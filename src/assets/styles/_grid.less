@@ -1,0 +1,50 @@
+.ark-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ark-flex {
+  display: flex;
+}
+
+.ark-flex-center {
+  display: flex;
+  align-items: center;
+}
+
+.ark-flex-between {
+  justify-content: space-between;
+}
+
+section {
+  padding: 165px 10px 70px;
+}
+
+.ark-grey-bg {
+  padding: 0 10px;
+}
+
+.ark-col-6 {
+  width: 48%;
+}
+
+@media (max-width: @tablet) {
+  section {
+    padding: 120px 10px 30px;
+    &.small-offset {
+      padding: 20px 10px 30px;
+    }
+  }
+  .ark-col-6 {
+    width: 100%;
+  }
+  .ark-grey-bg {
+    padding-top: 65px;
+  }
+}
+
+@media (max-width: @small-mobile) {
+  section {
+    padding: 150px 10px 30px;
+  }
+}

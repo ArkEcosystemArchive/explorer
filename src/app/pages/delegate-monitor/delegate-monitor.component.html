@@ -1,0 +1,215 @@
+<section>
+    <div class="ark-graph-wrap" *ngIf="chart">
+        <div [chart]="chart"></div>
+        <div class="chart-buttons">
+            <span [ngClass]="{'active': activeChartTab === 'day'}" id="day" (click)="updateChart($event)">1d</span>
+            <span [ngClass]="{'active': activeChartTab === 'week'}" id="week" (click)="updateChart($event)">7d</span>
+            <span [ngClass]="{'active': activeChartTab === 'month'}" id="month" (click)="updateChart($event)">1m</span>
+            <span [ngClass]="{'active': activeChartTab === 'quarter'}" id="quarter" (click)="updateChart($event)">3m</span>
+            <span [ngClass]="{'active': activeChartTab === 'year'}" id="year" (click)="updateChart($event)">1y</span>
+            <span [ngClass]="{'active': activeChartTab === 'all'}" id="all" (click)="updateChart($event)">ALL</span>
+        </div>
+    </div>
+    <div class="ark-wrap">
+        <div class="ark-section-title">{{ 'DELEGATE_MONITOR.TITLE' | translate}}</div>
+        <ul class="ark-delegate-monitor">
+            <li>
+                <div class="ark-title">{{ 'DELEGATE_MONITOR.MONITOR.DELEGATES_TITLE' | translate}}</div>
+                <div class="ark-count">
+                    <span *ngIf="monitorData && monitorData.active">{{monitorData.active.totalCount}}</span>
+                    <span *ngIf="!monitorData">0</span>
+                </div>
+                <div class="ark-info-item">
+                    <span *ngIf="monitorData && monitorData.active">{{monitorData.active.delegates.length}}</span>
+                    <span *ngIf="!monitorData">0</span> {{ 'DELEGATE_MONITOR.MONITOR.ACTIVE' | translate}}
+                </div>
+                <div class="ark-info-item">
+                    <span *ngIf="monitorData && monitorData.active">{{monitorData.active.totalCount - monitorData.active.delegates.length}}</span>
+                    <span *ngIf="!monitorData">0</span> {{ 'DELEGATE_MONITOR.MONITOR.STANDBY' | translate}}
+                </div>
+                <div class="ark-gradient-border orange-gradient"></div>
+            </li>
+            <li>
+                <div class="ark-title">{{ 'DELEGATE_MONITOR.MONITOR.LAST_BLOCK' | translate}}</div>
+                <div class="ark-count">
+                    <span *ngIf="monitorData && monitorData.lastBlock"><a href="#" (click)="goToAddress($event, monitorData.lastBlock.block.delegate.address)">{{monitorData.lastBlock.block.delegate.username}}</a></span>
+                    <span *ngIf="!monitorData">N/A</span>
+                </div>
+                <div class="ark-info-item">
+                    <span *ngIf="monitorData && monitorData.lastBlock"><a href="#" (click)="goToBlock($event, monitorData.lastBlock.block.id)">{{monitorData.lastBlock.block.id}}</a></span>
+                    <span *ngIf="!monitorData">N/A</span>
+                </div>
+                <div class="ark-info-item">
+                    <span *ngIf="monitorData && monitorData.lastBlock">{{(+monitorData.lastBlock.block.totalForged/100000000)*currencyValue | number: '1.0-2'}}</span>
+                    <span *ngIf="!monitorData">0</span> {{currencyName}} {{ 'DELEGATE_MONITOR.MONITOR.FORGED_FROM' | translate}}
+                    <span *ngIf="monitorData && monitorData.lastBlock">{{monitorData.lastBlock.block.numberOfTransactions}}</span>
+                    <span *ngIf="!monitorData">0</span> {{ 'DELEGATE_MONITOR.MONITOR.TRANSACTIONS' | translate}}
+                </div>
+                <div class="ark-gradient-border cyan-gradient"></div>
+            </li>
+            <li>
+                <div class="ark-title">{{ 'DELEGATE_MONITOR.MONITOR.NEXT_FORGERS' | translate}}</div>
+                <div class="ark-count" *ngIf="monitorData && monitorData.nextForgers">
+                    <a href="#" (click)="goToAddress($event, monitorData.nextForgers[0].address)">{{monitorData.nextForgers[0].username}}</a>
+                </div>
+                <div class="ark-message" *ngIf="!monitorData">{{ 'DELEGATE_MONITOR.MONITOR.WAITING' | translate}}</div>
+                <div class="ark-info-item" *ngIf="monitorData && monitorData.nextForgers">
+                    <span *ngFor="let item of monitorData.nextForgers; let i = index;">
+                        <a href="#" (click)="goToAddress($event, item.address)">{{item.username}}</a>
+                        <span *ngIf="i !== monitorData.nextForgers.length - 1"> - </span>
+                    </span>
+                </div>
+                <div class="ark-gradient-border green-gradient"></div>
+            </li>
+            <li>
+                <div class="ark-title">{{ 'GENERAL.INFO.TOTAL_FORGED' | translate }} <span class="opacity">({{currencyName}})</span></div>
+                <div class="ark-count">{{(totalForged/100000000)*currencyValue | number: '1.2-2'}}</div>
+                <div class="ark-info-item">{{ 'GENERAL.BETWEEN' | translate }} <span *ngIf="monitorData && monitorData.active">{{monitorData.active.delegates.length}}</span><span *ngIf="!monitorData">0</span> {{ 'DELEGATE_MONITOR.MONITOR.ACTIVE' | translate }}</div>
+                <div class="ark-gradient-border magenta-gradient"></div>
+            </li>
+            <li>
+                <div class="ark-title">{{ 'DELEGATE_MONITOR.MONITOR.BEST_FORGER' | translate }}</div>
+                <div class="ark-count">
+                    <span *ngIf="bestForger"><a href="#" (click)="goToAddress($event, bestForger.address)">{{bestForger.username}}</a></span>
+                    <span *ngIf="!bestForger">N/A</span>
+                </div>
+                <div class="ark-info-item phrase-wrap">
+                    <span *ngIf="bestForger">{{(bestForger.forged/100000000)*currencyValue}}</span>
+                    <span *ngIf="!bestForger">0</span> {{currencyName}} {{ 'DELEGATE_MONITOR.MONITOR.SINCE_REGISTRATION' | translate }}
+                </div>
+                <div class="ark-gradient-border darkblue-gradient"></div>
+            </li>
+            <li>
+                <div class="ark-title">{{ 'DELEGATE_MONITOR.MONITOR.BEST_PRODUCTIVITY' | translate }}</div>
+                <div class="ark-count">
+                    <span *ngIf="productivity">{{productivity.best.productivity}}%</span>
+                    <span *ngIf="!productivity">0%</span>
+                </div>
+                <div class="ark-info-item">{{ 'GENERAL.BY' | translate}}
+                    <a href="#" *ngIf="productivity" (click)="goToAddress($event, productivity.best.address)">{{productivity.best.username}}</a>
+                    <span *ngIf="!productivity">N/A</span>
+                </div>
+                <div class="ark-gradient-border blue-gradient"></div>
+            </li>
+            <li>
+                <div class="ark-title">{{ 'DELEGATE_MONITOR.MONITOR.WORST_PRODUCTIVITY' | translate }}</div>
+                <div class="ark-count">
+                    <span *ngIf="productivity">{{productivity.worst.productivity}}%</span>
+                    <span *ngIf="!productivity">0%</span>
+                </div>
+                <div class="ark-info-item">{{ 'GENERAL.BY' | translate}}
+                    <a href="#" *ngIf="productivity" (click)="goToAddress($event, productivity.worst.address)">{{productivity.worst.username}}</a>
+                    <span *ngIf="!productivity">N/A</span>
+                </div>
+                <div class="ark-gradient-border pink-gradient"></div>
+            </li>
+            <li>
+                <div class="ark-title">{{ 'GENERAL.INFO.TOTAL_FORGED' | translate }} ({{currencyName}})</div>
+                <div class="ark-count">
+                    <span *ngIf="supply">{{(+supply/100000000 - 125000000)*currencyValue | number: '1.2-2'}}</span>
+                    <span *ngIf="!supply">0.00</span>
+                </div>
+                <div class="ark-info-item">{{ 'DELEGATE_MONITOR.MONITOR.FROM_START' | translate }}</div>
+                <div class="ark-gradient-border green-gradient"></div>
+            </li>
+        </ul>
+        <div class="ark-section-title">{{ 'DELEGATE_MONITOR.VOTES_TITLE' | translate }}</div>
+        <div class="ark-latest-votes ark-flex ark-flex-between">
+            <div class="ark-col ark-col-6">
+                <table class="ark-table ark-table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="ellipsis width-15">{{ 'GENERAL.INFO.VOTER' | translate }}</th>
+                            <th class="ellipsis width-15">{{ 'GENERAL.INFO.TRANSACTION' | translate }}</th>
+                            <th class="ellipsis width-15">{{ 'GENERAL.INFO.TIME' | translate }}</th>
+                        </tr>
+                        <tr *ngIf="monitorData && monitorData.votes">
+                            <th class="ellipsis width-15"></th>
+                            <th class="ellipsis width-15"></th>
+                            <th class="ellipsis width-15"></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="monitorData && monitorData.votes">
+                        <tr *ngFor="let item of monitorData.votes.transactions">
+                            <td class="ellipsis width-15"><a href="#" (click)="goToAddress($event, item.senderId)">{{item.senderId | overflowText}}</a></td>
+                            <td class="ellipsis width-15"><a href="#" (click)="goToTransaction($event, item.id)">{{item.id | overflowText}}</a></td>
+                            <td class="ellipsis width-15">{{item.timestamp | localDate | amTimeAgo}}</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="ark-col ark-col-6">
+                <table class="ark-table ark-table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="ellipsis width-10">{{ 'GENERAL.INFO.DELEGATE' | translate }}</th>
+                            <th class="ellipsis width-15">{{ 'GENERAL.INFO.TRANSACTION' | translate }}</th>
+                            <th class="ellipsis width-15">{{ 'GENERAL.INFO.TIME' | translate }}</th>
+                        </tr>
+                        <tr *ngIf="monitorData && monitorData.registrations">
+                            <th class="ellipsis width-10"></th>
+                            <th class="ellipsis width-15"></th>
+                            <th class="ellipsis width-15"></th>
+                            <th class="ellipsis width-15"></th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="monitorData && monitorData.registrations">
+                        <tr *ngFor="let item of monitorData.registrations.transactions">
+                            <td class="ellipsis width-10"><a href="#" (click)="goToAddress($event, item.delegate.address)">{{item.delegate.username}}</a></td>
+                            <td class="ellipsis width-15"><a href="#" (click)="goToTransaction($event, item.id)">{{item.id | overflowText}}</a></td>
+                            <td class="ellipsis width-15">{{item.timestamp | localDate | amTimeAgo}}</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="ark-section-title">{{ 'DELEGATE_MONITOR.MONITOR.DELEGATES_TITLE' | translate}}</div>
+        <div class="ark-tab-header">
+            <div class="ark-tab-header-item ark-large-btn" [ngClass]="{'active': activeDelegate}" (click)="getActiveDelegates($event)">{{ 'DELEGATE_MONITOR.TABS.ACTIVE' | translate}}</div>
+            <div class="ark-tab-header-item ark-large-btn" [ngClass]="{'active': !activeDelegate}" (click)="getStandbyDelegates($event)">{{ 'DELEGATE_MONITOR.TABS.STANDBY' | translate}}</div>
+        </div>
+        <div class="ark-tab-body">
+            <div class="ark-tab-item" [ngClass]="{'active': activeDelegate}">
+                <ul class="ark-delegates-statistics ark-flex ark-flex-between">
+                    <li>
+                        <div class="li-wrapper">
+                            <span class="ark-title">{{ 'DELEGATE_MONITOR.STATUS_TABS.FORGED' | translate}}</span>
+                            <div class="ark-count" *ngIf="totals && height">{{totals.forging}}</div>
+                            <div class="ark-count" *ngIf="!height || !totals">0</div>
+                        </div>
+                        <div class="ark-gradient-border green-gradient"></div>
+                    </li>
+                    <li>
+                        <div class="li-wrapper">
+                            <span class="ark-title">{{ 'DELEGATE_MONITOR.STATUS_TABS.MISSED' | translate}}</span>
+                            <div class="ark-count" *ngIf="totals && height">{{totals.missedBlock}}</div>
+                            <div class="ark-count" *ngIf="!height || !totals">0</div>
+                        </div>
+                        <div class="ark-gradient-border darkorange-gradient"></div>
+                    </li>
+                    <li>
+                        <div class="li-wrapper">
+                            <span class="ark-title">{{ 'DELEGATE_MONITOR.STATUS_TABS.NOT_FORGING' | translate}}</span>
+                            <div class="ark-count" *ngIf="totals && height">{{totals.notForging}}</div>
+                            <div class="ark-count" *ngIf="!height || !totals">0</div>
+                        </div>
+                        <div class="ark-gradient-border red-gradient"></div>
+                    </li>
+                    <li>
+                        <div class="li-wrapper">
+                            <span class="ark-title">{{ 'DELEGATE_MONITOR.STATUS_TABS.IN_QUEUE' | translate}}</span>
+                            <div class="ark-count" *ngIf="totals && height">{{totals.awaitingSlot}}</div>
+                            <div class="ark-count" *ngIf="!height || !totals">0</div>
+                        </div>
+                        <div class="ark-gradient-border darkblue-gradient"></div>
+                    </li>
+                </ul>
+            </div>
+            <ark-delegates [list]="delegatesList" [active]="activeDelegate" [curValue]="currencyValue" [curName]="currencyName"></ark-delegates>
+            <div class="monitor-loading" *ngIf="!delegatesList"><span>{{ 'DELEGATE_MONITOR.WAITING' | translate}}</span> </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,132 @@
+@import "../../../assets/styles/_reset.less";
+@import "../../../assets/styles/_mixins.less";
+@import "../../../assets/styles/_variables.less";
+@import "../../../assets/styles/_fonts.less";
+@import "../../../assets/styles/_elements.less";
+@import "../../../assets/styles/_grid.less";
+
+footer {
+  background: @footer-bg;
+  font-family: 'Avenir';
+  color: @footer-text-color;
+  .ark-wrap {
+    padding: 50px 10px 30px 10px;
+  }
+  ul {
+    li {
+      font-family: 'ProximaNovaSemibold';
+      font-size: 16px;
+      margin-bottom: 12px;
+      &:first-child {
+        font-size: 20px;
+        font-family: 'Comfortaa-Regular';
+      }
+      a {
+        color: #000;
+        font-weight: 900;
+      }
+    }
+  }
+  .ark-border-box {
+    padding-top: 50px;
+    margin-top: 50px;
+    justify-content: space-between;
+  }
+  .ark-join {
+    .ark-join-title {
+      font-size: 20px;
+    }
+    .ark-join-description {
+      font-size: 13px;
+      margin: 7px 0 20px;
+      font-family: 'Ubuntu-Regular';
+    }
+  }
+  .ark-copyright {
+    font-family: Avenir;
+    font-size: 18px;
+    line-height: 25px;
+    a {
+      color: @footer-text-color;
+      .transition(all .5s);
+      &:hover {
+        color: @footer-text-color - #555;
+      }
+    }
+  }
+  .ark-social {
+    li {
+      display: inline-block;
+      margin: 0 8px;
+      a {
+        color: @footer-text-color;
+        font-family: Avenir;
+        font-weight: 300;
+        font-size: 26px;
+        .transition(all .5s);
+        &:hover {
+          color: @footer-text-color - #555;
+        }
+      }
+    }
+  }
+
+  @media (max-width: @mobile) {
+    .ark-copyright  {
+      font-size: 16px;
+    }
+    .ark-social {
+      li {
+        a {
+          font-size: 20px;
+        }
+      }
+    }
+    ul {
+      li {
+        &:first-child {
+          font-size: 17px;
+        }
+        font-size: 14px;
+        margin-bottom: 9px;
+      }
+    }
+    .ark-wrap {
+      padding: 20px;
+      > .ark-flex {
+        flex-wrap: wrap;
+      }
+    }
+    .ark-join {
+      width: 100%;
+      text-align: center;
+      margin-top: 30px;
+    }
+    .ark-border-box {
+      padding-top: 20px;
+      margin-top: 30px;
+    }
+    .ark-copyright {
+      width: 100%;
+      text-align: center;
+    }
+    .ark-social {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      width: 100%;
+    }
+  }
+}
+
+:host-context(.dark-theme) {
+  footer {
+    background: @dark-secondary-color;
+    color: @dark-body-color;
+    border-top: 1px solid @dark-secondary-color;
+
+    a:hover {
+      color: @color-white!important;
+    }
+  }
+}

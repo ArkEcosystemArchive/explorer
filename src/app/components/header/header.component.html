@@ -1,0 +1,37 @@
+<div class="fixed-header">
+    <div class="ark-wrap">
+        <header>
+            <a class="ark-logo" routerLink="/" (click)="closeMobileMenu()"></a>
+            <div class="ark-header-items ark-flex-center" [ngClass]="{'open': openMobileMenu}">
+                <div class="ark-search-wrap">
+                    <input class="ark-text-field ark-search-field" type="search" [(ngModel)]="searchQuery" placeholder="{{ 'HEADER.SEARCH' | translate}}" (keypress)="startSearch($event)" />
+                    <button class="ark-search-btn" type="submit" (click)="startSearch()"></button>
+                </div>
+                <nav class="ark-flex-center">
+                    <ul>
+                        <ark-toggle-background></ark-toggle-background>
+                        <ark-currency-dropdown [rates]="exchangeRate" (openMobMenu)="closeMobileMenu($event)"></ark-currency-dropdown>
+                        <ark-tools-dropdown (openMobMenu)="closeMobileMenu($event)"></ark-tools-dropdown>
+                    </ul>
+                </nav>
+            </div>
+            <div class="ark-menu-btn" (click)="showMobileMenu()"></div>
+        </header>
+        <div class="connection-message" *ngIf="!connection"><i class="fa fa-clock-o" aria-hidden="true"></i>Updating data. Please, wait or refresh this page in 15 seconds.</div>
+        <div class="ark-header-data ark-flex-center" *ngIf="socketObject">
+            <div class="ark-data-item"><span class="ark-item-index"><span class="ark-index-title"> {{ 'GENERAL.INFO.HEIGHT' | translate}}:</span><span class="ark-index-data">{{headerHeight}}</span></span><span class="ark-item-index"><span class="ark-index-title"> {{ 'GENERAL.INFO.NETHASH' | translate}}:</span>
+                <span class="ark-index-data">{{headerNethash}}</span>
+                </span>
+            </div>
+            <div class="ark-data-item"><span class="ark-item-index"><span class="ark-index-title"> {{ 'GENERAL.INFO.SUPPLY' | translate}}:</span><span class="ark-index-data">{{headerSupply}}</span></span><span class="ark-item-index"><span class="ark-index-title"> ARK/BTC:</span>
+                <span
+                    class="ark-index-data">{{headerBTC | number: '1.8-8'}}</span>
+                    </span>
+            </div>
+            <div class="ark-data-item"><span class="ark-item-index"><span class="ark-index-title"> ARK/USD:</span><span class="ark-index-data">{{headerUSD  | number: '1.0-2'}}</span></span><span class="ark-item-index"><span class="ark-index-title"> ARK/EUR:</span><span class="ark-index-data">{{headerEUR  | number: '1.0-2'}}</span></span>
+            </div>
+            <div class="ark-data-item"><span class="ark-item-index"><span class="ark-index-title"> ARK/GBP:</span><span class="ark-index-data">{{headerGBP  | number: '1.0-2'}}</span></span><span class="ark-item-index"><span class="ark-index-title"> ARK/CNY:</span><span class="ark-index-data">{{headerCNY  | number: '1.0-2'}}</span></span>
+            </div>
+        </div>
+    </div>
+</div>

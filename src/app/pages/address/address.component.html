@@ -1,0 +1,114 @@
+<section>
+    <div class="ark-wrap">
+        <div class="ark-section-title">{{ 'ADDRESS.TITLE' | translate }}</div>
+        <div class="ark-address-summary">
+            <div class="ark-summary" *ngIf="addressItem">
+                <div class="ark-summary-item ark-flex-between" *ngIf="addressItem.address">
+                    <span class="ark-summary-title ark-width-20">{{ 'GENERAL.INFO.ADDRESS' | translate }}</span>
+                    <span class="ark-summary-data">{{addressItem.address}}
+                      <span class="ark-show-clipboard">
+                        <i class="fa fa-clipboard copy-icon opacity" aria-hidden="true" ngxClipboard [cbContent]="addressItem.address"></i>
+                        <span class="ark-tooltip ark-clipboard-tooltip">{{ 'GENERAL.COPY_CLIPBOARD' | translate }}</span>
+                    </span>
+                    </span>
+                </div>
+                <div class="ark-summary-item ark-flex-between" *ngIf="addressItem.publicKey">
+                    <span class="ark-summary-title ark-width-20">{{ 'GENERAL.INFO.PUBLIC_KEY' | translate }}</span>
+                    <span class="ark-summary-data">{{addressItem.publicKey}}
+                        <span class="ark-show-clipboard">
+                        <i class="fa fa-clipboard copy-icon opacity" aria-hidden="true" ngxClipboard [cbContent]="addressItem.publicKey"></i>
+                        <span class="ark-tooltip ark-clipboard-tooltip">{{ 'GENERAL.COPY_CLIPBOARD' | translate }}</span>
+                    </span>
+                    </span>
+                </div>
+                <div class="ark-summary-item ark-flex-between" *ngIf="addressItem.balance" #balance>
+                    <span class="ark-summary-title">{{ 'GENERAL.INFO.TOTAL_BALANCE' | translate }}</span>
+                    <span class="ark-summary-data">{{(addressItem.balance / 100000000)*currencyValue | number: '1.2-2'}} <span class="opacity">{{currencyName}}</span></span>
+                </div>
+                <div class="ark-summary-item ark-flex-between">
+                    <span class="ark-summary-title">{{ 'GENERAL.INFO.TRANSACTIONS' | translate }}</span>
+                    <span class="ark-summary-data">
+                    <span class="ark-transaction-plus">{{addressItem.incoming_cnt}}</span>
+                    <span class="ark-transaction-minus">{{addressItem.outgoing_cnt}}</span>
+                    </span>
+                </div>
+            </div>
+            <div class="ark-qr" *ngIf="addressItem">
+                <div>
+                    <qr-code [value]="addressItem.address" [size]="150"></qr-code>
+                </div>
+                <div class="ark-qr-message ">({{ 'ADDRESS.SCAN' | translate }})</div>
+            </div>
+        </div>
+        <div *ngIf="addressItem && addressItem.delegate">
+            <div class="ark-section-title">{{ 'ADDRESS.DELEGATE_TITLE' | translate }} <span class="ark-title-username">{{addressItem.delegate.username}}</span></div>
+            <div class="ark-address-summary">
+                <div class="ark-summary ark-summary-delegate">
+                    <div class="ark-summary-item ark-flex-between" *ngIf="addressItem.delegate.productivity">
+                        <span class="ark-summary-title">{{ 'GENERAL.INFO.UPTIME' | translate }}</span>
+                        <span class="ark-summary-data">{{addressItem.delegate.productivity}}%</span>
+                    </div>
+                    <div class="ark-summary-item ark-flex-between" *ngIf="addressItem.delegate.rate">
+                        <span class="ark-summary-title">{{ 'GENERAL.INFO.RANK' | translate }} / {{ 'GENERAL.INFO.STATUS' | translate }}</span>
+                        <span class="ark-summary-data">{{addressItem.delegate.rate}} / <span class="opacity">{{ 'GENERAL.ACTIVE' | translate }}</span></span>
+                    </div>
+                    <div class="ark-summary-item ark-flex-between" *ngIf="addressItem.delegate.approval">
+                        <span class="ark-summary-title">{{ 'GENERAL.INFO.APPROVAL' | translate }}</span>
+                        <span class="ark-summary-data">{{addressItem.delegate.approval}}%</span>
+                    </div>
+                    <div class="ark-summary-item ark-flex-between" *ngIf="addressItem.delegate.forged">
+                        <span class="ark-summary-title">{{ 'GENERAL.INFO.FORGED' | translate }}</span>
+                        <span class="ark-summary-data">{{(+addressItem.delegate.forged/100000000)*currencyValue | number: '1.2-2'}} <span class="opacity">{{currencyName}}</span></span>
+                    </div>
+                    <div class="ark-summary-item ark-flex-between" *ngIf="addressItem.delegate.producedblocks">
+                        <span class="ark-summary-title">{{ 'GENERAL.INFO.BLOCKS' | translate }}</span>
+                        <span class="ark-summary-data">{{addressItem.delegate.producedblocks}} <span class="opacity">({{addressItem.delegate.missedblocks}} {{ 'GENERAL.MISSED' | translate }})</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="addressItem && addressItem.votes && addressItem.votes.length">
+            <div class="ark-section-title">{{ 'ADDRESS.VOTES_TITLE' | translate }}</div>
+            <div class="ark-address-summary">
+                <div class="ark-summary ark-summary-delegate" *ngFor="let item of addressItem.votes">
+                    <div class="ark-summary-item ark-flex-between">
+                        <span class="ark-summary-title">{{item.username}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Two voters' blocks open&closed -->
+        <!-- TODO: make one block -->
+        <div *ngIf="addressItem && addressItem.voters && addressItem.voters.length">
+            <div class="ark-section-title">{{ 'ADDRESS.VOTERS_TITLE' | translate }} <span class="ark-title-username">{{addressItem.voters.length}}</span></div>
+            <div class="ark-address-summary voters-container" style="display: block;" *ngIf="!openVoters" #voters>
+                <div class="voters-button" (click)="showBlock()"></div>
+                <span class="voters-address" *ngFor="let item of addressItem.voters; let i = index;">
+                    <a href="#" (click)="goToAddress($event, item.address)" *ngIf="i < votersNumber">{{item.address}}</a>
+                </span>
+            </div>
+            <div class="ark-address-summary voters-container open" style="display: block;" *ngIf="openVoters" #voters>
+                <div class="voters-button" (click)="showBlock()"></div>
+                <span class="voters-address" *ngFor="let item of addressItem.voters"><a href="#" (click)="goToAddress($event, item.address)">{{item.address}}</a> </span>
+            </div>
+        </div>
+        <!-- voters blocks -->
+        <div class="ark-section-title ">{{ 'ADDRESS.TX_TITLE' | translate }}</div>
+        <div class="ark-tab-header ">
+            <div class="ark-tab-header-item" [ngClass]="{'active': activeTab === 'all-tr'}" id="all-tr" (click)="getAllTransactions($event)">{{ 'GENERAL.TABS.ALL' | translate }}</div>
+            <div class="ark-tab-header-item " [ngClass]="{'active': activeTab === 'sent-tr'}" id="sent-tr" (click)="getSentTransactions($event)">{{ 'GENERAL.TABS.SENT' | translate }}</div>
+            <div class="ark-tab-header-item " [ngClass]="{'active': activeTab === 'received-tr'}" id="received-tr" (click)="getReceivedTransactions($event)">{{ 'GENERAL.TABS.RECEIVED' | translate }}</div>
+        </div>
+        <div class="ark-loader-block" *ngIf="showLoader">
+            <div class="ark-loader-icon"></div>
+            <p>{{ 'GENERAL.LOADING' | translate }}...</p>
+        </div>
+        <div class="empty-message" *ngIf="currentTransactions && currentTransactions.length === 0">{{ 'TRANSACTION.NO_TRANSACTIONS' | translate }}</div>
+        <div class="ark-tab-body " *ngIf="currentTransactions && currentTransactions.length > 0">
+            <div class="ark-tab-item active " id="delegates-table ">
+                <ark-address-transactions *ngIf="addressItem" [id]="addressItem.address" [items]="currentTransactions" [curName]="currencyName" [curValue]="currencyValue"></ark-address-transactions>
+            </div>
+        </div>
+    </div>
+    <ark-balance-footer *ngIf="addressItem" [show]="showBalanceFooter" [address]="addressItem.address" [balance]="addressItem.balance" [curName]="currencyName" [curVal]="currencyValue"></ark-balance-footer>
+</section>

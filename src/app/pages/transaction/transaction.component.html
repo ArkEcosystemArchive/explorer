@@ -1,0 +1,99 @@
+<section *ngIf="transaction">
+    <div class="ark-wrap">
+        <div class="ark-section-title">{{ 'TRANSACTION.TITLE' | translate }}</div>
+        <div class="ark-id-block">{{ 'TRANSACTION.ID' | translate }} {{transaction.id}}
+            <span class="ark-show-clipboard">
+                <i class="fa fa-clipboard copy-icon" aria-hidden="true" ngxClipboard [cbContent]="transaction.id"></i>
+                <span class="ark-tooltip ark-clipboard-tooltip">{{'GENERAL.COPY_CLIPBOARD' | translate}}</span>
+            </span>
+        </div>
+        <div class="ark-section-title">{{ 'TRANSACTION.SUMMARY_TITLE' | translate }}</div>
+        <div class="ark-address-summary">
+            <div class="ark-summary">
+                <div class="ark-summary-item ark-flex-between ark-flex-center" *ngIf="transaction.knownSender">
+                    <span class="ark-summary-title">{{ 'GENERAL.INFO.SENDER' | translate }}</span>
+                    <div class="ark-summary-data">
+                        <p><a href="#" (click)="goToAddress($event, transaction.senderId)">{{transaction.senderId}}</a></p>
+                        <p>{{transaction.knownSender.owner}} <span class="opacity">{{transaction.knownSender.description}}</span></p>
+                    </div>
+                </div>
+                <div class="ark-summary-item ark-flex-between ark-flex-center" *ngIf="transaction.recipientId">
+                    <span class="ark-summary-title">{{ 'GENERAL.INFO.RECIPIENT' | translate }}</span>
+                    <div class="ark-summary-data">
+                        <a href="#" (click)="goToAddress($event, transaction.recipientId)">{{transaction.recipientId}}</a>
+                    </div>
+                </div>
+                <div class="ark-summary-item ark-flex-between ark-flex-center" *ngIf="transaction.confirmations">
+                    <span class="ark-summary-title">{{ 'GENERAL.INFO.CONFIRMATIONS' | translate }}</span>
+                    <div class="ark-summary-data">{{transaction.confirmations}}</div>
+                </div>
+                <div class="ark-summary-item ark-flex-between ark-flex-center" *ngIf="transaction.amount">
+                    <span class="ark-summary-title">{{ 'GENERAL.INFO.AMOUNT' | translate }}</span>
+                    <div class="ark-summary-data">{{(transaction.amount / 100000000)*currencyValue | number: '1.2-2'}} <span class="opacity">{{currencyName}}</span></div>
+                </div>
+                <div class="ark-summary-item ark-flex-between ark-flex-center" *ngIf="transaction.fee">
+                    <span class="ark-summary-title">{{ 'GENERAL.INFO.FEE' | translate }}</span>
+                    <div class="ark-summary-data">{{(transaction.fee / 100000000)*currencyValue | number: '1.1-2'}} <span class="opacity">{{currencyName}}</span></div>
+                </div>
+                <div class="ark-summary-item ark-flex-between ark-flex-center" *ngIf="transaction.timestamp">
+                    <span class="ark-summary-title">{{ 'GENERAL.INFO.TIMESTAMP' | translate }}</span>
+                    <div class="ark-summary-data">{{transaction.timestamp | localDate | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
+                </div>
+                <div class="ark-summary-item ark-flex-between ark-flex-center">
+                    <span class="ark-summary-title">{{ 'GENERAL.INFO.VENDOR_FIELD' | translate }}</span>
+                    <div class="ark-summary-data">{{ transaction.vendorField }}</div>
+                </div>
+                <div class="ark-summary-item ark-flex-between ark-flex-center" *ngIf="transaction.blockid">
+                    <span class="ark-summary-title">{{ 'GENERAL.INFO.BLOCK' | translate }}</span>
+                    <div class="ark-summary-data">
+                        <a href="#" (click)="goToBlock($event, transaction.blockid)">{{transaction.blockid}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ark-section-title ">{{ 'TRANSACTION.DETAILS_TITLE' | translate }}</div>
+        <div class="ark-tab-body ">
+            <div class="ark-tab-item active " id="delegates-table ">
+                <table class="ark-table ">
+                    <thead>
+                        <tr>
+                            <th class="ellipsis width-15">{{ 'TRANSACTION.ID' | translate }}</th>
+                            <th class="ellipsis width-15">{{ 'GENERAL.INFO.DATE' | translate }}</th>
+                            <th class="ellipsis width-15">{{ 'GENERAL.INFO.SENDER' | translate }}</th>
+                            <th class="ellipsis width-15">{{ 'GENERAL.INFO.RECIPIENT' | translate }}</th>
+                            <th class="ellipsis width-15">{{ 'GENERAL.INFO.AMOUNT' | translate }}</th>
+                            <th class="ellipsis width-10">{{ 'GENERAL.INFO.FEE' | translate }}</th>
+                            <th class="ellipsis width-15">{{ 'GENERAL.INFO.CONFIRMATIONS' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="ellipsis width-15" [ngClass]="{'ark-transaction': transaction.vendorField}">
+                                <a href="#" (click)="goToTransaction($event, transaction.id)">{{transaction.id | overflowText}}</a>
+                            </td>
+                            <td class="ellipsis width-15">{{transaction.timestamp | localDate | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</td>
+                            <td class="ark-blue-text ellipsis width-15">
+                                <a href="#" *ngIf="transaction.senderDelegate" (click)="goToAddress($event, transaction.senderId)">{{transaction.senderDelegate.username}}</a>
+                                <a href="#" *ngIf="!transaction.senderDelegate && transaction.knownSender" (click)="goToAddress($event, transaction.senderId)">{{transaction.knownSender.owner}}</a>
+                                <a href="#" *ngIf="!transaction.senderDelegate && !transaction.knownSender" (click)="goToAddress($event, transaction.senderId)">{{transaction.senderId | overflowText}}</a>
+                            </td>
+                            <td class="ellipsis width-15">
+                                <a href="#" (click)="goToAddress($event, transaction.recipientId)" *ngIf="!(transaction.asset && transaction.asset.votes || transaction.asset && transaction.asset.signature || transaction.asset && transaction.asset.delegate)">{{transaction.recipientId | overflowText}}</a>
+                                <span *ngIf="transaction.asset && transaction.asset.votes">{{ 'TRANSACTION.ASSET.VOTES' | translate }}</span>
+                                <span *ngIf="transaction.asset && transaction.asset.signature">{{ 'TRANSACTION.ASSET.SIGNATURE' | translate }}</span>
+                                <span *ngIf="transaction.asset && transaction.asset.delegate">{{ 'TRANSACTION.ASSET.DELEGATE' | translate }}</span>
+                            </td>
+                            <td class="ark-amount ellipsis width-15">{{(transaction.amount / 100000000)*currencyValue | number: '1.2-2'}} {{currencyName}}</td>
+                            <td class="ellipsis width-10">{{(transaction.fee / 100000000)*currencyValue | number: '1.1-2'}} {{currencyName}}</td>
+                            <td class="ellipsis width-15 ark-tooltip-wrap">
+                                <span *ngIf="transaction.confirmations <= 50">{{transaction.confirmations}}</span>
+                                <span *ngIf="transaction.confirmations > 50">{{ 'GENERAL.WELL_CONFIRMED' | translate }}</span>
+                                <span class="ark-tooltip" *ngIf="transaction.confirmations > 50">{{transaction.confirmations}} {{ 'GENERAL.INFO.CONFIRMATIONS' | translate }}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

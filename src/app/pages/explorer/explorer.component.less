@@ -1,0 +1,57 @@
+@import "../../../assets/styles/_reset.less";
+@import "../../../assets/styles/_mixins.less";
+@import "../../../assets/styles/_variables.less";
+@import "../../../assets/styles/_fonts.less";
+@import "../../../assets/styles/_elements.less";
+@import "../../../assets/styles/_grid.less";
+
+.ark-graph-wrap {
+  position: relative;
+  margin: 35px 0 70px;
+  padding: 15px;
+  .box-shadow(1px 1px 15px 1px @light-box-shadow-color);
+  .ark-section-title {
+    font-family: Avenir;
+  }
+  .ark-graph-index {
+    font-family: Avenir;
+    font-size: 36px;
+      line-height: 49px;
+      color: @graph-index-color;
+    .ark-index-increase {
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 19px;
+      color: @graph-index-increase-color;
+      padding-left: 10px;
+    }
+  }
+  .ark-graph-box {
+    margin-top: 40px;
+    &:hover {
+      .ark-tooltip {
+        display: block;
+      }
+    }
+  }
+
+  @media (max-width: @mobile) {
+    margin: 20px 0 20px;
+    padding-top: 40px;
+    .ark-graph-index {
+      font-size: 24px;
+      line-height: 32px;
+    }
+  }
+}
+
+.explorer-loader {
+  margin-top: -50px;
+  margin-bottom: 30px;
+}
+
+:host-context(.dark-theme) {
+  .ark-graph-wrap {
+    .box-shadow(1px 1px 15px 1px @dark-box-shadow-color);
+  }
+}

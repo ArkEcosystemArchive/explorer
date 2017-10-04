@@ -1,0 +1,73 @@
+.box-shadow (@string) {
+	-webkit-box-shadow: @string;
+	-moz-box-shadow:    @string;
+	box-shadow:         @string;
+}
+
+.border-radius (@radius: 5px) {
+	-webkit-border-radius: @radius;
+	-moz-border-radius:    @radius;
+	border-radius:         @radius;
+
+	-moz-background-clip:    padding;
+	-webkit-background-clip: padding-box;
+	background-clip:         padding-box;
+}
+
+.gradient (@startColor: #eee, @endColor: white) {
+	background-color: @startColor;
+	background: -webkit-gradient(linear, left top, left bottom, from(@startColor), to(@endColor));
+	background: -webkit-linear-gradient(top, @startColor, @endColor);
+	background: -moz-linear-gradient(top, @startColor, @endColor);
+	background: -ms-linear-gradient(top, @startColor, @endColor);
+	background: -o-linear-gradient(top, @startColor, @endColor);
+}
+
+.transition (@transition) {
+	-webkit-transition: @transition;
+	-moz-transition:    @transition;
+	-ms-transition:     @transition;
+	-o-transition:      @transition;
+}
+
+.custom-list-circle(@color) {
+	&:before {
+		content: '';
+		background: @color;
+		.border-radius(50%);
+		left: -5px;
+		top: 50%;
+		margin-top: -3px;
+		width: 5px;
+		height: 5px;
+		position: absolute;
+	}
+}
+
+.menu-btn-border(@right, @top, @color) {
+	position: absolute;
+	right: @right;
+	top: 15px;
+	height: 25px;
+	width: 40px;
+	border-top: 5px solid @color;
+}
+
+.menu-btn-border-before(@right, @top, @color) {
+	position: absolute;
+	right: @right;
+	top: 15px;
+	height: 0;
+	width: 40px;
+	border-top: 5px solid @color;
+}
+
+.menu-btn-border-after(@right, @top, @color) {
+	position: absolute;
+	right: @right;
+	top: @top;
+	height: 0;
+	width: 40px;
+	border-top: 5px solid @color;
+}
+

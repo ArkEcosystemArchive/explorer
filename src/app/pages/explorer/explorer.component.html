@@ -1,0 +1,75 @@
+<section>
+    <div class="ark-graph-wrap" *ngIf="chart">
+        <div [chart]="chart"></div>
+        <div class="chart-buttons">
+            <span [ngClass]="{'active': activeChartTab === 'day'}" id="day" (click)="updateChart($event)">1d</span>
+            <span [ngClass]="{'active': activeChartTab === 'week'}" id="week" (click)="updateChart($event)">7d</span>
+            <span [ngClass]="{'active': activeChartTab === 'month'}" id="month" (click)="updateChart($event)">1m</span>
+            <span [ngClass]="{'active': activeChartTab === 'quarter'}" id="quarter" (click)="updateChart($event)">3m</span>
+            <span [ngClass]="{'active': activeChartTab === 'year'}" id="year" (click)="updateChart($event)">1y</span>
+            <span [ngClass]="{'active': activeChartTab === 'all'}" id="all" (click)="updateChart($event)">ALL</span>
+        </div>
+    </div>
+    <div class="ark-section-title">{{ 'EXPLORER.TX_TITLE' | translate }}</div>
+    <table class="ark-table">
+        <thead>
+            <tr>
+                <th class="ellipsis width-15">{{ 'GENERAL.INFO.ID' | translate }}</th>
+                <th class="ellipsis width-15">{{ 'GENERAL.INFO.TIMESTAMP' | translate }}</th>
+                <th class="ellipsis width-15">{{ 'GENERAL.INFO.SENDER' | translate }}</th>
+                <th class="ellipsis width-15">{{ 'GENERAL.INFO.RECIPIENT' | translate }} </th>
+                <th class="ellipsis width-20">{{ 'GENERAL.INFO.SMARTBRIDGE' | translate }}</th>
+                <th class="ellipsis width-15">{{ 'GENERAL.INFO.AMOUNT' | translate }} ({{currency}})</th>
+                <th class="ellipsis width-10">{{ 'GENERAL.INFO.FEE' | translate }} ({{currency}})</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of transactions">
+                <td class="ellipsis width-15" [ngClass]="{'ark-transaction': item.vendorField}"><a href="#" (click)="goToTransaction($event, item.id)">{{item.id | overflowText}}</a></td>
+                <td class="ellipsis width-15">{{item.timestamp | localDate | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</td>
+                <td class="ellipsis width-15"><a href="#" (click)="goToAddress($event, item.senderId)"><span *ngIf="item.senderDelegate">{{item.senderDelegate.username}}</span> <span *ngIf="!item.senderDelegate">{{item.senderId | overflowText}}</span></a></td>
+                <td class="ellipsis width-15"><a href="#" (click)="goToAddress($event, item.recipientId)">{{item.recipientId | overflowText}}</a></td>
+                <td class="ellipsis width-20">{{item.vendorField || ''}}</td>
+                <td class="ellipsis width-15">{{(+item.amount/100000000)*currencyRate | number: '1.2-2'}}</td>
+                <td class="ellipsis width-10">{{(+item.fee/100000000)*currencyRate | number: '1.1'}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="explorer-loader ark-loader-block" *ngIf="showTransactionLoader">
+        <div class="ark-loader-icon"></div>
+        <p>{{ 'GENERAL.LOADING' | translate }}...</p>
+    </div>
+    <div class="ark-section-title">{{ 'EXPLORER.BLOCK_TITLE' | translate }}</div>
+    <table class="ark-table">
+        <thead>
+            <tr>
+                <th class="ellipsis width-15">{{ 'GENERAL.INFO.ID' | translate }}</th>
+                <th class="ellipsis width-15">{{ 'GENERAL.INFO.HEIGHT' | translate }}</th>
+                <th class="ellipsis width-15">{{ 'GENERAL.INFO.TIMESTAMP' | translate }}</th>
+                <th class="ellipsis width-10">{{ 'GENERAL.INFO.TRANSACTIONS' | translate }}</th>
+                <th class="ellipsis width-15">{{ 'GENERAL.INFO.GENERATED_BY' | translate }}</th>
+                <th class="ellipsis width-15">{{ 'GENERAL.INFO.AMOUNT' | translate }} ({{currency}})</th>
+                <th class="ellipsis width-15">{{ 'GENERAL.INFO.FORGED' | translate }} ({{currency}})</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of blocks">
+                <td class="ellipsis width-15"><a href="#" (click)="goToBlock($event, item.id)">{{item.id}}</a></td>
+                <td class="ellipsis width-15">{{item.height}}</td>
+                <td class="ellipsis width-15">{{item.timestamp | localDate | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</td>
+                <td class="ellipsis width-10">{{item.transactionsCount}}</td>
+                <td class="ellipsis width-15"><a href="#" (click)="goToAddress($event, item.generator)">{{item.delegate.username}}</a></td>
+                <td class="ellipsis width-15">{{(+item.totalAmount/100000000)*currencyRate | number: '1.2-2'}}</td>
+                <td class="ellipsis width-15">{{(+item.totalForged/100000000)*currencyRate | number: '1.1'}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="explorer-loader ark-loader-block" *ngIf="showBlockLoader">
+        <div class="ark-loader-icon"></div>
+        <p>{{ 'GENERAL.LOADING' | translate }}...</p>
+    </div>
+    <div class="ark-shadowbtn-wrap">
+        <button class="ark-shadow-btn" type="button" [routerLink]="['/blocks/1']">{{ 'EXPLORER.BUTTON' | translate }}</button>
+        <div class="ark-shadowfor-btn"></div>
+    </div>
+</section>

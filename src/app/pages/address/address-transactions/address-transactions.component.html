@@ -1,0 +1,41 @@
+<table class="ark-table ">
+    <thead>
+        <tr>
+            <th class="ellipsis width-15">{{ 'TRANSACTION.ID' | translate }}</th>
+            <th class="ellipsis width-15">{{ 'GENERAL.INFO.DATE' | translate }}</th>
+            <th class="ellipsis width-15">{{ 'GENERAL.INFO.SENDER' | translate }}</th>
+            <th class="ellipsis width-15">{{ 'GENERAL.INFO.RECIPIENT' | translate }}</th>
+            <th class="ellipsis width-15">{{ 'GENERAL.INFO.AMOUNT' | translate }}</th>
+            <th class="ellipsis width-10">{{ 'GENERAL.INFO.FEE' | translate }}</th>
+            <th class="ellipsis width-15">{{ 'GENERAL.INFO.CONFIRMATIONS' | translate }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of items">
+            <td class="ark-transaction ellipsis width-15" [ngClass]="{'ark-transaction': item.vendorField}">
+                <a href="#" (click)="goToTransaction($event, item.id)">{{item.id | overflowText}}</a>
+            </td>
+            <td class="ellipsis width-15">{{item.timestamp | localDate | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</td>
+            <td class="ark-blue-text ellipsis width-15">
+                <a href="#" *ngIf="item.senderDelegate" (click)="goToAddress($event, item.senderId)">{{item.senderDelegate.username}}</a>
+                <a href="#" *ngIf="!item.senderDelegate && item.knownSender" (click)="goToAddress($event, item.senderId)">{{item.knownSender.owner}}</a>
+                <a href="#" *ngIf="!item.senderDelegate && !item.knownSender" (click)="goToAddress($event, item.senderId)">{{item.senderId | overflowText}}</a>
+            </td>
+            <td class="ellipsis width-15">
+                <a href="#" (click)="goToAddress($event, item.recipientId)" *ngIf="!(item.asset && item.asset.votes || item.asset && item.asset.signature || item.asset && item.asset.delegate)">{{item.recipientId | overflowText}}</a>
+                <span *ngIf="item.asset && item.asset.votes">{{ 'TRANSACTION.ASSET.VOTES' | translate }}</span>
+                <span *ngIf="item.asset && item.asset.signature">{{ 'TRANSACTION.ASSET.SIGNATURE' | translate }}</span>
+                <span *ngIf="item.asset && item.asset.delegate">{{ 'TRANSACTION.ASSET.DELEGATE' | translate }}</span>
+            </td>
+            <td class="ellipsis width-15" [ngClass]="{'ark-amount-plus': item.recipientId === id && item.recipientId !== item.senderId && !(item.asset && item.asset.votes || item.asset && item.asset.signature || item.asset && item.asset.delegate), 'ark-amount-minus': item.senderId === id && item.recipientId !== item.senderId && !(item.asset && item.asset.votes || item.asset && item.asset.signature || item.asset && item.asset.delegate)}">
+                {{(item.amount / 100000000)*curValue | number: '1.2-2'}} {{curName}}
+            </td>
+            <td class="ellipsis width-10">{{(item.fee / 100000000)*curValue | number: '1.2-2'}} {{curName}}</td>
+            <td class="ellipsis width-15 ark-tooltip-wrap">
+                <span *ngIf="item.confirmations <= 50">{{item.confirmations}}</span>
+                <span *ngIf="item.confirmations > 50">{{ 'GENERAL.WELL_CONFIRMED' | translate }}</span>
+                <span class="ark-tooltip" *ngIf="item.confirmations > 50">{{item.confirmations}} {{ 'GENERAL.INFO.CONFIRMATIONS' | translate }}</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
