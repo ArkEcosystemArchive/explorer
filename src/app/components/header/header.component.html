@@ -19,11 +19,11 @@
         </header>
         <div class="connection-message" *ngIf="!connection"><i class="fa fa-clock-o" aria-hidden="true"></i>Updating data. Please, wait or refresh this page in 15 seconds.</div>
         <div class="ark-header-data ark-flex-center" *ngIf="socketObject">
-            <div class="ark-data-item"><span class="ark-item-index"><span class="ark-index-title"> {{ 'GENERAL.INFO.HEIGHT' | translate}}:</span><span class="ark-index-data">{{headerHeight}}</span></span><span class="ark-item-index"><span class="ark-index-title"> {{ 'GENERAL.INFO.NETHASH' | translate}}:</span>
+            <div class="ark-data-item"><span class="ark-item-index"><span class="ark-index-title"> {{ 'GENERAL.INFO.HEIGHT' | translate}}:</span><span class="ark-index-data">{{headerHeight | number: 0}}</span></span><span class="ark-item-index"><span class="ark-index-title"> {{ 'GENERAL.INFO.NETHASH' | translate}}:</span>
                 <span class="ark-index-data">{{headerNethash}}</span>
                 </span>
             </div>
-            <div class="ark-data-item"><span class="ark-item-index"><span class="ark-index-title"> {{ 'GENERAL.INFO.SUPPLY' | translate}}:</span><span class="ark-index-data">{{headerSupply}}</span></span><span class="ark-item-index"><span class="ark-index-title"> ARK/BTC:</span>
+            <div class="ark-data-item"><span class="ark-item-index"><span class="ark-index-title"> {{ 'GENERAL.INFO.SUPPLY' | translate}}:</span><span class="ark-index-data">{{headerSupply | number: 0}}</span></span><span class="ark-item-index"><span class="ark-index-title"> ARK/BTC:</span>
                 <span
                     class="ark-index-data">{{headerBTC | number: '1.8-8'}}</span>
                     </span>
