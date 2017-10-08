@@ -190,6 +190,9 @@
       height: 45px;
       font-size: 15px;
   }
+  &:hover {
+    background: darken(@box-shadow-btn-bg, 5%);
+  }
 }
 
 .ark-shadowbtn-wrap {
@@ -197,24 +200,6 @@
   height: 60px;
   width: 260px;
   margin: 0 auto;
-  .ark-shadowfor-btn {
-    background:  linear-gradient(74.32deg, rgba(255,255,255,0.5) 0%, #3D69F5 100%);
-    position: absolute;
-    right: -10px;
-    top: -10px;
-    left: 10px;
-    bottom: 10px;
-    opacity: 0.3;
-    .transition(all .5s);
-    @media (max-width: @mobile) {
-      bottom: 22px;
-    }
-  }
-  &:hover {
-    .ark-shadowfor-btn {
-      opacity: 0.6;
-    }
-  }
 }
 
 .ark-scroll-top {
