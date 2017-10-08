@@ -1,15 +1,4 @@
 <section>
-    <div class="ark-graph-wrap" *ngIf="chart">
-        <div [chart]="chart"></div>
-        <div class="chart-buttons">
-            <span [ngClass]="{'active': activeChartTab === 'day'}" id="day" (click)="updateChart($event)">1d</span>
-            <span [ngClass]="{'active': activeChartTab === 'week'}" id="week" (click)="updateChart($event)">7d</span>
-            <span [ngClass]="{'active': activeChartTab === 'month'}" id="month" (click)="updateChart($event)">1m</span>
-            <span [ngClass]="{'active': activeChartTab === 'quarter'}" id="quarter" (click)="updateChart($event)">3m</span>
-            <span [ngClass]="{'active': activeChartTab === 'year'}" id="year" (click)="updateChart($event)">1y</span>
-            <span [ngClass]="{'active': activeChartTab === 'all'}" id="all" (click)="updateChart($event)">ALL</span>
-        </div>
-    </div>
     <div class="ark-wrap">
         <div class="ark-section-title">{{ 'DELEGATE_MONITOR.TITLE' | translate}}</div>
         <ul class="ark-delegate-monitor">
