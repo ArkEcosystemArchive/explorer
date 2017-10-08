@@ -49,7 +49,7 @@ export class DelegateMonitorComponent implements OnInit, OnDestroy {
     private _marketService: CoinmarketService,
     private _connectionService: ConnectionMessageService
   ) {
-    this.subscription = _currencyService.currencyChoosen$.subscribe(currency => {
+    this.subscription = _currencyService.currencyChosen$.subscribe(currency => {
       this.currencyName = currency.name;
       this.currencyValue = currency.value;
     });
@@ -57,10 +57,10 @@ export class DelegateMonitorComponent implements OnInit, OnDestroy {
     this.chartSubscription = _marketService.chartBuilt$.subscribe(chart => {
       this.chart = chart;
     });
-    this.supplySubscription = _currencyService.supplyChoosen$.subscribe(supply => {
+    this.supplySubscription = _currencyService.supplyChosen$.subscribe(supply => {
       this.supply = supply;
     });
-    this.heightSubscription = _currencyService.heightChoosen$.subscribe(height => {
+    this.heightSubscription = _currencyService.heightChosen$.subscribe(height => {
       this.height = height;
     });
   }

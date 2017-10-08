@@ -30,11 +30,11 @@ export class TopAccountsComponent implements OnInit, OnDestroy {
     private _currencyService: CurrencyService,
     private _connectionService: ConnectionMessageService
   ) { 
-    this.subscription = _currencyService.currencyChoosen$.subscribe(currency => {
+    this.subscription = _currencyService.currencyChosen$.subscribe(currency => {
       this.currencyName = currency.name;
       this.currencyValue = currency.value;
     });
-    this.supplySubscription = _currencyService.supplyChoosen$.subscribe(supply => {
+    this.supplySubscription = _currencyService.supplyChosen$.subscribe(supply => {
       this.supply = supply;
     });
   }

@@ -57,9 +57,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private _explorerService: ExplorerService,
     private router: Router,
     private _currencyService: CurrencyService,
-    private _connectionServoce: ConnectionMessageService
+    private _connectionService: ConnectionMessageService
   ) {
-    this.subscription = _connectionServoce.connectionChange$.subscribe(connection => {
+    this.subscription = _connectionService.connectionChange$.subscribe(connection => {
       this.connection = connection;
     });
   }

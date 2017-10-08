@@ -35,7 +35,7 @@ export class ExplorerComponent implements OnInit, OnDestroy {
     private _connectionService: ConnectionMessageService,
     private router: Router
   ) {
-    this.subscription = _currencyService.currencyChoosen$.subscribe(currency => {
+    this.subscription = _currencyService.currencyChosen$.subscribe(currency => {
       this.currency = currency.name;
       this.currencyRate = currency.value;
     });
