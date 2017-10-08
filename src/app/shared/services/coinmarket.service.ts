@@ -98,7 +98,10 @@ export class CoinmarketService {
           series: [{
             name: 'ARK/USD',
             data: currencyData,
-            color: '#f0373c'
+            color: '#f0373c',
+            animation: {
+              duration: 350
+            }
           }]
         };
         options = this.toDarkMode(options);
