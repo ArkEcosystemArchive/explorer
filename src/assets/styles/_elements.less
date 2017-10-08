@@ -5,9 +5,13 @@
   .ark-text-field {
     color: @color-white!important;
   }
-  .ark-search-field:focus {
-    background: darken(@dark-header-bg, 10%)!important;
-    border-color: lighten(@dark-header-bg, 10%)!important;
+  .ark-search-field {
+    border-color: transparent;
+    border-bottom: 1px solid lighten(@dark-header-bg, 10%)!important;
+    &:focus {
+      background: darken(@dark-header-bg, 10%)!important;
+      border-color: lighten(@dark-header-bg, 10%)!important;
+    }
   }
 }
 
@@ -32,6 +36,7 @@
     padding: 0 10px 0 32px;
     -webkit-appearance: none;
     border: 1px solid transparent;
+    border-bottom: 1px solid @color-gray-10;
     &:focus {
       background: lighten(@color-gray-10, 5%);
       border: 1px solid @color-gray-10;
