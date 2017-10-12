@@ -24,8 +24,7 @@ export class ScrollTopComponent implements OnInit {
   }
 
   public scrollTop() {
-    // TODO: fix smooth scroll
-    window.scrollTo(0, 0);
+    window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
   }
 
 }

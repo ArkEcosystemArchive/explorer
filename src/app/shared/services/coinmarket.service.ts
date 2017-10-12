@@ -44,6 +44,9 @@ export class CoinmarketService {
     options['yAxis']['gridLineColor'] = this.isDarkTheme ? '#333' : '#e6e6e6';
     options['xAxis']['lineColor'] = this.isDarkTheme ? '#666' : '#ccc';
     options['xAxis']['tickColor'] = this.isDarkTheme ? '#666' : '#ccc';
+    options['xAxis']['labels']['style']['color'] = this.isDarkTheme ? '#aaa' : '#3C4144';
+    options['yAxis']['labels']['style']['color'] = this.isDarkTheme ? '#aaa' : '#3C4144';
+    options['yAxis']['title']['style']['color'] = this.isDarkTheme ? '#aaa' : '#3C4144';
 
     return options;
   }
@@ -69,12 +72,25 @@ export class CoinmarketService {
             categories: categories,
             lineColor: '#ccc',
             tickColor: '#ccc',
+            labels: {
+              style: {
+                color: '#3C4144'
+              }
+            }
           } as any,
           yAxis: {
             gridLineWidth: 1,
             gridLineColor: '#dedede',
             title: {
-              text: 'USD'
+              text: 'USD',
+              style: {
+                color: '#3C4144'
+              }
+            },
+            labels: {
+              style: {
+                color: '#3C4144'
+              }
             }
           },
           title: {
@@ -98,7 +114,10 @@ export class CoinmarketService {
           series: [{
             name: 'ARK/USD',
             data: currencyData,
-            color: '#77d7d4'
+            color: '#f0373c',
+            animation: {
+              duration: 350
+            }
           }]
         };
         options = this.toDarkMode(options);

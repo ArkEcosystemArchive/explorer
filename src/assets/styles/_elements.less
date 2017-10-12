@@ -5,9 +5,13 @@
   .ark-text-field {
     color: @color-white!important;
   }
-  .ark-search-field:focus {
-    background: darken(@dark-header-bg, 10%)!important;
-    border-color: lighten(@dark-header-bg, 10%)!important;
+  .ark-search-field {
+    border-color: transparent;
+    border-bottom: 1px solid lighten(@dark-header-bg, 10%)!important;
+    &:focus {
+      background: darken(@dark-header-bg, 10%)!important;
+      border-color: lighten(@dark-header-bg, 10%)!important;
+    }
   }
 }
 
@@ -25,13 +29,14 @@
   &.ark-search-field {
     border: none;
     width: 100%;
-    font-size: 12px;
+    font-size: 13px;
   	line-height: 17px;
     height: 50px;
     line-height: 50px;
     padding: 0 10px 0 32px;
     -webkit-appearance: none;
     border: 1px solid transparent;
+    border-bottom: 1px solid @color-gray-10;
     &:focus {
       background: lighten(@color-gray-10, 5%);
       border: 1px solid @color-gray-10;
@@ -185,6 +190,9 @@
       height: 45px;
       font-size: 15px;
   }
+  &:hover {
+    background: darken(@box-shadow-btn-bg, 5%);
+  }
 }
 
 .ark-shadowbtn-wrap {
@@ -192,24 +200,6 @@
   height: 60px;
   width: 260px;
   margin: 0 auto;
-  .ark-shadowfor-btn {
-    background:  linear-gradient(74.32deg, rgba(255,255,255,0.5) 0%, #3D69F5 100%);
-    position: absolute;
-    right: -10px;
-    top: -10px;
-    left: 10px;
-    bottom: 10px;
-    opacity: 0.3;
-    .transition(all .5s);
-    @media (max-width: @mobile) {
-      bottom: 22px;
-    }
-  }
-  &:hover {
-    .ark-shadowfor-btn {
-      opacity: 0.6;
-    }
-  }
 }
 
 .ark-scroll-top {
@@ -452,8 +442,8 @@ body:not(.dark-theme) .ark-tooltip {
   }
   tbody {
     tr {
-      font-size: 13px;
-      .box-shadow(0 2px 14px 0 @light-box-shadow-color);
+      font-size: 14px;
+      .box-shadow(0 2px 3px 0 @light-box-shadow-color);
       .border-radius(2px);
       td {
         padding: 15px 10px;
@@ -542,8 +532,8 @@ body:not(.dark-theme) .ark-tooltip {
     }
     tbody {
       tr {
-        font-size: 13px;
-        .box-shadow(0 2px 14px 0 @light-box-shadow-color);
+        font-size: 14px;
+        .box-shadow(0 2px 3px 0 @light-box-shadow-color);
         .border-radius(2px);
         border: 1px solid @light-table-bordered-border;
         .box-shadow(none);
@@ -900,7 +890,7 @@ body:not(.dark-theme) .ark-tooltip {
 .dark-theme .ark-table {
   tbody {
     tr {
-      .box-shadow(0 2px 14px 0 @dark-box-shadow-color)!important;
+      .box-shadow(0 2px 3px 0 @dark-box-shadow-color)!important;
     }
     td {
       color: @dark-table-text-color!important;
