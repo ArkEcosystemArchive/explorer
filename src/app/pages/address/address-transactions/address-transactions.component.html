@@ -12,8 +12,9 @@
     </thead>
     <tbody>
         <tr *ngFor="let item of items">
-            <td class="ark-transaction ellipsis width-15" [ngClass]="{'ark-transaction': item.vendorField}">
+            <td class="ark-transaction ellipsis width-15 ark-tooltip-wrap" [ngClass]="{'ark-transaction': item.vendorField}">
                 <a href="#" (click)="goToTransaction($event, item.id)">{{item.id | overflowText}}</a>
+                <span class="ark-tooltip" *ngIf="item.vendorField">{{ item.vendorField }}</span>
             </td>
             <td class="ellipsis width-15">{{item.timestamp | localDate | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</td>
             <td class="ark-blue-text ellipsis width-15">

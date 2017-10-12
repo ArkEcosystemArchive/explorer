@@ -68,8 +68,9 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="ellipsis width-15" [ngClass]="{'ark-transaction': transaction.vendorField}">
+                            <td class="ellipsis width-15 ark-tooltip-wrap" [ngClass]="{'ark-transaction': transaction.vendorField}">
                                 <a href="#" (click)="goToTransaction($event, transaction.id)">{{transaction.id | overflowText}}</a>
+                                <span class="ark-tooltip" *ngIf="transaction.vendorField">{{ transaction.vendorField }}</span>
                             </td>
                             <td class="ellipsis width-15">{{transaction.timestamp | localDate | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</td>
                             <td class="ark-blue-text ellipsis width-15">
