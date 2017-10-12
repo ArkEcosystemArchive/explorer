@@ -12,16 +12,16 @@ import 'rxjs/Rx';
 @Injectable()
 export class CurrencyService {
   private currencySource = new Subject<CurrencyModel>();
-  private supplySourse = new Subject<number>();
+  private supplySource = new Subject<number>();
   private heightSourse = new Subject<number>();
 
   constructor(
     private http: Http
   ) { }
 
-  currencyChoosen$ = this.currencySource.asObservable();
-  supplyChoosen$ = this.supplySourse.asObservable();
-  heightChoosen$ = this.heightSourse.asObservable();
+  currencyChosen$ = this.currencySource.asObservable();
+  supplyChosen$ = this.supplySource.asObservable();
+  heightChosen$ = this.heightSourse.asObservable();
 
   changeCurrency(currency: string, value: number) {
     let i: CurrencyModel = {
@@ -32,7 +32,7 @@ export class CurrencyService {
   }
 
   changeSupply(value: number) {
-    this.supplySourse.next(value);
+    this.supplySource.next(value);
   }
 
   changeHeight(value: number) {

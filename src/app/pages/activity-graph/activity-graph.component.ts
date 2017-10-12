@@ -60,7 +60,7 @@ export class ActivityGraphComponent implements OnInit, OnDestroy {
     this.subscription = _statistic.statisticChange$.subscribe(statistic => {
       this.statistic = statistic;
     });
-    this.curSubscription = _currencyService.currencyChoosen$.subscribe(currency => {
+    this.curSubscription = _currencyService.currencyChosen$.subscribe(currency => {
       this.currencyName = currency.name;
       this.currencyValue = currency.value;
     });

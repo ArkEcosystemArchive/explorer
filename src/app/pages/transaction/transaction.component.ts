@@ -29,7 +29,7 @@ export class TransactionComponent implements OnInit,OnDestroy {
     private _currencyService: CurrencyService,
     private _connectionService: ConnectionMessageService
   ) {
-    this.subscription = _currencyService.currencyChoosen$.subscribe(currency => {
+    this.subscription = _currencyService.currencyChosen$.subscribe(currency => {
       this.currencyName = currency.name;
       this.currencyValue = currency.value;
     });
