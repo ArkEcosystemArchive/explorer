@@ -8,7 +8,12 @@ import { Router } from '@angular/router';
 })
 export class AddressTransactionsComponent implements OnInit {
   @Input() id: string;
-  @Input() items: any[];
+  private items: any[];
+  @Input() set itemsArray(value: any[]) {
+    this.items = value;
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.sortTransactions(null, this.sortColumn);
+  }
   @Input() curName: string;
   @Input() curValue: number;
 

@@ -197,7 +197,7 @@
                     </li>
                 </ul>
             </div>
-            <ark-delegates [list]="delegatesList" [active]="activeDelegate" [curValue]="currencyValue" [curName]="currencyName"></ark-delegates>
+            <ark-delegates [delegates]="delegatesList" [active]="activeDelegate" [curValue]="currencyValue" [curName]="currencyName"></ark-delegates>
             <div class="monitor-loading" *ngIf="!delegatesList"><span>{{ 'DELEGATE_MONITOR.WAITING' | translate}}</span> </div>
         </div>
     </div>

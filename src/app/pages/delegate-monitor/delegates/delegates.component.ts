@@ -8,6 +8,11 @@ import { Router } from '@angular/router';
 })
 export class DelegatesComponent implements OnInit {
   @Input() list: any;
+  @Input() set delegates(value: any[]) {
+    this.list = value;
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.sortDelegates(null, this.sortColumn);
+  }
   @Input() curValue: number;
   @Input() curName: string;
   @Input() active: boolean = true;
