@@ -55,8 +55,8 @@ export class DelegatesComponent implements OnInit {
       });
     } else if (column === 'forged') {
       this.list.sort((a, b): number => {
-        if (a.forged < b.forged)      return this.sortDirection === 'asc' ? -1 : 1;
-        else if (a.forged > b.forged) return this.sortDirection === 'asc' ? 1 : -1;
+        if (Number(a.forged) < Number(b.forged))      return this.sortDirection === 'asc' ? -1 : 1;
+        else if (Number(a.forged) > Number(b.forged)) return this.sortDirection === 'asc' ? 1 : -1;
         return 0;
       });
     } else if (column === 'forgingTime') {
