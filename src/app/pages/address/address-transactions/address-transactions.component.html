@@ -2,12 +2,36 @@
     <thead>
         <tr>
             <th class="ellipsis width-15">{{ 'TRANSACTION.ID' | translate }}</th>
-            <th class="ellipsis width-15">{{ 'GENERAL.INFO.DATE' | translate }}</th>
+            <th class="ellipsis width-15">
+                <a href="#" (click)="sortTransactions($event, 'timestamp')" style="color: inherit;">
+                    <i class="fa fa-arrow-up" aria-hidden="true" *ngIf="sortColumn === 'timestamp' && sortDirection === 'asc'"></i>
+                    <i class="fa fa-arrow-down" aria-hidden="true" *ngIf="sortColumn === 'timestamp' && sortDirection === 'desc'"></i>
+                    {{ 'GENERAL.INFO.DATE' | translate }}
+                </a>
+            </th>
             <th class="ellipsis width-15">{{ 'GENERAL.INFO.SENDER' | translate }}</th>
             <th class="ellipsis width-15">{{ 'GENERAL.INFO.RECIPIENT' | translate }}</th>
-            <th class="ellipsis width-15">{{ 'GENERAL.INFO.AMOUNT' | translate }}</th>
-            <th class="ellipsis width-10">{{ 'GENERAL.INFO.FEE' | translate }}</th>
-            <th class="ellipsis width-15">{{ 'GENERAL.INFO.CONFIRMATIONS' | translate }}</th>
+            <th class="ellipsis width-15">
+                <a href="#" (click)="sortTransactions($event, 'amount')" style="color: inherit;">
+                    <i class="fa fa-arrow-up" aria-hidden="true" *ngIf="sortColumn === 'amount' && sortDirection === 'asc'"></i>
+                    <i class="fa fa-arrow-down" aria-hidden="true" *ngIf="sortColumn === 'amount' && sortDirection === 'desc'"></i>
+                    {{ 'GENERAL.INFO.AMOUNT' | translate }}
+                </a>
+            </th>
+            <th class="ellipsis width-15">
+                <a href="#" (click)="sortTransactions($event, 'fee')" style="color: inherit;">
+                    <i class="fa fa-arrow-up" aria-hidden="true" *ngIf="sortColumn === 'fee' && sortDirection === 'asc'"></i>
+                    <i class="fa fa-arrow-down" aria-hidden="true" *ngIf="sortColumn === 'fee' && sortDirection === 'desc'"></i>
+                    {{ 'GENERAL.INFO.FEE' | translate }}
+                </a>
+            </th>
+            <th class="ellipsis width-15">
+                <a href="#" (click)="sortTransactions($event, 'confirmations')" style="color: inherit;">
+                    <i class="fa fa-arrow-up" aria-hidden="true" *ngIf="sortColumn === 'confirmations' && sortDirection === 'asc'"></i>
+                    <i class="fa fa-arrow-down" aria-hidden="true" *ngIf="sortColumn === 'confirmations' && sortDirection === 'desc'"></i>
+                    {{ 'GENERAL.INFO.CONFIRMATIONS' | translate }}
+                </a>
+            </th>
         </tr>
     </thead>
     <tbody>
