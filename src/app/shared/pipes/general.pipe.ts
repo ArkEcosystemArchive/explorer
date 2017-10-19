@@ -42,15 +42,25 @@ export class CurrencyFormatPipe implements PipeTransform {
         });
     }
 
-    transform(value: number): string {
+    transform(value: number, overrideCurrency?: string): string {
         var formatted = '';
 
-        if (this.currency === 'ARK' || this.currency === 'BTC') {
-            // 8 Decimal Places for Cryptocurrencies. Get rid of trailing 0's
-            formatted = value.toFixed(8).replace(/(?:\.0+|(\.\d+?)0+)$/, '$1');
+        if (overrideCurrency) {
+            if (overrideCurrency === 'ARK' || this.currency === 'BTC') {
+                // 8 Decimal Places for Cryptocurrencies. Get rid of trailing 0's
+                formatted = value.toFixed(8).replace(/(?:\.0+|(\.\d+?)0+)$/, '$1');
+            } else {
+                // 2 Decimal Places for Fiat
+                formatted = value.toFixed(2);
+            }
         } else {
-            // 2 Decimal Places for Fiat
-            formatted = value.toFixed(2);
+            if (this.currency === 'ARK' || this.currency === 'BTC') {
+                // 8 Decimal Places for Cryptocurrencies. Get rid of trailing 0's
+                formatted = value.toFixed(8).replace(/(?:\.0+|(\.\d+?)0+)$/, '$1');
+            } else {
+                // 2 Decimal Places for Fiat
+                formatted = value.toFixed(2);
+            }
         }
 
         // Add commas
