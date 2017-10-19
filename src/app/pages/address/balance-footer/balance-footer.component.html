@@ -1,6 +1,6 @@
 <div class="ark-balance-footer" *ngIf="show">
     <div class="ark-wrap ark-flex-center ark-flex-between">
         <p class="ark-balance-address">{{address}}</p>
-        <p class="ark-balance-amount">{{ 'GENERAL.INFO.FINAL_BALANCE' | translate}} {{(balance / 100000000)*curVal | number: '1.2-2'}} {{curName}}</p>
+        <p class="ark-balance-amount">{{ 'GENERAL.INFO.FINAL_BALANCE' | translate}} {{(balance / 100000000)*curVal | currencyFormat}} {{curName}}</p>
     </div>
 </div>

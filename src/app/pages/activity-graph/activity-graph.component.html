@@ -42,7 +42,7 @@
                     </li>
                     <li class="ark-flex ark-flex-between">
                         <div class="title">{{ 'ACTIVITY_GRAPH.STATISTICS.VOLUME' | translate}}</div>
-                        <div class="count">{{statistic.volume * currencyValue}} <span class="opacity">{{currencyName}}</span></div>
+                        <div class="count">{{statistic.volume * currencyValue | currencyFormat}} <span class="opacity">{{currencyName}}</span></div>
                     </li>
                     <li class="ark-flex ark-flex-between">
                         <div class="title">{{ 'ACTIVITY_GRAPH.STATISTICS.BLOCKS' | translate}}</div>

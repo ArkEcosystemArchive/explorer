@@ -19,8 +19,8 @@
                 <td class="ellipsis width-15">{{item.timestamp | localDate | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</td>
                 <td class="ellipsis width-15">{{item.transactionsCount}}</td>
                 <td class="ellipsis width-15"><a href="#" (click)="goToAddress($event, item.delegate.address)">{{item.delegate.username}}</a></td>
-                <td class="ellipsis width-15">{{(item.totalAmount/100000000)*currencyValue | number: '1.2-2'}}</td>
-                <td class="ellipsis width-15">{{(item.totalForged/100000000)*currencyValue | number: '1.0-2'}}</td>
+                <td class="ellipsis width-15">{{(item.totalAmount/100000000)*currencyValue | currencyFormat}}</td>
+                <td class="ellipsis width-15">{{(item.totalForged/100000000)*currencyValue | currencyFormat}}</td>
             </tr>
         </tbody>
     </table>
