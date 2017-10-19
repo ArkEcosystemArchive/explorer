@@ -66,10 +66,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._currencyService.getCNYprice().subscribe(res => {
-      this.headerCNY = res.ticker.price;
+      this.headerCNY = Number(res.ticker.price);
     });
     this._currencyService.getGBPprice().subscribe(res => {
-      this.headerGBP = res.ticker.price;
+      this.headerGBP = Number(res.ticker.price);
     });
     this.getExtraRates();
   }
@@ -85,10 +85,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   getExtraRates() {
     this._timer = setInterval(() => {
       this._currencyService.getCNYprice().subscribe(res => {
-        this.headerCNY = res.ticker.price;
+        this.headerCNY = Number(res.ticker.price);
       });
       this._currencyService.getGBPprice().subscribe(res => {
-        this.headerGBP = res.ticker.price;
+        this.headerGBP = Number(res.ticker.price);
       });
     }, 5*60000);
   }
