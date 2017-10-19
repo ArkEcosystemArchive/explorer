@@ -64,6 +64,10 @@ export class CurrencyFormatPipe implements PipeTransform {
         }
 
         // Add commas
-        return formatted.replace(/\B(?=(?=\d*\.|$)(\d{3})+(?!\d))/g, ',');
+        if (formatted.includes('.')) {
+            return formatted.replace(/\B(?=(?=\d*\.)(\d{3})+(?!\d))/g, ',');
+        } else {
+            return formatted.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
     }
 }
