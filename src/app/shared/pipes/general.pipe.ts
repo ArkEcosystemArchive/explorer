@@ -44,23 +44,14 @@ export class CurrencyFormatPipe implements PipeTransform {
 
     transform(value: number, overrideCurrency?: string): string {
         var formatted = '';
+        var formatCurrency = overrideCurrency ? overrideCurrency : this.currency;
 
-        if (overrideCurrency) {
-            if (overrideCurrency === 'ARK' || overrideCurrency === 'BTC') {
-                // 8 Decimal Places for Cryptocurrencies. Get rid of trailing 0's
-                formatted = value.toFixed(8).replace(/(?:\.0+|(\.\d+?)0+)$/, '$1');
-            } else {
-                // 2 Decimal Places for Fiat
-                formatted = value.toFixed(2);
-            }
+        if (formatCurrency === 'ARK' || formatCurrency === 'BTC') {
+            // 8 Decimal Places for Cryptocurrencies. Get rid of trailing 0's
+            formatted = value.toFixed(8).replace(/(?:\.0+|(\.\d+?)0+)$/, '$1');
         } else {
-            if (this.currency === 'ARK' || this.currency === 'BTC') {
-                // 8 Decimal Places for Cryptocurrencies. Get rid of trailing 0's
-                formatted = value.toFixed(8).replace(/(?:\.0+|(\.\d+?)0+)$/, '$1');
-            } else {
-                // 2 Decimal Places for Fiat
-                formatted = value.toFixed(2);
-            }
+            // 2 Decimal Places for Fiat
+            formatted = value.toFixed(2);
         }
 
         // Add commas
