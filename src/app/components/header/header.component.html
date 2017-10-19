@@ -22,7 +22,7 @@
             <div class="ark-data-item">
                 <span class="ark-item-index">
                     <span class="ark-index-title"> {{ 'GENERAL.INFO.HEIGHT' | translate}}:</span>
-                    <span class="ark-index-data">{{headerHeight}}</span>
+                    <span class="ark-index-data">{{headerHeight | number: 0}}</span>
                 </span>
                 <span class="ark-item-index">
                     <span class="ark-index-title"> {{ 'GENERAL.INFO.NETHASH' | translate}}:</span>
@@ -32,7 +32,7 @@
             <div class="ark-data-item">
                 <span class="ark-item-index">
                     <span class="ark-index-title"> {{ 'GENERAL.INFO.SUPPLY' | translate}}:</span>
-                    <span class="ark-index-data">{{headerSupply}}</span>
+                    <span class="ark-index-data">{{headerSupply | number: 0}}</span>
                 </span>
                 <span class="ark-item-index">
                     <span class="ark-index-title"> ARK/BTC:</span>
