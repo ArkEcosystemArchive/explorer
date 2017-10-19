@@ -46,7 +46,7 @@ export class CurrencyFormatPipe implements PipeTransform {
         var formatted = '';
 
         if (overrideCurrency) {
-            if (overrideCurrency === 'ARK' || this.currency === 'BTC') {
+            if (overrideCurrency === 'ARK' || overrideCurrency === 'BTC') {
                 // 8 Decimal Places for Cryptocurrencies. Get rid of trailing 0's
                 formatted = value.toFixed(8).replace(/(?:\.0+|(\.\d+?)0+)$/, '$1');
             } else {
