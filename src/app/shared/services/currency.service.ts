@@ -28,7 +28,6 @@ export class CurrencyService {
       name: currency,
       value: value
     };
-    console.log(i.name);
     this.currencySource.next(i);
   }
 
