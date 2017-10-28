@@ -29,10 +29,12 @@ export class CurrencyDropdownComponent implements OnInit {
     setTimeout(_ => {
       if(this.currency.length > 1) {
         let cur = localStorage.getItem('currency') || initCurrency.name;
-        this.setCurrency(cur);
+        if (cur != this.currentCurrency) {
+          this.setCurrency(cur);
+        }
       }
     });
-    
+
   }
 
   get rates(): any {
