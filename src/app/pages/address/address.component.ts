@@ -29,7 +29,7 @@ export class AddressComponent implements OnInit, OnDestroy {
   public showBalanceFooter: boolean = false;
   public openVoters: boolean = false;
   public votersNumber: number = 4;
-  public supply: number;
+  public supply: number = 0;
 
   private _currentAddress: string = '';
   private subscription: Subscription;
