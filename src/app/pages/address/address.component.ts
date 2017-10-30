@@ -29,9 +29,11 @@ export class AddressComponent implements OnInit, OnDestroy {
   public showBalanceFooter: boolean = false;
   public openVoters: boolean = false;
   public votersNumber: number = 4;
+  public supply: number = 0;
 
   private _currentAddress: string = '';
   private subscription: Subscription;
+  private supplySubscription: Subscription;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -44,6 +46,9 @@ export class AddressComponent implements OnInit, OnDestroy {
     this.subscription = _currencyService.currencyChosen$.subscribe(currency => {
       this.currencyName = currency.name;
       this.currencyValue = currency.value;
+    });
+    this.supplySubscription = _currencyService.supplyChoosen$.subscribe(supply => {
+      this.supply = supply;
     });
   }
 
@@ -147,6 +152,7 @@ export class AddressComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.supplySubscription.unsubscribe();
     this.document.body.classList.remove('extra-footer');
   }
 
