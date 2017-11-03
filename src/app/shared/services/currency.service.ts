@@ -13,7 +13,7 @@ import 'rxjs/Rx';
 export class CurrencyService {
   private currencySource = new Subject<CurrencyModel>();
   private supplySource = new Subject<number>();
-  private heightSourse = new Subject<number>();
+  private heightSource = new Subject<number>();
 
   constructor(
     private http: Http
@@ -21,7 +21,7 @@ export class CurrencyService {
 
   currencyChosen$ = this.currencySource.asObservable();
   supplyChosen$ = this.supplySource.asObservable();
-  heightChosen$ = this.heightSourse.asObservable();
+  heightChosen$ = this.heightSource.asObservable();
 
   changeCurrency(currency: string, value: number) {
     let i: CurrencyModel = {
@@ -36,7 +36,7 @@ export class CurrencyService {
   }
 
   changeHeight(value: number) {
-    this.heightSourse.next(value);
+    this.heightSource.next(value);
   }
 
   public getCNYprice() {

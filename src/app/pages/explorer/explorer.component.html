@@ -32,8 +32,8 @@
                 <td class="ellipsis width-15"><a href="#" (click)="goToAddress($event, item.senderId)"><span *ngIf="item.senderDelegate">{{item.senderDelegate.username}}</span> <span *ngIf="!item.senderDelegate">{{item.senderId | overflowText}}</span></a></td>
                 <td class="ellipsis width-15"><a href="#" (click)="goToAddress($event, item.recipientId)">{{item.recipientId | overflowText}}</a></td>
                 <td class="ellipsis width-20">{{item.vendorField || ''}}</td>
-                <td class="ellipsis width-15">{{(+item.amount/100000000)*currencyRate | number: '1.2-2'}}</td>
-                <td class="ellipsis width-10">{{(+item.fee/100000000)*currencyRate | number: '1.1'}}</td>
+                <td class="ellipsis width-15">{{(+item.amount/100000000)*currencyRate | currencyFormat}}</td>
+                <td class="ellipsis width-10">{{(+item.fee/100000000)*currencyRate | currencyFormat}}</td>
             </tr>
         </tbody>
     </table>
@@ -61,8 +61,8 @@
                 <td class="ellipsis width-15">{{item.timestamp | localDate | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</td>
                 <td class="ellipsis width-10">{{item.transactionsCount}}</td>
                 <td class="ellipsis width-15"><a href="#" (click)="goToAddress($event, item.generator)">{{item.delegate.username}}</a></td>
-                <td class="ellipsis width-15">{{(+item.totalAmount/100000000)*currencyRate | number: '1.2-2'}}</td>
-                <td class="ellipsis width-15">{{(+item.totalForged/100000000)*currencyRate | number: '1.1'}}</td>
+                <td class="ellipsis width-15">{{(+item.totalAmount/100000000)*currencyRate | currencyFormat}}</td>
+                <td class="ellipsis width-15">{{(+item.totalForged/100000000)*currencyRate | currencyFormat}}</td>
             </tr>
         </tbody>
     </table>

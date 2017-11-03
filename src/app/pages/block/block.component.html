@@ -27,19 +27,19 @@
                 </div>
                 <div class="ark-summary-item ark-flex-between ark-flex-center">
                     <span class="ark-summary-title">{{ 'GENERAL.INFO.REWARD' | translate }}</span>
-                    <div class="ark-summary-data">{{(block.reward / 100000000)*currencyValue | number: '1.0-2'}} <span class="opacity">{{currencyName}}</span></div>
+                    <div class="ark-summary-data">{{(block.reward / 100000000)*currencyValue | currencyFormat}} <span class="opacity">{{currencyName}}</span></div>
                 </div>
                 <div class="ark-summary-item ark-flex-between ark-flex-center">
                     <span class="ark-summary-title">{{ 'GENERAL.INFO.TOTAL_FEE' | translate }}</span>
-                    <div class="ark-summary-data">{{(block.totalFee / 100000000)*currencyValue | number: '1.1-2'}} <span class="opacity">{{currencyName}}</span></div>
+                    <div class="ark-summary-data">{{(block.totalFee / 100000000)*currencyValue | currencyFormat}} <span class="opacity">{{currencyName}}</span></div>
                 </div>
                 <div class="ark-summary-item ark-flex-between ark-flex-center">
                     <span class="ark-summary-title">{{ 'GENERAL.INFO.TOTAL_FORGED' | translate }}</span>
-                    <div class="ark-summary-data">{{(block.totalForged / 100000000)*currencyValue | number: '1.1-2'}} <span class="opacity">{{currencyName}}</span></div>
+                    <div class="ark-summary-data">{{(block.totalForged / 100000000)*currencyValue | currencyFormat}} <span class="opacity">{{currencyName}}</span></div>
                 </div>
                 <div class="ark-summary-item ark-flex-between ark-flex-center">
                     <span class="ark-summary-title">{{ 'GENERAL.INFO.TOTAL_AMOUNT' | translate }}</span>
-                    <div class="ark-summary-data">{{(block.totalAmount / 100000000)*currencyValue | number: '1.2-2'}} <span class="opacity">{{currencyName}}</span></div>
+                    <div class="ark-summary-data">{{(block.totalAmount / 100000000)*currencyValue | currencyFormat}} <span class="opacity">{{currencyName}}</span></div>
                 </div>
                 <div class="ark-summary-item ark-flex-between ark-flex-center">
                     <span class="ark-summary-title">{{ 'GENERAL.INFO.TIMESTAMP' | translate }}</span>
@@ -88,8 +88,8 @@
                                 <span *ngIf="transaction.asset && transaction.asset.signature">{{ 'TRANSACTION.ASSET.SIGNATURE' | translate }}</span>
                                 <span *ngIf="transaction.asset && transaction.asset.delegate">{{ 'TRANSACTION.ASSET.DELEGATE' | translate }}</span>
                             </td>
-                            <td class="ark-amount ellipsis width-15">{{(transaction.amount / 100000000)*currencyValue | number: '1.2-2'}} {{currencyName}}</td>
-                            <td class="ellipsis width-10">{{(transaction.fee / 100000000)*currencyValue | number: '1.1-1'}} {{currencyName}}</td>
+                            <td class="ark-amount ellipsis width-15">{{(transaction.amount / 100000000)*currencyValue | currencyFormat}} {{currencyName}}</td>
+                            <td class="ellipsis width-10">{{(transaction.fee / 100000000)*currencyValue | currencyFormat}} {{currencyName}}</td>
                             <td class="ellipsis width-15 ark-tooltip-wrap">
                                 <span *ngIf="transaction.confirmations <= 50">{{transaction.confirmations}}</span>
                                 <span *ngIf="transaction.confirmations > 50">{{ 'GENERAL.WELL_CONFIRMED' | translate }}</span>

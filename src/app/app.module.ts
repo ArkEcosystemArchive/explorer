@@ -32,7 +32,7 @@ import { DelegateMonitorComponent } from './pages/delegate-monitor/delegate-moni
 import { ToolsDropdownComponent } from './components/header/tools-dropdown/tools-dropdown.component';
 import { BalanceFooterComponent } from './pages/address/balance-footer/balance-footer.component';
 
-import { DatePipe, OverflowTextPipe } from './shared/pipes/general.pipe';
+import { DatePipe, OverflowTextPipe, CurrencyFormatPipe } from './shared/pipes/general.pipe';
 import { TopAccountsComponent } from './pages/top-accounts/top-accounts.component';
 import { DelegatesComponent } from './pages/delegate-monitor/delegates/delegates.component';
 import { ScrollTopComponent } from './components/scroll-top/scroll-top.component';
@@ -65,7 +65,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     TopAccountsComponent,
     DelegatesComponent,
     ScrollTopComponent,
-    ToggleBackgroundComponent
+    ToggleBackgroundComponent,
+    CurrencyFormatPipe
   ],
   imports: [
     BrowserModule,

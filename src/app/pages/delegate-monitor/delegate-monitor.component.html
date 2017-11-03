@@ -29,7 +29,7 @@
                     <span *ngIf="!monitorData">N/A</span>
                 </div>
                 <div class="ark-info-item">
-                    <span *ngIf="monitorData && monitorData.lastBlock">{{(+monitorData.lastBlock.block.totalForged/100000000)*currencyValue | number: '1.0-2'}}</span>
+                    <span *ngIf="monitorData && monitorData.lastBlock">{{(+monitorData.lastBlock.block.totalForged/100000000)*currencyValue | currencyFormat}}</span>
                     <span *ngIf="!monitorData">0</span> {{currencyName}} {{ 'DELEGATE_MONITOR.MONITOR.FORGED_FROM' | translate}}
                     <span *ngIf="monitorData && monitorData.lastBlock">{{monitorData.lastBlock.block.numberOfTransactions}}</span>
                     <span *ngIf="!monitorData">0</span> {{ 'DELEGATE_MONITOR.MONITOR.TRANSACTIONS' | translate}}
@@ -52,7 +52,7 @@
             </li>
             <li>
                 <div class="ark-title">{{ 'GENERAL.INFO.TOTAL_FORGED' | translate }} <span class="opacity">({{currencyName}})</span></div>
-                <div class="ark-count">{{(totalForged/100000000)*currencyValue | number: '1.2-2'}}</div>
+                <div class="ark-count">{{(totalForged/100000000)*currencyValue | currencyFormat}}</div>
                 <div class="ark-info-item">{{ 'GENERAL.BETWEEN' | translate }} <span *ngIf="monitorData && monitorData.active">{{monitorData.active.delegates.length}}</span><span *ngIf="!monitorData">0</span> {{ 'DELEGATE_MONITOR.MONITOR.ACTIVE' | translate }}</div>
                 <div class="ark-gradient-border magenta-gradient"></div>
             </li>
@@ -63,7 +63,7 @@
                     <span *ngIf="!bestForger">N/A</span>
                 </div>
                 <div class="ark-info-item phrase-wrap">
-                    <span *ngIf="bestForger">{{(bestForger.forged/100000000)*currencyValue}}</span>
+                    <span *ngIf="bestForger">{{(bestForger.forged/100000000)*currencyValue | currencyFormat}}</span>
                     <span *ngIf="!bestForger">0</span> {{currencyName}} {{ 'DELEGATE_MONITOR.MONITOR.SINCE_REGISTRATION' | translate }}
                 </div>
                 <div class="ark-gradient-border darkblue-gradient"></div>
@@ -95,7 +95,7 @@
             <li>
                 <div class="ark-title">{{ 'GENERAL.INFO.TOTAL_FORGED' | translate }} ({{currencyName}})</div>
                 <div class="ark-count">
-                    <span *ngIf="supply">{{(+supply/100000000 - 125000000)*currencyValue | number: '1.2-2'}}</span>
+                    <span *ngIf="supply">{{(+supply/100000000 - 125000000)*currencyValue | currencyFormat}}</span>
                     <span *ngIf="!supply">0.00</span>
                 </div>
                 <div class="ark-info-item">{{ 'DELEGATE_MONITOR.MONITOR.FROM_START' | translate }}</div>

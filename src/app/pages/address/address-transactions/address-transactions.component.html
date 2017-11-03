@@ -29,9 +29,9 @@
                 <span *ngIf="item.asset && item.asset.delegate">{{ 'TRANSACTION.ASSET.DELEGATE' | translate }}</span>
             </td>
             <td class="ellipsis width-15" [ngClass]="{'ark-amount-plus': item.recipientId === id && item.recipientId !== item.senderId && !(item.asset && item.asset.votes || item.asset && item.asset.signature || item.asset && item.asset.delegate), 'ark-amount-minus': item.senderId === id && item.recipientId !== item.senderId && !(item.asset && item.asset.votes || item.asset && item.asset.signature || item.asset && item.asset.delegate)}">
-                {{(item.amount / 100000000)*curValue | number: '1.2-2'}} {{curName}}
+                {{(item.amount / 100000000)*curValue | currencyFormat}} {{curName}}
             </td>
-            <td class="ellipsis width-10">{{(item.fee / 100000000)*curValue | number: '1.2-2'}} {{curName}}</td>
+            <td class="ellipsis width-10">{{(item.fee / 100000000)*curValue | currencyFormat}} {{curName}}</td>
             <td class="ellipsis width-15 ark-tooltip-wrap">
                 <span *ngIf="item.confirmations <= 50">{{item.confirmations}}</span>
                 <span *ngIf="item.confirmations > 50">{{ 'GENERAL.WELL_CONFIRMED' | translate }}</span>
