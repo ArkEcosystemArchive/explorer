@@ -15,13 +15,18 @@ export class CurrencyService {
   private supplySource = new Subject<number>();
   private heightSourse = new Subject<number>();
 
+  currencyChosen$: Observable<CurrencyModel>;
+  supplyChosen$: Observable<number>;
+  heightChosen$: Observable<number>;
+
   constructor(
     private http: Http
-  ) { }
+  ) { 
+    this.currencyChosen$ = this.currencySource.asObservable();
+    this.supplyChosen$ = this.supplySource.asObservable();
+    this.heightChosen$ = this.heightSourse.asObservable();
 
-  currencyChosen$ = this.currencySource.asObservable();
-  supplyChosen$ = this.supplySource.asObservable();
-  heightChosen$ = this.heightSourse.asObservable();
+  }
 
   changeCurrency(currency: string, value: number) {
     let i: CurrencyModel = {
