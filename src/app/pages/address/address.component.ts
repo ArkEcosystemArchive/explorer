@@ -47,7 +47,7 @@ export class AddressComponent implements OnInit, OnDestroy {
       this.currencyName = currency.name;
       this.currencyValue = currency.value;
     });
-    this.supplySubscription = _currencyService.supplyChoosen$.subscribe(supply => {
+    this.supplySubscription = _currencyService.supplyChosen$.subscribe(supply => {
       this.supply = supply;
     });
   }
