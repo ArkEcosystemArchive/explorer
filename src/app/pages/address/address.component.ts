@@ -42,12 +42,12 @@ export class AddressComponent implements OnInit, OnDestroy {
     private _explorerService: ExplorerService,
     private _currencyService: CurrencyService,
     private _connectionService: ConnectionMessageService
-  ) { 
+  ) {
     this.subscription = _currencyService.currencyChosen$.subscribe(currency => {
       this.currencyName = currency.name;
       this.currencyValue = currency.value;
     });
-    this.supplySubscription = _currencyService.supplyChoosen$.subscribe(supply => {
+    this.supplySubscription = _currencyService.supplyChosen$.subscribe(supply => {
       this.supply = supply;
     });
   }
@@ -58,7 +58,7 @@ export class AddressComponent implements OnInit, OnDestroy {
     this.showLoader = true;
     this.route.params.subscribe((params: Params) => {
       this._currentAddress = params["id"];
-    
+
       this._explorerService.getAccount(this._currentAddress).subscribe(
         res => {
           this.addressItem = res;
@@ -118,7 +118,7 @@ export class AddressComponent implements OnInit, OnDestroy {
 
   getSentTransactions(event):void {
     this.showLoader = true;
-    this.activeTab = event.target.id;    
+    this.activeTab = event.target.id;
     this._explorerService.getTransactionsByAddress(this._currentAddress, 'sent').subscribe(
       res => {
         this._connectionService.changeConnection(res.success);
@@ -130,7 +130,7 @@ export class AddressComponent implements OnInit, OnDestroy {
 
   getReceivedTransactions(event):void {
     this.showLoader = true;
-    this.activeTab = event.target.id;    
+    this.activeTab = event.target.id;
     this._explorerService.getTransactionsByAddress(this._currentAddress, 'received').subscribe(
       res => {
         this._connectionService.changeConnection(res.success);
