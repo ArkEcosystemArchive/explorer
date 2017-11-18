@@ -35,7 +35,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   @Input('socketObject') set socketObject(value: any) {
     if (value && value.status && value.ticker) {
-      console.log(value);
       this._socketValue = value;
       this.headerHeight = value.status.height;
       this.headerSupply = value.status.supply / 100000000;
