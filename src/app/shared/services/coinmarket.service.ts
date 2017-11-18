@@ -59,7 +59,7 @@ export class CoinmarketService {
       res => {
         categories = this.getTimeLine(res.Data, param);
         currencyData = this.getValues(res.Data);
-        chartSubtitle = this.getSubtitle(currencyData);
+        chartSubtitle = this.getSubtitle(currencyData, param);
 
         let options = {
           chart: {
@@ -203,13 +203,13 @@ export class CoinmarketService {
     return values;
   }
 
-  public getSubtitle(data: any) {
+  public getSubtitle(data: any, time: string) {
     let current = data[data.length - 1];
-    let prev = data[data.length - 2];
+    let prev = data[0];
     let difference = Math.round((current - prev) * Math.pow(10, 8)) / Math.pow(10, 8);
     let percent = Math.round(((difference / prev) * 100) * 100) / 100;
     let sign = difference > 0 ? '+' : '';
-    return '1h change: ' + sign + difference.toString() + '$ (' + sign + percent + '%)';
+    return '' + time + ' change: ' + sign + difference.toString() + '$ (' + sign + percent + '%)';
   }
 
   private _defineFormat(param: string) {
