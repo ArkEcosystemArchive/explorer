@@ -1,0 +1,170 @@
+{
+  "GENERAL": {
+      "COPY_CLIPBOARD": "Copier dans le presse-papier",
+      "WELL_CONFIRMED": "Confirmé",
+      "MORE": "Plus",
+      "LOADING": "chargement",
+      "NEXT_PAGE": "Page suivante",
+      "PREV_PAGE": "Page précédente",
+      "ACTIVE": "Active",
+      "MISSED": "manqué",
+      "TABS": {
+          "ALL": "Toutes",
+          "SENT": "Envoyé",
+          "RECEIVED": "Reçu"
+      },
+      "INFO": {
+          "ADDRESS": "Adresse",
+          "AMOUNT": "Montant",
+          "APPROVAL": "Approbation",
+          "BALANCE": "Balance",
+          "BLOCK": "Bloc",
+          "BLOCKS": "Blocs",
+          "CONFIRMATIONS": "Confirmations",
+          "DATE": "Date",
+          "DELEGATE": "Délégué",
+          "FEE": "Frais",
+          "FINAL_BALANCE": "Balance finale",
+          "FORGED": "Forgé",
+          "FORGING_TIME": "Temps de forge",
+          "GENERATED_BY": "Généré par",
+          "HEIGHT": "Hauteur",
+          "ID": "ID",
+          "NAME": "Nom",
+          "NETHASH": "Nethash",
+          "OWNER": "Propriétaire",
+          "PUBLIC_KEY": "Clé publique",
+          "PRODUCTIVITY": "Productivité",
+          "RANK": "Rang",
+          "RECIPIENT": "Destinataire",
+          "REWARD": "Récompense",
+          "SENDER": "Expéditeur",
+          "SMARTBRIDGE": "Smartbridge",
+          "STATUS": "Statut",
+          "SUPPLY": "Offre",
+          "TIME": "Temps",
+          "TIMESTAMP": "Timestamp",
+          "TOTAL_AMOUNT": "Montant total",
+          "TOTAL_BALANCE": "Balance totale",
+          "TOTAL_FEE": "Frais total",
+          "TOTAL_FORGED": "Total forgé",
+          "TRANSACTION": "Transaction",
+          "TRANSACTIONS": "Transactions",
+          "UPTIME": "Uptime",
+          "VENDOR_FIELD": "Message",
+          "VOTER": "Électeur"
+      },
+      "BETWEEN": "entre",
+      "BY": "par"
+  },
+  "EXPLORER": {
+      "TX_TITLE": "Dernières transactions",
+      "BLOCK_TITLE": "Derniers blocs",
+      "BUTTON": "Voir tous les blocs"
+  },
+  "ADDRESS": {
+      "TITLE": "Résumé adresse",
+      "SCAN": "Scanner pour adresse",
+      "DELEGATE_TITLE": "Délégué",
+      "VOTES_TITLE": "Votes",
+      "VOTERS_TITLE": "Électeurs",
+      "TX_TITLE": "Transactions"
+  },
+  "TRANSACTION": {
+      "TITLE": "Transaction",
+      "ID": "ID Transaction",
+      "SUMMARY_TITLE": "Résumé",
+      "DETAILS_TITLE": "Détails",
+      "ASSET": {
+          "VOTES": "Vote délégué",
+          "SIGNATURE": "Créer seconde signature",
+          "DELEGATE": "Inscription délégué"
+      },
+      "NO_TRANSACTIONS": "Aucune transaction impliquant cette adresse"
+  },
+  "BLOCK": {
+      "TITLE": "Bloc",
+      "ID": "ID Bloc",
+      "SUMMARY_TITLE": "Résumé",
+      "TX_TITLE": "Transactions",
+      "PREV_BLOCK": "Bloc précédent"
+  },
+  "BLOCK_LIST": {
+      "TITLE": "Blocs"
+  },
+  "TOP_ACCOUNTS": {
+      "TITLE": "Top adresses"
+  },
+  "ACTIVITY_GRAPH": {
+      "TITLE": "Graphique d'activité",
+      "DESCRIPTION": "Ceci est une visualisation graphique en direct de la blockchain ARK. Lors de l'initialisation, seul le dernier bloc est affiché. Les blocs suivants sont ajoutés au graphique lorsqu'ils sont forgés par le réseau. Après avoir atteint un maximum de 20 blocs, le graphique se réinitialisera automatiquement à la hauteur du bloc actuel et recommencera.",
+      "LEGEND_TITLE": "Légende",
+      "LEGEND_DESCRIPTION": "Utiliser la légende suivante afin d'identifier les noeuds et leurs interactions correspondantes.",
+      "UPDATE": "Mis à jour toute les 10 secondes",
+      "RESET_CAMERA": "Réinitialiser caméra",
+      "LEGEND": {
+          "ACCOUNT": "Compte",
+          "BLOCK": "Bloc",
+          "TX": "Tx",
+          "CREDIT": "Crédit",
+          "DEBIT": "Débit"
+      },
+      "STATISTICS": {
+          "TITLE": "Statistiques",
+          "TXS": "Txs",
+          "VOLUME": "Volume",
+          "BLOCKS": "Blocs",
+          "TIMESPAN": "Durée",
+          "ACCOUNTS": "Comptes"
+      },
+      "NAV_TITLE": "Navigation",
+      "NAV_DESCRIPTION": "Effectuer un zoom avant/arrière en pinçant le trackpad/l'écran tactile ou faire défiler la molette de la souris. Pour faire défiler, appuyer ou cliquer et faire glisser. Appuyer deux fois ou cliquer sur un noeud pour mettre celui en évidence. Appuyer une fois ou cliquer sur un noeud pour l'inspecter."
+    },
+  "DELEGATE_MONITOR": {
+      "TITLE": "Delegate Monitor",
+      "STATUS": {
+          "FORGING": "Forge",
+          "MISSING": "Manquant",
+          "NOT_FORGING": "Ne forge pas",
+          "AWAITING_SLOT": "En attente",
+          "LAST_BLOCK": "Dernier bloc forgé"
+      },
+      "MONITOR": {
+          "DELEGATES_TITLE": "Délégués",
+          "ACTIVE": "délégués actifs",
+          "STANDBY": "délégués en attente",
+          "LAST_BLOCK": "Dernier bloc par",
+          "FORGED_FROM": "forgé par",
+          "TRANSACTIONS": "transactions",
+          "NEXT_FORGERS": "Prochain forgeur",
+          "WAITING": "En attente du prochain forgeur",
+          "BEST_FORGER": "Meilleur forgeur",
+          "SINCE_REGISTRATION": "forgé depuis inscription",
+          "BEST_PRODUCTIVITY": "Meilleur productivité",
+          "WORST_PRODUCTIVITY": "Pire productivité",
+          "FROM_START": "depuis le début"
+      },
+      "VOTES_TITLE": "Derniers votes",
+      "TABS": {
+          "ACTIVE": "Délégués actifs",
+          "STANDBY": "Délégués en attente"
+      },
+      "STATUS_TABS": {
+          "FORGED": "Bloc récemment forgé",
+          "MISSED": "Bloc récemment manqué",
+          "NOT_FORGING": "Ne forge pas",
+          "IN_QUEUE": "En file d'attente pour forger"
+      },
+      "WAITING": "Attente des délégués"
+  },
+  "HEADER": {
+      "SEARCH": "Chercher un bloc, transaction, adresse ou délégué ...",
+      "TOOLS": {
+          "TITLE": "Outils",
+          "SNAPSHOTS": "Instantanés"
+      }
+  },
+  "FOOTER": {
+      "RIGHTS": "Tous droits réservés"
+  }
+}
