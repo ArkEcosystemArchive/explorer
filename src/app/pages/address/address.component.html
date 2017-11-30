@@ -84,12 +84,12 @@
             <div class="ark-address-summary voters-container" style="display: block;" *ngIf="!openVoters" #voters>
                 <div class="voters-button" (click)="showBlock()"></div>
                 <span class="voters-address" *ngFor="let item of addressItem.voters; let i = index;">
-                    <a href="#" (click)="goToAddress($event, item.address)" *ngIf="i < votersNumber">{{item.address}} ({{(item.balance / 100000000) | currencyFormat: 'ARK'}} ARK)</a>
+                    <a href="#" (click)="goToAddress($event, item.address)" *ngIf="i < votersNumber">{{item.address}} ({{(item.balance / 100000000)*currencyValue | currencyFormat: currencyName}} {{currencyName}})</a>
                 </span>
             </div>
             <div class="ark-address-summary voters-container open" style="display: block;" *ngIf="openVoters" #voters>
                 <div class="voters-button" (click)="showBlock()"></div>
-                <span class="voters-address" *ngFor="let item of addressItem.voters"><a href="#" (click)="goToAddress($event, item.address)">{{item.address}} ({{(item.balance / 100000000) | currencyFormat: 'ARK'}} ARK)</a> </span>
+                <span class="voters-address" *ngFor="let item of addressItem.voters"><a href="#" (click)="goToAddress($event, item.address)">{{item.address}} ({{(item.balance / 100000000)*currencyValue | currencyFormat: currencyName}} {{currencyName}})</a> </span>
             </div>
         </div>
         <!-- voters blocks -->
