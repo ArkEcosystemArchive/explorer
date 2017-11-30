@@ -25,7 +25,6 @@ export class AppComponent {
     translate.setDefaultLang('en');
 
     _themeService.isDarkThemeChange$.subscribe((data) => {
-      console.log(data);
       this.isDarkTheme = data;
     });
 
