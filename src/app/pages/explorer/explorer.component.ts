@@ -7,6 +7,7 @@ import { CurrencyService } from '../../shared/services/currency.service';
 import { CoinmarketService } from "../../shared/services/coinmarket.service";
 import { ConnectionMessageService } from "../../shared/services/connection-message.service";
 import { initCurrency } from '../../shared/const/currency';
+import { ThemeService } from '../../shared/services/theme.service';
 
 @Component({
   selector: 'ark-explorer',
@@ -18,6 +19,7 @@ export class ExplorerComponent implements OnInit, OnDestroy {
   public transactions: any;
   public blocks: any;
   public chart: any;
+  public isChartVisible: boolean;
   public currency: string = initCurrency.name;
   public currencyRate: number = initCurrency.value;
   public activeChartTab: string = 'day';
@@ -33,6 +35,7 @@ export class ExplorerComponent implements OnInit, OnDestroy {
     private _currencyService: CurrencyService,
     private _marketService: CoinmarketService,
     private _connectionService: ConnectionMessageService,
+    private _themeService: ThemeService,
     private router: Router
   ) {
     this.subscription = _currencyService.currencyChosen$.subscribe(currency => {
@@ -40,9 +43,9 @@ export class ExplorerComponent implements OnInit, OnDestroy {
       this.currencyRate = currency.value;
     });
 
-    this.chartSubscription = _marketService.chartBuilt$.subscribe(chart => {
-      this.chart = chart;
-    });
+    this._themeService.isPriceChartChange$.subscribe(isVisible => this.isChartVisible = isVisible);
+
+    this.chartSubscription = this._marketService.chartBuilt$.subscribe(chart => this.chart = chart);
   }
 
   ngOnInit() {

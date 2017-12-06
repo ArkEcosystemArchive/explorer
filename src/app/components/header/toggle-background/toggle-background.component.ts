@@ -4,7 +4,7 @@ import { ThemeService } from '../../../shared/services/theme.service';
 @Component({
   selector: 'ark-toggle-background',
   templateUrl: './toggle-background.component.html',
-  styleUrls: ['./toggle-background.component.less']
+  styleUrls: ['../shared/toggle-switch.styles.less']
 })
 export class ToggleBackgroundComponent implements OnInit {
 

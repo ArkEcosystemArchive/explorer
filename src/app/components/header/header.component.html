@@ -9,6 +9,8 @@
                 </div>
                 <nav class="ark-flex-center">
                     <ul>
+                        <ark-toggle-price-chart></ark-toggle-price-chart>
+                        <li class="ark-toggle-switch-spacer"></li>
                         <ark-toggle-background></ark-toggle-background>
                         <ark-currency-dropdown [rates]="exchangeRate" (openMobMenu)="closeMobileMenu($event)"></ark-currency-dropdown>
                         <ark-tools-dropdown (openMobMenu)="closeMobileMenu($event)"></ark-tools-dropdown>

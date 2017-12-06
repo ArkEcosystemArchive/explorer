@@ -2,23 +2,43 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable()
 export class ThemeService {
 
-  private isDarkThemeSource: boolean;
+  private isDarkThemeActive: boolean;
   public isDarkThemeChange$: BehaviorSubject<boolean>;
 
-  constructor() {
-    const source = localStorage.getItem('isDarkTheme');
-    this.isDarkThemeSource = source ? JSON.parse(source) : false;
-    this.isDarkThemeChange$ = new BehaviorSubject(this.isDarkThemeSource);
+  private isPriceChartVisible: boolean;
+  public isPriceChartChange$: BehaviorSubject<boolean>;
+
+  constructor(private _localStorageService: LocalStorageService) {
+    this.initializeDarkThemeSettings();
+    this.initializePriceChartSettings();
   }
 
   toggleTheme() {
-    this.isDarkThemeSource = !this.isDarkThemeSource;
-    localStorage.setItem('isDarkTheme', String(this.isDarkThemeSource));
-    this.isDarkThemeChange$.next(this.isDarkThemeSource);
+    this.isDarkThemeActive = !this.isDarkThemeActive;
+    this._localStorageService.setValue('isDarkTheme', this.isDarkThemeActive);
+    this.isDarkThemeChange$.next(this.isDarkThemeActive);
   }
 
+  togglePriceChart() {
+    this.isPriceChartVisible = !this.isPriceChartVisible;
+    this._localStorageService.setValue('isPriceChartHidden', !this.isPriceChartVisible);
+    this.isPriceChartChange$.next(this.isPriceChartVisible);
+  }
+
+  private initializeDarkThemeSettings(): void {
+    const isDarkThemeActive = this._localStorageService.getValue('isDarkTheme');
+    this.isDarkThemeActive = isDarkThemeActive !== null ? isDarkThemeActive : false;
+    this.isDarkThemeChange$ = new BehaviorSubject(this.isDarkThemeActive);
+  }
+
+  private initializePriceChartSettings(): void {
+    const isPriceChartHidden = this._localStorageService.getValue('isPriceChartHidden');
+    this.isPriceChartVisible = isPriceChartHidden !== null ? !isPriceChartHidden : true;
+    this.isPriceChartChange$ = new BehaviorSubject(this.isPriceChartVisible);
+  }
 }

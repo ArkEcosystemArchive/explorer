@@ -1,11 +1,12 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { ThemeService } from './theme.service';
+import { LocalStorageService } from './local-storage.service';
 
 describe('ThemeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ThemeService]
+      providers: [ThemeService, LocalStorageService]
     });
   });
 
