@@ -25,12 +25,12 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of transactions">
-                <td class="ellipsis width-15 ark-tooltip-wrap" [ngClass]="{'ark-transaction': item.vendorField}"><a href="#" (click)="goToTransaction($event, item.id)">{{item.id | overflowText}}</a>
+                <td class="ellipsis width-15 ark-tooltip-wrap" [ngClass]="{'ark-transaction': item.vendorField}"><a [routerLink]="['/tx', item.id]">{{item.id | overflowText}}</a>
                     <span class="ark-tooltip" *ngIf="item.vendorField">{{ item.vendorField }}</span>
                 </td>
                 <td class="ellipsis width-15">{{item.timestamp | localDate | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</td>
-                <td class="ellipsis width-15"><a href="#" (click)="goToAddress($event, item.senderId)"><span *ngIf="item.senderDelegate">{{item.senderDelegate.username}}</span> <span *ngIf="!item.senderDelegate">{{item.senderId | overflowText}}</span></a></td>
-                <td class="ellipsis width-15"><a href="#" (click)="goToAddress($event, item.recipientId)">{{item.recipientId | overflowText}}</a></td>
+                <td class="ellipsis width-15"><a [routerLink]="getAddressLink(item.senderId)"><span *ngIf="item.senderDelegate">{{item.senderDelegate.username}}</span> <span *ngIf="!item.senderDelegate">{{item.senderId | overflowText}}</span></a></td>
+                <td class="ellipsis width-15"><a [routerLink]="getAddressLink(item.recipientId)">{{item.recipientId | overflowText}}</a></td>
                 <td class="ellipsis width-20">{{item.vendorField || ''}}</td>
                 <td class="ellipsis width-15">{{(+item.amount/100000000)*currencyRate | number: '1.2-2'}}</td>
                 <td class="ellipsis width-10">{{(+item.fee/100000000)*currencyRate | number: '1.1'}}</td>
@@ -56,11 +56,11 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of blocks">
-                <td class="ellipsis width-15"><a href="#" (click)="goToBlock($event, item.id)">{{item.id}}</a></td>
+                <td class="ellipsis width-15"><a [routerLink]="['/block', item.id]">{{item.id}}</a></td>
                 <td class="ellipsis width-15">{{item.height}}</td>
                 <td class="ellipsis width-15">{{item.timestamp | localDate | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</td>
                 <td class="ellipsis width-10">{{item.transactionsCount}}</td>
-                <td class="ellipsis width-15"><a href="#" (click)="goToAddress($event, item.generator)">{{item.delegate.username}}</a></td>
+                <td class="ellipsis width-15"><a [routerLink]="getAddressLink(item.generator)">{{item.delegate.username}}</a></td>
                 <td class="ellipsis width-15">{{(+item.totalAmount/100000000)*currencyRate | number: '1.2-2'}}</td>
                 <td class="ellipsis width-15">{{(+item.totalForged/100000000)*currencyRate | number: '1.1'}}</td>
             </tr>

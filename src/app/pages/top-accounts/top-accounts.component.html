@@ -13,7 +13,7 @@
         <tbody>
             <tr *ngFor="let item of accounts; let i = index;">
                 <td class="ellipsis width-15">{{i + 1}}</td>
-                <td class="ellipsis width-15"><a href="#" (click)="goToAddress($event, item.address)">{{item.address}}</a></td>
+                <td class="ellipsis width-15"><a [routerLink]="['/address', item.address]">{{item.address}}</a></td>
                 <td class="ellipsis width-15">{{(item.balance / 100000000)*currencyValue | number: '1.2-2'}} {{currencyName}}</td>
                 <td class="ellipsis width-15">
                     <span *ngIf="supply">{{(item.balance / supply)*100 | number: '1.2-2'}}%</span>

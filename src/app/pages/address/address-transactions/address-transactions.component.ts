@@ -17,19 +17,7 @@ export class AddressTransactionsComponent implements OnInit {
   ngOnInit() {
   }
 
-  goToAddress(event, id: string) {
-    event.preventDefault();
-    this.router.navigate(['/address', id]);
+  getAddressLink(id: string) {
+    return ['/address', id];
   }
-
-  goToBlock(event, id: string) {
-    event.preventDefault();
-    this.router.navigate(['/block', id]);
-  }
-
-  goToTransaction(event, id: string) {
-    event.preventDefault();
-    this.router.navigate(['/tx', id]);
-  }
-
 }

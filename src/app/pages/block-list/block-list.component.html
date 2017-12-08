@@ -14,11 +14,11 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of blocks">
-                <td class="ellipsis width-15"><a href="#" (click)="goToBlock($event, item.id)">{{item.id}}</a></td>
+                <td class="ellipsis width-15"><a [routerLink]="['/block', item.id]">{{item.id}}</a></td>
                 <td class="ellipsis width-10">{{item.height}}</td>
                 <td class="ellipsis width-15">{{item.timestamp | localDate | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</td>
                 <td class="ellipsis width-15">{{item.transactionsCount}}</td>
-                <td class="ellipsis width-15"><a href="#" (click)="goToAddress($event, item.delegate.address)">{{item.delegate.username}}</a></td>
+                <td class="ellipsis width-15"><a [routerLink]="['/address', item.delegate.address]">{{item.delegate.username}}</a></td>
                 <td class="ellipsis width-15">{{(item.totalAmount/100000000)*currencyValue | number: '1.2-2'}}</td>
                 <td class="ellipsis width-15">{{(item.totalForged/100000000)*currencyValue | number: '1.0-2'}}</td>
             </tr>
@@ -29,7 +29,17 @@
         <p>{{ 'GENERAL.LOADING' | translate }}...</p>
     </div>
     <div class="ark-pagination ark-flex ark-flex-between">
-        <div class="ark-pagination-prev" *ngIf="pagination && pagination.previousPage" (click)="goToPage(pagination.previousPage)"><i class="fa fa-angle-left angle-icon" aria-hidden="true"></i> {{ 'GENERAL.PREV_PAGE' | translate }}</div>
-        <div class="ark-pagination-next" *ngIf="pagination && pagination.nextPage" (click)="goToPage(pagination.nextPage)">{{ 'GENERAL.NEXT_PAGE' | translate }} <i class="fa fa-angle-right angle-icon" aria-hidden="true"></i></div>
+        <div class="ark-pagination-prev" *ngIf="pagination && pagination.previousPage">
+            <i class="fa fa-angle-left angle-icon" aria-hidden="true"></i>
+            <a [routerLink]="getPageLink(pagination.previousPage)" (click)="changePage()">
+                {{ 'GENERAL.PREV_PAGE' | translate }}
+            </a>
+        </div>
+        <div class="ark-pagination-next" *ngIf="pagination && pagination.nextPage">
+            <a [routerLink]="getPageLink(pagination.nextPage)" (click)="changePage()">
+                {{ 'GENERAL.NEXT_PAGE' | translate }}
+            </a>
+            <i class="fa fa-angle-right angle-icon" aria-hidden="true"></i>
+        </div>
     </div>
 </section>

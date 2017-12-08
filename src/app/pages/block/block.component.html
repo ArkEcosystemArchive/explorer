@@ -47,11 +47,11 @@
                 </div>
                 <div class="ark-summary-item ark-flex-between ark-flex-center">
                     <span class="ark-summary-title">{{ 'BLOCK.PREV_BLOCK' | translate }}</span>
-                    <div class="ark-summary-data"><a href="#" (click)="goToBlock($event, block.previousBlock)">{{block.previousBlock}}</a></div>
+                    <div class="ark-summary-data"><a [routerLink]="['/block', block.previousBlock]">{{block.previousBlock}}</a></div>
                 </div>
                 <div class="ark-summary-item ark-flex-between ark-flex-center">
                     <span class="ark-summary-title">{{ 'GENERAL.INFO.GENERATED_BY' | translate }}</span>
-                    <div class="ark-summary-data"><a href="#" (click)="goToAddress($event, block.generatorId)">{{block.delegate.username}}</a></div>
+                    <div class="ark-summary-data"><a [routerLink]="getAddressLink(block.generatorId)">{{block.delegate.username}}</a></div>
                 </div>
             </div>
         </div>
@@ -73,17 +73,17 @@
                     <tbody *ngIf="transactions && transactions.length">
                         <tr *ngFor="let transaction of transactions">
                             <td class="ark-transaction ellipsis width-15 ark-tooltip-wrap" [ngClass]="{'ark-transaction': transaction.vendorField}">
-                                <a href="#" (click)="goToTransaction($event, transaction.id)">{{transaction.id | overflowText}}</a>
+                                <a [routerLink]="['/tx', transaction.id]">{{transaction.id | overflowText}}</a>
                                 <span class="ark-tooltip" *ngIf="transaction.vendorField">{{ transaction.vendorField }}</span>
                             </td>
                             <td class="ellipsis width-15">{{transaction.timestamp | localDate | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</td>
                             <td class="ark-blue-text ellipsis width-15">
-                                <a href="#" *ngIf="transaction.senderDelegate" (click)="goToAddress($event, transaction.senderId)">{{transaction.senderDelegate.username}}</a>
-                                <a href="#" *ngIf="!transaction.senderDelegate && transaction.knownSender" (click)="goToAddress($event, transaction.senderId)">{{transaction.knownSender.owner}}</a>
-                                <a href="#" *ngIf="!transaction.senderDelegate && !transaction.knownSender" (click)="goToAddress($event, transaction.senderId)">{{transaction.senderId | overflowText}}</a>
+                                <a *ngIf="transaction.senderDelegate" [routerLink]="getAddressLink(transaction.senderId)">{{transaction.senderDelegate.username}}</a>
+                                <a *ngIf="!transaction.senderDelegate && transaction.knownSender" [routerLink]="getAddressLink(transaction.senderId)">{{transaction.knownSender.owner}}</a>
+                                <a *ngIf="!transaction.senderDelegate && !transaction.knownSender" [routerLink]="getAddressLink(transaction.senderId)">{{transaction.senderId | overflowText}}</a>
                             </td>
                             <td class="ellipsis width-15">
-                                <a href="#" (click)="goToAddress($event, transaction.recipientId)" *ngIf="!((transaction.asset && transaction.asset.votes) || transaction.asset && transaction.asset.signature || transaction.asset && transaction.asset.delegate)">{{transaction.recipientId | overflowText}}</a>
+                                <a [routerLink]="getAddressLink(transaction.recipientId)" *ngIf="!((transaction.asset && transaction.asset.votes) || transaction.asset && transaction.asset.signature || transaction.asset && transaction.asset.delegate)">{{transaction.recipientId | overflowText}}</a>
                                 <span *ngIf="transaction.asset && transaction.asset.votes">{{ 'TRANSACTION.ASSET.VOTES' | translate }}</span>
                                 <span *ngIf="transaction.asset && transaction.asset.signature">{{ 'TRANSACTION.ASSET.SIGNATURE' | translate }}</span>
                                 <span *ngIf="transaction.asset && transaction.asset.delegate">{{ 'TRANSACTION.ASSET.DELEGATE' | translate }}</span>

@@ -16,10 +16,4 @@ export class DelegatesComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  goToAddress(event, id: string) {
-    event.preventDefault();
-    this.router.navigate(['/address', id]);
-  }
-
 }
