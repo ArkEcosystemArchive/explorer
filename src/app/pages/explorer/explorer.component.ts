@@ -43,6 +43,7 @@ export class ExplorerComponent implements OnInit, OnDestroy {
       this.currencyRate = currency.value;
     });
 
+    this._themeService.displayTogglePriceChartSwitch = true;
     this._themeService.isPriceChartChange$.subscribe(isVisible => this.isChartVisible = isVisible);
 
     this.chartSubscription = this._marketService.chartBuilt$.subscribe(chart => this.chart = chart);
@@ -110,6 +111,7 @@ export class ExplorerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this._themeService.displayTogglePriceChartSwitch = false;
     this.subscription.unsubscribe();
     this.chartSubscription.unsubscribe();
     if (this._timer) {

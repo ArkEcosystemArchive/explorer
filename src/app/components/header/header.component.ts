@@ -5,6 +5,7 @@ import { ExplorerService } from '../../shared/services/explorer.service';
 import { CurrencyService } from "../../shared/services/currency.service";
 import { ConnectionMessageService } from "../../shared/services/connection-message.service";
 import { initCurrency, ticker } from '../../shared/const/currency';
+import { ThemeService } from '../../shared/services/theme.service';
 
 @Component({
   selector: 'ark-header',
@@ -56,7 +57,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private _explorerService: ExplorerService,
     private router: Router,
     private _currencyService: CurrencyService,
-    private _connectionService: ConnectionMessageService
+    private _connectionService: ConnectionMessageService,
+    public themeService: ThemeService
   ) {
     this.subscription = _connectionService.connectionChange$.subscribe(connection => {
       this.connection = connection;

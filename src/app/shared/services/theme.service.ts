@@ -13,6 +13,8 @@ export class ThemeService {
   private isPriceChartVisible: boolean;
   public isPriceChartChange$: BehaviorSubject<boolean>;
 
+  public displayTogglePriceChartSwitch: boolean = false;
+  
   constructor(private _localStorageService: LocalStorageService) {
     this.initializeDarkThemeSettings();
     this.initializePriceChartSettings();
