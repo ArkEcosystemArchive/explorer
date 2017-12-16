@@ -5,6 +5,8 @@ import { ExplorerService } from '../../shared/services/explorer.service';
 import { CurrencyService } from '../../shared/services/currency.service';
 import { ConnectionMessageService } from '../../shared/services/connection-message.service';
 import { initCurrency } from '../../shared/const/currency';
+import {Transaction} from '../../models/transaction.model';
+import {Account} from '../../models/account.model';
 import { Subscription } from 'rxjs/Subscription';
 
 import 'rxjs/add/operator/switchMap';
@@ -19,8 +21,8 @@ export class AddressComponent implements OnInit, OnDestroy {
   @ViewChild('voters') votersBlock: ElementRef;
   @ViewChild('balance') balanceContainer: ElementRef;
 
-  public addressItem: any;
-  public currentTransactions: any[];
+  public addressItem: Account;
+  public currentTransactions: Transaction[];
   public activeTab = 'all-tr';
   public currencyName: string = initCurrency.name;
   public currencyValue: number = initCurrency.value;
@@ -60,7 +62,7 @@ export class AddressComponent implements OnInit, OnDestroy {
 
       this._explorerService.getAccount(this._currentAddress).subscribe(
         res => {
-          this.addressItem = res;
+          this.addressItem = res.account;
           this._connectionService.changeConnection(res.success);
         }
       );

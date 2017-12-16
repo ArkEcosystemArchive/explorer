@@ -4,6 +4,8 @@ import { ExplorerService } from '../../shared/services/explorer.service';
 import { CurrencyService } from '../../shared/services/currency.service';
 import { ConnectionMessageService } from '../../shared/services/connection-message.service';
 import { initCurrency } from '../../shared/const/currency';
+import {Block} from '../../models/block.model';
+import {Pagination} from '../../models/pagination.model';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -13,8 +15,8 @@ import { Subscription } from 'rxjs/Subscription';
   providers: [ExplorerService]
 })
 export class BlockListComponent implements OnInit, OnDestroy {
-  public blocks: any = [];
-  public pagination: any = [];
+  public blocks: Block[] = [];
+  public pagination: Pagination;
   public currencyName: string = initCurrency.name;
   public currencyValue: number = initCurrency.value;
   public showLoader = false;

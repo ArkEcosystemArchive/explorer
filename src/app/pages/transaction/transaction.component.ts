@@ -5,6 +5,7 @@ import { ExplorerService } from '../../shared/services/explorer.service';
 import { CurrencyService } from '../../shared/services/currency.service';
 import { ConnectionMessageService } from '../../shared/services/connection-message.service';
 import { initCurrency } from '../../shared/const/currency';
+import {Transaction} from '../../models/transaction.model';
 
 import 'rxjs/add/operator/switchMap';
 
@@ -15,7 +16,7 @@ import 'rxjs/add/operator/switchMap';
   providers: [ ExplorerService ]
 })
 export class TransactionComponent implements OnInit, OnDestroy {
-  public transaction: any;
+  public transaction: Transaction;
   public currencyName: string = initCurrency.name;
   public currencyValue: number = initCurrency.value;
 
