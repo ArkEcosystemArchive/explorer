@@ -12,20 +12,20 @@ export class WebsocketsService {
 
   public getHeaderData() {
     return this._headerSocket
-        .fromEvent("data")
-        .map(data => {return data;}); 
+        .fromEvent('data')
+        .map(data => data);
   }
 
   public getGraphData() {
     return this._graphSocket
-        .fromEvent("data")
-        .map(data => {return data;}); 
+        .fromEvent('data')
+        .map(data => data);
   }
 
   public getMonitorData() {
     return this._monitorSocket
-        .fromEvent("data")
-        .map(data => {return data;}); 
+        .fromEvent('data')
+        .map(data => data);
   }
 
 }

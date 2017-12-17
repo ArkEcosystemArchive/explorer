@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, RequestOptionsArgs } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { Chart } from 'angular-highcharts';
+import { ThemeService } from './theme.service';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
-
-import { ThemeService } from './theme.service';
-
 
 @Injectable()
 export class CoinmarketService {
@@ -96,13 +94,14 @@ export class CoinmarketService {
           title: {
             text: 'ARK Line Chart',
             align: 'left',
-            style: { "color": "#000", "font-size": "24px", "font-weight": "700", "line-height": "32px", "font-family": "'Comfortaa-Regular'" },
+            style: { 'color': '#000', 'font-size': '24px', 'font-weight': '700',
+                     'line-height': '32px', 'font-family': '"Comfortaa-Regular"' },
             x: 25
           },
           subtitle: {
             text: chartSubtitle,
             align: 'left',
-            style: { "font-family": "Avenir", "font-size": "16px", "color": "#3C4144" },
+            style: { 'font-family': 'Avenir', 'font-size': '16px', 'color': '#3C4144' },
             x: 25
           },
           credits: {
@@ -126,39 +125,39 @@ export class CoinmarketService {
 
         this.chartBuild(this.chart);
       },
-      error => {
+      () => {
         this.chart = null;
       }
     );
   }
 
   public getData(param: string) {
-    let date = Math.round(new Date().getTime() / 1000);
+    const date = Math.round(new Date().getTime() / 1000);
     switch (param) {
       case 'day': {
         return this.http.get(`https://min-api.cryptocompare.com/data/histohour?fsym=ARK&tsym=USD&toTs=${date}&limit=24`)
-          .map((res: Response) => { return res.json(); })
+          .map((res: Response) => res.json())
           .catch((error: any) => {
             return Observable.throw(error.json());
           });
       }
       case 'week': {
         return this.http.get(`https://min-api.cryptocompare.com/data/histohour?fsym=ARK&tsym=USD&toTs=${date}&limit=168`)
-          .map((res: Response) => { return res.json(); })
+          .map((res: Response) => res.json())
           .catch((error: any) => {
             return Observable.throw(error.json());
           });
       }
       case 'month': {
         return this.http.get(`https://min-api.cryptocompare.com/data/histohour?fsym=ARK&tsym=USD&toTs=${date}&limit=720`)
-          .map((res: Response) => { return res.json(); })
+          .map((res: Response) => res.json())
           .catch((error: any) => {
             return Observable.throw(error.json());
           });
       }
       case 'quarter': {
         return this.http.get(`https://min-api.cryptocompare.com/data/histohour?fsym=ARK&tsym=USD&toTs=${date}&limit=2000`)
-          .map((res: Response) => { return res.json(); })
+          .map((res: Response) => res.json())
           .catch((error: any) => {
             return Observable.throw(error.json());
           });
@@ -166,7 +165,7 @@ export class CoinmarketService {
       case 'year':
       case 'all': {
         return this.http.get(`https://min-api.cryptocompare.com/data/histoday?fsym=ARK&tsym=USD&toTs=${date}&limit=365`)
-          .map((res: Response) => { return res.json(); })
+          .map((res: Response) => res.json())
           .catch((error: any) => {
             return Observable.throw(error.json());
           });
@@ -178,14 +177,14 @@ export class CoinmarketService {
   }
 
   public getTimeLine(data: any, param: string) {
-    let timeArray = [];
-    let format = this._defineFormat(param);
+    const timeArray = [];
+    const format = this._defineFormat(param);
     // data.forEach(element => {
     //   timeArray.push(new Date(element.time * 1000));
     // });
     data.forEach((element, index) => {
-      let date = this._formatDate(new Date(element.time * 1000), format);
-      if ((index === 0) || (index > 0 && timeArray[index - 1] != date)) {
+      const date = this._formatDate(new Date(element.time * 1000), format);
+      if ((index === 0) || (index > 0 && timeArray[index - 1] !== date)) {
         timeArray.push(date);
       } else {
         timeArray.push('');
@@ -195,20 +194,20 @@ export class CoinmarketService {
   }
 
   public getValues(data: any) {
-    let values = [];
+    const values = [];
     data.forEach(element => {
-      let avg = Math.round(((element.high + element.low) / 2) * Math.pow(10, 8)) / Math.pow(10, 8);
+      const avg = Math.round(((element.high + element.low) / 2) * Math.pow(10, 8)) / Math.pow(10, 8);
       values.push(avg);
     });
     return values;
   }
 
   public getSubtitle(data: any, time: string) {
-    let current = data[data.length - 1];
-    let prev = data[0];
-    let difference = Math.round((current - prev) * Math.pow(10, 8)) / Math.pow(10, 8);
-    let percent = Math.round(((difference / prev) * 100) * 100) / 100;
-    let sign = difference > 0 ? '+' : '';
+    const current = data[data.length - 1];
+    const prev = data[0];
+    const difference = Math.round((current - prev) * Math.pow(10, 8)) / Math.pow(10, 8);
+    const percent = Math.round(((difference / prev) * 100) * 100) / 100;
+    const sign = difference > 0 ? '+' : '';
     return '' + time + ' change: ' + sign + difference.toString() + '$ (' + sign + percent + '%)';
   }
 
@@ -230,8 +229,8 @@ export class CoinmarketService {
   }
 
   private _formatDate(time, format) {
-    var t = new Date(time);
-    var tf = function (i) { return (i < 10 ? '0' : '') + i };
+    const t = new Date(time);
+    const tf = function (i) { return (i < 10 ? '0' : '') + i; };
     return format.replace(/yyyy|MM|dd|HH|mm|ss/g, function (a) {
       switch (a) {
         case 'yyyy': return tf(t.getFullYear());
@@ -242,7 +241,7 @@ export class CoinmarketService {
         case 'ss': return tf(t.getSeconds());
         default: return 0;
       }
-    })
+    });
 
   }
 

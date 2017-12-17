@@ -1,26 +1,21 @@
-import { Component, OnInit, ElementRef, HostListener, Inject} from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
+import { Component, OnInit, HostListener, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'ark-scroll-top',
-  templateUrl: './scroll-top.component.html',
-  styleUrls: ['./scroll-top.component.less']
+  templateUrl: './scroll-top.component.html'
 })
 export class ScrollTopComponent implements OnInit {
-  public showButton: boolean = false;
+  public showButton = false;
 
   constructor( @Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit() {
   }
 
-  @HostListener("window:scroll", [])
+  @HostListener('window:scroll', [])
   onWindowScroll() {
-    if(window.pageYOffset >= window.innerHeight / 2) {
-      this.showButton = true;
-    } else {
-      this.showButton = false;
-    }
+    this.showButton = window.pageYOffset >= window.innerHeight / 2;
   }
 
   public scrollTop() {

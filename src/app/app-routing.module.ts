@@ -10,7 +10,6 @@ import { ActivityGraphComponent } from './pages/activity-graph/activity-graph.co
 import { DelegateMonitorComponent } from './pages/delegate-monitor/delegate-monitor.component';
 import { TopAccountsComponent } from './pages/top-accounts/top-accounts.component';
 
-
 const appRoutes: Routes = [
   { path: '', component: ExplorerComponent, pathMatch: 'full' },
   { path: 'blocks/:page', component: BlockListComponent },
@@ -20,7 +19,6 @@ const appRoutes: Routes = [
   { path: 'activityGraph', component: ActivityGraphComponent },
   { path: 'delegateMonitor', component: DelegateMonitorComponent },
   { path: 'topAccounts', component: TopAccountsComponent }
-  
 ];
 
 @NgModule({

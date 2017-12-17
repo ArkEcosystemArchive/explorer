@@ -1,20 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
-import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { HttpModule } from '@angular/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { SocketIoModule } from 'ngx-socket-io';
 import { QRCodeModule } from 'angular2-qrcode';
 import { MomentModule } from 'angular2-moment';
 import { ChartModule } from 'angular-highcharts';
 import { ClipboardModule } from 'ngx-clipboard';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-
-import { CONFIG } from './app.config';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -31,7 +27,6 @@ import { SocketHeaderService, SocketGraphService, SocketMonitorService } from '.
 import { DelegateMonitorComponent } from './pages/delegate-monitor/delegate-monitor.component';
 import { ToolsDropdownComponent } from './components/header/tools-dropdown/tools-dropdown.component';
 import { BalanceFooterComponent } from './pages/address/balance-footer/balance-footer.component';
-
 import { DatePipe, OverflowTextPipe } from './shared/pipes/general.pipe';
 import { TopAccountsComponent } from './pages/top-accounts/top-accounts.component';
 import { DelegatesComponent } from './pages/delegate-monitor/delegates/delegates.component';

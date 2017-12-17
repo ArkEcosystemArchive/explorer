@@ -157,8 +157,8 @@
         </div>
         <div class="ark-section-title">{{ 'DELEGATE_MONITOR.MONITOR.DELEGATES_TITLE' | translate}}</div>
         <div class="ark-tab-header">
-            <div class="ark-tab-header-item ark-large-btn" [ngClass]="{'active': activeDelegate}" (click)="getActiveDelegates($event)">{{ 'DELEGATE_MONITOR.TABS.ACTIVE' | translate}}</div>
-            <div class="ark-tab-header-item ark-large-btn" [ngClass]="{'active': !activeDelegate}" (click)="getStandbyDelegates($event)">{{ 'DELEGATE_MONITOR.TABS.STANDBY' | translate}}</div>
+            <div class="ark-tab-header-item ark-large-btn" [ngClass]="{'active': activeDelegate}" (click)="getActiveDelegates()">{{ 'DELEGATE_MONITOR.TABS.ACTIVE' | translate}}</div>
+            <div class="ark-tab-header-item ark-large-btn" [ngClass]="{'active': !activeDelegate}" (click)="getStandbyDelegates()">{{ 'DELEGATE_MONITOR.TABS.STANDBY' | translate}}</div>
         </div>
         <div class="ark-tab-body">
             <div class="ark-tab-item" [ngClass]="{'active': activeDelegate}">

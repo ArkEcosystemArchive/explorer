@@ -14,5 +14,5 @@ export class StatisticModel {
         this.beginning = 0;
         this.end = 0;
     }
-    
+
 }

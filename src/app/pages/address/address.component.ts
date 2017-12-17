@@ -1,14 +1,13 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy, HostListener, Inject  } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, HostListener, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Subscription }   from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/switchMap';
-
 import { ExplorerService } from '../../shared/services/explorer.service';
 import { CurrencyService } from '../../shared/services/currency.service';
-import { ConnectionMessageService } from "../../shared/services/connection-message.service";
+import { ConnectionMessageService } from '../../shared/services/connection-message.service';
 import { initCurrency } from '../../shared/const/currency';
+import { Subscription } from 'rxjs/Subscription';
+
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'ark-address',
@@ -22,16 +21,16 @@ export class AddressComponent implements OnInit, OnDestroy {
 
   public addressItem: any;
   public currentTransactions: any[];
-  public activeTab: string = 'all-tr';
+  public activeTab = 'all-tr';
   public currencyName: string = initCurrency.name;
   public currencyValue: number = initCurrency.value;
-  public showLoader: boolean = false;
-  public showBalanceFooter: boolean = false;
-  public openVoters: boolean = false;
-  public votersNumber: number = 4;
-  public supply: number = 0;
+  public showLoader = false;
+  public showBalanceFooter = false;
+  public openVoters = false;
+  public votersNumber = 4;
+  public supply = 0;
 
-  private _currentAddress: string = '';
+  private _currentAddress = '';
   private subscription: Subscription;
   private supplySubscription: Subscription;
 
@@ -57,7 +56,7 @@ export class AddressComponent implements OnInit, OnDestroy {
     this.onResize();
     this.showLoader = true;
     this.route.params.subscribe((params: Params) => {
-      this._currentAddress = params["id"];
+      this._currentAddress = params['id'];
 
       this._explorerService.getAccount(this._currentAddress).subscribe(
         res => {
@@ -76,13 +75,13 @@ export class AddressComponent implements OnInit, OnDestroy {
     });
   }
 
-  @HostListener("window:scroll", [])
+  @HostListener('window:scroll', [])
   onWindowScroll() {
-    if(!this.balanceContainer) {
+    if (!this.balanceContainer) {
       return;
     }
-    let position = this.balanceContainer.nativeElement.getBoundingClientRect().bottom || 0;
-    if(position < 85) {
+    const position = this.balanceContainer.nativeElement.getBoundingClientRect().bottom || 0;
+    if (position < 85) {
       this.showBalanceFooter = true;
       this.document.body.classList.add('extra-footer');
     } else {
@@ -93,7 +92,7 @@ export class AddressComponent implements OnInit, OnDestroy {
 
   @HostListener('window:resize', ['$event'])
   onResize() {
-    let width = window.innerWidth;
+    const width = window.innerWidth;
     if (width > 940) {
       this.votersNumber = 3;
     } else if (width > 700) {
@@ -104,7 +103,7 @@ export class AddressComponent implements OnInit, OnDestroy {
 
   }
 
-  getAllTransactions(event):void {
+  getAllTransactions(event): void {
     this.showLoader = true;
     this.activeTab = event.target.id;
     this._explorerService.getTransactionsByAddress(this._currentAddress, '').subscribe(
@@ -116,7 +115,7 @@ export class AddressComponent implements OnInit, OnDestroy {
     );
   }
 
-  getSentTransactions(event):void {
+  getSentTransactions(event): void {
     this.showLoader = true;
     this.activeTab = event.target.id;
     this._explorerService.getTransactionsByAddress(this._currentAddress, 'sent').subscribe(
@@ -128,7 +127,7 @@ export class AddressComponent implements OnInit, OnDestroy {
     );
   }
 
-  getReceivedTransactions(event):void {
+  getReceivedTransactions(event): void {
     this.showLoader = true;
     this.activeTab = event.target.id;
     this._explorerService.getTransactionsByAddress(this._currentAddress, 'received').subscribe(
@@ -140,7 +139,7 @@ export class AddressComponent implements OnInit, OnDestroy {
     );
   }
 
-  showBlock(event) {
+  showBlock() {
     // this.votersBlock.nativeElement.classList.toggle('open');
     this.openVoters = !this.openVoters;
   }

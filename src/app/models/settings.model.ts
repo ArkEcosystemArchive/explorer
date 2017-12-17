@@ -14,5 +14,5 @@ export class SettingsModel {
         this.drawLabels = false;
         this.defaultEdgeType = 'arrow';
     }
-    
+
 }

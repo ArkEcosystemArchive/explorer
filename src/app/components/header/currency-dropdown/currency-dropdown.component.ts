@@ -1,14 +1,10 @@
-import { Component, OnInit, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit, ElementRef, EventEmitter, Input, Output, HostListener } from '@angular/core';
 import { CurrencyService } from '../../../shared/services/currency.service';
 import { initCurrency } from '../../../shared/const/currency';
 
 @Component({
   selector: 'ark-currency-dropdown',
-  host: {
-    '(document:click)': 'handleClick($event)',
-  },
-  templateUrl: './currency-dropdown.component.html',
-  styleUrls: ['./currency-dropdown.component.less']
+  templateUrl: './currency-dropdown.component.html'
 })
 export class CurrencyDropdownComponent implements OnInit {
   public currency: any[] = [initCurrency.name];
@@ -26,10 +22,10 @@ export class CurrencyDropdownComponent implements OnInit {
     this.currency = Object.keys(this._ratesObject).sort();
 
     // define currency on init
-    setTimeout(_ => {
-      if(this.currency.length > 1) {
-        let cur = localStorage.getItem('currency') || initCurrency.name;
-        if (cur != this.currentCurrency) {
+    setTimeout(() => {
+      if (this.currency.length > 1) {
+        const cur = localStorage.getItem('currency') || initCurrency.name;
+        if (cur !== this.currentCurrency) {
           this.setCurrency(cur);
         }
       }
@@ -49,15 +45,15 @@ export class CurrencyDropdownComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
   }
 
   showDropdown() {
     this.elementRef.nativeElement.children[0].classList.toggle('open');
   }
 
-  setCurrency(currency: string, event?){
-    if(event) {
+  setCurrency(currency: string, event?) {
+    if (event) {
       event.preventDefault();
     }
     this.currentCurrency = currency;
@@ -66,19 +62,20 @@ export class CurrencyDropdownComponent implements OnInit {
     this.openMobMenu.emit(false);
   }
 
-  handleClick(event){
-    var clickedComponent = event.target;
-    var inside = false;
+  @HostListener('document:click', ['$event'])
+  handleClick(event) {
+    let clickedComponent = event.target;
+    let inside = false;
     do {
       if (clickedComponent === this.elementRef.nativeElement) {
         inside = true;
       }
       clickedComponent = clickedComponent.parentNode;
      } while (clickedComponent);
-    
-    if (!inside){
+
+    if (!inside) {
       this.elementRef.nativeElement.children[0].classList.remove('open');
-    } 
+    }
   }
 
 }

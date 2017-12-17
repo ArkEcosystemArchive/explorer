@@ -12,7 +12,7 @@
   font-weight: 900;
   margin-top: -30px;
   padding-left: 10px;
-  font-family: 'Avenir';
+  font-family: 'Avenir', serif;
 
   span {
     vertical-align: middle;
@@ -36,10 +36,10 @@
   padding: 15px;
   .box-shadow(1px 1px 15px 1px @light-box-shadow-color);
   .ark-section-title {
-    font-family: Avenir;
+    font-family: Avenir, serif;
   }
   .ark-graph-index {
-    font-family: Avenir;
+    font-family: Avenir, serif;
     font-size: 36px;
       line-height: 49px;
       color: @graph-index-color;
@@ -75,7 +75,7 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   margin: 10px -18px 90px;
-    font-family: Avenir;
+  font-family: Avenir, serif;
   li {
     .box-shadow(1px 1px 15px 1px @light-box-shadow-color);
     width: 21%;
@@ -85,14 +85,14 @@
     position: relative;
     .ark-title {
       color: @light-delegate-item-title;
-      font-family: 'Comfortaa-Regular';
+      font-family: 'Comfortaa-Regular', serif;
       font-size: 14px;
       line-height: 18px;
     }
     .ark-count {
       font-size: 20px;
       font-weight: 900;
-      margin: 4px 0px;
+      margin: 4px 0;
     }
     .ark-message {
       font-size: 14px;
@@ -162,14 +162,14 @@
   background: @light-delegates-statistics-bg;
   margin: 15px 0 20px;
   padding: 20px 0 25px;
-  font-family: Avenir;
+  font-family: Avenir, serif;
   color: @light-table-text-color;
   li {
     width: 25%;
     position: relative;
     .li-wrapper {
       border-right: 1px solid @light-table-bordered-border;
-      padding: 20px 20px 0px 30px;
+      padding: 20px 20px 0 30px;
       &:last-child {
         border: none;
       }
@@ -180,10 +180,9 @@
       }
       .ark-faq {
           color: #5F6675;
-          font-family: "ProximaNovaSemibold";
+          font-family: "ProximaNovaSemibold", serif;
           font-size: 16px;
           font-weight: 600;
-          line-height: 20px;
           width: 23px;
           height: 23px;
           .border-radius(50%);
@@ -195,7 +194,7 @@
           margin: 0 5px;
       }
       .ark-count {
-        font-family: "ProximaNovaSemibold";
+        font-family: "ProximaNovaSemibold", serif;
         font-size: 28px;
         line-height: 34px;
         margin-top: 4px;
@@ -235,9 +234,8 @@
 }
 
 .phrase-wrap{
-  word-break: break-word!important;
+  word-break: break-all !important;
 }
-
 
 :host-context(.dark-theme) {
   .ark-graph-wrap {

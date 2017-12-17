@@ -2,9 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angu
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { ExplorerService } from '../../shared/services/explorer.service';
-import { CurrencyService } from "../../shared/services/currency.service";
-import { ConnectionMessageService } from "../../shared/services/connection-message.service";
-import { initCurrency, ticker } from '../../shared/const/currency';
+import { CurrencyService } from '../../shared/services/currency.service';
+import { ConnectionMessageService } from '../../shared/services/connection-message.service';
+import { ticker } from '../../shared/const/currency';
 import { ThemeService } from '../../shared/services/theme.service';
 
 @Component({
@@ -16,22 +16,22 @@ import { ThemeService } from '../../shared/services/theme.service';
 export class HeaderComponent implements OnInit, OnDestroy {
   private _socketValue: any = null;
   public exchangeRate: any = ticker;
-  public headerHeight: number = 0;
-  public headerSupply: number = 0;
-  public headerNethash: string = 'Mainnet';
+  public headerHeight = 0;
+  public headerSupply = 0;
+  public headerNethash = 'Mainnet';
   public headerBTC: any;
   public headerUSD: any;
   public headerEUR: any;
   public headerGBP: any;
 
-  public openMobileMenu: boolean = false;
-  public searchQuery: string = '';
-  public connection: boolean = true;
+  public openMobileMenu = false;
+  public searchQuery = '';
+  public connection = true;
 
   private _timer: any = null;
   private subscription: Subscription;
 
-  @Output() currentCurrency: EventEmitter<string> = new EventEmitter<string>();;
+  @Output() currentCurrency: EventEmitter<string> = new EventEmitter<string>();
 
   @Input('socketObject') set socketObject(value: any) {
     if (value && value.status && value.ticker) {
@@ -74,23 +74,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   closeMobileMenu(event?) {
-    this.openMobileMenu = event ? event: false;
+    this.openMobileMenu = event ? event : false;
   }
 
   getExtraRates() {
     this._timer = setInterval(() => {
       this.getGBPprice();
-    }, 5*60000);
+    }, 5 * 60000);
   }
 
   startSearch(event?) {
-    if(event && event.keyCode !== 13) {
+    if (event && event.keyCode !== 13) {
       return;
     }
 
     this._explorerService.search(this.searchQuery).subscribe(
       res => {
-        if(res.success) {
+        if (res.success) {
           this.searchQuery = '';
           this.router.navigate([`/${res.type}`, res.id]);
           this.openMobileMenu = false;
@@ -114,4 +114,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.headerGBP = res.ticker.price;
     });
   }
+
 }

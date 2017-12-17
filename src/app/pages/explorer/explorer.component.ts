@@ -1,13 +1,12 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-
 import { ExplorerService } from '../../shared/services/explorer.service';
 import { CurrencyService } from '../../shared/services/currency.service';
-import { CoinmarketService } from "../../shared/services/coinmarket.service";
-import { ConnectionMessageService } from "../../shared/services/connection-message.service";
+import { CoinmarketService } from '../../shared/services/coinmarket.service';
+import { ConnectionMessageService } from '../../shared/services/connection-message.service';
 import { initCurrency } from '../../shared/const/currency';
 import { ThemeService } from '../../shared/services/theme.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'ark-explorer',
@@ -22,10 +21,10 @@ export class ExplorerComponent implements OnInit, OnDestroy {
   public isChartVisible: boolean;
   public currency: string = initCurrency.name;
   public currencyRate: number = initCurrency.value;
-  public activeChartTab: string = 'day';
-  public showTransactionLoader: boolean = false;
-  public showBlockLoader: boolean = false;
-  
+  public activeChartTab = 'day';
+  public showTransactionLoader = false;
+  public showBlockLoader = false;
+
   private _timer = null;
   private subscription: Subscription;
   private chartSubscription: Subscription;
@@ -57,7 +56,7 @@ export class ExplorerComponent implements OnInit, OnDestroy {
       res => {
         this.transactions = res.transactions;
         this._connectionService.changeConnection(res.success);
-        this.showTransactionLoader = !res.success;        
+        this.showTransactionLoader = !res.success;
       }
     );
 

@@ -65,7 +65,7 @@ export class DelegateMonitorService {
     }
 
     private _getForgingStatus(delegate: any, height: number) {
-        let status: any = {
+        const status: any = {
             updatedAt: delegate.blocksAt
         };
         // let statusAge: number = 0;
@@ -121,7 +121,7 @@ export class DelegateMonitorService {
 
         delegate.status = [status.code, delegate.rate].join(':');
         return status;
-    };
+    }
 
     private _getforgingTotals(delegates) {
         let forging = 0;
@@ -144,10 +144,6 @@ export class DelegateMonitorService {
                 }
                 case 2: {
                     notForging++;
-                    break;
-                }
-                case 3:
-                case 4: {
                     break;
                 }
                 default: {

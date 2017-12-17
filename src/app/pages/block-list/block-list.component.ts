@@ -1,11 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Subscription }   from 'rxjs/Subscription';
-
 import { ExplorerService } from '../../shared/services/explorer.service';
 import { CurrencyService } from '../../shared/services/currency.service';
-import { ConnectionMessageService } from "../../shared/services/connection-message.service";
+import { ConnectionMessageService } from '../../shared/services/connection-message.service';
 import { initCurrency } from '../../shared/const/currency';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'ark-block-list',
@@ -18,10 +17,10 @@ export class BlockListComponent implements OnInit, OnDestroy {
   public pagination: any = [];
   public currencyName: string = initCurrency.name;
   public currencyValue: number = initCurrency.value;
-  public showLoader: boolean = false;
+  public showLoader = false;
 
   private subscription: Subscription;
-  private _currentPage: number = 1;
+  private _currentPage = 1;
 
   constructor(
     private router: Router,
@@ -40,10 +39,10 @@ export class BlockListComponent implements OnInit, OnDestroy {
     window.scrollTo(0, 0);
     this.showLoader = true;
     this.route.params.subscribe((params: Params) => {
-      this._currentPage = +params["page"];
+      this._currentPage = +params['page'];
 
-      let queryParams = this._currentPage*20 - 20;
-      
+      const queryParams = this._currentPage * 20 - 20;
+
       this._explorerService.getLastBlocks(queryParams).subscribe(
         res => {
           this.blocks = res.blocks;
@@ -51,7 +50,7 @@ export class BlockListComponent implements OnInit, OnDestroy {
           this._connectionService.changeConnection(res.success);
           this.showLoader = !res.success;
         }
-      );      
+      );
     });
   }
 

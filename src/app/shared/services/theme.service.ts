@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-
-import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { LocalStorageService } from './local-storage.service';
 
@@ -13,8 +11,8 @@ export class ThemeService {
   private isPriceChartVisible: boolean;
   public isPriceChartChange$: BehaviorSubject<boolean>;
 
-  public displayTogglePriceChartSwitch: boolean = false;
-  
+  public displayTogglePriceChartSwitch = false;
+
   constructor(private _localStorageService: LocalStorageService) {
     this.initializeDarkThemeSettings();
     this.initializePriceChartSettings();
