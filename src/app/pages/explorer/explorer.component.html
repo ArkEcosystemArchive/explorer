@@ -1,5 +1,5 @@
 <section>
-    <div class="ark-graph-wrap" *ngIf="chart">
+    <div class="ark-graph-wrap" *ngIf="chart && isChartVisible">
         <div [chart]="chart"></div>
         <div class="chart-buttons">
             <span [ngClass]="{'active': activeChartTab === 'day'}" id="day" (click)="updateChart($event)">1d</span>

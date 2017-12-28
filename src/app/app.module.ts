@@ -39,6 +39,8 @@ import { ScrollTopComponent } from './components/scroll-top/scroll-top.component
 import { ConnectionMessageService } from './shared/services/connection-message.service';
 import { ToggleBackgroundComponent } from './components/header/toggle-background/toggle-background.component';
 import { ThemeService } from './shared/services/theme.service';
+import { LocalStorageService } from './shared/services/local-storage.service';
+import { TogglePriceChartComponent } from './components/header/toggle-price-chart/toggle-price-chart.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/translate/', '.json');
@@ -65,7 +67,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     TopAccountsComponent,
     DelegatesComponent,
     ScrollTopComponent,
-    ToggleBackgroundComponent
+    ToggleBackgroundComponent,
+    TogglePriceChartComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +96,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     SocketGraphService,
     SocketMonitorService,
     ThemeService,
+    LocalStorageService,
   ],
   bootstrap: [AppComponent]
 })
