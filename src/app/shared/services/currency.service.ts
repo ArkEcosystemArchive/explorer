@@ -44,12 +44,6 @@ export class CurrencyService {
     this.heightSourse.next(value);
   }
 
-  public getCNYprice() {
-    return this.http.get(`https://api.cryptonator.com/api/ticker/ark-cny`)
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error.json()));
-  }
-
   public getGBPprice() {
     return this.http.get(`https://api.cryptonator.com/api/ticker/ark-gbp`)
       .map((res: Response) => res.json())
