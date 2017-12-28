@@ -5,6 +5,7 @@ import { ExplorerService } from '../../shared/services/explorer.service';
 import { CurrencyService } from '../../shared/services/currency.service';
 import { ConnectionMessageService } from '../../shared/services/connection-message.service';
 import { initCurrency } from '../../shared/const/currency';
+import {Account} from '../../models/account.model';
 
 @Component({
   selector: 'ark-top-accounts',
@@ -13,10 +14,10 @@ import { initCurrency } from '../../shared/const/currency';
   providers: [ExplorerService]
 })
 export class TopAccountsComponent implements OnInit, OnDestroy {
-  public accounts: any = [];
+  public accounts: Account[] = [];
   public currencyName: string = initCurrency.name;
   public currencyValue: number = initCurrency.value;
-  public supply: any = 0;
+  public supply = 0;
   public showLoader = false;
 
   private subscription: Subscription;

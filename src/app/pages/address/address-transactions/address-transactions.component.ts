@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import {Transaction} from '../../../models/transaction.model';
 
 @Component({
   selector: 'ark-address-transactions',
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AddressTransactionsComponent implements OnInit {
   @Input() id: string;
-  @Input() items: any[];
+  @Input() items: Transaction[];
   @Input() curName: string;
   @Input() curValue: number;
 

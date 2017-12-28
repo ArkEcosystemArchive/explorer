@@ -5,6 +5,8 @@ import { ExplorerService } from '../../shared/services/explorer.service';
 import { CurrencyService } from '../../shared/services/currency.service';
 import { ConnectionMessageService } from '../../shared/services/connection-message.service';
 import { initCurrency } from '../../shared/const/currency';
+import { Transaction } from '../../models/transaction.model';
+import {Block} from '../../models/block.model';
 
 import 'rxjs/add/operator/switchMap';
 
@@ -15,8 +17,8 @@ import 'rxjs/add/operator/switchMap';
   providers: [ExplorerService]
 })
 export class BlockComponent implements OnInit, OnDestroy {
-  public block: any;
-  public transactions: any[] = [];
+  public block: Block;
+  public transactions: Transaction[] = [];
   public currencyName: string = initCurrency.name;
   public currencyValue: number = initCurrency.value;
 

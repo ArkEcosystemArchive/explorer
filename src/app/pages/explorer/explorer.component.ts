@@ -6,6 +6,8 @@ import { CoinmarketService } from '../../shared/services/coinmarket.service';
 import { ConnectionMessageService } from '../../shared/services/connection-message.service';
 import { initCurrency } from '../../shared/const/currency';
 import { ThemeService } from '../../shared/services/theme.service';
+import {Transaction} from '../../models/transaction.model';
+import {Block} from '../../models/block.model';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -15,8 +17,8 @@ import { Subscription } from 'rxjs/Subscription';
   providers: [ExplorerService, CoinmarketService]
 })
 export class ExplorerComponent implements OnInit, OnDestroy {
-  public transactions: any;
-  public blocks: any;
+  public transactions: Transaction[];
+  public blocks: Block[];
   public chart: any;
   public isChartVisible: boolean;
   public currency: string = initCurrency.name;
