@@ -91,19 +91,8 @@ export class ExplorerComponent implements OnInit, OnDestroy {
     this._marketService.build(this.activeChartTab);
   }
 
-  goToAddress(event, id: string) {
-    event.preventDefault();
-    this.router.navigate(['/address', id]);
-  }
-
-  goToTransaction(event, id: string) {
-    event.preventDefault();
-    this.router.navigate(['/tx', id]);
-  }
-
-  goToBlock(event, id: string) {
-    event.preventDefault();
-    this.router.navigate(['/block', id]);
+  getAddressLink(id: string) {
+    return ['/address', id];
   }
 
   ngOnDestroy() {

@@ -55,20 +55,13 @@ export class BlockListComponent implements OnInit, OnDestroy {
     });
   }
 
-  goToAddress(event, id: string) {
-    event.preventDefault();
-    this.router.navigate(['/address', id]);
-  }
-
-  goToBlock(event, id: string) {
-    event.preventDefault();
-    this.router.navigate(['/block', id]);
-  }
-
-  goToPage(page: number) {
+  changePage() {
     this.blocks = [];
     this.showLoader = true;
-    this.router.navigate(['/blocks', page]);
+  }
+
+  getPageLink(page: number) {
+    return ['/blocks', page];
   }
 
   ngOnDestroy() {

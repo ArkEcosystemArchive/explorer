@@ -14,7 +14,7 @@
     <tbody *ngIf="list">
         <tr *ngFor="let item of list">
             <td class="ellipsis width-15">{{item.rate}}</td>
-            <td class="ellipsis width-15"><a href="#" (click)="goToAddress($event, item.address)">{{item.username}}</a></td>
+            <td class="ellipsis width-15"><a [routerLink]="['/address', item.address]">{{item.username}}</a></td>
             <td class="ellipsis width-20">{{item.address}}</td>
             <td class="ellipsis width-15" *ngIf="active">{{(item.forged/100000000)*curValue | number: '1.2-2'}} <span class="opacity">{{curName}}</span></td>
             <td class="ellipsis width-15" *ngIf="active">{{item.forgingTime | amDuration:'seconds'}}</td>

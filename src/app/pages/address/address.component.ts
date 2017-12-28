@@ -145,9 +145,8 @@ export class AddressComponent implements OnInit, OnDestroy {
     this.openVoters = !this.openVoters;
   }
 
-  goToAddress(event, id: string) {
-    event.preventDefault();
-    this.router.navigate(['/address', id]);
+  getAddressLink(id: string) {
+    return ['/address', id];
   }
 
   ngOnDestroy() {

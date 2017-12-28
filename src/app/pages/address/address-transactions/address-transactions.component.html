@@ -13,17 +13,17 @@
     <tbody>
         <tr *ngFor="let item of items">
             <td class="ark-transaction ellipsis width-15 ark-tooltip-wrap" [ngClass]="{'ark-transaction': item.vendorField}">
-                <a href="#" (click)="goToTransaction($event, item.id)">{{item.id | overflowText}}</a>
+                <a [routerLink]="['/tx', item.id]">{{item.id | overflowText}}</a>
                 <span class="ark-tooltip" *ngIf="item.vendorField">{{ item.vendorField }}</span>
             </td>
             <td class="ellipsis width-15">{{item.timestamp | localDate | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</td>
             <td class="ark-blue-text ellipsis width-15">
-                <a href="#" *ngIf="item.senderDelegate" (click)="goToAddress($event, item.senderId)">{{item.senderDelegate.username}}</a>
-                <a href="#" *ngIf="!item.senderDelegate && item.knownSender" (click)="goToAddress($event, item.senderId)">{{item.knownSender.owner}}</a>
-                <a href="#" *ngIf="!item.senderDelegate && !item.knownSender" (click)="goToAddress($event, item.senderId)">{{item.senderId | overflowText}}</a>
+                <a [routerLink]="getAddressLink(item.senderId)" *ngIf="item.senderDelegate">{{item.senderDelegate.username}}</a>
+                <a [routerLink]="getAddressLink(item.senderId)" *ngIf="!item.senderDelegate && item.knownSender">{{item.knownSender.owner}}</a>
+                <a [routerLink]="getAddressLink(item.senderId)" *ngIf="!item.senderDelegate && !item.knownSender">{{item.senderId | overflowText}}</a>
             </td>
             <td class="ellipsis width-15">
-                <a href="#" (click)="goToAddress($event, item.recipientId)" *ngIf="!(item.asset && item.asset.votes || item.asset && item.asset.signature || item.asset && item.asset.delegate)">{{item.recipientId | overflowText}}</a>
+                <a [routerLink]="getAddressLink(item.recipientId)" *ngIf="!(item.asset && item.asset.votes || item.asset && item.asset.signature || item.asset && item.asset.delegate)">{{item.recipientId | overflowText}}</a>
                 <span *ngIf="item.asset && item.asset.votes">{{ 'TRANSACTION.ASSET.VOTES' | translate }}</span>
                 <span *ngIf="item.asset && item.asset.signature">{{ 'TRANSACTION.ASSET.SIGNATURE' | translate }}</span>
                 <span *ngIf="item.asset && item.asset.delegate">{{ 'TRANSACTION.ASSET.DELEGATE' | translate }}</span>

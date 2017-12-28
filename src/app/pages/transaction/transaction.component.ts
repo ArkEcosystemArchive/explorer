@@ -47,19 +47,8 @@ export class TransactionComponent implements OnInit,OnDestroy {
     });
   }
 
-  goToAddress(event, id: string) {
-    event.preventDefault();
-    this.router.navigate(['/address', id]);
-  }
-
-  goToBlock(event, id: string) {
-    event.preventDefault();
-    this.router.navigate(['/block', id]);
-  }
-
-  goToTransaction(event, id: string) {
-    event.preventDefault();
-    this.router.navigate(['/tx', id]);
+  getAddressLink(id: string) {
+    return ['/address', id];
   }
 
   ngOnDestroy() {

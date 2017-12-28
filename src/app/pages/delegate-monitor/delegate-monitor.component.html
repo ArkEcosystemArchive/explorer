@@ -21,11 +21,11 @@
             <li>
                 <div class="ark-title">{{ 'DELEGATE_MONITOR.MONITOR.LAST_BLOCK' | translate}}</div>
                 <div class="ark-count">
-                    <span *ngIf="monitorData && monitorData.lastBlock"><a href="#" (click)="goToAddress($event, monitorData.lastBlock.block.delegate.address)">{{monitorData.lastBlock.block.delegate.username}}</a></span>
+                    <span *ngIf="monitorData && monitorData.lastBlock"><a [routerLink]="getAddressLink(monitorData.lastBlock.block.delegate.address)">{{monitorData.lastBlock.block.delegate.username}}</a></span>
                     <span *ngIf="!monitorData">N/A</span>
                 </div>
                 <div class="ark-info-item">
-                    <span *ngIf="monitorData && monitorData.lastBlock"><a href="#" (click)="goToBlock($event, monitorData.lastBlock.block.id)">{{monitorData.lastBlock.block.id}}</a></span>
+                    <span *ngIf="monitorData && monitorData.lastBlock"><a [routerLink]="['/block', monitorData.lastBlock.block.id]">{{monitorData.lastBlock.block.id}}</a></span>
                     <span *ngIf="!monitorData">N/A</span>
                 </div>
                 <div class="ark-info-item">
@@ -39,12 +39,12 @@
             <li>
                 <div class="ark-title">{{ 'DELEGATE_MONITOR.MONITOR.NEXT_FORGERS' | translate}}</div>
                 <div class="ark-count" *ngIf="monitorData && monitorData.nextForgers">
-                    <a href="#" (click)="goToAddress($event, monitorData.nextForgers[0].address)">{{monitorData.nextForgers[0].username}}</a>
+                    <a [routerLink]="getAddressLink(monitorData.nextForgers[0].address)">{{monitorData.nextForgers[0].username}}</a>
                 </div>
                 <div class="ark-message" *ngIf="!monitorData">{{ 'DELEGATE_MONITOR.MONITOR.WAITING' | translate}}</div>
                 <div class="ark-info-item" *ngIf="monitorData && monitorData.nextForgers">
                     <span *ngFor="let item of monitorData.nextForgers; let i = index;">
-                        <a href="#" (click)="goToAddress($event, item.address)">{{item.username}}</a>
+                        <a [routerLink]="getAddressLink(item.address)">{{item.username}}</a>
                         <span *ngIf="i !== monitorData.nextForgers.length - 1"> - </span>
                     </span>
                 </div>
@@ -59,7 +59,7 @@
             <li>
                 <div class="ark-title">{{ 'DELEGATE_MONITOR.MONITOR.BEST_FORGER' | translate }}</div>
                 <div class="ark-count">
-                    <span *ngIf="bestForger"><a href="#" (click)="goToAddress($event, bestForger.address)">{{bestForger.username}}</a></span>
+                    <span *ngIf="bestForger"><a [routerLink]="getAddressLink(bestForger.address)">{{bestForger.username}}</a></span>
                     <span *ngIf="!bestForger">N/A</span>
                 </div>
                 <div class="ark-info-item phrase-wrap">
@@ -75,7 +75,7 @@
                     <span *ngIf="!productivity">0%</span>
                 </div>
                 <div class="ark-info-item">{{ 'GENERAL.BY' | translate}}
-                    <a href="#" *ngIf="productivity" (click)="goToAddress($event, productivity.best.address)">{{productivity.best.username}}</a>
+                    <a *ngIf="productivity" [routerLink]="getAddressLink(productivity.best.address)">{{productivity.best.username}}</a>
                     <span *ngIf="!productivity">N/A</span>
                 </div>
                 <div class="ark-gradient-border blue-gradient"></div>
@@ -87,7 +87,7 @@
                     <span *ngIf="!productivity">0%</span>
                 </div>
                 <div class="ark-info-item">{{ 'GENERAL.BY' | translate}}
-                    <a href="#" *ngIf="productivity" (click)="goToAddress($event, productivity.worst.address)">{{productivity.worst.username}}</a>
+                    <a *ngIf="productivity" [routerLink]="getAddressLink(productivity.worst.address)">{{productivity.worst.username}}</a>
                     <span *ngIf="!productivity">N/A</span>
                 </div>
                 <div class="ark-gradient-border pink-gradient"></div>
@@ -121,8 +121,8 @@
                     </thead>
                     <tbody *ngIf="monitorData && monitorData.votes">
                         <tr *ngFor="let item of monitorData.votes.transactions">
-                            <td class="ellipsis width-15"><a href="#" (click)="goToAddress($event, item.senderId)">{{item.senderId | overflowText}}</a></td>
-                            <td class="ellipsis width-15"><a href="#" (click)="goToTransaction($event, item.id)">{{item.id | overflowText}}</a></td>
+                            <td class="ellipsis width-15"><a [routerLink]="getAddressLink(item.senderId)">{{item.senderId | overflowText}}</a></td>
+                            <td class="ellipsis width-15"><a [routerLink]="getTransactionLink(item.id)">{{item.id | overflowText}}</a></td>
                             <td class="ellipsis width-15">{{item.timestamp | localDate | amTimeAgo}}</td>
                             <td></td>
                         </tr>
@@ -146,8 +146,8 @@
                     </thead>
                     <tbody *ngIf="monitorData && monitorData.registrations">
                         <tr *ngFor="let item of monitorData.registrations.transactions">
-                            <td class="ellipsis width-10"><a href="#" (click)="goToAddress($event, item.delegate.address)">{{item.delegate.username}}</a></td>
-                            <td class="ellipsis width-15"><a href="#" (click)="goToTransaction($event, item.id)">{{item.id | overflowText}}</a></td>
+                            <td class="ellipsis width-10"><a [routerLink]="getAddressLink(item.delegate.address)">{{item.delegate.username}}</a></td>
+                            <td class="ellipsis width-15"><a [routerLink]="getTransactionLink(item.id)">{{item.id | overflowText}}</a></td>
                             <td class="ellipsis width-15">{{item.timestamp | localDate | amTimeAgo}}</td>
                             <td></td>
                         </tr>

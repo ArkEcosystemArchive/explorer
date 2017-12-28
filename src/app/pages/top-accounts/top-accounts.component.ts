@@ -51,11 +51,6 @@ export class TopAccountsComponent implements OnInit, OnDestroy {
     );
   }
 
-  goToAddress(event, id: string) {
-    event.preventDefault();
-    this.router.navigate(['/address', id]);
-  }
-
   loadAccounts() {
     this.showLoader = true;
     this._explorerService.getTopAccounts(50, this.accounts.length - 1).subscribe(
