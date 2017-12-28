@@ -15,7 +15,7 @@
   display: flex;
   justify-content: space-between;
   .ark-summary {
-    font-family: Avenir;
+    font-family: Avenir, serif;
     font-size: 13px;
     width: 875px;
     .ark-summary-item {
@@ -42,8 +42,8 @@
     text-align: center;
     .ark-qr-message {
       font-size: 13px;
-      margin: 12px 0px;
-      font-family: Avenir;
+      margin: 12px 0;
+      font-family: Avenir, serif;
     }
   }
 
@@ -64,10 +64,9 @@
   line-height: 27px;
   overflow: hidden;
   border: 1px solid @color-gray-10;
-  padding: 20px;
+  padding: 20px 40px 20px 20px;
   position: relative;
   transition: 0.3s;
-  padding-right: 40px;
   &.open {
     height: auto;
   }
@@ -85,7 +84,7 @@
 
   .voters-address {
     font-size: 13px;
-    font-family: 'Avenir';
+    font-family: 'Avenir', serif;
 
     a:before {
       content: '\2022';

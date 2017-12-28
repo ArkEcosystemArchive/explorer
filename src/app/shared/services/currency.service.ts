@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { Http, Response, RequestOptionsArgs } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-
 import { CurrencyModel } from '../../models/currency.model';
 
 import 'rxjs/add/operator/map';
@@ -13,7 +12,7 @@ import 'rxjs/Rx';
 export class CurrencyService {
   private currencySource = new Subject<CurrencyModel>();
   private supplySource = new Subject<number>();
-  private heightSourse = new Subject<number>();
+  private heightSource = new Subject<number>();
 
   currencyChosen$: Observable<CurrencyModel>;
   supplyChosen$: Observable<number>;
@@ -21,15 +20,15 @@ export class CurrencyService {
 
   constructor(
     private http: Http
-  ) { 
+  ) {
     this.currencyChosen$ = this.currencySource.asObservable();
     this.supplyChosen$ = this.supplySource.asObservable();
-    this.heightChosen$ = this.heightSourse.asObservable();
+    this.heightChosen$ = this.heightSource.asObservable();
 
   }
 
   changeCurrency(currency: string, value: number) {
-    let i: CurrencyModel = {
+    const i: CurrencyModel = {
       name: currency,
       value: value
     };
@@ -41,7 +40,7 @@ export class CurrencyService {
   }
 
   changeHeight(value: number) {
-    this.heightSourse.next(value);
+    this.heightSource.next(value);
   }
 
   public getGBPprice() {

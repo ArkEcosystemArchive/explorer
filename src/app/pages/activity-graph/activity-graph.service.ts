@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class GraphService {
@@ -31,23 +30,23 @@ export class GraphService {
     }
 
     private _sizeNodes(sigma: any) {
-        let self = this;
+        const self = this;
         sigma.graph.nodes().forEach(function (node) {
-            var deg = sigma.graph.degree(node.id);
+            const deg = sigma.graph.degree(node.id);
             node.size = self.maxNodeSize * Math.sqrt(deg);
         });
     }
 
     private _positionNodes(sigma: any) {
-        for (var type = 0; type < 3; type++) {
-            var nodes = this._nodesByType(type, sigma);
-            var i, len = nodes.length,
-                slice = 2 * Math.PI / len;
+        for (let type = 0; type < 3; type++) {
+            const nodes = this._nodesByType(type, sigma);
+            const len = nodes.length;
+            const slice = 2 * Math.PI / len;
 
-            for (i = 0; i < len; i++) {
-                var angle = slice * i,
-                    node = nodes[i];
-                var graph = sigma.graph.nodes(node.id);
+            for (let i = 0; i < len; i++) {
+                const angle = slice * i,
+                      node = nodes[i];
+                const graph = sigma.graph.nodes(node.id);
                 graph.x = (type + 1) * Math.cos(angle);
                 graph.y = (type + 1) * Math.sin(angle);
             }
@@ -127,7 +126,7 @@ export class GraphService {
     }
 
     private _addBlockTxs(block: any, sigma: any) {
-        let self = this;
+        const self = this;
         if (block.transactions) {
             block.transactions.forEach(function (tx) {
               self._addTx(tx, sigma);
@@ -185,4 +184,5 @@ export class GraphService {
             size: 1
         }, sigma);
     }
+
 }

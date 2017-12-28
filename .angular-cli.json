@@ -17,7 +17,7 @@
         "test": "test.ts",
         "tsconfig": "tsconfig.app.json",
         "testTsconfig": "tsconfig.spec.json",
-        "prefix": "app",
+        "prefix": "ark",
         "styles": [
             "styles.less",
             "../node_modules/font-awesome/css/font-awesome.css"

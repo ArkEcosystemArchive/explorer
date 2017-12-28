@@ -1,20 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { WebsocketsService } from '../../shared/services/websockets.service';
+import { CurrencyService } from '../../shared/services/currency.service';
+import { DelegateMonitorService } from './delegate-monitor.service';
+import { ExplorerService } from '../../shared/services/explorer.service';
+import { CoinmarketService } from '../../shared/services/coinmarket.service';
+import { ConnectionMessageService } from '../../shared/services/connection-message.service';
+import { initCurrency } from '../../shared/const/currency';
 import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
-import { Chart } from 'angular-highcharts';
+
 import 'rxjs/add/operator/switchMap';
 
-import { WebsocketsService } from '../../shared/services/websockets.service';
-import { CurrencyService } from "../../shared/services/currency.service";
-import { DelegateMonitorService } from "./delegate-monitor.service";
-import { ExplorerService } from "../../shared/services/explorer.service";
-import { CoinmarketService } from "../../shared/services/coinmarket.service";
-import { ConnectionMessageService } from "../../shared/services/connection-message.service";
-import { initCurrency } from '../../shared/const/currency';
-
 @Component({
-  selector: 'app-delegate-monitor',
+  selector: 'ark-delegate-monitor',
   templateUrl: './delegate-monitor.component.html',
   styleUrls: ['./delegate-monitor.component.less'],
   providers: [DelegateMonitorService, ExplorerService, CoinmarketService]
@@ -23,13 +21,13 @@ export class DelegateMonitorComponent implements OnInit, OnDestroy {
   public currencyName: string = initCurrency.name;
   public currencyValue: number = initCurrency.value;
   public monitorData: any;
-  public totalForged: number = 0;
+  public totalForged = 0;
   public bestForger: any;
   public productivity: any;
   public delegatesList: any = [];
-  public activeDelegate: boolean = true;
+  public activeDelegate = true;
   public chart: any;
-  public activeChartTab: string = 'day';
+  public activeChartTab = 'day';
   public supply: number;
   public height: number;
   public totals: any;
@@ -94,23 +92,18 @@ export class DelegateMonitorComponent implements OnInit, OnDestroy {
     this.delegatesList = data.hasOwnProperty('active') ? data.active.delegates : null;
   }
 
-  getActiveDelegates(event) {
+  getActiveDelegates() {
     this.activeDelegate = true;
     this.delegatesList = this.monitorData ? this.monitorData.active.delegates : null;
   }
 
-  getStandbyDelegates(event) {
+  getStandbyDelegates() {
     this.activeDelegate = false;
     this._explorerService.getStandby(0).subscribe(
       res => {
         this.delegatesList = res.delegates;
       }
     );
-  }
-
-  updateChart(event) {
-    this.activeChartTab = event.target.id;
-    this._marketService.build(this.activeChartTab);
   }
 
   getAddressLink(id: string) {

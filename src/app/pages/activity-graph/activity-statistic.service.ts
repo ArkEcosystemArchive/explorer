@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { StatisticModel } from "../../models/statistic.model";
+import { StatisticModel } from '../../models/statistic.model';
 
 @Injectable()
 export class GraphStatisticService {
-    //watcher
+    // watcher
     private statisticSource = new Subject<StatisticModel>();
     statisticChange$ = this.statisticSource.asObservable();
+
+  // statistic methods
+  public statistic = new StatisticModel();
 
     public changeStatistic(value: any) {
         this.statisticSource.next(value);
     }
 
-    //statistic methods
-    public statistic = new StatisticModel();
-
     public refresh(sigma: any) {
-        var txs = this._nodesByType(0, sigma);
-        var blocks = this._nodesByType(1, sigma);
-        var accounts = this._nodesByType(2, sigma);
+        const txs = this._nodesByType(0, sigma);
+        const blocks = this._nodesByType(1, sigma);
+        const accounts = this._nodesByType(2, sigma);
 
         this.statistic.txs = txs.length;
         this.statistic.volume = this._txsVolume(txs);
@@ -38,23 +38,24 @@ export class GraphStatisticService {
 
     private _txsVolume(chain: any) {
         return chain.reduce(function (vol, tx) {
-            return vol += tx.amount;
+            return vol + tx.amount;
         }, 0);
     }
 
-    private _minTime(chain: any){
-        let timestampArray = [];
+    private _minTime(chain: any) {
+        const timestampArray = [];
         chain.forEach(element => {
             timestampArray.push(element.timestamp);
         });
         return Math.min(...timestampArray);
     }
 
-    private _maxTime(chain: any){
-        let timestampArray = [];
+    private _maxTime(chain: any) {
+        const timestampArray = [];
         chain.forEach(element => {
             timestampArray.push(element.timestamp);
         });
         return Math.max(...timestampArray);
     }
+
 }

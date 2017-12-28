@@ -7,8 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class BalanceFooterComponent implements OnInit {
 
-  @Input() show: boolean = false;
-  @Input() address: string = '';
+  @Input() show = false;
+  @Input() address = '';
   @Input() balance: number;
   @Input() curName: string;
   @Input() curVal: number;

@@ -1,7 +1,11 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class LocalStorageService {
+
+  public static isLocalStorageSupported(): boolean {
+    return typeof (Storage) !== 'undefined';
+  }
 
   public getValue(key: string): any {
     if (!LocalStorageService.isLocalStorageSupported() || !key) {
@@ -17,9 +21,5 @@ export class LocalStorageService {
     }
 
     localStorage.setItem(key, JSON.stringify(value));
-  }
-
-  public static isLocalStorageSupported(): boolean {
-    return typeof (Storage) !== "undefined";
   }
 }

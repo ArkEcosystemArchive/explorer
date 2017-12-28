@@ -3,8 +3,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'ark-address-transactions',
-  templateUrl: './address-transactions.component.html',
-  styleUrls: ['./address-transactions.component.less']
+  templateUrl: './address-transactions.component.html'
 })
 export class AddressTransactionsComponent implements OnInit {
   @Input() id: string;

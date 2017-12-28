@@ -1,21 +1,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Subscription }   from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/switchMap';
-
+import { Subscription } from 'rxjs/Subscription';
 import { ExplorerService } from '../../shared/services/explorer.service';
 import { CurrencyService } from '../../shared/services/currency.service';
-import { ConnectionMessageService } from "../../shared/services/connection-message.service";
+import { ConnectionMessageService } from '../../shared/services/connection-message.service';
 import { initCurrency } from '../../shared/const/currency';
 
+import 'rxjs/add/operator/switchMap';
+
 @Component({
-  selector: 'app-transaction',
+  selector: 'ark-transaction',
   templateUrl: './transaction.component.html',
   styleUrls: ['./transaction.component.less'],
   providers: [ ExplorerService ]
 })
-export class TransactionComponent implements OnInit,OnDestroy {
+export class TransactionComponent implements OnInit, OnDestroy {
   public transaction: any;
   public currencyName: string = initCurrency.name;
   public currencyValue: number = initCurrency.value;
@@ -38,7 +37,7 @@ export class TransactionComponent implements OnInit,OnDestroy {
   ngOnInit() {
     window.scrollTo(0, 0);
     this.route.params.subscribe((params: Params) => {
-      this._explorerService.getTransaction(params["id"]).subscribe(
+      this._explorerService.getTransaction(params['id']).subscribe(
         res => {
           this.transaction = res.transaction;
           this._connectionService.changeConnection(res.success);
