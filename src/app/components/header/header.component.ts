@@ -21,7 +21,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public headerBTC: any;
   public headerUSD: any;
   public headerEUR: any;
-  public headerCNY: any;
   public headerGBP: any;
 
   public openMobileMenu: boolean = false;
@@ -64,9 +63,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this._currencyService.getCNYprice().subscribe(res => {
-      this.headerCNY = res.ticker.price;
-    });
     this._currencyService.getGBPprice().subscribe(res => {
       this.headerGBP = res.ticker.price;
     });
@@ -83,9 +79,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   getExtraRates() {
     this._timer = setInterval(() => {
-      this._currencyService.getCNYprice().subscribe(res => {
-        this.headerCNY = res.ticker.price;
-      });
       this._currencyService.getGBPprice().subscribe(res => {
         this.headerGBP = res.ticker.price;
       });
