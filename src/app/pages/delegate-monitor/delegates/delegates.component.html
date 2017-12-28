@@ -1,14 +1,50 @@
 <table class="ark-table">
     <thead>
         <tr>
-            <th class="ellipsis width-15">{{ 'GENERAL.INFO.RANK' | translate}}</th>
-            <th class="ellipsis width-15">{{ 'GENERAL.INFO.NAME' | translate}}</th>
+            <th class="ellipsis width-15">
+                <a href="#" (click)="sortDelegates($event, 'rate')" style="color: inherit;">
+                    <i class="fa fa-arrow-up" aria-hidden="true" *ngIf="sortColumn === 'rate' && sortDirection === 'asc'"></i>
+                    <i class="fa fa-arrow-down" aria-hidden="true" *ngIf="sortColumn === 'rate' && sortDirection === 'desc'"></i>
+                    {{ 'GENERAL.INFO.RANK' | translate}}
+                </a>
+            </th>
+            <th class="ellipsis width-15">
+                <a href="#" (click)="sortDelegates($event, 'username')" style="color: inherit;">
+                    <i class="fa fa-arrow-up" aria-hidden="true" *ngIf="sortColumn === 'username' && sortDirection === 'asc'"></i>
+                    <i class="fa fa-arrow-down" aria-hidden="true" *ngIf="sortColumn === 'username' && sortDirection === 'desc'"></i>
+                    {{ 'GENERAL.INFO.NAME' | translate}}
+                </a>
+            </th>
             <th class="ellipsis width-20">{{ 'GENERAL.INFO.ADDRESS' | translate}}</th>
-            <th class="ellipsis width-15" *ngIf="active">{{ 'GENERAL.INFO.FORGED' | translate}}</th>
-            <th class="ellipsis width-15" *ngIf="active">{{ 'GENERAL.INFO.FORGING_TIME' | translate}}</th>
+            <th class="ellipsis width-15">
+                <a href="#" (click)="sortDelegates($event, 'forged')" style="color: inherit;">
+                    <i class="fa fa-arrow-up" aria-hidden="true" *ngIf="sortColumn === 'forged' && sortDirection === 'asc'"></i>
+                    <i class="fa fa-arrow-down" aria-hidden="true" *ngIf="sortColumn === 'forged' && sortDirection === 'desc'"></i>
+                    {{ 'GENERAL.INFO.FORGED' | translate}}
+                </a>
+            </th>
+            <th class="ellipsis width-15">
+                <a href="#" (click)="sortDelegates($event, 'forgingTime')" style="color: inherit;">
+                    <i class="fa fa-arrow-up" aria-hidden="true" *ngIf="sortColumn === 'forgingTime' && sortDirection === 'asc'"></i>
+                    <i class="fa fa-arrow-down" aria-hidden="true" *ngIf="sortColumn === 'forgingTime' && sortDirection === 'desc'"></i>
+                    {{ 'GENERAL.INFO.FORGING_TIME' | translate}}
+                </a>
+            </th>
             <th class="ellipsis width-15" *ngIf="active">{{ 'GENERAL.INFO.STATUS' | translate}}</th>
-            <th class="ellipsis width-15">{{ 'GENERAL.INFO.PRODUCTIVITY' | translate}}</th>
-            <th class="ellipsis width-10">{{ 'GENERAL.INFO.APPROVAL' | translate}}</th>
+            <th class="ellipsis width-15">
+                <a href="#" (click)="sortDelegates($event, 'productivity')" style="color: inherit;">
+                    <i class="fa fa-arrow-up" aria-hidden="true" *ngIf="sortColumn === 'productivity' && sortDirection === 'asc'"></i>
+                    <i class="fa fa-arrow-down" aria-hidden="true" *ngIf="sortColumn === 'productivity' && sortDirection === 'desc'"></i>
+                    {{ 'GENERAL.INFO.PRODUCTIVITY' | translate}}
+                </a>
+            </th>
+            <th class="ellipsis width-15">
+                <a href="#" (click)="sortDelegates($event, 'approval')" style="color: inherit;">
+                    <i class="fa fa-arrow-up" aria-hidden="true" *ngIf="sortColumn === 'approval' && sortDirection === 'asc'"></i>
+                    <i class="fa fa-arrow-down" aria-hidden="true" *ngIf="sortColumn === 'approval' && sortDirection === 'desc'"></i>
+                    {{ 'GENERAL.INFO.APPROVAL' | translate}}
+                </a>
+            </th>
         </tr>
     </thead>
     <tbody *ngIf="list">

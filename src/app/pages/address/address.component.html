@@ -106,7 +106,7 @@
         <div class="empty-message" *ngIf="currentTransactions && currentTransactions.length === 0">{{ 'TRANSACTION.NO_TRANSACTIONS' | translate }}</div>
         <div class="ark-tab-body " *ngIf="currentTransactions && currentTransactions.length > 0">
             <div class="ark-tab-item active " id="delegates-table ">
-                <ark-address-transactions *ngIf="addressItem" [id]="addressItem.address" [items]="currentTransactions" [curName]="currencyName" [curValue]="currencyValue"></ark-address-transactions>
+                <ark-address-transactions *ngIf="addressItem" [id]="addressItem.address" [itemsArray]="currentTransactions" [curName]="currencyName" [curValue]="currencyValue"></ark-address-transactions>
             </div>
         </div>
     </div>
