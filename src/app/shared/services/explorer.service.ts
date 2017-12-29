@@ -9,6 +9,7 @@ import { CONFIG } from '../../app.config';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
+import { LoadAccountsResult } from '../../components/address-table/address-table.component';
 
 @Injectable()
 export class ExplorerService {
@@ -48,13 +49,12 @@ export class ExplorerService {
 
   }
 
-  public getTopAccounts(limit: number, offset: number): Observable<AccountsResponse> {
+  public getTopAccounts = (limit: number, offset: number): Observable<LoadAccountsResult> => {
     return this.http.get(`${CONFIG.API}/getTopAccounts?limit=${limit}&offset=${offset}`)
       .map((res: Response) => res.json())
       .catch((error: any) => {
         return Observable.throw(error.json());
       });
-
   }
 
   public getTransactionsByAddress(address: any, direction: string): Observable<TransactionsResponse> {

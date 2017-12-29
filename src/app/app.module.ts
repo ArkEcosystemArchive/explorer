@@ -36,6 +36,8 @@ import { ToggleBackgroundComponent } from './components/header/toggle-background
 import { ThemeService } from './shared/services/theme.service';
 import { LocalStorageService } from './shared/services/local-storage.service';
 import { TogglePriceChartComponent } from './components/header/toggle-price-chart/toggle-price-chart.component';
+import { AddressTableComponent } from './components/address-table/address-table.component';
+import { VotersComponent } from './pages/address/voters/voters.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/translate/', '.json');
@@ -63,7 +65,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     DelegatesComponent,
     ScrollTopComponent,
     ToggleBackgroundComponent,
-    TogglePriceChartComponent
+    TogglePriceChartComponent,
+    AddressTableComponent,
+    VotersComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,40 @@
+<table class="ark-table">
+    <thead>
+        <tr>
+            <th class="ellipsis width-15">{{ 'GENERAL.INFO.RANK' | translate }}</th>
+            <th class="ellipsis width-15">{{ 'GENERAL.INFO.ADDRESS' | translate }}</th>
+            <th class="ellipsis width-15">~{{ 'GENERAL.INFO.BALANCE' | translate }}</th>
+            <th class="ellipsis width-15">{{ (supplyLabel ? supplyLabel : 'GENERAL.INFO.SUPPLY') | translate }}</th>
+            <th class="ellipsis width-15">{{ 'GENERAL.INFO.OWNER' | translate }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of accounts; let i = index;">
+            <td class="ellipsis width-15">{{i + 1}}</td>
+            <td class="ellipsis width-15"><a [routerLink]="['/address', item.address]">{{item.address}}</a></td>
+            <td class="ellipsis width-15">{{(item.balance / 100000000)*currencyValue | number: '1.2-2'}} {{currencyName}}</td>
+            <td class="ellipsis width-15">
+                <span *ngIf="supply">{{(item.balance / supply)*100 | number: '1.2-2'}}%</span>
+                <span *ngIf="!supply">0.00%</span>
+            </td>
+            <td class="ellipsis width-15">
+                <span *ngIf="item.knowledge">{{item.knowledge.owner}} <span class="opacity" *ngIf="item.knowledge.description">{{item.knowledge.description}}</span></span>
+                <span *ngIf="!item.knowledge">N/A</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="top-loader ark-loader-block" *ngIf="showLoader">
+    <div class="ark-loader-icon"></div>
+    <p>{{ 'GENERAL.LOADING' | translate }}...</p>
+</div>
+<div *ngIf="areLoadButtonsVisible" class="ark-shadowbtn-wrap" [class.ark-two-buttons]="supportsLoadAll">
+  <div>
+    <button class="ark-shadow-btn" type="button" (click)="loadAccounts()">{{ 'GENERAL.MORE' | translate }}</button>
+    <div class="ark-shadowfor-btn"></div>
+  </div>
+  <div *ngIf="supportsLoadAll">
+    <button class="ark-shadow-btn" type="button" (click)="loadAllAccounts()">{{ 'GENERAL.LOAD_ALL' | translate }}</button>
+    <div class="ark-shadowfor-btn"></div>
+  </div>
+</div>

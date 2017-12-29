@@ -4,6 +4,7 @@
         "WELL_CONFIRMED": "Well Confirmed",
         "MORE": "More",
         "LOADING": "loading",
+        "LOAD_ALL": "Load All",
         "NEXT_PAGE": "Next page",
         "PREV_PAGE": "Previous page",
         "ACTIVE": "Active",
@@ -68,7 +69,9 @@
         "DELEGATE_TITLE": "Delegate",
         "VOTES_TITLE": "Votes",
         "VOTERS_TITLE": "Voters",
-        "TX_TITLE": "Transactions"
+        "TX_TITLE": "Transactions",
+        "VOTES_PERCENTAGE": "% of votes",
+        "VOTER_DETAILS": "View Voter Details"
     },
     "TRANSACTION": {
         "TITLE": "Transaction",

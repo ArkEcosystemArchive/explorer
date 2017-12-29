@@ -5,11 +5,6 @@
 @import "../../../assets/styles/_elements.less";
 @import "../../../assets/styles/_grid.less";
 
-.ark-title-username {
-  opacity: 0.5;
-  font-size: 18px;
-}
-
 .ark-address-summary {
   margin: 30px 0 50px;
   display: flex;
@@ -75,21 +70,18 @@
     position: absolute;
     width: 35px;
     height: 35px;
+    font-size: 30px;
     right: 7px;
     top: 13px;
     cursor: pointer;
-    transition: 0.3s;
-    background: @button-icon;
+    color: @box-shadow-btn-bg;
   }
 
   .voters-address {
     font-size: 13px;
-    font-family: 'Avenir', serif;
-
-    a:before {
-      content: '\2022';
-      display: inline-block;
-      margin: 0 5px;
+    font-family: 'Lucida Console', Monaco, monospace;
+    span {
+      white-space: nowrap;
     }
   }
 }

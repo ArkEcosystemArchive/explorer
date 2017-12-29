@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy, HostListener, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, HostListener, Inject  } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ExplorerService } from '../../shared/services/explorer.service';
@@ -28,13 +28,14 @@ export class AddressComponent implements OnInit, OnDestroy {
   public currencyValue: number = initCurrency.value;
   public showLoader = false;
   public showBalanceFooter = false;
-  public openVoters = false;
-  public votersNumber = 4;
   public supply = 0;
+  public voters: Account[];
+  public areVotersExpanded = false;
 
   private _currentAddress = '';
   private subscription: Subscription;
   private supplySubscription: Subscription;
+  private votersNumber = 4;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -64,6 +65,10 @@ export class AddressComponent implements OnInit, OnDestroy {
         res => {
           this.addressItem = res.account;
           this._connectionService.changeConnection(res.success);
+          window.scrollTo(0, 0);
+          if (this.addressItem && this.addressItem.voters) {
+            this.voters = this.addressItem.voters.sort((one, two) => two.balance - one.balance);
+          }
         }
       );
 
@@ -102,7 +107,6 @@ export class AddressComponent implements OnInit, OnDestroy {
     } else {
       this.votersNumber = 1;
     }
-
   }
 
   getAllTransactions(event): void {
@@ -141,13 +145,8 @@ export class AddressComponent implements OnInit, OnDestroy {
     );
   }
 
-  showBlock() {
-    // this.votersBlock.nativeElement.classList.toggle('open');
-    this.openVoters = !this.openVoters;
-  }
-
-  getAddressLink(id: string) {
-    return ['/address', id];
+  getVoters() {
+    return this.areVotersExpanded ? this.voters : this.voters.slice(0, this.votersNumber);
   }
 
   ngOnDestroy() {
@@ -155,5 +154,4 @@ export class AddressComponent implements OnInit, OnDestroy {
     this.supplySubscription.unsubscribe();
     this.document.body.classList.remove('extra-footer');
   }
-
 }

@@ -1,0 +1,35 @@
+@import "../../../assets/styles/_variables.less";
+
+.top-loader {
+  margin: 20px 0 30px;
+}
+
+.ark-table {
+    margin-bottom: 20px;
+}
+
+@media (min-width: @small-mobile) {
+  .ark-two-buttons {
+    width: 520px;
+
+    & > div {
+      float: left;
+      width: 45%;
+      position: relative;
+
+      &:not(:first-child) {
+        margin-left: 5%;
+      }
+    }
+  }
+}
+
+@media (max-width: @small-mobile) {
+  .ark-two-buttons {
+    & > div {
+      &:not(:first-child) {
+        margin-top: 10px;
+      }
+    }
+  }
+}

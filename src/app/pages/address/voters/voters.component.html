@@ -1,0 +1,28 @@
+<section *ngIf="account">
+  <div class="ark-section-title">
+    {{ 'ADDRESS.VOTERS_TITLE' | translate }}
+    <span class="ark-section-title-addition">
+      {{voters.length}}
+    </span>
+  </div>
+
+  <div class="ark-address-summary">
+    <div class="ark-summary ark-summary-delegate">
+      <div class="ark-summary-item ark-flex-between">
+        <span class="ark-summary-title">{{'GENERAL.INFO.DELEGATE' | translate}}</span>
+        <span class="ark-summary-data">{{account.delegate?.username}}</span>
+      </div>
+      <div class="ark-summary-item ark-flex-between">
+        <span class="ark-summary-title">{{'GENERAL.INFO.DELEGATE' | translate}} {{'GENERAL.INFO.ADDRESS' | translate}}</span>
+        <span class="ark-summary-data"><a [routerLink]="['/address', account.address]">{{account.address}}</a></span>
+      </div>
+    </div>
+  </div>
+
+  <ark-address-table *ngIf="areVotersVisible"
+                     [loadAccountsFunc]="getVoters"
+                     [supportsLoadAll]="true"
+                     [totalSupply]="totalVoteBalance"
+                     [supplyLabel]="'ADDRESS.VOTES_PERCENTAGE'">
+  </ark-address-table>
+</section>

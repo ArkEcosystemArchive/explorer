@@ -41,7 +41,7 @@
             </div>
         </div>
         <div *ngIf="addressItem && addressItem.delegate">
-            <div class="ark-section-title">{{ 'ADDRESS.DELEGATE_TITLE' | translate }} <span class="ark-title-username">{{addressItem.delegate.username}}</span></div>
+            <div class="ark-section-title">{{ 'ADDRESS.DELEGATE_TITLE' | translate }} <span class="ark-section-title-addition">{{addressItem.delegate.username}}</span></div>
             <div class="ark-address-summary">
                 <div class="ark-summary ark-summary-delegate">
                     <div class="ark-summary-item ark-flex-between" *ngIf="addressItem.delegate.productivity">
@@ -77,22 +77,24 @@
                 </div>
             </div>
         </div>
-        <!-- Two voters' blocks open&closed -->
-        <!-- TODO: make one block -->
-        <div *ngIf="addressItem && addressItem.voters && addressItem.voters.length">
-            <div class="ark-section-title">{{ 'ADDRESS.VOTERS_TITLE' | translate }} <span class="ark-title-username">{{addressItem.voters.length}}</span></div>
-            <div class="ark-address-summary voters-container" style="display: block;" *ngIf="!openVoters" #voters>
-                <div class="voters-button" (click)="showBlock()"></div>
-                <span class="voters-address" *ngFor="let item of addressItem.voters; let i = index;">
-                    <a [routerLink]="getAddressLink(item.address)" *ngIf="i < votersNumber">{{item.address}} ({{(item.balance / 100000000) | number: '1.2-2'}} ARK)</a>
-                </span>
-            </div>
-            <div class="ark-address-summary voters-container open" style="display: block;" *ngIf="openVoters" #voters>
-                <div class="voters-button" (click)="showBlock()"></div>
-                <span class="voters-address" *ngFor="let item of addressItem.voters"><a [routerLink]="getAddressLink(item.address)">{{item.address}} ({{(item.balance / 100000000) | number: '1.2-2'}} ARK)</a> </span>
-            </div>
+      <div *ngIf="addressItem && addressItem.voters && addressItem.voters.length">
+        <div class="ark-section-title">{{ 'ADDRESS.VOTERS_TITLE' | translate }} <span class="ark-section-title-addition">{{addressItem.voters.length}}</span></div>
+        <div class="ark-address-summary voters-container" [class.open]="areVotersExpanded" style="display: block;" #voters>
+          <i class="voters-button fa" [class.fa-plus-circle]="!areVotersExpanded" [class.fa-minus-circle]="areVotersExpanded" aria-label="false" (click)="areVotersExpanded = !areVotersExpanded"></i>
+          <span class="voters-address" *ngFor="let item of getVoters();">
+            <span>
+                    <a [routerLink]="['/address', item.address]">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        {{item.address}}
+                    </a>
+              </span>
+          </span>
         </div>
-        <!-- voters blocks -->
+        <div class="ark-shadowbtn-wrap">
+          <button class="ark-shadow-btn" type="button" [routerLink]="['/address', addressItem.address, 'voters']">{{ 'ADDRESS.VOTER_DETAILS' | translate }}</button>
+          <div class="ark-shadowfor-btn"></div>
+        </div>
+      </div>
         <div class="ark-section-title ">{{ 'ADDRESS.TX_TITLE' | translate }}</div>
         <div class="ark-tab-header ">
             <div class="ark-tab-header-item" [ngClass]="{'active': activeTab === 'all-tr'}" id="all-tr" (click)="getAllTransactions($event)">{{ 'GENERAL.TABS.ALL' | translate }}</div>
