@@ -6,7 +6,13 @@ import { Observable } from 'rxjs/Observable';
 import { CurrencyService } from '../../shared/services/currency.service';
 import { ConnectionMessageService } from '../../shared/services/connection-message.service';
 import { initCurrency } from '../../shared/const/currency';
-import {Account} from '../../models/account.model';
+import { Account, AccountsResponse } from '../../models/account.model';
+
+export class LoadAccountsResult extends AccountsResponse {
+  public success: boolean;
+  public isLast: boolean;
+  public accounts: Account[];
+}
 
 @Component({
   selector: 'ark-address-table',
@@ -19,16 +25,19 @@ export class AddressTableComponent implements OnInit, OnDestroy {
   public currencyValue: number = initCurrency.value;
   public supply = 0;
   public showLoader = false;
-  public isLoadButtonVisible = true;
+  public areLoadButtonsVisible = true;
 
   @Input()
-  public loadAccountsFunc: (pageSize: number, offSet: number) => Observable<{success: boolean, isLast: boolean, accounts: Account[]}>;
+  public loadAccountsFunc: (pageSize: number, offset: number, loadAll?: boolean) => Observable<LoadAccountsResult>;
 
   @Input()
   public initialNumberOfAccounts = 50;
 
   @Input()
   public additionalNumberOfAccounts = 50;
+
+  @Input()
+  public supportsLoadAll: boolean;
 
   @Input()
   public totalSupply: number;
@@ -60,9 +69,16 @@ export class AddressTableComponent implements OnInit, OnDestroy {
     }
   }
 
-  loadAccounts() {
+  loadAccounts(): void {
     this.showLoader = true;
+    this.areLoadButtonsVisible = false;
     this.loadAccountsFunc(this.additionalNumberOfAccounts, this.accounts.length).subscribe(this.loadAccountsCallback);
+  }
+
+  loadAllAccounts(): void {
+    this.showLoader = true;
+    this.areLoadButtonsVisible = false;
+    this.loadAccountsFunc(0, 0, true).subscribe(this.loadAccountsCallback);
   }
 
   ngOnDestroy() {
@@ -72,10 +88,10 @@ export class AddressTableComponent implements OnInit, OnDestroy {
     }
   }
 
-  private loadAccountsCallback= (res: {success: boolean, isLast: boolean, accounts: Account[]}): void => {
+  private loadAccountsCallback= (res: LoadAccountsResult): void => {
     this.accounts = this.accounts.concat(res.accounts || []);
     this._connectionService.changeConnection(res.success);
     this.showLoader = !res.success;
-    this.isLoadButtonVisible = !res.isLast;
+    this.areLoadButtonsVisible = !res.isLast;
   }
 }

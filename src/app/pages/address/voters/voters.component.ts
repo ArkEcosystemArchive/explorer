@@ -3,6 +3,7 @@ import { ExplorerService } from '../../../shared/services/explorer.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Account } from '../../../models/account.model';
 import { Observable } from 'rxjs/Observable';
+import { LoadAccountsResult } from '../../../components/address-table/address-table.component';
 
 @Component({
   templateUrl: './voters.component.html',
@@ -40,11 +41,11 @@ export class VotersComponent implements OnInit {
     });
   }
 
-  public getVoters = (pageSize: number, offset: number): Observable<any> => {
+  public getVoters = (pageSize: number, offset: number, loadAll?: boolean): Observable<LoadAccountsResult> => {
     return Observable.of({
       success: true,
-      accounts: this.voters.slice(offset, offset + pageSize),
-      isLast: (offset + pageSize) >= this.voters.length
+      accounts: loadAll ? this.voters : this.voters.slice(offset, offset + pageSize),
+      isLast: loadAll || ((offset + pageSize) >= this.voters.length)
     });
   };
 }

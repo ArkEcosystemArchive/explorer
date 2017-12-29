@@ -28,7 +28,13 @@
     <div class="ark-loader-icon"></div>
     <p>{{ 'GENERAL.LOADING' | translate }}...</p>
 </div>
-<div class="ark-shadowbtn-wrap" *ngIf="isLoadButtonVisible">
+<div *ngIf="areLoadButtonsVisible" class="ark-shadowbtn-wrap" [class.ark-two-buttons]="supportsLoadAll">
+  <div>
     <button class="ark-shadow-btn" type="button" (click)="loadAccounts()">{{ 'GENERAL.MORE' | translate }}</button>
     <div class="ark-shadowfor-btn"></div>
+  </div>
+  <div *ngIf="supportsLoadAll">
+    <button class="ark-shadow-btn" type="button" (click)="loadAllAccounts()">{{ 'GENERAL.LOAD_ALL' | translate }}</button>
+    <div class="ark-shadowfor-btn"></div>
+  </div>
 </div>

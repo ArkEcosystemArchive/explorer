@@ -21,6 +21,7 @@
 
   <ark-address-table *ngIf="areVotersVisible"
                      [loadAccountsFunc]="getVoters"
+                     [supportsLoadAll]="true"
                      [totalSupply]="totalVoteBalance"
                      [supplyLabel]="'ADDRESS.VOTES_PERCENTAGE'">
   </ark-address-table>
