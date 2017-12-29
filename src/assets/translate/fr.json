@@ -68,7 +68,9 @@
       "DELEGATE_TITLE": "Délégué",
       "VOTES_TITLE": "Votes",
       "VOTERS_TITLE": "Électeurs",
-      "TX_TITLE": "Transactions"
+      "TX_TITLE": "Transactions",
+      "VOTES_PERCENTAGE": "% des votes",
+      "VOTER_DETAILS": "Afficher les détails des electeurs"
   },
   "TRANSACTION": {
       "TITLE": "Transaction",

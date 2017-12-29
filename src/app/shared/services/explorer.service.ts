@@ -48,13 +48,12 @@ export class ExplorerService {
 
   }
 
-  public getTopAccounts(limit: number, offset: number): Observable<AccountsResponse> {
+  public getTopAccounts = (limit: number, offset: number): Observable<AccountsResponse> => {
     return this.http.get(`${CONFIG.API}/getTopAccounts?limit=${limit}&offset=${offset}`)
       .map((res: Response) => res.json())
       .catch((error: any) => {
         return Observable.throw(error.json());
       });
-
   }
 
   public getTransactionsByAddress(address: any, direction: string): Observable<TransactionsResponse> {

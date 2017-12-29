@@ -9,11 +9,13 @@ import { BlockComponent } from './pages/block/block.component';
 import { ActivityGraphComponent } from './pages/activity-graph/activity-graph.component';
 import { DelegateMonitorComponent } from './pages/delegate-monitor/delegate-monitor.component';
 import { TopAccountsComponent } from './pages/top-accounts/top-accounts.component';
+import { VotersComponent } from './pages/address/voters/voters.component';
 
 const appRoutes: Routes = [
   { path: '', component: ExplorerComponent, pathMatch: 'full' },
   { path: 'blocks/:page', component: BlockListComponent },
   { path: 'address/:id', component: AddressComponent },
+  { path: 'address/:id/voters', component: VotersComponent },
   { path: 'tx/:id', component: TransactionComponent },
   { path: 'block/:id', component: BlockComponent },
   { path: 'activityGraph', component: ActivityGraphComponent },
