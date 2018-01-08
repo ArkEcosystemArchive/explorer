@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { SocketIoModule } from 'ngx-socket-io';
 import { QRCodeModule } from 'angular2-qrcode';
 import { MomentModule } from 'angular2-moment';
 import { ChartModule } from 'angular-highcharts';
@@ -23,7 +22,6 @@ import { TransactionComponent } from './pages/transaction/transaction.component'
 import { BlockComponent } from './pages/block/block.component';
 import { CurrencyService } from './shared/services/currency.service';
 import { ActivityGraphComponent } from './pages/activity-graph/activity-graph.component';
-import { SocketHeaderService, SocketGraphService, SocketMonitorService } from './shared/services/socket.service';
 import { DelegateMonitorComponent } from './pages/delegate-monitor/delegate-monitor.component';
 import { ToolsDropdownComponent } from './components/header/tools-dropdown/tools-dropdown.component';
 import { BalanceFooterComponent } from './pages/address/balance-footer/balance-footer.component';
@@ -72,7 +70,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SocketIoModule,
     QRCodeModule,
     FormsModule,
     HttpModule,
@@ -91,9 +88,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   providers: [
     CurrencyService,
     ConnectionMessageService,
-    SocketHeaderService,
-    SocketGraphService,
-    SocketMonitorService,
     ThemeService,
     LocalStorageService,
   ],

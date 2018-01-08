@@ -42,7 +42,7 @@ export class BlockComponent implements OnInit, OnDestroy {
     this.route.params.subscribe((params: Params) => {
       this._explorerService.getBlock(params['id']).subscribe(
         res => {
-          this.block = res.block;
+          this.block = res;
           this._connectionService.changeConnection(res.success);
         }
       );

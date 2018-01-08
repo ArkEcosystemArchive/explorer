@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy, HostListener, Inject  } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, HostListener, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ExplorerService } from '../../shared/services/explorer.service';
@@ -28,6 +28,7 @@ export class AddressComponent implements OnInit, OnDestroy {
   public currencyValue: number = initCurrency.value;
   public showLoader = false;
   public showBalanceFooter = false;
+  public openVoters = false;
   public supply = 0;
   public voters: Account[];
   public areVotersExpanded = false;
@@ -66,16 +67,52 @@ export class AddressComponent implements OnInit, OnDestroy {
           this.addressItem = res.account;
           this._connectionService.changeConnection(res.success);
           window.scrollTo(0, 0);
-          if (this.addressItem && this.addressItem.voters) {
-            this.voters = this.addressItem.voters.sort((one, two) => two.balance - one.balance);
-          }
+
+          this._explorerService.getDelegate(this.addressItem.publicKey).subscribe(
+            res => {
+              if (res) {
+                this.addressItem.delegate = res;
+
+                this._explorerService.getForgedByPublicKey(this.addressItem.publicKey).subscribe(
+                  res => {
+                    this.addressItem.delegate.forged = res;
+                  }
+                );
+
+                this._explorerService.getDelegateVoters(this.addressItem.publicKey).subscribe(
+                  res => {
+                    this.addressItem.voters = res
+                    this.voters = this.addressItem.voters.sort((one, two) => two.balance - one.balance);
+                  }
+                );
+              }
+            }
+          );
+
+          this._explorerService.getDelegateVotes(this._currentAddress).subscribe(
+            res => {
+              this.addressItem.votes = res;
+            }
+          );
+
+          this._explorerService.getSendByAddressCount(this._currentAddress).subscribe(
+            res => {
+              this.addressItem.outgoing_cnt = res;
+            }
+          );
+
+          this._explorerService.getReceivedByAddressCount(this._currentAddress).subscribe(
+            res => {
+              this.addressItem.incoming_cnt = res;
+            }
+          );
         }
       );
 
-      this._explorerService.getTransactionsByAddress(this._currentAddress, '').subscribe(
+      this._explorerService.getTransactionsByAddress(this._currentAddress).subscribe(
         res => {
           this._connectionService.changeConnection(res.success);
-          this.currentTransactions = res.transactions;
+          this.currentTransactions = res;
           this.showLoader = false;
         }
       );
@@ -107,15 +144,16 @@ export class AddressComponent implements OnInit, OnDestroy {
     } else {
       this.votersNumber = 1;
     }
+
   }
 
   getAllTransactions(event): void {
     this.showLoader = true;
     this.activeTab = event.target.id;
-    this._explorerService.getTransactionsByAddress(this._currentAddress, '').subscribe(
+    this._explorerService.getTransactionsByAddress(this._currentAddress).subscribe(
       res => {
         this._connectionService.changeConnection(res.success);
-        this.currentTransactions = res.transactions;
+        this.currentTransactions = res;
         this.showLoader = false;
       }
     );
@@ -124,10 +162,10 @@ export class AddressComponent implements OnInit, OnDestroy {
   getSentTransactions(event): void {
     this.showLoader = true;
     this.activeTab = event.target.id;
-    this._explorerService.getTransactionsByAddress(this._currentAddress, 'sent').subscribe(
+    this._explorerService.getSendTransactionsByAddress(this._currentAddress).subscribe(
       res => {
         this._connectionService.changeConnection(res.success);
-        this.currentTransactions = res.transactions;
+        this.currentTransactions = res;
         this.showLoader = false;
       }
     );
@@ -136,13 +174,22 @@ export class AddressComponent implements OnInit, OnDestroy {
   getReceivedTransactions(event): void {
     this.showLoader = true;
     this.activeTab = event.target.id;
-    this._explorerService.getTransactionsByAddress(this._currentAddress, 'received').subscribe(
+    this._explorerService.getReceivedTransactionsByAddress(this._currentAddress).subscribe(
       res => {
         this._connectionService.changeConnection(res.success);
-        this.currentTransactions = res.transactions;
+        this.currentTransactions = res;
         this.showLoader = false;
       }
     );
+  }
+
+  showBlock() {
+    // this.votersBlock.nativeElement.classList.toggle('open');
+    this.openVoters = !this.openVoters;
+  }
+
+  getAddressLink(id: string) {
+    return ['/address', id];
   }
 
   getVoters() {
@@ -154,4 +201,5 @@ export class AddressComponent implements OnInit, OnDestroy {
     this.supplySubscription.unsubscribe();
     this.document.body.classList.remove('extra-footer');
   }
+
 }

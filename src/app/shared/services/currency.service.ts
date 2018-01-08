@@ -3,6 +3,7 @@ import { Subject } from 'rxjs/Subject';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { CurrencyModel } from '../../models/currency.model';
+import { CONFIG } from '../../app.config';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -25,6 +26,12 @@ export class CurrencyService {
     this.supplyChosen$ = this.supplySource.asObservable();
     this.heightChosen$ = this.heightSource.asObservable();
 
+    this.getHeight().subscribe(height => {
+      this.changeHeight(height.height);
+    });
+    this.getSupply().subscribe(supply => {
+      this.changeSupply(supply.supply);
+    });
   }
 
   changeCurrency(currency: string, value: number) {
@@ -43,10 +50,21 @@ export class CurrencyService {
     this.heightSource.next(value);
   }
 
-  public getGBPprice() {
-    return this.http.get(`https://api.cryptonator.com/api/ticker/ark-gbp`)
+  getHeight(): Observable<any> {
+    return this.http.get(`${CONFIG.NODE}/blocks/getHeight`)
       .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error.json()));
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  getSupply(): Observable<any> {
+    return this.http.get(`${CONFIG.NODE}/blocks/getSupply`)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+public getPriceFor(currency: string) {
+    return this.http.get(`https://api.coinmarketcap.com/v1/ticker/ark/?convert=${currency}`)
+      .map((res: Response) => res.json()[0])
+      .catch((error: any) => Observable.throw(error.json()));
+  }
 }

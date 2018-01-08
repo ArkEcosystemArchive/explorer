@@ -64,7 +64,7 @@ export class DelegateMonitorService {
         return totals;
     }
 
-    private _getForgingStatus(delegate: any, height: number) {
+    public _getForgingStatus(delegate: any, height: number) {
         const status: any = {
             updatedAt: delegate.blocksAt
         };

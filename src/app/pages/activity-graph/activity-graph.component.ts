@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { WebsocketsService } from '../../shared/services/websockets.service';
 import { ConnectionMessageService } from '../../shared/services/connection-message.service';
 import { GraphService } from './activity-graph.service';
 import { GraphStatisticService } from './activity-statistic.service';
 import { CurrencyService } from '../../shared/services/currency.service';
+import { ExplorerService } from '../../shared/services/explorer.service';
 import { StatisticModel } from '../../models/statistic.model';
 import { SettingsModel } from '../../models/settings.model';
 import { initCurrency } from '../../shared/const/currency';
@@ -16,7 +16,7 @@ import * as Sigma from 'sigma';
   selector: 'ark-activity-graph',
   templateUrl: './activity-graph.component.html',
   styleUrls: ['./activity-graph.component.less'],
-  providers: [WebsocketsService, GraphService, GraphStatisticService]
+  providers: [GraphService, GraphStatisticService, ExplorerService]
 })
 export class ActivityGraphComponent implements OnInit, OnDestroy {
   public sigma: any;
@@ -27,9 +27,9 @@ export class ActivityGraphComponent implements OnInit, OnDestroy {
   public currencyValue: number = initCurrency.value;
   public showLoader = false;
 
+  private _timer = null;
   private subscription: Subscription;
   private curSubscription: Subscription;
-  private socket: Subscription;
 
   public renderer = {
     container: 'sigma-canvas',
@@ -37,22 +37,15 @@ export class ActivityGraphComponent implements OnInit, OnDestroy {
   };
 
   constructor(
-    private _socketService: WebsocketsService,
+    private _explorerService: ExplorerService,
     private _graph: GraphService,
     private _statistic: GraphStatisticService,
     private _currencyService: CurrencyService,
     private _connectionService: ConnectionMessageService
   ) {
-    this.socket = _socketService.getGraphData().subscribe(
-      (data: any) => {
-        this._connectionService.changeConnection(data.success);
-        if (this.sigma) {
-          _graph.refresh(this.sigma, data.block);
-          _statistic.refresh(this.sigma);
-        }
-        this.showLoader = false;
-      }
-    );
+    this.getLastBlock()
+
+    this._timer = setInterval(() => this.getLastBlock(), 8000);
 
     this.subscription = _statistic.statisticChange$.subscribe(statistic => {
       this.statistic = statistic;
@@ -82,7 +75,19 @@ export class ActivityGraphComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
     this.curSubscription.unsubscribe();
-    this.socket.unsubscribe();
+    if (this._timer) {
+      clearInterval(this._timer);
+    }
   }
 
+  private getLastBlock() {
+    this._explorerService.getLastBlock().subscribe(block => {
+        this._connectionService.changeConnection(true);
+        if (this.sigma) {
+          this._graph.refresh(this.sigma, block);
+          this._statistic.refresh(this.sigma);
+        }
+        this.showLoader = false;
+    });
+  }
 }

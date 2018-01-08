@@ -14,8 +14,15 @@ import { ThemeService } from '../../shared/services/theme.service';
   providers: [ExplorerService]
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  private _socketValue: any = null;
-  public exchangeRate: any = ticker;
+  public exchangeRate: any = {
+    'ARK': 1,
+    'BTC': 1,
+    'USD': 1,
+    'EUR': 1,
+    'GBP': 1,
+    'CNY': 1,
+    'KRW': 1,
+  };
   public headerHeight = 0;
   public headerSupply = 0;
   public headerNethash = 'Mainnet';
@@ -23,6 +30,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public headerUSD: any;
   public headerEUR: any;
   public headerGBP: any;
+  public headerCNY: any;
+  public headerKRW: any;
 
   public openMobileMenu = false;
   public searchQuery = '';
@@ -33,40 +42,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   @Output() currentCurrency: EventEmitter<string> = new EventEmitter<string>();
 
-  @Input('socketObject') set socketObject(value: any) {
-    if (value && value.status && value.ticker) {
-      this._socketValue = value;
-      this.headerHeight = value.status.height;
-      this.headerSupply = value.status.supply / 100000000;
-      this.headerBTC = value.ticker.tickers.ARK.BTC;
-      this.headerUSD = value.ticker.tickers.ARK.USD;
-      this.headerEUR = value.ticker.tickers.ARK.EUR;
-      this.exchangeRate = value.ticker.tickers.ARK;
-    } else {
-      this._socketValue = null;
-      this.exchangeRate = ticker;
-    }
-  }
-
-  get socketObject(): any {
-    return this._socketValue;
-  }
-
   constructor(
     private _explorerService: ExplorerService,
     private router: Router,
     private _currencyService: CurrencyService,
     private _connectionService: ConnectionMessageService,
     public themeService: ThemeService
-  ) {
-    this.subscription = _connectionService.connectionChange$.subscribe(connection => {
-      this.connection = connection;
-    });
-  }
+  ) {}
 
   ngOnInit() {
-    this.getGBPprice();
-    this.getExtraRates();
+    this.getHeight();
+    this.getExchangeRates();
+
+    this._timer = setInterval(() => {
+      this.getHeight();
+      this.getExchangeRates();
+    }, 60000);
   }
 
   showMobileMenu() {
@@ -77,26 +68,48 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.openMobileMenu = event ? event : false;
   }
 
-  getExtraRates() {
-    this._timer = setInterval(() => {
-      this.getGBPprice();
-    }, 5 * 60000);
-  }
-
   startSearch(event?) {
     if (event && event.keyCode !== 13) {
       return;
     }
 
-    this._explorerService.search(this.searchQuery).subscribe(
-      res => {
-        if (res.success) {
-          this.searchQuery = '';
-          this.router.navigate([`/${res.type}`, res.id]);
-          this.openMobileMenu = false;
-        }
+    this._explorerService.searchByAddress(this.searchQuery).subscribe(res => {
+      if (res.success) {
+        this.searchQuery = '';
+        this.router.navigate([`/address`, res.account.address]);
+        this.openMobileMenu = false;
       }
-    );
+    });
+
+    this._explorerService.searchByUsername(this.searchQuery).subscribe(res => {
+      if (res.success) {
+        this.searchQuery = '';
+        this.router.navigate([`/address`, res.delegate.address]);
+        this.openMobileMenu = false;
+      }
+    });
+
+    this._explorerService.getDelegate(this.searchQuery).subscribe(res => {
+      this.searchQuery = '';
+      this.router.navigate([`/address`, res.address]);
+      this.openMobileMenu = false;
+    });
+
+    this._explorerService.searchByBlockId(this.searchQuery).subscribe(res => {
+      if (res.success) {
+        this.searchQuery = '';
+        this.router.navigate([`/block`, res.block.id]);
+        this.openMobileMenu = false;
+      }
+    });
+
+    this._explorerService.searchByTransactionId(this.searchQuery).subscribe(res => {
+      if (res.success) {
+        this.searchQuery = '';
+        this.router.navigate([`/tx`, res.transaction.id]);
+        this.openMobileMenu = false;
+      }
+    });
   }
 
   ngOnDestroy() {
@@ -105,14 +118,51 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  private getGBPprice(): void {
-    this._currencyService.getGBPprice().subscribe(res => {
-      if (!res.ticker) {
-        return;
-      }
+  private getHeight() {
+    this._currencyService.getHeight().subscribe(res => {
+      if (res.success) {
+        this.headerHeight = res.height;
 
-      this.headerGBP = res.ticker.price;
+        this.getSupply();
+      }
     });
   }
 
+  private getSupply() {
+    this._currencyService.getSupply().subscribe(res => {
+      if (res.success) {
+        this.headerSupply = 125000000 + (this.headerHeight - 75600) * 2;
+      }
+  });
+  }
+
+  private getExchangeRates(): void {
+    this._currencyService.getPriceFor('USD').subscribe(res => {
+      this.headerBTC = res.price_btc;
+      this.exchangeRate.BTC = res.price_btc;
+
+      this.headerUSD = res.price_usd;
+      this.exchangeRate.USD = res.price_usd;
+    });
+
+    this._currencyService.getPriceFor('EUR').subscribe(res => {
+      this.headerEUR = res.price_eur;
+      this.exchangeRate.EUR = res.price_eur;
+    });
+
+    this._currencyService.getPriceFor('GBP').subscribe(res => {
+      this.headerGBP = res.price_gbp;
+      this.exchangeRate.GBP = res.price_gbp;
+    });
+
+    this._currencyService.getPriceFor('CNY').subscribe(res => {
+      this.headerCNY = res.price_cny;
+      this.exchangeRate.CNY = res.price_cny;
+    });
+
+    this._currencyService.getPriceFor('KRW').subscribe(res => {
+      this.headerKRW = res.price_krw;
+      this.exchangeRate.KRW = res.price_krw;
+    });
+  }
 }

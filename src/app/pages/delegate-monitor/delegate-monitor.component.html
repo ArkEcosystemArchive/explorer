@@ -3,45 +3,60 @@
         <div class="ark-section-title">{{ 'DELEGATE_MONITOR.TITLE' | translate}}</div>
         <ul class="ark-delegate-monitor">
             <li>
-                <div class="ark-title">{{ 'DELEGATE_MONITOR.MONITOR.DELEGATES_TITLE' | translate}}</div>
+                <div class="ark-title">
+                  {{ 'DELEGATE_MONITOR.MONITOR.DELEGATES_TITLE' | translate}}
+                  <div class="ark-sigma-loader ark-loader-block" *ngIf="!monitorData?.active">
+                    <div class="ark-loader-icon"></div>
+                  </div>
+                </div>
                 <div class="ark-count">
                     <span *ngIf="monitorData && monitorData.active">{{monitorData.active.totalCount}}</span>
-                    <span *ngIf="!monitorData">0</span>
+                    <span *ngIf="!monitorData?.active">0</span>
                 </div>
                 <div class="ark-info-item">
                     <span *ngIf="monitorData && monitorData.active">{{monitorData.active.delegates.length}}</span>
-                    <span *ngIf="!monitorData">0</span> {{ 'DELEGATE_MONITOR.MONITOR.ACTIVE' | translate}}
+                    <span *ngIf="!monitorData?.active">0</span> {{ 'DELEGATE_MONITOR.MONITOR.ACTIVE' | translate}}
                 </div>
                 <div class="ark-info-item">
                     <span *ngIf="monitorData && monitorData.active">{{monitorData.active.totalCount - monitorData.active.delegates.length}}</span>
-                    <span *ngIf="!monitorData">0</span> {{ 'DELEGATE_MONITOR.MONITOR.STANDBY' | translate}}
+                    <span *ngIf="!monitorData?.active">0</span> {{ 'DELEGATE_MONITOR.MONITOR.STANDBY' | translate}}
                 </div>
                 <div class="ark-gradient-border orange-gradient"></div>
             </li>
             <li>
-                <div class="ark-title">{{ 'DELEGATE_MONITOR.MONITOR.LAST_BLOCK' | translate}}</div>
+                <div class="ark-title">
+                  {{ 'DELEGATE_MONITOR.MONITOR.LAST_BLOCK' | translate}}
+                  <div class="ark-sigma-loader ark-loader-block" *ngIf="!monitorData?.lastBlock">
+                    <div class="ark-loader-icon"></div>
+                  </div>
+                </div>
                 <div class="ark-count">
-                    <span *ngIf="monitorData && monitorData.lastBlock"><a [routerLink]="getAddressLink(monitorData.lastBlock.block.delegate.address)">{{monitorData.lastBlock.block.delegate.username}}</a></span>
-                    <span *ngIf="!monitorData">N/A</span>
+                    <span *ngIf="monitorData && monitorData.lastBlock"><a [routerLink]="getAddressLink(monitorData.lastBlock.delegate.address)">{{monitorData.lastBlock.delegate.username}}</a></span>
+                    <span *ngIf="!monitorData?.lastBlock">N/A</span>
                 </div>
                 <div class="ark-info-item">
-                    <span *ngIf="monitorData && monitorData.lastBlock"><a [routerLink]="['/block', monitorData.lastBlock.block.id]">{{monitorData.lastBlock.block.id}}</a></span>
-                    <span *ngIf="!monitorData">N/A</span>
+                    <span *ngIf="monitorData && monitorData.lastBlock"><a [routerLink]="['/block', monitorData.lastBlock.id]">{{monitorData.lastBlock.id}}</a></span>
+                    <span *ngIf="!monitorData?.lastBlock">N/A</span>
                 </div>
                 <div class="ark-info-item">
-                    <span *ngIf="monitorData && monitorData.lastBlock">{{(+monitorData.lastBlock.block.totalForged/100000000)*currencyValue | number: '1.0-2'}}</span>
-                    <span *ngIf="!monitorData">0</span> {{currencyName}} {{ 'DELEGATE_MONITOR.MONITOR.FORGED_FROM' | translate}}
-                    <span *ngIf="monitorData && monitorData.lastBlock">{{monitorData.lastBlock.block.numberOfTransactions}}</span>
-                    <span *ngIf="!monitorData">0</span> {{ 'DELEGATE_MONITOR.MONITOR.TRANSACTIONS' | translate}}
+                    <span *ngIf="monitorData && monitorData.lastBlock">{{(+monitorData.lastBlock.totalForged/100000000)*currencyValue | number: '1.0-2'}}</span>
+                    <span *ngIf="!monitorData?.lastBlock">0</span> {{currencyName}} {{ 'DELEGATE_MONITOR.MONITOR.FORGED_FROM' | translate}}
+                    <span *ngIf="monitorData && monitorData.lastBlock">{{monitorData.lastBlock.numberOfTransactions}}</span>
+                    <span *ngIf="!monitorData?.lastBlock">0</span> {{ 'DELEGATE_MONITOR.MONITOR.TRANSACTIONS' | translate}}
                 </div>
                 <div class="ark-gradient-border cyan-gradient"></div>
             </li>
             <li>
-                <div class="ark-title">{{ 'DELEGATE_MONITOR.MONITOR.NEXT_FORGERS' | translate}}</div>
+                <div class="ark-title">
+                  {{ 'DELEGATE_MONITOR.MONITOR.NEXT_FORGERS' | translate}}
+                  <div class="ark-sigma-loader ark-loader-block" *ngIf="!monitorData?.nextForgers">
+                    <div class="ark-loader-icon"></div>
+                  </div>
+                </div>
                 <div class="ark-count" *ngIf="monitorData && monitorData.nextForgers">
                     <a [routerLink]="getAddressLink(monitorData.nextForgers[0].address)">{{monitorData.nextForgers[0].username}}</a>
                 </div>
-                <div class="ark-message" *ngIf="!monitorData">{{ 'DELEGATE_MONITOR.MONITOR.WAITING' | translate}}</div>
+                <div class="ark-message" *ngIf="!monitorData?.nextForgers">{{ 'DELEGATE_MONITOR.MONITOR.WAITING' | translate}}</div>
                 <div class="ark-info-item" *ngIf="monitorData && monitorData.nextForgers">
                     <span *ngFor="let item of monitorData.nextForgers; let i = index;">
                         <a [routerLink]="getAddressLink(item.address)">{{item.username}}</a>
@@ -51,13 +66,23 @@
                 <div class="ark-gradient-border green-gradient"></div>
             </li>
             <li>
-                <div class="ark-title">{{ 'GENERAL.INFO.TOTAL_FORGED' | translate }} <span class="opacity">({{currencyName}})</span></div>
+                <div class="ark-title">
+                  {{ 'GENERAL.INFO.TOTAL_FORGED' | translate }} <span class="opacity">({{currencyName}})</span>
+                  <div class="ark-sigma-loader ark-loader-block" *ngIf="!monitorData?.active">
+                    <div class="ark-loader-icon"></div>
+                  </div>
+                </div>
                 <div class="ark-count">{{(totalForged/100000000)*currencyValue | number: '1.2-2'}}</div>
-                <div class="ark-info-item">{{ 'GENERAL.BETWEEN' | translate }} <span *ngIf="monitorData && monitorData.active">{{monitorData.active.delegates.length}}</span><span *ngIf="!monitorData">0</span> {{ 'DELEGATE_MONITOR.MONITOR.ACTIVE' | translate }}</div>
+                <div class="ark-info-item">{{ 'GENERAL.BETWEEN' | translate }} <span *ngIf="monitorData && monitorData.active">{{monitorData.active.delegates.length}}</span><span *ngIf="!monitorData?.active">0</span> {{ 'DELEGATE_MONITOR.MONITOR.ACTIVE' | translate }}</div>
                 <div class="ark-gradient-border magenta-gradient"></div>
             </li>
             <li>
-                <div class="ark-title">{{ 'DELEGATE_MONITOR.MONITOR.BEST_FORGER' | translate }}</div>
+                <div class="ark-title">
+                  {{ 'DELEGATE_MONITOR.MONITOR.BEST_FORGER' | translate }}
+                  <div class="ark-sigma-loader ark-loader-block" *ngIf="!bestForger">
+                    <div class="ark-loader-icon"></div>
+                  </div>
+                </div>
                 <div class="ark-count">
                     <span *ngIf="bestForger"><a [routerLink]="getAddressLink(bestForger.address)">{{bestForger.username}}</a></span>
                     <span *ngIf="!bestForger">N/A</span>
@@ -69,7 +94,12 @@
                 <div class="ark-gradient-border darkblue-gradient"></div>
             </li>
             <li>
-                <div class="ark-title">{{ 'DELEGATE_MONITOR.MONITOR.BEST_PRODUCTIVITY' | translate }}</div>
+                <div class="ark-title">
+                  {{ 'DELEGATE_MONITOR.MONITOR.BEST_PRODUCTIVITY' | translate }}
+                  <div class="ark-sigma-loader ark-loader-block" *ngIf="!productivity">
+                    <div class="ark-loader-icon"></div>
+                  </div>
+                </div>
                 <div class="ark-count">
                     <span *ngIf="productivity">{{productivity.best.productivity}}%</span>
                     <span *ngIf="!productivity">0%</span>
@@ -81,7 +111,12 @@
                 <div class="ark-gradient-border blue-gradient"></div>
             </li>
             <li>
-                <div class="ark-title">{{ 'DELEGATE_MONITOR.MONITOR.WORST_PRODUCTIVITY' | translate }}</div>
+                <div class="ark-title">
+                  {{ 'DELEGATE_MONITOR.MONITOR.WORST_PRODUCTIVITY' | translate }}
+                  <div class="ark-sigma-loader ark-loader-block" *ngIf="!productivity">
+                    <div class="ark-loader-icon"></div>
+                  </div>
+                </div>
                 <div class="ark-count">
                     <span *ngIf="productivity">{{productivity.worst.productivity}}%</span>
                     <span *ngIf="!productivity">0%</span>
@@ -93,9 +128,15 @@
                 <div class="ark-gradient-border pink-gradient"></div>
             </li>
             <li>
-                <div class="ark-title">{{ 'GENERAL.INFO.TOTAL_FORGED' | translate }} ({{currencyName}})</div>
+                <div class="ark-title">
+                  {{ 'GENERAL.INFO.TOTAL_FORGED' | translate }} ({{currencyName}})
+                  <div class="ark-sigma-loader ark-loader-block" *ngIf="!supply">
+                    <div class="ark-loader-icon"></div>
+                  </div>
+                </div>
                 <div class="ark-count">
-                    <span *ngIf="supply">{{(+supply/100000000 - 125000000)*currencyValue | number: '1.2-2'}}</span>
+                    <span *ngIf="supply">{{ ((height - 75600) * 2)*currencyValue | number: '1.2-2'}}</span>
+                    <!-- <span *ngIf="supply">{{(+supply/100000000 - 125000000)*currencyValue | number: '1.2-2'}}</span> -->
                     <span *ngIf="!supply">0.00</span>
                 </div>
                 <div class="ark-info-item">{{ 'DELEGATE_MONITOR.MONITOR.FROM_START' | translate }}</div>
@@ -120,7 +161,7 @@
                         </tr>
                     </thead>
                     <tbody *ngIf="monitorData && monitorData.votes">
-                        <tr *ngFor="let item of monitorData.votes.transactions">
+                        <tr *ngFor="let item of monitorData.votes">
                             <td class="ellipsis width-15"><a [routerLink]="getAddressLink(item.senderId)">{{item.senderId | overflowText}}</a></td>
                             <td class="ellipsis width-15"><a [routerLink]="getTransactionLink(item.id)">{{item.id | overflowText}}</a></td>
                             <td class="ellipsis width-15">{{item.timestamp | localDate | amTimeAgo}}</td>
@@ -145,8 +186,8 @@
                         </tr>
                     </thead>
                     <tbody *ngIf="monitorData && monitorData.registrations">
-                        <tr *ngFor="let item of monitorData.registrations.transactions">
-                            <td class="ellipsis width-10"><a [routerLink]="getAddressLink(item.delegate.address)">{{item.delegate.username}}</a></td>
+                        <tr *ngFor="let item of monitorData.registrations">
+                            <td class="ellipsis width-10"><a [routerLink]="getAddressLink(item.asset.delegate.address)">{{item.asset.delegate.username}}</a></td>
                             <td class="ellipsis width-15"><a [routerLink]="getTransactionLink(item.id)">{{item.id | overflowText}}</a></td>
                             <td class="ellipsis width-15">{{item.timestamp | localDate | amTimeAgo}}</td>
                             <td></td>
@@ -198,7 +239,10 @@
                 </ul>
             </div>
             <ark-delegates [list]="delegatesList" [active]="activeDelegate" [curValue]="currencyValue" [curName]="currencyName"></ark-delegates>
-            <div class="monitor-loading" *ngIf="!delegatesList"><span>{{ 'DELEGATE_MONITOR.WAITING' | translate}}</span> </div>
+            <div class="ark-sigma-loader ark-loader-block" *ngIf="!delegatesList.length">
+              <div class="ark-loader-icon"></div>
+              <p>{{ 'GENERAL.LOADING' | translate }}...</p>
+            </div>
         </div>
     </div>
 </section>

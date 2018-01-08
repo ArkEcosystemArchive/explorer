@@ -17,8 +17,8 @@ import { Subscription } from 'rxjs/Subscription';
   providers: [ExplorerService, CoinmarketService]
 })
 export class ExplorerComponent implements OnInit, OnDestroy {
-  public transactions: Transaction[];
-  public blocks: Block[];
+  public transactions: any[];
+  public blocks: any[];
   public chart: any;
   public isChartVisible: boolean;
   public currency: string = initCurrency.name;
@@ -52,43 +52,19 @@ export class ExplorerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window.scrollTo(0, 0);
+
     this.showTransactionLoader = true;
     this.showBlockLoader = true;
-    this._explorerService.getLastTransactions().subscribe(
-      res => {
-        this.transactions = res.transactions;
-        this._connectionService.changeConnection(res.success);
-        this.showTransactionLoader = !res.success;
-      }
-    );
 
-    this._explorerService.getLastBlocks().subscribe(
-      res => {
-        this.blocks = res.blocks;
-        this._connectionService.changeConnection(res.success);
-        this.showBlockLoader = !res.success;
-      }
-    );
-    this._marketService.build(this.activeChartTab);
-    this.getNewData();
-  }
+    this.getLastTransactions();
+    this.getLastBlocks();
 
-  getNewData() {
     this._timer = setInterval(() => {
-      this._explorerService.getLastTransactions().subscribe(
-        res => {
-          this.transactions = res.transactions;
-          this._connectionService.changeConnection(res.success);
-        }
-      );
+      this.getLastTransactions();
+      this.getLastBlocks();
+    }, 60000);
 
-      this._explorerService.getLastBlocks().subscribe(
-        res => {
-          this.blocks = res.blocks;
-          this._connectionService.changeConnection(res.success);
-        }
-      );
-    }, 10000);
+    this._marketService.build(this.activeChartTab);
   }
 
   updateChart(event) {
@@ -109,4 +85,23 @@ export class ExplorerComponent implements OnInit, OnDestroy {
     }
   }
 
+  private getLastTransactions() {
+    this._explorerService.getLastTransactions().subscribe(
+      res => {
+        this.transactions = res;
+        this._connectionService.changeConnection(true);
+        this.showTransactionLoader = false;
+      }
+    );
+  }
+
+  private getLastBlocks() {
+    this._explorerService.getLastBlocks(0).subscribe(
+      res => {
+        this.blocks = res.blocks;
+        this._connectionService.changeConnection(true);
+        this.showBlockLoader = false;
+      }
+    );
+  }
 }

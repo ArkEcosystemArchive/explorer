@@ -49,8 +49,9 @@ export class BlockListComponent implements OnInit, OnDestroy {
         res => {
           this.blocks = res.blocks;
           this.pagination = res.pagination;
-          this._connectionService.changeConnection(res.success);
-          this.showLoader = !res.success;
+          // this._connectionService.changeConnection(res.success);
+          this.showLoader = false;
+          // this.showLoader = !res.success;
         }
       );
     });

@@ -40,8 +40,8 @@ export class TransactionComponent implements OnInit, OnDestroy {
     this.route.params.subscribe((params: Params) => {
       this._explorerService.getTransaction(params['id']).subscribe(
         res => {
-          this.transaction = res.transaction;
-          this._connectionService.changeConnection(res.success);
+          this.transaction = res;
+          this._connectionService.changeConnection(true);
         }
       );
     });

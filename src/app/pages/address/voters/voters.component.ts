@@ -26,18 +26,25 @@ export class VotersComponent implements OnInit {
       const currentAddress = params['id'];
 
       this._explorerService.getAccount(currentAddress).subscribe(res => {
-          this.account = res.account;
-          if (!this.account.voters) {
-            this.account.voters = [];
-          }
+        this.account = res.account
 
-          this.voters = this.account.voters.sort((one, two) => two.balance - one.balance);
-          this.totalVoteBalance = this.voters.reduce((pv, nv) => Number(pv) + Number(nv.balance), 0);
-          // set to false and then to true again, so the address table is re-rendered
-          this.areVotersVisible = false;
-          window.setTimeout(() => this.areVotersVisible = true);
-        }
-      );
+        this._explorerService.getDelegate(this.account.publicKey).subscribe(res => {
+          this.account.delegate = res
+
+          this._explorerService.getDelegateVoters(this.account.publicKey).subscribe(res => {
+            this.account.voters = res
+            if (!this.account.voters) {
+              this.account.voters = [];
+            }
+
+            this.voters = this.account.voters.sort((one, two) => two.balance - one.balance);
+            this.totalVoteBalance = this.voters.reduce((pv, nv) => Number(pv) + Number(nv.balance), 0);
+            // set to false and then to true again, so the address table is re-rendered
+            this.areVotersVisible = false;
+            window.setTimeout(() => this.areVotersVisible = true);
+          });
+        });
+      });
     });
   }
 
