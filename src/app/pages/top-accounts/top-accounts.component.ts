@@ -20,7 +20,7 @@ export class TopAccountsComponent implements OnInit, OnDestroy {
   public currencyValue: number = initCurrency.value;
   public supply = 0;
   public showLoader = false;
-  public known = CONFIG.KNOWN_ADDRESSES;
+  public known = {};
   public delegates = {};
 
   private subscription: Subscription;
@@ -33,6 +33,8 @@ export class TopAccountsComponent implements OnInit, OnDestroy {
     private _currencyService: CurrencyService,
     private _connectionService: ConnectionMessageService
   ) {
+    this.known = CONFIG.NETWORKS[CONFIG.NETWORK].KNOWN_ADDRESSES;
+
     this.subscription = _currencyService.currencyChosen$.subscribe(currency => {
       this.currencyName = currency.name;
       this.currencyValue = currency.value;

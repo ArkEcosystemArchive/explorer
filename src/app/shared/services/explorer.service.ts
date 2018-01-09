@@ -17,9 +17,13 @@ export class ExplorerService {
   private static _delegateTimer = null;
   private static _delegates: Subject<Delegate[]> = new BehaviorSubject({});
 
+  private _network: any = {};
+
   constructor(
     private http: Http
   ) {
+    this._network = CONFIG.NETWORKS[CONFIG.NETWORK];
+
     this.startDelegateMonitor();
   }
 
@@ -43,7 +47,7 @@ export class ExplorerService {
   public getLastTransactions(): Observable<any> {
     let lastTransactions = [];
 
-    return this.http.get(`${CONFIG.NODE}/transactions?orderBy=timestamp:desc&limit=20`)
+    return this.http.get(`${this._network.NODE}/transactions?orderBy=timestamp:desc&limit=20`)
       .map((res: any) => res.json().transactions)
       .flatMap((transactions: any) => {
         lastTransactions = transactions;
@@ -71,7 +75,7 @@ export class ExplorerService {
   // public getLastBlocks(n?: number): Observable<BlocksResponse> {
   public getLastBlocks(offset?: number): Observable<any> {
     let lastBlocks = [];
-    return this.http.get(`${CONFIG.NODE}/blocks?orderBy=height:desc&limit=20&offset=${offset}`)
+    return this.http.get(`${this._network.NODE}/blocks?orderBy=height:desc&limit=20&offset=${offset}`)
       .map((res: any) => res.json().blocks)
       .flatMap((blocks: any) => {
 
@@ -125,12 +129,12 @@ export class ExplorerService {
 
   // public getAccount(address: any): Observable<AccountResponse> {
   public getAccount(address: any): Observable<any> {
-    return this.http.get(`${CONFIG.NODE}/accounts?address=${address}`)
+    return this.http.get(`${this._network.NODE}/accounts?address=${address}`)
       .map((res: Response) => res.json());
   }
 
   public getTopAccounts(limit: number, offset: number): Observable<AccountsResponse> {
-    return this.http.get(`${CONFIG.NODE}/accounts/top?limit=${limit}&offset=${offset}`)
+    return this.http.get(`${this._network.NODE}/accounts/top?limit=${limit}&offset=${offset}`)
       .map((res: Response) => res.json());
 
   }
@@ -138,7 +142,7 @@ export class ExplorerService {
   public getTransactionsByAddress(address: any): Observable<any> {
     let transactions = [];
 
-    return this.http.get(`${CONFIG.NODE}/transactions?senderId=${address}&recipientId=${address}&limit=50&offset=0&orderBy=timestamp:desc`)
+    return this.http.get(`${this._network.NODE}/transactions?senderId=${address}&recipientId=${address}&limit=50&offset=0&orderBy=timestamp:desc`)
       .flatMap((res: any) => {
         transactions = res.json().transactions;
 
@@ -165,7 +169,7 @@ export class ExplorerService {
   public getSendTransactionsByAddress(address: any): Observable<any> {
     let transactions = [];
 
-    return this.http.get(`${CONFIG.NODE}/transactions?senderId=${address}&limit=50&offset=0&orderBy=timestamp:desc`)
+    return this.http.get(`${this._network.NODE}/transactions?senderId=${address}&limit=50&offset=0&orderBy=timestamp:desc`)
       .flatMap((res: any) => {
         transactions = res.json().transactions;
 
@@ -192,7 +196,7 @@ export class ExplorerService {
   public getReceivedTransactionsByAddress(address: any): Observable<any> {
     let transactions = [];
 
-    return this.http.get(`${CONFIG.NODE}/transactions?recipientId=${address}&limit=50&offset=0&orderBy=timestamp:desc`)
+    return this.http.get(`${this._network.NODE}/transactions?recipientId=${address}&limit=50&offset=0&orderBy=timestamp:desc`)
       .flatMap((res: any) => {
         transactions = res.json().transactions;
 
@@ -217,7 +221,7 @@ export class ExplorerService {
   }
 
   public getTransaction(id: any): Observable<any> {
-    return this.http.get(`${CONFIG.NODE}/transactions/get?id=${id}`)
+    return this.http.get(`${this._network.NODE}/transactions/get?id=${id}`)
       .map((res: Response) => {
         const transaction = res.json().transaction;
 
@@ -231,19 +235,19 @@ export class ExplorerService {
 
   public getSendByAddressCount(address: string): Observable<any> {
     return this.http
-      .get(`${CONFIG.NODE}/transactions?senderId=${address}&limit=1`)
+      .get(`${this._network.NODE}/transactions?senderId=${address}&limit=1`)
       .map((res: Response) => (res.json().count))
   }
 
   public getReceivedByAddressCount(address: string): Observable<any> {
     return this.http
-      .get(`${CONFIG.NODE}/transactions?recipientId=${address}&limit=1`)
+      .get(`${this._network.NODE}/transactions?recipientId=${address}&limit=1`)
       .map((res: Response) => (res.json().count))
   }
 
   // public getBlock(id: any): Observable<BlockResponse> {
   public getBlock(id: any): Observable<any> {
-    return this.http.get(`${CONFIG.NODE}/blocks/get?id=${id}`)
+    return this.http.get(`${this._network.NODE}/blocks/get?id=${id}`)
       .map((res: any) => res.json().block)
       .flatMap((block: any) => {
         return this.getDelegate(block.generatorPublicKey)
@@ -255,7 +259,7 @@ export class ExplorerService {
   }
 
   public getTransactionsByBlock(id: any): Observable<TransactionsResponse> {
-    return this.http.get(`${CONFIG.NODE}/transactions?blockId=${id}&limit=50&offset=0`)
+    return this.http.get(`${this._network.NODE}/transactions?blockId=${id}&limit=50&offset=0`)
       .map((res: Response) => res.json());
   }
 
@@ -276,19 +280,19 @@ export class ExplorerService {
   }
 
   public getDelegateVotes(address: string) {
-    return this.http.get(`${CONFIG.NODE}/accounts/delegates?address=${address}`)
+    return this.http.get(`${this._network.NODE}/accounts/delegates?address=${address}`)
       .map((res: Response) => res.json().delegates);
   }
 
   public getDelegateVoters(publickey: string) {
-    return this.http.get(`${CONFIG.NODE}/delegates/voters?publicKey=${publickey}`)
+    return this.http.get(`${this._network.NODE}/delegates/voters?publicKey=${publickey}`)
       .map((res: Response) => res.json().accounts);
   }
 
   // monitor
   public getStandby(n: number): Observable<any> {
     // return this.http.get(`${CONFIG.API}/delegates/getStandby?n=${n}`)
-    return this.http.get(`${CONFIG.NODE}/delegates?offset=51`)
+    return this.http.get(`${this._network.NODE}/delegates?offset=51`)
       .map((res: Response) => res.json());
   }
 
@@ -300,7 +304,7 @@ public getActiveDelegates(nextForgers, blocks): Observable<any> {
     let totalCount = null;
     let activeDelegates = null;
 
-    return this.http.get(`${CONFIG.NODE}/delegates/?orderBy=rate:asc&limit=51`)
+    return this.http.get(`${this._network.NODE}/delegates/?orderBy=rate:asc&limit=51`)
       .map((res: any) => res.json())
       // get forged for each delegate
       .flatMap((res: any) => {
@@ -311,7 +315,7 @@ public getActiveDelegates(nextForgers, blocks): Observable<any> {
 
         activeDelegates.forEach(delegate => {
           requests.push(
-            this.http.get(`${CONFIG.NODE}/delegates/forging/getForgedByAccount?generatorPublicKey=${delegate.publicKey}`)
+            this.http.get(`${this._network.NODE}/delegates/forging/getForgedByAccount?generatorPublicKey=${delegate.publicKey}`)
           );
         });
 
@@ -361,7 +365,7 @@ public getActiveDelegates(nextForgers, blocks): Observable<any> {
       return Observable.of(lastBlock);
     } else {
       return this.http
-        .get(`${CONFIG.NODE}/blocks?orderBy=height:desc&limit=1&generatorPublicKey=${publicKey}`)
+        .get(`${this._network.NODE}/blocks?orderBy=height:desc&limit=1&generatorPublicKey=${publicKey}`)
         .map((res: any) => res.json().blocks[0]);
     }
   }
@@ -369,18 +373,18 @@ public getActiveDelegates(nextForgers, blocks): Observable<any> {
   public getForgedByPublicKey(publicKey): Observable<any>
   {
     return this.http
-      .get(`${CONFIG.NODE}/delegates/forging/getForgedByAccount?generatorPublicKey=${publicKey}`)
+      .get(`${this._network.NODE}/delegates/forging/getForgedByAccount?generatorPublicKey=${publicKey}`)
       .map((res: any) => res.json().forged);
   }
 
   public getLatestBlocks(): Observable<any> {
-    return this.http.get(`${CONFIG.NODE}/blocks?orderBy=height:desc&limit=51`)
+    return this.http.get(`${this._network.NODE}/blocks?orderBy=height:desc&limit=51`)
       .map((res: any) => res.json().blocks)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   public getLastBlock(): Observable<any> {
-    return this.http.get(`${CONFIG.NODE}/blocks?orderBy=height:desc&limit=1`)
+    return this.http.get(`${this._network.NODE}/blocks?orderBy=height:desc&limit=1`)
       .map((res: any) => res.json().blocks[0])
       .flatMap((block: any) => {
         return this.getDelegate(block.generatorPublicKey)
@@ -393,7 +397,7 @@ public getActiveDelegates(nextForgers, blocks): Observable<any> {
   }
 
   public getNextForgers(): Observable<any> {
-    return this.http.get(`${CONFIG.NODE}/delegates/getNextForgers?limit=51`)
+    return this.http.get(`${this._network.NODE}/delegates/getNextForgers?limit=51`)
       .map((res: any) => res.json().delegates)
       .flatMap((delegates: any) => {
         const requests = [];
@@ -411,13 +415,13 @@ public getActiveDelegates(nextForgers, blocks): Observable<any> {
   }
 
   public getLatestRegistrations(): Observable<any> {
-    return this.http.get(`${CONFIG.NODE}/transactions/?orderBy=timestamp:desc&limit=5&type=2`)
+    return this.http.get(`${this._network.NODE}/transactions/?orderBy=timestamp:desc&limit=5&type=2`)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   public getLatestVotes(): Observable<any> {
-    return this.http.get(`${CONFIG.NODE}/transactions/?orderBy=timestamp:desc&limit=5&type=3`)
+    return this.http.get(`${this._network.NODE}/transactions/?orderBy=timestamp:desc&limit=5&type=3`)
       .map((res: Response) => {
         return res.json();
       })
@@ -429,7 +433,7 @@ public getActiveDelegates(nextForgers, blocks): Observable<any> {
   }
 
   private _getDelegatesByPublicKey(): Observable<any> {
-    return this.http.get(`${CONFIG.NODE}/delegates?limit=51`)
+    return this.http.get(`${this._network.NODE}/delegates?limit=51`)
       .map((res: any) => res.json())
       .flatMap((res: any) => {
         const requests = [];
@@ -440,7 +444,7 @@ public getActiveDelegates(nextForgers, blocks): Observable<any> {
           index++
         ) {
           requests.push(
-            this.http.get(`${CONFIG.NODE}/delegates?limit=51&offset=${index * 51}`)
+            this.http.get(`${this._network.NODE}/delegates?limit=51&offset=${index * 51}`)
           );
         }
 
@@ -465,22 +469,22 @@ public getActiveDelegates(nextForgers, blocks): Observable<any> {
   }
 
   public searchByAddress(value: string): Observable<any> {
-    return this.http.get(`${CONFIG.NODE}/accounts?address=${value}`)
+    return this.http.get(`${this._network.NODE}/accounts?address=${value}`)
       .map((res: Response) => res.json());
   }
 
   public searchByUsername(value: string): Observable<any> {
-    return this.http.get(`${CONFIG.NODE}/delegates/get?username=${value}`)
+    return this.http.get(`${this._network.NODE}/delegates/get?username=${value}`)
       .map((res: Response) => res.json());
   }
 
   public searchByBlockId(value: string): Observable<any> {
-    return this.http.get(`${CONFIG.NODE}/blocks/get?id=${value}`)
+    return this.http.get(`${this._network.NODE}/blocks/get?id=${value}`)
       .map((res: Response) => res.json());
   }
 
   public searchByTransactionId(value: string): Observable<any> {
-    return this.http.get(`${CONFIG.NODE}/transactions/get?id=${value}`)
+    return this.http.get(`${this._network.NODE}/transactions/get?id=${value}`)
       .map((res: Response) => res.json());
   }
 }

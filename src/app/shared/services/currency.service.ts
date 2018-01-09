@@ -15,6 +15,8 @@ export class CurrencyService {
   private supplySource = new Subject<number>();
   private heightSource = new Subject<number>();
 
+  private _network: any = {};
+
   currencyChosen$: Observable<CurrencyModel>;
   supplyChosen$: Observable<number>;
   heightChosen$: Observable<number>;
@@ -22,6 +24,8 @@ export class CurrencyService {
   constructor(
     private http: Http
   ) {
+    this._network = CONFIG.NETWORKS[CONFIG.NETWORK];
+
     this.currencyChosen$ = this.currencySource.asObservable();
     this.supplyChosen$ = this.supplySource.asObservable();
     this.heightChosen$ = this.heightSource.asObservable();
@@ -51,13 +55,13 @@ export class CurrencyService {
   }
 
   getHeight(): Observable<any> {
-    return this.http.get(`${CONFIG.NODE}/blocks/getHeight`)
+    return this.http.get(`${this._network.NODE}/blocks/getHeight`)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   getSupply(): Observable<any> {
-    return this.http.get(`${CONFIG.NODE}/blocks/getSupply`)
+    return this.http.get(`${this._network.NODE}/blocks/getSupply`)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
