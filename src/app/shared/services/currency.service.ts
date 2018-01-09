@@ -15,7 +15,7 @@ export class CurrencyService {
   private supplySource = new Subject<number>();
   private heightSource = new Subject<number>();
 
-  private _network: any = {};
+  private _network: any = CONFIG.NETWORKS[CONFIG.NETWORK];
 
   currencyChosen$: Observable<CurrencyModel>;
   supplyChosen$: Observable<number>;
@@ -24,8 +24,6 @@ export class CurrencyService {
   constructor(
     private http: Http
   ) {
-    this._network = CONFIG.NETWORKS[CONFIG.NETWORK];
-
     this.currencyChosen$ = this.currencySource.asObservable();
     this.supplyChosen$ = this.supplySource.asObservable();
     this.heightChosen$ = this.heightSource.asObservable();
@@ -63,10 +61,13 @@ export class CurrencyService {
   getSupply(): Observable<any> {
     return this.http.get(`${this._network.NODE}/blocks/getSupply`)
       .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
-public getPriceFor(currency: string) {
+  public getPriceFor(currency: string) {
+    if (this._network.PROPERTIES.indexOf('DISABLE_PRICE_API') !== -1) {
+      return Observable.of(false);
+    }
     return this.http.get(`https://api.coinmarketcap.com/v1/ticker/ark/?convert=${currency}`)
       .map((res: Response) => res.json()[0])
       .catch((error: any) => Observable.throw(error.json()));
