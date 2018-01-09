@@ -18,6 +18,16 @@ export class ExplorerService {
   private static _delegates: Subject<Delegate[]> = new BehaviorSubject({});
 
   private _network: any = {};
+  private _updateForgedBlockFreqMS = 440000;
+
+  private _delegateLastForgedData = {
+    lastUpdated: new Date(0),
+    data: [],
+  };
+  private _delegateLastBlockData = {
+    lastUpdated: new Date(0),
+    data: [],
+  };
 
   constructor(
     private http: Http
@@ -300,7 +310,7 @@ export class ExplorerService {
   // WEBSOCKET REPLACEMENT - JUST KEEP IT RUNNING!
   //
 
-public getActiveDelegates(nextForgers, blocks): Observable<any> {
+  public getActiveDelegates(nextForgers, blocks): Observable<any> {
     let totalCount = null;
     let activeDelegates = null;
 
@@ -311,17 +321,31 @@ public getActiveDelegates(nextForgers, blocks): Observable<any> {
         totalCount = res.totalCount;
         activeDelegates = res.delegates;
 
-        const requests = [];
+        let requests = this._delegateLastForgedData.data;
+        let now = new Date();
+        let lastUpdatedDiff = Math.abs(this._delegateLastForgedData.lastUpdated.getTime() - now.getTime());
+        if (lastUpdatedDiff > this._updateForgedBlockFreqMS) {
+          requests = [];
+          activeDelegates.forEach(delegate => {
+            requests.push(
+              this.http.get(`${this._network.NODE}/delegates/forging/getForgedByAccount?generatorPublicKey=${delegate.publicKey}`)
+            );
+          });
+          this._delegateLastForgedData.lastUpdated = now;
+        } else {
+          requests = requests.map((response) => {
+            if (response.constructor.name === 'Response') {
+              return Observable.of(response);
+            }
 
-        activeDelegates.forEach(delegate => {
-          requests.push(
-            this.http.get(`${this._network.NODE}/delegates/forging/getForgedByAccount?generatorPublicKey=${delegate.publicKey}`)
-          );
-        });
+            return response;
+          });
+        }
 
         return Observable.forkJoin(requests);
       })
       .map((requests: any) => {
+        this._delegateLastForgedData.data = requests;
         return requests.map(res => {
           const item = activeDelegates.filter(
             delegate => (delegate.publicKey === res.url.slice(-66))
@@ -333,22 +357,39 @@ public getActiveDelegates(nextForgers, blocks): Observable<any> {
         });
       })
       .flatMap(delegates => {
-        return Observable.forkJoin(delegates.map(delegate => {
-          return this
-          .getLastBlockByPublicKey(delegate.publicKey, blocks)
-          .map((lastBlock: any) => {
-            delegate.blocks = [lastBlock];
-            delegate.blocksAt = lastBlock.timestamp;
+        let blockData = this._delegateLastBlockData.data;
+        let now = new Date();
+        let lastUpdatedDiff = Math.abs(this._delegateLastBlockData.lastUpdated.getTime() - now.getTime());
+        if (lastUpdatedDiff > this._updateForgedBlockFreqMS) {
+          blockData = delegates.map(delegate => {
+            return this
+            .getLastBlockByPublicKey(delegate.publicKey, blocks)
+            .map((lastBlock: any) => {
+              delegate.blocks = [lastBlock];
+              delegate.blocksAt = lastBlock.timestamp;
 
-            const delegateIndex = nextForgers.findIndex(d => d.publicKey === delegate.publicKey);
-            delegate.forgingTime = delegateIndex * 8;
-            delegate.isRoundDelegate = delegateIndex !== -1;
+              const delegateIndex = nextForgers.findIndex(d => d.publicKey === delegate.publicKey);
+              delegate.forgingTime = delegateIndex * 8;
+              delegate.isRoundDelegate = delegateIndex !== -1;
+
+              return delegate;
+            });
+          });
+          this._delegateLastBlockData.lastUpdated = now;
+        } else {
+          blockData = blockData.map((delegate) => {
+            if (delegate.constructor.name !== 'Observable') {
+              return Observable.of(delegate);
+            }
 
             return delegate;
           });
-        }));
+        }
+
+        return Observable.forkJoin(blockData);
       })
       .map(delegates => {
+        this._delegateLastBlockData.data = delegates;
         return {
           delegates: delegates,
           totalCount: totalCount,
