@@ -6,6 +6,7 @@ import { CurrencyService } from '../../shared/services/currency.service';
 import { ConnectionMessageService } from '../../shared/services/connection-message.service';
 import { ticker } from '../../shared/const/currency';
 import { ThemeService } from '../../shared/services/theme.service';
+import { CONFIG } from '../../app.config';
 
 @Component({
   selector: 'ark-header',
@@ -14,30 +15,17 @@ import { ThemeService } from '../../shared/services/theme.service';
   providers: [ExplorerService]
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  public exchangeRate: any = {
-    'ARK': 1,
-    'BTC': 1,
-    'USD': 1,
-    'EUR': 1,
-    'GBP': 1,
-    'CNY': 1,
-    'KRW': 1,
-  };
   public headerHeight = 0;
   public headerSupply = 0;
-  public headerNethash = 'Mainnet';
-  public headerBTC: any;
-  public headerUSD: any;
-  public headerEUR: any;
-  public headerGBP: any;
-  public headerCNY: any;
-  public headerKRW: any;
+  public headerNethash = CONFIG.NETWORK.toLowerCase();
+  public exchangeRate = {};
 
   public openMobileMenu = false;
   public searchQuery = '';
   public connection = true;
 
   private _timer: any = null;
+  private _network: any = CONFIG.NETWORKS[CONFIG.NETWORK];
   private subscription: Subscription;
 
   @Output() currentCurrency: EventEmitter<string> = new EventEmitter<string>();
@@ -136,33 +124,32 @@ export class HeaderComponent implements OnInit, OnDestroy {
   });
   }
 
+  public get currencies() {
+    return Object.keys(this.exchangeRate).map((key, index) => {
+      return {
+        name: key,
+        value: this.exchangeRate[key],
+      };
+    }).filter((currency) => {
+      return currency.name !== 'ARK' && currency.name !== 'DARK';
+    });
+  }
+
   private getExchangeRates(): void {
-    this._currencyService.getPriceFor('USD').subscribe(res => {
-      this.headerBTC = res.price_btc;
-      this.exchangeRate.BTC = res.price_btc;
+    let exchangeRate = {};
+    for (let currency of this._network.CURRENCIES) {
+      if (currency === 'USD') {
+        this.exchangeRate['BTC'] = null;
+      }
+      this.exchangeRate[currency] = null;
 
-      this.headerUSD = res.price_usd;
-      this.exchangeRate.USD = res.price_usd;
-    });
+      this._currencyService.getPriceFor(currency).subscribe(res => {
+        if (currency === 'USD') {
+          this.exchangeRate['BTC'] = res.price_btc;
+        }
 
-    this._currencyService.getPriceFor('EUR').subscribe(res => {
-      this.headerEUR = res.price_eur;
-      this.exchangeRate.EUR = res.price_eur;
-    });
-
-    this._currencyService.getPriceFor('GBP').subscribe(res => {
-      this.headerGBP = res.price_gbp;
-      this.exchangeRate.GBP = res.price_gbp;
-    });
-
-    this._currencyService.getPriceFor('CNY').subscribe(res => {
-      this.headerCNY = res.price_cny;
-      this.exchangeRate.CNY = res.price_cny;
-    });
-
-    this._currencyService.getPriceFor('KRW').subscribe(res => {
-      this.headerKRW = res.price_krw;
-      this.exchangeRate.KRW = res.price_krw;
-    });
+        this.exchangeRate[currency] = res[`price_${currency.toLowerCase()}`];
+      });
+    }
   }
 }

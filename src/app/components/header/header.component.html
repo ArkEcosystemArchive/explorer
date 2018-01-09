@@ -26,40 +26,22 @@
                     <span class="ark-index-title"> {{ 'GENERAL.INFO.HEIGHT' | translate}}:</span>
                     <span class="ark-index-data">{{headerHeight}}</span>
                 </span>
-                <span class="ark-item-index" *ngIf="headerNethash">
+                <span class="ark-item-index ark-item-nethash" *ngIf="headerNethash">
                     <span class="ark-index-title"> {{ 'GENERAL.INFO.NETHASH' | translate}}:</span>
                     <span class="ark-index-data">{{headerNethash}}</span>
                 </span>
-            </div>
-            <div class="ark-data-item">
                 <span class="ark-item-index" *ngIf="headerSupply">
                     <span class="ark-index-title"> {{ 'GENERAL.INFO.SUPPLY' | translate}}:</span>
                     <span class="ark-index-data">{{headerSupply}}</span>
                 </span>
-                <span class="ark-item-index" *ngIf="headerBTC">
-                    <span class="ark-index-title"> ARK/BTC:</span>
-                    <span class="ark-index-data">{{headerBTC | number: '1.8-8'}}</span>
-                </span>
             </div>
-            <div class="ark-data-item">
-                <span class="ark-item-index" *ngIf="headerUSD">
-                    <span class="ark-index-title"> ARK/USD:</span>
-                    <span class="ark-index-data">{{headerUSD  | number: '1.2-2'}}</span>
-                </span>
-                <span class="ark-item-index" *ngIf="headerEUR">
-                    <span class="ark-index-title"> ARK/EUR:</span>
-                    <span class="ark-index-data">{{headerEUR  | number: '1.2-2'}}</span>
-                </span>
-            </div>
-            <div class="ark-data-item">
-                <span class="ark-item-index" *ngIf="headerGBP">
-                    <span class="ark-index-title"> ARK/GBP:</span>
-                    <span class="ark-index-data">{{headerGBP  | number: '1.2-2'}}</span>
-                </span>
-                <span class="ark-item-index" *ngIf="headerCNY">
-                    <span class="ark-index-title"> ARK/CNY:</span>
-                    <span class="ark-index-data">{{headerCNY  | number: '1.2-2'}}</span>
-                </span>
+            <div *ngFor="let currency of currencies">
+                <div class="ark-data-item" *ngIf="currency.value">
+                    <span class="ark-item-index">
+                        <span class="ark-index-title"> ARK/{{ currency.name }}:</span>
+                        <span class="ark-index-data">{{ currency.value | number: (currency.name === 'BTC' ? '1.8-8' : '1.2-2') }}</span>
+                    </span>
+                </div>
             </div>
         </div>
     </div>

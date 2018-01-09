@@ -1,8 +1,12 @@
+import { CONFIG } from '../../app.config';
+
+let initName = CONFIG.NETWORKS[CONFIG.NETWORK].CURRENCIES[0];
 export const initCurrency = {
-    name: 'ARK',
+    name: initName,
     value: 1
 };
 
-export const ticker = {
-    'ARK': 1
-};
+let tickerVal = {};
+tickerVal[initName] = 1;
+
+export const ticker = tickerVal;

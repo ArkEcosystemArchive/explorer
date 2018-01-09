@@ -106,7 +106,7 @@ header {
 
 
 .ark-header-data {
-  font-size: 12px;
+  font-size: 11px;
   color: @light-body-color;
   font-family: 'Comfortaa-Regular', serif;
   align-items: center;
@@ -114,6 +114,9 @@ header {
   height: 40px;
   padding: 0 20px;
   .ark-data-item {
+    .ark-item-nethash .ark-index-data {
+      text-transform: capitalize;
+    }
     .ark-item-index {
       margin-right: 30px;
       overflow: hidden;

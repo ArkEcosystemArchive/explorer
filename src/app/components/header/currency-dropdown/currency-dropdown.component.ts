@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, EventEmitter, Input, Output, HostListener } from '@angular/core';
+import { Component, OnInit, DoCheck, ElementRef, EventEmitter, Input, Output, HostListener } from '@angular/core';
 import { CurrencyService } from '../../../shared/services/currency.service';
 import { initCurrency } from '../../../shared/const/currency';
 
@@ -6,7 +6,7 @@ import { initCurrency } from '../../../shared/const/currency';
   selector: 'ark-currency-dropdown',
   templateUrl: './currency-dropdown.component.html'
 })
-export class CurrencyDropdownComponent implements OnInit {
+export class CurrencyDropdownComponent implements OnInit, DoCheck {
   public currency: any[] = [initCurrency.name];
   public currentCurrency: string = initCurrency.name;
   public elementRef;
@@ -16,21 +16,7 @@ export class CurrencyDropdownComponent implements OnInit {
   @Output() openMobMenu: EventEmitter<boolean> = new EventEmitter();
 
   @Input('rates') set rates(value: any) {
-    this._ratesObject = value;
-    // add ARK currency in array
-    this._ratesObject[initCurrency.name] = initCurrency.value;
-    this.currency = Object.keys(this._ratesObject).sort();
-
-    // define currency on init
-    setTimeout(() => {
-      if (this.currency.length > 1) {
-        const cur = localStorage.getItem('currency') || initCurrency.name;
-        if (cur !== this.currentCurrency) {
-          this.setCurrency(cur);
-        }
-      }
-    });
-
+    this._updateRates(value, true);
   }
 
   get rates(): any {
@@ -46,6 +32,33 @@ export class CurrencyDropdownComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  ngDoCheck() {
+    this._updateRates();
+  }
+
+  private _updateRates(value?: any, isInit: boolean = false) {
+    value = value || this._ratesObject;
+    this._ratesObject = value;
+    // add ARK currency in array
+    // this._ratesObject[this.initCurrency.name] = this.initCurrency.value;
+    this.currency = Object.keys(this._ratesObject).sort();
+
+    if (isInit) {
+      // define currency on init
+      setTimeout(() => {
+        console.log(this.currentCurrency);
+        if (this.currency.length > 0) {
+          const cur = localStorage.getItem('currency') || initCurrency.name;
+          if (cur !== this.currentCurrency && this.currency.indexOf(cur) > -1) {
+            this.setCurrency(cur);
+          } else if (this.currency.indexOf(cur) === -1) {
+            this.setCurrency(initCurrency.name);
+          }
+        }
+      });
+    }
   }
 
   showDropdown() {
