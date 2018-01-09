@@ -1,7 +1,6 @@
 <li class="ark-menu-item ark-route" (click)="showTools()">
     <div class="ark-dropdown-link">{{ 'HEADER.TOOLS.TITLE' | translate}}</div>
     <ul class="ark-dropdown">
-        <li><a [routerLink]="['/']" (click)="closeMobileMenu()">{{ 'EXPLORER.TX_TITLE' | translate }}</a></li>
         <li><a [routerLink]="['/topAccounts']" (click)="closeMobileMenu()">{{ 'TOP_ACCOUNTS.TITLE' | translate }}</a></li>
         <li><a [routerLink]="['/activityGraph']" (click)="closeMobileMenu()">{{ 'ACTIVITY_GRAPH.TITLE' | translate }}</a></li>
         <li><a [routerLink]="['/delegateMonitor']" (click)="closeMobileMenu()">{{ 'DELEGATE_MONITOR.TITLE' | translate }}</a></li>
