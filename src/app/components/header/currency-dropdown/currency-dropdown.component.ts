@@ -48,7 +48,6 @@ export class CurrencyDropdownComponent implements OnInit, DoCheck {
     if (isInit) {
       // define currency on init
       setTimeout(() => {
-        console.log(this.currentCurrency);
         if (this.currency.length > 0) {
           const cur = localStorage.getItem('currency') || initCurrency.name;
           if (cur !== this.currentCurrency && this.currency.indexOf(cur) > -1) {
