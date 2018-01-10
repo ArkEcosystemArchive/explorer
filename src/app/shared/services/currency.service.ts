@@ -66,7 +66,7 @@ export class CurrencyService {
 
   public getPriceFor(currency: string) {
     if (this._network.PROPERTIES.indexOf('DISABLE_PRICE_API') !== -1) {
-      return Observable.of(false);
+      return Observable.of({});
     }
     return this.http.get(`https://api.coinmarketcap.com/v1/ticker/ark/?convert=${currency}`)
       .map((res: Response) => res.json()[0])

@@ -144,10 +144,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.exchangeRate[currency] = null;
 
       this._currencyService.getPriceFor(currency).subscribe(res => {
+        if (!res.price_btc) {
+          return;
+        }
+
         if (currency === 'USD') {
           this.exchangeRate['BTC'] = res.price_btc;
         }
-
         this.exchangeRate[currency] = res[`price_${currency.toLowerCase()}`];
       });
     }
