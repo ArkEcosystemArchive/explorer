@@ -4,6 +4,8 @@
 
 > A redesigned frontend of ARK Blockchain Explorer using AngularJS and TypeScript.
 
+You can access it at [https://explorer.ark.io/](https://explorer.ark.io/).
+
 The feel of the [old explorer](https://github.com/ArkEcosystem/old-ark-explorer) is retained in the new version, under the hood things are completely revamped. The frontend of the Explorer itself has been redone using AngularJS framework and TypeScript programming language.
 
 ## Installation
