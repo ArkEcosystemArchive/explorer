@@ -1,6 +1,6 @@
 ![ArkExplorer](https://i.imgur.com/JpkIhYH.png)
 
-# Ark Block Explorer
+# ARK Block Explorer
 
 > A redesigned frontend of ARK Blockchain Explorer using AngularJS and TypeScript.
 
@@ -42,4 +42,4 @@ Before running the tests make sure you are serving the app via `ng serve`
 
 ## License
 
-Ark Explorer is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+ARK Explorer is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
