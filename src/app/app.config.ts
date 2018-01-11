@@ -14,6 +14,7 @@ export const CONFIG = {
           "AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK" : "Bittrex",
           "AeUyEH2UGpYrwHAupBh7syFhWYSBNFAkap" : "OKEx",
         },
+        PROPERTIES: [],
       },
       DEVNET: {
         NODE: 'https://dexplorer.ark.io:8443/api',
