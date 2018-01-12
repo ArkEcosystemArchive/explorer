@@ -65,7 +65,7 @@
                 <td class="ellipsis width-15">{{item.height}}</td>
                 <td class="ellipsis width-15">{{item.timestamp | localDate | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</td>
                 <td class="ellipsis width-10">{{item.numberOfTransactions}}</td>
-                <td class="ellipsis width-15"><a [routerLink]="getAddressLink(item.delegate)">{{item.delegate.username}}</a></td>
+                <td class="ellipsis width-15"><a [routerLink]="getAddressLink(item.delegate.address)">{{item.delegate.username}}</a></td>
                 <td class="ellipsis width-15">{{(+item.totalAmount/100000000)*currencyRate | number: '1.2-8'}}</td>
                 <td class="ellipsis width-15">{{(+item.totalForged/100000000)*currencyRate | number: '1.2-8'}}</td>
             </tr>
