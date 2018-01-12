@@ -44,6 +44,10 @@
       position: relative;
       cursor: pointer;
       user-select: none;
+      background: darken(@light-secondary-color, 10%);
+      border-radius: 2em;
+      padding: 2px;
+      transition: all .4s ease;
       &:after,
       &:before {
         position: relative;
@@ -55,6 +59,9 @@
 
       &:after {
         left: 0;
+        border-radius: 50%;
+        background: @light-secondary-color;
+        transition: all .2s ease;
       }
 
       &:before {
@@ -62,33 +69,31 @@
       }
     }
 
-    &:checked + .tgl-btn:after {
-      left: 50%;
-    }
-  }
-
-  // themes
-  .tgl-light {
-    + .tgl-btn {
-      background: darken(@light-secondary-color, 10%);
-      border-radius: 2em;
-      padding: 2px;
-      transition: all .4s ease;
-      &:after {
-        border-radius: 50%;
-        background: @light-secondary-color;
-        transition: all .2s ease;
-      }
-    }
-
     &:checked + .tgl-btn {
       background: @switch-btn-checked;
+
+      &:after {
+        left: 50%;
+      }
     }
   }
 }
 
 :host-context(.dark-theme) {
   .tgl-item {
-    color: @dark-header-menu-color
+    color: @dark-header-menu-color;
+    .tgl {
+      + .tgl-btn {
+        background: @dark-toggle-switch-button;
+
+        &:after {
+          background: @dark-toggle-switch-bg;
+        }
+      }
+
+      &:checked + .tgl-btn {
+        background: @switch-btn-checked;
+      }
+    }
   }
 }
