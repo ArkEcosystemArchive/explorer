@@ -28,7 +28,7 @@ export class VotersComponent implements OnInit {
       this._explorerService.getAccount(currentAddress).subscribe(res => {
         this.account = res.account
 
-        this._explorerService.getDelegate(this.account.publicKey).subscribe(res => {
+        this._explorerService.getDelegateByPublicKey(this.account.publicKey).subscribe(res => {
           this.account.delegate = res
 
           this._explorerService.getDelegateVoters(this.account.publicKey).subscribe(res => {
