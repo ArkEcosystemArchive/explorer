@@ -77,7 +77,7 @@ export class TopAccountsComponent implements OnInit, OnDestroy {
 
   loadAccounts() {
     this.showLoader = true;
-    this._explorerService.getTopAccounts(50, this.accounts.length - 1).subscribe(
+    this._explorerService.getTopAccounts(50, this.accounts.length).subscribe(
       res => {
         this.accounts = this.accounts.concat(res.accounts);
         this._connectionService.changeConnection(res.success);
