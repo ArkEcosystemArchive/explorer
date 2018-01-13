@@ -60,8 +60,9 @@
     },
     "EXPLORER": {
         "TX_TITLE": "Latest Transactions",
+        "SHOW_ALL_TRANSACTIONS_BUTTON": "See All Transactions",
         "BLOCK_TITLE": "Latest Blocks",
-        "BUTTON": "See All Blocks"
+        "SHOW_ALL_BLOCKS_BUTTON": "See All Blocks"
     },
     "ADDRESS": {
         "TITLE": "Address Summary",

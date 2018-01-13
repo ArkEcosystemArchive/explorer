@@ -36,6 +36,9 @@ import { LocalStorageService } from './shared/services/local-storage.service';
 import { TogglePriceChartComponent } from './components/header/toggle-price-chart/toggle-price-chart.component';
 import { AddressTableComponent } from './components/address-table/address-table.component';
 import { VotersComponent } from './pages/address/voters/voters.component';
+import { TransactionTableComponent } from './components/transaction-table/transaction-table.component';
+import { TransactionListComponent } from './pages/transaction-list/transaction-list.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/translate/', '.json');
@@ -49,6 +52,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ExplorerComponent,
     CurrencyDropdownComponent,
     BlockListComponent,
+    TransactionListComponent,
+    TransactionTableComponent,
     AddressComponent,
     AddressTransactionsComponent,
     TransactionComponent,
@@ -65,7 +70,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ToggleBackgroundComponent,
     TogglePriceChartComponent,
     AddressTableComponent,
-    VotersComponent
+    VotersComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

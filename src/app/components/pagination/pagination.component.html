@@ -1,0 +1,14 @@
+<div class="ark-pagination ark-flex ark-flex-between">
+  <div class="ark-pagination-prev" *ngIf="pagination && pagination.hasNextPage">
+    <i class="fa fa-angle-left angle-icon" aria-hidden="true"></i>
+    <a [routerLink]="getPageLinkFunc(pagination.nextPage)" (click)="changePage()">
+      {{ 'GENERAL.PREV_PAGE' | translate }}
+    </a>
+  </div>
+  <div class="ark-pagination-next" *ngIf="pagination && pagination.hasPreviousPage">
+    <a [routerLink]="getPageLinkFunc(pagination.previousPage)" (click)="changePage()">
+      {{ 'GENERAL.NEXT_PAGE' | translate }}
+    </a>
+    <i class="fa fa-angle-right angle-icon" aria-hidden="true"></i>
+  </div>
+</div>

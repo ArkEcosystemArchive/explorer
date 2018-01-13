@@ -95,11 +95,11 @@
           <div class="ark-shadowfor-btn"></div>
         </div>
       </div>
-        <div class="ark-section-title ">{{ 'ADDRESS.TX_TITLE' | translate }}</div>
+        <div class="ark-section-title" #transactions>{{ 'ADDRESS.TX_TITLE' | translate }}</div>
         <div class="ark-tab-header ">
-            <div class="ark-tab-header-item" [ngClass]="{'active': activeTab === 'all-tr'}" id="all-tr" (click)="getAllTransactions($event)">{{ 'GENERAL.TABS.ALL' | translate }}</div>
-            <div class="ark-tab-header-item " [ngClass]="{'active': activeTab === 'sent-tr'}" id="sent-tr" (click)="getSentTransactions($event)">{{ 'GENERAL.TABS.SENT' | translate }}</div>
-            <div class="ark-tab-header-item " [ngClass]="{'active': activeTab === 'received-tr'}" id="received-tr" (click)="getReceivedTransactions($event)">{{ 'GENERAL.TABS.RECEIVED' | translate }}</div>
+            <div class="ark-tab-header-item" [ngClass]="{'active': activeTab === 'all'}" id="all-tr" [routerLink]="getTransactionTypeLink('all')">{{ 'GENERAL.TABS.ALL' | translate }}</div>
+            <div class="ark-tab-header-item " [ngClass]="{'active': activeTab === 'sent'}" id="sent-tr" [routerLink]="getTransactionTypeLink('sent')">{{ 'GENERAL.TABS.SENT' | translate }}</div>
+            <div class="ark-tab-header-item " [ngClass]="{'active': activeTab === 'received'}" id="received-tr" [routerLink]="getTransactionTypeLink('received')">{{ 'GENERAL.TABS.RECEIVED' | translate }}</div>
         </div>
         <div class="ark-loader-block" *ngIf="showLoader">
             <div class="ark-loader-icon"></div>
@@ -111,6 +111,13 @@
                 <ark-address-transactions *ngIf="addressItem" [id]="addressItem.address" [items]="currentTransactions" [curName]="currencyName" [curValue]="currencyValue"></ark-address-transactions>
             </div>
         </div>
+      <ark-pagination *ngIf="addressItem && renderPagination"
+                      [pageSize]="30"
+                      [getPageLinkFunc]="getPageLink"
+                      [getItemsFunc]="currentTransactionsFunc"
+                      (onChangePage)="onChangePage($event)"
+                      (onPageResult)="onPageResult($event)">
+      </ark-pagination>
     </div>
     <ark-balance-footer *ngIf="addressItem" [show]="showBalanceFooter" [address]="addressItem.address" [balance]="addressItem.balance" [curName]="currencyName" [curVal]="currencyValue"></ark-balance-footer>
 </section>

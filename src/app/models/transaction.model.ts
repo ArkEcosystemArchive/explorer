@@ -1,6 +1,8 @@
 import {Account} from './account.model';
 import {OwnerInfo} from './owner-info.model';
 import {BaseApiResponse} from './api-response.model';
+import { Pagination, PaginationResult } from './pagination.model';
+import { Delegate } from './delegate.model';
 
 export class Transaction {
   public amount: number;
@@ -11,7 +13,7 @@ export class Transaction {
   public id: string;
   public knownSender: OwnerInfo;
   public recipientId: string;
-  public senderDelegate: Account;
+  public senderDelegate: Delegate;
   public senderId: string;
   public timestamp: number;
   public vendorField: string;
@@ -29,4 +31,16 @@ export class TransactionResponse extends BaseApiResponse {
 
 export class TransactionsResponse extends BaseApiResponse {
   public transactions: Transaction[];
+}
+
+export interface PaginatedTransactions extends PaginationResult {
+  pagination: Pagination;
+  transactions: Transaction[];
+}
+
+export class TransactionRequestParameters {
+  offset?: number;
+  limit?: number;
+  recipientId?: string;
+  senderId?: string;
 }

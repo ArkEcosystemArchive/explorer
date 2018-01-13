@@ -88,7 +88,7 @@ export class ExplorerComponent implements OnInit, OnDestroy {
   private getLastTransactions() {
     this._explorerService.getLastTransactions().subscribe(
       res => {
-        this.transactions = res;
+        this.transactions = res.transactions;
         this._connectionService.changeConnection(true);
         this.showTransactionLoader = false;
       }
