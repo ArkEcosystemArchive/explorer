@@ -69,7 +69,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
     });
 
-    this._explorerService.searchByUsername(this.searchQuery).subscribe(res => {
+    this._explorerService.searchByDelegateUserName(this.searchQuery).subscribe(res => {
       if (res.success) {
         this.searchQuery = '';
         this.router.navigate([`/address`, res.delegate.address]);
@@ -77,7 +77,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
     });
 
-    this._explorerService.getDelegate(this.searchQuery).subscribe(res => {
+    this._explorerService.getDelegateByPublicKey(this.searchQuery).subscribe(res => {
+      if (!res || !res.address) {
+        return;
+      }
       this.searchQuery = '';
       this.router.navigate([`/address`, res.address]);
       this.openMobileMenu = false;

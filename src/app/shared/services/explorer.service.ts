@@ -87,7 +87,7 @@ export class ExplorerService {
         const requests = [];
 
         txs.forEach(transaction => {
-          requests.push(this.getDelegate(transaction.senderPublicKey));
+          requests.push(this.getDelegateByPublicKey(transaction.senderPublicKey));
         });
 
         return Observable.forkJoin(requests);
@@ -121,7 +121,7 @@ export class ExplorerService {
 
         const requests = [];
         blocks.forEach(block => {
-          requests.push(this.getDelegate(block.generatorPublicKey));
+          requests.push(this.getDelegateByPublicKey(block.generatorPublicKey));
         });
 
         return Observable.forkJoin(requests);
@@ -194,7 +194,7 @@ export class ExplorerService {
       .map((res: Response) => {
         const transaction = res.json().transaction;
 
-        this.getDelegate(transaction.senderPublicKey).subscribe(res => {
+        this.getDelegateByPublicKey(transaction.senderPublicKey).subscribe(res => {
           transaction.senderDelegate = res;
         })
 
@@ -219,7 +219,7 @@ export class ExplorerService {
     return this.http.get(`${this._network.NODE}/blocks/get?id=${id}`)
       .map((res: any) => res.json().block)
       .flatMap((block: any) => {
-        return this.getDelegate(block.generatorPublicKey)
+        return this.getDelegateByPublicKey(block.generatorPublicKey)
           .map((res: any) => {
             block.delegate = res;
             return block;
@@ -232,7 +232,7 @@ export class ExplorerService {
       .map((res: Response) => res.json());
   }
 
-  public getDelegate(publickey: string) {
+  public getDelegateByPublicKey(publickey: string) {
     return new Observable<Delegate>(observer => {
       ExplorerService._delegates.subscribe(delegates => {
         if (Object.keys(delegates).length !== 0) {
@@ -387,7 +387,7 @@ export class ExplorerService {
     return this.http.get(`${this._network.NODE}/blocks?orderBy=height:desc&limit=1`)
       .map((res: any) => res.json().blocks[0])
       .flatMap((block: any) => {
-        return this.getDelegate(block.generatorPublicKey)
+        return this.getDelegateByPublicKey(block.generatorPublicKey)
           .map((res: any) => {
             block.delegate = res;
             return block;
@@ -403,7 +403,7 @@ export class ExplorerService {
         const requests = [];
 
         delegates.forEach(delegate => {
-          requests.push(this.getDelegate(delegate));
+          requests.push(this.getDelegateByPublicKey(delegate));
         });
 
         return Observable.forkJoin(requests);
@@ -473,7 +473,7 @@ export class ExplorerService {
       .map((res: Response) => res.json());
   }
 
-  public searchByUsername(value: string): Observable<any> {
+  public searchByDelegateUserName(value: string): Observable<any> {
     return this.http.get(`${this._network.NODE}/delegates/get?username=${value}`)
       .map((res: Response) => res.json());
   }

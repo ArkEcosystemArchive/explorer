@@ -83,7 +83,7 @@ export class AddressComponent implements OnInit, OnDestroy {
           this._connectionService.changeConnection(res.success);
           window.scrollTo(0, 0);
 
-          this._explorerService.getDelegate(this.addressItem.publicKey).subscribe(
+          this._explorerService.getDelegateByPublicKey(this.addressItem.publicKey).subscribe(
             res => {
               if (res) {
                 this.addressItem.delegate = res;
