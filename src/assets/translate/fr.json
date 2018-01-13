@@ -62,7 +62,7 @@
   "EXPLORER": {
       "TX_TITLE": "Dernières transactions",
       "BLOCK_TITLE": "Derniers blocs",
-      "BUTTON": "Voir tous les blocs"
+      "SHOW_ALL_BLOCKS_BUTTON": "Voir tous les blocs"
   },
   "ADDRESS": {
       "TITLE": "Résumé adresse",

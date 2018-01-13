@@ -5,11 +5,13 @@ import { ExplorerService } from '../../shared/services/explorer.service';
 import { CurrencyService } from '../../shared/services/currency.service';
 import { ConnectionMessageService } from '../../shared/services/connection-message.service';
 import { initCurrency } from '../../shared/const/currency';
-import {Transaction} from '../../models/transaction.model';
+import { PaginatedTransactions, Transaction } from '../../models/transaction.model';
 import {Account} from '../../models/account.model';
 import { Subscription } from 'rxjs/Subscription';
 
 import 'rxjs/add/operator/switchMap';
+import { Observable } from 'rxjs/Rx';
+import { PaginationResult } from '../../models/pagination.model';
 
 @Component({
   selector: 'ark-address',
@@ -20,10 +22,11 @@ import 'rxjs/add/operator/switchMap';
 export class AddressComponent implements OnInit, OnDestroy {
   @ViewChild('voters') votersBlock: ElementRef;
   @ViewChild('balance') balanceContainer: ElementRef;
+  @ViewChild('transactions') transactionsElement: ElementRef;
 
   public addressItem: Account;
   public currentTransactions: Transaction[];
-  public activeTab = 'all-tr';
+  public activeTab: string;
   public currencyName: string = initCurrency.name;
   public currencyValue: number = initCurrency.value;
   public showLoader = false;
@@ -32,6 +35,8 @@ export class AddressComponent implements OnInit, OnDestroy {
   public supply = 0;
   public voters: Account[];
   public areVotersExpanded = false;
+  public currentTransactionsFunc: (offset: number) => Observable<PaginatedTransactions>;
+  public renderPagination: boolean;
 
   private _currentAddress = '';
   private subscription: Subscription;
@@ -56,10 +61,20 @@ export class AddressComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
     this.onResize();
     this.showLoader = true;
     this.route.params.subscribe((params: Params) => {
+      this.setTransactionParameters(params['type']);
+
+      // if we have a page we scroll to the transactions section
+      if (params['page']) {
+        window.scrollTo(0, this.transactionsElement.nativeElement.offsetTop - 125);
+      }
+
+      if (params['id'] === this._currentAddress) {
+        return;
+      }
+
       this._currentAddress = params['id'];
 
       this._explorerService.getAccount(this._currentAddress).subscribe(
@@ -108,14 +123,6 @@ export class AddressComponent implements OnInit, OnDestroy {
           );
         }
       );
-
-      this._explorerService.getTransactionsByAddress(this._currentAddress).subscribe(
-        res => {
-          this._connectionService.changeConnection(res.success);
-          this.currentTransactions = res;
-          this.showLoader = false;
-        }
-      );
     });
   }
 
@@ -144,43 +151,37 @@ export class AddressComponent implements OnInit, OnDestroy {
     } else {
       this.votersNumber = 1;
     }
-
   }
 
-  getAllTransactions(event): void {
-    this.showLoader = true;
-    this.activeTab = event.target.id;
-    this._explorerService.getTransactionsByAddress(this._currentAddress).subscribe(
-      res => {
-        this._connectionService.changeConnection(res.success);
-        this.currentTransactions = res;
-        this.showLoader = false;
-      }
-    );
+  private setTransactionParameters(type?: string): void {
+    if (this.activeTab != null && this.activeTab === type) {
+      return;
+    }
+
+    if (type === 'sent') {
+      this.currentTransactionsFunc = this.getSentTransactions;
+    } else if (type === 'received') {
+      this.currentTransactionsFunc = this.getReceivedTransactions;
+    } else {
+      type = 'all';
+      this.currentTransactionsFunc = this.getAllTransactions;
+    }
+
+    this.activeTab = type;
+    this.renderPagination = false;
+    window.setTimeout(() => this.renderPagination = true);
   }
 
-  getSentTransactions(event): void {
-    this.showLoader = true;
-    this.activeTab = event.target.id;
-    this._explorerService.getSendTransactionsByAddress(this._currentAddress).subscribe(
-      res => {
-        this._connectionService.changeConnection(res.success);
-        this.currentTransactions = res;
-        this.showLoader = false;
-      }
-    );
+  private getAllTransactions = (offset: number): Observable<PaginatedTransactions> => {
+   return this._explorerService.getTransactionsByAddress(this._currentAddress, offset);
   }
 
-  getReceivedTransactions(event): void {
-    this.showLoader = true;
-    this.activeTab = event.target.id;
-    this._explorerService.getReceivedTransactionsByAddress(this._currentAddress).subscribe(
-      res => {
-        this._connectionService.changeConnection(res.success);
-        this.currentTransactions = res;
-        this.showLoader = false;
-      }
-    );
+  private getSentTransactions = (offset: number): Observable<PaginatedTransactions> => {
+    return this._explorerService.getSendTransactionsByAddress(this._currentAddress, offset);
+  }
+
+  private getReceivedTransactions = (offset: number): Observable<PaginatedTransactions> => {
+    return this._explorerService.getReceivedTransactionsByAddress(this._currentAddress, offset);
   }
 
   showBlock() {
@@ -194,6 +195,24 @@ export class AddressComponent implements OnInit, OnDestroy {
 
   getVoters() {
     return this.areVotersExpanded ? this.voters : this.voters.slice(0, this.votersNumber);
+  }
+
+  public onChangePage = (): void => {
+    this.currentTransactions = [];
+    this.showLoader = true;
+  }
+
+  public onPageResult = (pageResult: PaginatedTransactions): void => {
+    this.currentTransactions = pageResult.transactions;
+    this.showLoader = false;
+  }
+
+  public getTransactionTypeLink(activeTab: string): any[] {
+    return this.getPageLink(1, activeTab);
+  }
+
+  public getPageLink = (page: number, activeTab?: string): any[] => {
+    return ['/address', this._currentAddress, 'transactions', activeTab || this.activeTab, page];
   }
 
   ngOnDestroy() {

@@ -1,0 +1,38 @@
+<div class="ark-section-title">{{ 'EXPLORER.TX_TITLE' | translate }}</div>
+<table class="ark-table">
+  <thead>
+  <tr>
+    <th class="ellipsis width-15">{{ 'GENERAL.INFO.ID' | translate }}</th>
+    <th class="ellipsis width-15">{{ 'GENERAL.INFO.TIMESTAMP' | translate }}</th>
+    <th class="ellipsis width-15">{{ 'GENERAL.INFO.SENDER' | translate }}</th>
+    <th class="ellipsis width-15">{{ 'GENERAL.INFO.RECIPIENT' | translate }}</th>
+    <th class="ellipsis width-20">{{ 'GENERAL.INFO.SMARTBRIDGE' | translate }}</th>
+    <th class="ellipsis width-15">{{ 'GENERAL.INFO.AMOUNT' | translate }} ({{currency}})</th>
+    <th class="ellipsis width-10">{{ 'GENERAL.INFO.FEE' | translate }} ({{currency}})</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of transactions">
+    <td class="ellipsis width-15 ark-tooltip-wrap" [ngClass]="{'ark-transaction': item.vendorField}"><a
+      [routerLink]="['/tx', item.id]">{{item.id | overflowText}}</a>
+      <span class="ark-tooltip" *ngIf="item.vendorField">{{ item.vendorField }}</span>
+    </td>
+    <td class="ellipsis width-15">{{item.timestamp | localDate | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</td>
+    <td class="ellipsis width-15">
+      <a [routerLink]="getAddressLink(item.senderId)">
+        <span *ngIf="item.senderDelegate">{{item.senderDelegate.username}}</span>
+        <span *ngIf="!item.senderDelegate">{{item.senderId | overflowText}}</span>
+      </a>
+    </td>
+    <td class="ellipsis width-15"><a [routerLink]="getAddressLink(item.recipientId)">{{item.recipientId |
+      overflowText}}</a></td>
+    <td class="ellipsis width-20">{{item.vendorField || ''}}</td>
+    <td class="ellipsis width-15">{{(+item.amount/100000000)*currencyRate | number: '1.2-8'}}</td>
+    <td class="ellipsis width-10">{{(+item.fee/100000000)*currencyRate | number: '1.2-8'}}</td>
+  </tr>
+  </tbody>
+</table>
+<div class="explorer-loader ark-loader-block" *ngIf="showLoader">
+  <div class="ark-loader-icon"></div>
+  <p>{{ 'GENERAL.LOADING' | translate }}...</p>
+</div>

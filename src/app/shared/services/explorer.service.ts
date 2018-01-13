@@ -1,4 +1,7 @@
-import {TransactionResponse, TransactionsResponse} from '../../models/transaction.model';
+import {
+  PaginatedTransactions, Transaction, TransactionRequestParameters, TransactionResponse,
+  TransactionsResponse
+} from '../../models/transaction.model';
 import {Account, AccountResponse, AccountsResponse} from '../../models/account.model';
 import {BlockResponse, BlocksResponse} from '../../models/block.model';
 import {Delegate} from '../../models/delegate.model';
@@ -10,6 +13,7 @@ import { CONFIG } from '../../app.config';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
+import { Pagination } from '../../models/pagination.model';
 
 @Injectable()
 export class ExplorerService {
@@ -54,30 +58,54 @@ export class ExplorerService {
   }
 
   // public getLastTransactions(): Observable<TransactionsResponse> {
-  public getLastTransactions(): Observable<any> {
-    let lastTransactions = [];
+  public getLastTransactions = (parameters?: TransactionRequestParameters): Observable<PaginatedTransactions> => {
+    if (!parameters) {
+      parameters = {};
+    }
 
-    return this.http.get(`${this._network.NODE}/transactions?orderBy=timestamp:desc&limit=20`)
+    const limit = parameters.limit || 20;
+    const offset = parameters.offset || 0;
+
+    // request one item more than the actual limit is, so we know if there's a next page
+    let requestURl = `${this._network.NODE}/transactions?orderBy=timestamp:desc&limit=${limit + 1}&offset=${offset ? offset : 0}`;
+
+    if (parameters.senderId) {
+      requestURl += '&senderId=' + parameters.senderId;
+    }
+
+    if (parameters.recipientId) {
+      requestURl += '&recipientId=' + parameters.recipientId;
+    }
+
+    let lastTransactions: Transaction[] = [];
+
+    return this.http.get(requestURl)
       .map((res: any) => res.json().transactions)
-      .flatMap((transactions: any) => {
-        lastTransactions = transactions;
+      .flatMap((txs: any[]) => {
+        lastTransactions = txs;
 
         const requests = [];
 
-        transactions.forEach(transaction => {
+        txs.forEach(transaction => {
           requests.push(this.getDelegate(transaction.senderPublicKey));
         });
 
         return Observable.forkJoin(requests);
       })
-      .map((data: any[]) => {
-        return data.map((res, index) => {
-          const item = lastTransactions[index];
+      .map((delegates: Delegate[]) => {
+        return delegates.map((res, index) => {
+          const tx: Transaction = lastTransactions[index];
 
-          item.senderDelegate = res;
+          tx.senderDelegate = res;
 
-          return item;
+          return tx;
         });
+      })
+      .map((txs: Transaction[]) => {
+        const pagination = new Pagination(Math.round(offset / limit) + 1);
+        pagination.hasPreviousPage = offset >= limit;
+        pagination.hasNextPage = txs.length > limit;
+        return {pagination: pagination, transactions: txs.slice(0, txs.length - 1 )} as PaginatedTransactions;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
@@ -149,85 +177,16 @@ export class ExplorerService {
 
   }
 
-  public getTransactionsByAddress(address: any): Observable<any> {
-    let transactions = [];
-
-    return this.http.get(`${this._network.NODE}/transactions?senderId=${address}&recipientId=${address}&limit=50&offset=0&orderBy=timestamp:desc`)
-      .flatMap((res: any) => {
-        transactions = res.json().transactions;
-
-        const requests = [];
-
-        transactions.forEach(transaction => {
-          if (transaction.senderPublicKey) {
-            requests.push(this.getDelegate(transaction.senderPublicKey));
-          }
-        });
-
-        return Observable.forkJoin(requests)
-      })
-      .map((data: any[]) => {
-        return data.map((res, index) => {
-          const item = transactions[index];
-          item.senderDelegate = res;
-
-          return item;
-        });
-      });
+  public getTransactionsByAddress = (address: string, offset?: number): Observable<PaginatedTransactions> => {
+    return this.getLastTransactions({recipientId: address, senderId: address, limit: 30, offset: offset});
   }
 
-  public getSendTransactionsByAddress(address: any): Observable<any> {
-    let transactions = [];
-
-    return this.http.get(`${this._network.NODE}/transactions?senderId=${address}&limit=50&offset=0&orderBy=timestamp:desc`)
-      .flatMap((res: any) => {
-        transactions = res.json().transactions;
-
-        const requests = [];
-
-        transactions.forEach(transaction => {
-          if (transaction.senderPublicKey) {
-            requests.push(this.getDelegate(transaction.senderPublicKey));
-          }
-        });
-
-        return Observable.forkJoin(requests)
-      })
-      .map((data: any[]) => {
-        return data.map((res, index) => {
-          const item = transactions[index];
-          item.senderDelegate = res;
-
-          return item;
-        });
-      });
+  public getSendTransactionsByAddress = (address: any, offset?: number): Observable<PaginatedTransactions> => {
+    return this.getLastTransactions({senderId: address, limit: 30, offset: offset});
   }
 
-  public getReceivedTransactionsByAddress(address: any): Observable<any> {
-    let transactions = [];
-
-    return this.http.get(`${this._network.NODE}/transactions?recipientId=${address}&limit=50&offset=0&orderBy=timestamp:desc`)
-      .flatMap((res: any) => {
-        transactions = res.json().transactions;
-
-        const requests = [];
-
-        transactions.forEach(transaction => {
-          if (transaction.senderPublicKey) {
-            requests.push(this.getDelegate(transaction.senderPublicKey));
-          }
-        });
-
-        return Observable.forkJoin(requests)
-      })
-      .map((data: any[]) => {
-        return data.map((res, index) => {
-          const item = transactions[index];
-          item.senderDelegate = res;
-
-          return item;
-        });
-      });
+  public getReceivedTransactionsByAddress = (address: any, offset?: number): Observable<PaginatedTransactions> => {
+    return this.getLastTransactions({recipientId: address, limit: 30, offset: offset});
   }
 
   public getTransaction(id: any): Observable<any> {
