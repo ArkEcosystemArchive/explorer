@@ -1,5 +1,11 @@
+<ark-error-section *ngIf="erroneousTransactionId"
+                   [error]="error"
+                   [titleKey]="'TRANSACTION.TITLE'"
+                   [messageKey]="'TRANSACTION.ERROR'"
+                   [messageParams]="{id: erroneousTransactionId}">
+</ark-error-section>
 <section *ngIf="transaction">
-    <div class="ark-wrap">
+  <div class="ark-wrap">
         <div class="ark-section-title">{{ 'TRANSACTION.TITLE' | translate }}</div>
         <div class="ark-id-block">{{ 'TRANSACTION.ID' | translate }} {{transaction.id}}
             <ark-clipboard [stringToCopy]="transaction.id"></ark-clipboard>

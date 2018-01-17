@@ -4,6 +4,7 @@ import {
 } from '../../models/transaction.model';
 import {Account, AccountResponse, AccountsResponse} from '../../models/account.model';
 import {Delegate, DelegateResponse, DelegatesForgersResponse, DelegatesResponse, ForgingResponse} from '../../models/delegate.model';
+import {Block, BlockResponse, BlocksResponse, PaginatedBlocks} from '../../models/block.model';
 import { Injectable } from '@angular/core';
 import { CONFIG } from '../../app.config';
 
@@ -15,7 +16,6 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import {Block, BlockResponse, BlocksResponse, PaginatedBlocks} from '../../models/block.model';
 
 @Injectable()
 export class ExplorerService {
@@ -160,8 +160,14 @@ export class ExplorerService {
   }
 
   // public getAccount(address: any): Observable<AccountResponse> {
-  public getAccount(address: any): Observable<AccountResponse> {
-    return this.http.get<AccountResponse>(`${this._network.NODE}/accounts?address=${address}`);
+  public getAccount(address: any): Observable<Account> {
+    return this.http.get<AccountResponse>(`${this._network.NODE}/accounts?address=${address}`)
+      .map((res: AccountResponse) => {
+        if (!res.success) {
+          throw new Error(res.error);
+        }
+        return res.account;
+      });
   }
 
   public getTopAccounts(limit: number, offset: number): Observable<AccountsResponse> {
@@ -183,13 +189,17 @@ export class ExplorerService {
   public getTransaction(id: any): Observable<Transaction> {
     return this.http.get<TransactionResponse>(`${this._network.NODE}/transactions/get?id=${id}`)
       .map((res: TransactionResponse) => {
-        const transaction = res.transaction;
-
-        this.getDelegateByPublicKey(transaction.senderPublicKey).subscribe(delegate => {
-          transaction.senderDelegate = delegate;
-        });
-
-        return transaction;
+        if (!res.success) {
+          throw new Error(res.error);
+        }
+        return res.transaction;
+      })
+      .mergeMap((transaction: Transaction) => {
+        return this.getDelegateByPublicKey(transaction.senderPublicKey)
+          .map(delegate => {
+            transaction.senderDelegate = delegate;
+            return transaction;
+          });
       });
   }
 
@@ -208,7 +218,12 @@ export class ExplorerService {
   // public getBlock(id: any): Observable<BlockResponse> {
   public getBlock(id: string | number): Observable<Block> {
     return this.http.get<BlockResponse>(`${this._network.NODE}/blocks/get?id=${id}`)
-      .map((res: BlockResponse) => res.block)
+      .map((res: BlockResponse) => {
+        if (!res.success) {
+          throw new Error(res.error);
+        }
+        return res.block;
+      })
       .flatMap((block: Block) => {
         return this.getDelegateByPublicKey(block.generatorPublicKey)
           .map((delegate: Delegate) => {

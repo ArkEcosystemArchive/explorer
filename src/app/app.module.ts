@@ -39,6 +39,7 @@ import { TransactionTableComponent } from './components/transaction-table/transa
 import { TransactionListComponent } from './pages/transaction-list/transaction-list.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ClipboardComponent } from './components/clipboard/clipboard.component';
+import { ErrorSectionComponent } from './components/error-section/error-section.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/translate/', '.json');
@@ -72,7 +73,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AddressTableComponent,
     VotersComponent,
     PaginationComponent,
-    ClipboardComponent
+    ClipboardComponent,
+    ErrorSectionComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,3 @@
-import {Account} from './account.model';
 import {OwnerInfo} from './owner-info.model';
 import {BaseApiResponse} from './api-response.model';
 import { Pagination, PaginationResult } from './pagination.model';
@@ -11,10 +10,10 @@ export class Transaction {
   public confirmations: number;
   public fee: number;
   public id: string;
-  public senderPublicKey: string;
   public knownSender: OwnerInfo;
   public recipientId: string;
   public senderDelegate: Delegate;
+  public senderPublicKey: string;
   public senderId: string;
   public timestamp: number;
   public vendorField: string;
