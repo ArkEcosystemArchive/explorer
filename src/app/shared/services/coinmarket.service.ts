@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { Chart } from 'angular-highcharts';
@@ -8,6 +7,7 @@ import { ThemeService } from './theme.service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class CoinmarketService {
@@ -22,7 +22,7 @@ export class CoinmarketService {
     this.chartSource.next(value);
   }
 
-  constructor(private http: Http, private _themeService: ThemeService) {
+  constructor(private http: HttpClient, private _themeService: ThemeService) {
     this._themeService.isDarkThemeChange$.subscribe((data) => {
       this.isDarkTheme = data;
       if (this.chart) {
@@ -136,38 +136,33 @@ export class CoinmarketService {
     switch (param) {
       case 'day': {
         return this.http.get(`https://min-api.cryptocompare.com/data/histohour?fsym=ARK&tsym=USD&toTs=${date}&limit=24`)
-          .map((res: Response) => res.json())
           .catch((error: any) => {
-            return Observable.throw(error.json());
+            return Observable.throw(error);
           });
       }
       case 'week': {
         return this.http.get(`https://min-api.cryptocompare.com/data/histohour?fsym=ARK&tsym=USD&toTs=${date}&limit=168`)
-          .map((res: Response) => res.json())
           .catch((error: any) => {
-            return Observable.throw(error.json());
+            return Observable.throw(error);
           });
       }
       case 'month': {
         return this.http.get(`https://min-api.cryptocompare.com/data/histohour?fsym=ARK&tsym=USD&toTs=${date}&limit=720`)
-          .map((res: Response) => res.json())
           .catch((error: any) => {
-            return Observable.throw(error.json());
+            return Observable.throw(error);
           });
       }
       case 'quarter': {
         return this.http.get(`https://min-api.cryptocompare.com/data/histohour?fsym=ARK&tsym=USD&toTs=${date}&limit=2000`)
-          .map((res: Response) => res.json())
           .catch((error: any) => {
-            return Observable.throw(error.json());
+            return Observable.throw(error);
           });
       }
       case 'year':
       case 'all': {
         return this.http.get(`https://min-api.cryptocompare.com/data/histoday?fsym=ARK&tsym=USD&toTs=${date}&limit=365`)
-          .map((res: Response) => res.json())
           .catch((error: any) => {
-            return Observable.throw(error.json());
+            return Observable.throw(error);
           });
       }
       default: {

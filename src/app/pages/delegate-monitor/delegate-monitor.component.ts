@@ -144,7 +144,7 @@ export class DelegateMonitorComponent implements OnInit, OnDestroy {
 
   getStandbyDelegates() {
     this.activeDelegate = false;
-    this._explorerService.getStandby(0).subscribe(
+    this._explorerService.getStandby().subscribe(
       res => {
         this.delegatesList = res.delegates;
       }

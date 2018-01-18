@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { CurrencyModel } from '../../models/currency.model';
 import { CONFIG } from '../../app.config';
@@ -8,6 +7,8 @@ import { CONFIG } from '../../app.config';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
+import { HttpClient } from '@angular/common/http';
+import {BlockHeightResponse, BlockSupplyResponse} from '../../models/block.model';
 
 @Injectable()
 export class CurrencyService {
@@ -22,7 +23,7 @@ export class CurrencyService {
   heightChosen$: Observable<number>;
 
   constructor(
-    private http: Http
+    private http: HttpClient
   ) {
     this.currencyChosen$ = this.currencySource.asObservable();
     this.supplyChosen$ = this.supplySource.asObservable();
@@ -52,15 +53,13 @@ export class CurrencyService {
     this.heightSource.next(value);
   }
 
-  getHeight(): Observable<any> {
-    return this.http.get(`${this._network.NODE}/blocks/getHeight`)
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  getHeight(): Observable<BlockHeightResponse> {
+    return this.http.get<BlockHeightResponse>(`${this._network.NODE}/blocks/getHeight`)
+      .catch((error: any) => Observable.throw(error.error || 'Server error'));
   }
 
-  getSupply(): Observable<any> {
-    return this.http.get(`${this._network.NODE}/blocks/getSupply`)
-      .map((res: Response) => res.json())
+  getSupply(): Observable<BlockSupplyResponse> {
+    return this.http.get<BlockSupplyResponse>(`${this._network.NODE}/blocks/getSupply`)
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
@@ -69,7 +68,7 @@ export class CurrencyService {
       return Observable.of({});
     }
     return this.http.get(`https://api.coinmarketcap.com/v1/ticker/ark/?convert=${currency}`)
-      .map((res: Response) => res.json()[0])
-      .catch((error: any) => Observable.throw(error.json()));
+      .map((res: Response) => res[0])
+      .catch((error: any) => Observable.throw(error));
   }
 }
