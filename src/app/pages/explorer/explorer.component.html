@@ -11,7 +11,7 @@
     </div>
   </div>
   <ark-transaction-table [transactions]="transactions" [showLoader]="showTransactionLoader"></ark-transaction-table>
-  <div class="ark-shadowbtn-wrap">
+  <div class="ark-shadowbtn-wrap" *ngIf="!showTransactionLoader">
     <button class="ark-shadow-btn" type="button" [routerLink]="['/transactions/1']">
       {{ 'EXPLORER.SHOW_ALL_TRANSACTIONS_BUTTON' | translate }}
     </button>
@@ -47,7 +47,7 @@
     <div class="ark-loader-icon"></div>
     <p>{{ 'GENERAL.LOADING' | translate }}...</p>
   </div>
-  <div class="ark-shadowbtn-wrap">
+  <div class="ark-shadowbtn-wrap" *ngIf="!showBlockLoader">
     <button class="ark-shadow-btn" type="button" [routerLink]="['/blocks/1']">{{ 'EXPLORER.SHOW_ALL_BLOCKS_BUTTON' | translate }}
     </button>
     <div class="ark-shadowfor-btn"></div>
