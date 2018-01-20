@@ -2,10 +2,7 @@
     <div class="ark-wrap">
         <div class="ark-section-title">{{ 'BLOCK.TITLE' | translate }}</div>
         <div class="ark-id-block">{{ 'BLOCK.ID' | translate }} {{block.id}}
-            <span class="ark-show-clipboard">
-                <i class="fa fa-clipboard copy-icon" aria-hidden="true" ngxClipboard [cbContent]="block.id"></i>
-                <span class="ark-tooltip ark-clipboard-tooltip">{{'GENERAL.COPY_CLIPBOARD' | translate}}</span>
-            </span>
+            <ark-clipboard [stringToCopy]="block.id"></ark-clipboard>
         </div>
         <div class="ark-section-title">{{ 'BLOCK.SUMMARY_TITLE' | translate }}</div>
         <div class="ark-address-summary">
