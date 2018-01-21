@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ClipboardComponent implements OnInit {
     @Input() stringToCopy: string;
     public copied = false;
-    private timeout;
+    private timeoutID = undefined;
 
     constructor() { }
 
@@ -17,12 +17,13 @@ export class ClipboardComponent implements OnInit {
     showCheck () {
         this.copied = true;
 
-        if (this.timeout !== null) {
-            clearTimeout(this.timeout);
+        if (this.timeoutID !== undefined) {
+            clearTimeout(this.timeoutID);
         }
 
-        this.timeout = setTimeout(() => {
+        this.timeoutID = setTimeout(() => {
             this.copied = false;
+            this.timeoutID = undefined;
         }, 1000);
     }
 
