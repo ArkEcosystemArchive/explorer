@@ -7,8 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ClipboardComponent implements OnInit {
     @Input() stringToCopy: string;
-
     public copied = false;
+    private timeout;
 
     constructor() { }
 
@@ -16,7 +16,12 @@ export class ClipboardComponent implements OnInit {
 
     showCheck () {
         this.copied = true;
-        setTimeout(() => {
+
+        if (this.timeout !== null) {
+            clearTimeout(this.timeout);
+        }
+
+        this.timeout = setTimeout(() => {
             this.copied = false;
         }, 1000);
     }
