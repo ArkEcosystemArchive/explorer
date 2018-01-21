@@ -8,9 +8,17 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ClipboardComponent implements OnInit {
     @Input() stringToCopy: string;
 
+    public copied = false;
+
     constructor() { }
 
-    ngOnInit() {
+    ngOnInit() { }
+
+    showCheck () {
+        this.copied = true;
+        setTimeout(() => {
+            this.copied = false;
+        }, 1000);
     }
 
 }
