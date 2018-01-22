@@ -3,16 +3,6 @@
     <div class="ark-section-title">{{ titleKey | translate }}</div>
     <div class="ark-error-message-block">
       {{ messageKey | translate: messageParams }}
-      <div *ngIf="error" class="ark-error-container">
-        <span class="ark-error-toggle" (click)="showErrorDetails = !showErrorDetails">
-          <i class="fa" [class.fa-plus-circle]="!showErrorDetails" [class.fa-minus-circle]="showErrorDetails" aria-hidden="true"></i>
-          {{ 'GENERAL.DETAILS' | translate}}
-        </span>
-        <div *ngIf="showErrorDetails" class="ark-error-details">
-          {{ error.message }}
-          <pre>{{error.stack}}</pre>
-        </div>
-      </div>
     </div>
   </div>
 </section>

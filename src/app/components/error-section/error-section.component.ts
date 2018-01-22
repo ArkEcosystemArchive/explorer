@@ -16,7 +16,7 @@ export class ErrorSectionComponent {
   public messageParams: Object;
 
   @Input()
-  public error: Error;
-
-  public showErrorDetails: boolean;
+  public set error(value: Error) {
+   console.log(value);
+  }
 }
