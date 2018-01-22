@@ -19,6 +19,8 @@ export class TransactionComponent implements OnInit, OnDestroy {
   public transaction: Transaction;
   public currencyName: string = initCurrency.name;
   public currencyValue: number = initCurrency.value;
+  public erroneousTransactionId: string;
+  public error: Error;
 
   private subscription: Subscription;
 
@@ -33,17 +35,20 @@ export class TransactionComponent implements OnInit, OnDestroy {
       this.currencyName = currency.name;
       this.currencyValue = currency.value;
     });
-   }
+  }
 
   ngOnInit() {
     window.scrollTo(0, 0);
     this.route.params.subscribe((params: Params) => {
-      this._explorerService.getTransaction(params['id']).subscribe(
-        res => {
+      this.setErrorInfo();
+
+      this._explorerService.getTransaction(params['id']).subscribe(res => {
           this.transaction = res;
           this._connectionService.changeConnection(true);
-        }
-      );
+        },
+        (error) => {
+          this.setErrorInfo(params['id'], error);
+        });
     });
   }
 
@@ -56,4 +61,8 @@ export class TransactionComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  private setErrorInfo(id?: string, error?: Error): void {
+    this.erroneousTransactionId = id;
+    this.error = error;
+  }
 }

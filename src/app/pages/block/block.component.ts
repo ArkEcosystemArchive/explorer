@@ -22,6 +22,9 @@ export class BlockComponent implements OnInit, OnDestroy {
   public currencyName: string = initCurrency.name;
   public currencyValue: number = initCurrency.value;
 
+  public erroneousBlockId: string;
+  public error: Error;
+
   private subscription: Subscription;
 
   constructor(
@@ -40,12 +43,15 @@ export class BlockComponent implements OnInit, OnDestroy {
   ngOnInit() {
     window.scrollTo(0, 0);
     this.route.params.subscribe((params: Params) => {
-      this._explorerService.getBlock(params['id']).subscribe(
-        res => {
-          this.block = res;
+      this.setErrorInfo();
+      this._explorerService.getBlock(params['id']).subscribe(block => {
+          this.block = block;
           this._connectionService.changeConnection(true);
-        }
-      );
+        },
+        (error) => {
+          this._connectionService.changeConnection(false);
+          this.setErrorInfo(params['id'], error);
+        });
 
       this._explorerService.getTransactionsByBlock(params['id']).subscribe(
         res => {
@@ -62,5 +68,10 @@ export class BlockComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  private setErrorInfo(id?: string, error?: Error): void {
+    this.erroneousBlockId = id;
+    this.error = error;
   }
 }

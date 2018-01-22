@@ -1,3 +1,9 @@
+<ark-error-section *ngIf="erroneousBlockId"
+                   [error]="error"
+                   [titleKey]="'BLOCK.TITLE'"
+                   [messageKey]="'BLOCK.ERROR'"
+                   [messageParams]="{id: erroneousBlockId}">
+</ark-error-section>
 <section *ngIf="block">
     <div class="ark-wrap">
         <div class="ark-section-title">{{ 'BLOCK.TITLE' | translate }}</div>

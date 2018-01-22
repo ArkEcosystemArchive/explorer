@@ -38,7 +38,10 @@ export class AddressComponent implements OnInit, OnDestroy {
   public currentTransactionsFunc: (offset: number) => Observable<PaginatedTransactions>;
   public renderPagination: boolean;
 
-  private _currentAddress = '';
+  public error: Error;
+  public hasError: boolean;
+
+  public currentAddress = '';
   private subscription: Subscription;
   private supplySubscription: Subscription;
   private votersNumber = 4;
@@ -64,23 +67,24 @@ export class AddressComponent implements OnInit, OnDestroy {
     this.onResize();
     this.showLoader = true;
     this.route.params.subscribe((params: Params) => {
+      this.setErrorInfo();
+
       this.setTransactionParameters(params['type']);
 
       // if we have a page we scroll to the transactions section
-      if (params['page']) {
+      if (params['page'] &&  this.transactionsElement) {
         window.scrollTo(0, this.transactionsElement.nativeElement.offsetTop - 125);
       }
 
-      if (params['id'] === this._currentAddress) {
+      if (params['id'] === this.currentAddress) {
         return;
       }
 
-      this._currentAddress = params['id'];
+      this.currentAddress = params['id'];
 
-      this._explorerService.getAccount(this._currentAddress).subscribe(
-        res => {
-          this.addressItem = res.account;
-          this._connectionService.changeConnection(res.success);
+      this._explorerService.getAccount(this.currentAddress).subscribe(account => {
+          this.addressItem = account;
+          this._connectionService.changeConnection(true);
           window.scrollTo(0, 0);
 
           this._explorerService.getDelegateByPublicKey(this.addressItem.publicKey).subscribe(
@@ -104,25 +108,28 @@ export class AddressComponent implements OnInit, OnDestroy {
             }
           );
 
-          this._explorerService.getDelegateVotes(this._currentAddress).subscribe(
+          this._explorerService.getDelegateVotes(this.currentAddress).subscribe(
             res => {
               this.addressItem.votes = res;
             }
           );
 
-          this._explorerService.getSendByAddressCount(this._currentAddress).subscribe(
+          this._explorerService.getSendByAddressCount(this.currentAddress).subscribe(
             res => {
               this.addressItem.outgoing_cnt = res;
             }
           );
 
-          this._explorerService.getReceivedByAddressCount(this._currentAddress).subscribe(
+          this._explorerService.getReceivedByAddressCount(this.currentAddress).subscribe(
             res => {
               this.addressItem.incoming_cnt = res;
             }
           );
-        }
-      );
+        },
+        (error) => {
+          this._connectionService.changeConnection(false);
+          this.setErrorInfo(true, error);
+        });
     });
   }
 
@@ -153,6 +160,11 @@ export class AddressComponent implements OnInit, OnDestroy {
     }
   }
 
+  private setErrorInfo(hasError?: boolean, error?: Error): void {
+    this.hasError = hasError || false;
+    this.error = error;
+  }
+
   private setTransactionParameters(type?: string): void {
     if (this.activeTab != null && this.activeTab === type) {
       return;
@@ -173,15 +185,15 @@ export class AddressComponent implements OnInit, OnDestroy {
   }
 
   private getAllTransactions = (offset: number): Observable<PaginatedTransactions> => {
-   return this._explorerService.getTransactionsByAddress(this._currentAddress, offset);
+   return this._explorerService.getTransactionsByAddress(this.currentAddress, offset);
   }
 
   private getSentTransactions = (offset: number): Observable<PaginatedTransactions> => {
-    return this._explorerService.getSendTransactionsByAddress(this._currentAddress, offset);
+    return this._explorerService.getSendTransactionsByAddress(this.currentAddress, offset);
   }
 
   private getReceivedTransactions = (offset: number): Observable<PaginatedTransactions> => {
-    return this._explorerService.getReceivedTransactionsByAddress(this._currentAddress, offset);
+    return this._explorerService.getReceivedTransactionsByAddress(this.currentAddress, offset);
   }
 
   showBlock() {
@@ -212,7 +224,7 @@ export class AddressComponent implements OnInit, OnDestroy {
   }
 
   public getPageLink = (page: number, activeTab?: string): any[] => {
-    return ['/address', this._currentAddress, 'transactions', activeTab || this.activeTab, page];
+    return ['/address', this.currentAddress, 'transactions', activeTab || this.activeTab, page];
   }
 
   ngOnDestroy() {

@@ -25,8 +25,8 @@ export class VotersComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       const currentAddress = params['id'];
 
-      this._explorerService.getAccount(currentAddress).subscribe(res => {
-        this.account = res.account
+      this._explorerService.getAccount(currentAddress).subscribe(account => {
+        this.account = account;
 
         this._explorerService.getDelegateByPublicKey(this.account.publicKey).subscribe(res => {
           this.account.delegate = res

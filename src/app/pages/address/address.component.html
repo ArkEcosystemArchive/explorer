@@ -1,4 +1,10 @@
-<section>
+<ark-error-section *ngIf="hasError"
+                   [error]="error"
+                   [titleKey]="'ADDRESS.TITLE'"
+                   [messageKey]="'ADDRESS.ERROR'"
+                   [messageParams]="{address: currentAddress}">
+</ark-error-section>
+<section *ngIf="addressItem">
     <div class="ark-wrap">
         <div class="ark-section-title">{{ 'ADDRESS.TITLE' | translate }}</div>
         <div class="ark-address-summary">
