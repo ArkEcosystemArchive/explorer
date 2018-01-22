@@ -20,7 +20,8 @@
         "prefix": "ark",
         "styles": [
             "styles.less",
-            "../node_modules/font-awesome/css/font-awesome.css"
+            "../node_modules/font-awesome/css/font-awesome.css",
+            "../node_modules/ngx-toastr/toastr.css"
         ],
         "scripts": [
             "../node_modules/sigma/build/sigma.min.js",

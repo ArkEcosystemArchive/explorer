@@ -9,6 +9,8 @@ import { Delegate, DelegateResponse } from '../../models/delegate.model';
 import { BlockResponse } from '../../models/block.model';
 import { TransactionResponse } from '../../models/transaction.model';
 import { SearchExecutor } from './search-executor';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ark-header',
@@ -36,7 +38,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private _explorerService: ExplorerService,
     private router: Router,
     private _currencyService: CurrencyService,
-    public themeService: ThemeService
+    public themeService: ThemeService,
+    private toastr: ToastrService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -100,7 +104,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         (error) => console.log(error),
         () => {
           if (++doneCounter === this.activeSearches.length && !hasResult) {
-            console.log('NO RESULTS');
+            this.translate.get('HEADER.SEARCH_NO_RESULTS', {'query': this.searchQuery}).subscribe(message => {
+              this.toastr.info(message);
+            });
           }
         });
     });
