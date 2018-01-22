@@ -6,19 +6,13 @@
                 <div class="ark-summary-item ark-flex-between" *ngIf="addressItem.address">
                     <span class="ark-summary-title ark-width-20">{{ 'GENERAL.INFO.ADDRESS' | translate }}</span>
                     <span class="ark-summary-data">{{addressItem.address}}
-                      <span class="ark-show-clipboard">
-                        <i class="fa fa-clipboard copy-icon opacity" aria-hidden="true" ngxClipboard [cbContent]="addressItem.address"></i>
-                        <span class="ark-tooltip ark-clipboard-tooltip">{{ 'GENERAL.COPY_CLIPBOARD' | translate }}</span>
-                    </span>
+                        <ark-clipboard [stringToCopy]="addressItem.address"></ark-clipboard>
                     </span>
                 </div>
                 <div class="ark-summary-item ark-flex-between" *ngIf="addressItem.publicKey">
                     <span class="ark-summary-title ark-width-20">{{ 'GENERAL.INFO.PUBLIC_KEY' | translate }}</span>
                     <span class="ark-summary-data">{{addressItem.publicKey}}
-                        <span class="ark-show-clipboard">
-                        <i class="fa fa-clipboard copy-icon opacity" aria-hidden="true" ngxClipboard [cbContent]="addressItem.publicKey"></i>
-                        <span class="ark-tooltip ark-clipboard-tooltip">{{ 'GENERAL.COPY_CLIPBOARD' | translate }}</span>
-                    </span>
+                        <ark-clipboard [stringToCopy]="addressItem.publicKey"></ark-clipboard>
                     </span>
                 </div>
                 <div class="ark-summary-item ark-flex-between" *ngIf="addressItem.balance" #balance>

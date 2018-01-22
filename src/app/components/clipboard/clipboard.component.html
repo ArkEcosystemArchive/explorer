@@ -1,0 +1,6 @@
+<span class="ark-show-clipboard">
+    <i class="fa fa-clipboard copy-icon opacity" (click)="showCheck()" aria-hidden="true" ngxClipboard [cbContent]="stringToCopy"></i>
+    <span class="ark-tooltip ark-clipboard-tooltip">{{ 'GENERAL.COPY_CLIPBOARD' | translate }}
+        <i class="fa fa-check copy-icon opacity ark-copied-check" [style.opacity]="copied ? 1 : 0" aria-hidden="true"></i>
+    </span>
+</span>

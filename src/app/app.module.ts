@@ -38,6 +38,7 @@ import { VotersComponent } from './pages/address/voters/voters.component';
 import { TransactionTableComponent } from './components/transaction-table/transaction-table.component';
 import { TransactionListComponent } from './pages/transaction-list/transaction-list.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { ClipboardComponent } from './components/clipboard/clipboard.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/translate/', '.json');
@@ -70,7 +71,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     TogglePriceChartComponent,
     AddressTableComponent,
     VotersComponent,
-    PaginationComponent
+    PaginationComponent,
+    ClipboardComponent
   ],
   imports: [
     BrowserModule,
