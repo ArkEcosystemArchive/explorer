@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { QRCodeModule } from 'angular2-qrcode';
 import { MomentModule } from 'angular2-moment';
@@ -78,7 +77,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AppRoutingModule,
     QRCodeModule,
     FormsModule,
-    HttpModule,
     MomentModule,
     ChartModule,
     ClipboardModule,

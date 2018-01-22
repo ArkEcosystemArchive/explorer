@@ -12,7 +12,7 @@ export class Account {
   public publicKey: string;
   public username: string;
   public voters: Account[];
-  public votes: Account[];
+  public votes: Delegate[];
 }
 
 export class AccountResponse extends BaseApiResponse {

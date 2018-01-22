@@ -11,6 +11,7 @@ export class Transaction {
   public confirmations: number;
   public fee: number;
   public id: string;
+  public senderPublicKey: string;
   public knownSender: OwnerInfo;
   public recipientId: string;
   public senderDelegate: Delegate;
@@ -31,6 +32,7 @@ export class TransactionResponse extends BaseApiResponse {
 
 export class TransactionsResponse extends BaseApiResponse {
   public transactions: Transaction[];
+  public count: number;
 }
 
 export interface PaginatedTransactions extends PaginationResult {
