@@ -35,6 +35,8 @@
                 {{ 'GENERAL.PREV_PAGE' | translate }}
             </a>
         </div>
+      <div *ngIf="pagination && !pagination.previousPage && pagination.nextPage">
+      </div>
         <div class="ark-pagination-next" *ngIf="pagination && pagination.nextPage">
             <a [routerLink]="getPageLink(pagination.nextPage)" (click)="changePage()">
                 {{ 'GENERAL.NEXT_PAGE' | translate }}
