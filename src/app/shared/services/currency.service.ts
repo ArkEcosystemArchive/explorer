@@ -6,7 +6,6 @@ import { CONFIG } from '../../app.config';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
 import {BlockHeightResponse, BlockSupplyResponse} from '../../models/block.model';
 

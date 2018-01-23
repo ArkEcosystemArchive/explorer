@@ -24,17 +24,17 @@ export class TransactionListComponent implements OnInit {
 
   public getLastTransactions = (offset?: number): Observable<PaginatedTransactions> => {
     return this._explorerService.getLastTransactions({offset: offset});
-  }
+  };
 
   public onChangePage = (): void => {
     this.transactions = [];
     this.showLoader = true;
-  }
+  };
 
   public onPageResult = (pageResult: PaginatedTransactions): void => {
     this.transactions = pageResult.transactions;
     this.showLoader = false;
-  }
+  };
 
   public getPageLink(page: number): any[] {
     return ['/transactions', page];

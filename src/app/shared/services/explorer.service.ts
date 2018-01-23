@@ -7,15 +7,17 @@ import {Delegate, DelegateResponse, DelegatesForgersResponse, DelegatesResponse,
 import {Block, BlockResponse, BlocksResponse, PaginatedBlocks} from '../../models/block.model';
 import { Injectable } from '@angular/core';
 import { CONFIG } from '../../app.config';
-
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/Rx';
 import { Pagination } from '../../models/pagination.model';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/forkJoin';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class ExplorerService {

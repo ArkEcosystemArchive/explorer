@@ -8,10 +8,9 @@ import { initCurrency } from '../../shared/const/currency';
 import { PaginatedTransactions, Transaction } from '../../models/transaction.model';
 import {Account} from '../../models/account.model';
 import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/switchMap';
-import { Observable } from 'rxjs/Rx';
-import { PaginationResult } from '../../models/pagination.model';
 
 @Component({
   selector: 'ark-address',
@@ -31,7 +30,6 @@ export class AddressComponent implements OnInit, OnDestroy {
   public currencyValue: number = initCurrency.value;
   public showLoader = false;
   public showBalanceFooter = false;
-  public openVoters = false;
   public supply = 0;
   public voters: Account[];
   public areVotersExpanded = false;
@@ -88,19 +86,19 @@ export class AddressComponent implements OnInit, OnDestroy {
           window.scrollTo(0, 0);
 
           this._explorerService.getDelegateByPublicKey(this.addressItem.publicKey).subscribe(
-            res => {
-              if (res) {
-                this.addressItem.delegate = res;
+            delegate => {
+              if (delegate) {
+                this.addressItem.delegate = delegate;
 
                 this._explorerService.getForgedByPublicKey(this.addressItem.publicKey).subscribe(
-                  res => {
-                    this.addressItem.delegate.forged = res;
+                  forged => {
+                    this.addressItem.delegate.forged = forged;
                   }
                 );
 
                 this._explorerService.getDelegateVoters(this.addressItem.publicKey).subscribe(
-                  res => {
-                    this.addressItem.voters = res
+                  voters => {
+                    this.addressItem.voters = voters;
                     this.voters = this.addressItem.voters.sort((one, two) => two.balance - one.balance);
                   }
                 );
@@ -186,20 +184,15 @@ export class AddressComponent implements OnInit, OnDestroy {
 
   private getAllTransactions = (offset: number): Observable<PaginatedTransactions> => {
    return this._explorerService.getTransactionsByAddress(this.currentAddress, offset);
-  }
+  };
 
   private getSentTransactions = (offset: number): Observable<PaginatedTransactions> => {
     return this._explorerService.getSendTransactionsByAddress(this.currentAddress, offset);
-  }
+  };
 
   private getReceivedTransactions = (offset: number): Observable<PaginatedTransactions> => {
     return this._explorerService.getReceivedTransactionsByAddress(this.currentAddress, offset);
-  }
-
-  showBlock() {
-    // this.votersBlock.nativeElement.classList.toggle('open');
-    this.openVoters = !this.openVoters;
-  }
+  };
 
   getAddressLink(id: string) {
     return ['/address', id];
@@ -212,12 +205,12 @@ export class AddressComponent implements OnInit, OnDestroy {
   public onChangePage = (): void => {
     this.currentTransactions = [];
     this.showLoader = true;
-  }
+  };
 
   public onPageResult = (pageResult: PaginatedTransactions): void => {
     this.currentTransactions = pageResult.transactions;
     this.showLoader = false;
-  }
+  };
 
   public getTransactionTypeLink(activeTab: string): any[] {
     return this.getPageLink(1, activeTab);
@@ -225,12 +218,11 @@ export class AddressComponent implements OnInit, OnDestroy {
 
   public getPageLink = (page: number, activeTab?: string): any[] => {
     return ['/address', this.currentAddress, 'transactions', activeTab || this.activeTab, page];
-  }
+  };
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
     this.supplySubscription.unsubscribe();
     this.document.body.classList.remove('extra-footer');
   }
-
 }

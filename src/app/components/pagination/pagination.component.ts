@@ -1,12 +1,8 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Transaction } from '../../models/transaction.model';
-import { Subscription } from 'rxjs/Subscription';
-import { initCurrency } from '../../shared/const/currency';
-import { CurrencyService } from '../../shared/services/currency.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ExplorerService } from '../../shared/services/explorer.service';
 import { Pagination, PaginationResult } from '../../models/pagination.model';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'ark-pagination',
@@ -24,10 +20,10 @@ export class PaginationComponent implements OnInit, OnDestroy {
   public pageSize = 20;
 
   @Output()
-  public onPageResult: EventEmitter<any> = new EventEmitter<any>();
+  public pageResult: EventEmitter<any> = new EventEmitter<any>();
 
   @Output()
-  public onChangePage: EventEmitter<number> = new EventEmitter<number>();
+  public changePage: EventEmitter<number> = new EventEmitter<number>();
 
   public pagination: Pagination;
 
@@ -55,8 +51,8 @@ export class PaginationComponent implements OnInit, OnDestroy {
     }
   }
 
-  public changePage(newPage: number): void {
-      this.onChangePage.emit(newPage);
+  public changePageClick(newPage: number): void {
+      this.changePage.emit(newPage);
   }
 
   private loadItems(newPage: number): void {
@@ -70,7 +66,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
 
     this.itemSubscription = this.getItemsFunc(offset).subscribe((res: PaginationResult) => {
         this.pagination = res.pagination;
-        this.onPageResult.emit(res);
+        this.pageResult.emit(res);
       }
     );
   }
