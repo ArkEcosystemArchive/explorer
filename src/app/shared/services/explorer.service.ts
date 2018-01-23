@@ -105,7 +105,13 @@ export class ExplorerService {
         const pagination = new Pagination(Math.round(offset / limit) + 1);
         pagination.hasPreviousPage = offset >= limit;
         pagination.hasNextPage = txs.length > limit;
-        return {pagination: pagination, transactions: txs.slice(0, txs.length - 1 )} as PaginatedTransactions;
+
+        // if we have a next page, we have to remove the last transaction, since we got this only to see if there is a next page
+        if (pagination.hasNextPage) {
+          txs = txs.slice(0, txs.length - 1);
+        }
+
+        return {pagination: pagination, transactions: txs} as PaginatedTransactions;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   };
