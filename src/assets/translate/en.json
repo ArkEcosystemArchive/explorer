@@ -167,6 +167,7 @@
     },
     "HEADER": {
         "SEARCH": "Find a block, transaction, address or delegate...",
+        "SEARCH_NO_RESULTS": "Sorry, no results for your search - {{ query }} - were found.",
         "TOOLS": {
             "TITLE": "Tools",
             "SNAPSHOTS": "Snapshots"

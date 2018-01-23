@@ -40,6 +40,8 @@ import { TransactionListComponent } from './pages/transaction-list/transaction-l
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ClipboardComponent } from './components/clipboard/clipboard.component';
 import { ErrorSectionComponent } from './components/error-section/error-section.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/translate/', '.json');
@@ -91,7 +93,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
             useFactory: HttpLoaderFactory,
             deps: [HttpClient]
         }
-    })
+    }),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     CurrencyService,

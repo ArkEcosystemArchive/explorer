@@ -1,12 +1,16 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
 import { ExplorerService } from '../../shared/services/explorer.service';
 import { CurrencyService } from '../../shared/services/currency.service';
-import { ConnectionMessageService } from '../../shared/services/connection-message.service';
-import { ticker } from '../../shared/const/currency';
 import { ThemeService } from '../../shared/services/theme.service';
 import { CONFIG } from '../../app.config';
+import { AccountResponse } from '../../models/account.model';
+import { Delegate, DelegateResponse } from '../../models/delegate.model';
+import { BlockResponse } from '../../models/block.model';
+import { TransactionResponse } from '../../models/transaction.model';
+import { SearchExecutor } from './search-executor';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ark-header',
@@ -26,7 +30,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private _timer: any = null;
   private _network: any = CONFIG.NETWORKS[CONFIG.NETWORK];
-  private subscription: Subscription;
+  private activeSearches: SearchExecutor<any>[] = [];
 
   @Output() currentCurrency: EventEmitter<string> = new EventEmitter<string>();
 
@@ -34,8 +38,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private _explorerService: ExplorerService,
     private router: Router,
     private _currencyService: CurrencyService,
-    private _connectionService: ConnectionMessageService,
-    public themeService: ThemeService
+    public themeService: ThemeService,
+    private toastr: ToastrService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -61,46 +66,56 @@ export class HeaderComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this._explorerService.searchByAddress(this.searchQuery).subscribe(res => {
-      if (res.success) {
-        this.searchQuery = '';
-        this.router.navigate([`/address`, res.account.address]);
-        this.openMobileMenu = false;
-      }
-    });
+    this.activeSearches.forEach(s => s.unsubscribe());
+    this.activeSearches = [];
 
-    this._explorerService.searchByDelegateUserName(this.searchQuery).subscribe(res => {
-      if (res.success) {
-        this.searchQuery = '';
-        this.router.navigate([`/address`, res.delegate.address]);
-        this.openMobileMenu = false;
-      }
-    });
+    this.activeSearches.push(new SearchExecutor<AccountResponse>(
+      this._explorerService.searchByAddress(this.searchQuery),
+      res => res.success,
+      res => [`/address`, res.account.address]));
 
-    this._explorerService.getDelegateByPublicKey(this.searchQuery).subscribe(res => {
-      if (!res || !res.address) {
-        return;
-      }
-      this.searchQuery = '';
-      this.router.navigate([`/address`, res.address]);
-      this.openMobileMenu = false;
-    });
+    this.activeSearches.push(new SearchExecutor<DelegateResponse>(
+      this._explorerService.searchByDelegateUserName(this.searchQuery),
+      res => res.success,
+      res => [`/address`, res.delegate.address]));
 
-    this._explorerService.searchByBlockId(this.searchQuery).subscribe(res => {
-      if (res.success) {
-        this.searchQuery = '';
-        this.router.navigate([`/block`, res.block.id]);
-        this.openMobileMenu = false;
-      }
-    });
+    this.activeSearches.push(new SearchExecutor<Delegate>(
+      this._explorerService.getDelegateByPublicKey(this.searchQuery),
+      res => res && res.address && res.address.length !== 0,
+      res => [`/address`, res.address]));
 
-    this._explorerService.searchByTransactionId(this.searchQuery).subscribe(res => {
-      if (res.success) {
-        this.searchQuery = '';
-        this.router.navigate([`/tx`, res.transaction.id]);
-        this.openMobileMenu = false;
-      }
+    this.activeSearches.push(new SearchExecutor<BlockResponse>(
+      this._explorerService.searchByBlockId(this.searchQuery),
+      res => res.success,
+      res => [`/block`, res.block.id]));
+
+    this.activeSearches.push(new SearchExecutor<TransactionResponse>(
+      this._explorerService.searchByTransactionId(this.searchQuery),
+      res => res.success,
+      res => [`/tx`, res.transaction.id]));
+
+    let hasResult = false;
+    let doneCounter = 0;
+    this.activeSearches.forEach(s => {
+      s.execute((route) => {
+          hasResult = true;
+          this.onSearchSuccess(route);
+        },
+        (error) => console.log(error),
+        () => {
+          if (++doneCounter === this.activeSearches.length && !hasResult) {
+            this.translate.get('HEADER.SEARCH_NO_RESULTS', {'query': this.searchQuery}).subscribe(message => {
+              this.toastr.info(message);
+            });
+          }
+        });
     });
+  }
+
+  private onSearchSuccess(route: any[]): void {
+    this.searchQuery = '';
+    this.router.navigate(route);
+    this.openMobileMenu = false;
   }
 
   ngOnDestroy() {
@@ -159,3 +174,4 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 }
+
