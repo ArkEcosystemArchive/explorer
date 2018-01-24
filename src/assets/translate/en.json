@@ -1,6 +1,7 @@
 {
     "GENERAL": {
         "COPY_CLIPBOARD": "Copy to clipboard",
+        "COPY_CLIPBOARD_SUCCESS": "Copied value to clipboard!",
         "WELL_CONFIRMED": "Well Confirmed",
         "DETAILS": "Details",
         "MORE": "More",

@@ -1,30 +1,20 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-    selector: 'ark-clipboard',
-    templateUrl: './clipboard.component.html',
-    styleUrls: ['./clipboard.component.less']
+  selector: 'ark-clipboard',
+  templateUrl: './clipboard.component.html',
+  styleUrls: ['./clipboard.component.less']
 })
-export class ClipboardComponent implements OnInit {
-    @Input() stringToCopy: string;
-    public copied = false;
-    private timeoutID = undefined;
+export class ClipboardComponent {
+  @Input() stringToCopy: string;
 
-    constructor() { }
+  public constructor(private toastr: ToastrService,
+                     private translate: TranslateService) {
+  }
 
-    ngOnInit() { }
-
-    showCheck () {
-        this.copied = true;
-
-        if (this.timeoutID !== undefined) {
-            clearTimeout(this.timeoutID);
-        }
-
-        this.timeoutID = setTimeout(() => {
-            this.copied = false;
-            this.timeoutID = undefined;
-        }, 1000);
-    }
-
+  public onCopied(): void {
+    this.translate.get('GENERAL.COPY_CLIPBOARD_SUCCESS').subscribe(t => this.toastr.success(t));
+  }
 }
