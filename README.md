@@ -1,5 +1,7 @@
 ![ArkExplorer](https://i.imgur.com/JpkIhYH.png)
 
+[![Build Status](https://travis-ci.org/ArkEcosystem/ark-explorer.svg?branch=master)](https://travis-ci.org/ArkEcosystem/ark-explorer)
+
 # ARK Block Explorer
 
 > A redesigned frontend of ARK Blockchain Explorer using AngularJS and TypeScript.
