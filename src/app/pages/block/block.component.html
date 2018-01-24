@@ -91,7 +91,7 @@
                                 <span *ngIf="transaction.asset && transaction.asset.signature">{{ 'TRANSACTION.ASSET.SIGNATURE' | translate }}</span>
                                 <span *ngIf="transaction.asset && transaction.asset.delegate">{{ 'TRANSACTION.ASSET.DELEGATE' | translate }}</span>
                             </td>
-                            <td class="ark-amount ellipsis width-15">{{(transaction.amount / 100000000)*currencyValue | number: '1.2-2'}} {{currencyName}}</td>
+                            <td class="ark-amount ellipsis width-15">{{(transaction.amount / 100000000)*currencyValue | number: '1.2-8'}} {{currencyName}}</td>
                             <td class="ellipsis width-10">{{(transaction.fee / 100000000)*currencyValue | number: '1.1-1'}} {{currencyName}}</td>
                             <td class="ellipsis width-15 ark-tooltip-wrap">
                                 <span *ngIf="transaction.confirmations <= 50">{{transaction.confirmations}}</span>

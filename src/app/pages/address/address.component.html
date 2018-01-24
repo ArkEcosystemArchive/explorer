@@ -23,7 +23,7 @@
                 </div>
                 <div class="ark-summary-item ark-flex-between" *ngIf="addressItem.balance" #balance>
                     <span class="ark-summary-title">{{ 'GENERAL.INFO.TOTAL_BALANCE' | translate }}</span>
-                    <span class="ark-summary-data">{{(addressItem.balance / 100000000)*currencyValue | number: '1.2-2'}} <span class="opacity">{{currencyName}}</span></span>
+                    <span class="ark-summary-data">{{(addressItem.balance / 100000000)*currencyValue | number: '1.2-8'}} <span class="opacity">{{currencyName}}</span></span>
                 </div>
                 <div class="ark-summary-item ark-flex-between">
                     <span class="ark-summary-title">{{ 'GENERAL.INFO.TRANSACTIONS' | translate }}</span>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="ark-summary-item ark-flex-between" *ngIf="addressItem.delegate.forged">
                         <span class="ark-summary-title">{{ 'GENERAL.INFO.FORGED' | translate }}</span>
-                        <span class="ark-summary-data">{{(+addressItem.delegate.forged/100000000)*currencyValue | number: '1.2-2'}} <span class="opacity">{{currencyName}}</span></span>
+                        <span class="ark-summary-data">{{(+addressItem.delegate.forged/100000000)*currencyValue | number: '1.2-8'}} <span class="opacity">{{currencyName}}</span></span>
                     </div>
                     <div class="ark-summary-item ark-flex-between" *ngIf="addressItem.delegate.producedblocks">
                         <span class="ark-summary-title">{{ 'GENERAL.INFO.BLOCKS' | translate }}</span>
