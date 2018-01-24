@@ -1,0 +1,27 @@
+dist: trusty
+sudo: false
+
+language: node_js
+node_js:
+  - "8"
+  
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+
+cache:
+  directories:
+     - ./node_modules
+
+install:
+  - npm install
+
+script:
+  - npm run lint
+  # Use Chromium instead of Chrome.
+  - export CHROME_BIN=chromium-browser
+  - xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox
+  - npm run build -- --prod

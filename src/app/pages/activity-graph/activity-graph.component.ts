@@ -43,7 +43,7 @@ export class ActivityGraphComponent implements OnInit, OnDestroy {
     private _currencyService: CurrencyService,
     private _connectionService: ConnectionMessageService
   ) {
-    this.getLastBlock()
+    this.getLastBlock();
 
     this._timer = setInterval(() => this.getLastBlock(), 8000);
 

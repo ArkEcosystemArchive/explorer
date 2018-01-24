@@ -6,7 +6,6 @@ import { ThemeService } from './theme.service';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()

@@ -115,8 +115,8 @@
                       [pageSize]="30"
                       [getPageLinkFunc]="getPageLink"
                       [getItemsFunc]="currentTransactionsFunc"
-                      (onChangePage)="onChangePage()"
-                      (onPageResult)="onPageResult($event)">
+                      (changePage)="onChangePage()"
+                      (pageResult)="onPageResult($event)">
       </ark-pagination>
     </div>
     <ark-balance-footer *ngIf="addressItem" [show]="showBalanceFooter" [address]="addressItem.address" [balance]="addressItem.balance" [curName]="currencyName" [curVal]="currencyValue"></ark-balance-footer>

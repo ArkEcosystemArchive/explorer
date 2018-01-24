@@ -143,7 +143,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public get currencies() {
-    return Object.keys(this.exchangeRate).map((key, index) => {
+    return Object.keys(this.exchangeRate).map((key) => {
       return {
         name: key,
         value: this.exchangeRate[key],
@@ -154,8 +154,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   private getExchangeRates(): void {
-    let exchangeRate = {};
-    for (let currency of this._network.CURRENCIES) {
+    for (const currency of this._network.CURRENCIES) {
       if (currency === 'USD') {
         this.exchangeRate['BTC'] = null;
       }

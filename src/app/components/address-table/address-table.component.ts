@@ -88,10 +88,10 @@ export class AddressTableComponent implements OnInit, OnDestroy {
     }
   }
 
-  private loadAccountsCallback= (res: LoadAccountsResult): void => {
+  private loadAccountsCallback = (res: LoadAccountsResult): void => {
     this.accounts = this.accounts.concat(res.accounts || []);
     this._connectionService.changeConnection(res.success);
     this.showLoader = !res.success;
     this.areLoadButtonsVisible = !res.isLast;
-  }
+  };
 }

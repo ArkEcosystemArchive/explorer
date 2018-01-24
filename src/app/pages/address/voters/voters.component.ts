@@ -28,11 +28,11 @@ export class VotersComponent implements OnInit {
       this._explorerService.getAccount(currentAddress).subscribe(account => {
         this.account = account;
 
-        this._explorerService.getDelegateByPublicKey(this.account.publicKey).subscribe(res => {
-          this.account.delegate = res
+        this._explorerService.getDelegateByPublicKey(this.account.publicKey).subscribe(delegate => {
+          this.account.delegate = delegate;
 
-          this._explorerService.getDelegateVoters(this.account.publicKey).subscribe(res => {
-            this.account.voters = res
+          this._explorerService.getDelegateVoters(this.account.publicKey).subscribe(voters => {
+            this.account.voters = voters;
             if (!this.account.voters) {
               this.account.voters = [];
             }

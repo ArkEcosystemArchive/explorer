@@ -2,7 +2,7 @@
   <ark-transaction-table [showLoader]="showLoader" [transactions]="transactions"></ark-transaction-table>
   <ark-pagination [getPageLinkFunc]="getPageLink"
                   [getItemsFunc]="getLastTransactions"
-                  (onChangePage)="onChangePage()"
-                  (onPageResult)="onPageResult($event)">
+                  (changePage)="onChangePage()"
+                  (pageResult)="onPageResult($event)">
   </ark-pagination>
 </section>
