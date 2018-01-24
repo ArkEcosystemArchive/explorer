@@ -1,11 +1,11 @@
 @import "_variables.less";
 
 .extra-footer {
-	padding-bottom: 82px;
+  padding-bottom: 82px;
 }
 
 .ark-section-title {
-	font-family: 'Comfortaa-Regular';
+  font-family: 'Comfortaa-Regular';
   font-size: 24px;
   font-weight: bold;
   line-height: 32px;
@@ -17,7 +17,7 @@
 }
 
 .opacity {
-	opacity: 0.5;
+  opacity: 0.5;
 }
 
 .ark-border-box {
@@ -25,46 +25,58 @@
 }
 
 .ark-block-text {
-	font-family: 'Comfortaa-Regular';
-	font-size: 13px;
-	margin: 8px 0;
-	&.ark-offset-bottom {
-		margin-bottom: 50px;
-	}
+  font-family: 'Comfortaa-Regular';
+  font-size: 13px;
+  margin: 8px 0;
+  &.ark-offset-bottom {
+    margin-bottom: 50px;
+  }
 }
 
 .ark-section-wrap {
-	min-height :calc(~'100vh - 125px');
+  min-height: calc(~'100vh - 125px');
 }
 
 .ark-summary-title {
-	&.ark-width-20 {
-		min-width: 80px;
-	}
+  &.ark-width-20 {
+    min-width: 80px;
+  }
 }
 
 .ark-summary-data {
-		text-align: right;
-		word-break: break-all;
+  text-align: right;
+  word-break: break-all;
 }
 
 .ark-show-clipboard {
-	position: relative;
+  position: relative;
 }
 
 @media (max-width: @tablet) {
-	.ark-section-title {
-		&.ark-topoffset-60 {
-			margin-top: 60px;
-		}
-	}
+  .ark-section-title {
+    &.ark-topoffset-60 {
+      margin-top: 60px;
+    }
+  }
+
+  .toast-container.toast-top-right {
+    top: unset;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+
+    .toast {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
 }
 
 @media (max-width: @mobile) {
-	.ark-section-title {
-	  font-size: 20px;
-	  line-height: 26px;
-	}
+  .ark-section-title {
+    font-size: 20px;
+    line-height: 26px;
+  }
 }
 
 .dark-theme {
