@@ -1,5 +1,5 @@
-import {OwnerInfo} from './owner-info.model';
-import {BaseApiResponse} from './api-response.model';
+import { OwnerInfo } from './owner-info.model';
+import { BaseApiResponse } from './api-response.model';
 import { Pagination, PaginationResult } from './pagination.model';
 import { Delegate } from './delegate.model';
 

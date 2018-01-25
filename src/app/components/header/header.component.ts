@@ -11,6 +11,7 @@ import { TransactionResponse } from '../../models/transaction.model';
 import { SearchExecutor } from './search-executor';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { Network } from '../../models/network-config.model';
 
 @Component({
   selector: 'ark-header',
@@ -21,7 +22,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class HeaderComponent implements OnInit, OnDestroy {
   public headerHeight = 0;
   public headerSupply = 0;
-  public headerNethash = CONFIG.NETWORK.toLowerCase();
+  public headerNethash = CONFIG.activeNetwork.name.toLowerCase();
   public exchangeRate = {};
 
   public openMobileMenu = false;
@@ -29,7 +30,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public connection = true;
 
   private _timer: any = null;
-  private _network: any = CONFIG.NETWORKS[CONFIG.NETWORK];
+  private _network: Network = CONFIG.activeNetwork;
   private activeSearches: SearchExecutor<any>[] = [];
 
   @Output() currentCurrency: EventEmitter<string> = new EventEmitter<string>();
@@ -154,7 +155,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   private getExchangeRates(): void {
-    for (const currency of this._network.CURRENCIES) {
+    for (const currency of this._network.currencies) {
       if (currency === 'USD') {
         this.exchangeRate['BTC'] = null;
       }
