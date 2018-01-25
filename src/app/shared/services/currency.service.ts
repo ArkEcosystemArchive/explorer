@@ -9,12 +9,13 @@ import 'rxjs/add/operator/catch';
 import { HttpClient } from '@angular/common/http';
 import {BlockHeightResponse, BlockSupplyResponse} from '../../models/block.model';
 import { Network } from '../../models/network-config.model';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 @Injectable()
 export class CurrencyService {
-  private currencySource = new Subject<CurrencyModel>();
-  private supplySource = new Subject<number>();
-  private heightSource = new Subject<number>();
+  private currencySource = new ReplaySubject<CurrencyModel>(1);
+  private supplySource = new ReplaySubject<number>(1);
+  private heightSource = new ReplaySubject<number>(1);
 
   private _network: Network = CONFIG.activeNetwork;
 
