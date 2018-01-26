@@ -9,18 +9,19 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of accounts; let i = index;">
+        <tr *ngFor="let account of accounts; let i = index;">
             <td class="ellipsis width-15">{{i + 1}}</td>
-            <td class="ellipsis width-15"><a [routerLink]="['/address', item.address]">{{item.address}}</a></td>
-            <td class="ellipsis width-15">{{(item.balance / 100000000)*currencyValue | number: '1.2-8'}} {{currencyName}}</td>
+            <td class="ellipsis width-15"><a [routerLink]="['/address', account.address]">{{account.address}}</a></td>
+            <td class="ellipsis width-15">{{(account.balance / 100000000)*currencyValue | number: '1.2-8'}} {{currencyName}}</td>
             <td class="ellipsis width-15">
-                <span *ngIf="supply">{{(item.balance / supply)*100 | number: '1.2-2'}}%</span>
+                <span *ngIf="supply">{{(account.balance / supply)*100 | number: '1.2-2'}}%</span>
                 <span *ngIf="!supply">0.00%</span>
             </td>
-            <td class="ellipsis width-15">
-                <span *ngIf="item.knowledge">{{item.knowledge.owner}} <span class="opacity" *ngIf="item.knowledge.description">{{item.knowledge.description}}</span></span>
-                <span *ngIf="!item.knowledge">N/A</span>
-            </td>
+          <td class="ellipsis width-15">
+            <span *ngIf="isKnown(account)">{{ known[account.address] }}</span>
+            <span *ngIf="isDelegate(account)">{{ delegates[account.publicKey].username }}</span>
+            <span *ngIf="!isKnown(account) && !isDelegate(account)">N/A</span>
+          </td>
         </tr>
     </tbody>
 </table>

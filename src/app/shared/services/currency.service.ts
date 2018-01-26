@@ -8,14 +8,16 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { HttpClient } from '@angular/common/http';
 import {BlockHeightResponse, BlockSupplyResponse} from '../../models/block.model';
+import { Network } from '../../models/network-config.model';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 @Injectable()
 export class CurrencyService {
-  private currencySource = new Subject<CurrencyModel>();
-  private supplySource = new Subject<number>();
-  private heightSource = new Subject<number>();
+  private currencySource = new ReplaySubject<CurrencyModel>(1);
+  private supplySource = new ReplaySubject<number>(1);
+  private heightSource = new ReplaySubject<number>(1);
 
-  private _network: any = CONFIG.NETWORKS[CONFIG.NETWORK];
+  private _network: Network = CONFIG.activeNetwork;
 
   currencyChosen$: Observable<CurrencyModel>;
   supplyChosen$: Observable<number>;
@@ -53,17 +55,17 @@ export class CurrencyService {
   }
 
   getHeight(): Observable<BlockHeightResponse> {
-    return this.http.get<BlockHeightResponse>(`${this._network.NODE}/blocks/getHeight`)
+    return this.http.get<BlockHeightResponse>(`${this._network.node}/blocks/getHeight`)
       .catch((error: any) => Observable.throw(error.error || 'Server error'));
   }
 
   getSupply(): Observable<BlockSupplyResponse> {
-    return this.http.get<BlockSupplyResponse>(`${this._network.NODE}/blocks/getSupply`)
+    return this.http.get<BlockSupplyResponse>(`${this._network.node}/blocks/getSupply`)
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   public getPriceFor(currency: string) {
-    if (this._network.PROPERTIES.indexOf('DISABLE_PRICE_API') !== -1) {
+    if (this._network.properties.disablePriceApi) {
       return Observable.of({});
     }
     return this.http.get(`https://api.coinmarketcap.com/v1/ticker/ark/?convert=${currency}`)
