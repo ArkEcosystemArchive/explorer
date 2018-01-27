@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 
 import { CurrencyService } from '../../shared/services/currency.service';
-import { ConnectionMessageService } from '../../shared/services/connection-message.service';
 import { initCurrency } from '../../shared/const/currency';
 import { Account, AccountsResponse } from '../../models/account.model';
 import { CONFIG } from '../../app.config';
@@ -56,8 +55,7 @@ export class AddressTableComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,
               private _currencyService: CurrencyService,
-              private _explorerService: ExplorerService,
-              private _connectionService: ConnectionMessageService) {
+              private _explorerService: ExplorerService) {
   }
 
   public ngOnInit(): void {
@@ -112,7 +110,6 @@ export class AddressTableComponent implements OnInit, OnDestroy {
 
   private loadAccountsCallback = (res: LoadAccountsResult): void => {
     this.accounts = this.accounts.concat(res.accounts || []);
-    this._connectionService.changeConnection(res.success);
     this.showLoader = !res.success;
     this.areLoadButtonsVisible = !res.isLast;
   };

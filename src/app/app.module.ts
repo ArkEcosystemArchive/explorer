@@ -28,7 +28,6 @@ import { DatePipe, OverflowTextPipe } from './shared/pipes/general.pipe';
 import { TopAccountsComponent } from './pages/top-accounts/top-accounts.component';
 import { DelegatesComponent } from './pages/delegate-monitor/delegates/delegates.component';
 import { ScrollTopComponent } from './components/scroll-top/scroll-top.component';
-import { ConnectionMessageService } from './shared/services/connection-message.service';
 import { ToggleBackgroundComponent } from './components/header/toggle-background/toggle-background.component';
 import { ThemeService } from './shared/services/theme.service';
 import { LocalStorageService } from './shared/services/local-storage.service';
@@ -101,7 +100,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   ],
   providers: [
     CurrencyService,
-    ConnectionMessageService,
     ThemeService,
     LocalStorageService,
   ],

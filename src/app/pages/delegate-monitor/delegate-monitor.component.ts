@@ -4,7 +4,6 @@ import { CurrencyService } from '../../shared/services/currency.service';
 import { DelegateMonitorService } from './delegate-monitor.service';
 import { ExplorerService } from '../../shared/services/explorer.service';
 import { CoinmarketService } from '../../shared/services/coinmarket.service';
-import { ConnectionMessageService } from '../../shared/services/connection-message.service';
 import { initCurrency } from '../../shared/const/currency';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -35,14 +34,11 @@ export class DelegateMonitorComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   private chartSubscription: Subscription;
 
-  constructor(
-    private router: Router,
-    private _currencyService: CurrencyService,
-    private _monitorService: DelegateMonitorService,
-    private _explorerService: ExplorerService,
-    private _marketService: CoinmarketService,
-    private _connectionService: ConnectionMessageService
-  ) {
+  constructor(private router: Router,
+              private _currencyService: CurrencyService,
+              private _monitorService: DelegateMonitorService,
+              private _explorerService: ExplorerService,
+              private _marketService: CoinmarketService) {
     this.subscription = _currencyService.currencyChosen$.subscribe(currency => {
       this.currencyName = currency.name;
       this.currencyValue = currency.value;
@@ -55,7 +51,6 @@ export class DelegateMonitorComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window.scrollTo(0, 0);
-    this._connectionService.changeConnection(false);
 
     this.monitorData = {
       active: null,
