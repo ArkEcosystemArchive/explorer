@@ -3,7 +3,6 @@ import { DOCUMENT } from '@angular/common';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ExplorerService } from '../../shared/services/explorer.service';
 import { CurrencyService } from '../../shared/services/currency.service';
-import { ConnectionMessageService } from '../../shared/services/connection-message.service';
 import { initCurrency } from '../../shared/const/currency';
 import { PaginatedTransactions, Transaction } from '../../models/transaction.model';
 import {Account} from '../../models/account.model';
@@ -15,8 +14,7 @@ import 'rxjs/add/operator/switchMap';
 @Component({
   selector: 'ark-address',
   templateUrl: './address.component.html',
-  styleUrls: ['./address.component.less'],
-  providers: [ExplorerService]
+  styleUrls: ['./address.component.less']
 })
 export class AddressComponent implements OnInit, OnDestroy {
   @ViewChild('voters') votersBlock: ElementRef;
@@ -44,14 +42,11 @@ export class AddressComponent implements OnInit, OnDestroy {
   private supplySubscription: Subscription;
   private votersNumber = 4;
 
-  constructor(
-    @Inject(DOCUMENT) private document: Document,
-    private route: ActivatedRoute,
-    private router: Router,
-    private _explorerService: ExplorerService,
-    private _currencyService: CurrencyService,
-    private _connectionService: ConnectionMessageService
-  ) {
+  constructor(@Inject(DOCUMENT) private document: Document,
+              private route: ActivatedRoute,
+              private router: Router,
+              private _explorerService: ExplorerService,
+              private _currencyService: CurrencyService) {
     this.subscription = _currencyService.currencyChosen$.subscribe(currency => {
       this.currencyName = currency.name;
       this.currencyValue = currency.value;
@@ -82,7 +77,6 @@ export class AddressComponent implements OnInit, OnDestroy {
 
       this._explorerService.getAccount(this.currentAddress).subscribe(account => {
           this.addressItem = account;
-          this._connectionService.changeConnection(true);
           window.scrollTo(0, 0);
 
           this._explorerService.getDelegateByPublicKey(this.addressItem.publicKey).subscribe(
@@ -125,7 +119,6 @@ export class AddressComponent implements OnInit, OnDestroy {
           );
         },
         (error) => {
-          this._connectionService.changeConnection(false);
           this.setErrorInfo(true, error);
         });
     });

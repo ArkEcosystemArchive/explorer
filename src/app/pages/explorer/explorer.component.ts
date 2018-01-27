@@ -1,20 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
 import { ExplorerService } from '../../shared/services/explorer.service';
 import { CurrencyService } from '../../shared/services/currency.service';
 import { CoinmarketService } from '../../shared/services/coinmarket.service';
-import { ConnectionMessageService } from '../../shared/services/connection-message.service';
 import { initCurrency } from '../../shared/const/currency';
 import { ThemeService } from '../../shared/services/theme.service';
-import {Transaction} from '../../models/transaction.model';
-import {Block} from '../../models/block.model';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'ark-explorer',
   templateUrl: './explorer.component.html',
   styleUrls: ['./explorer.component.less'],
-  providers: [ExplorerService, CoinmarketService]
+  providers: [CoinmarketService]
 })
 export class ExplorerComponent implements OnInit, OnDestroy {
   public transactions: any[];
@@ -31,14 +27,10 @@ export class ExplorerComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   private chartSubscription: Subscription;
 
-  constructor(
-    private _explorerService: ExplorerService,
-    private _currencyService: CurrencyService,
-    private _marketService: CoinmarketService,
-    private _connectionService: ConnectionMessageService,
-    private _themeService: ThemeService,
-    private router: Router
-  ) {
+  constructor(private _explorerService: ExplorerService,
+              private _currencyService: CurrencyService,
+              private _marketService: CoinmarketService,
+              private _themeService: ThemeService) {
     this.subscription = _currencyService.currencyChosen$.subscribe(currency => {
       this.currency = currency.name;
       this.currencyRate = currency.value;
@@ -89,7 +81,6 @@ export class ExplorerComponent implements OnInit, OnDestroy {
     this._explorerService.getLastTransactions().subscribe(
       res => {
         this.transactions = res.transactions;
-        this._connectionService.changeConnection(true);
         this.showTransactionLoader = false;
       }
     );
@@ -99,7 +90,6 @@ export class ExplorerComponent implements OnInit, OnDestroy {
     this._explorerService.getLastBlocks(0).subscribe(
       res => {
         this.blocks = res.blocks;
-        this._connectionService.changeConnection(true);
         this.showBlockLoader = false;
       }
     );

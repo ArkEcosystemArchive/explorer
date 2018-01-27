@@ -58,7 +58,6 @@ export class ExplorerService {
     }, 600000);
   }
 
-  // public getLastTransactions(): Observable<TransactionsResponse> {
   public getLastTransactions = (parameters?: TransactionRequestParameters): Observable<PaginatedTransactions> => {
     if (!parameters) {
       parameters = {};
@@ -117,7 +116,6 @@ export class ExplorerService {
       .catch((error: any) => Observable.throw(error || 'Server error'));
   };
 
-  // public getLastBlocks(n?: number): Observable<BlocksResponse> {
   public getLastBlocks(offset?: number): Observable<PaginatedBlocks> {
     let lastBlocks: Block[] = [];
     return this.http.get(`${this._network.node}/blocks?orderBy=height:desc&limit=20&offset=${offset}`)
@@ -166,7 +164,6 @@ export class ExplorerService {
       });
   }
 
-  // public getAccount(address: any): Observable<AccountResponse> {
   public getAccount(address: any): Observable<Account> {
     return this.http.get<AccountResponse>(`${this._network.node}/accounts?address=${address}`)
       .map((res: AccountResponse) => {
@@ -222,7 +219,6 @@ export class ExplorerService {
       .map((res: TransactionsResponse) => (res.count));
   }
 
-  // public getBlock(id: any): Observable<BlockResponse> {
   public getBlock(id: string | number): Observable<Block> {
     return this.http.get<BlockResponse>(`${this._network.node}/blocks/get?id=${id}`)
       .map((res: BlockResponse) => {

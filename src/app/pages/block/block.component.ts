@@ -3,7 +3,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { ExplorerService } from '../../shared/services/explorer.service';
 import { CurrencyService } from '../../shared/services/currency.service';
-import { ConnectionMessageService } from '../../shared/services/connection-message.service';
 import { initCurrency } from '../../shared/const/currency';
 import { Transaction } from '../../models/transaction.model';
 import {Block} from '../../models/block.model';
@@ -13,8 +12,7 @@ import 'rxjs/add/operator/switchMap';
 @Component({
   selector: 'ark-block',
   templateUrl: './block.component.html',
-  styleUrls: ['./block.component.less'],
-  providers: [ExplorerService]
+  styleUrls: ['./block.component.less']
 })
 export class BlockComponent implements OnInit, OnDestroy {
   public block: Block;
@@ -27,13 +25,10 @@ export class BlockComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private _explorerService: ExplorerService,
-    private _currencyService: CurrencyService,
-    private _connectionService: ConnectionMessageService
-  ) {
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private _explorerService: ExplorerService,
+              private _currencyService: CurrencyService) {
     this.subscription = _currencyService.currencyChosen$.subscribe(currency => {
       this.currencyName = currency.name;
       this.currencyValue = currency.value;
@@ -46,10 +41,8 @@ export class BlockComponent implements OnInit, OnDestroy {
       this.setErrorInfo();
       this._explorerService.getBlock(params['id']).subscribe(block => {
           this.block = block;
-          this._connectionService.changeConnection(true);
         },
         (error) => {
-          this._connectionService.changeConnection(false);
           this.setErrorInfo(params['id'], error);
         });
 

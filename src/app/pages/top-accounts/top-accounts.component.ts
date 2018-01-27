@@ -3,8 +3,7 @@ import { ExplorerService } from '../../shared/services/explorer.service';
 
 @Component({
   selector: 'ark-top-accounts',
-  templateUrl: './top-accounts.component.html',
-  providers: [ExplorerService]
+  templateUrl: './top-accounts.component.html'
 })
 export class TopAccountsComponent implements OnInit {
 

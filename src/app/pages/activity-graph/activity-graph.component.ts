@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { ConnectionMessageService } from '../../shared/services/connection-message.service';
 import { GraphService } from './activity-graph.service';
 import { GraphStatisticService } from './activity-statistic.service';
 import { CurrencyService } from '../../shared/services/currency.service';
@@ -16,7 +15,7 @@ import * as Sigma from 'sigma';
   selector: 'ark-activity-graph',
   templateUrl: './activity-graph.component.html',
   styleUrls: ['./activity-graph.component.less'],
-  providers: [GraphService, GraphStatisticService, ExplorerService]
+  providers: [GraphService, GraphStatisticService]
 })
 export class ActivityGraphComponent implements OnInit, OnDestroy {
   public sigma: any;
@@ -36,13 +35,10 @@ export class ActivityGraphComponent implements OnInit, OnDestroy {
     type: 'canvas'
   };
 
-  constructor(
-    private _explorerService: ExplorerService,
-    private _graph: GraphService,
-    private _statistic: GraphStatisticService,
-    private _currencyService: CurrencyService,
-    private _connectionService: ConnectionMessageService
-  ) {
+  constructor(private _explorerService: ExplorerService,
+              private _graph: GraphService,
+              private _statistic: GraphStatisticService,
+              private _currencyService: CurrencyService) {
     this.getLastBlock();
 
     this._timer = setInterval(() => this.getLastBlock(), 8000);
@@ -58,7 +54,6 @@ export class ActivityGraphComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window.scrollTo(0, 0);
-    this._connectionService.changeConnection(true);
     this.showLoader = true;
     this.sigma = new Sigma({
       renderer: this.renderer,
@@ -82,7 +77,6 @@ export class ActivityGraphComponent implements OnInit, OnDestroy {
 
   private getLastBlock() {
     this._explorerService.getLastBlock().subscribe(block => {
-        this._connectionService.changeConnection(true);
         if (this.sigma) {
           this._graph.refresh(this.sigma, block);
           this._statistic.refresh(this.sigma);
