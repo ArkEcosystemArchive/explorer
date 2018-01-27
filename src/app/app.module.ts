@@ -41,6 +41,7 @@ import { ClipboardComponent } from './components/clipboard/clipboard.component';
 import { ErrorSectionComponent } from './components/error-section/error-section.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { ExplorerService } from './shared/services/explorer.service';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/translate/', '.json');
@@ -102,6 +103,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CurrencyService,
     ThemeService,
     LocalStorageService,
+    ExplorerService
   ],
   bootstrap: [AppComponent]
 })

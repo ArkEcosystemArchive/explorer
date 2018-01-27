@@ -6,8 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'ark-block-list',
-  templateUrl: './transaction-list.component.html',
-  providers: [ExplorerService]
+  templateUrl: './transaction-list.component.html'
 })
 export class TransactionListComponent implements OnInit {
   public transactions: Transaction[] = [];

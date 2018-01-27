@@ -10,8 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'ark-block-list',
   templateUrl: './block-list.component.html',
-  styleUrls: ['./block-list.component.less'],
-  providers: [ExplorerService]
+  styleUrls: ['./block-list.component.less']
 })
 export class BlockListComponent implements OnInit, OnDestroy {
   public blocks: Block[] = [];

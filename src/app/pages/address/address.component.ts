@@ -14,8 +14,7 @@ import 'rxjs/add/operator/switchMap';
 @Component({
   selector: 'ark-address',
   templateUrl: './address.component.html',
-  styleUrls: ['./address.component.less'],
-  providers: [ExplorerService]
+  styleUrls: ['./address.component.less']
 })
 export class AddressComponent implements OnInit, OnDestroy {
   @ViewChild('voters') votersBlock: ElementRef;

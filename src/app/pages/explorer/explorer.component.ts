@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
 import { ExplorerService } from '../../shared/services/explorer.service';
 import { CurrencyService } from '../../shared/services/currency.service';
 import { CoinmarketService } from '../../shared/services/coinmarket.service';
@@ -11,7 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
   selector: 'ark-explorer',
   templateUrl: './explorer.component.html',
   styleUrls: ['./explorer.component.less'],
-  providers: [ExplorerService, CoinmarketService]
+  providers: [CoinmarketService]
 })
 export class ExplorerComponent implements OnInit, OnDestroy {
   public transactions: any[];

@@ -15,7 +15,7 @@ import * as Sigma from 'sigma';
   selector: 'ark-activity-graph',
   templateUrl: './activity-graph.component.html',
   styleUrls: ['./activity-graph.component.less'],
-  providers: [GraphService, GraphStatisticService, ExplorerService]
+  providers: [GraphService, GraphStatisticService]
 })
 export class ActivityGraphComponent implements OnInit, OnDestroy {
   public sigma: any;

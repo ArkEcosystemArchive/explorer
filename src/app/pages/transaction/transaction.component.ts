@@ -11,8 +11,7 @@ import 'rxjs/add/operator/switchMap';
 @Component({
   selector: 'ark-transaction',
   templateUrl: './transaction.component.html',
-  styleUrls: ['./transaction.component.less'],
-  providers: [ ExplorerService ]
+  styleUrls: ['./transaction.component.less']
 })
 export class TransactionComponent implements OnInit, OnDestroy {
   public transaction: Transaction;

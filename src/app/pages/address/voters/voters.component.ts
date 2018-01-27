@@ -7,8 +7,7 @@ import { LoadAccountsResult } from '../../../components/address-table/address-ta
 
 @Component({
   templateUrl: './voters.component.html',
-  styleUrls: ['../address.component.less'],
-  providers: [ExplorerService]
+  styleUrls: ['../address.component.less']
 })
 export class VotersComponent implements OnInit {
 

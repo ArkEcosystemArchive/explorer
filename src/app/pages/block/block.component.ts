@@ -12,8 +12,7 @@ import 'rxjs/add/operator/switchMap';
 @Component({
   selector: 'ark-block',
   templateUrl: './block.component.html',
-  styleUrls: ['./block.component.less'],
-  providers: [ExplorerService]
+  styleUrls: ['./block.component.less']
 })
 export class BlockComponent implements OnInit, OnDestroy {
   public block: Block;

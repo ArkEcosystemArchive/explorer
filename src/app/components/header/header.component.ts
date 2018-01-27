@@ -16,8 +16,7 @@ import { Network } from '../../models/network-config.model';
 @Component({
   selector: 'ark-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.less'],
-  providers: [ExplorerService]
+  styleUrls: ['./header.component.less']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   public headerHeight = 0;

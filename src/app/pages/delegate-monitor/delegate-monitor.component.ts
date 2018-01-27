@@ -13,7 +13,7 @@ import 'rxjs/add/operator/switchMap';
   selector: 'ark-delegate-monitor',
   templateUrl: './delegate-monitor.component.html',
   styleUrls: ['./delegate-monitor.component.less'],
-  providers: [DelegateMonitorService, ExplorerService, CoinmarketService]
+  providers: [DelegateMonitorService, CoinmarketService]
 })
 export class DelegateMonitorComponent implements OnInit, OnDestroy {
   public currencyName: string = initCurrency.name;
