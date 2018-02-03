@@ -5,6 +5,7 @@ export interface NetworkConfig {
 
 export interface Network {
   name: string;
+  displayName: string;
   node: string;
   nethash: string;
   currencies: string[];

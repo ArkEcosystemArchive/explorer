@@ -21,7 +21,7 @@ import { Network } from '../../models/network-config.model';
 export class HeaderComponent implements OnInit, OnDestroy {
   public headerHeight = 0;
   public headerSupply = 0;
-  public headerNethash = CONFIG.activeNetwork.name.toLowerCase();
+  public headerNethash = CONFIG.activeNetwork.displayName;
   public exchangeRate = {};
 
   public openMobileMenu = false;
