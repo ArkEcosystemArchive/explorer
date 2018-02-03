@@ -1,7 +1,9 @@
 import { Network, NetworkConfig } from './models/network-config.model';
+import { environment } from '../environments/environment';
 
 const mainNet: Network = {
   name: 'MAINNET',
+  displayName: 'Mainnet',
   node: 'https://explorer.ark.io:8443/api',
   nethash: '6e84d08bd299ed97c212c886c98a57e36545c8f5d645ca7eeae63a8bd62d8988',
   currencies: ['ARK', 'BTC', 'USD', 'EUR', 'GBP', 'CNY', 'KRW'],
@@ -18,6 +20,7 @@ const mainNet: Network = {
 
 const devNet: Network = {
   name: 'DEVNET',
+  displayName: 'Devnet',
   node: 'https://dexplorer.ark.io:8443/api',
   nethash: '578e820911f24e039733b45e4882b73e301f813a0d2c31330dafda84534ffa23',
   currencies: ['DARK'],
@@ -28,6 +31,6 @@ const devNet: Network = {
 };
 
 export const CONFIG: NetworkConfig = {
-  activeNetwork: devNet,
+  activeNetwork: environment.production ? mainNet : devNet,
   availableNetworks: [mainNet, devNet]
 };
