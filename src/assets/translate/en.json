@@ -154,6 +154,7 @@
             "FROM_START": "from the start"
         },
         "VOTES_TITLE": "Latest Votes",
+        "LATEST_DELEGATES_TITLE": "Latest Delegate Registrations",
         "TABS": {
             "ACTIVE": "Active Delegates",
             "STANDBY": "Standby Delegates"
