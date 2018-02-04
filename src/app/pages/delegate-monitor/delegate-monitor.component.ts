@@ -24,15 +24,12 @@ export class DelegateMonitorComponent implements OnInit, OnDestroy {
   public productivity: any;
   public delegatesList: any = [];
   public activeDelegate = true;
-  public chart: any;
-  public activeChartTab = 'day';
   public supply: number;
   public height: number;
   public totals: any;
 
   private _timer = null;
   private subscription: Subscription;
-  private chartSubscription: Subscription;
 
   constructor(private router: Router,
               private _currencyService: CurrencyService,
@@ -42,10 +39,6 @@ export class DelegateMonitorComponent implements OnInit, OnDestroy {
     this.subscription = _currencyService.currencyChosen$.subscribe(currency => {
       this.currencyName = currency.name;
       this.currencyValue = currency.value;
-    });
-
-    this.chartSubscription = _marketService.chartBuilt$.subscribe(chart => {
-      this.chart = chart;
     });
   }
 
@@ -68,8 +61,6 @@ export class DelegateMonitorComponent implements OnInit, OnDestroy {
       this._loadBlockData();
       this._loadDelegateData();
     }, 8000);
-
-    this._marketService.build(this.activeChartTab);
   }
 
   private _loadBlockData() {
@@ -156,7 +147,6 @@ export class DelegateMonitorComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-    this.chartSubscription.unsubscribe();
     if (this._timer) {
       clearInterval(this._timer);
     }
