@@ -8,6 +8,7 @@ import { initCurrency } from '../../shared/const/currency';
 import { Subscription } from 'rxjs/Subscription';
 
 import 'rxjs/add/operator/switchMap';
+import { Transaction } from '../../models/transaction.model';
 
 @Component({
   selector: 'ark-delegate-monitor',
@@ -111,7 +112,27 @@ export class DelegateMonitorComponent implements OnInit, OnDestroy {
 
   private _getLatestVotes() {
     this._explorerService.getLatestVotes().subscribe(res => {
-      this.monitorData.votes = res.transactions;
+      this.monitorData.votes = res.transactions.map(t => {
+        this.trySetVotedDelegate(t);
+        return t;
+      });
+    });
+  }
+
+  private trySetVotedDelegate(transaction: Transaction): void {
+    if (!transaction.asset || !transaction.asset.votes || !transaction.asset.votes.length) {
+      return;
+    }
+
+    const voteType = (transaction.asset.votes[0] || '').substring(0, 1);
+    if (voteType !== '+' && voteType !== '-') {
+      return;
+    }
+
+    const publicKey = transaction.asset.votes[0].substring(1);
+    this._explorerService.getDelegateByPublicKey(publicKey).subscribe(delegate => {
+      transaction.asset.delegate = delegate;
+      transaction.asset.votes = voteType;
     });
   }
 

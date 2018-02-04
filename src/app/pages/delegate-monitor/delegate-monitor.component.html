@@ -142,58 +142,75 @@
                 <div class="ark-gradient-border green-gradient"></div>
             </li>
         </ul>
-        <div class="ark-section-title">{{ 'DELEGATE_MONITOR.VOTES_TITLE' | translate }}</div>
         <div class="ark-latest-votes ark-flex ark-flex-between">
             <div class="ark-col ark-col-6">
-                <table class="ark-table ark-table-bordered">
-                    <thead>
-                        <tr>
-                            <th class="ellipsis width-15">{{ 'GENERAL.INFO.VOTER' | translate }}</th>
-                            <th class="ellipsis width-15">{{ 'GENERAL.INFO.TRANSACTION' | translate }}</th>
-                            <th class="ellipsis width-15">{{ 'GENERAL.INFO.TIME' | translate }}</th>
-                        </tr>
-                        <tr *ngIf="monitorData && monitorData.votes">
-                            <th class="ellipsis width-15"></th>
-                            <th class="ellipsis width-15"></th>
-                            <th class="ellipsis width-15"></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody *ngIf="monitorData && monitorData.votes">
-                        <tr *ngFor="let item of monitorData.votes">
-                            <td class="ellipsis width-15"><a [routerLink]="getAddressLink(item.senderId)">{{item.senderId | overflowText}}</a></td>
-                            <td class="ellipsis width-15"><a [routerLink]="getTransactionLink(item.id)">{{item.id | overflowText}}</a></td>
-                            <td class="ellipsis width-15">{{item.timestamp | localDate | amTimeAgo}}</td>
-                            <td></td>
-                        </tr>
-                    </tbody>
+              <div class="ark-section-title">{{ 'DELEGATE_MONITOR.VOTES_TITLE' | translate }}</div>
+              <table class="ark-table ark-table-bordered">
+                <thead>
+                <tr>
+                  <th class="ellipsis width-15">{{ 'GENERAL.INFO.VOTER' | translate }}</th>
+                  <th class="ellipsis width-15">{{ 'GENERAL.INFO.DELEGATE' | translate }}</th>
+                  <th class="ellipsis width-15">{{ 'GENERAL.INFO.TRANSACTION' | translate }}</th>
+                  <th class="ellipsis width-15">{{ 'GENERAL.INFO.TIME' | translate }}</th>
+                </tr>
+                <tr *ngIf="monitorData && monitorData.votes">
+                  <th class="ellipsis width-15"></th>
+                  <th class="ellipsis width-15"></th>
+                  <th class="ellipsis width-15"></th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody *ngIf="monitorData && monitorData.votes">
+                <tr *ngFor="let transaction of monitorData.votes">
+                  <td class="ellipsis width-15">
+                    <a [routerLink]="getAddressLink(transaction.senderId)">
+                      {{transaction.senderId | overflowText}}
+                    </a>
+                  </td>
+                  <td class="ellipsis width-15">
+                    <a *ngIf="transaction.asset && transaction.asset.delegate"
+                       [routerLink]="getAddressLink(transaction.asset.delegate.address)">
+                      {{transaction.asset.votes}} {{transaction.asset.delegate.username}}
+                    </a>
+                    <span *ngIf="!transaction.asset || !transaction.asset.delegate">N/A</span>
+                  </td>
+                  <td class="ellipsis width-15">
+                    <a [routerLink]="getTransactionLink(transaction.id)">
+                      {{transaction.id | overflowText}}
+                    </a>
+                  </td>
+                  <td class="ellipsis width-15">{{transaction.timestamp | localDate | amTimeAgo}}</td>
+                  <td></td>
+                </tr>
+                </tbody>
                 </table>
             </div>
-            <div class="ark-col ark-col-6">
-                <table class="ark-table ark-table-bordered">
-                    <thead>
-                        <tr>
-                            <th class="ellipsis width-10">{{ 'GENERAL.INFO.DELEGATE' | translate }}</th>
-                            <th class="ellipsis width-15">{{ 'GENERAL.INFO.TRANSACTION' | translate }}</th>
-                            <th class="ellipsis width-15">{{ 'GENERAL.INFO.TIME' | translate }}</th>
-                        </tr>
-                        <tr *ngIf="monitorData && monitorData.registrations">
-                            <th class="ellipsis width-10"></th>
-                            <th class="ellipsis width-15"></th>
-                            <th class="ellipsis width-15"></th>
-                            <th class="ellipsis width-15"></th>
-                        </tr>
-                    </thead>
-                    <tbody *ngIf="monitorData && monitorData.registrations">
-                        <tr *ngFor="let item of monitorData.registrations">
-                            <td class="ellipsis width-10"><a [routerLink]="getAddressLink(item.asset.delegate.address)">{{item.asset.delegate.username}}</a></td>
-                            <td class="ellipsis width-15"><a [routerLink]="getTransactionLink(item.id)">{{item.id | overflowText}}</a></td>
-                            <td class="ellipsis width-15">{{item.timestamp | localDate | amTimeAgo}}</td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+          <div class="ark-col ark-col-6">
+            <div class="ark-section-title">{{ 'DELEGATE_MONITOR.LATEST_DELEGATES_TITLE' | translate }}</div>
+            <table class="ark-table ark-table-bordered">
+              <thead>
+              <tr>
+                <th class="ellipsis width-10">{{ 'GENERAL.INFO.DELEGATE' | translate }}</th>
+                <th class="ellipsis width-15">{{ 'GENERAL.INFO.TRANSACTION' | translate }}</th>
+                <th class="ellipsis width-15">{{ 'GENERAL.INFO.TIME' | translate }}</th>
+              </tr>
+              <tr *ngIf="monitorData && monitorData.registrations">
+                <th class="ellipsis width-10"></th>
+                <th class="ellipsis width-15"></th>
+                <th class="ellipsis width-15"></th>
+                <th class="ellipsis width-15"></th>
+              </tr>
+              </thead>
+              <tbody *ngIf="monitorData && monitorData.registrations">
+              <tr *ngFor="let item of monitorData.registrations">
+                <td class="ellipsis width-10"><a [routerLink]="getAddressLink(item.asset.delegate.address)">{{item.asset.delegate.username}}</a></td>
+                <td class="ellipsis width-15"><a [routerLink]="getTransactionLink(item.id)">{{item.id | overflowText}}</a></td>
+                <td class="ellipsis width-15">{{item.timestamp | localDate | amTimeAgo}}</td>
+                <td></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="ark-section-title">{{ 'DELEGATE_MONITOR.MONITOR.DELEGATES_TITLE' | translate}}</div>
         <div class="ark-tab-header">
