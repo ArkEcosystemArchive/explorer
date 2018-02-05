@@ -22,6 +22,9 @@ header {
   background: @light-header-bg;
   position: relative;
   z-index: 1;
+  .ark-mobile-header-title {
+    display: none;
+  }
   .box-shadow(0 2px 14px 0 @box-shadow-color);
   .ark-logo {
     margin-right: 25px;
@@ -47,6 +50,12 @@ header {
   }
 
   @media (max-width: @tablet) {
+    .ark-mobile-header-title {
+      font-family: 'Comfortaa-Regular', serif;
+      width: 100%;
+      text-align: left;
+      display: inline-block;
+    }
     height: 60px;
     // position: fixed;
     top: 0;
@@ -55,7 +64,7 @@ header {
     background-color: @light-header-bg;
     z-index: 3;
     .ark-logo {
-      width: 60px;
+      width: 78px;
       height: 60px;
     }
     .ark-header-items {
@@ -68,12 +77,8 @@ header {
       left: -120%;
       width: 100%;
       .transition(all .5s);
-      padding: 10px;
       &.open {
         left: 0;
-      }
-      .ark-header-data {
-        margin: 0 auto;
       }
       nav {
         display: block;
@@ -91,70 +96,26 @@ header {
   }
 
   @media (max-width: @small-mobile) {
-  .ark-header-items {
-    box-sizing: border-box;
-      .ark-header-data {
-        display: block;
-        .ark-data-item {
-          font-size: 13px;
-          margin-bottom: 10px;
-        }
-      }
+    .ark-header-items {
+      box-sizing: border-box;
     }
   }
 }
 
+.ark-inline-header-data {
+  display: none;
+}
 
-.ark-header-data {
-  font-size: 11px;
-  color: @light-body-color;
-  font-family: 'Comfortaa-Regular', serif;
-  align-items: center;
-  background: @light-subheader-bg;
-  height: 40px;
-  padding: 0 20px;
-  .ark-data-item {
-    .ark-item-nethash .ark-index-data {
-      text-transform: capitalize;
-    }
-    .ark-item-index {
-      margin-right: 30px;
-      overflow: hidden;
-      white-space: nowrap;
-      .ark-index-title {
-        font-family: 'Comfortaa-Bold', serif;
-        color: @light-subheader-label-color;
-      }
-      .ark-index-data {
-        color: @light-subheader-text-color;;
-        padding-left: 5px;
-      }
-    }
+@media (max-width: @tablet) {
+  .ark-standalone-header-data {
+    display: none;
   }
-
-  @media (max-width: @small-mobile) {
-    height: auto;
-    padding: 10px 10px;
+  .ark-inline-header-data {
     display: block;
   }
 }
 
-.connection-message {
-  background: @color-gray-10;
-  text-align: center;
-  font-size: 13px;
-  font-family: 'Avenir', serif;
-  padding: 15px 0;
-
-  i {
-    margin-right: 10px;
-  }
-}
-
 :host-context(.dark-theme) {
-  .connection-message {
-    background: @color-gray-80;
-  }
   header {
     background: @dark-header-bg;
     box-shadow: none;
