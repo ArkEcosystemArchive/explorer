@@ -196,13 +196,15 @@ export class CoinmarketService {
     return values;
   }
 
-  public getSubtitle(data: any, time: string) {
+  public getSubtitle(data: any, time: string): string {
     const current = data[data.length - 1];
     const prev = data[0];
     const difference = Math.round((current - prev) * Math.pow(10, 8)) / Math.pow(10, 8);
     const percent = Math.round(((difference / prev) * 100) * 100) / 100;
     const sign = difference > 0 ? '+' : '';
-    return '' + time + ' change: ' + sign + difference.toString() + '$ (' + sign + percent + '%)';
+    const changeClass: string = difference > 0 ? 'ark-chart-change gain' : 'ark-chart-change loss';
+
+    return `${time} change: <span class="${changeClass}">${sign}${difference.toString()}$ (${sign}${percent}%)`;
   }
 
   private _defineFormat(param: string) {
