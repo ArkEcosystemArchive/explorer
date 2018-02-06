@@ -1,0 +1,41 @@
+{
+  "title": "ARK Explorer",
+  "server": "https://explorer.ark.io:8443/api",
+  "alias": "Main",
+  "activeDelegates": 51,
+  "currencies": {
+    "AUD": "A$",
+    "BRL": "R$",
+    "BTC": "Ƀ",
+    "CAD": "C$",
+    "CHF": "CHF",
+    "CNY": "¥",
+    "ETH": "Ξ",
+    "EUR": "€",
+    "GBP": "£",
+    "INR": "₹",
+    "JPY": "¥",
+    "KRW": "₩",
+    "LTC": "Ł",
+    "NZD": "N$",
+    "RUB": "₽",
+    "USD": "$"
+  },
+  "knownWallets": {
+    "AFrPtEmzu6wdVpa2CnRDEKGQQMWgq8nE9V": "Binance",
+    "AJbmGnDAx9y91MQCDApyaqZhn6fBvYX9iJ": "Cryptopia",
+    "ALgvTAoz5Vi9easHqBK6aEMKatHb4beCXm": "ARK Shield",
+    "AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv": "ARK Team",
+    "AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK": "Bittrex",
+    "AeUyEH2UGpYrwHAupBh7syFhWYSBNFAkap": "OKEx"
+  },
+  "defaults": {
+    "currency": {
+      "name": "USD",
+      "symbol": "$"
+    }
+  },
+  "config": {
+    "priceChart": true
+  }
+}

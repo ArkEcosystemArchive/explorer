@@ -1,8 +1,0 @@
-<section>
-  <ark-transaction-table [showLoader]="showLoader" [transactions]="transactions"></ark-transaction-table>
-  <ark-pagination [getPageLinkFunc]="getPageLink"
-                  [getItemsFunc]="getLastTransactions"
-                  (changePage)="onChangePage()"
-                  (pageResult)="onPageResult($event)">
-  </ark-pagination>
-</section>

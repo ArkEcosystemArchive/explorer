@@ -1,0 +1,466 @@
+{
+  "success": true,
+  "blocks": [
+    {
+      "id": "4315613800037214683",
+      "timestamp": 25541904,
+      "generator": "AMvZYkTSMXCqFLPP4bxJyq84FfMg9m2V81",
+      "totalAmount": 0,
+      "totalFee": 0,
+      "reward": 200000000,
+      "totalForged": "200000000",
+      "transactionsCount": 0,
+      "height": 3146859,
+      "delegate": {
+        "username": "calidelegate",
+        "address": "AMvZYkTSMXCqFLPP4bxJyq84FfMg9m2V81",
+        "publicKey":
+          "037b4730e7c63252912825510423487e9ee507e1a5719dfeef52187d8ababe3048",
+        "vote": "137842758365804",
+        "producedblocks": 22480,
+        "missedblocks": 257,
+        "rate": 31,
+        "approval": 1.05,
+        "productivity": 98.87
+      }
+    },
+    {
+      "id": "2854562310562307024",
+      "timestamp": 25541896,
+      "generator": "AXzEMF7TC1aH3ax1Luxk6XdyKXDRxnBj4f",
+      "totalAmount": 0,
+      "totalFee": 0,
+      "reward": 200000000,
+      "totalForged": "200000000",
+      "transactionsCount": 0,
+      "height": 3146858,
+      "delegate": {
+        "username": "arknet",
+        "address": "AXzEMF7TC1aH3ax1Luxk6XdyKXDRxnBj4f",
+        "publicKey":
+          "0217ff1ec656f2354a899bde097bb3131a9730fe491bb87dedb96489120be9154f",
+        "vote": "140540220038209",
+        "producedblocks": 43426,
+        "missedblocks": 30,
+        "rate": 22,
+        "approval": 1.07,
+        "productivity": 99.93
+      }
+    },
+    {
+      "id": "18189453068604730040",
+      "timestamp": 25541888,
+      "generator": "ARESrXpca6ehHWyVkhh1wvDgAiNwpsA2VH",
+      "totalAmount": 0,
+      "totalFee": 0,
+      "reward": 200000000,
+      "totalForged": "200000000",
+      "transactionsCount": 0,
+      "height": 3146857,
+      "delegate": {
+        "username": "ares",
+        "address": "ARESrXpca6ehHWyVkhh1wvDgAiNwpsA2VH",
+        "publicKey":
+          "02c44cc9787fae3ce5c8873ff541deadb86cd8ddb56a90dba37049ca6506d022f5",
+        "vote": "136250945720271",
+        "producedblocks": 59398,
+        "missedblocks": 668,
+        "rate": 39,
+        "approval": 1.04,
+        "productivity": 98.89
+      }
+    },
+    {
+      "id": "13960121324210085799",
+      "timestamp": 25541880,
+      "generator": "AandN2kp4fkm4gscqdcJHTeaigP2q6BxPr",
+      "totalAmount": 0,
+      "totalFee": 100000000,
+      "reward": 200000000,
+      "totalForged": "300000000",
+      "transactionsCount": 1,
+      "height": 3146856,
+      "delegate": {
+        "username": "ozpooldelegate",
+        "address": "AandN2kp4fkm4gscqdcJHTeaigP2q6BxPr",
+        "publicKey":
+          "02f2f5c5f10084edc5e14f7f1e69d444ade37e9c6fa1b60130425e15c13418ef26",
+        "vote": "136082717326331",
+        "producedblocks": 5517,
+        "missedblocks": 36,
+        "rate": 43,
+        "approval": 1.04,
+        "productivity": 99.35
+      }
+    },
+    {
+      "id": "12921821227150796987",
+      "timestamp": 25541872,
+      "generator": "ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ",
+      "totalAmount": 0,
+      "totalFee": 0,
+      "reward": 200000000,
+      "totalForged": "200000000",
+      "transactionsCount": 0,
+      "height": 3146855,
+      "delegate": {
+        "username": "arkpool",
+        "address": "ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ",
+        "publicKey":
+          "02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b",
+        "vote": "172180538868896",
+        "producedblocks": 61157,
+        "missedblocks": 304,
+        "rate": 1,
+        "approval": 1.31,
+        "productivity": 99.51
+      }
+    },
+    {
+      "id": "9492693430449981259",
+      "timestamp": 25541864,
+      "generator": "AHazk56nvQ3isZrYkarJV1RPcDUrQocmfR",
+      "totalAmount": 0,
+      "totalFee": 0,
+      "reward": 200000000,
+      "totalForged": "200000000",
+      "transactionsCount": 0,
+      "height": 3146854,
+      "delegate": {
+        "username": "anamix",
+        "address": "AHazk56nvQ3isZrYkarJV1RPcDUrQocmfR",
+        "publicKey":
+          "02a0ed5604868461a87639f58bd3a55f661774c3cbb705a735f58c50087f942c3d",
+        "vote": "136202174352580",
+        "producedblocks": 40986,
+        "missedblocks": 1074,
+        "rate": 40,
+        "approval": 1.04,
+        "productivity": 97.45
+      }
+    },
+    {
+      "id": "6688111399496204979",
+      "timestamp": 25541856,
+      "generator": "AbkG2erJoFRFK4H1VuVkb9Mgx4cA1oSG43",
+      "totalAmount": 0,
+      "totalFee": 0,
+      "reward": 200000000,
+      "totalForged": "200000000",
+      "transactionsCount": 0,
+      "height": 3146853,
+      "delegate": {
+        "username": "hippopotamus",
+        "address": "AbkG2erJoFRFK4H1VuVkb9Mgx4cA1oSG43",
+        "publicKey":
+          "03331b3bdebd082d0c43d08b20a687c7b55adde6e39766d96bf6188d6646330aef",
+        "vote": "138748589949589",
+        "producedblocks": 10943,
+        "missedblocks": 219,
+        "rate": 26,
+        "approval": 1.06,
+        "productivity": 98.04
+      }
+    },
+    {
+      "id": "58111919845986774",
+      "timestamp": 25541848,
+      "generator": "AXvBF7JoNyM6ztMrgr45KrqQf7LA7RgZhf",
+      "totalAmount": 0,
+      "totalFee": 0,
+      "reward": 200000000,
+      "totalForged": "200000000",
+      "transactionsCount": 0,
+      "height": 3146852,
+      "delegate": {
+        "username": "ravelou",
+        "address": "AXvBF7JoNyM6ztMrgr45KrqQf7LA7RgZhf",
+        "publicKey":
+          "021f277f1e7a48c88f9c02988f06ca63d6f1781471f78dba49d58bab85eb3964c6",
+        "vote": "145912639517133",
+        "producedblocks": 55611,
+        "missedblocks": 485,
+        "rate": 6,
+        "approval": 1.11,
+        "productivity": 99.14
+      }
+    },
+    {
+      "id": "13791510935783286483",
+      "timestamp": 25541840,
+      "generator": "Aasu14aTs9ipZdy1FMv7ay1Vqn3jPskA8t",
+      "totalAmount": 0,
+      "totalFee": 0,
+      "reward": 200000000,
+      "totalForged": "200000000",
+      "transactionsCount": 0,
+      "height": 3146851,
+      "delegate": {
+        "username": "jarunik",
+        "address": "Aasu14aTs9ipZdy1FMv7ay1Vqn3jPskA8t",
+        "publicKey":
+          "02c7455bebeadde04728441e0f57f82f972155c088252bf7c1365eb0dc84fbf5de",
+        "vote": "142028742525536",
+        "producedblocks": 52216,
+        "missedblocks": 242,
+        "rate": 14,
+        "approval": 1.08,
+        "productivity": 99.54
+      }
+    },
+    {
+      "id": "9011548740702978275",
+      "timestamp": 25541832,
+      "generator": "AandN2kp4fkm4gscqdcJHTeaigP2q6BxPr",
+      "totalAmount": 0,
+      "totalFee": 0,
+      "reward": 200000000,
+      "totalForged": "200000000",
+      "transactionsCount": 0,
+      "height": 3146850,
+      "delegate": {
+        "username": "ozpooldelegate",
+        "address": "AandN2kp4fkm4gscqdcJHTeaigP2q6BxPr",
+        "publicKey":
+          "02f2f5c5f10084edc5e14f7f1e69d444ade37e9c6fa1b60130425e15c13418ef26",
+        "vote": "136082717326331",
+        "producedblocks": 5517,
+        "missedblocks": 36,
+        "rate": 43,
+        "approval": 1.04,
+        "productivity": 99.35
+      }
+    },
+    {
+      "id": "17277889252723149125",
+      "timestamp": 25541824,
+      "generator": "ATHAwQnSZCRXvNkBtWn5AkGyVrFdSRH756",
+      "totalAmount": 0,
+      "totalFee": 0,
+      "reward": 200000000,
+      "totalForged": "200000000",
+      "transactionsCount": 0,
+      "height": 3146849,
+      "delegate": {
+        "username": "arkland",
+        "address": "ATHAwQnSZCRXvNkBtWn5AkGyVrFdSRH756",
+        "publicKey":
+          "0386d5a3cd292ffaa9a3b73c556453326780e092015141efaed347c4c50c7886bb",
+        "vote": "136060237372618",
+        "producedblocks": 6841,
+        "missedblocks": 80,
+        "rate": 44,
+        "approval": 1.04,
+        "productivity": 98.84
+      }
+    },
+    {
+      "id": "2306951573610004750",
+      "timestamp": 25541816,
+      "generator": "AMvZYkTSMXCqFLPP4bxJyq84FfMg9m2V81",
+      "totalAmount": 0,
+      "totalFee": 0,
+      "reward": 200000000,
+      "totalForged": "200000000",
+      "transactionsCount": 0,
+      "height": 3146848,
+      "delegate": {
+        "username": "calidelegate",
+        "address": "AMvZYkTSMXCqFLPP4bxJyq84FfMg9m2V81",
+        "publicKey":
+          "037b4730e7c63252912825510423487e9ee507e1a5719dfeef52187d8ababe3048",
+        "vote": "137842758365804",
+        "producedblocks": 22480,
+        "missedblocks": 257,
+        "rate": 31,
+        "approval": 1.05,
+        "productivity": 98.87
+      }
+    },
+    {
+      "id": "12752843272620814443",
+      "timestamp": 25541808,
+      "generator": "ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ",
+      "totalAmount": 0,
+      "totalFee": 0,
+      "reward": 200000000,
+      "totalForged": "200000000",
+      "transactionsCount": 0,
+      "height": 3146847,
+      "delegate": {
+        "username": "arkpool",
+        "address": "ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ",
+        "publicKey":
+          "02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b",
+        "vote": "172180538868896",
+        "producedblocks": 61157,
+        "missedblocks": 304,
+        "rate": 1,
+        "approval": 1.31,
+        "productivity": 99.51
+      }
+    },
+    {
+      "id": "17521105531761503818",
+      "timestamp": 25541800,
+      "generator": "AaAy8BZkjV86YN7xUtZ35iwyXRMQKtKoAy",
+      "totalAmount": 0,
+      "totalFee": 0,
+      "reward": 200000000,
+      "totalForged": "200000000",
+      "transactionsCount": 0,
+      "height": 3146846,
+      "delegate": {
+        "username": "biz_private",
+        "address": "AaAy8BZkjV86YN7xUtZ35iwyXRMQKtKoAy",
+        "publicKey":
+          "02fa6902e91e127d6d3410f6abc271a79ae24029079caa0db5819757e3c1c1c5a4",
+        "vote": "138452993922565",
+        "producedblocks": 15090,
+        "missedblocks": 149,
+        "rate": 28,
+        "approval": 1.05,
+        "productivity": 99.02
+      }
+    },
+    {
+      "id": "15041459967819821662",
+      "timestamp": 25541792,
+      "generator": "APzMVrARso9qatWF5VPCyDTttBFKjcNccL",
+      "totalAmount": 0,
+      "totalFee": 0,
+      "reward": 200000000,
+      "totalForged": "200000000",
+      "transactionsCount": 0,
+      "height": 3146845,
+      "delegate": {
+        "username": "emotive_ark",
+        "address": "APzMVrARso9qatWF5VPCyDTttBFKjcNccL",
+        "publicKey":
+          "035a0302ddd571bb821f6b069450814cb29fc927f14f146491fd5c9b3ab57d8ca8",
+        "vote": "135930312976804",
+        "producedblocks": 57453,
+        "missedblocks": 727,
+        "rate": 47,
+        "approval": 1.04,
+        "productivity": 98.75
+      }
+    },
+    {
+      "id": "6296909093960738810",
+      "timestamp": 25541784,
+      "generator": "AXW2vq7bNvAJS7uRcZBdyRWca9Dehtr8ds",
+      "totalAmount": 0,
+      "totalFee": 0,
+      "reward": 200000000,
+      "totalForged": "200000000",
+      "transactionsCount": 0,
+      "height": 3146844,
+      "delegate": {
+        "username": "toad",
+        "address": "AXW2vq7bNvAJS7uRcZBdyRWca9Dehtr8ds",
+        "publicKey":
+          "031c110968941f29c76f3752d5752d5541cfe65f23f5d7f9115d2f4eb194f41c47",
+        "vote": "135959150574501",
+        "producedblocks": 50318,
+        "missedblocks": 437,
+        "rate": 46,
+        "approval": 1.04,
+        "productivity": 99.14
+      }
+    },
+    {
+      "id": "16146504273965839117",
+      "timestamp": 25541776,
+      "generator": "AHUzSzYLVhqJuXpPubmhdE2dD2otMBvLQZ",
+      "totalAmount": 0,
+      "totalFee": 0,
+      "reward": 200000000,
+      "totalForged": "200000000",
+      "transactionsCount": 0,
+      "height": 3146843,
+      "delegate": {
+        "username": "wes",
+        "address": "AHUzSzYLVhqJuXpPubmhdE2dD2otMBvLQZ",
+        "publicKey":
+          "0354319db3f22fb8d4588a09ebbb3e91631cbc2202ba58c69149b75c1a47eb7686",
+        "vote": "141075073046429",
+        "producedblocks": 61496,
+        "missedblocks": 472,
+        "rate": 20,
+        "approval": 1.07,
+        "productivity": 99.24
+      }
+    },
+    {
+      "id": "16808475711853902464",
+      "timestamp": 25541768,
+      "generator": "AKdr5d9AMEnsKYxpDcoHdyyjSCKVx3r9Nj",
+      "totalAmount": 10,
+      "totalFee": 110000000,
+      "reward": 200000000,
+      "totalForged": "310000000",
+      "transactionsCount": 2,
+      "height": 3146842,
+      "delegate": {
+        "username": "biz_classic",
+        "address": "AKdr5d9AMEnsKYxpDcoHdyyjSCKVx3r9Nj",
+        "publicKey":
+          "020431436cf94f3c6a6ba566fe9e42678db8486590c732ca6c3803a10a86f50b92",
+        "vote": "140953776263216",
+        "producedblocks": 41040,
+        "missedblocks": 220,
+        "rate": 21,
+        "approval": 1.07,
+        "productivity": 99.47
+      }
+    },
+    {
+      "id": "14026825416971489537",
+      "timestamp": 25541760,
+      "generator": "AbUdMhk96FbzxH7vDYAwdyqUELmLopZV5x",
+      "totalAmount": 0,
+      "totalFee": 0,
+      "reward": 200000000,
+      "totalForged": "200000000",
+      "transactionsCount": 0,
+      "height": 3146841,
+      "delegate": {
+        "username": "bioly",
+        "address": "AbUdMhk96FbzxH7vDYAwdyqUELmLopZV5x",
+        "publicKey":
+          "02c0b645f19ab304d25aae3add139edd9f6ca9fd0d98e57a808100de0e93832181",
+        "vote": "164718353764664",
+        "producedblocks": 61487,
+        "missedblocks": 271,
+        "rate": 2,
+        "approval": 1.25,
+        "productivity": 99.56
+      }
+    },
+    {
+      "id": "3582090457802670555",
+      "timestamp": 25541752,
+      "generator": "AKmcaBfVepg8YwZxCb8gSYKWWNaeJxwu5d",
+      "totalAmount": 128141700000,
+      "totalFee": 10000000,
+      "reward": 200000000,
+      "totalForged": "210000000",
+      "transactionsCount": 1,
+      "height": 3146840,
+      "delegate": {
+        "username": "criptodogg",
+        "address": "AKmcaBfVepg8YwZxCb8gSYKWWNaeJxwu5d",
+        "publicKey":
+          "034920a86224835ed039cbfdd6dbaf74061a750377126747c7ce68fd5ef8c8b9d4",
+        "vote": "136146573573164",
+        "producedblocks": 23956,
+        "missedblocks": 587,
+        "rate": 41,
+        "approval": 1.04,
+        "productivity": 97.61
+      }
+    }
+  ],
+  "pagination": { "currentPage": null }
+}

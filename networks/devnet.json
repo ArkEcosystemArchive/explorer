@@ -1,0 +1,14 @@
+{
+  "title": "DARK Explorer",
+  "server": "https://dexplorer.ark.io:8443/api",
+  "alias": "Development",
+  "activeDelegates": 51,
+  "currencies": [],
+  "knownWallets": {},
+  "defaults": {
+    "currency": null
+  },
+  "config": {
+    "priceChart": false
+  }
+}

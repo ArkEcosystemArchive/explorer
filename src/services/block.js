@@ -1,0 +1,90 @@
+import NodeService from '@/services/node'
+
+class BlockService {
+  latest(limit = 25) {
+    return NodeService.get('blocks', {
+      params: {
+        orderBy: 'height:desc',
+        limit
+      }
+    }).then(response => response.data.blocks)
+  }
+
+  last() {
+    return NodeService.get('blocks', {
+      params: {
+        orderBy: 'height:desc',
+        limit: 1
+      }
+    }).then(response => response.data.blocks[0])
+  }
+
+  height() {
+    return NodeService
+      .get('blocks/getHeight')
+      .then(response => response.data.height)
+  }
+
+  supply() {
+    return NodeService
+      .get('blocks/getSupply')
+      .then(response => response.data.supply)
+  }
+
+  find(id) {
+    return NodeService.get('blocks/get', {
+      params: {
+        id
+      }
+    }).then(response => response.data.block)
+  }
+
+  paginate(page, perPage = 25) {
+    const offset = page > 1 ? page * perPage : 0
+
+    return NodeService.get('blocks', {
+      params: {
+        orderBy: 'height:desc',
+        limit: perPage,
+        offset
+      }
+    }).then(response => response.data.blocks)
+  }
+
+  getByPublicKey(generatorPublicKey, page, perPage = 25) {
+    const offset = page > 1 ? page * perPage : 0
+
+    return NodeService.get('blocks', {
+      params: {
+        orderBy: 'height:desc',
+        limit: perPage,
+        offset,
+        generatorPublicKey
+      }
+    }).then(response => response.data.blocks)
+  }
+
+  lastBlockByPublicKey(publicKey) {
+    return NodeService.get('blocks', {
+      params: {
+        orderBy: 'height:desc',
+        limit: 1,
+        generatorPublicKey: publicKey
+      }
+    }).then(response => response.data.blocks[0])
+  }
+
+  findPrevious(height) {
+    return NodeService.get('blocks', {
+      params: { height: height - 1 }
+    }).then(response => response.data.blocks[0])
+  }
+
+  findNext(height) {
+    return NodeService.get('blocks', {
+      params: { height: height + 1 }
+    }).then(response => response.data.blocks[0])
+  }
+}
+
+export default new BlockService()

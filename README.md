@@ -1,61 +1,91 @@
-![ArkExplorer](https://i.imgur.com/JpkIhYH.png)
+<p align="center">
+    <img src="https://i.imgur.com/JpkIhYH.png" />
+</p>
 
-[![Build Status](https://travis-ci.org/ArkEcosystem/ark-explorer.svg?branch=master)](https://travis-ci.org/ArkEcosystem/ark-explorer)
+[![Build Status](https://img.shields.io/travis/ArkEcosystem/ark-explorer/master.svg?style=flat)](https://travis-ci.org/ArkEcosystem/ark-explorer)
+[![License](https://img.shields.io/packagist/l/ArkEcosystem/ark-explorer.svg?style=flat)](https://packagist.org/packages/ArkEcosystem/ark-explorer)
 
-# ARK Block Explorer
+# ARK Explorer 3.0
 
-> A redesigned frontend of ARK Blockchain Explorer using AngularJS and TypeScript.
+> Designed and developed from the ground-up, using lean & fast developmental frameworks (Tailwind CSS & Vue.JS).
 
 You can access it at [https://explorer.ark.io/](https://explorer.ark.io/).
 
-The feel of the [old explorer](https://github.com/ArkEcosystem/old-ark-explorer) is retained in the new version, under the hood things are completely revamped. The frontend of the Explorer itself has been redone using [AngularJS framework](https://angular.io) and [TypeScript programming language](http://www.typescriptlang.org/).
+## Build Setup
 
-## Installation
-
-```bash
-git clone https://github.com/ArkEcosystem/ark-explorer.git
-cd ark-explorer
-npm install
-```
-
-You will want to edit the config file [src/app/app.config.ts](https://github.com/ArkEcosystem/ark-explorer/blob/master/src/app/app.config.ts) depending on whether you want **MAINNET** or **DEVNET**. If you are pointing your explorer instance to your own ARK node, update the **NODE** property.
-
-#### Custom ARK node
-
-Due to performance factors, the explorer works best when pointing to a specific version of the ARK node **which is not forging**.
-
-Once you have setup your explorer and given it the address for the node API, you will want to go into the ark-node directory and change the branch. On the machine that is running your ARK node, run the following commands:
+### 1. Clone the repository
 
 ```bash
-cd ~/ark-node
-git pull
-git checkout explorer
+git clone https://github.com/ArkEcosystem/ark-explorer
 ```
 
-## Development server
+### 2. Install Dependencies
 
-Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```bash
+yarn install
+```
 
-## Build
+### 3. Build for Production
 
-Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+#### 3.1 Mainnet
 
-## Running unit tests
+```bash
+yarn build:mainnet
+```
 
-Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#### 3.2 Devnet
 
-## Running end-to-end tests
+```bash
+yarn build:devnet
+```
 
-Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`
+#### 3.3 Custom
 
-## Contributing
+```bash
+yarn build --network my-custom-network
+```
 
-* If you find any bugs, submit an [issue](../../issues) or open [pull-request](../../pulls), helping us catch and fix them.
-* Engage with other users and developers on [ARK Slack](https://ark.io/slack/).
-* Join the #development channel on Slack or contact our developer Lúcio (@lorenzo).
-* [Contribute bounties](./CONTRIBUTING.md).
+#### 3.4 GitHub Pages
+
+If you are going to host your explorer instance on GitHub Pages you will need to specify your base url in most cases as GitHub Pages serves repositories from sub-directories instead of sub-domains.
+
+```
+yarn build:mainnet --base https://username.github.io/repository
+```
+
+Now open `dist/index.html` and replace all occurrences of `/static/` with `static/`. This change is requires because GitHub Pages serves repositories from sub-directories instead of sub-domains.
+
+> This step is not required if you are hosting the explorer on your "root" repository which is usually your username https://username.github.io/.
+
+## History Mode
+
+If you wish to remove the `/#/` from your URLs you can follow those steps https://router.vuejs.org/en/essentials/history-mode.html.
+
+> Keep in mind that this requires you to run your own server and a running instance of nginx.
+
+## Development
+
+```bash
+yarn dev
+```
+
+## Testing
+
+``` bash
+$ yarn test
+```
+
+## Security
+
+If you discover a security vulnerability within this package, please send an e-mail to security@ark.io. All security vulnerabilities will be promptly addressed.
+
+## Credits
+
+- [Brian Faust](https://github.com/faustbrian)
+- [Lúcio Rubens](https://github.com/luciorubeens)
+- [Alex Barnsley](https://github.com/alexbarnsley)
+- [All Contributors](../../contributors)
 
 ## License
 
-ARK Explorer is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+[MIT](LICENSE) © [ArkEcosystem](https://ark.io)
