@@ -1,7 +1,8 @@
 <div class="fixed-header">
     <div class="ark-wrap">
         <header>
-            <a class="ark-logo" routerLink="/" (click)="closeMobileMenu()"></a>
+          <a class="ark-logo" routerLink="/" (click)="closeMobileMenu()"></a>
+          <span class="ark-mobile-header-title">Ark {{headerNethash}}</span>
             <div class="ark-header-items ark-flex-center" [ngClass]="{'open': openMobileMenu}">
                 <div class="ark-search-wrap">
                     <input class="ark-text-field ark-search-field" type="search" [(ngModel)]="searchQuery" placeholder="{{ 'HEADER.SEARCH' | translate}}" (keypress)="startSearch($event)" />
@@ -16,33 +17,20 @@
                         <ark-tools-dropdown (openMobMenu)="closeMobileMenu($event)"></ark-tools-dropdown>
                     </ul>
                 </nav>
+              <ark-header-data class="ark-inline-header-data"
+                               [currencies]="currencies"
+                               [headerHeight]="headerHeight"
+                               [headerNethash]="headerNethash"
+                               [headerSupply]="headerSupply">
+              </ark-header-data>
             </div>
             <div class="ark-menu-btn" (click)="showMobileMenu()"></div>
         </header>
-        <div class="connection-message" *ngIf="!connection"><i class="fa fa-clock-o" aria-hidden="true"></i>Updating data. Please, wait or refresh this page in 15 seconds.</div>
-        <div class="ark-header-data ark-flex-center">
-            <div class="ark-data-item">
-                <span class="ark-item-index" *ngIf="headerHeight">
-                    <span class="ark-index-title"> {{ 'GENERAL.INFO.HEIGHT' | translate}}:</span>
-                    <span class="ark-index-data">{{headerHeight}}</span>
-                </span>
-                <span class="ark-item-index ark-item-nethash" *ngIf="headerNethash">
-                    <span class="ark-index-title"> {{ 'GENERAL.INFO.NETHASH' | translate}}:</span>
-                    <span class="ark-index-data">{{headerNethash}}</span>
-                </span>
-                <span class="ark-item-index" *ngIf="headerSupply">
-                    <span class="ark-index-title"> {{ 'GENERAL.INFO.SUPPLY' | translate}}:</span>
-                    <span class="ark-index-data">{{headerSupply}}</span>
-                </span>
-            </div>
-            <div *ngFor="let currency of currencies">
-                <div class="ark-data-item" *ngIf="currency.value">
-                    <span class="ark-item-index">
-                        <span class="ark-index-title"> ARK/{{ currency.name }}:</span>
-                        <span class="ark-index-data">{{ currency.value | number: (currency.name === 'BTC' ? '1.8-8' : '1.2-2') }}</span>
-                    </span>
-                </div>
-            </div>
-        </div>
+        <ark-header-data class="ark-standalone-header-data"
+                         [currencies]="currencies"
+                         [headerHeight]="headerHeight"
+                         [headerNethash]="headerNethash"
+                         [headerSupply]="headerSupply">
+        </ark-header-data>
     </div>
 </div>

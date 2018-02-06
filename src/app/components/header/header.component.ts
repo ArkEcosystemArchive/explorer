@@ -26,7 +26,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public openMobileMenu = false;
   public searchQuery = '';
-  public connection = true;
 
   private _timer: any = null;
   private _network: Network = CONFIG.activeNetwork;

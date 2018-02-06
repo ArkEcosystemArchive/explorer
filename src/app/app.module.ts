@@ -42,6 +42,7 @@ import { ErrorSectionComponent } from './components/error-section/error-section.
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ExplorerService } from './shared/services/explorer.service';
+import { HeaderDataComponent } from './components/header/header-data/header-data.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/translate/', '.json');
@@ -76,7 +77,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     VotersComponent,
     PaginationComponent,
     ClipboardComponent,
-    ErrorSectionComponent
+    ErrorSectionComponent,
+    HeaderDataComponent
   ],
   imports: [
     BrowserModule,
