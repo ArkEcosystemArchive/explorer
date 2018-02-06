@@ -3,7 +3,6 @@
 </p>
 
 [![Build Status](https://img.shields.io/travis/ArkEcosystem/ark-explorer/master.svg?style=flat)](https://travis-ci.org/ArkEcosystem/ark-explorer)
-[![License](https://img.shields.io/packagist/l/ArkEcosystem/ark-explorer.svg?style=flat)](https://packagist.org/packages/ArkEcosystem/ark-explorer)
 
 # ARK Explorer 3.0
 
