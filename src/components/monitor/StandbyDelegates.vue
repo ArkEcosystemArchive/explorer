@@ -1,7 +1,7 @@
 <template>
   <table class="w-full text-xs md:text-base">
     <thead>
-      <tr class="opacity-25 md:text-xs">
+      <tr class="text-theme-text-thead md:text-xs">
         <th class="p-4 pl-5 sm:pl-10 text-left">Rank</th>
         <th class="p-4 text-left">Name</th>
         <th class="p-4 text-right hidden md:table-cell">Productivity</th>

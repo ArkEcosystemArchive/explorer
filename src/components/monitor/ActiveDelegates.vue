@@ -1,7 +1,7 @@
 <template>
   <table class="w-full text-xs md:text-base">
     <thead>
-      <tr class="opacity-25 md:text-xs">
+      <tr class="text-theme-text-thead md:text-xs">
         <th @click="sortBy('rate')" class="p-4 pl-5 sm:pl-10 text-left">
           <span class="hidden sm:inline-block">Rank</span>
           <span class="sm:hidden">#</span>
