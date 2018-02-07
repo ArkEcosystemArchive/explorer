@@ -9,7 +9,7 @@
         <th @click="sortBy('username')" class="p-4 text-left">Name</th>
         <th @click="sortBy('producedblocks')" class="p-4 text-left hidden xl:table-cell">Forged</th>
         <th @click="sortBy('forgingStatus.lastBlock.timestamp')" class="p-4 text-left">Last Forged</th>
-        <th class="p-4 pr-5 md:pr-4 text-right hidden md:inline-block">Status</th>
+        <th class="p-4 pr-5 md:pr-4 text-left hidden md:block">Status</th>
         <th @click="sortBy('productivity')" class="p-4 text-right hidden md:table-cell">Productivity</th>
         <th @click="sortBy('approval')" class="p-4 pr-5 sm:pr-10 text-right hidden md:table-cell">Approval</th>
       </tr>
