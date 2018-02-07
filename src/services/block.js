@@ -39,25 +39,25 @@ class BlockService {
     }).then(response => response.data.block)
   }
 
-  paginate(page, perPage = 25) {
-    const offset = page > 1 ? page * perPage : 0
+  paginate(page, limit = 25) {
+    const offset = page > 1 ? (page - 1) * limit : 0
 
     return NodeService.get('blocks', {
       params: {
         orderBy: 'height:desc',
-        limit: perPage,
+        limit,
         offset
       }
     }).then(response => response.data.blocks)
   }
 
-  getByPublicKey(generatorPublicKey, page, perPage = 25) {
-    const offset = page > 1 ? page * perPage : 0
+  getByPublicKey(generatorPublicKey, page, limit = 25) {
+    const offset = page > 1 ? (page - 1) * limit : 0
 
     return NodeService.get('blocks', {
       params: {
         orderBy: 'height:desc',
-        limit: perPage,
+        limit,
         offset,
         generatorPublicKey
       }

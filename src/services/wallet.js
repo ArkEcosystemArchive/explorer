@@ -19,13 +19,13 @@ class WalletService {
     })
   }
 
-  top(page = 1, perPage = 25) {
-    const offset = page > 1 ? page * perPage : 0
+  top(page = 1, limit = 25) {
+    const offset = page > 1 ? (page - 1) * limit : 0
 
     return NodeService.get('accounts/top', {
       params: {
         orderBy: 'balance:desc',
-        limit: perPage,
+        limit,
         offset
       }
     }).then(response => response.data.accounts)

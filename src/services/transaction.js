@@ -48,7 +48,7 @@ class TransactionService {
   }
 
   allByAddress(address, page = 1, limit = 25) {
-    const offset = page > 1 ? page * limit : 0
+    const offset = page > 1 ? (page - 1) * limit : 0
 
     return NodeService.get('transactions', {
       params: {
@@ -62,7 +62,7 @@ class TransactionService {
   }
 
   sentByAddress(senderId, page = 1, limit = 25) {
-    const offset = page > 1 ? page * limit : 0
+    const offset = page > 1 ? (page - 1) * limit : 0
 
     return NodeService.get('transactions', {
       params: {
@@ -75,7 +75,7 @@ class TransactionService {
   }
 
   receivedByAddress(recipientId, page = 1, limit = 25) {
-    const offset = page > 1 ? page * limit : 0
+    const offset = page > 1 ? (page - 1) * limit : 0
 
     return NodeService.get('transactions', {
       params: {
@@ -117,7 +117,7 @@ class TransactionService {
   }
 
   paginate(page, limit = 25) {
-    const offset = (page > 1) ? page * limit : 0
+    const offset = (page > 1) ? (page - 1) * limit : 0
 
     return NodeService.get('transactions', {
       params: {
@@ -129,7 +129,7 @@ class TransactionService {
   }
 
   paginateByAddress(address, page = 1, limit = 25) {
-    const offset = (page > 1) ? page * limit : 0
+    const offset = (page > 1) ? (page - 1) * limit : 0
 
     return NodeService.get('transactions', {
       params: {
