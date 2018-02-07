@@ -26,7 +26,7 @@
           <wallet-link :address="transaction.recipientId"></wallet-link>
         </td>
         <td class="p-4 text-right border-none hidden lg:table-cell">
-          {{ transaction.vendorField }}
+          {{ truncate(transaction.vendorField || '', 35) }}
         </td>
         <td class="p-4 pr-10 md:pr-4 text-right border-none">
           {{ readableCrypto(transaction.amount) }}
