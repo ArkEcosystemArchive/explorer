@@ -125,6 +125,26 @@ const router = new Router({
     {
       path: '*',
       redirect: { name: '404' }
+    },
+    // 2.0 fallback redirects...
+    {
+      path: '/address/:address',
+      redirect: to => ({
+        name: 'wallet',
+        params: { address: to.params.address }
+      })
+    }, {
+      path: '/tx/:id',
+      redirect: to => ({
+        name: 'transaction',
+        params: { id: to.params.id }
+      })
+    }, {
+      path: '/delegateMonitor',
+      redirect: '/delegate-monitor'
+    }, {
+      path: '/topAccounts',
+      redirect: to => ({ name: 'top-wallets', params: { page: 1 } })
     }
   ],
 })
