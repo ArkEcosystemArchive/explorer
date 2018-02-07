@@ -11,6 +11,10 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const minimist = require('minimist')
 
+/**
+ * Builder Arguments...
+ */
+const routerMode = minimist(process.argv.slice(2)).history ? 'history' : 'hash'
 const network = minimist(process.argv.slice(2)).network || 'mainnet'
 const networkConfig = require(`../networks/${network}.json`)
 
@@ -52,7 +56,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': {
         ...require('../config/dev.env'),
-        ...{EXPLORER_CONFIG: `"${network}"`}
+        ...{EXPLORER_CONFIG: `"${network}"`},
+        ...{ROUTER_MODE: `"${routerMode}"`}
       }
     }),
     new webpack.HotModuleReplacementPlugin(),

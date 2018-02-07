@@ -14,7 +14,11 @@ const PurgecssPlugin = require('purgecss-webpack-plugin')
 const minimist = require('minimist')
 const glob = require('glob-all')
 
-const base_url = minimist(process.argv.slice(2)).base || '/'
+/**
+ * Builder Arguments...
+ */
+const routerMode = minimist(process.argv.slice(2)).history ? 'history' : 'hash'
+const baseUrl = minimist(process.argv.slice(2)).base || '/'
 const network = minimist(process.argv.slice(2)).network || 'mainnet'
 const networkConfig = require(`../networks/${network}.json`)
 
@@ -44,7 +48,8 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': {
         ...require('../config/prod.env'),
-        ...{EXPLORER_CONFIG: `"${network}"`}
+        ...{EXPLORER_CONFIG: `"${network}"`},
+        ...{ROUTER_MODE: `"${routerMode}"`}
       }
     }),
     new UglifyJsPlugin({
@@ -91,7 +96,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       title: networkConfig.title,
-      base_url: base_url,
+      base_url: baseUrl,
       filename: config.build.index,
       template: 'src/index.html',
       inject: true,

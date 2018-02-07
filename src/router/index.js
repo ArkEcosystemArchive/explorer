@@ -19,7 +19,7 @@ const PageNotFoundComponent = () => import('@/pages/404')
 Vue.use(Router)
 
 const router = new Router({
-  mode: 'hash',
+  mode: process.env.ROUTER_MODE,
   routes: [
     {
       path: '/',
