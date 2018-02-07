@@ -90,19 +90,17 @@ class TransactionService {
   sendByAddressCount(senderId) {
     return NodeService.get('transactions', {
       params: {
-        senderId,
-        limit: 1
+        senderId
       }
-    }).then(response => response.data.count)
+    }).then(response => response.data.transactions.length)
   }
 
   receivedByAddressCount(recipientId) {
     return NodeService.get('transactions', {
       params: {
-        recipientId,
-        limit: 1
+        recipientId
       }
-    }).then(response => response.data.count)
+    }).then(response => response.data.transactions.length)
   }
 
   votes(senderId) {
