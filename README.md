@@ -48,11 +48,9 @@ yarn build --network my-custom-network
 
 If you are going to host your explorer instance on GitHub Pages you will need to specify your base url in most cases as GitHub Pages serves repositories from sub-directories instead of sub-domains.
 
+```bash
+yarn build --base https://username.github.io/repository/
 ```
-yarn build:mainnet --base https://username.github.io/repository
-```
-
-Now open `dist/index.html` and replace all occurrences of `/static/` with `static/`. This change is requires because GitHub Pages serves repositories from sub-directories instead of sub-domains.
 
 > This step is not required if you are hosting the explorer on your "root" repository which is usually your username https://username.github.io/.
 
