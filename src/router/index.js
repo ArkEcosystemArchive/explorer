@@ -153,6 +153,8 @@ router.beforeEach((to, from, next) => {
   store.dispatch('ui/setHeaderType', null)
   store.dispatch('ui/setMenuVisible', false)
 
+  window.scrollTo(0, 0)
+
   next()
 })
 
