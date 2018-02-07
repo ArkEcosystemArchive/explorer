@@ -4,7 +4,7 @@
       fill="none"
       stroke="var(--ark-meter)"
       :cx="width / 2" :cy="width / 2" :r="radius" :stroke-width="stroke" />
-    <circle
+    <circle v-if="percentage"
       :style="{strokeDashoffset: dashoffset, strokeDasharray: circumference }"
       stroke-linecap="round"
       fill="none"
