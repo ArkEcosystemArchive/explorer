@@ -70,7 +70,7 @@ If you wish to remove the `/#/` from your URLs you can follow those steps https:
 yarn dev # or yarn dev:mainnet
 ```
 
-#### Mainnet
+#### Devnet
 
 ```bash
 yarn dev:devnet
