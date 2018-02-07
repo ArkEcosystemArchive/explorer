@@ -3,6 +3,7 @@ import * as types from '../mutation-types'
 export default {
   namespaced: true,
   state: {
+    defaults: {},
     server: null,
     nethash: null,
     alias: null,
@@ -15,6 +16,9 @@ export default {
     height: 0
   },
   mutations: {
+    [types.SET_NETWORK_DEFAULTS](state, payload) {
+      state.defaults = payload.value
+    },
     [types.SET_NETWORK_SERVER](state, payload) {
       state.server = payload.value
     },
@@ -47,6 +51,12 @@ export default {
     }
   },
   actions: {
+    setDefaults: ({commit}, value) => {
+      commit({
+        type: types.SET_NETWORK_DEFAULTS,
+        value
+      })
+    },
     setServer: ({commit}, value) => {
       commit({
         type: types.SET_NETWORK_SERVER,
@@ -109,6 +119,7 @@ export default {
     }
   },
   getters: {
+    defaults: state => state.defaults,
     server: state => state.server,
     nethash: state => state.nethash,
     alias: state => state.alias,

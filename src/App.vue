@@ -32,6 +32,8 @@ export default {
   created() {
     const network = require(`../networks/${process.env.EXPLORER_CONFIG}`)
 
+    this.$store.dispatch('network/setDefaults', network)
+
     this.$store.dispatch('network/setServer', network.server)
     this.$store.dispatch('network/setAlias', network.alias)
     this.$store.dispatch('network/setActiveDelegates', network.activeDelegates)

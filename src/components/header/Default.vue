@@ -32,8 +32,8 @@
         </label>
       </div>
 
-      <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4 block" v-if="priceChart"></span>
-      <currency v-if="priceChart"></currency>
+      <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4 block" v-if="shouldDisplayCurrency"></span>
+      <currency v-if="shouldDisplayCurrency"></currency>
 
       <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4 hidden md:block" v-if="shouldDisplayChart"></span>
       <toggle-chart v-if="shouldDisplayChart"></toggle-chart>
@@ -62,10 +62,16 @@ export default {
   }),
 
   computed: {
+    ...mapGetters('network', { networkDefaults: 'defaults' }),
+
     ...mapGetters('ui', ['mainMenuVisible', 'priceChart']),
 
+    shouldDisplayCurrency() {
+      return this.networkDefaults.config.priceChart
+    },
+
     shouldDisplayChart() {
-      return this.$route.name === 'home' && this.priceChart
+      return this.$route.name === 'home' && this.networkDefaults.config.priceChart
     },
   },
 
