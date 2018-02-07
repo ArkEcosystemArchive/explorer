@@ -14,8 +14,8 @@ const minimist = require('minimist')
 /**
  * Builder Arguments...
  */
-const routerMode = minimist(process.argv.slice(2)).history ? 'history' : 'hash'
-const network = minimist(process.argv.slice(2)).network || 'mainnet'
+const routerMode = process.env.EXP_ROUTER ? 'history' : 'hash'
+const network = process.env.EXP_NETWORK || 'mainnet'
 const networkConfig = require(`../networks/${network}.json`)
 
 const HOST = process.env.HOST
