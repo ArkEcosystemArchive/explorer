@@ -30,7 +30,7 @@ const methods = {
         minute: 0,
         second: 0,
       })
-      .add(new Date().getTimezoneOffset() / 60)
+      .add(Math.abs(new Date().getTimezoneOffset()), 'minutes')
       .add(value, 'seconds')
       .format('DD.MM.YYYY HH:mm:ss')
   },
@@ -46,7 +46,7 @@ const methods = {
         minute: 0,
         second: 0,
       })
-      .add(new Date().getTimezoneOffset() / 60)
+      .add(Math.abs(new Date().getTimezoneOffset()), 'minutes')
       .add(value, 'seconds')
       .fromNow()
   },
