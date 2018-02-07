@@ -2,21 +2,21 @@
   <table class="w-full text-xs md:text-base">
     <thead>
       <tr class="opacity-25 md:text-xs">
-        <th class="p-4 pl-5 sm:pl-10 text-left">
+        <th @click="sortBy('rate')" class="p-4 pl-5 sm:pl-10 text-left">
           <span class="hidden sm:inline-block">Rank</span>
           <span class="sm:hidden">#</span>
         </th>
-        <th class="p-4 text-left">Name</th>
-        <th class="p-4 text-left hidden xl:table-cell">Forged</th>
-        <th class="p-4 text-left">Last Forged</th>
+        <th @click="sortBy('username')" class="p-4 text-left">Name</th>
+        <th @click="sortBy('producedblocks')" class="p-4 text-left hidden xl:table-cell">Forged</th>
+        <th @click="sortBy('forgingStatus.lastBlock.timestamp')" class="p-4 text-left">Last Forged</th>
         <th class="p-4 pr-5 md:pr-4 text-right hidden md:inline-block">Status</th>
-        <th class="p-4 text-right hidden md:table-cell">Productivity</th>
-        <th class="p-4 pr-5 sm:pr-10 text-right hidden md:table-cell">Approval</th>
+        <th @click="sortBy('productivity')" class="p-4 text-right hidden md:table-cell">Productivity</th>
+        <th @click="sortBy('approval')" class="p-4 pr-5 sm:pr-10 text-right hidden md:table-cell">Approval</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(row, index) in delegates" :key="row.address">
-        <td class="p-3 pl-5 sm:pl-10 text-left border-none">{{ index + 1 }}</td>
+      <tr v-for="(row, index) in sortedDelegates" :key="row.address">
+        <td class="p-3 pl-5 sm:pl-10 text-left border-none">{{ row.rate }}</td>
 
         <td class="p-3 text-left border-none">
           <wallet-link :address="row.address"></wallet-link>
@@ -65,8 +65,17 @@ export default {
     },
   },
 
+  data: () => ({
+    sortKey: 'rate',
+    sortDirection: 'asc'
+  }),
+
   computed: {
     ...mapGetters('delegates', ['forged']),
+
+    sortedDelegates() {
+      return _.orderBy(this.delegates, this.sortKey, this.sortDirection)
+    }
   },
 
   methods: {
@@ -111,6 +120,11 @@ export default {
         '5': '#ef192d', // Not Forging
       }[row.forgingStatus.code]
     },
+
+    sortBy(sortKey) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc'
+      this.sortKey = sortKey
+    }
   },
 }
 </script>

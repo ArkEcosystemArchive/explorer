@@ -10,7 +10,7 @@
     </thead>
     <tbody>
       <tr v-for="(row, index) in delegates" :key="row.address">
-        <td class="p-4 pl-5 sm:pl-10 text-left border-none w-24">{{ index + (activeDelegates + 1) }}</td>
+        <td class="p-4 pl-5 sm:pl-10 text-left border-none w-24">{{ row.rate }}</td>
 
         <td class="p-4 text-left border-none">
           <wallet-link :address="row.address"></wallet-link>
