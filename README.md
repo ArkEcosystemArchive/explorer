@@ -52,6 +52,8 @@ If you are going to host your explorer instance on GitHub Pages you will need to
 yarn build --base https://username.github.io/repository/
 ```
 
+A running instance of the explorer on GitHub Pages can be found at https://arkecosystem.github.io/.
+
 > This step is not required if you are hosting the explorer on your "root" repository which is usually your username https://username.github.io/.
 
 ## History Mode
