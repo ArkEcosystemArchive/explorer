@@ -56,13 +56,13 @@ A running instance of the explorer on GitHub Pages can be found at https://arkec
 
 > This step is not required if you are hosting the explorer on your "root" repository which is usually your username https://username.github.io/.
 
-## History Mode
+## 4. History Mode
 
 If you wish to remove the `/#/` from your URLs you can follow those steps https://router.vuejs.org/en/essentials/history-mode.html.
 
 > Keep in mind that this requires you to run your own server and a running instance of nginx.
 
-## Development
+## 5. Development
 
 #### Mainnet
 
@@ -88,23 +88,23 @@ EXP_NETWORK=custom yarn dev
 EXP_ROUTER=history yarn dev
 ```
 
-## Testing
+## 6. Testing
 
 ``` bash
 $ yarn test
 ```
 
-## Security
+## 7. Security
 
 If you discover a security vulnerability within this package, please send an e-mail to security@ark.io. All security vulnerabilities will be promptly addressed.
 
-## Credits
+## 8. Credits
 
 - [Brian Faust](https://github.com/faustbrian)
 - [Lúcio Rubens](https://github.com/luciorubeens)
 - [Alex Barnsley](https://github.com/alexbarnsley)
 - [All Contributors](../../contributors)
 
-## License
+## 9. License
 
 [MIT](LICENSE) © [ArkEcosystem](https://ark.io)
