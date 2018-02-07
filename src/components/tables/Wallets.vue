@@ -3,13 +3,13 @@
     <thead>
       <tr class="opacity-25 text-xs">
         <th class="p-4 pl-10 text-left">Rank</th>
-        <th class="p-4 text-left">Address</th>
-        <th class="p-4 text-right">Balance</th>
+        <th @click="sortBy('address')" class="p-4 text-left">Address</th>
+        <th @click="sortBy('balance')" class="p-4 text-right">Balance</th>
         <th class="p-4 pr-10 text-right">Supply</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(row, index) in wallets" :key="row.address">
+      <tr v-for="(row, index) in sortedWallets" :key="row.address">
         <td class="p-4 pl-10 text-left border-none w-24">
           {{ getRank(index) }}
         </td>
@@ -33,9 +33,12 @@
 <script type="text/ecmascript-6">
 import Currency from '@/components/utils/Currency'
 import WalletLink from '@/components/links/Wallet'
+import SortableTable from '@/mixins/sortable-table'
 import { mapGetters } from 'vuex'
 
 export default {
+  mixins: [SortableTable],
+
   components: { WalletLink, Currency },
 
   props: {
@@ -47,6 +50,10 @@ export default {
 
   computed: {
     ...mapGetters('network', ['supply']),
+
+    sortedWallets() {
+      return _.orderBy(this.wallets, this.sortKey, this.sortDirection)
+    }
   },
 
   methods: {
@@ -54,8 +61,8 @@ export default {
       const page = this.$route.params.page > 1 ? this.$route.params.page - 1 : 0
 
       return page * 25 + (index + 1)
-    },
-  },
+    }
+  }
 }
 </script>
 

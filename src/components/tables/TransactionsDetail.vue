@@ -2,19 +2,19 @@
   <table class="w-full">
     <thead>
       <tr class="opacity-25 text-xs">
-        <th class="p-4 pl-10 text-left">Transaction ID</th>
-        <th class="p-4 text-left hidden lg:table-cell">Date</th>
-        <th class="p-4 text-left">Sender</th>
-        <th class="p-4 text-left">Recipient</th>
-        <th class="p-4 pr-4 text-right">Amount (ARK)</th>
-        <th class="p-4 text-right hidden md:table-cell">Fee (ARK)</th>
-        <th class="p-4 pr-10 text-right">
+        <th @click="sortBy('id')" class="p-4 pl-10 text-left">Transaction ID</th>
+        <th @click="sortBy('timestamp')" class="p-4 text-left hidden lg:table-cell">Date</th>
+        <th @click="sortBy('senderId')" class="p-4 text-left">Sender</th>
+        <th @click="sortBy('recipientId')" class="p-4 text-left">Recipient</th>
+        <th @click="sortBy('amount')" class="p-4 pr-4 text-right">Amount (ARK)</th>
+        <th @click="sortBy('fee')" class="p-4 text-right hidden md:table-cell">Fee (ARK)</th>
+        <th @click="sortBy('confirmations')" class="p-4 pr-10 text-right">
           <span class="hidden md:inline-block">Confirmations</span>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="transaction in transactions" :key="transaction.id">
+      <tr v-for="transaction in sortedTransactions" :key="transaction.id">
         <td class="p-4 pl-10 text-left border-none">
           <transaction-link :id="transaction.id" :smart-bridge="transaction.vendorField"></transaction-link>
         </td>
@@ -62,16 +62,25 @@
 import Currency from '@/components/utils/Currency'
 import WalletLink from '@/components/links/Wallet'
 import TransactionLink from '@/components/links/Transaction'
+import SortableTable from '@/mixins/sortable-table'
 
 export default {
+  mixins: [SortableTable],
+
   components: { Currency, TransactionLink, WalletLink },
 
   props: {
     transactions: {
       type: Array,
       required: true,
-    },
+    }
   },
+
+  computed: {
+    sortedTransactions() {
+      return _.orderBy(this.transactions, this.sortKey, this.sortDirection)
+    }
+  }
 }
 </script>
 

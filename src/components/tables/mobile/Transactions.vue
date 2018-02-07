@@ -51,8 +51,8 @@ export default {
     transactions: {
       type: Array,
       required: true,
-    },
-  },
+    }
+  }
 }
 </script>
 

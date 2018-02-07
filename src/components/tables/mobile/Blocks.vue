@@ -51,8 +51,8 @@ export default {
     blocks: {
       type: Array,
       required: true,
-    },
-  },
+    }
+  }
 }
 </script>
 

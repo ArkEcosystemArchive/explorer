@@ -54,8 +54,11 @@ import Currency from '@/components/utils/Currency'
 import WalletLink from '@/components/links/Wallet'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
+import SortableTable from '@/mixins/sortable-table'
 
 export default {
+  mixins: [SortableTable],
+
   components: { Currency, WalletLink },
 
   props: {
@@ -65,10 +68,7 @@ export default {
     },
   },
 
-  data: () => ({
-    sortKey: 'rate',
-    sortDirection: 'asc'
-  }),
+  data: () => ({ sortKey: 'name' }),
 
   computed: {
     ...mapGetters('delegates', ['forged']),
@@ -119,11 +119,6 @@ export default {
         '4': '#838a9b', // Awaiting Slot
         '5': '#ef192d', // Not Forging
       }[row.forgingStatus.code]
-    },
-
-    sortBy(sortKey) {
-      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc'
-      this.sortKey = sortKey
     }
   },
 }

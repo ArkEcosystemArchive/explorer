@@ -40,7 +40,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('network', ['supply']),
+    ...mapGetters('network', ['supply'])
   },
 
   methods: {
@@ -48,8 +48,8 @@ export default {
       const page = this.$route.params.page > 1 ? this.$route.params.page - 1 : 0
 
       return page * 25 + (index + 1)
-    },
-  },
+    }
+  }
 }
 </script>
 
