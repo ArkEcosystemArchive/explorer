@@ -46,7 +46,6 @@ const methods = {
         minute: 0,
         second: 0,
       })
-      .add(Math.abs(new Date().getTimezoneOffset()), 'minutes')
       .add(value, 'seconds')
       .fromNow()
   },
