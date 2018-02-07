@@ -6,9 +6,9 @@
 
     <section class="bg-theme-content-background shadow-theme xl:rounded-lg mb-5" :class="{ 'py-8': isDelegate }" v-show="isDelegate || isVoting">
       <div class="px-5 sm:px-10" :class="{ 'py-4': !isDelegate }">
-        <delegate :wallet="wallet"></delegate>
-        <vote :wallet="wallet"></vote>
-        <voters :wallet="wallet"></voters>
+        <delegate :wallet="wallet" v-show="isDelegate"></delegate>
+        <vote :wallet="wallet" v-show="isVoting"></vote>
+        <voters :wallet="wallet" v-show="isDelegate"></voters>
       </div>
     </section>
 
