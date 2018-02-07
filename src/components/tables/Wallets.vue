@@ -1,7 +1,7 @@
 <template>
   <table class="w-full">
     <thead>
-      <tr class="opacity-25 text-xs">
+      <tr class="text-xs text-theme-text-thead">
         <th class="p-4 pl-10 text-left">Rank</th>
         <th @click="sortBy('address')" class="p-4 text-left">Address</th>
         <th @click="sortBy('balance')" class="p-4 text-right">Balance</th>

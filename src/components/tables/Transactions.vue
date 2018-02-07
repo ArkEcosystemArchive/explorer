@@ -1,7 +1,7 @@
 <template>
   <table class="w-full">
     <thead>
-      <tr class="opacity-25 text-xs">
+      <tr class="text-xs text-theme-text-thead">
         <th @click="sortBy('id')" class="p-4 pl-10 text-left">ID</th>
         <th @click="sortBy('timestamp')" class="p-4 text-left hidden md:table-cell">Timestamp</th>
         <th @click="sortBy('senderId')" class="p-4 text-left">Sender</th>

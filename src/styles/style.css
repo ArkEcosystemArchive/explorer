@@ -5,6 +5,9 @@
 @tailwind utilities;
 
 .theme-light {
+  --color-theme-text-thead: #C5C7CB;
+  --color-theme-table-row-sticky: #fff;
+
   --color-theme-page-background-primary: #f5f6fa;
   --color-theme-content-background-primary: #fff;
   --color-theme-feature-background: #20222d;
@@ -37,6 +40,9 @@
 }
 
 .theme-dark {
+  --color-theme-text-thead: #A1A2A6;
+  --color-theme-table-row-sticky: #25262c;
+
   --color-theme-page-background-primary: #1a1b1f;
   --color-theme-content-background-primary: #202126;
   --color-theme-feature-background: #202126;
@@ -115,4 +121,18 @@ hr {
   width: 96%;
   background-color: var(--theme-border-secondary);
   height: 1px;
+}
+
+/** Sticky Table Header */
+
+thead tr {
+    background-color: var(--color-theme-table-row-sticky);
+}
+
+thead th {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 80px;
+    background-color: var(--color-theme-table-row-sticky);
+    z-index: 10;
 }

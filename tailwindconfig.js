@@ -62,6 +62,8 @@ let colors = {
   'chart-inactive': 'var(--chart-inactive)',
   'theme-button': 'var(--theme-button)',
   'theme-button-text': 'var(--theme-button-text)',
+
+  'theme-text-thead': 'var(--color-theme-text-thead)',
   // END CUSTOM ADDED
 
   black: '#172130',
