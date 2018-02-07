@@ -64,8 +64,28 @@ If you wish to remove the `/#/` from your URLs you can follow those steps https:
 
 ## Development
 
+#### Mainnet
+
 ```bash
-yarn dev
+yarn dev # or yarn dev:mainnet
+```
+
+#### Mainnet
+
+```bash
+yarn dev:devnet
+```
+
+#### Custom
+
+```bash
+EXP_NETWORK=custom yarn dev
+```
+
+#### Change Router Mode
+
+```bash
+EXP_ROUTER=history yarn dev
 ```
 
 ## Testing
