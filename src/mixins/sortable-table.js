@@ -1,8 +1,14 @@
 export default {
   data: () => ({
     sortKey: null,
-    sortDirection: 'asc'
+    sortDirection: 'desc'
   }),
+
+  computed: {
+    sortSymbol() {
+      return require(`@/assets/images/arrows/${this.sortDirection}.svg`)
+    }
+  },
 
   methods: {
     sortBy(sortKey) {

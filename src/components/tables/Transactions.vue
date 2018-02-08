@@ -1,16 +1,36 @@
 <template>
   <table class="w-full">
-    <thead>
-      <tr class="text-xs text-theme-text-thead">
-        <th @click="sortBy('id')" class="p-4 pl-10 text-left">ID</th>
-        <th @click="sortBy('timestamp')" class="p-4 text-left hidden md:table-cell">Timestamp</th>
-        <th @click="sortBy('senderId')" class="p-4 text-left">Sender</th>
-        <th @click="sortBy('recipientId')" class="p-4 text-left">Recipient</th>
-        <th @click="sortBy('vendorField')" class="p-4 text-right hidden lg:table-cell">Smartbridge</th>
-        <th @click="sortBy('amount')" class="p-4 pr-10 md:pr-4 text-right">Amount (ARK)</th>
-        <th @click="sortBy('fee')" class="p-4 pr-10 text-right hidden md:table-cell">Fee (ARK)</th>
-      </tr>
-    </thead>
+    <table-header :fields="[
+        {
+          label: 'ID',
+          sortBy: 'id',
+          class: 'p-4 pl-10 text-left'
+        }, {
+          label: 'Timestamp',
+          sortBy: 'timestamp',
+          class: 'p-4 text-left hidden md:table-cell'
+        }, {
+          label: 'Sender',
+          sortBy: 'senderId',
+          class: 'p-4 text-left'
+        }, {
+          label: 'Recipient',
+          sortBy: 'recipientId',
+          class: 'p-4 text-left'
+        }, {
+          label: 'Smartbridge',
+          sortBy: 'vendorField',
+          class: 'p-4 text-right hidden lg:table-cell'
+        }, {
+          label: 'Amount (ARK)',
+          sortBy: 'amount',
+          class: 'p-4 pr-10 md:pr-4 text-right'
+        }, {
+          label: 'Fee (ARK)',
+          sortBy: 'fee',
+          class: 'p-4 pr-10 text-right'
+        },
+    ]" :sort-key="sortKey" :sort-direction="sortDirection" :sort-symbol="sortSymbol" :handler="sortBy"></table-header>
     <tbody>
       <tr v-for="transaction in sortedTransactions" :key="transaction.id">
         <td class="p-4 pl-10 text-left border-none">
@@ -44,11 +64,12 @@ import Currency from '@/components/utils/Currency'
 import WalletLink from '@/components/links/Wallet'
 import TransactionLink from '@/components/links/Transaction'
 import SortableTable from '@/mixins/sortable-table'
+import TableHeader from '@/components/table/TableHeader'
 
 export default {
   mixins: [SortableTable],
 
-  components: { Currency, TransactionLink, WalletLink },
+  components: { Currency, TransactionLink, WalletLink, TableHeader },
 
   props: {
     transactions: {
@@ -56,6 +77,8 @@ export default {
       required: true,
     },
   },
+
+  data: () => ({ sortKey: 'timestamp' }),
 
   computed: {
     sortedTransactions() {

@@ -1,13 +1,22 @@
 <template>
   <table class="w-full">
-    <thead>
-      <tr class="text-xs text-theme-text-thead">
-        <th class="p-4 pl-10 text-left">Rank</th>
-        <th @click="sortBy('address')" class="p-4 text-left">Address</th>
-        <th @click="sortBy('balance')" class="p-4 text-right">Balance</th>
-        <th class="p-4 pr-10 text-right">Supply</th>
-      </tr>
-    </thead>
+    <table-header :fields="[
+        {
+          label: 'Rank',
+          class: 'p-4 pl-10 text-left'
+        }, {
+          label: 'Address',
+          sortBy: 'address',
+          class: 'p-4 text-left'
+        }, {
+          label: 'Balance',
+          sortBy: 'balance',
+          class: 'p-4 text-right'
+        }, {
+          label: 'Supply',
+          class: 'p-4 pr-10 text-right'
+        }
+    ]" :sort-key="sortKey" :sort-direction="sortDirection" :sort-symbol="sortSymbol" :handler="sortBy"></table-header>
     <tbody>
       <tr v-for="(row, index) in sortedWallets" :key="row.address">
         <td class="p-4 pl-10 text-left border-none w-24">
@@ -33,13 +42,14 @@
 <script type="text/ecmascript-6">
 import Currency from '@/components/utils/Currency'
 import WalletLink from '@/components/links/Wallet'
+import TableHeader from '@/components/table/TableHeader'
 import SortableTable from '@/mixins/sortable-table'
 import { mapGetters } from 'vuex'
 
 export default {
   mixins: [SortableTable],
 
-  components: { WalletLink, Currency },
+  components: { WalletLink, Currency, TableHeader },
 
   props: {
     wallets: {
