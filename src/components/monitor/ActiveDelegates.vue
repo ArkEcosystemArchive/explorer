@@ -1,62 +1,65 @@
 <template>
-  <table class="w-full text-xs md:text-base">
-    <thead>
-      <tr class="text-theme-text-thead md:text-xs">
-        <th @click="sortBy('rate')" class="p-4 pl-5 sm:pl-10 text-left">
-          <span class="hidden sm:inline-block">Rank</span>
-          <span class="sm:hidden">#</span>
-        </th>
-        <th @click="sortBy('username')" class="p-4 text-left">Name</th>
-        <th @click="sortBy('producedblocks')" class="p-4 text-left hidden xl:table-cell">Forged</th>
-        <th @click="sortBy('forgingStatus.lastBlock.timestamp')" class="p-4 text-left">Last Forged</th>
-        <th class="p-4 pr-5 md:pr-4 text-left hidden md:block">Status</th>
-        <th @click="sortBy('productivity')" class="p-4 text-right hidden md:table-cell">Productivity</th>
-        <th @click="sortBy('approval')" class="p-4 pr-5 sm:pr-10 text-right hidden md:table-cell">Approval</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(row, index) in sortedDelegates" :key="row.address">
-        <td class="p-3 pl-5 sm:pl-10 text-left border-none">{{ row.rate }}</td>
+  <!-- <th @click="sortBy('rate')" class="p-4 pl-5 sm:pl-10 text-left">
+    <span class="hidden sm:inline-block">Rank</span>
+    <span class="sm:hidden">#</span>
+  </th> -->
+  <table-component :data="delegates" sort-by="rate" sort-order="asc" :show-filter="false" :show-caption="false" table-class="w-full text-xs md:text-base">
+    <table-column show="rate" label="Rank" header-class="p-4 pl-5 sm:pl-10 text-left" cell-class="p-3 pl-5 sm:pl-10 text-left border-none">
+      <template slot-scope="row">
+        {{ row.rate }}
+      </template>
+    </table-column>
 
-        <td class="p-3 text-left border-none">
-          <link-wallet :address="row.address"></link-wallet>
-        </td>
+    <table-column show="username" label="Name" header-class="p-4 text-left" cell-class="p-3 text-left border-none">
+      <template slot-scope="row">
+        <link-wallet :address="row.address"></link-wallet>
+      </template>
+    </table-column>
 
-        <td class="p-3 text-left border-none hidden xl:table-cell">
-          {{ readableCrypto(totalForged(row)) }}
-        </td>
+    <table-column show="producedblocks" label="Forged" header-class="p-4 text-left hidden xl:table-cell" cell-class="p-3 text-left border-none hidden xl:table-cell">
+      <template slot-scope="row">
+        {{ readableCrypto(totalForged(row)) }}
+      </template>
+    </table-column>
 
-        <td class="p-3 text-left border-none">
-          {{ lastForgingTime(row) }}
-        </td>
+    <table-column show="forgingTime" label="Last Forged" header-class="p-4 text-left" cell-class="p-3 text-left border-none">
+      <template slot-scope="row">
+        {{ lastForgingTime(row) }}
+      </template>
+    </table-column>
 
-        <td class="p-3 pr-4 text-right border-none">
-          <svg
-           xmlns="http://www.w3.org/2000/svg"
-           xmlns:xlink="http://www.w3.org/1999/xlink"
-           width="19px" height="19px"
-           v-tooltip="statusMessage(row)">
-          <path fill-rule="evenodd" :fill="statusColor(row)"
-           d="M9.500,-0.000 C14.746,-0.000 18.999,4.253 18.999,9.500 C18.999,14.747 14.746,19.000 9.500,19.000 C4.253,19.000 -0.001,14.747 -0.001,9.500 C-0.001,4.253 4.253,-0.000 9.500,-0.000 Z"/>
-          </svg>
-        </td>
+    <table-column :sortable="false" show="forgingStatus" label="Status" header-class="p-4 pr-5 md:pr-4 text-left hidden md:block" cell-class="p-3 pr-4 text-right border-none">
+      <template slot-scope="row">
+        <svg
+         xmlns="http://www.w3.org/2000/svg"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         width="19px" height="19px"
+         v-tooltip="statusMessage(row)">
+        <path fill-rule="evenodd" :fill="statusColor(row)"
+         d="M9.500,-0.000 C14.746,-0.000 18.999,4.253 18.999,9.500 C18.999,14.747 14.746,19.000 9.500,19.000 C4.253,19.000 -0.001,14.747 -0.001,9.500 C-0.001,4.253 4.253,-0.000 9.500,-0.000 Z"/>
+        </svg>
+      </template>
+    </table-column>
 
-        <td class="p-3 text-right border-none hidden md:table-cell">{{ row.productivity }}%</td>
+    <table-column show="productivity" label="Productivity" header-class="p-4 text-right hidden md:table-cell" cell-class="p-3 text-right border-none hidden md:table-cell">
+      <template slot-scope="row">
+        {{ row.productivity }}%
+      </template>
+    </table-column>
 
-        <td class="p-3 pr-10 text-right border-none hidden md:table-cell">{{ row.approval }}%</td>
-      </tr>
-    </tbody>
-  </table>
+    <table-column show="approval" label="Approval" header-class="p-4 pr-5 sm:pr-10 text-right hidden md:table-cell" cell-class="p-3 pr-10 text-right border-none hidden md:table-cell">
+      <template slot-scope="row">
+        {{ row.approval }}%
+      </template>
+    </table-column>
+  </table-component>
 </template>
 
 <script type="text/ecmascript-6">
 import { mapGetters } from 'vuex'
 import moment from 'moment'
-import SortableTable from '@/mixins/sortable-table'
 
 export default {
-  mixins: [SortableTable],
-
   props: {
     delegates: {
       type: Array,
@@ -64,14 +67,8 @@ export default {
     },
   },
 
-  data: () => ({ sortKey: 'name' }),
-
   computed: {
-    ...mapGetters('delegates', ['forged']),
-
-    sortedDelegates() {
-      return _.orderBy(this.delegates, this.sortKey, this.sortDirection)
-    }
+    ...mapGetters('delegates', ['forged'])
   },
 
   methods: {

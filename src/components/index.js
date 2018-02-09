@@ -1,5 +1,7 @@
 import Vue from 'vue'
 
+// https://github.com/vuejs/vue-loader/releases/tag/v13.0.0
+
 // Utilities
 Vue.component('clipboard', require('@/components/utils/Clipboard.vue').default)
 Vue.component('currency', require('@/components/utils/Currency.vue').default)
