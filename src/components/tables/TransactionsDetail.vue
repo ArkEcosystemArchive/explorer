@@ -71,28 +71,4 @@ export default {
   width: 16px;
   height: 16px;
 }
-tbody tr:nth-child(even) {
-  background-color: var(--color-theme-table-row);
-}
-
-tbody tr:hover {
-  background-color: rgba(0, 0, 0, 0);
-  transform: scale(1.015);
-  box-shadow: var(--theme-table-hover-shadow);
-  z-index: 999;
-  border-radius: 7px;
-}
-
-tr:hover,
-tr:hover td {
-  background-color: var(--color-theme-table-row-hover);
-}
-tr:hover td:first-child {
-  border-top-left-radius: 7px;
-  border-bottom-left-radius: 7px;
-}
-tr:hover td:last-child {
-  border-top-right-radius: 7px;
-  border-bottom-right-radius: 7px;
-}
 </style>
