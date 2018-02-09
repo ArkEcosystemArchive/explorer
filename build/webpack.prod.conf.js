@@ -80,7 +80,8 @@ const webpackConfig = merge(baseWebpackConfig, {
       ]),
       whitelist: [
         'tooltip', 'tooltip-inner', 'tooltip-arrow',
-        'table-component__th--sort-asc', 'table-component__th--sort-desc'
+        'table-component__th--sort-asc', 'table-component__th--sort-desc',
+        'tr', 'td'
       ],
       extractors: [{
         extractor: TailwindExtractor,

@@ -137,7 +137,6 @@ tbody tr:hover {
   border-radius: 7px;
 }
 
-tr:hover,
 tr:hover td {
   background-color: var(--color-theme-table-row-hover);
 }
