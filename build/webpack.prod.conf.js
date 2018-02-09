@@ -78,7 +78,10 @@ const webpackConfig = merge(baseWebpackConfig, {
         path.join(__dirname, './../**/*.vue'),
         path.join(__dirname, './../src/**/*.js')
       ]),
-      whitelist: ['tooltip', 'tooltip-inner', 'tooltip-arrow'],
+      whitelist: [
+        'tooltip', 'tooltip-inner', 'tooltip-arrow',
+        'table-component__th--sort-asc', 'table-component__th--sort-desc'
+      ],
       extractors: [{
         extractor: TailwindExtractor,
         extensions: ["html", "js", "vue"]
