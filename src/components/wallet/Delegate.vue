@@ -30,6 +30,7 @@
       <div>
         <span>{{ delegate.producedblocks }}</span>
         <span class="text-grey">({{ delegate.missedblocks }} missed)</span>
+        <router-link v-if="delegate.producedblocks > 0" :to="{ name: 'wallet-blocks', params: { address: delegate.address, page: 1 } }">See all</router-link>
       </div>
     </div>
   </div>
