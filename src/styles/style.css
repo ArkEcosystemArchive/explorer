@@ -157,14 +157,21 @@ thead tr {
 }
 
 thead th {
-    position: sticky;
-    position: -webkit-sticky;
-    top: 80px;
-    background-color: var(--color-theme-table-row-sticky);
-    z-index: 10;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 80px;
+  background-color: var(--color-theme-table-row-sticky);
+  z-index: 10;
 }
 
-/** Table Arrows */
+/** Table Arrows*/
+
+
+.table-component__th--sort-asc,
+.table-component__th--sort-desc,
+.table-component__th--sort {
+  cursor: pointer;
+}
 
 .table-component__th--sort-asc:after {
   background-image: url('../assets/images/arrows/asc.svg');
