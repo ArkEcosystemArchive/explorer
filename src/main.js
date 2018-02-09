@@ -7,6 +7,7 @@ import router from './router'
 import store from './store'
 // import i18n from './i18n'
 import VTooltip from 'v-tooltip'
+import TableComponent from 'vue-table-component'
 
 require('./mixins')
 
@@ -25,3 +26,10 @@ new Vue({
 })
 
 Vue.use(VTooltip)
+
+/** Sortable Tables */
+TableComponent.settings({
+  sortHandler: (rows, column, order) => _.orderBy(rows, (row) => (row.data[column]), order)
+})
+
+Vue.use(TableComponent)

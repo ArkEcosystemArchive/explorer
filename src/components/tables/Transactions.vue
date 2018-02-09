@@ -1,88 +1,61 @@
 <template>
-  <table class="w-full">
-    <table-header :fields="[
-        {
-          label: 'ID',
-          sortBy: 'id',
-          class: 'p-4 pl-10 text-left'
-        }, {
-          label: 'Timestamp',
-          sortBy: 'timestamp',
-          class: 'p-4 text-left hidden md:table-cell'
-        }, {
-          label: 'Sender',
-          sortBy: 'senderId',
-          class: 'p-4 text-left'
-        }, {
-          label: 'Recipient',
-          sortBy: 'recipientId',
-          class: 'p-4 text-left'
-        }, {
-          label: 'Smartbridge',
-          sortBy: 'vendorField',
-          class: 'p-4 text-right hidden lg:table-cell'
-        }, {
-          label: 'Amount (ARK)',
-          sortBy: 'amount',
-          class: 'p-4 pr-10 md:pr-4 text-right'
-        }, {
-          label: 'Fee (ARK)',
-          sortBy: 'fee',
-          class: 'p-4 pr-10 text-right'
-        },
-    ]" :sort-key="sortKey" :sort-direction="sortDirection" :sort-symbol="sortSymbol" :handler="sortBy"></table-header>
-    <tbody>
-      <tr v-for="transaction in sortedTransactions" :key="transaction.id">
-        <td class="p-4 pl-10 text-left border-none">
-          <transaction-link :id="transaction.id" :smart-bridge="transaction.vendorField"></transaction-link>
-        </td>
-        <td class="p-4 text-left border-none hidden md:table-cell">
-          {{ readableTimestamp(transaction.timestamp) }}
-        </td>
-        <td class="p-4 text-left border-none">
-          <wallet-link :address="transaction.senderId"></wallet-link>
-        </td>
-        <td class="p-4 text-left border-none">
-          <wallet-link :address="transaction.recipientId"></wallet-link>
-        </td>
-        <td class="p-4 text-right border-none hidden lg:table-cell">
-          {{ truncate(transaction.vendorField || '', 35) }}
-        </td>
-        <td class="p-4 pr-10 md:pr-4 text-right border-none">
-          {{ readableCrypto(transaction.amount) }}
-        </td>
-        <td class="p-4 pr-10 text-right border-none hidden md:table-cell">
-          {{ readableCrypto(transaction.fee) }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <table-component :data="transactions" sort-by="timestamp" sort-order="desc" :show-filter="false" :show-caption="false" table-class="w-full">
+    <table-column show="id" label="ID" header-class="p-4 pl-10 text-left" cell-class="p-4 pl-10 text-left border-none">
+      <template slot-scope="row">
+        <transaction-link :id="row.id" :smart-bridge="row.vendorField"></transaction-link>
+      </template>
+    </table-column>
+
+    <table-column show="timestamp" label="Timestamp" header-class="p-4 text-left hidden md:table-cell" cell-class="p-4 text-left border-none hidden md:table-cell">
+      <template slot-scope="row">
+        {{ readableTimestamp(row.timestamp) }}
+      </template>
+    </table-column>
+
+    <table-column show="senderId" label="Sender" header-class="p-4 text-left" cell-class="p-4 text-left border-none">
+      <template slot-scope="row">
+        <wallet-link :address="row.senderId"></wallet-link>
+      </template>
+    </table-column>
+
+    <table-column show="recipientId" label="Recipient" header-class="p-4 text-left" cell-class="p-4 text-left border-none">
+      <template slot-scope="row">
+        <wallet-link :address="row.recipientId"></wallet-link>
+      </template>
+    </table-column>
+
+    <table-column show="vendorField" label="Smartbridge" header-class="p-4 text-right hidden lg:table-cell" cell-class="p-4 text-right border-none hidden lg:table-cell">
+      <template slot-scope="row">
+        {{ truncate(row.vendorField || '', 35) }}
+      </template>
+    </table-column>
+
+    <table-column show="amount" label="Amount (ARK)" header-class="p-4 pr-10 md:pr-4 text-right" cell-class="p-4 pr-10 md:pr-4 text-right border-none">
+      <template slot-scope="row">
+        {{ readableCrypto(row.amount) }}
+      </template>
+    </table-column>
+
+    <table-column show="fee" label="Fee (ARK)" header-class="p-4 pr-10 text-right" cell-class="p-4 pr-10 text-right border-none hidden md:table-cell">
+      <template slot-scope="row">
+        {{ readableCrypto(row.fee) }}
+      </template>
+    </table-column>
+  </table-component>
 </template>
 
 <script type="text/ecmascript-6">
 import Currency from '@/components/utils/Currency'
 import WalletLink from '@/components/links/Wallet'
 import TransactionLink from '@/components/links/Transaction'
-import SortableTable from '@/mixins/sortable-table'
-import TableHeader from '@/components/table/TableHeader'
 
 export default {
-  mixins: [SortableTable],
-
-  components: { Currency, TransactionLink, WalletLink, TableHeader },
+  components: { Currency, TransactionLink, WalletLink },
 
   props: {
     transactions: {
       type: Array,
       required: true,
-    },
-  },
-
-  data: () => ({ sortKey: 'timestamp' }),
-
-  computed: {
-    sortedTransactions() {
-      return _.orderBy(this.transactions, this.sortKey, this.sortDirection)
     }
   }
 }

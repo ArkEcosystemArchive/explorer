@@ -111,6 +111,7 @@ export default {
     },
 
     statusColor(row) {
+      console.log(row.username, row.forgingStatus.code)
       return {
         '0': '#46b02e', // Forging
         '1': '#f6993f', // Missing

@@ -1,55 +1,38 @@
 <template>
-  <table class="w-full">
-    <table-header :fields="[
-        {
-          label: 'Rank',
-          class: 'p-4 pl-10 text-left'
-        }, {
-          label: 'Address',
-          sortBy: 'address',
-          class: 'p-4 text-left'
-        }, {
-          label: 'Balance',
-          sortBy: 'balance',
-          class: 'p-4 text-right'
-        }, {
-          label: 'Supply',
-          class: 'p-4 pr-10 text-right'
-        }
-    ]" :sort-key="sortKey" :sort-direction="sortDirection" :sort-symbol="sortSymbol" :handler="sortBy"></table-header>
-    <tbody>
-      <tr v-for="(row, index) in sortedWallets" :key="row.address">
-        <td class="p-4 pl-10 text-left border-none w-24">
-          {{ getRank(index) }}
-        </td>
+  <table-component :data="wallets" :show-filter="false" :show-caption="false" table-class="w-full">
+    <table-column :sortable="false" show="index" label="Rank" header-class="p-4 pl-10 text-left" cell-class="p-4 pl-10 text-left border-none w-24">
+      <template slot-scope="row">
+        {{ getRank(row.vueTableComponentInternalRowId) }}
+      </template>
+    </table-column>
 
-        <td class="p-4 text-left border-none">
-          <wallet-link :address="row.address"></wallet-link>
-        </td>
+    <table-column show="address" label="Address" header-class="p-4 text-left" cell-class="p-4 text-left border-none">
+      <template slot-scope="row">
+        <wallet-link :address="row.address"></wallet-link>
+      </template>
+    </table-column>
 
-        <td class="p-4 text-right border-none">
-          {{ readableCrypto(row.balance) }}
-        </td>
+    <table-column show="balance" label="Balance" header-class="p-4 text-right" cell-class="p-4 text-right border-none">
+      <template slot-scope="row">
+        {{ readableCrypto(row.balance) }}
+      </template>
+    </table-column>
 
-        <td class="p-4 pr-10 text-right border-none w-24">
-          {{ readableNumber((row.balance / supply) * 100) }}%
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <table-column :sortable="false" show="supply" label="Supply" header-class="p-4 pr-10 text-right" cell-class="p-4 pr-10 text-right border-none w-24">
+      <template slot-scope="row">
+        {{ readableNumber((row.balance / supply) * 100) }}%
+      </template>
+    </table-column>
+  </table-component>
 </template>
 
 <script type="text/ecmascript-6">
 import Currency from '@/components/utils/Currency'
 import WalletLink from '@/components/links/Wallet'
-import TableHeader from '@/components/table/TableHeader'
-import SortableTable from '@/mixins/sortable-table'
 import { mapGetters } from 'vuex'
 
 export default {
-  mixins: [SortableTable],
-
-  components: { WalletLink, Currency, TableHeader },
+  components: { WalletLink, Currency },
 
   props: {
     wallets: {
@@ -59,11 +42,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('network', ['supply']),
-
-    sortedWallets() {
-      return _.orderBy(this.wallets, this.sortKey, this.sortDirection)
-    }
+    ...mapGetters('network', ['supply'])
   },
 
   methods: {

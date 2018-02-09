@@ -127,6 +127,7 @@ hr {
 
 thead tr {
     background-color: var(--color-theme-table-row-sticky);
+    @apply .text-theme-text-thead .text-xs
 }
 
 thead th {
@@ -135,4 +136,23 @@ thead th {
     top: 80px;
     background-color: var(--color-theme-table-row-sticky);
     z-index: 10;
+}
+
+
+/** Table Arrows */
+
+.table-component__th--sort-asc:before {
+  background-image: url('../assets/images/arrows/asc.svg');
+  height: 12px;
+  width: 12px;
+  display: inline-block;
+  content: "";
+}
+
+.table-component__th--sort-desc:before {
+  background-image: url('../assets/images/arrows/desc.svg');
+  height: 12px;
+  width: 12px;
+  display: inline-block;
+  content: "";
 }
