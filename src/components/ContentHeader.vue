@@ -27,11 +27,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-import Currency from '@/components/utils/Currency'
 import { mapGetters } from 'vuex'
 
 export default {
-  components: { Currency },
   computed: {
     ...mapGetters('network', ['alias', 'supply', 'height']),
     ...mapGetters('currency', ['name', 'rate', 'symbol']),

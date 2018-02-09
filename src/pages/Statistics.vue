@@ -63,28 +63,10 @@
 </template>
 
 <script type="text/ecmascript-6">
-// Components
-import ContentHeader from '@/components/ContentHeader'
-import ChartWrapper from '@/components/ChartWrapper'
-import TableTransactions from '@/components/tables/Transactions'
-import TableTransactionsMobile from '@/components/tables/mobile/Transactions'
-import TableBlocks from '@/components/tables/Blocks'
-import TableBlocksMobile from '@/components/tables/mobile/Blocks'
-
-// Mock data
 import lastTransactions from '@/assets/lastTransactions'
 import lastBlocks from '@/assets/lastBlocks'
 
 export default {
-  components: {
-    ContentHeader,
-    ChartWrapper,
-    TableTransactions,
-    TableTransactionsMobile,
-    TableBlocks,
-    TableBlocksMobile,
-  },
-
   data: () => ({
     lastTransactions,
     lastBlocks,

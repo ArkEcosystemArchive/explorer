@@ -14,20 +14,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-import ContentHeader from '@/components/ContentHeader'
-import TableTransactions from '@/components/tables/Transactions'
-import TableTransactionsMobile from '@/components/tables/mobile/Transactions'
-import Paginator from '@/components/utils/Paginator'
 import TransactionService from '@/services/transaction'
 
 export default {
-  components: {
-    ContentHeader,
-    TableTransactions,
-    TableTransactionsMobile,
-    Paginator,
-  },
-
   data: () => ({ transactions: [] }),
 
   created() {

@@ -15,13 +15,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-import TableBlocks from '@/components/tables/Blocks'
-import TableBlocksMobile from '@/components/tables/mobile/Blocks'
 import BlockService from '@/services/block'
 
 export default {
-  components: { TableBlocks, TableBlocksMobile },
-
   data: () => ({ blocks: [] }),
 
   mounted() {

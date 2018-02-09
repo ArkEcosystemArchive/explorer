@@ -11,14 +11,13 @@
 </template>
 
 <script type="text/ecmascript-6">
-import ContentHeader from '@/components/ContentHeader'
 import Identity from '@/components/block/Identity'
 import BlockDetails from '@/components/block/Details'
 import Transactions from '@/components/block/Transactions'
 import BlockService from '@/services/block'
 
 export default {
-  components: {ContentHeader, Identity, BlockDetails, Transactions},
+  components: {Identity, BlockDetails, Transactions},
 
   data: () => ({ block: {} }),
 

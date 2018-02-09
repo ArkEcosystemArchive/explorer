@@ -8,7 +8,7 @@
 
       <div class="border-b py-4 flex justify-between flex-wrap">
         <div>Address</div>
-        <wallet-link :address="row.address"></wallet-link>
+        <link-wallet :address="row.address"></link-wallet>
       </div>
 
       <div class="border-b py-4 flex justify-between flex-wrap">
@@ -25,13 +25,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-import Currency from '@/components/utils/Currency'
-import WalletLink from '@/components/links/Wallet'
 import { mapGetters } from 'vuex'
 
 export default {
-  components: { WalletLink, Currency },
-
   props: {
     wallets: {
       type: Array,

@@ -132,17 +132,10 @@
 </template>
 
 <script type="text/ecmascript-6">
-import QrCode from '@/components/utils/QrCode'
-import Clipboard from '@/components/utils/Clipboard'
-import Modal from '@/components/Modal'
-import Currency from '@/components/utils/Currency'
-
 import TransactionService from '@/services/transaction'
 import { mapGetters } from 'vuex'
 
 export default {
-  components: { Modal, Clipboard, QrCode, Currency },
-
   props: {
     wallet: {
       type: Object,

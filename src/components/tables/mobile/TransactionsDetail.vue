@@ -3,7 +3,7 @@
     <div v-for="transaction in transactions" :key="transaction.id" class="tx-row-mobile px-5 py-4">
       <div class="border-b py-4 flex justify-between flex-wrap">
         <div>ID</div>
-        <transaction-link :id="transaction.id" :smart-bridge="transaction.vendorField"></transaction-link>
+        <link-transaction :id="transaction.id" :smart-bridge="transaction.vendorField"></link-transaction>
       </div>
 
       <div class="border-b py-4 flex justify-between flex-wrap">
@@ -13,12 +13,12 @@
 
       <div class="border-b py-4 flex justify-between flex-wrap">
         <div>Sender</div>
-        <wallet-link :address="transaction.senderId"></wallet-link>
+        <link-wallet :address="transaction.senderId"></link-wallet>
       </div>
 
       <div class="border-b py-4 flex justify-between flex-wrap">
         <div>Recipient</div>
-        <wallet-link :address="transaction.recipientId"></wallet-link>
+        <link-wallet :address="transaction.recipientId"></link-wallet>
       </div>
 
       <div class="border-b py-4 flex justify-between flex-wrap">
@@ -50,13 +50,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import Currency from '@/components/utils/Currency'
-import WalletLink from '@/components/links/Wallet'
-import TransactionLink from '@/components/links/Transaction'
-
 export default {
-  components: { Currency, TransactionLink, WalletLink },
-
   props: {
     transactions: {
       type: Array,

@@ -44,19 +44,10 @@
 </template>
 
 <script type="text/ecmascript-6">
-import ContentHeader from '@/components/ContentHeader'
-import TableTransactionsDetail from '@/components/tables/TransactionsDetail'
-import TableTransactionsDetailMobile from '@/components//tables/mobile/TransactionsDetail'
 import TransactionService from '@/services/transaction'
 import { mapGetters } from 'vuex'
 
 export default {
-  components: {
-    ContentHeader,
-    TableTransactionsDetail,
-    TableTransactionsDetailMobile,
-  },
-
   props: {
     wallet: {
       type: Object,

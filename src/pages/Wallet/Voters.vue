@@ -14,21 +14,10 @@
 </template>
 
 <script type="text/ecmascript-6">
-import ContentHeader from '@/components/ContentHeader'
-import TableWallets from '@/components/tables/Wallets'
-import TableWalletsMobile from '@/components/tables/mobile/Wallets'
-import Paginator from '@/components/utils/Paginator'
 import WalletService from '@/services/wallet'
 import DelegateService from '@/services/delegate'
 
 export default {
-  components: {
-    ContentHeader,
-    TableWallets,
-    TableWalletsMobile,
-    Paginator,
-  },
-
   data: () => ({
     wallets: [],
     perPage: 25,

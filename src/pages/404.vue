@@ -18,15 +18,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-import ContentHeader from '@/components/ContentHeader'
-
 import { mapGetters } from 'vuex'
 
 export default {
-  components: {
-    ContentHeader,
-  },
-
   computed: {
     ...mapGetters('ui', ['nightMode']),
   },

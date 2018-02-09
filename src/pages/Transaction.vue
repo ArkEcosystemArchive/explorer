@@ -22,14 +22,14 @@
         <div class="border-b py-4 flex justify-between flex-wrap">
           <div>Sender</div>
           <div class="truncate">
-            <wallet-link :address="transaction.senderId">{{ transaction.senderId }}</wallet-link>
+            <link-wallet :address="transaction.senderId">{{ transaction.senderId }}</link-wallet>
           </div>
         </div>
 
         <div class="border-b py-4 flex justify-between flex-wrap">
           <div>Recipient</div>
           <div class="truncate">
-            <wallet-link :address="transaction.recipientId">{{ transaction.recipientId }}</wallet-link>
+            <link-wallet :address="transaction.recipientId">{{ transaction.recipientId }}</link-wallet>
           </div>
         </div>
 
@@ -60,7 +60,7 @@
 
         <div class="py-4 flex justify-between flex-wrap" v-if="transaction.blockid">
           <div>Block</div>
-          <div><block-link :id="transaction.blockid">{{ transaction.blockid }}</block-link></div>
+          <div><link-block :id="transaction.blockid">{{ transaction.blockid }}</link-block></div>
         </div>
       </div>
     </section>
@@ -68,26 +68,10 @@
 </template>
 
 <script type="text/ecmascript-6">
-import Currency from '@/components/utils/Currency'
-import WalletLink from '@/components/links/Wallet'
-import BlockLink from '@/components/links/Block'
-
-// Components
-import ContentHeader from '@/components/ContentHeader'
-import Clipboard from '@/components/utils/Clipboard'
-
 import TransactionService from '@/services/transaction'
 import { mapGetters } from 'vuex'
 
 export default {
-  components: {
-    ContentHeader,
-    BlockLink,
-    WalletLink,
-    Currency,
-    Clipboard,
-  },
-
   data: () => ({
     transaction: {},
   }),

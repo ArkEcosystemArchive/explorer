@@ -15,13 +15,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-import TableTransactions from '@/components/tables/Transactions'
-import TableTransactionsMobile from '@/components/tables/mobile/Transactions'
 import TransactionService from '@/services/transaction'
 
 export default {
-  components: { TableTransactions, TableTransactionsMobile },
-
   data: () => ({ transactions: [] }),
 
   mounted() {

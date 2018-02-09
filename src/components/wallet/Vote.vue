@@ -1,17 +1,14 @@
 <template>
   <div class="py-4 flex justify-between flex-wrap" v-show="Object.keys(delegate).length">
     <div>Votes</div>
-    <div><wallet-link :address="delegate.address">{{ delegate.username }}</wallet-link></div>
+    <div><link-wallet :address="delegate.address">{{ delegate.username }}</link-wallet></div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import WalletLink from '@/components/links/Wallet'
 import WalletService from '@/services/wallet'
 
 export default {
-  components: {WalletLink},
-
   props: {
     wallet: {
       type: Object,

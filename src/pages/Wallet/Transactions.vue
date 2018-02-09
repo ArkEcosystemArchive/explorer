@@ -14,21 +14,10 @@
 </template>
 
 <script type="text/ecmascript-6">
-import ContentHeader from '@/components/ContentHeader'
-import TableTransactions from '@/components/tables/TransactionsDetail'
-import TableTransactionsMobile from '@/components/tables/mobile/TransactionsDetail'
-import Paginator from '@/components/utils/Paginator'
 import WalletService from '@/services/wallet'
 import TransactionService from '@/services/transaction'
 
 export default {
-  components: {
-    ContentHeader,
-    TableTransactions,
-    TableTransactionsMobile,
-    Paginator,
-  },
-
   data: () => ({ transactions: [] }),
 
   created() {

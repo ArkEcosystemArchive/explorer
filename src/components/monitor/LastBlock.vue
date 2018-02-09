@@ -3,7 +3,7 @@
     <div>
       <div class="text-grey mb-2 min-w-0">Last block</div>
       <div class="text-lg truncate" v-if="block.id">
-        <block-link :id="block.id">{{ block.id }}</block-link>
+        <link-block :id="block.id">{{ block.id }}</link-block>
       </div>
     </div>
 
@@ -17,23 +17,17 @@
     <div class="w-32">
       <div class="text-grey mb-2 min-w-0">Delegate</div>
       <div class="text-lg text-white truncate semibold">
-        <wallet-link :public-key="block.generatorPublicKey"></wallet-link>
+        <link-wallet :public-key="block.generatorPublicKey"></link-wallet>
       </div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import WalletLink from '@/components/links/Wallet'
-import BlockLink from '@/components/links/Block'
-import Currency from '@/components/utils/Currency'
-
 import BlockService from '@/services/block'
 import { mapGetters } from 'vuex'
 
 export default {
-  components: { WalletLink, BlockLink, Currency },
-
   data: () => ({
     block: {},
     timer: null,

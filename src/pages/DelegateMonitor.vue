@@ -34,7 +34,6 @@
 </template>
 
 <script type="text/ecmascript-6">
-import ContentHeader from '@/components/ContentHeader'
 import DelegateDetail from '@/components/monitor/Details'
 import ActiveDelegates from '@/components/monitor/ActiveDelegates'
 import StandbyDelegates from '@/components/monitor/StandbyDelegates'
@@ -43,7 +42,6 @@ import DelegateService from '@/services/delegate'
 
 export default {
   components: {
-    ContentHeader,
     DelegateDetail,
     Forging,
     ActiveDelegates,

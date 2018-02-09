@@ -45,12 +45,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-import ArkMeter from '@/components/ArkMeter'
 import ForgingService from '@/services/forging'
 
 export default {
-  components: { ArkMeter },
-
   props: {
     delegates: {
       type: Array,

@@ -33,7 +33,7 @@
       </div>
 
       <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4 block" v-if="shouldDisplayCurrency"></span>
-      <currency v-if="shouldDisplayCurrency"></currency>
+      <toggle-currency v-if="shouldDisplayCurrency"></toggle-currency>
 
       <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4 hidden md:block" v-if="shouldDisplayChart"></span>
       <toggle-chart v-if="shouldDisplayChart"></toggle-chart>
@@ -47,13 +47,13 @@
 <script type="text/ecmascript-6">
 import ToggleTheme from './ToggleTheme'
 import ToggleChart from './ToggleChart'
-import Currency from './Currency'
+import ToggleCurrency from './ToggleCurrency'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
     ToggleTheme,
-    Currency,
+    ToggleCurrency,
     ToggleChart,
   },
 

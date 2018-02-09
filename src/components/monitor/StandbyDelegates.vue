@@ -13,7 +13,7 @@
         <td class="p-4 pl-5 sm:pl-10 text-left border-none w-24">{{ row.rate }}</td>
 
         <td class="p-4 text-left border-none">
-          <wallet-link :address="row.address"></wallet-link>
+          <link-wallet :address="row.address"></link-wallet>
         </td>
 
         <td class="p-4 text-right border-none hidden md:table-cell">{{ row.productivity }}%</td>
@@ -25,15 +25,11 @@
 </template>
 
 <script type="text/ecmascript-6">
-import Currency from '@/components/utils/Currency'
-import WalletLink from '@/components/links/Wallet'
 import DelegateService from '@/services/delegate'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 
 export default {
-  components: { Currency, WalletLink },
-
   data: () => ({ delegates: [] }),
 
   computed: {

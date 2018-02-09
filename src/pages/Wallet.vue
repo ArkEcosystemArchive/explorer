@@ -17,7 +17,6 @@
 </template>
 
 <script type="text/ecmascript-6">
-import ContentHeader from '@/components/ContentHeader'
 import WalletDetails from '@/components/wallet/Details'
 import Delegate from '@/components/wallet/Delegate'
 import Vote from '@/components/wallet/Vote'
@@ -27,7 +26,6 @@ import WalletService from '@/services/wallet'
 
 export default {
   components: {
-    ContentHeader,
     WalletDetails,
     Delegate,
     Vote,

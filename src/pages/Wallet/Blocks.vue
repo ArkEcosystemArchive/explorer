@@ -14,21 +14,10 @@
 </template>
 
 <script type="text/ecmascript-6">
-import ContentHeader from '@/components/ContentHeader'
-import TableBlocks from '@/components/tables/Blocks'
-import TableBlocksMobile from '@/components/tables/mobile/Blocks'
-import Paginator from '@/components/utils/Paginator'
 import WalletService from '@/services/wallet'
 import BlockService from '@/services/block'
 
 export default {
-  components: {
-    ContentHeader,
-    TableBlocks,
-    TableBlocksMobile,
-    Paginator,
-  },
-
   data: () => ({ blocks: [] }),
 
   created() {

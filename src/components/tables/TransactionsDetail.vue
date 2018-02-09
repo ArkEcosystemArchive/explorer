@@ -2,7 +2,7 @@
   <table-component :data="transactions" sort-by="timestamp" sort-order="desc" :show-filter="false" :show-caption="false" table-class="w-full">
     <table-column show="id" label="Transaction ID" header-class="p-4 pl-10 text-left" cell-class="p-4 pl-10 text-left border-none">
       <template slot-scope="row">
-        <transaction-link :id="row.id" :smart-bridge="row.vendorField"></transaction-link>
+        <link-transaction :id="row.id" :smart-bridge="row.vendorField"></link-transaction>
       </template>
     </table-column>
 
@@ -14,13 +14,13 @@
 
     <table-column show="senderId" label="Sender" header-class="p-4 text-left" cell-class="p-4 text-left border-none">
       <template slot-scope="row">
-        <wallet-link :address="row.senderId"></wallet-link>
+        <link-wallet :address="row.senderId"></link-wallet>
       </template>
     </table-column>
 
     <table-column show="recipientId" label="Recipient" header-class="p-4 text-left" cell-class="p-4 text-left border-none">
       <template slot-scope="row">
-        <wallet-link :address="row.recipientId"></wallet-link>
+        <link-wallet :address="row.recipientId"></link-wallet>
       </template>
     </table-column>
 
@@ -56,13 +56,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import Currency from '@/components/utils/Currency'
-import WalletLink from '@/components/links/Wallet'
-import TransactionLink from '@/components/links/Transaction'
-
 export default {
-  components: { Currency, TransactionLink, WalletLink },
-
   props: {
     transactions: {
       type: Array,

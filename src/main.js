@@ -9,6 +9,7 @@ import store from './store'
 import VTooltip from 'v-tooltip'
 import TableComponent from 'vue-table-component'
 
+require('./components')
 require('./mixins')
 
 sync(store, router)

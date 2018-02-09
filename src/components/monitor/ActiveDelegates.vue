@@ -19,7 +19,7 @@
         <td class="p-3 pl-5 sm:pl-10 text-left border-none">{{ row.rate }}</td>
 
         <td class="p-3 text-left border-none">
-          <wallet-link :address="row.address"></wallet-link>
+          <link-wallet :address="row.address"></link-wallet>
         </td>
 
         <td class="p-3 text-left border-none hidden xl:table-cell">
@@ -50,16 +50,12 @@
 </template>
 
 <script type="text/ecmascript-6">
-import Currency from '@/components/utils/Currency'
-import WalletLink from '@/components/links/Wallet'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 import SortableTable from '@/mixins/sortable-table'
 
 export default {
   mixins: [SortableTable],
-
-  components: { Currency, WalletLink },
 
   props: {
     delegates: {

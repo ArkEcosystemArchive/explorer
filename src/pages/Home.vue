@@ -34,16 +34,13 @@
 </template>
 
 <script type="text/ecmascript-6">
-import ContentHeader from '@/components/ContentHeader'
 import ChartWrapper from '@/components/ChartWrapper'
 import LatestTransactions from '@/components/home/LatestTransactions'
 import LatestBlocks from '@/components/home/LatestBlocks'
-
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
-    ContentHeader,
     ChartWrapper,
     LatestTransactions,
     LatestBlocks,

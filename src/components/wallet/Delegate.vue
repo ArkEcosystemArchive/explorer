@@ -38,11 +38,8 @@
 
 <script type="text/ecmascript-6">
 import DelegateService from '@/services/delegate'
-import Currency from '@/components/utils/Currency'
 
 export default {
-  components: {Currency},
-
   props: {
     wallet: {
       type: Object,

@@ -8,7 +8,7 @@
 
     <table-column show="address" label="Address" header-class="p-4 text-left" cell-class="p-4 text-left border-none">
       <template slot-scope="row">
-        <wallet-link :address="row.address"></wallet-link>
+        <link-wallet :address="row.address"></link-wallet>
       </template>
     </table-column>
 
@@ -27,13 +27,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-import Currency from '@/components/utils/Currency'
-import WalletLink from '@/components/links/Wallet'
 import { mapGetters } from 'vuex'
 
 export default {
-  components: { WalletLink, Currency },
-
   props: {
     wallets: {
       type: Array,

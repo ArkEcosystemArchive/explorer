@@ -13,13 +13,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-import TableTransactions from '@/components/tables/TransactionsDetail'
-import TableTransactionsMobile from '@/components//tables/mobile/TransactionsDetail'
 import TransactionService from '@/services/transaction'
 
 export default {
-  components: {TableTransactions, TableTransactionsMobile},
-
   props: {
     block: {
       type: Object,

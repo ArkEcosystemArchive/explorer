@@ -32,7 +32,6 @@ import HeaderDefault from '@/components/header/Default'
 import HeaderSearch from '@/components/header/Search'
 import HeaderDesktopCurrencies from '@/components/header/currencies/Desktop'
 import HeaderMobileCurrencies from '@/components/header/currencies/Mobile'
-import HeaderCurrency from '@/components/header/Currency'
 import HeaderDesktopMenu from '@/components/header/menu/Desktop'
 import HeaderMobileMenu from '@/components/header/menu/Mobile'
 import { mapGetters } from 'vuex'
@@ -41,7 +40,6 @@ export default {
   components: {
     HeaderDefault,
     HeaderSearch,
-    HeaderCurrency,
     HeaderDesktopCurrencies,
     HeaderMobileCurrencies,
     HeaderDesktopMenu,
