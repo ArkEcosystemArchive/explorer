@@ -166,7 +166,7 @@ thead th {
 
 /** Table Arrows */
 
-.table-component__th--sort-asc:before {
+.table-component__th--sort-asc:after {
   background-image: url('../assets/images/arrows/asc.svg');
   height: 12px;
   width: 12px;
@@ -174,7 +174,7 @@ thead th {
   content: "";
 }
 
-.table-component__th--sort-desc:before {
+.table-component__th--sort-desc:after {
   background-image: url('../assets/images/arrows/desc.svg');
   height: 12px;
   width: 12px;
