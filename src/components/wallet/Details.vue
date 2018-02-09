@@ -121,13 +121,13 @@
     </div>
 
     <!-- Modal -->
-    <Modal v-if="showModal" @close="showModal = false">
+    <modal v-if="showModal" @close="showModal = false">
       <div class="text-center p-10 pt-2">
         <p class="semibold text-3xl mb-4">QR Code</p>
         <p class="mb-10">Scan for Address</p>
         <qr-code :value="wallet.address" :options="{ size: 160 }"></qr-code>
       </div>
-    </Modal>
+    </modal>
   </section>
 </template>
 
