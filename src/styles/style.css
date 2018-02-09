@@ -149,6 +149,10 @@ tr:hover td:last-child {
   border-bottom-right-radius: 7px;
 }
 
+.table-component__message {
+  @apply .p-4 .pl-10
+}
+
 /** Sticky Table Header */
 
 thead tr {
@@ -165,7 +169,6 @@ thead th {
 }
 
 /** Table Arrows*/
-
 
 .table-component__th--sort-asc,
 .table-component__th--sort-desc,
