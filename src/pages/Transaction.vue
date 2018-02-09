@@ -29,7 +29,7 @@
         <div class="border-b py-4 flex justify-between flex-wrap">
           <div>Recipient</div>
           <div class="truncate">
-            <link-wallet :address="transaction.recipientId">{{ transaction.recipientId }}</link-wallet>
+            <link-wallet :address="transaction.recipientId" :type="transaction.type">{{ transaction.recipientId }}</link-wallet>
           </div>
         </div>
 

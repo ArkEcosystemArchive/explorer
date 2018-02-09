@@ -20,7 +20,7 @@
 
     <table-column show="recipientId" label="Recipient" header-class="p-4 text-left" cell-class="p-4 text-left border-none">
       <template slot-scope="row">
-        <link-wallet :address="row.recipientId"></link-wallet>
+        <link-wallet :address="row.recipientId" :type="row.type"></link-wallet>
       </template>
     </table-column>
 

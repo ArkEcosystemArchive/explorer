@@ -18,7 +18,7 @@
 
       <div class="border-b py-4 flex justify-between flex-wrap">
         <div>Recipient</div>
-        <link-wallet :address="transaction.recipientId"></link-wallet>
+        <link-wallet :address="transaction.recipientId" :type="transaction.type"></link-wallet>
       </div>
 
       <div class="border-b py-4 flex justify-between flex-wrap" v-if="truncate(transaction.vendorField || '')">
