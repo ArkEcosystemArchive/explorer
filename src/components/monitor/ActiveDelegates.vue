@@ -28,7 +28,7 @@
       </template>
     </table-column>
 
-    <table-column :sortable="false" show="forgingStatus" label="Status" header-class="p-4 pr-5 md:pr-4 text-left hidden md:block" cell-class="p-3 pr-4 text-right border-none">
+    <table-column :sortable="false" show="forgingStatus" label="Status" header-class="p-4 pr-5 md:pr-4 text-right hidden md:block" cell-class="p-3 pr-4 text-right border-none">
       <template slot-scope="row">
         <svg
          xmlns="http://www.w3.org/2000/svg"
