@@ -214,3 +214,47 @@ thead th {
     @apply .rounded-lg
   }
 }
+
+/* Table Cells */
+
+.base-cell {
+  @apply .p-4 .border-none
+}
+
+.left-cell {
+  @apply .base-cell .text-left
+}
+
+.left-start-cell {
+  @apply .left-cell .pl-10
+}
+
+.right-cell {
+  @apply .base-cell .text-right
+}
+
+.right-end-cell {
+  @apply .right-cell .pr-10
+}
+
+/* Table Header Cells */
+
+.base-header-cell {
+  @apply .p-4
+}
+
+.left-header-cell {
+  @apply .base-header-cell .text-left
+}
+
+.left-header-start-cell {
+  @apply .left-header-cell .pl-10
+}
+
+.right-header-cell {
+  @apply .base-header-cell .text-right
+}
+
+.right-header-end-cell {
+  @apply .right-header-cell .pr-10
+}

@@ -1,24 +1,24 @@
 <template>
   <table-component :data="delegates" sort-by="rate" sort-order="desc" :show-filter="false" :show-caption="false" table-class="w-full text-xs md:text-base">
-    <table-column show="rate" label="Rank" header-class="p-4 pl-5 sm:pl-10 text-left" cell-class="p-4 pl-5 sm:pl-10 text-left border-none w-32">
+    <table-column show="rate" label="Rank" header-class="left-header-cell pl-5 sm:pl-10" cell-class="p-4 pl-5 sm:pl-10 text-left border-none w-32">
       <template slot-scope="row">
         {{ row.rate }}
       </template>
     </table-column>
 
-    <table-column show="address" label="Name" header-class="p-4 text-left" cell-class="p-4 text-left border-none">
+    <table-column show="address" label="Name" header-class="left-header-cell" cell-class="left-cell">
       <template slot-scope="row">
         <link-wallet :address="row.address"></link-wallet>
       </template>
     </table-column>
 
-    <table-column show="productivity" label="Productivity" header-class="p-4 text-right hidden md:table-cell" cell-class="p-4 text-right border-none hidden md:table-cell">
+    <table-column show="productivity" label="Productivity" header-class="right-header-cell hidden md:table-cell" cell-class="right-cell hidden md:table-cell">
       <template slot-scope="row">
         {{ row.productivity }}%
       </template>
     </table-column>
 
-    <table-column show="approval" label="Approval" header-class="p-4 pr-5 sm:pr-10 text-right hidden md:table-cell" cell-class="p-4 pr-10 text-right border-none hidden md:table-cell w-40">
+    <table-column show="approval" label="Approval" header-class="right-header-cell sm:pr-10 hidden md:table-cell" cell-class="right-end-cell hidden md:table-cell w-40">
       <template slot-scope="row">
         {{ row.approval }}%
       </template>
