@@ -204,3 +204,13 @@ thead th {
 .show-more-button:hover {
   @apply .bg-blue .text-white .hover-button-shadow-definition
 }
+
+.page-section {
+  @apply .bg-theme-content-background .shadow-theme .py-10
+}
+
+@screen xl {
+  .page-section {
+    @apply .rounded-lg
+  }
+}
