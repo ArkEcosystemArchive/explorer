@@ -206,7 +206,7 @@ thead th {
 }
 
 .page-section {
-  @apply .bg-theme-content-background .shadow-theme .py-10
+  @apply .bg-theme-content-background .shadow-theme
 }
 
 @screen xl {
@@ -257,4 +257,16 @@ thead th {
 
 .right-header-end-cell {
   @apply .right-header-cell .pr-10
+}
+
+.list-row {
+  @apply .py-4 .flex .justify-between .flex-wrap
+}
+
+.list-row-border-b {
+  @apply .list-row .border-b
+}
+
+.row-mobile {
+  @apply .px-5 .py-4
 }

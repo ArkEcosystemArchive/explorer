@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
     <content-header>Top Accounts</content-header>
-    <section class="bg-theme-content-background shadow-theme xl:rounded-lg py-5 md:py-10">
+    <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
         <table-wallets :wallets="wallets"></table-wallets>
       </div>

@@ -1,31 +1,31 @@
 <template>
   <div v-show="Object.keys(delegate).length">
-    <div class="border-b py-4 flex justify-between flex-wrap">
+    <div class="list-row-border-b">
       <div>Delegate</div>
       <div>{{ delegate.username }}</div>
     </div>
 
-    <div class="border-b py-4 flex justify-between flex-wrap">
+    <div class="list-row-border-b">
       <div>Uptime</div>
       <div>{{ delegate.productivity }}%</div>
     </div>
 
-    <div class="border-b py-4 flex justify-between flex-wrap">
+    <div class="list-row-border-b">
       <div>Rank/Status</div>
       <div>{{ delegate.rate }}</div>
     </div>
 
-    <div class="border-b py-4 flex justify-between flex-wrap">
+    <div class="list-row-border-b">
       <div>Approval</div>
       <div>{{ delegate.approval }}%</div>
     </div>
 
-    <div class="border-b py-4 flex justify-between flex-wrap">
+    <div class="list-row-border-b">
       <div>Forged</div>
       <div>{{ readableCrypto(delegate.forged) }}</div>
     </div>
 
-    <div class="border-b py-4 flex justify-between flex-wrap">
+    <div class="list-row-border-b">
       <div>Blocks</div>
       <div>
         <span>{{ delegate.producedblocks }}</span>

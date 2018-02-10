@@ -2,7 +2,7 @@
   <div class="max-w-2xl mx-auto md:pt-5 text-center">
     <content-header>Ooops!</content-header>
 
-    <section class="page-section px-6">
+    <section class="page-section py-10 px-6">
       <div class="my-10">
         <img
           v-if="!nightMode"

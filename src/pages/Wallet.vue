@@ -4,7 +4,7 @@
 
     <wallet-details :wallet="wallet"></wallet-details>
 
-    <section class="bg-theme-content-background shadow-theme xl:rounded-lg mb-5" :class="{ 'py-8': isDelegate }" v-show="isDelegate || isVoting">
+    <section class="page-section mb-5" :class="{ 'py-8': isDelegate }" v-show="isDelegate || isVoting">
       <div class="px-5 sm:px-10" :class="{ 'py-4': !isDelegate }">
         <delegate :wallet="wallet" v-show="isDelegate"></delegate>
         <vote :wallet="wallet" v-show="isVoting"></vote>

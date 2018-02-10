@@ -6,7 +6,7 @@
       <chart-wrapper></chart-wrapper>
     </section>
 
-    <section class="bg-theme-content-background shadow-theme xl:rounded-lg py-5 md:py-10">
+    <section class="page-section py-5 md:py-10">
       <nav class="mx-5 sm:mx-10 mb-8 border-b flex items-end">
         <div
           @click="dataView = 'transactions'"
