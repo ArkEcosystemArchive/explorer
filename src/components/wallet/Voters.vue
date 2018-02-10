@@ -1,5 +1,5 @@
 <template>
-  <div class="border-t py-4 flex justify-between flex-wrap" v-show="Object.keys(voters).length">
+  <div class="border-t list-row" v-show="Object.keys(voters).length">
     <div>Voters</div>
     <div>
       <span class="mr-2">{{ voters.length }}</span>

@@ -1,37 +1,37 @@
 <template>
   <div>
-    <div v-for="transaction in transactions" :key="transaction.id" class="tx-row-mobile px-5 py-4">
-      <div class="border-b py-4 flex justify-between flex-wrap">
+    <div v-for="transaction in transactions" :key="transaction.id" class="row-mobile">
+      <div class="list-row-border-b">
         <div>ID</div>
         <link-transaction :id="transaction.id" :smart-bridge="transaction.vendorField"></link-transaction>
       </div>
 
-      <div class="border-b py-4 flex justify-between flex-wrap">
+      <div class="list-row-border-b">
         <div>Date</div>
         <div>{{ readableTimestamp(transaction.timestamp) }}</div>
       </div>
 
-      <div class="border-b py-4 flex justify-between flex-wrap">
+      <div class="list-row-border-b">
         <div>Sender</div>
         <link-wallet :address="transaction.senderId"></link-wallet>
       </div>
 
-      <div class="border-b py-4 flex justify-between flex-wrap">
+      <div class="list-row-border-b">
         <div>Recipient</div>
         <link-wallet :address="transaction.recipientId" :type="transaction.type"></link-wallet>
       </div>
 
-      <div class="border-b py-4 flex justify-between flex-wrap">
+      <div class="list-row-border-b">
         <div>Amount</div>
         <div>{{ readableCrypto(transaction.amount) }}</div>
       </div>
 
-      <div class="border-b py-4 flex justify-between flex-wrap">
+      <div class="list-row-border-b">
         <div>Fee</div>
         <div>{{ readableCrypto(transaction.fee) }}</div>
       </div>
 
-      <div class="py-4 flex justify-between flex-wrap">
+      <div class="list-row">
         <div>Confirmations</div>
         <div>
           <div class="flex items-center justify-end">
@@ -61,7 +61,7 @@ export default {
 </script>
 
 <style scoped>
-.tx-row-mobile:nth-child(even) {
+.row-mobile:nth-child(even) {
   background-color: var(--color-theme-table-row);
 }
 </style>

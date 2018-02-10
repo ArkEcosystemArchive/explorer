@@ -19,46 +19,46 @@
 
     <section class="bg-theme-content-background shadow-theme xl:rounded-lg py-8 mb-5">
       <div class="px-5 sm:px-10 py-4">
-        <div class="border-b py-4 flex justify-between flex-wrap">
+        <div class="list-row-border-b">
           <div>Sender</div>
           <div class="truncate">
             <link-wallet :address="transaction.senderId">{{ transaction.senderId }}</link-wallet>
           </div>
         </div>
 
-        <div class="border-b py-4 flex justify-between flex-wrap">
+        <div class="list-row-border-b">
           <div>Recipient</div>
           <div class="truncate">
             <link-wallet :address="transaction.recipientId" :type="transaction.type">{{ transaction.recipientId }}</link-wallet>
           </div>
         </div>
 
-        <div class="border-b py-4 flex justify-between flex-wrap">
+        <div class="list-row-border-b">
           <div>Confirmations</div>
           <div>{{ transaction.confirmations }}</div>
         </div>
 
-        <div class="border-b py-4 flex justify-between flex-wrap">
+        <div class="list-row-border-b">
           <div>Amount</div>
           <div>{{ readableCrypto(transaction.amount) }}</div>
         </div>
 
-        <div class="border-b py-4 flex justify-between flex-wrap">
+        <div class="list-row-border-b">
           <div>Fee</div>
           <div>{{ readableCrypto(transaction.fee) }}</div>
         </div>
 
-        <div class="border-b py-4 flex justify-between flex-wrap">
+        <div class="list-row-border-b">
           <div>Timestamp</div>
           <div>{{ readableTimestamp(transaction.timestamp) }}</div>
         </div>
 
-        <div class="border-b py-4 flex justify-between flex-wrap" v-if="transaction.vendorField">
+        <div class="list-row-border-b" v-if="transaction.vendorField">
           <div>Vendor field</div>
           <div>{{ transaction.vendorField }}</div>
         </div>
 
-        <div class="py-4 flex justify-between flex-wrap" v-if="transaction.blockid">
+        <div class="list-row" v-if="transaction.blockid">
           <div>Block</div>
           <div><link-block :id="transaction.blockid">{{ transaction.blockid }}</link-block></div>
         </div>

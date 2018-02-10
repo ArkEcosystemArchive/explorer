@@ -1,22 +1,22 @@
 <template>
   <div>
-    <div v-for="(row, index) in wallets" :key="row.address" class="tx-row-mobile px-5 py-4">
-      <div class="border-b py-4 flex justify-between flex-wrap">
+    <div v-for="(row, index) in wallets" :key="row.address" class="row-mobile">
+      <div class="list-row-border-b">
         <div>Rank</div>
         <div>{{ getRank(index) }}</div>
       </div>
 
-      <div class="border-b py-4 flex justify-between flex-wrap">
+      <div class="list-row-border-b">
         <div>Address</div>
         <link-wallet :address="row.address"></link-wallet>
       </div>
 
-      <div class="border-b py-4 flex justify-between flex-wrap">
+      <div class="list-row-border-b">
         <div>Balance</div>
         <div>{{ readableCrypto(row.balance) }}</div>
       </div>
 
-      <div class="py-4 flex justify-between flex-wrap">
+      <div class="list-row">
         <div>Supply</div>
         <div>{{ readableNumber((row.balance / supply) * 100) }}%</div>
       </div>
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style scoped>
-.tx-row-mobile:nth-child(even) {
+.row-mobile:nth-child(even) {
   background-color: var(--color-theme-table-row);
 }
 </style>

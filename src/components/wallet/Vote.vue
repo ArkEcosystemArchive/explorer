@@ -1,5 +1,5 @@
 <template>
-  <div class="py-4 flex justify-between flex-wrap" v-show="Object.keys(delegate).length">
+  <div class="list-row" v-show="Object.keys(delegate).length">
     <div>Votes</div>
     <div><link-wallet :address="delegate.address">{{ delegate.username }}</link-wallet></div>
   </div>
