@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
     <content-header>Transactions</content-header>
-    <section class="page-section">
+    <section class="page-section py-10">
       <div class="hidden sm:block">
         <table-transactions :transactions="transactions"></table-transactions>
       </div>

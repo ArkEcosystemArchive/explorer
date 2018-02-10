@@ -206,7 +206,7 @@ thead th {
 }
 
 .page-section {
-  @apply .bg-theme-content-background .shadow-theme .py-10
+  @apply .bg-theme-content-background .shadow-theme
 }
 
 @screen xl {

@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
     <content-header>Statistics</content-header>
-    <section class="bg-theme-content-background shadow-theme xl:rounded-t-lg pt-10 pb-8">
+    <section class="page-section pt-10 pb-8">
       <nav class="mx-5 sm:mx-10 border-b flex items-end">
         <div
           @click="activeTab = 'transactions'"

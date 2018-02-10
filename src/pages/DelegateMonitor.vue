@@ -4,7 +4,7 @@
 
     <delegate-detail></delegate-detail>
 
-    <section class="bg-theme-content-background shadow-theme xl:rounded-lg py-8">
+    <section class="page-section py-8">
       <nav class="mx-5 sm:mx-10 mb-4 border-b flex items-end">
         <div
           @click="activeTab = 'active'"

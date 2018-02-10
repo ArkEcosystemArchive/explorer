@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="text-2xl mb-5 md:mb-6 px-10 sm:hidden text-theme-text-primary">Transactions</h2>
-    <section class="bg-theme-content-background shadow-theme xl:rounded-lg py-8">
+    <section class="page-section py-8">
       <nav class="mx-5 md:mx-10 mb-8 border-b flex items-end">
         <div
           @click="type = 'all'"

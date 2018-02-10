@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-theme-content-background shadow-theme xl:rounded-lg py-8 mb-5">
+  <section class="page-section py-8 mb-5">
     <div class="px-10 py-4">
       <div class="list-row-border-b">
         <div>Transactions</div>
