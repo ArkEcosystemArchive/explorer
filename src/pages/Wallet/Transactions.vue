@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-2xl mx-auto pt-5">
     <content-header>Transactions</content-header>
-    <section class="bg-theme-content-background shadow-theme xl:rounded-lg py-10">
+    <section class="page-section">
       <div class="hidden sm:block">
         <table-transactions :transactions="transactions"></table-transactions>
       </div>

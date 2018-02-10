@@ -110,8 +110,12 @@ input:focus {
   font-family: 'Proxima Nova Semibold';
 }
 
-.hover-button-shadow:hover {
+.hover-button-shadow-definition {
   box-shadow: 0 5px 15px rgba(9, 100, 228, 0.34);
+}
+
+.hover-button-shadow:hover {
+  @apply .hover-button-shadow-definition
 }
 
 hr {
@@ -190,4 +194,67 @@ thead th {
   width: 12px;
   display: inline-block;
   content: "";
+}
+
+
+.show-more-button {
+  @apply .mx-auto .bg-theme-button .text-theme-button-text .semibold .py-5 .px-8 .border-transparent .rounded
+}
+
+.show-more-button:hover {
+  @apply .bg-blue .text-white .hover-button-shadow-definition
+}
+
+.page-section {
+  @apply .bg-theme-content-background .shadow-theme .py-10
+}
+
+@screen xl {
+  .page-section {
+    @apply .rounded-lg
+  }
+}
+
+/* Table Cells */
+
+.base-cell {
+  @apply .p-4 .border-none
+}
+
+.left-cell {
+  @apply .base-cell .text-left
+}
+
+.left-start-cell {
+  @apply .left-cell .pl-10
+}
+
+.right-cell {
+  @apply .base-cell .text-right
+}
+
+.right-end-cell {
+  @apply .right-cell .pr-10
+}
+
+/* Table Header Cells */
+
+.base-header-cell {
+  @apply .p-4
+}
+
+.left-header-cell {
+  @apply .base-header-cell .text-left
+}
+
+.left-header-start-cell {
+  @apply .left-header-cell .pl-10
+}
+
+.right-header-cell {
+  @apply .base-header-cell .text-right
+}
+
+.right-header-end-cell {
+  @apply .right-header-cell .pr-10
 }

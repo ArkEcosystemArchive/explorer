@@ -35,7 +35,7 @@
         <table-transactions-detail-mobile :transactions="transactions"></table-transactions-detail-mobile>
       </div>
       <div class="mx-10 mt-10 flex flex-wrap" v-if="transactions.length >= 25">
-        <router-link :to="{ name: 'wallet-transactions', params: { address: this.wallet.address, type, page: 2 } }" tag="button" class="mx-auto bg-theme-button hover:bg-blue text-theme-button-text semibold hover:text-white py-5 px-8 border-transparent rounded hover-button-shadow">
+        <router-link :to="{ name: 'wallet-transactions', params: { address: this.wallet.address, type, page: 2 } }" tag="button" class="show-more-button">
           Show more
         </router-link>
       </div>
