@@ -7,7 +7,7 @@
       <table-blocks-mobile :blocks="blocks"></table-blocks-mobile>
     </div>
     <div class="mx-10 mt-10 flex flex-wrap">
-      <router-link :to="{ name: 'blocks', params: { page: 1 } }" tag="button" class="mx-auto bg-theme-button hover:bg-blue text-theme-button-text semibold hover:text-white py-5 px-8 border-transparent rounded hover-button-shadow">
+      <router-link :to="{ name: 'blocks', params: { page: 1 } }" tag="button" class="show-more-button">
         Show more
       </router-link>
     </div>

@@ -110,8 +110,12 @@ input:focus {
   font-family: 'Proxima Nova Semibold';
 }
 
-.hover-button-shadow:hover {
+.hover-button-shadow-definition {
   box-shadow: 0 5px 15px rgba(9, 100, 228, 0.34);
+}
+
+.hover-button-shadow:hover {
+  @apply .hover-button-shadow-definition
 }
 
 hr {
@@ -190,4 +194,13 @@ thead th {
   width: 12px;
   display: inline-block;
   content: "";
+}
+
+
+.show-more-button {
+  @apply .mx-auto .bg-theme-button .text-theme-button-text .semibold .py-5 .px-8 .border-transparent .rounded
+}
+
+.show-more-button:hover {
+  @apply .bg-blue .text-white .hover-button-shadow-definition
 }
