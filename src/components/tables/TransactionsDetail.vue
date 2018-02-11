@@ -1,12 +1,12 @@
 <template>
   <table-component :data="transactions" sort-by="timestamp" sort-order="desc" :show-filter="false" :show-caption="false" table-class="w-full">
-    <table-column show="id" label="Transaction ID" header-class="left-header-start-cell" cell-class="left-start-cell">
+    <table-column show="id" label="ID" header-class="left-header-start-cell" cell-class="left-start-cell">
       <template slot-scope="row">
         <link-transaction :id="row.id" :smart-bridge="row.vendorField"></link-transaction>
       </template>
     </table-column>
 
-    <table-column show="timestamp" label="Date" header-class="left-header-cell hidden lg:table-cell" cell-class="left-cell hidden lg:table-cell">
+    <table-column show="timestamp" label="Timestamp" header-class="left-header-cell hidden lg:table-cell" cell-class="left-cell hidden lg:table-cell">
       <template slot-scope="row">
         {{ readableTimestamp(row.timestamp) }}
       </template>
@@ -39,7 +39,7 @@
       </template>
     </table-column>
 
-    <table-column show="confirmations" label="Confirmations (ARK)" header-class="right-header-end-cell" cell-class="right-end-cell">
+    <table-column show="confirmations" label="Confirmations" header-class="right-header-end-cell" cell-class="right-end-cell">
       <template slot-scope="row">
         <div class="flex items-center justify-end whitespace-no-wrap">
           <div v-if="row.confirmations <= 52">
