@@ -8,7 +8,7 @@
       <div class="sm:hidden">
         <table-transactions-mobile :transactions="transactions"></table-transactions-mobile>
       </div>
-      <paginator :start="+this.page"></paginator>
+      <paginator :start="+this.page" :count="totalTransactions"></paginator>
     </section>
   </div>
 </template>
@@ -18,10 +18,14 @@ import WalletService from '@/services/wallet'
 import TransactionService from '@/services/transaction'
 
 export default {
-  data: () => ({ transactions: [] }),
+  data: () => ({ 
+    totalTransactions: 0,
+    transactions: [] 
+  }),
 
   created() {
     this.$on('paginatorChanged', page => this.changePage(page))
+    this.getTotalTransactions()
   },
 
   beforeRouteEnter (to, from, next) {
@@ -60,6 +64,29 @@ export default {
       if (!transactions) return
 
       this.transactions = transactions
+    },
+
+    getTotalTransactions() {
+      if (this.type === 'sent' || this.type === 'all') {
+        this.getSentCount()
+      }
+      if (this.type === 'received' || this.type === 'all') {
+        this.getReceivedCount()
+      }
+    },
+
+    getSentCount() {
+      WalletService
+        .find(this.address)
+        .then(wallet => TransactionService.sendByAddressCount(wallet.address))
+        .then(response => (this.totalTransactions += Number(response)))
+    },
+    
+    getReceivedCount() {
+      WalletService
+        .find(this.address)
+        .then(wallet => TransactionService.receivedByAddressCount(wallet.address))
+        .then(response => (this.totalTransactions += Number(response)))
     },
 
     changePage(page) {
