@@ -32,7 +32,10 @@
 
     <table-column show="amount" label="Amount (ARK)" header-class="right-header-end-cell md:pr-4" cell-class="right-end-cell md:pr-4">
       <template slot-scope="row">
-        {{ readableCrypto(row.amount) }}
+        <span :class="{
+          'text-red': row.senderId === $route.params.address,
+          'text-green': row.recipientId === $route.params.address,
+        }">{{ readableCrypto(row.amount) }}</span>
       </template>
     </table-column>
 
