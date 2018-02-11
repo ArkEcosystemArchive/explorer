@@ -24,7 +24,7 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
-      component: HomeComponent,
+      component: HomeComponent
     },
     {
       path: '/wallets/:address',
@@ -145,15 +145,26 @@ const router = new Router({
     }, {
       path: '/topAccounts',
       redirect: to => ({ name: 'top-wallets', params: { page: 1 } })
+    },
+    // must be last, because else certain routes, like /transcations won't work anymore
+    {
+      path: '/:activeType',
+      name: 'home-active-type',
+      component: HomeComponent
     }
   ],
+  scrollBehavior (to, from, savedPosition) {
+    if (to && to.params && to.params['disableScroll'] === true) {
+      return null
+    }
+
+    return {x: 0, y: 0}
+  }
 })
 
 router.beforeEach((to, from, next) => {
   store.dispatch('ui/setHeaderType', null)
   store.dispatch('ui/setMenuVisible', false)
-
-  window.scrollTo(0, 0)
 
   next()
 })

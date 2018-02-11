@@ -8,18 +8,12 @@
       <nav class="mx-5 sm:mx-10 mb-4 border-b flex items-end">
         <div
           @click="activeTab = 'active'"
-          :class="[
-            activeTab === 'active' ? 'text-lg sm:text-2xl border-blue text-theme-text-primary' : 'sm:text-lg text-theme-text-secondary border-transparent',
-            'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-primary hover:border-blue'
-          ]">
+          :class="activeTab === 'active' ? 'active-tab' : 'inactive-tab'">
           Active
         </div>
         <div
           @click="activeTab = 'standby'"
-          :class="[
-            activeTab === 'standby' ? 'text-lg sm:text-2xl border-blue text-theme-text-primary' : 'sm:text-lg text-theme-text-secondary border-transparent',
-            'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-text-primary hover:border-blue'
-          ]">
+          :class="activeTab === 'standby' ? 'active-tab' : 'inactive-tab'">
           Standby
         </div>
       </nav>

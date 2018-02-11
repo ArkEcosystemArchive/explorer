@@ -8,27 +8,19 @@
 
     <section class="page-section py-5 md:py-10">
       <nav class="mx-5 sm:mx-10 mb-8 border-b flex items-end">
-        <div
-          @click="dataView = 'transactions'"
-          :class="[
-            dataView === 'transactions' ? 'text-lg sm:text-2xl border-blue text-theme-text-primary' : 'sm:text-lg text-theme-text-secondary border-transparent',
-            'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-primary hover:border-blue'
-          ]">
+        <router-link :to="{ name: 'home-active-type', params: { activeType: 'txView', disableScroll: true } }"
+          :class="dataView === 'txView' ? 'active-tab' : 'inactive-tab'">
           Latest Transactions
-        </div>
-        <div
-          @click="dataView = 'blocks'"
-          :class="[
-            dataView === 'blocks' ? 'text-lg sm:text-2xl border-blue text-theme-text-primary' : 'sm:text-lg text-theme-text-secondary border-transparent',
-            'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-text-primary hover:border-blue'
-          ]">
+        </router-link>
+        <router-link :to="{ name: 'home-active-type', params: { activeType: 'bkView', disableScroll: true } }"
+          :class="dataView === 'bkView' ? 'active-tab' : 'inactive-tab'">
           Latest Blocks
-        </div>
+        </router-link>
       </nav>
 
-      <latest-transactions v-if="dataView === 'transactions'"></latest-transactions>
+      <latest-transactions v-if="dataView === 'txView'"></latest-transactions>
 
-      <latest-blocks v-if="dataView === 'blocks'"></latest-blocks>
+      <latest-blocks v-if="dataView === 'bkView'"></latest-blocks>
     </section>
   </div>
 </template>
@@ -47,11 +39,26 @@ export default {
   },
 
   data: () => ({
-    dataView: 'transactions',
+    dataView: 'txView',
   }),
+
+  beforeRouteEnter(to, from, next) {
+    next(vm => vm.setDataView(to))
+  },
+
+  beforeRouteUpdate(to, from, next) {
+    this.setDataView(to)
+    next()
+  },
 
   computed: {
     ...mapGetters('ui', ['priceChart']),
   },
+
+  methods: {
+    setDataView(to) {
+      this.dataView = to.params.activeType === 'bkView' ? 'bkView' : 'txView'
+    }
+  }
 }
 </script>
