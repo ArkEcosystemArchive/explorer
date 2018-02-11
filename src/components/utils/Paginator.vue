@@ -1,9 +1,16 @@
 <template>
   <div class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
-    <button @click="prev" :class="{ 'hidden' : page <= 1 }" class="mr-auto bg-theme-button hover:bg-blue text-theme-button-text semibold hover:text-white py-5 px-8 border-transparent rounded hover-button-shadow">
+    <button
+      @click="prev"
+      :class="{ 'hidden' : page <= 1 }"
+      class="mr-auto bg-theme-button hover:bg-blue text-theme-button-text semibold hover:text-white py-5 px-8 border-transparent rounded hover-button-shadow">
       Previous
     </button>
-    <button @click="next" class="ml-auto bg-theme-button hover:bg-blue text-theme-button-text semibold hover:text-white py-5 px-8 border-transparent rounded hover-button-shadow float-right">
+
+    <button
+      @click="next"
+      :class="{ 'hidden' : page >= totalPages }"
+      class="ml-auto bg-theme-button hover:bg-blue text-theme-button-text semibold hover:text-white py-5 px-8 border-transparent rounded hover-button-shadow float-right">
       Next
     </button>
   </div>
@@ -16,11 +23,24 @@ export default {
       type: Number,
       require: true,
     },
+    perPage: {
+      type: Number,
+      default: 25
+    },
+    count: {
+      type: Number
+    }
   },
 
   data: () => ({
     page: 1,
   }),
+
+  computed: {
+    totalPages() {
+      return Math.ceil(this.count / this.perPage)
+    }
+  },
 
   mounted() {
     this.page = this.start

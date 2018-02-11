@@ -8,7 +8,7 @@
       <div class="sm:hidden">
         <table-wallets-mobile :wallets="filteredWallets"></table-wallets-mobile>
       </div>
-      <paginator :start="+this.page"></paginator>
+      <paginator :start="+this.page" :count="wallets.length"></paginator>
     </section>
   </div>
 </template>
