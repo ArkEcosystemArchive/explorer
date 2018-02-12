@@ -5,26 +5,17 @@
       <nav class="mx-5 sm:mx-10 border-b flex items-end">
         <div
           @click="activeTab = 'transactions'"
-          :class="[
-            activeTab === 'transactions' ? 'text-lg sm:text-2xl border-blue text-theme-text-primary' : 'sm:text-lg text-theme-text-secondary border-transparent',
-            'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-primary hover:border-blue'
-          ]">
+          :class="activeTab === 'transactions' ? 'active-tab' : 'inactive-tab'">
           Transactions
         </div>
         <div
           @click="activeTab = 'sent'"
-          :class="[
-            activeTab === 'sent' ? 'text-lg sm:text-2xl border-blue text-theme-text-primary' : 'sm:text-lg text-theme-text-secondary border-transparent',
-            'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-text-primary hover:border-blue'
-          ]">
+          :class="activeTab === 'sent' ? 'active-tab' : 'inactive-tab'">
           ARK sent
         </div>
         <div
           @click="activeTab = 'fees'"
-          :class="[
-            activeTab === 'fees' ? 'text-lg sm:text-2xl border-blue text-theme-text-primary' : 'sm:text-lg text-theme-text-secondary border-transparent',
-            'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-text-primary hover:border-blue'
-          ]">
+          :class="activeTab === 'fees' ? 'active-tab' : 'inactive-tab'">
           ARK fees
         </div>
       </nav>
