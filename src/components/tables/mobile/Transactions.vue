@@ -28,7 +28,12 @@
 
       <div class="list-row-border-b">
         <div>Amount (ARK)</div>
-        <div>{{ readableCrypto(transaction.amount) }}</div>
+        <div>
+          <span :class="{
+            'text-red': transaction.senderId === $route.params.address,
+            'text-green': transaction.recipientId === $route.params.address,
+          }">{{ readableCrypto(transaction.amount) }}</span>
+        </div>
       </div>
 
       <div class="list-row">
