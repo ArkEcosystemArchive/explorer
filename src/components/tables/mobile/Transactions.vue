@@ -2,39 +2,39 @@
   <div>
     <div v-for="transaction in transactions" :key="transaction.id" class="row-mobile">
       <div class="list-row-border-b">
-        <div>ID</div>
+        <div>{{ $t("ID") }}</div>
         <link-transaction :id="transaction.id" :smart-bridge="transaction.vendorField"></link-transaction>
       </div>
 
       <div class="list-row-border-b">
-        <div>Timestamp</div>
+        <div>{{ $t("Timestamp") }}</div>
         <div>{{ readableTimestamp(transaction.timestamp) }}</div>
       </div>
 
       <div class="list-row-border-b">
-        <div>Sender</div>
+        <div>{{ $t("Sender") }}</div>
         <link-wallet :address="transaction.senderId"></link-wallet>
       </div>
 
       <div class="list-row-border-b">
-        <div>Recipient</div>
+        <div>{{ $t("Recipient") }}</div>
         <link-wallet :address="transaction.recipientId" :type="transaction.type"></link-wallet>
       </div>
 
       <div class="list-row-border-b" v-if="truncate(transaction.vendorField || '')">
-        <div>Smartbridge</div>
+        <div>{{ $t("Smartbridge") }}</div>
         <div>{{ truncate(transaction.vendorField || '') }}</div>
       </div>
 
       <div class="list-row-border-b">
-        <div>Amount (ARK)</div>
+        <div>{{ $t("Amount (ARK)") }}</div>
         <div>
           <transaction-amount :transaction="transaction"></transaction-amount>
         </div>
       </div>
 
       <div class="list-row">
-        <div>Fee (ARK)</div>
+        <div>{{ $t("Fee (ARK)") }}</div>
         <div>{{ readableCrypto(transaction.fee) }}</div>
       </div>
     </div>

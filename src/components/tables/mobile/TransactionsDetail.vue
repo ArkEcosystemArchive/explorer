@@ -2,39 +2,39 @@
   <div>
     <div v-for="transaction in transactions" :key="transaction.id" class="row-mobile">
       <div class="list-row-border-b">
-        <div>ID</div>
+        <div>{{ $t("ID") }}</div>
         <link-transaction :id="transaction.id" :smart-bridge="transaction.vendorField"></link-transaction>
       </div>
 
       <div class="list-row-border-b">
-        <div>Date</div>
+        <div>{{ $t("Timestamp") }}</div>
         <div>{{ readableTimestamp(transaction.timestamp) }}</div>
       </div>
 
       <div class="list-row-border-b">
-        <div>Sender</div>
+        <div>{{ $t("Sender") }}</div>
         <link-wallet :address="transaction.senderId"></link-wallet>
       </div>
 
       <div class="list-row-border-b">
-        <div>Recipient</div>
+        <div>{{ $t("Recipient") }}</div>
         <link-wallet :address="transaction.recipientId" :type="transaction.type"></link-wallet>
       </div>
 
       <div class="list-row-border-b">
-        <div>Amount</div>
+        <div>{{ $t("Amount") }}</div>
         <div>
           <transaction-amount :transaction="transaction"></transaction-amount>
         </div>
       </div>
 
       <div class="list-row-border-b">
-        <div>Fee</div>
+        <div>{{ $t("Fee") }}</div>
         <div>{{ readableCrypto(transaction.fee) }}</div>
       </div>
 
       <div class="list-row">
-        <div>Confirmations</div>
+        <div>{{ $t("Confirmations") }}</div>
         <div>
           <div class="flex items-center justify-end">
             <div v-if="transaction.confirmations <= 52">
@@ -42,7 +42,7 @@
               <img class="icon flex-none" src="@/assets/images/icons/clock.svg" />
             </div>
             <div v-else>
-              Well Confirmed
+              {{ $t("Well Confirmed") }}
             </div>
           </div>
         </div>
