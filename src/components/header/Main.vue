@@ -14,14 +14,14 @@
 
       <header-default v-else></header-default>
 
-      <header-desktop-menu v-if="mainMenuVisible"></header-desktop-menu>
+      <header-desktop-menu v-if="menuVisible"></header-desktop-menu>
     </div>
     <div class="w-full relative flex md:hidden">
       <header-search v-if="headerType === 'search'"></header-search>
 
       <header-default v-else></header-default>
     </div>
-    <header-mobile-menu v-if="mainMenuVisible"></header-mobile-menu>
+    <header-mobile-menu v-if="menuVisible"></header-mobile-menu>
 
     <header-mobile-currencies v-else-if="headerType === 'currencies'"></header-mobile-currencies>
   </header>
@@ -47,7 +47,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('ui', ['headerType', 'mainMenuVisible']),
+    ...mapGetters('ui', ['headerType', 'menuVisible']),
   },
 }
 </script>

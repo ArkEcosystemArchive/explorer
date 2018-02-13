@@ -7,7 +7,7 @@ export default {
     nightMode: false,
     priceChart: true,
     headerType: null,
-    mainMenuVisible: false,
+    menuVisible: false,
   },
   mutations: {
     [types.SET_UI_LANGUAGE](state, payload) {
@@ -20,7 +20,7 @@ export default {
       state.headerType = payload.value
     },
     [types.SET_UI_MENU_VISIBLE](state, payload) {
-      state.mainMenuVisible = payload.value
+      state.menuVisible = payload.value
     },
     [types.SET_UI_PRICE_CHART](state, payload) {
       state.priceChart = payload.value
@@ -76,6 +76,6 @@ export default {
     nightMode: state => state.nightMode,
     priceChart: state => state.priceChart,
     headerType: state => state.headerType,
-    mainMenuVisible: state => state.mainMenuVisible,
+    menuVisible: state => state.menuVisible,
   },
 }

@@ -2,9 +2,9 @@
   <div class="w-full flex">
     <div class="px-4 md:px-8 flex-auto flex">
       <button
-        @click="$store.dispatch('ui/setMenuVisible', !mainMenuVisible)"
+        @click="$store.dispatch('ui/setMenuVisible', !menuVisible)"
         :class="[
-          mainMenuVisible ? 'border-red' : 'border-transparent',
+          menuVisible ? 'border-red' : 'border-transparent',
           'px-2 sm:px-4 py-3 md:py-6 flex-none flex items-center border-b-2 hover:border-red text-theme-text-secondary'
         ]">
         <!-- Inline this SVG so we can change color dynamically -->
@@ -64,7 +64,7 @@ export default {
   computed: {
     ...mapGetters('network', { networkDefaults: 'defaults' }),
 
-    ...mapGetters('ui', ['mainMenuVisible', 'priceChart']),
+    ...mapGetters('ui', ['menuVisible', 'priceChart']),
 
     shouldDisplayCurrency() {
       return this.networkDefaults.config.priceChart

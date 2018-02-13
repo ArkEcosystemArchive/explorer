@@ -33,7 +33,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
-        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'src/index.html') },
+        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
       ],
     },
     hot: true,
@@ -67,8 +67,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       title: networkConfig.title,
       base_url: '/',
-      filename: 'src/index.html',
-      template: 'src/index.html',
+      filename: 'index.html',
+      template: 'index.html',
       inject: true
     }),
     // copy custom static assets

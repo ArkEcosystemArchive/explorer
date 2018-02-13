@@ -74,7 +74,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // for more information about purgecss.
     new PurgecssPlugin({
       paths: glob.sync([
-        path.join(__dirname, './../src/index.html'),
+        // path.join(__dirname, './../index.html'),
         path.join(__dirname, './../**/*.vue'),
         path.join(__dirname, './../src/**/*.js')
       ]),
@@ -102,7 +102,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       title: networkConfig.title,
       base_url: baseUrl,
       filename: config.build.index,
-      template: 'src/index.html',
+      template: 'index.html',
       inject: true,
       minify: {
         removeComments: true,
