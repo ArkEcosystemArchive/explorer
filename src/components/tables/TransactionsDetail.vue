@@ -26,10 +26,7 @@
 
     <table-column show="amount" label="Amount (ARK)" header-class="right-header-cell" cell-class="right-cell">
       <template slot-scope="row">
-        <span :class="{
-          'text-red': row.senderId === $route.params.address,
-          'text-green': row.recipientId === $route.params.address,
-        }">{{ readableCrypto(row.amount) }}</span>
+        <transaction-amount :transaction="row"></transaction-amount>
       </template>
     </table-column>
 

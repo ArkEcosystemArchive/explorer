@@ -7,6 +7,7 @@ Vue.component('clipboard', require('@/components/utils/Clipboard.vue').default)
 Vue.component('currency', require('@/components/utils/Currency.vue').default)
 Vue.component('paginator', require('@/components/utils/Paginator.vue').default)
 Vue.component('qr-code', require('@/components/utils/QrCode').default)
+Vue.component('transaction-amount', require('@/components/utils/TransactionAmount').default)
 
 // Links
 Vue.component('link-block', require('@/components/links/Block.vue').default)
