@@ -18,8 +18,8 @@ const glob = require('glob-all')
  * Builder Arguments...
  */
 const routerMode = minimist(process.argv.slice(2)).history ? 'history' : 'hash'
-const baseUrl = minimist(process.argv.slice(2)).base || '/'
-const network = minimist(process.argv.slice(2)).network || 'mainnet'
+const baseUrl = minimist(process.argv.slice(2)).base || '/'
+const network = minimist(process.argv.slice(2)).network || 'mainnet'
 const networkConfig = require(`../networks/${network}.json`)
 
 class TailwindExtractor {

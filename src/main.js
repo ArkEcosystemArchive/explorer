@@ -1,5 +1,6 @@
 require('es6-promise').polyfill()
 
+/* eslint-disable import/first */
 import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
 import App from './App'
@@ -8,6 +9,7 @@ import store from './store'
 // import i18n from './i18n'
 import VTooltip from 'v-tooltip'
 import TableComponent from 'vue-table-component'
+import _ from 'lodahs'
 
 require('./components')
 require('./mixins')

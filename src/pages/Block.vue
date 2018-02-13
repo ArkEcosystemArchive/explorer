@@ -47,14 +47,14 @@ export default {
       BlockService
         .findPrevious(this.block.height)
         .then(response => this.$router.push({ name: 'block', params: { id: response.id } }))
-        .catch(e => console.log(e.message || e.data.error))
+        .catch(e => console.log(e.message || e.data.error))
     },
 
     nextBlock() {
       BlockService
         .findNext(this.block.height)
         .then(response => this.$router.push({ name: 'block', params: { id: response.id } }))
-        .catch(e => console.log(e.message || e.data.error))
+        .catch(e => console.log(e.message || e.data.error))
     }
   }
 }

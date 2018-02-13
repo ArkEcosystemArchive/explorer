@@ -41,23 +41,23 @@ export default {
     search() {
       SearchService.findByAddress(this.query).then(response =>
         this.changePage('wallet', { address: response.account.address })
-      ).catch(e => console.log(e.message || e.data.error))
+      ).catch(e => console.log(e.message || e.data.error))
 
       SearchService.findByUsername(this.query).then(response =>
         this.changePage('wallet', { address: response.delegate.address })
-      ).catch(e => console.log(e.message || e.data.error))
+      ).catch(e => console.log(e.message || e.data.error))
 
       SearchService.findByPublicKey(this.query).then(response =>
         this.changePage('wallet', { address: response.delegate.address })
-      ).catch(e => console.log(e.message || e.data.error))
+      ).catch(e => console.log(e.message || e.data.error))
 
       SearchService.findByBlockId(this.query).then(response =>
         this.changePage('block', { id: response.block.id })
-      ).catch(e => console.log(e.message || e.data.error))
+      ).catch(e => console.log(e.message || e.data.error))
 
       SearchService.findByTransactionId(this.query).then(response =>
         this.changePage('transaction', { id: response.transaction.id })
-      ).catch(e => console.log(e.message || e.data.error))
+      ).catch(e => console.log(e.message || e.data.error))
     },
 
     changePage(name, params) {

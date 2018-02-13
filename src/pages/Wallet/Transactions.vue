@@ -18,9 +18,9 @@ import WalletService from '@/services/wallet'
 import TransactionService from '@/services/transaction'
 
 export default {
-  data: () => ({ 
+  data: () => ({
     totalTransactions: 0,
-    transactions: [] 
+    transactions: []
   }),
 
   created() {
@@ -81,7 +81,7 @@ export default {
         .then(wallet => TransactionService.sendByAddressCount(wallet.address))
         .then(response => (this.totalTransactions += Number(response)))
     },
-    
+
     getReceivedCount() {
       WalletService
         .find(this.address)

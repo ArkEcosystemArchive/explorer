@@ -24,25 +24,25 @@ describe('ui store module', () => {
 
     store.getters['ui/priceChart'].should.equal(false)
   })
-  
+
   it('should set the language', () => {
     store.dispatch('ui/setLanguage', 'en')
 
     store.getters['ui/language'].should.equal('en')
   })
-  
+
   it('should set the header type', () => {
     store.dispatch('ui/setHeaderType', 'headerType')
 
     store.getters['ui/headerType'].should.equal('headerType')
   })
-  
+
   it('should show the menu', () => {
     store.dispatch('ui/setMenuVisible', true)
 
     store.getters['ui/menuVisible'].should.equal(true)
   })
-  
+
   it('should hide the menu', () => {
     store.dispatch('ui/setMenuVisible', false)
 

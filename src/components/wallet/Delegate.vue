@@ -60,7 +60,7 @@ export default {
       DelegateService
         .find(wallet.publicKey)
         .then(response => this.delegate = response)
-        .catch(e => console.log(e.message || e.data.error))
+        .catch(e => console.log(e.message || e.data.error))
     }
   }
 }

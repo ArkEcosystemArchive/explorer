@@ -11,10 +11,10 @@ const WalletBlocksComponent = () => import('@/pages/Wallet/Blocks')
 const WalletTransactionsComponent = () => import('@/pages/Wallet/Transactions')
 const TransactionComponent = () => import('@/pages/Transaction')
 const TransactionsComponent = () => import('@/pages/Transactions')
-const StatisticsComponent = () => import('@/pages/Statistics')
+// const StatisticsComponent = () => import('@/pages/Statistics')
 const DelegateMonitorComponent = () => import('@/pages/DelegateMonitor')
 const TopWalletsComponent = () => import('@/pages/TopWallets')
-const PageNotFoundComponent = () => import('@/pages/404')
+const NotFoundComponent = () => import('@/pages/404')
 
 Vue.use(Router)
 
@@ -120,7 +120,7 @@ const router = new Router({
     {
       path: '404',
       name: '404',
-      component: PageNotFoundComponent
+      component: NotFoundComponent
     },
     {
       path: '*',
