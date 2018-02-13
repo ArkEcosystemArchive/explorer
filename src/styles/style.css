@@ -172,6 +172,18 @@ thead th {
   z-index: 10;
 }
 
+@screen sm {
+  thead th {
+    top: 50px;
+  }
+}
+
+@screen md {
+  thead th {
+    top: 80px;
+  }
+}
+
 /** Table Arrows*/
 
 .table-component__th--sort-asc,
