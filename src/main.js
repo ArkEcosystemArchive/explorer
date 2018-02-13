@@ -9,7 +9,7 @@ import store from './store'
 // import i18n from './i18n'
 import VTooltip from 'v-tooltip'
 import TableComponent from 'vue-table-component'
-import _ from 'lodahs'
+import _ from 'lodash'
 
 require('./components')
 require('./mixins')

@@ -23,7 +23,6 @@
 
 <script type="text/ecmascript-6">
 import SearchService from '@/services/search'
-import _ from 'lodash'
 import { mapGetters } from 'vuex'
 
 export default {
