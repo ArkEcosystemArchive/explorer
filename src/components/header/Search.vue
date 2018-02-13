@@ -13,7 +13,7 @@
       class="search-input w-full flex-auto mr-2 py-4 pl-4 bg-transparent"
       :class="{ 'text-grey': nightMode }"
       v-model="query"
-      @input="search" />
+      @keyup.enter="search" />
 
     <div class="search-icon text-grey hover:text-blue p-3 md:p-4" @click="search">
       <svg class="fill-current" width="20" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1216 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z"/></svg>
@@ -38,7 +38,7 @@ export default {
   },
 
   methods: {
-    search: _.debounce(function() {
+    search() {
       SearchService.findByAddress(this.query).then(response =>
         this.changePage('wallet', { address: response.account.address })
       ).catch(e => console.log(e.message || e.data.error))
@@ -58,7 +58,7 @@ export default {
       SearchService.findByTransactionId(this.query).then(response =>
         this.changePage('transaction', { id: response.transaction.id })
       ).catch(e => console.log(e.message || e.data.error))
-    }, 250),
+    },
 
     changePage(name, params) {
       this.$router.push({ name, params })
