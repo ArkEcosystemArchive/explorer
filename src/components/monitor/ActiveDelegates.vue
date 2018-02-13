@@ -4,31 +4,31 @@
     <span class="sm:hidden">#</span>
   </th> -->
   <table-component :data="delegates" sort-by="rate" sort-order="asc" :show-filter="false" :show-caption="false" table-class="w-full text-xs md:text-base">
-    <table-column show="rate" label="Rank" header-class="p-4 pl-5 sm:pl-10 text-left" cell-class="p-3 pl-5 sm:pl-10 text-left border-none">
+    <table-column show="rate" :label="$t('Rank')" header-class="p-4 pl-5 sm:pl-10 text-left" cell-class="p-3 pl-5 sm:pl-10 text-left border-none">
       <template slot-scope="row">
         {{ row.rate }}
       </template>
     </table-column>
 
-    <table-column show="username" label="Name" header-class="left-header-cell" cell-class="p-3 text-left border-none">
+    <table-column show="username" :label="$t('Name')" header-class="left-header-cell" cell-class="p-3 text-left border-none">
       <template slot-scope="row">
         <link-wallet :address="row.address"></link-wallet>
       </template>
     </table-column>
 
-    <table-column show="producedblocks" label="Forged" header-class="left-header-cell hidden xl:table-cell" cell-class="p-3 text-left border-none hidden xl:table-cell">
+    <table-column show="producedblocks" :label="$t('Forged')" header-class="left-header-cell hidden xl:table-cell" cell-class="p-3 text-left border-none hidden xl:table-cell">
       <template slot-scope="row">
         {{ readableCrypto(totalForged(row)) }}
       </template>
     </table-column>
 
-    <table-column show="forgingTime" label="Last Forged" header-class="left-header-cell" cell-class="p-3 text-left border-none">
+    <table-column show="forgingTime" :label="$t('Last Forged')" header-class="left-header-cell" cell-class="p-3 text-left border-none">
       <template slot-scope="row">
         {{ lastForgingTime(row) }}
       </template>
     </table-column>
 
-    <table-column :sortable="false" show="forgingStatus" label="Status" header-class="right-header-cell pr-5 md:pr-4 hidden md:block" cell-class="p-3 pr-4 text-right border-none">
+    <table-column :sortable="false" show="forgingStatus" :label="$t('Status')" header-class="right-header-cell pr-5 md:pr-4 hidden md:block" cell-class="p-3 pr-4 text-right border-none">
       <template slot-scope="row">
         <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -41,13 +41,13 @@
       </template>
     </table-column>
 
-    <table-column show="productivity" label="Productivity" header-class="right-header-cell hidden md:table-cell" cell-class="p-3 text-right border-none hidden md:table-cell">
+    <table-column show="productivity" :label="$t('Productivity')" header-class="right-header-cell hidden md:table-cell" cell-class="p-3 text-right border-none hidden md:table-cell">
       <template slot-scope="row">
         {{ row.productivity }}%
       </template>
     </table-column>
 
-    <table-column show="approval" label="Approval" header-class="right-header-cell pr-5 sm:pr-10 hidden md:table-cell" cell-class="p-3 pr-10 text-right border-none hidden md:table-cell">
+    <table-column show="approval" :label="$t('Approval')" header-class="right-header-cell pr-5 sm:pr-10 hidden md:table-cell" cell-class="p-3 pr-10 text-right border-none hidden md:table-cell">
       <template slot-scope="row">
         {{ row.approval }}%
       </template>

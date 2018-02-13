@@ -13,9 +13,9 @@
       </svg>
     </button>
 
-    <router-link :to="{ name: 'home' }" tag="button" class="flex items-center p-4 border-b-2 border-transparent hover:border-red text-theme-text-secondary">Home</router-link>
-    <router-link :to="{ name: 'top-wallets', params: { page: 1 } }" tag="button" class="flex items-center p-4 border-b-2 border-transparent hover:border-red text-theme-text-secondary">Top Wallets</router-link>
-    <router-link :to="{ name: 'delegate-monitor' }" tag="button" class="flex items-center p-4 border-b-2 border-transparent hover:border-red text-theme-text-secondary">Delegate Monitor</router-link>
+    <router-link :to="{ name: 'home' }" tag="button" class="flex items-center p-4 border-b-2 border-transparent hover:border-red text-theme-text-secondary">{{ $t("Home") }}</router-link>
+    <router-link :to="{ name: 'top-wallets', params: { page: 1 } }" tag="button" class="flex items-center p-4 border-b-2 border-transparent hover:border-red text-theme-text-secondary">{{ $t("Top Wallets") }}</router-link>
+    <router-link :to="{ name: 'delegate-monitor' }" tag="button" class="flex items-center p-4 border-b-2 border-transparent hover:border-red text-theme-text-secondary">{{ $t("Delegate Monitor") }}</router-link>
     <!-- <router-link :to="{ name: 'statistics' }" tag="button" class="flex items-center p-4 border-b-2 border-transparent hover:border-red text-theme-text-secondary">Statistics</router-link> -->
 
     <div class="flex-auto"></div>

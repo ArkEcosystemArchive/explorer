@@ -8,7 +8,7 @@
     </div>
     <div class="mx-10 mt-10 flex flex-wrap">
       <router-link :to="{ name: 'transactions', params: { page: 1 } }" tag="button" class="show-more-button">
-        Show more
+        {{ $t("Delegate Monitor") }}
       </router-link>
     </div>
   </div>

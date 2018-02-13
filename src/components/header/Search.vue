@@ -4,7 +4,7 @@
       <img src="@/assets/images/icons/cross.svg" />
     </button>
 
-    <label for="search" class="hidden">Search</label>
+    <label for="search" class="hidden">{{ $t("Search") }}</label>
 
     <input
       type="search"
