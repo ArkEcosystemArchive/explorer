@@ -1,5 +1,5 @@
 <template>
-  <table-component :data="delegates" sort-by="rate" sort-order="desc" :show-filter="false" :show-caption="false" table-class="w-full text-xs md:text-base">
+  <table-component :data="delegates" sort-by="approval" sort-order="desc" :show-filter="false" :show-caption="false" table-class="w-full text-xs md:text-base">
     <table-column show="rate" :label="$t('Rank')" header-class="left-header-cell pl-5 sm:pl-10" cell-class="p-4 pl-5 sm:pl-10 text-left border-none w-32">
       <template slot-scope="row">
         {{ row.rate }}
