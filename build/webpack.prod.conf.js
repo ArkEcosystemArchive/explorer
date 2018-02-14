@@ -74,7 +74,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // for more information about purgecss.
     new PurgecssPlugin({
       paths: glob.sync([
-        // path.join(__dirname, './../index.html'),
+        path.join(__dirname, './../index.html'),
         path.join(__dirname, './../**/*.vue'),
         path.join(__dirname, './../src/**/*.js')
       ]),
