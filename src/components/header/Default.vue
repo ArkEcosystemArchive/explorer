@@ -87,8 +87,8 @@ export default {
   methods: {
     setMobilePlaceholder(showMobile) {
       this.placeholder = showMobile
-        ? 'Search'
-        : 'Find a block, transaction, address or delegate'
+        ? this.$i18n.t('Search')
+        : this.$i18n.t('Find a block, transaction, address or delegate')
     },
   },
 }

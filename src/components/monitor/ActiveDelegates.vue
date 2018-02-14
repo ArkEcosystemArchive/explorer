@@ -86,12 +86,12 @@ export default {
 
     statusMessage(row) {
       const status = {
-        '0': 'Forging',
-        '1': 'Missing',
-        '2': 'Not Forging',
-        '3': 'Awaiting Slot',
-        '4': 'Awaiting Slot',
-        '5': 'Not Forging',
+        '0': this.$i18n.t('Forging'),
+        '1': this.$i18n.t('Missing'),
+        '2': this.$i18n.t('Not Forging'),
+        '3': this.$i18n.t('Awaiting Slot'),
+        '4': this.$i18n.t('Awaiting Slot'),
+        '5': this.$i18n.t('Not Forging'),
       }[row.forgingStatus.code]
 
       const lastBlock = row.forgingStatus.lastBlock

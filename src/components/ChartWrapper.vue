@@ -3,11 +3,11 @@
     <div class="flex justify-between px-10 py-8">
       <h2 class="text-white m-0 text-xl font-normal">{{ $t("Price in") }} {{ currencyName }}</h2>
       <div>
-        <button @click="period('day')"  :class="{ 'bg-blue-darker text-white': type === 'day' }" class="py-2 px-4 bg-transparent hover:bg-blue-darker rounded-md hover:text-white text-blue-light font-normal text-xs">Day</button>
-        <button @click="period('week')"  :class="{ 'bg-blue-darker text-white': type === 'week' }" class="py-2 px-4 bg-transparent hover:bg-blue-darker rounded-md hover:text-white text-blue-light font-normal text-xs">Week</button>
-        <button @click="period('month')"  :class="{ 'bg-blue-darker text-white': type === 'month' }" class="py-2 px-4 bg-transparent hover:bg-blue-darker rounded-md hover:text-white text-blue-light font-normal text-xs">Month</button>
-        <button @click="period('quarter')"  :class="{ 'bg-blue-darker text-white': type === 'quarter' }" class="py-2 px-4 bg-transparent hover:bg-blue-darker rounded-md hover:text-white text-blue-light font-normal text-xs">Quarter</button>
-        <button @click="period('year')"  :class="{ 'bg-blue-darker text-white': type === 'year' }" class="py-2 px-4 bg-transparent hover:bg-blue-darker rounded-md hover:text-white text-blue-light font-normal text-xs">Year</button>
+        <button @click="period('day')"  :class="{ 'bg-blue-darker text-white': type === 'day' }" class="py-2 px-4 bg-transparent hover:bg-blue-darker rounded-md hover:text-white text-blue-light font-normal text-xs">{{ $t("Day") }}</button>
+        <button @click="period('week')"  :class="{ 'bg-blue-darker text-white': type === 'week' }" class="py-2 px-4 bg-transparent hover:bg-blue-darker rounded-md hover:text-white text-blue-light font-normal text-xs">{{ $t("Week") }}</button>
+        <button @click="period('month')"  :class="{ 'bg-blue-darker text-white': type === 'month' }" class="py-2 px-4 bg-transparent hover:bg-blue-darker rounded-md hover:text-white text-blue-light font-normal text-xs">{{ $t("Month") }}</button>
+        <button @click="period('quarter')"  :class="{ 'bg-blue-darker text-white': type === 'quarter' }" class="py-2 px-4 bg-transparent hover:bg-blue-darker rounded-md hover:text-white text-blue-light font-normal text-xs">{{ $t("Quarter") }}</button>
+        <button @click="period('year')"  :class="{ 'bg-blue-darker text-white': type === 'year' }" class="py-2 px-4 bg-transparent hover:bg-blue-darker rounded-md hover:text-white text-blue-light font-normal text-xs">{{ $t("Year") }}</button>
       </div>
     </div>
 
