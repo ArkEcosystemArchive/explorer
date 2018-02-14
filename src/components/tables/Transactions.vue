@@ -36,7 +36,7 @@
       </template>
     </table-column>
 
-    <table-column show="fee" label="Fee (ARK)" header-class="right-header-end-cell" cell-class="right-end-cell hidden md:table-cell">
+    <table-column show="fee" label="Fee (ARK)" header-class="right-header-end-cell hidden md:table-cell" cell-class="right-end-cell hidden md:table-cell">
       <template slot-scope="row">
         {{ readableCrypto(row.fee) }}
       </template>
