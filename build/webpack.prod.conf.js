@@ -13,6 +13,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const PurgecssPlugin = require('purgecss-webpack-plugin')
 const minimist = require('minimist')
 const glob = require('glob-all')
+const gitRevision = require('./utils/git-revision')()
 
 /**
  * Builder Arguments...
@@ -50,7 +51,9 @@ const webpackConfig = merge(baseWebpackConfig, {
         ...require('../config/prod.env'),
         ...{EXPLORER_CONFIG: `"${network}"`},
         ...{ROUTER_MODE: `"${routerMode}"`}
-      }
+      },
+      GIT_VERSION: JSON.stringify(gitRevision.version),
+      GIT_DATE: JSON.stringify(gitRevision.date)
     }),
     new UglifyJsPlugin({
       uglifyOptions: {

@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const minimist = require('minimist')
+const gitRevision = require('./utils/git-revision')()
 
 /**
  * Builder Arguments...
@@ -57,8 +58,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       'process.env': {
         ...require('../config/dev.env'),
         ...{EXPLORER_CONFIG: `"${network}"`},
-        ...{ROUTER_MODE: `"${routerMode}"`}
-      }
+        ...{ROUTER_MODE: `"${routerMode}"`},
+      },
+      GIT_VERSION: JSON.stringify(gitRevision.version),
+      GIT_DATE: JSON.stringify(gitRevision.date)
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
