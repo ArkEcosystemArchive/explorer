@@ -6,7 +6,7 @@
       </div>
       <div class="p-0 sm:pl-4">
         <div class="text-3xl semibold">{{ totals.forging }}</div>
-        <div class="text-grey">Forged block recently</div>
+        <div class="text-grey">{{ $t("Forged block recently") }}</div>
       </div>
     </div>
 
@@ -16,7 +16,7 @@
       </div>
       <div class="p-0 sm:pl-4">
         <div class="text-3xl semibold">{{ totals.missedBlock }}</div>
-        <div class="text-grey">Missed block</div>
+        <div class="text-grey">{{ $t("Missed block") }}</div>
       </div>
     </div>
 
@@ -28,7 +28,7 @@
       </div>
       <div class="p-0 sm:pl-4">
         <div class="text-3xl semibold">{{ totals.notForging }}</div>
-        <div class="text-grey">Not forging</div>
+        <div class="text-grey">{{ $t("Not forging") }}</div>
       </div>
     </div>
 
@@ -38,7 +38,7 @@
       </div>
       <div class="p-0 sm:pl-4">
         <div class="text-3xl semibold">{{ totals.awaitingSlot }}</div>
-        <div class="text-grey">In queue for forging</div>
+        <div class="text-grey">{{ $t("In queue for forging") }}</div>
       </div>
     </div>
   </div>

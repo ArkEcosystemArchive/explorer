@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex justify-between px-10 py-8">
-      <h2 class="text-white m-0 text-xl font-normal">Price in {{ currencyName }}</h2>
+      <h2 class="text-white m-0 text-xl font-normal">{{ $t("Price in") }} {{ currencyName }}</h2>
       <div>
         <button @click="period('day')"  :class="{ 'bg-blue-darker text-white': type === 'day' }" class="py-2 px-4 bg-transparent hover:bg-blue-darker rounded-md hover:text-white text-blue-light font-normal text-xs">Day</button>
         <button @click="period('week')"  :class="{ 'bg-blue-darker text-white': type === 'week' }" class="py-2 px-4 bg-transparent hover:bg-blue-darker rounded-md hover:text-white text-blue-light font-normal text-xs">Week</button>

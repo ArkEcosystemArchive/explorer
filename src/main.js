@@ -6,7 +6,7 @@ import { sync } from 'vuex-router-sync'
 import App from './App'
 import router from './router'
 import store from './store'
-// import i18n from './i18n'
+import i18n from './i18n'
 import VTooltip from 'v-tooltip'
 import TableComponent from 'vue-table-component'
 import _ from 'lodash'
@@ -21,7 +21,7 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  // i18n,
+  i18n,
   router,
   store,
   components: { App },

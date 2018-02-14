@@ -1,6 +1,6 @@
 <template>
   <div class="list-row" v-show="Object.keys(delegate).length">
-    <div>Votes</div>
+    <div>{{ $t("Votes") }}</div>
     <div><link-wallet :address="delegate.address">{{ delegate.username }}</link-wallet></div>
   </div>
 </template>

@@ -1,36 +1,36 @@
 <template>
   <div v-show="Object.keys(delegate).length">
     <div class="list-row-border-b">
-      <div>Delegate</div>
+      <div>{{ $t("Delegate") }}</div>
       <div>{{ delegate.username }}</div>
     </div>
 
     <div class="list-row-border-b">
-      <div>Uptime</div>
+      <div>{{ $t("Uptime") }}</div>
       <div>{{ delegate.productivity }}%</div>
     </div>
 
     <div class="list-row-border-b">
-      <div>Rank/Status</div>
+      <div>{{ $t("Rank/Status") }}</div>
       <div>{{ delegate.rate }}</div>
     </div>
 
     <div class="list-row-border-b">
-      <div>Approval</div>
+      <div>{{ $t("Approval") }}</div>
       <div>{{ delegate.approval }}%</div>
     </div>
 
     <div class="list-row-border-b">
-      <div>Forged</div>
+      <div>{{ $t("Forged") }}</div>
       <div>{{ readableCrypto(delegate.forged) }}</div>
     </div>
 
     <div class="list-row-border-b">
-      <div>Blocks</div>
+      <div>{{ $t("Blocks") }}</div>
       <div>
         <span>{{ delegate.producedblocks }}</span>
-        <span class="text-grey">({{ delegate.missedblocks }} missed)</span>
-        <router-link v-if="delegate.producedblocks > 0" :to="{ name: 'wallet-blocks', params: { address: delegate.address, page: 1 } }">See all</router-link>
+        <span class="text-grey">({{ delegate.missedblocks }} {{ $t("missed") }})</span>
+        <router-link v-if="delegate.producedblocks > 0" :to="{ name: 'wallet-blocks', params: { address: delegate.address, page: 1 } }">{{ $t("See all") }}</router-link>
       </div>
     </div>
   </div>

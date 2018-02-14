@@ -2,22 +2,22 @@
   <div>
     <div v-for="(row, index) in wallets" :key="row.address" class="row-mobile">
       <div class="list-row-border-b">
-        <div>Rank</div>
+        <div>{{ $t("Rank") }}</div>
         <div>{{ getRank(index) }}</div>
       </div>
 
       <div class="list-row-border-b">
-        <div>Address</div>
+        <div>{{ $t("Address") }}</div>
         <link-wallet :address="row.address"></link-wallet>
       </div>
 
       <div class="list-row-border-b">
-        <div>Balance</div>
+        <div>{{ $t("Balance") }}</div>
         <div>{{ readableCrypto(row.balance) }}</div>
       </div>
 
       <div class="list-row">
-        <div>Supply</div>
+        <div>{{ $t("Supply") }}</div>
         <div>{{ readableNumber((row.balance / supply) * 100) }}%</div>
       </div>
     </div>

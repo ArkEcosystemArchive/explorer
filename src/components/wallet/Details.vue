@@ -11,7 +11,7 @@
       <div
         v-if="view === 'public'"
         class="pr-8 flex-auto min-w-0">
-        <div class="text-grey mb-2">Address</div>
+        <div class="text-grey mb-2">{{ $t("Address") }}</div>
         <div class="text-lg text-white semibold truncate">
           <span class="mr-2">{{ wallet.address }}</span>
           <clipboard v-if="wallet.address" :value="wallet.address"></clipboard>
@@ -21,7 +21,7 @@
       <div
         v-if="view === 'private' && wallet.publicKey"
         class="pr-8 flex-auto min-w-0">
-        <div class="text-grey mb-2">Public Key</div>
+        <div class="text-grey mb-2">{{ $t("Public Key") }}</div>
         <div class="text-lg text-white semibold truncate mr-2">
           <span class="mr-2">{{ wallet.publicKey }}</span>
           <clipboard v-if="wallet.publicKey" :value="wallet.publicKey"></clipboard>
@@ -57,14 +57,14 @@
       <div
         v-if="view === 'public'"
         class="flex-none border-l border-grey-dark px-9">
-        <div class="text-grey mb-2">Balance ARK</div>
+        <div class="text-grey mb-2">{{ $t("Balance (ARK)") }}</div>
         <div class="text-lg text-white semibold">{{ readableCrypto(wallet.balance, false) }}</div>
       </div>
 
       <div
         v-if="view === 'public'"
         class="flex-none border-l border-grey-dark px-9">
-        <div class="text-grey mb-2">Transactions</div>
+        <div class="text-grey mb-2">{{ $t("Transactions") }}</div>
         <div class="text-lg text-white semibold">
           <span class="text-green">{{ receivedCount }}</span>
           <img class="mr-4" src="@/assets/images/icons/arrow-down.svg" />
@@ -84,14 +84,14 @@
       <div class="px-2">
         <div class="flex -mx-6 mb-8">
           <div class="md:w-1/2 px-6 w-full border-r border-grey-dark">
-            <div class="text-grey mb-2">Address</div>
+            <div class="text-grey mb-2">{{ $t("Address") }}</div>
             <div class="text-white flex">
               <span class="mr-2">{{ truncate(wallet.address) }}</span>
               <clipboard v-if="wallet.address" :value="wallet.address"></clipboard>
             </div>
           </div>
           <div class="md:w-1/2 px-6 w-full" v-if="wallet.publicKey">
-            <div class="text-grey mb-2">Public Key</div>
+            <div class="text-grey mb-2">{{ $t("Public Key") }}</div>
             <div class="text-white flex">
               <span class="mr-2">{{ truncate(wallet.publicKey, 36) }}</span>
               <clipboard v-if="wallet.publicKey" :value="wallet.publicKey"></clipboard>
@@ -100,11 +100,11 @@
         </div>
         <div class="flex -mx-6">
           <div class="w-1/2 px-6 w-full border-r border-grey-dark">
-            <div class="text-grey mb-2">Balance (ARK)</div>
+            <div class="text-grey mb-2">{{ $t("Balance (ARK)") }}</div>
             <div class="text-white">{{ readableCrypto(wallet.balance, false) }}</div>
           </div>
           <div class="w-1/2 px-6 w-full">
-            <div class="text-grey mb-2">Transactions</div>
+            <div class="text-grey mb-2">{{ $t("Transactions") }}</div>
             <div class="text-white">
               <span class="whitespace-no-wrap">
                 <span class="text-green">{{ receivedCount }}</span>
@@ -123,8 +123,8 @@
     <!-- Modal -->
     <modal v-if="showModal" @close="showModal = false">
       <div class="text-center p-10 pt-2">
-        <p class="semibold text-3xl mb-4">QR Code</p>
-        <p class="mb-10">Scan for Address</p>
+        <p class="semibold text-3xl mb-4">{{ $t("QR Code") }}</p>
+        <p class="mb-10">{{ $t("Scan for Address") }}</p>
         <qr-code :value="wallet.address" :options="{ size: 160 }"></qr-code>
       </div>
     </modal>

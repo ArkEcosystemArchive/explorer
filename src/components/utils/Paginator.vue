@@ -4,14 +4,14 @@
       @click="prev"
       :class="{ 'hidden' : page <= 1 }"
       class="mr-auto bg-theme-button hover:bg-blue text-theme-button-text semibold hover:text-white py-5 px-8 border-transparent rounded hover-button-shadow">
-      Previous
+      {{ $t("Previous") }}
     </button>
 
     <button
       @click="next"
       :class="{ 'hidden' : page >= totalPages }"
       class="ml-auto bg-theme-button hover:bg-blue text-theme-button-text semibold hover:text-white py-5 px-8 border-transparent rounded hover-button-shadow float-right">
-      Next
+      {{ $t("Next") }}
     </button>
   </div>
 </template>

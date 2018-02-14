@@ -1,9 +1,9 @@
 <template>
   <div class="border-t list-row" v-show="Object.keys(voters).length">
-    <div>Voters</div>
+    <div>{{ $t("Voters") }}</div>
     <div>
       <span class="mr-2">{{ voters.length }}</span>
-      <router-link :to="{ name: 'wallet-voters', params: { address: wallet.address, page: 1 } }">See all</router-link>
+      <router-link :to="{ name: 'wallet-voters', params: { address: wallet.address, page: 1 } }">{{ $t("See all") }}</router-link>
     </div>
   </div>
 </template>

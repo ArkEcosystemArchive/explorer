@@ -4,7 +4,7 @@
       <img class="block" src="@/assets/images/icons/group.svg" />
     </div>
     <div>
-      <div class="text-grey mb-2">Delegates</div>
+      <div class="text-grey mb-2">{{ $t("Delegates") }}</div>
       <div class="text-lg text-white semibold truncate">{{ count }}</div>
     </div>
   </div>
