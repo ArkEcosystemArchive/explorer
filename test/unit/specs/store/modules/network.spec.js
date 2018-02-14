@@ -4,60 +4,60 @@ describe('network store modules', () => {
   it('should set the network server', () => {
     store.dispatch('network/setServer', 'setServer')
 
-    store.getters['network/server'].should.equal('setServer')
+    expect(store.getters['network/server']).toEqual('setServer')
   })
 
   it('should set the network nethash', () => {
     store.dispatch('network/setNethash', 'setNethash')
 
-    store.getters['network/nethash'].should.equal('setNethash')
+    expect(store.getters['network/nethash']).toEqual('setNethash')
   })
 
   it('should set the network alias', () => {
     store.dispatch('network/setAlias', 'setAlias')
 
-    store.getters['network/alias'].should.equal('setAlias')
+    expect(store.getters['network/alias']).toEqual('setAlias')
   })
 
   it('should set the network active delegates', () => {
     store.dispatch('network/setActiveDelegates', 'setActiveDelegates')
 
-    store.getters['network/activeDelegates'].should.equal('setActiveDelegates')
+    expect(store.getters['network/activeDelegates']).toEqual('setActiveDelegates')
   })
 
   it('should set the network token', () => {
     store.dispatch('network/setToken', 'setToken')
 
-    store.getters['network/token'].should.equal('setToken')
+    expect(store.getters['network/token']).toEqual('setToken')
   })
 
   it('should set the network symbol', () => {
     store.dispatch('network/setSymbol', 'setSymbol')
 
-    store.getters['network/symbol'].should.equal('setSymbol')
+    expect(store.getters['network/symbol']).toEqual('setSymbol')
   })
 
   it('should set the network currencies', () => {
     store.dispatch('network/setCurrencies', 'setCurrencies')
 
-    store.getters['network/currencies'].should.equal('setCurrencies')
+    expect(store.getters['network/currencies']).toEqual('setCurrencies')
   })
 
   it('should set the network known wallets', () => {
     store.dispatch('network/setKnownWallets', 'setKnownWallets')
 
-    store.getters['network/knownWallets'].should.equal('setKnownWallets')
+    expect(store.getters['network/knownWallets']).toEqual('setKnownWallets')
   })
 
   it('should set the network supply', () => {
     store.dispatch('network/setSupply', 'setSupply')
 
-    store.getters['network/supply'].should.equal('setSupply')
+    expect(store.getters['network/supply']).toEqual('setSupply')
   })
 
   it('should set the network height', () => {
     store.dispatch('network/setHeight', 'setHeight')
 
-    store.getters['network/height'].should.equal('setHeight')
+    expect(store.getters['network/height']).toEqual('setHeight')
   })
 })
