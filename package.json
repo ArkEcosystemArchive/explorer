@@ -33,6 +33,7 @@
     "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
+    "@vue/test-utils": "^1.0.0-beta.11",
     "autoprefixer": "^7.2.5",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
@@ -83,6 +84,7 @@
     "karma-webpack": "^2.0.9",
     "minimist": "^1.2.0",
     "mocha": "^5.0.0",
+    "moment-timezone": "^0.5.14",
     "nightwatch": "^0.9.19",
     "node-notifier": "^5.2.1",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
@@ -106,7 +108,6 @@
     "vue-loader": "^13.7.0",
     "vue-style-loader": "^3.1.1",
     "vue-template-compiler": "^2.5.13",
-    "@vue/test-utils": "^1.0.0-beta.11",
     "webpack": "^3.10.0",
     "webpack-bundle-analyzer": "^2.9.2",
     "webpack-dev-server": "^2.11.1",
