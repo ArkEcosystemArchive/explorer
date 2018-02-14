@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <content-header>Latest transactions and blocks</content-header>
+    <content-header>{{ $t("Latest transactions and blocks") }}</content-header>
 
     <section v-if="priceChart" class="hidden md:block mb-5 bg-theme-feature-background xl:rounded-lg">
       <chart-wrapper></chart-wrapper>
@@ -10,11 +10,11 @@
       <nav class="mx-5 sm:mx-10 mb-8 border-b flex items-end">
         <div @click="dataView = 'transactions'"
              :class="dataView === 'transactions' ? 'active-tab' : 'inactive-tab'">
-          Latest Transactions
+          {{ $t("Latest Transactions") }}
         </div>
         <div @click="dataView = 'blocks'"
              :class="dataView === 'blocks' ? 'active-tab' : 'inactive-tab'">
-          Latest Blocks
+          {{ $t("Latest Blocks") }}
         </div>
       </nav>
 

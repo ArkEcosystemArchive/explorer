@@ -23,6 +23,11 @@
 	"Next block": "Next block",
 
 	"Price in": "Price in",
+	"Day": "Day",
+	"Week": "Week",
+	"Month": "Month",
+	"Year": "Year",
+	"All time": "All time",
 
 	"Menu": "Menu",
 	"Search": "Search",
@@ -80,5 +85,20 @@
 	"Recipient": "Recipient",
 	"Smartbridge": "Smartbridge",
 	"Well Confirmed": "Well Confirmed",
-	"Balance": "Balance"
+	"Balance": "Balance",
+
+	"Ooops!": "Ooops!",
+	"Sorry, page not found": "Sorry, page not found",
+	"Active": "Active",
+	"Standby": "Standby",
+	"Latest transactions and blocks": "Latest transactions and blocks",
+	"Latest Transactions": "Latest Transactions",
+	"Latest Blocks": "Latest Blocks",
+	"Statistics": "Statistics",
+	"ARK sent": "ARK sent",
+	"ARK fees": "ARK fees",
+	"Top Accounts": "Top Accounts",
+	"Transaction ID": "Transaction ID",
+	"Vendor field": "Vendor field",
+	"Wallet Summary": "Wallet Summary"
 }
