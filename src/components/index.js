@@ -28,3 +28,7 @@ Vue.component('table-wallets-mobile', require('@/components/tables/mobile/Wallet
 Vue.component('ark-meter', require('@/components/ArkMeter.vue').default)
 Vue.component('content-header', require('@/components/ContentHeader.vue').default)
 Vue.component('modal', require('@/components/Modal.vue').default)
+
+// Loading
+Vue.component('pulse-loader', require('vue-spinner/src/PulseLoader.vue').default)
+Vue.component('loader', require('@/components/utils/Loader.vue').default)

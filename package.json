@@ -28,6 +28,7 @@
     "vue-chartjs": "^3.1.0",
     "vue-i18n": "^7.4.1",
     "vue-router": "^3.0.1",
+    "vue-spinner": "^1.0.3",
     "vue-table-component": "faustbrian/vue-table-component",
     "vuex": "^3.0.1",
     "vuex-router-sync": "^5.0.0"
