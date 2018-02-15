@@ -30,5 +30,4 @@ Vue.component('content-header', require('@/components/ContentHeader.vue').defaul
 Vue.component('modal', require('@/components/Modal.vue').default)
 
 // Loading
-Vue.component('pulse-loader', require('vue-spinner/src/PulseLoader.vue').default)
 Vue.component('loader', require('@/components/utils/Loader.vue').default)
