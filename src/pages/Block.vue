@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5" v-if="block">
-    <content-header>Blocks</content-header>
+    <content-header>{{ $t("Blocks") }}</content-header>
 
     <identity :block="block" :prev-handler="prevBlock" :next-handler="nextBlock"></identity>
 

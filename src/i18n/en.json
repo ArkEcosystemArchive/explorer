@@ -23,9 +23,16 @@
 	"Next block": "Next block",
 
 	"Price in": "Price in",
+	"Day": "Day",
+	"Week": "Week",
+	"Month": "Month",
+	"Quarter": "Quarter",
+	"Year": "Year",
+	"All time": "All time",
 
 	"Menu": "Menu",
 	"Search": "Search",
+	"Find a block, transaction, address or delegate": "Find a block, transaction, address or delegate",
 	"Home": "Home",
 	"Top Wallets": "Top Wallets",
 	"Delegate Monitor": "Delegate Monitor",
@@ -48,6 +55,10 @@
 	"Last block": "Last block",
 	"from transactions": "{currency} from {transactions} transactions",
 	"Total Forged (ARK)": "Total Forged (ARK)",
+	"Forging": "Forging",
+	"Missing": "Missing",
+	"Not Forging": "Not Forging",
+	"Awaiting Slot": "Awaiting Slot",
 
 	"Address": "Address",
 	"Public Key": "Public Key",
@@ -80,5 +91,20 @@
 	"Recipient": "Recipient",
 	"Smartbridge": "Smartbridge",
 	"Well Confirmed": "Well Confirmed",
-	"Balance": "Balance"
+	"Balance": "Balance",
+
+	"Ooops!": "Ooops!",
+	"Sorry, page not found": "Sorry, page not found",
+	"Active": "Active",
+	"Standby": "Standby",
+	"Latest transactions and blocks": "Latest transactions and blocks",
+	"Latest Transactions": "Latest Transactions",
+	"Latest Blocks": "Latest Blocks",
+	"Statistics": "Statistics",
+	"ARK sent": "ARK sent",
+	"ARK fees": "ARK fees",
+	"Top Accounts": "Top Accounts",
+	"Transaction ID": "Transaction ID",
+	"Vendor field": "Vendor field",
+	"Wallet Summary": "Wallet Summary"
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <content-header>Delegate Monitor</content-header>
+    <content-header>{{ $t("Delegate Monitor") }}</content-header>
 
     <delegate-detail></delegate-detail>
 
@@ -9,12 +9,12 @@
         <div
           @click="activeTab = 'active'"
           :class="activeTab === 'active' ? 'active-tab' : 'inactive-tab'">
-          Active
+          {{ $t("Active") }}
         </div>
         <div
           @click="activeTab = 'standby'"
           :class="activeTab === 'standby' ? 'active-tab' : 'inactive-tab'">
-          Standby
+          {{ $t("Standby") }}
         </div>
       </nav>
 
