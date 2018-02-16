@@ -319,3 +319,27 @@ thead th {
 .chart-tab-active, .chart-tab:hover {
   @apply .bg-blue-darker .text-white
 }
+
+/* Pager */
+
+.pager-button {
+  @apply .bg-theme-button .text-theme-button-text .semibold .py-5 .px-8 .border-transparent .rounded
+}
+
+.pager-button:hover {
+  @apply .bg-blue .text-white
+}
+
+.block-pager-button {
+  @apply .py-4 .px-5 .bg-transparent .bg-blue-darker .rounded-md .text-white .font-normal .text-xs
+}
+
+/** Menu */
+
+.menu-button {
+  @apply .flex .items-center .p-4 .border-b-2 .border-transparent .text-theme-text-secondary
+}
+
+.menu-button:hover {
+  @apply .border-red
+}

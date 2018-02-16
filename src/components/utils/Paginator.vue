@@ -3,14 +3,14 @@
     <button
       @click="prev"
       :class="{ 'hidden' : page <= 1 }"
-      class="mr-auto bg-theme-button hover:bg-blue text-theme-button-text semibold hover:text-white py-5 px-8 border-transparent rounded hover-button-shadow">
+      class="mr-auto pager-button">
       {{ $t("Previous") }}
     </button>
 
     <button
       @click="next"
       :class="{ 'hidden' : page >= totalPages }"
-      class="ml-auto bg-theme-button hover:bg-blue text-theme-button-text semibold hover:text-white py-5 px-8 border-transparent rounded hover-button-shadow float-right">
+      class="ml-auto pager-button float-right">
       {{ $t("Next") }}
     </button>
   </div>
