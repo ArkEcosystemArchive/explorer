@@ -22,7 +22,7 @@
       </template>
     </table-column>
 
-    <table-column show="forgingTime" :label="$t('Last Forged')" header-class="left-header-cell" cell-class="p-3 text-left border-none">
+    <table-column show="blocksAt" :label="$t('Last Forged')" header-class="left-header-cell" cell-class="p-3 text-left border-none">
       <template slot-scope="row">
         {{ lastForgingTime(row) }}
       </template>
