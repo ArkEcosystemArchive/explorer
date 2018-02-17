@@ -30,13 +30,13 @@
       </template>
     </table-column>
 
-    <table-column show="totalForged" :label="$t('Reward (ARK)')" header-class="right-header-cell" cell-class="right-cell">
+    <table-column show="totalForged" :label="$t('Reward (token)', { token: networkToken() })" header-class="right-header-cell" cell-class="right-cell">
       <template slot-scope="row">
         {{ readableCrypto(row.totalForged) }}
       </template>
     </table-column>
 
-    <table-column show="totalFee" :label="$t('Fee (ARK)')" header-class="right-header-end-cell" cell-class="right-end-cell">
+    <table-column show="totalFee" :label="$t('Fee (token)', {token: networkToken()})" header-class="right-header-end-cell" cell-class="right-end-cell">
       <template slot-scope="row">
         {{ readableCrypto(row.totalFee) }}
       </template>

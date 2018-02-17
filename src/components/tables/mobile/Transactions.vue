@@ -27,14 +27,14 @@
       </div>
 
       <div class="list-row-border-b">
-        <div>{{ $t("Amount (ARK)") }}</div>
+        <div>{{ $t("Amount (token)", {token: networkToken()}) }}</div>
         <div>
           <transaction-amount :transaction="transaction"></transaction-amount>
         </div>
       </div>
 
       <div class="list-row">
-        <div>{{ $t("Fee (ARK)") }}</div>
+        <div>{{ $t("Fee (token)", {token: networkToken()}) }}</div>
         <div>{{ readableCrypto(transaction.fee) }}</div>
       </div>
     </div>
