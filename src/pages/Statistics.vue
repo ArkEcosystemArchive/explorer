@@ -11,12 +11,12 @@
         <div
           @click="activeTab = 'sent'"
           :class="activeTab === 'sent' ? 'active-tab' : 'inactive-tab'">
-          {{ $t("ARK sent") }}
+          {{ $t("Token sent", {token: networkToken()}) }}
         </div>
         <div
           @click="activeTab = 'fees'"
           :class="activeTab === 'fees' ? 'active-tab' : 'inactive-tab'">
-          {{ $t("ARK fees") }}
+          {{ $t("Token fees", {token: networkToken()}) }}
         </div>
       </nav>
       <div class="px-5 sm:px-10 pt-8 flex flex-wrap flex-col sm:flex-row">

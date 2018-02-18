@@ -109,6 +109,10 @@ const methods = {
     return appendCurrency ? `${value} ${store.getters['network/symbol']}` : value
   },
 
+  networkToken() {
+    return store.getters['network/token']
+  },
+
   capitalize(value) {
     return value.charAt(0).toUpperCase() + value.slice(1)
   },

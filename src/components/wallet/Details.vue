@@ -57,7 +57,7 @@
       <div
         v-if="view === 'public'"
         class="flex-none border-l border-grey-dark px-9">
-        <div class="text-grey mb-2">{{ $t("Balance (ARK)") }}</div>
+        <div class="text-grey mb-2">{{ $t("Balance (token)", {token: networkToken()}) }}</div>
         <div class="text-lg text-white semibold">{{ readableCrypto(wallet.balance, false) }}</div>
       </div>
 
@@ -100,7 +100,7 @@
         </div>
         <div class="flex -mx-6">
           <div class="w-1/2 px-6 w-full border-r border-grey-dark">
-            <div class="text-grey mb-2">{{ $t("Balance (ARK)") }}</div>
+            <div class="text-grey mb-2">{{ $t("Balance (token)", {token: networkToken()}) }}</div>
             <div class="text-white">{{ readableCrypto(wallet.balance, false) }}</div>
           </div>
           <div class="w-1/2 px-6 w-full">

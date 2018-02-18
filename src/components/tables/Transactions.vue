@@ -30,13 +30,13 @@
       </template>
     </table-column>
 
-    <table-column show="amount" :label="$t('Amount (ARK)')" header-class="right-header-end-cell md:pr-4" cell-class="right-end-cell md:pr-4">
+    <table-column show="amount" :label="$t('Amount (token)', {token: networkToken()})" header-class="right-header-end-cell md:pr-4" cell-class="right-end-cell md:pr-4">
       <template slot-scope="row">
         <transaction-amount :transaction="row"></transaction-amount>
       </template>
     </table-column>
 
-    <table-column show="fee" :label="$t('Fee (ARK)')" header-class="right-header-end-cell hidden md:table-cell" cell-class="right-end-cell hidden md:table-cell">
+    <table-column show="fee" :label="$t('Fee (token)', {token: networkToken()})" header-class="right-header-end-cell hidden md:table-cell" cell-class="right-end-cell hidden md:table-cell">
       <template slot-scope="row">
         {{ readableCrypto(row.fee) }}
       </template>
