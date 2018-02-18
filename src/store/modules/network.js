@@ -8,6 +8,7 @@ export default {
     nethash: null,
     alias: null,
     activeDelegates: 51,
+    rewardOffset: 51,
     token: null,
     symbol: null,
     currencies: [],
@@ -30,6 +31,9 @@ export default {
     },
     [types.SET_NETWORK_ACTIVE_DELEGATES](state, payload) {
       state.activeDelegates = payload.value
+    },
+    [types.SET_NETWORK_REWARD_OFFSET](state, payload) {
+      state.rewardOffset = payload.value
     },
     [types.SET_NETWORK_TOKEN](state, payload) {
       state.token = payload.value
@@ -81,6 +85,12 @@ export default {
         value
       })
     },
+    setRewardOffset: ({commit}, value) => {
+      commit({
+        type: types.SET_NETWORK_REWARD_OFFSET,
+        value
+      })
+    },
     setToken: ({commit}, value) => {
       commit({
         type: types.SET_NETWORK_TOKEN,
@@ -124,6 +134,7 @@ export default {
     nethash: state => state.nethash,
     alias: state => state.alias,
     activeDelegates: state => state.activeDelegates,
+    rewardOffset: state => state.rewardOffset,
     token: state => state.token,
     symbol: state => state.symbol,
     currencies: state => state.currencies,

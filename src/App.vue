@@ -37,6 +37,7 @@ export default {
     this.$store.dispatch('network/setServer', network.server)
     this.$store.dispatch('network/setAlias', network.alias)
     this.$store.dispatch('network/setActiveDelegates', network.activeDelegates)
+    this.$store.dispatch('network/setRewardOffset', network.rewardOffset)
     this.$store.dispatch('network/setCurrencies', network.currencies)
     this.$store.dispatch('network/setKnownWallets', network.knownWallets)
 

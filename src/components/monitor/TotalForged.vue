@@ -12,7 +12,7 @@ export default {
   data: () => ({ forged: 0 }),
 
   computed: {
-    ...mapGetters('network', ['height']),
+    ...mapGetters('network', ['height', 'rewardOffset']),
   },
 
   mounted() {
@@ -27,7 +27,7 @@ export default {
     },
 
     getTotal() {
-      this.forged = (this.height - 75600) * 2 * Math.pow(10, 8)
+      this.forged = (this.height - this.rewardOffset) * 2 * Math.pow(10, 8)
     },
   },
 }

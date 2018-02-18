@@ -3,6 +3,7 @@
   "server": "https://explorer.ark.io:8443/api",
   "alias": "Main",
   "activeDelegates": 51,
+  "rewardOffset": 75600,
   "currencies": {
     "AUD": "A$",
     "BRL": "R$",
