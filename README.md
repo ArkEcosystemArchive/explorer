@@ -79,13 +79,13 @@ yarn dev:devnet
 #### Custom
 
 ```bash
-EXP_NETWORK=custom yarn dev
+yarn dev --env.network=custom
 ```
 
 #### Change Router Mode
 
 ```bash
-EXP_ROUTER=history yarn dev
+yarn dev --env.routerMode=history
 ```
 
 ## 6. Testing
