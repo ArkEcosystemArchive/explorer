@@ -60,6 +60,18 @@ A running instance of the explorer on GitHub Pages can be found at https://arkec
 
 If you wish to remove the `/#/` from your URLs you can follow those steps https://router.vuejs.org/en/essentials/history-mode.html.
 
+### 4.1 Build
+
+```bash
+yarn build:mainnet --history
+```
+
+### 4.1 Development
+
+```bash
+yarn dev --env.routerMode=history
+```
+
 > Keep in mind that this requires you to run your own server and a running instance of nginx.
 
 ## 5. Development
