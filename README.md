@@ -66,7 +66,7 @@ If you wish to remove the `/#/` from your URLs you can follow those steps https:
 yarn build:mainnet --history
 ```
 
-### 4.1 Development
+### 4.2 Development
 
 ```bash
 yarn dev --env.routerMode=history
