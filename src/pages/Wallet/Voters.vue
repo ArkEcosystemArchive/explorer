@@ -3,10 +3,10 @@
     <content-header>{{ $t("Voters") }}</content-header>
     <section class="page-section py-10">
       <div class="hidden sm:block">
-        <table-wallets :wallets="filteredWallets"></table-wallets>
+        <table-wallets :wallets="filteredWallets" :total="votes"></table-wallets>
       </div>
       <div class="sm:hidden">
-        <table-wallets-mobile :wallets="filteredWallets"></table-wallets-mobile>
+        <table-wallets-mobile :wallets="filteredWallets" :total="votes"></table-wallets-mobile>
       </div>
       <paginator :start="+this.page" :count="wallets.length"></paginator>
     </section>
@@ -16,6 +16,7 @@
 <script type="text/ecmascript-6">
 import WalletService from '@/services/wallet'
 import DelegateService from '@/services/delegate'
+import sumBy from 'lodash/sumBy'
 
 export default {
   data: () => ({
@@ -35,6 +36,9 @@ export default {
     },
     page() {
       return this.$route.params.page
+    },
+    votes() {
+      return sumBy(this.wallets, 'balance')
     },
   },
 

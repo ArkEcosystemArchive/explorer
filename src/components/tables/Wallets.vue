@@ -20,7 +20,7 @@
 
     <table-column :sortable="false" show="supply" :label="$t('Supply')" header-class="right-header-end-cell" cell-class="right-end-cell w-24">
       <template slot-scope="row">
-        {{ readableNumber((row.balance / supply) * 100) }}%
+        {{ readableNumber((row.balance / total) * 100) }}%
       </template>
     </table-column>
   </table-component>
@@ -33,8 +33,12 @@ export default {
   props: {
     wallets: {
       type: Array,
-      required: true,
+      required: true
     },
+    total: {
+      type: Number,
+      required: true
+    }
   },
 
   computed: {
