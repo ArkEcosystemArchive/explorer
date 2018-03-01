@@ -1,55 +1,57 @@
 <template>
-  <table-component :data="transactions" sort-by="timestamp" sort-order="desc" :show-filter="false" :show-caption="false" table-class="w-full">
-    <table-column show="id" :label="$t('ID')" header-class="left-header-start-cell" cell-class="left-start-cell">
-      <template slot-scope="row">
-        <link-transaction :id="row.id" :smart-bridge="row.vendorField"></link-transaction>
-      </template>
-    </table-column>
+  <loader :data="transactions">
+    <table-component :data="transactions" sort-by="timestamp" sort-order="desc" :show-filter="false" :show-caption="false" table-class="w-full">
+      <table-column show="id" :label="$t('ID')" header-class="left-header-start-cell" cell-class="left-start-cell">
+        <template slot-scope="row">
+          <link-transaction :id="row.id" :smart-bridge="row.vendorField"></link-transaction>
+        </template>
+      </table-column>
 
-    <table-column show="timestamp" :label="$t('Timestamp')" header-class="left-header-cell hidden lg:table-cell" cell-class="left-cell hidden lg:table-cell">
-      <template slot-scope="row">
-        {{ readableTimestamp(row.timestamp) }}
-      </template>
-    </table-column>
+      <table-column show="timestamp" :label="$t('Timestamp')" header-class="left-header-cell hidden lg:table-cell" cell-class="left-cell hidden lg:table-cell">
+        <template slot-scope="row">
+          {{ readableTimestamp(row.timestamp) }}
+        </template>
+      </table-column>
 
-    <table-column show="senderId" :label="$t('Sender')" header-class="left-header-cell" cell-class="left-cell">
-      <template slot-scope="row">
-        <link-wallet :address="row.senderId"></link-wallet>
-      </template>
-    </table-column>
+      <table-column show="senderId" :label="$t('Sender')" header-class="left-header-cell" cell-class="left-cell">
+        <template slot-scope="row">
+          <link-wallet :address="row.senderId"></link-wallet>
+        </template>
+      </table-column>
 
-    <table-column show="recipientId" :label="$t('Recipient')" header-class="left-header-cell" cell-class="left-cell">
-      <template slot-scope="row">
-        <link-wallet :address="row.recipientId" :type="row.type"></link-wallet>
-      </template>
-    </table-column>
+      <table-column show="recipientId" :label="$t('Recipient')" header-class="left-header-cell" cell-class="left-cell">
+        <template slot-scope="row">
+          <link-wallet :address="row.recipientId" :type="row.type"></link-wallet>
+        </template>
+      </table-column>
 
-    <table-column show="amount" :label="$t('Amount (token)', {token: networkToken()})" header-class="right-header-cell" cell-class="right-cell">
-      <template slot-scope="row">
-        <transaction-amount :transaction="row"></transaction-amount>
-      </template>
-    </table-column>
+      <table-column show="amount" :label="$t('Amount (token)', {token: networkToken()})" header-class="right-header-cell" cell-class="right-cell">
+        <template slot-scope="row">
+          <transaction-amount :transaction="row"></transaction-amount>
+        </template>
+      </table-column>
 
-    <table-column show="fee" :label="$t('Fee (token)', {token: networkToken()})" header-class="right-header-cell hidden md:table-cell" cell-class="right-cell hidden md:table-cell">
-      <template slot-scope="row">
-        {{ readableCrypto(row.fee) }}
-      </template>
-    </table-column>
+      <table-column show="fee" :label="$t('Fee (token)', {token: networkToken()})" header-class="right-header-cell hidden md:table-cell" cell-class="right-cell hidden md:table-cell">
+        <template slot-scope="row">
+          {{ readableCrypto(row.fee) }}
+        </template>
+      </table-column>
 
-    <table-column show="confirmations" :label="$t('Confirmations')" header-class="right-header-end-cell" cell-class="right-end-cell">
-      <template slot-scope="row">
-        <div class="flex items-center justify-end whitespace-no-wrap">
-          <div v-if="row.confirmations <= 52">
-            <span class="text-green hidden md:inline-block mr-2">{{ row.confirmations }}</span>
-            <img class="icon flex-none" src="@/assets/images/icons/clock.svg" />
+      <table-column show="confirmations" :label="$t('Confirmations')" header-class="right-header-end-cell" cell-class="right-end-cell">
+        <template slot-scope="row">
+          <div class="flex items-center justify-end whitespace-no-wrap">
+            <div v-if="row.confirmations <= 52">
+              <span class="text-green hidden md:inline-block mr-2">{{ row.confirmations }}</span>
+              <img class="icon flex-none" src="@/assets/images/icons/clock.svg" />
+            </div>
+            <div v-else>
+              {{ $t("Well Confirmed") }}
+            </div>
           </div>
-          <div v-else>
-            {{ $t("Well Confirmed") }}
-          </div>
-        </div>
-      </template>
-    </table-column>
-  </table-component>
+        </template>
+      </table-column>
+    </table-component>
+  </loader>
 </template>
 
 <script type="text/ecmascript-6">

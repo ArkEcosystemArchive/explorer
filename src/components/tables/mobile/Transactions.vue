@@ -1,43 +1,45 @@
 <template>
   <div>
-    <div v-for="transaction in transactions" :key="transaction.id" class="row-mobile">
-      <div class="list-row-border-b">
-        <div>{{ $t("ID") }}</div>
-        <link-transaction :id="transaction.id" :smart-bridge="transaction.vendorField"></link-transaction>
-      </div>
+    <loader :data="transactions">
+      <div v-for="transaction in transactions" :key="transaction.id" class="row-mobile">
+        <div class="list-row-border-b">
+          <div>{{ $t("ID") }}</div>
+          <link-transaction :id="transaction.id" :smart-bridge="transaction.vendorField"></link-transaction>
+        </div>
 
-      <div class="list-row-border-b">
-        <div>{{ $t("Timestamp") }}</div>
-        <div>{{ readableTimestamp(transaction.timestamp) }}</div>
-      </div>
+        <div class="list-row-border-b">
+          <div>{{ $t("Timestamp") }}</div>
+          <div>{{ readableTimestamp(transaction.timestamp) }}</div>
+        </div>
 
-      <div class="list-row-border-b">
-        <div>{{ $t("Sender") }}</div>
-        <link-wallet :address="transaction.senderId"></link-wallet>
-      </div>
+        <div class="list-row-border-b">
+          <div>{{ $t("Sender") }}</div>
+          <link-wallet :address="transaction.senderId"></link-wallet>
+        </div>
 
-      <div class="list-row-border-b">
-        <div>{{ $t("Recipient") }}</div>
-        <link-wallet :address="transaction.recipientId" :type="transaction.type"></link-wallet>
-      </div>
+        <div class="list-row-border-b">
+          <div>{{ $t("Recipient") }}</div>
+          <link-wallet :address="transaction.recipientId" :type="transaction.type"></link-wallet>
+        </div>
 
-      <div class="list-row-border-b" v-if="truncate(transaction.vendorField || '')">
-        <div>{{ $t("Smartbridge") }}</div>
-        <div>{{ truncate(transaction.vendorField || '') }}</div>
-      </div>
+        <div class="list-row-border-b" v-if="truncate(transaction.vendorField || '')">
+          <div>{{ $t("Smartbridge") }}</div>
+          <div>{{ truncate(transaction.vendorField || '') }}</div>
+        </div>
 
-      <div class="list-row-border-b">
-        <div>{{ $t("Amount (token)", {token: networkToken()}) }}</div>
-        <div>
-          <transaction-amount :transaction="transaction"></transaction-amount>
+        <div class="list-row-border-b">
+          <div>{{ $t("Amount (token)", {token: networkToken()}) }}</div>
+          <div>
+            <transaction-amount :transaction="transaction"></transaction-amount>
+          </div>
+        </div>
+
+        <div class="list-row">
+          <div>{{ $t("Fee (token)", {token: networkToken()}) }}</div>
+          <div>{{ readableCrypto(transaction.fee) }}</div>
         </div>
       </div>
-
-      <div class="list-row">
-        <div>{{ $t("Fee (token)", {token: networkToken()}) }}</div>
-        <div>{{ readableCrypto(transaction.fee) }}</div>
-      </div>
-    </div>
+    </loader>
   </div>
 </template>
 
