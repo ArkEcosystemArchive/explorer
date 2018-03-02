@@ -98,7 +98,7 @@
     "shelljs": "^0.8.1",
     "sinon": "^4.2.2",
     "sinon-chai": "^2.14.0",
-    "tailwindcss": "^0.4.0",
+    "tailwindcss": "^0.4.2",
     "uglifyjs-webpack-plugin": "^1.1.6",
     "url-loader": "^0.6.2",
     "vue-jest": "^1.0.2",
