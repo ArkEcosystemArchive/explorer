@@ -1,7 +1,7 @@
 <template>
   <footer class="max-w-2xl mx-auto px-5 md:px-10 py-8 text-theme-text-tertiary flex flex-wrap justify-between items-center">
     <div>
-      &copy; ARK.io | {{ year }}. {{ $t("All rights reserved") }} <span class="hidden md:inline-block"> | Version: {{ version }} | Date: {{ date }}</span>
+      &copy; ARK.io | {{ year }}. {{ $t("All rights reserved") }} <span class="hidden md:inline-block"> | {{ $t("Version") }}: {{ version }} | {{ $t("Date") }}: {{ date }}</span>
     </div>
     <div>
       <a href="https://www.facebook.com/arkecosystem" target="_blank">
