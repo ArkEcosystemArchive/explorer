@@ -1,7 +1,7 @@
 <template>
   <footer class="max-w-2xl mx-auto px-5 md:px-10 py-8 text-theme-text-tertiary flex flex-wrap justify-between items-center">
     <div>
-      &copy; ARK.io | {{ year }}. {{ $t("All rights reserved") }} <span class="hidden md:inline-block"> | {{ $t("Version") }}: {{ version }} | {{ $t("Date") }}: {{ date }}</span>
+      &copy; ARK.io | {{ year }}. {{ $t("All rights reserved") }} <span class="hidden md:inline-block"> | {{ $t("Version") }}: <a :href="versionLink" target="_blank">{{ version }}</a> | {{ $t("Date") }}: {{ date }}</span>
     </div>
     <div>
       <a href="https://www.facebook.com/arkecosystem" target="_blank">
@@ -139,6 +139,9 @@ export default {
     },
     version() {
       return GIT_VERSION
+    },
+    versionLink() {
+      return `https://github.com/ArkEcosystem/ark-explorer/commit/${GIT_VERSION}`
     },
     date() {
       return GIT_DATE
