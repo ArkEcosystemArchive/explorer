@@ -6,7 +6,7 @@
         <div class="pr-6">{{ $t("Height") }}: {{ height.toLocaleString() }}</div>
         <div class="pr-6">{{ $t("Network") }}: {{ $t(alias) }}</div>
         <div class="pr-6">{{ $t("Supply") }}: {{ readableCrypto(supply) }}</div>
-        <div>{{ $t("Market Cap") }}: <currency :amount="+supply"></currency></div>
+        <div v-if="shouldDisplayMarketInfo">{{ $t("Market Cap") }}: <currency :amount="+supply"></currency></div>
       </div>
     </div>
     <div class="sm:hidden flex items-center justify-between text-theme-text-tertiary text-2xs px-5 sm:px-8 xl:px-6 py-3 bg-stat-background">
@@ -14,8 +14,8 @@
         <span>{{ $t("Height") }}:</span>
         <span class="block md:inline-block">{{ height.toLocaleString() }}</span>
       </div>
-      <div class="mr-2">
-        <span>ARK/{{name}}:</span>
+      <div class="mr-2" v-if="shouldDisplayMarketInfo">
+        <span>{{config.currencyName}}/{{name}}:</span>
         <span class="block md:inline-block">{{ rawCurrency(rate, name) }}</span>
       </div>
       <div>
@@ -31,8 +31,12 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters('network', ['alias', 'supply', 'height']),
+    ...mapGetters('network', ['alias', 'supply', 'height', 'config']),
     ...mapGetters('currency', ['name', 'rate', 'symbol']),
+
+      shouldDisplayMarketInfo() {
+        return this.config.cmcCurrencyName
+      },
   },
 }
 </script>

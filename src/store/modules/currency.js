@@ -1,11 +1,13 @@
 import * as types from '../mutation-types'
 
+const network = require(`../../../networks/${process.env.EXPLORER_CONFIG}`)
+
 export default {
   namespaced: true,
   state: {
-    name: 'ARK',
+    name: network.config.currencyName,
     rate: 1,
-    symbol: 'Ѧ'
+    symbol: network.config.currencySymbol
   },
   mutations: {
     [types.SET_CURRENCY_NAME](state, payload) {

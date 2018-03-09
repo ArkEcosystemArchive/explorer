@@ -60,4 +60,11 @@ describe('network store modules', () => {
 
     expect(store.getters['network/height']).toEqual('setHeight')
   })
+
+  it('should set the network config', () => {
+    const config = {cmcCurrencyName: 'myCurrency'}
+    store.dispatch('network/setConfig', config)
+
+    expect(store.getters['network/config']).toEqual(config)
+  })
 })

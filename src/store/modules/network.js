@@ -52,6 +52,9 @@ export default {
     },
     [types.SET_NETWORK_HEIGHT](state, payload) {
       state.height = payload.value
+    },
+    [types.SET_NETWORK_CONFIG](state, payload) {
+      state.config = payload.value
     }
   },
   actions: {
@@ -126,6 +129,12 @@ export default {
         type: types.SET_NETWORK_HEIGHT,
         value
       })
+    },
+    setConfig: ({commit}, value) => {
+      commit({
+        type: types.SET_NETWORK_CONFIG,
+        value
+      })
     }
   },
   getters: {
@@ -140,6 +149,7 @@ export default {
     currencies: state => state.currencies,
     knownWallets: state => state.knownWallets,
     supply: state => state.supply,
-    height: state => state.height
+    height: state => state.height,
+    config: state => state.config
   }
 }

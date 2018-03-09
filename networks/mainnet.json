@@ -37,6 +37,9 @@
     }
   },
   "config": {
-    "priceChart": true
+    "priceChart": true,
+    "currencyName": "Ark",
+    "currencySymbol": "Ѧ",
+    "cmcCurrencyName": "ark"
   }
 }

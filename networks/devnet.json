@@ -10,6 +10,9 @@
     "currency": null
   },
   "config": {
-    "priceChart": false
+    "priceChart": false,
+    "currencyName": "Dark",
+    "currencySymbol": "DѦ",
+    "cmcCurrencyName": null
   }
 }
