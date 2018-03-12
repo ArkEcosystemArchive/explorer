@@ -1,5 +1,5 @@
 <template>
-  <span v-tooltip="smartBridge">
+  <span v-tooltip="sanitizedVendorfield">
     <router-link :to="{ name: 'transaction', params: { id } }" class="hidden md:inline-block whitespace-no-wrap">
       <span v-if="hasDefaultSlot"><slot></slot></span>
       <span v-else>{{ truncate(id) }}</span>
@@ -11,6 +11,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+import sanitizeHtml from 'sanitize-html'
+
 export default {
   props: {
     id: {
@@ -27,6 +29,12 @@ export default {
     hasDefaultSlot() {
       return !!this.$slots.default
     },
+    sanitizedVendorfield() {
+      if (this.smartBridge !== undefined) {
+        return sanitizeHtml(this.smartBridge)
+      }
+      return ""
+    }
   },
 }
 </script>
