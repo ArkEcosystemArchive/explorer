@@ -110,13 +110,20 @@ $ yarn test
 
 If you discover a security vulnerability within this package, please send an e-mail to security@ark.io. All security vulnerabilities will be promptly addressed.
 
-## 8. Credits
+## 8. Contributing
+
+* If you find any bugs, submit an [issue](../../issues) or open a [pull-request](../../pulls), helping us catch and fix them.
+* Engage with other users and developers on [ARK Slack](https://ark.io/slack/).
+* Join our [gitter](https://gitter.im/ark-developers/Lobby).
+* [Contribute bounties](./CONTRIBUTING.md).
+
+## 9. Credits
 
 - [Brian Faust](https://github.com/faustbrian)
 - [Lúcio Rubens](https://github.com/luciorubeens)
 - [Alex Barnsley](https://github.com/alexbarnsley)
 - [All Contributors](../../contributors)
 
-## 9. License
+## 10. License
 
 [MIT](LICENSE) © [ArkEcosystem](https://ark.io)
