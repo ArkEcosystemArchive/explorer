@@ -19,7 +19,7 @@ const methods = {
     )
   },
 
-  readableTimestamp(value) {
+  readableTimestamp(value, timeZoneOffset) {
     return moment()
       .utc()
       .set({
@@ -30,24 +30,28 @@ const methods = {
         minute: 0,
         second: 0,
       })
-      .add(Math.abs(new Date().getTimezoneOffset()), 'minutes')
+      .add(Math.abs(typeof timeZoneOffset !== 'undefined' ? timeZoneOffset : new Date().getTimezoneOffset()), 'minutes')
       .add(value, 'seconds')
       .format('DD.MM.YYYY HH:mm:ss')
   },
 
-  readableTimestampAgo(value) {
-    return moment()
-      .utc()
-      .set({
-        year: 2017,
-        month: 2,
-        date: 21,
-        hour: 13,
-        minute: 0,
-        second: 0,
-      })
-      .add(value, 'seconds')
-      .fromNow()
+  readableTimestampAgo(time, compareTime) {
+    const getTime = function (t) {
+      return moment()
+        .utc()
+        .set({
+          year: 2017,
+          month: 2,
+          date: 21,
+          hour: 13,
+          minute: 0,
+          second: 0,
+        })
+        .add(t, 'seconds');
+    }
+
+    const momentTime = getTime(time)
+    return typeof compareTime !== 'undefined' ? momentTime.from(getTime(compareTime)) : momentTime.fromNow();
   },
 
   truncate(value, length = 12) {
