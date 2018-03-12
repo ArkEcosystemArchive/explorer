@@ -40,6 +40,7 @@ export default {
     this.$store.dispatch('network/setRewardOffset', network.rewardOffset)
     this.$store.dispatch('network/setCurrencies', network.currencies)
     this.$store.dispatch('network/setKnownWallets', network.knownWallets)
+    this.$store.dispatch('network/setConfig', network.config)
 
     if (network.defaults.currency) {
       this.$store.dispatch(
