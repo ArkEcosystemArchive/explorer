@@ -108,5 +108,9 @@
   "Top Accounts": "Beste Accounts",
   "Transaction ID": "Transactie ID",
   "Vendor field": "Verkoper veld",
-  "Wallet Summary": "Wallet Samenvatting"
+  "Wallet Summary": "Wallet Samenvatting",
+
+  "2nd Signature Registration": "Registratie 2e Handtekening",
+  "Delegate Registration": "Registratie Afgevaardigde",
+  "Vote": "Stem"
 }

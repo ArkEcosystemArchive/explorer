@@ -3,9 +3,9 @@
     <router-link :to="{ name: 'wallet', params: { address: walletAddress } }" class="hidden md:inline-block">
       <span v-if="isKnown">{{ knownWallets[address] }}</span>
       <span v-else-if="delegate">{{ delegate.username }}</span>
-      <span v-else-if="type === 1">2nd Signature Registration</span>
-      <span v-else-if="type === 2">Delegate Registration</span>
-      <span v-else-if="type === 3">Vote</span>
+      <span v-else-if="type === 1">{{ $t("2nd Signature Registration") }}</span>
+      <span v-else-if="type === 2">{{ $t("Delegate Registration") }}</span>
+      <span v-else-if="type === 3">{{ $t("Vote") }}</span>
       <span v-else-if="hasDefaultSlot"><slot></slot></span>
       <span v-else-if="address">{{ truncate(address) }}</span>
     </router-link>
@@ -13,9 +13,9 @@
     <router-link :to="{ name: 'wallet', params: { address: walletAddress } }" class="md:hidden">
       <span v-if="isKnown">{{ knownWallets[address] }}</span>
       <span v-else-if="delegate">{{ delegate.username }}</span>
-      <span v-else-if="type === 1">2nd Signature Registration</span>
-      <span v-else-if="type === 2">Delegate Registration</span>
-      <span v-else-if="type === 3">Vote</span>
+      <span v-else-if="type === 1">{{ $t("2nd Signature Registration") }}</span>
+      <span v-else-if="type === 2">{{ $t("Delegate Registration") }}</span>
+      <span v-else-if="type === 3">{{ $t("Vote") }}</span>
       <span v-else-if="address">{{ truncate(address) }}</span>
     </router-link>
   </span>
