@@ -108,5 +108,9 @@
   "Top Accounts": "Top Accounts",
   "Transaction ID": "Transaction ID",
   "Vendor field": "Vendor field",
-  "Wallet Summary": "Wallet Summary"
+  "Wallet Summary": "Wallet Summary",
+
+  "2nd Signature Registration": "2nd Signature Registration",
+  "Delegate Registration": "Delegate Registration",
+  "Vote": "Vote"
 }
