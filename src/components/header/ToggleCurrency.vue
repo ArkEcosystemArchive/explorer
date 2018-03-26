@@ -32,12 +32,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.search-input::placeholder {
-  color: var(--color-theme-text-placeholder);
-}
-.search-icon:hover {
-  box-shadow: 0 0 13px 2px rgba(197, 197, 213, 0.24);
-}
-</style>
