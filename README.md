@@ -115,7 +115,7 @@ If you discover a security vulnerability within this package, please send an e-m
 * If you find any bugs, submit an [issue](../../issues) or open a [pull-request](../../pulls), helping us catch and fix them.
 * Engage with other users and developers on [ARK Slack](https://ark.io/slack/).
 * Join our [gitter](https://gitter.im/ark-developers/Lobby).
-* [Contribute bounties](./CONTRIBUTING.md).
+* [Contribute bounties](https://github.com/ArkEcosystem/ARK-Bounty-Program).
 
 ## 9. Credits
 
