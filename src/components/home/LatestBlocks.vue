@@ -8,7 +8,7 @@
         <table-blocks-mobile :blocks="blocks"></table-blocks-mobile>
       </div>
       <div class="mx-10 mt-10 flex flex-wrap">
-        <router-link :to="{ name: 'blocks', params: { page: 1 } }" tag="button" class="show-more-button">
+        <router-link :to="{ name: 'blocks', params: { page: 2 } }" tag="button" class="show-more-button">
           {{ $t("Show more") }}
         </router-link>
       </div>
