@@ -8,7 +8,7 @@
           <table-transactions-mobile :transactions="transactions"></table-transactions-mobile>
       </div>
       <div class="mx-10 mt-10 flex flex-wrap">
-        <router-link :to="{ name: 'transactions', params: { page: 1 } }" tag="button" class="show-more-button">
+        <router-link :to="{ name: 'transactions', params: { page: 2 } }" tag="button" class="show-more-button">
           {{ $t("Show more") }}
         </router-link>
       </div>
