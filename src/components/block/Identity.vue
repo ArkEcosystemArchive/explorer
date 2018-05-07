@@ -6,12 +6,12 @@
       <div class="text-xl text-white semibold">{{ block.id }}</div>
     </div>
     <div class="hidden sm:block">
-      <button @click="prevHandler" class="hover-button block-pager-button mr-5">
+      <button @click="prevHandler" class="block-pager-button mr-5">
         <img src="@/assets/images/icons/caret-left.svg" />
-        <span class="ml-2 hidden">{{ $t("Previous block") }}</span>
+        <span class="ml-2">{{ $t("Previous block") }}</span>
       </button>
-      <button @click="nextHandler" class="hover-button block-pager-button">
-        <span class="mr-2 hidden">{{ $t("Next block") }}</span>
+      <button @click="nextHandler" class="block-pager-button">
+        <span class="mr-2">{{ $t("Next block") }}</span>
         <img src="@/assets/images/icons/caret-right.svg" />
       </button>
     </div>
