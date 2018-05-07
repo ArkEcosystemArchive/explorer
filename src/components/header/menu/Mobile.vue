@@ -7,7 +7,7 @@
       <router-link :to="{ name: 'top-wallets', params: { page: 1 } }" tag="div" class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border">{{ $t("Top Wallets") }}</router-link>
     </li>
     <li class="flex justify-center hover:bg-grey-light">
-      <router-link :to="{ name: 'delegate-monitor' }" tag="div" class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border">{{ $t("Delegate Monitor") }}</router-link>
+      <router-link :to="{ name: 'delegate-monitor' }" tag="div" class="cursor-pointer py-5 w-64 flex-none">{{ $t("Delegate Monitor") }}</router-link>
     </li>
     <!-- <li class="flex justify-center hover:bg-grey-light">
       <router-link :to="{ name: 'statistics' }" tag="div" class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border">Statistics</router-link>
