@@ -4,7 +4,7 @@
     <span class="sm:hidden">#</span>
   </th> -->
   <table-component :data="delegates" sort-by="rate" sort-order="asc" :show-filter="false" :show-caption="false" table-class="w-full text-xs md:text-base">
-    <table-column show="rate" :label="$t('Rank')" header-class="p-4 pl-5 sm:pl-10 text-left w-24 sm:w-32" cell-class="p-3 pl-5 sm:pl-10 text-left border-none">
+    <table-column show="rate" :label="$t('Rank')" header-class="p-4 pl-5 sm:pl-10 text-left w-32" cell-class="p-3 pl-5 sm:pl-10 text-left border-none">
       <template slot-scope="row">
         {{ row.rate }}
       </template>
