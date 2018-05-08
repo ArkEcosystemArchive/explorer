@@ -28,6 +28,25 @@
         </div>
       </div>
 
+      <div
+        v-if="view === 'public'"
+        class="flex-none border-r border-grey-dark px-9">
+        <div class="text-grey mb-2">{{ $t("Balance (token)", {token: networkToken()}) }}</div>
+        <div class="text-lg text-white semibold">{{ readableCrypto(wallet.balance, false) }}</div>
+      </div>
+
+      <div
+        v-if="view === 'public'"
+        class="flex-none border-r border-grey-dark px-9">
+        <div class="text-grey mb-2">{{ $t("Transactions") }}</div>
+        <div class="text-lg text-white semibold">
+          <span class="text-green">{{ receivedCount }}</span>
+          <img class="mr-4" src="@/assets/images/icons/arrow-down.svg" />
+          <span class="text-red">{{ sendCount }}</span>
+          <img src="@/assets/images/icons/arrow-up.svg" />
+        </div>
+      </div>
+
       <div class="flex-none px-8">
         <button
           @click="view = 'public'"
@@ -52,25 +71,6 @@
             <path fill-rule="evenodd"  fill="currentColor" d="M5.833,10.537 L4.850,9.544 L8.229,6.124 C9.457,6.794 11.013,6.618 12.051,5.570 C13.315,4.289 13.315,2.213 12.051,0.934 C10.786,-0.346 8.734,-0.346 7.469,0.934 C6.432,1.982 6.260,3.559 6.921,4.800 L0.269,11.532 C-0.091,11.896 -0.091,12.493 0.269,12.857 C0.629,13.221 1.218,13.221 1.578,12.857 L2.559,13.850 C2.740,14.033 3.034,14.033 3.214,13.850 L3.869,13.188 C4.050,13.005 4.050,12.709 3.869,12.526 L2.887,11.532 L3.542,10.868 L4.524,11.863 C4.704,12.046 4.997,12.046 5.178,11.863 L5.833,11.201 C6.013,11.016 6.013,10.722 5.833,10.537 ZM8.777,2.259 C9.320,1.710 10.200,1.710 10.742,2.259 C11.283,2.806 11.283,3.698 10.742,4.245 C10.200,4.793 9.320,4.793 8.777,4.245 C8.237,3.698 8.237,2.806 8.777,2.259 Z"/>
           </svg>
         </button>
-      </div>
-
-      <div
-        v-if="view === 'public'"
-        class="flex-none border-l border-grey-dark px-9">
-        <div class="text-grey mb-2">{{ $t("Balance (token)", {token: networkToken()}) }}</div>
-        <div class="text-lg text-white semibold">{{ readableCrypto(wallet.balance, false) }}</div>
-      </div>
-
-      <div
-        v-if="view === 'public'"
-        class="flex-none border-l border-grey-dark px-9">
-        <div class="text-grey mb-2">{{ $t("Transactions") }}</div>
-        <div class="text-lg text-white semibold">
-          <span class="text-green">{{ receivedCount }}</span>
-          <img class="mr-4" src="@/assets/images/icons/arrow-down.svg" />
-          <span class="text-red">{{ sendCount }}</span>
-          <img src="@/assets/images/icons/arrow-up.svg" />
-        </div>
       </div>
     </div>
 
