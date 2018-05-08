@@ -43,13 +43,13 @@
 
     <table-column show="productivity" :label="$t('Productivity')" header-class="right-header-cell hidden md:table-cell" cell-class="py-3 px-4 text-right border-none hidden md:table-cell">
       <template slot-scope="row">
-        {{ row.productivity }}%
+        {{ percentageString(row.productivity) }}
       </template>
     </table-column>
 
     <table-column show="approval" :label="$t('Approval')" header-class="right-header-cell pr-5 md:pr-10 hidden md:table-cell" cell-class="py-3 px-4 md:pr-10 text-right border-none hidden md:table-cell">
       <template slot-scope="row">
-        {{ row.approval }}%
+        {{ percentageString(row.approval) }}
       </template>
     </table-column>
   </table-component>

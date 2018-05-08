@@ -7,7 +7,7 @@
 
     <div class="list-row-border-b">
       <div>{{ $t("Uptime") }}</div>
-      <div>{{ delegate.productivity }}%</div>
+      <div>{{ percentageString(delegate.productivity) }}</div>
     </div>
 
     <div class="list-row-border-b">
@@ -17,7 +17,7 @@
 
     <div class="list-row-border-b">
       <div>{{ $t("Approval") }}</div>
-      <div>{{ delegate.approval }}%</div>
+      <div>{{ percentageString(delegate.approval) }}</div>
     </div>
 
     <div class="list-row-border-b">
