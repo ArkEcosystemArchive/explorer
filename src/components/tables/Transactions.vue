@@ -33,7 +33,7 @@
 
       <table-column show="amount" :label="$t('Amount (token)', {token: networkToken()})" header-class="right-header-end-cell md:pr-4" cell-class="right-end-cell md:pr-4">
         <template slot-scope="row">
-          <transaction-amount :transaction="row"></transaction-amount>
+          <transaction-amount :transaction="row" :type="row.type"></transaction-amount>
         </template>
       </table-column>
 

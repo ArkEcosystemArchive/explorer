@@ -28,7 +28,7 @@
       </template>
     </table-column>
 
-    <table-column :sortable="false" show="forgingStatus" :label="$t('Status')" header-class="base-header-cell pr-5 sm:pr-10 md:pr-4 w-24 md:w-auto" cell-class="py-3 px-4 pr-5 sm:pr-10 md:pr-4 text-center border-none">
+    <table-column sort-by="status" show="forgingStatus" :label="$t('Status')" header-class="base-header-cell pr-5 sm:pr-10 md:pr-4 w-24 md:w-auto" cell-class="py-3 px-4 pr-5 sm:pr-10 md:pr-4 text-center border-none">
       <template slot-scope="row">
         <svg
          xmlns="http://www.w3.org/2000/svg"
