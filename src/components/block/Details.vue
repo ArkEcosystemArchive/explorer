@@ -1,6 +1,6 @@
 <template>
   <section class="page-section py-8 mb-5">
-    <div class="px-10 py-4">
+    <div class="px-5 sm:px-10 py-4">
       <div class="list-row-border-b">
         <div>{{ $t("Transactions") }}</div>
         <div>{{ block.numberOfTransactions }}</div>
