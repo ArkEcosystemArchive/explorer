@@ -120,6 +120,15 @@ const methods = {
   capitalize(value) {
     return value.charAt(0).toUpperCase() + value.slice(1)
   },
+
+  percentageString(value, decimals = 2) {
+    value = value.toLocaleString(undefined, {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    })
+
+    return value + '%'
+  },
 }
 
 Vue.mixin({
