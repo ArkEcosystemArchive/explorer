@@ -1,6 +1,6 @@
 <template>
-  <span>
-    {{ readableCurrency(amount) }} <span>{{ currencySymbol }}</span>
+  <span class="whitespace-no-wrap">
+    {{ readableCurrency(amount) }} {{ currencySymbol }}
   </span>
 </template>
 
