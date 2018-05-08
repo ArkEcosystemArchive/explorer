@@ -127,6 +127,10 @@ hr {
   height: 1px;
 }
 
+.margin-t-2 {
+  margin-top: 2px;
+}
+
 /** Tables */
 
 tbody tr:nth-child(even) {
@@ -331,7 +335,7 @@ thead th {
 /** Menu */
 
 .menu-button {
-  @apply .flex .items-center .p-4 .border-b-2 .border-transparent .text-theme-text-secondary
+  @apply .flex .items-center .p-4 .border-b-2 .border-transparent .margin-t-2 .text-theme-text-secondary
 }
 
 .menu-button:hover {
