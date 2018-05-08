@@ -1,21 +1,17 @@
 <template>
-  <section class="mb-5 bg-theme-feature-background xl:rounded-lg flex flex-col sm:flex-row items-center px-10 py-8">
-    <div class="flex items-center flex-auto w-full sm:w-auto mb-5 sm:mb-0">
-      <img class="mr-6" src="@/assets/images/icons/block.svg" />
-      <div>
-        <div class="text-grey mb-2">{{ $t("Block ID") }}</div>
-        <div class="text-xl text-white semibold">{{ block.id }}</div>
-      </div>
+  <section class="mb-5 bg-theme-feature-background xl:rounded-lg flex items-center px-10 py-8">
+    <img class="mr-6" src="@/assets/images/icons/block.svg" />
+    <div class="flex-auto">
+      <div class="text-grey mb-2">{{ $t("Block ID") }}</div>
+      <div class="text-xl text-white semibold">{{ block.id }}</div>
     </div>
-    <div class="flex w-full sm:block sm:w-auto justify-between">
-      <button @click="prevHandler" class="hover-button block-pager-button mr-5">
+    <div class="hidden sm:block">
+      <button @click="prevHandler" class="block-pager-button mr-5">
         <img src="@/assets/images/icons/caret-left.svg" />
-        <span class="ml-2 hidden">{{ $t("Previous block") }}</span>
-        <span class="ml-2 sm:hidden">{{ $t("Previous") }}</span>
+        <span class="ml-2">{{ $t("Previous block") }}</span>
       </button>
-      <button @click="nextHandler" class="hover-button block-pager-button">
-        <span class="mr-2 hidden">{{ $t("Next block") }}</span>
-        <span class="mr-2 sm:hidden">{{ $t("Next") }}</span>
+      <button @click="nextHandler" class="block-pager-button">
+        <span class="mr-2">{{ $t("Next block") }}</span>
         <img src="@/assets/images/icons/caret-right.svg" />
       </button>
     </div>
