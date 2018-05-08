@@ -231,6 +231,10 @@ thead th {
   @apply .p-4 .border-none
 }
 
+.base-start-cell {
+  @apply .base-cell .pl-10
+}
+
 .left-cell {
   @apply .base-cell .text-left
 }
@@ -251,6 +255,10 @@ thead th {
 
 .base-header-cell {
   @apply .p-4
+}
+
+.base-header-start-cell {
+  @apply .base-header-cell .pl-10
 }
 
 .left-header-cell {
