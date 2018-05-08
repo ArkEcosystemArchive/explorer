@@ -25,7 +25,7 @@
         <div class="list-row-border-b">
           <div>{{ $t("Amount") }}</div>
           <div>
-            <transaction-amount :transaction="transaction"></transaction-amount>
+            <transaction-amount :transaction="transaction" :type="transaction.type"></transaction-amount>
           </div>
         </div>
 
