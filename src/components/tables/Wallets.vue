@@ -1,7 +1,7 @@
 <template>
   <loader :data="wallets">
     <table-component :data="wallets" :show-filter="false" :show-caption="false" table-class="w-full">
-      <table-column show="vueTableComponentInternalRowId" :label="$t('Rank')" header-class="base-header-start-cell text-center w-32" cell-class="base-start-cell text-center">
+      <table-column show="vueTableComponentInternalRowId" :label="$t('Rank')" header-class="left-header-start-cell w-32" cell-class="left-start-cell">
         <template slot-scope="row">
           {{ getRank(row.vueTableComponentInternalRowId) }}
         </template>
