@@ -42,7 +42,9 @@ export default {
 </script>
 
 <style>
-.hover-button:hover span:first-of-type {
-  display: inline-block;
+@media (min-width: 576px) {
+  .hover-button:hover span:first-of-type {
+    display: inline-block;
+  }
 }
 </style>
