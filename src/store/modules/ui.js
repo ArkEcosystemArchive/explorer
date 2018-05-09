@@ -45,6 +45,11 @@ export default {
     },
     setHeaderType: ({ commit }, value) => {
       commit({
+        type: types.SET_UI_MENU_VISIBLE,
+        value: null,
+      })
+
+      commit({
         type: types.SET_UI_HEADER_TYPE,
         value,
       })
