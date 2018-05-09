@@ -161,7 +161,7 @@ export default {
         }
 
         let maxY = Math.max(...this.chartData.datasets[0].data);
-        this.options.scales.yAxes[0].ticks.max = maxY + 0.01;
+        this.options.scales.yAxes[0].ticks.suggestedMax = maxY + 0.01;
       })
     },
 
