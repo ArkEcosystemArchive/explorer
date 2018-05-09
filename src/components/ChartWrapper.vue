@@ -159,6 +159,9 @@ export default {
             data: response.datasets
           }],
         }
+
+        let maxY = Math.max(...this.chartData.datasets[0].data);
+        this.options.scales.yAxes[0].ticks.max = maxY + 0.01;
       })
     },
 
