@@ -27,7 +27,9 @@
 
       <table-column show="amount" :label="$t('Amount (token)', {token: networkToken()})" header-class="right-header-cell" cell-class="right-cell">
         <template slot-scope="row">
-          <transaction-amount :transaction="row" :type="row.type"></transaction-amount>
+          <span class="whitespace-no-wrap">
+            <transaction-amount :transaction="row" :type="row.type"></transaction-amount>
+          </span>
         </template>
       </table-column>
 
