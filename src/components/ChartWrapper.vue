@@ -105,7 +105,7 @@ export default {
             const name = store.getters['currency/name']
             const symbol = store.getters['currency/symbol']
 
-            return `${symbol} ${tooltipItem[0].yLabel} ${name}`
+            return `${symbol} ${Number(tooltipItem[0].yLabel).toFixed(2)} ${name}`
           },
           label: tooltipItem => ''
           // label: tooltipItem => `BTC ${tooltipItem.yLabel}`
