@@ -3,7 +3,7 @@
     <li v-for="(symbol, currency) in currencies"
             @click="setCurrency(currency, symbol)"
             :key="currency"
-            class="inline-flex hover:bg-grey-light">
+            :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'inline-flex justify-center']">
       <a href="#" class="cursor-pointer py-3 w-32 flex-none">{{ currency }}</a>
     </li>
   </ul>
@@ -15,6 +15,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
+    ...mapGetters('ui', ['nightMode']),
     ...mapGetters('currency', { currencyName: 'name' }),
     ...mapGetters('network', ['currencies'])
   },
