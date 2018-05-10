@@ -25,11 +25,14 @@
   "knownWallets": {
     "AFrPtEmzu6wdVpa2CnRDEKGQQMWgq8nE9V": "Binance",
     "AJbmGnDAx9y91MQCDApyaqZhn6fBvYX9iJ": "Cryptopia",
+    "AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs": "ARK Bounty",
     "ALgvTAoz5Vi9easHqBK6aEMKatHb4beCXm": "ARK Shield",
     "AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv": "ARK Team",
     "AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK": "Bittrex",
     "AeUyEH2UGpYrwHAupBh7syFhWYSBNFAkap": "OKEx",
-    "AN4YrhvXUCLwL4wtts1FuWupbitKkwo91G": "Upbit"
+    "AN4YrhvXUCLwL4wtts1FuWupbitKkwo91G": "Upbit",
+    "AcVHEfEmFJkgoyuNczpgyxEA3MZ747DRAu": "Livecoin",
+    "AWkBFnqvCF4jhqPSdE2HBPJiwaf67tgfGR": "ACF"
   },
   "defaults": {
     "currency": {
