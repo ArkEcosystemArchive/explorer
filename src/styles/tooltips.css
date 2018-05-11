@@ -103,3 +103,63 @@
   opacity: 1;
   transition: opacity 0.15s;
 }
+
+/* Forging */
+.tooltip.tooltip-bg-0 .tooltip-inner {
+  background-color: #46b02e;
+  color: white;
+}
+
+.tooltip.tooltip-bg-0 .tooltip-arrow {
+  border-color: #46b02e;
+}
+
+/* Missing */
+.tooltip.tooltip-bg-1 .tooltip-inner {
+  background-color: #f6993f;
+  color: white;
+}
+
+.tooltip.tooltip-bg-1 .tooltip-arrow {
+  border-color: #f6993f;
+}
+
+/* Not Forging */
+.tooltip.tooltip-bg-2 .tooltip-inner {
+  background-color: #ef192d;
+  color: white;
+}
+
+.tooltip.tooltip-bg-2 .tooltip-arrow {
+  border-color: #ef192d;
+}
+
+/* Awaiting Slot */
+.tooltip.tooltip-bg-3 .tooltip-inner {
+  background-color: #838a9b;
+  color: white;
+}
+
+.tooltip.tooltip-bg-3 .tooltip-arrow {
+  border-color: #838a9b;
+}
+
+/* Awaiting Slot */
+.tooltip.tooltip-bg-4 .tooltip-inner {
+  background-color: #838a9b;
+  color: white;
+}
+
+.tooltip.tooltip-bg-4 .tooltip-arrow {
+  border-color: #838a9b;
+}
+
+/* Not Forging */
+.tooltip.tooltip-bg-5 .tooltip-inner {
+  background-color: #ef192d;
+  color: white;
+}
+
+.tooltip.tooltip-bg-5 .tooltip-arrow {
+  border-color: #ef192d;
+}
