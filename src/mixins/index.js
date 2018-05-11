@@ -122,12 +122,16 @@ const methods = {
   },
 
   percentageString(value, decimals = 2) {
-    value = value.toLocaleString(undefined, {
-      minimumFractionDigits: decimals,
-      maximumFractionDigits: decimals,
-    })
+    if (typeof value != 'undefined') {
+      value = value.toLocaleString(undefined, {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+      })
 
-    return value + '%'
+      return value + '%'
+    }
+
+    return "-"
   },
 }
 
