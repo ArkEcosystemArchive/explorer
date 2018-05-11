@@ -30,6 +30,7 @@ export default {
 
   computed: {
     ...mapGetters('ui', ['nightMode']),
+    ...mapGetters('network', ['knownWallets'])
   },
 
   mounted() {
@@ -57,11 +58,26 @@ export default {
       SearchService.findByTransactionId(this.query).then(response =>
         this.changePage('transaction', { id: response.transaction.id })
       ).catch(e => console.log(e.message || e.data.error))
+
+      const address = this.findByNameInKnownWallets(this.query)
+      if (address) {
+        this.changePage('wallet', { address: address })
+      }
     },
 
     changePage(name, params) {
       this.$router.push({ name, params })
       this.$store.dispatch('ui/setHeaderType', null)
+    },
+
+    findByNameInKnownWallets(name) {
+      for (const address in this.knownWallets) {
+        if (this.knownWallets.hasOwnProperty(address)) {
+          if (this.query.toLowerCase() === this.knownWallets[address].toLowerCase()) {
+            return address
+          }
+        }
+      }
     },
   },
 }
