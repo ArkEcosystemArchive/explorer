@@ -1,5 +1,5 @@
 <template>
-  <button class="flex-none" @click="copy" v-tooltip="copying ? $t('Copied!') : $t('Copy to Clipboard')">
+  <button class="flex-none" @click="copy" v-tooltip="{ show: isMobileCopying, content: copying ? $t('Copied!') : $t('Copy to Clipboard'), trigger:'hover'}">
     <img :class="{
       'block': !copying, 'block animated wobble': copying
     }" src="@/assets/images/icons/copy.svg" ref="copyImage" />
@@ -15,7 +15,10 @@ export default {
     },
   },
 
-  data: () => ({ copying: false }),
+  data: () => ({ 
+    copying: false,
+    isMobileCopying: false
+  }),
 
   methods: {
     copy() {
@@ -31,6 +34,11 @@ export default {
         this.copying = true
 
         setTimeout(() => (this.copying = false), 500)
+
+        if (window.innerWidth < 768) {
+          this.isMobileCopying = true
+          setTimeout(() => (this.isMobileCopying = false), 400) // If set to 500, it will briefly show 'Copy to clipboard' before closing tooltip
+        }
 
         document.execCommand('copy')
       } catch (err) {
