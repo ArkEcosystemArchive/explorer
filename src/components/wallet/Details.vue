@@ -12,8 +12,10 @@
         v-if="view === 'public'"
         class="pr-8 flex-auto min-w-0">
         <div class="text-grey mb-2">{{ $t("Address") }}</div>
-        <div class="text-lg text-white semibold truncate">
-          <span class="mr-2">{{ wallet.address }}</span>
+        <div class="flex">
+          <div class="text-lg text-white semibold truncate">
+            <span class="mr-2">{{ wallet.address }}</span>
+          </div>
           <clipboard v-if="wallet.address" :value="wallet.address"></clipboard>
         </div>
       </div>
@@ -22,8 +24,10 @@
         v-if="view === 'private' && wallet.publicKey"
         class="pr-8 flex-auto min-w-0">
         <div class="text-grey mb-2">{{ $t("Public Key") }}</div>
-        <div class="text-lg text-white semibold truncate mr-2">
-          <span class="mr-2">{{ wallet.publicKey }}</span>
+        <div class="flex">
+          <div class="text-lg text-white semibold truncate mr-2">
+            <span class="mr-2">{{ wallet.publicKey }}</span>
+          </div>
           <clipboard v-if="wallet.publicKey" :value="wallet.publicKey"></clipboard>
         </div>
       </div>
