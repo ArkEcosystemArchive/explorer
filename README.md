@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://i.imgur.com/JpkIhYH.png" />
+    <img src="/ARKExplorer.png" />
 </p>
 
 [![Build Status](https://img.shields.io/travis/ArkEcosystem/ark-explorer/master.svg?style=flat)](https://travis-ci.org/ArkEcosystem/ark-explorer)
