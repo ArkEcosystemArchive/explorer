@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full px-10 hidden md:flex">
-    <button @click="$store.dispatch('ui/setHeaderType', null)" class="mr-4">
+  <div class="w-full px-10 hidden md:flex items-center">
+    <button @click="$store.dispatch('ui/setHeaderType', null)" style="margin-right: 0.825rem">
       <img src="@/assets/images/icons/cross.svg" />
     </button>
 
