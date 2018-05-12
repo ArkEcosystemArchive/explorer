@@ -7,7 +7,7 @@
       <img class="logo max-w-25px md:max-w-38px" src="@/assets/images/ark-logo.png" />
     </router-link>
 
-    <div class="w-full relative hidden md:flex">
+    <div class="w-full relative hidden xl:flex">
       <header-search v-if="headerType === 'search'"></header-search>
 
       <header-desktop-currencies v-else-if="headerType === 'currencies'"></header-desktop-currencies>
@@ -16,7 +16,7 @@
 
       <header-desktop-menu v-if="menuVisible"></header-desktop-menu>
     </div>
-    <div class="w-full relative flex md:hidden">
+    <div class="w-full relative flex xl:hidden">
       <header-search v-if="headerType === 'search'"></header-search>
 
       <header-default v-else></header-default>
