@@ -13,6 +13,7 @@
       class="search-input w-full flex-auto mr-2 py-4 pl-4 bg-transparent"
       :class="{ 'text-grey': nightMode }"
       v-model="query"
+      v-tooltip="{show: nothingFound, content: $t('Nothing matched your search'), trigger: 'manual', placement: 'bottom-start', classes: 'search-tip' }"
       @keyup.enter="search" />
 
     <div class="search-icon text-grey hover:text-blue p-3 md:p-4" @click="search">
@@ -26,7 +27,11 @@ import SearchService from '@/services/search'
 import { mapGetters } from 'vuex'
 
 export default {
-  data: () => ({ query: null }),
+  data: () => ({ 
+    query: null,
+    nothingFound: false,
+    searchCount: 0
+  }),
 
   computed: {
     ...mapGetters('ui', ['nightMode']),
@@ -39,29 +44,47 @@ export default {
 
   methods: {
     search() {
+      this.nothingFound = false
+      this.searchCount = 0
+
       SearchService.findByAddress(this.query).then(response =>
         this.changePage('wallet', { address: response.account.address })
-      ).catch(e => console.log(e.message || e.data.error))
+      ).catch(e => this.updateSearchCount(e))
 
       SearchService.findByUsername(this.query).then(response =>
         this.changePage('wallet', { address: response.delegate.address })
-      ).catch(e => console.log(e.message || e.data.error))
+      ).catch(e => this.updateSearchCount(e))
 
       SearchService.findByPublicKey(this.query).then(response =>
         this.changePage('wallet', { address: response.delegate.address })
-      ).catch(e => console.log(e.message || e.data.error))
+      ).catch(e => this.updateSearchCount(e))
 
       SearchService.findByBlockId(this.query).then(response =>
         this.changePage('block', { id: response.block.id })
-      ).catch(e => console.log(e.message || e.data.error))
+      ).catch(e => this.updateSearchCount(e))
 
       SearchService.findByTransactionId(this.query).then(response =>
         this.changePage('transaction', { id: response.transaction.id })
-      ).catch(e => console.log(e.message || e.data.error))
+      ).catch(e => this.updateSearchCount(e))
 
       const address = this.findByNameInKnownWallets(this.query)
       if (address) {
         this.changePage('wallet', { address: address })
+      } else {
+        this.updateSearchCount(null)
+      }
+    },
+
+    updateSearchCount(err) {
+      if (err !== null) {
+        console.log(err.message || err.data.error)
+      }
+
+      // Increment counter to keep track of whether we found anything
+      this.searchCount += 1
+      if (this.searchCount === 6) { // Should match total amount of callbacks
+        this.nothingFound = true
+        setTimeout(() => (this.nothingFound = false), 1500)
       }
     },
 
@@ -91,5 +114,13 @@ export default {
 }
 .search-icon:hover {
   box-shadow: 0 0 13px 2px rgba(197, 197, 213, 0.24);
+}
+.tooltip.search-tip .tooltip-inner {
+  background-color: #ef192d;
+  color: white;
+}
+
+.tooltip.search-tip .tooltip-arrow {
+  border-color: #ef192d;
 }
 </style>
