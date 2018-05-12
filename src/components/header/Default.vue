@@ -63,7 +63,6 @@ export default {
 
   computed: {
     ...mapGetters('network', { networkDefaults: 'defaults' }),
-
     ...mapGetters('ui', ['menuVisible', 'priceChart']),
 
     shouldDisplayCurrency() {

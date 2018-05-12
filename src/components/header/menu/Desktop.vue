@@ -26,11 +26,3 @@
     </a> -->
   </div>
 </template>
-
-<style>
-.menu-container {
-  transform: translateY(100%);
-  max-width: 480px;
-  width: 100%;
-}
-</style>

@@ -1,5 +1,5 @@
 <template>
-  <ul class="menu-container w-full text-center max-w-480px justify-center bg-table-row list-reset absolute pin-b pin-r py-5 block md:hidden">
+  <ul class="menu-container w-full text-center max-w-480px justify-center bg-table-row list-reset absolute pin-b pin-r py-5 block xl:hidden">
     <li v-for="(symbol, currency) in currencies"
             @click="setCurrency(currency, symbol)"
             :key="currency"
@@ -39,14 +39,6 @@ export default {
 </script>
 
 <style>
-  .search-input::placeholder {
-    color: var(--color-theme-text-placeholder);
-  }
-
-  .search-icon:hover {
-    box-shadow: 0 0 13px 2px rgba(197, 197, 213, 0.24);
-  }
-
   .menu-container {
     transform: translateY(100%);
   }
