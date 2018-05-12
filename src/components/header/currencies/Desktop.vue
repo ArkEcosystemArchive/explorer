@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full px-10 hidden md:flex">
-    <button @click="$store.dispatch('ui/setHeaderType', null)" class="mr-4">
+  <div class="w-full px-10 hidden md:flex items-center">
+    <button @click="$store.dispatch('ui/setHeaderType', null)" class="close-button">
       <img src="@/assets/images/icons/cross.svg" />
     </button>
 
@@ -38,12 +38,8 @@ export default {
 }
 </script>
 
-<style>
-  .search-input::placeholder {
-    color: var(--color-theme-text-placeholder);
-  }
-
-  .search-icon:hover {
-    box-shadow: 0 0 13px 2px rgba(197, 197, 213, 0.24);
+<style scoped>
+  .close-button {
+    margin-right: 0.825rem;
   }
 </style>
