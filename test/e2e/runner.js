@@ -4,12 +4,13 @@ process.env.NODE_ENV = 'testing'
 const webpack = require('webpack')
 const DevServer = require('webpack-dev-server')
 
-const webpackConfig = require('../../build/webpack.prod.conf')
+const webpackConfigPromise = require('../../build/webpack.prod.conf')()
 const devConfigPromise = require('../../build/webpack.dev.conf')
 
 let server
 
-devConfigPromise(null).then(devConfig => {
+Promise.all([devConfigPromise(null), webpackConfigPromise])
+.then(([devConfig, webpackConfig]) => {
   const devServerOptions = devConfig.devServer
   const compiler = webpack(webpackConfig)
   server = new DevServer(compiler, devServerOptions)

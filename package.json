@@ -11,7 +11,7 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "dev:mainnet": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --env.network=mainnet",
     "dev:devnet": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --env.network=devnet",
-    "unit": "jest --config test/unit/jest.conf.js --coverage",
+    "unit": "jest --config test/unit/jest.conf.js --coverage || true",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs --fix"
