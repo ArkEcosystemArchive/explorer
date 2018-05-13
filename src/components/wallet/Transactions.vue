@@ -28,10 +28,10 @@
           {{ $t("Received") }}
         </div>
       </nav>
-      <div class="hidden sm:block" v-if="transactions.length > 0">
+      <div class="hidden sm:block">
         <table-transactions-detail :transactions="transactions"></table-transactions-detail>
       </div>
-      <div class="sm:hidden" v-if="transactions.length > 0">
+      <div class="sm:hidden">
         <table-transactions-detail-mobile :transactions="transactions"></table-transactions-detail-mobile>
       </div>
       <div class="mx-10 mt-10 flex flex-wrap" v-if="transactions.length >= 25">
@@ -71,10 +71,12 @@ export default {
 
   methods: {
     getTransactions() {
-      TransactionService[`${this.type}ByAddress`](
-        this.wallet.address,
-        this.page
-      ).then(transactions => (this.transactions = transactions))
+      if (this.wallet.address !== undefined) {
+        TransactionService[`${this.type}ByAddress`](
+          this.wallet.address,
+          this.page
+        ).then(transactions => (this.transactions = transactions))
+      }
     },
   },
 }
