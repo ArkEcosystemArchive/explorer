@@ -28,10 +28,10 @@
           {{ $t("Received") }}
         </div>
       </nav>
-      <div class="hidden sm:block">
+      <div class="hidden sm:block" v-if="transactions.length > 0">
         <table-transactions-detail :transactions="transactions"></table-transactions-detail>
       </div>
-      <div class="sm:hidden">
+      <div class="sm:hidden" v-if="transactions.length > 0">
         <table-transactions-detail-mobile :transactions="transactions"></table-transactions-detail-mobile>
       </div>
       <div class="mx-10 mt-10 flex flex-wrap" v-if="transactions.length >= 25">
