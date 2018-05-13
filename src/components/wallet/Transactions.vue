@@ -71,10 +71,12 @@ export default {
 
   methods: {
     getTransactions() {
-      TransactionService[`${this.type}ByAddress`](
-        this.wallet.address,
-        this.page
-      ).then(transactions => (this.transactions = transactions))
+      if (this.wallet.address !== undefined) {
+        TransactionService[`${this.type}ByAddress`](
+          this.wallet.address,
+          this.page
+        ).then(transactions => (this.transactions = transactions))
+      }
     },
   },
 }
