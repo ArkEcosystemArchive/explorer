@@ -9,7 +9,7 @@
     <input
       type="search"
       ref="search"
-      placeholder="Find a block, transaction, address or delegate"
+      :placeholder="$t('Find a block, transaction, address or delegate')"
       class="search-input w-full flex-auto mr-2 py-4 pl-4 bg-transparent"
       :class="{ 'text-grey': nightMode }"
       v-model="query"
