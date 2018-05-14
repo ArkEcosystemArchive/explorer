@@ -4,7 +4,7 @@
       <img class="mr-6" src="@/assets/images/icons/block.svg" />
       <div>
         <div class="text-grey mb-2">{{ $t("Block ID") }}</div>
-        <div class="text-xl text-white semibold">{{ block.id }}</div>
+        <div class="text-xl text-white semibold">{{ block.id ? block.id : "&nbsp;" }}</div>
       </div>
     </div>
     <div class="flex w-full md:block md:w-auto justify-between">
