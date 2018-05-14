@@ -9,7 +9,7 @@
     <input
       type="search"
       ref="search"
-      placeholder="Find a block, transaction, address or delegate"
+      :placeholder="$t('Find a block, transaction, address or delegate')"
       class="search-input w-full flex-auto mr-2 py-4 pl-4 bg-transparent"
       :class="{ 'text-grey': nightMode }"
       v-model="query"
@@ -112,9 +112,12 @@ export default {
 .search-input::placeholder {
   color: var(--color-theme-text-placeholder);
 }
+
 .search-icon:hover {
   box-shadow: 0 0 13px 2px rgba(197, 197, 213, 0.24);
+  cursor: pointer;
 }
+
 .tooltip.search-tip .tooltip-inner {
   background-color: #ef192d;
   color: white;
