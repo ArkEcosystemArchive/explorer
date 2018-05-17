@@ -61,7 +61,7 @@ export default {
     changePage(page) {
       this.$router.push({
         name: 'wallet-voters',
-        params: { address: this.$route.params.address, page }
+        params: { address: this.$route.params.address, username: this.$route.params.username, page }
       })
     }
   }
