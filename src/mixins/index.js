@@ -106,10 +106,10 @@ const methods = {
       })
   },
 
-  readableCrypto(value, appendCurrency = true) {
+  readableCrypto(value, appendCurrency = true, decimals = 8) {
     if (typeof value != 'undefined') {
       value = (value /= Math.pow(10, 8)).toLocaleString(undefined, {
-        maximumFractionDigits: 8,
+        maximumFractionDigits: decimals,
       })
 
       return appendCurrency ? `${value} ${store.getters['network/symbol']}` : value
