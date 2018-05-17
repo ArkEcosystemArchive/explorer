@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto pt-5">
-    <content-header>{{ $t("Voters") }}</content-header>
+    <content-header>{{ $t("Voters") }} <span v-show="username">- {{ username }}</span></content-header>
     <section class="page-section py-10">
       <div class="hidden sm:block">
         <table-wallets :wallets="filteredWallets" :total="votes"></table-wallets>
@@ -39,6 +39,9 @@ export default {
     },
     votes() {
       return sumBy(this.wallets, 'balance')
+    },
+    username() {
+      return this.$route.params.username
     },
   },
 
