@@ -1,4 +1,4 @@
-import { shallow, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import sinon from 'sinon'
 import Footer from '@/components/Footer'
 import VueI18n from 'vue-i18n'
@@ -24,7 +24,7 @@ describe('Footer', () => {
       useFakeTimers: new Date(year, 1)
     })
 
-    const cmp = shallow(Footer, {
+    const cmp = shallowMount(Footer, {
       localVue,
       i18n
     })
