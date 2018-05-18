@@ -55,9 +55,10 @@ const methods = {
   },
 
   truncate(value, length = 12) {
+    const odd = length % 2;
     const truncationLength = Math.floor((length - 1) / 2);
     return (value.length > length)
-      ? `${value.slice(0, truncationLength)}...${value.slice(value.length - truncationLength)}`
+      ? `${value.slice(0, truncationLength - odd)}...${value.slice(value.length - truncationLength + 1)}`
       : value
   },
 
