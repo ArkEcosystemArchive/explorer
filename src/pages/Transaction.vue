@@ -58,7 +58,7 @@
         </div>
 
         <div class="list-row-border-b" v-if="transaction.vendorField">
-          <div>{{ $t("Vendor field") }}</div>
+          <div>{{ $t("Smartbridge") }}</div>
           <div>{{ transaction.vendorField }}</div>
         </div>
 
