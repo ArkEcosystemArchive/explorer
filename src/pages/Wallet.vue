@@ -46,6 +46,9 @@ export default {
   },
 
   beforeRouteEnter(to, from, next) {
+    console.log('beforeRouteEnter')
+    console.log(to.params.address)
+
     WalletService.find(to.params.address)
       .then(response => next(vm => vm.setWallet(response)))
       .catch(() => next({ name: '404' }))
