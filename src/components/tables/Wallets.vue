@@ -15,7 +15,7 @@
 
       <table-column show="balance" :label="$t('Balance')" header-class="right-header-cell" cell-class="right-cell">
         <template slot-scope="row">
-          {{ readableCrypto(row.balance) }}
+          {{ readableCrypto(row.balance,true,2) }}
         </template>
       </table-column>
 
