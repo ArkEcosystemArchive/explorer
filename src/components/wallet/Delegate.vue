@@ -59,7 +59,11 @@ export default {
     getDelegate(wallet) {
       DelegateService
         .find(wallet.publicKey)
-        .then(response => { this.delegate = response; this.$emit('username', response.username); })
+        .then(response => {
+          this.delegate = response;
+
+          this.$emit('username', response.username);
+        })
         .catch(e => console.log(e.message || e.data.error))
     }
   }
