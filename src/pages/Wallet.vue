@@ -6,9 +6,9 @@
 
     <section class="page-section mb-5" :class="{ 'py-8': isDelegate }" v-show="isDelegate || isVoting">
       <div class="px-5 sm:px-10" :class="{ 'py-4': !isDelegate }">
-        <delegate :wallet="wallet" v-show="isDelegate"></delegate>
+        <delegate :wallet="wallet" v-show="isDelegate" v-on:username="username = $event"></delegate>
         <vote :wallet="wallet" v-show="isVoting"></vote>
-        <voters :wallet="wallet" v-show="isDelegate"></voters>
+        <voters :wallet="wallet" :username="username" v-show="isDelegate"></voters>
       </div>
     </section>
 
@@ -37,6 +37,7 @@ export default {
     wallet: {},
     activeTab: 'all',
     isVoting: false,
+    username: ''
   }),
 
   computed: {
