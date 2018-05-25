@@ -101,80 +101,65 @@ class DelegateService {
   /**
    * @TODO - Remove this when Core 2.0 is released.
    */
-  activeDelegates() {
+  async activeDelegates() {
     const activeDelegates = store.getters['network/activeDelegates']
 
-    return NodeService.get('delegates', {
+    const delegateResponse = await NodeService.get('delegates', {
       params: {
         orderBy: 'rate:asc',
         limit: activeDelegates
       }
     })
-      // Last Block (from last 100 Blocks)
-      .then(response => {
-        return block.latest(100).then(blocks => {
-          return response.data.delegates.map(delegate => {
-            const lastBlock = blocks.find(
-              b => b.generatorPublicKey === delegate.publicKey
-            )
 
-            if (
-              lastBlock !== undefined &&
-                              lastBlock.hasOwnProperty('timestamp')
-            ) {
-              delegate.blocks = [lastBlock]
-              delegate.blocksAt = lastBlock.timestamp
-            }
+    // Last Block (from last 100 Blocks)
+    const blocks = await block.latest(100)
+    const delegates = delegateResponse.data.delegates.map(delegate => {
+      const lastBlock = blocks.find(b => b.generatorPublicKey === delegate.publicKey)
+      if (lastBlock !== undefined && lastBlock.hasOwnProperty('timestamp')) {
+          delegate.blocks = [lastBlock]
+          delegate.blocksAt = lastBlock.timestamp
+      }
+      return delegate
+    })
 
-            return delegate
-          })
-        })
-      })
-      // Last Block (from specific delegate)
-      .then(delegates => {
-        const requests = []
+    // Last Block (from specific delegate)
+    const requests = []
+    delegates.forEach((delegate) => requests.push(delegate.blocksAt ? delegate.blocks[0] : block.lastBlockByPublicKey(delegate.publicKey)))
+    const results = await Promise.all(requests)
+    delegates.map((result, index) => {
+      let lastBlock = results[index]
 
-        delegates.forEach((delegate) => requests.push(delegate.blocksAt ? delegate.blocks[0] : block.lastBlockByPublicKey(delegate.publicKey)))
+      result.blocks = [lastBlock]
+      result.blocksAt = lastBlock ? lastBlock.timestamp : false
 
-        return Promise.all(requests).then(results => {
-          return delegates.map((result, index) => {
-            let lastBlock = results[index]
+      return result
+    })
 
-            result.blocks = [lastBlock]
-            result.blocksAt = lastBlock ? lastBlock.timestamp : false
+    // Rounds
+    const nextForgers = await this.nextForgers()
+    delegates.map(delegate => {
+      const delegateIndex = nextForgers.findIndex(
+        d => d === delegate.publicKey
+      )
 
-            return result
-          })
-        })
-      })
-      // Rounds
-      .then(delegates => {
-        return this.nextForgers().then(nextForgers => {
-          return delegates.map(delegate => {
-            const delegateIndex = nextForgers.findIndex(
-              d => d === delegate.publicKey
-            )
+      delegate.forgingTime = delegateIndex * 8
+      delegate.isRoundDelegate = delegateIndex !== -1
 
-            delegate.forgingTime = delegateIndex * 8
-            delegate.isRoundDelegate = delegateIndex !== -1
+      return delegate
+    })
 
-            return delegate
-          })
-        })
-      })
-      // Forging Status
-      .then(delegates => {
-        return block.height(status).then(height => {
-          return delegates.map(delegate => {
-            delegate.forgingStatus = forging.status(
-              delegate,
-              height
-            )
+    // Forging Status
+    const height = await block.height(status)
+    delegates.map(delegate => {
+      delegate.forgingStatus = forging.status(
+        delegate,
+        height
+      )
 
-            return delegate
-          })
-        })
-      })
+      return delegate
+    })
+
+    return delegates
   }
 
   async forged() {
