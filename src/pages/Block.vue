@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5" v-if="block">
-    <content-header>{{ $t("Blocks") }}</content-header>
+    <content-header>{{ $t("Block") }}</content-header>
 
     <identity :block="block" :prev-handler="prevBlock" :next-handler="nextBlock"></identity>
 
@@ -19,7 +19,10 @@ import BlockService from '@/services/block'
 export default {
   components: {Identity, BlockDetails, Transactions},
 
-  data: () => ({ block: {} }),
+  data: () => ({
+    block: {},
+    timer: null
+  }),
 
   async beforeRouteEnter (to, from, next) {
     try {
@@ -38,7 +41,21 @@ export default {
     } catch(e) { next({ name: '404' }) }
   },
 
+  mounted() {
+    this.initialiseTimer()
+  },
+
   methods: {
+    initialiseTimer() {
+      this.timer = setInterval(this.updateBlock, 8 * 1000)
+    },
+
+    updateBlock() {
+      BlockService
+        .find(this.block.id)
+        .then(response => this.setBlock(response))
+    },
+
     setBlock (block) {
       this.block = block
     },
