@@ -42,8 +42,6 @@ const mockPaginatingTopWallets = {
 
 export default {
   get: (url, config) => new Promise(resolve => {
-    console.log(url)
-    console.log(config)
     if (config.params.address === 'AMockedFindAddress') {
       resolve(mockFindAddress)
     } else if (config.params.address === 'AMockedVoteAddress') {
