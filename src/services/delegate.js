@@ -122,10 +122,8 @@ class DelegateService {
               lastBlock !== undefined &&
                               lastBlock.hasOwnProperty('timestamp')
             ) {
-              if (delegate.username !== 'bioly') {
-                delegate.blocks = [lastBlock]
-                delegate.blocksAt = lastBlock.timestamp
-              }
+              delegate.blocks = [lastBlock]
+              delegate.blocksAt = lastBlock.timestamp
             }
 
             return delegate
