@@ -14,6 +14,7 @@ const PurgecssPlugin = require('purgecss-webpack-plugin')
 const glob = require('glob-all')
 const gitRevision = require('./utils/git-revision')()
 const argumentParser = require('./argument-parser')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 class TailwindExtractor {
   static extract(content) {
@@ -38,6 +39,7 @@ const createWebpackConfig = (baseUrl, network, networkConfig, routerMode) => {
       publicPath: baseUrl
     },
     plugins: [
+      new VueLoaderPlugin(),
       // http://vuejs.github.io/vue-loader/en/workflow/production.html
       new webpack.DefinePlugin({
         'process.env': {
@@ -160,6 +162,7 @@ module.exports = (env) => {
   const args = argumentParser(env)
 
   const webpackConfig = createWebpackConfig(args.baseUrl, args.network, args.networkConfig, args.routerMode)
+  webpackConfig.mode = 'production'
 
   if (config.build.productionGzip) {
     const CompressionWebpackPlugin = require('compression-webpack-plugin')
