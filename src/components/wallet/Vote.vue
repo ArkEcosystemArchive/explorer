@@ -25,10 +25,9 @@ export default {
   },
 
   methods: {
-    getVotes() {
-      WalletService
-        .vote(this.wallet.address)
-        .then(response => this.delegate = response)
+    async getVotes() {
+      const response = await WalletService.vote(this.wallet.address)
+      this.delegate = response
     }
   }
 }

@@ -1,56 +1,61 @@
 import NodeService from '@/services/node'
 
 class TransactionService {
-  latest(limit = 25) {
-    return NodeService.get('transactions', {
+  async latest(limit = 25) {
+    const response = await NodeService.get('transactions', {
       params: {
         orderBy: 'timestamp:desc',
         limit
       }
-    }).then(response => response.data.transactions)
+    })
+    return response.data.transactions
   }
 
-  find(id) {
-    return NodeService.get('transactions/get', {
+  async find(id) {
+    const response = await NodeService.get('transactions/get', {
       params: {
         id
       }
-    }).then(response => response.data.transaction)
+    })
+    return response.data.transaction
   }
 
-  findByBlock(id) {
-    return NodeService.get('transactions', {
+  async findByBlock(id) {
+    const response = await NodeService.get('transactions', {
       params: {
         blockId: id,
         limit: 25
       }
-    }).then(response => response.data.transactions)
+    })
+    return response.data.transactions
   }
 
-  latestRegistrations() {
-    return NodeService.get('transactions', {
+  async latestRegistrations() {
+    const response = await NodeService.get('transactions', {
       params: {
         orderBy: 'timestamp:desc',
         limit: 5,
         type: 2
       }
-    }).then(response => response.data.transactions)
+    })
+    return response.data.transactions
   }
 
-  latestVotes() {
-    return NodeService.get('transactions', {
+  async latestVotes() {
+    const response = await NodeService.get('transactions', {
       params: {
         orderBy: 'timestamp:desc',
         limit: 5,
         type: 3
       }
-    }).then(response => response.data.transactions)
+    })
+    return response.data.transactions
   }
 
-  allByAddress(address, page = 1, limit = 25) {
+  async allByAddress(address, page = 1, limit = 25) {
     const offset = page > 1 ? (page - 1) * limit : 0
 
-    return NodeService.get('transactions', {
+    const response = await NodeService.get('transactions', {
       params: {
         senderId: address,
         recipientId: address,
@@ -58,80 +63,87 @@ class TransactionService {
         offset,
         orderBy: 'timestamp:desc'
       }
-    }).then(response => response.data.transactions)
+    })
+    return response.data.transactions
   }
 
-  sentByAddress(senderId, page = 1, limit = 25) {
+  async sentByAddress(senderId, page = 1, limit = 25) {
     const offset = page > 1 ? (page - 1) * limit : 0
 
-    return NodeService.get('transactions', {
+    const response = await NodeService.get('transactions', {
       params: {
         senderId,
         limit,
         offset,
         orderBy: 'timestamp:desc'
       }
-    }).then(response => response.data.transactions)
+    })
+    return response.data.transactions
   }
 
-  receivedByAddress(recipientId, page = 1, limit = 25) {
+  async receivedByAddress(recipientId, page = 1, limit = 25) {
     const offset = page > 1 ? (page - 1) * limit : 0
 
-    return NodeService.get('transactions', {
+    const response = await NodeService.get('transactions', {
       params: {
         recipientId,
         limit,
         offset,
         orderBy: 'timestamp:desc'
       }
-    }).then(response => response.data.transactions)
+    })
+    return response.data.transactions
   }
 
-  sendByAddressCount(senderId) {
-    return NodeService.get('transactions', {
+  async sendByAddressCount(senderId) {
+    const response = await NodeService.get('transactions', {
       params: {
         senderId,
         limit: 1
       }
-    }).then(response => response.data.count)
+    })
+    return response.data.count
   }
 
-  receivedByAddressCount(recipientId) {
-    return NodeService.get('transactions', {
+  async receivedByAddressCount(recipientId) {
+    const response = await NodeService.get('transactions', {
       params: {
         recipientId,
         limit: 1
       }
-    }).then(response => response.data.count)
+    })
+    return response.data.count
   }
 
-  votes(senderId) {
-    return NodeService.get('transactions', {
+  async votes(senderId) {
+    const response = await NodeService.get('transactions', {
       params: {
         orderBy: 'timestamp:desc',
         limit: 25,
         type: 3,
         senderId
       }
-    }).then(response => response.data)
+    })
+    return response.data
   }
 
-  paginate(page, limit = 25) {
+  async paginate(page, limit = 25) {
     const offset = (page > 1) ? (page - 1) * limit : 0
 
-    return NodeService.get('transactions', {
+    const response = await NodeService.get('transactions', {
       params: {
         orderBy: 'timestamp:desc',
         limit,
         offset
       }
-    }).then(response => response.data.transactions)
+    })
+    return response.data.transactions
   }
 
-  paginateByAddress(address, page = 1, limit = 25) {
+  async paginateByAddress(address, page = 1, limit = 25) {
     const offset = (page > 1) ? (page - 1) * limit : 0
 
-    return NodeService.get('transactions', {
+    const response = await NodeService.get('transactions', {
       params: {
         senderId: address,
         recipientId: address,
@@ -139,7 +151,8 @@ class TransactionService {
         offset,
         orderBy: 'timestamp:desc'
       }
-    }).then(response => response.data.transactions)
+    })
+    return response.data.transactions
   }
 }
 

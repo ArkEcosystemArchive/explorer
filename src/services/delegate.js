@@ -5,222 +5,213 @@ import store from '@/store'
 import _ from 'lodash'
 
 class DelegateService {
-  all() {
+  async all() {
     const activeDelegates = store.getters['network/activeDelegates']
 
-    return NodeService.get('delegates', {
+    const response = await NodeService.get('delegates', {
       params: {
         limit: activeDelegates
       }
-    }).then(response => {
-      const requests = []
-
-      for (
-        let index = 0;
-        index < Math.ceil(response.data.totalCount / activeDelegates);
-        index++
-      ) {
-        requests.push(
-          NodeService.get('delegates', {
-            params: {
-              limit: activeDelegates,
-              offset: index * activeDelegates
-            }
-          })
-        )
-      }
-
-      return Promise.all(requests).then(results => {
-        return results
-          .map(result => {
-            return result.data.delegates
-          })
-          .reduce((a, b) => [...a, ...b])
-      })
     })
-  }
 
-  voters(publicKey) {
-    return NodeService.get('delegates/voters', {
-      params: {publicKey}
-    }).then(response => {
-      return _.orderBy(
-        response.data.accounts.map(account => {
-          account.balance = Number(account.balance)
+    const requests = []
 
-          return account
-        }),
-        'balance',
-        'desc'
+    for (
+      let index = 0;
+      index < Math.ceil(response.data.totalCount / activeDelegates);
+      index++
+    ) {
+      requests.push(
+        NodeService.get('delegates', {
+          params: {
+            limit: activeDelegates,
+            offset: index * activeDelegates
+          }
+        })
       )
-    })
-  }
+    }
 
-  findByUsername(username) {
-    return NodeService.get('delegates/get', {
-      params: {username}
-    }).then(response => response.data.delegate)
-  }
+    const results = await Promise.all(requests)
 
-  find(publicKey) {
-    return NodeService.get('delegates/get', {
-      params: {publicKey}
-    }).then(response => {
-      const delegate = response.data.delegate
-
-      if (!delegate) {
-        return false
-      }
-
-      return NodeService.get(
-        `delegates/forging/getForgedByAccount?generatorPublicKey=${
-          delegate.publicKey
-        }`
-      ).then(response => {
-        delegate.forged = Number(response.data.forged)
-
-        return delegate
+    return results
+      .map(result => {
+        return result.data.delegates
       })
-    })
+      .reduce((a, b) => [...a, ...b])
   }
 
-  standby() {
-    const activeDelegates = store.getters['network/activeDelegates']
+  async voters(publicKey) {
+    const response = await NodeService.get('delegates/voters', {
+      params: {publicKey}
+    })
+    
+    return _.orderBy(
+      response.data.accounts.map(account => {
+        account.balance = Number(account.balance)
 
-    return NodeService.get('delegates', {params: {offset: activeDelegates}}).then(
-      response => response.data.delegates
+        return account
+      }),
+      'balance',
+      'desc'
     )
   }
 
-  nextForgers() {
+  async findByUsername(username) {
+    const response = await NodeService.get('delegates/get', {
+      params: {username}
+    })
+    return response.data.delegate
+  }
+
+  async find(publicKey) {
+    const response = await NodeService.get('delegates/get', {
+      params: {publicKey}
+    })
+
+    const delegate = response.data.delegate
+
+    if (!delegate) {
+      return false
+    }
+
+    const forgeResponse = await NodeService.get(
+      `delegates/forging/getForgedByAccount?generatorPublicKey=${
+        delegate.publicKey
+      }`
+    )
+
+    delegate.forged = Number(forgeResponse.data.forged)
+
+    return delegate
+  }
+
+  async standby() {
     const activeDelegates = store.getters['network/activeDelegates']
 
-    return NodeService.get('delegates/getNextForgers', {
+    const response = await NodeService.get('delegates', {params: {offset: activeDelegates}})
+    return response.data.delegates
+  }
+
+  async nextForgers() {
+    const activeDelegates = store.getters['network/activeDelegates']
+
+    const response = await NodeService.get('delegates/getNextForgers', {
       params: {limit: activeDelegates}
-    }).then(response => response.data.delegates)
+    })
+    return response.data.delegates
   }
 
   /**
    * @TODO - Remove this when Core 2.0 is released.
    */
-  activeDelegates() {
+  async activeDelegates() {
     const activeDelegates = store.getters['network/activeDelegates']
 
-    return NodeService.get('delegates', {
+    const response = await NodeService.get('delegates', {
       params: {
         orderBy: 'rate:asc',
         limit: activeDelegates
       }
     })
-      // Last Block (from last 100 Blocks)
-      .then(response => {
-        return block.latest(100).then(blocks => {
-          return response.data.delegates.map(delegate => {
-            const lastBlock = blocks.find(
-              b => b.generatorPublicKey === delegate.publicKey
-            )
 
-            if (
-              lastBlock !== undefined &&
-                              lastBlock.hasOwnProperty('timestamp')
-            ) {
-              if (delegate.username !== 'bioly') {
-                delegate.blocks = [lastBlock]
-                delegate.blocksAt = lastBlock.timestamp
-              }
-            }
+    // Last Block (from last 100 Blocks)
+    const blocks = await block.latest(100)
 
-            return delegate
-          })
-        })
-      })
-      // Last Block (from specific delegate)
-      .then(delegates => {
-        const requests = []
+    const delegates = response.data.delegates.map(delegate => {
+      const lastBlock = blocks.find(
+        b => b.generatorPublicKey === delegate.publicKey
+      )
 
-        delegates.forEach((delegate) => requests.push(delegate.blocksAt ? delegate.blocks[0] : block.lastBlockByPublicKey(delegate.publicKey)))
+      if (lastBlock !== undefined && lastBlock.hasOwnProperty('timestamp')) {
+        if (delegate.username !== 'bioly') {
+          delegate.blocks = [lastBlock]
+          delegate.blocksAt = lastBlock.timestamp
+        }
+      }
 
-        return Promise.all(requests).then(results => {
-          return delegates.map((result, index) => {
-            let lastBlock = results[index]
+      return delegate
+    })
 
-            result.blocks = [lastBlock]
-            result.blocksAt = lastBlock ? lastBlock.timestamp : false
+    // Last Block (from specific delegate)
+    const requests = []
 
-            return result
-          })
-        })
-      })
-      // Rounds
-      .then(delegates => {
-        return this.nextForgers().then(nextForgers => {
-          return delegates.map(delegate => {
-            const delegateIndex = nextForgers.findIndex(
-              d => d === delegate.publicKey
-            )
+    delegates.forEach((delegate) => requests.push(delegate.blocksAt ? delegate.blocks[0] : block.lastBlockByPublicKey(delegate.publicKey)))
 
-            delegate.forgingTime = delegateIndex * 8
-            delegate.isRoundDelegate = delegateIndex !== -1
+    const results = await Promise.all(requests)
+    const delegatesLastBlock = delegates.map((result, index) => {
+      let lastBlock = results[index]
 
-            return delegate
-          })
-        })
-      })
-      // Forging Status
-      .then(delegates => {
-        return block.height(status).then(height => {
-          return delegates.map(delegate => {
-            delegate.forgingStatus = forging.status(
-              delegate,
-              height
-            )
+      result.blocks = [lastBlock]
+      result.blocksAt = lastBlock ? lastBlock.timestamp : false
 
-            return delegate
-          })
-        })
-      })
+      return result
+    })
+
+    // Rounds
+    const nextForgers = await this.nextForgers()
+    const delegatesRounds = delegatesLastBlock.map(delegate => {
+      const delegateIndex = nextForgers.findIndex(
+        d => d === delegate.publicKey
+      )
+
+      delegate.forgingTime = delegateIndex * 8
+      delegate.isRoundDelegate = delegateIndex !== -1
+
+      return delegate
+    })
+        
+    // Forging Status
+    const height = await block.height(status)
+    return delegatesRounds.map(delegate => {
+      delegate.forgingStatus = forging.status(
+        delegate,
+        height
+      )
+
+      return delegate
+    })
   }
 
-  forged() {
+  async forged() {
     const activeDelegates = store.getters['network/activeDelegates']
 
-    return NodeService.get('delegates', {
+    const response = await NodeService.get('delegates', {
       params: {
         orderBy: 'rate:asc',
         limit: activeDelegates
       }
-    }).then(response => {
-      const delegates = response.data.delegates
-      const requests = []
+    })
 
-      delegates.forEach(delegate => {
-        requests.push(
-          NodeService.get('delegates/forging/getForgedByAccount', {
-            params: {
-              generatorPublicKey: delegate.publicKey
-            }
-          })
-        )
-      })
+    const delegates = response.data.delegates
+    const requests = []
 
-      return Promise.all(requests).then(results => {
-        return results.map((result, index) => {
-          return {
-            delegate: delegates[index].publicKey,
-            forged: Number(result.data.forged)
+    delegates.forEach(delegate => {
+      requests.push(
+        NodeService.get('delegates/forging/getForgedByAccount', {
+          params: {
+            generatorPublicKey: delegate.publicKey
           }
         })
-      })
+      )
+    })
+
+    const results = await Promise.all(requests)
+    return results.map((result, index) => {
+      return {
+        delegate: delegates[index].publicKey,
+        forged: Number(result.data.forged)
+      }
     })
   }
 
-  activeDelegatesCount() {
-    return NodeService.get('delegates', {
+  async activeDelegatesCount() {
+    const response = await NodeService.get('delegates', {
       params: {
         orderBy: 'rate:asc',
         limit: 1
       }
-    }).then(response => response.data.totalCount)
+    })
+    return response.data.totalCount
   }
 }
 

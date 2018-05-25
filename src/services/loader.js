@@ -1,10 +1,9 @@
 import NodeService from '@/services/node'
 
 class LoaderService {
-  config() {
-    return NodeService
-      .get('loader/autoconfigure')
-      .then(response => response.data.network)
+  async config() {
+    const response = await NodeService.get('loader/autoconfigure')
+    return response.data.network
   }
 }
 

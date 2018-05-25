@@ -43,29 +43,34 @@ export default {
   },
 
   methods: {
-    search() {
+    async search() {
       this.nothingFound = false
       this.searchCount = 0
 
-      SearchService.findByAddress(this.query).then(response =>
-        this.changePage('wallet', { address: response.account.address })
-      ).catch(e => this.updateSearchCount(e))
+      try {
+        const responseAddress = await SearchService.findByAddress(this.query)
+        this.changePage('wallet', { address: responseAddress.account.address })
+      } catch(e) { this.updateSearchCount(e) }
 
-      SearchService.findByUsername(this.query).then(response =>
-        this.changePage('wallet', { address: response.delegate.address })
-      ).catch(e => this.updateSearchCount(e))
+      try {
+        const responseUsername = await SearchService.findByUsername(this.query)
+        this.changePage('wallet', { address: responseUsername.delegate.address })
+      } catch(e) { this.updateSearchCount(e) }
 
-      SearchService.findByPublicKey(this.query).then(response =>
-        this.changePage('wallet', { address: response.delegate.address })
-      ).catch(e => this.updateSearchCount(e))
+      try {
+        const responsePublicKey = await SearchService.findByPublicKey(this.query)
+        this.changePage('wallet', { address: responsePublicKey.delegate.address })
+      } catch(e) { this.updateSearchCount(e) }
 
-      SearchService.findByBlockId(this.query).then(response =>
-        this.changePage('block', { id: response.block.id })
-      ).catch(e => this.updateSearchCount(e))
+      try {
+        const responseBlock = await SearchService.findByBlockId(this.query)
+        this.changePage('block', { id: responseBlock.block.id })
+      } catch(e) { this.updateSearchCount(e) }
 
-      SearchService.findByTransactionId(this.query).then(response =>
-        this.changePage('transaction', { id: response.transaction.id })
-      ).catch(e => this.updateSearchCount(e))
+      try {
+        const responseTransaction = await SearchService.findByTransactionId(this.query)
+        this.changePage('transaction', { id: responseTransaction.transaction.id })
+      } catch(e) { this.updateSearchCount(e) }
 
       const address = this.findByNameInKnownWallets(this.query)
       if (address) {

@@ -28,10 +28,9 @@ export default {
   },
 
   methods: {
-    getVoters() {
-      DelegateService
-        .voters(this.wallet.publicKey)
-        .then(response => this.voters = response)
+    async getVoters() {
+      const response = await DelegateService.voters(this.wallet.publicKey)
+      this.voters = response
     }
   }
 }

@@ -33,13 +33,15 @@ export default {
     timer: null,
   }),
 
-  mounted() {
-    this.getBlock().then(() => this.initialiseTimer())
+  async mounted() {
+    await this.getBlock()
+    this.initialiseTimer()
   },
 
   methods: {
-    getBlock() {
-      return BlockService.last().then(response => (this.block = response))
+    async getBlock() {
+      const response = await BlockService.last()
+      this.block = response
     },
 
     initialiseTimer() {

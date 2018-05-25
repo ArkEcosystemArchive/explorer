@@ -48,15 +48,15 @@ export default {
     timer: null,
   }),
 
-  mounted() {
-    this.getDelegates().then(() => this.initialiseTimer())
+  async mounted() {
+    await this.getDelegates()
+    this.initialiseTimer()
   },
 
   methods: {
-    getDelegates() {
-      return DelegateService.activeDelegates().then(
-        response => (this.delegates = response)
-      )
+    async getDelegates() {
+      const response = await DelegateService.activeDelegates()
+      this.delegates = response
     },
 
     initialiseTimer() {
