@@ -43,8 +43,9 @@ export default {
   },
 
   methods: {
-    getDelegates() {
-      DelegateService.standby().then(response => (this.delegates = response))
+    async getDelegates() {
+      const response = await DelegateService.standby()
+      this.delegates = response
     },
   },
 }

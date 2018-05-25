@@ -23,7 +23,7 @@ class CryptoCompareService {
     return this.sendRequest('day', 365, 'DD.MM')
   }
 
-  sendRequest(type, limit, dateTimeFormat) {
+  async sendRequest(type, limit, dateTimeFormat) {
     const date = Math.round(new Date().getTime() / 1000)
 
     let targetCurrency = 'USD'
@@ -31,8 +31,7 @@ class CryptoCompareService {
       targetCurrency = store.getters['currency/name']
     }
 
-    return axios
-      .get(`https://min-api.cryptocompare.com/data/histo${type}`, {
+    const response = await axios.get(`https://min-api.cryptocompare.com/data/histo${type}`, {
         params: {
           fsym: store.getters['network/token'],
           tsym: targetCurrency,
@@ -40,9 +39,8 @@ class CryptoCompareService {
           limit
         }
       })
-      .then(response =>
-        this.transform(response.data.Data, dateTimeFormat)
-      )
+    
+    return this.transform(response.data.Data, dateTimeFormat)
   }
 
   transform(response, dateTimeFormat) {

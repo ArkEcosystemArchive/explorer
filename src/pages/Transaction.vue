@@ -84,19 +84,25 @@ export default {
     ...mapGetters('delegates', ['delegates']),
   },
 
-  beforeRouteEnter(to, from, next) {
-    TransactionService.find(to.params.id)
-      .then(response => next(vm => vm.setTransaction(response)))
-      .catch(() => next({ name: '404' }))
+  async beforeRouteEnter(to, from, next) {
+    try {
+      const response = await TransactionService.find(to.params.id)
+      next(vm => vm.setTransaction(response))
+    } catch (error) {
+      next({ name: '404' })
+    }
   },
 
-  beforeRouteUpdate(to, from, next) {
+  async beforeRouteUpdate(to, from, next) {
     this.transaction = {}
 
-    TransactionService.find(to.params.id)
-      .then(response => this.setTransaction(response))
-      .then(() => next())
-      .catch(() => next({ name: '404' }))
+    try {
+      const response = await TransactionService.find(to.params.id)
+      this.setTransaction(response)
+      next()
+    } catch (error) {
+      next({ name: '404' })
+    }
   },
 
   methods: {

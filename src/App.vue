@@ -53,7 +53,34 @@ export default {
       )
     }
 
-    LoaderService.config().then(response => {
+    this.updateLoader()
+  },
+
+  mounted() {
+    this.prepareComponent()
+  },
+
+  computed: {
+    ...mapGetters('currency', { currencyName: 'name' }),
+    ...mapGetters('ui', ['nightMode']),
+    ...mapGetters('network', ['token']),
+  },
+
+  methods: {
+    prepareComponent() {
+      this.initialiseTimer()
+    },
+
+    async updateCurrencyRate() {
+      if (this.currencyName !== this.token) {
+        const rate = await CoinMarketCapService.price(this.currencyName)
+        this.$store.dispatch('currency/setRate', rate)
+      }
+    },
+
+    async updateLoader() {
+      const response = await LoaderService.config()
+
       this.$store.dispatch('network/setToken', response.token)
       this.$store.dispatch('network/setSymbol', response.symbol)
       this.$store.dispatch('network/setNethash', response.nethash)
@@ -78,54 +105,26 @@ export default {
       this.updateHeight()
       this.updateDelegates()
       this.updateForged()
-    })
-  },
-
-  mounted() {
-    this.prepareComponent()
-  },
-
-  computed: {
-    ...mapGetters('currency', { currencyName: 'name' }),
-    ...mapGetters('ui', ['nightMode']),
-    ...mapGetters('network', ['token']),
-  },
-
-  methods: {
-    prepareComponent() {
-      this.initialiseTimer()
     },
 
-    updateCurrencyRate() {
-      if (this.currencyName !== this.token) {
-        CoinMarketCapService.price(this.currencyName).then(rate => {
-          this.$store.dispatch('currency/setRate', rate)
-        })
-      }
+    async updateSupply() {
+      const supply = await BlockService.supply()
+      this.$store.dispatch('network/setSupply', supply)
     },
 
-    updateSupply() {
-      BlockService.supply().then(supply =>
-        this.$store.dispatch('network/setSupply', supply)
-      )
+    async updateHeight() {
+      const height = await BlockService.height()
+      this.$store.dispatch('network/setHeight', height)
     },
 
-    updateHeight() {
-      BlockService.height().then(height =>
-        this.$store.dispatch('network/setHeight', height)
-      )
+    async updateDelegates() {
+      const delegates = await DelegateService.all()
+      this.$store.dispatch('delegates/setDelegates', delegates)
     },
 
-    updateDelegates() {
-      DelegateService.all().then(delegates => {
-        this.$store.dispatch('delegates/setDelegates', delegates)
-      })
-    },
-
-    updateForged() {
-      DelegateService.forged().then(response => {
-        this.$store.dispatch('delegates/setForged', response)
-      })
+    async updateForged() {
+      const response = await DelegateService.forged()
+      this.$store.dispatch('delegates/setForged', response)
     },
 
     initialiseTimer() {

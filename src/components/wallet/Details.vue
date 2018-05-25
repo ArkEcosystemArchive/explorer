@@ -164,16 +164,14 @@ export default {
   },
 
   methods: {
-    getSendCount() {
-      TransactionService.sendByAddressCount(this.wallet.address).then(
-        response => (this.sendCount = response)
-      )
+    async getSendCount() {
+      const response = await TransactionService.sendByAddressCount(this.wallet.address)
+      this.sendCount = response
     },
 
-    getReceivedCount() {
-      TransactionService.receivedByAddressCount(this.wallet.address).then(
-        response => (this.receivedCount = response)
-      )
+    async getReceivedCount() {
+      const response = await TransactionService.receivedByAddressCount(this.wallet.address)
+      this.receivedCount = response
     },
   },
 }

@@ -23,19 +23,17 @@ export default {
     this.$on('paginatorChanged', page => this.changePage(page))
   },
 
-  beforeRouteEnter (to, from, next) {
-    BlockService
-      .paginate(to.params.page)
-      .then(response => next(vm => vm.setBlocks(response)))
+  async beforeRouteEnter (to, from, next) {
+    const response = await BlockService.paginate(to.params.page)
+    next(vm => vm.setBlocks(response))
   },
 
-  beforeRouteUpdate (to, from, next) {
+  async beforeRouteUpdate (to, from, next) {
     this.blocks = []
 
-    BlockService
-      .paginate(to.params.page)
-      .then(response => this.setBlocks(response))
-      .then(() => next())
+    const response = await BlockService.paginate(to.params.page)
+    this.setBlocks(response)
+    next()
   },
 
   methods: {
