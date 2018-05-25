@@ -92,7 +92,9 @@ class TransactionService {
         orderBy: 'timestamp:desc'
       }
     })
-    return response.data.transactions
+    // Filter the vote transactions which are not received but sent
+    const txMinusVotes = response.data.transactions.filter(tx => tx.type != 3)
+    return txMinusVotes
   }
 
   async sendByAddressCount(senderId) {
