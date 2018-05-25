@@ -43,29 +43,44 @@ export default {
   },
 
   methods: {
-    search() {
+    async search() {
       this.nothingFound = false
       this.searchCount = 0
 
-      SearchService.findByAddress(this.query).then(response =>
+      try {
+        const response = await SearchService.findByAddress(this.query)
         this.changePage('wallet', { address: response.account.address })
-      ).catch(e => this.updateSearchCount(e))
+      } catch (error) {
+        this.updateSearchCount(error)
+      }
 
-      SearchService.findByUsername(this.query).then(response =>
+      try {
+        const response = await SearchService.findByUsername(this.query)
         this.changePage('wallet', { address: response.delegate.address })
-      ).catch(e => this.updateSearchCount(e))
+      } catch (error) {
+        this.updateSearchCount(error)
+      }
 
-      SearchService.findByPublicKey(this.query).then(response =>
+      try {
+        const response = await SearchService.findByPublicKey(this.query)
         this.changePage('wallet', { address: response.delegate.address })
-      ).catch(e => this.updateSearchCount(e))
+      } catch (error) {
+        this.updateSearchCount(error)
+      }
 
-      SearchService.findByBlockId(this.query).then(response =>
+      try {
+        const response = await SearchService.findByBlockId(this.query)
         this.changePage('block', { id: response.block.id })
-      ).catch(e => this.updateSearchCount(e))
+      } catch (error) {
+        this.updateSearchCount(error)
+      }
 
-      SearchService.findByTransactionId(this.query).then(response =>
+      try {
+        const response = await SearchService.findByTransactionId(this.query)
         this.changePage('transaction', { id: response.transaction.id })
-      ).catch(e => this.updateSearchCount(e))
+      } catch (error) {
+        this.updateSearchCount(error)
+      }
 
       const address = this.findByNameInKnownWallets(this.query)
       if (address) {

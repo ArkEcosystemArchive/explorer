@@ -22,8 +22,9 @@ import TransactionService from '@/services/transaction'
 export default {
   data: () => ({ transactions: [] }),
 
-  mounted() {
-    TransactionService.latest().then(response => (this.transactions = response))
+  async mounted() {
+    const response = await TransactionService.latest()
+    this.transactions = response
   },
 }
 </script>
