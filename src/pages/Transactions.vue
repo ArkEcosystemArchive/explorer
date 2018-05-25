@@ -23,19 +23,17 @@ export default {
     this.$on('paginatorChanged', page => this.changePage(page))
   },
 
-  beforeRouteEnter (to, from, next) {
-    TransactionService
-      .paginate(to.params.page)
-      .then(response => next(vm => vm.setTransactions(response)))
+  async beforeRouteEnter (to, from, next) {
+    const response = await TransactionService.paginate(to.params.page)
+    next(vm => vm.setTransactions(response))
   },
 
-  beforeRouteUpdate (to, from, next) {
+  async beforeRouteUpdate (to, from, next) {
     this.transactions = []
 
-    TransactionService
-      .paginate(to.params.page)
-      .then(response => this.setTransactions(response))
-      .then(() => next())
+    const response = await TransactionService.paginate(to.params.page)
+    this.setTransactions(response)
+    next()
   },
 
   methods: {

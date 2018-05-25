@@ -20,19 +20,17 @@ import WalletService from '@/services/wallet'
 export default {
   data: () => ({ wallets: [] }),
 
-  beforeRouteEnter (to, from, next) {
-    WalletService
-      .top(to.params.page)
-      .then(response => next(vm => vm.setWallets(response)))
+  async beforeRouteEnter (to, from, next) {
+    const response = await WalletService.top(to.params.page)
+    next(vm => vm.setWallets(response))
   },
 
-  beforeRouteUpdate (to, from, next) {
+  async beforeRouteUpdate (to, from, next) {
     this.wallets = []
 
-    WalletService
-      .top(to.params.page)
-      .then(response => this.setWallets(response))
-      .then(() => next())
+    const response = await WalletService.top(to.params.page)
+    this.setWallets(response)
+    next()
   },
 
   computed: {

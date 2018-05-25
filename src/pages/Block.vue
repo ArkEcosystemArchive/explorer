@@ -24,21 +24,25 @@ export default {
     timer: null
   }),
 
-  beforeRouteEnter (to, from, next) {
-    BlockService
-      .find(to.params.id)
-      .then(response => next(vm => vm.setBlock(response)))
-      .catch(() => next({ name: '404' }))
+  async beforeRouteEnter (to, from, next) {
+    try {
+      const response = await BlockService.find(to.params.id)
+      next(vm => vm.setBlock(response))
+    } catch (error) {
+      next({ name: '404' })
+    }
   },
 
-  beforeRouteUpdate (to, from, next) {
+  async beforeRouteUpdate (to, from, next) {
     this.block = {}
 
-    BlockService
-      .find(to.params.id)
-      .then(response => this.setBlock(response))
-      .then(() => next())
-      .catch(() => next({ name: '404' }))
+    try {
+      const response = await BlockService.find(to.params.id)
+      this.setBlock(response)
+      next()
+    } catch (error) {
+      next({ name: '404' })
+    }
   },
 
   mounted() {
@@ -50,28 +54,31 @@ export default {
       this.timer = setInterval(this.updateBlock, 8 * 1000)
     },
 
-    updateBlock() {
-      BlockService
-        .find(this.block.id)
-        .then(response => this.setBlock(response))
+    async updateBlock() {
+      const response = await BlockService.find(this.block.id)
+      this.setBlock(response)
     },
 
     setBlock (block) {
       this.block = block
     },
 
-    prevBlock() {
-      BlockService
-        .findPrevious(this.block.height)
-        .then(response => this.$router.push({ name: 'block', params: { id: response.id } }))
-        .catch(e => console.log(e.message || e.data.error))
+    async prevBlock() {
+      try {
+        const response = await BlockService.findPrevious(this.block.height)
+        this.$router.push({ name: 'block', params: { id: response.id } })
+      } catch (error) {
+        console.log(error.message || error.data.error)
+      }
     },
 
-    nextBlock() {
-      BlockService
-        .findNext(this.block.height)
-        .then(response => this.$router.push({ name: 'block', params: { id: response.id } }))
-        .catch(e => console.log(e.message || e.data.error))
+    async nextBlock() {
+      try {
+        const response = await BlockService.findNext(this.block.height)
+        this.$router.push({ name: 'block', params: { id: response.id } })
+      } catch (error) {
+        console.log(error.message || error.data.error)
+      }
     }
   }
 }
