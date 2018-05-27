@@ -277,6 +277,10 @@ thead th {
   @apply .list-row .border-b
 }
 
+.list-row-border-b-no-wrap {
+  @apply .list-row-border-b .flex-no-wrap;
+}
+
 .row-mobile {
   @apply .px-5 .py-4
 }
