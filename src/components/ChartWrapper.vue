@@ -136,33 +136,32 @@ export default {
       this.renderChart()
     },
 
-    renderChart(type) {
-      CryptoCompareService[this.type]().then(response => {
-        this.chartData = {
-          labels: response.labels,
-          datasets: [{
-            type: 'line',
-            pointHoverBackgroundColor: '#fff',
-            borderColor: '#535972',
-            pointHoverBorderColor: '#037cff',
-            pointBackgroundColor: 'rgba(0,0,0,0)',
-            pointBorderColor: 'rgba(0,0,0,0)',
-            pointHoverRadius: 5,
-            pointHoverBorderWidth: 4,
-            fill: false,
-            // data: this.chartData.map((point, index) => {
-            //   return {
-            //     t: this.labels[index],
-            //     y: point,
-            //   }
-            // }),
-            data: response.datasets
-          }],
-        }
+    async renderChart(type) {
+      const response = await CryptoCompareService[this.type]()
+      this.chartData = {
+        labels: response.labels,
+        datasets: [{
+          type: 'line',
+          pointHoverBackgroundColor: '#fff',
+          borderColor: '#535972',
+          pointHoverBorderColor: '#037cff',
+          pointBackgroundColor: 'rgba(0,0,0,0)',
+          pointBorderColor: 'rgba(0,0,0,0)',
+          pointHoverRadius: 5,
+          pointHoverBorderWidth: 4,
+          fill: false,
+          // data: this.chartData.map((point, index) => {
+          //   return {
+          //     t: this.labels[index],
+          //     y: point,
+          //   }
+          // }),
+          data: response.datasets
+        }],
+      }
 
-        let maxY = Math.max(...this.chartData.datasets[0].data);
-        this.options.scales.yAxes[0].ticks.suggestedMax = maxY + 0.01;
-      })
+      let maxY = Math.max(...this.chartData.datasets[0].data);
+      this.options.scales.yAxes[0].ticks.suggestedMax = maxY + 0.01;
     },
 
     watchCurrencyName() {

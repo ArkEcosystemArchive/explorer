@@ -50,12 +50,12 @@ export default {
   },
 
   methods: {
-    getVoters() {
-      WalletService
-        .find(this.$route.params.address)
-        .then(response => DelegateService.voters(response.publicKey))
-        .then(response => this.wallets = response)
-        .catch(() => next({ name: '404' }))
+    async getVoters() {
+      try {
+        const wallet = await WalletService.find(this.$route.params.address)
+        const voters = await DelegateService.voters(wallet.publicKey)
+        this.wallets = voters
+      } catch(e) { next({ name: '404' }) }
     },
 
     changePage(page) {

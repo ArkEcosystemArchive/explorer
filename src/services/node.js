@@ -2,15 +2,13 @@ import axios from 'axios'
 import store from '@/store'
 
 class NodeService {
-  get(url, config) {
+  async get(url, config) {
     const server = store.getters['network/server']
 
-    return axios
-      .get(`${server}/${url}`, config)
-      .then(
-        response =>
-          response.data.success ? response : Promise.reject(response)
-      )
+    const response = await axios.get(`${server}/${url}`, config);
+    
+    if (!response.data.success) { throw new Error('Error GET ' + url + ' : ' + JSON.stringify(response)) }
+    return response;
   }
 }
 

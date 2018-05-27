@@ -22,8 +22,9 @@ import BlockService from '@/services/block'
 export default {
   data: () => ({ blocks: [] }),
 
-  mounted() {
-    BlockService.latest().then(response => (this.blocks = response))
+  async mounted() {
+    const response = await BlockService.latest()
+    this.blocks = response
   },
 }
 </script>

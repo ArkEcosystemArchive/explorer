@@ -46,28 +46,29 @@ export default {
     },
   },
 
-  beforeRouteEnter(to, from, next) {
-    WalletService.find(to.params.address)
-      .then(response => next(vm => vm.setWallet(response)))
-      .catch(() => next({ name: '404' }))
+  async beforeRouteEnter(to, from, next) {
+    try {
+      const response = await WalletService.find(to.params.address)
+      next(vm => vm.setWallet(response))
+    } catch(e) { next({ name: '404' }) }
   },
 
-  beforeRouteUpdate(to, from, next) {
+  async beforeRouteUpdate(to, from, next) {
     this.wallet = {}
 
-    WalletService.find(to.params.address)
-      .then(response => this.setWallet(response))
-      .then(() => next())
-      .catch(() => next({ name: '404' }))
+    try {
+      const response = await WalletService.find(to.params.address)
+      this.setWallet(response)
+      next()
+    } catch(e) { next({ name: '404' }) }
   },
 
   methods: {
-    setWallet(wallet) {
+    async setWallet(wallet) {
       this.wallet = wallet
 
-      WalletService.vote(wallet.address).then(
-        vote => (this.isVoting = vote ? true : false)
-      )
+      const vote = await WalletService.vote(wallet.address)
+      this.isVoting = vote ? true : false
     },
   },
 }

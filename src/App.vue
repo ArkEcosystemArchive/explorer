@@ -29,7 +29,7 @@ export default {
     timer: null,
   }),
 
-  created() {
+  async created() {
     const network = require(`../networks/${process.env.EXPLORER_CONFIG}`)
 
     this.$store.dispatch('network/setDefaults', network)
@@ -53,32 +53,31 @@ export default {
       )
     }
 
-    LoaderService.config().then(response => {
-      this.$store.dispatch('network/setToken', response.token)
-      this.$store.dispatch('network/setSymbol', response.symbol)
-      this.$store.dispatch('network/setNethash', response.nethash)
+    const response = await LoaderService.config()
+    this.$store.dispatch('network/setToken', response.token)
+    this.$store.dispatch('network/setSymbol', response.symbol)
+    this.$store.dispatch('network/setNethash', response.nethash)
 
-      this.$store.dispatch(
-        'ui/setLanguage',
-        localStorage.getItem('language') || 'en'
-      )
+    this.$store.dispatch(
+      'ui/setLanguage',
+      localStorage.getItem('language') || 'en'
+    )
 
-      this.$store.dispatch(
-        'ui/setPriceChart',
-        localStorage.getItem('priceChart') || network.config.priceChart
-      )
+    this.$store.dispatch(
+      'ui/setPriceChart',
+      localStorage.getItem('priceChart') || network.config.priceChart
+    )
 
-      this.$store.dispatch(
-        'ui/setNightMode',
-        localStorage.getItem('nightMode') || false
-      )
+    this.$store.dispatch(
+      'ui/setNightMode',
+      localStorage.getItem('nightMode') || false
+    )
 
-      this.updateCurrencyRate()
-      this.updateSupply()
-      this.updateHeight()
-      this.updateDelegates()
-      this.updateForged()
-    })
+    this.updateCurrencyRate()
+    this.updateSupply()
+    this.updateHeight()
+    this.updateDelegates()
+    this.updateForged()
   },
 
   mounted() {
@@ -96,36 +95,31 @@ export default {
       this.initialiseTimer()
     },
 
-    updateCurrencyRate() {
+    async updateCurrencyRate() {
       if (this.currencyName !== this.token) {
-        CoinMarketCapService.price(this.currencyName).then(rate => {
-          this.$store.dispatch('currency/setRate', rate)
-        })
+        const rate = await CoinMarketCapService.price(this.currencyName)
+        this.$store.dispatch('currency/setRate', rate)
       }
     },
 
-    updateSupply() {
-      BlockService.supply().then(supply =>
-        this.$store.dispatch('network/setSupply', supply)
-      )
+    async updateSupply() {
+      const supply = await BlockService.supply()
+      this.$store.dispatch('network/setSupply', supply)
     },
 
-    updateHeight() {
-      BlockService.height().then(height =>
-        this.$store.dispatch('network/setHeight', height)
-      )
+    async updateHeight() {
+      const height = await BlockService.height()
+      this.$store.dispatch('network/setHeight', height)
     },
 
-    updateDelegates() {
-      DelegateService.all().then(delegates => {
-        this.$store.dispatch('delegates/setDelegates', delegates)
-      })
+    async updateDelegates() {
+      const delegates = await DelegateService.all()
+      this.$store.dispatch('delegates/setDelegates', delegates)
     },
 
-    updateForged() {
-      DelegateService.forged().then(response => {
-        this.$store.dispatch('delegates/setForged', response)
-      })
+    async updateForged() {
+      const response = await DelegateService.forged()
+      this.$store.dispatch('delegates/setForged', response)
     },
 
     initialiseTimer() {

@@ -50,21 +50,19 @@ export default {
   data: () => ({ delegate: {} }),
 
   watch: {
-    wallet(wallet) {
-      if (wallet.publicKey) this.getDelegate(wallet)
+    async wallet(wallet) {
+      if (wallet.publicKey) await this.getDelegate(wallet)
     }
   },
 
   methods: {
-    getDelegate(wallet) {
-      DelegateService
-        .find(wallet.publicKey)
-        .then(response => {
-          this.delegate = response;
+    async getDelegate(wallet) {
+      try {
+        const response = await DelegateService.find(wallet.publicKey)
+        this.delegate = response
 
-          this.$emit('username', response.username);
-        })
-        .catch(e => console.log(e.message || e.data.error))
+        this.$emit('username', response.username)
+      } catch(e) { console.log(e.message || e.data.error) }
     }
   }
 }
