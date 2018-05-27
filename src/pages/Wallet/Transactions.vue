@@ -28,23 +28,23 @@ export default {
     this.getTotalTransactions()
   },
 
-  beforeRouteEnter (to, from, next) {
-    WalletService
-      .find(to.params.address)
-      .then(wallet => TransactionService[`${to.params.type}ByAddress`](wallet.address, to.params.page))
-      .then(transactions => next(vm => vm.setTransactions(transactions)))
-      .catch(() => next({ name: '404' }))
+  async beforeRouteEnter (to, from, next) {
+    try {
+      const wallet = await WalletService.find(to.params.address)
+      const transactions = await TransactionService[`${to.params.type}ByAddress`](wallet.address, to.params.page)
+      next(vm => vm.setTransactions(transactions))
+    } catch(e) { next({ name: '404' }) }
   },
 
-  beforeRouteUpdate (to, from, next) {
+  async beforeRouteUpdate (to, from, next) {
     this.transactions = []
 
-    WalletService
-      .find(to.params.address)
-      .then(wallet => TransactionService[`${to.params.type}ByAddress`](wallet.address, to.params.page))
-      .then(transactions => this.setTransactions(transactions))
-      .then(() => next())
-      .catch(() => next({ name: '404' }))
+    try {
+      const wallet = await WalletService.find(to.params.address)
+      const transactions = await TransactionService[`${to.params.type}ByAddress`](wallet.address, to.params.page)
+      this.setTransactions(transactions)
+      next()
+    } catch(e) { next({ name: '404' }) }
   },
 
   computed: {
@@ -75,18 +75,16 @@ export default {
       }
     },
 
-    getSentCount() {
-      WalletService
-        .find(this.address)
-        .then(wallet => TransactionService.sendByAddressCount(wallet.address))
-        .then(response => (this.totalTransactions += Number(response)))
+    async getSentCount() {
+      const wallet = await WalletService.find(this.address)
+      const response = await TransactionService.sendByAddressCount(wallet.address)
+      this.totalTransactions += Number(response)
     },
 
-    getReceivedCount() {
-      WalletService
-        .find(this.address)
-        .then(wallet => TransactionService.receivedByAddressCount(wallet.address))
-        .then(response => (this.totalTransactions += Number(response)))
+    async getReceivedCount() {
+      const wallet = await WalletService.find(this.address)
+      const received = await TransactionService.receivedByAddressCount(wallet.address)
+      this.totalTransactions += Number(received)
     },
 
     changePage(page) {

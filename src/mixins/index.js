@@ -54,11 +54,12 @@ const methods = {
     return typeof compareTime !== 'undefined' ? momentTime.from(getTime(compareTime)) : momentTime.fromNow();
   },
 
-  truncate(value, length = 12) {
-    if (length <= 0 || value.length <= length) { return value }
+
+  truncate(value, length = 13) {
+    const odd = length % 2;
     const truncationLength = Math.floor((length - 1) / 2);
     return (value.length > length)
-      ? `${value.slice(0, truncationLength)}...${value.slice(value.length - truncationLength)}`
+      ? `${value.slice(0, truncationLength - odd)}...${value.slice(value.length - truncationLength + 1)}`
       : value
   },
 
@@ -108,11 +109,13 @@ const methods = {
   },
 
   readableCrypto(value, appendCurrency = true) {
-    value = (value /= Math.pow(10, 8)).toLocaleString(undefined, {
-      maximumFractionDigits: 8,
-    })
+    if (typeof value != 'undefined') {
+      value = (value /= Math.pow(10, 8)).toLocaleString(undefined, {
+        maximumFractionDigits: 8,
+      })
 
-    return appendCurrency ? `${value} ${store.getters['network/symbol']}` : value
+      return appendCurrency ? `${value} ${store.getters['network/symbol']}` : value
+    }
   },
 
   networkToken() {

@@ -21,10 +21,9 @@ export default {
   },
 
   methods: {
-    setCurrency(currency, symbol) {
-      CoinMarketCapService
-        .price(currency)
-        .then(rate => this.storeCurrency(currency, rate, symbol))
+    async setCurrency(currency, symbol) {
+      const rate = await CoinMarketCapService.price(currency)
+      this.storeCurrency(currency, rate, symbol)
     },
 
     storeCurrency(currency, rate, symbol) {

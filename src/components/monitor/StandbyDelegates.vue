@@ -38,13 +38,14 @@ export default {
     ...mapGetters('network', ['activeDelegates']),
   },
 
-  mounted() {
-    this.getDelegates()
+  async mounted() {
+    await this.getDelegates()
   },
 
   methods: {
-    getDelegates() {
-      DelegateService.standby().then(response => (this.delegates = response))
+    async getDelegates() {
+      const response = await DelegateService.standby()
+      this.delegates = response
     },
   },
 }

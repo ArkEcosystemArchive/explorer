@@ -24,22 +24,22 @@ export default {
     this.$on('paginatorChanged', page => this.changePage(page))
   },
 
-  beforeRouteEnter (to, from, next) {
-    WalletService
-      .find(to.params.address)
-      .then(wallet => BlockService.getByPublicKey(wallet.publicKey, to.params.page))
-      .then(blocks => next(vm => vm.setBlocks(blocks)))
-      .catch(() => next({ name: '404' }))
+  async beforeRouteEnter (to, from, next) {
+    try {
+      const wallet = await WalletService.find(to.params.address)
+      const blocks = await BlockService.getByPublicKey(wallet.publicKey, to.params.page)
+      next(vm => vm.setBlocks(blocks))
+    } catch(e) { next({ name: '404' }) }
   },
 
-  beforeRouteUpdate (to, from, next) {
+  async beforeRouteUpdate (to, from, next) {
     this.blocks = []
 
-    WalletService
-      .find(to.params.address)
-      .then(wallet => BlockService.getByPublicKey(wallet.publicKey, to.params.page))
-      .then(blocks => this.setBlocks(blocks))
-      .catch(() => next({ name: '404' }))
+    try {
+      const wallet = await WalletService.find(to.params.address)
+      const blocks = await BlockService.getByPublicKey(wallet.publicKey, to.params.page)
+      this.setBlocks(blocks)
+    } catch(e) { next({ name: '404' }) }
   },
 
   computed: {

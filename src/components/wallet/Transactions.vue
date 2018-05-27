@@ -70,12 +70,13 @@ export default {
   },
 
   methods: {
-    getTransactions() {
+    async getTransactions() {
       if (this.wallet.address !== undefined) {
-        TransactionService[`${this.type}ByAddress`](
+        const transactions = await TransactionService[`${this.type}ByAddress`](
           this.wallet.address,
           this.page
-        ).then(transactions => (this.transactions = transactions))
+        )
+        this.transactions = transactions
       }
     },
   },

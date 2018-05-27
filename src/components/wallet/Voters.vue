@@ -3,7 +3,7 @@
     <div>{{ $t("Voters") }}</div>
     <div>
       <span class="mr-2">{{ voters.length }}</span>
-      <router-link v-if="wallet.address" :to="{ name: 'wallet-voters', params: { address: wallet.address, page: 1 } }">{{ $t("See all") }}</router-link>
+      <router-link v-if="wallet.address" :to="{ name: 'wallet-voters', params: { address: wallet.address, username: username, page: 1 } }">{{ $t("See all") }}</router-link>
     </div>
   </div>
 </template>
@@ -16,7 +16,8 @@ export default {
     wallet: {
       type: Object,
       required: true
-    }
+    },
+    username: {}
   },
 
   data: () => ({ voters: {} }),
@@ -28,10 +29,9 @@ export default {
   },
 
   methods: {
-    getVoters() {
-      DelegateService
-        .voters(this.wallet.publicKey)
-        .then(response => this.voters = response)
+    async getVoters() {
+      const response = await DelegateService.voters(this.wallet.publicKey)
+      this.voters = response
     }
   }
 }

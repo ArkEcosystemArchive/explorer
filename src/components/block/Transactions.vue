@@ -32,12 +32,11 @@ export default {
   },
 
   methods: {
-    getTransactions () {
+    async getTransactions () {
       if (!this.block.id) return
 
-      TransactionService
-        .findByBlock(this.block.id)
-        .then(response => this.transactions = response)
+      const response = await TransactionService.findByBlock(this.block.id)
+      this.transactions = response
     }
   }
 }

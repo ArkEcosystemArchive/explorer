@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto pt-5">
-    <content-header>{{ $t("Voters") }}</content-header>
+    <content-header>{{ $t("Voters") }} <span v-show="username">- {{ username }}</span></content-header>
     <section class="page-section py-10">
       <div class="hidden sm:block">
         <table-wallets :wallets="filteredWallets" :total="votes"></table-wallets>
@@ -40,6 +40,9 @@ export default {
     votes() {
       return sumBy(this.wallets, 'balance')
     },
+    username() {
+      return this.$route.params.username
+    },
   },
 
   mounted() {
@@ -47,18 +50,18 @@ export default {
   },
 
   methods: {
-    getVoters() {
-      WalletService
-        .find(this.$route.params.address)
-        .then(response => DelegateService.voters(response.publicKey))
-        .then(response => this.wallets = response)
-        .catch(() => next({ name: '404' }))
+    async getVoters() {
+      try {
+        const wallet = await WalletService.find(this.$route.params.address)
+        const voters = await DelegateService.voters(wallet.publicKey)
+        this.wallets = voters
+      } catch(e) { next({ name: '404' }) }
     },
 
     changePage(page) {
       this.$router.push({
         name: 'wallet-voters',
-        params: { address: this.$route.params.address, page }
+        params: { address: this.$route.params.address, username: this.$route.params.username, page }
       })
     }
   }

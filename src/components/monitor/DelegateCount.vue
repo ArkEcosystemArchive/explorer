@@ -19,17 +19,15 @@ export default {
     timer: null
   }),
 
-  mounted() {
-    this
-      .getCount()
-      .then(() => this.initialiseTimer())
+  async mounted() {
+    await this.getCount()
+    this.initialiseTimer()
   },
 
   methods: {
-    getCount() {
-      return DelegateService
-        .activeDelegatesCount()
-        .then(response => this.count = response)
+    async getCount() {
+      const response = await DelegateService.activeDelegatesCount()
+      this.count = response
     },
 
     initialiseTimer() {
