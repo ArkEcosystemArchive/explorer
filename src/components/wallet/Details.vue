@@ -97,7 +97,7 @@
           <div class="md:w-1/2 px-6 w-full" v-if="wallet.publicKey">
             <div class="text-grey mb-2">{{ $t("Public Key") }}</div>
             <div class="text-white flex">
-              <span class="mr-2">{{ truncate(wallet.publicKey, 36) }}</span>
+              <span class="mr-2">{{ truncate(wallet.publicKey) }}</span>
               <clipboard v-if="wallet.publicKey" :value="wallet.publicKey"></clipboard>
             </div>
           </div>
