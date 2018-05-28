@@ -22,9 +22,9 @@
           <link-wallet :address="transaction.recipientId" :type="transaction.type"></link-wallet>
         </div>
 
-        <div class="list-row-border-b" v-if="truncate(transaction.vendorField || '')">
-          <div>{{ $t("Smartbridge") }}</div>
-          <div>{{ truncate(transaction.vendorField || '') }}</div>
+        <div class="list-row-border-b-no-wrap" v-if="truncate(transaction.vendorField || '')">
+          <div class="mr-4">{{ $t("Smartbridge") }}</div>
+          <div class="truncate">{{ transaction.vendorField }}</div>
         </div>
 
         <div class="list-row-border-b">
