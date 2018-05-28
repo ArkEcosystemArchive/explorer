@@ -25,12 +25,13 @@
       <div>{{ readableCrypto(delegate.forged) }}</div>
     </div>
 
-    <div class="list-row-border-b">
+    <div class="list-row-border-b" v-show="delegate.producedblocks > 0">
       <div>{{ $t("Blocks") }}</div>
       <div>
-        <span>{{ delegate.producedblocks }}</span>
-        <span class="text-grey">({{ delegate.missedblocks }} {{ $t("missed") }})</span>
-        <router-link v-if="delegate.producedblocks > 0" :to="{ name: 'wallet-blocks', params: { address: delegate.address, page: 1 } }">{{ $t("See all") }}</router-link>
+        <router-link :to="{ name: 'wallet-blocks', params: { address: delegate.address, page: 1 } }">
+          <span>{{ delegate.producedblocks }}</span>
+          <span v-if="delegate.missedblocks">({{ delegate.missedblocks }} {{ $t("missed") }})</span>
+        </router-link>
       </div>
     </div>
   </div>
