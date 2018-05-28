@@ -11,6 +11,7 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const gitRevision = require('./utils/git-revision')()
 const argumentParser = require('./argument-parser')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const createDevWebpackConfig = (host, port, network, networkConfig, routerMode) => {
   return merge(baseWebpackConfig, {
@@ -45,6 +46,7 @@ const createDevWebpackConfig = (host, port, network, networkConfig, routerMode) 
       }
     },
     plugins: [
+      new VueLoaderPlugin(),
       new webpack.DefinePlugin({
         'process.env': {
           ...require('../config/dev.env'),
@@ -89,6 +91,7 @@ module.exports = (env) => {
         // publish the new Port, necessary for e2e tests
         process.env.PORT = port
         const devWebpackConfig = createDevWebpackConfig(args.host, args.port, args.network, args.networkConfig, args.routerMode)
+        devWebpackConfig.mode = 'development'
         // add port to devServer config
         devWebpackConfig.devServer.port = port
 
