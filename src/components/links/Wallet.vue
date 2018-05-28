@@ -5,7 +5,7 @@
         <span v-if="isKnown">{{ knownWallets[address] }}</span>
         <span v-else-if="delegate">{{ delegate.username }}</span>
         <span v-else-if="hasDefaultSlot"><slot></slot></span>
-        <span v-else-if="address">{{ truncate(address) }}</span>
+        <span v-else-if="address">{{ trunc ? truncate(address) : address }}</span>
       </router-link>
 
       <span v-if="type === 1">{{ $t("2nd Signature Registration") }}</span>
@@ -41,6 +41,10 @@ export default {
     type: {
       type: Number,
     },
+    trunc: {
+      type: Boolean,
+      default: true
+    }
   },
 
   data: () => ({ delegate: null }),

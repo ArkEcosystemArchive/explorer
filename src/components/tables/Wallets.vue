@@ -9,7 +9,7 @@
 
       <table-column show="address" :label="$t('Address')" header-class="left-header-cell" cell-class="left-cell">
         <template slot-scope="row">
-          <link-wallet :address="row.address"></link-wallet>
+          <link-wallet :address="row.address" :trunc="false"></link-wallet>
         </template>
       </table-column>
 
