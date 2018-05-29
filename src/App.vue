@@ -77,7 +77,6 @@ export default {
     this.updateSupply()
     this.updateHeight()
     this.updateDelegates()
-    this.updateForged()
   },
 
   mounted() {
@@ -117,18 +116,12 @@ export default {
       this.$store.dispatch('delegates/setDelegates', delegates)
     },
 
-    async updateForged() {
-      const response = await DelegateService.forged()
-      this.$store.dispatch('delegates/setForged', response)
-    },
-
     initialiseTimer() {
       this.timer = setInterval(() => {
         this.updateCurrencyRate()
         this.updateSupply()
         this.updateHeight()
         this.updateDelegates()
-        this.updateForged()
       }, 5 * 60 * 1000)
     },
   },
