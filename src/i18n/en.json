@@ -59,7 +59,7 @@
   "Not forging": "Not forging",
   "In queue for forging": "In queue for forging",
   "Last block": "Last block",
-  "from transactions": "{currency} from {transactions} transactions",
+  "from transactions": "from 0 transactions | from 1 transaction | from {count} transactions",
   "Total Forged (token)": "Total Forged ({token})",
   "Forging": "Forging",
   "Missing": "Missing",
