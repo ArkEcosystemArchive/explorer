@@ -10,7 +10,7 @@
     <div class="hidden md:block">
       <div class="text-grey mb-2 min-w-0">{{ $t("Forged") }}</div>
       <div class="text-lg text-white truncate">
-        {{ $t("from transactions", { currency: readableCrypto(block.totalForged), transactions: block.numberOfTransactions }) }}
+        {{ readableCrypto(block.totalForged) }} {{ $tc("from transactions", block.numberOfTransactions, { count: block.numberOfTransactions }) }}
       </div>
     </div>
 

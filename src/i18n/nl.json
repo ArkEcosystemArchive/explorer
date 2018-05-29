@@ -55,7 +55,7 @@
   "Not forging": "Niet aan het forgen",
   "In queue for forging": "In de rij om te forgen",
   "Last block": "Laatste block",
-  "from transactions": "{currency} van {transactions} transacties",
+  "from transactions": "van 0 transacties | van 1 transactie | van {count} transacties",
   "Total Forged (token)": "Totaal geforged ({token})",
   "Forging": "Aan het forgen",
   "Missing": "Missend",
