@@ -146,12 +146,12 @@
 
 /* Awaiting Slot */
 .tooltip.tooltip-bg-4 .tooltip-inner {
-  background-color: #838a9b;
+  background-color: #f6993f;
   color: white;
 }
 
 .tooltip.tooltip-bg-4 .tooltip-arrow {
-  border-color: #838a9b;
+  border-color: #f6993f;
 }
 
 /* Not Forging */
