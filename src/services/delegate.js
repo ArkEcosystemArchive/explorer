@@ -113,6 +113,7 @@ class DelegateService {
         limit: activeDelegates
       }
     })
+    const delegateCount = response.data.totalCount;
 
     // Last Block (from last 100 Blocks)
     const blocks = await block.latest(100)
@@ -160,14 +161,15 @@ class DelegateService {
         
     // Forging Status
     const height = await block.height(status)
-    return delegatesRounds.map(delegate => {
-      delegate.forgingStatus = forging.status(
-        delegate,
-        height
-      )
+    return { delegateCount: delegateCount,
+      delegates: delegatesRounds.map(delegate => {
+        delegate.forgingStatus = forging.status(
+          delegate,
+          height
+        )
 
-      return delegate
-    })
+        return delegate
+      }) }
   }
 
   async forged() {
