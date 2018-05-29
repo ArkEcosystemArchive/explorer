@@ -16,9 +16,9 @@
       </template>
     </table-column>
 
-    <table-column show="producedblocks" :label="$t('Forged')" header-class="left-header-cell hidden xl:table-cell" cell-class="py-3 px-4 text-left border-none hidden xl:table-cell">
+    <table-column show="producedblocks" :label="$t('Forged blocks')" header-class="left-header-cell hidden xl:table-cell" cell-class="py-3 px-4 text-left border-none hidden xl:table-cell">
       <template slot-scope="row">
-        {{ readableCrypto(totalForged(row)) }}
+        {{ row.producedblocks }}
       </template>
     </table-column>
 
@@ -67,17 +67,7 @@ export default {
     },
   },
 
-  computed: {
-    ...mapGetters('delegates', ['forged'])
-  },
-
   methods: {
-    totalForged(delegate) {
-      delegate = this.forged.find(d => d.delegate === delegate.publicKey)
-
-      return delegate ? delegate.forged : 0
-    },
-
     lastForgingTime(delegate) {
       const lastBlock = delegate.forgingStatus.lastBlock
 
