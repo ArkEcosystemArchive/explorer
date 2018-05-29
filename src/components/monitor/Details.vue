@@ -1,7 +1,7 @@
 <template>
   <section class="mb-5">
     <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
-      <delegate-count></delegate-count>
+      <delegate-count :delegateCount="delegateCount"></delegate-count>
 
       <total-forged></total-forged>
 
@@ -17,5 +17,7 @@ import TotalForged from '@/components/monitor/TotalForged'
 
 export default {
   components: { DelegateCount, LastBlock, TotalForged },
+
+  props: ['delegateCount']
 }
 </script>
