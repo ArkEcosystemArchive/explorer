@@ -117,6 +117,8 @@ class DelegateService {
 
     // Last Block (from last 100 Blocks)
     const blocks = await block.latest(100)
+    const lastBlocksFetched = JSON.parse(sessionStorage.getItem('lastBlocksFetched') || '[]')
+    sessionStorage.setItem('lastBlocksFetched', JSON.stringify(blocks))
 
     const delegates = response.data.delegates.map(delegate => {
       const lastBlock = blocks.find(
@@ -133,8 +135,24 @@ class DelegateService {
 
     // Last Block (from specific delegate)
     const requests = []
+    const lastDelegatesLastBlock = JSON.parse(sessionStorage.getItem('lastDelegatesLastBlock') || '[]')
 
-    delegates.forEach((delegate) => requests.push(delegate.blocksAt ? delegate.blocks[0] : block.lastBlockByPublicKey(delegate.publicKey)))
+    delegates.forEach((delegate) => {
+      if (delegate.blocksAt) {
+        // we already have the delegate's last block from looking at the last 100 blocks
+        requests.push(delegate.blocks[0])
+      }
+      else if (lastBlocksFetched.length && lastBlocksFetched[0].height >= blocks[blocks.length-1].height) {
+        // the delegate's last block is not in the last 100 blocks but we might have saved it in sessionStorage
+        // only valid if there is no 'hole' between the last blocks fetched and the current ones
+        const lastDel = lastDelegatesLastBlock.find(del => del.publicKey === delegate.publicKey)
+        if (lastDel) { requests.push(lastDel.blocks[0]) }
+        else { requests.push(block.lastBlockByPublicKey(delegate.publicKey)) }
+      }
+      else {
+        // last option : make a specific server request to get the delegate's last block
+        requests.push(block.lastBlockByPublicKey(delegate.publicKey)) }
+    })
 
     const results = await Promise.all(requests)
     const delegatesLastBlock = delegates.map((result, index) => {
@@ -145,6 +163,7 @@ class DelegateService {
 
       return result
     })
+    sessionStorage.setItem('lastDelegatesLastBlock', JSON.stringify(delegatesLastBlock))
 
     // Rounds
     const nextForgers = await this.nextForgers()
