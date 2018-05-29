@@ -15,9 +15,10 @@ class DelegateService {
     })
 
     const requests = []
+    requests.push(response)
 
     for (
-      let index = 0;
+      let index = 1;
       index < Math.ceil(response.data.totalCount / activeDelegates);
       index++
     ) {
