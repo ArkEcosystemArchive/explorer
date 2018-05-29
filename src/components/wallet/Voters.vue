@@ -2,8 +2,9 @@
   <div class="border-t list-row" v-show="Object.keys(voters).length">
     <div>{{ $t("Voters") }}</div>
     <div>
-      <span class="mr-2">{{ voters.length }}</span>
-      <router-link v-if="wallet.address" :to="{ name: 'wallet-voters', params: { address: wallet.address, username: username, page: 1 } }">{{ $t("See all") }}</router-link>
+      <router-link v-if="wallet.address" :to="{ name: 'wallet-voters', params: { address: wallet.address, username: username, page: 1 } }">
+        <span>{{ voters.length }}</span>
+      </router-link>
     </div>
   </div>
 </template>
