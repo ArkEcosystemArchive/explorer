@@ -5,38 +5,13 @@
     </div>
     <div>
       <div class="text-grey mb-2">{{ $t("Delegates") }}</div>
-      <div class="text-lg text-white semibold truncate">{{ count }}</div>
+      <div class="text-lg text-white semibold truncate">{{ delegateCount }}</div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import DelegateService from '@/services/delegate'
-
 export default {
-  data: () => ({
-    count: 0,
-    timer: null
-  }),
-
-  async mounted() {
-    await this.getCount()
-    this.initialiseTimer()
-  },
-
-  methods: {
-    async getCount() {
-      const response = await DelegateService.activeDelegatesCount()
-      this.count = response
-    },
-
-    initialiseTimer() {
-      this.timer = setInterval(this.getCount, 8 * 1000)
-    }
-  },
-
-  beforeDestroy() {
-    clearInterval(this.timer)
-  }
+  props: ['delegateCount']
 }
 </script>

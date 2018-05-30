@@ -1,5 +1,14 @@
 import store from '@/store'
 
+const ForgeStatus = Object.freeze({
+  FORGING: 0,
+  MISSING: 1,
+  NOT_FORGING: 2,
+  AWAITING_SLOT: 3,
+  MISSED_AWAITING_SLOT: 4,
+  AWAITING_STATUS: 5
+})
+
 /**
  * @TODO - Remove this when Core 2.0 is released.
  */
@@ -19,39 +28,39 @@ class ForgingService {
       status.lastBlock = null
     }
 
-    if (status.awaitingSlot === 0) {
+    if (status.awaitingSlot === ForgeStatus.FORGING) {
       // Forged block in current round
-      status.code = 0
-    } else if (!delegate.isRoundDelegate && status.awaitingSlot === 1) {
+      status.code = ForgeStatus.FORGING
+    } else if (!delegate.isRoundDelegate && status.awaitingSlot === ForgeStatus.MISSING) {
       // Missed block in current round
-      status.code = 1
-    } else if (!delegate.isRoundDelegate && status.awaitingSlot > 1) {
+      status.code = ForgeStatus.MISSING
+    } else if (!delegate.isRoundDelegate && status.awaitingSlot > ForgeStatus.MISSING) {
       // Missed block in current and last round = not forging
-      status.code = 2
-    } else if (status.awaitingSlot === 1) {
+      status.code = ForgeStatus.NOT_FORGING
+    } else if (status.awaitingSlot === ForgeStatus.MISSING) {
       // Awaiting slot, but forged in last round
-      status.code = 3
-    } else if (status.awaitingSlot === 2) {
+      status.code = ForgeStatus.AWAITING_SLOT
+    } else if (status.awaitingSlot === ForgeStatus.NOT_FORGING) {
       // Awaiting slot, but missed block in last round
-      status.code = 4
+      status.code = ForgeStatus.MISSED_AWAITING_SLOT
     } else if (!status.blockAt && !status.updatedAt) {
       // Awaiting status or unprocessed
-      status.code = 5
-      // For delegates which not forged a signle block yet (statuses 0,3,5 not apply here)
+      status.code = ForgeStatus.AWAITING_STATUS
+      // For delegates which not forged a single block yet (statuses FORGING, AWAITING_SLOT, AWAITING_STATUS not apply here)
     } else if (!status.blockAt && status.updatedAt) {
-      if (!delegate.isRoundDelegate && delegate.missedblocks === 1) {
+      if (!delegate.isRoundDelegate && delegate.missedblocks === ForgeStatus.MISSING) {
         // Missed block in current round
-        status.code = 1
+        status.code = ForgeStatus.MISSING
       } else if (delegate.missedblocks > 1) {
         // Missed more than 1 block = not forging
-        status.code = 2
-      } else if (delegate.missedblocks === 1) {
+        status.code = ForgeStatus.NOT_FORGING
+      } else if (delegate.missedblocks === ForgeStatus.MISSING) {
         // Missed block in previous round
-        status.code = 4
+        status.code = ForgeStatus.MISSED_AWAITING_SLOT
       }
     } else {
       // Not Forging
-      status.code = 2
+      status.code = ForgeStatus.NOT_FORGING
     }
 
     delegate.status = [status.code, delegate.rate].join(':')
@@ -80,20 +89,20 @@ class ForgingService {
 
     delegates.forEach(element => {
       switch (element.forgingStatus.code) {
-        case 0:
-        case 3:
+        case ForgeStatus.FORGING:
+        case ForgeStatus.AWAITING_SLOT:
         {
           forging++
           break
         }
-        case 1:
-        case 4:
+        case ForgeStatus.MISSING:
+        case ForgeStatus.MISSED_AWAITING_SLOT:
         {
           missedBlock++
           break
         }
-        case 2:
-        case 5:
+        case ForgeStatus.NOT_FORGING:
+        case ForgeStatus.AWAITING_STATUS:
         {
           notForging++
           break
@@ -108,8 +117,8 @@ class ForgingService {
 
     delegates.forEach(element => {
       switch (element.forgingStatus.code) {
-        case 3:
-        case 4:
+        case ForgeStatus.AWAITING_SLOT:
+        case ForgeStatus.MISSED_AWAITING_SLOT:
         {
           awaitingSlot++
           break

@@ -2,7 +2,7 @@
   <div class="max-w-2xl mx-auto md:pt-5">
     <content-header>{{ $t("Delegate Monitor") }}</content-header>
 
-    <delegate-detail></delegate-detail>
+    <delegate-detail :delegateCount="delegateCount"></delegate-detail>
 
     <section class="page-section py-8">
       <nav class="mx-5 sm:mx-10 mb-4 border-b flex items-end">
@@ -44,6 +44,7 @@ export default {
 
   data: () => ({
     delegates: [],
+    delegateCount: null,
     activeTab: 'active',
     timer: null,
   }),
@@ -56,7 +57,8 @@ export default {
   methods: {
     async getDelegates() {
       const response = await DelegateService.activeDelegates()
-      this.delegates = response
+      this.delegates = response.delegates
+      this.delegateCount = response.delegateCount
     },
 
     initialiseTimer() {

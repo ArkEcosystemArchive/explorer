@@ -7,7 +7,7 @@
         </template>
       </table-column>
 
-      <table-column show="timestamp" :label="$t('Timestamp')" header-class="left-header-cell hidden md:table-cell" cell-class="left-cell hidden md:table-cell">
+      <table-column show="timestamp" :label="$t('Timestamp')" header-class="left-header-cell hidden md:table-cell" cell-class="left-cell hidden md:table-cell whitespace-no-wrap">
         <template slot-scope="row">
           {{ readableTimestamp(row.timestamp) }}
         </template>
@@ -27,7 +27,7 @@
 
       <table-column show="vendorField" :label="$t('Smartbridge')" header-class="right-header-cell hidden lg:table-cell" cell-class="right-cell hidden lg:table-cell">
         <template slot-scope="row">
-          {{ truncate(row.vendorField || '', 35) }}
+          {{ truncate(row.vendorField || '', 35, 'right') }}
         </template>
       </table-column>
 
