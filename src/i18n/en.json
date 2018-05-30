@@ -63,6 +63,7 @@
   "Total Forged (token)": "Total Forged ({token})",
   "Forging": "Forging",
   "Missing": "Missing",
+  "Missed block, Awaiting Slot": "Missed block, Awaiting Slot",
   "Not Forging": "Not Forging",
   "Awaiting Slot": "Awaiting Slot",
 

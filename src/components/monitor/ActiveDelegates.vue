@@ -80,7 +80,7 @@ export default {
         '1': this.$i18n.t('Missing'),
         '2': this.$i18n.t('Not Forging'),
         '3': this.$i18n.t('Awaiting Slot'),
-        '4': this.$i18n.t('Awaiting Slot'),
+        '4': this.$i18n.t('Missed block, Awaiting Slot'),
         '5': this.$i18n.t('Not Forging'),
       }[row.forgingStatus.code]
 
@@ -102,7 +102,7 @@ export default {
         '1': '#f6993f', // Missing
         '2': '#ef192d', // Not Forging
         '3': '#838a9b', // Awaiting Slot
-        '4': '#838a9b', // Awaiting Slot
+        '4': '#f6993f', // Missed in previous round, now awaiting Slot
         '5': '#ef192d', // Not Forging
       }[row.forgingStatus.code]
     }
