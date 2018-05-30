@@ -13,7 +13,7 @@
         </template>
       </table-column>
 
-      <table-column show="timestamp" :label="$t('Timestamp')" header-class="left-header-cell" cell-class="left-cell">
+      <table-column show="timestamp" :label="$t('Timestamp')" header-class="left-header-cell" cell-class="left-cell whitespace-no-wrap">
         <template slot-scope="row">
           {{ readableTimestamp(row.timestamp) }}
         </template>
