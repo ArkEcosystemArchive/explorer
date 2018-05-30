@@ -47,7 +47,9 @@
               <img class="icon flex-none" src="@/assets/images/icons/clock.svg" />
             </div>
             <div v-else>
-              {{ $t("Well Confirmed") }}
+              <div v-tooltip="row.confirmations + ' ' + $t('Confirmations')">
+                {{ $t("Well Confirmed") }}
+              </div>
             </div>
           </div>
         </template>
