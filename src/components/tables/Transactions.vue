@@ -60,10 +60,8 @@ export default {
 </script>
 
 <style>
-  @media(max-width: 815px) {
-    .wrap-timestamp {
-      white-space: normal;
-    }
+  .wrap-timestamp {
+    white-space: normal;
   }
 
   @media(min-width: 815px) {
