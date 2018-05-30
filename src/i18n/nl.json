@@ -113,5 +113,10 @@
 
   "2nd Signature Registration": "Registratie 2e Handtekening",
   "Delegate Registration": "Registratie Afgevaardigde",
-  "Vote": "Stem"
+  "Vote": "Stem",
+  "Multisignature Registration": "Registratie Multisignature",
+  "IPFS": "IPFS",
+  "Timelock Transfer": "Timelock Transfer",
+  "Multipayment": "Multipayment",
+  "Delegate Resignation": "Ontslag Afgevaardigde"
 }
