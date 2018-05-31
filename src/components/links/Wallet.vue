@@ -1,7 +1,7 @@
 <template>
   <span>
     <span class="hidden md:inline-block">
-      <router-link v-if="![1, 2, 3].includes(type)" :to="{ name: 'wallet', params: { address: walletAddress } }">
+      <router-link v-if="!type" :to="{ name: 'wallet', params: { address: walletAddress } }">
         <span v-if="isKnown">{{ knownWallets[address] }}</span>
         <span v-else-if="delegate">{{ delegate.username }}</span>
         <span v-else-if="hasDefaultSlot"><slot></slot></span>
@@ -11,10 +11,15 @@
       <span v-if="type === 1">{{ $t("2nd Signature Registration") }}</span>
       <span v-else-if="type === 2">{{ $t("Delegate Registration") }}</span>
       <span v-else-if="type === 3">{{ $t("Vote") }}</span>
+      <span v-else-if="type === 4">{{ $t("Multisignature Registration") }}</span>
+      <span v-else-if="type === 5">{{ $t("IPFS") }}</span>
+      <span v-else-if="type === 6">{{ $t("Timelock Transfer") }}</span>
+      <span v-else-if="type === 7">{{ $t("Multipayment") }}</span>
+      <span v-else-if="type === 8">{{ $t("Delegate Resignation") }}</span>
     </span>
 
     <span class="md:hidden">
-      <router-link v-if="![1, 2, 3].includes(type)" :to="{ name: 'wallet', params: { address: walletAddress } }">
+      <router-link v-if="!type" :to="{ name: 'wallet', params: { address: walletAddress } }">
         <span v-if="isKnown">{{ knownWallets[address] }}</span>
         <span v-else-if="delegate">{{ delegate.username }}</span>
         <span v-else-if="address">{{ truncate(address) }}</span>
@@ -23,6 +28,11 @@
       <span v-if="type === 1">{{ $t("2nd Signature Registration") }}</span>
       <span v-else-if="type === 2">{{ $t("Delegate Registration") }}</span>
       <span v-else-if="type === 3">{{ $t("Vote") }}</span>
+      <span v-else-if="type === 4">{{ $t("Multisignature Registration") }}</span>
+      <span v-else-if="type === 5">{{ $t("IPFS") }}</span>
+      <span v-else-if="type === 6">{{ $t("Timelock Transfer") }}</span>
+      <span v-else-if="type === 7">{{ $t("Multipayment") }}</span>
+      <span v-else-if="type === 8">{{ $t("Delegate Resignation") }}</span>
     </span>
   </span>
 </template>

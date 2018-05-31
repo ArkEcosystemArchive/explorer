@@ -117,5 +117,10 @@
 
   "2nd Signature Registration": "2nd Signature Registration",
   "Delegate Registration": "Delegate Registration",
-  "Vote": "Vote"
+  "Vote": "Vote",
+  "Multisignature Registration": "Multisignature Registration",
+  "IPFS": "IPFS",
+  "Timelock Transfer": "Timelock Transfer",
+  "Multipayment": "Multipayment",
+  "Delegate Resignation": "Delegate Resignation"
 }
