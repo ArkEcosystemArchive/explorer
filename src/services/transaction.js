@@ -95,7 +95,7 @@ class TransactionService {
     return response.data.transactions
   }
 
-  async sendByAddressCount(senderId) {
+  async sentByAddressCount(senderId) {
     const response = await NodeService.get('transactions', {
       params: {
         senderId,
