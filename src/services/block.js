@@ -67,6 +67,18 @@ class BlockService {
     return response.data.blocks
   }
 
+  async forgedByPublicKeyCount(generatorPublicKey) {
+    const response = await NodeService.get('blocks', {
+      params: {
+        generatorPublicKey,
+        limit: 1
+      }
+    })
+
+    // currently not supported by node
+    return response.data.count
+  }
+
   async lastBlockByPublicKey(publicKey) {
     const response = await NodeService.get('blocks', {
       params: {

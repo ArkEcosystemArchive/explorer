@@ -77,7 +77,7 @@ export default {
 
     async getSentCount() {
       const wallet = await WalletService.find(this.address)
-      const response = await TransactionService.sendByAddressCount(wallet.address)
+      const response = await TransactionService.sentByAddressCount(wallet.address)
       this.totalTransactions += Number(response)
     },
 
