@@ -45,8 +45,8 @@ class DelegateService {
     const response = await NodeService.get('delegates/voters', {
       params: {publicKey}
     })
-    
-    return _.orderBy(
+
+    const voters = _.orderBy(
       response.data.accounts.map(account => {
         account.balance = Number(account.balance)
 
@@ -55,6 +55,10 @@ class DelegateService {
       'balance',
       'desc'
     )
+
+    return _.filter(voters, account => {
+      return account.balance > 0.1 * Math.pow(10, 8)
+    })
   }
 
   async findByUsername(username) {
