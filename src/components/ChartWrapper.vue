@@ -164,9 +164,6 @@ export default {
           data: response.datasets
         }],
       }
-
-      let maxY = Math.max(...this.chartData.datasets[0].data);
-      this.options.scales.yAxes[0].ticks.suggestedMax = maxY + 0.01;
     },
 
     watchCurrencyName() {
