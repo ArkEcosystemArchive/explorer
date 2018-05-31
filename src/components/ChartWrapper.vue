@@ -104,6 +104,11 @@ export default {
           title: tooltipItem => {
             const name = store.getters['currency/name']
             const symbol = store.getters['currency/symbol']
+            const token = store.getters['currency/symbol']
+
+            if ([token, 'BTC', 'ETH', 'LTC'].some(c => name.indexOf(c) > -1)) {
+              return `${symbol} ${Number(tooltipItem[0].yLabel).toFixed(8)} ${name}`
+            }
 
             return `${symbol} ${Number(tooltipItem[0].yLabel).toFixed(2)} ${name}`
           },
