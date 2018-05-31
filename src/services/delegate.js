@@ -41,12 +41,12 @@ class DelegateService {
       .reduce((a, b) => [...a, ...b])
   }
 
-  async voters(publicKey) {
+  async voters(publicKey, excludeLowBalances = true) {
     const response = await NodeService.get('delegates/voters', {
       params: {publicKey}
     })
 
-    const voters = _.orderBy(
+    let voters = _.orderBy(
       response.data.accounts.map(account => {
         account.balance = Number(account.balance)
 
@@ -56,9 +56,13 @@ class DelegateService {
       'desc'
     )
 
-    return _.filter(voters, account => {
-      return account.balance > 0.1 * Math.pow(10, 8)
-    })
+    if (excludeLowBalances) {
+      voters = _.filter(voters, account => {
+        return account.balance > 0.1 * Math.pow(10, 8)
+      })
+    }
+
+    return voters
   }
 
   async findByUsername(username) {
