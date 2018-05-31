@@ -30,7 +30,7 @@
     <div class="list-row-border-b">
       <div>{{ $t("Blocks") }}</div>
       <div>
-        <span :class="[ !delegate.missedblocks ? 'mr-2' : '' ]">{{ delegate.producedblocks }}</span>
+        <span :class="[ !delegate.missedblocks && delegate.producedblocks ? 'mr-2' : '' ]">{{ delegate.producedblocks }}</span>
         <span v-if="!!delegate.missedblocks" class="text-grey mr-2">({{ delegate.missedblocks }} {{ $t("missed") }})</span>
         <router-link v-if="delegate.producedblocks > 0" :to="{ name: 'wallet-blocks', params: { address: delegate.address, page: 1 } }">{{ $t("See all") }}</router-link>
       </div>
