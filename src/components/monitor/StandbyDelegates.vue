@@ -20,7 +20,9 @@
 
     <table-column show="approval" :label="$t('Approval')" header-class="right-header-cell sm:pr-10 hidden md:table-cell" cell-class="right-end-cell hidden md:table-cell w-40">
       <template slot-scope="row">
-        {{ percentageString(row.approval) }}
+        <span v-tooltip="{ content: readableCrypto(row.vote, true, 2), placement: 'left' }">
+          {{ percentageString(row.approval) }}
+        </span>
       </template>
     </table-column>
   </table-component>
