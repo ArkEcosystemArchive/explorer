@@ -49,7 +49,7 @@
 
     <table-column show="approval" :label="$t('Approval')" header-class="right-header-cell pr-5 md:pr-10 hidden md:table-cell" cell-class="py-3 px-4 md:pr-10 text-right border-none hidden md:table-cell">
       <template slot-scope="row">
-        <span v-tooltip="{ content: readableCrypto(row.vote, true, 2), placement: 'left' }">
+        <span v-tooltip="{ content: readableCrypto(row.vote, true, 2), placement: 'top' }">
           {{ percentageString(row.approval) }}
         </span>
       </template>
