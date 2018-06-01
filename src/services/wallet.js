@@ -14,7 +14,7 @@ class WalletService {
         address
       }
     })
-    
+
     const delegate = response.data.delegates[0]
 
     return delegate || false

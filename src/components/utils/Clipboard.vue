@@ -15,7 +15,7 @@ export default {
     },
   },
 
-  data: () => ({ 
+  data: () => ({
     copying: false,
     isMobileCopying: false
   }),

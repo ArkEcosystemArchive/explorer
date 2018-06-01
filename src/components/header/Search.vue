@@ -27,7 +27,7 @@ import SearchService from '@/services/search'
 import { mapGetters } from 'vuex'
 
 export default {
-  data: () => ({ 
+  data: () => ({
     query: null,
     nothingFound: false,
     searchCount: 0,
