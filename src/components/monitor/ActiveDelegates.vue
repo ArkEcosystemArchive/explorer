@@ -16,9 +16,9 @@
       </template>
     </table-column>
 
-    <table-column show="producedblocks" :label="$t('Forged')" header-class="left-header-cell hidden xl:table-cell" cell-class="py-3 px-4 text-left border-none hidden xl:table-cell">
+    <table-column show="producedblocks" :label="$t('Forged blocks')" header-class="left-header-cell hidden xl:table-cell" cell-class="py-3 px-4 text-left border-none hidden xl:table-cell">
       <template slot-scope="row">
-        {{ readableCrypto(totalForged(row)) }}
+        {{ row.producedblocks }}
       </template>
     </table-column>
 
@@ -49,7 +49,9 @@
 
     <table-column show="approval" :label="$t('Approval')" header-class="right-header-cell pr-5 md:pr-10 hidden md:table-cell" cell-class="py-3 px-4 md:pr-10 text-right border-none hidden md:table-cell">
       <template slot-scope="row">
-        {{ percentageString(row.approval) }}
+        <span v-tooltip="{ content: readableCrypto(row.vote, true, 2), placement: 'top' }">
+          {{ percentageString(row.approval) }}
+        </span>
       </template>
     </table-column>
   </table-component>
@@ -67,17 +69,7 @@ export default {
     },
   },
 
-  computed: {
-    ...mapGetters('delegates', ['forged'])
-  },
-
   methods: {
-    totalForged(delegate) {
-      delegate = this.forged.find(d => d.delegate === delegate.publicKey)
-
-      return delegate ? delegate.forged : 0
-    },
-
     lastForgingTime(delegate) {
       const lastBlock = delegate.forgingStatus.lastBlock
 
@@ -90,7 +82,7 @@ export default {
         '1': this.$i18n.t('Missing'),
         '2': this.$i18n.t('Not Forging'),
         '3': this.$i18n.t('Awaiting Slot'),
-        '4': this.$i18n.t('Awaiting Slot'),
+        '4': this.$i18n.t('Missed block, Awaiting Slot'),
         '5': this.$i18n.t('Not Forging'),
       }[row.forgingStatus.code]
 
@@ -112,7 +104,7 @@ export default {
         '1': '#f6993f', // Missing
         '2': '#ef192d', // Not Forging
         '3': '#838a9b', // Awaiting Slot
-        '4': '#838a9b', // Awaiting Slot
+        '4': '#f6993f', // Missed in previous round, now awaiting Slot
         '5': '#ef192d', // Not Forging
       }[row.forgingStatus.code]
     }

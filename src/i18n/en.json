@@ -47,6 +47,7 @@
   "Rank": "Rank",
   "Name": "Name",
   "Forged": "Forged",
+  "Forged blocks": "Forged blocks",
   "Last Forged": "Last Forged",
   "Status": "Status",
   "Productivity": "Productivity",
@@ -58,10 +59,11 @@
   "Not forging": "Not forging",
   "In queue for forging": "In queue for forging",
   "Last block": "Last block",
-  "from transactions": "{currency} from {transactions} transactions",
+  "from transactions": "from 0 transactions | from 1 transaction | from {count} transactions",
   "Total Forged (token)": "Total Forged ({token})",
   "Forging": "Forging",
   "Missing": "Missing",
+  "Missed block, Awaiting Slot": "Missed block, Awaiting Slot",
   "Not Forging": "Not Forging",
   "Awaiting Slot": "Awaiting Slot",
 
@@ -78,6 +80,7 @@
   "missed": "missed",
   "Votes": "Votes",
   "Voters": "Voters",
+  "Only voters with more than 0.1 Ark": "Only voters with more than 0.1 Ark",
   "See all": "See all",
   "All": "All",
   "Sent": "Sent",
@@ -115,5 +118,10 @@
 
   "2nd Signature Registration": "2nd Signature Registration",
   "Delegate Registration": "Delegate Registration",
-  "Vote": "Vote"
+  "Vote": "Vote",
+  "Multisignature Registration": "Multisignature Registration",
+  "IPFS": "IPFS",
+  "Timelock Transfer": "Timelock Transfer",
+  "Multipayment": "Multipayment",
+  "Delegate Resignation": "Delegate Resignation"
 }

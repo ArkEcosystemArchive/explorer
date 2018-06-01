@@ -103,9 +103,13 @@ export default {
         callbacks: {
           title: tooltipItem => {
             const name = store.getters['currency/name']
-            const symbol = store.getters['currency/symbol']
+            const token = store.getters['currency/symbol']
 
-            return `${symbol} ${Number(tooltipItem[0].yLabel).toFixed(2)} ${name}`
+            if ([token, 'BTC', 'ETH', 'LTC'].some(c => name.indexOf(c) > -1)) {
+              return `${name} ${Number(tooltipItem[0].yLabel).toFixed(8)}`
+            }
+
+            return `${name} ${Number(tooltipItem[0].yLabel).toFixed(2)}`
           },
           label: tooltipItem => ''
           // label: tooltipItem => `BTC ${tooltipItem.yLabel}`
@@ -159,9 +163,6 @@ export default {
           data: response.datasets
         }],
       }
-
-      let maxY = Math.max(...this.chartData.datasets[0].data);
-      this.options.scales.yAxes[0].ticks.suggestedMax = maxY + 0.01;
     },
 
     watchCurrencyName() {

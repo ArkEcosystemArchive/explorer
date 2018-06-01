@@ -9,7 +9,7 @@
     <input
       type="search"
       ref="search"
-      :placeholder="$t('Find a block, transaction, address or delegate')"
+      :placeholder=placeholder
       class="search-input w-full flex-auto mr-2 py-4 pl-4 bg-transparent"
       :class="{ 'text-grey': nightMode }"
       v-model="query"
@@ -27,10 +27,11 @@ import SearchService from '@/services/search'
 import { mapGetters } from 'vuex'
 
 export default {
-  data: () => ({ 
+  data: () => ({
     query: null,
     nothingFound: false,
-    searchCount: 0
+    searchCount: 0,
+    placeholder: 'Search'
   }),
 
   computed: {
@@ -40,6 +41,13 @@ export default {
 
   mounted() {
     this.$refs.search.focus()
+
+    const WIDTH_THRESHOLD = 1024
+    const widthQuery = window.matchMedia(`(max-width: ${WIDTH_THRESHOLD}px)`)
+
+    widthQuery.addListener(e => this.setMobilePlaceholder(e.matches))
+
+    this.setMobilePlaceholder(window.innerWidth < WIDTH_THRESHOLD)
   },
 
   methods: {
@@ -91,6 +99,12 @@ export default {
         this.nothingFound = true
         setTimeout(() => (this.nothingFound = false), 1500)
       }
+    },
+
+    setMobilePlaceholder(showMobile) {
+      this.placeholder = showMobile
+        ? this.$i18n.t('Search')
+        : this.$i18n.t('Find a block, transaction, address or delegate')
     },
 
     changePage(name, params) {

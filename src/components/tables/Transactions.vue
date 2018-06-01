@@ -7,7 +7,7 @@
         </template>
       </table-column>
 
-      <table-column show="timestamp" :label="$t('Timestamp')" header-class="left-header-cell hidden md:table-cell" cell-class="left-cell hidden md:table-cell">
+      <table-column show="timestamp" :label="$t('Timestamp')" header-class="left-header-cell hidden md:table-cell" cell-class="left-cell hidden md:table-cell wrap-timestamp">
         <template slot-scope="row">
           {{ readableTimestamp(row.timestamp) }}
         </template>
@@ -27,11 +27,11 @@
 
       <table-column show="vendorField" :label="$t('Smartbridge')" header-class="right-header-cell hidden lg:table-cell" cell-class="right-cell hidden lg:table-cell">
         <template slot-scope="row">
-          {{ truncate(row.vendorField || '', 35) }}
+          {{ truncate(row.vendorField || '', 35, 'right') }}
         </template>
       </table-column>
 
-      <table-column show="amount" :label="$t('Amount (token)', {token: networkToken()})" header-class="right-header-end-cell md:pr-4" cell-class="right-end-cell md:pr-4">
+      <table-column show="amount" :label="$t('Amount (token)', {token: networkToken()})" header-class="right-header-end-cell lg:pr-4" cell-class="right-end-cell lg:pr-4">
         <template slot-scope="row">
           <span class="whitespace-no-wrap">
             <transaction-amount :transaction="row" :type="row.type"></transaction-amount>
@@ -39,7 +39,7 @@
         </template>
       </table-column>
 
-      <table-column show="fee" :label="$t('Fee (token)', {token: networkToken()})" header-class="right-header-end-cell hidden md:table-cell" cell-class="right-end-cell hidden md:table-cell">
+      <table-column show="fee" :label="$t('Fee (token)', {token: networkToken()})" header-class="right-header-end-cell hidden lg:table-cell" cell-class="right-end-cell hidden lg:table-cell">
         <template slot-scope="row">
           {{ readableCrypto(row.fee) }}
         </template>
@@ -58,3 +58,15 @@ export default {
   }
 }
 </script>
+
+<style>
+  .wrap-timestamp {
+    white-space: normal;
+  }
+
+  @media(min-width: 815px) {
+    .wrap-timestamp {
+      white-space: nowrap;
+    }
+  }
+</style>

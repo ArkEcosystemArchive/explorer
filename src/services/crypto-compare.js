@@ -4,23 +4,23 @@ import store from '@/store'
 
 class CryptoCompareService {
   async day() {
-    return await this.sendRequest('hour', 24, 'HH:mm')
+    return this.sendRequest('hour', 24, 'HH:mm')
   }
 
   async week() {
-    return await this.sendRequest('day', 7, 'DD.MM')
+    return this.sendRequest('day', 7, 'DD.MM')
   }
 
   async month() {
-    return await this.sendRequest('day', 30, 'DD.MM')
+    return this.sendRequest('day', 30, 'DD.MM')
   }
 
   async quarter() {
-    return await this.sendRequest('day', 120, 'DD.MM')
+    return this.sendRequest('day', 120, 'DD.MM')
   }
 
   async year() {
-    return await this.sendRequest('day', 365, 'DD.MM')
+    return this.sendRequest('day', 365, 'DD.MM')
   }
 
   async sendRequest(type, limit, dateTimeFormat) {

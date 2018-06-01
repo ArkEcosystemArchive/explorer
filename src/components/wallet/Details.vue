@@ -54,6 +54,7 @@
       <div class="flex-none px-8">
         <button
           @click="view = 'public'"
+          :disabled="!wallet.publicKey"
           :class="[view === 'public' ? 'bg-blue-darker' : 'bg-transparent text-blue-light', 'py-3 px-3 rounded-md text-white font-normal text-xs hover:text-blue']">
           <svg
             class="block"
@@ -165,7 +166,7 @@ export default {
 
   methods: {
     async getSendCount() {
-      const response = await TransactionService.sendByAddressCount(this.wallet.address)
+      const response = await TransactionService.sentByAddressCount(this.wallet.address)
       this.sendCount = response
     },
 

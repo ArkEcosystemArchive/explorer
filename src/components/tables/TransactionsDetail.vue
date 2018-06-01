@@ -3,7 +3,7 @@
     <table-component :data="transactions" sort-by="timestamp" sort-order="desc" :show-filter="false" :show-caption="false" table-class="w-full">
       <table-column show="id" :label="$t('ID')" header-class="left-header-start-cell" cell-class="left-start-cell">
         <template slot-scope="row">
-          <link-transaction :id="row.id" :smart-bridge="row.vendorField"></link-transaction>
+          <link-transaction :id="row.id" :smart-bridge="row.vendorField" :show-smart-bridge-icon="true"></link-transaction>
         </template>
       </table-column>
 
@@ -47,7 +47,9 @@
               <img class="icon flex-none" src="@/assets/images/icons/clock.svg" />
             </div>
             <div v-else>
-              {{ $t("Well Confirmed") }}
+              <div v-tooltip="row.confirmations + ' ' + $t('Confirmations')">
+                {{ $t("Well Confirmed") }}
+              </div>
             </div>
           </div>
         </template>

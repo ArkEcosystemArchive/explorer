@@ -8,7 +8,7 @@
       <div class="sm:hidden">
         <table-blocks-mobile :blocks="blocks"></table-blocks-mobile>
       </div>
-      <paginator :start="+this.page"></paginator>
+      <paginator :start="+this.page" :count="totalBlocks"></paginator>
     </section>
   </div>
 </template>
@@ -18,10 +18,14 @@ import WalletService from '@/services/wallet'
 import BlockService from '@/services/block'
 
 export default {
-  data: () => ({ blocks: [] }),
+  data: () => ({
+    totalBlocks: 0,
+    blocks: []
+  }),
 
   created() {
     this.$on('paginatorChanged', page => this.changePage(page))
+    this.getTotalBlocks()
   },
 
   async beforeRouteEnter (to, from, next) {
@@ -39,6 +43,7 @@ export default {
       const wallet = await WalletService.find(to.params.address)
       const blocks = await BlockService.getByPublicKey(wallet.publicKey, to.params.page)
       this.setBlocks(blocks)
+      next()
     } catch(e) { next({ name: '404' }) }
   },
 
@@ -56,6 +61,13 @@ export default {
       if (!blocks) return
 
       this.blocks = blocks
+    },
+
+    async getTotalBlocks() {
+      const wallet = await WalletService.find(this.address)
+      const response = await BlockService.forgedByPublicKeyCount(wallet.publicKey)
+
+      this.totalBlocks = Number(response)
     },
 
     changePage(page) {

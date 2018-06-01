@@ -47,20 +47,35 @@ const methods = {
           minute: 0,
           second: 0,
         })
-        .add(t, 'seconds');
+        .add(t, 'seconds')
     }
 
     const momentTime = getTime(time)
-    return typeof compareTime !== 'undefined' ? momentTime.from(getTime(compareTime)) : momentTime.fromNow();
+    return typeof compareTime !== 'undefined' ? momentTime.from(getTime(compareTime)) : momentTime.fromNow()
   },
 
+  truncate(value, length = 13, truncateWhere = 'middle') {
+    switch (truncateWhere) {
+      case 'left':
+        return (value.length > length)
+          ? `...${value.slice(value.length - length + 3)}`
+          : value
 
-  truncate(value, length = 13) {
-    const odd = length % 2;
-    const truncationLength = Math.floor((length - 1) / 2);
-    return (value.length > length)
-      ? `${value.slice(0, truncationLength - odd)}...${value.slice(value.length - truncationLength + 1)}`
-      : value
+      case 'middle':
+        const odd = length % 2
+        const truncationLength = Math.floor((length - 1) / 2)
+        return (value.length > length)
+          ? `${value.slice(0, truncationLength - odd)}...${value.slice(value.length - truncationLength + 1)}`
+          : value
+
+      case 'right':
+        return (value.length > length)
+          ? `${value.slice(0, length - 3)}...`
+          : value
+
+      default:
+        return value
+    }
   },
 
   rawCurrency(value, currencyName) {
@@ -108,10 +123,10 @@ const methods = {
       })
   },
 
-  readableCrypto(value, appendCurrency = true) {
-    if (typeof value != 'undefined') {
+  readableCrypto(value, appendCurrency = true, decimals = 8) {
+    if (typeof value !== 'undefined') {
       value = (value /= Math.pow(10, 8)).toLocaleString(undefined, {
-        maximumFractionDigits: 8,
+        maximumFractionDigits: decimals,
       })
 
       return appendCurrency ? `${value} ${store.getters['network/symbol']}` : value
@@ -127,7 +142,7 @@ const methods = {
   },
 
   percentageString(value, decimals = 2) {
-    if (typeof value != 'undefined') {
+    if (typeof value !== 'undefined') {
       value = value.toLocaleString(undefined, {
         minimumFractionDigits: decimals,
         maximumFractionDigits: decimals,
@@ -136,7 +151,7 @@ const methods = {
       return value + '%'
     }
 
-    return "-"
+    return '-'
   },
 }
 
