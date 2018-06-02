@@ -2,9 +2,9 @@
   <span v-tooltip="sanitizedVendorfield">
     <router-link :to="{ name: 'transaction', params: { id } }" class="hidden md:inline-block whitespace-no-wrap">
       <span v-if="hasDefaultSlot"><slot></slot></span>
-      <div v-else class="flex">
+      <div v-else-if="showSmartBridgeIcon" class="flex">
         <svg
-         v-if="smartBridge && showSmartBridgeIcon"
+         v-if="smartBridge"
          class="mr-2 fill-current"
          xmlns="http://www.w3.org/2000/svg"
          xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -16,7 +16,10 @@
           c0-0.1,0-0.5,0.5-0.9l0,0c0.6-0.6,1.2-1,2.1-1.4h0.1v1.6c0.2-0.1,0.3-0.2,0.6-0.2c0.6-0.2,1.1-0.6,1.6-0.8c0-0.3,0.1-0.7,0.3-1
           c0.5-0.5,1.1-0.5,1.6,0C8.4,5,8.4,5.7,8,6.1z"/>
         </svg>
-        <div v-else style="width:18px" class="mr-2"></div>
+        <div v-else style="width:18px;" class="mr-2"></div>
+        <span>{{ truncate(id) }}</span>
+      </div>
+      <div v-else>
         <span>{{ truncate(id) }}</span>
       </div>
     </router-link>
