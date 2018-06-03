@@ -143,7 +143,7 @@ tbody tr:nth-child(even) {
 }
 
 tbody tr:hover {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: var(--color-theme-table-row-hover);
   transform: scale(1.015);
   box-shadow: var(--theme-table-hover-shadow);
   z-index: 999;
