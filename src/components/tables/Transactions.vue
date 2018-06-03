@@ -64,7 +64,7 @@ export default {
     white-space: normal;
   }
 
-  @media(min-width: 815px) {
+  @media(min-width: 870px) {
     .wrap-timestamp {
       white-space: nowrap;
     }
