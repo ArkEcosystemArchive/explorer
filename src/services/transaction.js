@@ -24,7 +24,7 @@ class TransactionService {
     const response = await NodeService.get('transactions', {
       params: {
         blockId: id,
-        limit: 25
+        limit: 50
       }
     })
     return response.data.transactions
