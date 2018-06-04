@@ -4,11 +4,12 @@
 module.exports = {
   // Default test, which also serves as setup for correct url
   'delegate wallet summary page should be available': function (browser) {
-    const devServer = browser.globals.devServerURL + '/wallets/ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ'
+    const devServer = browser.globals.devServerURL + '/#/wallets/ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ'
 
     browser
       .url(devServer)
       .waitForElementVisible('main.theme-light', 5000)
+      .waitForElementVisible('h1', 5000)
       .assert.containsText('h1', 'Wallet Summary')
       .end()
   },

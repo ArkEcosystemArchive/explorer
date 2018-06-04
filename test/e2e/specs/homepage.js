@@ -9,6 +9,7 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('main.theme-light', 5000)
+      .waitForElementVisible('h1', 5000)
       .assert.containsText('h1', 'Latest transactions and blocks')
   },
 
