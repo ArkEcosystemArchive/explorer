@@ -25,7 +25,6 @@
     "lodash": "^4.17.10",
     "moment": "^2.22.1",
     "qrious": "^4.0.2",
-    "sanitize-html": "^1.18.2",
     "v-tooltip": "^2.0.0-rc.32",
     "vue": "^2.5.16",
     "vue-chartjs": "^3.3.1",

@@ -3,7 +3,7 @@
     <table-component :data="transactions" sort-by="timestamp" sort-order="desc" :show-filter="false" :show-caption="false" table-class="w-full">
       <table-column show="id" :label="$t('ID')" header-class="left-header-start-cell" cell-class="left-start-cell">
         <template slot-scope="row">
-          <link-transaction :id="row.id" :smart-bridge="row.vendorField" :show-smart-bridge-icon="true"></link-transaction>
+          <link-transaction :id="row.id" :smart-bridge="row.vendorField" :show-smart-bridge-icon="showSmartBridgeIcon"></link-transaction>
         </template>
       </table-column>
 
@@ -55,6 +55,14 @@ export default {
       type: Array,
       required: true,
     }
+  },
+
+  computed: {
+    showSmartBridgeIcon() {
+      return this.transactions.some(transaction => {
+        return !!transaction.vendorField
+      })
+    }
   }
 }
 </script>
@@ -64,7 +72,7 @@ export default {
     white-space: normal;
   }
 
-  @media(min-width: 815px) {
+  @media(min-width: 870px) {
     .wrap-timestamp {
       white-space: nowrap;
     }
