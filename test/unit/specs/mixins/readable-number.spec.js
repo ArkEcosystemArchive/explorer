@@ -7,7 +7,7 @@ describe('readable number mixin', () => {
     expect(mixins.readableNumber(100)).toEqual('100.00')
     expect(mixins.readableNumber(1000)).toEqual('1000.00')
     expect(mixins.readableNumber(1234.56789)).toEqual('1234.57')
-  }),
+  })
 
   it('should format to the specified decimals', () => {
     expect(mixins.readableNumber(1, 3)).toEqual('1.000')

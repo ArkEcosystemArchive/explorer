@@ -19,6 +19,7 @@ describe('Block/Details', () => {
       propsData: { block: {} },
       stubs: ['link-wallet'],
       i18n,
+      mixins,
       localVue,
     })
     expect(wrapper.findAll('.list-row-border-b')).toHaveLength(8)

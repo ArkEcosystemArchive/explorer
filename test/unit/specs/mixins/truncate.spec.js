@@ -1,7 +1,6 @@
 import mixins from '@/mixins'
 
 describe('truncate mixin', () => {
-
   it('should properly truncate the given data, if given length is smaller than value', () => {
     expect(mixins.truncate('Hello World', 1)).toEqual('Hello Worl...')
     expect(mixins.truncate('Hello World', 10)).toEqual('Hell...rld')

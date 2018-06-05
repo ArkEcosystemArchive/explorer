@@ -7,7 +7,7 @@ describe('Modal', () => {
       const wrapper = mount(Modal)
       expect(wrapper.contains('.modal-mask')).toBe(true)
     })
-  }),
+  })
 
   describe('when closed by button', () => {
     it('should emit a close event', () => {
@@ -16,7 +16,7 @@ describe('Modal', () => {
       mask.trigger('click')
       expect(wrapper.emitted('close')).toBeTruthy()
     })
-  }),
+  })
 
   describe('when closed by clicking mask overlay', () => {
     it('should emit a close event', () => {
@@ -25,7 +25,7 @@ describe('Modal', () => {
       button.trigger('click')
       expect(wrapper.emitted('close')).toBeTruthy()
     })
-  }),
+  })
 
   it('should not close when pressing inside the modal', () => {
     const wrapper = mount(Modal)

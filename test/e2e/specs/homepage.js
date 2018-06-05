@@ -1,6 +1,9 @@
 // For authoring Nightwatch tests, see
 // http://nightwatchjs.org/guide#usage
 
+// Disable eslint for .to.not.be.present statements
+/* eslint-disable no-unused-expressions */
+
 module.exports = {
   // Default homepage test, which also serves as setup for correct url
   'homepage should be available': function (browser) {
@@ -16,16 +19,16 @@ module.exports = {
   'homepage should contain expected components': function(browser) {
     browser
       .elements('css selector', '.bg-stat-background > div', function(result) {
-        browser.elementIdText(result.value[0].ELEMENT, function(elemResult) { 
+        browser.elementIdText(result.value[0].ELEMENT, function(elemResult) {
           browser.assert.ok(elemResult.value.startsWith('Height'))
         })
-        browser.elementIdText(result.value[1].ELEMENT, function(elemResult) { 
+        browser.elementIdText(result.value[1].ELEMENT, function(elemResult) {
           browser.assert.ok(elemResult.value.startsWith('Network'))
         })
-        browser.elementIdText(result.value[2].ELEMENT, function(elemResult) { 
+        browser.elementIdText(result.value[2].ELEMENT, function(elemResult) {
           browser.assert.ok(elemResult.value.startsWith('Supply'))
         })
-        browser.elementIdText(result.value[3].ELEMENT, function(elemResult) { 
+        browser.elementIdText(result.value[3].ELEMENT, function(elemResult) {
           browser.assert.ok(elemResult.value.startsWith('Market Cap'))
         })
       })
@@ -92,13 +95,13 @@ module.exports = {
       .pause(500)
     browser.assert.visible('.menu-button')
     browser.elements('css selector', '.menu-button', function(result) {
-      browser.elementIdText(result.value[0].ELEMENT, function(elemResult) { 
+      browser.elementIdText(result.value[0].ELEMENT, function(elemResult) {
         browser.assert.ok(elemResult.value === 'Home')
       })
-      browser.elementIdText(result.value[1].ELEMENT, function(elemResult) { 
+      browser.elementIdText(result.value[1].ELEMENT, function(elemResult) {
         browser.assert.ok(elemResult.value === 'Top Wallets')
       })
-      browser.elementIdText(result.value[2].ELEMENT, function(elemResult) { 
+      browser.elementIdText(result.value[2].ELEMENT, function(elemResult) {
         browser.assert.ok(elemResult.value === 'Delegate Monitor')
       })
     })
