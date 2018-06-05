@@ -81,6 +81,11 @@ const router = new Router({
       component: BlockComponent
     },
     {
+      path: '/block/:id/transactions/:page',
+      name: 'block-transactions',
+      component: BlockTransactionsComponent
+    },
+    {
       path: '/blocks',
       redirect: to => ({ name: 'blocks', params: { page: 1 } })
     },
@@ -88,11 +93,6 @@ const router = new Router({
       path: '/blocks/:page',
       name: 'blocks',
       component: BlocksComponent
-    },
-    {
-      path: '/blocks/:id/transactions/:page',
-      name: 'block-transactions',
-      component: BlockTransactionsComponent
     },
     {
       path: '/transaction/:id',
