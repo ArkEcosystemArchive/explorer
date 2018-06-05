@@ -8,6 +8,11 @@
       <div class="sm:hidden">
         <table-transactions-mobile :transactions="transactions"></table-transactions-mobile>
       </div>
+      <div class="mx-10 mt-10 flex flex-wrap" v-if="transactions.length >= 25">
+        <router-link :to="{ name: 'block-transactions', params: { block: this.block.id, page: 2 } }" tag="button" class="show-more-button">
+          {{ $t("Show more") }}
+        </router-link>
+      </div>
     </section>
   </div>
 </template>

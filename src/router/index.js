@@ -4,6 +4,7 @@ import store from '@/store'
 
 const HomeComponent = () => import('@/pages/Home')
 const BlockComponent = () => import('@/pages/Block')
+const BlockTransactionsComponent = () => import('@/pages/Block/Transactions')
 const BlocksComponent = () => import('@/pages/Blocks')
 const WalletComponent = () => import('@/pages/Wallet')
 const WalletVotersComponent = () => import('@/pages/Wallet/Voters')
@@ -87,6 +88,11 @@ const router = new Router({
       path: '/blocks/:page',
       name: 'blocks',
       component: BlocksComponent
+    },
+    {
+      path: '/blocks/:id/transactions/:page',
+      name: 'block-transactions',
+      component: BlockTransactionsComponent
     },
     {
       path: '/transaction/:id',
