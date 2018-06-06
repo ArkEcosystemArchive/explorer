@@ -26,7 +26,8 @@ export default {
   components: { AppHeader, AppFooter },
 
   data: () => ({
-    timer: null,
+    currencyTimer: null,
+    networkTimer: null
   }),
 
   async created() {
@@ -91,7 +92,7 @@ export default {
 
   methods: {
     prepareComponent() {
-      this.initialiseTimer()
+      this.initialiseTimers()
     },
 
     async updateCurrencyRate() {
@@ -116,18 +117,26 @@ export default {
       this.$store.dispatch('delegates/setDelegates', delegates)
     },
 
-    initialiseTimer() {
-      this.timer = setInterval(() => {
+    initialiseTimers() {
+      this.currencyTimer = setInterval(() => {
         this.updateCurrencyRate()
+      }, 5 * 60 * 1000)
+
+      this.networkTimer = setInterval(() => {
         this.updateSupply()
         this.updateHeight()
         this.updateDelegates()
-      }, 5 * 60 * 1000)
+      }, 8 * 1000)
     },
+
+    clearTimers() {
+      clearInterval(this.currencyTimer)
+      clearInterval(this.networkTimer)
+    }
   },
 
   beforeDestroy() {
-    clearInterval(this.timer)
+    this.clearTimers()
   },
 }
 </script>
