@@ -4,7 +4,7 @@
       <div v-for="transaction in transactions" :key="transaction.id" class="row-mobile">
         <div class="list-row-border-b">
           <div>{{ $t("ID") }}</div>
-          <link-transaction :id="transaction.id" :smart-bridge="transaction.vendorField"></link-transaction>
+          <link-transaction :id="transaction.id"></link-transaction>
         </div>
 
         <div class="list-row-border-b">
@@ -20,6 +20,11 @@
         <div class="list-row-border-b">
           <div>{{ $t("Recipient") }}</div>
           <link-wallet :address="transaction.recipientId" :type="transaction.type"></link-wallet>
+        </div>
+
+        <div class="list-row-border-b-no-wrap" v-if="transaction.vendorField">
+          <div class="mr-4">{{ $t("Smartbridge") }}</div>
+          <div class="truncate">{{ transaction.vendorField }}</div>
         </div>
 
         <div class="list-row-border-b">
