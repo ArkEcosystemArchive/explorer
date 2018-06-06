@@ -20,11 +20,15 @@ class TransactionService {
     return response.data.transaction
   }
 
-  async findByBlock(id) {
+  async findByBlock(id, page = 1, limit = 25) {
+    const offset = page > 1 ? (page - 1) * limit : 0
+
     const response = await NodeService.get('transactions', {
       params: {
         blockId: id,
-        limit: 25
+        limit,
+        offset,
+        orderBy: 'timestamp:desc'
       }
     })
     return response.data.transactions
@@ -109,6 +113,16 @@ class TransactionService {
     const response = await NodeService.get('transactions', {
       params: {
         recipientId,
+        limit: 1
+      }
+    })
+    return response.data.count
+  }
+
+  async findByBlockCount(blockId) {
+    const response = await NodeService.get('transactions', {
+      params: {
+        blockId,
         limit: 1
       }
     })
