@@ -1,5 +1,5 @@
 <template>
-  <section class="mb-5 bg-theme-feature-background xl:rounded-lg flex flex-col md:flex-row items-center px-10 py-8">
+  <section class="mb-5 bg-theme-feature-background xl:rounded-lg flex flex-col md:flex-row items-center px-5 sm:px-10 py-8">
     <div class="flex items-center flex-auto w-full md:w-auto mb-5 md:mb-0">
       <img class="mr-6" src="@/assets/images/icons/block.svg" />
       <div class="flex-auto min-w-0">
