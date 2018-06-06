@@ -40,7 +40,7 @@ const router = new Router({
       })
     },
     {
-      path: '/wallets/:address/voters/:page',
+      path: '/wallets/:address/voters/:page(\\d+)',
       name: 'wallet-voters',
       component: WalletVotersComponent
     },
@@ -52,7 +52,7 @@ const router = new Router({
       })
     },
     {
-      path: '/wallets/:address/blocks/:page',
+      path: '/wallets/:address/blocks/:page(\\d+)',
       name: 'wallet-blocks',
       component: WalletBlocksComponent
     },
@@ -71,7 +71,7 @@ const router = new Router({
       })
     },
     {
-      path: '/wallets/:address/transactions/:type/:page',
+      path: '/wallets/:address/transactions/:type/:page(\\d+)',
       name: 'wallet-transactions',
       component: WalletTransactionsComponent
     },
@@ -81,7 +81,14 @@ const router = new Router({
       component: BlockComponent
     },
     {
-      path: '/block/:id/transactions/:page',
+      path: '/block/:id/transactions',
+      redirect: to => ({
+        name: 'block-transactions',
+        params: { id: to.params.id, page: 1 }
+      })
+    },
+    {
+      path: '/block/:id/transactions/:page(\\d+)',
       name: 'block-transactions',
       component: BlockTransactionsComponent
     },
@@ -90,7 +97,7 @@ const router = new Router({
       redirect: to => ({ name: 'blocks', params: { page: 1 } })
     },
     {
-      path: '/blocks/:page',
+      path: '/blocks/:page(\\d+)',
       name: 'blocks',
       component: BlocksComponent
     },
@@ -104,7 +111,7 @@ const router = new Router({
       redirect: to => ({ name: 'transactions', params: { page: 1 } })
     },
     {
-      path: '/transactions/:page',
+      path: '/transactions/:page(\\d+)',
       name: 'transactions',
       component: TransactionsComponent
     },
@@ -114,7 +121,11 @@ const router = new Router({
       component: DelegateMonitorComponent
     },
     {
-      path: '/top-wallets/:page',
+      path: 'top-wallets',
+      redirect: to => ({ name: 'top-wallets', params: { page: 1 } })
+    },
+    {
+      path: '/top-wallets/:page(\\d+)',
       name: 'top-wallets',
       component: TopWalletsComponent
     },
