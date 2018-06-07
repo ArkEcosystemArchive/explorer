@@ -37,6 +37,9 @@
           <div>{{ readableCrypto(block.totalFee) }}</div>
         </div>
       </div>
+      <div v-if="blocks && !blocks.length" class="px-5 md:px-10">
+        <span>{{ $t("No Results") }}</span>
+      </div>
     </loader>
   </div>
 </template>
@@ -45,7 +48,7 @@
 export default {
   props: {
     blocks: {
-      type: Array,
+      // type: Array or null
       required: true,
     }
   }

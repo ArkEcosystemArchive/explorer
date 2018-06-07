@@ -1,5 +1,5 @@
 <template>
-  <div v-if="transactions.length > 0">
+  <div v-if="transactions && transactions.length > 0">
     <h2 class="text-2xl mb-5 md:mb-6 px-5 sm:hidden text-theme-text-primary">{{ $t("Transactions") }}</h2>
     <section class="page-section py-8">
       <div class="hidden sm:block">
@@ -28,7 +28,7 @@ export default {
     }
   },
 
-  data: () => ({ transactions: [] }),
+  data: () => ({ transactions: null }),
 
   watch: {
     block() {

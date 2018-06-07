@@ -8,7 +8,7 @@
       <div class="sm:hidden">
         <table-blocks-mobile :blocks="blocks"></table-blocks-mobile>
       </div>
-      <paginator :start="+this.$route.params.page"></paginator>
+      <paginator v-if="blocks" :start="+this.$route.params.page"></paginator>
     </section>
   </div>
 </template>
@@ -17,7 +17,7 @@
 import BlockService from '@/services/block'
 
 export default {
-  data: () => ({ blocks: [] }),
+  data: () => ({ blocks: null }),
 
   created() {
     this.$on('paginatorChanged', page => this.changePage(page))
@@ -29,7 +29,7 @@ export default {
   },
 
   async beforeRouteUpdate (to, from, next) {
-    this.blocks = []
+    this.blocks = null
 
     const response = await BlockService.paginate(to.params.page)
     this.setBlocks(response)

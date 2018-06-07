@@ -1,10 +1,10 @@
 <template>
   <span>
-    <div class="text-center" v-if="!keys.length">
+    <div class="text-center" v-if="data === null">
       <pulse-loader color="#037cff"></pulse-loader>
     </div>
 
-    <slot v-if="keys.length"></slot>
+    <slot v-else></slot>
   </span>
 </template>
 
@@ -20,10 +20,6 @@ export default {
     data: {
       required: true
     }
-  },
-
-  computed: {
-    keys() { return Object.keys(this.data) }
   }
 }
 </script>

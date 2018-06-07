@@ -39,6 +39,9 @@
           <div>{{ readableCrypto(transaction.fee) }}</div>
         </div>
       </div>
+      <div v-if="transactions && !transactions.length" class="px-5 md:px-10">
+        <span>{{ $t("No Results") }}</span>
+      </div>
     </loader>
   </div>
 </template>
@@ -47,7 +50,7 @@
 export default {
   props: {
     transactions: {
-      type: Array,
+      // type: Array or null
       required: true,
     }
   }

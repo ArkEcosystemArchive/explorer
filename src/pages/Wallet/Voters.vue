@@ -8,7 +8,7 @@
       <div class="sm:hidden">
         <table-wallets-mobile :wallets="filteredWallets" :total="votes"></table-wallets-mobile>
       </div>
-      <paginator :start="+this.page" :count="wallets.length"></paginator>
+      <paginator v-if="wallets" :start="+this.page" :count="count"></paginator>
     </section>
   </div>
 </template>
@@ -20,7 +20,7 @@ import sumBy from 'lodash/sumBy'
 
 export default {
   data: () => ({
-    wallets: [],
+    wallets: null,
     perPage: 25,
   }),
 
@@ -30,6 +30,8 @@ export default {
 
   computed: {
     filteredWallets() {
+      if (!this.wallets) return null
+
       let page = this.page - 1
 
       return this.wallets.slice(page * this.perPage, (page + 1) * this.perPage)
@@ -43,6 +45,9 @@ export default {
     username() {
       return this.$route.params.username
     },
+    count() {
+      return this.wallets.length
+    }
   },
 
   mounted() {

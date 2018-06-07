@@ -8,7 +8,7 @@
       <div class="sm:hidden">
         <table-transactions-mobile :transactions="transactions"></table-transactions-mobile>
       </div>
-      <paginator :start="+this.page" :count="totalTransactions"></paginator>
+      <paginator v-if="transactions" :start="+this.page" :count="totalTransactions"></paginator>
     </section>
   </div>
 </template>
@@ -20,7 +20,7 @@ import TransactionService from '@/services/transaction'
 export default {
   data: () => ({
     totalTransactions: 0,
-    transactions: []
+    transactions: null
   }),
 
   created() {
@@ -37,7 +37,7 @@ export default {
   },
 
   async beforeRouteUpdate (to, from, next) {
-    this.transactions = []
+    this.transactions = null
 
     try {
       const block = await BlockService.find(to.params.id)

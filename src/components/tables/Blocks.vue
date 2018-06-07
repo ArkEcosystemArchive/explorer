@@ -1,6 +1,6 @@
 <template>
   <loader :data="blocks">
-    <table-component :data="blocks" sort-by="height" sort-order="desc" :show-filter="false" :show-caption="false" table-class="w-full">
+    <table-component v-if="blocks && blocks.length > 0" :data="blocks" sort-by="height" sort-order="desc" :show-filter="false" :show-caption="false" table-class="w-full">
       <table-column show="id" :label="$t('ID')" header-class="left-header-start-cell" cell-class="left-start-cell">
         <template slot-scope="row">
           <link-block :id="row.id"></link-block>
@@ -43,6 +43,9 @@
         </template>
       </table-column>
     </table-component>
+    <div v-else class="px-5 md:px-10">
+      <span>{{ $t("No Results") }}</span>
+    </div>
   </loader>
 </template>
 
@@ -50,7 +53,7 @@
 export default {
   props: {
     blocks: {
-      type: Array,
+      // type: Array or null
       required: true,
     },
   }
