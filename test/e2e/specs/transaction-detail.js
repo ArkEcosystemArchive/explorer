@@ -1,6 +1,9 @@
 // For authoring Nightwatch tests, see
 // http://nightwatchjs.org/guide#usage
 
+// Disable eslint for .to.not.be.present statements
+/* eslint-disable no-unused-expressions */
+
 module.exports = {
   // Default test, which also serves as setup for correct url
   'transaction detail page should be available': function (browser) {
@@ -11,7 +14,65 @@ module.exports = {
       .waitForElementVisible('main.theme-light', 5000)
       .waitForElementVisible('h1', 5000)
       .assert.containsText('h1', 'Transaction')
-      .end()
   },
 
+  'it should be possible to click on the sender': function(browser) {
+    browser
+      .useXpath()
+      .click("//div/div[contains(@class, 'list-row')][1]//a[1]")
+      .pause(500)
+    browser
+      .useCss()
+      .waitForElementVisible('h1', 5000)
+      .assert.containsText('h1', 'Wallet Summary')
+      .assert.urlContains('wallets/AFrPtEmzu6wdVpa2CnRDEKGQQMWgq8nE9V')
+  },
+
+  'it should be possible to click on the recipient': function(browser) {
+    const devServer = browser.globals.devServerURL + '/#/transaction/818c157383c814a353efbfbbdd3dccabb13cb35e156bb70d31e77248166657a7'
+
+    browser
+      .url(devServer)
+      .waitForElementVisible('main.theme-light', 5000)
+      .waitForElementVisible('.list-row-border-b', 5000)
+    browser
+      .useXpath()
+      .click("//div/div[contains(@class, 'list-row')][2]//a[1]")
+      .pause(500)
+    browser
+      .useCss()
+      .waitForElementVisible('h1', 5000)
+      .assert.containsText('h1', 'Wallet Summary')
+      .assert.urlContains('wallets/ATJDMLxBXPxn9bss911HTFCp9PhBHih9uL')
+  },
+
+  'it should be possible to click on the transaction block id': function(browser) {
+    const devServer = browser.globals.devServerURL + '/#/transaction/818c157383c814a353efbfbbdd3dccabb13cb35e156bb70d31e77248166657a7'
+
+    browser
+      .url(devServer)
+      .waitForElementVisible('main.theme-light', 5000)
+      .waitForElementVisible('.list-row-border-b', 5000)
+    browser
+      .useXpath()
+      .click("//div/div[contains(@class, 'list-row')][8]//a[1]")
+      .pause(500)
+    browser
+      .useCss()
+      .waitForElementVisible('h1', 5000)
+      .assert.containsText('h1', 'Block')
+      .assert.urlContains('block/12374209887221238137')
+      .end()
+  }
+
+  // TODO
+  // 'it should be possible to copy the transaction ID': function(browser) {
+  //   browser
+  //     .assert.cssClassNotPresent('img.block', 'animated')
+  //   browser
+  //     .click('button.has-tooltip')
+  //     .pause(50)
+  //     .assert.cssClassPresent('img.block', 'animated')
+  // }
 }
+
