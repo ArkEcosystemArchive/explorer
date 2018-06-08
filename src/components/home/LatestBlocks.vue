@@ -20,7 +20,7 @@
 import BlockService from '@/services/block'
 
 export default {
-  data: () => ({ blocks: [] }),
+  data: () => ({ blocks: null }),
 
   async mounted() {
     const response = await BlockService.latest()

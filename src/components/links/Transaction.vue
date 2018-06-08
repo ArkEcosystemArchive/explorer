@@ -1,11 +1,11 @@
 <template>
   <span v-tooltip="smartBridge">
-    <router-link :to="{ name: 'transaction', params: { id } }" class="hidden md:inline-block whitespace-no-wrap">
+    <router-link :to="{ name: 'transaction', params: { id } }" class="flex items-center whitespace-no-wrap">
       <span v-if="hasDefaultSlot"><slot></slot></span>
-      <div v-else-if="showSmartBridgeIcon" class="flex">
+      <template v-else>
         <svg
-         v-if="smartBridge"
-         class="mr-2 fill-current"
+         v-if="showSmartBridgeIcon && smartBridge"
+         class="mr-2 fill-current hidden md:block"
          xmlns="http://www.w3.org/2000/svg"
          xmlns:xlink="http://www.w3.org/1999/xlink"
          width="18px" height="18px">
@@ -17,8 +17,8 @@
           c0.5-0.5,1.1-0.5,1.6,0C8.4,5,8.4,5.7,8,6.1z"/>
         </svg>
         <svg
-         v-else
-         class="mr-2 fill-current"
+         v-else-if="showSmartBridgeIcon && !smartBridge"
+         class="mr-2 fill-current hidden md:block"
          xmlns="http://www.w3.org/2000/svg"
          xmlns:xlink="http://www.w3.org/1999/xlink"
          width="18px" height="18px">
@@ -33,13 +33,7 @@
           c0-0.3,0.3-0.5,0.6-0.5l3.9,0c0.3,0,0.6,0.1,0.7,0.2l6.7,6.7C17.1,10.3,17.1,10.5,16.9,10.7z"/>
         </svg>
         <span>{{ truncate(id) }}</span>
-      </div>
-      <div v-else>
-        <span>{{ truncate(id) }}</span>
-      </div>
-    </router-link>
-    <router-link :to="{ name: 'transaction', params: { id } }" class="md:hidden whitespace-no-wrap">
-      <span>{{ truncate(id) }}</span>
+      </template>
     </router-link>
   </span>
 </template>

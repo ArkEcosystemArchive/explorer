@@ -28,13 +28,13 @@
           {{ $t("Received") }}
         </div>
       </nav>
-      <div class="hidden sm:block" v-if="transactions.length > 0">
+      <div class="hidden sm:block">
         <table-transactions-detail :transactions="transactions"></table-transactions-detail>
       </div>
-      <div class="sm:hidden" v-if="transactions.length > 0">
+      <div class="sm:hidden">
         <table-transactions-detail-mobile :transactions="transactions"></table-transactions-detail-mobile>
       </div>
-      <div class="mx-10 mt-10 flex flex-wrap" v-if="transactions.length >= 25">
+      <div class="mx-10 mt-10 flex flex-wrap" v-if="transactions && transactions.length >= 25">
         <router-link :to="{ name: 'wallet-transactions', params: { address: this.wallet.address, type, page: 2 } }" tag="button" class="show-more-button">
           {{ $t("Show more") }}
         </router-link>
@@ -56,7 +56,7 @@ export default {
   },
 
   data: () => ({
-    transactions: [],
+    transactions: null,
     type: 'all',
   }),
 
@@ -71,6 +71,8 @@ export default {
 
   methods: {
     async getTransactions() {
+      this.transactions = null
+
       if (this.wallet.address !== undefined) {
         const transactions = await TransactionService[`${this.type}ByAddress`](
           this.wallet.address,

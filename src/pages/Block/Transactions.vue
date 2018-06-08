@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto pt-5">
-    <content-header>{{ $t("Transactions") }} - {{ $t(capitalize(type)) }}</content-header>
+    <content-header>{{ $t("Transactions") }}</content-header>
     <section class="page-section py-10">
       <div class="hidden sm:block">
         <table-transactions :transactions="transactions"></table-transactions>
@@ -14,7 +14,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import WalletService from '@/services/wallet'
+import BlockService from '@/services/block'
 import TransactionService from '@/services/transaction'
 
 export default {
@@ -30,8 +30,8 @@ export default {
 
   async beforeRouteEnter (to, from, next) {
     try {
-      const wallet = await WalletService.find(to.params.address)
-      const transactions = await TransactionService[`${to.params.type}ByAddress`](wallet.address, to.params.page)
+      const block = await BlockService.find(to.params.id)
+      const transactions = await TransactionService.findByBlock(block.id, to.params.page)
       next(vm => vm.setTransactions(transactions))
     } catch(e) { next({ name: '404' }) }
   },
@@ -40,19 +40,16 @@ export default {
     this.transactions = null
 
     try {
-      const wallet = await WalletService.find(to.params.address)
-      const transactions = await TransactionService[`${to.params.type}ByAddress`](wallet.address, to.params.page)
+      const block = await BlockService.find(to.params.id)
+      const transactions = await TransactionService.findByBlock(block.id, to.params.page)
       this.setTransactions(transactions)
       next()
     } catch(e) { next({ name: '404' }) }
   },
 
   computed: {
-    address() {
-      return this.$route.params.address
-    },
-    type() {
-      return this.$route.params.type
+    id() {
+      return this.$route.params.id
     },
     page() {
       return this.$route.params.page
@@ -66,33 +63,17 @@ export default {
       this.transactions = transactions
     },
 
-    getTotalTransactions() {
-      if (this.type === 'sent' || this.type === 'all') {
-        this.getSentCount()
-      }
-      if (this.type === 'received' || this.type === 'all') {
-        this.getReceivedCount()
-      }
-    },
-
-    async getSentCount() {
-      const wallet = await WalletService.find(this.address)
-      const response = await TransactionService.sentByAddressCount(wallet.address)
+    async getTotalTransactions() {
+      const block = await BlockService.find(this.id)
+      const response = await TransactionService.findByBlockCount(block.id)
       this.totalTransactions += Number(response)
-    },
-
-    async getReceivedCount() {
-      const wallet = await WalletService.find(this.address)
-      const received = await TransactionService.receivedByAddressCount(wallet.address)
-      this.totalTransactions += Number(received)
     },
 
     changePage(page) {
       this.$router.push({
-        name: 'wallet-transactions',
+        name: 'block-transactions',
         params: {
-          address: this.address,
-          type: this.type,
+          id: this.id,
           page,
         }
       })

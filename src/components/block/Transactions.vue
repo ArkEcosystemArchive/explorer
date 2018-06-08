@@ -1,5 +1,5 @@
 <template>
-  <div v-if="transactions.length > 0">
+  <div v-if="transactions && transactions.length > 0">
     <h2 class="text-2xl mb-5 md:mb-6 px-5 sm:hidden text-theme-text-primary">{{ $t("Transactions") }}</h2>
     <section class="page-section py-8">
       <div class="hidden sm:block">
@@ -7,6 +7,11 @@
       </div>
       <div class="sm:hidden">
         <table-transactions-mobile :transactions="transactions"></table-transactions-mobile>
+      </div>
+      <div class="mx-10 mt-10 flex flex-wrap" v-if="transactions.length >= 25">
+        <router-link :to="{ name: 'block-transactions', params: { block: this.block.id, page: 2 } }" tag="button" class="show-more-button">
+          {{ $t("Show more") }}
+        </router-link>
       </div>
     </section>
   </div>
@@ -23,7 +28,7 @@ export default {
     }
   },
 
-  data: () => ({ transactions: [] }),
+  data: () => ({ transactions: null }),
 
   watch: {
     block() {

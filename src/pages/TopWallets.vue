@@ -8,7 +8,7 @@
       <div class="sm:hidden">
         <table-wallets-mobile :wallets="wallets" :total="supply"></table-wallets-mobile>
       </div>
-      <paginator :start="+this.$route.params.page"></paginator>
+      <paginator v-if="wallets" :start="+this.$route.params.page"></paginator>
     </section>
   </div>
 </template>
@@ -18,7 +18,7 @@ import { mapGetters } from 'vuex'
 import WalletService from '@/services/wallet'
 
 export default {
-  data: () => ({ wallets: [] }),
+  data: () => ({ wallets: null }),
 
   async beforeRouteEnter (to, from, next) {
     const response = await WalletService.top(to.params.page)
@@ -26,7 +26,7 @@ export default {
   },
 
   async beforeRouteUpdate (to, from, next) {
-    this.wallets = []
+    this.wallets = null
 
     const response = await WalletService.top(to.params.page)
     this.setWallets(response)

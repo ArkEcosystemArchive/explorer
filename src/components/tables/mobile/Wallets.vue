@@ -22,6 +22,9 @@
           <div>{{ readableNumber((row.balance / supply) * 100) }}%</div>
         </div>
       </div>
+      <div v-if="wallets && !wallets.length" class="px-5 md:px-10">
+        <span>{{ $t("No Results") }}</span>
+      </div>
     </loader>
   </div>
 </template>
@@ -32,7 +35,7 @@ import { mapGetters } from 'vuex'
 export default {
   props: {
     wallets: {
-      type: Array,
+      // type: Array or null
       required: true,
     },
   },
