@@ -20,7 +20,7 @@
 import TransactionService from '@/services/transaction'
 
 export default {
-  data: () => ({ transactions: [] }),
+  data: () => ({ transactions: null }),
 
   async mounted() {
     const response = await TransactionService.latest()

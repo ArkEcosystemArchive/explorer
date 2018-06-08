@@ -1,6 +1,6 @@
 <template>
   <loader :data="wallets">
-    <table-component :data="wallets" :show-filter="false" :show-caption="false" table-class="w-full">
+    <table-component v-if="wallets && wallets.length > 0" :data="wallets" :show-filter="false" :show-caption="false" table-class="w-full">
       <table-column show="vueTableComponentInternalRowId" :label="$t('Rank')" header-class="left-header-start-cell w-32" cell-class="left-start-cell">
         <template slot-scope="row">
           {{ getRank(row.vueTableComponentInternalRowId) }}
@@ -25,6 +25,9 @@
         </template>
       </table-column>
     </table-component>
+    <div v-else class="px-5 md:px-10">
+      <span>{{ $t("No Results") }}</span>
+    </div>
   </loader>
 </template>
 
@@ -34,7 +37,7 @@ import { mapGetters } from 'vuex'
 export default {
   props: {
     wallets: {
-      type: Array,
+      // type: Array or null
       required: true
     },
     total: {

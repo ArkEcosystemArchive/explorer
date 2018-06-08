@@ -8,7 +8,7 @@
       <div class="sm:hidden">
         <table-blocks-mobile :blocks="blocks"></table-blocks-mobile>
       </div>
-      <paginator :start="+this.page" :count="totalBlocks"></paginator>
+      <paginator v-if="blocks" :start="+this.page" :count="totalBlocks"></paginator>
     </section>
   </div>
 </template>
@@ -20,7 +20,7 @@ import BlockService from '@/services/block'
 export default {
   data: () => ({
     totalBlocks: 0,
-    blocks: []
+    blocks: null
   }),
 
   created() {
@@ -37,7 +37,7 @@ export default {
   },
 
   async beforeRouteUpdate (to, from, next) {
-    this.blocks = []
+    this.blocks = null
 
     try {
       const wallet = await WalletService.find(to.params.address)
