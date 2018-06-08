@@ -3,20 +3,20 @@
 
 module.exports = {
   // Default test, which also serves as setup for correct url
-  'top wallets page should be available': function (browser) {
-    const devServer = browser.globals.devServerURL + '/#/top-wallets/1'
+  'voters page should be available': function (browser) {
+    const devServer = browser.globals.devServerURL + '/#/wallets/ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ/voters/1'
 
     browser
       .url(devServer)
       .waitForElementVisible('main.theme-light', 5000)
       .waitForElementVisible('h1', 5000)
-      .assert.containsText('h1', 'Top Wallets')
+      .assert.containsText('h1', 'Voters')
   },
 
   'it should be possible to navigate to the next page and back': function (browser) {
     browser
       .waitForElementVisible('div.table-component', 5000)
-      .assert.urlContains('/top-wallets/1')
+      .assert.urlContains('/voters/1')
       .useXpath().expect.element("//button[contains(., 'Previous')]").to.not.be.visible
     browser
       .expect.element("//button[contains(., 'Next')]").to.be.visible
@@ -24,14 +24,14 @@ module.exports = {
       .click("//button[contains(., 'Next')]")
       .pause(500)
     browser
-      .assert.urlContains('/top-wallets/2')
+      .assert.urlContains('/voters/2')
       .click("//button[contains(., 'Previous')]")
       .pause(500)
     browser
-      .assert.urlContains('/top-wallets/1')
+      .assert.urlContains('/voters/1')
   },
 
-  'it should be possible to sort the wallets': function (browser) {
+  'it should be possible to sort the voters': function (browser) {
     browser
       .useCss()
       .waitForElementVisible('div.table-component', 5000)
