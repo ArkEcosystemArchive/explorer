@@ -1,6 +1,9 @@
 // For authoring Nightwatch tests, see
 // http://nightwatchjs.org/guide#usage
 
+// Disable eslint for .to.not.be.present statements
+/* eslint-disable no-unused-expressions */
+
 module.exports = {
   // Default test, which also serves as setup for correct url
   'top wallets page should be available': function (browser) {
@@ -10,12 +13,12 @@ module.exports = {
       .url(devServer)
       .waitForElementVisible('main.theme-light', 5000)
       .waitForElementVisible('h1', 5000)
+      .waitForElementVisible('div.table-component', 5000)
       .assert.containsText('h1', 'Top Wallets')
   },
 
   'it should be possible to navigate to the next page and back': function (browser) {
     browser
-      .waitForElementVisible('div.table-component', 5000)
       .assert.urlContains('/top-wallets/1')
       .useXpath().expect.element("//button[contains(., 'Previous')]").to.not.be.visible
     browser
@@ -23,10 +26,12 @@ module.exports = {
     browser
       .click("//button[contains(., 'Next')]")
       .pause(500)
+      .useCss().waitForElementVisible('div.table-component', 5000)
     browser
       .assert.urlContains('/top-wallets/2')
-      .click("//button[contains(., 'Previous')]")
+      .useXpath().click("//button[contains(., 'Previous')]")
       .pause(500)
+      .useCss().waitForElementVisible('div.table-component', 5000)
     browser
       .assert.urlContains('/top-wallets/1')
   },

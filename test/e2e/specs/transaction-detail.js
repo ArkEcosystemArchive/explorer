@@ -16,6 +16,15 @@ module.exports = {
       .assert.containsText('h1', 'Transaction')
   },
 
+  'it should be possible to copy the transaction ID': function(browser) {
+    browser
+      .waitForElementVisible('img.block', 5000)
+      .assert.cssClassNotPresent('img.block', 'animated')
+    browser
+      .click('button.has-tooltip')
+      .waitForElementVisible('img.block.animated', 5000)
+  },
+
   'it should be possible to click on the sender': function(browser) {
     browser
       .useXpath()
@@ -64,15 +73,4 @@ module.exports = {
       .assert.urlContains('block/12374209887221238137')
       .end()
   }
-
-  // TODO
-  // 'it should be possible to copy the transaction ID': function(browser) {
-  //   browser
-  //     .assert.cssClassNotPresent('img.block', 'animated')
-  //   browser
-  //     .click('button.has-tooltip')
-  //     .pause(50)
-  //     .assert.cssClassPresent('img.block', 'animated')
-  // }
 }
-

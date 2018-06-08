@@ -1,6 +1,9 @@
 // For authoring Nightwatch tests, see
 // http://nightwatchjs.org/guide#usage
 
+// Disable eslint for .to.not.be.present statements
+/* eslint-disable no-unused-expressions */
+
 module.exports = {
   // Default test, which also serves as setup for correct url
   'voters page should be available': function (browser) {

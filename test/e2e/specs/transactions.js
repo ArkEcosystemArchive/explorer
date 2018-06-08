@@ -1,6 +1,9 @@
 // For authoring Nightwatch tests, see
 // http://nightwatchjs.org/guide#usage
 
+// Disable eslint for .to.not.be.present statements
+/* eslint-disable no-unused-expressions */
+
 module.exports = {
   // Default test, which also serves as setup for correct url
   'transaction page should be available': function (browser) {
@@ -48,10 +51,12 @@ module.exports = {
     browser
       .click("//button[contains(., 'Next')]")
       .pause(500)
+      .useCss().waitForElementVisible('div.table-component', 5000)
     browser
       .assert.urlContains('/transactions/2')
-      .click("//button[contains(., 'Previous')]")
+      .useXpath().click("//button[contains(., 'Previous')]")
       .pause(500)
+      .useCss().waitForElementVisible('div.table-component', 5000)
     browser
       .assert.urlContains('/transactions/1')
   },
@@ -73,11 +78,11 @@ module.exports = {
 
   'it should be possible to click on the sender': function (browser) {
     const devServer = browser.globals.devServerURL + '/#/transactions/1'
-    
+
     browser
       .url(devServer)
       .waitForElementVisible('main.theme-light', 5000)
-      .waitForElementVisible('div.table-component', 5000)
+      .waitForElementVisible('.table-component__table__body', 5000)
     browser
       .useXpath().click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[3]//a[1]")
       .pause(500)
@@ -92,17 +97,17 @@ module.exports = {
 
   'it should be possible to click on the recipient': function (browser) {
     const devServer = browser.globals.devServerURL + '/#/transactions/1'
-    
+
     browser
       .url(devServer)
       .waitForElementVisible('main.theme-light', 5000)
-      .waitForElementVisible('div.table-component', 5000)
+      .waitForElementVisible('.table-component__table__body', 5000)
     browser
       .useXpath().click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]")
       .pause(500)
     browser
       .useCss()
-      .waitForElementVisible('main.theme-light', 5000)
+      .waitForElementVisible('div.table-component', 5000)
       .assert.urlContains('/wallets/')
     browser
       .waitForElementVisible('h1', 5000)

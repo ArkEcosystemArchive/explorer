@@ -43,16 +43,23 @@ module.exports = {
     browser
       .url(browser.globals.devServerURL + '/#/block/12287662939647858585')
       .pause(500)
-      .waitForElementVisible('main.theme-light', 5000)
-      .waitForElementVisible('h1', 5000)
+      .waitForElementVisible('div.table-component', 5000)
       .useXpath().assert.containsText("//div[.='Transactions']/following-sibling::div[1]", '1')
       .useCss().expect.element('h2').to.be.present
     browser
       .expect.element('div.table-component').to.be.present
-    browser 
+    browser
       .elements('css selector', '.table-component__table__body tr', function(result) {
         browser.assert.equal(1, result.value.length)
       })
+  },
+
+  'it should be possible to copy the block ID': function(browser) {
+    browser
+      .assert.cssClassNotPresent('img.block', 'animated')
+    browser
+      .click('button.has-tooltip')
+      .waitForElementVisible('img.block.animated', 5000)
   },
 
   'it should be possible to click on the delegate': function(browser) {
@@ -63,15 +70,6 @@ module.exports = {
     browser
       .assert.containsText('h1', 'Wallet Summary')
       .assert.urlContains('wallets/ALLZ3TQKTaHm2Bte4SrXL9C5cS8ZovqFfZ')
-  },
-
-  // TODO
-  // 'it should be possible to copy the block ID': function(browser) {
-  //   browser
-  //     .assert.cssClassNotPresent('img.block', 'animated')
-  //   browser
-  //     .click('button.has-tooltip')
-  //     .pause(50)
-  //     .assert.cssClassPresent('img.block', 'animated')
-  // }
+      .end()
+  }
 }
