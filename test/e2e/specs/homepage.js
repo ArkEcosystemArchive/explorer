@@ -62,30 +62,38 @@ module.exports = {
     browser.assert.cssClassPresent('main', 'theme-light')
   },
 
-  // TODO: fix issue with 'element' being undefined?
-  // 'header should be able to change currency': function(browser) {
-  //   browser.useXpath().click("//button[contains(., 'ARK/USD')]")
-  //   browser
-  //     .assert.visible('.menu-button')
-  //     .assert.visible('.close-button')
-  //   browser.useXpath().click("//button[contains(., 'ETH')]")
-  //   browser.useXpath().click("//button[contains(., 'ARK/ETH')]")
-  //   browser.useXpath().click("//button[contains(., 'USD')]")
-  //   browser
-  //     .useCss()
-  //     .expect.element('.menu-button').to.not.be.present
-  //     .expect.element('.close-button').to.not.be.present
-  // },
+  'header should be able to change currency': function(browser) {
+    browser.useXpath().click("//button[contains(., 'ARK/USD')]")
+    browser
+      .useCss()
+      .assert.visible('.menu-button')
+      .assert.visible('.close-button')
+    browser
+      .useXpath()
+      .click("//button[contains(., 'ETH')]")
+      .waitForElementVisible("//button[contains(., 'ARK/ETH')]", 5000)
+    browser
+      .click("//button[contains(., 'ARK/ETH')]")
+      .useCss().waitForElementVisible('.close-button', 5000)
+    browser
+      .useXpath()
+      .click("//button[contains(., 'USD')]")
+      .waitForElementVisible("//button[contains(., 'ARK/USD')]", 5000)
+    browser
+      .useCss()
+      .expect.element('.menu-button').to.not.be.present
+    browser
+      .expect.element('.close-button').to.not.be.present
+  },
 
   // Footer tests
   'footer should contain links': function(browser) {
     browser
       .assert.visible('footer > div.text-center')
-      // TODO: check for child elements containing links
-      // .elements('css selector', '.footer > div.text-center a', function(result) {
-      //   console.log(result.value)
-      //   browser.assert.ok(result.value.length > 0)
-      // })
+      .elements('css selector', 'footer > div.text-center a', function(result) {
+        console.log(result.value)
+        browser.assert.ok(result.value.length > 0)
+      })
   },
 
   // Menu tests
@@ -107,7 +115,6 @@ module.exports = {
     })
 
     // TODO: close menu again
-    browser.end() // Closes current browser screen
   },
 
   'from menu, it should be possible to navigate to top wallets': function(browser) {
@@ -138,10 +145,114 @@ module.exports = {
       .useXpath().click("//button[contains(., 'Home')]")
       .pause(1000)
       .assert.urlContains('/#')
-      .end()
   },
 
-  // TODO: search options
   // Search tests
+  'it should be possible to search for a known wallet': function (browser) {
+    const devServer = browser.globals.devServerURL
 
+    browser
+      .url(devServer)
+      .useCss()
+      .waitForElementVisible('input#search', 5000)
+    browser
+      .click('input#search')
+      .waitForElementVisible('input.search-input', 5000)
+      .setValue('input.search-input', ['ARK Bounty', browser.Keys.ENTER])
+      .pause(1000)
+    browser
+      .waitForElementVisible('h1', 5000)
+      .assert.containsText('h1', 'Wallet Summary')
+      .assert.urlContains('/wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs')
+  },
+
+  'it should be possible to search for a delegate': function (browser) {
+    const devServer = browser.globals.devServerURL
+
+    browser
+      .url(devServer)
+      .useCss()
+      .waitForElementVisible('input#search', 5000)
+    browser
+      .click('input#search')
+      .waitForElementVisible('input.search-input', 5000)
+      .setValue('input.search-input', ['genesis_1', browser.Keys.ENTER])
+      .pause(1000)
+    browser
+      .waitForElementVisible('h1', 5000)
+      .assert.containsText('h1', 'Wallet Summary')
+      .assert.urlContains('/wallets/AeLpRK8rFVtBeyBVqBtdQpWDfLzaiNujKr')
+  },
+
+  'it should be possible to search for an address': function (browser) {
+    const devServer = browser.globals.devServerURL
+
+    browser
+      .url(devServer)
+      .useCss()
+      .waitForElementVisible('input#search', 5000)
+    browser
+      .click('input#search')
+      .waitForElementVisible('input.search-input', 5000)
+      .setValue('input.search-input', ['AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv', browser.Keys.ENTER])
+      .pause(1000)
+    browser
+      .waitForElementVisible('h1', 5000)
+      .assert.containsText('h1', 'Wallet Summary')
+      .assert.urlContains('/wallets/AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv')
+  },
+
+  'it should be possible to search for a block ID': function (browser) {
+    const devServer = browser.globals.devServerURL
+
+    browser
+      .url(devServer)
+      .useCss()
+      .waitForElementVisible('input#search', 5000)
+    browser
+      .click('input#search')
+      .waitForElementVisible('input.search-input', 5000)
+      .setValue('input.search-input', ['13507259488170268466', browser.Keys.ENTER])
+      .pause(1000)
+    browser
+      .waitForElementVisible('h1', 5000)
+      .assert.containsText('h1', 'Block')
+      .assert.urlContains('/block/13507259488170268466')
+  },
+
+  'it should be possible to search for a transaction ID': function (browser) {
+    const devServer = browser.globals.devServerURL
+
+    browser
+      .url(devServer)
+      .useCss()
+      .waitForElementVisible('input#search', 5000)
+    browser
+      .click('input#search')
+      .waitForElementVisible('input.search-input', 5000)
+      .setValue('input.search-input', ['4a169d00de2029110829fad77eebf6fd25751418b47561f05b994750acbd3b13', browser.Keys.ENTER])
+      .pause(1000)
+    browser
+      .waitForElementVisible('h1', 5000)
+      .assert.containsText('h1', 'Transaction')
+      .assert.urlContains('/transaction/4a169d00de2029110829fad77eebf6fd25751418b47561f05b994750acbd3b13')
+  },
+
+  'search should show a notice if nothing could be found': function (browser) {
+    const devServer = browser.globals.devServerURL
+
+    browser
+      .url(devServer)
+      .useCss()
+      .waitForElementVisible('input#search', 5000)
+    browser
+      .click('input#search')
+      .waitForElementVisible('input.search-input', 5000)
+      .setValue('input.search-input', ['asdfnothingfoundforthisvalueasdf', browser.Keys.ENTER])
+      .pause(1000)
+    browser
+      .useXpath()
+      .waitForElementVisible("//div[contains(@class, 'tooltip-inner') and text() = 'Nothing matched your search']", 5000)
+      .end()
+  }
 }
