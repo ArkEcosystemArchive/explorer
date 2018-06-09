@@ -42,12 +42,10 @@ module.exports = {
     browser
       .assert.visible('#line-chart')
       .click('button.text-chart-active')
-      .pause(500)
-    browser.expect.element('#line-chart').to.not.be.present
+      .useXpath().waitForElementNotPresent("//canvas[@id = 'line-chart']", 5000)
     browser
-      .click('button.text-chart-inactive')
-      .pause(500)
-      .expect.element('#line-chart').to.be.visible
+      .useCss().click('button.text-chart-inactive')
+      .useXpath().waitForElementVisible("//canvas[@id = 'line-chart']", 5000)
   },
 
   'header should be able to toggle theme': function(browser) {

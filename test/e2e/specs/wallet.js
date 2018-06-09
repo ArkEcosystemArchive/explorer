@@ -39,7 +39,7 @@ module.exports = {
   'it should show a list of transactions, including show more button': function (browser) {
     browser
       .useCss()
-      .expect.element('div.hidden.sm\\:block').to.be.present
+      .waitForElementVisible('div.hidden.sm\\:block div.table-component tbody.table-component__table__body tr', 5000)
     browser
       .elements('css selector', 'div.hidden.sm\\:block div.table-component tbody.table-component__table__body tr', function(result) {
         browser.assert.equal(25, result.value.length)

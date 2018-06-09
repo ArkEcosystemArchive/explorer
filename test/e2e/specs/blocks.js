@@ -85,14 +85,9 @@ module.exports = {
       .waitForElementVisible('div.table-component', 5000)
       .waitForElementVisible('.table-component__table__body', 5000)
       .useXpath().click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[5]//a[1]")
-      .pause(500)
     browser
-      .useCss()
-      .waitForElementVisible('main.theme-light', 5000)
+      .waitForElementVisible("//h1[text() = 'Wallet Summary']", 5000)
       .assert.urlContains('/wallets/')
-    browser
-      .waitForElementVisible('h1', 5000)
-      .assert.containsText('h1', 'Wallet Summary')
       .end()
   }
 }
