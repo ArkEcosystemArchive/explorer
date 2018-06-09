@@ -20,13 +20,10 @@ module.exports = {
     browser
       .assert.containsText('div.semibold.truncate span', '3487084709104787070')
       .useXpath().click("//button[contains(., 'Next')]")
-      .pause(500)
+      .waitForElementVisible("//div[contains(@class, 'semibold') and contains(@class, 'truncate')]/span[contains(text(), '12152817243754268433')]", 5000)
     browser
-      .useCss().assert.containsText('div.semibold.truncate span', '12152817243754268433')
       .useXpath().click("//button[contains(., 'Previous')]")
-      .pause(500)
-    browser
-      .useCss().assert.containsText('div.semibold.truncate span', '3487084709104787070')
+      .waitForElementVisible("//div[contains(@class, 'semibold') and contains(@class, 'truncate')]/span[contains(text(), '3487084709104787070')]", 5000)
   },
 
   'it should not contain a transaction table if block has no transactions': function(browser) {

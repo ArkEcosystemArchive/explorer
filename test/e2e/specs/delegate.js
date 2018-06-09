@@ -91,8 +91,7 @@ module.exports = {
   'it should be possible to show the list of forged blocks': function (browser) {
     browser
       .click("//a[contains(@href, '/blocks/1') and text() = 'See all']")
-      .pause(500)
-      .useCss().waitForElementVisible('div.table-component', 5000)
+      .waitForElementVisible("//h1[text() = 'Blocks']", 5000)
     browser
       .assert.urlContains('/wallets/ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ/blocks/1')
   },
@@ -102,10 +101,10 @@ module.exports = {
 
     browser
       .url(devServer)
+      .useCss()
       .waitForElementVisible('div.border-t.list-row', 5000)
       .useXpath().click("//a[contains(@href, '/voters/1') and text() = 'See all']")
-      .pause(500)
-      .useCss().waitForElementVisible('div.table-component', 5000)
+      .waitForElementVisible("//h1[contains(text(), 'Voters')]", 5000)
     browser
       .assert.urlContains('/wallets/ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ/voters/1')
     browser.end()
