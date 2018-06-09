@@ -57,6 +57,18 @@ module.exports = {
       .useXpath().expect.element("//div[contains(., 'Received')]").to.be.present
   },
 
+  'it should be possible to toggle the QR code': function (browser) {
+    browser
+      .useCss()
+      .expect.element('div.modal-container').to.be.not.present
+    browser
+      .click('button.address-button')
+      .waitForElementVisible('div.modal-container', 5000)
+    browser
+      .click('button.absolute.pin-t')
+      .waitForElementNotPresent('div.modal-container', 5000)
+  },
+
   'it should show who the wallet voted for': function (browser) {
     const devServer = browser.globals.devServerURL + '/#/wallets/ATsPMTAHNsUwKedzNpjTNRfcj1oRGaX5xC'
 
