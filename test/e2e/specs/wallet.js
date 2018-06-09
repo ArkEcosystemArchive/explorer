@@ -26,24 +26,48 @@ module.exports = {
   },
 
   'it should be possible to see the balance and transaction count': function (browser) {
-
-  },
-
-  'it should be possible to toggle between public key and address': function (browser) {
-
+    browser
+      .useXpath().expect.element("//div[contains(., 'Balance')]").to.be.present
+    browser
+      .expect.element("//div[contains(., 'Transactions')]").to.be.present
+    browser
+      .expect.element("//div[contains(., 'Transactions')]/following-sibling::div/span[contains(@class, 'text-green')]").to.be.present
+    browser
+      .expect.element("//div[contains(., 'Transactions')]/following-sibling::div/span[contains(@class, 'text-red')]").to.be.present
   },
 
   'it should show a list of transactions, including show more button': function (browser) {
-
+    browser
+      .useCss()
+      .expect.element('div.hidden.sm\\:block').to.be.present
+    browser
+      .elements('css selector', 'div.hidden.sm\\:block div.table-component tbody.table-component__table__body tr', function(result) {
+        browser.assert.equal(25, result.value.length)
+      })
+    browser
+      .expect.element('button.show-more-button').to.be.visible
   },
 
   'it should contain transaction tabs': function (browser) {
-
+    browser
+      .useXpath().expect.element("//div[contains(., 'All')]").to.be.present
+    browser
+      .useXpath().expect.element("//div[contains(., 'Sent')]").to.be.present
+    browser
+      .useXpath().expect.element("//div[contains(., 'Received')]").to.be.present
   },
 
   'it should show who the wallet voted for': function (browser) {
-    //ATsPMTAHNsUwKedzNpjTNRfcj1oRGaX5xC
+    const devServer = browser.globals.devServerURL + '/#/wallets/ATsPMTAHNsUwKedzNpjTNRfcj1oRGaX5xC'
 
+    browser
+      .url(devServer)
+      .useCss()
+      .waitForElementVisible('section.page-section', 5000)
+    browser
+      .useXpath().expect.element("//div[text() = 'Votes']").to.be.present
+    browser
+      .expect.element("//div[text() = 'Votes']/following-sibling::div//a").to.be.present
     browser.end()
   }
 }
