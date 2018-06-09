@@ -38,8 +38,9 @@ module.exports = {
 
   'it should show a list of transactions, including show more button': function (browser) {
     browser
+      .useXpath()
+      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]", 5000)
       .useCss()
-      .expect.element('div.hidden.sm\\:block').to.be.present
     browser
       .elements('css selector', 'div.hidden.sm\\:block div.table-component tbody.table-component__table__body tr', function(result) {
         browser.assert.equal(25, result.value.length)

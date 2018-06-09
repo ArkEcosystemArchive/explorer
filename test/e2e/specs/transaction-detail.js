@@ -31,9 +31,7 @@ module.exports = {
       .click("//div/div[contains(@class, 'list-row')][1]//a[1]")
       .pause(500)
     browser
-      .useCss()
-      .waitForElementVisible('h1', 5000)
-      .assert.containsText('h1', 'Wallet Summary')
+      .waitForElementVisible("//h1[text() = 'Wallet Summary']", 5000)
       .assert.urlContains('wallets/AFrPtEmzu6wdVpa2CnRDEKGQQMWgq8nE9V')
   },
 
@@ -42,6 +40,7 @@ module.exports = {
 
     browser
       .url(devServer)
+      .useCss()
       .waitForElementVisible('main.theme-light', 5000)
       .waitForElementVisible('.list-row-border-b', 5000)
     browser
@@ -49,9 +48,7 @@ module.exports = {
       .click("//div/div[contains(@class, 'list-row')][2]//a[1]")
       .pause(500)
     browser
-      .useCss()
-      .waitForElementVisible('h1', 5000)
-      .assert.containsText('h1', 'Wallet Summary')
+      .waitForElementVisible("//h1[text() = 'Wallet Summary']", 5000)
       .assert.urlContains('wallets/ATJDMLxBXPxn9bss911HTFCp9PhBHih9uL')
   },
 
@@ -60,6 +57,7 @@ module.exports = {
 
     browser
       .url(devServer)
+      .useCss()
       .waitForElementVisible('main.theme-light', 5000)
       .waitForElementVisible('.list-row-border-b', 5000)
     browser
@@ -67,9 +65,7 @@ module.exports = {
       .click("//div/div[contains(@class, 'list-row')][8]//a[1]")
       .pause(500)
     browser
-      .useCss()
-      .waitForElementVisible('h1', 5000)
-      .assert.containsText('h1', 'Block')
+      .waitForElementVisible("//h1[text() = 'Block']", 5000)
       .assert.urlContains('block/12374209887221238137')
       .end()
   }

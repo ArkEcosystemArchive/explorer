@@ -31,10 +31,8 @@ module.exports = {
   'it should be possible to click on the last block': function (browser) {
     browser
       .click("//div[text() = 'Last block']/following-sibling::div//a[1]")
-      .pause(2000)
-      .useCss()
-      .waitForElementVisible('h1', 5000)
-      .assert.containsText('h1', 'Block')
+      .pause(500)
+      .waitForElementVisible("//h1[text() = 'Block']", 5000)
       .assert.urlContains('/block/')
   },
 
@@ -45,12 +43,11 @@ module.exports = {
       .url(devServer)
       .useXpath()
       .waitForElementVisible("//div[text() = 'Delegate']", 5000)
+      .pause(1000)
     browser
       .click("//div[contains(@class, 'bg-theme-feature-background')]/div[3]//div[text() = 'Delegate']/following-sibling::div//a[1]")
-      .pause(2000)
-      .useCss()
-      .waitForElementVisible('h1', 5000)
-      .assert.containsText('h1', 'Wallet')
+      .pause(500)
+      .waitForElementVisible("//h1[text() = 'Wallet Summary']", 5000)
       .assert.urlContains('/wallets/')
   },
 
@@ -58,6 +55,7 @@ module.exports = {
     const devServer = browser.globals.devServerURL + '/#/delegate-monitor'
     browser
       .url(devServer)
+      .useCss()
       .waitForElementVisible('.bg-theme-feature-background', 5000)
     browser
       .elements('css selector', 'div.meter', function(result) {

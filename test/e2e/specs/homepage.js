@@ -161,8 +161,8 @@ module.exports = {
       .setValue('input.search-input', ['ARK Bounty', browser.Keys.ENTER])
       .pause(1000)
     browser
-      .waitForElementVisible('h1', 5000)
-      .assert.containsText('h1', 'Wallet Summary')
+      .useXpath()
+      .waitForElementVisible("//h1[text() = 'Wallet Summary']", 5000)
       .assert.urlContains('/wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs')
   },
 
@@ -179,8 +179,8 @@ module.exports = {
       .setValue('input.search-input', ['genesis_1', browser.Keys.ENTER])
       .pause(1000)
     browser
-      .waitForElementVisible('h1', 5000)
-      .assert.containsText('h1', 'Wallet Summary')
+      .useXpath()
+      .waitForElementVisible("//h1[text() = 'Wallet Summary']", 5000)
       .assert.urlContains('/wallets/AeLpRK8rFVtBeyBVqBtdQpWDfLzaiNujKr')
   },
 
@@ -197,8 +197,8 @@ module.exports = {
       .setValue('input.search-input', ['AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv', browser.Keys.ENTER])
       .pause(1000)
     browser
-      .waitForElementVisible('h1', 5000)
-      .assert.containsText('h1', 'Wallet Summary')
+      .useXpath()
+      .waitForElementVisible("//h1[text() = 'Wallet Summary']", 5000)
       .assert.urlContains('/wallets/AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv')
   },
 
@@ -215,8 +215,8 @@ module.exports = {
       .setValue('input.search-input', ['13507259488170268466', browser.Keys.ENTER])
       .pause(1000)
     browser
-      .waitForElementVisible('h1', 5000)
-      .assert.containsText('h1', 'Block')
+      .useXpath()
+      .waitForElementVisible("//h1[text() = 'Block']", 5000)
       .assert.urlContains('/block/13507259488170268466')
   },
 
@@ -233,8 +233,8 @@ module.exports = {
       .setValue('input.search-input', ['4a169d00de2029110829fad77eebf6fd25751418b47561f05b994750acbd3b13', browser.Keys.ENTER])
       .pause(1000)
     browser
-      .waitForElementVisible('h1', 5000)
-      .assert.containsText('h1', 'Transaction')
+      .useXpath()
+      .waitForElementVisible("//h1[text() = 'Transaction']", 5000)
       .assert.urlContains('/transaction/4a169d00de2029110829fad77eebf6fd25751418b47561f05b994750acbd3b13')
   },
 
