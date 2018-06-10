@@ -16,8 +16,7 @@ export default {
   computed: {
     ...mapGetters('currency', {
       currencyName: 'name',
-      currencyRate: 'rate',
-      currencySymbol: 'symbol'
+      currencyRate: 'rate'
     }),
 
     ...mapGetters('ui', ['headerType']),
