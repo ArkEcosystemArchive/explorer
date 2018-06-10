@@ -42,14 +42,16 @@ module.exports = {
     browser
       .assert.visible('#line-chart')
       .click('button.text-chart-active')
-      .useXpath().waitForElementNotVisible("//canvas[@id = 'line-chart']", 5000)
+      .useXpath().waitForElementNotPresent("//canvas[@id = 'line-chart']", 5000)
     browser
       .useCss().click('button.text-chart-inactive')
       .useXpath().waitForElementVisible("//canvas[@id = 'line-chart']", 5000)
   },
 
   'header should be able to toggle theme': function(browser) {
-    browser.assert.cssClassPresent('main', 'theme-light')
+    browser
+      .useCss()
+      .assert.cssClassPresent('main', 'theme-light')
     browser
       .click('button.text-yellow')
       .pause(500)

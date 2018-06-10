@@ -19,8 +19,8 @@ module.exports = {
   'it should display delegate details': function (browser) {
     browser
       .waitForElementVisible('.bg-theme-feature-background', 5000)
+      .pause(2000)
       .useXpath()
-      .waitForElementVisible("//div[text() = 'Delegates']", 5000)
     browser.expect.element("//div[text() = 'Delegates']").to.be.visible
     browser.expect.element("//div[text() = 'Total Forged (ARK)']").to.be.visible
     browser.expect.element("//div[text() = 'Last block']").to.be.visible
