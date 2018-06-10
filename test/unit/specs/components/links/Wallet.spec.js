@@ -86,12 +86,11 @@ describe('Link/Wallet', () => {
     expect(wrapper.text()).toEqual(expect.stringContaining('TestKnownWallet'))
   })
 
-  it('Should display the name of a delegate', () => {
-    store.dispatch('delegates/setDelegates', [ { username: 'TestDelegate', address: 'ALgvTAoz5Vi9easHqBK6aEMKatHb4beCXm', publicKey: testDelegatePublicKey } ])
+  it('Should display the name of a delegate', done => {
+    store.dispatch('delegates/setDelegates', [ { username: 'TestDelegate', address: testDelegateAddress, publicKey: testDelegatePublicKey } ])
     const wrapper = mount(Wallet, {
       propsData: {
         address: testDelegateAddress,
-        publicKey: testDelegatePublicKey,
         type: 0
       },
       stubs: {
@@ -102,14 +101,19 @@ describe('Link/Wallet', () => {
       mixins,
       store
     })
+    // Delegate name is set after function call in mounted(), so we need to wait a little while
     expect(wrapper.contains('a')).toBe(true)
     expect(wrapper.findAll('a')).toHaveLength(2)
-    expect(wrapper.text()).not.toEqual(expect.stringContaining(testDelegateAddress))
-    expect(wrapper.text()).not.toEqual(expect.stringContaining(mixins.truncate(testDelegateAddress)))
-    expect(wrapper.text()).toEqual(expect.stringContaining('TestDelegate'))
+    setTimeout(() => {
+      expect(wrapper.text()).not.toEqual(expect.stringContaining(testDelegateAddress))
+      expect(wrapper.text()).not.toEqual(expect.stringContaining(mixins.truncate(testDelegateAddress)))
+      expect(wrapper.text()).toEqual(expect.stringContaining('TestDelegate'))
+      done()
+    }, 500)
   })
 
-  it('Should also find the delegate by public key', () => {
+  it('Should also find the delegate by public key', done => {
+    store.dispatch('delegates/setDelegates', [ { username: 'TestDelegate', address: testDelegateAddress, publicKey: testDelegatePublicKey } ])
     const wrapper = mount(Wallet, {
       propsData: {
         publicKey: testDelegatePublicKey,
@@ -123,11 +127,15 @@ describe('Link/Wallet', () => {
       mixins,
       store
     })
+    // Delegate name is set after function call in mounted(), so we need to wait a little while
     expect(wrapper.contains('a')).toBe(true)
     expect(wrapper.findAll('a')).toHaveLength(2)
-    expect(wrapper.text()).not.toEqual(expect.stringContaining(testDelegateAddress))
-    expect(wrapper.text()).not.toEqual(expect.stringContaining(mixins.truncate(testDelegateAddress)))
-    expect(wrapper.text()).toEqual(expect.stringContaining('TestDelegate'))
+    setTimeout(() => {
+      expect(wrapper.text()).not.toEqual(expect.stringContaining(testDelegateAddress))
+      expect(wrapper.text()).not.toEqual(expect.stringContaining(mixins.truncate(testDelegateAddress)))
+      expect(wrapper.text()).toEqual(expect.stringContaining('TestDelegate'))
+      done()
+    }, 500)
   })
 
   describe('When given a transaction type > 0', () => {
