@@ -30,6 +30,7 @@ module.exports = {
 
   'it should be possible to click on the last block': function (browser) {
     browser
+      .useXpath()
       .click("//div[text() = 'Last block']/following-sibling::div//a[1]")
       .pause(500)
       .waitForElementVisible("//h1[text() = 'Block']", 5000)

@@ -41,9 +41,11 @@ module.exports = {
   'header should be able to toggle chart': function(browser) {
     browser
       .assert.visible('#line-chart')
+      .waitForElementVisible('button.text-chart-active', 5000)
       .click('button.text-chart-active')
       .waitForElementNotPresent('#line-chart', 5000)
     browser
+      .waitForElementVisible('button.text-chart-inactive', 5000)
       .click('button.text-chart-inactive')
       .waitForElementVisible('#line-chart', 5000)
   },
