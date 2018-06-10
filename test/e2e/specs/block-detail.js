@@ -61,6 +61,7 @@ module.exports = {
 
   'it should be possible to click on the delegate': function(browser) {
     browser
+      .waitForElementVisible('div.list-row a', 5000)
       .click('div.list-row a')
       .useXpath().waitForElementVisible("//h1[text() = 'Wallet Summary']", 5000)
       .assert.urlContains('wallets/ALLZ3TQKTaHm2Bte4SrXL9C5cS8ZovqFfZ')

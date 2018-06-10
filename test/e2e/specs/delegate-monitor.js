@@ -16,17 +16,17 @@ module.exports = {
       .assert.containsText('h1', 'Delegate Monitor')
   },
 
-  // 'it should display delegate details': function (browser) {
-  //   browser
-  //     .waitForElementVisible('.bg-theme-feature-background', 5000)
-  //     .pause(2000)
-  //     .useXpath()
-  //   browser.expect.element("//div[text() = 'Delegates']").to.be.visible
-  //   browser.expect.element("//div[text() = 'Total Forged (ARK)']").to.be.visible
-  //   browser.expect.element("//div[text() = 'Last block']").to.be.visible
-  //   browser.expect.element("//div[text() = 'Forged']").to.be.visible
-  //   browser.expect.element("//div[text() = 'Delegate']").to.be.visible
-  // },
+  'it should display delegate details': function (browser) {
+    browser
+      .waitForElementVisible('.bg-theme-feature-background', 5000)
+      .pause(2000)
+      .useXpath()
+    browser.expect.element("//div[text() = 'Delegates']").to.be.visible
+    browser.expect.element("//div[text() = 'Total Forged (ARK)']").to.be.visible
+    browser.expect.element("//div[text() = 'Last block']").to.be.visible
+    browser.expect.element("//div[text() = 'Forged']").to.be.visible
+    browser.expect.element("//div[text() = 'Delegate']").to.be.visible
+  },
 
   'it should be possible to click on the last block': function (browser) {
     browser
