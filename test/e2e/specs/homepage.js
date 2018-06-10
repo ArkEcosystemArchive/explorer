@@ -42,7 +42,7 @@ module.exports = {
     browser
       .assert.visible('#line-chart')
       .click('button.text-chart-active')
-      .useXpath().waitForElementNotPresent("//canvas[@id = 'line-chart']", 5000)
+      .useXpath().waitForElementNotVisible("//canvas[@id = 'line-chart']", 5000)
     browser
       .useCss().click('button.text-chart-inactive')
       .useXpath().waitForElementVisible("//canvas[@id = 'line-chart']", 5000)
