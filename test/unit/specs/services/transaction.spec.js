@@ -34,7 +34,7 @@ describe('Transaction Service', () => {
   })
 
   it('should fail if no transaction can be found for given id', async () => {
-    await expect(transactionService.find('bd8a71caeeab36339ac5baf832bb0e150549629c1992dc749a79ff3cdcd449fd')).rejects
+    await expect(transactionService.find('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')).rejects
   })
 
   it('should return the transactions for a given block', async () => {

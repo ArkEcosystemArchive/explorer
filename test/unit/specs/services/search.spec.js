@@ -61,7 +61,7 @@ describe('Search Service', () => {
   })
 
   it('should fail when searching for non-matching public key', async () => {
-    await searchService.findByPublicKey('02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0z').rejects
+    await searchService.findByPublicKey('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff').rejects
   })
 
   it('should return block when searching for existing block id', async () => {
@@ -110,7 +110,7 @@ describe('Search Service', () => {
   })
 
   it('should fail when searching for non-existing transaction id', async () => {
-    await searchService.findByTransactionId('e0a78fa665eb69a5e607a4f3f39a6c9c76a24b647f1cd1d56dd75b29ccf7fa6z').rejects
+    await searchService.findByTransactionId('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff').rejects
   })
 
 })
