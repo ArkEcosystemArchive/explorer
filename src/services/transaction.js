@@ -138,7 +138,7 @@ class TransactionService {
         senderId
       }
     })
-    return response.data
+    return response.data.transactions
   }
 
   async paginate(page, limit = 25) {
