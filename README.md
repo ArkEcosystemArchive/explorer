@@ -2,7 +2,7 @@
     <img src="/ARKExplorer.png" />
 </p>
 
-[![Build Status](https://img.shields.io/travis/ArkEcosystem/ark-explorer/master.svg?style=flat)](https://travis-ci.org/ArkEcosystem/ark-explorer)
+[![Build Status](https://img.shields.io/travis/ArkEcosystem/explorer/master.svg?style=flat)](https://travis-ci.org/ArkEcosystem/explorer)
 
 # ARK Explorer 3.0
 
