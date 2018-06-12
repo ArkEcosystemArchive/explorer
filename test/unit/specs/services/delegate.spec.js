@@ -104,6 +104,7 @@ describe('Delegate Service', () => {
       'status',
       'forgingStatus'
     ].sort())
+    
   })
 
   it('should return a list of delegates and their forged amounts', async() => {
