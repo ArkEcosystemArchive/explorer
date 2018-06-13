@@ -186,7 +186,7 @@ class DelegateService {
     })
 
     // Forging Status
-    const height = await block.height(status)
+    const height = await block.height()
     return { delegateCount: delegateCount,
       delegates: delegatesRounds.map(delegate => {
         delegate.forgingStatus = forging.status(
