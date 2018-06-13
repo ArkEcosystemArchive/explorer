@@ -31,7 +31,6 @@ describe('Forging Service', () => {
 
   it('should return the status for the given delegate', () => {
     const data = forgingService.status(dummyDelegate, 4781312)
-    console.log(data)
     expect(Object.keys(data).sort()).toEqual([
       'updatedAt',
       'lastBlock',
