@@ -129,18 +129,6 @@ class TransactionService {
     return response.data.count
   }
 
-  async votes(senderId) {
-    const response = await NodeService.get('transactions', {
-      params: {
-        orderBy: 'timestamp:desc',
-        limit: 25,
-        type: 3,
-        senderId
-      }
-    })
-    return response.data.transactions
-  }
-
   async paginate(page, limit = 25) {
     const offset = (page > 1) ? (page - 1) * limit : 0
 
