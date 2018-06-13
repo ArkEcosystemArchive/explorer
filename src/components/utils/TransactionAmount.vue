@@ -1,7 +1,7 @@
 <template>
   <span :class="{
     'text-red': transaction.senderId === $route.params.address,
-    'text-green': transaction.recipientId === $route.params.address && !isSpecialType,
+    'text-green': transaction.recipientId === $route.params.address && isTransfer,
   }">{{ readableCrypto(transaction.amount) }}</span>
 </template>
 
@@ -21,9 +21,10 @@ export default {
   },
 
   computed: {
-    isSpecialType() {
+    isTransfer() {
       if (this.type !== undefined) {
-        return this.type === 1 || this.type === 2 || this.type === 3
+        // 0 = transfer, 6 = timelock transfer, 7 = multipayment
+        return this.type === 0 || this.type === 6 || this.type === 7
       }
       return false
     }
