@@ -5,7 +5,7 @@ import store from '@/store'
 const methods = {
   isDelegateByAddress(address) {
     return (
-      this.$store.getters['delegates/delegates'].filter(
+      store.getters['delegates/delegates'].filter(
         d => d.address === address
       ).length > 0
     )
@@ -13,7 +13,7 @@ const methods = {
 
   isDelegateByPublicKey(publicKey) {
     return (
-      this.$store.getters['delegates/delegates'].filter(
+      store.getters['delegates/delegates'].filter(
         d => d.publicKey === publicKey
       ).length > 0
     )
