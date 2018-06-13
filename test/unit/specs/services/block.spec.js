@@ -85,6 +85,7 @@ describe('Block Service', () => {
   })
 
   it('should return the last block for given generator public key', async () => {
+    jest.setTimeout(30000); // This function easily takes 10-20 seconds to resolve, not sure why
     const data = await blockService.lastBlockByPublicKey('0257581c82d1931c4b0b2df9d658ecd303fcf2a6ea4ec291669ed06f44fb75c8fe')
     expect(Object.keys(data).sort()).toEqual(blockPropertyArray)
   })
@@ -94,6 +95,7 @@ describe('Block Service', () => {
   })
 
   it('should return the previous block for the given height', async () => {
+    jest.setTimeout(30000); // This function easily takes 10-20 seconds to resolve, not sure why
     const data = await blockService.findPrevious(4771470)
     expect(Object.keys(data).sort()).toEqual(blockPropertyArray)
   })

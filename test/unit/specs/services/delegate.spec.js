@@ -68,6 +68,10 @@ describe('Delegate Service', () => {
     expect(data.username).toBe('arkpool')
   })
 
+  it('should fail if the public key exists but does not correspond to a delegate', async() => {
+    await delegateService.find('021d03bace0687a1a5e797f884b13fb46f817ec32de1374a7f223f24404401d220').rejects
+  })
+
   it('should fail when searching for non-existing public key', async() => {
     await delegateService.find('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff').rejects
   })
