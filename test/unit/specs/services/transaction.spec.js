@@ -117,14 +117,6 @@ describe('Transaction Service', () => {
     expect(Number(data)).toBe(1)
   })
 
-  it('should return vote transactions for an address', async() => {
-    const data = await transactionService.votes('ATsPMTAHNsUwKedzNpjTNRfcj1oRGaX5xC')
-    expect(data).toHaveLength(25)
-    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
-    expect(data[0].type).toBe(3)
-    expect(data[0].timestamp < data[1].timestamp)
-  })
-
   it('should return latest transactions with offset', async() => {
     const data = await transactionService.paginate(0)
     expect(data).toHaveLength(25)

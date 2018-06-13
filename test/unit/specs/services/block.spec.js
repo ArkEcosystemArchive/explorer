@@ -103,6 +103,7 @@ describe('Block Service', () => {
   })
 
   it('should return the next block for the given height', async () => {
+    jest.setTimeout(30000); // This function easily takes 10-20 seconds to resolve, not sure why
     const data = await blockService.findNext(4771470)
     expect(Object.keys(data).sort()).toEqual(blockPropertyArray)
   })
