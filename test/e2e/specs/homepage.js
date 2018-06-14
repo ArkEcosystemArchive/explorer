@@ -93,7 +93,6 @@ module.exports = {
     browser
       .assert.visible('footer > div.text-center')
       .elements('css selector', 'footer > div.text-center a', function(result) {
-        console.log(result.value)
         browser.assert.ok(result.value.length > 0)
       })
   },
