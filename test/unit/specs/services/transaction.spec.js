@@ -43,6 +43,11 @@ describe('Transaction Service', () => {
     expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
   })
 
+  it('should return no transactions if offset is larger than the amount of transactions', async () => {
+    const data = await transactionService.findByBlock('8034780571166969612', 2)
+    expect(data).toHaveLength(0)
+  })
+
   it('should return and empty list if no transactions in a block', async () => {
     const data = await transactionService.findByBlock('7818295669546141032')
     expect(data).toHaveLength(0)
@@ -146,9 +151,23 @@ describe('Transaction Service', () => {
     expect(data[0].timestamp < data[1].timestamp)
   })
 
+  it('should return latest transactions with offset and given limit', async() => {
+    const data = await transactionService.paginate(2, 40)
+    expect(data).toHaveLength(40)
+    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
+    expect(data[0].timestamp < data[1].timestamp)
+  })
+
   it('should return latest transactions for an address with offset', async() => {
     const data = await transactionService.paginateByAddress('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK', 0)
     expect(data).toHaveLength(25)
+    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
+    expect(data[0].timestamp < data[1].timestamp)
+  })
+
+  it('should return latest transactions for an address with offset and given limit', async() => {
+    const data = await transactionService.paginateByAddress('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK', 2, 40)
+    expect(data).toHaveLength(40)
     expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
     expect(data[0].timestamp < data[1].timestamp)
   })
