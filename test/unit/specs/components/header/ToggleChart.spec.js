@@ -16,18 +16,18 @@ const i18n = new VueI18n({
   silentTranslationWarn: true
 })
 
-const getters = {
-  'ui/priceChart': () => false
-}
-
-const actions = {
-  'ui/setPriceChart': jest.fn()
-}
+const uiAction = { setPriceChart: jest.fn() }
 
 const store = new Vuex.Store({
-  state: {},
-  actions,
-  getters
+  modules: {
+    ui: {
+      namespaced: true,
+      state: { priceChart: false },
+      actions: uiAction,
+      getters: { priceChart: state => false }
+    }
+  },
+  strict: true
 })
 
 describe('header/ToggleChart', () => {
@@ -40,7 +40,7 @@ describe('header/ToggleChart', () => {
       store
     })
     wrapper.find('button').trigger('click')
-    expect(actions['ui/setPriceChart']).toHaveBeenCalled()
+    expect(uiAction.setPriceChart).toHaveBeenCalled()
   })
 
 })
