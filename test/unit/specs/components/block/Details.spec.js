@@ -17,7 +17,9 @@ describe('Block/Details', () => {
   it('Should display the block details', () => {
     const wrapper = mount(Details, {
       propsData: { block: {} },
-      stubs: ['link-wallet'],
+      stubs: {
+        'link-wallet': '<div></div>'
+      },
       i18n,
       mixins,
       localVue,
