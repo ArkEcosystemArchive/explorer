@@ -2,7 +2,6 @@ import coinmarketcapService from '@/services/coin-market-cap'
 import store from '@/store'
 
 describe('Coinmarketcap Service', () => {
-
   beforeAll(() => {
     store.dispatch('network/setServer', 'https://explorer.ark.io:8443/api')
   })

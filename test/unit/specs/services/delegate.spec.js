@@ -1,3 +1,5 @@
+/* Disable eslint for the block and forging imports */
+/* eslint-disable no-unused-vars */
 import delegateService from '@/services/delegate'
 import block from '@/services/block'
 import forging from '@/services/forging'
@@ -20,10 +22,9 @@ const voterPropertyArray = [
   'address',
   'publicKey',
   'balance'
-  ].sort()
+].sort()
 
 describe('Delegate Service', () => {
-
   beforeAll(() => {
     store.dispatch('network/setServer', 'https://explorer.ark.io:8443/api')
     store.dispatch('network/setActiveDelegates', 51)
@@ -88,7 +89,7 @@ describe('Delegate Service', () => {
   })
 
   it('should return a list of active delegates and their stats', async() => {
-    jest.setTimeout(20000); // Allow this function to take longer than the specified 5 seconds
+    jest.setTimeout(20000) // Allow this function to take longer than the specified 5 seconds
     const data = await delegateService.activeDelegates()
     expect(data.delegateCount).toBeDefined()
     expect(data.delegates).toBeDefined()
@@ -109,7 +110,6 @@ describe('Delegate Service', () => {
       'status',
       'forgingStatus'
     ].sort())
-    
   })
 
   it('should return a list of delegates and their forged amounts', async() => {
@@ -124,5 +124,4 @@ describe('Delegate Service', () => {
     const data = await delegateService.activeDelegatesCount()
     expect(data).toBeGreaterThan(102)
   })
-  
 })

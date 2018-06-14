@@ -1,4 +1,4 @@
-import { mount, createLocalVue, RouterLinkStub } from '@vue/test-utils'
+import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
 
 import ToggleCurrency from '@/components/header/ToggleCurrency'
@@ -28,13 +28,13 @@ const store = new Vuex.Store({
     },
     currency: {
       namespaced: true,
-      state: { 
+      state: {
         name: 'USD',
         rate: 1.5
       },
-      getters: { 
-        name: state => 'USD', 
-        rate: state => 1.5 
+      getters: {
+        name: state => 'USD',
+        rate: state => 1.5
       }
     }
   },
@@ -52,5 +52,4 @@ describe('header/ToggleCurrency', () => {
     wrapper.find('button').trigger('click')
     expect(uiAction.setHeaderType).toHaveBeenCalled()
   })
-
 })

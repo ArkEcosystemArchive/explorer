@@ -138,7 +138,6 @@ describe('Transaction Service', () => {
     expect(Number(data)).toBeGreaterThan(0)
   })
 
-
   it('should return count of transactions in given block', async () => {
     const data = await transactionService.findByBlockCount('14744703911220072486')
     expect(Number(data)).toBe(1)
@@ -172,5 +171,3 @@ describe('Transaction Service', () => {
     expect(data[0].timestamp < data[1].timestamp)
   })
 })
-
-

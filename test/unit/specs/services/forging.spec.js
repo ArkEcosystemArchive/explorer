@@ -2,7 +2,7 @@ import forgingService from '@/services/forging'
 import store from '@/store'
 
 const dummyBlock = {
-  "id":"9680842915822578693","version":0,"timestamp":38739832,"height":4781312,"previousBlock":"2930936246427877286","numberOfTransactions":0,"totalAmount":0,"totalFee":0,"reward":200000000,"payloadLength":0,"payloadHash":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855","generatorPublicKey":"03331b3bdebd082d0c43d08b20a687c7b55adde6e39766d96bf6188d6646330aef","generatorId":"AbkG2erJoFRFK4H1VuVkb9Mgx4cA1oSG43","blockSignature":"3045022100aab1299e2e1e046e00755ac8541506c2ac253d2337341a3f8b2f42af332bb5b502202f5ff2dcd4fd63b51b74509772192aab0d2d5a01f10581141256a9e5974274b1","confirmations":1,"totalForged":"200000000"
+  'id': '9680842915822578693', 'version': 0, 'timestamp': 38739832, 'height': 4781312, 'previousBlock': '2930936246427877286', 'numberOfTransactions': 0, 'totalAmount': 0, 'totalFee': 0, 'reward': 200000000, 'payloadLength': 0, 'payloadHash': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', 'generatorPublicKey': '03331b3bdebd082d0c43d08b20a687c7b55adde6e39766d96bf6188d6646330aef', 'generatorId': 'AbkG2erJoFRFK4H1VuVkb9Mgx4cA1oSG43', 'blockSignature': '3045022100aab1299e2e1e046e00755ac8541506c2ac253d2337341a3f8b2f42af332bb5b502202f5ff2dcd4fd63b51b74509772192aab0d2d5a01f10581141256a9e5974274b1', 'confirmations': 1, 'totalForged': '200000000'
 }
 
 const dummyDelegate = {
@@ -24,7 +24,6 @@ const dummyDelegate = {
 }
 
 describe('Forging Service', () => {
-
   beforeAll(() => {
     store.dispatch('network/setActiveDelegates', 51)
   })
@@ -80,13 +79,13 @@ describe('Forging Service', () => {
 
   it('should return an object of forging stats for the given delegates', () => {
     const data = forgingService.totals([
-      { forgingStatus: { code: 0 }},
-      { forgingStatus: { code: 1 }},
-      { forgingStatus: { code: 2 }},
-      { forgingStatus: { code: 3 }},
-      { forgingStatus: { code: 4 }},
-      { forgingStatus: { code: 5 }},
-      { forgingStatus: { code: 6 }} // Unprocessable
+      { forgingStatus: { code: 0 } },
+      { forgingStatus: { code: 1 } },
+      { forgingStatus: { code: 2 } },
+      { forgingStatus: { code: 3 } },
+      { forgingStatus: { code: 4 } },
+      { forgingStatus: { code: 5 } },
+      { forgingStatus: { code: 6 } } // Unprocessable
     ])
     expect(data).toEqual({
       forging: 2,

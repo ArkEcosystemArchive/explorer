@@ -21,7 +21,6 @@ const blockPropertyArray = [
 ].sort()
 
 describe('Block Service', () => {
-
   beforeAll(() => {
     store.dispatch('network/setServer', 'https://explorer.ark.io:8443/api')
   })
@@ -85,7 +84,7 @@ describe('Block Service', () => {
   })
 
   it('should return the last block for given generator public key', async () => {
-    jest.setTimeout(30000); // This function easily takes 10-20 seconds to resolve, not sure why
+    jest.setTimeout(30000) // This function easily takes 10-20 seconds to resolve, not sure why
     const data = await blockService.lastBlockByPublicKey('0257581c82d1931c4b0b2df9d658ecd303fcf2a6ea4ec291669ed06f44fb75c8fe')
     expect(Object.keys(data).sort()).toEqual(blockPropertyArray)
   })
@@ -95,7 +94,7 @@ describe('Block Service', () => {
   })
 
   it('should return the previous block for the given height', async () => {
-    jest.setTimeout(30000); // This function easily takes 10-20 seconds to resolve, not sure why
+    jest.setTimeout(30000) // This function easily takes 10-20 seconds to resolve, not sure why
     const data = await blockService.findPrevious(4771470)
     expect(Object.keys(data).sort()).toEqual(blockPropertyArray)
   })
@@ -105,7 +104,7 @@ describe('Block Service', () => {
   })
 
   it('should return the next block for the given height', async () => {
-    jest.setTimeout(30000); // This function easily takes 10-20 seconds to resolve, not sure why
+    jest.setTimeout(30000) // This function easily takes 10-20 seconds to resolve, not sure why
     const data = await blockService.findNext(4771470)
     expect(Object.keys(data).sort()).toEqual(blockPropertyArray)
   })
@@ -113,6 +112,4 @@ describe('Block Service', () => {
   it('should fail to find the next block for an incorrect height', async () => {
     await blockService.findNext('0').rejects
   })
-
 })
-

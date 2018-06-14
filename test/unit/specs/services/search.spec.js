@@ -2,7 +2,6 @@ import searchService from '@/services/search'
 import store from '@/store'
 
 describe('Search Service', () => {
-
   beforeAll(() => {
     store.dispatch('network/setServer', 'https://explorer.ark.io:8443/api')
   })
@@ -10,14 +9,14 @@ describe('Search Service', () => {
   it('should return address when searching for existing wallet', async () => {
     const data = await searchService.findByAddress('ATsPMTAHNsUwKedzNpjTNRfcj1oRGaX5xC')
     expect(Object.keys(data.account).sort()).toEqual([
-      'address', 
-      'unconfirmedBalance', 
-      'balance', 
-      'publicKey', 
-      'unconfirmedSignature', 
-      'secondSignature', 
-      'secondPublicKey', 
-      'multisignatures', 
+      'address',
+      'unconfirmedBalance',
+      'balance',
+      'publicKey',
+      'unconfirmedSignature',
+      'secondSignature',
+      'secondPublicKey',
+      'multisignatures',
       'u_multisignatures'
     ].sort())
   })
@@ -112,5 +111,4 @@ describe('Search Service', () => {
   it('should fail when searching for non-existing transaction id', async () => {
     await searchService.findByTransactionId('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff').rejects
   })
-
 })

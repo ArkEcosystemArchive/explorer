@@ -79,5 +79,4 @@ describe('Link/Transaction', () => {
     expect(wrapper.findAll('svg')).toHaveLength(0)
     expect(wrapper.text()).toEqual(expect.stringContaining(mixins.truncate(testTransaction)))
   })
-  
 })

@@ -1,4 +1,4 @@
-import { mount, createLocalVue, RouterLinkStub } from '@vue/test-utils'
+import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
 import store from '@/store'
 
@@ -103,5 +103,4 @@ describe('Utils/TransactionAmount', () => {
     expect(wrapper.classes()).not.toContain('text-green')
     expect(wrapper.text()).toEqual(mixins.readableCrypto(100000000))
   })
-
 })

@@ -2,7 +2,6 @@ import cryptoCompareService from '@/services/crypto-compare'
 import store from '@/store'
 
 describe('CryptoCompare Service', () => {
-
   beforeAll(() => {
     store.dispatch('network/setServer', 'https://explorer.ark.io:8443/api')
     store.dispatch('network/setToken', 'ARK')
@@ -45,5 +44,4 @@ describe('CryptoCompare Service', () => {
     expect(data.labels.length).toBeGreaterThanOrEqual(366)
     expect(data.datasets.length).toBeGreaterThanOrEqual(366)
   })
-
 })

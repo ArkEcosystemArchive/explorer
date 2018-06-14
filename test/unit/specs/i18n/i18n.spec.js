@@ -1,5 +1,4 @@
 import i18n from '@/i18n'
-import store from '@/store'
 
 describe('i18n', () => {
   it('should return a translation for a given phrase', () => {

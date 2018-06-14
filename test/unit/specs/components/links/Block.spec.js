@@ -34,5 +34,4 @@ describe('Link/Block', () => {
     expect(wrapper.findAll('a')).toHaveLength(2)
     expect(wrapper.text()).toEqual(expect.stringContaining(mixins.truncate(testBlock)))
   })
-
 })

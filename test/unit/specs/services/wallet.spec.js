@@ -2,7 +2,6 @@ import walletService from '@/services/wallet'
 import store from '@/store'
 
 describe('Wallet Service', () => {
-
   beforeAll(() => {
     store.dispatch('network/setServer', 'https://explorer.ark.io:8443/api')
   })
@@ -11,14 +10,14 @@ describe('Wallet Service', () => {
     const data = await walletService.find('ATsPMTAHNsUwKedzNpjTNRfcj1oRGaX5xC')
     // Response should contain all these properties
     expect(Object.keys(data).sort()).toEqual([
-      'address', 
-      'unconfirmedBalance', 
-      'balance', 
-      'publicKey', 
-      'unconfirmedSignature', 
-      'secondSignature', 
-      'secondPublicKey', 
-      'multisignatures', 
+      'address',
+      'unconfirmedBalance',
+      'balance',
+      'publicKey',
+      'unconfirmedSignature',
+      'secondSignature',
+      'secondPublicKey',
+      'multisignatures',
       'u_multisignatures'
     ].sort())
   })

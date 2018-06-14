@@ -1,4 +1,4 @@
-import { mount, createLocalVue, RouterLinkStub } from '@vue/test-utils'
+import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
 
 import ToggleChart from '@/components/header/ToggleChart'
@@ -32,7 +32,6 @@ const store = new Vuex.Store({
 
 describe('header/ToggleChart', () => {
   it('Should be possible to toggle the chart', () => {
-
     const wrapper = mount(ToggleChart, {
       i18n,
       localVue,
@@ -42,5 +41,4 @@ describe('header/ToggleChart', () => {
     wrapper.find('button').trigger('click')
     expect(uiAction.setPriceChart).toHaveBeenCalled()
   })
-
 })

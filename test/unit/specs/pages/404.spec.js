@@ -1,4 +1,4 @@
-import { shallowMount, createLocalVue, RouterLinkStub } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
 
 import errorPage from '@/pages/404'
@@ -68,5 +68,4 @@ describe('page/404', () => {
     expect(wrapper.find('h1').text()).toEqual('Ooops!!')
     expect(wrapper.find('img').attributes().src).toBe('@/assets/images/404/light.png')
   })
-
 })

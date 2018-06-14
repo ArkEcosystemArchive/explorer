@@ -1,4 +1,4 @@
-import { mount, createLocalVue, RouterLinkStub } from '@vue/test-utils'
+import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
 
 import ToggleTheme from '@/components/header/ToggleTheme'
@@ -66,5 +66,4 @@ describe('header/ToggleTheme', () => {
 
     wrapper.vm.changeImageSource()
   })
-
 })

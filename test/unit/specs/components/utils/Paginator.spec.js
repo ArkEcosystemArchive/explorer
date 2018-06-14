@@ -1,4 +1,4 @@
-import { mount, createLocalVue, RouterLinkStub } from '@vue/test-utils'
+import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
 import store from '@/store'
 
@@ -86,7 +86,7 @@ describe('Utils/Paginator', () => {
       mixins,
       store
     })
-    wrapper.vm.$parent = parentWrapper.vm;
+    wrapper.vm.$parent = parentWrapper.vm
     const buttons = wrapper.findAll('button')
     expect(buttons).toHaveLength(2)
 
@@ -103,5 +103,4 @@ describe('Utils/Paginator', () => {
     expect(parentWrapper.emitted().paginatorChanged.length).toBe(3)
     expect(parentWrapper.emitted().paginatorChanged[2]).toEqual([1])
   })
-
 })
