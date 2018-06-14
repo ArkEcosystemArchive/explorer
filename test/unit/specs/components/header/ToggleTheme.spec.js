@@ -18,20 +18,18 @@ const i18n = new VueI18n({
 
 const uiAction = { setNightMode: jest.fn() }
 
-const store = new Vuex.Store({
-  modules: {
-    ui: {
-      namespaced: true,
-      state: { nightMode: false },
-      actions: uiAction,
-      getters: { nightMode: state => state.nightMode }
-    }
-  },
-  strict: true
-})
-
 describe('header/ToggleTheme', () => {
-  it('Should be possible to toggle the theme', () => {
+  it('Should be possible to toggle the theme (nightmode)', () => {
+    const store = new Vuex.Store({
+      modules: {
+        ui: {
+          namespaced: true,
+          actions: uiAction,
+          getters: { nightMode: state => false }
+        }
+      },
+      strict: true
+    })
 
     const wrapper = mount(ToggleTheme, {
       i18n,
@@ -41,6 +39,35 @@ describe('header/ToggleTheme', () => {
     })
     wrapper.find('button').trigger('click')
     expect(uiAction.setNightMode).toHaveBeenCalled()
+
+    wrapper.vm.changeImageSource()
+  })
+
+})
+
+describe('header/ToggleTheme', () => {
+  it('Should be possible to toggle the theme (daymode)', () => {
+    const store = new Vuex.Store({
+      modules: {
+        ui: {
+          namespaced: true,
+          actions: uiAction,
+          getters: { nightMode: state => true }
+        }
+      },
+      strict: true
+    })
+
+    const wrapper = mount(ToggleTheme, {
+      i18n,
+      localVue,
+      mixins,
+      store
+    })
+    wrapper.find('button').trigger('click')
+    expect(uiAction.setNightMode).toHaveBeenCalled()
+
+    wrapper.vm.changeImageSource()
   })
 
 })
