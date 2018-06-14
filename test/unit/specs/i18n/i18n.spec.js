@@ -7,8 +7,7 @@ describe('i18n', () => {
   })
 
   it('should be possible to switch languages', () => {
-    store.dispatch('ui/setLanguage', 'nl')
-    expect(i18n.t('No Results')).toBe('Geen Resultaten')
-    expect(store.getters['ui/language']).toBe('nl')
+    expect(i18n.t('No Results', 'nl')).toBe('Geen Resultaten')
+    expect(i18n.t('No Results', 'pt')).toBe('Sem resultados')
   })
 })
