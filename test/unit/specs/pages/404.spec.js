@@ -35,7 +35,10 @@ describe('page/404', () => {
       i18n,
       localVue,
       mixins,
-      store
+      store,
+      stubs: {
+        'content-header': true
+      }
     })
     expect(wrapper.find('h1').text()).toEqual('Ooops!!')
     expect(wrapper.find('img').attributes().src).toBe('@/assets/images/404/dark.png')
@@ -57,7 +60,10 @@ describe('page/404', () => {
       i18n,
       localVue,
       mixins,
-      store
+      store,
+      stubs: {
+        'content-header': true
+      }
     })
     expect(wrapper.find('h1').text()).toEqual('Ooops!!')
     expect(wrapper.find('img').attributes().src).toBe('@/assets/images/404/light.png')
