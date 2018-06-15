@@ -33,7 +33,7 @@ describe('Transaction Service', () => {
   })
 
   it('should fail if no transaction can be found for given id', async () => {
-    await expect(transactionService.find('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')).rejects
+    await expect(transactionService.find('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')).rejects.toThrow()
   })
 
   it('should return the transactions for a given block', async () => {
@@ -53,7 +53,7 @@ describe('Transaction Service', () => {
   })
 
   it('should fail if an incorrect block id is given', async () => {
-    await expect(transactionService.findByBlock('8034780571166969613')).rejects
+    await expect(transactionService.findByBlock('0')).rejects.toThrow()
   })
 
   it('should return the latest registrations', async () => {
@@ -87,7 +87,7 @@ describe('Transaction Service', () => {
   })
 
   it('should fail when searching for transactions if address does not exist', async () => {
-    await expect(transactionService.allByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects
+    await expect(transactionService.allByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects.toThrow()
   })
 
   it('should return all outgoing transactions for an address', async () => {
@@ -105,7 +105,7 @@ describe('Transaction Service', () => {
   })
 
   it('should fail when searching for outgoing transactions if address does not exist', async () => {
-    await expect(transactionService.sentByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects
+    await expect(transactionService.sentByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects.toThrow()
   })
 
   it('should return all incoming transactions for an address', async () => {
@@ -123,7 +123,7 @@ describe('Transaction Service', () => {
   })
 
   it('should fail when searching for incoming transactions if address does not exist', async () => {
-    await expect(transactionService.receivedByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects
+    await expect(transactionService.receivedByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects.toThrow()
   })
 
   it('should return count of outgoing transactions for an address', async () => {

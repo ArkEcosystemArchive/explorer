@@ -7,8 +7,8 @@ class NodeService {
 
     const response = await axios.get(`${server}/${url}`, config)
 
-    if (!response.data.success) { 
-    	return Promise.reject(new Error('Error GET ' + url + ' : ' + JSON.stringify(response)))
+    if (!response.data.success) {
+      return Promise.reject(new Error('Error GET ' + url + ' : ' + JSON.stringify(response)))
     }
     return response
   }
