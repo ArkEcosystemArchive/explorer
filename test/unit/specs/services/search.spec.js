@@ -22,7 +22,7 @@ describe('Search Service', () => {
   })
 
   it('should fail when searching for non-existing wallet', async () => {
-    await searchService.findByAddress('ATsPMTAHNsUwKedzNpjTNRfcj1oRGaX5xz').rejects
+    await expect(searchService.findByAddress('ATsPMTAHNsUwKedzNpjTNRfcj1oRGaX5xz')).rejects.toThrow()
   })
 
   it('should return delegate address when searching for existing username', async () => {
@@ -41,7 +41,7 @@ describe('Search Service', () => {
   })
 
   it('should fail when searching for non-matching username', async () => {
-    await searchService.findByAddress('asdhfajksdhfakjsdfasdf').rejects
+    await expect(searchService.findByAddress('asdhfajksdhfakjsdfasdf')).rejects.toThrow()
   })
 
   it('should return delegate address when searching for existing public key', async () => {
@@ -60,7 +60,7 @@ describe('Search Service', () => {
   })
 
   it('should fail when searching for non-matching public key', async () => {
-    await searchService.findByPublicKey('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff').rejects
+    await expect(searchService.findByPublicKey('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')).rejects.toThrow()
   })
 
   it('should return block when searching for existing block id', async () => {
@@ -86,7 +86,7 @@ describe('Search Service', () => {
   })
 
   it('should fail when searching for non-existing block id', async () => {
-    await searchService.findByBlockId('16259489398325158419').rejects
+    await expect(searchService.findByBlockId('0')).rejects.toThrow()
   })
 
   it('should return transaction when searching for existing transaction id', async () => {
@@ -109,6 +109,6 @@ describe('Search Service', () => {
   })
 
   it('should fail when searching for non-existing transaction id', async () => {
-    await searchService.findByTransactionId('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff').rejects
+    await expect(searchService.findByTransactionId('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')).rejects.toThrow()
   })
 })

@@ -23,7 +23,7 @@ describe('Wallet Service', () => {
   })
 
   it('should fail when searching for incorrect wallet address', async () => {
-    await expect(walletService.find('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gsx')).rejects
+    await expect(walletService.find('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gsx')).rejects.toThrow()
   })
 
   it('should return delegate when address is voting for one', async () => {
@@ -46,7 +46,7 @@ describe('Wallet Service', () => {
   })
 
   it('should fail when fetching vote for incorrect wallet address', async () => {
-    await expect(walletService.vote('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gsx')).rejects
+    await expect(walletService.vote('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gsx')).rejects.toThrow()
   })
 
   it('should return a list of top wallet accounts', async () => {

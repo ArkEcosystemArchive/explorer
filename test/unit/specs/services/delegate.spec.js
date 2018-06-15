@@ -49,8 +49,9 @@ describe('Delegate Service', () => {
     expect(data.length).toBeGreaterThanOrEqual(excluding.length)
   })
 
-  it('should fail when retrieving voters of delegate with non-existing public key', async() => {
-    await delegateService.voters('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff').rejects
+  it('should return an empty list when retrieving voters of delegate with non-existing public key', async() => {
+    const data = await delegateService.voters('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
+    expect(data).toHaveLength(0)
   })
 
   it('should return the delegate when searching by username', async() => {
@@ -60,7 +61,7 @@ describe('Delegate Service', () => {
   })
 
   it('should fail when searching for delegate by non-existing username', async() => {
-    await delegateService.findByUsername('asdfasdfasdfasdfasdfasdf').rejects
+    await expect(delegateService.findByUsername('asdfasdfasdfasdfasdfasdf')).rejects.toThrow()
   })
 
   it('should return the delegate when searching by public key', async() => {
@@ -70,11 +71,11 @@ describe('Delegate Service', () => {
   })
 
   it('should fail if the public key exists but does not correspond to a delegate', async() => {
-    await delegateService.find('021d03bace0687a1a5e797f884b13fb46f817ec32de1374a7f223f24404401d220').rejects
+    await expect(delegateService.find('021d03bace0687a1a5e797f884b13fb46f817ec32de1374a7f223f24404401d220')).rejects.toThrow()
   })
 
   it('should fail when searching for non-existing public key', async() => {
-    await delegateService.find('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff').rejects
+    await expect(delegateService.find('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')).rejects.toThrow()
   })
 
   it('should retrieve the standby delegates', async() => {

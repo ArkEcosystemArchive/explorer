@@ -53,7 +53,7 @@ describe('Block Service', () => {
   })
 
   it('should fail when given block id is incorrect', async () => {
-    await blockService.find('0').rejects
+    await expect(blockService.find('0')).rejects.toThrow()
   })
 
   it('should return the blocks by an offset', async () => {
@@ -70,8 +70,9 @@ describe('Block Service', () => {
     expect(data[0].height < data[1].height)
   })
 
-  it('should fail when given generator public key is incorrect', async () => {
-    await expect(blockService.getByPublicKey('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')).rejects
+  it('should return an empty list when given generator public key is incorrect', async () => {
+    const data = await blockService.getByPublicKey('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
+    expect(data).toHaveLength(0)
   })
 
   it('should return the number of blocks forged by given generator public key', async () => {
@@ -80,7 +81,8 @@ describe('Block Service', () => {
   })
 
   it('should fail to return count when given generator public key is incorrect', async () => {
-    await expect(blockService.forgedByPublicKeyCount('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')).rejects
+    const data = await blockService.forgedByPublicKeyCount('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
+    expect(data).toBeUndefined()
   })
 
   it('should return the last block for given generator public key', async () => {
@@ -89,8 +91,9 @@ describe('Block Service', () => {
     expect(Object.keys(data).sort()).toEqual(blockPropertyArray)
   })
 
-  it('should fail to return latest block when given generator public key is incorrect', async () => {
-    await expect(blockService.lastBlockByPublicKey('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')).rejects
+  it('should return undefined when given generator public key is incorrect', async () => {
+    const data = await blockService.lastBlockByPublicKey('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
+    expect(data).toBeUndefined()
   })
 
   it('should return the previous block for the given height', async () => {
@@ -99,8 +102,18 @@ describe('Block Service', () => {
     expect(Object.keys(data).sort()).toEqual(blockPropertyArray)
   })
 
-  it('should fail to find the previous block for an incorrect height', async () => {
-    await expect(blockService.findPrevious('1')).rejects
+  it('should return undefined when finding previous block for an incorrect height', async () => {
+    const data = await blockService.findPrevious(1234567891234567890)
+    expect(data).toBeUndefined()
+  })
+
+  it('should fail when an no parameter is given (findPrevious)', async() => {
+    await expect(blockService.findPrevious()).rejects.toThrow()
+  })
+
+  it('should return the latest block when an empty string is given (findPrevious)', async() => {
+    const data = await blockService.findPrevious('')
+    expect(Object.keys(data).sort()).toEqual(blockPropertyArray)
   })
 
   it('should return the next block for the given height', async () => {
@@ -109,7 +122,18 @@ describe('Block Service', () => {
     expect(Object.keys(data).sort()).toEqual(blockPropertyArray)
   })
 
-  it('should fail to find the next block for an incorrect height', async () => {
-    await expect(blockService.findNext('0')).rejects
+  it('should return undefined when finding next block for an incorrect height', async () => {
+    const data = await blockService.findNext(1234567891234567890)
+    expect(data).toBeUndefined()
+  })
+
+  it('should fail when no parameter is given (findNext)', async() => {
+    await expect(blockService.findNext()).rejects.toThrow()
+  })
+
+  it('should return the block at height 1 when an empty string is given (findNext)', async() => {
+    const data = await blockService.findNext('')
+    expect(Object.keys(data).sort()).toEqual(blockPropertyArray)
+    expect(data.height).toBe(1)
   })
 })

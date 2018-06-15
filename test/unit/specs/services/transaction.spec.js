@@ -52,8 +52,9 @@ describe('Transaction Service', () => {
     expect(data).toHaveLength(0)
   })
 
-  it('should fail if an incorrect block id is given', async () => {
-    await expect(transactionService.findByBlock('0')).rejects.toThrow()
+  it('should return an empty list of transactions when an incorrect block id is given', async () => {
+    const data = await transactionService.findByBlock('0')
+    expect(data).toHaveLength(0)
   })
 
   it('should return the latest registrations', async () => {
