@@ -1,4 +1,4 @@
-import { mount, createLocalVue, RouterLinkStub } from '@vue/test-utils'
+import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
 
 import forging from '@/components/monitor/Forging'

@@ -74,10 +74,8 @@ module.exports = {
 
     browser
       .url(devServer)
-      .useCss()
-      .waitForElementVisible('section.page-section', 5000)
-    browser
-      .useXpath().expect.element("//div[text() = 'Votes']").to.be.present
+      .useXpath()
+      .waitForElementVisible("//div[text() = 'Votes']", 5000)
     browser
       .expect.element("//div[text() = 'Votes']/following-sibling::div//a").to.be.present
     browser.end()
