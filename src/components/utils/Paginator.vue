@@ -70,7 +70,7 @@ export default {
     },
 
     next() {
-      if (!this.count || totalPages < this.page) this.page++
+      if (!this.count || this.page < this.totalPages) this.page++
 
       this.$parent.$emit('paginatorChanged', this.page)
     },
