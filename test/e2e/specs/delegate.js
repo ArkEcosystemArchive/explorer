@@ -101,9 +101,9 @@ module.exports = {
 
     browser
       .url(devServer)
-      .useCss()
-      .waitForElementVisible('div.border-t.list-row', 5000)
-      .useXpath().click("//a[contains(@href, '/voters/1') and text() = 'See all']")
+      .useXpath()
+      .waitForElementVisible("//a[contains(@href, '/voters/1') and text() = 'See all']", 5000)
+      .click("//a[contains(@href, '/voters/1') and text() = 'See all']")
       .waitForElementVisible("//h1[contains(text(), 'Voters')]", 5000)
     browser
       .assert.urlContains('/wallets/ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ/voters/1')
