@@ -11,14 +11,14 @@ module.exports = {
 
     browser
       .url(devServer)
-      .waitForElementVisible('main.theme-light', 5000)
-      .waitForElementVisible('h1', 5000)
+      .waitForElementVisible('main.theme-light')
+      .waitForElementVisible('h1')
       .assert.containsText('h1', 'Voters')
   },
 
   'it should be possible to navigate to the next page and back': function (browser) {
     browser
-      .waitForElementVisible('div.table-component', 5000)
+      .waitForElementVisible('div.table-component')
       .assert.urlContains('/voters/1')
       .useXpath().expect.element("//button[contains(., 'Previous')]").to.not.be.visible
     browser
@@ -37,7 +37,7 @@ module.exports = {
   'it should be possible to sort the voters': function (browser) {
     browser
       .useCss()
-      .waitForElementVisible('div.table-component', 5000)
+      .waitForElementVisible('div.table-component')
       .useXpath().expect.element("//th[contains(.,'Address')]").to.be.present
     browser
       .assert.cssClassPresent("//th[contains(.,'Address')]", 'table-component__th--sort')
@@ -66,15 +66,15 @@ module.exports = {
   'it should be possible to click on a wallet address': function (browser) {
     browser
       .useCss()
-      .waitForElementVisible('div.table-component', 5000)
+      .waitForElementVisible('div.table-component')
       .useXpath().click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]//a[1]")
       .pause(500)
     browser
       .useCss()
-      .waitForElementVisible('main.theme-light', 5000)
+      .waitForElementVisible('main.theme-light')
       .assert.urlContains('/wallets/')
     browser
-      .waitForElementVisible('h1', 5000)
+      .waitForElementVisible('h1')
       .assert.containsText('h1', 'Wallet Summary')
       .end()
   }

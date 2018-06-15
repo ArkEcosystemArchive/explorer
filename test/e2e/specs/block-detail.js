@@ -11,8 +11,8 @@ module.exports = {
 
     browser
       .url(devServer)
-      .waitForElementVisible('main.theme-light', 5000)
-      .waitForElementVisible('h1', 5000)
+      .waitForElementVisible('main.theme-light')
+      .waitForElementVisible('h1')
       .assert.containsText('h1', 'Block')
   },
 
@@ -20,10 +20,10 @@ module.exports = {
     browser
       .assert.containsText('div.semibold.truncate span', '3487084709104787070')
       .useXpath().click("//button[contains(., 'Next')]")
-      .waitForElementVisible("//div[contains(@class, 'semibold') and contains(@class, 'truncate')]/span[contains(text(), '12152817243754268433')]", 5000)
+      .waitForElementVisible("//div[contains(@class, 'semibold') and contains(@class, 'truncate')]/span[contains(text(), '12152817243754268433')]")
     browser
       .useXpath().click("//button[contains(., 'Previous')]")
-      .waitForElementVisible("//div[contains(@class, 'semibold') and contains(@class, 'truncate')]/span[contains(text(), '3487084709104787070')]", 5000)
+      .waitForElementVisible("//div[contains(@class, 'semibold') and contains(@class, 'truncate')]/span[contains(text(), '3487084709104787070')]")
   },
 
   'it should not contain a transaction table if block has no transactions': function(browser) {
@@ -40,7 +40,7 @@ module.exports = {
     browser
       .url(browser.globals.devServerURL + '/#/block/12287662939647858585')
       .pause(500)
-      .waitForElementVisible('div.table-component', 5000)
+      .waitForElementVisible('div.table-component')
       .useXpath().assert.containsText("//div[.='Transactions']/following-sibling::div[1]", '1')
       .useCss().expect.element('h2').to.be.present
     browser
@@ -56,14 +56,14 @@ module.exports = {
       .assert.cssClassNotPresent('img.block', 'animated')
     browser
       .click('button.has-tooltip')
-      .waitForElementVisible('img.block.animated', 5000)
+      .waitForElementVisible('img.block.animated')
   },
 
   'it should be possible to click on the delegate': function(browser) {
     browser
-      .waitForElementVisible('div.list-row a', 5000)
+      .waitForElementVisible('div.list-row a')
       .click('div.list-row a')
-      .useXpath().waitForElementVisible("//h1[text() = 'Wallet Summary']", 5000)
+      .useXpath().waitForElementVisible("//h1[text() = 'Wallet Summary']")
       .assert.urlContains('wallets/ALLZ3TQKTaHm2Bte4SrXL9C5cS8ZovqFfZ')
       .end()
   }

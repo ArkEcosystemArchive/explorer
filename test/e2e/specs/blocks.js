@@ -11,8 +11,8 @@ module.exports = {
 
     browser
       .url(devServer)
-      .waitForElementVisible('main.theme-light', 5000)
-      .waitForElementVisible('h1', 5000)
+      .waitForElementVisible('main.theme-light')
+      .waitForElementVisible('h1')
       .assert.containsText('h1', 'Blocks')
   },
 
@@ -51,12 +51,12 @@ module.exports = {
     browser
       .click("//button[contains(., 'Next')]")
       .pause(500)
-      .useCss().waitForElementVisible('div.table-component', 5000)
+      .useCss().waitForElementVisible('div.table-component')
     browser
       .assert.urlContains('/blocks/2')
       .useXpath().click("//button[contains(., 'Previous')]")
       .pause(500)
-      .useCss().waitForElementVisible('div.table-component', 5000)
+      .useCss().waitForElementVisible('div.table-component')
     browser
       .assert.urlContains('/blocks/1')
   },
@@ -64,15 +64,15 @@ module.exports = {
   'it should be possible to click on the block id': function (browser) {
     browser
       .useCss()
-      .waitForElementVisible('div.table-component', 5000)
+      .waitForElementVisible('div.table-component')
       .useXpath().click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[1]//a[1]")
       .pause(500)
     browser
       .useCss()
-      .waitForElementVisible('main.theme-light', 5000)
+      .waitForElementVisible('main.theme-light')
       .assert.urlContains('/block/')
     browser
-      .waitForElementVisible('h1', 5000)
+      .waitForElementVisible('h1')
       .assert.containsText('h1', 'Block')
       .end()
   },
@@ -82,12 +82,12 @@ module.exports = {
 
     browser
       .url(devServer)
-      .waitForElementVisible('div.table-component', 5000)
+      .waitForElementVisible('div.table-component')
       .useXpath()
-      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[5]//a[1]", 5000)
+      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[5]//a[1]")
       .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[5]//a[1]")
     browser
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']", 5000)
+      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
       .assert.urlContains('/wallets/')
       .end()
   }

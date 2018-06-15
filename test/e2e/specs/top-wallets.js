@@ -11,9 +11,9 @@ module.exports = {
 
     browser
       .url(devServer)
-      .waitForElementVisible('main.theme-light', 5000)
-      .waitForElementVisible('h1', 5000)
-      .waitForElementVisible('div.table-component', 5000)
+      .waitForElementVisible('main.theme-light')
+      .waitForElementVisible('h1')
+      .waitForElementVisible('div.table-component')
       .assert.containsText('h1', 'Top Wallets')
   },
 
@@ -26,12 +26,12 @@ module.exports = {
     browser
       .click("//button[contains(., 'Next')]")
       .pause(500)
-      .useCss().waitForElementVisible('div.table-component', 5000)
+      .useCss().waitForElementVisible('div.table-component')
     browser
       .assert.urlContains('/top-wallets/2')
       .useXpath().click("//button[contains(., 'Previous')]")
       .pause(500)
-      .useCss().waitForElementVisible('div.table-component', 5000)
+      .useCss().waitForElementVisible('div.table-component')
     browser
       .assert.urlContains('/top-wallets/1')
   },
@@ -39,7 +39,7 @@ module.exports = {
   'it should be possible to sort the wallets': function (browser) {
     browser
       .useCss()
-      .waitForElementVisible('div.table-component', 5000)
+      .waitForElementVisible('div.table-component')
       .useXpath().expect.element("//th[contains(.,'Address')]").to.be.present
     browser
       .assert.cssClassPresent("//th[contains(.,'Address')]", 'table-component__th--sort')
@@ -68,16 +68,16 @@ module.exports = {
   'it should be possible to click on a wallet address': function (browser) {
     browser
       .useCss()
-      .waitForElementVisible('div.table-component', 5000)
+      .waitForElementVisible('div.table-component')
       .useXpath().click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]//a[1]")
       .pause(500)
     browser
       .useXpath()
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']", 5000)
+      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
       .assert.urlContains('/wallets/')
     browser
       .useCss()
-      .waitForElementVisible('h1', 5000)
+      .waitForElementVisible('h1')
       .assert.containsText('h1', 'Wallet Summary')
       .end()
   }

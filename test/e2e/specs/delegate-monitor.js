@@ -11,14 +11,14 @@ module.exports = {
 
     browser
       .url(devServer)
-      .waitForElementVisible('main.theme-light', 5000)
-      .waitForElementVisible('h1', 5000)
+      .waitForElementVisible('main.theme-light')
+      .waitForElementVisible('h1')
       .assert.containsText('h1', 'Delegate Monitor')
   },
 
   'it should display delegate details': function (browser) {
     browser
-      .waitForElementVisible('.bg-theme-feature-background', 5000)
+      .waitForElementVisible('.bg-theme-feature-background')
       .pause(2000)
       .useXpath()
     browser.expect.element("//div[text() = 'Delegates']").to.be.visible
@@ -33,7 +33,7 @@ module.exports = {
       .useXpath()
       .click("//div[text() = 'Last block']/following-sibling::div//a[1]")
       .pause(500)
-      .waitForElementVisible("//h1[text() = 'Block']", 5000)
+      .waitForElementVisible("//h1[text() = 'Block']")
       .assert.urlContains('/block/')
   },
 
@@ -43,12 +43,12 @@ module.exports = {
     browser
       .url(devServer)
       .useXpath()
-      .waitForElementVisible("//div[text() = 'Delegate']", 5000)
+      .waitForElementVisible("//div[text() = 'Delegate']")
       .pause(1000)
     browser
       .click("//div[contains(@class, 'bg-theme-feature-background')]/div[3]//div[text() = 'Delegate']/following-sibling::div//a[1]")
       .pause(500)
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']", 5000)
+      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
       .assert.urlContains('/wallets/')
   },
 
@@ -57,7 +57,7 @@ module.exports = {
     browser
       .url(devServer)
       .useCss()
-      .waitForElementVisible('.bg-theme-feature-background', 5000)
+      .waitForElementVisible('.bg-theme-feature-background')
     browser
       .elements('css selector', 'div.meter', function(result) {
         browser.assert.equal(4, result.value.length)
@@ -90,15 +90,15 @@ module.exports = {
   'it should be possible to click on an active delegates name': function (browser) {
     browser
       .useCss()
-      .waitForElementVisible('div.table-component', 5000)
+      .waitForElementVisible('div.table-component')
       .useXpath().click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]//a[1]")
       .pause(500)
     browser
       .useCss()
-      .waitForElementVisible('main.theme-light', 5000)
+      .waitForElementVisible('main.theme-light')
       .assert.urlContains('/wallets/')
     browser
-      .waitForElementVisible('h1', 5000)
+      .waitForElementVisible('h1')
       .assert.containsText('h1', 'Wallet Summary')
   },
 
@@ -106,11 +106,11 @@ module.exports = {
     const devServer = browser.globals.devServerURL + '/#/delegate-monitor'
     browser
       .url(devServer)
-      .waitForElementVisible('.bg-theme-feature-background', 5000)
+      .waitForElementVisible('.bg-theme-feature-background')
     browser
       .useXpath()
       .click("//div[contains(@class, 'inactive-tab') and contains(text(), 'Standby')]")
-      .waitForElementVisible("//div[contains(@class, 'active-tab') and contains(text(), 'Standby')]", 5000)
+      .waitForElementVisible("//div[contains(@class, 'active-tab') and contains(text(), 'Standby')]")
     browser.expect.element("//div[contains(@class, 'active-tab') and contains(text(), 'Standby')]").to.be.present
     browser.expect.element("//div[contains(@class, 'inactive-tab') and contains(text(), 'Active')]").to.be.present
   },
@@ -144,15 +144,15 @@ module.exports = {
   'it should be possible to click on the standby delegates name': function (browser) {
     browser
       .useCss()
-      .waitForElementVisible('div.table-component', 5000)
+      .waitForElementVisible('div.table-component')
       .useXpath().click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]//a[1]")
       .pause(500)
     browser
       .useCss()
-      .waitForElementVisible('main.theme-light', 5000)
+      .waitForElementVisible('main.theme-light')
       .assert.urlContains('/wallets/')
     browser
-      .waitForElementVisible('h1', 5000)
+      .waitForElementVisible('h1')
       .assert.containsText('h1', 'Wallet Summary')
     browser.end()
   }

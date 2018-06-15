@@ -11,18 +11,18 @@ module.exports = {
 
     browser
       .url(devServer)
-      .waitForElementVisible('main.theme-light', 5000)
-      .waitForElementVisible('h1', 5000)
+      .waitForElementVisible('main.theme-light')
+      .waitForElementVisible('h1')
       .assert.containsText('h1', 'Transaction')
   },
 
   'it should be possible to copy the transaction ID': function(browser) {
     browser
-      .waitForElementVisible('img.block', 5000)
+      .waitForElementVisible('img.block')
       .assert.cssClassNotPresent('img.block', 'animated')
     browser
       .click('button.has-tooltip')
-      .waitForElementVisible('img.block.animated', 5000)
+      .waitForElementVisible('img.block.animated')
   },
 
   'it should be possible to click on the sender': function(browser) {
@@ -31,7 +31,7 @@ module.exports = {
       .click("//div/div[contains(@class, 'list-row')][1]//a[1]")
       .pause(500)
     browser
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']", 5000)
+      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
       .assert.urlContains('wallets/AFrPtEmzu6wdVpa2CnRDEKGQQMWgq8nE9V')
   },
 
@@ -41,14 +41,14 @@ module.exports = {
     browser
       .url(devServer)
       .useCss()
-      .waitForElementVisible('main.theme-light', 5000)
-      .waitForElementVisible('.list-row-border-b', 5000)
+      .waitForElementVisible('main.theme-light')
+      .waitForElementVisible('.list-row-border-b')
     browser
       .useXpath()
       .click("//div/div[contains(@class, 'list-row')][2]//a[1]")
       .pause(500)
     browser
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']", 5000)
+      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
       .assert.urlContains('wallets/ATJDMLxBXPxn9bss911HTFCp9PhBHih9uL')
   },
 
@@ -58,14 +58,14 @@ module.exports = {
     browser
       .url(devServer)
       .useCss()
-      .waitForElementVisible('main.theme-light', 5000)
-      .waitForElementVisible('.list-row-border-b', 5000)
+      .waitForElementVisible('main.theme-light')
+      .waitForElementVisible('.list-row-border-b')
     browser
       .useXpath()
       .click("//div/div[contains(@class, 'list-row')][8]//a[1]")
       .pause(500)
     browser
-      .waitForElementVisible("//h1[text() = 'Block']", 5000)
+      .waitForElementVisible("//h1[text() = 'Block']")
       .assert.urlContains('block/12374209887221238137')
       .end()
   }

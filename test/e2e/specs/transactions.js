@@ -11,8 +11,8 @@ module.exports = {
 
     browser
       .url(devServer)
-      .waitForElementVisible('main.theme-light', 5000)
-      .waitForElementVisible('h1', 5000)
+      .waitForElementVisible('main.theme-light')
+      .waitForElementVisible('h1')
       .assert.containsText('h1', 'Transactions')
   },
 
@@ -51,12 +51,12 @@ module.exports = {
     browser
       .click("//button[contains(., 'Next')]")
       .pause(500)
-      .useCss().waitForElementVisible('div.table-component', 5000)
+      .useCss().waitForElementVisible('div.table-component')
     browser
       .assert.urlContains('/transactions/2')
       .useXpath().click("//button[contains(., 'Previous')]")
       .pause(500)
-      .useCss().waitForElementVisible('div.table-component', 5000)
+      .useCss().waitForElementVisible('div.table-component')
     browser
       .assert.urlContains('/transactions/1')
   },
@@ -64,15 +64,15 @@ module.exports = {
   'it should be possible to click on the transactions id': function (browser) {
     browser
       .useCss()
-      .waitForElementVisible('div.table-component', 5000)
+      .waitForElementVisible('div.table-component')
       .useXpath().click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[1]//a[1]")
       .pause(500)
     browser
       .useCss()
-      .waitForElementVisible('main.theme-light', 5000)
+      .waitForElementVisible('main.theme-light')
       .assert.urlContains('/transaction/')
     browser
-      .waitForElementVisible('h1', 5000)
+      .waitForElementVisible('h1')
       .assert.containsText('h1', 'Transaction')
   },
 
@@ -81,17 +81,17 @@ module.exports = {
 
     browser
       .url(devServer)
-      .waitForElementVisible('main.theme-light', 5000)
-      .waitForElementVisible('.table-component__table__body', 5000)
+      .waitForElementVisible('main.theme-light')
+      .waitForElementVisible('.table-component__table__body')
     browser
       .useXpath().click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[3]//a[1]")
       .pause(500)
     browser
       .useCss()
-      .waitForElementVisible('main.theme-light', 5000)
+      .waitForElementVisible('main.theme-light')
       .assert.urlContains('/wallets/')
     browser
-      .waitForElementVisible('h1', 5000)
+      .waitForElementVisible('h1')
       .assert.containsText('h1', 'Wallet Summary')
   },
 
@@ -100,18 +100,18 @@ module.exports = {
 
     browser
       .url(devServer)
-      .waitForElementVisible('main.theme-light', 5000)
-      .waitForElementVisible('.table-component__table__body', 5000)
+      .waitForElementVisible('main.theme-light')
+      .waitForElementVisible('.table-component__table__body')
       .pause(500)
     browser
       .useXpath().click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]")
       .pause(500)
     browser
       .useCss()
-      .waitForElementVisible('div.table-component', 5000)
+      .waitForElementVisible('div.table-component')
       .assert.urlContains('/wallets/')
     browser
-      .waitForElementVisible('h1', 5000)
+      .waitForElementVisible('h1')
       .assert.containsText('h1', 'Wallet Summary')
       .end()
   }

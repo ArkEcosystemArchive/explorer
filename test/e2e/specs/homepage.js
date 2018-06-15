@@ -11,8 +11,8 @@ module.exports = {
 
     browser
       .url(devServer)
-      .waitForElementVisible('main.theme-light', 5000)
-      .waitForElementVisible('h1', 5000)
+      .waitForElementVisible('main.theme-light')
+      .waitForElementVisible('h1')
       .assert.containsText('h1', 'Latest transactions and blocks')
   },
 
@@ -41,13 +41,13 @@ module.exports = {
   'header should be able to toggle chart': function(browser) {
     browser
       .assert.visible('#line-chart')
-      .waitForElementVisible('button.text-chart-active', 5000)
+      .waitForElementVisible('button.text-chart-active')
       .click('button.text-chart-active')
-      .waitForElementNotPresent('#line-chart', 5000)
+      .waitForElementNotPresent('#line-chart')
     browser
-      .waitForElementVisible('button.text-chart-inactive', 5000)
+      .waitForElementVisible('button.text-chart-inactive')
       .click('button.text-chart-inactive')
-      .waitForElementVisible('#line-chart', 5000)
+      .waitForElementVisible('#line-chart')
   },
 
   'header should be able to toggle theme': function(browser) {
@@ -73,14 +73,14 @@ module.exports = {
     browser
       .useXpath()
       .click("//button[contains(., 'ETH')]")
-      .waitForElementVisible("//button[contains(., 'ARK/ETH')]", 5000)
+      .waitForElementVisible("//button[contains(., 'ARK/ETH')]")
     browser
       .click("//button[contains(., 'ARK/ETH')]")
-      .useCss().waitForElementVisible('.close-button', 5000)
+      .useCss().waitForElementVisible('.close-button')
     browser
       .useXpath()
       .click("//button[contains(., 'USD')]")
-      .waitForElementVisible("//button[contains(., 'ARK/USD')]", 5000)
+      .waitForElementVisible("//button[contains(., 'ARK/USD')]")
     browser
       .useCss()
       .expect.element('.menu-button').to.not.be.present
@@ -123,7 +123,7 @@ module.exports = {
 
     browser
       .url(devServer)
-      .waitForElementVisible('main.theme-light', 5000)
+      .waitForElementVisible('main.theme-light')
       .click('button.border-transparent')
 
     browser
@@ -155,15 +155,15 @@ module.exports = {
     browser
       .url(devServer)
       .useCss()
-      .waitForElementVisible('input#search', 5000)
+      .waitForElementVisible('input#search')
     browser
       .click('input#search')
-      .waitForElementVisible('input.search-input', 5000)
+      .waitForElementVisible('input.search-input')
       .setValue('input.search-input', ['ARK Bounty', browser.Keys.ENTER])
       .pause(1000)
     browser
       .useXpath()
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']", 5000)
+      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
       .assert.urlContains('/wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs')
   },
 
@@ -173,15 +173,15 @@ module.exports = {
     browser
       .url(devServer)
       .useCss()
-      .waitForElementVisible('input#search', 5000)
+      .waitForElementVisible('input#search')
     browser
       .click('input#search')
-      .waitForElementVisible('input.search-input', 5000)
+      .waitForElementVisible('input.search-input')
       .setValue('input.search-input', ['genesis_1', browser.Keys.ENTER])
       .pause(1000)
     browser
       .useXpath()
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']", 5000)
+      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
       .assert.urlContains('/wallets/AeLpRK8rFVtBeyBVqBtdQpWDfLzaiNujKr')
   },
 
@@ -191,15 +191,15 @@ module.exports = {
     browser
       .url(devServer)
       .useCss()
-      .waitForElementVisible('input#search', 5000)
+      .waitForElementVisible('input#search')
     browser
       .click('input#search')
-      .waitForElementVisible('input.search-input', 5000)
+      .waitForElementVisible('input.search-input')
       .setValue('input.search-input', ['AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv', browser.Keys.ENTER])
       .pause(1000)
     browser
       .useXpath()
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']", 5000)
+      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
       .assert.urlContains('/wallets/AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv')
   },
 
@@ -209,15 +209,15 @@ module.exports = {
     browser
       .url(devServer)
       .useCss()
-      .waitForElementVisible('input#search', 5000)
+      .waitForElementVisible('input#search')
     browser
       .click('input#search')
-      .waitForElementVisible('input.search-input', 5000)
+      .waitForElementVisible('input.search-input')
       .setValue('input.search-input', ['13507259488170268466', browser.Keys.ENTER])
       .pause(1000)
     browser
       .useXpath()
-      .waitForElementVisible("//h1[text() = 'Block']", 5000)
+      .waitForElementVisible("//h1[text() = 'Block']")
       .assert.urlContains('/block/13507259488170268466')
   },
 
@@ -227,15 +227,15 @@ module.exports = {
     browser
       .url(devServer)
       .useCss()
-      .waitForElementVisible('input#search', 5000)
+      .waitForElementVisible('input#search')
     browser
       .click('input#search')
-      .waitForElementVisible('input.search-input', 5000)
+      .waitForElementVisible('input.search-input')
       .setValue('input.search-input', ['4a169d00de2029110829fad77eebf6fd25751418b47561f05b994750acbd3b13', browser.Keys.ENTER])
       .pause(1000)
     browser
       .useXpath()
-      .waitForElementVisible("//h1[text() = 'Transaction']", 5000)
+      .waitForElementVisible("//h1[text() = 'Transaction']")
       .assert.urlContains('/transaction/4a169d00de2029110829fad77eebf6fd25751418b47561f05b994750acbd3b13')
   },
 
@@ -245,15 +245,15 @@ module.exports = {
     browser
       .url(devServer)
       .useCss()
-      .waitForElementVisible('input#search', 5000)
+      .waitForElementVisible('input#search')
     browser
       .click('input#search')
-      .waitForElementVisible('input.search-input', 5000)
+      .waitForElementVisible('input.search-input')
       .setValue('input.search-input', ['asdfnothingfoundforthisvalueasdf', browser.Keys.ENTER])
       .pause(1000)
     browser
       .useXpath()
-      .waitForElementVisible("//div[contains(@class, 'tooltip-inner') and text() = 'Nothing matched your search']", 5000)
+      .waitForElementVisible("//div[contains(@class, 'tooltip-inner') and text() = 'Nothing matched your search']")
       .end()
   }
 }

@@ -11,18 +11,18 @@ module.exports = {
 
     browser
       .url(devServer)
-      .waitForElementVisible('main.theme-light', 5000)
-      .waitForElementVisible('h1', 5000)
+      .waitForElementVisible('main.theme-light')
+      .waitForElementVisible('h1')
       .assert.containsText('h1', 'Wallet Summary')
   },
 
   'it should be possible to copy the wallet address': function(browser) {
     browser
-      .waitForElementVisible('img.block', 5000)
+      .waitForElementVisible('img.block')
       .assert.cssClassNotPresent('img.block', 'animated')
     browser
       .click('button.has-tooltip')
-      .waitForElementVisible('img.block.animated', 5000)
+      .waitForElementVisible('img.block.animated')
   },
 
   'it should be possible to see the balance and transaction count': function (browser) {
@@ -39,7 +39,7 @@ module.exports = {
   'it should show a list of transactions, including show more button': function (browser) {
     browser
       .useCss()
-      .waitForElementVisible('div.hidden.sm\\:block div.table-component tbody.table-component__table__body tr', 5000)
+      .waitForElementVisible('div.hidden.sm\\:block div.table-component tbody.table-component__table__body tr')
     browser
       .elements('css selector', 'div.hidden.sm\\:block div.table-component tbody.table-component__table__body tr', function(result) {
         browser.assert.equal(25, result.value.length)
@@ -63,10 +63,10 @@ module.exports = {
       .expect.element('div.modal-container').to.be.not.present
     browser
       .click('button.address-button')
-      .waitForElementVisible('div.modal-container', 5000)
+      .waitForElementVisible('div.modal-container')
     browser
       .click('button.absolute.pin-t')
-      .waitForElementNotPresent('div.modal-container', 5000)
+      .waitForElementNotPresent('div.modal-container')
   },
 
   'it should show who the wallet voted for': function (browser) {
@@ -75,9 +75,9 @@ module.exports = {
     browser
       .url(devServer)
       .useXpath()
-      .waitForElementVisible("//div[text() = 'Votes']", 5000)
+      .waitForElementVisible("//div[text() = 'Votes']")
     browser
-      .waitForElementVisible("//div[text() = 'Votes']/following-sibling::div//a", 5000)
+      .waitForElementVisible("//div[text() = 'Votes']/following-sibling::div//a")
     browser
       .click("//div[text() = 'Votes']/following-sibling::div//a")
       .waitForElementVisible("//div[text() = 'Delegate']")
