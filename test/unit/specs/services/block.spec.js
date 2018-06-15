@@ -71,7 +71,7 @@ describe('Block Service', () => {
   })
 
   it('should fail when given generator public key is incorrect', async () => {
-    await blockService.getByPublicKey('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff').rejects
+    await expect(blockService.getByPublicKey('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')).rejects
   })
 
   it('should return the number of blocks forged by given generator public key', async () => {
@@ -80,7 +80,7 @@ describe('Block Service', () => {
   })
 
   it('should fail to return count when given generator public key is incorrect', async () => {
-    await blockService.forgedByPublicKeyCount('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff').rejects
+    await expect(blockService.forgedByPublicKeyCount('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')).rejects
   })
 
   it('should return the last block for given generator public key', async () => {
@@ -90,7 +90,7 @@ describe('Block Service', () => {
   })
 
   it('should fail to return latest block when given generator public key is incorrect', async () => {
-    await blockService.lastBlockByPublicKey('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff').rejects
+    await expect(blockService.lastBlockByPublicKey('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')).rejects
   })
 
   it('should return the previous block for the given height', async () => {
@@ -100,7 +100,7 @@ describe('Block Service', () => {
   })
 
   it('should fail to find the previous block for an incorrect height', async () => {
-    await blockService.findPrevious('1').rejects
+    await expect(blockService.findPrevious('1')).rejects
   })
 
   it('should return the next block for the given height', async () => {
@@ -110,6 +110,6 @@ describe('Block Service', () => {
   })
 
   it('should fail to find the next block for an incorrect height', async () => {
-    await blockService.findNext('0').rejects
+    await expect(blockService.findNext('0')).rejects
   })
 })

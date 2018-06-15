@@ -11,10 +11,9 @@ const blockPropertyArray = [
   'senderId',
   'senderPublicKey',
   'signature',
-  'asset',
   'confirmations'
 ].sort()
-// Note: recipientId, signSignature and vendorField can also be returned, but are optional
+// Note: asset, recipientId, signSignature and vendorField can also be returned, but are optional
 
 describe('Transaction Service', () => {
   beforeAll(() => {
@@ -60,8 +59,7 @@ describe('Transaction Service', () => {
   it('should return the latest registrations', async () => {
     const data = await transactionService.latestRegistrations()
     expect(data).toHaveLength(5)
-    expect(Object.keys(data[0]).sort()).toEqual(blockPropertyArray)
-    expect(Object.keys(data[0])).toHaveLength(blockPropertyArray.length)
+    expect(Object.keys(data[0]).sort()).toEqual(blockPropertyArray.concat(['asset']).sort())
     expect(data[0].type).toBe(2)
     expect(data[0].timestamp < data[1].timestamp)
   })
@@ -89,7 +87,7 @@ describe('Transaction Service', () => {
   })
 
   it('should fail when searching for transactions if address does not exist', async () => {
-    await transactionService.allByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz').rejects
+    await expect(transactionService.allByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects
   })
 
   it('should return all outgoing transactions for an address', async () => {
@@ -107,7 +105,7 @@ describe('Transaction Service', () => {
   })
 
   it('should fail when searching for outgoing transactions if address does not exist', async () => {
-    await transactionService.sentByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz').rejects
+    await expect(transactionService.sentByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects
   })
 
   it('should return all incoming transactions for an address', async () => {
@@ -125,7 +123,7 @@ describe('Transaction Service', () => {
   })
 
   it('should fail when searching for incoming transactions if address does not exist', async () => {
-    await transactionService.receivedByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz').rejects
+    await expect(transactionService.receivedByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects
   })
 
   it('should return count of outgoing transactions for an address', async () => {
