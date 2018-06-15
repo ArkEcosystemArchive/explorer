@@ -1,24 +1,25 @@
-// 1. start the dev server using production config
-process.env.NODE_ENV = 'testing'
+(async function() {
+  // 1. start the dev server using production config
+  process.env.NODE_ENV = 'testing'
 
-const webpack = require('webpack')
-const DevServer = require('webpack-dev-server')
+  const webpack = require('webpack')
+  const DevServer = require('webpack-dev-server')
 
-const webpackConfigPromise = require('../../build/webpack.prod.conf')()
-const devConfigPromise = require('../../build/webpack.dev.conf')
+  const webpackConfigPromise = require('../../build/webpack.prod.conf')
+  const devConfigPromise = require('../../build/webpack.dev.conf')
 
-let server
+  let server
 
-Promise.all([devConfigPromise(null), webpackConfigPromise])
-.then(([devConfig, webpackConfig]) => {
+  const devConfig = await devConfigPromise(null)
+  const webpackConfig = await webpackConfigPromise(null)
+
   const devServerOptions = devConfig.devServer
   const compiler = webpack(webpackConfig)
   server = new DevServer(compiler, devServerOptions)
   const port = devServerOptions.port
   const host = devServerOptions.host
-  return server.listen(port, host)
-})
-.then(() => {
+  server.listen(port, host)
+
   // 2. run the nightwatch test suite against it
   // to run in additional browsers:
   //    1. add an entry in test/e2e/nightwatch.conf.js under "test_settings"
@@ -46,4 +47,4 @@ Promise.all([devConfigPromise(null), webpackConfigPromise])
     server.close()
     throw err
   })
-})
+})()
