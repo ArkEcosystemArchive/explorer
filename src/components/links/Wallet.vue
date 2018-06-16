@@ -1,6 +1,6 @@
 <template>
   <span>
-    <span class="hidden md:inline-block">
+    <span v-tooltip="walletAddress" class="hidden md:inline-block">
       <router-link v-if="!type" :to="{ name: 'wallet', params: { address: walletAddress } }">
         <span v-if="isKnown">{{ knownWallets[address] }}</span>
         <span v-else-if="delegate">{{ delegate.username }}</span>

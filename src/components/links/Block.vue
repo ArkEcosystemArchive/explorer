@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <span v-tooltip="id">
     <router-link :to="{ name: 'block', params: { id } }" class="hidden md:inline-block">
       <span v-if="hasDefaultSlot"><slot></slot></span>
       <span v-else>{{ truncate(id) }}</span>
