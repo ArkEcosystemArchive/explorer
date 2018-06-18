@@ -91,8 +91,12 @@ const methods = {
       })
   },
 
-  readableNumber(value, digits = 2) {
-    return value.toFixed(digits)
+  readableNumber(value, digits = 2, separator = false) {
+    if (!separator) {
+      return value.toFixed(digits)
+    }
+
+    return value.toFixed(digits).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   },
 
   readableFiat(value) {

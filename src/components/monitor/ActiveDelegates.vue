@@ -18,7 +18,7 @@
 
     <table-column show="producedblocks" :label="$t('Forged blocks')" header-class="left-header-cell hidden xl:table-cell" cell-class="py-3 px-4 text-left border-none hidden xl:table-cell">
       <template slot-scope="row">
-        {{ row.producedblocks }}
+        {{ readableNumber(row.producedblocks, 0, true) }}
       </template>
     </table-column>
 
