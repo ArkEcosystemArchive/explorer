@@ -96,7 +96,7 @@ const methods = {
       return value.toFixed(digits)
     }
 
-    return value.toFixed(digits).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    return value.toFixed(digits).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   },
 
   readableFiat(value) {
