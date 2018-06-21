@@ -96,7 +96,7 @@ const methods = {
       return value.toFixed(digits)
     }
 
-    return value.toFixed(digits).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    return value.toLocaleString(undefined, { minimumFractionDigits: digits })
   },
 
   readableFiat(value) {
