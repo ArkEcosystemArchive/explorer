@@ -96,7 +96,10 @@ const methods = {
       return value.toFixed(digits)
     }
 
-    return value.toLocaleString(undefined, { minimumFractionDigits: digits })
+    return value.toLocaleString(undefined, {
+      minimumFractionDigits: digits,
+      maximumFractionDigits: digits,
+    })
   },
 
   readableFiat(value) {
