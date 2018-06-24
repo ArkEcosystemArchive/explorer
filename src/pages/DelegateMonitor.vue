@@ -43,7 +43,7 @@ export default {
   },
 
   data: () => ({
-    delegates: [],
+    delegates: null,
     delegateCount: null,
     activeTab: 'active',
     timer: null,
