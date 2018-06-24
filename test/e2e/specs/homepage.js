@@ -124,27 +124,44 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('main.theme-light')
+      .waitForElementVisible('button.border-transparent')
       .click('button.border-transparent')
 
     browser
-      .useXpath().click("//button[contains(., 'Top Wallets')]")
-      .pause(1000)
+      .useXpath()
+      .waitForElementVisible("//button[contains(., 'Top Wallets')]")
+      .click("//button[contains(., 'Top Wallets')]")
+      .pause(500)
+      
+    browser
+      .useCss()
+      .waitForElementVisible('div.table-component')
       .assert.urlContains('/top-wallets')
   },
 
   'from menu, it should be possible to navigate to delegate monitor': function(browser) {
     browser
       .useCss().click('button.border-transparent')
-      .useXpath().click("//button[contains(., 'Delegate Monitor')]")
-      .pause(1000)
+      .useXpath()
+      .waitForElementVisible("//button[contains(., 'Delegate Monitor')]")
+      .click("//button[contains(., 'Delegate Monitor')]")
+      .pause(500)
+    browser
+      .useCss()
+      .waitForElementVisible('div.table-component')
       .assert.urlContains('/delegate-monitor')
   },
 
   'from menu, it should be possible to navigate back to homepage': function(browser) {
     browser
       .useCss().click('button.border-transparent')
-      .useXpath().click("//button[contains(., 'Home')]")
-      .pause(1000)
+      .useXpath()
+      .waitForElementVisible("//button[contains(., 'Home')]")
+      .click("//button[contains(., 'Home')]")
+      .pause(500)
+    browser
+      .useCss()
+      .waitForElementVisible('div.table-component')
       .assert.urlContains('/#')
   },
 
