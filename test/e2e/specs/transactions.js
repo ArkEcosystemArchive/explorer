@@ -101,10 +101,10 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('main.theme-light')
-      .waitForElementVisible('.table-component__table__body')
-      .pause(500)
+      .useXpath()
+      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]")
     browser
-      .useXpath().click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]")
+      .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]")
       .pause(500)
     browser
       .useCss()

@@ -143,9 +143,9 @@ module.exports = {
 
   'it should be possible to click on the standby delegates name': function (browser) {
     browser
-      .useCss()
-      .waitForElementVisible('div.table-component')
-      .useXpath().click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]//a[1]")
+      .useXpath()
+      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]//a[1]")
+      .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]//a[1]")
       .pause(500)
     browser
       .useCss()
