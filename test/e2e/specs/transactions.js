@@ -63,9 +63,9 @@ module.exports = {
 
   'it should be possible to click on the transactions id': function (browser) {
     browser
-      .useCss()
-      .waitForElementVisible('div.table-component')
-      .useXpath().click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[1]//a[1]")
+      .useXpath()
+      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[1]//a[1]")
+      .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[1]//a[1]")
       .pause(500)
     browser
       .useCss()
@@ -82,9 +82,10 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('main.theme-light')
-      .waitForElementVisible('.table-component__table__body')
+      .useXpath()
+      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[3]//a[1]")
     browser
-      .useXpath().click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[3]//a[1]")
+      .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[3]//a[1]")
       .pause(500)
     browser
       .useCss()

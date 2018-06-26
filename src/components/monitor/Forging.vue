@@ -50,7 +50,7 @@ import ForgingService from '@/services/forging'
 export default {
   props: {
     delegates: {
-      type: Array,
+      // type: Array or null
       required: true,
     },
   },
