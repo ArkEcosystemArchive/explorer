@@ -179,7 +179,6 @@ export default {
 
   methods: {
     async getSendCount() {
-      console.log(this.wallet)
       const response = await TransactionService.sentByAddressCount(this.wallet.address)
       this.sendCount = response
     },
