@@ -69,11 +69,9 @@ module.exports = {
       .pause(500)
     browser
       .useCss()
-      .waitForElementVisible('main.theme-light')
-      .assert.urlContains('/transaction/')
-    browser
       .waitForElementVisible('h1')
       .assert.containsText('h1', 'Transaction')
+      .assert.urlContains('/transaction/')
   },
 
   'it should be possible to click on the sender': function (browser) {
@@ -89,11 +87,9 @@ module.exports = {
       .pause(500)
     browser
       .useCss()
-      .waitForElementVisible('main.theme-light')
-      .assert.urlContains('/wallets/')
-    browser
       .waitForElementVisible('h1')
       .assert.containsText('h1', 'Wallet Summary')
+      .assert.urlContains('/wallets/')
   },
 
   'it should be possible to click on the recipient': function (browser) {

@@ -69,11 +69,9 @@ module.exports = {
       .pause(500)
     browser
       .useCss()
-      .waitForElementVisible('main.theme-light')
-      .assert.urlContains('/block/')
-    browser
       .waitForElementVisible('h1')
       .assert.containsText('h1', 'Block')
+      .assert.urlContains('/block/')
       .end()
   },
 
