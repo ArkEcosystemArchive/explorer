@@ -132,7 +132,7 @@ module.exports = {
       .waitForElementVisible("//button[contains(., 'Top Wallets')]")
       .click("//button[contains(., 'Top Wallets')]")
       .pause(500)
-      
+
     browser
       .useCss()
       .waitForElementVisible('div.table-component')
