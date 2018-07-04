@@ -43,11 +43,10 @@ module.exports = {
     browser
       .url(devServer)
       .useXpath()
-      .waitForElementVisible("//div[text() = 'Delegate']")
-      .pause(1000)
-    browser
+      .waitForElementVisible("//div[contains(@class, 'bg-theme-feature-background')]/div[3]//div[text() = 'Delegate']/following-sibling::div//a[1]")
       .click("//div[contains(@class, 'bg-theme-feature-background')]/div[3]//div[text() = 'Delegate']/following-sibling::div//a[1]")
       .pause(500)
+    browser
       .waitForElementVisible("//h1[text() = 'Wallet Summary']")
       .assert.urlContains('/wallets/')
   },
@@ -95,11 +94,9 @@ module.exports = {
       .pause(500)
     browser
       .useCss()
-      .waitForElementVisible('main.theme-light')
-      .assert.urlContains('/wallets/')
-    browser
       .waitForElementVisible('h1')
       .assert.containsText('h1', 'Wallet Summary')
+      .assert.urlContains('/wallets/')
   },
 
   'it should be possible to switch to standby delegates': function (browser) {
@@ -149,11 +146,9 @@ module.exports = {
       .pause(500)
     browser
       .useCss()
-      .waitForElementVisible('main.theme-light')
-      .assert.urlContains('/wallets/')
-    browser
       .waitForElementVisible('h1')
       .assert.containsText('h1', 'Wallet Summary')
+      .assert.urlContains('/wallets/')
     browser.end()
   }
 }
