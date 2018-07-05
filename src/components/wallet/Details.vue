@@ -11,12 +11,12 @@
       <div
         v-if="view === 'public'"
         class="pr-8 flex-auto min-w-0">
-        <div class="text-grey mb-2">
-          {{ $t("Address") }}
+        <div class="flex items-center text-grey mb-2">
+          <span class="mr-2">{{ $t("Address") }}</span>
           <svg
             v-tooltip="$t('Second Signature Enabled')"
             v-if="wallet.secondSignature"
-            class="ml-1 fill-current"
+            class="fill-current"
             viewBox="0 0 448 512"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
