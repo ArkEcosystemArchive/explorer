@@ -40,12 +40,12 @@ export default {
     } catch(e) { next({ name: '404' }) }
   },
 
-  mounted() {
-    this.prepareComponent()
+  async mounted() {
+    await this.prepareComponent()
   },
 
   methods: {
-    prepareComponent() {
+    async prepareComponent() {
       this.$store.watch(state => state.network.height, value => this.updateBlock())
     },
 
