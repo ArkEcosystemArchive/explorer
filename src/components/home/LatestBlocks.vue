@@ -20,11 +20,25 @@
 import BlockService from '@/services/block'
 
 export default {
-  data: () => ({ blocks: null }),
+  data: () => ({
+    blocks: null
+  }),
 
   async mounted() {
-    const response = await BlockService.latest()
-    this.blocks = response
+    await this.prepareComponent()
   },
+
+  methods: {
+    async prepareComponent() {
+      await this.getBlocks()
+
+      this.$store.watch(state => state.network.height, value => this.getBlocks())
+    },
+
+    async getBlocks() {
+      const response = await BlockService.latest()
+      this.blocks = response
+    }
+  }
 }
 </script>
