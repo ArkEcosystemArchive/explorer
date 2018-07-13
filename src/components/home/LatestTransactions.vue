@@ -20,11 +20,25 @@
 import TransactionService from '@/services/transaction'
 
 export default {
-  data: () => ({ transactions: null }),
+  data: () => ({
+    transactions: null
+  }),
 
   async mounted() {
-    const response = await TransactionService.latest()
-    this.transactions = response
+    await this.prepareComponent()
   },
+
+  methods: {
+    async prepareComponent() {
+      await this.getTransactions()
+
+      this.$store.watch(state => state.network.height, value => this.getTransactions())
+    },
+
+    async getTransactions() {
+      const response = await TransactionService.latest()
+      this.transactions = response
+    }
+  }
 }
 </script>
