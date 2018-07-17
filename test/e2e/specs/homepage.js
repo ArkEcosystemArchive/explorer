@@ -165,6 +165,18 @@ module.exports = {
       .assert.urlContains('/#')
   },
 
+  'it should be possible to switch to latest blocks': function (browser) {
+    const devServer = browser.globals.devServerURL
+
+    browser
+      .url(devServer)
+      .useXpath()
+      .click("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest Blocks')]")
+      .waitForElementVisible("//div[contains(@class, 'active-tab') and contains(text(), 'Latest Blocks')]")
+    browser.expect.element("//div[contains(@class, 'active-tab') and contains(text(), 'Latest Blocks')]").to.be.present
+    browser.expect.element("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest Transactions')]").to.be.present
+  },
+
   // Search tests
   'it should be possible to search for a known wallet': function (browser) {
     const devServer = browser.globals.devServerURL
