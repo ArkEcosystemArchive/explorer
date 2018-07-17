@@ -126,13 +126,11 @@ module.exports = {
       .waitForElementVisible('main.theme-light')
       .waitForElementVisible('button.border-transparent')
       .click('button.border-transparent')
-
     browser
       .useXpath()
       .waitForElementVisible("//button[contains(., 'Top Wallets')]")
       .click("//button[contains(., 'Top Wallets')]")
       .pause(500)
-
     browser
       .useCss()
       .waitForElementVisible('div.table-component')
@@ -184,7 +182,6 @@ module.exports = {
       .url(devServer)
       .useXpath().click("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest Blocks')]")
       .useCss().waitForElementVisible('div.table-component')
-
     browser
       .useXpath()
       .getText("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]", function(result) {
