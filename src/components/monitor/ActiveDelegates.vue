@@ -93,14 +93,12 @@ export default {
 
       const lastBlock = row.forgingStatus.lastBlock
 
-      const tooltip = {
+      return lastBlock ? {
         content: `[${status}] Last Block @ ${
             lastBlock.height
           } on ${this.readableTimestamp(lastBlock.timestamp)}`,
         classes: [`tooltip-bg-${row.forgingStatus.code}`, 'font-sans']
-      }
-
-      return lastBlock ? tooltip : status
+      } : status
     },
 
     statusColor(row) {
