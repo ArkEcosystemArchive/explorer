@@ -177,6 +177,27 @@ module.exports = {
     browser.expect.element("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest Transactions')]").to.be.present
   },
 
+  'latest block table should refresh automatically': function (browser) {
+    const devServer = browser.globals.devServerURL
+
+    browser
+      .url(devServer)
+      .useXpath().click("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest Blocks')]")
+      .useCss().waitForElementVisible('div.table-component')
+
+    browser
+      .useXpath()
+      .getText("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]", function(result) {
+        const blockId = result.value
+
+        browser
+          .pause(8000)
+          .getText("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]", function(result) {
+            browser.assert.notEqual(result.value, blockId)
+          })
+      })
+  },
+
   // Search tests
   'it should be possible to search for a known wallet': function (browser) {
     const devServer = browser.globals.devServerURL
