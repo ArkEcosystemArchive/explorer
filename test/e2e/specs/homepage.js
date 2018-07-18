@@ -126,13 +126,11 @@ module.exports = {
       .waitForElementVisible('main.theme-light')
       .waitForElementVisible('button.border-transparent')
       .click('button.border-transparent')
-
     browser
       .useXpath()
       .waitForElementVisible("//button[contains(., 'Top Wallets')]")
       .click("//button[contains(., 'Top Wallets')]")
       .pause(500)
-
     browser
       .useCss()
       .waitForElementVisible('div.table-component')
@@ -163,6 +161,38 @@ module.exports = {
       .useCss()
       .waitForElementVisible('div.table-component')
       .assert.urlContains('/#')
+  },
+
+  'it should be possible to switch to latest blocks': function (browser) {
+    const devServer = browser.globals.devServerURL
+
+    browser
+      .url(devServer)
+      .useXpath()
+      .click("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest Blocks')]")
+      .waitForElementVisible("//div[contains(@class, 'active-tab') and contains(text(), 'Latest Blocks')]")
+    browser.expect.element("//div[contains(@class, 'active-tab') and contains(text(), 'Latest Blocks')]").to.be.present
+    browser.expect.element("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest Transactions')]").to.be.present
+  },
+
+  'latest block table should refresh automatically': function (browser) {
+    const devServer = browser.globals.devServerURL
+
+    browser
+      .url(devServer)
+      .useXpath().click("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest Blocks')]")
+      .useCss().waitForElementVisible('div.table-component')
+    browser
+      .useXpath()
+      .getText("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]", function(result) {
+        const blockId = result.value
+
+        browser
+          .pause(8000)
+          .getText("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]", function(result) {
+            browser.assert.notEqual(result.value, blockId)
+          })
+      })
   },
 
   // Search tests
