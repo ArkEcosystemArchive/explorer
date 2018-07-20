@@ -28,6 +28,20 @@ module.exports = {
     browser.expect.element("//div[text() = 'Delegate']").to.be.visible
   },
 
+  'it should fetch the latest block automatically': function (browser) {
+    browser
+      .useXpath().waitForElementVisible("//div[text() = 'Last block']")
+      .getText("//div[text() = 'Last block']/following-sibling::div//a[1]", function(result) {
+        const blockId = result.value
+
+        browser
+          .pause(8000)
+          .getText("//div[text() = 'Last block']/following-sibling::div//a[1]", function(result) {
+            browser.assert.notEqual(result.value, blockId)
+          })
+      })
+  },
+
   'it should be possible to click on the last block': function (browser) {
     browser
       .useXpath()
