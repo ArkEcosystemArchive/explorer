@@ -66,7 +66,7 @@ module.exports = {
         const confirmations = result.value
 
         browser
-          .pause(8000)
+          .pause(8500)
           .getText("//div[contains(@class, 'list-row-border-b')][2]//div[2]", function(result) {
             browser.assert.notEqual(result.value, confirmations)
           })

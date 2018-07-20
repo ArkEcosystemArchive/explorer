@@ -35,7 +35,7 @@ module.exports = {
         const blockId = result.value
 
         browser
-          .pause(8000)
+          .pause(8500)
           .getText("//div[text() = 'Last block']/following-sibling::div//a[1]", function(result) {
             browser.assert.notEqual(result.value, blockId)
           })
@@ -49,7 +49,7 @@ module.exports = {
         const queueCount = result.value
 
         browser
-          .pause(8000)
+          .pause(8500)
           .getText("//div[text() = 'In queue for forging']/preceding-sibling::div", function(result) {
             browser.assert.notEqual(result.value, queueCount)
           })
