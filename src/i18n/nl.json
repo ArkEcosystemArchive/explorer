@@ -66,6 +66,7 @@
   "Missed block, Awaiting Slot": "Block gemist, Wachten op plek",
   "Not Forging": "Niet aan het forgen",
   "Awaiting Slot": "Wachten op een plek",
+  "Never": "Nooit",
 
   "Address": "Adres",
   "Public Key": "Public Key",
@@ -85,6 +86,7 @@
   "All": "Alles",
   "Sent": "Verzonden",
   "Received": "Ontvangen",
+  "Second Signature": "2e Handtekening Ingeschakeld",
 
   "Previous": "Vorige",
   "Next": "Volgende",

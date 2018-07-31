@@ -91,8 +91,15 @@ const methods = {
       })
   },
 
-  readableNumber(value, digits = 2) {
-    return value.toFixed(digits)
+  readableNumber(value, digits = 2, separator = false) {
+    if (!separator) {
+      return value.toFixed(digits)
+    }
+
+    return value.toLocaleString(undefined, {
+      minimumFractionDigits: digits,
+      maximumFractionDigits: digits,
+    })
   },
 
   readableFiat(value) {

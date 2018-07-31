@@ -1,6 +1,12 @@
 import store from '@/store'
 
 describe('network store modules', () => {
+  it('should set the network defaults', () => {
+    store.dispatch('network/setDefaults', 'setDefaults')
+
+    expect(store.getters['network/defaults']).toEqual('setDefaults')
+  })
+
   it('should set the network server', () => {
     store.dispatch('network/setServer', 'setServer')
 
@@ -23,6 +29,12 @@ describe('network store modules', () => {
     store.dispatch('network/setActiveDelegates', 'setActiveDelegates')
 
     expect(store.getters['network/activeDelegates']).toEqual('setActiveDelegates')
+  })
+
+  it('should set the network reward offset', () => {
+    store.dispatch('network/setRewardOffset', 'setRewardOffset')
+
+    expect(store.getters['network/rewardOffset']).toEqual('setRewardOffset')
   })
 
   it('should set the network token', () => {
