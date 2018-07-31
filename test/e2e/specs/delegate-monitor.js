@@ -28,6 +28,34 @@ module.exports = {
     browser.expect.element("//div[text() = 'Delegate']").to.be.visible
   },
 
+  'it should fetch the latest block automatically': function (browser) {
+    browser
+      .useXpath().waitForElementVisible("//div[text() = 'Last block']")
+      .getText("//div[text() = 'Last block']/following-sibling::div//a[1]", function(result) {
+        const blockId = result.value
+
+        browser
+          .pause(8500)
+          .getText("//div[text() = 'Last block']/following-sibling::div//a[1]", function(result) {
+            browser.assert.notEqual(result.value, blockId)
+          })
+      })
+  },
+
+  'it should fetch the delegates automatically': function (browser) {
+    browser
+      .useXpath().waitForElementVisible("//div[text() = 'In queue for forging']")
+      .getText("//div[text() = 'In queue for forging']/preceding-sibling::div", function(result) {
+        const queueCount = result.value
+
+        browser
+          .pause(8500)
+          .getText("//div[text() = 'In queue for forging']/preceding-sibling::div", function(result) {
+            browser.assert.notEqual(result.value, queueCount)
+          })
+      })
+  },
+
   'it should be possible to click on the last block': function (browser) {
     browser
       .useXpath()
