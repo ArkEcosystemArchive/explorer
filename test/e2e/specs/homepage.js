@@ -185,7 +185,7 @@ module.exports = {
         const blockId = result.value
 
         browser
-          .pause(8000)
+          .pause(8500)
           .getText("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]", function(result) {
             browser.assert.notEqual(result.value, blockId)
           })
