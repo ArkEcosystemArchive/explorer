@@ -132,8 +132,7 @@ module.exports = {
       .click("//button[contains(., 'Top Wallets')]")
       .pause(500)
     browser
-      .useCss()
-      .waitForElementVisible('div.table-component')
+      .waitForElementVisible("//h1[text() = 'Top Wallets']")
       .assert.urlContains('/top-wallets')
   },
 
@@ -145,8 +144,7 @@ module.exports = {
       .click("//button[contains(., 'Delegate Monitor')]")
       .pause(500)
     browser
-      .useCss()
-      .waitForElementVisible('div.table-component')
+      .waitForElementVisible("//h1[text() = 'Delegate Monitor']")
       .assert.urlContains('/delegate-monitor')
   },
 
@@ -158,8 +156,7 @@ module.exports = {
       .click("//button[contains(., 'Home')]")
       .pause(500)
     browser
-      .useCss()
-      .waitForElementVisible('div.table-component')
+      .waitForElementVisible("//h1[text() = 'Latest transactions and blocks']")
       .assert.urlContains('/#')
   },
 

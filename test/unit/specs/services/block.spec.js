@@ -57,6 +57,7 @@ describe('Block Service', () => {
   })
 
   it('should return the blocks by an offset', async () => {
+    jest.setTimeout(30000)
     const data = await blockService.paginate()
     expect(data).toHaveLength(25)
     expect(Object.keys(data[0]).sort()).toEqual(blockPropertyArray)
@@ -64,6 +65,7 @@ describe('Block Service', () => {
   })
 
   it('should return the blocks for given generator public key', async () => {
+    jest.setTimeout(30000)
     const data = await blockService.getByPublicKey('0257581c82d1931c4b0b2df9d658ecd303fcf2a6ea4ec291669ed06f44fb75c8fe')
     expect(data).toHaveLength(25)
     expect(Object.keys(data[0]).sort()).toEqual(blockPropertyArray)
@@ -71,16 +73,19 @@ describe('Block Service', () => {
   })
 
   it('should return an empty list when given generator public key is incorrect', async () => {
+    jest.setTimeout(30000)
     const data = await blockService.getByPublicKey('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
     expect(data).toHaveLength(0)
   })
 
   it('should return the number of blocks forged by given generator public key', async () => {
+    jest.setTimeout(30000)
     const data = await blockService.forgedByPublicKeyCount('0257581c82d1931c4b0b2df9d658ecd303fcf2a6ea4ec291669ed06f44fb75c8fe')
     expect(data).not.toBeDefined() // Currently this endpoint is not supported
   })
 
   it('should fail to return count when given generator public key is incorrect', async () => {
+    jest.setTimeout(30000)
     const data = await blockService.forgedByPublicKeyCount('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
     expect(data).toBeUndefined()
   })
@@ -92,6 +97,7 @@ describe('Block Service', () => {
   })
 
   it('should return undefined when given generator public key is incorrect', async () => {
+    jest.setTimeout(30000)
     const data = await blockService.lastBlockByPublicKey('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
     expect(data).toBeUndefined()
   })
@@ -103,6 +109,7 @@ describe('Block Service', () => {
   })
 
   it('should return undefined when finding previous block for an incorrect height', async () => {
+    jest.setTimeout(30000)
     const data = await blockService.findPrevious(1234567891234567890)
     expect(data).toBeUndefined()
   })
@@ -132,6 +139,7 @@ describe('Block Service', () => {
   })
 
   it('should return the block at height 1 when an empty string is given (findNext)', async() => {
+    jest.setTimeout(30000)
     const data = await blockService.findNext('')
     expect(Object.keys(data).sort()).toEqual(blockPropertyArray)
     expect(data.height).toBe(1)
