@@ -62,11 +62,15 @@ module.exports = {
   'it should refresh the confirmation count automatically': function (browser) {
     browser
       .waitForElementVisible('div.list-row-border-b')
-      .useXpath().getText("//div[contains(@class, 'list-row-border-b')][2]//div[2]", function(result) {
+      .useXpath()
+      .getText("//div[contains(@class, 'list-row-border-b')][2]//div[2]", function(result) {
         const confirmations = result.value
 
         browser
-          .pause(8500)
+          .expect.element("//div[contains(@class, 'list-row-border-b')][2]//div[2][text() = '" + confirmations + "']").to.be.present
+        browser
+          .waitForElementNotPresent("//div[contains(@class, 'list-row-border-b')][2]//div[2][text() = '" + confirmations + "']", 10000)
+        browser
           .getText("//div[contains(@class, 'list-row-border-b')][2]//div[2]", function(result) {
             browser.assert.notEqual(result.value, confirmations)
           })

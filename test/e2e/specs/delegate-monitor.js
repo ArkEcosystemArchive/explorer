@@ -31,12 +31,15 @@ module.exports = {
   'it should fetch the latest block automatically': function (browser) {
     browser
       .useXpath().waitForElementVisible("//div[text() = 'Last block']")
-      .getText("//div[text() = 'Last block']/following-sibling::div//a[1]", function(result) {
+      .getText("//div[text() = 'Last block']/following-sibling::div//a[1]/span", function(result) {
         const blockId = result.value
 
         browser
-          .pause(8500)
-          .getText("//div[text() = 'Last block']/following-sibling::div//a[1]", function(result) {
+          .expect.element("//div[text() = 'Last block']/following-sibling::div//a[1]/span[text() = '" + blockId + "']").to.be.present
+        browser
+          .waitForElementNotPresent("//div[text() = 'Last block']/following-sibling::div//a[1]/span[text() = '" + blockId + "']", 10000)
+        browser
+          .getText("//div[text() = 'Last block']/following-sibling::div//a[1]/span", function(result) {
             browser.assert.notEqual(result.value, blockId)
           })
       })
@@ -49,7 +52,10 @@ module.exports = {
         const queueCount = result.value
 
         browser
-          .pause(8500)
+          .expect.element("//div[text() = 'In queue for forging']/preceding-sibling::div[text() = '" + queueCount + "']").to.be.present
+        browser
+          .waitForElementNotPresent("//div[text() = 'In queue for forging']/preceding-sibling::div[text() = '" + queueCount + "']", 10000)
+        browser
           .getText("//div[text() = 'In queue for forging']/preceding-sibling::div", function(result) {
             browser.assert.notEqual(result.value, queueCount)
           })

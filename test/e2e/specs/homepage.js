@@ -177,15 +177,18 @@ module.exports = {
 
     browser
       .url(devServer)
-      .useXpath().click("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest Blocks')]")
-      .useCss().waitForElementVisible('div.table-component')
-    browser
       .useXpath()
+      .click("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest Blocks')]")
+      .waitForElementVisible("//thead[contains(@class, 'table-component__table__head')]//tr[1]//th[4][contains(., 'Transactions')]")
+    browser
       .getText("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]", function(result) {
         const blockId = result.value
 
         browser
-          .pause(8500)
+          .expect.element("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2][contains(., '" + blockId + "')]").to.be.present
+        browser
+          .waitForElementNotPresent("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2][contains(., '" + blockId + "')]", 10000)
+        browser
           .getText("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]", function(result) {
             browser.assert.notEqual(result.value, blockId)
           })
