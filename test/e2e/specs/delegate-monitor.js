@@ -37,7 +37,7 @@ module.exports = {
         browser
           .expect.element("//div[text() = 'Last block']/following-sibling::div//a[1]/span[text() = '" + blockId + "']").to.be.present
         browser
-          .waitForElementNotPresent("//div[text() = 'Last block']/following-sibling::div//a[1]/span[text() = '" + blockId + "']", 10000)
+          .waitForElementNotPresent("//div[text() = 'Last block']/following-sibling::div//a[1]/span[text() = '" + blockId + "']", 20000)
         browser
           .getText("//div[text() = 'Last block']/following-sibling::div//a[1]/span", function(result) {
             browser.assert.notEqual(result.value, blockId)
@@ -54,7 +54,7 @@ module.exports = {
         browser
           .expect.element("//div[text() = 'In queue for forging']/preceding-sibling::div[text() = '" + queueCount + "']").to.be.present
         browser
-          .waitForElementNotPresent("//div[text() = 'In queue for forging']/preceding-sibling::div[text() = '" + queueCount + "']", 10000)
+          .waitForElementNotPresent("//div[text() = 'In queue for forging']/preceding-sibling::div[text() = '" + queueCount + "']", 20000)
         browser
           .getText("//div[text() = 'In queue for forging']/preceding-sibling::div", function(result) {
             browser.assert.notEqual(result.value, queueCount)
