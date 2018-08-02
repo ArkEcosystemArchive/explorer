@@ -187,7 +187,7 @@ module.exports = {
         browser
           .expect.element("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2][contains(., '" + blockId + "')]").to.be.present
         browser
-          .waitForElementNotPresent("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2][contains(., '" + blockId + "')]", 10000)
+          .waitForElementNotPresent("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2][contains(., '" + blockId + "')]", 20000)
         browser
           .getText("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]", function(result) {
             browser.assert.notEqual(result.value, blockId)
