@@ -8,7 +8,7 @@
       <div class="sm:hidden">
         <table-wallets-mobile :wallets="filteredWallets" :total="votes"></table-wallets-mobile>
       </div>
-      <paginator v-if="wallets" :start="+this.page" :count="count"></paginator>
+      <paginator v-if="wallets && wallets.length" :start="+this.page" :count="count"></paginator>
     </section>
   </div>
 </template>

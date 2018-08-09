@@ -8,7 +8,7 @@
       <div class="sm:hidden">
         <table-blocks-mobile :blocks="blocks"></table-blocks-mobile>
       </div>
-      <paginator v-if="blocks" :start="+this.$route.params.page"></paginator>
+      <paginator v-if="blocks && blocks.length" :start="+this.$route.params.page"></paginator>
     </section>
   </div>
 </template>

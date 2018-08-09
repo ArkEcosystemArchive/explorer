@@ -8,7 +8,7 @@
       <div class="sm:hidden">
         <table-transactions-mobile :transactions="transactions"></table-transactions-mobile>
       </div>
-      <paginator v-if="transactions" :start="+this.page" :count="totalTransactions"></paginator>
+      <paginator v-if="transactions && transactions.length" :start="+this.page" :count="totalTransactions"></paginator>
     </section>
   </div>
 </template>
