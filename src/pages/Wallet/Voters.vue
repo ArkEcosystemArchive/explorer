@@ -8,7 +8,7 @@
       <div class="sm:hidden">
         <table-wallets-mobile :wallets="filteredWallets" :total="votes"></table-wallets-mobile>
       </div>
-      <paginator v-if="wallets" :start="+this.page" :count="count"></paginator>
+      <paginator v-if="wallets && wallets.length" :start="+this.page" :count="count"></paginator>
     </section>
   </div>
 </template>
@@ -20,6 +20,7 @@ import sumBy from 'lodash/sumBy'
 
 export default {
   data: () => ({
+    username: null,
     wallets: null,
     perPage: 25,
   }),
@@ -42,9 +43,6 @@ export default {
     votes() {
       return sumBy(this.wallets, 'balance')
     },
-    username() {
-      return this.$route.params.username
-    },
     count() {
       return this.wallets.length
     }
@@ -52,6 +50,7 @@ export default {
 
   mounted() {
     this.getVoters()
+    this.getUsername()
   },
 
   methods: {
@@ -63,10 +62,20 @@ export default {
       } catch(e) { next({ name: '404' }) }
     },
 
+    async getUsername() {
+      if (this.$route.params.username === undefined) {
+        const wallet = await WalletService.find(this.$route.params.address)
+        const delegate = await DelegateService.find(wallet.publicKey)
+        this.username = delegate.username
+      } else {
+        this.username = this.$route.params.username
+      }
+    },
+
     changePage(page) {
       this.$router.push({
         name: 'wallet-voters',
-        params: { address: this.$route.params.address, username: this.$route.params.username, page }
+        params: { address: this.$route.params.address, username: this.username, page }
       })
     }
   }

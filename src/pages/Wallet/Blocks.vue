@@ -8,7 +8,7 @@
       <div class="sm:hidden">
         <table-blocks-mobile :blocks="blocks"></table-blocks-mobile>
       </div>
-      <paginator v-if="blocks" :start="+this.page" :count="totalBlocks"></paginator>
+      <paginator v-if="blocks && blocks.length" :start="+this.page" :count="totalBlocks"></paginator>
     </section>
   </div>
 </template>
