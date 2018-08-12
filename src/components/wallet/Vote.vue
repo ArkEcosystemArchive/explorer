@@ -1,5 +1,5 @@
 <template>
-  <div class="list-row" v-show="Object.keys(delegate).length">
+  <div class="list-row-border-t" v-show="Object.keys(delegate).length">
     <div>{{ $t("Votes") }}</div>
     <div><link-wallet v-if="delegate.address" :address="delegate.address">{{ delegate.username }}</link-wallet></div>
   </div>

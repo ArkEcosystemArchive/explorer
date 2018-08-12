@@ -27,7 +27,7 @@
       <div>{{ readableCrypto(delegate.forged) }}</div>
     </div>
 
-    <div class="list-row-border-b">
+    <div class="list-row">
       <div>{{ $t("Blocks") }}</div>
       <div>
         <span :class="[ !delegate.missedblocks && delegate.producedblocks ? 'mr-2' : '' ]">{{ delegate.producedblocks }}</span>
