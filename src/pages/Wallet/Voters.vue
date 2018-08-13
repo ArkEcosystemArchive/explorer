@@ -60,6 +60,8 @@ export default {
   },
 
   async beforeRouteUpdate(to, from, next) {
+    this.wallets = null
+
     try {
       const wallet = await WalletService.find(to.params.address)
       const voters = await DelegateService.voters(wallet.publicKey)
