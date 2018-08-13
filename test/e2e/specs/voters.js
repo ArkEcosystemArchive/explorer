@@ -81,6 +81,17 @@ module.exports = {
       .useXpath()
       .waitForElementVisible("//h1[contains(.,'Wallet Summary')]")
       .assert.urlContains('/wallets/')
+  },
+
+  'it should redirect to 404 if the wallet address is invalid': function(browser) {
+    const devServer = browser.globals.devServerURL + '/#/wallets/ffffffffffffffffffffffffffffffffff/voters/1'
+
+    browser
+      .url(devServer)
+      .useXpath()
+      .waitForElementVisible("//h1[text() = 'Ooops!']")
+    browser
+      .assert.urlContains('/404')
       .end()
   }
 }

@@ -6,7 +6,7 @@
 
 module.exports = {
   // Default test, which also serves as setup for correct url
-  'wallet summary page should be available': function (browser) {
+  'wallet summary page should be available': function(browser) {
     const devServer = browser.globals.devServerURL + '/#/wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs'
 
     browser
@@ -83,6 +83,17 @@ module.exports = {
       .waitForElementVisible("//div[text() = 'Delegate']")
     browser
       .assert.urlContains('/wallets/')
-    browser.end()
+  },
+
+  'it should redirect to 404 if the wallet address is invalid': function(browser) {
+    const devServer = browser.globals.devServerURL + '/#/wallets/ffffffffffffffffffffffffffffffffff'
+
+    browser
+      .url(devServer)
+      .useXpath()
+      .waitForElementVisible("//h1[text() = 'Ooops!']")
+    browser
+      .assert.urlContains('/404')
+      .end()
   }
 }

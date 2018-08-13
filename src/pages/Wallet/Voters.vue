@@ -48,27 +48,39 @@ export default {
     }
   },
 
-  mounted() {
-    this.getVoters()
-    this.getUsername()
+  async beforeRouteEnter(to, from, next) {
+    try {
+      const wallet = await WalletService.find(to.params.address)
+      const voters = await DelegateService.voters(wallet.publicKey)
+      next(vm => {
+        vm.setWallets(voters),
+        vm.setUsername(to.params.username)
+      })
+    } catch(e) { next({ name: '404' }) }
+  },
+
+  async beforeRouteUpdate(to, from, next) {
+    try {
+      const wallet = await WalletService.find(to.params.address)
+      const voters = await DelegateService.voters(wallet.publicKey)
+      this.setWallets(voters)
+      this.setUsername(to.params.username)
+      next()
+    } catch(e) { next({ name: '404' }) }
   },
 
   methods: {
-    async getVoters() {
-      try {
-        const wallet = await WalletService.find(this.$route.params.address)
-        const voters = await DelegateService.voters(wallet.publicKey)
-        this.wallets = voters
-      } catch(e) { next({ name: '404' }) }
+    setWallets(wallets) {
+      this.wallets = wallets
     },
 
-    async getUsername() {
-      if (this.$route.params.username === undefined) {
+    async setUsername(username) {
+      if (username === undefined) {
         const wallet = await WalletService.find(this.$route.params.address)
         const delegate = await DelegateService.find(wallet.publicKey)
         this.username = delegate.username
       } else {
-        this.username = this.$route.params.username
+        this.username = username
       }
     },
 
