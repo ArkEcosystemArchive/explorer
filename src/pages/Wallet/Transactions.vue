@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-2xl mx-auto pt-5">
+  <div class="max-w-2xl mx-auto md:pt-5">
     <content-header>{{ $t("Transactions") }} - {{ $t(capitalize(type)) }}</content-header>
     <section class="page-section py-10">
       <div class="hidden sm:block">
