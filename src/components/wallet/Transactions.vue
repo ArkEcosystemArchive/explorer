@@ -34,7 +34,7 @@
       <div class="sm:hidden">
         <table-transactions-detail-mobile :transactions="transactions"></table-transactions-detail-mobile>
       </div>
-      <div class="mx-10 mt-10 flex flex-wrap" v-if="transactions && transactions.length >= 25">
+      <div class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap" v-if="transactions && transactions.length >= 25">
         <router-link :to="{ name: 'wallet-transactions', params: { address: this.wallet.address, type, page: 2 } }" tag="button" class="show-more-button">
           {{ $t("Show more") }}
         </router-link>
