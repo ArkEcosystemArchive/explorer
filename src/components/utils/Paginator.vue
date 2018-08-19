@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
+  <div class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap" v-show="page > 1 || page < totalPages">
     <button
       @click="prev"
       :class="{ 'hidden' : page <= 1, 'flex' : page > 1 }"
