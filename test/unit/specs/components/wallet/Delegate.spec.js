@@ -31,13 +31,15 @@ describe('wallet/Delegate', () => {
         wallet: { publicKey: '02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b' }
       }
     })
-    const divs = wrapper.findAll('div.list-row-border-b')
-    expect(divs).toHaveLength(6)
+    let divs = wrapper.findAll('div.list-row-border-b')
+    expect(divs).toHaveLength(5)
     expect(divs.at(0).text()).toBe('Delegate')
     expect(divs.at(1).text()).toContain('Uptime')
     expect(divs.at(2).text()).toBe('Rank/Status')
     expect(divs.at(3).text()).toContain('Approval')
     expect(divs.at(4).text()).toBe('Forged')
-    expect(divs.at(5).text()).toBe('Blocks')
+    divs = wrapper.findAll('div.list-row')
+    expect(divs).toHaveLength(1)
+    expect(divs.at(0).text()).toBe('Blocks')
   })
 })
