@@ -46,6 +46,10 @@ export default {
 </script>
 
 <style>
+.search-input::placeholder {
+  color: var(--color-theme-text-placeholder);
+}
+
 .button-block {
   display: block;
 }
