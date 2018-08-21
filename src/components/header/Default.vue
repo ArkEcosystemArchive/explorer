@@ -17,7 +17,7 @@
         </svg>
         <span class="semibold">{{ $t("Menu") }}</span>
       </button>
-      <span class="border-r mx-4 lg:mx-6 my-4"></span>
+      <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4"></span>
       <div class="flex-auto flex items-center justify-center">
         <label for="search" class="hidden">{{ $t("Search") }}</label>
         <input
