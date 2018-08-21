@@ -62,6 +62,8 @@ export default {
       })
     },
     setServer: ({commit}, value) => {
+      localStorage.setItem('server', value)
+
       commit({
         type: types.SET_NETWORK_SERVER,
         value

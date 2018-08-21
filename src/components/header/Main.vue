@@ -12,13 +12,15 @@
 
       <header-desktop-currencies v-else-if="headerType === 'currencies'"></header-desktop-currencies>
 
+      <header-server v-else-if="headerType === 'server'"></header-server>
+
       <header-default v-else></header-default>
 
       <header-desktop-menu v-if="menuVisible"></header-desktop-menu>
     </div>
     <div class="w-full relative flex xl:hidden">
       <header-search v-if="headerType === 'search'"></header-search>
-
+      <header-server v-else-if="headerType === 'server'"></header-server>
       <header-default v-else></header-default>
     </div>
     <header-mobile-menu v-if="menuVisible"></header-mobile-menu>
@@ -30,6 +32,7 @@
 <script type="text/ecmascript-6">
 import HeaderDefault from '@/components/header/Default'
 import HeaderSearch from '@/components/header/Search'
+import HeaderServer from '@/components/header/Server'
 import HeaderDesktopCurrencies from '@/components/header/currencies/Desktop'
 import HeaderMobileCurrencies from '@/components/header/currencies/Mobile'
 import HeaderDesktopMenu from '@/components/header/menu/Desktop'
@@ -40,6 +43,7 @@ export default {
   components: {
     HeaderDefault,
     HeaderSearch,
+    HeaderServer,
     HeaderDesktopCurrencies,
     HeaderMobileCurrencies,
     HeaderDesktopMenu,
