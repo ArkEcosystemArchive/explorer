@@ -35,7 +35,9 @@ export default {
 
     this.$store.dispatch('network/setDefaults', network)
 
-    this.$store.dispatch('network/setServer', network.server)
+    localStorage.setItem('originalServer', network.server)
+    this.$store.dispatch('network/setServer', localStorage.getItem('server') || network.server)
+
     this.$store.dispatch('network/setAlias', network.alias)
     this.$store.dispatch('network/setActiveDelegates', network.activeDelegates)
     this.$store.dispatch('network/setRewardOffset', network.rewardOffset)
