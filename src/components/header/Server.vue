@@ -8,8 +8,8 @@
         v-model="newServerURL"
         :placeholder="currentServerURL"
         class="search-input w-full flex-auto mr-2 py-4 pl-4 bg-transparent"/>
-    <button @click="resetServer" class="semibold text-red px-2 py-4 hidden items-center border-b-2 margin-t-2 border-transparent" style="display:block">RESET</button>
-    <button @click="setServer" class="semibold px-2 py-4 hidden items-center border-b-2 margin-t-2 border-transparent" style="display:block">SAVE</button>
+    <button @click="resetServer" class="semibold text-red px-2 py-4 hidden items-center border-b-2 margin-t-2 border-transparent button-block">RESET</button>
+    <button @click="setServer" class="semibold px-2 py-4 hidden items-center border-b-2 margin-t-2 border-transparent button-block">SAVE</button>
   </div>
 </template>
 
@@ -46,21 +46,7 @@ export default {
 </script>
 
 <style>
-.search-input::placeholder {
-  color: var(--color-theme-text-placeholder);
-}
-
-.search-icon:hover {
-  box-shadow: 0 0 13px 2px rgba(197, 197, 213, 0.24);
-  cursor: pointer;
-}
-
-.tooltip.search-tip .tooltip-inner {
-  background-color: #ef192d;
-  color: white;
-}
-
-.tooltip.search-tip .tooltip-arrow {
-  border-color: #ef192d;
+.button-block {
+  display: block;
 }
 </style>
