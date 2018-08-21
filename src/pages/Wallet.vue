@@ -4,8 +4,8 @@
 
     <wallet-details :wallet="wallet"></wallet-details>
 
-    <section class="page-section mb-5" :class="{ 'py-8': isDelegate }" v-show="isDelegate || isVoting">
-      <div class="px-5 sm:px-10" :class="{ 'py-4': !isDelegate }">
+    <section class="page-section mb-5" :class="{ 'py-5 md:py-10': isDelegate }" v-show="isDelegate || isVoting">
+      <div class="px-5 sm:px-10" :class="{ 'py-5': !isDelegate }">
         <delegate :wallet="wallet" v-show="isDelegate" v-on:username="username = $event"></delegate>
         <vote :wallet="wallet" v-show="isVoting"></vote>
         <voters :wallet="wallet" :username="username" v-show="isDelegate"></voters>

@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
+  <div class="mx-5 sm:mx-10 mt-5 md:mt-10" :class="[ showPaginator ? 'flex flex-wrap' : 'hidden' ]">
     <button
       @click="prev"
       :class="{ 'hidden' : page <= 1, 'flex' : page > 1 }"
@@ -17,7 +17,7 @@
 
     <button
       @click="next"
-      :class="{ 'hidden' : page >= totalPages, 'flex' : page < totalPages}"
+      :class="{ 'hidden' : page >= totalPages, 'flex' : page < totalPages }"
       class="ml-auto pager-button items-center float-right">
       <span class="mr-2">{{ $t("Next") }}</span>
       <svg
@@ -55,6 +55,10 @@ export default {
   computed: {
     totalPages() {
       return Math.ceil(this.count / this.perPage)
+    },
+
+    showPaginator() {
+      return this.count ? this.page > 1 || this.page < this.totalPages : true
     }
   },
 
