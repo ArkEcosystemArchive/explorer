@@ -21,8 +21,8 @@
       </div>
     </section>
 
-    <section class="page-section py-8 mb-5">
-      <div class="px-5 sm:px-10 py-4">
+    <section class="page-section py-5 md:py-10 mb-5">
+      <div class="px-5 sm:px-10">
         <div class="list-row-border-b">
           <div>{{ $t("Sender") }}</div>
           <div class="truncate">
