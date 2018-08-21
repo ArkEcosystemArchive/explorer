@@ -44,7 +44,7 @@
       <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4"></span>
       <button
         @click="$store.dispatch('ui/setHeaderType', 'server')"
-        class="px-2 py-2 md:py-4 text-black flex-none flex items-center border-b-2 margin-t-2 border-transparent hover:border-red hover:text-blue">
+        class="px-2 py-2 md:py-4 text-black flex-none flex items-center border-b-2 margin-t-2 border-transparent hover:border-red hover:text-blue" :class="{ 'text-grey': nightMode }">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -76,7 +76,7 @@ export default {
 
   computed: {
     ...mapGetters('network', { networkDefaults: 'defaults' }),
-    ...mapGetters('ui', ['menuVisible', 'priceChart']),
+    ...mapGetters('ui', ['menuVisible', 'priceChart', 'nightMode']),
 
     shouldDisplayCurrency() {
       return this.networkDefaults.config.priceChart
