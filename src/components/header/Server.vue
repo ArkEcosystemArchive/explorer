@@ -8,8 +8,8 @@
         v-model="newServerURL"
         :placeholder="currentServerURL"
         class="search-input w-full flex-auto mr-2 py-4 pl-4 bg-transparent"/>
-    <button @click="resetServer" class="semibold text-red px-2 py-4 hidden items-center border-b-2 margin-t-2 border-transparent button-block">RESET</button>
-    <button @click="setServer" class="semibold px-2 py-4 hidden items-center border-b-2 margin-t-2 border-transparent button-block">SAVE</button>
+    <button @click="resetServer" class="semibold text-red px-2 py-4 items-center border-b-2 margin-t-2 border-transparent button-block">RESET</button>
+    <button @click="setServer" class="semibold px-2 py-4 items-center border-b-2 margin-t-2 border-transparent button-block">SAVE</button>
   </div>
 </template>
 
