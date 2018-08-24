@@ -92,7 +92,7 @@
         </svg>
       </a>
 
-      <a href="https://discord.ark.io" target="_blank">
+      <a href="https://ark.io/discord" target="_blank">
         <svg
           viewBox="0 0 24 24"
           class="m-2"
