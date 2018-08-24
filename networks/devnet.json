@@ -1,6 +1,6 @@
 {
   "title": "DARK Explorer",
-  "server": "http://127.0.0.1:4003/api",
+  "server": "https://dexplorer.ark.io:8443/api",
   "alias": "Development",
   "activeDelegates": 51,
   "rewardOffset": 10800,
