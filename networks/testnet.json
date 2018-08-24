@@ -1,7 +1,7 @@
 {
-  "title": "DARK Explorer",
+  "title": "TARK Explorer",
   "server": "http://127.0.0.1:4003/api",
-  "alias": "Development",
+  "alias": "Testnet local",
   "activeDelegates": 51,
   "rewardOffset": 75600,
   "currencies": [],
