@@ -3,7 +3,7 @@
   "server": "http://127.0.0.1:4003/api",
   "alias": "Development",
   "activeDelegates": 51,
-  "rewardOffset": 75600,
+  "rewardOffset": 10800,
   "currencies": [],
   "knownWallets": {},
   "defaults": {

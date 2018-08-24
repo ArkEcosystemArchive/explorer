@@ -29,28 +29,24 @@ import { mapGetters } from 'vuex'
 
 export default {
   data: () => ({
-    block: {},
-    timer: null,
+    block: {}
   }),
 
   async mounted() {
-    await this.getBlock()
-    this.initialiseTimer()
+    await this.prepareComponent()
   },
 
   methods: {
+    async prepareComponent() {
+      await this.getBlock()
+
+      this.$store.watch(state => state.network.height, value => this.getBlock())
+    },
+
     async getBlock() {
       const response = await BlockService.last()
       this.block = response
-    },
-
-    initialiseTimer() {
-      this.timer = setInterval(this.getBlock, 8 * 1000)
-    },
-  },
-
-  beforeDestroy() {
-    clearInterval(this.timer)
-  },
+    }
+  }
 }
 </script>

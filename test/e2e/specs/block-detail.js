@@ -59,9 +59,27 @@ module.exports = {
       .waitForElementVisible('img.block.animated')
   },
 
+  'it should refresh the confirmation count automatically': function (browser) {
+    browser
+      .waitForElementVisible('div.list-row-border-b')
+      .useXpath()
+      .getText("//div[contains(@class, 'list-row-border-b')][2]//div[2]", function(result) {
+        const confirmations = result.value
+
+        browser
+          .expect.element("//div[contains(@class, 'list-row-border-b')][2]//div[2][text() = '" + confirmations + "']").to.be.present
+        browser
+          .waitForElementNotPresent("//div[contains(@class, 'list-row-border-b')][2]//div[2][text() = '" + confirmations + "']", 20000)
+        browser
+          .getText("//div[contains(@class, 'list-row-border-b')][2]//div[2]", function(result) {
+            browser.assert.notEqual(result.value, confirmations)
+          })
+      })
+  },
+
   'it should be possible to click on the delegate': function(browser) {
     browser
-      .waitForElementVisible('div.list-row a')
+      .useCss().waitForElementVisible('div.list-row a')
       .click('div.list-row a')
       .useXpath().waitForElementVisible("//h1[text() = 'Wallet Summary']")
       .assert.urlContains('wallets/ALLZ3TQKTaHm2Bte4SrXL9C5cS8ZovqFfZ')

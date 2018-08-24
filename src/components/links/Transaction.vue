@@ -1,5 +1,5 @@
 <template>
-  <span v-tooltip="smartBridge">
+  <span v-tooltip="id">
     <router-link :to="{ name: 'transaction', params: { id } }" class="flex items-center whitespace-no-wrap">
       <span v-if="hasDefaultSlot"><slot></slot></span>
       <template v-else>

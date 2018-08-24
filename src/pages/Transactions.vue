@@ -1,14 +1,14 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
     <content-header>{{ $t("Transactions") }}</content-header>
-    <section class="page-section py-10">
+    <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
         <table-transactions :transactions="transactions"></table-transactions>
       </div>
       <div class="sm:hidden">
         <table-transactions-mobile :transactions="transactions"></table-transactions-mobile>
       </div>
-      <paginator v-if="transactions" :start="+this.$route.params.page"></paginator>
+      <paginator v-if="transactions && transactions.length" :start="+this.$route.params.page"></paginator>
     </section>
   </div>
 </template>

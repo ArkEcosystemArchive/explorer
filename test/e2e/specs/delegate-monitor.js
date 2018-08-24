@@ -28,6 +28,40 @@ module.exports = {
     browser.expect.element("//div[text() = 'Delegate']").to.be.visible
   },
 
+  'it should fetch the latest block automatically': function (browser) {
+    browser
+      .useXpath().waitForElementVisible("//div[text() = 'Last block']")
+      .getText("//div[text() = 'Last block']/following-sibling::div//a[1]/span", function(result) {
+        const blockId = result.value
+
+        browser
+          .expect.element("//div[text() = 'Last block']/following-sibling::div//a[1]/span[text() = '" + blockId + "']").to.be.present
+        browser
+          .waitForElementNotPresent("//div[text() = 'Last block']/following-sibling::div//a[1]/span[text() = '" + blockId + "']", 20000)
+        browser
+          .getText("//div[text() = 'Last block']/following-sibling::div//a[1]/span", function(result) {
+            browser.assert.notEqual(result.value, blockId)
+          })
+      })
+  },
+
+  'it should fetch the delegates automatically': function (browser) {
+    browser
+      .useXpath().waitForElementVisible("//div[text() = 'In queue for forging']")
+      .getText("//div[text() = 'In queue for forging']/preceding-sibling::div", function(result) {
+        const queueCount = result.value
+
+        browser
+          .expect.element("//div[text() = 'In queue for forging']/preceding-sibling::div[text() = '" + queueCount + "']").to.be.present
+        browser
+          .waitForElementNotPresent("//div[text() = 'In queue for forging']/preceding-sibling::div[text() = '" + queueCount + "']", 20000)
+        browser
+          .getText("//div[text() = 'In queue for forging']/preceding-sibling::div", function(result) {
+            browser.assert.notEqual(result.value, queueCount)
+          })
+      })
+  },
+
   'it should be possible to click on the last block': function (browser) {
     browser
       .useXpath()
@@ -145,9 +179,8 @@ module.exports = {
       .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]//a[1]")
       .pause(500)
     browser
-      .useCss()
-      .waitForElementVisible('h1')
-      .assert.containsText('h1', 'Wallet Summary')
+      .useXpath()
+      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
       .assert.urlContains('/wallets/')
     browser.end()
   }

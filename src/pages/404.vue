@@ -1,9 +1,9 @@
 <template>
-  <div class="max-w-2xl mx-auto md:pt-5 text-center">
+  <div class="max-w-2xl mx-auto md:pt-5">
     <content-header>{{ $t("Ooops!") }}</content-header>
 
-    <section class="page-section py-10 px-6">
-      <div class="my-10">
+    <section class="page-section py-5 md:py-10 px-6">
+      <div class="my-10 text-center">
         <img
           v-if="!nightMode"
           src="@/assets/images/404/light.png" />

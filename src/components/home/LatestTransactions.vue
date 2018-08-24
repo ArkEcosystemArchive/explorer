@@ -7,7 +7,7 @@
       <div class="sm:hidden">
           <table-transactions-mobile :transactions="transactions"></table-transactions-mobile>
       </div>
-      <div class="mx-10 mt-10 flex flex-wrap">
+      <div class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
         <router-link :to="{ name: 'transactions', params: { page: 2 } }" tag="button" class="show-more-button">
           {{ $t("Show more") }}
         </router-link>
@@ -20,11 +20,25 @@
 import TransactionService from '@/services/transaction'
 
 export default {
-  data: () => ({ transactions: null }),
+  data: () => ({
+    transactions: null
+  }),
 
   async mounted() {
-    const response = await TransactionService.latest()
-    this.transactions = response
+    await this.prepareComponent()
   },
+
+  methods: {
+    async prepareComponent() {
+      await this.getTransactions()
+
+      this.$store.watch(state => state.network.height, value => this.getTransactions())
+    },
+
+    async getTransactions() {
+      const response = await TransactionService.latest()
+      this.transactions = response
+    }
+  }
 }
 </script>

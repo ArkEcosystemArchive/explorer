@@ -1,5 +1,5 @@
 <template>
-  <div class="list-row" v-show="Object.keys(delegate).length">
+  <div :class="[ isDelegate ? 'list-row-border-t' : 'list-row' ]" v-show="Object.keys(delegate).length">
     <div>{{ $t("Votes") }}</div>
     <div><link-wallet v-if="delegate.address" :address="delegate.address">{{ delegate.username }}</link-wallet></div>
   </div>
@@ -17,6 +17,12 @@ export default {
   },
 
   data: () => ({ delegate: {} }),
+
+  computed: {
+    isDelegate() {
+      return this.isDelegateByAddress(this.wallet.address)
+    }
+  },
 
   watch: {
     wallet(wallet) {

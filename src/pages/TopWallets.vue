@@ -8,7 +8,7 @@
       <div class="sm:hidden">
         <table-wallets-mobile :wallets="wallets" :total="supply"></table-wallets-mobile>
       </div>
-      <paginator v-if="wallets" :start="+this.$route.params.page"></paginator>
+      <paginator v-if="wallets && wallets.length" :start="+this.$route.params.page"></paginator>
     </section>
   </div>
 </template>

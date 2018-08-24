@@ -1,6 +1,6 @@
 <template>
   <span>
-    <span class="hidden md:inline-block">
+    <span v-tooltip="getAddress()" class="hidden md:inline-block">
       <router-link v-if="!type" :to="{ name: 'wallet', params: { address: walletAddress } }">
         <span v-if="isKnown">{{ knownWallets[address] }}</span>
         <span v-else-if="delegate">{{ delegate.username }}</span>
@@ -18,7 +18,7 @@
       <span v-else-if="type === 8">{{ $t("Delegate Resignation") }}</span>
     </span>
 
-    <span class="md:hidden">
+    <span v-tooltip="walletAddress" class="md:hidden">
       <router-link v-if="!type" :to="{ name: 'wallet', params: { address: walletAddress } }">
         <span v-if="isKnown">{{ knownWallets[address] }}</span>
         <span v-else-if="delegate">{{ delegate.username }}</span>
@@ -104,6 +104,17 @@ export default {
     findByPublicKey() {
       this.delegate = this.delegates.find(d => d.publicKey === this.publicKey)
     },
+
+    getAddress() {
+      const knownOrDelegate = this.isKnown || this.delegate
+      const truncated = !this.hasDefaultSlot && this.trunc
+
+      if (knownOrDelegate || truncated) {
+        return this.walletAddress
+      }
+
+      return false
+    }
   },
 }
 </script>

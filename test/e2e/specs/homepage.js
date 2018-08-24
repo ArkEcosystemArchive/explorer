@@ -132,8 +132,7 @@ module.exports = {
       .click("//button[contains(., 'Top Wallets')]")
       .pause(500)
     browser
-      .useCss()
-      .waitForElementVisible('div.table-component')
+      .waitForElementVisible("//h1[text() = 'Top Wallets']")
       .assert.urlContains('/top-wallets')
   },
 
@@ -145,8 +144,7 @@ module.exports = {
       .click("//button[contains(., 'Delegate Monitor')]")
       .pause(500)
     browser
-      .useCss()
-      .waitForElementVisible('div.table-component')
+      .waitForElementVisible("//h1[text() = 'Delegate Monitor']")
       .assert.urlContains('/delegate-monitor')
   },
 
@@ -158,8 +156,7 @@ module.exports = {
       .click("//button[contains(., 'Home')]")
       .pause(500)
     browser
-      .useCss()
-      .waitForElementVisible('div.table-component')
+      .waitForElementVisible("//h1[text() = 'Latest transactions and blocks']")
       .assert.urlContains('/#')
   },
 
@@ -180,15 +177,18 @@ module.exports = {
 
     browser
       .url(devServer)
-      .useXpath().click("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest Blocks')]")
-      .useCss().waitForElementVisible('div.table-component')
-    browser
       .useXpath()
+      .click("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest Blocks')]")
+      .waitForElementVisible("//thead[contains(@class, 'table-component__table__head')]//tr[1]//th[4][contains(., 'Transactions')]")
+    browser
       .getText("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]", function(result) {
         const blockId = result.value
 
         browser
-          .pause(8000)
+          .expect.element("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2][contains(., '" + blockId + "')]").to.be.present
+        browser
+          .waitForElementNotPresent("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2][contains(., '" + blockId + "')]", 20000)
+        browser
           .getText("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]", function(result) {
             browser.assert.notEqual(result.value, blockId)
           })

@@ -1,14 +1,14 @@
 <template>
-  <div class="max-w-2xl mx-auto pt-5">
+  <div class="max-w-2xl mx-auto md:pt-5">
     <content-header>{{ $t("Voters") }} <span v-show="username">- {{ username }}</span></content-header>
-    <section class="page-section py-10">
+    <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
         <table-wallets :wallets="filteredWallets" :total="votes"></table-wallets>
       </div>
       <div class="sm:hidden">
         <table-wallets-mobile :wallets="filteredWallets" :total="votes"></table-wallets-mobile>
       </div>
-      <paginator v-if="wallets" :start="+this.page" :count="count"></paginator>
+      <paginator v-if="wallets && wallets.length" :start="+this.page" :count="count"></paginator>
     </section>
   </div>
 </template>
@@ -20,6 +20,7 @@ import sumBy from 'lodash/sumBy'
 
 export default {
   data: () => ({
+    username: null,
     wallets: null,
     perPage: 25,
   }),
@@ -42,31 +43,53 @@ export default {
     votes() {
       return sumBy(this.wallets, 'balance')
     },
-    username() {
-      return this.$route.params.username
-    },
     count() {
       return this.wallets.length
     }
   },
 
-  mounted() {
-    this.getVoters()
+  async beforeRouteEnter(to, from, next) {
+    try {
+      const wallet = await WalletService.find(to.params.address)
+      const voters = await DelegateService.voters(wallet.publicKey)
+      next(vm => {
+        vm.setWallets(voters),
+        vm.setUsername(to.params.username)
+      })
+    } catch(e) { next({ name: '404' }) }
+  },
+
+  async beforeRouteUpdate(to, from, next) {
+    this.wallets = null
+
+    try {
+      const wallet = await WalletService.find(to.params.address)
+      const voters = await DelegateService.voters(wallet.publicKey)
+      this.setWallets(voters)
+      this.setUsername(to.params.username)
+      next()
+    } catch(e) { next({ name: '404' }) }
   },
 
   methods: {
-    async getVoters() {
-      try {
+    setWallets(wallets) {
+      this.wallets = wallets
+    },
+
+    async setUsername(username) {
+      if (username === undefined) {
         const wallet = await WalletService.find(this.$route.params.address)
-        const voters = await DelegateService.voters(wallet.publicKey)
-        this.wallets = voters
-      } catch(e) { next({ name: '404' }) }
+        const delegate = await DelegateService.find(wallet.publicKey)
+        this.username = delegate.username
+      } else {
+        this.username = username
+      }
     },
 
     changePage(page) {
       this.$router.push({
         name: 'wallet-voters',
-        params: { address: this.$route.params.address, username: this.$route.params.username, page }
+        params: { address: this.$route.params.address, username: this.username, page }
       })
     }
   }

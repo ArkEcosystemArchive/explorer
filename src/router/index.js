@@ -141,7 +141,7 @@ const router = new Router({
       meta: { title: route => { return 'Delegate Monitor' + titleSuffix } }
     },
     {
-      path: 'top-wallets',
+      path: '/top-wallets',
       redirect: to => ({ name: 'top-wallets', params: { page: 1 } }),
       meta: { title: route => { return 'Top Wallets' + titleSuffix } }
     },
@@ -157,7 +157,7 @@ const router = new Router({
     //   component: StatisticsComponent
     // },
     {
-      path: '404',
+      path: '/404',
       name: '404',
       component: NotFoundComponent,
       meta: { title: route => { return '404' + titleSuffix } }

@@ -290,6 +290,10 @@ thead th {
   @apply .list-row .border-b
 }
 
+.list-row-border-t {
+  @apply .list-row .border-t
+}
+
 .list-row-border-b-no-wrap {
   @apply .list-row-border-b .flex-no-wrap;
 }

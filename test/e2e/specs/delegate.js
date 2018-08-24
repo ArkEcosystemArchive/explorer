@@ -91,7 +91,9 @@ module.exports = {
   'it should be possible to show the list of forged blocks': function (browser) {
     browser
       .click("//a[contains(@href, '/blocks/1') and text() = 'See all']")
-      .waitForElementVisible("//h1[text() = 'Blocks']")
+      .waitForElementVisible("//h1[contains(., 'Blocks')]")
+      .waitForElementVisible('//h1//span')
+      .expect.element("//h1//span[contains(., 'arkpool')]").to.be.visible
     browser
       .assert.urlContains('/wallets/ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ/blocks/1')
   },

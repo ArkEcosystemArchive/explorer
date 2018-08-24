@@ -16,8 +16,16 @@ module.exports = {
       .assert.containsText('h1', 'Voters')
   },
 
+  'it should display the delegates name': function (browser) {
+    browser
+      .useXpath()
+      .waitForElementVisible('//h1//span')
+      .expect.element("//h1//span[contains(., 'arkpool')]").to.be.visible
+  },
+
   'it should be possible to navigate to the next page and back': function (browser) {
     browser
+      .useCss()
       .waitForElementVisible('div.table-component')
       .assert.urlContains('/voters/1')
       .useXpath().expect.element("//button[contains(., 'Previous')]").to.not.be.visible
@@ -73,6 +81,17 @@ module.exports = {
       .useXpath()
       .waitForElementVisible("//h1[contains(.,'Wallet Summary')]")
       .assert.urlContains('/wallets/')
+  },
+
+  'it should redirect to 404 if the wallet address is invalid': function(browser) {
+    const devServer = browser.globals.devServerURL + '/#/wallets/ffffffffffffffffffffffffffffffffff/voters/1'
+
+    browser
+      .url(devServer)
+      .useXpath()
+      .waitForElementVisible("//h1[text() = 'Ooops!']")
+    browser
+      .assert.urlContains('/404')
       .end()
   }
 }

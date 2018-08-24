@@ -1,14 +1,14 @@
 <template>
-  <div class="max-w-2xl mx-auto pt-5">
-    <content-header>{{ $t("Blocks") }}</content-header>
-    <section class="page-section py-10">
+  <div class="max-w-2xl mx-auto md:pt-5">
+    <content-header>{{ $t("Blocks") }} <span v-show="username">- {{ username }}</span></content-header>
+    <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
         <table-blocks :blocks="blocks"></table-blocks>
       </div>
       <div class="sm:hidden">
         <table-blocks-mobile :blocks="blocks"></table-blocks-mobile>
       </div>
-      <paginator v-if="blocks" :start="+this.page" :count="totalBlocks"></paginator>
+      <paginator v-if="blocks && blocks.length" :start="+this.page" :count="totalBlocks"></paginator>
     </section>
   </div>
 </template>
@@ -16,16 +16,17 @@
 <script type="text/ecmascript-6">
 import WalletService from '@/services/wallet'
 import BlockService from '@/services/block'
+import DelegateService from '@/services/delegate'
 
 export default {
   data: () => ({
+    username: null,
     totalBlocks: 0,
     blocks: null
   }),
 
   created() {
     this.$on('paginatorChanged', page => this.changePage(page))
-    this.getTotalBlocks()
   },
 
   async beforeRouteEnter (to, from, next) {
@@ -56,6 +57,11 @@ export default {
     },
   },
 
+  mounted() {
+    this.getTotalBlocks()
+    this.getUsername()
+  },
+
   methods: {
     setBlocks (blocks) {
       if (!blocks) return
@@ -70,10 +76,20 @@ export default {
       this.totalBlocks = Number(response)
     },
 
+    async getUsername() {
+      if (this.$route.params.username === undefined) {
+        const wallet = await WalletService.find(this.$route.params.address)
+        const delegate = await DelegateService.find(wallet.publicKey)
+        this.username = delegate.username
+      } else {
+        this.username = this.$route.params.username
+      }
+    },
+
     changePage(page) {
       this.$router.push({
         name: 'wallet-blocks',
-        params: { address: this.address, page }
+        params: { address: this.address, username: this.username, page }
       })
     }
   }
