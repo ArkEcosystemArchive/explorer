@@ -83,6 +83,8 @@ module.exports = {
 
     browser
       .url(devServer)
+      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+    browser
       .useCss()
       .expect.element('div.modal-container').to.be.not.present
     browser
