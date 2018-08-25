@@ -36,6 +36,15 @@ module.exports = {
       .expect.element("//div[contains(., 'Transactions')]/following-sibling::div/span[contains(@class, 'text-red')]").to.be.present
   },
 
+  'it should contain transaction tabs': function (browser) {
+    browser
+      .useXpath().expect.element("//div[contains(., 'All')]").to.be.present
+    browser
+      .useXpath().expect.element("//div[contains(., 'Sent')]").to.be.present
+    browser
+      .useXpath().expect.element("//div[contains(., 'Received')]").to.be.present
+  },
+
   'it should show a list of transactions, including show more button': function (browser) {
     browser
       .useCss()
@@ -48,17 +57,32 @@ module.exports = {
       .expect.element('button.show-more-button').to.be.visible
   },
 
-  'it should contain transaction tabs': function (browser) {
+  'it should be possible to click on the show more button': function (browser) {
     browser
-      .useXpath().expect.element("//div[contains(., 'All')]").to.be.present
+      .useCss()
+      .waitForElementVisible('button.show-more-button')
+      .click('button.show-more-button')
     browser
-      .useXpath().expect.element("//div[contains(., 'Sent')]").to.be.present
+      .assert.urlContains('wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs/transactions/all/2')
+  },
+
+  'it should be possible to switch transaction type': function (browser) {
     browser
-      .useXpath().expect.element("//div[contains(., 'Received')]").to.be.present
+      .useXpath()
+      .expect.element("//span[contains(., 'Transactions')]").to.be.present
+    browser
+      .click("//span[contains(., 'Transactions')]/following-sibling::div//span")
+      .waitForElementVisible("//span[contains(., 'Transactions')]/following-sibling::div//ul//li[2]//a")
+    browser
+      .click("//span[contains(., 'Transactions')]/following-sibling::div//ul//li[2]//a")
+      .assert.urlContains('wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs/transactions/sent/1')
   },
 
   'it should be possible to toggle the QR code': function (browser) {
+    const devServer = browser.globals.devServerURL + '/#/wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs'
+
     browser
+      .url(devServer)
       .useCss()
       .expect.element('div.modal-container').to.be.not.present
     browser
