@@ -1,0 +1,15 @@
+{
+  "title": "TARK Explorer",
+  "server": "http://127.0.0.1:4003/api",
+  "alias": "Testnet local",
+  "activeDelegates": 51,
+  "rewardOffset": 75600,
+  "currencies": [],
+  "knownWallets": {},
+  "defaults": {
+    "currency": null
+  },
+  "config": {
+    "priceChart": false
+  }
+}
