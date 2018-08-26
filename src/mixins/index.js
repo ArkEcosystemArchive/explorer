@@ -32,7 +32,7 @@ const methods = {
       })
       .add(Math.abs(typeof timeZoneOffset !== 'undefined' ? timeZoneOffset : new Date().getTimezoneOffset()), 'minutes')
       .add(value, 'seconds')
-      .format('DD.MM.YYYY HH:mm:ss')
+      .format('YYYY.MM.DD HH:mm:ss')
   },
 
   readableTimestampAgo(time, compareTime) {
