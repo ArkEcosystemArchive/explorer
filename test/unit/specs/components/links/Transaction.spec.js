@@ -4,11 +4,9 @@ import store from '@/store'
 
 import Transaction from '@/components/links/Transaction'
 import VueI18n from 'vue-i18n'
-import VTooltip from 'v-tooltip'
 
 const localVue = createLocalVue()
 localVue.use(VueI18n)
-localVue.use(VTooltip, { defaultHtml: false })
 const i18n = new VueI18n({
   locale: 'en',
   fallbackLocale: 'en',
