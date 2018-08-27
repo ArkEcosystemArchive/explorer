@@ -55,6 +55,7 @@ describe('rawCurrency mixin', () => {
 describe('readableFiat mixin', () => {
   it('should display fiat currency with two digits', () => {
     store.dispatch('currency/setName', 'USD')
+    store.dispatch('ui/setLocale', 'en-US')
     expect(mixins.readableFiat(10.234)).toEqual('$10.23')
     expect(mixins.readableFiat(10.23423478592034)).toEqual('$10.23')
   })
