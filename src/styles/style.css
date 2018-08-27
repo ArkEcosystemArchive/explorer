@@ -363,3 +363,17 @@ thead th {
 .menu-button:hover {
   @apply .border-red
 }
+
+/** Dropdown */
+
+.dropdown-button {
+  @apply .flex .items-center .p-4 .text-theme-text-secondary .transition .cursor-pointer
+}
+
+.dropdown-button:hover {
+  color: #1461ff;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}

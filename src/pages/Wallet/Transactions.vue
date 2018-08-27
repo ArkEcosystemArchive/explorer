@@ -1,6 +1,23 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <content-header>{{ $t("Transactions") }} - {{ $t(capitalize(type)) }}</content-header>
+    <content-header>
+      <span>{{ $t("Transactions") }} - </span>
+      <div class="inline relative z-20">
+        <span @click="selectOpen = !selectOpen" class="cursor-pointer">
+          <span class="mr-1">{{ $t(capitalize(type)) }}</span>
+          <svg :class="{ 'rotate-180': selectOpen }" class="fill-current" xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            width="16px" height="16px">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+          </svg>
+        </span>
+        <ul v-show="selectOpen" class="absolute pin-l mt-px bg-white shadow rounded border overflow-hidden list-reset text-sm">
+          <li v-for="txType in ['all', 'sent', 'received']">
+            <router-link :to="{ name: 'wallet-transactions', params: { address: address, type: txType, page: 1 } }" class="dropdown-button">{{ $t(capitalize(txType)) }}</router-link>
+          </li>
+        </ul>
+      </div>
+    </content-header>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
         <table-transactions :transactions="transactions"></table-transactions>
@@ -20,7 +37,8 @@ import TransactionService from '@/services/transaction'
 export default {
   data: () => ({
     totalTransactions: 0,
-    transactions: null
+    transactions: null,
+    selectOpen: false
   }),
 
   created() {
@@ -37,11 +55,13 @@ export default {
   },
 
   async beforeRouteUpdate (to, from, next) {
+    this.selectOpen = false
     this.transactions = null
 
     try {
       const wallet = await WalletService.find(to.params.address)
       const transactions = await TransactionService[`${to.params.type}ByAddress`](wallet.address, to.params.page)
+      this.getTotalTransactions(to.params.type)
       this.setTransactions(transactions)
       next()
     } catch(e) { next({ name: '404' }) }
@@ -66,11 +86,14 @@ export default {
       this.transactions = transactions
     },
 
-    getTotalTransactions() {
-      if (this.type === 'sent' || this.type === 'all') {
+    getTotalTransactions(type = this.type) {
+      this.totalTransactions = 0
+
+      if (type === 'sent' || type === 'all') {
         this.getSentCount()
       }
-      if (this.type === 'received' || this.type === 'all') {
+
+      if (type === 'received' || type === 'all') {
         this.getReceivedCount()
       }
     },
