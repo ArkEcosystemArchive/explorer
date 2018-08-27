@@ -16,7 +16,7 @@ You can access it at [https://explorer.ark.io/](https://explorer.ark.io/).
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/ArkEcosystem/ark-explorer
+git clone https://github.com/ArkEcosystem/explorer
 ```
 
 ### 2. Install Dependencies
