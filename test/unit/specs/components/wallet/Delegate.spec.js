@@ -4,12 +4,10 @@ import mixins from '@/mixins'
 import delegate from '@/components/wallet/Delegate'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
-import VTooltip from 'v-tooltip'
 
 const localVue = createLocalVue()
 localVue.use(VueI18n)
 localVue.use(Vuex)
-localVue.use(VTooltip, { defaultHtml: false })
 
 const i18n = new VueI18n({
   locale: 'en',
