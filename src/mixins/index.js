@@ -2,6 +2,9 @@ import Vue from 'vue'
 import moment from 'moment'
 import store from '@/store'
 
+const locale = localStorage.getItem('locale') || navigator.language || 'en'
+moment.locale(locale)
+
 const methods = {
   isDelegateByAddress(address) {
     return (
@@ -32,7 +35,7 @@ const methods = {
       })
       .add(Math.abs(typeof timeZoneOffset !== 'undefined' ? timeZoneOffset : new Date().getTimezoneOffset()), 'minutes')
       .add(value, 'seconds')
-      .format('DD.MM.YYYY HH:mm:ss')
+      .format('L LTS')
   },
 
   readableTimestampAgo(time, compareTime) {
@@ -82,10 +85,10 @@ const methods = {
     return [store.getters['network/token'], 'BTC', 'ETH', 'LTC'].some(
       c => currencyName.indexOf(c) > -1
     )
-      ? value.toLocaleString(undefined, {
+      ? value.toLocaleString(locale, {
         maximumFractionDigits: 8,
       })
-      : value.toLocaleString(undefined, {
+      : value.toLocaleString(locale, {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       })
@@ -96,14 +99,14 @@ const methods = {
       return value.toFixed(digits)
     }
 
-    return value.toLocaleString(undefined, {
+    return value.toLocaleString(locale, {
       minimumFractionDigits: digits,
       maximumFractionDigits: digits,
     })
   },
 
   readableFiat(value) {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat(locale, {
       style: 'currency',
       currency: store.getters['currency/name'],
       minimumFractionDigits: 2,
@@ -122,17 +125,17 @@ const methods = {
     return [store.getters['network/token'], 'BTC', 'ETH', 'LTC'].some(
       c => currencyName.indexOf(c) > -1
     )
-      ? value.toLocaleString(undefined, {
+      ? value.toLocaleString(locale, {
         maximumFractionDigits: 8,
       })
-      : value.toLocaleString(undefined, {
+      : value.toLocaleString(locale, {
         maximumFractionDigits: 2,
       })
   },
 
   readableCrypto(value, appendCurrency = true, decimals = 8) {
     if (typeof value !== 'undefined') {
-      value = (value /= Math.pow(10, 8)).toLocaleString(undefined, {
+      value = (value /= Math.pow(10, 8)).toLocaleString(locale, {
         maximumFractionDigits: decimals,
       })
 
@@ -150,7 +153,7 @@ const methods = {
 
   percentageString(value, decimals = 2) {
     if (typeof value !== 'undefined') {
-      value = value.toLocaleString(undefined, {
+      value = value.toLocaleString(locale, {
         minimumFractionDigits: decimals,
         maximumFractionDigits: decimals,
       })

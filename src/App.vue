@@ -65,6 +65,11 @@ export default {
     )
 
     this.$store.dispatch(
+      'ui/setLocale',
+      localStorage.getItem('locale') || navigator.language || 'en'
+    )
+
+    this.$store.dispatch(
       'ui/setPriceChart',
       localStorage.getItem('priceChart') || network.config.priceChart
     )
