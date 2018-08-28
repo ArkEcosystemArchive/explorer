@@ -18,4 +18,18 @@ describe('currency store modules', () => {
 
     expect(store.getters['currency/symbol']).toEqual('magical-pixel-symbol')
   })
+
+  it('should set the last conversion rate', () => {
+    store.dispatch('currency/setLastConversion', {
+      to: 'USD',
+      timestamp: 1533772799,
+      rate: 0.8034
+    })
+
+    expect(store.getters['currency/lastConversion']).toEqual({
+      to: 'USD',
+      timestamp: 1533772799,
+      rate: 0.8034
+    })
+  })
 })
