@@ -44,6 +44,11 @@ class CryptoCompareService {
   }
 
   async dailyAverage(timestamp) {
+    const networkAlias = store.getters['network/alias']
+    if (networkAlias !== 'Main') {
+      return null
+    }
+
     let ts = moment()
       .utc()
       .set({
