@@ -7,7 +7,7 @@
         <div class="mr-6 flex-none">
           <img class="block" src="@/assets/images/icons/transaction.svg" />
         </div>
-        <div  class="flex-auto min-w-0">
+        <div class="flex-auto min-w-0">
           <div class="text-grey mb-2">{{ $t("Transaction ID") }}</div>
           <div class="flex">
             <div class="text-xl text-white semibold truncate">
@@ -44,7 +44,8 @@
 
         <div class="list-row-border-b">
           <div>{{ $t("Amount") }}</div>
-          <div>{{ readableCrypto(transaction.amount) }}</div>
+          <div v-if="average" v-tooltip="{ content: `${readableCurrency(transaction.amount, average)} ${currencySymbol}`, placement: 'left' }">{{ readableCrypto(transaction.amount) }}</div>
+          <div v-else>{{ readableCrypto(transaction.amount) }}</div>
         </div>
 
         <div class="list-row-border-b">
@@ -73,21 +74,29 @@
 
 <script type="text/ecmascript-6">
 import TransactionService from '@/services/transaction'
+import CryptoCompareService from '@/services/crypto-compare'
+
 import { mapGetters } from 'vuex'
 
 export default {
   data: () => ({
     transaction: {},
+    average: 1
   }),
 
   computed: {
     ...mapGetters('delegates', ['delegates']),
+    ...mapGetters('currency', { currencySymbol: 'symbol' })
   },
 
   async beforeRouteEnter(to, from, next) {
     try {
-      const response = await TransactionService.find(to.params.id)
-      next(vm => vm.setTransaction(response))
+      const transaction = await TransactionService.find(to.params.id)
+      const average = await CryptoCompareService.dailyAverage(transaction.timestamp)
+      next(vm => {
+        vm.setTransaction(transaction),
+        vm.setAverage(average)
+      })
     } catch(e) { next({ name: '404' }) }
   },
 
@@ -95,8 +104,10 @@ export default {
     this.transaction = {}
 
     try {
-      const response = await TransactionService.find(to.params.id)
-      this.setTransaction(response)
+      const transaction = await TransactionService.find(to.params.id)
+      const average = await CryptoCompareService.dailyAverage(transaction.timestamp)
+      this.setTransaction(transaction)
+      this.setAverage(average)
       next()
     } catch(e) { next({ name: '404' }) }
   },
@@ -105,6 +116,9 @@ export default {
     setTransaction(transaction) {
       this.transaction = transaction
     },
+    setAverage(average) {
+      this.average = average
+    }
   },
 }
 </script>

@@ -25,9 +25,19 @@ module.exports = {
       .waitForElementVisible('img.block.animated')
   },
 
-  'it should be possible to click on the sender': function(browser) {
+  'it should be possible to show the amount tooltip': function(browser) {
     browser
       .useXpath()
+      .moveToElement("//div/div[contains(@class, 'list-row')][4]//div[2]", 0, 0, () => {
+        browser
+          .waitForElementVisible("//div[contains(@class, 'vue-tooltip')]")
+        browser
+          .assert.containsText("//div[contains(@class, 'vue-tooltip')]", '2.29 $')
+      })
+  },
+
+  'it should be possible to click on the sender': function(browser) {
+    browser
       .click("//div/div[contains(@class, 'list-row')][1]//a[1]")
       .pause(500)
     browser

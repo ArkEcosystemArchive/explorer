@@ -44,4 +44,17 @@ describe('CryptoCompare Service', () => {
     expect(data.labels.length).toBeGreaterThanOrEqual(366)
     expect(data.datasets.length).toBeGreaterThanOrEqual(366)
   })
+
+  it('should return the daily average for a given timestamp and valid currency', async () => {
+    store.dispatch('currency/setName', 'USD')
+    const data = await cryptoCompareService.dailyAverage(45089379)
+    console.log(data)
+    expect(data).toBe(0.8496)
+  })
+
+  it('should return null for a given timestamp and invalid currency', async () => {
+    store.dispatch('currency/setName', '???')
+    const data = await cryptoCompareService.dailyAverage(45089379)
+    expect(data).toBe(null)
+  })
 })
