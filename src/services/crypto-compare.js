@@ -63,7 +63,7 @@ class CryptoCompareService {
     const targetCurrency = store.getters['currency/name']
     const lastConversion = store.getters['currency/lastConversion']
 
-    if (lastConversion.to == targetCurrency && lastConversion.timestamp == ts) {
+    if (lastConversion.to === targetCurrency && lastConversion.timestamp === ts) {
       return lastConversion.rate
     }
 
@@ -89,7 +89,7 @@ class CryptoCompareService {
         }
       })
 
-    if (response.data.Response == "Error") {
+    if (response.data.Response === "Error") {
       return null
     }
 
