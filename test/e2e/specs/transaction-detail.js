@@ -81,9 +81,9 @@ module.exports = {
       .useXpath()
       .waitForElementVisible("//div[text() = '0.9 Ѧ']")
       .moveToElement("//div[text() = '0.9 Ѧ']", 0, 0)
-      .waitForElementVisible("//div[contains(@class, 'vue-tooltip')]")
+      .waitForElementVisible("//div[contains(@class, 'vue-tooltip')]", 10000)
     browser
       .assert.containsText("//div[contains(@class, 'vue-tooltip')]", '2.29 $')
       .end()
-  },
+  }
 }
