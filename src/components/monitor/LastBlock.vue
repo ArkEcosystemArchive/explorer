@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-auto flex justify-between sm:ml-10">
+  <div class="flex-auto flex justify-between lg:ml-10">
     <div>
       <div class="text-grey mb-2 min-w-0">{{ $t("Last block") }}</div>
       <div class="text-lg truncate" v-if="block.id">
