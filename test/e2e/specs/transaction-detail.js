@@ -82,9 +82,9 @@ module.exports = {
       .waitForElementVisible("//div[text() = '0.9 Ѧ']")
       .moveToElement("//div[text() = '0.9 Ѧ']", 0, 0, () => {
         browser
-          .waitForElementVisible("//div[contains(@class, 'vue-tooltip')]", 10000)
+          .waitForElementPresent("//div[contains(@class, 'vue-tooltip-theme')]", 10000)
         browser
-          .assert.containsText("//div[contains(@class, 'vue-tooltip')]", '2.29 $')
+          .assert.containsText("//div[contains(@class, 'vue-tooltip-theme')]", '2.29 $')
           .end()
       })
   }
