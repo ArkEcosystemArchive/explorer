@@ -19,7 +19,7 @@
 
         <div class="list-row">
           <div>{{ $t("Supply") }}</div>
-          <div>{{ readableNumber((row.balance / supply) * 100) }}%</div>
+          <div>{{ readableNumber((row.balance / total) * 100) }}%</div>
         </div>
       </div>
       <div v-if="wallets && !wallets.length" class="px-5 md:px-10">
@@ -37,6 +37,10 @@ export default {
     wallets: {
       // type: Array or null
       required: true,
+    },
+    total: {
+      type: Number,
+      required: true
     },
   },
 
