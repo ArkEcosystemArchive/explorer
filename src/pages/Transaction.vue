@@ -44,7 +44,7 @@
 
         <div class="list-row-border-b">
           <div>{{ $t("Amount") }}</div>
-          <div v-if="average" v-tooltip="{ content: `${readableCurrency(transaction.amount, average)} ${currencySymbol}`, placement: 'left' }">{{ readableCrypto(transaction.amount) }}</div>
+          <div v-if="average" v-tooltip="{ content: `${readableCurrency(transaction.amount, average)}`, placement: 'left' }">{{ readableCrypto(transaction.amount) }}</div>
           <div v-else>{{ readableCrypto(transaction.amount) }}</div>
         </div>
 

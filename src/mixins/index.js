@@ -129,8 +129,8 @@ const methods = {
         maximumFractionDigits: 8,
       })
       : value.toLocaleString(locale, {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
+        style: 'currency',
+        currency: currencyName
       })
   },
 

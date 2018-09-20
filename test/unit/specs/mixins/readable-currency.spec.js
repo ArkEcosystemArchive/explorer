@@ -1,9 +1,9 @@
 import mixins from '@/mixins'
 
 const displayCurrency = function(value) {
-  return value.toLocaleString(undefined, {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
+  return value.toLocaleString('en', {
+    style: 'currency',
+    currency: 'eur'
   })
 }
 
