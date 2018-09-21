@@ -94,7 +94,7 @@ class CryptoCompareService {
         }
       })
 
-    if (response.data.Response === "Error") {
+    if (response.data.Response === 'Error') {
       return null
     }
 
