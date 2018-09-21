@@ -1,10 +1,12 @@
 <template>
-  <span v-tooltip="id">
-    <router-link :to="{ name: 'transaction', params: { id } }" class="flex items-center whitespace-no-wrap">
-      <span v-if="hasDefaultSlot"><slot></slot></span>
-      <template v-else>
+  <router-link :to="{ name: 'transaction', params: { id } }" class="flex items-center whitespace-no-wrap">
+    <span v-if="hasDefaultSlot"><slot></slot></span>
+    <template v-else>
+      <span 
+        v-tooltip="smartBridge"
+        v-if="showSmartBridgeIcon && smartBridge"
+      >
         <svg
-         v-if="showSmartBridgeIcon && smartBridge"
          class="mr-2 fill-current hidden md:block"
          xmlns="http://www.w3.org/2000/svg"
          xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -16,8 +18,9 @@
           c0-0.1,0-0.5,0.5-0.9l0,0c0.6-0.6,1.2-1,2.1-1.4h0.1v1.6c0.2-0.1,0.3-0.2,0.6-0.2c0.6-0.2,1.1-0.6,1.6-0.8c0-0.3,0.1-0.7,0.3-1
           c0.5-0.5,1.1-0.5,1.6,0C8.4,5,8.4,5.7,8,6.1z"/>
         </svg>
+      </span>
+      <span v-else-if="showSmartBridgeIcon && !smartBridge">
         <svg
-         v-else-if="showSmartBridgeIcon && !smartBridge"
          class="mr-2 fill-current hidden md:block"
          xmlns="http://www.w3.org/2000/svg"
          xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -32,10 +35,14 @@
           C9.7,6,9.6,4.7,8.8,3.8C8.4,3.4,7.8,3.2,7.3,3.2c-0.6,0-1.1,0.2-1.5,0.6C5.5,4.1,5.3,4.5,5.2,4.9C5.1,5,5.1,5,5,5V3.7
           c0-0.3,0.3-0.5,0.6-0.5l3.9,0c0.3,0,0.6,0.1,0.7,0.2l6.7,6.7C17.1,10.3,17.1,10.5,16.9,10.7z"/>
         </svg>
-        <span>{{ truncate(id) }}</span>
-      </template>
-    </router-link>
-  </span>
+      </span>
+      <span>
+        <span v-tooltip="id">
+          {{ truncate(id) }}
+        </span>
+      </span>
+    </template>
+  </router-link>
 </template>
 
 <script type="text/ecmascript-6">
