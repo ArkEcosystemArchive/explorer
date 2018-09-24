@@ -9,6 +9,11 @@ describe('CryptoCompare Service', () => {
     store.dispatch('currency/setName', 'USD')
   })
 
+  it('should return price for ARK in given currency', async () => {
+    const data = await cryptoCompare.price('USD')
+    expect(data).toBeGreaterThan(0)
+  })
+
   it('should return day values', async () => {
     const data = await cryptoCompareService.day()
     expect(data.labels.length).toBe(25)
