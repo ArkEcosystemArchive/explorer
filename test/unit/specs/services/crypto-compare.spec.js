@@ -10,7 +10,7 @@ describe('CryptoCompare Service', () => {
   })
 
   it('should return price for ARK in given currency', async () => {
-    const data = await cryptoCompare.price('USD')
+    const data = await cryptoCompareService.price('USD')
     expect(data).toBeGreaterThan(0)
   })
 
