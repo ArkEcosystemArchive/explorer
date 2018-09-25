@@ -154,12 +154,11 @@ const methods = {
 
   percentageString(value, decimals = 2) {
     if (typeof value !== 'undefined') {
-      value = value.toLocaleString(locale, {
+      return (value / 100).toLocaleString(locale, {
         minimumFractionDigits: decimals,
         maximumFractionDigits: decimals,
+        style: 'percent'
       })
-
-      return value + '%'
     }
 
     return '-'
