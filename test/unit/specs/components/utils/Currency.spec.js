@@ -18,6 +18,8 @@ const i18n = new VueI18n({
 
 describe('Utils/Currency', () => {
   it('Should display a currency amount', () => {
+    store.dispatch('network/setToken', 'ARK')
+
     const wrapper = mount(Currency, {
       propsData: {
         amount: 1012345678
@@ -29,6 +31,6 @@ describe('Utils/Currency', () => {
     })
     expect(wrapper.contains('span')).toBe(true)
     expect(wrapper.findAll('span')).toHaveLength(1)
-    expect(wrapper.text()).toEqual(mixins.readableCurrency(1012345678) + ' Ѧ')
+    expect(wrapper.text()).toEqual(mixins.readableCurrency(1012345678))
   })
 })
