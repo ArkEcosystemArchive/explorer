@@ -10,7 +10,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import CoinMarketCapService from '@/services/coin-market-cap'
+import CryptoCompareService from '@/services/crypto-compare'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -22,7 +22,7 @@ export default {
 
   methods: {
     async setCurrency(currency, symbol) {
-      const rate = await CoinMarketCapService.price(currency)
+      const rate = await CryptoCompareService.price(currency)
       this.storeCurrency(currency, rate, symbol)
     },
 
