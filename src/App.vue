@@ -14,7 +14,7 @@
 <script type="text/ecmascript-6">
 import AppHeader from '@/components/header/Main'
 import AppFooter from '@/components/Footer'
-import CoinMarketCapService from '@/services/coin-market-cap'
+import CryptoCompareService from '@/services/crypto-compare'
 import BlockService from '@/services/block'
 import DelegateService from '@/services/delegate'
 import LoaderService from '@/services/loader'
@@ -102,7 +102,7 @@ export default {
 
     async updateCurrencyRate() {
       if (this.currencyName !== this.token) {
-        const rate = await CoinMarketCapService.price(this.currencyName)
+        const rate = await CryptoCompareService.price(this.currencyName)
         this.$store.dispatch('currency/setRate', rate)
       }
     },

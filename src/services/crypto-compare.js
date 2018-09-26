@@ -3,6 +3,13 @@ import moment from 'moment'
 import store from '@/store'
 
 class CryptoCompareService {
+  async price(currency) {
+    const response = await axios.get(`https://min-api.cryptocompare.com/data/price?fsym=ARK&tsyms=${currency}`)
+    if (response.data.hasOwnProperty(currency)) {
+      return Number(response.data[currency])
+    }
+  }
+
   async day() {
     return this.sendRequest('hour', 24, 'HH:mm')
   }
