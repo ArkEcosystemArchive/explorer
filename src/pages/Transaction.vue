@@ -33,7 +33,7 @@
         <div class="list-row-border-b">
           <div>{{ $t("Recipient") }}</div>
           <div class="truncate">
-            <link-wallet :address="transaction.recipientId" :type="transaction.type">{{ transaction.recipientId }}</link-wallet>
+            <link-wallet :address="transaction.recipientId" :type="transaction.type" :asset="transaction.asset">{{ transaction.recipientId }}</link-wallet>
           </div>
         </div>
 

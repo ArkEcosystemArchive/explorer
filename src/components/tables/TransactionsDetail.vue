@@ -21,7 +21,7 @@
 
       <table-column show="recipientId" :label="$t('Recipient')" header-class="left-header-cell" cell-class="left-cell">
         <template slot-scope="row">
-          <link-wallet :address="row.recipientId" :type="row.type"></link-wallet>
+          <link-wallet :address="row.recipientId" :type="row.type" :asset="row.asset"></link-wallet>
         </template>
       </table-column>
 
