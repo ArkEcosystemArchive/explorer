@@ -10,7 +10,7 @@
 
       <span v-if="type === 1">{{ $t("2nd Signature Registration") }}</span>
       <span v-else-if="type === 2">{{ $t("Delegate Registration") }}</span>
-      <span v-else-if="type === 3">{{ $t("Vote") }}</span>
+      <span v-else-if="type === 3" :class="getVoteColor">{{ isUnvote ? $t("Unvote") : $t("Vote") }} ({{ getDelegateUsername() }})</span>
       <span v-else-if="type === 4">{{ $t("Multisignature Registration") }}</span>
       <span v-else-if="type === 5">{{ $t("IPFS") }}</span>
       <span v-else-if="type === 6">{{ $t("Timelock Transfer") }}</span>
@@ -27,7 +27,7 @@
 
       <span v-if="type === 1">{{ $t("2nd Signature Registration") }}</span>
       <span v-else-if="type === 2">{{ $t("Delegate Registration") }}</span>
-      <span v-else-if="type === 3">{{ $t("Vote") }}</span>
+      <span v-else-if="type === 3" :class="getVoteColor">{{ isUnvote ? $t("Unvote") : $t("Vote") }} ({{ getDelegateUsername() }})</span>
       <span v-else-if="type === 4">{{ $t("Multisignature Registration") }}</span>
       <span v-else-if="type === 5">{{ $t("IPFS") }}</span>
       <span v-else-if="type === 6">{{ $t("Timelock Transfer") }}</span>
@@ -44,6 +44,10 @@ export default {
   props: {
     address: {
       type: String,
+    },
+    asset: {
+      type: Object,
+      required: false
     },
     publicKey: {
       type: String,
@@ -90,6 +94,26 @@ export default {
     hasDefaultSlot() {
       return !!this.$slots.default
     },
+
+    getVoteColor() {
+      return this.isUnvote ? 'text-red' : 'text-green'
+    },
+
+    isUnvote() {
+      if (this.asset) {
+        const vote = this.asset.votes[0]
+        return vote.charAt(0) === '-'
+      }
+      return false
+    },
+
+    votePublicKey() {
+      if (this.asset) {
+        const vote = this.asset.votes[0]
+        return vote.substr(1)
+      }
+      return ''
+    },
   },
 
   methods: {
@@ -105,6 +129,11 @@ export default {
       this.delegate = this.delegates.find(d => d.publicKey === this.publicKey)
     },
 
+    getDelegateUsername() {
+      const del = this.delegates.find(d => d.publicKey === this.votePublicKey)
+      return del ? del.username : ''
+    },
+
     getAddress() {
       const knownOrDelegate = this.isKnown || this.delegate
       const truncated = !this.hasDefaultSlot && this.trunc
@@ -114,7 +143,7 @@ export default {
       }
 
       return false
-    }
+    },
   },
 }
 </script>
