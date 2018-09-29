@@ -10,10 +10,9 @@
 
       <span v-if="type === 1">{{ $t("2nd Signature Registration") }}</span>
       <span v-else-if="type === 2">{{ $t("Delegate Registration") }}</span>
-      <span v-else-if="type === 3" :class="getVoteColor">
-        {{ isUnvote ? $t("Unvote") : $t("Vote") }}
+      <span v-else-if="type === 3">
         <router-link v-if="votedDelegateAddress" :to="{ name: 'wallet', params: { address: votedDelegateAddress } }">
-          ({{ votedDelegateUsername }})
+          <span :class="getVoteColor">{{ isUnvote ? $t("Unvote") : $t("Vote") }} <span class="italic">({{ votedDelegateUsername }})</span></span>
         </router-link>
       </span>
       <span v-else-if="type === 4">{{ $t("Multisignature Registration") }}</span>
@@ -32,10 +31,9 @@
 
       <span v-if="type === 1">{{ $t("2nd Signature Registration") }}</span>
       <span v-else-if="type === 2">{{ $t("Delegate Registration") }}</span>
-      <span v-else-if="type === 3" :class="getVoteColor">
-        {{ isUnvote ? $t("Unvote") : $t("Vote") }}
+      <span v-else-if="type === 3"> 
         <router-link v-if="votedDelegateAddress" :to="{ name: 'wallet', params: { address: votedDelegateAddress } }">
-          ({{ votedDelegateUsername }})
+          <span :class="getVoteColor">{{ isUnvote ? $t("Unvote") : $t("Vote") }} <span class="italic">({{ votedDelegateUsername }})</span></span>
         </router-link>
       </span>
       <span v-else-if="type === 4">{{ $t("Multisignature Registration") }}</span>
