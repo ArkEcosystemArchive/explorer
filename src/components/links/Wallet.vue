@@ -10,7 +10,12 @@
 
       <span v-if="type === 1">{{ $t("2nd Signature Registration") }}</span>
       <span v-else-if="type === 2">{{ $t("Delegate Registration") }}</span>
-      <span v-else-if="type === 3" :class="getVoteColor">{{ isUnvote ? $t("Unvote") : $t("Vote") }} ({{ getDelegateUsername() }})</span>
+      <span v-else-if="type === 3" :class="getVoteColor">
+        {{ isUnvote ? $t("Unvote") : $t("Vote") }}
+        <router-link v-if="votedDelegateAddress" :to="{ name: 'wallet', params: { address: votedDelegateAddress } }">
+          ({{ votedDelegateUsername }})
+        </router-link>
+      </span>
       <span v-else-if="type === 4">{{ $t("Multisignature Registration") }}</span>
       <span v-else-if="type === 5">{{ $t("IPFS") }}</span>
       <span v-else-if="type === 6">{{ $t("Timelock Transfer") }}</span>
@@ -27,7 +32,12 @@
 
       <span v-if="type === 1">{{ $t("2nd Signature Registration") }}</span>
       <span v-else-if="type === 2">{{ $t("Delegate Registration") }}</span>
-      <span v-else-if="type === 3" :class="getVoteColor">{{ isUnvote ? $t("Unvote") : $t("Vote") }} ({{ getDelegateUsername() }})</span>
+      <span v-else-if="type === 3" :class="getVoteColor">
+        {{ isUnvote ? $t("Unvote") : $t("Vote") }}
+        <router-link v-if="votedDelegateAddress" :to="{ name: 'wallet', params: { address: votedDelegateAddress } }">
+          ({{ votedDelegateUsername }})
+        </router-link>
+      </span>
       <span v-else-if="type === 4">{{ $t("Multisignature Registration") }}</span>
       <span v-else-if="type === 5">{{ $t("IPFS") }}</span>
       <span v-else-if="type === 6">{{ $t("Timelock Transfer") }}</span>
@@ -61,7 +71,10 @@ export default {
     }
   },
 
-  data: () => ({ delegate: null }),
+  data: () => ({
+    delegate: null,
+    votedDelegate: null
+  }),
 
   mounted() {
     this.determine()
@@ -100,7 +113,7 @@ export default {
     },
 
     isUnvote() {
-      if (this.asset) {
+      if (this.asset && this.asset.votes) {
         const vote = this.asset.votes[0]
         return vote.charAt(0) === '-'
       }
@@ -108,17 +121,32 @@ export default {
     },
 
     votePublicKey() {
-      if (this.asset) {
+      if (this.asset && this.asset.votes) {
         const vote = this.asset.votes[0]
         return vote.substr(1)
       }
       return ''
     },
+
+    votedDelegateAddress() {
+      return this.votedDelegate ? this.votedDelegate.address : ''
+    },
+
+    votedDelegateUsername() {
+      return this.votedDelegate ? this.votedDelegate.username : ''
+    }
   },
 
   methods: {
     determine() {
       this.address ? this.findByAddress() : this.findByPublicKey()
+      if (this.votePublicKey) {
+        this.determineVote()
+      }
+    },
+
+    determineVote() {
+      this.votedDelegate = this.delegates.find(d => d.publicKey === this.votePublicKey)
     },
 
     findByAddress() {
@@ -127,11 +155,6 @@ export default {
 
     findByPublicKey() {
       this.delegate = this.delegates.find(d => d.publicKey === this.publicKey)
-    },
-
-    getDelegateUsername() {
-      const del = this.delegates.find(d => d.publicKey === this.votePublicKey)
-      return del ? del.username : ''
     },
 
     getAddress() {
