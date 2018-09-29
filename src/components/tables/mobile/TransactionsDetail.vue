@@ -43,7 +43,7 @@
           <div>{{ $t("Confirmations") }}</div>
           <div>
             <div class="flex items-center justify-end">
-              <div v-if="transaction.confirmations <= 52" class="flex items-center justify-end whitespace-no-wrap">
+              <div v-if="transaction.confirmations <= 51" class="flex items-center justify-end whitespace-no-wrap">
                 <span class="text-green inline-block mr-2">{{ transaction.confirmations }}</span>
                 <img class="icon flex-none" src="@/assets/images/icons/clock.svg" />
               </div>
