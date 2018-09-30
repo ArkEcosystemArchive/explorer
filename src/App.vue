@@ -35,7 +35,7 @@ export default {
     if (network.alias === 'Development') {
       this.$store.dispatch('ui/setNightMode', true)
     }
-    
+
     this.$store.dispatch('network/setDefaults', network)
 
     this.$store.dispatch('network/setServer', network.server)
