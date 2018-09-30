@@ -21,7 +21,7 @@
   "dependencies": {
     "animate.css": "^3.7.0",
     "axios": "^0.18.0",
-    "chart.js": "^2.7.2",
+    "chart.js": "chartjs/Chart.js#7c3e934",
     "connect-history-api-fallback": "^1.5.0",
     "express": "^4.16.3",
     "lodash": "^4.17.10",
