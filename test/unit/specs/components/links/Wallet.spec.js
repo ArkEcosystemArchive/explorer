@@ -170,8 +170,14 @@ describe('Link/Wallet', () => {
     })
 
     it('Should display Vote for type 3', () => {
+      store.dispatch('delegates/setDelegates', [ { username: 'TestDelegate', address: testDelegateAddress, publicKey: testDelegatePublicKey } ])
       const wrapper = mount(Wallet, {
-        propsData: { type: 3 },
+        propsData: {
+          type: 3,
+          asset: {
+            votes: ['+testDelegatePublicKey']
+          }
+        },
         stubs: {
           RouterLink: RouterLinkStub
         },
@@ -180,8 +186,9 @@ describe('Link/Wallet', () => {
         mixins,
         store
       })
-      expect(wrapper.contains('a')).toBe(false)
-      expect(wrapper.text()).toEqual(expect.stringContaining('Vote'))
+      setTimeout(() => {
+        expect(wrapper.text()).toEqual(expect.stringContaining('Vote'))
+      }, 500)
     })
 
     it('Should display Multisignature Registration for type 4', () => {
