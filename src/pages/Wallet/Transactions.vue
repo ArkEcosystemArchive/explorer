@@ -105,8 +105,9 @@ export default {
     },
   },
 
-  methods: {setWallet(wallet) {
-    if (!wallet) return
+  methods: {
+    setWallet(wallet) {
+      if (!wallet) return
 
       this.wallet = wallet
     },
