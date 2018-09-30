@@ -1,7 +1,7 @@
 <template>
   <span>
-    <span v-tooltip="getAddress()" class="hidden md:inline-block">
-      <router-link v-if="!type" :to="{ name: 'wallet', params: { address: walletAddress } }">
+    <span class="hidden md:inline-block">
+      <router-link v-if="!type" v-tooltip="getAddress()" :to="{ name: 'wallet', params: { address: walletAddress } }">
         <span v-if="isKnown">{{ knownWallets[address] }}</span>
         <span v-else-if="delegate">{{ delegate.username }}</span>
         <span v-else-if="hasDefaultSlot"><slot></slot></span>
@@ -11,7 +11,7 @@
       <span v-if="type === 1">{{ $t("2nd Signature Registration") }}</span>
       <span v-else-if="type === 2">{{ $t("Delegate Registration") }}</span>
       <span v-else-if="type === 3">
-        <router-link v-if="votedDelegateAddress" :to="{ name: 'wallet', params: { address: votedDelegateAddress } }">
+        <router-link v-if="votedDelegateAddress" v-tooltip="votedDelegateAddress" :to="{ name: 'wallet', params: { address: votedDelegateAddress } }">
           <span :class="getVoteColor">{{ isUnvote ? $t("Unvote") : $t("Vote") }} <span class="italic">({{ votedDelegateUsername }})</span></span>
         </router-link>
       </span>
@@ -22,8 +22,8 @@
       <span v-else-if="type === 8">{{ $t("Delegate Resignation") }}</span>
     </span>
 
-    <span v-tooltip="walletAddress" class="md:hidden">
-      <router-link v-if="!type" :to="{ name: 'wallet', params: { address: walletAddress } }">
+    <span class="md:hidden">
+      <router-link v-if="!type"v-tooltip="walletAddress"  :to="{ name: 'wallet', params: { address: walletAddress } }">
         <span v-if="isKnown">{{ knownWallets[address] }}</span>
         <span v-else-if="delegate">{{ delegate.username }}</span>
         <span v-else-if="address">{{ truncate(address) }}</span>
@@ -32,7 +32,7 @@
       <span v-if="type === 1">{{ $t("2nd Signature Registration") }}</span>
       <span v-else-if="type === 2">{{ $t("Delegate Registration") }}</span>
       <span v-else-if="type === 3"> 
-        <router-link v-if="votedDelegateAddress" :to="{ name: 'wallet', params: { address: votedDelegateAddress } }">
+        <router-link v-if="votedDelegateAddress" v-tooltip="votedDelegateAddress" :to="{ name: 'wallet', params: { address: votedDelegateAddress } }">
           <span :class="getVoteColor">{{ isUnvote ? $t("Unvote") : $t("Vote") }} <span class="italic">({{ votedDelegateUsername }})</span></span>
         </router-link>
       </span>
