@@ -71,10 +71,10 @@ module.exports = {
       .useXpath()
       .expect.element("//span[contains(., 'Transactions')]").to.be.present
     browser
-      .click("//span[contains(., 'Transactions')]/following-sibling::div//span")
-      .waitForElementVisible("//span[contains(., 'Transactions')]/following-sibling::div//ul//li[2]//a")
+      .click("//div[contains(., 'Type')]/following-sibling::div//span")
+      .waitForElementVisible("//div[contains(., 'Type')]/following-sibling::div//ul//li[2]//a")
     browser
-      .click("//span[contains(., 'Transactions')]/following-sibling::div//ul//li[2]//a")
+      .click("//div[contains(., 'Type')]/following-sibling::div//ul//li[2]//a")
       .assert.urlContains('wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs/transactions/sent/1')
   },
 
