@@ -62,7 +62,7 @@ export default {
       } catch(e) { this.updateSearchCount(e) }
 
       const del = this.delegates.find(d => d.username === this.query.toLowerCase())
-      del ? this.changePage('wallet', {  address: del.address }) : this.updateSearchCount({ message: 'No delegate with that username could be found'});
+      del ? this.changePage('wallet', { address: del.address }) : this.updateSearchCount({ message: 'No delegate with that username could be found' });
 
       try {
         const responseUsername = await SearchService.findByUsername(this.query)

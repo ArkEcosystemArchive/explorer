@@ -232,6 +232,24 @@ module.exports = {
       .assert.urlContains('/wallets/AeLpRK8rFVtBeyBVqBtdQpWDfLzaiNujKr')
   },
 
+  'it should be possible to search for a delegate with uppercase letters': function (browser) {
+    const devServer = browser.globals.devServerURL
+
+    browser
+      .url(devServer)
+      .useCss()
+      .waitForElementVisible('input#search')
+    browser
+      .click('input#search')
+      .waitForElementVisible('input.search-input')
+      .setValue('input.search-input', ['gEnESis_1', browser.Keys.ENTER])
+      .pause(1000)
+    browser
+      .useXpath()
+      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+      .assert.urlContains('/wallets/AeLpRK8rFVtBeyBVqBtdQpWDfLzaiNujKr')
+  },
+
   'it should be possible to search for an address': function (browser) {
     const devServer = browser.globals.devServerURL
 
