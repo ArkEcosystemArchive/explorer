@@ -35,6 +35,7 @@ export default {
   }),
 
   computed: {
+    ...mapGetters('delegates', ['delegates']),
     ...mapGetters('ui', ['nightMode']),
     ...mapGetters('network', ['knownWallets'])
   },
@@ -59,6 +60,9 @@ export default {
         const responseAddress = await SearchService.findByAddress(this.query)
         this.changePage('wallet', { address: responseAddress.account.address })
       } catch(e) { this.updateSearchCount(e) }
+
+      const del = this.delegates.find(d => d.username === this.query.toLowerCase())
+      del ? this.changePage('wallet', {  address: del.address }) : this.updateSearchCount({ message: 'No delegate with that username could be found'});
 
       try {
         const responseUsername = await SearchService.findByUsername(this.query)
