@@ -48,6 +48,7 @@ describe('Block Service', () => {
   })
 
   it('should return the block for the given id', async () => {
+    jest.setTimeout(30000)
     const data = await blockService.find('12382692495927527414')
     expect(Object.keys(data).sort()).toEqual(blockPropertyArray)
   })
