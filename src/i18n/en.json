@@ -58,6 +58,7 @@
   "Forged block recently": "Forged block recently",
   "Missed block": "Missed block",
   "Not forging": "Not forging",
+  "Never forged": "Never forged",
   "In queue for forging": "In queue for forging",
   "Last block": "Last block",
   "from transactions": "from 0 transactions | from 1 transaction | from {count} transactions",
