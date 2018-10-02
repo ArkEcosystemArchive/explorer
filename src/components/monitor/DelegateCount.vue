@@ -12,6 +12,11 @@
 
 <script type="text/ecmascript-6">
 export default {
-  props: ['delegateCount']
+  props: {
+    delegateCount: {
+      type: Number,
+      required: true
+    }
+  }
 }
 </script>
