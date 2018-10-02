@@ -18,6 +18,11 @@ import TotalForged from '@/components/monitor/TotalForged'
 export default {
   components: { DelegateCount, LastBlock, TotalForged },
 
-  props: ['delegateCount']
+  props: {
+    delegateCount: {
+      type: Number,
+      required: true
+    }
+  }
 }
 </script>
