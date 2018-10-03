@@ -57,6 +57,7 @@
   "Forged block recently": "Recentelijk block geforged",
   "Missed block": "Block gemist",
   "Not forging": "Niet aan het forgen",
+  "Never forged": "Nooit geforged",
   "In queue for forging": "In de rij om te forgen",
   "Last block": "Laatste block",
   "from transactions": "van 0 transacties | van 1 transactie | van {count} transacties",
