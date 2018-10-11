@@ -15,6 +15,9 @@ jobs:
           name: Lint
           command: npm run lint
       - run:
+          name: Command to prevent chrome deadlock
+          command: export DBUS_SESSION_BUS_ADDRESS=/dev/null
+      - run:
           name: Test
           command: npm run test
       - run:
