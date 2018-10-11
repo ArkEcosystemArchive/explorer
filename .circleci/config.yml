@@ -19,7 +19,7 @@ jobs:
           command: export DBUS_SESSION_BUS_ADDRESS=/dev/null
       - run:
           name: Test
-          command: npm run test:circleci
+          command: npm run test
       - run:
           name: Build
           command: npm run build
