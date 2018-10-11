@@ -29,8 +29,7 @@ module.exports = {
       desiredCapabilities: {
         chromeOptions: {
           args: [
-            "window-size=1920,1080",
-            "headless"
+            "window-size=1920,1080"
           ]
         }
       }
