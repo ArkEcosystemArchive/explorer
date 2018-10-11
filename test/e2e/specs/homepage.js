@@ -39,6 +39,8 @@ module.exports = {
 
   // Header tests
   'header should be able to toggle chart': function(browser) {
+    jest.setTimeout(60000)
+    
     browser
       .assert.visible('#line-chart')
       .waitForElementVisible('button.text-chart-active')
