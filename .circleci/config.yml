@@ -19,7 +19,7 @@ jobs:
           command: export DBUS_SESSION_BUS_ADDRESS=/dev/null
       - run:
           name: Test
-          command: xvfb-run npm run test
+          command: npm run test:circleci
       - run:
           name: Build
           command: npm run build
