@@ -1,0 +1,35 @@
+version: 2
+jobs:
+  test-node-9:
+    working_directory: ~/ark-core
+    docker:
+      - image: circleci/node:9-browsers
+    steps: &teststeps
+      - checkout
+      - run:
+          name: Install
+          command: npm install
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Lint
+          command: npm run lint
+      - run:
+          name: Test
+          command: npm run test
+      - run:
+          name: Build
+          command: npm run build
+      
+  test-node-stable:
+    working_directory: ~/ark-core
+    docker:
+      - image: circleci/node:latest-browsers
+    steps: *teststeps
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test-node-9
+      - test-node-stable
