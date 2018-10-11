@@ -17,8 +17,6 @@ module.exports = {
   },
 
   'it should display delegate details': function (browser) {
-    jest.setTimeout(60000)
-
     browser
       .waitForElementVisible('.bg-theme-feature-background')
       .pause(2000)
