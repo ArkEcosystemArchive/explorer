@@ -20,7 +20,7 @@
       </div>
       <div>
         <span>{{ $t("Supply") }}:</span>
-        <span class="block md:inline-block whitespace-no-wrap">{{ readableCrypto(supply) }}</span>
+        <span class="block md:inline-block whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }}</span>
       </div>
     </div>
   </div>
