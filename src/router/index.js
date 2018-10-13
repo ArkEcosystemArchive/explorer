@@ -56,13 +56,13 @@ const router = new Router({
         name: 'wallet-blocks',
         params: { address: to.params.address, page: 1 }
       }),
-      meta: { title: route => { return 'Blocks' + titleSuffix } }
+      meta: { title: route => { return 'Wallet Blocks' + titleSuffix } }
     },
     {
       path: '/wallets/:address/blocks/:page(\\d+)',
       name: 'wallet-blocks',
       component: WalletBlocksComponent,
-      meta: { title: route => { return 'Blocks' + titleSuffix } }
+      meta: { title: route => { return 'Wallet Blocks' + titleSuffix } }
     },
     {
       path: '/wallets/:address/transactions',
