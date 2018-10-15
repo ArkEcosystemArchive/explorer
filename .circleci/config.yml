@@ -1,22 +1,23 @@
 version: 2
 jobs:
   test-node-9:
-    working_directory: ~/ark-core
+    working_directory: ~/explorer
     docker:
-      - image: circleci/node:9-browsers
+      - image: circleci/node:9.8-browsers
     steps: &teststeps
       - checkout
-      - run:
-          name: Install
-          command: npm install
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
+          name: Install
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
           name: Lint
           command: npm run lint
-      - run:
-          name: Command to prevent chrome deadlock
-          command: export DBUS_SESSION_BUS_ADDRESS=/dev/null
       - run:
           name: Test
           command: npm run test
