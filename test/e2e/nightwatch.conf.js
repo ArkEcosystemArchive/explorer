@@ -9,7 +9,7 @@ module.exports = {
   globals_path: 'test/e2e/globalModules.js',
 
   selenium: {
-    start_process: false,
+    start_process: !process.env.WITHOUT_SELENIUM_SERVER,
     server_path: require('selenium-server').path,
     host: '127.0.0.1',
     port: 4444,

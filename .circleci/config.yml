@@ -27,8 +27,13 @@ jobs:
           name: Lint
           command: npm run lint
       - run:
-          name: Test
-          command: npm run test
+          name: Unit tests
+          command: npm run unit
+      - run:
+          name: e2e tests
+          command: npm run e2e
+          environment:
+            WITHOUT_SELENIUM_SERVER: true
       - run:
           name: Build
           command: npm run build
