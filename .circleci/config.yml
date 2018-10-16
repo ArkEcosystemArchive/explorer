@@ -39,7 +39,7 @@ jobs:
           command: npm run build
       
   test-node-stable:
-    working_directory: ~/ark-core
+    working_directory: ~/explorer
     docker:
       - image: circleci/node:latest-browsers
     steps: *teststeps
