@@ -6,7 +6,7 @@
 
 > Designed and developed from the ground-up, using lean & fast developmental frameworks (Tailwind CSS & Vue.JS).
 
-[![Build Status](https://badgen.now.sh/travis/ArkEcosystem/explorer/master)](https://travis-ci.org/ArkEcosystem/explorer)
+[![Build Status](https://badgen.now.sh/circleci/github/ArkEcosystem/explorer)](https://circleci.com/gh/ArkEcosystem/explorer)
 [![License: MIT](https://badgen.now.sh/badge/license/MIT/green)](https://opensource.org/licenses/MIT)
 
 You can access it at [https://explorer.ark.io/](https://explorer.ark.io/).
