@@ -1,0 +1,52 @@
+version: 2
+jobs:
+  test-node-9:
+    working_directory: ~/explorer
+    docker:
+      - image: circleci/node:9-browsers
+    steps: &teststeps
+      - checkout
+      - run: mkdir test-reports
+      - run:
+          name: Download Selenium
+          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+      - run:
+          name: Start Selenium
+          command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
+          background: true
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Lint
+          command: npm run lint
+      - run:
+          name: Unit tests
+          command: npm run unit
+      - run:
+          name: e2e tests
+          command: npm run e2e
+          environment:
+            WITHOUT_SELENIUM_SERVER: true
+      - run:
+          name: Build
+          command: npm run build
+      
+  test-node-stable:
+    working_directory: ~/ark-core
+    docker:
+      - image: circleci/node:latest-browsers
+    steps: *teststeps
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test-node-9
+      - test-node-stable
