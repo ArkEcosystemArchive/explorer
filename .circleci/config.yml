@@ -30,6 +30,10 @@ jobs:
           name: Unit tests
           command: npm run unit
       - run:
+          name: Codecov
+          when: on_success
+          command: bash <(curl -s https://codecov.io/bash)
+      - run:
           name: e2e tests
           command: npm run e2e
           environment:
