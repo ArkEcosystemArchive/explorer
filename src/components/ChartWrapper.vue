@@ -31,6 +31,13 @@ export default {
       showScale: true,
       responsive: true,
       maintainAspectRatio: false,
+      hover: {
+          intersect: false
+      },
+      animation: {
+          duration: 0
+      },
+      responsiveAnimationDuration: 0,
       legend: {
         display: false,
       },
@@ -95,6 +102,7 @@ export default {
         bodyFontSize: 14,
         xPadding: 14,
         yPadding: 14,
+        caretPadding: 20,
         displayColors: false,
         mode: 'index',
         intersect: false,
@@ -151,7 +159,7 @@ export default {
           pointHoverBorderColor: '#037cff',
           pointBackgroundColor: 'rgba(0,0,0,0)',
           pointBorderColor: 'rgba(0,0,0,0)',
-          pointHoverRadius: 5,
+          pointHoverRadius: 7,
           pointHoverBorderWidth: 4,
           fill: false,
           // data: this.chartData.map((point, index) => {
