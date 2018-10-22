@@ -4,7 +4,7 @@ import store from '@/store'
 describe('Search Service', () => {
   beforeAll(() => {
     jest.setTimeout(60000)
-    
+
     store.dispatch('network/setServer', 'https://explorer.ark.io:8443/api')
   })
 

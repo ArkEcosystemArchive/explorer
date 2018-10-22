@@ -52,6 +52,7 @@ const createDevWebpackConfig = (host, port, network, networkConfig, routerMode) 
           ...require('../config/dev.env'),
           ...{EXPLORER_CONFIG: `"${network}"`},
           ...{ROUTER_MODE: `"${routerMode}"`},
+          ...{TITLE: `"${networkConfig.title}"`}
         },
         GIT_VERSION: JSON.stringify(gitRevision.version),
         GIT_DATE:  JSON.stringify(gitRevision.date)
