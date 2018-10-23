@@ -82,7 +82,7 @@
   "missed": "gemist",
   "Votes": "Stemmen",
   "Voters": "Stemmers",
-  "Only voters with more than 0.1 Ark": "Alleen stemmers met meer dan 0.1 Ark",
+  "Only voters with more than 0.1 token": "Alleen stemmers met meer dan 0.1 {token}",
   "See all": "Zie alle",
   "All": "Alles",
   "Sent": "Verzonden",
