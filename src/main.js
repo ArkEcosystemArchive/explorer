@@ -28,7 +28,10 @@ new Vue({
   template: '<App/>',
 })
 
-Vue.use(VTooltip, { defaultHtml: false })
+Vue.use(VTooltip, {
+	defaultHtml: false,
+	defaultContainer: 'main'
+})
 
 /** Sortable Tables */
 TableComponent.settings({
