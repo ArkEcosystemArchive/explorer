@@ -1,7 +1,7 @@
 import axios from 'axios'
 import store from '@/store'
 
-class NodeService {
+class ApiService {
   async get(url, config) {
     const server = store.getters['network/server']
 
@@ -14,4 +14,4 @@ class NodeService {
   }
 }
 
-export default new NodeService()
+export default new ApiService()

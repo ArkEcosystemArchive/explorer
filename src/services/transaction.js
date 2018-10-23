@@ -1,8 +1,8 @@
-import NodeService from '@/services/node'
+import ApiService from '@/services/api'
 
 class TransactionService {
   async latest(limit = 25) {
-    const response = await NodeService.get('transactions', {
+    const response = await ApiService.get('transactions', {
       params: {
         orderBy: 'timestamp:desc',
         limit
@@ -12,7 +12,7 @@ class TransactionService {
   }
 
   async find(id) {
-    const response = await NodeService.get('transactions/get', {
+    const response = await ApiService.get('transactions/get', {
       params: {
         id
       }
@@ -23,7 +23,7 @@ class TransactionService {
   async findByBlock(id, page = 1, limit = 25) {
     const offset = page > 1 ? (page - 1) * limit : 0
 
-    const response = await NodeService.get('transactions', {
+    const response = await ApiService.get('transactions', {
       params: {
         blockId: id,
         limit,
@@ -35,7 +35,7 @@ class TransactionService {
   }
 
   async latestRegistrations() {
-    const response = await NodeService.get('transactions', {
+    const response = await ApiService.get('transactions', {
       params: {
         orderBy: 'timestamp:desc',
         limit: 5,
@@ -46,7 +46,7 @@ class TransactionService {
   }
 
   async latestVotes() {
-    const response = await NodeService.get('transactions', {
+    const response = await ApiService.get('transactions', {
       params: {
         orderBy: 'timestamp:desc',
         limit: 5,
@@ -59,7 +59,7 @@ class TransactionService {
   async allByAddress(address, page = 1, limit = 25) {
     const offset = page > 1 ? (page - 1) * limit : 0
 
-    const response = await NodeService.get('transactions', {
+    const response = await ApiService.get('transactions', {
       params: {
         senderId: address,
         recipientId: address,
@@ -74,7 +74,7 @@ class TransactionService {
   async sentByAddress(senderId, page = 1, limit = 25) {
     const offset = page > 1 ? (page - 1) * limit : 0
 
-    const response = await NodeService.get('transactions', {
+    const response = await ApiService.get('transactions', {
       params: {
         senderId,
         limit,
@@ -88,7 +88,7 @@ class TransactionService {
   async receivedByAddress(recipientId, page = 1, limit = 25) {
     const offset = page > 1 ? (page - 1) * limit : 0
 
-    const response = await NodeService.get('transactions', {
+    const response = await ApiService.get('transactions', {
       params: {
         recipientId,
         limit,
@@ -100,7 +100,7 @@ class TransactionService {
   }
 
   async sentByAddressCount(senderId) {
-    const response = await NodeService.get('transactions', {
+    const response = await ApiService.get('transactions', {
       params: {
         senderId,
         limit: 1
@@ -110,7 +110,7 @@ class TransactionService {
   }
 
   async receivedByAddressCount(recipientId) {
-    const response = await NodeService.get('transactions', {
+    const response = await ApiService.get('transactions', {
       params: {
         recipientId,
         limit: 1
@@ -120,7 +120,7 @@ class TransactionService {
   }
 
   async findByBlockCount(blockId) {
-    const response = await NodeService.get('transactions', {
+    const response = await ApiService.get('transactions', {
       params: {
         blockId,
         limit: 1
@@ -132,7 +132,7 @@ class TransactionService {
   async paginate(page, limit = 25) {
     const offset = (page > 1) ? (page - 1) * limit : 0
 
-    const response = await NodeService.get('transactions', {
+    const response = await ApiService.get('transactions', {
       params: {
         orderBy: 'timestamp:desc',
         limit,
@@ -145,7 +145,7 @@ class TransactionService {
   async paginateByAddress(address, page = 1, limit = 25) {
     const offset = (page > 1) ? (page - 1) * limit : 0
 
-    const response = await NodeService.get('transactions', {
+    const response = await ApiService.get('transactions', {
       params: {
         senderId: address,
         recipientId: address,

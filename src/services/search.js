@@ -1,28 +1,28 @@
-import NodeService from '@/services/node'
+import ApiService from '@/services/api'
 
 class SearchService {
   async findByAddress(address) {
-    const response = await NodeService.get('accounts', {params: {address}})
+    const response = await ApiService.get('accounts', {params: {address}})
     return response.data
   }
 
   async findByUsername(username) {
-    const response = await NodeService.get('delegates/get', {params: {username}})
+    const response = await ApiService.get('delegates/get', {params: {username}})
     return response.data
   }
 
   async findByPublicKey(publicKey) {
-    const response = await NodeService.get('delegates/get', {params: {publicKey}})
+    const response = await ApiService.get('delegates/get', {params: {publicKey}})
     return response.data
   }
 
   async findByBlockId(id) {
-    const response = await NodeService.get('blocks/get', {params: {id}})
+    const response = await ApiService.get('blocks/get', {params: {id}})
     return response.data
   }
 
   async findByTransactionId(id) {
-    const response = await NodeService.get('transactions/get', {params: {id}})
+    const response = await ApiService.get('transactions/get', {params: {id}})
     return response.data
   }
 }

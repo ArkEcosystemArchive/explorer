@@ -1,15 +1,15 @@
-import NodeService from '@/services/node'
+import ApiService from '@/services/api'
 
 class WalletService {
   async find(address) {
-    const response = await NodeService.get('accounts', {
+    const response = await ApiService.get('accounts', {
       params: {address}
     })
     return response.data.account
   }
 
   async vote(address) {
-    const response = await NodeService.get('accounts/delegates', {
+    const response = await ApiService.get('accounts/delegates', {
       params: {
         address
       }
@@ -23,7 +23,7 @@ class WalletService {
   async top(page = 1, limit = 25) {
     const offset = page > 1 ? (page - 1) * limit : 0
 
-    const response = await NodeService.get('accounts/top', {
+    const response = await ApiService.get('accounts/top', {
       params: {
         orderBy: 'balance:desc',
         limit,

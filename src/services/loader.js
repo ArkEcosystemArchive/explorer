@@ -1,8 +1,8 @@
-import NodeService from '@/services/node'
+import ApiService from '@/services/api'
 
 class LoaderService {
   async config() {
-    const response = await NodeService.get('loader/autoconfigure')
+    const response = await ApiService.get('loader/autoconfigure')
     return response.data.network
   }
 }

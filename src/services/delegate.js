@@ -1,4 +1,4 @@
-import NodeService from '@/services/node'
+import ApiService from '@/services/api'
 import block from '@/services/block'
 import forging from '@/services/forging'
 import store from '@/store'
@@ -8,7 +8,7 @@ class DelegateService {
   async all() {
     const activeDelegates = store.getters['network/activeDelegates']
 
-    const response = await NodeService.get('delegates', {
+    const response = await ApiService.get('delegates', {
       params: {
         limit: activeDelegates
       }
@@ -23,7 +23,7 @@ class DelegateService {
       index++
     ) {
       requests.push(
-        NodeService.get('delegates', {
+        ApiService.get('delegates', {
           params: {
             limit: activeDelegates,
             offset: index * activeDelegates
@@ -42,7 +42,7 @@ class DelegateService {
   }
 
   async voters(publicKey, excludeLowBalances = true) {
-    const response = await NodeService.get('delegates/voters', {
+    const response = await ApiService.get('delegates/voters', {
       params: {publicKey}
     })
 
@@ -66,14 +66,14 @@ class DelegateService {
   }
 
   async findByUsername(username) {
-    const response = await NodeService.get('delegates/get', {
+    const response = await ApiService.get('delegates/get', {
       params: {username}
     })
     return response.data.delegate
   }
 
   async find(publicKey) {
-    const response = await NodeService.get('delegates/get', {
+    const response = await ApiService.get('delegates/get', {
       params: {publicKey}
     })
 
@@ -83,7 +83,7 @@ class DelegateService {
       return false
     }
 
-    const forgeResponse = await NodeService.get(
+    const forgeResponse = await ApiService.get(
       `delegates/forging/getForgedByAccount?generatorPublicKey=${
         delegate.publicKey
       }`
@@ -97,14 +97,14 @@ class DelegateService {
   async standby() {
     const activeDelegates = store.getters['network/activeDelegates']
 
-    const response = await NodeService.get('delegates', {params: {offset: activeDelegates}})
+    const response = await ApiService.get('delegates', {params: {offset: activeDelegates}})
     return response.data.delegates
   }
 
   async nextForgers() {
     const activeDelegates = store.getters['network/activeDelegates']
 
-    const response = await NodeService.get('delegates/getNextForgers', {
+    const response = await ApiService.get('delegates/getNextForgers', {
       params: {limit: activeDelegates}
     })
     return response.data.delegates
@@ -116,7 +116,7 @@ class DelegateService {
   async activeDelegates() {
     const activeDelegates = store.getters['network/activeDelegates']
 
-    const response = await NodeService.get('delegates', {
+    const response = await ApiService.get('delegates', {
       params: {
         orderBy: 'rate:asc',
         limit: activeDelegates
@@ -201,7 +201,7 @@ class DelegateService {
   async forged() {
     const activeDelegates = store.getters['network/activeDelegates']
 
-    const response = await NodeService.get('delegates', {
+    const response = await ApiService.get('delegates', {
       params: {
         orderBy: 'rate:asc',
         limit: activeDelegates
@@ -213,7 +213,7 @@ class DelegateService {
 
     delegates.forEach(delegate => {
       requests.push(
-        NodeService.get('delegates/forging/getForgedByAccount', {
+        ApiService.get('delegates/forging/getForgedByAccount', {
           params: {
             generatorPublicKey: delegate.publicKey
           }
@@ -231,7 +231,7 @@ class DelegateService {
   }
 
   async activeDelegatesCount() {
-    const response = await NodeService.get('delegates', {
+    const response = await ApiService.get('delegates', {
       params: {
         orderBy: 'rate:asc',
         limit: 1
