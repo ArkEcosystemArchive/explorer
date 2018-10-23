@@ -81,7 +81,7 @@
   "missed": "perdido",
   "Votes": "Votos",
   "Voters": "Votantes",
-  "Only voters with more than 0.1 Ark": "Somente votantes com mais de 0.1 Ark",
+  "Only voters with more than 0.1 token": "Somente votantes com mais de 0.1 {token}",
   "See all": "Ver todos",
   "All": "Todos",
   "Sent": "Enviado",
