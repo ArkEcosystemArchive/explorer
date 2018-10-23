@@ -20,6 +20,15 @@
   z-index: 1;
 }
 
+.theme-dark .tooltip .tooltip-inner {
+  background: #373b4a;
+  color: #ffffff;
+}
+
+.theme-dark .tooltip .tooltip-arrow {
+  border-color: #373b4a;
+}
+
 .tooltip[x-placement^='top'] {
   margin-bottom: 5px;
 }
