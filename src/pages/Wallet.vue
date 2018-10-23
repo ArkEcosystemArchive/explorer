@@ -67,8 +67,13 @@ export default {
     async setWallet(wallet) {
       this.wallet = wallet
 
-      const vote = await WalletService.vote(wallet.address)
-      this.isVoting = vote ? true : false
+      try {
+        const vote = await WalletService.vote(wallet.address)
+        this.isVoting = vote
+      } catch(e) {
+        console.log(e.message || e.data.error)
+        this.isVoting = false
+      }
     },
   },
 }

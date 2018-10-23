@@ -32,8 +32,13 @@ export default {
 
   methods: {
     async getVotes() {
-      const response = await WalletService.vote(this.wallet.address)
-      this.delegate = response
+      try {
+        const response = await WalletService.vote(this.wallet.address)
+        this.delegate = response
+      } catch(e) {
+        console.log(e.message || e.data.error)
+        this.delegate = {}
+      }
     }
   }
 }
