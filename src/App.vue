@@ -32,9 +32,6 @@ export default {
 
   async created() {
     const network = require(`../networks/${process.env.EXPLORER_CONFIG}`)
-    if (network.alias === 'Development') {
-      this.$store.dispatch('ui/setNightMode', true)
-    }
 
     this.$store.dispatch('network/setDefaults', network)
 
@@ -79,7 +76,7 @@ export default {
 
     this.$store.dispatch(
       'ui/setNightMode',
-      localStorage.getItem('nightMode') || false
+      localStorage.getItem('nightMode') || (network.alias === 'Development') ? true : false
     )
 
     this.updateCurrencyRate()
