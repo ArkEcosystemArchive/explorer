@@ -83,7 +83,7 @@
   "missed": "przegapiono",
   "Votes": "Głosy",
   "Voters": "Wyborcy",
-  "Only voters with more than 0.1 Ark": "Tylko wyborcy posiadający więcej niż 0,1 Ark",
+  "Only voters with more than 0.1 token": "Tylko wyborcy posiadający więcej niż 0,1 {token}",
   "See all": "Zobacz wszystko",
   "All": "Wszystko",
   "Sent": "Wysłano",
