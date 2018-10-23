@@ -1,4 +1,4 @@
-# ARK Explorer 3.0
+# Ark Explorer 3.0
 
 <p align="center">
     <img src="/ARKExplorer.png" />
@@ -117,7 +117,7 @@ If you discover a security vulnerability within this package, please send an e-m
 ## Contributing
 
 * If you find any bugs, submit an [issue](../../issues) or open a [pull-request](../../pulls), helping us catch and fix them.
-* Engage with other users and developers on [ARK Slack](https://ark.io/slack/).
+* Engage with other users and developers on the [ArkEcosystem Slack](https://ark.io/slack/).
 * Join our [gitter](https://gitter.im/ark-developers/Lobby).
 * [Contribute bounties](https://github.com/ArkEcosystem/ARK-Bounty-Program).
 
