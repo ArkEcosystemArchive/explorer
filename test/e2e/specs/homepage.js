@@ -97,9 +97,60 @@ module.exports = {
       })
   },
 
+  // Language switcher tests
+
+  'language menu should open and close based on mouse position': function(browser) {
+    browser
+      .moveToElement('#current-language', 10, 10)
+      .moveToElement('#language-menu', 10, 10)
+      .pause(500)
+    browser.assert.visible('#language-menu')
+
+    // move mouse away anywhere
+    browser
+      .moveToElement('.logo-container', 10, 10)
+      .pause(500)
+
+    browser.assert.elementNotPresent('#language-menu')
+  },
+
+  'language menu should contain flag images': function(browser) {
+    browser
+      .moveToElement('#current-language', 10, 10)
+      .pause(500)
+
+    browser.assert.visible('#language-menu a img.flag-image')
+    // flag is image of type png so it must've been found
+    browser.assert.attributeContains('#current-language img.flag-image', 'src', 'image/png')
+    browser.assert.attributeContains('#language-menu a img.flag-image', 'src', 'image/png')
+  },
+
+  'from language menu, it should be possible to change language': function(browser) {
+    browser
+      .moveToElement('#current-language', 10, 10)
+      .pause(500)
+
+    browser.getAttribute('#current-language img.flag-image', 'src', function(result) {
+      browser
+        .click('#language-menu button:last-child')
+        .pause(500)
+      browser.getAttribute('#current-language img.flag-image', 'src', function(result2) {
+        // if flag has changed then language must've changed as well
+        browser.assert.ok(result.value !== result2.value)
+
+        // end session to restore default language
+        browser.end()
+      })
+    })
+  },
+
+
   // Menu tests
   'menu should be able to be opened and closed': function(browser) {
+    const devServer = browser.globals.devServerURL
     browser
+      .url(devServer)
+      .waitForElementVisible('h1')
       .click('button.border-transparent')
       .pause(500)
     browser.assert.visible('.menu-button')
