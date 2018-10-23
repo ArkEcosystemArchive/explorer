@@ -148,5 +148,6 @@ export default {
 
 .tooltip.search-tip .tooltip-arrow {
   border-color: #ef192d;
+  left: 11px !important;
 }
 </style>
