@@ -19,7 +19,9 @@ const NotFoundComponent = () => import('@/pages/404')
 
 Vue.use(Router)
 
-const titleSuffix = ' - ARK Explorer'
+function getTitle(title) {
+  return `${title} - ${process.env.TITLE}`
+}
 
 const router = new Router({
   mode: process.env.ROUTER_MODE,
@@ -28,13 +30,13 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: HomeComponent,
-      meta: { title: route => { return 'Home' + titleSuffix } }
+      meta: { title: route => { return getTitle('Home') } }
     },
     {
       path: '/wallets/:address',
       name: 'wallet',
       component: WalletComponent,
-      meta: { title: route => { return 'Wallet ' + route.params.address + titleSuffix } }
+      meta: { title: route => { return getTitle('Wallet ' + route.params.address) } }
     },
     {
       path: '/wallets/:address/voters',
@@ -42,13 +44,13 @@ const router = new Router({
         name: 'wallet-voters',
         params: { address: to.params.address, page: 1 }
       }),
-      meta: { title: route => { return 'Voters' + titleSuffix } }
+      meta: { title: route => { return getTitle('Voters') } }
     },
     {
       path: '/wallets/:address/voters/:page(\\d+)',
       name: 'wallet-voters',
       component: WalletVotersComponent,
-      meta: { title: route => { return 'Voters' + titleSuffix } }
+      meta: { title: route => { return getTitle('Voters') } }
     },
     {
       path: '/wallets/:address/blocks',
@@ -56,13 +58,13 @@ const router = new Router({
         name: 'wallet-blocks',
         params: { address: to.params.address, page: 1 }
       }),
-      meta: { title: route => { return 'Wallet Blocks' + titleSuffix } }
+      meta: { title: route => { return getTitle('Wallet Blocks') } }
     },
     {
       path: '/wallets/:address/blocks/:page(\\d+)',
       name: 'wallet-blocks',
       component: WalletBlocksComponent,
-      meta: { title: route => { return 'Wallet Blocks' + titleSuffix } }
+      meta: { title: route => { return getTitle('Wallet Blocks') } }
     },
     {
       path: '/wallets/:address/transactions',
@@ -70,7 +72,7 @@ const router = new Router({
         name: 'wallet-transactions',
         params: { address: to.params.address, type: 'all', page: 1 }
       }),
-      meta: { title: route => { return 'Wallet Transactions' + titleSuffix } }
+      meta: { title: route => { return getTitle('Wallet Transactions') } }
     },
     {
       path: '/wallets/:address/transactions/:type',
@@ -78,19 +80,19 @@ const router = new Router({
         name: 'wallet-transactions',
         params: { address: to.params.address, type: to.params.type, page: 1 }
       }),
-      meta: { title: route => { return 'Wallet Transactions' + titleSuffix } }
+      meta: { title: route => { return getTitle('Wallet Transactions') } }
     },
     {
       path: '/wallets/:address/transactions/:type/:page(\\d+)',
       name: 'wallet-transactions',
       component: WalletTransactionsComponent,
-      meta: { title: route => { return 'Wallet Transactions' + titleSuffix } }
+      meta: { title: route => { return getTitle('Wallet Transactions') } }
     },
     {
       path: '/block/:id',
       name: 'block',
       component: BlockComponent,
-      meta: { title: route => { return 'Block' + titleSuffix } }
+      meta: { title: route => { return getTitle('Block') } }
     },
     {
       path: '/block/:id/transactions',
@@ -98,58 +100,58 @@ const router = new Router({
         name: 'block-transactions',
         params: { id: to.params.id, page: 1 }
       }),
-      meta: { title: route => { return 'Block Transactions' + titleSuffix } }
+      meta: { title: route => { return getTitle('Block Transactions') } }
     },
     {
       path: '/block/:id/transactions/:page(\\d+)',
       name: 'block-transactions',
       component: BlockTransactionsComponent,
-      meta: { title: route => { return 'Block Transactions' + titleSuffix } }
+      meta: { title: route => { return getTitle('Block Transactions') } }
     },
     {
       path: '/blocks',
       redirect: to => ({ name: 'blocks', params: { page: 1 } }),
-      meta: { title: route => { return 'Blocks' + titleSuffix } }
+      meta: { title: route => { return getTitle('Blocks') } }
     },
     {
       path: '/blocks/:page(\\d+)',
       name: 'blocks',
       component: BlocksComponent,
-      meta: { title: route => { return 'Blocks' + titleSuffix } }
+      meta: { title: route => { return getTitle('Blocks') } }
     },
     {
       path: '/transaction/:id',
       name: 'transaction',
       component: TransactionComponent,
-      meta: { title: route => { return 'Transaction' + titleSuffix } }
+      meta: { title: route => { return getTitle('Transaction') } }
     },
     {
       path: '/transactions',
       redirect: to => ({ name: 'transactions', params: { page: 1 } }),
-      meta: { title: route => { return 'Transactions' + titleSuffix } }
+      meta: { title: route => { return getTitle('Transactions') } }
     },
     {
       path: '/transactions/:page(\\d+)',
       name: 'transactions',
       component: TransactionsComponent,
-      meta: { title: route => { return 'Transactions' + titleSuffix } }
+      meta: { title: route => { return getTitle('Transactions') } }
     },
     {
       path: '/delegate-monitor',
       name: 'delegate-monitor',
       component: DelegateMonitorComponent,
-      meta: { title: route => { return 'Delegate Monitor' + titleSuffix } }
+      meta: { title: route => { return getTitle('Delegate Monitor') } }
     },
     {
       path: '/top-wallets',
       redirect: to => ({ name: 'top-wallets', params: { page: 1 } }),
-      meta: { title: route => { return 'Top Wallets' + titleSuffix } }
+      meta: { title: route => { return getTitle('Top Wallets') } }
     },
     {
       path: '/top-wallets/:page(\\d+)',
       name: 'top-wallets',
       component: TopWalletsComponent,
-      meta: { title: route => { return 'Top Wallets' + titleSuffix } }
+      meta: { title: route => { return getTitle('Top Wallets') } }
     },
     // {
     //   path: '/statistics',
@@ -160,12 +162,12 @@ const router = new Router({
       path: '/404',
       name: '404',
       component: NotFoundComponent,
-      meta: { title: route => { return '404' + titleSuffix } }
+      meta: { title: route => { return getTitle('404') } }
     },
     {
       path: '*',
       redirect: { name: '404' },
-      meta: { title: route => { return '404' + titleSuffix } }
+      meta: { title: route => { return getTitle('404') } }
     },
     // 2.0 fallback redirects...
     {
@@ -174,7 +176,7 @@ const router = new Router({
         name: 'wallet',
         params: { address: to.params.address }
       }),
-      meta: { title: route => { return 'Wallet' + titleSuffix } }
+      meta: { title: route => { return getTitle('Wallet') } }
     },
     {
       path: '/tx/:id',
@@ -182,17 +184,17 @@ const router = new Router({
         name: 'transaction',
         params: { id: to.params.id }
       }),
-      meta: { title: route => { return 'Transaction' + titleSuffix } }
+      meta: { title: route => { return getTitle('Transaction') } }
     },
     {
       path: '/delegateMonitor',
       redirect: '/delegate-monitor',
-      meta: { title: route => { return 'Delegate Monitor' + titleSuffix } }
+      meta: { title: route => { return getTitle('Delegate Monitor') } }
     },
     {
       path: '/topAccounts',
       redirect: to => ({ name: 'top-wallets', params: { page: 1 } }),
-      meta: { title: route => { return 'Top Wallets' + titleSuffix } }
+      meta: { title: route => { return getTitle('Top Wallets') } }
     }
   ],
   scrollBehavior (to, from, savedPosition) {
