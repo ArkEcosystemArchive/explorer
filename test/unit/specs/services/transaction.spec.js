@@ -17,7 +17,7 @@ const blockPropertyArray = [
 
 describe('Transaction Service', () => {
   beforeAll(() => {
-    store.dispatch('network/setServer', 'https://explorer.ark.io:8443/api')
+    store.dispatch('network/setServer', 'https://dexplorer.ark.io:8443/api/v2')
   })
 
   it('should return the latest transactions ordered by timestamp descending', async () => {

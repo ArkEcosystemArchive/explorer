@@ -3,7 +3,7 @@ import store from '@/store'
 
 describe('CryptoCompare Service', () => {
   beforeAll(() => {
-    store.dispatch('network/setServer', 'https://explorer.ark.io:8443/api')
+    store.dispatch('network/setServer', 'https://dexplorer.ark.io:8443/api/v2')
     store.dispatch('network/setAlias', 'Main')
     store.dispatch('network/setToken', 'ARK')
     store.dispatch('currency/setName', 'USD')
