@@ -46,7 +46,8 @@ const createWebpackConfig = (baseUrl, network, networkConfig, routerMode) => {
         'process.env': {
           ...require('../config/prod.env'),
           ...{EXPLORER_CONFIG: `"${network}"`},
-          ...{ROUTER_MODE: `"${routerMode}"`}
+          ...{ROUTER_MODE: `"${routerMode}"`},
+          ...{TITLE: `"${networkConfig.title}"`}
         },
         GIT_VERSION: JSON.stringify(gitRevision.version),
         GIT_DATE: JSON.stringify(gitRevision.date)
