@@ -7,9 +7,10 @@ class ApiService {
 
     const response = await axios.get(`${server}/${url}`, config)
 
-    if (!response.data.success) {
+    if (response.error) {
       return Promise.reject(new Error(`Error GET ${url} : ${JSON.stringify(response)}`))
     }
+
     return response
   }
 }
