@@ -377,3 +377,10 @@ thead th {
 .rotate-180 {
   transform: rotate(180deg);
 }
+
+/** Configuration */
+
+.flag-image {
+  width: 20px;
+  height: 15px;
+}

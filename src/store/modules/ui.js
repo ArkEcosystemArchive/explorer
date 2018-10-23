@@ -9,6 +9,7 @@ export default {
     priceChart: true,
     headerType: null,
     menuVisible: false,
+    languageMenuVisible: false
   },
   mutations: {
     [types.SET_UI_LANGUAGE](state, payload) {
@@ -25,6 +26,9 @@ export default {
     },
     [types.SET_UI_MENU_VISIBLE](state, payload) {
       state.menuVisible = payload.value
+    },
+    [types.SET_UI_LANGUAGE_MENU_VISIBLE](state, payload) {
+      state.languageMenuVisible = payload.value
     },
     [types.SET_UI_PRICE_CHART](state, payload) {
       state.priceChart = payload.value
@@ -77,6 +81,12 @@ export default {
         value,
       })
     },
+    setLanguageMenuVisible: ({ commit }, value) => {
+      commit({
+        type: types.SET_UI_LANGUAGE_MENU_VISIBLE,
+        value,
+      })
+    },
     setPriceChart: ({ commit }, value) => {
       localStorage.setItem('priceChart', value)
 
@@ -95,5 +105,6 @@ export default {
     priceChart: state => state.priceChart,
     headerType: state => state.headerType,
     menuVisible: state => state.menuVisible,
+    languageMenuVisible: state => state.languageMenuVisible,
   },
 }
