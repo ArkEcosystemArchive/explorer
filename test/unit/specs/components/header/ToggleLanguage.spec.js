@@ -22,9 +22,9 @@ const store = new Vuex.Store({
   modules: {
     ui: {
       namespaced: true,
-      state: { language: "en" },
+      state: { language: 'en' },
       actions: uiAction,
-      getters: { language: state => "en" }
+      getters: { language: state => 'en' }
     }
   },
   strict: true
@@ -40,6 +40,5 @@ describe('header/ToggleLanguage', () => {
     })
     wrapper.find('button').trigger('mouseover')
     expect(uiAction.setLanguageMenuVisible).toHaveBeenCalled()
-
   })
 })

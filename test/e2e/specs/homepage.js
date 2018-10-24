@@ -144,7 +144,6 @@ module.exports = {
     })
   },
 
-
   // Menu tests
   'menu should be able to be opened and closed': function(browser) {
     const devServer = browser.globals.devServerURL
