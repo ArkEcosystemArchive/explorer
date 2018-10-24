@@ -20,7 +20,6 @@ export default {
   methods: {
     setLanguage(language) {
       this.$store.dispatch('ui/setLanguage', language)
-      this.$store.dispatch('ui/setLocale', language)
       this.setI18nLanguage(language)
       this.$store.dispatch('ui/setLanguageMenuVisible', false)
     },

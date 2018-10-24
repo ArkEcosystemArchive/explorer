@@ -14,8 +14,7 @@ export default {
     ...mapGetters('ui', ['language']),
 
     imageSource() {
-      let language = this.language.split("-")[0]
-      return require(`@/assets/images/flags/${language}.png`)
+      return require(`@/assets/images/flags/${this.language}.png`)
     }
   }
 }
