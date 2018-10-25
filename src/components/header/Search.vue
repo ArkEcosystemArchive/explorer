@@ -140,14 +140,4 @@ export default {
   box-shadow: 0 0 13px 2px rgba(197, 197, 213, 0.24);
   cursor: pointer;
 }
-
-.tooltip.search-tip .tooltip-inner {
-  background-color: #ef192d;
-  color: white;
-}
-
-.tooltip.search-tip .tooltip-arrow {
-  border-color: #ef192d;
-  left: 11px !important;
-}
 </style>
