@@ -17,7 +17,7 @@ import AppFooter from '@/components/Footer'
 import CryptoCompareService from '@/services/crypto-compare'
 import BlockService from '@/services/block'
 import DelegateService from '@/services/delegate'
-import LoaderService from '@/services/loader'
+import NodeService from '@/services/node'
 import { mapGetters } from 'vuex'
 
 import '@/styles/style.css'
@@ -54,7 +54,7 @@ export default {
       )
     }
 
-    const response = await LoaderService.config()
+    const response = await NodeService.config()
     this.$store.dispatch('network/setToken', response.token)
     this.$store.dispatch('network/setSymbol', response.symbol)
     this.$store.dispatch('network/setNethash', response.nethash)
