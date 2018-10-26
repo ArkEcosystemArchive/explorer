@@ -30,6 +30,7 @@
   --chart-inactive: #a0a6c8;
   --theme-button: #e0f0fd;
   --theme-button-text: #037cff;
+  --language-icon: #395174;
 }
 
 .theme-light footer a {
@@ -65,6 +66,7 @@
   --chart-inactive: #585a68;
   --theme-button: #2a2b31;
   --theme-button-text: #fff;
+  --language-icon: #a1a2a6;
 }
 
 .theme-dark footer a {

@@ -1,11 +1,11 @@
 <template>
   <div class="w-full flex">
-    <div class="px-4 md:px-8 flex-auto flex">
+    <div class="px-2 md:px-8 flex-auto flex">
       <button
         @click="$store.dispatch('ui/setMenuVisible', !menuVisible)"
         :class="[
           menuVisible ? 'border-red' : 'border-transparent',
-          'px-2 sm:px-4 py-3 md:py-6 flex-none flex items-center border-b-2 margin-t-2 hover:border-red text-theme-text-secondary'
+          'px-2 py-3 md:py-6 flex-none flex items-center border-b-2 margin-t-2 hover:border-red text-theme-text-secondary'
         ]">
         <!-- Inline this SVG so we can change color dynamically -->
         <svg
@@ -17,7 +17,7 @@
         </svg>
         <span class="semibold">{{ $t("Menu") }}</span>
       </button>
-      <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4"></span>
+      <span class="border-r mx-1 md:mx-4 lg:mx-6 my-4"></span>
       <div class="flex-auto flex items-center justify-center">
         <label for="search" class="hidden">{{ $t("Search") }}</label>
         <input
@@ -35,13 +35,13 @@
       <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4 block" v-if="shouldDisplayCurrency"></span>
       <toggle-currency v-if="shouldDisplayCurrency"></toggle-currency>
 
-      <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4 hidden md:block" v-if="shouldDisplayChart"></span>
+      <span class="border-r mx-1 md:mx-4 lg:mx-6 my-4 hidden md:block" v-if="shouldDisplayChart"></span>
       <toggle-chart v-if="shouldDisplayChart"></toggle-chart>
 
-      <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4"></span>
+      <span class="border-r mx-1 md:mx-4 lg:mx-6 my-4"></span>
       <toggle-theme></toggle-theme>
 
-      <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4"></span>
+      <span class="border-r mx-1 md:mx-4 lg:mx-6 my-4"></span>
       <toggle-language></toggle-language>
     </div>
   </div>

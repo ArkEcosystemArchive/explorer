@@ -48,16 +48,4 @@ describe('ui store module', () => {
 
     expect(store.getters['ui/menuVisible']).toEqual(false)
   })
-
-  it('should show the language menu', () => {
-    store.dispatch('ui/setLanguageMenuVisible', true)
-
-    expect(store.getters['ui/languageMenuVisible']).toEqual(true)
-  })
-
-  it('should hide the language menu', () => {
-    store.dispatch('ui/setLanguageMenuVisible', false)
-
-    expect(store.getters['ui/languageMenuVisible']).toEqual(false)
-  })
 })

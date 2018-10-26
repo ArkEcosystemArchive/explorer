@@ -99,46 +99,49 @@ module.exports = {
 
   // Language switcher tests
 
-  'language menu should open and close based on mouse position': function(browser) {
+  'language menu should open and close': function(browser) {
     browser
-      .moveToElement('#current-language', 10, 10)
-      .moveToElement('#language-menu', 10, 10)
-      .pause(500)
-    browser.assert.visible('#language-menu')
-
-    // move mouse away anywhere
-    browser
-      .moveToElement('.logo-container', 10, 10)
+      .click('#language-icon')
       .pause(500)
 
-    browser.assert.elementNotPresent('#language-menu')
+    browser.assert.visible('.language-menu')
+
+    browser
+      .click('.close-button')
+      .pause(500)
+
+    browser.assert.elementNotPresent('.language-menu')
   },
 
   'language menu should contain flag images': function(browser) {
     browser
-      .moveToElement('#current-language', 10, 10)
+      .click('#language-icon')
       .pause(500)
 
-    browser.assert.visible('#language-menu a img.flag-image')
     // flag is image of type png so it must've been found
-    browser.assert.attributeContains('#current-language img.flag-image', 'src', 'image/png')
-    browser.assert.attributeContains('#language-menu a img.flag-image', 'src', 'image/png')
+    browser.assert.visible('.language-menu img.flag-image')
+    browser.assert.attributeContains('.language-menu img.flag-image', 'src', 'image/png')
   },
 
   'from language menu, it should be possible to change language': function(browser) {
+    // select first language
     browser
-      .moveToElement('#current-language', 10, 10)
+      .click('#language-icon')
       .pause(500)
-
-    browser.getAttribute('#current-language img.flag-image', 'src', function(result) {
+      .click('.language-menu button:nth-child(1) img.flag-image')
+      .pause(1000)
+    browser.getText('h1', function(result) {
+      // select second language
       browser
-        .click('#language-menu button:last-child')
+        .click('#language-icon')
         .pause(500)
-      browser.getAttribute('#current-language img.flag-image', 'src', function(result2) {
-        // if flag has changed then language must've changed as well
+        .click('.language-menu button:nth-child(2) img.flag-image')
+        .pause(1000)
+      browser.getText('h1', function(result2) {
+        // translation should've changed
         browser.assert.ok(result.value !== result2.value)
 
-        // end session to restore default language
+        // end session to restore default language (for other tests)
         browser.end()
       })
     })

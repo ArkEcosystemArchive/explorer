@@ -16,7 +16,7 @@ const i18n = new VueI18n({
   silentTranslationWarn: true
 })
 
-const uiAction = { setLanguageMenuVisible: jest.fn() }
+const uiAction = { setHeaderType: jest.fn() }
 
 const store = new Vuex.Store({
   modules: {
@@ -38,7 +38,7 @@ describe('header/ToggleLanguage', () => {
       mixins,
       store
     })
-    wrapper.find('button').trigger('mouseover')
-    expect(uiAction.setLanguageMenuVisible).toHaveBeenCalled()
+    wrapper.find('button').trigger('click')
+    expect(uiAction.setHeaderType).toHaveBeenCalled()
   })
 })
