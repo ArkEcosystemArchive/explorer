@@ -109,7 +109,7 @@ module.exports = {
           browser
             .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]")
             .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]")
-            .pause(2000)
+            .pause(500)
           browser
             .useCss()
             .waitForElementVisible('h1')
