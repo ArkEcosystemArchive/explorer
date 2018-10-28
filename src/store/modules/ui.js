@@ -8,11 +8,11 @@ export default {
     nightMode: false,
     priceChart: true,
     headerType: null,
-    menuVisible: false,
+    menuVisible: false
   },
   mutations: {
     [types.SET_UI_LANGUAGE](state, payload) {
-      state.language = payload.value
+      state.language = payload.value.split('-')[0]
     },
     [types.SET_UI_LOCALE](state, payload) {
       state.locale = payload.value
@@ -32,6 +32,8 @@ export default {
   },
   actions: {
     setLanguage: ({ commit }, value) => {
+      localStorage.setItem('language', value)
+
       commit({
         type: types.SET_UI_LANGUAGE,
         value,
@@ -41,7 +43,7 @@ export default {
       localStorage.setItem('locale', value)
 
       commit({
-        type: types.SET_UI_LANGUAGE,
+        type: types.SET_UI_LOCALE,
         value,
       })
     },

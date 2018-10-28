@@ -12,6 +12,8 @@
 
       <header-desktop-currencies v-else-if="headerType === 'currencies'"></header-desktop-currencies>
 
+      <header-desktop-languages v-else-if="headerType === 'languages'"></header-desktop-languages>
+
       <header-default v-else></header-default>
 
       <header-desktop-menu v-if="menuVisible"></header-desktop-menu>
@@ -24,6 +26,9 @@
     <header-mobile-menu v-if="menuVisible"></header-mobile-menu>
 
     <header-mobile-currencies v-else-if="headerType === 'currencies'"></header-mobile-currencies>
+
+    <header-mobile-languages v-else-if="headerType === 'languages'"></header-mobile-languages>
+
   </header>
 </template>
 
@@ -32,6 +37,8 @@ import HeaderDefault from '@/components/header/Default'
 import HeaderSearch from '@/components/header/Search'
 import HeaderDesktopCurrencies from '@/components/header/currencies/Desktop'
 import HeaderMobileCurrencies from '@/components/header/currencies/Mobile'
+import HeaderDesktopLanguages from '@/components/header/languages/Desktop'
+import HeaderMobileLanguages from '@/components/header/languages/Mobile'
 import HeaderDesktopMenu from '@/components/header/menu/Desktop'
 import HeaderMobileMenu from '@/components/header/menu/Mobile'
 import { mapGetters } from 'vuex'
@@ -42,6 +49,8 @@ export default {
     HeaderSearch,
     HeaderDesktopCurrencies,
     HeaderMobileCurrencies,
+    HeaderDesktopLanguages,
+    HeaderMobileLanguages,
     HeaderDesktopMenu,
     HeaderMobileMenu,
   },

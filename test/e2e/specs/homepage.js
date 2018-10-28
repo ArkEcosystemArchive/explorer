@@ -97,9 +97,62 @@ module.exports = {
       })
   },
 
+  // Language switcher tests
+
+  'language menu should open and close': function(browser) {
+    browser
+      .click('#language-icon')
+      .pause(500)
+
+    browser.assert.visible('.language-menu')
+
+    browser
+      .click('.close-button')
+      .pause(500)
+
+    browser.assert.elementNotPresent('.language-menu')
+  },
+
+  'language menu should contain flag images': function(browser) {
+    browser
+      .click('#language-icon')
+      .pause(500)
+
+    // flag is image of type png so it must've been found
+    browser.assert.visible('.language-menu img.flag-image')
+    browser.assert.attributeContains('.language-menu img.flag-image', 'src', 'image/png')
+  },
+
+  'from language menu, it should be possible to change language': function(browser) {
+    // select first language
+    browser
+      .click('#language-icon')
+      .pause(500)
+      .click('.language-menu button:nth-child(1) img.flag-image')
+      .pause(1000)
+    browser.getText('h1', function(result) {
+      // select second language
+      browser
+        .click('#language-icon')
+        .pause(500)
+        .click('.language-menu button:nth-child(2) img.flag-image')
+        .pause(1000)
+      browser.getText('h1', function(result2) {
+        // translation should've changed
+        browser.assert.ok(result.value !== result2.value)
+
+        // end session to restore default language (for other tests)
+        browser.end()
+      })
+    })
+  },
+
   // Menu tests
   'menu should be able to be opened and closed': function(browser) {
+    const devServer = browser.globals.devServerURL
     browser
+      .url(devServer)
+      .waitForElementVisible('h1')
       .click('button.border-transparent')
       .pause(500)
     browser.assert.visible('.menu-button')

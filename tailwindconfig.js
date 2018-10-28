@@ -62,6 +62,7 @@ let colors = {
   'chart-inactive': 'var(--chart-inactive)',
   'theme-button': 'var(--theme-button)',
   'theme-button-text': 'var(--theme-button-text)',
+  'language-icon': 'var(--language-icon)',
 
   'theme-text-thead': 'var(--color-theme-text-thead)',
   // END CUSTOM ADDED
