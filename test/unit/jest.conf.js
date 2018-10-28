@@ -10,8 +10,8 @@ module.exports = {
     'vue'
   ],
   moduleNameMapper: {
-    '\\.(svg)$': '<rootDir>/__mocks__/fileMock.js',
-    '^@/(.*)$': '<rootDir>/src/$1'
+    '\\.(svg|png)$': '<rootDir>/__mocks__/fileMock.js',
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
   transform: {
     '^.+\\.js$': '<rootDir>/node_modules/babel-jest',
