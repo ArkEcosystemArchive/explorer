@@ -25,10 +25,14 @@ describe('ui store module', () => {
     expect(store.getters['ui/priceChart']).toEqual(false)
   })
 
-  it('should set the language', () => {
-    store.dispatch('ui/setLanguage', 'en')
-
+  it('should have English set as default language', () => {
     expect(store.getters['ui/language']).toEqual('en')
+  })
+
+  it('should set the language', () => {
+    store.dispatch('ui/setLanguage', 'nl')
+
+    expect(store.getters['ui/language']).toEqual('nl')
   })
 
   it('should set the header type', () => {
