@@ -39,6 +39,6 @@ export default {
 
 <style scoped>
   .close-button {
-    margin-right: 0.825rem;
+    margin-left: 0.825rem;
   }
 </style>
