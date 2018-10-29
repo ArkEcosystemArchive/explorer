@@ -124,11 +124,16 @@ module.exports = {
     // flag is image of type png so it must've been found
     browser.assert.visible('.language-menu img.flag-image')
     browser.assert.attributeContains('.language-menu img.flag-image', 'src', 'image/png')
+
+    browser
+      .click('.close-button')
+      .pause(500)
   },
 
   'from language menu, it should be possible to change language': function(browser) {
     // select first language
     browser
+      .waitForElementVisible('#language-icon')
       .click('#language-icon')
       .pause(500)
       .click('.language-menu button:nth-child(1) img.flag-image')
