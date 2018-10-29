@@ -4,6 +4,9 @@
 // Disable eslint for .to.not.be.present statements
 /* eslint-disable no-unused-expressions */
 
+const events = require('events')
+events.EventEmitter.defaultMaxListeners = 30
+
 module.exports = {
   // Default homepage test, which also serves as setup for correct url
   'homepage should be available': function (browser) {
