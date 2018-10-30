@@ -21,16 +21,6 @@ class BlockService {
     return response.data.blocks[0]
   }
 
-  async height() {
-    const response = await ApiService.get('blocks/getHeight')
-    return response.data.height
-  }
-
-  async supply() {
-    const response = await ApiService.get('blocks/getSupply')
-    return response.data.supply
-  }
-
   async find(id) {
     const response = await ApiService.get('blocks/get', {
       params: {
