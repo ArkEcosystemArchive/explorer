@@ -34,28 +34,6 @@ class TransactionService {
     return response.data.transactions
   }
 
-  async latestRegistrations() {
-    const response = await ApiService.get('transactions', {
-      params: {
-        orderBy: 'timestamp:desc',
-        limit: 5,
-        type: 2
-      }
-    })
-    return response.data.transactions
-  }
-
-  async latestVotes() {
-    const response = await ApiService.get('transactions', {
-      params: {
-        orderBy: 'timestamp:desc',
-        limit: 5,
-        type: 3
-      }
-    })
-    return response.data.transactions
-  }
-
   async allByAddress(address, page = 1, limit = 25) {
     const offset = page > 1 ? (page - 1) * limit : 0
 

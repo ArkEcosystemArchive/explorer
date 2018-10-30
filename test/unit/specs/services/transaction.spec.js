@@ -57,22 +57,6 @@ describe('Transaction Service', () => {
     expect(data).toHaveLength(0)
   })
 
-  it('should return the latest registrations', async () => {
-    const data = await transactionService.latestRegistrations()
-    expect(data).toHaveLength(5)
-    expect(Object.keys(data[0]).sort()).toEqual(blockPropertyArray.concat(['asset']).sort())
-    expect(data[0].type).toBe(2)
-    expect(data[0].timestamp < data[1].timestamp)
-  })
-
-  it('should return the latest votes', async () => {
-    const data = await transactionService.latestVotes()
-    expect(data).toHaveLength(5)
-    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
-    expect(data[0].type).toBe(3)
-    expect(data[0].timestamp < data[1].timestamp)
-  })
-
   it('should return all transactions for an address', async () => {
     const data = await transactionService.allByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs')
     expect(data).toHaveLength(25)
