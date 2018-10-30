@@ -266,6 +266,7 @@ module.exports = {
       .waitForElementVisible('input#search')
     browser
       .click('input#search')
+      .pause(500)
       .waitForElementVisible('input.search-input')
       .setValue('input.search-input', ['ARK Bounty', browser.Keys.ENTER])
       .pause(1000)
@@ -284,6 +285,7 @@ module.exports = {
       .waitForElementVisible('input#search')
     browser
       .click('input#search')
+      .pause(500)
       .waitForElementVisible('input.search-input')
       .setValue('input.search-input', ['genesis_1', browser.Keys.ENTER])
       .pause(1000)
@@ -293,7 +295,6 @@ module.exports = {
       .assert.urlContains('/wallets/AeLpRK8rFVtBeyBVqBtdQpWDfLzaiNujKr')
   },
 
-  /* TODO re-enable this test and make it pass
   'it should be possible to search for a delegate with uppercase letters': function (browser) {
     const devServer = browser.globals.devServerURL
 
@@ -303,6 +304,7 @@ module.exports = {
       .waitForElementVisible('input#search')
     browser
       .click('input#search')
+      .pause(500)
       .waitForElementVisible('input.search-input')
       .setValue('input.search-input', ['gEnESis_1', browser.Keys.ENTER])
       .pause(1000)
@@ -311,7 +313,6 @@ module.exports = {
       .waitForElementVisible("//h1[text() = 'Wallet Summary']")
       .assert.urlContains('/wallets/AeLpRK8rFVtBeyBVqBtdQpWDfLzaiNujKr')
   },
-  */
 
   'it should be possible to search for an address': function (browser) {
     const devServer = browser.globals.devServerURL
@@ -322,6 +323,7 @@ module.exports = {
       .waitForElementVisible('input#search')
     browser
       .click('input#search')
+      .pause(500)
       .waitForElementVisible('input.search-input')
       .setValue('input.search-input', ['AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv', browser.Keys.ENTER])
       .pause(1000)
@@ -340,6 +342,7 @@ module.exports = {
       .waitForElementVisible('input#search')
     browser
       .click('input#search')
+      .pause(500)
       .waitForElementVisible('input.search-input')
       .setValue('input.search-input', ['13507259488170268466', browser.Keys.ENTER])
       .pause(1000)
@@ -358,6 +361,7 @@ module.exports = {
       .waitForElementVisible('input#search')
     browser
       .click('input#search')
+      .pause(500)
       .waitForElementVisible('input.search-input')
       .setValue('input.search-input', ['4a169d00de2029110829fad77eebf6fd25751418b47561f05b994750acbd3b13', browser.Keys.ENTER])
       .pause(1000)
@@ -376,6 +380,7 @@ module.exports = {
       .waitForElementVisible('input#search')
     browser
       .click('input#search')
+      .pause(500)
       .waitForElementVisible('input.search-input')
       .setValue('input.search-input', ['asdfnothingfoundforthisvalueasdf', browser.Keys.ENTER])
       .pause(1000)
