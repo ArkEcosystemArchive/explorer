@@ -22,9 +22,15 @@ const store = new Vuex.Store({
   modules: {
     ui: {
       namespaced: true,
-      state: { language: 'en' },
+      state: {
+        language: 'en',
+        headerType: null
+      },
       actions: uiAction,
-      getters: { language: state => 'en' }
+      getters: {
+        language: state => 'en',
+        headerType: state => null
+      }
     }
   },
   strict: true
