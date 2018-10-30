@@ -65,44 +65,6 @@ describe('Block Service', () => {
     expect(data[0].height < data[1].height)
   })
 
-  it('should return the blocks for given generator public key', async () => {
-    jest.setTimeout(30000)
-    const data = await blockService.getByPublicKey('0257581c82d1931c4b0b2df9d658ecd303fcf2a6ea4ec291669ed06f44fb75c8fe')
-    expect(data).toHaveLength(25)
-    expect(Object.keys(data[0]).sort()).toEqual(blockPropertyArray)
-    expect(data[0].height < data[1].height)
-  })
-
-  it('should return an empty list when given generator public key is incorrect', async () => {
-    jest.setTimeout(30000)
-    const data = await blockService.getByPublicKey('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
-    expect(data).toHaveLength(0)
-  })
-
-  it('should return the number of blocks forged by given generator public key', async () => {
-    jest.setTimeout(30000)
-    const data = await blockService.forgedByPublicKeyCount('0257581c82d1931c4b0b2df9d658ecd303fcf2a6ea4ec291669ed06f44fb75c8fe')
-    expect(data).not.toBeDefined() // Currently this endpoint is not supported
-  })
-
-  it('should fail to return count when given generator public key is incorrect', async () => {
-    jest.setTimeout(30000)
-    const data = await blockService.forgedByPublicKeyCount('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
-    expect(data).toBeUndefined()
-  })
-
-  it('should return the last block for given generator public key', async () => {
-    jest.setTimeout(30000) // This function easily takes 10-20 seconds to resolve, not sure why
-    const data = await blockService.lastBlockByPublicKey('0257581c82d1931c4b0b2df9d658ecd303fcf2a6ea4ec291669ed06f44fb75c8fe')
-    expect(Object.keys(data).sort()).toEqual(blockPropertyArray)
-  })
-
-  it('should return undefined when given generator public key is incorrect', async () => {
-    jest.setTimeout(30000)
-    const data = await blockService.lastBlockByPublicKey('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
-    expect(data).toBeUndefined()
-  })
-
   it('should return the previous block for the given height', async () => {
     jest.setTimeout(30000) // This function easily takes 10-20 seconds to resolve, not sure why
     const data = await blockService.findPrevious(4771470)
