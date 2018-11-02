@@ -1,7 +1,7 @@
 <template>
   <button id="language-icon"
     @click="$store.dispatch('ui/setHeaderType', isLanguagesMenu ? null : 'languages')"
-    class="text-language-icon px-2 py-3 hidden md:flex items-center text-sm border-b-2 margin-t-2 border-transparent hover:border-red hover:text-blue">
+    class="text-language-icon px-2 py-3 flex items-center text-sm border-b-2 margin-t-2 border-transparent hover:border-red hover:text-blue">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
