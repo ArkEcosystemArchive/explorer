@@ -15,7 +15,7 @@
         <span class="block md:inline-block">{{ height.toLocaleString() }}</span>
       </div>
       <div class="mr-2">
-        <span>ARK/{{name}}:</span>
+        <span>{{ networkToken() }}/{{ name }}:</span>
         <span class="block md:inline-block">{{ rawCurrency(rate, name) }}</span>
       </div>
       <div>

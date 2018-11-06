@@ -55,6 +55,7 @@ export default {
     async search() {
       this.nothingFound = false
       this.searchCount = 0
+      this.query = this.query.trim()
 
       try {
         const responseAddress = await SearchService.findByAddress(this.query)
@@ -120,7 +121,7 @@ export default {
       if (name !== null) {
         for (const address in this.knownWallets) {
           if (this.knownWallets.hasOwnProperty(address)) {
-            if (this.query.toLowerCase() === this.knownWallets[address].toLowerCase()) {
+            if (name.toLowerCase() === this.knownWallets[address].toLowerCase()) {
               return address
             }
           }
