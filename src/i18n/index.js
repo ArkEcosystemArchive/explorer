@@ -5,10 +5,10 @@ import store from '@/store'
 Vue.use(VueI18n)
 
 const messages = {
-  'en': require('./en.json'),
-  'nl': require('./nl.json'),
+  en: require('./en.json'),
+  nl: require('./nl.json'),
   'pt-br': require('./pt-br.json'),
-  'pl': require('./pl.json')
+  pl: require('./pl.json')
 }
 
 export default new VueI18n({
