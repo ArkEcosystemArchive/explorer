@@ -8,7 +8,7 @@ describe('i18n', () => {
 
   it('should be possible to switch languages', () => {
     expect(i18n.t('No Results', 'nl')).toBe('Geen Resultaten')
-    expect(i18n.t('No Results', 'pt')).toBe('Sem resultados')
+    expect(i18n.t('No Results', 'pt-br')).toBe('Sem resultados')
     expect(i18n.t('No Results', 'pl')).toBe('Brak wyników')
   })
 })
