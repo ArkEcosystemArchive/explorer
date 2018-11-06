@@ -5,8 +5,8 @@
       <div class="hidden sm:flex items-center text-theme-text-tertiary text-2xs px-3 sm:px-8 xl:px-6 py-3 mb-5 md:mb-6 bg-stat-background rounded-md">
         <div class="pr-6">{{ $t("Height") }}: {{ height.toLocaleString() }}</div>
         <div class="pr-6">{{ $t("Network") }}: {{ $t(alias) }}</div>
-        <div class="pr-6">{{ $t("Supply") }}: <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }}</span></div>
-        <div>{{ $t("Market Cap") }}: <currency :amount="+supply"></currency></div>
+        <div :class="{ 'pr-6': alias == 'Main' }">{{ $t("Supply") }}: <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }}</span></div>
+        <div v-if="alias == 'Main'">{{ $t("Market Cap") }}: <currency :amount="+supply"></currency></div>
       </div>
     </div>
     <div class="sm:hidden flex items-center justify-between text-theme-text-tertiary text-2xs px-5 sm:px-8 xl:px-6 py-3 bg-stat-background">
