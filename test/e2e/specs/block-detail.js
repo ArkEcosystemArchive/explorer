@@ -83,6 +83,6 @@ module.exports = {
       .click('div.list-row a')
       .useXpath().waitForElementVisible("//h1[text() = 'Wallet Summary']")
       .assert.urlContains('wallets/ALLZ3TQKTaHm2Bte4SrXL9C5cS8ZovqFfZ')
-      .end()
+    browser.end()
   }
 }

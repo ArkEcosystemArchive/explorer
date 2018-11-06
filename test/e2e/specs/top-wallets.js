@@ -79,6 +79,6 @@ module.exports = {
       .useCss()
       .waitForElementVisible('h1')
       .assert.containsText('h1', 'Wallet Summary')
-      .end()
+    browser.end()
   }
 }

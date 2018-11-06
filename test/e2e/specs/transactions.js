@@ -116,8 +116,8 @@ module.exports = {
             .waitForElementVisible('h1')
             .assert.containsText('h1', 'Wallet Summary')
             .assert.urlContains('/wallets/')
-            .end()
         }
       })
+    browser.end()
   }
 }
