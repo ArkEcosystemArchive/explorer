@@ -87,6 +87,6 @@ module.exports = {
     browser
       .waitForElementVisible("//h1[text() = 'Wallet Summary']")
       .assert.urlContains('/wallets/')
-      .end()
+    browser.end()
   }
 }

@@ -31,7 +31,8 @@ module.exports = {
       desiredCapabilities: {
         chromeOptions: {
           args: [
-            "window-size=1920,1080"
+            'window-size=1920,1080',
+            'disable-dev-shm-usage'
           ]
         }
       }
