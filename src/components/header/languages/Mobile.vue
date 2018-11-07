@@ -36,7 +36,7 @@ export default {
     },
 
     getLanguageFlag(language) {
-      return require(`@/assets/images/flags/${language}.png`)
+      return require(`@/assets/images/flags/${language}.svg`)
     }
   }
 }

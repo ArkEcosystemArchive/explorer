@@ -31,7 +31,7 @@ export default {
 
     getLanguageFlag(language) {
       // TODO: consider using flag plugin, for example `flag-icon-css`
-      return require(`@/assets/images/flags/${language}.png`)
+      return require(`@/assets/images/flags/${language}.svg`)
     }
   }
 }
