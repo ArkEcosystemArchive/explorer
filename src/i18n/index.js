@@ -7,7 +7,7 @@ Vue.use(VueI18n)
 const messages = {
   en: require('./en.json'),
   nl: require('./nl.json'),
-  pt: require('./pt-br.json'),
+  'pt-br': require('./pt-br.json'),
   pl: require('./pl.json')
 }
 

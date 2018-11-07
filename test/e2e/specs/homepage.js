@@ -121,9 +121,9 @@ module.exports = {
       .click('#language-icon')
       .pause(500)
 
-    // flag is image of type png so it must've been found
+    // flag is image of type svg so it must've been found
     browser.assert.visible('.language-menu img.flag-image')
-    browser.assert.attributeContains('.language-menu img.flag-image', 'src', 'image/png')
+    browser.assert.attributeContains('.language-menu img.flag-image', 'src', 'image/svg')
 
     browser
       .click('.close-button')
