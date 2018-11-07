@@ -387,6 +387,6 @@ module.exports = {
     browser
       .useXpath()
       .waitForElementVisible("//div[contains(@class, 'tooltip-inner') and text() = 'Nothing matched your search']")
-      .end()
+    browser.end()
   }
 }
