@@ -69,6 +69,7 @@
   "Not Forging": "Not Forging",
   "Awaiting Slot": "Awaiting Slot",
   "Never": "Never",
+  "Last block at height on": "Last Block @ {height} on",
 
   "Address": "Address",
   "Public Key": "Public Key",
