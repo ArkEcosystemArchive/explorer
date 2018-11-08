@@ -69,6 +69,7 @@
   "Not Forging": "Nie wydobywa",
   "Awaiting Slot": "Oczekuje na miejsce",
   "Never": "Nigdy",
+  "Last block at height on": "Ostatni blok @ {height} wytworzony",
 
   "Address": "Adres",
   "Public Key": "Klucz publiczny",
