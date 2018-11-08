@@ -1,5 +1,5 @@
 <template>
-  <ul class="language-menu menu-container text-center max-w-480px justify-center bg-table-row list-reset absolute pin-b pin-r py-1 px-4 flex items-center block xl:hidden">
+  <ul class="language-menu menu-container text-center max-w-480px justify-center bg-table-row list-reset absolute pin-b pin-r py-1 px-4 items-center hidden md:flex xl:hidden">
     <li v-for="lang in languages"
             @click="setLanguage(lang)"
             :key="lang"
