@@ -38,7 +38,7 @@
         </div>
       </div>
       <div v-if="blocks && !blocks.length" class="px-5 md:px-10">
-        <span>{{ $t("No Results") }}</span>
+        <span>{{ $t("No results") }}</span>
       </div>
     </loader>
   </div>

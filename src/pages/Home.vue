@@ -10,11 +10,11 @@
       <nav class="mx-5 sm:mx-10 mb-8 border-b flex items-end">
         <div @click="dataView = 'transactions'"
              :class="dataView === 'transactions' ? 'active-tab' : 'inactive-tab'">
-          {{ $t("Latest Transactions") }}
+          {{ $t("Latest transactions") }}
         </div>
         <div @click="dataView = 'blocks'"
              :class="dataView === 'blocks' ? 'active-tab' : 'inactive-tab'">
-          {{ $t("Latest Blocks") }}
+          {{ $t("Latest blocks") }}
         </div>
       </nav>
 
