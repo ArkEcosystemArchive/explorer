@@ -262,6 +262,8 @@ module.exports = {
 
     browser
       .url(devServer)
+      .useXpath()
+      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]")
       .useCss()
       .waitForElementVisible('input#search')
     browser
@@ -281,6 +283,8 @@ module.exports = {
 
     browser
       .url(devServer)
+      .useXpath()
+      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]")
       .useCss()
       .waitForElementVisible('input#search')
     browser
@@ -300,6 +304,8 @@ module.exports = {
 
     browser
       .url(devServer)
+      .useXpath()
+      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]")
       .useCss()
       .waitForElementVisible('input#search')
     browser
@@ -319,6 +325,8 @@ module.exports = {
 
     browser
       .url(devServer)
+      .useXpath()
+      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]")
       .useCss()
       .waitForElementVisible('input#search')
     browser
@@ -338,6 +346,8 @@ module.exports = {
 
     browser
       .url(devServer)
+      .useXpath()
+      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]")
       .useCss()
       .waitForElementVisible('input#search')
     browser
@@ -357,6 +367,8 @@ module.exports = {
 
     browser
       .url(devServer)
+      .useXpath()
+      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]")
       .useCss()
       .waitForElementVisible('input#search')
     browser
@@ -376,6 +388,8 @@ module.exports = {
 
     browser
       .url(devServer)
+      .useXpath()
+      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]")
       .useCss()
       .waitForElementVisible('input#search')
     browser
