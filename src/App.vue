@@ -79,6 +79,7 @@ export default {
       localStorage.getItem('nightMode') || ((network.alias === 'Development') ? true : false)
     )
 
+    this.updateI18n()
     this.updateCurrencyRate()
     this.updateSupply()
     this.updateHeight()
@@ -91,7 +92,7 @@ export default {
 
   computed: {
     ...mapGetters('currency', { currencyName: 'name' }),
-    ...mapGetters('ui', ['nightMode']),
+    ...mapGetters('ui', ['language', 'nightMode']),
     ...mapGetters('network', ['token']),
   },
 
@@ -120,6 +121,10 @@ export default {
     async updateDelegates() {
       const delegates = await DelegateService.all()
       this.$store.dispatch('delegates/setDelegates', delegates)
+    },
+
+    updateI18n() {
+      this.$i18n.locale = this.language
     },
 
     initialiseTimers() {

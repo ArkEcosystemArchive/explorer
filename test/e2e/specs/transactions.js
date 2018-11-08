@@ -108,6 +108,7 @@ module.exports = {
           console.log('Link is present')
           browser
             .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]")
+            .pause(500)
             .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]")
             .pause(500)
           browser
@@ -115,8 +116,8 @@ module.exports = {
             .waitForElementVisible('h1')
             .assert.containsText('h1', 'Wallet Summary')
             .assert.urlContains('/wallets/')
-            .end()
         }
       })
+    browser.end()
   }
 }

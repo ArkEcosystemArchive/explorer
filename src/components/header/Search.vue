@@ -55,41 +55,53 @@ export default {
     async search() {
       this.nothingFound = false
       this.searchCount = 0
+      this.query = this.query.trim()
+
+      const address = this.findByNameInKnownWallets(this.query)
+      if (address) {
+        this.changePage('wallet', { address: address })
+        return
+      } else {
+        this.updateSearchCount({ message: 'No known wallet with that name could be found' })
+      }
+
+      const del = this.delegates.find(d => d.username === this.query.toLowerCase())
+      if (del) {
+        this.changePage('wallet', { address: del.address })
+        return
+      } else {
+        this.updateSearchCount({ message: 'No delegate with that username could be found' });
+      }
 
       try {
         const responseAddress = await SearchService.findByAddress(this.query)
         this.changePage('wallet', { address: responseAddress.account.address })
+        return
       } catch(e) { this.updateSearchCount(e) }
-
-      const del = this.delegates.find(d => d.username === this.query.toLowerCase())
-      del ? this.changePage('wallet', { address: del.address }) : this.updateSearchCount({ message: 'No delegate with that username could be found' });
 
       try {
         const responseUsername = await SearchService.findByUsername(this.query)
         this.changePage('wallet', { address: responseUsername.delegate.address })
+        return
       } catch(e) { this.updateSearchCount(e) }
 
       try {
         const responsePublicKey = await SearchService.findByPublicKey(this.query)
         this.changePage('wallet', { address: responsePublicKey.delegate.address })
+        return
       } catch(e) { this.updateSearchCount(e) }
 
       try {
         const responseBlock = await SearchService.findByBlockId(this.query)
         this.changePage('block', { id: responseBlock.block.id })
+        return
       } catch(e) { this.updateSearchCount(e) }
 
       try {
         const responseTransaction = await SearchService.findByTransactionId(this.query)
         this.changePage('transaction', { id: responseTransaction.transaction.id })
+        return
       } catch(e) { this.updateSearchCount(e) }
-
-      const address = this.findByNameInKnownWallets(this.query)
-      if (address) {
-        this.changePage('wallet', { address: address })
-      } else {
-        this.updateSearchCount(null)
-      }
     },
 
     updateSearchCount(err) {
@@ -120,7 +132,7 @@ export default {
       if (name !== null) {
         for (const address in this.knownWallets) {
           if (this.knownWallets.hasOwnProperty(address)) {
-            if (this.query.toLowerCase() === this.knownWallets[address].toLowerCase()) {
+            if (name.toLowerCase() === this.knownWallets[address].toLowerCase()) {
               return address
             }
           }
@@ -139,15 +151,5 @@ export default {
 .search-icon:hover {
   box-shadow: 0 0 13px 2px rgba(197, 197, 213, 0.24);
   cursor: pointer;
-}
-
-.tooltip.search-tip .tooltip-inner {
-  background-color: #ef192d;
-  color: white;
-}
-
-.tooltip.search-tip .tooltip-arrow {
-  border-color: #ef192d;
-  left: 11px !important;
 }
 </style>

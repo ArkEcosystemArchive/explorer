@@ -120,6 +120,6 @@ module.exports = {
       .waitForElementVisible("//h1[text() = 'Ooops!']")
     browser
       .assert.urlContains('/404')
-      .end()
+    browser.end()
   }
 }

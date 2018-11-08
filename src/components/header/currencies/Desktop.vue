@@ -1,11 +1,11 @@
 <template>
-  <div class="w-full px-10 hidden xl:flex items-center">
-    <button @click="$store.dispatch('ui/setHeaderType', null)" class="close-button">
-      <img src="@/assets/images/icons/cross.svg" />
-    </button>
-
+  <div class="w-full px-5 hidden xl:flex items-center justify-end">
     <button v-for="(symbol, currency) in currencies" @click="setCurrency(currency, symbol)" :key="currency" class="menu-button">
       <a href="#">{{ currency }}</a>
+    </button>
+
+    <button @click="$store.dispatch('ui/setHeaderType', null)" class="px-2 close-button">
+      <img src="@/assets/images/icons/cross.svg" />
     </button>
   </div>
 </template>
@@ -39,6 +39,6 @@ export default {
 
 <style scoped>
   .close-button {
-    margin-right: 0.825rem;
+    margin-left: 0.825rem;
   }
 </style>

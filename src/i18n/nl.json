@@ -68,6 +68,7 @@
   "Not Forging": "Niet aan het forgen",
   "Awaiting Slot": "Wachten op een plek",
   "Never": "Nooit",
+  "Last block at height on": "Last Block @ {height} on",
 
   "Address": "Adres",
   "Public Key": "Public Key",
