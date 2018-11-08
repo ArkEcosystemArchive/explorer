@@ -5,7 +5,7 @@
 /* eslint-disable no-unused-expressions */
 
 const events = require('events')
-events.EventEmitter.defaultMaxListeners = 30
+events.EventEmitter.defaultMaxListeners = 50
 
 module.exports = {
   // Default homepage test, which also serves as setup for correct url
