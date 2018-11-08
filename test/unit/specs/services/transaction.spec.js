@@ -60,7 +60,7 @@ describe('Transaction Service', () => {
   it('should return the latest registrations', async () => {
     const data = await transactionService.latestRegistrations()
     expect(data).toHaveLength(5)
-    expect(Object.keys(data[0]).sort()).toEqual(blockPropertyArray.concat(['asset']).sort())
+    expect(Object.keys(data[0]).sort()).toEqual(blockPropertyArray.concat(['asset', 'signSignature']).sort())
     expect(data[0].type).toBe(2)
     expect(data[0].timestamp < data[1].timestamp)
   })
