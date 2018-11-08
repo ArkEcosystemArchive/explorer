@@ -12,8 +12,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-
 import { mapGetters } from 'vuex'
+import moment from 'moment'
 
 export default {
   computed: {
@@ -28,11 +28,20 @@ export default {
     setLanguage(language) {
       this.$store.dispatch('ui/setLanguage', language)
       this.setI18nLanguage(language)
+
+      const locale = language.split('-')[0]
+      this.$store.dispatch('ui/setLocale', locale)
+      this.setLocale(locale)
+
       this.$store.dispatch('ui/setHeaderType', null)
     },
 
     setI18nLanguage(language) {
       this.$i18n.locale = language
+    },
+
+    setLocale(locale) {
+      moment.locale(locale)
     },
 
     getLanguageFlag(language) {

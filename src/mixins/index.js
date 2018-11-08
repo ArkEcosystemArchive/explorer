@@ -2,8 +2,7 @@ import Vue from 'vue'
 import moment from 'moment'
 import store from '@/store'
 
-const locale = localStorage.getItem('locale') || navigator.language || 'en'
-moment.locale(locale)
+const locale = store.getters['ui/locale']
 
 const methods = {
   isDelegateByAddress(address) {
