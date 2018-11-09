@@ -5,9 +5,10 @@ import store from '@/store'
 Vue.use(VueI18n)
 
 const messages = {
-  en: require('./en.json'),
+  'en-gb': require('./en.json'),
+  'en-us': require('./en.json'),
   nl: require('./nl.json'),
-  'pt-br': require('./pt-br.json'),
+  'pt-br': require('./pt.json'),
   pl: require('./pl.json')
 }
 

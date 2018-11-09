@@ -21,7 +21,7 @@ export default {
 
     languages() {
       return Object.keys(this.$i18n.messages).filter(
-        l => l.split('-')[0] != this.language
+        l => l != this.language
       )
     }
   },
@@ -29,21 +29,12 @@ export default {
   methods: {
     setLanguage(language) {
       this.$store.dispatch('ui/setLanguage', language)
-      this.setI18nLanguage(language)
+      this.$i18n.locale = language
 
-      const locale = language.split('-')[0]
-      this.$store.dispatch('ui/setLocale', locale)
-      this.setLocale(locale)
+      this.$store.dispatch('ui/setLocale', language)
+      moment.locale(language)
 
       this.$store.dispatch('ui/setHeaderType', null)
-    },
-
-    setI18nLanguage(language) {
-      this.$i18n.locale = language
-    },
-
-    setLocale(locale) {
-      moment.locale(locale)
     },
 
     getLanguageFlag(language) {
