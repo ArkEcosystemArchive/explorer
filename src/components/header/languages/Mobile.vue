@@ -17,13 +17,15 @@ import moment from 'moment'
 
 export default {
   computed: {
-    ...mapGetters('ui', ['nightMode']),
+    ...mapGetters('ui', ['nightMode', 'language']),
 
     languages() {
-      return Object.keys(this.$i18n.messages)
-    },
-
+      return Object.keys(this.$i18n.messages).filter(
+        l => l.split('-')[0] != this.language
+      )
+    }
   },
+
   methods: {
     setLanguage(language) {
       this.$store.dispatch('ui/setLanguage', language)
