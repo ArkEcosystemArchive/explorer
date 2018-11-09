@@ -25,7 +25,7 @@
         </template>
       </table-column>
 
-      <table-column show="amount" :label="$t('Amount (token)', {token: networkToken()})" header-class="right-header-cell" cell-class="right-cell">
+      <table-column show="amount" :label="$t('Amount (token)', { token: networkToken() })" header-class="right-header-cell" cell-class="right-cell">
         <template slot-scope="row">
           <span class="whitespace-no-wrap">
             <transaction-amount :transaction="row" :type="row.type"></transaction-amount>
@@ -33,7 +33,7 @@
         </template>
       </table-column>
 
-      <table-column show="fee" :label="$t('Fee (token)', {token: networkToken()})" header-class="right-header-cell hidden md:table-cell" cell-class="right-cell hidden md:table-cell">
+      <table-column show="fee" :label="$t('Fee (token)', { token: networkToken() })" header-class="right-header-cell hidden md:table-cell" cell-class="right-cell hidden md:table-cell">
         <template slot-scope="row">
           {{ readableCrypto(row.fee) }}
         </template>
