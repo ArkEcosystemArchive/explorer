@@ -10,9 +10,9 @@ const localVue = createLocalVue()
 localVue.use(VueI18n)
 localVue.use(Vuex)
 const i18n = new VueI18n({
-  locale: 'en',
-  fallbackLocale: 'en',
-  messages: { 'en': {} },
+  locale: 'en-gb',
+  fallbackLocale: 'en-gb',
+  messages: { 'en-gb': {} },
   silentTranslationWarn: true
 })
 
