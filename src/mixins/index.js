@@ -32,8 +32,8 @@ const methods = {
         minute: 0,
         second: 0,
       })
-      .add((typeof timeZoneOffset !== 'undefined' ? timeZoneOffset : new Date().getTimezoneOffset()) * (-1), 'minutes')
       .add(value, 'seconds')
+      .local()
       .format('L LTS')
   },
 
