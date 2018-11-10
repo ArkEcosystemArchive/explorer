@@ -3,8 +3,8 @@ import * as types from '../mutation-types'
 export default {
   namespaced: true,
   state: {
-    language: 'en',
-    locale: navigator.language || 'en',
+    language: 'en-gb',
+    locale: navigator.language || 'en-gb',
     nightMode: false,
     priceChart: true,
     headerType: null,
@@ -12,7 +12,7 @@ export default {
   },
   mutations: {
     [types.SET_UI_LANGUAGE](state, payload) {
-      state.language = payload.value.split('-')[0]
+      state.language = payload.value
     },
     [types.SET_UI_LOCALE](state, payload) {
       state.locale = payload.value

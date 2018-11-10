@@ -48,7 +48,7 @@
       <div
         v-if="view === 'public'"
         class="flex-none border-r border-grey-dark px-9">
-        <div class="text-grey mb-2">{{ $t("Balance (token)", {token: networkToken()}) }}</div>
+        <div class="text-grey mb-2">{{ $t("Balance (token)", { token: networkToken() }) }}</div>
         <div v-tooltip="readableCurrency(wallet.balance)" class="text-lg text-white semibold">{{ readableCrypto(wallet.balance, false) }}</div>
       </div>
 
@@ -131,7 +131,7 @@
         </div>
         <div class="flex -mx-6">
           <div class="md:w-1/2 px-6 w-full border-r border-grey-dark">
-            <div class="text-grey mb-2">{{ $t("Balance (token)", {token: networkToken()}) }}</div>
+            <div class="text-grey mb-2">{{ $t("Balance (token)", { token: networkToken() }) }}</div>
             <div v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(wallet.balance)}` }" class="text-white">{{ readableCrypto(wallet.balance, false) }}</div>
           </div>
           <div class="md:w-1/2 px-6 w-full">
