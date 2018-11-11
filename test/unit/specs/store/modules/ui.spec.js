@@ -26,7 +26,7 @@ describe('ui store module', () => {
   })
 
   it('should have English set as default language', () => {
-    expect(store.getters['ui/language']).toEqual('en')
+    expect(store.getters['ui/language']).toEqual('en-gb')
   })
 
   it('should set the language', () => {

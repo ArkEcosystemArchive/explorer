@@ -2,7 +2,7 @@ import mixins from '@/mixins'
 import store from '@/store'
 
 const displayCurrency = function(value) {
-  return value.toLocaleString('en', {
+  return value.toLocaleString('en-gb', {
     style: 'currency',
     currency: 'eur'
   })

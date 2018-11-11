@@ -62,12 +62,12 @@ export default {
 
     this.$store.dispatch(
       'ui/setLanguage',
-      localStorage.getItem('language') || 'en'
+      localStorage.getItem('language') || 'en-gb'
     )
 
     this.$store.dispatch(
       'ui/setLocale',
-      localStorage.getItem('locale') || navigator.language || 'en'
+      localStorage.getItem('locale') || navigator.language || 'en-gb'
     )
 
     this.$store.dispatch(
