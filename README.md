@@ -1,4 +1,4 @@
-# Ark Explorer 3.0
+# KI Explorer 3.0
 
 <p align="center">
     <img src="/ARKExplorer.png" />
@@ -17,7 +17,7 @@ You can access it at [https://explorer.ark.io/](https://explorer.ark.io/).
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/ArkEcosystem/explorer
+git clone https://github.com/GetGenki/explorer
 ```
 
 ### 2. Install Dependencies
