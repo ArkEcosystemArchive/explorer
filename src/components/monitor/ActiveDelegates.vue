@@ -92,10 +92,11 @@ export default {
       }[row.forgingStatus.code]
 
       const lastBlock = row.forgingStatus.lastBlock
-      const translation = this.$i18n.t('Last block at height on', { height: lastBlock.height })
 
       return {
-        content: lastBlock ? `[${status}] ${translation} ${this.readableTimestamp(lastBlock.timestamp)}`
+        content: lastBlock ? `[${status}] ${
+          this.$i18n.t('Last block at height on', { height: lastBlock.height })
+        } ${this.readableTimestamp(lastBlock.timestamp)}`
           : status,
         classes: [`tooltip-bg-${row.forgingStatus.code}`, 'font-sans']
       }
