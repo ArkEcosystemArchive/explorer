@@ -5,7 +5,7 @@
 /* eslint-disable no-unused-expressions */
 
 const events = require('events')
-events.EventEmitter.defaultMaxListeners = 30
+events.EventEmitter.defaultMaxListeners = 50
 
 module.exports = {
   // Default homepage test, which also serves as setup for correct url
@@ -36,8 +36,8 @@ module.exports = {
         })
       })
       .assert.visible('#line-chart')
-      .assert.containsText('div .active-tab', 'Latest Transactions')
-      .assert.containsText('div .inactive-tab', 'Latest Blocks')
+      .assert.containsText('div .active-tab', 'Latest transactions')
+      .assert.containsText('div .inactive-tab', 'Latest blocks')
   },
 
   // Header tests
@@ -227,10 +227,10 @@ module.exports = {
     browser
       .url(devServer)
       .useXpath()
-      .click("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest Blocks')]")
-      .waitForElementVisible("//div[contains(@class, 'active-tab') and contains(text(), 'Latest Blocks')]")
-    browser.expect.element("//div[contains(@class, 'active-tab') and contains(text(), 'Latest Blocks')]").to.be.present
-    browser.expect.element("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest Transactions')]").to.be.present
+      .click("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest blocks')]")
+      .waitForElementVisible("//div[contains(@class, 'active-tab') and contains(text(), 'Latest blocks')]")
+    browser.expect.element("//div[contains(@class, 'active-tab') and contains(text(), 'Latest blocks')]").to.be.present
+    browser.expect.element("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest transactions')]").to.be.present
   },
 
   'latest block table should refresh automatically': function (browser) {
@@ -239,7 +239,7 @@ module.exports = {
     browser
       .url(devServer)
       .useXpath()
-      .click("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest Blocks')]")
+      .click("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest blocks')]")
       .waitForElementVisible("//thead[contains(@class, 'table-component__table__head')]//tr[1]//th[4][contains(., 'Transactions')]")
     browser
       .getText("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]", function(result) {
