@@ -28,19 +28,19 @@
         </div>
 
         <div class="list-row-border-b">
-          <div>{{ $t("Amount (token)", {token: networkToken()}) }}</div>
+          <div>{{ $t("Amount (token)", { token: networkToken() }) }}</div>
           <div>
             <transaction-amount :transaction="transaction" :type="transaction.type"></transaction-amount>
           </div>
         </div>
 
         <div class="list-row">
-          <div>{{ $t("Fee (token)", {token: networkToken()}) }}</div>
+          <div>{{ $t("Fee (token)", { token: networkToken() }) }}</div>
           <div>{{ readableCrypto(transaction.fee) }}</div>
         </div>
       </div>
       <div v-if="transactions && !transactions.length" class="px-5 md:px-10">
-        <span>{{ $t("No Results") }}</span>
+        <span>{{ $t("No results") }}</span>
       </div>
     </loader>
   </div>

@@ -2,8 +2,7 @@ import Vue from 'vue'
 import moment from 'moment'
 import store from '@/store'
 
-const locale = localStorage.getItem('locale') || navigator.language || 'en'
-moment.locale(locale)
+const locale = store.getters['ui/locale']
 
 const methods = {
   isDelegateByAddress(address) {
@@ -33,8 +32,8 @@ const methods = {
         minute: 0,
         second: 0,
       })
-      .add((typeof timeZoneOffset !== 'undefined' ? timeZoneOffset : new Date().getTimezoneOffset()) * (-1), 'minutes')
       .add(value, 'seconds')
+      .local()
       .format('L LTS')
   },
 

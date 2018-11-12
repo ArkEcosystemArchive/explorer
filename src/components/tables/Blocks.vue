@@ -37,14 +37,14 @@
         </template>
       </table-column>
 
-      <table-column show="totalFee" :label="$t('Fee (token)', {token: networkToken()})" header-class="right-header-end-cell" cell-class="right-end-cell">
+      <table-column show="totalFee" :label="$t('Fee (token)', { token: networkToken() })" header-class="right-header-end-cell" cell-class="right-end-cell">
         <template slot-scope="row">
           {{ readableCrypto(row.totalFee) }}
         </template>
       </table-column>
     </table-component>
     <div v-else class="px-5 md:px-10">
-      <span>{{ $t("No Results") }}</span>
+      <span>{{ $t("No results") }}</span>
     </div>
   </loader>
 </template>

@@ -19,6 +19,7 @@ import BlockService from '@/services/block'
 import DelegateService from '@/services/delegate'
 import NodeService from '@/services/node'
 import { mapGetters } from 'vuex'
+import moment from 'moment'
 
 import '@/styles/style.css'
 
@@ -61,12 +62,12 @@ export default {
 
     this.$store.dispatch(
       'ui/setLanguage',
-      localStorage.getItem('language') || 'en'
+      localStorage.getItem('language') || 'en-gb'
     )
 
     this.$store.dispatch(
       'ui/setLocale',
-      localStorage.getItem('locale') || navigator.language || 'en'
+      localStorage.getItem('locale') || navigator.language || 'en-gb'
     )
 
     this.$store.dispatch(
@@ -80,6 +81,7 @@ export default {
     )
 
     this.updateI18n()
+    this.updateLocale()
     this.updateCurrencyRate()
     this.updateSupply()
     this.updateHeight()
@@ -92,7 +94,7 @@ export default {
 
   computed: {
     ...mapGetters('currency', { currencyName: 'name' }),
-    ...mapGetters('ui', ['language', 'nightMode']),
+    ...mapGetters('ui', ['language', 'locale', 'nightMode']),
     ...mapGetters('network', ['token']),
   },
 
@@ -125,6 +127,10 @@ export default {
 
     updateI18n() {
       this.$i18n.locale = this.language
+    },
+
+    updateLocale() {
+      moment.locale(this.locale)
     },
 
     initialiseTimers() {

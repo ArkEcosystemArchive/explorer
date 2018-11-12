@@ -23,7 +23,7 @@
         </template>
       </table-column>
 
-      <table-column show="blocksAt" :label="$t('Last Forged')" header-class="left-header-cell hidden sm:table-cell" cell-class="py-3 px-4 text-left border-none hidden sm:table-cell">
+      <table-column show="blocksAt" :label="$t('Last forged')" header-class="left-header-cell hidden sm:table-cell" cell-class="py-3 px-4 text-left border-none hidden sm:table-cell">
         <template slot-scope="row">
           {{ lastForgingTime(row) }}
         </template>
@@ -57,7 +57,7 @@
       </table-column>
     </table-component>
     <div v-else class="px-5 md:px-10">
-      <span>{{ $t("No Results") }}</span>
+      <span>{{ $t("No results") }}</span>
     </div>
   </loader>
 </template>
@@ -85,17 +85,18 @@ export default {
       const status = {
         '0': this.$i18n.t('Forging'),
         '1': this.$i18n.t('Missing'),
-        '2': this.$i18n.t('Not Forging'),
-        '3': this.$i18n.t('Awaiting Slot'),
-        '4': this.$i18n.t('Missed block, Awaiting Slot'),
-        '5': this.$i18n.t('Never Forged'),
+        '2': this.$i18n.t('Not forging'),
+        '3': this.$i18n.t('Awaiting slot'),
+        '4': this.$i18n.t('Missed block, awaiting slot'),
+        '5': this.$i18n.t('Never forged'),
       }[row.forgingStatus.code]
 
       const lastBlock = row.forgingStatus.lastBlock
-      const translation = this.$i18n.t('Last block at height on', { height: lastBlock.height })
 
       return {
-        content: lastBlock ? `[${status}] ${translation} ${this.readableTimestamp(lastBlock.timestamp)}`
+        content: lastBlock ? `[${status}] ${
+          this.$i18n.t('Last block at height on', { height: lastBlock.height })
+        } ${this.readableTimestamp(lastBlock.timestamp)}`
           : status,
         classes: [`tooltip-bg-${row.forgingStatus.code}`, 'font-sans']
       }
@@ -105,9 +106,9 @@ export default {
       return {
         '0': '#46b02e', // Forging
         '1': '#f6993f', // Missing
-        '2': '#ef192d', // Not Forging
-        '3': '#838a9b', // Awaiting Slot
-        '4': '#f6993f', // Missed in previous round, now awaiting Slot
+        '2': '#ef192d', // Not forging
+        '3': '#838a9b', // Awaiting slot
+        '4': '#f6993f', // Missed in previous round, now awaiting slot
         '5': '#ef192d', // Never forged
       }[row.forgingStatus.code]
     }

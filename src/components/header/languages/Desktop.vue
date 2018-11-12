@@ -11,22 +11,29 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { mapGetters } from 'vuex'
+import moment from 'moment'
+
 export default {
   computed: {
-    languages() {
-      return Object.keys(this.$i18n.messages)
-    },
+    ...mapGetters('ui', ['language']),
 
+    languages() {
+      return Object.keys(this.$i18n.messages).filter(
+        l => l != this.language
+      )
+    }
   },
+
   methods: {
     setLanguage(language) {
       this.$store.dispatch('ui/setLanguage', language)
-      this.setI18nLanguage(language)
-      this.$store.dispatch('ui/setHeaderType', null)
-    },
-
-    setI18nLanguage(language) {
       this.$i18n.locale = language
+
+      this.$store.dispatch('ui/setLocale', language)
+      moment.locale(language)
+
+      this.$store.dispatch('ui/setHeaderType', null)
     },
 
     getLanguageFlag(language) {

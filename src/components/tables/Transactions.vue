@@ -31,7 +31,7 @@
         </template>
       </table-column>
 
-      <table-column show="amount" :label="$t('Amount (token)', {token: networkToken()})" header-class="right-header-end-cell lg:pr-4" cell-class="right-end-cell lg:pr-4">
+      <table-column show="amount" :label="$t('Amount (token)', { token: networkToken() })" header-class="right-header-end-cell lg:pr-4" cell-class="right-end-cell lg:pr-4">
         <template slot-scope="row">
           <span class="whitespace-no-wrap">
             <transaction-amount :transaction="row" :type="row.type"></transaction-amount>
@@ -39,14 +39,14 @@
         </template>
       </table-column>
 
-      <table-column show="fee" :label="$t('Fee (token)', {token: networkToken()})" header-class="right-header-end-cell hidden lg:table-cell" cell-class="right-end-cell hidden lg:table-cell">
+      <table-column show="fee" :label="$t('Fee (token)', { token: networkToken() })" header-class="right-header-end-cell hidden lg:table-cell" cell-class="right-end-cell hidden lg:table-cell">
         <template slot-scope="row">
           {{ readableCrypto(row.fee) }}
         </template>
       </table-column>
     </table-component>
     <div v-else class="px-5 md:px-10">
-      <span>{{ $t("No Results") }}</span>
+      <span>{{ $t("No results") }}</span>
     </div>
   </loader>
 </template>
