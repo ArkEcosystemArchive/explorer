@@ -147,7 +147,7 @@ module.exports = {
         .pause(1000)
       browser.getText('h1', function(result2) {
         // translation should've changed
-        browser.assert.ok(result.value !== result2.value)
+        browser.assert.notEqual(result.value, result2.value)
 
         // end session to restore default language (for other tests)
         browser.end()
@@ -166,13 +166,13 @@ module.exports = {
     browser.assert.visible('.menu-button')
     browser.elements('css selector', '.menu-button', function(result) {
       browser.elementIdText(result.value[0].ELEMENT, function(elemResult) {
-        browser.assert.ok(elemResult.value === 'Home')
+        browser.assert.equal(elemResult.value, 'Home')
       })
       browser.elementIdText(result.value[1].ELEMENT, function(elemResult) {
-        browser.assert.ok(elemResult.value === 'Top Wallets')
+        browser.assert.equal(elemResult.value, 'Top Wallets')
       })
       browser.elementIdText(result.value[2].ELEMENT, function(elemResult) {
-        browser.assert.ok(elemResult.value === 'Delegate Monitor')
+        browser.assert.equal(elemResult.value, 'Delegate Monitor')
       })
     })
 
@@ -243,15 +243,11 @@ module.exports = {
       .waitForElementVisible("//thead[contains(@class, 'table-component__table__head')]//tr[1]//th[4][contains(., 'Transactions')]")
     browser
       .getText("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]", function(result) {
-        const blockId = result.value
-
         browser
-          .expect.element("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2][contains(., '" + blockId + "')]").to.be.present
+          .waitForElementNotPresent("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2][contains(., '" + result.value + "')]", 20000)
         browser
-          .waitForElementNotPresent("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2][contains(., '" + blockId + "')]", 20000)
-        browser
-          .getText("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]", function(result) {
-            browser.assert.notEqual(result.value, blockId)
+          .getText("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]", function(result2) {
+            browser.assert.notEqual(result.value, result2.value)
           })
       })
   },

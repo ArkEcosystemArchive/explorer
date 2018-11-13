@@ -64,15 +64,11 @@ module.exports = {
       .waitForElementVisible('div.list-row-border-b')
       .useXpath()
       .getText("//div[contains(@class, 'list-row-border-b')][2]//div[2]", function(result) {
-        const confirmations = result.value
-
         browser
-          .expect.element("//div[contains(@class, 'list-row-border-b')][2]//div[2][text() = '" + confirmations + "']").to.be.present
+          .waitForElementNotPresent("//div[contains(@class, 'list-row-border-b')][2]//div[2][text() = '" + result.value + "']", 20000)
         browser
-          .waitForElementNotPresent("//div[contains(@class, 'list-row-border-b')][2]//div[2][text() = '" + confirmations + "']", 20000)
-        browser
-          .getText("//div[contains(@class, 'list-row-border-b')][2]//div[2]", function(result) {
-            browser.assert.notEqual(result.value, confirmations)
+          .getText("//div[contains(@class, 'list-row-border-b')][2]//div[2]", function(result2) {
+            browser.assert.notEqual(result.value, result2.value)
           })
       })
   },
