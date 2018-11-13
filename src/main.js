@@ -36,7 +36,7 @@ Vue.use(VTooltip, {
 /** Sortable Tables */
 TableComponent.settings({
   sortHandler: (rows, column, order) => _.orderBy(rows, (row) => (row.data[column]), order),
-  filterNoResults: i18n.t('No Results')
+  filterNoResults: i18n.t('No results')
 })
 
 Vue.use(TableComponent)
