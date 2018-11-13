@@ -12,12 +12,13 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('main.theme-light')
-      .waitForElementVisible('h1')
-      .assert.containsText('h1', 'Delegate Monitor')
+      .useXpath()
+      .waitForElementVisible("//h1[text() = 'Delegate Monitor']")
   },
 
   'it should display delegate details': function (browser) {
     browser
+      .useCss()
       .waitForElementVisible('.bg-theme-feature-background')
       .pause(2000)
       .useXpath()
@@ -97,7 +98,8 @@ module.exports = {
 
   'it should be possible to sort the active delegates': function (browser) {
     browser
-      .useXpath().expect.element("//th[contains(.,'Name')]").to.be.present
+      .useXpath()
+      .expect.element("//th[contains(.,'Name')]").to.be.present
     browser
       .assert.cssClassPresent("//th[contains(.,'Name')]", 'table-component__th--sort')
       .assert.cssClassNotPresent("//th[contains(.,'Name')]", 'table-component__th--sort-asc')
@@ -116,19 +118,21 @@ module.exports = {
     browser
       .useCss()
       .waitForElementVisible('div.table-component')
-      .useXpath().click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]//a[1]")
+      .useXpath()
+      .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]//a[1]")
       .pause(500)
     browser
-      .useCss()
-      .waitForElementVisible('h1')
-      .assert.containsText('h1', 'Wallet Summary')
+      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+    browser
       .assert.urlContains('/wallets/')
   },
 
   'it should be possible to switch to standby delegates': function (browser) {
     const devServer = browser.globals.devServerURL + '/#/delegate-monitor'
+
     browser
       .url(devServer)
+      .useCss()
       .waitForElementVisible('.bg-theme-feature-background')
     browser
       .useXpath()

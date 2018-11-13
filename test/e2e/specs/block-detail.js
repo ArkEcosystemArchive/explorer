@@ -12,17 +12,17 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('main.theme-light')
-      .waitForElementVisible('h1')
-      .assert.containsText('h1', 'Block')
+      .useXpath()
+      .waitForElementVisible("//h1[text() = 'Block']")
   },
 
   'it should be possible to navigate to next block and back': function(browser) {
     browser
-      .assert.containsText('div.semibold.truncate span', '3487084709104787070')
-      .useXpath().click("//button[contains(., 'Next')]")
+      .waitForElementVisible("//div[contains(@class, 'semibold') and contains(@class, 'truncate')]/span[contains(text(), '3487084709104787070')]")
+      .click("//button[contains(., 'Next')]")
       .waitForElementVisible("//div[contains(@class, 'semibold') and contains(@class, 'truncate')]/span[contains(text(), '12152817243754268433')]")
     browser
-      .useXpath().click("//button[contains(., 'Previous')]")
+      .click("//button[contains(., 'Previous')]")
       .waitForElementVisible("//div[contains(@class, 'semibold') and contains(@class, 'truncate')]/span[contains(text(), '3487084709104787070')]")
   },
 
@@ -51,7 +51,7 @@ module.exports = {
       })
   },
 
-  'it should be possible to copy the block ID': function(browser) {
+  'it should be possible to copy the block id': function (browser) {
     browser
       .assert.cssClassNotPresent('img.block', 'animated')
     browser

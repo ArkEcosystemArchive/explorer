@@ -15,12 +15,13 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('main.theme-light')
-      .waitForElementVisible('h1')
-      .assert.containsText('h1', 'Latest transactions and blocks')
+      .useXpath()
+      .waitForElementVisible("//h1[text() = 'Latest transactions and blocks']")
   },
 
   'homepage should contain expected components': function(browser) {
     browser
+      .useCss()
       .elements('css selector', '.bg-stat-background > div', function(result) {
         browser.elementIdText(result.value[0].ELEMENT, function(elemResult) {
           browser.assert.ok(elemResult.value.startsWith('Height'))
@@ -337,7 +338,7 @@ module.exports = {
       .assert.urlContains('/wallets/AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv')
   },
 
-  'it should be possible to search for a block ID': function (browser) {
+  'it should be possible to search for a block id': function (browser) {
     const devServer = browser.globals.devServerURL
 
     browser
@@ -358,7 +359,7 @@ module.exports = {
       .assert.urlContains('/block/13507259488170268466')
   },
 
-  'it should be possible to search for a transaction ID': function (browser) {
+  'it should be possible to search for a transaction id': function (browser) {
     const devServer = browser.globals.devServerURL
 
     browser
