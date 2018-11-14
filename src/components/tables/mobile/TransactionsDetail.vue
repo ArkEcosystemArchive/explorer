@@ -24,7 +24,7 @@
 
         <div class="list-row-border-b-no-wrap" v-if="transaction.vendorField">
           <div class="mr-4">{{ $t("Smartbridge") }}</div>
-          <div class="truncate">{{ emojify(transaction.vendorField) }}</div>
+          <div class="truncate">{{ transaction.vendorField }}</div>
         </div>
 
         <div class="list-row-border-b">

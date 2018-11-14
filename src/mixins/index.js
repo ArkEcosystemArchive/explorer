@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import emoji from 'node-emoji'
 import moment from 'moment'
 import store from '@/store'
 
@@ -170,10 +169,6 @@ const methods = {
 
     return '-'
   },
-
-  emojify(text) {
-    return emoji.emojify(text)
-  }
 }
 
 Vue.mixin({
