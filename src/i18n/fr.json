@@ -60,7 +60,7 @@
   "Never forged": "Jamais forgé",
   "In queue for forging": "En file pour forgeage",
   "Last block": "Dernier bloc",
-  "from transactions": "de 0 transactions | de 1 transaction | de {count} transactions"
+  "from transactions": "de 0 transactions | de 1 transaction | de {count} transactions",
   "Total forged (token)": "Total forgé ({token})",
   "Forging": "Forgeage",
   "Missing": "Manquant",
@@ -68,7 +68,7 @@
   "Not forging": "Ne forge pas",
   "Awaiting slot": "En attente d'une place",
   "Never": "Jamais",
-  "Last block at height on": "Dernier bloc @ {heigh}"
+  "Last block at height on": "Dernier bloc @ {heigh}",
 
   "Address": "Adresse",
   "Public key": "Clé publique",
