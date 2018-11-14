@@ -3,7 +3,7 @@
     <span v-if="hasDefaultSlot"><slot></slot></span>
     <template v-else>
       <span 
-        v-tooltip="smartBridge"
+        v-tooltip="emojify(smartBridge)"
         v-if="showSmartBridgeIcon && smartBridge"
       >
         <svg
