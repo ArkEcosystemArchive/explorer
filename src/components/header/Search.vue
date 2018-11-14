@@ -13,7 +13,7 @@
       class="search-input w-full flex-auto mr-2 py-4 pl-4 bg-transparent"
       :class="{ 'text-grey': nightMode }"
       v-model="query"
-      v-tooltip="{show: nothingFound, content: $t('Nothing matched your search'), trigger: 'manual', placement: 'bottom-start', classes: 'search-tip' }"
+      v-tooltip="{ show: nothingFound, content: $t('Nothing matched your search'), trigger: 'manual', placement: 'bottom-start', classes: 'search-tip' }"
       @keyup.enter="search" />
 
     <div class="search-icon text-grey hover:text-blue p-3 md:p-4" @click="search">
@@ -111,7 +111,7 @@ export default {
 
       // Increment counter to keep track of whether we found anything
       this.searchCount += 1
-      if (this.searchCount === 6) { // Should match total amount of callbacks
+      if (this.searchCount === 7) { // Should match total amount of callbacks
         this.nothingFound = true
         setTimeout(() => (this.nothingFound = false), 1500)
       }

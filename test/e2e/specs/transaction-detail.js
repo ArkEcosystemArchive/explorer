@@ -67,21 +67,8 @@ module.exports = {
     browser
       .waitForElementVisible("//h1[text() = 'Block']")
       .assert.urlContains('block/12374209887221238137')
-  },
-
-  'it should emojify the vendor field': function(browser) {
-    const devServer = browser.globals.devServerURL + '/#/transaction/80aa5f3c1520481c26ab606b9e15fae1c3424dbabbce3719fc8f381e8bb19d29'
-
-    browser
-      .url(devServer)
-      .useCss()
-      .waitForElementVisible('main.theme-light')
-      .waitForElementVisible('.list-row-border-b')
-    browser
-      .useXpath()
-      .expect.element("//div[contains(@class, 'list-row-border-b')][7]//div[2]").text.to.equal('ARK ❤️ you')
     browser.end()
-  }
+  },
 
   // TODO: unsure why this one doesn't work reliably, needs to be looked into further
   // 'it should be possible to show the amount tooltip': function(browser) {
