@@ -30,28 +30,22 @@ module.exports = {
   },
 
   'it should fetch the latest block automatically': function (browser) {
+    const element = "//div[text() = 'Last block']/following-sibling::div//a[1]/span"
+
     browser
       .useXpath().waitForElementVisible("//div[text() = 'Last block']")
-      .getText("//div[text() = 'Last block']/following-sibling::div//a[1]/span", function(result) {
-        browser
-          .waitForElementNotPresent("//div[text() = 'Last block']/following-sibling::div//a[1]/span[text() = '" + result.value + "']", 20000)
-        browser
-          .getText("//div[text() = 'Last block']/following-sibling::div//a[1]/span", function(result2) {
-            browser.assert.notEqual(result.value, result2.value)
-          })
+      .getText(element, function(result) {
+        browser.expect.element(element).text.to.not.contain(result.value).after(20000);
       })
   },
 
   'it should fetch the delegates automatically': function (browser) {
+    const element = "//div[text() = 'In queue for forging']/preceding-sibling::div"
+
     browser
       .useXpath().waitForElementVisible("//div[text() = 'In queue for forging']")
-      .getText("//div[text() = 'In queue for forging']/preceding-sibling::div", function(result) {
-        browser
-          .waitForElementNotPresent("//div[text() = 'In queue for forging']/preceding-sibling::div[text() = '" + result.value + "']", 20000)
-        browser
-          .getText("//div[text() = 'In queue for forging']/preceding-sibling::div", function(result2) {
-            browser.assert.notEqual(result.value, result2.value)
-          })
+      .getText(element, function(result) {
+        browser.expect.element(element).text.to.not.contain(result.value).after(20000);
       })
   },
 

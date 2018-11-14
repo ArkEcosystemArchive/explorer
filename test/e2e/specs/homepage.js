@@ -236,6 +236,7 @@ module.exports = {
 
   'latest block table should refresh automatically': function (browser) {
     const devServer = browser.globals.devServerURL
+    const element = "//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]"
 
     browser
       .url(devServer)
@@ -243,13 +244,8 @@ module.exports = {
       .click("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest blocks')]")
       .waitForElementVisible("//thead[contains(@class, 'table-component__table__head')]//tr[1]//th[4][contains(., 'Transactions')]")
     browser
-      .getText("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]", function(result) {
-        browser
-          .waitForElementNotPresent("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2][contains(., '" + result.value + "')]", 20000)
-        browser
-          .getText("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]", function(result2) {
-            browser.assert.notEqual(result.value, result2.value)
-          })
+      .getText(element, function(result) {
+        browser.expect.element(element).text.to.not.contain(result.value).after(20000);
       })
   },
 

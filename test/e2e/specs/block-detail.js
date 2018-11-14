@@ -60,16 +60,13 @@ module.exports = {
   },
 
   'it should refresh the confirmation count automatically': function (browser) {
+    const element = "//div[contains(@class, 'list-row-border-b')][2]//div[2]"
+
     browser
       .waitForElementVisible('div.list-row-border-b')
       .useXpath()
-      .getText("//div[contains(@class, 'list-row-border-b')][2]//div[2]", function(result) {
-        browser
-          .waitForElementNotPresent("//div[contains(@class, 'list-row-border-b')][2]//div[2][text() = '" + result.value + "']", 20000)
-        browser
-          .getText("//div[contains(@class, 'list-row-border-b')][2]//div[2]", function(result2) {
-            browser.assert.notEqual(result.value, result2.value)
-          })
+      .getText(element, function(result) {
+        browser.expect.element(element).text.to.not.contain(result.value).after(20000);
       })
   },
 
