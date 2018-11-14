@@ -9,7 +9,8 @@ const messages = {
   'en-us': require('./en.json'),
   nl: require('./nl.json'),
   'pt-br': require('./pt.json'),
-  pl: require('./pl.json')
+  pl: require('./pl.json'),
+  fr: require('./fr.json')
 }
 
 export default new VueI18n({
