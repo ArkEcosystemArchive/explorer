@@ -12,12 +12,13 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('main.theme-light')
-      .waitForElementVisible('h1')
-      .assert.containsText('h1', 'Delegate Monitor')
+      .useXpath()
+      .waitForElementVisible("//h1[text() = 'Delegate Monitor']")
   },
 
   'it should display delegate details': function (browser) {
     browser
+      .useCss()
       .waitForElementVisible('.bg-theme-feature-background')
       .pause(2000)
       .useXpath()
@@ -29,36 +30,22 @@ module.exports = {
   },
 
   'it should fetch the latest block automatically': function (browser) {
+    const element = "//div[text() = 'Last block']/following-sibling::div//a[1]/span"
+
     browser
       .useXpath().waitForElementVisible("//div[text() = 'Last block']")
-      .getText("//div[text() = 'Last block']/following-sibling::div//a[1]/span", function(result) {
-        const blockId = result.value
-
-        browser
-          .expect.element("//div[text() = 'Last block']/following-sibling::div//a[1]/span[text() = '" + blockId + "']").to.be.present
-        browser
-          .waitForElementNotPresent("//div[text() = 'Last block']/following-sibling::div//a[1]/span[text() = '" + blockId + "']", 20000)
-        browser
-          .getText("//div[text() = 'Last block']/following-sibling::div//a[1]/span", function(result) {
-            browser.assert.notEqual(result.value, blockId)
-          })
+      .getText(element, function(result) {
+        browser.expect.element(element).text.to.not.contain(result.value).after(20000);
       })
   },
 
   'it should fetch the delegates automatically': function (browser) {
+    const element = "//div[text() = 'In queue for forging']/preceding-sibling::div"
+
     browser
       .useXpath().waitForElementVisible("//div[text() = 'In queue for forging']")
-      .getText("//div[text() = 'In queue for forging']/preceding-sibling::div", function(result) {
-        const queueCount = result.value
-
-        browser
-          .expect.element("//div[text() = 'In queue for forging']/preceding-sibling::div[text() = '" + queueCount + "']").to.be.present
-        browser
-          .waitForElementNotPresent("//div[text() = 'In queue for forging']/preceding-sibling::div[text() = '" + queueCount + "']", 20000)
-        browser
-          .getText("//div[text() = 'In queue for forging']/preceding-sibling::div", function(result) {
-            browser.assert.notEqual(result.value, queueCount)
-          })
+      .getText(element, function(result) {
+        browser.expect.element(element).text.to.not.contain(result.value).after(20000);
       })
   },
 
@@ -105,7 +92,8 @@ module.exports = {
 
   'it should be possible to sort the active delegates': function (browser) {
     browser
-      .useXpath().expect.element("//th[contains(.,'Name')]").to.be.present
+      .useXpath()
+      .expect.element("//th[contains(.,'Name')]").to.be.present
     browser
       .assert.cssClassPresent("//th[contains(.,'Name')]", 'table-component__th--sort')
       .assert.cssClassNotPresent("//th[contains(.,'Name')]", 'table-component__th--sort-asc')
@@ -124,19 +112,21 @@ module.exports = {
     browser
       .useCss()
       .waitForElementVisible('div.table-component')
-      .useXpath().click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]//a[1]")
+      .useXpath()
+      .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]//a[1]")
       .pause(500)
     browser
-      .useCss()
-      .waitForElementVisible('h1')
-      .assert.containsText('h1', 'Wallet Summary')
+      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+    browser
       .assert.urlContains('/wallets/')
   },
 
   'it should be possible to switch to standby delegates': function (browser) {
     const devServer = browser.globals.devServerURL + '/#/delegate-monitor'
+
     browser
       .url(devServer)
+      .useCss()
       .waitForElementVisible('.bg-theme-feature-background')
     browser
       .useXpath()
