@@ -12,8 +12,8 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('main.theme-light')
-      .waitForElementVisible('h1')
-      .assert.containsText('h1', 'Voters')
+      .useXpath()
+      .waitForElementVisible("//h1[text()[contains(., 'Voters')]]")
   },
 
   'it should display the delegates name': function (browser) {

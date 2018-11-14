@@ -12,12 +12,13 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('main.theme-light')
-      .waitForElementVisible('h1')
-      .assert.containsText('h1', 'Transaction')
+      .useXpath()
+      .waitForElementVisible("//h1[text() = 'Transaction']")
   },
 
-  'it should be possible to copy the transaction ID': function(browser) {
+  'it should be possible to copy the transaction id': function(browser) {
     browser
+      .useCss()
       .waitForElementVisible('img.block')
       .assert.cssClassNotPresent('img.block', 'animated')
     browser
@@ -42,9 +43,9 @@ module.exports = {
       .url(devServer)
       .useCss()
       .waitForElementVisible('main.theme-light')
-      .waitForElementVisible('.list-row-border-b')
     browser
       .useXpath()
+      .waitForElementVisible("//div/div[contains(@class, 'list-row')][2]//a[1]")
       .click("//div/div[contains(@class, 'list-row')][2]//a[1]")
       .pause(500)
     browser
@@ -59,9 +60,9 @@ module.exports = {
       .url(devServer)
       .useCss()
       .waitForElementVisible('main.theme-light')
-      .waitForElementVisible('.list-row-border-b')
     browser
       .useXpath()
+      .waitForElementVisible("//div/div[contains(@class, 'list-row')][8]//a[1]")
       .click("//div/div[contains(@class, 'list-row')][8]//a[1]")
       .pause(500)
     browser
