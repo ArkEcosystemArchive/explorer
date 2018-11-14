@@ -60,7 +60,7 @@
 
         <div class="list-row-border-b-no-wrap" v-if="transaction.vendorField">
           <div class="mr-4">{{ $t("Smartbridge") }}</div>
-          <div class="text-right">{{ transaction.vendorField }}</div>
+          <div class="text-right">{{ emojify(transaction.vendorField) }}</div>
         </div>
 
         <div class="list-row" v-if="transaction.blockid">
@@ -120,13 +120,16 @@ export default {
     async prepareComponent() {
       this.$store.watch(state => state.currency.name, value => this.updateAverage())
     },
+
     async updateAverage() {
       const average = await CryptoCompareService.dailyAverage(this.transaction.timestamp)
       this.setAverage(average)
     },
+
     setTransaction(transaction) {
       this.transaction = transaction
     },
+
     setAverage(average) {
       this.average = average
     }
