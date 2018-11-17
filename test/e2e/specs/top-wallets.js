@@ -12,9 +12,8 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('main.theme-light')
-      .waitForElementVisible('h1')
-      .waitForElementVisible('div.table-component')
-      .assert.containsText('h1', 'Top Wallets')
+      .useXpath()
+      .waitForElementVisible("//h1[text() = 'Top Wallets']")
   },
 
   'it should be possible to navigate to the next page and back': function (browser) {
@@ -75,10 +74,6 @@ module.exports = {
       .useXpath()
       .waitForElementVisible("//h1[text() = 'Wallet Summary']")
       .assert.urlContains('/wallets/')
-    browser
-      .useCss()
-      .waitForElementVisible('h1')
-      .assert.containsText('h1', 'Wallet Summary')
     browser.end()
   }
 }
