@@ -74,7 +74,7 @@ module.exports = {
     browser
       .useCss().waitForElementVisible('div.list-row a')
       .click('div.list-row a')
-      .useXpath().waitForElementVisible("//h1[text() = 'Wallet Summary']")
+      .useXpath().waitForElementVisible("//h1[text() = 'Wallet summary']")
       .assert.urlContains('wallets/ALLZ3TQKTaHm2Bte4SrXL9C5cS8ZovqFfZ')
     browser.end()
   }

@@ -79,7 +79,7 @@ module.exports = {
       .pause(500)
     browser
       .useXpath()
-      .waitForElementVisible("//h1[contains(.,'Wallet Summary')]")
+      .waitForElementVisible("//h1[contains(.,'Wallet summary')]")
       .assert.urlContains('/wallets/')
   },
 

@@ -68,7 +68,7 @@ module.exports = {
       .click("//div[contains(@class, 'bg-theme-feature-background')]/div[3]//div[text() = 'Delegate']/following-sibling::div//a[1]")
       .pause(500)
     browser
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+      .waitForElementVisible("//h1[text() = 'Wallet summary']")
       .assert.urlContains('/wallets/')
   },
 
@@ -116,7 +116,7 @@ module.exports = {
       .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]//a[1]")
       .pause(500)
     browser
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+      .waitForElementVisible("//h1[text() = 'Wallet summary']")
     browser
       .assert.urlContains('/wallets/')
   },
@@ -170,7 +170,7 @@ module.exports = {
       .pause(500)
     browser
       .useXpath()
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+      .waitForElementVisible("//h1[text() = 'Wallet summary']")
       .assert.urlContains('/wallets/')
     browser.end()
   }

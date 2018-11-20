@@ -85,7 +85,7 @@ module.exports = {
       .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[5]//a[1]")
       .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[5]//a[1]")
     browser
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+      .waitForElementVisible("//h1[text() = 'Wallet summary']")
       .assert.urlContains('/wallets/')
     browser.end()
   }
