@@ -70,7 +70,7 @@
   "Last block at height on": "Last block @ {height} on",
 
   "Address": "Adres",
-  "Public Key": "Public Key",
+  "Public key": "Public key",
   "Balance (token)": "Balans ({token})",
   "Copied!": "Gekopieerd!",
   "Copy to clipboard": "Kopieer naar klembord",
@@ -116,7 +116,7 @@
   "Token fees": "{token} kosten",
   "Transaction ID": "Transactie ID",
   "Vendor field": "Verkoper veld",
-  "Wallet Summary": "Wallet Samenvatting",
+  "Wallet summary": "Wallet samenvatting",
 
   "2nd Signature Registration": "Registratie 2e Handtekening",
   "Delegate Registration": "Registratie Afgevaardigde",

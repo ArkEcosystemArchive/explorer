@@ -71,7 +71,7 @@
   "Last block at height on": "Ostatni blok @ {height} wytworzony",
 
   "Address": "Adres",
-  "Public Key": "Klucz publiczny",
+  "Public key": "Klucz publiczny",
   "Balance (token)": "Saldo ({token})",
   "Copied!": "Skopiowano!",
   "Copy to clipboard": "Skopiuj do schowka",
@@ -117,7 +117,7 @@
   "Token fees": "{token} opłacono",
   "Transaction ID": "ID transakcji",
   "Vendor field": "Pole dostawcy",
-  "Wallet Summary": "Podsumowanie Portfela",
+  "Wallet summary": "Podsumowanie Portfela",
 
   "2nd Signature Registration": "Rejestracja Drugiego Podpisu",
   "Delegate Registration": "Rejestracja Delegata",
