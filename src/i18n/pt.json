@@ -70,7 +70,7 @@
   "Last block at height on": "Last block @ {height} on",
 
   "Address": "Endereço",
-  "Public key": "Public Key",
+  "Public Key": "Public Key",
   "Balance (token)": "Balanço ({token})",
   "Copied!": "Copiado!",
   "Copy to clipboard": "Copiar para a Área de Transferência",
@@ -116,7 +116,7 @@
   "Token fees": "{token} taxas",
   "Transaction ID": "ID de transação",
   "Vendor field": "Campo do fornecedor",
-  "Wallet summary": "Sumário da carteira",
+  "Wallet Summary": "Sumário da carteira",
 
   "2nd Signature Registration": "Registro de Senha Secundária",
   "Delegate Registration": "Registro de Delegado",

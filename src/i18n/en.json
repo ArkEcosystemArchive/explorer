@@ -71,7 +71,7 @@
   "Last block at height on": "Last block @ {height} on",
 
   "Address": "Address",
-  "Public key": "Public key",
+  "Public Key": "Public Key",
   "Balance (token)": "Balance ({token})",
   "Copied!": "Copied!",
   "Copy to clipboard": "Copy to clipboard",
@@ -117,7 +117,7 @@
   "Token fees": "{token} fees",
   "Transaction ID": "Transaction ID",
   "Vendor field": "Vendor field",
-  "Wallet summary": "Wallet summary",
+  "Wallet Summary": "Wallet Summary",
 
   "2nd Signature Registration": "2nd Signature Registration",
   "Delegate Registration": "Delegate Registration",
