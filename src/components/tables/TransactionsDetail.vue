@@ -48,7 +48,7 @@
             </div>
             <div v-else>
               <div v-tooltip="row.confirmations + ' ' + $t('Confirmations')">
-                {{ $t("Well Confirmed") }}
+                {{ $t("Well confirmed") }}
               </div>
             </div>
           </div>
