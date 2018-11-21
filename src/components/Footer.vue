@@ -37,7 +37,7 @@
         </svg>
       </a>
 
-	    <a href="mailto:info@ark.io" target="_blank">
+      <a href="mailto:info@ark.io" target="_blank">
         <svg
           viewBox="0 0 24 24"
           class="m-2"
