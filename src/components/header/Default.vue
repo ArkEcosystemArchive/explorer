@@ -26,7 +26,7 @@
           :placeholder="placeholder"
           class="search-input hidden sm:block w-full flex-auto sm:mr-2 py-2 md:py-4 sm:pl-4 bg-transparent" />
         <label
-          for="search" class="search-icon text-grey hover:text-blue p-3 md:p-4"
+          for="search" class="search-icon text-grey border-b-2 margin-t-2 border-transparent hover:border-red hover:text-blue p-3 md:p-4"
           @click="$store.dispatch('ui/setHeaderType', 'search')">
           <svg class="fill-current" width="20" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1216 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z"/></svg>
         </label>
@@ -103,7 +103,6 @@ export default {
   color: var(--color-theme-text-placeholder);
 }
 .search-icon:hover {
-  box-shadow: 0 0 13px 2px rgba(197, 197, 213, 0.24);
   cursor: pointer;
 }
 </style>
