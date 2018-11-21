@@ -7,7 +7,7 @@
     </section>
 
     <section class="page-section pb-5 sm:py-5 md:py-10">
-      <nav class="mx-5 sm:mx-10 mb-8 border-b flex items-end">
+      <nav class="mx-5 sm:mx-10 mb-0 sm:mb-8 border-b flex items-end">
         <div @click="dataView = 'transactions'"
              :class="dataView === 'transactions' ? 'active-tab' : 'inactive-tab'">
           {{ $t("Latest transactions") }}
