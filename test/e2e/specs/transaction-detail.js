@@ -32,7 +32,7 @@ module.exports = {
       .click("//div/div[contains(@class, 'list-row')][1]//a[1]")
       .pause(500)
     browser
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+      .waitForElementVisible("//h1[text() = 'Wallet summary']")
       .assert.urlContains('wallets/AFrPtEmzu6wdVpa2CnRDEKGQQMWgq8nE9V')
   },
 
@@ -49,7 +49,7 @@ module.exports = {
       .click("//div/div[contains(@class, 'list-row')][2]//a[1]")
       .pause(500)
     browser
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+      .waitForElementVisible("//h1[text() = 'Wallet summary']")
       .assert.urlContains('wallets/ATJDMLxBXPxn9bss911HTFCp9PhBHih9uL')
   },
 

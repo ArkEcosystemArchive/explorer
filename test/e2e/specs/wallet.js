@@ -13,7 +13,7 @@ module.exports = {
       .url(devServer)
       .waitForElementVisible('main.theme-light')
       .useXpath()
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+      .waitForElementVisible("//h1[text() = 'Wallet summary']")
   },
 
   'it should be possible to copy the wallet address': function(browser) {
@@ -84,7 +84,7 @@ module.exports = {
 
     browser
       .url(devServer)
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+      .waitForElementVisible("//h1[text() = 'Wallet summary']")
     browser
       .useCss()
       .expect.element('div.modal-container').to.be.not.present
