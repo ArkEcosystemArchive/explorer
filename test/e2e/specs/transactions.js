@@ -89,7 +89,7 @@ module.exports = {
       .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[3]//a[1]")
       .pause(500)
     browser
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+      .waitForElementVisible("//h1[text() = 'Wallet summary']")
       .assert.urlContains('/wallets/')
   },
 
@@ -114,7 +114,7 @@ module.exports = {
             .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]")
             .pause(500)
           browser
-            .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+            .waitForElementVisible("//h1[text() = 'Wallet summary']")
             .assert.urlContains('/wallets/')
         }
       })
