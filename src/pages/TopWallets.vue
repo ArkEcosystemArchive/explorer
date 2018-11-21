@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
     <content-header>{{ $t("Top Wallets") }}</content-header>
-    <section class="page-section py-5 md:py-10">
+    <section class="page-section pb-5 sm:py-5 md:py-10">
       <div class="hidden sm:block">
         <table-wallets :wallets="wallets" :total="supply"></table-wallets>
       </div>

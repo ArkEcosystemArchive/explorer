@@ -1,5 +1,5 @@
 <template>
-  <section class="page-section py-5 md:py-10 mb-5">
+  <section class="page-section pb-5 sm:py-5 md:py-10 mb-5">
     <div class="px-5 sm:px-10">
       <div class="list-row-border-b">
         <div>{{ $t("Transactions") }}</div>

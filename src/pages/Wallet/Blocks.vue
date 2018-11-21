@@ -20,7 +20,7 @@
       </div>
     </section>
 
-    <section class="page-section py-5 md:py-10">
+    <section class="page-section pb-5 sm:py-5 md:py-10">
       <div class="hidden sm:block">
         <table-blocks :blocks="blocks"></table-blocks>
       </div>

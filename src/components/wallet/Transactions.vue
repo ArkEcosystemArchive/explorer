@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="text-2xl mb-5 md:mb-6 px-5 sm:hidden text-theme-text-primary">{{ $t("Transactions") }}</h2>
-    <section class="page-section py-5 md:py-10">
+    <section class="page-section pb-5 sm:py-5 md:py-10">
       <nav class="mx-5 md:mx-10 mb-8 border-b flex items-end">
         <div
           @click="type = 'all'"

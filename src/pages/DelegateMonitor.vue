@@ -4,7 +4,7 @@
 
     <delegate-detail :delegateCount="delegateCount"></delegate-detail>
 
-    <section class="page-section py-5 md:py-10">
+    <section class="page-section pb-5 sm:py-5 md:py-10">
       <nav class="mx-5 sm:mx-10 mb-4 border-b flex items-end">
         <div
           @click="activeTab = 'active'"
