@@ -1,6 +1,6 @@
 <template>
   <span>
-    <div class="text-center" v-if="data === null">
+    <div class="text-center mt-5 sm:mt-0" v-if="data === null">
       <pulse-loader color="#037cff"></pulse-loader>
     </div>
 
