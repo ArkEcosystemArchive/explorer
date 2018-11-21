@@ -1,7 +1,7 @@
 <template>
   <loader :data="delegates">
     <table-component v-if="delegates && delegates.length > 0" :data="delegates" sort-by="approval" sort-order="desc" :show-filter="false" :show-caption="false" table-class="w-full text-xs md:text-base">
-      <table-column show="rate" :label="$t('Rank')" header-class="left-header-cell pl-5 sm:pl-10 w-32" cell-class="p-3 pl-5 sm:pl-10 text-left border-none">
+      <table-column show="rate" :label="$t('Rank')" header-class="p-4 pl-8 sm:pl-10 text-left w-32" cell-class="p-3 pl-8 sm:pl-10 text-left border-none">
         <template slot-scope="row">
           {{ row.rate }}
         </template>
