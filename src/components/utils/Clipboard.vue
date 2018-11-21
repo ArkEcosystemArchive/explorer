@@ -1,5 +1,5 @@
 <template>
-  <button class="flex-none" @click="copy" v-tooltip="{ show: isMobileCopying, content: copying ? $t('Copied!') : $t('Copy to Clipboard'), trigger:'hover'}">
+  <button class="flex-none" @click="copy" v-tooltip="{ show: isMobileCopying, content: copying ? $t('Copied!') : $t('Copy to clipboard'), trigger:'hover'}">
     <img :class="{
       'block': !copying, 'block animated wobble': copying
     }" src="@/assets/images/icons/copy.svg" ref="copyImage" />
