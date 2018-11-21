@@ -38,7 +38,7 @@
       </a>
 
 	    <a href="mailto:info@ark.io" target="_blank">
-	      <svg
+        <svg
           viewBox="0 0 24 24"
           class="m-2"
           xmlns="http://www.w3.org/2000/svg"
