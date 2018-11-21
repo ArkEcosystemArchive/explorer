@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-5 sm:mx-10 mt-5 md:mt-10" :class="[ showPaginator ? 'flex flex-wrap' : 'hidden' ]">
+  <div class="mx-5 sm:mx-10 mt-0 sm:mt-5 md:mt-10" :class="[ showPaginator ? 'flex flex-wrap' : 'hidden' ]">
     <button
       @click="prev"
       :class="{ 'hidden' : page <= 1, 'flex' : page > 1 }"
