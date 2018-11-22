@@ -15,32 +15,32 @@ jobs:
           command: java -jar selenium-server-standalone-3.141.5.jar -log test-reports/selenium.log
           background: true
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}
       - run:
           name: Install
-          command: npm install
+          command: yarn install
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
       - run:
           name: Lint
-          command: npm run lint
+          command: yarn lint
       - run:
           name: Unit tests
-          command: npm run unit
+          command: yarn unit
       - run:
           name: Codecov
           when: on_success
           command: bash <(curl -s https://codecov.io/bash)
       - run:
           name: e2e tests
-          command: npm run e2e
+          command: yarn e2e
           environment:
             WITHOUT_SELENIUM_SERVER: true
       - run:
           name: Build
-          command: npm run build
+          command: yarn build
       - store_artifacts:
           path: test-reports/
           destination: test-results
