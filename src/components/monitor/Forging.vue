@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap p-5">
+  <div class="flex flex-wrap px-5 py-0 sm:py-5">
     <div class="w-1/2 lg:w-1/4 flex items-center px-6 my-6 border-r border-theme-border-secondary flex-col sm:flex-row text-center sm:text-left">
       <div class="meter flex-none text-green mb-4 sm:mb-0">
         <ark-meter :percentage="percentage(totals.forging)"></ark-meter>

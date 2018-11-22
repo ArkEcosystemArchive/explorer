@@ -1,7 +1,7 @@
 <template>
   <div v-if="transactions && transactions.length > 0">
     <h2 class="text-2xl mb-5 md:mb-6 px-5 sm:hidden text-theme-text-primary">{{ $t("Transactions") }}</h2>
-    <section class="page-section pb-5 sm:py-5 md:py-10">
+    <section class="page-section sm:py-5 md:py-10">
       <div class="hidden sm:block">
         <table-transactions :transactions="transactions"></table-transactions>
       </div>
