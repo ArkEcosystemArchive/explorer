@@ -13,7 +13,7 @@ module.exports = {
       .url(devServer)
       .waitForElementVisible('main.theme-light')
       .useXpath()
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+      .waitForElementVisible("//h1[text() = 'Wallet summary']")
   },
 
   'it should be possible to copy the wallet address': function(browser) {

@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <content-header>{{ $t("Wallet Summary") }}</content-header>
+    <content-header>{{ $t("Wallet summary") }}</content-header>
 
     <wallet-details :wallet="wallet"></wallet-details>
 
