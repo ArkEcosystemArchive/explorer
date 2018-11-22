@@ -3,7 +3,7 @@
     @click="$store.dispatch('ui/setNightMode', !nightMode)"
     @mouseover="changeImageSource"
     @mouseleave="setImageSource"
-    class="px-2 py-2 md:py-4 text-yellow flex-none flex items-center border-b-2 margin-t-2 border-transparent hover:border-red">
+    class="px-2 py-2 md:py-4 text-yellow flex-none flex items-center border-b-2 margin-t-2 border-transparent hover:border-red transition">
 
     <img :src="imageSource" width="30" />
   </button>
