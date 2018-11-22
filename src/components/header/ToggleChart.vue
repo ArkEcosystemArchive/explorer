@@ -1,4 +1,4 @@
- <template>
+<template>
   <button
     @click="$store.dispatch('ui/setPriceChart', !priceChart)"
     :class="[
