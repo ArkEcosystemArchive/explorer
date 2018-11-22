@@ -48,7 +48,7 @@
                 <img class="icon flex-none" src="@/assets/images/icons/clock.svg" />
               </div>
               <div v-else>
-                {{ $t("Well Confirmed") }}
+                {{ $t("Well confirmed") }}
               </div>
             </div>
           </div>
