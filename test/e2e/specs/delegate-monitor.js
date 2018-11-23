@@ -33,7 +33,7 @@ module.exports = {
     const element = "//div[text() = 'Last block']/following-sibling::div//a[1]/span"
 
     browser
-      .useXpath().waitForElementVisible("//div[text() = 'Last block']")
+      .useXpath().waitForElementVisible(element)
       .getText(element, function(result) {
         browser.expect.element(element).text.to.not.contain(result.value).after(20000);
       })
@@ -43,7 +43,7 @@ module.exports = {
     const element = "//div[text() = 'In queue for forging']/preceding-sibling::div"
 
     browser
-      .useXpath().waitForElementVisible("//div[text() = 'In queue for forging']")
+      .useXpath().waitForElementVisible(element)
       .getText(element, function(result) {
         browser.expect.element(element).text.to.not.contain(result.value).after(20000);
       })
@@ -93,19 +93,19 @@ module.exports = {
   'it should be possible to sort the active delegates': function (browser) {
     browser
       .useXpath()
-      .expect.element("//th[contains(.,'Name')]").to.be.present
+      .expect.element("//th[contains(., 'Name')]").to.be.present
     browser
-      .assert.cssClassPresent("//th[contains(.,'Name')]", 'table-component__th--sort')
-      .assert.cssClassNotPresent("//th[contains(.,'Name')]", 'table-component__th--sort-asc')
-      .assert.cssClassNotPresent("//th[contains(.,'Name')]", 'table-component__th--sort-desc')
+      .assert.cssClassPresent("//th[contains(., 'Name')]", 'table-component__th--sort')
+      .assert.cssClassNotPresent("//th[contains(., 'Name')]", 'table-component__th--sort-asc')
+      .assert.cssClassNotPresent("//th[contains(., 'Name')]", 'table-component__th--sort-desc')
     browser
-      .click("//th[contains(.,'Name')]")
+      .click("//th[contains(., 'Name')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(.,'Name')]", 'table-component__th--sort-asc')
+    browser.assert.cssClassPresent("//th[contains(., 'Name')]", 'table-component__th--sort-asc')
     browser
-      .click("//th[contains(.,'Name')]")
+      .click("//th[contains(., 'Name')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(.,'Name')]", 'table-component__th--sort-desc')
+    browser.assert.cssClassPresent("//th[contains(., 'Name')]", 'table-component__th--sort-desc')
   },
 
   'it should be possible to click on an active delegates name': function (browser) {
@@ -147,19 +147,19 @@ module.exports = {
 
   'it should be possible to sort the standby delegates': function (browser) {
     browser
-      .useXpath().expect.element("//th[contains(.,'Name')]").to.be.present
+      .useXpath().expect.element("//th[contains(., 'Name')]").to.be.present
     browser
-      .assert.cssClassPresent("//th[contains(.,'Name')]", 'table-component__th--sort')
-      .assert.cssClassNotPresent("//th[contains(.,'Name')]", 'table-component__th--sort-asc')
-      .assert.cssClassNotPresent("//th[contains(.,'Name')]", 'table-component__th--sort-desc')
+      .assert.cssClassPresent("//th[contains(., 'Name')]", 'table-component__th--sort')
+      .assert.cssClassNotPresent("//th[contains(., 'Name')]", 'table-component__th--sort-asc')
+      .assert.cssClassNotPresent("//th[contains(., 'Name')]", 'table-component__th--sort-desc')
     browser
-      .click("//th[contains(.,'Name')]")
+      .click("//th[contains(., 'Name')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(.,'Name')]", 'table-component__th--sort-asc')
+    browser.assert.cssClassPresent("//th[contains(., 'Name')]", 'table-component__th--sort-asc')
     browser
-      .click("//th[contains(.,'Name')]")
+      .click("//th[contains(., 'Name')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(.,'Name')]", 'table-component__th--sort-desc')
+    browser.assert.cssClassPresent("//th[contains(., 'Name')]", 'table-component__th--sort-desc')
   },
 
   'it should be possible to click on the standby delegates name': function (browser) {

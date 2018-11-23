@@ -6,7 +6,7 @@ module.exports = {
   src_folders: ['test/e2e/specs'],
   output_folder: 'test/e2e/reports',
   custom_assertions_path: 'test/e2e/custom-assertions',
-  globals_path: 'globalModules.js',
+  globals_path: 'test/e2e/globalModules.js',
 
   selenium: {
     start_process: !process.env.WITHOUT_SELENIUM_SERVER,

@@ -28,19 +28,19 @@ module.exports = {
 
   'it should be possible to sort the table': function (browser) {
     browser
-      .useXpath().expect.element("//th[contains(.,'ID')]").to.be.present
+      .useXpath().expect.element("//th[contains(., 'ID')]").to.be.present
     browser
-      .assert.cssClassPresent("//th[contains(.,'ID')]", 'table-component__th--sort')
-      .assert.cssClassNotPresent("//th[contains(.,'ID')]", 'table-component__th--sort-asc')
-      .assert.cssClassNotPresent("//th[contains(.,'ID')]", 'table-component__th--sort-desc')
+      .assert.cssClassPresent("//th[contains(., 'ID')]", 'table-component__th--sort')
+      .assert.cssClassNotPresent("//th[contains(., 'ID')]", 'table-component__th--sort-asc')
+      .assert.cssClassNotPresent("//th[contains(., 'ID')]", 'table-component__th--sort-desc')
     browser
-      .click("//th[contains(.,'ID')]")
+      .click("//th[contains(., 'ID')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(.,'ID')]", 'table-component__th--sort-asc')
+    browser.assert.cssClassPresent("//th[contains(., 'ID')]", 'table-component__th--sort-asc')
     browser
-      .click("//th[contains(.,'ID')]")
+      .click("//th[contains(., 'ID')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(.,'ID')]", 'table-component__th--sort-desc')
+    browser.assert.cssClassPresent("//th[contains(., 'ID')]", 'table-component__th--sort-desc')
   },
 
   'it should be possible to navigate to the next page and back': function (browser) {
