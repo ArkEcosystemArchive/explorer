@@ -184,12 +184,13 @@ module.exports = {
     const devServer = browser.globals.devServerURL
 
     browser
+      .useCss()
       .url(devServer)
       .waitForElementVisible('main.theme-light')
-      .waitForElementVisible('button.border-transparent')
-      .click('button.border-transparent')
-    browser
       .useXpath()
+      .waitForElementVisible("//button[contains(@class, 'border-transparent')]//span[contains(., 'Menu')]")
+      .click("//button[contains(@class, 'border-transparent')]//span[contains(., 'Menu')]")
+    browser
       .waitForElementVisible("//button[contains(., 'Top Wallets')]")
       .click("//button[contains(., 'Top Wallets')]")
       .pause(500)
@@ -200,8 +201,9 @@ module.exports = {
 
   'from menu, it should be possible to navigate to delegate monitor': function(browser) {
     browser
-      .useCss().click('button.border-transparent')
-      .useXpath()
+      .waitForElementVisible("//button[contains(@class, 'border-transparent')]//span[contains(., 'Menu')]")
+      .click("//button[contains(@class, 'border-transparent')]//span[contains(., 'Menu')]")
+    browser
       .waitForElementVisible("//button[contains(., 'Delegate Monitor')]")
       .click("//button[contains(., 'Delegate Monitor')]")
       .pause(500)
@@ -212,8 +214,9 @@ module.exports = {
 
   'from menu, it should be possible to navigate back to homepage': function(browser) {
     browser
-      .useCss().click('button.border-transparent')
-      .useXpath()
+      .waitForElementVisible("//button[contains(@class, 'border-transparent')]//span[contains(., 'Menu')]")
+      .click("//button[contains(@class, 'border-transparent')]//span[contains(., 'Menu')]")
+    browser
       .waitForElementVisible("//button[contains(., 'Home')]")
       .click("//button[contains(., 'Home')]")
       .pause(500)
