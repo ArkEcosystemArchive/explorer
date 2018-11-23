@@ -34,6 +34,11 @@ export default {
   async created() {
     const network = require(`../networks/${process.env.EXPLORER_CONFIG}`)
 
+    this.$store.dispatch(
+      'ui/setNightMode',
+      localStorage.getItem('nightMode') || ((network.alias === 'Development') ? true : false)
+    )
+
     this.$store.dispatch('network/setDefaults', network)
 
     this.$store.dispatch('network/setServer', network.server)
@@ -73,11 +78,6 @@ export default {
     this.$store.dispatch(
       'ui/setPriceChart',
       localStorage.getItem('priceChart') || network.config.priceChart
-    )
-
-    this.$store.dispatch(
-      'ui/setNightMode',
-      localStorage.getItem('nightMode') || ((network.alias === 'Development') ? true : false)
     )
 
     this.updateI18n()
