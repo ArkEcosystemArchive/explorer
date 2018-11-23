@@ -1,9 +1,16 @@
 {
   "name": "ark-explorer",
   "version": "3.0.0",
-  "description": "A Vue.js project",
-  "author": "pm",
-  "private": true,
+  "description": "A Blockchain Explorer for ARK using Vue.js and Tailwind CSS",
+  "author": "Brian Faust",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arkecosystem/explorer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/arkecosystem/explorer/issues"
+  },
+  "license": "MIT",
   "scripts": {
     "build": "node build/build.js",
     "build:mainnet": "node build/build.js --network mainnet",
@@ -21,7 +28,7 @@
   "dependencies": {
     "animate.css": "^3.7.0",
     "axios": "^0.18.0",
-    "chart.js": "chartjs/Chart.js#7c3e934",
+    "chart.js": "^2.7.3",
     "connect-history-api-fallback": "^1.5.0",
     "express": "^4.16.3",
     "lodash": "^4.17.10",
@@ -33,7 +40,7 @@
     "vue-i18n": "^8.0.0",
     "vue-router": "^3.0.1",
     "vue-spinner": "^1.0.3",
-    "vue-table-component": "faustbrian/vue-table-component",
+    "vue-table-component": "github:faustbrian/vue-table-component",
     "vuex": "^3.0.1",
     "vuex-router-sync": "^5.0.0"
   },
@@ -56,7 +63,7 @@
     "babel-runtime": "^6.26.0",
     "chai": "^4.1.2",
     "chalk": "^2.4.1",
-    "chromedriver": "^2.41.0",
+    "chromedriver": "^2.43.3",
     "compression-webpack-plugin": "1.1.11",
     "copy-webpack-plugin": "4.5.2",
     "cross-env": "^5.2.0",
@@ -85,7 +92,7 @@
     "mini-css-extract-plugin": "^0.4.1",
     "minimist": "^1.2.0",
     "moment-timezone": "^0.5.21",
-    "nightwatch": "^1.0.11",
+    "nightwatch": "^0.9.21",
     "node-notifier": "^5.2.1",
     "optimize-css-assets-webpack-plugin": "5.0.0",
     "ora": "^3.0.0",
@@ -98,7 +105,7 @@
     "promise-polyfill": "^8.1.0",
     "purgecss-webpack-plugin": "1.2.0",
     "rimraf": "^2.6.2",
-    "selenium-server": "^3.14.0",
+    "selenium-server": "^3.141.59",
     "semver": "^5.5.0",
     "shelljs": "^0.8.2",
     "sinon": "^6.1.5",
