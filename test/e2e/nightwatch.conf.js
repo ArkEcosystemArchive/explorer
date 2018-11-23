@@ -20,11 +20,13 @@ module.exports = {
 
   test_settings: {
     default: {
-      selenium_port: 4444,
-      selenium_host: 'localhost',
+      webdriver: {
+        webdriver_port: 4444,
+        webdriver_host: '127.0.0.1',
+      },
       silent: true,
       globals: {
-        devServerURL: 'http://localhost:' + (process.env.PORT || config.dev.port)
+        devServerURL: 'http://127.0.0.1:' + (process.env.PORT || config.dev.port)
       },
       desiredCapabilities: {
         chromeOptions: {
