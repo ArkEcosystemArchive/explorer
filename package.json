@@ -22,7 +22,7 @@
     "dev:testnet": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --env.network=testnet",
     "unit": "jest --config test/unit/jest.conf.js",
     "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e",
+    "test": "yarn unit && yarn e2e",
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs --fix"
   },
   "dependencies": {
