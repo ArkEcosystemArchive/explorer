@@ -15,6 +15,6 @@ describe('readable timestamp mixin', () => {
       })
       .local()
 
-    expect(mixins.readableTimestamp(22231900, 0)).toEqual(result.format('L LTS'))
+    expect(mixins.readableTimestamp(22231900)).toEqual(result.format('L LTS'))
   })
 })
