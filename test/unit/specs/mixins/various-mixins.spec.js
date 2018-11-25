@@ -91,3 +91,9 @@ describe('networkToken mixin', () => {
     expect(mixins.networkToken()).toEqual('ARK')
   })
 })
+
+describe('emojify mixin', () => {
+  it('should return emoji', () => {
+    expect(mixins.emojify(':smile:')).toEqual('😄')
+  })
+})
