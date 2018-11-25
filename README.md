@@ -1,7 +1,7 @@
 # KI Explorer 3.0
 
 <p align="center">
-    <img src="/ARKExplorer.png" />
+    <img src="/KIExplorer.png" />
 </p>
 
 > Designed and developed from the ground-up, using lean & fast developmental frameworks (Tailwind CSS & Vue.JS).
@@ -123,6 +123,14 @@ If you discover a security vulnerability within this package, please send an e-m
 
 ## Credits
 
+
+* Genki Team:
+
+- [Reda Berrehili](https://github.com/berrehili)
+- [Tarek Awwad](https://github.com/TarekAwwad)
+
+* Ark Original Team
+
 - [Brian Faust](https://github.com/faustbrian)
 - [Lúcio Rubens](https://github.com/luciorubeens)
 - [Alex Barnsley](https://github.com/alexbarnsley)
@@ -130,4 +138,4 @@ If you discover a security vulnerability within this package, please send an e-m
 
 ## License
 
-[MIT](LICENSE) © [ArkEcosystem](https://ark.io)
+[MIT](LICENSE) © [Genki](https://gen.ki) © [ArkEcosystem](https://ark.io)
