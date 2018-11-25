@@ -1,7 +1,20 @@
 import mixins from '@/mixins'
+import moment from 'moment-timezone'
 
 describe('readable timestamp mixin', () => {
   it('should properly format the given data', () => {
-    expect(mixins.readableTimestamp(22231900, 0)).toEqual('12/03/2017 8:31:40 PM')
+    const result = moment()
+      .utc()
+      .set({
+        year: 2017,
+        month: 11,
+        date: 3,
+        hour: 20,
+        minute: 31,
+        second: 40,
+      })
+      .local()
+
+    expect(mixins.readableTimestamp(22231900)).toEqual(result.format('L LTS'))
   })
 })

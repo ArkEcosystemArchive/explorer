@@ -39,19 +39,19 @@ module.exports = {
     browser
       .useCss()
       .waitForElementVisible('div.table-component')
-      .useXpath().expect.element("//th[contains(.,'Address')]").to.be.present
+      .useXpath().expect.element("//th[contains(., 'Address')]").to.be.present
     browser
-      .assert.cssClassPresent("//th[contains(.,'Address')]", 'table-component__th--sort')
-      .assert.cssClassNotPresent("//th[contains(.,'Address')]", 'table-component__th--sort-asc')
-      .assert.cssClassNotPresent("//th[contains(.,'Address')]", 'table-component__th--sort-desc')
+      .assert.cssClassPresent("//th[contains(., 'Address')]", 'table-component__th--sort')
+      .assert.cssClassNotPresent("//th[contains(., 'Address')]", 'table-component__th--sort-asc')
+      .assert.cssClassNotPresent("//th[contains(., 'Address')]", 'table-component__th--sort-desc')
     browser
-      .click("//th[contains(.,'Address')]")
+      .click("//th[contains(., 'Address')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(.,'Address')]", 'table-component__th--sort-asc')
+    browser.assert.cssClassPresent("//th[contains(., 'Address')]", 'table-component__th--sort-asc')
     browser
-      .click("//th[contains(.,'Address')]")
+      .click("//th[contains(., 'Address')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(.,'Address')]", 'table-component__th--sort-desc')
+    browser.assert.cssClassPresent("//th[contains(., 'Address')]", 'table-component__th--sort-desc')
   },
 
   'it should contain 25 wallets on a page': function (browser) {
@@ -72,7 +72,7 @@ module.exports = {
       .pause(500)
     browser
       .useXpath()
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+      .waitForElementVisible("//h1[text() = 'Wallet summary']")
       .assert.urlContains('/wallets/')
     browser.end()
   }
