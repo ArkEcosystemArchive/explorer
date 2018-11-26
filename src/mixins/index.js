@@ -22,7 +22,7 @@ const methods = {
     )
   },
 
-  readableTimestamp(value, timeZoneOffset) {
+  readableTimestamp(value) {
     return moment()
       .utc()
       .set({
