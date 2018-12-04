@@ -41,7 +41,9 @@
 
       <table-column show="fee" :label="$t('Fee (token)', { token: networkToken() })" header-class="right-header-end-cell hidden lg:table-cell" cell-class="right-end-cell hidden lg:table-cell">
         <template slot-scope="row">
-          {{ readableCrypto(row.fee) }}
+          <span class="whitespace-no-wrap">
+            {{ readableCrypto(row.fee) }}
+          </span>
         </template>
       </table-column>
     </table-component>
