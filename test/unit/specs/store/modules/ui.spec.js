@@ -35,6 +35,16 @@ describe('ui store module', () => {
     expect(store.getters['ui/language']).toEqual('nl')
   })
 
+  it('should have navigator or English set as default locale', () => {
+    expect(store.getters['ui/locale']).toEqual(navigator.language || 'en-gb')
+  })
+
+  it('should set the locale', () => {
+    store.dispatch('ui/setLocale', 'nl')
+
+    expect(store.getters['ui/locale']).toEqual('nl')
+  })
+
   it('should set the header type', () => {
     store.dispatch('ui/setHeaderType', 'headerType')
 

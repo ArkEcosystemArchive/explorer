@@ -12,12 +12,13 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('main.theme-light')
-      .waitForElementVisible('h1')
-      .assert.containsText('h1', 'Wallet Summary')
+      .useXpath()
+      .waitForElementVisible("//h1[text() = 'Wallet summary']")
   },
 
   'it should be possible to copy the wallet address': function(browser) {
     browser
+      .useCss()
       .waitForElementVisible('img.block')
       .assert.cssClassNotPresent('img.block', 'animated')
     browser
@@ -27,7 +28,8 @@ module.exports = {
 
   'it should be possible to see the balance and transaction count': function (browser) {
     browser
-      .useXpath().expect.element("//div[contains(., 'Balance')]").to.be.present
+      .useXpath()
+      .expect.element("//div[contains(., 'Balance')]").to.be.present
     browser
       .expect.element("//div[contains(., 'Transactions')]").to.be.present
     browser

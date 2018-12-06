@@ -15,12 +15,13 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('main.theme-light')
-      .waitForElementVisible('h1')
-      .assert.containsText('h1', 'Latest transactions and blocks')
+      .useXpath()
+      .waitForElementVisible("//h1[text() = 'Latest transactions and blocks']")
   },
 
   'homepage should contain expected components': function(browser) {
     browser
+      .useCss()
       .elements('css selector', '.bg-stat-background > div', function(result) {
         browser.elementIdText(result.value[0].ELEMENT, function(elemResult) {
           browser.assert.ok(elemResult.value.startsWith('Height'))
@@ -147,7 +148,7 @@ module.exports = {
         .pause(1000)
       browser.getText('h1', function(result2) {
         // translation should've changed
-        browser.assert.ok(result.value !== result2.value)
+        browser.assert.notEqual(result.value, result2.value)
 
         // end session to restore default language (for other tests)
         browser.end()
@@ -166,13 +167,13 @@ module.exports = {
     browser.assert.visible('.menu-button')
     browser.elements('css selector', '.menu-button', function(result) {
       browser.elementIdText(result.value[0].ELEMENT, function(elemResult) {
-        browser.assert.ok(elemResult.value === 'Home')
+        browser.assert.equal(elemResult.value, 'Home')
       })
       browser.elementIdText(result.value[1].ELEMENT, function(elemResult) {
-        browser.assert.ok(elemResult.value === 'Top Wallets')
+        browser.assert.equal(elemResult.value, 'Top Wallets')
       })
       browser.elementIdText(result.value[2].ELEMENT, function(elemResult) {
-        browser.assert.ok(elemResult.value === 'Delegate Monitor')
+        browser.assert.equal(elemResult.value, 'Delegate Monitor')
       })
     })
 
@@ -183,12 +184,13 @@ module.exports = {
     const devServer = browser.globals.devServerURL
 
     browser
+      .useCss()
       .url(devServer)
       .waitForElementVisible('main.theme-light')
-      .waitForElementVisible('button.border-transparent')
-      .click('button.border-transparent')
-    browser
       .useXpath()
+      .waitForElementVisible("//button[contains(@class, 'border-transparent')]//span[contains(., 'Menu')]")
+      .click("//button[contains(@class, 'border-transparent')]//span[contains(., 'Menu')]")
+    browser
       .waitForElementVisible("//button[contains(., 'Top Wallets')]")
       .click("//button[contains(., 'Top Wallets')]")
       .pause(500)
@@ -199,8 +201,9 @@ module.exports = {
 
   'from menu, it should be possible to navigate to delegate monitor': function(browser) {
     browser
-      .useCss().click('button.border-transparent')
-      .useXpath()
+      .waitForElementVisible("//button[contains(@class, 'border-transparent')]//span[contains(., 'Menu')]")
+      .click("//button[contains(@class, 'border-transparent')]//span[contains(., 'Menu')]")
+    browser
       .waitForElementVisible("//button[contains(., 'Delegate Monitor')]")
       .click("//button[contains(., 'Delegate Monitor')]")
       .pause(500)
@@ -211,8 +214,9 @@ module.exports = {
 
   'from menu, it should be possible to navigate back to homepage': function(browser) {
     browser
-      .useCss().click('button.border-transparent')
-      .useXpath()
+      .waitForElementVisible("//button[contains(@class, 'border-transparent')]//span[contains(., 'Menu')]")
+      .click("//button[contains(@class, 'border-transparent')]//span[contains(., 'Menu')]")
+    browser
       .waitForElementVisible("//button[contains(., 'Home')]")
       .click("//button[contains(., 'Home')]")
       .pause(500)
@@ -235,6 +239,7 @@ module.exports = {
 
   'latest block table should refresh automatically': function (browser) {
     const devServer = browser.globals.devServerURL
+    const element = "//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]"
 
     browser
       .url(devServer)
@@ -242,17 +247,8 @@ module.exports = {
       .click("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest blocks')]")
       .waitForElementVisible("//thead[contains(@class, 'table-component__table__head')]//tr[1]//th[4][contains(., 'Transactions')]")
     browser
-      .getText("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]", function(result) {
-        const blockId = result.value
-
-        browser
-          .expect.element("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2][contains(., '" + blockId + "')]").to.be.present
-        browser
-          .waitForElementNotPresent("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2][contains(., '" + blockId + "')]", 20000)
-        browser
-          .getText("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]", function(result) {
-            browser.assert.notEqual(result.value, blockId)
-          })
+      .getText(element, function(result) {
+        browser.expect.element(element).text.to.not.contain(result.value).after(20000);
       })
   },
 
@@ -274,7 +270,7 @@ module.exports = {
       .pause(1000)
     browser
       .useXpath()
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+      .waitForElementVisible("//h1[text() = 'Wallet summary']")
       .assert.urlContains('/wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs')
   },
 
@@ -295,7 +291,7 @@ module.exports = {
       .pause(1000)
     browser
       .useXpath()
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+      .waitForElementVisible("//h1[text() = 'Wallet summary']")
       .assert.urlContains('/wallets/AeLpRK8rFVtBeyBVqBtdQpWDfLzaiNujKr')
   },
 
@@ -316,7 +312,7 @@ module.exports = {
       .pause(1000)
     browser
       .useXpath()
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+      .waitForElementVisible("//h1[text() = 'Wallet summary']")
       .assert.urlContains('/wallets/AeLpRK8rFVtBeyBVqBtdQpWDfLzaiNujKr')
   },
 
@@ -337,11 +333,11 @@ module.exports = {
       .pause(1000)
     browser
       .useXpath()
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+      .waitForElementVisible("//h1[text() = 'Wallet summary']")
       .assert.urlContains('/wallets/AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv')
   },
 
-  'it should be possible to search for a block ID': function (browser) {
+  'it should be possible to search for a block id': function (browser) {
     const devServer = browser.globals.devServerURL
 
     browser
@@ -362,7 +358,7 @@ module.exports = {
       .assert.urlContains('/block/13507259488170268466')
   },
 
-  'it should be possible to search for a transaction ID': function (browser) {
+  'it should be possible to search for a transaction id': function (browser) {
     const devServer = browser.globals.devServerURL
 
     browser

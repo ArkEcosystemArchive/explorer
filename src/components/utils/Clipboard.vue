@@ -1,8 +1,6 @@
 <template>
-  <button class="flex-none" @click="copy" v-tooltip="{ show: isMobileCopying, content: copying ? $t('Copied!') : $t('Copy to Clipboard'), trigger:'hover'}">
-    <img :class="{
-      'block': !copying, 'block animated wobble': copying
-    }" src="@/assets/images/icons/copy.svg" ref="copyImage" />
+  <button class="flex-none" @click="copy" v-tooltip="getTooltip()">
+    <img class="block" :class="{ 'animated wobble': copying }" src="@/assets/images/icons/copy.svg" ref="copyImage" />
   </button>
 </template>
 
@@ -17,10 +15,33 @@ export default {
 
   data: () => ({
     copying: false,
-    isMobileCopying: false
+    notSupported: false
   }),
 
   methods: {
+    getTooltip() {
+      const tooltip = {
+        content: this.$i18n.t('Copy to clipboard'),
+        trigger: 'hover',
+        show: this.copying,
+        hideOnTargetClick: this.copying
+      }
+
+      if (this.copying) {
+        tooltip.delay = { show: 0, hide: 1000 }
+
+        if (this.notSupported) {
+          tooltip.content = this.$i18n.t('Error!')
+          tooltip.classes ='tooltip-bg-2'
+        } else {
+          tooltip.content = this.$i18n.t('Copied!')
+          tooltip.classes ='tooltip-bg-0'
+        }
+      }
+
+      return tooltip
+    },
+
     copy() {
       let textArea = document.createElement('textarea')
       textArea.value = this.value
@@ -30,19 +51,14 @@ export default {
       document.body.appendChild(textArea)
       textArea.select()
 
+      this.copying = true
+      setTimeout(() => (this.copying = false), 1200)
+
       try {
-        this.copying = true
-
-        setTimeout(() => (this.copying = false), 500)
-
-        if (window.innerWidth < 768) {
-          this.isMobileCopying = true
-          setTimeout(() => (this.isMobileCopying = false), 400) // If set to 500, it will briefly show 'Copy to clipboard' before closing tooltip
-        }
-
+        this.notSupported = false
         document.execCommand('copy')
       } catch (err) {
-        console.error('Clipboard not supported!')
+        this.notSupported = true
       }
 
       document.body.removeChild(textArea)

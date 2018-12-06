@@ -12,12 +12,13 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('main.theme-light')
-      .waitForElementVisible('h1')
-      .assert.containsText('h1', 'Wallet Summary')
+      .useXpath()
+      .waitForElementVisible("//h1[text() = 'Wallet summary']")
   },
 
   'it should be possible to copy the wallet address': function(browser) {
     browser
+      .useCss()
       .waitForElementVisible('img.block')
       .assert.cssClassNotPresent('img.block', 'animated')
     browser
@@ -83,7 +84,7 @@ module.exports = {
 
     browser
       .url(devServer)
-      .waitForElementVisible("//h1[text() = 'Wallet Summary']")
+      .waitForElementVisible("//h1[text() = 'Wallet summary']")
     browser
       .useCss()
       .expect.element('div.modal-container').to.be.not.present

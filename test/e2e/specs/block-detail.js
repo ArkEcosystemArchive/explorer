@@ -12,17 +12,17 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('main.theme-light')
-      .waitForElementVisible('h1')
-      .assert.containsText('h1', 'Block')
+      .useXpath()
+      .waitForElementVisible("//h1[text() = 'Block']")
   },
 
   'it should be possible to navigate to next block and back': function(browser) {
     browser
-      .assert.containsText('div.semibold.truncate span', '3487084709104787070')
-      .useXpath().click("//button[contains(., 'Next')]")
+      .waitForElementVisible("//div[contains(@class, 'semibold') and contains(@class, 'truncate')]/span[contains(text(), '3487084709104787070')]")
+      .click("//button[contains(., 'Next')]")
       .waitForElementVisible("//div[contains(@class, 'semibold') and contains(@class, 'truncate')]/span[contains(text(), '12152817243754268433')]")
     browser
-      .useXpath().click("//button[contains(., 'Previous')]")
+      .click("//button[contains(., 'Previous')]")
       .waitForElementVisible("//div[contains(@class, 'semibold') and contains(@class, 'truncate')]/span[contains(text(), '3487084709104787070')]")
   },
 
@@ -51,7 +51,7 @@ module.exports = {
       })
   },
 
-  'it should be possible to copy the block ID': function(browser) {
+  'it should be possible to copy the block id': function (browser) {
     browser
       .assert.cssClassNotPresent('img.block', 'animated')
     browser
@@ -60,20 +60,13 @@ module.exports = {
   },
 
   'it should refresh the confirmation count automatically': function (browser) {
+    const element = "//div[contains(@class, 'list-row-border-b')][2]//div[2]"
+
     browser
       .waitForElementVisible('div.list-row-border-b')
       .useXpath()
-      .getText("//div[contains(@class, 'list-row-border-b')][2]//div[2]", function(result) {
-        const confirmations = result.value
-
-        browser
-          .expect.element("//div[contains(@class, 'list-row-border-b')][2]//div[2][text() = '" + confirmations + "']").to.be.present
-        browser
-          .waitForElementNotPresent("//div[contains(@class, 'list-row-border-b')][2]//div[2][text() = '" + confirmations + "']", 20000)
-        browser
-          .getText("//div[contains(@class, 'list-row-border-b')][2]//div[2]", function(result) {
-            browser.assert.notEqual(result.value, confirmations)
-          })
+      .getText(element, function(result) {
+        browser.expect.element(element).text.to.not.contain(result.value).after(20000);
       })
   },
 
@@ -81,7 +74,7 @@ module.exports = {
     browser
       .useCss().waitForElementVisible('div.list-row a')
       .click('div.list-row a')
-      .useXpath().waitForElementVisible("//h1[text() = 'Wallet Summary']")
+      .useXpath().waitForElementVisible("//h1[text() = 'Wallet summary']")
       .assert.urlContains('wallets/ALLZ3TQKTaHm2Bte4SrXL9C5cS8ZovqFfZ')
     browser.end()
   }
