@@ -26,14 +26,14 @@
         <div class="list-row-border-b">
           <div>{{ $t("Sender") }}</div>
           <div class="truncate">
-            <link-wallet :address="transaction.senderId">{{ transaction.senderId }}</link-wallet>
+            <link-wallet :address="transaction.sender">{{ transaction.sender }}</link-wallet>
           </div>
         </div>
 
         <div class="list-row-border-b">
           <div>{{ $t("Recipient") }}</div>
           <div class="truncate">
-            <link-wallet :address="transaction.recipientId" :type="transaction.type" :asset="transaction.asset">{{ transaction.recipientId }}</link-wallet>
+            <link-wallet :address="transaction.recipient" :type="transaction.type" :asset="transaction.asset">{{ transaction.recipient }}</link-wallet>
           </div>
         </div>
 
@@ -55,7 +55,7 @@
 
         <div class="list-row-border-b">
           <div>{{ $t("Timestamp") }}</div>
-          <div>{{ readableTimestamp(transaction.timestamp) }}</div>
+          <div>{{ readableTimestamp(transaction.timestamp.unix) }}</div>
         </div>
 
         <div class="list-row-border-b-no-wrap" v-if="transaction.vendorField">
@@ -63,9 +63,9 @@
           <div class="text-right">{{ emojify(transaction.vendorField) }}</div>
         </div>
 
-        <div class="list-row" v-if="transaction.blockid">
+        <div class="list-row" v-if="transaction.blockId">
           <div>{{ $t("Block") }}</div>
-          <div><link-block :id="transaction.blockid">{{ transaction.blockid }}</link-block></div>
+          <div><link-block :id="transaction.blockId">{{ transaction.blockId }}</link-block></div>
         </div>
       </div>
     </section>
