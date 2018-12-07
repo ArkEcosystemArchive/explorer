@@ -7,9 +7,9 @@
           <link-transaction :id="transaction.id" :smart-bridge="transaction.vendorField"></link-transaction>
         </div>
 
-        <div v-if="transaction.timestamp" class="list-row-border-b">
+        <div class="list-row-border-b">
           <div>{{ $t("Timestamp") }}</div>
-          <div>{{ readableTimestamp(transaction.timestamp.unix) }}</div>
+          <div v-if="transaction.timestamp">{{ readableTimestamp(transaction.timestamp.unix) }}</div>
         </div>
 
         <div class="list-row-border-b">
