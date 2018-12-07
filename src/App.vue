@@ -16,6 +16,7 @@ import AppHeader from '@/components/header/Main'
 import AppFooter from '@/components/Footer'
 import CryptoCompareService from '@/services/crypto-compare'
 import BlockService from '@/services/block'
+import BlockchainService from '@/services/blockchain'
 import DelegateService from '@/services/delegate'
 import NodeService from '@/services/node'
 import { mapGetters } from 'vuex'
@@ -111,12 +112,12 @@ export default {
     },
 
     async updateSupply() {
-      const supply = await BlockService.supply()
+      const supply = await BlockchainService.supply()
       this.$store.dispatch('network/setSupply', supply)
     },
 
     async updateHeight() {
-      const height = await BlockService.height()
+      const height = await BlockchainService.height()
       this.$store.dispatch('network/setHeight', height)
     },
 
