@@ -44,7 +44,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import TransactionService from '@/services/transaction'
+import WalletService from '@/services/wallet'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -74,7 +74,7 @@ export default {
       this.transactions = null
 
       if (this.wallet.address !== undefined) {
-        const transactions = await TransactionService[`${this.type}ByAddress`](
+        const transactions = await WalletService[`${this.type}ByAddress`](
           this.wallet.address,
           this.page
         )

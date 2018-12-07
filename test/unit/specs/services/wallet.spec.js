@@ -59,14 +59,14 @@ describe('Wallet Service', () => {
   })
 
   it('should return latest transactions for an address and page offset', async() => {
-    const data = await WalletService.paginateByAddress('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK', 1)
+    const data = await WalletService.allByAddress('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK', 1)
     expect(data).toHaveLength(25)
     expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(transactionPropertyArray))
     expect(data[0].timestamp < data[1].timestamp)
   })
 
   it('should return latest transactions for an address with page offset and given limit', async() => {
-    const data = await WalletService.paginateByAddress('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK', 2, 40)
+    const data = await WalletService.allByAddress('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK', 2, 40)
     expect(data).toHaveLength(40)
     expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(transactionPropertyArray))
     expect(data[0].timestamp < data[1].timestamp)

@@ -7,7 +7,7 @@ class WalletService {
     return response.data
   }
 
-  async paginateByAddress(address, page = 1, limit = 25) {
+  async allByAddress(address, page = 1, limit = 25) {
     const response = await ApiService.get(`wallets/${address}/transactions`, {
       params: {
         page,
@@ -21,8 +21,7 @@ class WalletService {
     const response = await ApiService.get(`wallets/${address}/transactions/sent`, {
       params: {
         page,
-        limit,
-        orderBy: 'timestamp:desc'
+        limit
       }
     })
     return response.data
@@ -32,8 +31,7 @@ class WalletService {
     const response = await ApiService.get(`wallets/${address}/transactions/received`, {
       params: {
         page,
-        limit,
-        orderBy: 'timestamp:desc'
+        limit
       }
     })
     return response.data
