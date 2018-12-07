@@ -4,57 +4,62 @@ class BlockService {
   async latest(limit = 25) {
     const response = await ApiService.get('blocks', {
       params: {
-        orderBy: 'height:desc',
         limit
       }
     })
-    return response.data.blocks
+
+    return response.data
   }
 
   async last() {
     const response = await ApiService.get('blocks', {
       params: {
-        orderBy: 'height:desc',
         limit: 1
       }
     })
-    return response.data.blocks[0]
+
+    return response.data[0]
   }
 
   async find(id) {
-    const response = await ApiService.get('blocks/get', {
+    const response = await ApiService.get(`blocks/${id}`)
+    return response.data
+  }
+
+  async transactionsByBlock(id, page = 1, limit = 25) {
+    const response = await ApiService.get(`blocks/${id}/transactions`, {
       params: {
-        id
+        page,
+        limit
       }
     })
-    return response.data.block
+    return response.data
+  }
+
+  async transactionsByBlockCount(id) {
+    const response = await ApiService.get(`blocks/${id}`)
+    return response.data.transactions
   }
 
   async paginate(page, limit = 25) {
-    const offset = page > 1 ? (page - 1) * limit : 0
-
     const response = await ApiService.get('blocks', {
       params: {
-        orderBy: 'height:desc',
         limit,
-        offset
+        page
       }
     })
-    return response.data.blocks
+
+    return response.data
   }
 
   async findPrevious(height) {
-    const response = await ApiService.get('blocks', {
-      params: { height: height - 1 }
-    })
-    return response.data.blocks[0]
+    const response = await ApiService.get(`blocks/${height - 1}`)
+    return response.data
   }
 
   async findNext(height) {
-    const response = await ApiService.get('blocks', {
-      params: { height: height + 1 }
-    })
-    return response.data.blocks[0]
+    const response = await ApiService.get(`blocks/${height + 1}`)
+    return response.data
   }
 }
 

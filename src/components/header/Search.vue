@@ -74,32 +74,26 @@ export default {
       }
 
       try {
-        const responseAddress = await SearchService.findByAddress(this.query)
-        this.changePage('wallet', { address: responseAddress.account.address })
+        const responseAddress = await SearchService.walletByAddress(this.query)
+        this.changePage('wallet', { address: responseAddress.address })
         return
       } catch(e) { this.updateSearchCount(e) }
 
       try {
-        const responseUsername = await SearchService.findByUsername(this.query)
-        this.changePage('wallet', { address: responseUsername.delegate.address })
+        const responsePublicKey = await SearchService.delegateByQuery(this.query)
+        this.changePage('wallet', { address: responsePublicKey.address })
         return
       } catch(e) { this.updateSearchCount(e) }
 
       try {
-        const responsePublicKey = await SearchService.findByPublicKey(this.query)
-        this.changePage('wallet', { address: responsePublicKey.delegate.address })
+        const responseBlock = await SearchService.blockByQuery(this.query)
+        this.changePage('block', { id: responseBlock.id })
         return
       } catch(e) { this.updateSearchCount(e) }
 
       try {
-        const responseBlock = await SearchService.findByBlockId(this.query)
-        this.changePage('block', { id: responseBlock.block.id })
-        return
-      } catch(e) { this.updateSearchCount(e) }
-
-      try {
-        const responseTransaction = await SearchService.findByTransactionId(this.query)
-        this.changePage('transaction', { id: responseTransaction.transaction.id })
+        const responseTransaction = await SearchService.transactionById(this.query)
+        this.changePage('transaction', { id: responseTransaction.id })
         return
       } catch(e) { this.updateSearchCount(e) }
     },
@@ -111,7 +105,7 @@ export default {
 
       // Increment counter to keep track of whether we found anything
       this.searchCount += 1
-      if (this.searchCount === 7) { // Should match total amount of callbacks
+      if (this.searchCount === 6) { // Should match total amount of callbacks
         this.nothingFound = true
         setTimeout(() => (this.nothingFound = false), 1500)
       }

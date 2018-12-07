@@ -1,29 +1,23 @@
-import ApiService from '@/services/api'
+import WalletService from '@/services/wallet'
+import DelegateService from '@/services/delegate'
+import BlockService from '@/services/block'
+import TransactionService from '@/services/transaction'
 
 class SearchService {
-  async findByAddress(address) {
-    const response = await ApiService.get('accounts', {params: {address}})
-    return response.data
+  async walletByAddress(address) {
+    return await WalletService.find(address)
   }
 
-  async findByUsername(username) {
-    const response = await ApiService.get('delegates/get', {params: {username}})
-    return response.data
+  async delegateByQuery(query) {
+    return await DelegateService.find(query)
   }
 
-  async findByPublicKey(publicKey) {
-    const response = await ApiService.get('delegates/get', {params: {publicKey}})
-    return response.data
+  async blockByQuery(id) {
+    return await BlockService.find(id)
   }
 
-  async findByBlockId(id) {
-    const response = await ApiService.get('blocks/get', {params: {id}})
-    return response.data
-  }
-
-  async findByTransactionId(id) {
-    const response = await ApiService.get('transactions/get', {params: {id}})
-    return response.data
+  async transactionById(id) {
+    return await TransactionService.find(id)
   }
 }
 

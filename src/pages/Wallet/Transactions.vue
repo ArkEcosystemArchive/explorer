@@ -53,7 +53,6 @@
 
 <script type="text/ecmascript-6">
 import WalletService from '@/services/wallet'
-import TransactionService from '@/services/transaction'
 
 export default {
   data: () => ({
@@ -71,7 +70,7 @@ export default {
   async beforeRouteEnter (to, from, next) {
     try {
       const wallet = await WalletService.find(to.params.address)
-      const transactions = await TransactionService[`${to.params.type}ByAddress`](wallet.address, to.params.page)
+      const transactions = await WalletService[`${to.params.type}ByAddress`](wallet.address, to.params.page)
       next(vm => {
         vm.setWallet(wallet)
         vm.setTransactions(transactions)
@@ -85,7 +84,7 @@ export default {
 
     try {
       const wallet = await WalletService.find(to.params.address)
-      const transactions = await TransactionService[`${to.params.type}ByAddress`](wallet.address, to.params.page)
+      const transactions = await WalletService[`${to.params.type}ByAddress`](wallet.address, to.params.page)
       this.getTotalTransactions(to.params.type)
       this.setWallet(wallet)
       this.setTransactions(transactions)
@@ -132,13 +131,13 @@ export default {
 
     async getSentCount() {
       const wallet = await WalletService.find(this.address)
-      const response = await TransactionService.sentByAddressCount(wallet.address)
+      const response = await WalletService.sentByAddressCount(wallet.address)
       this.totalTransactions += Number(response)
     },
 
     async getReceivedCount() {
       const wallet = await WalletService.find(this.address)
-      const received = await TransactionService.receivedByAddressCount(wallet.address)
+      const received = await WalletService.receivedByAddressCount(wallet.address)
       this.totalTransactions += Number(received)
     },
 

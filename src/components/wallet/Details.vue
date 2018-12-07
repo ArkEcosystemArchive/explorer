@@ -163,7 +163,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import TransactionService from '@/services/transaction'
+import WalletService from '@/services/wallet'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -192,12 +192,12 @@ export default {
 
   methods: {
     async getSendCount() {
-      const response = await TransactionService.sentByAddressCount(this.wallet.address)
+      const response = await WalletService.sentByAddressCount(this.wallet.address)
       this.sendCount = response
     },
 
     async getReceivedCount() {
-      const response = await TransactionService.receivedByAddressCount(this.wallet.address)
+      const response = await WalletService.receivedByAddressCount(this.wallet.address)
       this.receivedCount = response
     },
   },

@@ -6,27 +6,19 @@ import _ from 'lodash'
 
 class DelegateService {
   async all() {
-    const activeDelegates = store.getters['network/activeDelegates']
-
-    const response = await ApiService.get('delegates', {
-      params: {
-        limit: activeDelegates
-      }
-    })
+    const response = await ApiService.get('delegates')
 
     const requests = []
-    requests.push(response)
 
     for (
       let index = 1;
-      index < Math.ceil(response.data.totalCount / activeDelegates);
+      index <= response.meta.pageCount;
       index++
     ) {
       requests.push(
         ApiService.get('delegates', {
           params: {
-            limit: activeDelegates,
-            offset: index * activeDelegates
+            page: index
           }
         })
       )
@@ -36,25 +28,15 @@ class DelegateService {
 
     return results
       .map(result => {
-        return result.data.delegates
+        return result.data
       })
       .reduce((a, b) => [...a, ...b])
   }
 
   async voters(publicKey, excludeLowBalances = true) {
-    const response = await ApiService.get('delegates/voters', {
-      params: {publicKey}
-    })
+    const response = await ApiService.get(`delegates/${publicKey}/voters`)
 
-    let voters = _.orderBy(
-      response.data.accounts.map(account => {
-        account.balance = Number(account.balance)
-
-        return account
-      }),
-      'balance',
-      'desc'
-    )
+    let voters = response.data
 
     if (excludeLowBalances) {
       voters = _.filter(voters, account => {
@@ -65,40 +47,20 @@ class DelegateService {
     return voters
   }
 
-  async findByUsername(username) {
-    const response = await ApiService.get('delegates/get', {
-      params: {username}
-    })
-    return response.data.delegate
-  }
-
-  async find(publicKey) {
-    const response = await ApiService.get('delegates/get', {
-      params: {publicKey}
-    })
-
-    const delegate = response.data.delegate
-
-    if (!delegate) {
-      return false
-    }
-
-    const forgeResponse = await ApiService.get(
-      `delegates/forging/getForgedByAccount?generatorPublicKey=${
-        delegate.publicKey
-      }`
-    )
-
-    delegate.forged = Number(forgeResponse.data.forged)
-
-    return delegate
+  async find(query) {
+    const response = await ApiService.get(`delegates/${query}`)
+    return response.data
   }
 
   async standby() {
     const activeDelegates = store.getters['network/activeDelegates']
 
-    const response = await ApiService.get('delegates', {params: {offset: activeDelegates}})
-    return response.data.delegates
+    const response = await ApiService.get('delegates', {
+      params: {
+        offset: activeDelegates
+      }
+    })
+    return response.data
   }
 
   async nextForgers() {
@@ -118,7 +80,7 @@ class DelegateService {
 
     const response = await ApiService.get('delegates', {
       params: {
-        orderBy: 'rate:asc',
+        orderBy: 'rank:desc',
         limit: activeDelegates
       }
     })
@@ -129,7 +91,7 @@ class DelegateService {
     const lastBlocksFetched = JSON.parse(sessionStorage.getItem('lastBlocksFetched') || '[]')
     sessionStorage.setItem('lastBlocksFetched', JSON.stringify(blocks))
 
-    const delegates = response.data.delegates.map(delegate => {
+    const delegates = response.data.map(delegate => {
       const lastBlock = blocks.find(
         b => b.generatorPublicKey === delegate.publicKey
       )
@@ -208,24 +170,10 @@ class DelegateService {
       }
     })
 
-    const delegates = response.data.delegates
-    const requests = []
-
-    delegates.forEach(delegate => {
-      requests.push(
-        ApiService.get('delegates/forging/getForgedByAccount', {
-          params: {
-            generatorPublicKey: delegate.publicKey
-          }
-        })
-      )
-    })
-
-    const results = await Promise.all(requests)
-    return results.map((result, index) => {
+    return response.data.map((delegate, index) => {
       return {
-        delegate: delegates[index].publicKey,
-        forged: Number(result.data.forged)
+        delegate: delegate.publicKey,
+        forged: Number(delegate.forged.total)
       }
     })
   }
@@ -237,7 +185,7 @@ class DelegateService {
         limit: 1
       }
     })
-    return response.data.totalCount
+    return response.meta.totalCount
   }
 }
 

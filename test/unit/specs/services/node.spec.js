@@ -3,7 +3,7 @@ import store from '@/store'
 
 describe('Node Service', () => {
   beforeAll(() => {
-    store.dispatch('network/setServer', 'https://dexplorer.ark.io:8443/api/v2')
+    store.dispatch('network/setServer', 'https://explorer.ark.io/api/v2')
   })
 
   it('should return network settings', async () => {
