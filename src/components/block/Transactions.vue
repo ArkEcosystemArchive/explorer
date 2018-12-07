@@ -18,7 +18,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import TransactionService from '@/services/transaction'
+import BlockService from '@/services/block'
 
 export default {
   props: {
@@ -32,16 +32,23 @@ export default {
 
   watch: {
     block() {
+      this.resettTransactions()
       this.getTransactions()
     }
   },
 
   methods: {
+    resettTransactions() {
+      this.transactions = null
+    },
+
     async getTransactions () {
       if (!this.block.id) return
 
-      const response = await TransactionService.findByBlock(this.block.id)
-      this.transactions = response
+      if (this.block.transactions) {
+        const response = await BlockService.transactionsByBlock(this.block.id)
+        this.transactions = response
+      }
     }
   }
 }

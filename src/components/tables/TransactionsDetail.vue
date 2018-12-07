@@ -9,19 +9,19 @@
 
       <table-column show="timestamp" :label="$t('Timestamp')" header-class="left-header-cell hidden lg:table-cell" cell-class="left-cell hidden lg:table-cell">
         <template slot-scope="row">
-          {{ readableTimestamp(row.timestamp) }}
+          {{ readableTimestamp(row.timestamp.unix) }}
         </template>
       </table-column>
 
       <table-column show="senderId" :label="$t('Sender')" header-class="left-header-cell" cell-class="left-cell">
         <template slot-scope="row">
-          <link-wallet :address="row.senderId"></link-wallet>
+          <link-wallet :address="row.sender"></link-wallet>
         </template>
       </table-column>
 
       <table-column show="recipientId" :label="$t('Recipient')" header-class="left-header-cell" cell-class="left-cell">
         <template slot-scope="row">
-          <link-wallet :address="row.recipientId" :type="row.type" :asset="row.asset"></link-wallet>
+          <link-wallet :address="row.recipient" :type="row.type" :asset="row.asset"></link-wallet>
         </template>
       </table-column>
 

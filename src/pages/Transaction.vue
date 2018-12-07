@@ -39,13 +39,12 @@
 
         <div class="list-row-border-b">
           <div>{{ $t("Confirmations") }}</div>
-          <div>{{ transaction.confirmations }}</div>
+          <div>{{ getConfirmations() }}</div>
         </div>
 
         <div class="list-row-border-b">
           <div>{{ $t("Amount") }}</div>
-          <div v-if="average" v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(transaction.amount, average)}`, placement: 'left' }">{{ readableCrypto(transaction.amount) }}</div>
-          <div v-else>{{ readableCrypto(transaction.amount) }}</div>
+          <div v-tooltip="average ? { trigger: 'hover click', content: `${readableCurrency(transaction.amount, average)}`, placement: 'left' } : {}">{{ readableCrypto(transaction.amount) }}</div>
         </div>
 
         <div class="list-row-border-b">
@@ -53,7 +52,7 @@
           <div>{{ readableCrypto(transaction.fee) }}</div>
         </div>
 
-        <div class="list-row-border-b">
+        <div v-if="transaction.timestamp" class="list-row-border-b">
           <div>{{ $t("Timestamp") }}</div>
           <div>{{ readableTimestamp(transaction.timestamp.unix) }}</div>
         </div>
@@ -81,12 +80,14 @@ import { mapGetters } from 'vuex'
 export default {
   data: () => ({
     transaction: {},
+    initialBlockHeight: 0,
     average: 1
   }),
 
   computed: {
     ...mapGetters('delegates', ['delegates']),
-    ...mapGetters('currency', { currencySymbol: 'symbol' })
+    ...mapGetters('currency', { currencySymbol: 'symbol' }),
+    ...mapGetters('network', ['height'])
   },
 
   async mounted() {
@@ -118,7 +119,16 @@ export default {
 
   methods: {
     async prepareComponent() {
-      this.$store.watch(state => state.currency.name, value => this.updateAverage())
+      this.getConfirmations()
+
+      this.$store.watch(state => {
+        state.currency.name, value => this.updateAverage()
+        state.network.height, value => this.getConfirmations()
+      })
+    },
+
+    getConfirmations() {
+      return this.transaction.confirmations ? this.height - this.initialBlockHeight : ''
     },
 
     async updateAverage() {
@@ -128,6 +138,7 @@ export default {
 
     setTransaction(transaction) {
       this.transaction = transaction
+      this.initialBlockHeight = this.height - this.transaction.confirmations
     },
 
     setAverage(average) {

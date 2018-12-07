@@ -40,20 +40,7 @@ export default {
     } catch(e) { next({ name: '404' }) }
   },
 
-  async mounted() {
-    await this.prepareComponent()
-  },
-
   methods: {
-    async prepareComponent() {
-      this.$store.watch(state => state.network.height, value => this.updateBlock())
-    },
-
-    async updateBlock() {
-      const response = await BlockService.find(this.block.id)
-      this.setBlock(response)
-    },
-
     setBlock (block) {
       this.block = block
     },
