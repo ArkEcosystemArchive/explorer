@@ -23,18 +23,8 @@ const methods = {
   },
 
   readableTimestamp(value) {
-    return moment()
-      .utc()
-      .set({
-        year: 2017,
-        month: 2,
-        date: 21,
-        hour: 13,
-        minute: 0,
-        second: 0,
-      })
-      .add(value, 'seconds')
-      .local()
+    return moment
+      .unix(value)
       .format('L LTS')
   },
 
