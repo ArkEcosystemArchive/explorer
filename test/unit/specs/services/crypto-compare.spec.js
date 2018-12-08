@@ -53,21 +53,20 @@ describe('CryptoCompare Service', () => {
 
   it('should return the daily average for a given timestamp and valid currency', async () => {
     store.dispatch('currency/setName', 'USD')
-    const data = await CryptoCompareService.dailyAverage(45089379)
-    console.log(data)
+    const data = await CryptoCompareService.dailyAverage(1535190579)
     expect(data).toBe(0.8496)
   })
 
   it('should return null for a given timestamp and invalid currency', async () => {
     store.dispatch('currency/setName', '???')
-    const data = await CryptoCompareService.dailyAverage(45089379)
+    const data = await CryptoCompareService.dailyAverage(1535190579)
     expect(data).toBe(null)
   })
 
   it('should return null if not on Main network', async () => {
     store.dispatch('network/setAlias', 'Development')
     store.dispatch('currency/setName', 'DARK')
-    const data = await CryptoCompareService.dailyAverage(45089379)
+    const data = await CryptoCompareService.dailyAverage(1535190579)
     expect(data).toBe(null)
   })
 })

@@ -97,7 +97,7 @@ export default {
   async beforeRouteEnter(to, from, next) {
     try {
       const transaction = await TransactionService.find(to.params.id)
-      const average = await CryptoCompareService.dailyAverage(transaction.timestamp)
+      const average = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
       next(vm => {
         vm.setTransaction(transaction),
         vm.setAverage(average)
@@ -110,7 +110,7 @@ export default {
 
     try {
       const transaction = await TransactionService.find(to.params.id)
-      const average = await CryptoCompareService.dailyAverage(transaction.timestamp)
+      const average = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
       this.setTransaction(transaction)
       this.setAverage(average)
       next()
@@ -132,7 +132,7 @@ export default {
     },
 
     async updateAverage() {
-      const average = await CryptoCompareService.dailyAverage(this.transaction.timestamp)
+      const average = await CryptoCompareService.dailyAverage(this.transaction.timestamp.unix)
       this.setAverage(average)
     },
 

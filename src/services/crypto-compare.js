@@ -56,18 +56,9 @@ class CryptoCompareService {
       return null
     }
 
-    let ts = moment()
-      .utc()
-      .set({
-        year: 2017,
-        month: 2,
-        date: 21,
-        hour: 13,
-        minute: 0,
-        second: 0
-      })
-      .add(timestamp, 'seconds')
-      .unix()
+    let ts = moment
+      .unix(timestamp)
+    ts = ts.unix()
 
     // get last second of the day as unix timestamp
     ts = ts - (ts % 86400) + 86400 - 1
