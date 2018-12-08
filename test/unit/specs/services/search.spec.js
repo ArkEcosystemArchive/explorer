@@ -61,7 +61,7 @@ describe('Search Service', () => {
   })
 
   it('should return block when searching for existing block id', async () => {
-    const data = await SearchService.blockById('16259489398325158419')
+    const data = await SearchService.blockByQuery('16259489398325158419')
     expect(Object.keys(data).sort()).toEqual([
       'id',
       'version',
@@ -77,7 +77,7 @@ describe('Search Service', () => {
   })
 
   it('should fail when searching for non-existing block id', async () => {
-    await expect(SearchService.blockById('0')).rejects.toThrow()
+    await expect(SearchService.blockByQuery('0')).rejects.toThrow()
   })
 
   it('should return transaction when searching for existing transaction id', async () => {
@@ -85,6 +85,7 @@ describe('Search Service', () => {
     expect(Object.keys(data).sort()).toEqual([
       'id',
       'blockId',
+      'version',
       'type',
       'amount',
       'fee',
