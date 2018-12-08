@@ -32,13 +32,13 @@ export default {
 
   watch: {
     block() {
-      this.resettTransactions()
+      this.resetTransactions()
       this.getTransactions()
     }
   },
 
   methods: {
-    resettTransactions() {
+    resetTransactions() {
       this.transactions = null
     },
 
