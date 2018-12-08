@@ -5,19 +5,19 @@ import TransactionService from '@/services/transaction'
 
 class SearchService {
   async walletByAddress(address) {
-    return await WalletService.find(address)
+    return WalletService.find(address)
   }
 
   async delegateByQuery(query) {
-    return await DelegateService.find(query)
+    return DelegateService.find(query)
   }
 
   async blockByQuery(id) {
-    return await BlockService.find(id)
+    return BlockService.find(id)
   }
 
   async transactionById(id) {
-    return await TransactionService.find(id)
+    return TransactionService.find(id)
   }
 }
 
