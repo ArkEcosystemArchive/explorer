@@ -86,11 +86,6 @@ describe('Wallet Service', () => {
     expect(data[0].timestamp < data[1].timestamp)
   })
 
-  it('should return an empty list when searching for outgoing transactions if address does not exist', async () => {
-    const data = await WalletService.sentByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')
-    expect(data).toEqual([])
-  })
-
   it('should return all incoming transactions for an address', async () => {
     const data = await WalletService.receivedByAddress('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK')
     expect(data).toHaveLength(25)
@@ -105,9 +100,12 @@ describe('Wallet Service', () => {
     expect(data[0].timestamp < data[1].timestamp)
   })
 
-  it('should return an empty list when searching for outgoing transactions if address does not exist', async () => {
-    const data = await WalletService.receivedByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')
-    expect(data).toEqual([])
+  it('should fail when searching for outgoing transactions if address does not exist', async () => {
+    expect(WalletService.sentByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects.toThrow()
+  })
+
+  it('should fail when searching for incoming transactions if address does not exist', async () => {
+    expect(WalletService.receivedByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects.toThrow()
   })
 
   it('should return count of outgoing transactions for an address', async () => {
