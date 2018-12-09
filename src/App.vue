@@ -65,23 +65,18 @@ export default {
     this.$store.dispatch('network/setSymbol', response.symbol)
     this.$store.dispatch('network/setNethash', response.nethash)
 
-    this.$store.dispatch(
-      'ui/setLanguage',
-      localStorage.getItem('language') || 'en-gb'
-    )
-
-    this.$store.dispatch(
-      'ui/setLocale',
-      localStorage.getItem('locale') || navigator.language || 'en-gb'
-    )
+    let userLanguage = localStorage.getItem('language') || 'en-gb'
+    let userLocale = localStorage.getItem('locale') || navigator.language || 'en-gb'
+    this.$store.dispatch('ui/setLanguage', userLanguage)
+    this.$store.dispatch('ui/setLocale', userLocale)
 
     this.$store.dispatch(
       'ui/setPriceChart',
       localStorage.getItem('priceChart') || network.config.priceChart
     )
 
-    this.updateI18n()
-    this.updateLocale()
+    this.updateI18n(userLanguage)
+    this.updateLocale(userLocale)
     this.updateCurrencyRate()
     this.updateSupply()
     this.updateHeight()
@@ -125,12 +120,12 @@ export default {
       this.$store.dispatch('delegates/setDelegates', delegates)
     },
 
-    updateI18n() {
-      this.$i18n.locale = this.language
+    updateI18n(userLanguage) {
+      this.$i18n.locale = userLanguage
     },
 
-    updateLocale() {
-      moment.locale(this.locale)
+    updateLocale(userLocale) {
+      moment.locale(userLocale)
     },
 
     initialiseTimers() {
