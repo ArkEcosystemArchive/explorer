@@ -1,5 +1,5 @@
 <template>
-  <span :class="{
+  <span v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(transaction.amount)}`, placement: 'top' }" :class="{
     'text-red': transaction.senderId === $route.params.address,
     'text-green': transaction.recipientId === $route.params.address && isTransfer,
   }">{{ readableCrypto(transaction.amount) }}</span>
