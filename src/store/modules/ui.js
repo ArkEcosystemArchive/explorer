@@ -3,7 +3,7 @@ import * as types from '../mutation-types'
 export default {
   namespaced: true,
   state: {
-    language: 'en-gb',
+    language: 'en',
     locale: navigator.language || 'en-gb',
     nightMode: false,
     priceChart: true,
