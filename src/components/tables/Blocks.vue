@@ -13,7 +13,7 @@
         </template>
       </table-column>
 
-      <table-column show="timestamp" :label="$t('Timestamp')" header-class="left-header-cell" cell-class="left-cell whitespace-no-wrap">
+      <table-column show="timestamp" :label="$t('Timestamp')" header-class="left-header-cell" cell-class="left-cell wrap-timestamp">
         <template slot-scope="row">
           {{ readableTimestamp(row.timestamp.unix) }}
         </template>
@@ -33,13 +33,17 @@
 
       <table-column show="totalForged" :label="$t('Reward (token)', { token: networkToken() })" header-class="right-header-cell" cell-class="right-cell">
         <template slot-scope="row">
-          {{ readableCrypto(row.forged.total) }}
+          <span class="whitespace-no-wrap">
+            {{ readableCrypto(row.forged.total) }}
+          </span>
         </template>
       </table-column>
 
       <table-column show="totalFee" :label="$t('Fee (token)', { token: networkToken() })" header-class="right-header-end-cell" cell-class="right-end-cell">
         <template slot-scope="row">
-          {{ readableCrypto(row.forged.fee) }}
+          <span class="whitespace-no-wrap">
+            {{ readableCrypto(row.forged.fee) }}
+          </span>
         </template>
       </table-column>
     </table-component>
@@ -59,3 +63,15 @@ export default {
   }
 }
 </script>
+
+<style>
+  .wrap-timestamp {
+    white-space: normal;
+  }
+
+  @media(min-width: 870px) {
+    .wrap-timestamp {
+      white-space: nowrap;
+    }
+  }
+</style>

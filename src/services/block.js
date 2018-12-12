@@ -52,6 +52,18 @@ class BlockService {
     return response.data
   }
 
+  async getByPublicKey(generatorPublicKey, page, limit = 25) {
+    const response = await ApiService.get('blocks', {
+      params: {
+        page,
+        limit,
+        generatorPublicKey
+      }
+    })
+
+    return response.data
+  }
+
   async findPrevious(height) {
     const response = await ApiService.get(`blocks/${height - 1}`)
     return response.data
