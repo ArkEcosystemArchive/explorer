@@ -82,33 +82,10 @@ describe('Delegate Service', () => {
     expect(Object.keys(data[0]).sort()).toEqual(delegatePropertyArray)
   })
 
-  it('should retrieve the list of next forgers', async() => {
-    const data = await DelegateService.nextForgers()
-    expect(data.length).toBeLessThanOrEqual(51)
-  })
-
   it('should return a list of active delegates and their stats', async() => {
     jest.setTimeout(20000) // Allow this function to take longer than the specified 5 seconds
-    const data = await DelegateService.activeDelegates()
-    expect(data.delegateCount).toBeDefined()
-    expect(data.delegates).toBeDefined()
-    expect(Object.keys(data.delegates[0]).sort()).toEqual([
-      'username',
-      'address',
-      'publicKey',
-      'vote',
-      'producedblocks',
-      'missedblocks',
-      'rate',
-      'approval',
-      'productivity',
-      'blocks',
-      'blocksAt',
-      'forgingTime',
-      'isRoundDelegate',
-      'status',
-      'forgingStatus'
-    ].sort())
+    const delegates = await DelegateService.active()
+    expect(Object.keys(delegates[0]).sort()).toEqual(delegatePropertyArray.concat(['forgingStatus']).sort())
   })
 
   it('should return a list of delegates and their forged amounts', async() => {

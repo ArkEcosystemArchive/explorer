@@ -53,14 +53,13 @@ export default {
 
   methods: {
     async prepareComponent() {
-      // await this.getDelegates()
+      await this.getDelegates()
 
-      // this.$store.watch(state => state.network.height, value => this.getDelegates())
+      this.$store.watch(state => state.network.height, value => this.getDelegates())
     },
 
     async getDelegates() {
-      const response = await DelegateService.activeDelegates()
-      this.delegates = response.delegates
+      this.delegates = await DelegateService.active()
     }
   }
 }

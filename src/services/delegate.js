@@ -52,112 +52,37 @@ class DelegateService {
     return response.data
   }
 
+  async active() {
+    const activeDelegates = store.getters['network/activeDelegates']
+    const height = store.getters['network/height']
+
+    const response = await ApiService.get('delegates', {
+      params: {
+        limit: activeDelegates
+      }
+    })
+
+    return response.data.map(delegate => {
+      delegate.forgingStatus = forging.status(
+        delegate,
+        height
+      )
+
+      return delegate
+    })
+  }
+
   async standby() {
     const activeDelegates = store.getters['network/activeDelegates']
 
     const response = await ApiService.get('delegates', {
       params: {
-        offset: activeDelegates
-      }
-    })
-    return response.data
-  }
-
-  async nextForgers() {
-    const activeDelegates = store.getters['network/activeDelegates']
-
-    const response = await ApiService.get('delegates/getNextForgers', {
-      params: {limit: activeDelegates}
-    })
-    return response.data.delegates
-  }
-
-  /**
-   * @TODO - Remove this when Core 2.0 is released.
-   */
-  async activeDelegates() {
-    const activeDelegates = store.getters['network/activeDelegates']
-
-    const response = await ApiService.get('delegates', {
-      params: {
-        orderBy: 'rank:desc',
+        offset: activeDelegates,
         limit: activeDelegates
       }
     })
-    const delegateCount = response.data.totalCount
 
-    // Last Block (from last 100 Blocks)
-    const blocks = await block.latest(100)
-    const lastBlocksFetched = JSON.parse(sessionStorage.getItem('lastBlocksFetched') || '[]')
-    sessionStorage.setItem('lastBlocksFetched', JSON.stringify(blocks))
-
-    const delegates = response.data.map(delegate => {
-      const lastBlock = blocks.find(
-        b => b.generatorPublicKey === delegate.publicKey
-      )
-
-      if (lastBlock !== undefined && lastBlock.hasOwnProperty('timestamp')) {
-        delegate.blocks = [lastBlock]
-        delegate.blocksAt = lastBlock.timestamp
-      }
-
-      return delegate
-    })
-
-    // Last Block (from specific delegate)
-    const requests = []
-    const lastDelegatesLastBlock = JSON.parse(sessionStorage.getItem('lastDelegatesLastBlock') || '[]')
-
-    delegates.forEach((delegate) => {
-      if (delegate.blocksAt) {
-        // we already have the delegate's last block from looking at the last 100 blocks
-        requests.push(delegate.blocks[0])
-      } else if (lastBlocksFetched.length && lastBlocksFetched[0].height >= blocks[blocks.length - 1].height) {
-        // the delegate's last block is not in the last 100 blocks but we might have saved it in sessionStorage
-        // only valid if there is no 'hole' between the last blocks fetched and the current ones
-        const lastDel = lastDelegatesLastBlock.find(del => del.publicKey === delegate.publicKey)
-        if (lastDel) { requests.push(lastDel.blocks[0]) } else { requests.push(block.lastBlockByPublicKey(delegate.publicKey)) }
-      } else {
-        // last option : make a specific server request to get the delegate's last block
-        requests.push(block.lastBlockByPublicKey(delegate.publicKey))
-      }
-    })
-
-    const results = await Promise.all(requests)
-    const delegatesLastBlock = delegates.map((result, index) => {
-      let lastBlock = results[index]
-
-      result.blocks = [lastBlock]
-      result.blocksAt = lastBlock ? lastBlock.timestamp : false
-
-      return result
-    })
-    sessionStorage.setItem('lastDelegatesLastBlock', JSON.stringify(delegatesLastBlock))
-
-    // Rounds
-    const nextForgers = await this.nextForgers()
-    const delegatesRounds = delegatesLastBlock.map(delegate => {
-      const delegateIndex = nextForgers.findIndex(
-        d => d === delegate.publicKey
-      )
-
-      delegate.forgingTime = delegateIndex * 8
-      delegate.isRoundDelegate = delegateIndex !== -1
-
-      return delegate
-    })
-
-    // Forging Status
-    const height = await block.height()
-    return { delegateCount: delegateCount,
-      delegates: delegatesRounds.map(delegate => {
-        delegate.forgingStatus = forging.status(
-          delegate,
-          height
-        )
-
-        return delegate
-      }) }
+    return response.data
   }
 
   async forged() {
