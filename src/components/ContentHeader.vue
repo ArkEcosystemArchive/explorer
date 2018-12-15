@@ -5,8 +5,8 @@
       <div class="hidden sm:flex items-center text-theme-text-tertiary text-2xs px-3 sm:px-8 xl:px-6 py-3 mb-5 md:mb-6 bg-stat-background rounded-md">
         <div class="pr-6">{{ $t("Height") }}: {{ height.toLocaleString() }}</div>
         <div class="pr-6">{{ $t("Network") }}: {{ $t(alias) }}</div>
-        <div :class="{ 'pr-6': alias == 'Main' }">{{ $t("Supply") }}: <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }}</span></div>
-        <div v-if="alias == 'Main'">{{ $t("Market Cap") }}: <currency :amount="+supply"></currency></div>
+        <div :class="{ 'pr-6': alias === 'Main' }">{{ $t("Supply") }}: <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }}</span></div>
+        <div v-if="alias === 'Main'">{{ $t("Market Cap") }}: <currency :amount="+supply"></currency></div>
       </div>
     </div>
     <div class="sm:hidden flex items-center justify-between text-theme-text-tertiary text-2xs px-5 sm:px-8 xl:px-6 py-3 bg-stat-background">
@@ -14,7 +14,11 @@
         <span>{{ $t("Height") }}:</span>
         <span class="block md:inline-block">{{ height.toLocaleString() }}</span>
       </div>
-      <div class="mr-2">
+      <div class="mr-2" v-if="alias !== 'Main'">
+        <span>{{ $t("Network") }}:</span>
+        <span class="block md:inline-block">{{ $t(alias) }}</span>
+      </div>
+      <div class="mr-2" v-if="alias === 'Main'">
         <span>{{ networkToken() }}/{{ name }}:</span>
         <span class="block md:inline-block">{{ rawCurrency(rate, name) }}</span>
       </div>
