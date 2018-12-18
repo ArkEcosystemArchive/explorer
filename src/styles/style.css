@@ -29,7 +29,7 @@
   --chart-active: #395174;
   --chart-inactive: #a0a6c8;
   --theme-button: #e0f0fd;
-  --theme-button-text: #037cff;
+  --theme-button-text: #739eff;
   --language-icon: #395174;
 }
 
@@ -385,4 +385,19 @@ thead th {
 .flag-image {
   width: 20px;
   height: 20px;
+}
+
+.genki-menu-button:hover, .genki-menu-button {
+  color: #395174;
+}
+
+.genki-menu-button-img {
+  height: 15px;
+  padding-right: 15px;
+  margin-bottom: 2px;
+  vertical-align: middle;
+}
+
+.vertical-middle {
+  vertical-align: middle;
 }
