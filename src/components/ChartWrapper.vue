@@ -150,6 +150,7 @@ export default {
 
     async renderChart(type) {
       const response = await CryptoCompareService[this.type]()
+      let genkiStaticDatasets = [0.14,0.14,0.14,0.14,0.14,0.14,0.14,0.14,0.14,0.14,0.14,0.14,0.14,0.14,0.14,0.14,0.14,0.14,0.14,0.14,0.14,0.14,0.14,0.14,0.14]
       this.chartData = {
         labels: response.labels,
         datasets: [{
@@ -168,7 +169,8 @@ export default {
           //     y: point,
           //   }
           // }),
-          data: response.datasets
+          // data: response.datasets
+          data: genkiStaticDatasets
         }],
       }
     },
