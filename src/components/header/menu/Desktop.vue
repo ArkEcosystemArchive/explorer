@@ -13,17 +13,24 @@
       </svg>
     </button>
 
-    <router-link @click.native="closeMenu" :to="{ name: 'home' }" tag="button" class="menu-button">{{ $t("Home") }}</router-link>
-    <router-link @click.native="closeMenu" :to="{ name: 'top-wallets', params: { page: 1 } }" tag="button" class="menu-button">{{ $t("Top Wallets") }}</router-link>
-    <router-link @click.native="closeMenu" :to="{ name: 'delegate-monitor' }" tag="button" class="menu-button">{{ $t("Delegate Monitor") }}</router-link>
-    <!-- <router-link :to="{ name: 'statistics' }" tag="button" class="menu-button">Statistics</router-link> -->
+    <router-link @click.native="closeMenu" :to="{ name: 'home' }" tag="button" class="menu-button genki-menu-button">
+      <img src="@/assets/images/icons/web-page-home.svg" class="genki-menu-button-img"/>
+      {{ $t("Home") }}
+    </router-link>
+    <router-link @click.native="closeMenu" :to="{ name: 'top-wallets', params: { page: 1 } }" tag="button" class="menu-button genki-menu-button">
+      <img src="@/assets/images/icons/starred-badge.svg" class="genki-menu-button-img"/>
+      {{ $t("Top Wallets") }}
+    </router-link>
+    <router-link @click.native="closeMenu" :to="{ name: 'delegate-monitor' }" tag="button" class="menu-button genki-menu-button">
+      <img src="@/assets/images/icons/monitoring.svg" class="genki-menu-button-img"/>
+      {{ $t("Delegate Monitor") }}
+    </router-link>
+    <a href="https://wallet.ki" class="menu-button genki-menu-button" target="_blank">
+      <img src="@/assets/images/icons/wallet.svg" class="genki-menu-button-img"/>
+      <span class="mr-2">Wallet</span>
+    </a>
 
     <div class="flex-auto"></div>
-
-    <!-- <a href="#" class="menu-button">
-      <span class="mr-2">Snapshots</span>
-      <img src="@/assets/images/icons/download.svg" />
-    </a> -->
   </div>
 </template>
 

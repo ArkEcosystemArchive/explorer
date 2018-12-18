@@ -121,7 +121,7 @@ let colors = {
   'blue-darkest': '#202126', // UPDATED
   'blue-darker': '#282a38', // UPDATED
   'blue-dark': '#2779bd',
-  blue: '#037CFF', // UPDATED
+  blue: '#739eff', // UPDATED
   'blue-light': '#6f77a4', // UPDATED
   'blue-lighter': '#e8eeff', // UPDATED
   'blue-lightest': '#e0f0fd', // UPDATED
