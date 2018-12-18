@@ -128,6 +128,7 @@ export default {
 
   computed: {
     ...mapGetters('currency', { currencyName: 'name' }),
+    ...mapGetters('network', ['token'])
   },
 
   mounted() {
@@ -145,7 +146,9 @@ export default {
     period(type) {
       this.type = type
 
-      this.renderChart()
+      if (!!this.token) {
+        this.renderChart()
+      }
     },
 
     async renderChart(type) {
