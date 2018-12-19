@@ -108,6 +108,9 @@
 
   "Ooops!": "Ooops!",
   "Sorry, page not found": "Désolé, page introuvable",
+  "Sorry, dataType dataId could not be found on the blockchain": "Désolé, {dataType} <b>{dataId}</b> n'a pu être trouvé sur la blockchain",
+  "Reload this page": "Actualiser cette page",
+  "Loading...": "Chargement...",
   "Active": "Actif",
   "Standby": "En attente",
   "Latest transactions and blocks": "Dernières transactions et blocs",
