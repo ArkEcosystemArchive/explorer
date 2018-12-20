@@ -1,7 +1,7 @@
 <template>
   <span :class="{
-    'text-red': transaction.senderId === $route.params.address,
-    'text-green': transaction.recipientId === $route.params.address && isTransfer,
+    'text-red': transaction.sender === $route.params.address,
+    'text-green': transaction.recipient === $route.params.address && isTransfer,
   }">{{ readableCrypto(transaction.amount) }}</span>
 </template>
 

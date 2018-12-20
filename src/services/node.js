@@ -1,16 +1,16 @@
-import axios from 'axios'
-import store from '@/store'
+import ApiService from '@/services/api'
 
 class NodeService {
-  async get(url, config) {
-    const server = store.getters['network/server']
+  async config() {
+    const response = await ApiService.get('node/configuration')
 
-    const response = await axios.get(`${server}/${url}`, config)
+    return response.data
+  }
 
-    if (!response.data.success) {
-      return Promise.reject(new Error(`Error GET ${url} : ${JSON.stringify(response)}`))
-    }
-    return response
+  async status() {
+    const response = await ApiService.get('node/status')
+
+    return response.data
   }
 }
 

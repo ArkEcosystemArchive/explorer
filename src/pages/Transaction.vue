@@ -26,26 +26,25 @@
         <div class="list-row-border-b">
           <div>{{ $t("Sender") }}</div>
           <div class="truncate">
-            <link-wallet :address="transaction.senderId">{{ transaction.senderId }}</link-wallet>
+            <link-wallet :address="transaction.sender">{{ transaction.sender }}</link-wallet>
           </div>
         </div>
 
         <div class="list-row-border-b">
           <div>{{ $t("Recipient") }}</div>
           <div class="truncate">
-            <link-wallet :address="transaction.recipientId" :type="transaction.type" :asset="transaction.asset">{{ transaction.recipientId }}</link-wallet>
+            <link-wallet :address="transaction.recipient" :type="transaction.type" :asset="transaction.asset">{{ transaction.recipient }}</link-wallet>
           </div>
         </div>
 
         <div class="list-row-border-b">
           <div>{{ $t("Confirmations") }}</div>
-          <div>{{ transaction.confirmations }}</div>
+          <div>{{ getConfirmations() }}</div>
         </div>
 
         <div class="list-row-border-b">
           <div>{{ $t("Amount") }}</div>
-          <div v-if="average" v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(transaction.amount, average)}`, placement: 'left' }">{{ readableCrypto(transaction.amount) }}</div>
-          <div v-else>{{ readableCrypto(transaction.amount) }}</div>
+          <div v-tooltip="average ? { trigger: 'hover click', content: `${readableCurrency(transaction.amount, average)}`, placement: 'left' } : {}">{{ readableCrypto(transaction.amount) }}</div>
         </div>
 
         <div class="list-row-border-b">
@@ -55,7 +54,7 @@
 
         <div class="list-row-border-b">
           <div>{{ $t("Timestamp") }}</div>
-          <div>{{ readableTimestamp(transaction.timestamp) }}</div>
+          <div v-if="transaction.timestamp">{{ readableTimestamp(transaction.timestamp.unix) }}</div>
         </div>
 
         <div class="list-row-border-b-no-wrap" v-if="transaction.vendorField">
@@ -63,9 +62,9 @@
           <div class="text-right">{{ emojify(transaction.vendorField) }}</div>
         </div>
 
-        <div class="list-row" v-if="transaction.blockid">
+        <div class="list-row" v-if="transaction.blockId">
           <div>{{ $t("Block") }}</div>
-          <div><link-block :id="transaction.blockid">{{ transaction.blockid }}</link-block></div>
+          <div><link-block :id="transaction.blockId">{{ transaction.blockId }}</link-block></div>
         </div>
       </div>
     </section>
@@ -81,12 +80,14 @@ import { mapGetters } from 'vuex'
 export default {
   data: () => ({
     transaction: {},
+    initialBlockHeight: 0,
     average: 1
   }),
 
   computed: {
     ...mapGetters('delegates', ['delegates']),
-    ...mapGetters('currency', { currencySymbol: 'symbol' })
+    ...mapGetters('currency', { currencySymbol: 'symbol' }),
+    ...mapGetters('network', ['height'])
   },
 
   async mounted() {
@@ -96,7 +97,7 @@ export default {
   async beforeRouteEnter(to, from, next) {
     try {
       const transaction = await TransactionService.find(to.params.id)
-      const average = await CryptoCompareService.dailyAverage(transaction.timestamp)
+      const average = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
       next(vm => {
         vm.setTransaction(transaction),
         vm.setAverage(average)
@@ -109,7 +110,7 @@ export default {
 
     try {
       const transaction = await TransactionService.find(to.params.id)
-      const average = await CryptoCompareService.dailyAverage(transaction.timestamp)
+      const average = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
       this.setTransaction(transaction)
       this.setAverage(average)
       next()
@@ -118,16 +119,26 @@ export default {
 
   methods: {
     async prepareComponent() {
-      this.$store.watch(state => state.currency.name, value => this.updateAverage())
+      this.getConfirmations()
+
+      this.$store.watch(state => {
+        state.currency.name, value => this.updateAverage()
+        state.network.height, value => this.getConfirmations()
+      })
+    },
+
+    getConfirmations() {
+      return this.transaction.confirmations ? this.height - this.initialBlockHeight : ''
     },
 
     async updateAverage() {
-      const average = await CryptoCompareService.dailyAverage(this.transaction.timestamp)
+      const average = await CryptoCompareService.dailyAverage(this.transaction.timestamp.unix)
       this.setAverage(average)
     },
 
     setTransaction(transaction) {
       this.transaction = transaction
+      this.initialBlockHeight = this.height - this.transaction.confirmations
     },
 
     setAverage(average) {

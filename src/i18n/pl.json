@@ -64,9 +64,7 @@
   "Total forged (token)": "Łącznie wydobyto ({token})",
   "Forging": "Wydobywa",
   "Missing": "Przegapia",
-  "Missed block, awaiting slot": "Opuścił blok, Oczekuje na miejsce",
   "Not forging": "Nie wydobywa",
-  "Awaiting slot": "Oczekuje na miejsce",
   "Never": "Nigdy",
   "Last block at height on": "Ostatni blok @ {height} wytworzony",
 

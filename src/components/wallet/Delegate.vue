@@ -7,32 +7,32 @@
 
     <div class="list-row-border-b">
       <div>{{ $t("Uptime") }}</div>
-      <div>{{ percentageString(delegate.productivity) }}</div>
+      <div v-if="delegate.production">{{ percentageString(delegate.production.productivity) }}</div>
     </div>
 
     <div class="list-row-border-b">
       <div>{{ $t("Rank/Status") }}</div>
-      <div>{{ delegate.rate }}</div>
+      <div>{{ delegate.rank }}</div>
     </div>
 
     <div class="list-row-border-b">
       <div>{{ $t("Approval") }}</div>
-      <div v-tooltip="{ trigger: 'hover click', content: readableCrypto(this.delegate.vote, true, 2), placement: 'left' }">
-        {{ percentageString(delegate.approval) }}
+      <div v-if="delegate.production" v-tooltip="delegate.votes ? { trigger: 'hover click', content: readableCrypto(delegate.votes, true, 2), placement: 'left' } : {}">
+        {{ percentageString(delegate.production.approval) }}
       </div>
     </div>
 
     <div class="list-row-border-b">
       <div>{{ $t("Forged") }}</div>
-      <div>{{ readableCrypto(delegate.forged) }}</div>
+      <div v-if="delegate.forged">{{ readableCrypto(delegate.forged.total) }}</div>
     </div>
 
     <div class="list-row">
       <div>{{ $t("Blocks") }}</div>
-      <div>
-        <span :class="{ 'mr-2': !delegate.missedblocks && delegate.producedblocks }">{{ delegate.producedblocks }}</span>
-        <span v-if="delegate.missedblocks" class="text-grey" :class="{ 'mr-2': delegate.producedblocks }">({{ delegate.missedblocks }} {{ $t("missed") }})</span>
-        <router-link v-if="delegate.producedblocks" :to="{ name: 'wallet-blocks', params: { address: delegate.address, username: delegate.username, page: 1 } }">{{ $t("See all") }}</router-link>
+      <div v-if="delegate.blocks">
+        <span :class="{ 'mr-2': !delegate.blocks.missed && delegate.blocks.produced }">{{ delegate.blocks.produced }}</span>
+        <span v-if="delegate.blocks.missed" class="text-grey" :class="{ 'mr-2': delegate.blocks.produced }">({{ delegate.blocks.missed }} {{ $t("missed") }})</span>
+        <router-link v-if="delegate.blocks.produced" :to="{ name: 'wallet-blocks', params: { address: delegate.address, username: delegate.username, page: 1 } }">{{ $t("See all") }}</router-link>
       </div>
     </div>
   </div>
@@ -53,14 +53,14 @@ export default {
 
   watch: {
     async wallet(wallet) {
-      if (wallet.publicKey) await this.getDelegate(wallet)
+      if (wallet.username) await this.getDelegate(wallet.username)
     }
   },
 
   methods: {
-    async getDelegate(wallet) {
+    async getDelegate(username) {
       try {
-        const response = await DelegateService.find(wallet.publicKey)
+        const response = await DelegateService.find(username)
         this.delegate = response
 
         this.$emit('username', response.username)

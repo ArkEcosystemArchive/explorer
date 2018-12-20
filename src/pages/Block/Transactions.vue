@@ -15,7 +15,6 @@
 
 <script type="text/ecmascript-6">
 import BlockService from '@/services/block'
-import TransactionService from '@/services/transaction'
 
 export default {
   data: () => ({
@@ -31,7 +30,7 @@ export default {
   async beforeRouteEnter (to, from, next) {
     try {
       const block = await BlockService.find(to.params.id)
-      const transactions = await TransactionService.findByBlock(block.id, to.params.page)
+      const transactions = await BlockService.transactionsByBlock(block.id, to.params.page)
       next(vm => vm.setTransactions(transactions))
     } catch(e) { next({ name: '404' }) }
   },
@@ -41,7 +40,7 @@ export default {
 
     try {
       const block = await BlockService.find(to.params.id)
-      const transactions = await TransactionService.findByBlock(block.id, to.params.page)
+      const transactions = await BlockService.transactionsByBlock(block.id, to.params.page)
       this.setTransactions(transactions)
       next()
     } catch(e) { next({ name: '404' }) }
@@ -65,8 +64,7 @@ export default {
 
     async getTotalTransactions() {
       const block = await BlockService.find(this.id)
-      const response = await TransactionService.findByBlockCount(block.id)
-      this.totalTransactions += Number(response)
+      this.totalTransactions += Number(block.transactions)
     },
 
     changePage(page) {

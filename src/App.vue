@@ -16,8 +16,9 @@ import AppHeader from '@/components/header/Main'
 import AppFooter from '@/components/Footer'
 import CryptoCompareService from '@/services/crypto-compare'
 import BlockService from '@/services/block'
+import BlockchainService from '@/services/blockchain'
 import DelegateService from '@/services/delegate'
-import LoaderService from '@/services/loader'
+import NodeService from '@/services/node'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 
@@ -60,7 +61,7 @@ export default {
       )
     }
 
-    const response = await LoaderService.config()
+    const response = await NodeService.config()
     this.$store.dispatch('network/setToken', response.token)
     this.$store.dispatch('network/setSymbol', response.symbol)
     this.$store.dispatch('network/setNethash', response.nethash)
@@ -111,12 +112,12 @@ export default {
     },
 
     async updateSupply() {
-      const supply = await BlockService.supply()
+      const supply = await BlockchainService.supply()
       this.$store.dispatch('network/setSupply', supply)
     },
 
     async updateHeight() {
-      const height = await BlockService.height()
+      const height = await BlockchainService.height()
       this.$store.dispatch('network/setHeight', height)
     },
 

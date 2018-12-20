@@ -59,7 +59,7 @@
         <div class="text-lg text-white semibold">
           <span class="text-green">{{ receivedCount }}</span>
           <img class="mr-4" src="@/assets/images/icons/arrow-down.svg" />
-          <span class="text-red">{{ sendCount }}</span>
+          <span class="text-red">{{ sentCount }}</span>
           <img src="@/assets/images/icons/arrow-up.svg" />
         </div>
       </div>
@@ -142,7 +142,7 @@
                 <img class="mr-4" src="@/assets/images/icons/arrow-down.svg" />
               </span>
               <span class="whitespace-no-wrap">
-                <span class="text-red">{{ sendCount }}</span>
+                <span class="text-red">{{ sentCount }}</span>
                 <img src="@/assets/images/icons/arrow-up.svg" />
               </span>
             </div>
@@ -163,7 +163,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import TransactionService from '@/services/transaction'
+import WalletService from '@/services/wallet'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -175,7 +175,7 @@ export default {
   },
 
   data: () => ({
-    sendCount: 0,
+    sentCount: 0,
     receivedCount: 0,
     view: 'public',
     showModal: false,
@@ -185,19 +185,19 @@ export default {
     wallet(wallet) {
       if (!wallet.address) return
 
-      this.getSendCount()
+      this.getSentCount()
       this.getReceivedCount()
     },
   },
 
   methods: {
-    async getSendCount() {
-      const response = await TransactionService.sentByAddressCount(this.wallet.address)
-      this.sendCount = response
+    async getSentCount() {
+      const response = await WalletService.sentByAddressCount(this.wallet.address)
+      this.sentCount = response
     },
 
     async getReceivedCount() {
-      const response = await TransactionService.receivedByAddressCount(this.wallet.address)
+      const response = await WalletService.receivedByAddressCount(this.wallet.address)
       this.receivedCount = response
     },
   },

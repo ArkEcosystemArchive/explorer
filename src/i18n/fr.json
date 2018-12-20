@@ -64,9 +64,7 @@
   "Total forged (token)": "Total forgé ({token})",
   "Forging": "Forgeage",
   "Missing": "Manquant",
-  "Missed block, awaiting slot": "Bloc manqué, En attente d'une place",
   "Not forging": "Ne forge(nt) pas",
-  "Awaiting slot": "En attente d'une place",
   "Never": "Jamais",
   "Last block at height on": "Dernier bloc @ {heigh}",
 

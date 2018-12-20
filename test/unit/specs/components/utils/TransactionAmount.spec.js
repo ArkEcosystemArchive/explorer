@@ -29,8 +29,8 @@ describe('Utils/TransactionAmount', () => {
     const wrapper = mount(TransactionAmount, {
       propsData: {
         transaction: {
-          senderId: incomingAddress,
-          recipientId: outgoingAddress,
+          sender: incomingAddress,
+          recipient: outgoingAddress,
           amount: 100000000
         },
         type: 0
@@ -57,8 +57,8 @@ describe('Utils/TransactionAmount', () => {
     const wrapper = mount(TransactionAmount, {
       propsData: {
         transaction: {
-          senderId: outgoingAddress,
-          recipientId: incomingAddress,
+          sender: outgoingAddress,
+          recipient: incomingAddress,
           amount: 100000000
         },
         type: 0
@@ -85,8 +85,8 @@ describe('Utils/TransactionAmount', () => {
     const wrapper = mount(TransactionAmount, {
       propsData: {
         transaction: {
-          senderId: incomingAddress,
-          recipientId: incomingAddress,
+          sender: incomingAddress,
+          recipient: incomingAddress,
           amount: 100000000
         },
         type: 1
