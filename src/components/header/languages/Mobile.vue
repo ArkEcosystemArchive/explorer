@@ -21,7 +21,7 @@ export default {
 
     languages() {
       return Object.keys(this.$i18n.messages).filter(
-        l => l != this.language
+        lang => lang !== this.language && lang !== 'en'
       )
     }
   },
