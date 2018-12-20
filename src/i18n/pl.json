@@ -106,6 +106,9 @@
 
   "Ooops!": "Ups!",
   "Sorry, page not found": "Przykro nam, strona nie została odnaleziona",
+  "Sorry, dataType dataId could not be found on the blockchain": "Przykro nam, {dataType} <b>{dataId}</b> nie można znaleźć na blockchain",
+  "Reload this page": "Odśwież stronę",
+  "Loading...": "Ładuję...",
   "Active": "Aktywni",
   "Standby": "Oczekujący",
   "Latest transactions and blocks": "Najnowsze transakcje i bloki",
