@@ -107,6 +107,9 @@
 
   "Ooops!": "Oeeps!",
   "Sorry, page not found": "Sorry, pagina niet gevonden",
+  "Sorry, dataType dataId could not be found on the blockchain": "Sorry, {dataType} <b>{dataId}</b> kon niet worden gevonden op de blockchain",
+  "Reload this page": "Ververs deze pagina",
+  "Loading...": "Laadt...",
   "Active": "Actief",
   "Standby": "Standby",
   "Latest transactions and blocks": "Laatste transacties en blocks",
