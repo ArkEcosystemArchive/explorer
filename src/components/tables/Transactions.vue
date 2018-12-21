@@ -27,7 +27,7 @@
 
       <table-column show="vendorField" :label="$t('Smartbridge')" header-class="right-header-cell hidden lg:table-cell" cell-class="right-cell hidden lg:table-cell">
         <template slot-scope="row">
-          {{ truncate(emojify(row.vendorField) || '', 35, 'right') }}
+          {{ truncate(emojify(row.vendorField) || '', 20, 'right') }}
         </template>
       </table-column>
 
