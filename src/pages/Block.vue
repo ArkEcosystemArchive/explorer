@@ -2,32 +2,56 @@
   <div class="max-w-2xl mx-auto md:pt-5" v-if="block">
     <content-header>{{ $t("Block") }}</content-header>
 
-    <identity :block="block" :prev-handler="prevBlock" :next-handler="nextBlock"></identity>
+    <template v-if="blockNotFound">
+      <section class="page-section py-5 md:py-10 px-6">
+        <div class="my-10 text-center">
+          <not-found data-type="block" :data-id="block.id" />
 
-    <block-details :block="block"></block-details>
+          <button @click="fetchBlock" :disabled="isFetching" class="mt-4 pager-button items-center">
+            <span>{{ !isFetching ? $t('Reload this page') : $t('Loading...') }}</span>
+          </button>
+        </div>
+      </section>
+    </template>
 
-    <transactions :block="block"></transactions>
+    <template v-else>
+      <identity :block="block" :prev-handler="prevBlock" :next-handler="nextBlock"></identity>
+
+      <block-details :block="block"></block-details>
+
+      <transactions :block="block"></transactions>
+    </template>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 import Identity from '@/components/block/Identity'
+import NotFound from '@/components/utils/NotFound'
 import BlockDetails from '@/components/block/Details'
 import Transactions from '@/components/block/Transactions'
 import BlockService from '@/services/block'
 
 export default {
-  components: {Identity, BlockDetails, Transactions},
+  components: {NotFound, Identity, BlockDetails, Transactions},
 
   data: () => ({
-    block: {}
+    block: {},
+    blockNotFound: false,
+    isFetching: false
   }),
 
   async beforeRouteEnter (to, from, next) {
     try {
       const response = await BlockService.find(to.params.id)
       next(vm => vm.setBlock(response))
-    } catch(e) { next({ name: '404' }) }
+    } catch(e) {
+      next(vm => {
+        console.log(e.message || e.data.error)
+
+        vm.blockNotFound = true
+        vm.block = { id: to.params.id }
+      })
+    }
   },
 
   async beforeRouteUpdate (to, from, next) {
@@ -37,7 +61,12 @@ export default {
       const response = await BlockService.find(to.params.id)
       this.setBlock(response)
       next()
-    } catch(e) { next({ name: '404' }) }
+    } catch(e) {
+      console.log(e.message || e.data.error)
+
+      this.blockNotFound = true
+      this.block = { id: to.params.id }
+    }
   },
 
   async mounted() {
@@ -50,11 +79,29 @@ export default {
     },
 
     async updateBlock() {
-      const response = await BlockService.find(this.block.id)
-      this.setBlock(response)
+      try {
+        const response = await BlockService.find(this.block.id)
+        this.setBlock(response)
+      } catch(e) {
+        console.log(e.message || e.data.error)
+      }
     },
 
-    setBlock (block) {
+    async fetchBlock() {
+      this.isFetching = true
+
+      try {
+        const block = await BlockService.find(this.block.id)
+        this.setBlock(block)
+        this.blockNotFound = false
+      } catch(e) {
+        console.log(e.message || e.data.error)
+      } finally {
+        this.isFetching = false
+      }
+    },
+
+    setBlock(block) {
       this.block = block
     },
 
