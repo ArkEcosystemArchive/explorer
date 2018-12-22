@@ -1,6 +1,17 @@
 import NodeService from '@/services/node'
 
 class TransactionService {
+
+  async filterByType(limit = 25, type = 0) {
+    const response = await NodeService.get('transactions', {
+      params: {
+        type: type,
+        limit
+      }
+    })
+    return response.data.transactions
+  }
+
   async latest(limit = 25) {
     const response = await NodeService.get('transactions', {
       params: {
