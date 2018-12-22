@@ -1,6 +1,23 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
     <content-header>{{ $t("Transactions") }}</content-header>
+      <div class="text-grey mb-2">Dropdown</div>
+      <div class="relative text-white z-20">
+        <span @click="selectOpen = !selectOpen" class="cursor-pointer flex items-center">
+          <span class="mr-1">All</span>
+          <svg :class="{ 'rotate-180': selectOpen }" class="fill-current" xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            width="16px" height="16px">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+          </svg>
+        </span>
+        <select v-model="selected" v-show="selectOpen" class="absolute pin-r mt-px bg-white shadow rounded border overflow-hidden list-reset text-sm">
+          <option v-for="item in transactionsChoices" :value="item" v-on:click="selected = item">
+            {{ item }}
+          </option>
+        </select>
+
+      </div>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
         <table-transactions :transactions="transactions"></table-transactions>
@@ -17,21 +34,27 @@
 import TransactionService from '@/services/transaction'
 
 export default {
-  data: () => ({ transactions: null }),
+  data: () => ({
+    transactions: null,
+    selectOpen: false,
+    transactionsChoicesBis: ['Transfer', 'Second Signature', 'Delegate Registration', 'Vote', 'MultiSignature'],
+    transactionsChoices: [0,1,2,3,4],
+    selected: 0,
+  }),
 
   created() {
     this.$on('paginatorChanged', page => this.changePage(page))
   },
 
   async beforeRouteEnter (to, from, next) {
-    const response = await TransactionService.paginate(to.params.page)
+    const response = await TransactionService.filterByType(to.params.page, 3)
     next(vm => vm.setTransactions(response))
   },
 
   async beforeRouteUpdate (to, from, next) {
     this.transactions = null
 
-    const response = await TransactionService.paginate(to.params.page)
+    const response = await TransactionService.filterByType(to.params.page, 0)
     this.setTransactions(response)
     next()
   },
