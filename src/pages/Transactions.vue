@@ -11,12 +11,11 @@
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
           </svg>
         </span>
-        <select v-model="selected" v-show="selectOpen" class="absolute pin-r mt-px bg-white shadow rounded border overflow-hidden list-reset text-sm">
-          <option v-for="item in transactionsChoices" :value="item" v-on:click="selected = item">
+        <select v-model="transactionType" v-show="selectOpen" @change="filterTransactions" class="absolute pin-r mt-px bg-white shadow rounded border overflow-hidden list-reset text-sm">
+          <option v-for="(item, index) in transactionsChoices" :value="index">
             {{ item }}
           </option>
         </select>
-
       </div>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
@@ -29,45 +28,40 @@
     </section>
   </div>
 </template>
-
 <script type="text/ecmascript-6">
 import TransactionService from '@/services/transaction'
-
 export default {
   data: () => ({
     transactions: null,
     selectOpen: false,
-    transactionsChoicesBis: ['Transfer', 'Second Signature', 'Delegate Registration', 'Vote', 'MultiSignature'],
-    transactionsChoices: [0,1,2,3,4],
-    selected: 0,
+    transactionsChoices: ['Transfer', 'Second Signature', 'Delegate Registration', 'Vote', 'MultiSignature'],
+    transactionType: 0
   }),
-
   created() {
     this.$on('paginatorChanged', page => this.changePage(page))
   },
-
   async beforeRouteEnter (to, from, next) {
-    const response = await TransactionService.filterByType(to.params.page, 3)
+    const response = await TransactionService.filterByType(to.params.page, 0) // TODO: set type based on what tx type we were looking for, might have to do this in the url as is done with transaction filtering on sent / received / all in a wallet
     next(vm => vm.setTransactions(response))
   },
-
   async beforeRouteUpdate (to, from, next) {
     this.transactions = null
-
-    const response = await TransactionService.filterByType(to.params.page, 0)
+    const response = await TransactionService.filterByType(to.params.page, 0) // TODO: set type based on what tx type we were looking for, might have to do this in the url as is done with transaction filtering on sent / received / all in a wallet
     this.setTransactions(response)
     next()
   },
-
   methods: {
     setTransactions (transactions) {
       if (!transactions) return
-
       this.transactions = transactions
     },
-
     changePage(page) {
       this.$router.push({ name: 'transactions', params: { page } })
+    },
+    async filterTransactions() {
+      this.transactions = null // Used to show the loading indicator
+      const response = await TransactionService.filterByType(1, this.transactionType) // TODO: fix hardcoded '1' parameter
+      this.setTransactions(response)
     }
   }
 }
