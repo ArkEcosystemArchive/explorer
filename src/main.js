@@ -7,6 +7,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import i18n from './i18n'
+import directives from './directives'
 import VTooltip from 'v-tooltip'
 import TableComponent from 'vue-table-component'
 import _ from 'lodash'
@@ -27,6 +28,8 @@ new Vue({
   components: { App },
   template: '<App/>',
 })
+
+Vue.use(directives)
 
 Vue.use(VTooltip, {
   defaultHtml: false,
