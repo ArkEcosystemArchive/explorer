@@ -57,7 +57,6 @@ export default {
     transactionType: -1,
     currentPage: 0,
     selectOpen: false,
-    test: localStorage.getItem('transactionType')
   }),
 
   created() {
