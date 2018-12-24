@@ -9,7 +9,7 @@
           <div class="text-grey mb-2">Transactions Type</div>
           <div class="flex">
             <div class="text-lg text-white semibold truncate">
-              <span class="mr-2">{{ transactionsChoices[transactionType+1]  || test }}</span>
+              <span class="mr-2">{{ transactionsChoices[transactionType+1] }}</span>
             </div>
           </div>
         </div>
@@ -17,7 +17,7 @@
           <div class="text-grey mb-2">{{ $t("Type") }}</div>
           <div class="relative text-white z-20">
             <span @click="selectOpen = !selectOpen" class="cursor-pointer flex items-center">
-              <span class="mr-1">{{ $t(transactionsChoices[transactionType + 1]) || test }}</span>
+              <span class="mr-1">{{ $t(transactionsChoices[transactionType + 1]) }}</span>
               <svg :class="{ 'rotate-180': selectOpen }" class="fill-current" xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 width="16px" height="16px">
@@ -61,7 +61,7 @@ export default {
   }),
 
   created() {
-    this.transactionType = localStorage.getItem('transactionType') || -1
+    this.transactionType = Number(localStorage.getItem('transactionType')) || -1
     this.$on('paginatorChanged', page => this.changePage(page))
   },
 
