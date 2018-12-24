@@ -13,12 +13,13 @@ class TransactionService {
 
   async filterByType(page, type, limit = 25) {
     const offset = (page > 1) ? (page - 1) * limit : 0
+
     const response = await NodeService.get('transactions', {
       params: {
         orderBy: 'timestamp:desc',
-        type,
         limit,
-        offset
+        offset,
+        type: (type == -1) ? '' : type
       }
     })
     return response.data.transactions
