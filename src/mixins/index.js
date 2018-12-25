@@ -147,7 +147,11 @@ const methods = {
         maximumFractionDigits: decimals,
       })
 
-      return appendCurrency ? `${value} ${store.getters['network/symbol']}` : value
+      return appendCurrency ? `${value} ${
+          store.getters['network/symbol'] ||
+          store.getters['network/defaults'].symbol ||
+          ""
+        }` : value
     }
   },
 
