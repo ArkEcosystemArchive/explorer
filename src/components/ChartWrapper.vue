@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :key="componentKey">
     <div class="flex justify-between items-center px-10 py-8">
       <h2 class="text-white m-0 text-xl font-normal">{{ $t("Price in") }} {{ currencyName }}</h2>
       <div>
@@ -26,6 +26,7 @@ export default {
 
   data: () => ({
     type: 'day',
+    componentKey: 0,
     chartData: {},
     options: {
       showScale: true,
@@ -132,6 +133,7 @@ export default {
   },
 
   mounted() {
+    window.addEventListener('resize', this.handleResize)
     this.prepareComponent()
   },
 
@@ -182,6 +184,12 @@ export default {
 
     watchNetworkToken() {
       this.$store.watch((state) => state.network.token, (value) => this.renderChart())
+    },
+
+    handleResize() {
+      // trick to re-mount the chart on resize
+      // https://stackoverflow.com/questions/47459837/how-to-re-mount-a-component
+      this.componentKey++
     },
   }
 }
