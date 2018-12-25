@@ -51,7 +51,7 @@
   "Last forged": "Último bloco forjado",
   "Status": "Status",
   "Productivity": "Produtividade",
-  "Approval": "Aprovação",
+  "Vote %": "% de votos",
   "Delegates": "Delegados",
   "Delegate": "Delegado",
   "Forged block recently": "Bloco forjado recentemente",
@@ -107,6 +107,9 @@
 
   "Ooops!": "Ooops!",
   "Sorry, page not found": "Desculpe, página não encontrada",
+  "Sorry, dataType dataId could not be found on the blockchain": "Desculpe, {dataType} <b>{dataId}</b> não foi encontrado no blockchain",
+  "Reload this page": "Atualize esta página",
+  "Loading...": "Carregando...",
   "Active": "Ativo",
   "Standby": "Em Espera",
   "Latest transactions and blocks": "Últimas transações e blocos",
