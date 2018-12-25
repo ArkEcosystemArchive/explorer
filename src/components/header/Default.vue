@@ -71,11 +71,11 @@ export default {
     ...mapGetters('ui', ['menuVisible', 'priceChart']),
 
     shouldDisplayCurrency() {
-      return this.networkDefaults.config.priceChart
+      return this.networkDefaults.priceChart
     },
 
     shouldDisplayChart() {
-      return this.$route.name === 'home' && this.networkDefaults.config.priceChart
+      return this.$route.name === 'home' && this.networkDefaults.priceChart
     },
   },
 
