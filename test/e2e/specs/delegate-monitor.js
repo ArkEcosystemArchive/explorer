@@ -35,7 +35,7 @@ module.exports = {
     browser
       .useXpath().waitForElementVisible(element)
       .getText(element, function(result) {
-        browser.expect.element(element).text.to.not.contain(result.value).after(20000);
+        browser.expect.element(element).text.to.not.contain(result.value).after(20000)
       })
   },
 
@@ -45,7 +45,7 @@ module.exports = {
     browser
       .useXpath().waitForElementVisible(element)
       .getText(element, function(result) {
-        browser.expect.element(element).text.to.not.contain(result.value).after(20000);
+        browser.expect.element(element).text.to.not.contain(result.value).after(20000)
       })
   },
 

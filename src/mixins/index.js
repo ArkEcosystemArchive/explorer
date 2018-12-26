@@ -148,10 +148,10 @@ const methods = {
       })
 
       return appendCurrency ? `${value} ${
-          store.getters['network/symbol'] ||
+        store.getters['network/symbol'] ||
           store.getters['network/defaults'].symbol ||
-          ""
-        }` : value
+          ''
+      }` : value
     }
   },
 

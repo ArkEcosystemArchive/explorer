@@ -66,7 +66,7 @@ module.exports = {
       .waitForElementVisible('div.list-row-border-b')
       .useXpath()
       .getText(element, function(result) {
-        browser.expect.element(element).text.to.not.contain(result.value).after(20000);
+        browser.expect.element(element).text.to.not.contain(result.value).after(20000)
       })
   },
 
