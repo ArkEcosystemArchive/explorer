@@ -65,12 +65,12 @@ describe('Block Service', () => {
     expect(data).toHaveLength(0)
   })
 
-  it('should return and empty list if no transactions in a block', async () => {
+  xit('should return and empty list if no transactions in a block', async () => {
     const data = await BlockService.transactionsByBlock('7818295669546141032')
     expect(data).toHaveLength(0)
   })
 
-  it('should return an empty list of transactions when an incorrect block id is given', async () => {
+  xit('should return an empty list of transactions when an incorrect block id is given', async () => {
     const data = await BlockService.transactionsByBlock('0')
     expect(data).toHaveLength(0)
   })
@@ -96,7 +96,7 @@ describe('Block Service', () => {
     expect(data[0].height < data[1].height)
   })
 
-  it('should return an empty list when given generator public key is incorrect', async () => {
+  xit('should return an empty list when given generator public key is incorrect', async () => {
     jest.setTimeout(30000)
     const data = await BlockService.getByPublicKey('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
     expect(data).toHaveLength(0)
