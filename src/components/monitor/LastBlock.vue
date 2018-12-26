@@ -3,7 +3,7 @@
     <div>
       <div class="text-grey mb-2 min-w-0">{{ $t("Last block") }}</div>
       <div class="text-lg truncate" v-if="block.id">
-        <link-block :id="block.id">{{ block.id }}</link-block>
+        <link-block :id="block.id">{{ block.height }}</link-block>
       </div>
     </div>
 
