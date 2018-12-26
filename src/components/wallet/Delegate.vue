@@ -16,7 +16,7 @@
     </div>
 
     <div class="list-row-border-b">
-      <div>{{ $t("Approval") }}</div>
+      <div>{{ $t("Vote %") }}</div>
       <div v-if="delegate.production" v-tooltip="delegate.votes ? { trigger: 'hover click', content: readableCrypto(delegate.votes, true, 2), placement: 'left' } : {}">
         {{ percentageString(delegate.production.approval) }}
       </div>
