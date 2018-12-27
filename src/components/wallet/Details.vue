@@ -153,7 +153,7 @@
 
     <!-- Modal -->
     <modal v-if="showModal" @close="showModal = false">
-      <div class="text-center p-10 pt-2">
+      <div class="text-center px-10 py-2">
         <p class="semibold text-3xl mb-4">{{ $t("QR Code") }}</p>
         <p class="mb-10">{{ $t("Scan for Address") }}</p>
         <qr-code :value="wallet.address" :options="{ size: 160 }"></qr-code>
