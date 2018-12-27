@@ -16,9 +16,13 @@
       v-tooltip="{ show: nothingFound, content: $t('Nothing matched your search'), trigger: 'manual', placement: 'bottom-start', classes: 'search-tip' }"
       @keyup.enter="search" />
 
-    <div class="search-icon text-grey hover:text-blue p-3 md:p-4 transition" @click="search">
+    <button
+      class="search-icon text-grey hover:text-blue p-3 md:p-4 transition"
+      :disabled="!hasInput"
+      @click="search"
+    >
       <svg class="fill-current" width="20" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1216 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z"/></svg>
-    </div>
+    </button>
   </div>
 </template>
 
@@ -37,7 +41,11 @@ export default {
   computed: {
     ...mapGetters('delegates', ['delegates']),
     ...mapGetters('ui', ['nightMode']),
-    ...mapGetters('network', ['knownWallets'])
+    ...mapGetters('network', ['knownWallets']),
+
+    hasInput() {
+      return !!this.query
+    }
   },
 
   mounted() {
@@ -53,6 +61,10 @@ export default {
 
   methods: {
     async search() {
+      if (!this.query) {
+        return
+      }
+
       this.nothingFound = false
       this.searchCount = 0
       this.query = this.query.trim()
@@ -148,7 +160,7 @@ export default {
   color: var(--color-theme-text-placeholder);
 }
 
-.search-icon:hover {
+.search-icon:hover:enabled {
   box-shadow: 0 0 13px 2px rgba(197, 197, 213, 0.24);
   cursor: pointer;
 }
