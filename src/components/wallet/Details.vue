@@ -3,8 +3,8 @@
     <!-- Desktop -->
     <div class="py-8 bg-theme-feature-background hidden md:flex xl:rounded-lg items-center">
       <button
-        @click="showModal = !showModal"
-        class="address-button ml-10 mr-6 p-3 rounded flex-none hover-button-shadow">
+        class="address-button ml-10 mr-6 p-3 rounded flex-none hover-button-shadow transition"
+        @click="showModal = !showModal">
         <img class="block" src="@/assets/images/icons/qr.svg" />
       </button>
 
