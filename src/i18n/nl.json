@@ -2,6 +2,7 @@
   "Height": "Hoogte",
   "Network": "Netwerk",
   "Main": "Main",
+  "Development": "Ontwikkeling",
   "Supply": "Voorraad",
   "Market Cap": "Market Cap",
 
@@ -10,6 +11,7 @@
   "Date": "Datum",
 
   "No results": "Geen Resultaten",
+  "This wallet has been verified by the Ark team": "Deze wallet is geverifieerd door het Ark-team",
 
   "Transaction": "Transactie",
   "Transactions": "Transacties",
@@ -88,7 +90,7 @@
   "All": "Alles",
   "Sent": "Verzonden",
   "Received": "Ontvangen",
-  "Second Signature enabled": "2e Handtekening Ingeschakeld",
+  "Second signature enabled": "2e Handtekening Ingeschakeld",
 
   "Previous": "Vorige",
   "Next": "Volgende",

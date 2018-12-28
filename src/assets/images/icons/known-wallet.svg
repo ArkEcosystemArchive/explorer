@@ -1,0 +1,7 @@
+<svg
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ width="16px" height="16px">
+<path fill="none" d="M0,0h16v16H0V0z" />
+<path fill-rule="evenodd" fill="currentColor" d="M8,0L1.5,2.9v4.4c0,4,2.8,7.8,6.5,8.7c3.8-0.9,6.5-4.7,6.5-8.7V2.9L8,0z M6.5,11.6L3.6,8.7l1-1l1.9,1.9l4.8-4.8l1,1 L6.5,11.6z" />
+</svg>

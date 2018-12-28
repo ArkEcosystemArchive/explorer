@@ -2,6 +2,7 @@
   "Height": "Altura",
   "Network": "Rede",
   "Main": "Mainnet",
+  "Development": "Desenvolvimento",
   "Supply": "Distribuição",
   "Market Cap": "Valor de mercado",
 
@@ -10,6 +11,7 @@
   "Date": "Data",
 
   "No results": "Sem resultados",
+  "This wallet has been verified by the Ark team": "Esta carteira foi verificada pela equipe da Ark",
 
   "Transaction": "Transação",
   "Transactions": "Transações",
@@ -88,7 +90,7 @@
   "All": "Todos",
   "Sent": "Enviado",
   "Received": "Recebido",
-  "Second Signature enabled": "Senha Secundária ativada",
+  "Second signature enabled": "Senha Secundária ativada",
 
   "Previous": "Anterior",
   "Next": "Próximo",

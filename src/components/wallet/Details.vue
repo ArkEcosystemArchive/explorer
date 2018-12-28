@@ -12,17 +12,28 @@
         v-if="view === 'public'"
         class="pr-8 flex-auto min-w-0">
         <div class="flex items-center text-grey mb-2">
-          <span class="mr-2">{{ $t("Address") }}</span>
+          <span>{{ $t("Address") }}</span>
           <svg
-            v-tooltip="$t('Second Signature Enabled')"
+            v-tooltip="$t('Second signature enabled')"
             v-if="wallet.secondSignature"
-            class="fill-current"
+            class="fill-current ml-2"
             viewBox="0 0 448 512"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             width="14px" height="14px">
             <path fill-rule="evenodd" fill="currentColor" 
             d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"/>
+          </svg>
+          <svg
+            v-if="isKnown"
+            v-tooltip="$t('This wallet has been verified by the Ark team')"
+            viewBox="0 0 16 16"
+            class="fill-current ml-2"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="14px" height="14px">
+            <path fill="none" d="M0,0h16v16H0V0z" />
+            <path fill-rule="evenodd" fill="currentColor" d="M8,0L1.5,2.9v4.4c0,4,2.8,7.8,6.5,8.7c3.8-0.9,6.5-4.7,6.5-8.7V2.9L8,0z M6.5,11.6L3.6,8.7l1-1l1.9,1.9l4.8-4.8l1,1 L6.5,11.6z" />
           </svg>
         </div>
         <div class="flex">
@@ -105,7 +116,7 @@
             <div class="flex items-center text-grey mb-2">
               <span class="mr-2">{{ $t("Address") }}</span>
               <svg
-                v-tooltip="{ trigger: 'click', content: $t('Second Signature Enabled') }"
+                v-tooltip="{ trigger: 'click', content: $t('Second signature enabled') }"
                 v-if="wallet.secondSignature"
                 class="fill-current"
                 viewBox="0 0 448 512"
@@ -172,6 +183,14 @@ export default {
       type: Object,
       required: true,
     },
+  },
+
+  computed: {
+    ...mapGetters('network', ['knownWallets']),
+
+    isKnown() {
+      return this.knownWallets.hasOwnProperty(this.wallet.address)
+    }
   },
 
   data: () => ({
