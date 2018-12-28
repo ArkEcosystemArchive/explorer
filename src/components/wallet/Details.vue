@@ -26,7 +26,7 @@
           </svg>
           <svg
             v-if="isKnown"
-            v-tooltip="$t('This wallet has been verified by the Ark team')"
+            v-tooltip="$t('This is a verified address')"
             viewBox="0 0 16 16"
             class="fill-current ml-2"
             xmlns="http://www.w3.org/2000/svg"

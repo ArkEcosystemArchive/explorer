@@ -4,7 +4,7 @@
       <span v-if="isKnown">
         <router-link :to="{ name: 'wallet', params: { address: walletAddress } }" class="flex items-center">
           <svg
-            v-tooltip="$t('This wallet has been verified by the Ark team')"
+            v-tooltip="$t('This is a verified address')"
             viewBox="0 0 16 16"
             class="flex flex-none mr-2"
             xmlns="http://www.w3.org/2000/svg"
