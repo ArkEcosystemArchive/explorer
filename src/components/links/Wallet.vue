@@ -3,19 +3,19 @@
     <template v-if="!type">
       <span v-if="isKnown">
         <router-link :to="{ name: 'wallet', params: { address: walletAddress } }" class="flex items-center">
-          <span v-tooltip="getAddress()">
-            {{ knownWallets[address] }}
-          </span>
           <svg
             v-tooltip="$t('This wallet has been verified by the Ark team')"
             viewBox="0 0 16 16"
-            class="ml-1"
+            class="flex flex-none mr-2"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             width="16px" height="16px">
             <path fill="none" d="M0,0h16v16H0V0z" />
             <path fill-rule="evenodd" fill="currentColor" d="M8,0L1.5,2.9v4.4c0,4,2.8,7.8,6.5,8.7c3.8-0.9,6.5-4.7,6.5-8.7V2.9L8,0z M6.5,11.6L3.6,8.7l1-1l1.9,1.9l4.8-4.8l1,1 L6.5,11.6z" />
           </svg>
+          <span v-tooltip="getAddress()">
+            {{ knownWallets[address] }}
+          </span>
         </router-link>
       </span>
       <router-link v-else v-tooltip="getAddress()" :to="{ name: 'wallet', params: { address: walletAddress } }">
