@@ -7,9 +7,8 @@
   "currencies": [],
   "knownWallets": {},
   "defaults": {
-    "currency": null
-  },
-  "config": {
+    "symbol": "DѦ",
+    "currency": null,
     "priceChart": false
   }
 }

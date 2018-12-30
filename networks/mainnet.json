@@ -14,7 +14,6 @@
     "ETH": "Ξ",
     "EUR": "€",
     "GBP": "£",
-    "INR": "₹",
     "JPY": "¥",
     "KRW": "₩",
     "LTC": "Ł",
@@ -41,12 +40,11 @@
     "AewxfHQobSc49a4radHp74JZCGP8LRe4xA": "Genesis Wallet"
   },
   "defaults": {
+    "symbol": "Ѧ",
     "currency": {
       "name": "USD",
       "symbol": "$"
-    }
-  },
-  "config": {
+    },
     "priceChart": true
   }
 }
