@@ -76,9 +76,9 @@
             <div class="text-right">{{ emojify(transaction.vendorField) }}</div>
           </div>
 
-          <div class="list-row" v-if="transaction.blockid">
+          <div class="list-row" v-if="transaction.blockId">
             <div>{{ $t("Block") }}</div>
-            <div><link-block :id="transaction.blockid">{{ transaction.blockid }}</link-block></div>
+            <div><link-block :id="transaction.blockId">{{ transaction.blockId }}</link-block></div>
           </div>
         </div>
       </section>
