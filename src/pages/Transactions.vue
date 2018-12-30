@@ -1,10 +1,8 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
+    <h1 class="text-2xl md:text-3xl mb-5 md:mb-6 text-theme-text-primary sm:mr-5">Transactions</h1>
     <section class="mb-5">
       <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
-        <div class="mr-6 flex-none">
-          <img class="block" src="@/assets/images/icons/transaction.svg" />
-        </div>
         <div class="flex-auto min-w-0">
           <div class="text-grey mb-2">Transactions Type</div>
           <div class="flex">
@@ -26,7 +24,7 @@
             </span>
             <ul v-show="selectOpen" class="absolute pin-r mt-px bg-white shadow rounded border overflow-hidden list-reset text-sm">
               <li v-for="(txType, index) in transactionsChoices">
-              <div @click="filterTransactions(index - 1)" class="dropdown-button">{{ $t(txType) }}</div>
+                <div @click="filterTransactions(index - 1)" class="dropdown-button">{{ $t(txType) }}</div>
               </li>
             </ul>
           </div>
