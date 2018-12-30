@@ -20,6 +20,10 @@ const incomingAddress = 'AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv'
 const outgoingAddress = 'AN7BURQn5oqBRBADeWhmmUMJGQTy5Seey3'
 
 describe('Utils/TransactionAmount', () => {
+  beforeAll(() => {
+    store.dispatch('network/setSymbol', 'Ѧ')
+  })
+
   it('Should display an outgoing transaction in red', () => {
     const $route = {
       params: {
