@@ -95,7 +95,7 @@
     <!-- Mobile -->
     <div class="px-5 sm:px-10 py-10 bg-theme-feature-background md:hidden" v-if="wallet.address">
       <div class="flex justify-center mb-10">
-        <div class="p-2 bg-white rounded mx-auto">
+        <div class="flex items-center p-2 bg-white rounded mx-auto">
           <qr-code :value="wallet.address" :options="{ size: 160 }"></qr-code>
         </div>
       </div>
