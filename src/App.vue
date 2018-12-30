@@ -40,7 +40,7 @@ export default {
       localStorage.getItem('nightMode') || ((network.alias === 'Development') ? true : false)
     )
 
-    this.$store.dispatch('network/setDefaults', network)
+    this.$store.dispatch('network/setDefaults', network.defaults)
 
     this.$store.dispatch('network/setServer', network.server)
     this.$store.dispatch('network/setAlias', network.alias)
@@ -78,7 +78,7 @@ export default {
 
     this.$store.dispatch(
       'ui/setPriceChart',
-      localStorage.getItem('priceChart') || network.config.priceChart
+      localStorage.getItem('priceChart') || network.defaults.priceChart
     )
 
     this.updateI18n()

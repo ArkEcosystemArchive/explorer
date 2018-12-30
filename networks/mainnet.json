@@ -44,9 +44,7 @@
     "currency": {
       "name": "USD",
       "symbol": "$"
-    }
-  },
-  "config": {
+    },
     "priceChart": true
   }
 }

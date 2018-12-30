@@ -3,8 +3,8 @@
     <!-- Desktop -->
     <div class="py-8 bg-theme-feature-background hidden md:flex xl:rounded-lg items-center">
       <button
-        @click="showModal = !showModal"
-        class="address-button ml-10 mr-6 p-3 rounded flex-none hover-button-shadow">
+        class="address-button ml-10 mr-6 p-3 rounded flex-none hover-button-shadow transition"
+        @click="showModal = !showModal">
         <img class="block" src="@/assets/images/icons/qr.svg" />
       </button>
 
@@ -153,7 +153,7 @@
 
     <!-- Modal -->
     <modal v-if="showModal" @close="showModal = false">
-      <div class="text-center p-10 pt-2">
+      <div class="text-center px-10 py-2">
         <p class="semibold text-3xl mb-4">{{ $t("QR Code") }}</p>
         <p class="mb-10">{{ $t("Scan for Address") }}</p>
         <qr-code :value="wallet.address" :options="{ size: 160 }"></qr-code>
