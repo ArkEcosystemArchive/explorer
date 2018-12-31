@@ -11,6 +11,7 @@
   "Date": "Date",
 
   "No results": "No results",
+  "This is a verified address": "This is a verified address",
 
   "Transaction": "Transaction",
   "Transactions": "Transactions",
@@ -89,7 +90,7 @@
   "All": "All",
   "Sent": "Sent",
   "Received": "Received",
-  "Second Signature enabled": "Second signature enabled",
+  "Second signature enabled": "Second signature enabled",
 
   "Previous": "Previous",
   "Next": "Next",

@@ -11,6 +11,7 @@
   "Date": "Data",
 
   "No results": "Brak wyników",
+  "This is a verified address": "To jest zweryfikowany adres",
 
   "Transaction": "Transakcja",
   "Transactions": "Transakcje",
@@ -89,7 +90,7 @@
   "All": "Wszystko",
   "Sent": "Wysłano",
   "Received": "Otrzymano",
-  "Second Signature enabled": "Aktywowany Drugi Podpis",
+  "Second signature enabled": "Aktywowany Drugi Podpis",
 
   "Previous": "Poprzedni",
   "Next": "Następny",
