@@ -39,7 +39,7 @@ describe('Link/Wallet', () => {
     expect(wrapper.contains('a')).toBe(true)
     expect(wrapper.findAll('a')).toHaveLength(1)
     expect(wrapper.text()).toEqual(expect.stringContaining(testAddress))
-    expect(wrapper.text()).not.toEqual(expect.stringContaining(mixins.truncate(testAddress)))
+    expect(wrapper.text()).toEqual(expect.stringContaining(mixins.truncate(testAddress)))
   })
 
   it('Should display a truncated link to a wallet', () => {
