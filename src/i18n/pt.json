@@ -2,6 +2,7 @@
   "Height": "Altura",
   "Network": "Rede",
   "Main": "Mainnet",
+  "Development": "Desenvolvimento",
   "Supply": "Distribuição",
   "Market Cap": "Valor de mercado",
 
@@ -10,6 +11,7 @@
   "Date": "Data",
 
   "No results": "Sem resultados",
+  "This is a verified address": "Este é um endereço confirmado",
 
   "Transaction": "Transação",
   "Transactions": "Transações",
@@ -88,7 +90,7 @@
   "All": "Todos",
   "Sent": "Enviado",
   "Received": "Recebido",
-  "Second Signature enabled": "Senha Secundária ativada",
+  "Second signature enabled": "Senha Secundária ativada",
 
   "Previous": "Anterior",
   "Next": "Próximo",

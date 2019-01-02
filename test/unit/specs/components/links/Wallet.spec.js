@@ -37,9 +37,9 @@ describe('Link/Wallet', () => {
       store
     })
     expect(wrapper.contains('a')).toBe(true)
-    expect(wrapper.findAll('a')).toHaveLength(2)
+    expect(wrapper.findAll('a')).toHaveLength(1)
     expect(wrapper.text()).toEqual(expect.stringContaining(testAddress))
-    expect(wrapper.text()).toEqual(expect.stringContaining(mixins.truncate(testAddress)))
+    expect(wrapper.text()).not.toEqual(expect.stringContaining(mixins.truncate(testAddress)))
   })
 
   it('Should display a truncated link to a wallet', () => {
@@ -58,7 +58,7 @@ describe('Link/Wallet', () => {
       store
     })
     expect(wrapper.contains('a')).toBe(true)
-    expect(wrapper.findAll('a')).toHaveLength(2)
+    expect(wrapper.findAll('a')).toHaveLength(1)
     expect(wrapper.text()).not.toEqual(expect.stringContaining(testAddress))
     expect(wrapper.text()).toEqual(expect.stringContaining(mixins.truncate(testAddress)))
   })
@@ -80,7 +80,8 @@ describe('Link/Wallet', () => {
       store
     })
     expect(wrapper.contains('a')).toBe(true)
-    expect(wrapper.findAll('a')).toHaveLength(2)
+    expect(wrapper.findAll('a')).toHaveLength(1)
+    expect(wrapper.findAll('svg')).toHaveLength(1)
     expect(wrapper.text()).not.toEqual(expect.stringContaining(testAddress))
     expect(wrapper.text()).not.toEqual(expect.stringContaining(mixins.truncate(testAddress)))
     expect(wrapper.text()).toEqual(expect.stringContaining('TestKnownWallet'))
@@ -103,7 +104,7 @@ describe('Link/Wallet', () => {
     })
     // Delegate name is set after function call in mounted(), so we need to wait a little while
     expect(wrapper.contains('a')).toBe(true)
-    expect(wrapper.findAll('a')).toHaveLength(2)
+    expect(wrapper.findAll('a')).toHaveLength(1)
     setTimeout(() => {
       expect(wrapper.text()).not.toEqual(expect.stringContaining(testDelegateAddress))
       expect(wrapper.text()).not.toEqual(expect.stringContaining(mixins.truncate(testDelegateAddress)))
@@ -129,7 +130,7 @@ describe('Link/Wallet', () => {
     })
     // Delegate name is set after function call in mounted(), so we need to wait a little while
     expect(wrapper.contains('a')).toBe(true)
-    expect(wrapper.findAll('a')).toHaveLength(2)
+    expect(wrapper.findAll('a')).toHaveLength(1)
     setTimeout(() => {
       expect(wrapper.text()).not.toEqual(expect.stringContaining(testDelegateAddress))
       expect(wrapper.text()).not.toEqual(expect.stringContaining(mixins.truncate(testDelegateAddress)))
