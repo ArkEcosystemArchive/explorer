@@ -13,7 +13,9 @@ describe('Loader Service', () => {
       'token',
       'symbol',
       'explorer',
-      'version'
+      'version',
+      'feeStatistics',
+      'ports'
     ].sort())
   })
 })

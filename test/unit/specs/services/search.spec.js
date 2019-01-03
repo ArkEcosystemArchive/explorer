@@ -13,6 +13,7 @@ describe('Search Service', () => {
     expect(Object.keys(data.account).sort()).toEqual([
       'address',
       'unconfirmedBalance',
+      'username',
       'balance',
       'publicKey',
       'unconfirmedSignature',
@@ -80,7 +81,6 @@ describe('Search Service', () => {
       'payloadLength',
       'payloadHash',
       'generatorPublicKey',
-      'generatorId',
       'blockSignature',
       'confirmations',
       'totalForged'
@@ -96,7 +96,6 @@ describe('Search Service', () => {
     expect(Object.keys(data.transaction).sort()).toEqual([
       'id',
       'blockid',
-      'height',
       'type',
       'timestamp',
       'amount',
