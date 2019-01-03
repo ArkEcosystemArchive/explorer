@@ -20,12 +20,20 @@
 import TransactionService from '@/services/transaction'
 
 export default {
+  props: ['testTransactionType'],
   data: () => ({
-    transactions: null
+    transactions: null,
+    transactionType: null
   }),
 
   async mounted() {
     await this.prepareComponent()
+  },
+
+  computed: {
+    computeTransactionType() {
+      return this.testTransactionType || Number(localStorage.getItem('transactionType'))
+    }
   },
 
   methods: {
@@ -36,7 +44,8 @@ export default {
     },
 
     async getTransactions() {
-      const response = await TransactionService.latest()
+      const response = await TransactionService.filterByType(0, this.computeTransactionType)
+      localStorage.setItem('transactionType', this.computeTransactionType)
       this.transactions = response
     }
   }
