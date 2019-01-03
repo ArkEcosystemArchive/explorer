@@ -38,15 +38,15 @@
         <div class="px-5 sm:px-10">
           <div class="list-row-border-b">
             <div>{{ $t("Sender") }}</div>
-            <div class="truncate">
-              <link-wallet :address="transaction.senderId">{{ transaction.senderId }}</link-wallet>
+            <div>
+              <link-wallet :address="transaction.senderId" :trunc="false"></link-wallet>
             </div>
           </div>
 
           <div class="list-row-border-b">
             <div>{{ $t("Recipient") }}</div>
-            <div class="truncate">
-              <link-wallet :address="transaction.recipientId" :type="transaction.type" :asset="transaction.asset">{{ transaction.recipientId }}</link-wallet>
+            <div>
+              <link-wallet :address="transaction.recipientId" :type="transaction.type" :asset="transaction.asset" :trunc="false"></link-wallet>
             </div>
           </div>
 
