@@ -14,7 +14,7 @@
         <span>{{ $t("Height") }}:</span>
         <span class="block md:inline-block">{{ height.toLocaleString() }}</span>
       </div>
-      <div class="mr-2" v-if="alias !== 'Main'">
+      <div class="mr-2">
         <span>{{ $t("Network") }}:</span>
         <span class="block md:inline-block">{{ $t(alias) }}</span>
       </div>
