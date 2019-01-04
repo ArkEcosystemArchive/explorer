@@ -7,6 +7,8 @@
   "currencies": [],
   "knownWallets": {},
   "defaults": {
+    "token": "TARK",
+    "symbol": "TѦ",
     "currency": null,
     "priceChart": false
   }
