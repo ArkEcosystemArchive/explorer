@@ -19,7 +19,7 @@ class TransactionService {
         orderBy: 'timestamp:desc',
         limit,
         offset,
-        type: (type == -1) ? '' : type
+        type: (type === -1) ? '' : type
       }
     })
     return response.data.transactions

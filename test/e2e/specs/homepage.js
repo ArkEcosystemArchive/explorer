@@ -248,7 +248,7 @@ module.exports = {
       .waitForElementVisible("//thead[contains(@class, 'table-component__table__head')]//tr[1]//th[4][contains(., 'Transactions')]")
     browser
       .getText(element, function(result) {
-        browser.expect.element(element).text.to.not.contain(result.value).after(20000);
+        browser.expect.element(element).text.to.not.contain(result.value).after(20000)
       })
   },
 

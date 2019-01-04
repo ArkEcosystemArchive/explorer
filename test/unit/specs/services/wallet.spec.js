@@ -11,6 +11,7 @@ describe('Wallet Service', () => {
     // Response should contain all these properties
     expect(Object.keys(data).sort()).toEqual([
       'address',
+      'username',
       'unconfirmedBalance',
       'balance',
       'publicKey',
@@ -41,8 +42,8 @@ describe('Wallet Service', () => {
     ].sort())
   })
 
-  it('should return false when address is not voting', async () => {
-    await expect(walletService.vote('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs')).resolves.toEqual(false)
+  it('should fail when address is not voting', async () => {
+    await expect(walletService.vote('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs')).rejects.toThrow()
   })
 
   it('should fail when fetching vote for incorrect wallet address', async () => {
