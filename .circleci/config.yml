@@ -6,6 +6,9 @@ jobs:
       - image: circleci/node:9-browsers
     steps: &teststeps
       - checkout
+      - run:
+          name: Update npm to @latest
+          command: 'sudo npm install -g npm@latest'
       - run: mkdir test-reports
       - run:
           name: Download Selenium
