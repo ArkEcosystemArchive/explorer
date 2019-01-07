@@ -397,7 +397,6 @@ module.exports = {
     browser
       .useXpath()
       .waitForElementVisible("//div[contains(@class, 'tooltip-inner') and text() = 'Nothing matched your search']")
-    browser.end()
   },
 
   'it should contains a dropdown allowing to filter transactions types': function (browser) {
@@ -411,5 +410,6 @@ module.exports = {
       .click("//div[contains(@class, 'dropdown-button')]")
       .pause(500)
       .useXpath().expect.element("//div[text() = 'Vote']").to.be.present
+    browser.end()
   }
 }
