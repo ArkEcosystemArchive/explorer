@@ -20,7 +20,7 @@
 import TransactionService from '@/services/transaction'
 
 export default {
-  props: ['testTransactionType'],
+  props: ['transactionType'],
   data: () => ({
     transactions: null,
     transactionType: null
@@ -32,7 +32,7 @@ export default {
 
   computed: {
     computeTransactionType() {
-      return this.testTransactionType || Number(localStorage.getItem('transactionType'))
+      return this.transactionType || Number(localStorage.getItem('transactionType'))
     }
   },
 
