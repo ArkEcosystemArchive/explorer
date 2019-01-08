@@ -17,11 +17,19 @@
         <div class="flex flex-col ml-4">
           <div class="text-grey mb-2">{{ $t("Type") }}</div>
           <div class="relative text-white z-20">
-            <span @click="selectOpen = !selectOpen" class="cursor-pointer flex items-center">
+            <span
+              class="cursor-pointer flex items-center"
+              @click="selectOpen = !selectOpen"
+              v-click-outside="closeDropdown"
+            >
               <span class="mr-1">{{ $t(types[transactionType + 1]) }}</span>
-              <svg :class="{ 'rotate-180': selectOpen }" class="fill-current" xmlns="http://www.w3.org/2000/svg"
+              <svg
+                class="fill-current"
+                :class="{ 'rotate-180': selectOpen }"
+                xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
-                width="16px" height="16px">
+                width="16px" height="16px"
+              >
                 <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
               </svg>
             </span>
@@ -98,6 +106,10 @@ export default {
       const response = await TransactionService.filterByType(this.currentPage, index)
       this.setTransactions(response)
       localStorage.setItem('transactionType', index)
+    },
+
+    closeDropdown() {
+      this.selectOpen = false
     }
   }
 }

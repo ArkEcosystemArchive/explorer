@@ -9,17 +9,26 @@
     <section class="page-section py-5 md:py-10">
       <div class="border-b mb-8 mx-5 sm:mx-10 flex items-center justify-between">
         <nav class="flex items-end">
-          <div @click="dataView = 'transactions'"
-               :class="dataView === 'transactions' ? 'active-tab' : 'inactive-tab'">
+          <div
+            :class="dataView === 'transactions' ? 'active-tab' : 'inactive-tab'"
+            @click="dataView = 'transactions'"
+          >
             {{ $t("Latest transactions") }}
           </div>
-          <div @click="dataView = 'blocks'"
-               :class="dataView === 'blocks' ? 'active-tab' : 'inactive-tab'">
+          <div
+            :class="dataView === 'blocks' ? 'active-tab' : 'inactive-tab'"
+            @click="dataView = 'blocks'"
+          >
             {{ $t("Latest blocks") }}
           </div>
         </nav>
 
-        <div v-if="dataView === 'transactions'" @click="selectOpen = !selectOpen" class="flex ml-4 relative z-20 cursor-pointer">
+        <div
+          v-if="dataView === 'transactions'"
+          class="flex ml-4 relative z-20 cursor-pointer"
+          @click="selectOpen = !selectOpen"
+          v-click-outside="closeDropdown"
+        >
           <span class="text-theme-text-secondary mr-2">{{ $t("Type") }}:</span>
           <span class="flex items-center text-theme-text-primary">
             <span class="mr-1">{{ $t(types[transactionType + 1]) }}</span>
@@ -84,6 +93,10 @@ export default {
     setTransactionType(type) {
       localStorage.setItem('transactionType', type)
       this.transactionType = type
+    },
+
+    closeDropdown() {
+      this.selectOpen = false
     }
   }
 }
