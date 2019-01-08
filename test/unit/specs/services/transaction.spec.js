@@ -49,4 +49,13 @@ describe('Transaction Service', () => {
     expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(transactionPropertyArray))
     expect(data[0].timestamp < data[1].timestamp)
   })
+
+  it('should filter the transactions and only return type 3 transactions', async() => {
+    const data = await TransactionService.filterByType(1, 3)
+    expect(data).toHaveLength(25)
+    data.forEach(transaction => {
+      expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray))
+      expect(transaction.type === 3)
+    })
+  })
 })

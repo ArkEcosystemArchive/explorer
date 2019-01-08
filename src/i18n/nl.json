@@ -2,6 +2,7 @@
   "Height": "Hoogte",
   "Network": "Netwerk",
   "Main": "Main",
+  "Development": "Ontwikkeling",
   "Supply": "Voorraad",
   "Market Cap": "Market Cap",
 
@@ -10,6 +11,7 @@
   "Date": "Datum",
 
   "No results": "Geen Resultaten",
+  "This is a verified address": "Dit is een geverifieerd adres",
 
   "Transaction": "Transactie",
   "Transactions": "Transacties",
@@ -86,7 +88,7 @@
   "All": "Alles",
   "Sent": "Verzonden",
   "Received": "Ontvangen",
-  "Second Signature enabled": "2e Handtekening Ingeschakeld",
+  "Second signature enabled": "2e Handtekening Ingeschakeld",
 
   "Previous": "Vorige",
   "Next": "Volgende",
@@ -128,5 +130,6 @@
   "IPFS": "IPFS",
   "Timelock Transfer": "Timelock Transfer",
   "Multipayment": "Multipayment",
-  "Delegate Resignation": "Aftreden Afgevaardigde"
+  "Delegate Resignation": "Aftreden Afgevaardigde",
+  "Second Signature": "Tweede Handtekening"
 }

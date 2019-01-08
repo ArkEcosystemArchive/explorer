@@ -8,7 +8,7 @@
     </router-link>
 
     <div class="w-full relative hidden xl:flex">
-      <header-search v-if="headerType === 'search'"></header-search>
+      <header-search v-if="headerType === 'search'" v-click-outside="closeHeader"></header-search>
 
       <header-desktop-currencies v-else-if="headerType === 'currencies'"></header-desktop-currencies>
 
@@ -58,6 +58,12 @@ export default {
   computed: {
     ...mapGetters('ui', ['headerType', 'menuVisible']),
   },
+
+  methods: {
+    closeHeader () {
+      this.$store.dispatch('ui/setHeaderType', null)
+    }
+  }
 }
 </script>
 
