@@ -1,6 +1,9 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <h1 class="text-2xl md:text-3xl mb-5 md:mb-6 text-theme-text-primary sm:mr-5">Transactions</h1>
+    <content-header>
+      <span>{{ $t("Transactions") }}</span>
+    </content-header>
+
     <section class="mb-5">
       <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
         <div class="flex-auto min-w-0">
