@@ -53,7 +53,7 @@ export default {
   data: () => ({
     transactions: null,
     transactionsChoices: [
-      'All', 'Transfer', 'Second Signature', 'Delegate Registration', 'Vote', 'MultiSignature'
+      'All', 'Transfer', 'Second Signature', 'Delegate Registration', 'Vote', 'Multisignature Registration'
     ],
     transactionType: -1,
     currentPage: 0,

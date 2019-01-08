@@ -72,7 +72,7 @@ export default {
   data: () => ({
     dataView: 'transactions',
     transactionsChoices: [
-      'All', 'Transfer', 'Second Signature', 'Delegate Registration', 'Vote', 'MultiSignature'
+      'All', 'Transfer', 'Second Signature', 'Delegate Registration', 'Vote', 'Multisignature Registration'
     ],
     transactionType: -1,
     currentPage: 0,
