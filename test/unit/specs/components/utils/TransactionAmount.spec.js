@@ -49,7 +49,7 @@ describe('Utils/TransactionAmount', () => {
     })
     expect(wrapper.classes()).toContain('text-red')
     expect(wrapper.classes()).not.toContain('text-green')
-    expect(wrapper.text()).toEqual(mixins.readableCrypto(100000000))
+    expect(wrapper.text()).toEqual(mixins.readableCrypto(100000000).trim())
   })
 
   it('Should display an incoming transaction in green', () => {
@@ -77,7 +77,7 @@ describe('Utils/TransactionAmount', () => {
     })
     expect(wrapper.classes()).toContain('text-green')
     expect(wrapper.classes()).not.toContain('text-red')
-    expect(wrapper.text()).toEqual(mixins.readableCrypto(100000000))
+    expect(wrapper.text()).toEqual(mixins.readableCrypto(100000000).trim())
   })
 
   it('Should display special transactions in red', () => {
@@ -105,6 +105,6 @@ describe('Utils/TransactionAmount', () => {
     })
     expect(wrapper.classes()).toContain('text-red')
     expect(wrapper.classes()).not.toContain('text-green')
-    expect(wrapper.text()).toEqual(mixins.readableCrypto(100000000))
+    expect(wrapper.text()).toEqual(mixins.readableCrypto(100000000).trim())
   })
 })

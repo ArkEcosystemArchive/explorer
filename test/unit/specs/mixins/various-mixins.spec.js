@@ -90,6 +90,17 @@ describe('networkToken mixin', () => {
     store.dispatch('network/setToken', 'ARK')
     expect(mixins.networkToken()).toEqual('ARK')
   })
+
+  it('should return the default network token', () => {
+    store.dispatch('network/setToken', null)
+    store.dispatch('network/setDefaults', { token: 'DEFAULTARK' })
+    expect(mixins.networkToken()).toEqual('DEFAULTARK')
+  })
+
+  it('should return an empty string if no token has been set', () => {
+    store.dispatch('network/setDefaults', {})
+    expect(mixins.networkToken()).toEqual('')
+  })
 })
 
 describe('emojify mixin', () => {
