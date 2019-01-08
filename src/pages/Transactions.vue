@@ -7,10 +7,10 @@
     <section class="mb-5">
       <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
         <div class="flex-auto min-w-0">
-          <div class="text-grey mb-2">Transactions Type</div>
+          <div class="text-grey mb-2">{{ $t("Transaction type") }}</div>
           <div class="flex">
             <div class="text-lg text-white semibold truncate">
-              <span class="mr-2">{{ transactionsChoices[transactionType+1] }}</span>
+              <span class="mr-2">{{ types[transactionType + 1] }}</span>
             </div>
           </div>
         </div>
@@ -18,7 +18,7 @@
           <div class="text-grey mb-2">{{ $t("Type") }}</div>
           <div class="relative text-white z-20">
             <span @click="selectOpen = !selectOpen" class="cursor-pointer flex items-center">
-              <span class="mr-1">{{ $t(transactionsChoices[transactionType + 1]) }}</span>
+              <span class="mr-1">{{ $t(types[transactionType + 1]) }}</span>
               <svg :class="{ 'rotate-180': selectOpen }" class="fill-current" xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 width="16px" height="16px">
@@ -26,8 +26,8 @@
               </svg>
             </span>
             <ul v-show="selectOpen" class="absolute pin-r mt-px bg-white shadow rounded border overflow-hidden list-reset text-sm">
-              <li v-for="(txType, index) in transactionsChoices">
-                <div @click="filterTransactions(index - 1)" class="dropdown-button">{{ $t(txType) }}</div>
+              <li v-for="(type, index) in types">
+                <div @click="filterTransactions(index - 1)" class="dropdown-button">{{ $t(type) }}</div>
               </li>
             </ul>
           </div>
@@ -52,7 +52,7 @@ import TransactionService from '@/services/transaction'
 export default {
   data: () => ({
     transactions: null,
-    transactionsChoices: [
+    types: [
       'All', 'Transfer', 'Second Signature', 'Delegate Registration', 'Vote', 'Multisignature Registration'
     ],
     transactionType: -1,

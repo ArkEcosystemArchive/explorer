@@ -20,20 +20,26 @@
 import TransactionService from '@/services/transaction'
 
 export default {
-  props: ['transactionType'],
+  props: {
+    transactionType: {
+      type: Number,
+      required: true
+    }
+  },
+
   data: () => ({
-    transactions: null,
-    transactionType: null
+    transactions: null
   }),
+
+  watch: {
+    async transactionType() {
+      this.transactions = null
+      await this.getTransactions()
+    }
+  },
 
   async mounted() {
     await this.prepareComponent()
-  },
-
-  computed: {
-    computeTransactionType() {
-      return this.transactionType || Number(localStorage.getItem('transactionType'))
-    }
   },
 
   methods: {
@@ -44,8 +50,7 @@ export default {
     },
 
     async getTransactions() {
-      const response = await TransactionService.filterByType(0, this.computeTransactionType)
-      localStorage.setItem('transactionType', this.computeTransactionType)
+      const response = await TransactionService.filterByType(0, this.transactionType)
       this.transactions = response
     }
   }

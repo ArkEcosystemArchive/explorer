@@ -7,49 +7,37 @@
     </section>
 
     <section class="page-section py-5 md:py-10">
-      <nav class="mx-5 sm:mx-10 mb-8 border-b flex items-end">
-        <div @click="dataView = 'transactions'"
-             :class="dataView === 'transactions' ? 'active-tab' : 'inactive-tab'">
-          {{ $t("Latest transactions") }}
-        </div>
-        <div @click="dataView = 'blocks'"
-             :class="dataView === 'blocks' ? 'active-tab' : 'inactive-tab'">
-          {{ $t("Latest blocks") }}
-        </div>
-      </nav>
-
-      <section class="mb-5" v-if="dataView === 'transactions'">
-        <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
-          <div class="flex-auto min-w-0">
-            <div class="text-grey mb-2">Transactions Type</div>
-            <div class="flex">
-              <div class="text-lg text-white semibold truncate">
-                <span class="mr-2">{{ transactionsChoices[transactionType+1] }}</span>
-              </div>
-            </div>
+      <div class="border-b mb-8 mx-5 sm:mx-10 flex items-center justify-between">
+        <nav class="flex items-end">
+          <div @click="dataView = 'transactions'"
+               :class="dataView === 'transactions' ? 'active-tab' : 'inactive-tab'">
+            {{ $t("Latest transactions") }}
           </div>
-          <div class="flex flex-col ml-4">
-            <div class="text-grey mb-2">{{ $t("Type") }}</div>
-            <div class="relative text-white z-20">
-              <span @click="selectOpen = !selectOpen" class="cursor-pointer flex items-center">
-                <span class="mr-1">{{ $t(transactionsChoices[transactionType + 1]) }}</span>
-                <svg :class="{ 'rotate-180': selectOpen }" class="fill-current" xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                width="16px" height="16px">
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-              </span>
-              <ul v-show="selectOpen" class="absolute pin-r mt-px bg-white shadow rounded border overflow-hidden list-reset text-sm">
-                <li v-for="(txType, index) in transactionsChoices">
-                  <div @click="filterTransactions(index - 1)" class="dropdown-button">{{ $t(txType) }}</div>
-                </li>
-              </ul>
-            </div>
+          <div @click="dataView = 'blocks'"
+               :class="dataView === 'blocks' ? 'active-tab' : 'inactive-tab'">
+            {{ $t("Latest blocks") }}
           </div>
-        </div>
-      </section>
+        </nav>
 
-      <latest-transactions v-if="dataView === 'transactions'" v-bind:testTransactionType="transactionType"></latest-transactions>
+        <div v-if="dataView === 'transactions'" @click="selectOpen = !selectOpen" class="flex ml-4 relative z-20 cursor-pointer">
+          <span class="text-theme-text-secondary mr-2">{{ $t("Type") }}:</span>
+          <span class="flex items-center text-theme-text-primary">
+            <span class="mr-1">{{ $t(types[transactionType + 1]) }}</span>
+            <svg :class="{ 'rotate-180': selectOpen }" class="fill-current" xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            width="16px" height="16px">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg>
+          </span>
+          <ul v-show="selectOpen" class="absolute pin-r mt-6 bg-white shadow rounded border overflow-hidden list-reset text-sm">
+            <li v-for="(type, index) in types">
+              <div @click="filterTransactions(index - 1)" class="dropdown-button">{{ $t(type) }}</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <latest-transactions v-if="dataView === 'transactions'" :transaction-type="transactionType"></latest-transactions>
 
       <latest-blocks v-if="dataView === 'blocks'"></latest-blocks>
     </section>
@@ -71,7 +59,7 @@ export default {
 
   data: () => ({
     dataView: 'transactions',
-    transactionsChoices: [
+    types: [
       'All', 'Transfer', 'Second Signature', 'Delegate Registration', 'Vote', 'Multisignature Registration'
     ],
     transactionType: -1,
@@ -88,14 +76,15 @@ export default {
   },
 
   methods: {
-    async filterTransactions(index) {
-       this.transactions = null
-       this.selectOpen = false
-       this.transactionType = index
-       const response = await TransactionService.filterByType(0, index)
-       this.setTransactions(response)
-       localStorage.setItem('transactionType', index)
-     }
+    async filterTransactions(type) {
+      this.selectOpen = false
+      this.setTransactionType(type)
+    },
+
+    setTransactionType(type) {
+      localStorage.setItem('transactionType', type)
+      this.transactionType = type
+    }
   }
 }
 </script>
