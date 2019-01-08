@@ -17,12 +17,17 @@ class TransactionService {
   }
 
   async filterByType(page, type, limit = 25) {
+    const params = {
+      page,
+      limit
+    }
+
+    if (type !== -1) {
+      params.type = type
+    }
+
     const response = await ApiService.get('transactions', {
-      params: {
-        page,
-        limit,
-        type: (type === -1) ? '' : type
-      }
+      params: params
     })
     return response.data
   }
