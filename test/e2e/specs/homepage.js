@@ -401,15 +401,15 @@ module.exports = {
 
   'it should contains a dropdown allowing to filter transactions types': function (browser) {
     browser
-      .assert.urlContains('/#')
-      .expect.element("//span[contains(@class, 'mr-1')]").to.be.visible
-    browser
-      .waitForElementVisible("//div[text() = 'Type']")
+      .useXpath()
+      .waitForElementVisible("//span[text() = 'Type']")
       .waitForElementVisible("//span[text() = 'All']")
+      .click("//span[text() = 'All']")
     browser
-      .click("//div[contains(@class, 'dropdown-button')]")
+      .waitForElementVisible("//div[contains(@class, 'dropdown-button') and text() = 'Vote']")
+      .click("//div[contains(@class, 'dropdown-button') and text() = 'Vote']")
       .pause(500)
-      .useXpath().expect.element("//div[text() = 'Vote']").to.be.present
+      .expect.element("//span[text() = 'Vote']").to.be.present
     browser.end()
   }
 }
