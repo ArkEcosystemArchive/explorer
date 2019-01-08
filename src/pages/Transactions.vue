@@ -16,29 +16,10 @@
         </div>
         <div class="flex flex-col ml-4">
           <div class="text-grey mb-2">{{ $t("Type") }}</div>
-          <div class="relative text-white z-20">
-            <span
-              class="cursor-pointer flex items-center"
-              @click="selectOpen = !selectOpen"
-              v-click-outside="closeDropdown"
-            >
-              <span class="mr-1">{{ $t(types[transactionType + 1]) }}</span>
-              <svg
-                class="fill-current"
-                :class="{ 'rotate-180': selectOpen }"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                width="16px" height="16px"
-              >
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-              </svg>
-            </span>
-            <ul v-show="selectOpen" class="absolute pin-r mt-px bg-white shadow rounded border overflow-hidden list-reset text-sm">
-              <li v-for="(type, index) in types">
-                <div @click="filterTransactions(index - 1)" class="dropdown-button">{{ $t(type) }}</div>
-              </li>
-            </ul>
-          </div>
+          <selection-type
+            color="text-white"
+            @change="onTypeChange"
+          ></selection-type>
         </div>
       </div>
     </section>
@@ -55,17 +36,20 @@
 </template>
 
 <script type="text/ecmascript-6">
+import SelectionType from '@/components/SelectionType'
 import TransactionService from '@/services/transaction'
 
 export default {
+  components: {
+    SelectionType
+  },
+
   data: () => ({
     transactions: null,
+    currentPage: 0,
     types: [
       'All', 'Transfer', 'Second Signature', 'Delegate Registration', 'Vote', 'Multisignature Registration'
-    ],
-    transactionType: -1,
-    currentPage: 0,
-    selectOpen: false,
+    ]
   }),
 
   created() {
@@ -90,7 +74,7 @@ export default {
   },
 
   methods: {
-    setTransactions (transactions) {
+    setTransactions(transactions) {
       if (!transactions) return
       this.transactions = transactions
     },
@@ -99,17 +83,11 @@ export default {
       this.$router.push({ name: 'transactions', params: { page } })
     },
 
-    async filterTransactions(index) {
+    async onTypeChange(type) {
       this.transactions = null
-      this.selectOpen = false
-      this.transactionType = index
-      const response = await TransactionService.filterByType(this.currentPage, index)
-      this.setTransactions(response)
-      localStorage.setItem('transactionType', index)
-    },
 
-    closeDropdown() {
-      this.selectOpen = false
+      const response = await TransactionService.filterByType(this.currentPage, type)
+      this.setTransactions(response)
     }
   }
 }
