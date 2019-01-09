@@ -7,8 +7,8 @@
     </section>
 
     <section class="page-section py-5 md:py-10">
-      <div class="border-b mb-8 mx-5 sm:mx-10 flex items-center justify-between">
-        <nav class="flex items-end">
+      <div class="flex flex-col sm:flex-row items-center mx-5 sm:mx-0 mb-4 sm:mb-8">
+        <nav class="flex items-end w-full border-b mb-4 sm:mb-0 mx-5 sm:mx-10">
           <div
             :class="dataView === 'transactions' ? 'active-tab' : 'inactive-tab'"
             @click="dataView = 'transactions'"
@@ -25,9 +25,9 @@
 
         <div
           v-if="dataView === 'transactions'"
-          class="flex"
+          class="flex flex-col mb-4 sm:mb-0 mr-auto sm:mr-10"
         >
-          <span class="text-theme-text-secondary mr-2">{{ $t("Type") }}:</span>
+          <span class="text-theme-text-secondary mb-2 text-theme-text-thead text-xs">{{ $t("Type") }}</span>
           <selection-type @change="onTypeChange"></selection-type>
         </div>
       </div>

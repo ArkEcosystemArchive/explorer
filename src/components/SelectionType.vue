@@ -8,7 +8,7 @@
       :class="color"
       @click="selectOpen = !selectOpen"
     >
-      <span class="mr-1">{{ $t(types[transactionType + 1]) }}</span>
+      <span class="mr-1 md:whitespace-no-wrap">{{ $t(types[transactionType + 1]) }}</span>
       <svg :class="{ 'rotate-180': isOpen }" class="fill-current" xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 20 20"
       width="16px" height="16px">
