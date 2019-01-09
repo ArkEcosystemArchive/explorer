@@ -399,17 +399,15 @@ module.exports = {
       .waitForElementVisible("//div[contains(@class, 'tooltip-inner') and text() = 'Nothing matched your search']")
   },
 
-  'it should contains a dropdown allowing to filter transactions types': function (browser) {
+  'it should contain a dropdown allowing to filter transactions types': function (browser) {
     browser
       .useXpath()
-      .waitForElementVisible("//span[text() = 'Type']")
-      .waitForElementVisible("//span[text() = 'All']")
-      .click("//span[text() = 'All']")
+      .waitForElementVisible("//span[contains(@class, 'mr-1') and text() = 'All']")
+      .click("//span[contains(@class, 'mr-1') and text() = 'All']")
     browser
       .waitForElementVisible("//div[contains(@class, 'dropdown-button') and text() = 'Vote']")
       .click("//div[contains(@class, 'dropdown-button') and text() = 'Vote']")
-      .pause(500)
-      .expect.element("//span[text() = 'Vote']").to.be.present
+      .waitForElementVisible("//span[contains(@class, 'mr-1') and text() = 'Vote']")
     browser.end()
   }
 }
