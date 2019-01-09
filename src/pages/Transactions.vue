@@ -47,7 +47,8 @@ export default {
     currentPage: 0,
     types: [
       'All', 'Transfer', 'Second Signature', 'Delegate Registration', 'Vote', 'Multisignature Registration'
-    ]
+    ],
+    transactionType: -1
   }),
 
   created() {
@@ -83,6 +84,7 @@ export default {
 
     async onTypeChange(type) {
       this.transactions = null
+      this.transactionType = type
 
       const response = await TransactionService.filterByType(this.currentPage, type)
       this.setTransactions(response)
