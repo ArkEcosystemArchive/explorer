@@ -52,12 +52,12 @@ export default {
   }),
 
   created() {
-    this.transactionType = Number(localStorage.getItem('transactionType')) || -1
+    this.transactionType = Number(localStorage.getItem('transactionType') || -1)
     this.$on('paginatorChanged', page => this.changePage(page))
   },
 
   async beforeRouteEnter (to, from, next) {
-    const response = await TransactionService.filterByType(to.params.page, Number(localStorage.getItem('transactionType')) || -1)
+    const response = await TransactionService.filterByType(to.params.page, Number(localStorage.getItem('transactionType') || -1))
     next(vm => {
       vm.currentPage = to.params.page
       vm.setTransactions(response)
@@ -66,7 +66,7 @@ export default {
 
   async beforeRouteUpdate (to, from, next) {
     this.transactions = null
-    const response = await TransactionService.filterByType(to.params.page, Number(localStorage.getItem('transactionType')) || -1)
+    const response = await TransactionService.filterByType(to.params.page, Number(localStorage.getItem('transactionType') || -1))
     this.currentPage = to.params.page
     this.setTransactions(response)
     next()

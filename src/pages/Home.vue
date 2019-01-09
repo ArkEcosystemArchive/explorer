@@ -60,7 +60,7 @@ export default {
   }),
 
   created () {
-    this.transactionType = Number(localStorage.getItem('transactionType')) || -1
+    this.transactionType = Number(localStorage.getItem('transactionType') || -1)
   },
 
   computed: {
