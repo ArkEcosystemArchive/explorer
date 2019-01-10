@@ -1,11 +1,11 @@
 <template>
   <span
-    class="flex relative z-20 cursor-pointer"
-    v-click-outside="closeDropdown"
+    class="flex relative z-20"
   >
     <span
-      class="flex items-center"
+      class="flex items-center cursor-pointer"
       :class="color"
+      v-click-outside="closeDropdown"
       @click="selectOpen = !selectOpen"
     >
       <span class="mr-1 md:whitespace-no-wrap">{{ $t(types[transactionType + 1]) }}</span>
@@ -16,7 +16,7 @@
       </svg>
     </span>
 
-    <ul v-show="isOpen" class="absolute pin-r mt-6 bg-white shadow rounded border overflow-hidden list-reset text-sm">
+    <ul v-show="isOpen" class="absolute pin-x sm:pin-none sm:pin-r mt-6 bg-white shadow rounded border overflow-hidden list-reset text-sm">
       <li v-for="(type, index) in types">
         <div @click="filterTransactions(index - 1)" class="dropdown-button">{{ $t(type) }}</div>
       </li>
