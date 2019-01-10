@@ -70,7 +70,7 @@ module.exports = {
   'it should be possible to switch transaction type': function (browser) {
     browser
       .useXpath()
-      .expect.element("//span[contains(., 'Transactions')]").to.be.present
+      .waitForElementVisible("//h1[text() = 'Transactions']")
     browser
       .click("//div[contains(., 'Type')]/following-sibling::div//span")
       .waitForElementVisible("//div[contains(., 'Type')]/following-sibling::div//ul//li[2]//a")

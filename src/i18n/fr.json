@@ -124,6 +124,8 @@
   "Vendor field": "Communication",
   "Wallet summary": "Résumé du portefeuille",
 
+  "Type": "Type",
+  "Transaction type": "Type de transaction",
   "2nd Signature Registration": "Enregistrement de seconde Signature",
   "Delegate Registration": "Inscription de Délégué",
   "Vote": "Vote",
