@@ -1,19 +1,20 @@
 <template>
   <span
     class="flex w-full sm:w-auto relative z-20 sm:mr-10"
+    :class="{ 'sm:mb-4': !inBanner }"
     v-click-outside="closeDropdown"
   >
     <div class="flex sm:hidden w-full">
       <span
         class="flex items-center rounded-l py-4 px-6 text-xs"
-        :class="`${colorClasses.header} bg-${borderClass}`"
+        :class="`bg-${backgroundColor} text-${secondaryTextColor}`"
       >
         {{ $t("Type") }}
       </span>
 
       <span
         class="flex flex-1 items-center justify-between border rounded-r cursor-pointer p-4"
-        :class="`${colorClasses.body} border-${borderClass}`"
+        :class="`border-${backgroundColor} text-${primaryTextColor}`"
         @click="toggleDropdown"
       >
         <span class="font-bold">
@@ -40,15 +41,15 @@
 
     <div class="hidden sm:block">
       <span
-        class="block mb-2 text-theme-text-thead text-xs"
-        :class="colorClasses.header"
+        class="block mb-2 text-xs"
+        :class="[ inBanner ? bannerClasses : 'text-theme-text-thead' ]"
       >
         {{ $t("Type") }}
       </span>
 
       <span
         class="flex items-center cursor-pointer"
-        :class="colorClasses.body"
+        :class="`border-${backgroundColor} text-${primaryTextColor}`"
         @click="toggleDropdown"
       >
         <span class="mr-1 md:whitespace-no-wrap">{{ $t(types[transactionType + 1]) }}</span>
@@ -71,18 +72,10 @@
 <script>
 export default {
   props: {
-    colorClasses: {
-      type: Object,
+    inBanner: {
+      type: Boolean,
       required: false,
-      default: {
-        header: 'text-theme-text-secondary',
-        body: 'text-theme-text-primary'
-      }
-    },
-    borderClass: {
-      type: String,
-      required: false,
-      default: 'theme-page-background'
+      default: false
     }
   },
 
@@ -101,6 +94,22 @@ export default {
   computed: {
     isOpen() {
       return this.selectOpen
+    },
+
+    backgroundColor() {
+      return this.inBanner ? 'none' : 'theme-page-background'
+    },
+
+    primaryTextColor() {
+      return this.inBanner ? 'white' : 'theme-text-primary'
+    },
+
+    secondaryTextColor() {
+      return this.inBanner ? 'grey' : 'theme-text-secondary'
+    },
+
+    bannerClasses() {
+      return `bg-${this.backgroundColor} text-${this.secondaryTextColor}`
     }
   },
 
