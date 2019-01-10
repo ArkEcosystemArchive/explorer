@@ -12,10 +12,10 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-col w-full sm:w-auto sm:ml-4">
-          <div class="text-grey mb-2">{{ $t("Type") }}</div>
+        <div class="flex flex-col w-full sm:w-auto sm:ml-4 sm:-mr-10">
           <selection-type
-            color="text-white"
+            :colorClasses="{ header: 'text-grey', body: 'text-white' }"
+            borderClass="theme-feature-background"
             @change="onTypeChange"
           ></selection-type>
         </div>
