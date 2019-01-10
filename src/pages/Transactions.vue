@@ -4,7 +4,7 @@
 
     <section class="mb-5">
       <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
-        <div class="flex-auto min-w-0">
+        <div class="hidden sm:block flex-auto min-w-0">
           <div class="text-grey mb-2">{{ $t("Transaction type") }}</div>
           <div class="flex">
             <div class="text-lg text-white semibold truncate">
@@ -12,7 +12,7 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-col ml-4">
+        <div class="flex flex-col w-full sm:w-auto sm:ml-4">
           <div class="text-grey mb-2">{{ $t("Type") }}</div>
           <selection-type
             color="text-white"

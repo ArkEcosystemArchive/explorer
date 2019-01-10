@@ -25,7 +25,7 @@
 
         <div
           v-if="dataView === 'transactions'"
-          class="flex flex-col mb-4 sm:mb-0 mr-auto sm:mr-10"
+          class="flex flex-col w-full sm:w-auto mb-4 sm:mb-0 mr-auto sm:mr-10"
         >
           <span class="text-theme-text-secondary mb-2 text-theme-text-thead text-xs">{{ $t("Type") }}</span>
           <selection-type @change="onTypeChange"></selection-type>
