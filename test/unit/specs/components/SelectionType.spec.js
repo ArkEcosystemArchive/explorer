@@ -23,11 +23,11 @@ describe('SelectionType', () => {
       clickOutside
     })
 
-    wrapper.find('.flex.items-center').trigger('click')
-    expect(wrapper.find('ul').isVisible()).toBeTruthy()
+    wrapper.find('.mr-1').trigger('click')
+    expect(wrapper.findAll('ul').at(1).isVisible()).toBeTruthy()
 
-    wrapper.find('.flex.items-center').trigger('click')
-    expect(wrapper.find('ul').isVisible()).toBeFalsy()
+    wrapper.find('.mr-1').trigger('click')
+    expect(wrapper.findAll('ul').at(1).isVisible()).toBeFalsy()
   })
 
   it('Should close the dropdown after selecting a type', () => {
@@ -40,7 +40,7 @@ describe('SelectionType', () => {
     })
 
     wrapper.setData({ selectOpen: true })
-    wrapper.findAll('.dropdown-button').at(5).trigger('click')
+    wrapper.findAll('.dropdown-button').at(11).trigger('click')
     expect(wrapper.vm.selectOpen).toBeFalsy()
   })
 
@@ -51,7 +51,7 @@ describe('SelectionType', () => {
       clickOutside
     })
 
-    wrapper.findAll('.dropdown-button').at(5).trigger('click')
+    wrapper.findAll('.dropdown-button').at(11).trigger('click')
     expect(localStorage.setItem).toHaveBeenCalledWith('transactionType', 4);
     expect(Number(localStorage.__STORE__['transactionType'])).toBe(4);
   })

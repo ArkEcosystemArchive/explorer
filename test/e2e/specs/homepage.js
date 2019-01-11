@@ -405,8 +405,8 @@ module.exports = {
       .waitForElementVisible("//span[contains(@class, 'mr-1') and text() = 'All']")
       .click("//span[contains(@class, 'mr-1') and text() = 'All']")
     browser
-      .waitForElementVisible("//div[contains(@class, 'dropdown-button') and text() = 'Vote']")
-      .click("//div[contains(@class, 'dropdown-button') and text() = 'Vote']")
+      .waitForElementVisible("(//div[contains(@class, 'dropdown-button') and text() = 'Vote'])[last()]")
+      .click("(//div[contains(@class, 'dropdown-button') and text() = 'Vote'])[last()]")
       .waitForElementVisible("//span[contains(@class, 'mr-1') and text() = 'Vote']")
     browser.end()
   }

@@ -8,7 +8,10 @@
 
     <section class="page-section py-5 md:py-10">
       <div class="flex flex-col sm:flex-row items-center mx-5 sm:mx-0 mb-4 sm:mb-8">
-        <nav class="flex items-end w-full border-b mb-4 sm:mb-0 mx-5 sm:mx-10">
+        <nav
+          class="flex items-end w-full border-b mx-5 sm:mx-10"
+          :class="dataView === 'transactions' ? 'mb-8 sm:mb-4' : 'mb-4'"
+        >
           <div
             :class="dataView === 'transactions' ? 'active-tab' : 'inactive-tab'"
             @click="dataView = 'transactions'"
@@ -23,13 +26,10 @@
           </div>
         </nav>
 
-        <div
+        <selection-type
           v-if="dataView === 'transactions'"
-          class="flex flex-col w-full sm:w-auto mb-4 sm:mb-0 mr-auto sm:mr-10"
-        >
-          <span class="text-theme-text-secondary mb-2 text-theme-text-thead text-xs">{{ $t("Type") }}</span>
-          <selection-type @change="onTypeChange"></selection-type>
-        </div>
+          @change="onTypeChange"
+        ></selection-type>
       </div>
 
       <latest-transactions v-if="dataView === 'transactions'" :transaction-type="transactionType"></latest-transactions>
