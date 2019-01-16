@@ -27,6 +27,17 @@
           ]">
           {{ $t("Received") }}
         </div>
+        <div
+          v-if="delegate && !isDelegate"
+          :class="[
+            'text-lg text-theme-text-secondary border-transparent',
+            'py-4 border-b-3'
+          ]"
+          class="hidden sm:block w-full text-right truncate"
+        >
+          {{ $t("Votes") }}
+          <link-wallet v-if="delegate.address" :address="delegate.address">{{ delegate.username }}</link-wallet>
+        </div>
       </nav>
       <div class="hidden sm:block">
         <table-transactions-detail :transactions="transactions"></table-transactions-detail>
@@ -45,6 +56,8 @@
 
 <script type="text/ecmascript-6">
 import TransactionService from '@/services/transaction'
+import WalletService from '@/services/wallet'
+import WalletLink from '@/components/links/Wallet'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -58,11 +71,19 @@ export default {
   data: () => ({
     transactions: null,
     type: 'all',
+    delegate: null
   }),
+
+  computed: {
+    isDelegate() {
+      return this.isDelegateByAddress(this.wallet.address)
+    }
+  },
 
   watch: {
     wallet() {
       this.getTransactions()
+      this.getVotes()
     },
     type() {
       this.getTransactions()
@@ -79,6 +100,16 @@ export default {
           this.page
         )
         this.transactions = transactions
+      }
+    },
+
+    async getVotes() {
+      try {
+        const response = await WalletService.vote(this.wallet.address)
+        this.delegate = response
+      } catch(e) {
+        console.log(e.message || e.data.error)
+        this.delegate = {}
       }
     },
   },
