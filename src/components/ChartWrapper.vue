@@ -1,17 +1,29 @@
 <template>
-  <div :key="componentKey">
-    <div class="flex justify-between items-center px-10 py-8">
-      <h2 class="text-white m-0 text-xl font-normal">{{ $t("Price in") }} {{ currencyName }}</h2>
-      <div>
-        <button @click="period('day')"  :class="{ 'chart-tab-active': type === 'day' }" class="chart-tab">{{ $t("Day") }}</button>
-        <button @click="period('week')"  :class="{ 'chart-tab-active': type === 'week' }" class="chart-tab">{{ $t("Week") }}</button>
-        <button @click="period('month')"  :class="{ 'chart-tab-active': type === 'month' }" class="chart-tab">{{ $t("Month") }}</button>
-        <button @click="period('quarter')"  :class="{ 'chart-tab-active': type === 'quarter' }" class="chart-tab">{{ $t("Quarter") }}</button>
-        <button @click="period('year')"  :class="{ 'chart-tab-active': type === 'year' }" class="chart-tab">{{ $t("Year") }}</button>
-      </div>
+  <div class="relative">
+    <div v-if="hasError" class="absolute pin flex flex-col items-center justify-center text-white z-10">
+      <p class="mb-4">
+        {{ $t('The chart data could not be loaded') }}
+      </p>
+      <button @click="renderChart" :disabled="isLoading" class="mt-4 pager-button items-center">
+        <span>{{ !isLoading ? $t('Reload chart') : $t('Loading...') }}</span>
+      </button>
     </div>
 
-    <price-chart :chartData="chartData" :options="options" :height="314"></price-chart>
+    <div :key="componentKey" :class="{ 'blur': hasError }">
+
+      <div class="flex justify-between items-center px-10 py-8">
+        <h2 class="text-white m-0 text-xl font-normal">{{ $t("Price in") }} {{ currencyName }}</h2>
+        <div>
+          <button @click="period('day')"  :class="{ 'chart-tab-active': type === 'day' }" class="chart-tab">{{ $t("Day") }}</button>
+          <button @click="period('week')"  :class="{ 'chart-tab-active': type === 'week' }" class="chart-tab">{{ $t("Week") }}</button>
+          <button @click="period('month')"  :class="{ 'chart-tab-active': type === 'month' }" class="chart-tab">{{ $t("Month") }}</button>
+          <button @click="period('quarter')"  :class="{ 'chart-tab-active': type === 'quarter' }" class="chart-tab">{{ $t("Quarter") }}</button>
+          <button @click="period('year')"  :class="{ 'chart-tab-active': type === 'year' }" class="chart-tab">{{ $t("Year") }}</button>
+        </div>
+      </div>
+
+      <price-chart :chartData="chartData" :options="options" :height="314"></price-chart>
+    </div>
   </div>
 </template>
 
@@ -22,12 +34,17 @@ import { mapGetters } from 'vuex'
 import store from '@/store'
 
 export default {
-  components: {PriceChart},
+  components: {
+    PriceChart
+  },
 
   data: () => ({
+    error: null,
+    isLoading: false,
     type: 'day',
     componentKey: 0,
-    chartData: {},
+    labels: [],
+    datasets: [],
     options: {
       showScale: true,
       responsive: true,
@@ -74,14 +91,6 @@ export default {
         ],
         xAxes: [
           {
-            // type: 'time',
-            // time: {
-            //   unit: 'day',
-            //   unitStepSize: 1,
-            //   displayFormats: {
-            //     day: 'MMM D',
-            //   },
-            // },
             gridLines: {
               display: true,
               color: '#282b38',
@@ -129,7 +138,29 @@ export default {
 
   computed: {
     ...mapGetters('currency', { currencyName: 'name' }),
-    ...mapGetters('network', ['token'])
+    ...mapGetters('network', ['token']),
+
+    chartData() {
+      return {
+        labels: this.labels,
+        datasets: [{
+          type: 'line',
+          pointHoverBackgroundColor: '#fff',
+          borderColor: '#535972',
+          pointHoverBorderColor: '#037cff',
+          pointBackgroundColor: 'rgba(0,0,0,0)',
+          pointBorderColor: 'rgba(0,0,0,0)',
+          pointHoverRadius: 7,
+          pointHoverBorderWidth: 4,
+          fill: false,
+          data: this.datasets
+        }]
+      }
+    },
+
+    hasError() {
+      return !!this.error
+    }
   },
 
   mounted() {
@@ -154,27 +185,21 @@ export default {
     },
 
     async renderChart(type) {
-      const response = await CryptoCompareService[this.type]()
-      this.chartData = {
-        labels: response.labels,
-        datasets: [{
-          type: 'line',
-          pointHoverBackgroundColor: '#fff',
-          borderColor: '#535972',
-          pointHoverBorderColor: '#037cff',
-          pointBackgroundColor: 'rgba(0,0,0,0)',
-          pointBorderColor: 'rgba(0,0,0,0)',
-          pointHoverRadius: 7,
-          pointHoverBorderWidth: 4,
-          fill: false,
-          // data: this.chartData.map((point, index) => {
-          //   return {
-          //     t: this.labels[index],
-          //     y: point,
-          //   }
-          // }),
-          data: response.datasets
-        }],
+      this.isLoading = true
+
+      try {
+        const response = await CryptoCompareService[this.type]()
+        this.labels = response.labels
+        this.datasets = response.datasets
+
+        this.error = null
+      } catch(error) {
+        this.labels = []
+        this.datasets = []
+
+        this.error = error
+      } finally {
+        this.isLoading = false
       }
     },
 
@@ -194,3 +219,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.blur {
+  filter: blur(4px)
+}
+</style>

@@ -344,7 +344,7 @@ thead th {
 /* Pager */
 
 .pager-button {
-  @apply .bg-theme-button .text-theme-button-text .semibold .py-5 .px-8 .border-transparent .rounded .transition
+  @apply .bg-theme-button .text-theme-button-text .semibold .py-5 .px-8 .border-transparent .rounded .transition .cursor-pointer
 }
 
 .pager-button:enabled:hover,
