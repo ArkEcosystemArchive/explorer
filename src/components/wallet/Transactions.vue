@@ -31,7 +31,7 @@
           v-if="delegate && !isDelegate"
           class="hidden sm:block w-full text-right truncate text-lg text-theme-text-secondary py-4 border-b-3 border-transparent"
         >
-          {{ $t("Votes") }}
+          <span>{{ $t("Votes") }}</span>
           <link-wallet v-if="delegate.address" :address="delegate.address">{{ delegate.username }}</link-wallet>
         </div>
       </nav>

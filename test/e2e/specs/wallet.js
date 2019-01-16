@@ -44,6 +44,8 @@ module.exports = {
       .useXpath().expect.element("//div[contains(., 'Sent')]").to.be.present
     browser
       .useXpath().expect.element("//div[contains(., 'Received')]").to.be.present
+    browser
+      .useXpath().expect.element("//div[contains(., 'Votes')]").to.be.present
   },
 
   'it should show a list of transactions, including show more button': function (browser) {
@@ -102,11 +104,11 @@ module.exports = {
     browser
       .url(devServer)
       .useXpath()
-      .waitForElementVisible("//div[text() = 'Votes']")
+      .waitForElementVisible("//div/span[text() = 'Votes']")
     browser
-      .waitForElementVisible("//div[text() = 'Votes']/following-sibling::div//a")
+      .waitForElementVisible("//div/span[text() = 'Votes']/following-sibling::span//a")
     browser
-      .click("//div[text() = 'Votes']/following-sibling::div//a")
+      .click("//div/span[text() = 'Votes']/following-sibling::span//a")
       .waitForElementVisible("//div[text() = 'Delegate']")
     browser
       .assert.urlContains('/wallets/')
