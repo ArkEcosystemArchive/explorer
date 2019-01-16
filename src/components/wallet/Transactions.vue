@@ -29,11 +29,7 @@
         </div>
         <div
           v-if="delegate && !isDelegate"
-          :class="[
-            'text-lg text-theme-text-secondary border-transparent',
-            'py-4 border-b-3'
-          ]"
-          class="hidden sm:block w-full text-right truncate"
+          class="hidden sm:block w-full text-right truncate text-lg text-theme-text-secondary py-4 border-b-3 border-transparent"
         >
           {{ $t("Votes") }}
           <link-wallet v-if="delegate.address" :address="delegate.address">{{ delegate.username }}</link-wallet>
