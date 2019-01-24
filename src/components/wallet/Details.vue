@@ -138,7 +138,7 @@
           </div>
         </div>
         <div class="flex -mx-6">
-          <div class="md:w-1/2 px-6 w-full border-r border-grey-dark">
+          <div class="md:w-1/2 px-6 w-full" :class="{ 'border-r border-grey-dark' : !isDelegate & isVoting}">
             <div class="text-grey mb-2">{{ $t("Balance (token)", { token: networkToken() }) }}</div>
             <div v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(wallet.balance)}` }" class="text-white">{{ readableCrypto(wallet.balance, false) }}</div>
           </div>

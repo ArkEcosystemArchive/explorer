@@ -71,6 +71,9 @@ export default {
     },
     type() {
       this.getTransactions()
+
+      this.getSendCount()
+      this.getReceivedCount()
     },
   },
 
