@@ -7,12 +7,13 @@
         @click="showModal = !showModal">
         <img class="block" src="@/assets/images/icons/qr.svg" />
       </button>
-
+      
       <div
         v-if="view === 'public'"
         class="pr-8 flex-auto min-w-0">
         <div class="flex items-center text-grey mb-2">
           <span>{{ $t("Address") }}</span>
+
           <svg
             v-tooltip="$t('Second signature enabled')"
             v-if="wallet.secondSignature"
@@ -62,15 +63,13 @@
       </div>
 
       <div
+        v-show="!isDelegate & isVoting"
         v-if="view === 'public'"
         class="flex-none border-r border-grey-dark px-9">
-        <div class="text-grey mb-2">{{ $t("Transactions") }}</div>
-        <div class="text-lg text-white semibold">
-          <span class="text-green">{{ receivedCount }}</span>
-          <img class="mr-4" src="@/assets/images/icons/arrow-down.svg" />
-          <span class="text-red">{{ sendCount }}</span>
-          <img src="@/assets/images/icons/arrow-up.svg" />
-        </div>
+        <div class="text-grey mb-2">{{ $t("Delegate") }}</div>
+        <link-wallet v-if="delegate.address" :address="delegate.address">
+          <span class="text-lg text-white semibold truncate">{{ delegate.username }}</span>
+        </link-wallet>
       </div>
 
       <div class="flex-none px-8">
@@ -143,18 +142,14 @@
             <div class="text-grey mb-2">{{ $t("Balance (token)", { token: networkToken() }) }}</div>
             <div v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(wallet.balance)}` }" class="text-white">{{ readableCrypto(wallet.balance, false) }}</div>
           </div>
-          <div class="md:w-1/2 px-6 w-full">
-            <div class="text-grey mb-2">{{ $t("Transactions") }}</div>
-            <div class="text-white">
-              <span class="whitespace-no-wrap">
-                <span class="text-green">{{ receivedCount }}</span>
-                <img class="mr-4" src="@/assets/images/icons/arrow-down.svg" />
-              </span>
-              <span class="whitespace-no-wrap">
-                <span class="text-red">{{ sendCount }}</span>
-                <img src="@/assets/images/icons/arrow-up.svg" />
-              </span>
-            </div>
+           <div
+            v-show="!isDelegate & isVoting"
+            v-if="view === 'public'"
+            class="md:w-1/2 px-6 w-full">
+            <div class="text-grey mb-2">{{ $t("Delegate") }}</div>
+            <link-wallet v-if="delegate.address" :address="delegate.address">
+              <span class="text-lg text-white semibold truncate">{{ delegate.username }}</span>
+            </link-wallet>
           </div>
         </div>
       </div>
@@ -172,8 +167,10 @@
 </template>
 
 <script type="text/ecmascript-6">
+import WalletService from '@/services/wallet'
 import TransactionService from '@/services/transaction'
 import { mapGetters } from 'vuex'
+
 
 export default {
   props: {
@@ -188,34 +185,40 @@ export default {
 
     isKnown() {
       return this.knownWallets.hasOwnProperty(this.wallet.address)
+    },
+
+    isDelegate() {
+      return this.isDelegateByAddress(this.wallet.address)
     }
   },
 
   data: () => ({
-    sendCount: 0,
-    receivedCount: 0,
     view: 'public',
     showModal: false,
+    delegate: {},
+    isVoting: false,
   }),
 
   watch: {
     wallet(wallet) {
       if (!wallet.address) return
-
-      this.getSendCount()
-      this.getReceivedCount()
+      if (wallet.address) this.getVotes()
     },
   },
 
   methods: {
-    async getSendCount() {
-      const response = await TransactionService.sentByAddressCount(this.wallet.address)
-      this.sendCount = response
-    },
-
-    async getReceivedCount() {
-      const response = await TransactionService.receivedByAddressCount(this.wallet.address)
-      this.receivedCount = response
+    async getVotes() {
+      try {
+        const response = await WalletService.vote(this.wallet.address)
+        if (response.vote) {
+          this.isVoting = true
+        }
+        this.delegate = response
+      } catch(e) {
+        console.log(e.message || e.data.error)
+        this.delegate = {}
+        this.isVoting = false
+      }
     },
   },
 }
