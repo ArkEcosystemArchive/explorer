@@ -57,30 +57,6 @@ class WalletService {
     return response.meta.totalCount
   }
 
-  async vote(address) {
-    const response = await ApiService.get(`wallets/${address}/votes`, {
-      params: {
-        limit: 1
-      }
-    })
-
-    const votes = response.data
-
-    let delegate = null
-
-    if (votes.length) {
-      const lastVote = votes[0].asset.votes[0]
-
-      if (lastVote.charAt(0) === '-') {
-        return false
-      }
-
-      delegate = await DelegateService.find(lastVote.substring(1))
-    }
-
-    return delegate || false
-  }
-
   async top(page = 1, limit = 25) {
     const response = await ApiService.get('wallets/top', {
       params: {

@@ -72,6 +72,7 @@
   "Address": "Endereço",
   "Public key": "Public key",
   "Balance (token)": "Balanço ({token})",
+  "Voting for": "Votos para",
   "Copied!": "Copiado!",
   "Error!": "Erro!",
   "Copy to clipboard": "Copiar para a Área de Transferência",
@@ -122,6 +123,8 @@
   "Vendor field": "Campo do fornecedor",
   "Wallet Summary": "Sumário da carteira",
 
+  "Type": "Tipo",
+  "Transaction type": "Tipo de transação",
   "2nd Signature Registration": "Registro de Senha Secundária",
   "Delegate Registration": "Registro de Delegado",
   "Vote": "Voto",

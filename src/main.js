@@ -19,6 +19,16 @@ sync(store, router)
 
 Vue.config.productionTip = false
 
+Vue.use(directives)
+Vue.use(VTooltip, {
+  defaultHtml: false,
+  defaultContainer: 'main'
+})
+Vue.use(TableComponent, {
+  sortHandler: (rows, column, order) => _.orderBy(rows, (row) => (row.data[column]), order),
+  filterNoResults: i18n.t('No results')
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
@@ -28,18 +38,3 @@ new Vue({
   components: { App },
   template: '<App/>',
 })
-
-Vue.use(directives)
-
-Vue.use(VTooltip, {
-  defaultHtml: false,
-  defaultContainer: 'main'
-})
-
-/** Sortable Tables */
-TableComponent.settings({
-  sortHandler: (rows, column, order) => _.orderBy(rows, (row) => (row.data[column]), order),
-  filterNoResults: i18n.t('No results')
-})
-
-Vue.use(TableComponent)

@@ -87,7 +87,7 @@ export default {
 
       return {
         content: lastBlock ? `[${status}] ${
-          this.$i18n.t('Last block at height on', { height: lastBlock.id })
+          this.$i18n.t('Last block at height on', { height: lastBlock.height })
         } ${this.readableTimestamp(lastBlock.timestamp.unix)}`
           : status,
         classes: [`tooltip-bg-${row.forgingStatus}`, 'font-sans']

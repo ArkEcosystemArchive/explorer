@@ -81,7 +81,8 @@ const createWebpackConfig = (baseUrl, network, networkConfig, routerMode) => {
           'tr', 'td'
         ],
         whitelistPatterns: [
-          /^tooltip-bg-/
+          /^tooltip-bg-/,
+          /^border-theme-page-background/
         ],
         extractors: [{
           extractor: TailwindExtractor,

@@ -72,6 +72,7 @@
   "Address": "Adresse",
   "Public key": "Clé publique",
   "Balance (token)": "Solde ({token})",
+  "Voting for": "Votes pour",
   "Copied!": "Copié!!",
   "Error!": "Erreur!",
   "Copy to clipboard": "Copier vers le presse-papier",
@@ -122,6 +123,8 @@
   "Vendor field": "Communication",
   "Wallet summary": "Résumé du portefeuille",
 
+  "Type": "Type",
+  "Transaction type": "Type de transaction",
   "2nd Signature Registration": "Enregistrement de seconde Signature",
   "Delegate Registration": "Inscription de Délégué",
   "Vote": "Vote",
