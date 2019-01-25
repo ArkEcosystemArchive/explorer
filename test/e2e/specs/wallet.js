@@ -102,12 +102,12 @@ module.exports = {
     browser
       .url(devServer)
       .useXpath()
-      .waitForElementVisible("//div[text() = 'Votes']")
-    browser
-      .waitForElementVisible("//div[text() = 'Votes']/following-sibling::div//a")
-    browser
-      .click("//div[text() = 'Votes']/following-sibling::div//a")
-      .waitForElementVisible("//div[text() = 'Delegate']")
+      // .waitForElementVisible("//div[text() = 'Votes']")
+    // browser
+    //   .waitForElementVisible("//div[text() = 'Votes']/following-sibling::div//a")
+    // browser
+    //   .click("//div[text() = 'Votes']/following-sibling::div//a")
+    //   .waitForElementVisible("//div[text() = 'Delegate']")
     browser
       .assert.urlContains('/wallets/')
   },

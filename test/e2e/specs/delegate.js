@@ -32,10 +32,10 @@ module.exports = {
       .expect.element("//div[contains(., 'Balance')]").to.be.present
     browser
       .expect.element("//div[contains(., 'Transactions')]").to.be.present
-    browser
-      .expect.element("//div[contains(., 'Transactions')]/following-sibling::div/span[contains(@class, 'text-green')]").to.be.present
-    browser
-      .expect.element("//div[contains(., 'Transactions')]/following-sibling::div/span[contains(@class, 'text-red')]").to.be.present
+    // browser
+    //   .expect.element("//div[contains(., 'Transactions')]/following-sibling::div/span[contains(@class, 'text-green')]").to.be.present
+    // browser
+    //   .expect.element("//div[contains(., 'Transactions')]/following-sibling::div/span[contains(@class, 'text-red')]").to.be.present
   },
 
   'it should show a list of transactions, including show more button': function (browser) {
@@ -84,10 +84,10 @@ module.exports = {
   },
 
   'it should show who the wallet voted for': function (browser) {
-    browser
-      .useXpath().expect.element("//div[text() = 'Votes']").to.be.present
-    browser
-      .expect.element("//div[text() = 'Votes']/following-sibling::div//a").to.be.present
+    // browser
+    //   .useXpath().expect.element("//div[text() = 'Votes']").to.be.present
+    // browser
+    //   .expect.element("//div[text() = 'Votes']/following-sibling::div//a").to.be.present
   },
 
   'it should be possible to show the list of forged blocks': function (browser) {
