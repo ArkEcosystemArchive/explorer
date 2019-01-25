@@ -126,18 +126,15 @@ module.exports = {
 
     browser
       .url(devServer)
-      .useXpath()
       .assert.urlContains('/transactions/1')
-      .expect.element("//span[contains(@class, 'mr-1')]").to.be.visible
     browser
       .useXpath()
-      .waitForElementVisible("//div[text() = 'Type']")
-      .waitForElementVisible("//span[text() = 'All']")
+      .waitForElementVisible("//span[contains(@class, 'mr-1') and text() = 'All']")
+      .click("//span[contains(@class, 'mr-1') and text() = 'All']")
     browser
-      .useXpath()
-      .click("//div[contains(@class, 'dropdown-button')]")
-      .pause(500)
-      .useXpath().expect.element("//div[text() = 'Vote']").to.be.present
+      .waitForElementVisible("(//div[contains(@class, 'dropdown-button') and text() = 'Vote'])[2]")
+      .click("(//div[contains(@class, 'dropdown-button') and text() = 'Vote'])[2]")
+      .waitForElementVisible("//span[contains(@class, 'mr-1') and text() = 'Vote']")
     browser.end()
   }
 }

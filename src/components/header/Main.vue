@@ -1,14 +1,15 @@
 <template>
   <header
-    class="header min-h-50px md:min-h-80px z-50 max-w-2xl mx-auto flex bg-theme-nav-background shadow-theme xl:rounded-md mb-5 sm:mb-10">
+    class="header min-h-50px md:min-h-80px z-50 max-w-2xl mx-auto flex bg-theme-nav-background shadow-theme xl:rounded-md mb-5 sm:mb-10"
+    v-click-outside="closeHeader"
+  >
     <router-link
       :to="{ name: 'home' }"
       class="logo-container w-50px md:w-80px h-50px md:h-80px flex-none bg-red text-2xl xl:rounded-l-md flex justify-center items-center">
-      <img class="logo max-w-25px md:max-w-38px" src="@/assets/images/ark-logo.png" />
+      <img class="logo max-w-25px md:max-w-38px" src="@/assets/images/logo.png" />
     </router-link>
-
     <div class="w-full relative hidden xl:flex">
-      <header-search v-if="headerType === 'search'" v-click-outside="closeHeader"></header-search>
+      <header-search v-if="headerType === 'search'"></header-search>
 
       <header-desktop-currencies v-else-if="headerType === 'currencies'"></header-desktop-currencies>
 

@@ -18,11 +18,11 @@
         </div>
       </nav>
 
-      <forging :delegates="delegates" v-show="activeTab === 'active'"></forging>
+      <forging :delegates="delegates" v-show="activeTab === 'active'" />
 
-      <active-delegates v-if="activeTab === 'active'" :delegates="delegates"></active-delegates>
+      <active-delegates v-if="activeTab === 'active'" :delegates="delegates" />
 
-      <standby-delegates v-if="activeTab === 'standby'"></standby-delegates>
+      <standby-delegates v-if="activeTab === 'standby'" />
     </section>
   </div>
 </template>

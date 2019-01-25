@@ -28,34 +28,13 @@ describe('Wallet Service', () => {
       'isDelegate',
       'publicKey',
       'secondPublicKey',
-      'username'
+      'username',
+      'vote'
     ].sort())
   })
 
   it('should fail when searching for incorrect wallet address', async () => {
     await expect(WalletService.find('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gsx')).rejects.toThrow()
-  })
-
-  it('should return delegate when address is voting for one', async () => {
-    const data = await WalletService.vote('ATsPMTAHNsUwKedzNpjTNRfcj1oRGaX5xC')
-    expect(Object.keys(data).sort()).toEqual([
-      'username',
-      'address',
-      'publicKey',
-      'votes',
-      'rank',
-      'blocks',
-      'production',
-      'forged'
-    ].sort())
-  })
-
-  it('should return false when address is not voting', async () => {
-    await expect(WalletService.vote('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs')).resolves.toEqual(false)
-  })
-
-  it('should fail when fetching vote for incorrect wallet address', async () => {
-    await expect(WalletService.vote('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gsx')).rejects.toThrow()
   })
 
   it('should return latest transactions for an address and page offset', async() => {
