@@ -18,6 +18,7 @@
           @click="setType('sent')"
           :class="[
             isTypeSent ? 'text-2xl border-blue text-theme-text-primary' : 'text-lg text-theme-text-secondary border-transparent',
+            !sentCount ? 'pointer-events-none text-theme-text-tertiary' : '',
             'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-text-primary hover:border-blue'
           ]"
         >
@@ -33,6 +34,7 @@
           @click="setType('received')"
           :class="[
             isTypeReceived ? 'text-2xl border-blue text-theme-text-primary' : 'text-lg text-theme-text-secondary border-transparent',
+            !receivedCount ? 'pointer-events-none text-theme-text-tertiary' : '',
             'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-text-primary hover:border-blue'
           ]"
         >
