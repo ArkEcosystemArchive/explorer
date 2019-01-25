@@ -7,7 +7,6 @@
         @click="showModal = !showModal">
         <img class="block" src="@/assets/images/icons/qr.svg" />
       </button>
-      
       <div
         v-if="view === 'public'"
         class="pr-8 flex-auto min-w-0">
@@ -63,7 +62,7 @@
       </div>
 
       <div
-        v-show="!isDelegate & isVoting"
+        v-show="isVoting"
         v-if="view === 'public'"
         class="flex-none border-r border-grey-dark px-9">
         <div class="text-grey mb-2">{{ $t("Delegate") }}</div>
@@ -202,7 +201,7 @@ export default {
   watch: {
     wallet(wallet) {
       if (!wallet.address) return
-      if (wallet.address) this.getVotes()
+      this.getVotes()
     },
   },
 

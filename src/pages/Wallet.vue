@@ -5,7 +5,7 @@
     <wallet-details :wallet="wallet"></wallet-details>
 
     <section class="page-section mb-5" :class="{ 'py-5 md:py-10': isDelegate }" v-show="isDelegate">
-      <div class="px-5 sm:px-10" :class="{ 'py-5': !isDelegate }">
+      <div class="px-5 sm:px-10">
         <delegate :wallet="wallet" v-show="isDelegate" v-on:username="username = $event"></delegate>
         <voters :wallet="wallet" :username="username" v-show="isDelegate"></voters>
       </div>
