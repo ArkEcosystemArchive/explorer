@@ -100,6 +100,7 @@ module.exports = {
 
     browser
       .url(devServer)
+      .useXpath()
       .waitForElementVisible("//h1[text() = 'Wallet summary']")
       .waitForElementVisible("//div[text() = 'Voting for']")
       .waitForElementVisible("//div[text() = 'Voting for']/following-sibling::span//a")
@@ -109,7 +110,6 @@ module.exports = {
     const devServer = browser.globals.devServerURL + '/#/wallets/AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv'
 
     browser
-      .useXpath()
       .url(devServer)
       .waitForElementVisible("//h1[text() = 'Wallet summary']")
       .waitForElementNotVisible("//div[text() = 'Voting for']")
