@@ -4,10 +4,9 @@
 
     <wallet-details :wallet="wallet"></wallet-details>
 
-    <section class="page-section mb-5" :class="{ 'py-5 md:py-10': isDelegate }" v-show="isDelegate || isVoting">
-      <div class="px-5 sm:px-10" :class="{ 'py-5': !isDelegate }">
+    <section class="page-section mb-5" :class="{ 'py-5 md:py-10': isDelegate }" v-show="isDelegate">
+      <div class="px-5 sm:px-10">
         <delegate :wallet="wallet" v-show="isDelegate" v-on:username="username = $event"></delegate>
-        <vote :wallet="wallet" v-show="isVoting"></vote>
         <voters :wallet="wallet" :username="username" v-show="isDelegate"></voters>
       </div>
     </section>
@@ -19,7 +18,6 @@
 <script type="text/ecmascript-6">
 import WalletDetails from '@/components/wallet/Details'
 import Delegate from '@/components/wallet/Delegate'
-import Vote from '@/components/wallet/Vote'
 import Voters from '@/components/wallet/Voters'
 import Transactions from '@/components/wallet/Transactions'
 import WalletService from '@/services/wallet'
@@ -28,7 +26,6 @@ export default {
   components: {
     WalletDetails,
     Delegate,
-    Vote,
     Voters,
     Transactions,
   },

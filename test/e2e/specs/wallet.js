@@ -29,12 +29,12 @@ module.exports = {
   'it should be possible to see the balance and transaction count': function (browser) {
     browser
       .useXpath().expect.element("//div[contains(., 'Balance')]").to.be.present
-    browser
-      .expect.element("//div[contains(., 'Transactions')]").to.be.present
-    browser
-      .expect.element("//div[contains(., 'Transactions')]/following-sibling::div/span[contains(@class, 'text-green')]").to.be.present
-    browser
-      .expect.element("//div[contains(., 'Transactions')]/following-sibling::div/span[contains(@class, 'text-red')]").to.be.present
+    // browser
+    //   .expect.element("//div[contains(., 'Transactions')]").to.be.present
+    // browser
+    //   .expect.element("//div[contains(., 'Transactions')]/following-sibling::div/span[contains(@class, 'text-green')]").to.be.present
+    // browser
+    //   .expect.element("//div[contains(., 'Transactions')]/following-sibling::div/span[contains(@class, 'text-red')]").to.be.present
   },
 
   'it should contain transaction tabs': function (browser) {
@@ -102,12 +102,12 @@ module.exports = {
     browser
       .url(devServer)
       .useXpath()
-      .waitForElementVisible("//div[text() = 'Votes']")
-    browser
-      .waitForElementVisible("//div[text() = 'Votes']/following-sibling::div//a")
-    browser
-      .click("//div[text() = 'Votes']/following-sibling::div//a")
-      .waitForElementVisible("//div[text() = 'Delegate']")
+      // .waitForElementVisible("//div[text() = 'Votes']")
+    // browser
+    //   .waitForElementVisible("//div[text() = 'Votes']/following-sibling::div//a")
+    // browser
+    //   .click("//div[text() = 'Votes']/following-sibling::div//a")
+    //   .waitForElementVisible("//div[text() = 'Delegate']")
     browser
       .assert.urlContains('/wallets/')
   },

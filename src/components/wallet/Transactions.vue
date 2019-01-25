@@ -17,7 +17,7 @@
             type === 'sent' ? 'text-2xl border-blue text-theme-text-primary' : 'text-lg text-theme-text-secondary border-transparent',
             'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-text-primary hover:border-blue'
           ]">
-          {{ $t("Sent") }}
+          {{ $t("Sent") }} <span class="text-xs"> ( {{ sentCount }} ) </span>
         </div>
         <div
           @click="type = 'received'"
@@ -25,7 +25,7 @@
             type === 'received' ? 'text-2xl border-blue text-theme-text-primary' : 'text-lg text-theme-text-secondary border-transparent',
             'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-text-primary hover:border-blue'
           ]">
-          {{ $t("Received") }}
+          {{ $t("Received") }} <span class="text-xs"> ( {{ receivedCount }} ) </span>
         </div>
       </nav>
       <div class="hidden sm:block">
@@ -58,14 +58,22 @@ export default {
   data: () => ({
     transactions: null,
     type: 'all',
+    receivedCount: 0,
+    sentCount: 0,
   }),
 
   watch: {
     wallet() {
       this.getTransactions()
+
+      this.getSentCount()
+      this.getReceivedCount()
     },
     type() {
       this.getTransactions()
+
+      this.getSentCount()
+      this.getReceivedCount()
     },
   },
 
@@ -80,6 +88,16 @@ export default {
         )
         this.transactions = transactions
       }
+    },
+
+    async getReceivedCount() {
+      const response = await TransactionService.receivedByAddressCount(this.wallet.address)
+      this.receivedCount = response
+    },
+
+    async getSentCount() {
+      const response = await TransactionService.sentByAddressCount(this.wallet.address)
+      this.sentCount = response
     },
   },
 }
