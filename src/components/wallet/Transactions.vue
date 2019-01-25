@@ -85,7 +85,7 @@ export default {
     transactions: null,
     type: 'all',
     receivedCount: 0,
-    sentCount: 0,
+    sentCount: 0
   }),
 
   computed: {
@@ -100,12 +100,6 @@ export default {
 
   watch: {
     wallet() {
-      this.getTransactions()
-
-      this.getSentCount()
-      this.getReceivedCount()
-    },
-    type() {
       this.getTransactions()
 
       this.getSentCount()
@@ -127,17 +121,27 @@ export default {
     },
 
     async getReceivedCount() {
-      const response = await TransactionService.receivedByAddressCount(this.wallet.address)
-      this.receivedCount = response
+      if (this.wallet && this.wallet.address) {
+        const response = await TransactionService.receivedByAddressCount(this.wallet.address)
+        this.receivedCount = response
+      } else {
+        this.receivedCount = 0
+      }
     },
 
     async getSentCount() {
-      const response = await TransactionService.sentByAddressCount(this.wallet.address)
-      this.sentCount = response
+      if (this.wallet && this.wallet.address) {
+        const response = await TransactionService.sentByAddressCount(this.wallet.address)
+        this.sentCount = response
+      } else {
+        this.sentCount = 0
+      }
     },
 
     setType(type) {
       this.type = type
+
+      this.getTransactions()
     }
   },
 }

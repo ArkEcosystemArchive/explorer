@@ -129,15 +129,13 @@ export default {
     },
 
     async getSentCount() {
-      const wallet = await WalletService.find(this.address)
-      const response = await TransactionService.sentByAddressCount(wallet.address)
-      this.totalTransactions += Number(response)
+      const count = await TransactionService.sentByAddressCount(this.wallet.address)
+      this.totalTransactions += Number(count)
     },
 
     async getReceivedCount() {
-      const wallet = await WalletService.find(this.address)
-      const received = await TransactionService.receivedByAddressCount(wallet.address)
-      this.totalTransactions += Number(received)
+      const count = await TransactionService.receivedByAddressCount(this.wallet.address)
+      this.totalTransactions += Number(count)
     },
 
     changePage(page) {
