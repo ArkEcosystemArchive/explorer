@@ -92,8 +92,8 @@ export default {
       } catch(e) { this.updateSearchCount(e) }
 
       try {
-        const responsePublicKey = await SearchService.delegateByQuery(this.query)
-        this.changePage('wallet', { address: responsePublicKey.address })
+        const responseDelegate = await SearchService.delegateByQuery(this.query.toLowerCase())
+        this.changePage('wallet', { address: responseDelegate.address })
         return
       } catch(e) { this.updateSearchCount(e) }
 
