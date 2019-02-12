@@ -1,6 +1,6 @@
 {
   "title": "TARK Explorer",
-  "server": "http://127.0.0.1:4003/api",
+  "server": "http://127.0.0.1:4003/api/v2",
   "alias": "Testnet local",
   "activeDelegates": 51,
   "rewardOffset": 75600,
