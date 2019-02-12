@@ -106,7 +106,8 @@ describe('Wallet Service', () => {
       'isDelegate',
       'publicKey',
       'secondPublicKey',
-      'username'
+      'username',
+      'vote'
     ].sort())
   })
 

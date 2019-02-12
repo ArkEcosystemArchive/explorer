@@ -12,11 +12,12 @@ describe('Search Service', () => {
     const data = await SearchService.walletByAddress('ATsPMTAHNsUwKedzNpjTNRfcj1oRGaX5xC')
     expect(Object.keys(data).sort()).toEqual([
       'address',
-      'publicKey',
-      'username',
-      'secondPublicKey',
       'balance',
-      'isDelegate'
+      'isDelegate',
+      'publicKey',
+      'secondPublicKey',
+      'username',
+      'vote'
     ].sort())
   })
 

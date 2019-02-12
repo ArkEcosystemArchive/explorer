@@ -16,11 +16,12 @@ const delegatePropertyArray = [
 
 const voterPropertyArray = [
   'address',
-  'publicKey',
-  'username',
-  'secondPublicKey',
   'balance',
-  'isDelegate'
+  'isDelegate',
+  'publicKey',
+  'secondPublicKey',
+  'username',
+  'vote'
 ].sort()
 
 describe('Delegate Service', () => {
@@ -31,19 +32,25 @@ describe('Delegate Service', () => {
 
   it('should return all available delegates', async () => {
     const data = await DelegateService.all()
-    expect(Object.keys(data[0]).sort()).toEqual(delegatePropertyArray)
     expect(data.length).toBeGreaterThan(102)
+    data.forEach(delegate => {
+      expect(Object.keys(delegate).sort()).toEqual(delegatePropertyArray)
+    })
   })
 
   it('should retrieve the voters based on given delegate public key, excluding low balances', async() => {
     const data = await DelegateService.voters('02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b')
-    expect(Object.keys(data[0]).sort()).toEqual(voterPropertyArray)
-    expect(data[0].balance).toBeGreaterThan(0.1 * Math.pow(10, 8))
+    data.forEach(voter => {
+      expect(Object.keys(voter).sort()).toEqual(voterPropertyArray)
+      expect(voter.balance).toBeGreaterThan(0.1 * Math.pow(10, 8))
+    })
   })
 
   it('should retrieve the voters based on given delegate public key, including low balances', async() => {
     const data = await DelegateService.voters('02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b', false)
-    expect(Object.keys(data[0]).sort()).toEqual(voterPropertyArray)
+    data.forEach(voter => {
+      expect(Object.keys(voter).sort()).toEqual(voterPropertyArray)
+    })
     const excluding = await DelegateService.voters('02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b')
     expect(data.length).toBeGreaterThanOrEqual(excluding.length)
   })
@@ -79,21 +86,27 @@ describe('Delegate Service', () => {
   it('should retrieve the standby delegates', async() => {
     const data = await DelegateService.standby()
     expect(data.length).toBeGreaterThan(0)
-    expect(Object.keys(data[0]).sort()).toEqual(delegatePropertyArray)
+    data.forEach(delegate => {
+      expect(Object.keys(delegate).sort()).toEqual(delegatePropertyArray)
+    })
   })
 
   it('should return a list of active delegates and their stats', async() => {
     jest.setTimeout(20000) // Allow this function to take longer than the specified 5 seconds
-    const delegates = await DelegateService.active()
-    expect(Object.keys(delegates[0]).sort()).toEqual(delegatePropertyArray.concat(['forgingStatus']).sort())
+    const data = await DelegateService.active()
+    data.forEach(delegate => {
+      expect(Object.keys(delegate).sort()).toEqual(delegatePropertyArray.concat(['forgingStatus']).sort())
+    })
   })
 
   it('should return a list of delegates and their forged amounts', async() => {
     const data = await DelegateService.forged()
-    expect(Object.keys(data[0]).sort()).toEqual([
-      'delegate',
-      'forged'
-    ])
+    data.forEach(delegate => {
+      expect(Object.keys(delegate).sort()).toEqual([
+        'delegate',
+        'forged'
+      ])
+    })
   })
 
   it('should return the count of active delegates', async() => {
