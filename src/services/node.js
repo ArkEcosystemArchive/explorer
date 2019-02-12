@@ -12,6 +12,12 @@ class NodeService {
     }
     return response
   }
+
+  async getv2(url, config) {
+    const server = store.getters['network/server']
+
+    return axios.get(`${server}/v2/${url}`, config)
+  }
 }
 
 export default new NodeService()

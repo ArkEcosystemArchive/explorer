@@ -27,8 +27,8 @@ class BlockService {
   }
 
   async supply() {
-    const response = await NodeService.get('blocks/getSupply')
-    return response.data.supply
+    const response = await NodeService.getv2('blockchain')
+    return response.data.data.supply
   }
 
   async find(id) {
