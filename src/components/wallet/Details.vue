@@ -139,7 +139,13 @@
         <div class="flex -mx-6">
           <div class="md:w-1/2 px-6 w-full" :class="{ 'border-r border-grey-dark' : isVoting}">
             <div class="text-grey mb-2">{{ $t("Balance (token)", { token: networkToken() }) }}</div>
-            <div v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(wallet.balance)}` }" class="text-white">{{ readableCrypto(wallet.balance, false) }}</div>
+            <div class="text-white">
+              <span
+                v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(wallet.balance)}` }"
+              >
+                {{ readableCrypto(wallet.balance, false) }}
+              </span>
+            </div>
           </div>
 
           <div
@@ -149,7 +155,7 @@
           >
             <div class="text-grey mb-2">{{ $t("Voting for") }}</div>
             <link-wallet v-if="delegate.address" :address="delegate.address">
-              <span class="text-lg text-white semibold truncate">{{ delegate.username }}</span>
+              <span class="text-white semibold truncate">{{ delegate.username }}</span>
             </link-wallet>
           </div>
         </div>
