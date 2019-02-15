@@ -4,7 +4,7 @@
       <div v-for="transaction in transactions" :key="transaction.id" class="row-mobile">
         <div class="list-row-border-b">
           <div>{{ $t("ID") }}</div>
-          <link-transaction :id="transaction.id"></link-transaction>
+          <link-transaction :id="transaction.id" />
         </div>
 
         <div v-if="transaction.timestamp"  class="list-row-border-b">
@@ -14,12 +14,12 @@
 
         <div class="list-row-border-b">
           <div>{{ $t("Sender") }}</div>
-          <link-wallet :address="transaction.sender"></link-wallet>
+          <link-wallet :address="transaction.sender" />
         </div>
 
         <div class="list-row-border-b">
           <div>{{ $t("Recipient") }}</div>
-          <link-wallet :address="transaction.recipient" :type="transaction.type" :asset="transaction.asset"></link-wallet>
+          <link-wallet :address="transaction.recipient" :type="transaction.type" :asset="transaction.asset" />
         </div>
 
         <div class="list-row-border-b-no-wrap" v-if="transaction.vendorField">
@@ -30,7 +30,7 @@
         <div class="list-row-border-b">
           <div>{{ $t("Amount") }}</div>
           <div>
-            <transaction-amount :transaction="transaction" :type="transaction.type"></transaction-amount>
+            <transaction-amount :transaction="transaction" :type="transaction.type" />
           </div>
         </div>
 

@@ -2,10 +2,10 @@
   <div>
     <loader :data="blocks">
       <div class="hidden sm:block">
-        <table-blocks :blocks="blocks"></table-blocks>
+        <table-blocks :blocks="blocks" />
       </div>
       <div class="sm:hidden">
-        <table-blocks-mobile :blocks="blocks"></table-blocks-mobile>
+        <table-blocks-mobile :blocks="blocks" />
       </div>
       <div class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
         <router-link :to="{ name: 'blocks', params: { page: 2 } }" tag="button" class="show-more-button">

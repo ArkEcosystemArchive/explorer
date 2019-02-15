@@ -25,7 +25,7 @@
         cell-class="left-cell"
       >
         <template slot-scope="row">
-          <link-wallet :address="row.address" :trunc="false"></link-wallet>
+          <link-wallet :address="row.address" :trunc="false" />
         </template>
       </table-column>
 

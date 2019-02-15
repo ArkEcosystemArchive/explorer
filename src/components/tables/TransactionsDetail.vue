@@ -16,7 +16,7 @@
         cell-class="left-start-cell"
       >
         <template slot-scope="row">
-          <link-transaction :id="row.id" :smart-bridge="row.vendorField" :show-smart-bridge-icon="showSmartBridgeIcon"></link-transaction>
+          <link-transaction :id="row.id" :smart-bridge="row.vendorField" :show-smart-bridge-icon="showSmartBridgeIcon" />
         </template>
       </table-column>
 
@@ -38,7 +38,7 @@
         cell-class="left-cell"
       >
         <template slot-scope="row">
-          <link-wallet :address="row.sender"></link-wallet>
+          <link-wallet :address="row.sender" />
         </template>
       </table-column>
 
@@ -49,7 +49,7 @@
         cell-class="left-cell"
       >
         <template slot-scope="row">
-          <link-wallet :address="row.recipient" :type="row.type" :asset="row.asset"></link-wallet>
+          <link-wallet :address="row.recipient" :type="row.type" :asset="row.asset" />
         </template>
       </table-column>
 
@@ -61,7 +61,7 @@
       >
         <template slot-scope="row">
           <span class="whitespace-no-wrap">
-            <transaction-amount :transaction="row" :type="row.type"></transaction-amount>
+            <transaction-amount :transaction="row" :type="row.type" />
           </span>
         </template>
       </table-column>

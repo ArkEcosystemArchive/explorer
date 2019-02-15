@@ -16,7 +16,7 @@
         cell-class="left-start-cell"
       >
         <template slot-scope="row">
-          <link-block :id="row.id"></link-block>
+          <link-block :id="row.id" />
         </template>
       </table-column>
 
@@ -60,7 +60,7 @@
         cell-class="right-cell hidden lg:table-cell"
       >
         <template slot-scope="row">
-          <link-wallet :address="row.generator.address"></link-wallet>
+          <link-wallet :address="row.generator.address" />
         </template>
       </table-column>
 

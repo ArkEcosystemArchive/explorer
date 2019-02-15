@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <price-chart :chartData="chartData" :options="options" :height="314"></price-chart>
+      <price-chart :chartData="chartData" :options="options" :height="314" />
     </div>
   </div>
 </template>

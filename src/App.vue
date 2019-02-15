@@ -3,11 +3,11 @@
     nightMode ? 'theme-dark' : 'theme-light',
     'bg-theme-page-background text-theme-text-content min-h-screen font-sans xl:pt-8'
   ]">
-    <app-header></app-header>
+    <app-header />
 
-    <router-view></router-view>
+    <router-view />
 
-    <app-footer></app-footer>
+    <app-footer />
   </main>
 </template>
 

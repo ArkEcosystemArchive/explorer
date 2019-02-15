@@ -27,7 +27,7 @@
         cell-class="py-3 px-4 text-left border-none"
       >
         <template slot-scope="row">
-          <link-wallet :address="row.address"></link-wallet>
+          <link-wallet :address="row.address" />
         </template>
       </table-column>
 
