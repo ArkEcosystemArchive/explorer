@@ -4,7 +4,7 @@
       v-if="delegates && delegates.length > 0"
       :data="delegates"
       sort-by="rank"
-      sort-order="desc"
+      sort-order="asc"
       :show-filter="false"
       :show-caption="false"
       table-class="w-full text-xs md:text-base"
