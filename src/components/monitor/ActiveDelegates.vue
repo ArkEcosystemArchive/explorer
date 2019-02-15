@@ -1,13 +1,9 @@
 <template>
-  <!-- <th @click="sortBy('rate')" class="p-4 pl-5 sm:pl-10 text-left">
-    <span class="hidden sm:inline-block">Rank</span>
-    <span class="sm:hidden">#</span>
-  </th> -->
   <loader :data="delegates">
     <table-component v-if="delegates && delegates.length > 0" :data="delegates" sort-by="rate" sort-order="asc" :show-filter="false" :show-caption="false" table-class="w-full text-xs md:text-base">
       <table-column show="rate" :label="$t('Rank')" header-class="p-4 pl-8 sm:pl-10 text-left w-32" cell-class="p-3 pl-8 sm:pl-10 text-left border-none">
         <template slot-scope="row">
-          {{ row.rate }}
+          {{ row.rank }}
         </template>
       </table-column>
 
@@ -19,7 +15,7 @@
 
       <table-column show="producedblocks" :label="$t('Forged blocks')" header-class="left-header-cell hidden xl:table-cell" cell-class="py-3 px-4 text-left border-none hidden xl:table-cell">
         <template slot-scope="row">
-          {{ readableNumber(row.producedblocks, 0, true) }}
+          {{ readableNumber(row.blocks.produced, 0, true) }}
         </template>
       </table-column>
 
@@ -44,14 +40,14 @@
 
       <table-column show="productivity" :label="$t('Productivity')" header-class="right-header-cell hidden md:table-cell" cell-class="py-3 px-4 text-right border-none hidden md:table-cell">
         <template slot-scope="row">
-          {{ percentageString(row.productivity) }}
+          {{ percentageString(row.production.productivity) }}
         </template>
       </table-column>
 
-      <table-column show="approval" :label="$t('Approval')" header-class="right-header-cell pr-5 md:pr-10 hidden md:table-cell" cell-class="py-3 px-4 md:pr-10 text-right border-none hidden md:table-cell">
+      <table-column show="approval" :label="$t('Vote %')" header-class="right-header-cell pr-5 md:pr-10 hidden md:table-cell" cell-class="py-3 px-4 md:pr-10 text-right border-none hidden md:table-cell">
         <template slot-scope="row">
           <span v-tooltip="{ content: readableCrypto(row.vote, true, 2), placement: 'top' }">
-            {{ percentageString(row.approval) }}
+            {{ percentageString(row.production.approval) }}
           </span>
         </template>
       </table-column>
@@ -76,41 +72,35 @@ export default {
 
   methods: {
     lastForgingTime(delegate) {
-      const lastBlock = delegate.forgingStatus.lastBlock
-
-      return lastBlock ? this.readableTimestampAgo(lastBlock.timestamp) : this.$i18n.t('Never')
+      return delegate.blocks.last ? this.readableTimestampAgo(delegate.blocks.last.timestamp.unix) : this.$i18n.t('Never')
     },
 
     statusMessage(row) {
       const status = {
-        '0': this.$i18n.t('Forging'),
-        '1': this.$i18n.t('Missing'),
-        '2': this.$i18n.t('Not forging'),
-        '3': this.$i18n.t('Awaiting slot'),
-        '4': this.$i18n.t('Missed block, awaiting slot'),
-        '5': this.$i18n.t('Never forged'),
-      }[row.forgingStatus.code]
+        0: this.$i18n.t('Forging'),
+        1: this.$i18n.t('Missing'),
+        2: this.$i18n.t('Not forging'),
+        3: this.$i18n.t('Never forged')
+      }[row.forgingStatus]
 
-      const lastBlock = row.forgingStatus.lastBlock
+      const lastBlock = row.blocks.last
 
       return {
         content: lastBlock ? `[${status}] ${
           this.$i18n.t('Last block at height on', { height: lastBlock.height })
-        } ${this.readableTimestamp(lastBlock.timestamp)}`
+        } ${this.readableTimestamp(lastBlock.timestamp.unix)}`
           : status,
-        classes: [`tooltip-bg-${row.forgingStatus.code}`, 'font-sans']
+        classes: [`tooltip-bg-${row.forgingStatus}`, 'font-sans']
       }
     },
 
     statusColor(row) {
       return {
-        '0': '#46b02e', // Forging
-        '1': '#f6993f', // Missing
-        '2': '#ef192d', // Not forging
-        '3': '#838a9b', // Awaiting slot
-        '4': '#f6993f', // Missed in previous round, now awaiting slot
-        '5': '#ef192d', // Never forged
-      }[row.forgingStatus.code]
+        0: '#46b02e', // Forging
+        1: '#f6993f', // Missing
+        2: '#ef192d', // Not forging
+        3: '#ef192d', // Never forged
+      }[row.forgingStatus]
     }
   },
 }

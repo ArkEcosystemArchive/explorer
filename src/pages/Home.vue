@@ -32,9 +32,9 @@
         ></selection-type>
       </div>
 
-      <latest-transactions v-if="dataView === 'transactions'" :transaction-type="transactionType"></latest-transactions>
+      <latest-transactions v-if="dataView === 'transactions'" :transaction-type="transactionType" />
 
-      <latest-blocks v-if="dataView === 'blocks'"></latest-blocks>
+      <latest-blocks v-if="dataView === 'blocks'" />
     </section>
   </div>
 </template>

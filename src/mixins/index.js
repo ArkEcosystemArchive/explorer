@@ -23,38 +23,17 @@ const methods = {
   },
 
   readableTimestamp(value) {
-    return moment()
-      .utc()
-      .set({
-        year: 2017,
-        month: 2,
-        date: 21,
-        hour: 13,
-        minute: 0,
-        second: 0,
-      })
-      .add(value, 'seconds')
+    return moment
+      .unix(value)
       .local()
       .format('L LTS')
   },
 
   readableTimestampAgo(time, compareTime) {
-    const getTime = function (t) {
-      return moment()
-        .utc()
-        .set({
-          year: 2017,
-          month: 2,
-          date: 21,
-          hour: 13,
-          minute: 0,
-          second: 0,
-        })
-        .add(t, 'seconds')
-    }
-
-    const momentTime = getTime(time)
-    return typeof compareTime !== 'undefined' ? momentTime.from(getTime(compareTime)) : momentTime.fromNow()
+    const momentTime = moment
+      .unix(time)
+      .local()
+    return typeof compareTime !== 'undefined' ? momentTime.from(moment.unix(compareTime).local()) : momentTime.fromNow()
   },
 
   truncate(value, length = 13, truncateWhere = 'middle') {

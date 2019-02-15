@@ -69,10 +69,6 @@ export default {
     }
   },
 
-  async mounted() {
-    await this.prepareComponent()
-  },
-
   methods: {
     async prepareComponent() {
       this.$store.watch(state => state.network.height, value => this.updateBlock())

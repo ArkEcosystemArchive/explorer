@@ -7,19 +7,19 @@
           <link-transaction :id="transaction.id"></link-transaction>
         </div>
 
-        <div class="list-row-border-b">
+        <div v-if="transaction.timestamp"  class="list-row-border-b">
           <div>{{ $t("Timestamp") }}</div>
           <div>{{ readableTimestamp(transaction.timestamp) }}</div>
         </div>
 
         <div class="list-row-border-b">
           <div>{{ $t("Sender") }}</div>
-          <link-wallet :address="transaction.senderId"></link-wallet>
+          <link-wallet :address="transaction.sender"></link-wallet>
         </div>
 
         <div class="list-row-border-b">
           <div>{{ $t("Recipient") }}</div>
-          <link-wallet :address="transaction.recipientId" :type="transaction.type" :asset="transaction.asset"></link-wallet>
+          <link-wallet :address="transaction.recipient" :type="transaction.type" :asset="transaction.asset"></link-wallet>
         </div>
 
         <div class="list-row-border-b-no-wrap" v-if="transaction.vendorField">

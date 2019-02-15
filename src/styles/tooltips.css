@@ -153,32 +153,12 @@
   border-color: #ef192d;
 }
 
-/* Awaiting Slot */
-.tooltip.tooltip-bg-3 .tooltip-inner {
-  background-color: #838a9b;
-  color: white;
-}
-
-.tooltip.tooltip-bg-3 .tooltip-arrow {
-  border-color: #838a9b;
-}
-
-/* Awaiting Slot */
-.tooltip.tooltip-bg-4 .tooltip-inner {
-  background-color: #f6993f;
-  color: white;
-}
-
-.tooltip.tooltip-bg-4 .tooltip-arrow {
-  border-color: #f6993f;
-}
-
 /* Never forged */
-.tooltip.tooltip-bg-5 .tooltip-inner {
+.tooltip.tooltip-bg-3 .tooltip-inner {
   background-color: #ef192d;
   color: white;
 }
 
-.tooltip.tooltip-bg-5 .tooltip-arrow {
+.tooltip.tooltip-bg-3 .tooltip-arrow {
   border-color: #ef192d;
 }

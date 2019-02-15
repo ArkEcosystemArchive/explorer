@@ -139,15 +139,23 @@
         <div class="flex -mx-6">
           <div class="md:w-1/2 px-6 w-full" :class="{ 'border-r border-grey-dark' : isVoting}">
             <div class="text-grey mb-2">{{ $t("Balance (token)", { token: networkToken() }) }}</div>
-            <div v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(wallet.balance)}` }" class="text-white">{{ readableCrypto(wallet.balance, false) }}</div>
+            <div class="text-white">
+              <span
+                v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(wallet.balance)}` }"
+              >
+                {{ readableCrypto(wallet.balance, false) }}
+              </span>
+            </div>
           </div>
-           <div
+
+          <div
             v-show="isVoting"
             v-if="view === 'public'"
-            class="md:w-1/2 px-6 w-full">
+            class="md:w-1/2 px-6 w-full"
+          >
             <div class="text-grey mb-2">{{ $t("Voting for") }}</div>
             <link-wallet v-if="delegate.address" :address="delegate.address">
-              <span class="text-lg text-white semibold truncate">{{ delegate.username }}</span>
+              <span class="text-white semibold truncate">{{ delegate.username }}</span>
             </link-wallet>
           </div>
         </div>
@@ -167,7 +175,7 @@
 
 <script type="text/ecmascript-6">
 import WalletService from '@/services/wallet'
-import TransactionService from '@/services/transaction'
+import DelegateService from '@/services/delegate'
 import { mapGetters } from 'vuex'
 
 
@@ -201,20 +209,24 @@ export default {
   watch: {
     wallet(wallet) {
       if (!wallet.address) return
-      this.getVotes()
+      this.getVotedDelegate()
     },
   },
 
   methods: {
-    async getVotes() {
-      try {
-        const response = await WalletService.vote(this.wallet.address)
-        if (response.vote) {
-          this.isVoting = true
+    async getVotedDelegate() {
+      if (this.wallet.vote) {
+        try {
+          this.delegate = await DelegateService.find(this.wallet.vote)
+          if (this.delegate) {
+            this.isVoting = true
+          }
+        } catch(e) {
+          console.log(e.message || e.data.error)
+          this.delegate = {}
+          this.isVoting = false
         }
-        this.delegate = response
-      } catch(e) {
-        console.log(e.message || e.data.error)
+      } else {
         this.delegate = {}
         this.isVoting = false
       }

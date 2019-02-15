@@ -3,7 +3,7 @@
     <div>{{ $t("Voters") }}</div>
     <div class="whitespace-no-wrap">
       <span v-tooltip="{ content: $t('Only voters with more than 0.1 token', { token: networkToken() }), placement: 'left' }" :class="voters.length ? 'mr-2' : ''">{{ voters.length }}</span>
-      <router-link v-if="wallet.address && voters.length" :to="{ name: 'wallet-voters', params: { address: wallet.address, username: username, page: 1 } }">{{ $t("See all") }}</router-link>
+      <router-link v-if="wallet.address && voters.length" :to="{ name: 'wallet-voters', params: { address: wallet.address, username: wallet.username, page: 1 } }">{{ $t("See all") }}</router-link>
     </div>
   </div>
 </template>
@@ -16,21 +16,20 @@ export default {
     wallet: {
       type: Object,
       required: true
-    },
-    username: {}
+    }
   },
 
   data: () => ({ voters: {} }),
 
   watch: {
     wallet(wallet) {
-      if (wallet.publicKey) this.getVoters()
+      if (wallet.username) this.getVoters()
     }
   },
 
   methods: {
     async getVoters() {
-      const response = await DelegateService.voters(this.wallet.publicKey)
+      const response = await DelegateService.voters(this.wallet.username)
       this.voters = response
     }
   }

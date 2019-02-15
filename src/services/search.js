@@ -1,29 +1,23 @@
-import NodeService from '@/services/node'
+import WalletService from '@/services/wallet'
+import DelegateService from '@/services/delegate'
+import BlockService from '@/services/block'
+import TransactionService from '@/services/transaction'
 
 class SearchService {
-  async findByAddress(address) {
-    const response = await NodeService.get('accounts', {params: {address}})
-    return response.data
+  async walletByAddress(address) {
+    return WalletService.find(address)
   }
 
-  async findByUsername(username) {
-    const response = await NodeService.get('delegates/get', {params: {username}})
-    return response.data
+  async delegateByQuery(query) {
+    return DelegateService.find(query)
   }
 
-  async findByPublicKey(publicKey) {
-    const response = await NodeService.get('delegates/get', {params: {publicKey}})
-    return response.data
+  async blockByQuery(id) {
+    return BlockService.find(id)
   }
 
-  async findByBlockId(id) {
-    const response = await NodeService.get('blocks/get', {params: {id}})
-    return response.data
-  }
-
-  async findByTransactionId(id) {
-    const response = await NodeService.get('transactions/get', {params: {id}})
-    return response.data
+  async transactionById(id) {
+    return TransactionService.find(id)
   }
 }
 

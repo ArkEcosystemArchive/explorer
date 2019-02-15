@@ -1,15 +1,15 @@
-import transactionService from '@/services/transaction'
+import TransactionService from '@/services/transaction'
 import store from '@/store'
 
-const blockPropertyArray = [
+const transactionPropertyArray = [
   'id',
-  'blockid',
+  'blockId',
   'type',
   'timestamp',
   'amount',
   'fee',
-  'senderId',
-  'senderPublicKey',
+  'sender',
+  'recipient',
   'signature',
   'confirmations'
 ].sort()
@@ -17,164 +17,45 @@ const blockPropertyArray = [
 
 describe('Transaction Service', () => {
   beforeAll(() => {
-    store.dispatch('network/setServer', 'https://explorer.ark.io:8443/api')
+    store.dispatch('network/setServer', 'https://explorer.ark.io/api/v2')
   })
 
   it('should return the latest transactions ordered by timestamp descending', async () => {
-    const data = await transactionService.latest()
+    const data = await TransactionService.latest()
     expect(data).toHaveLength(25)
-    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
+    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(transactionPropertyArray))
     expect(data[0].timestamp < data[1].timestamp)
   })
 
   it('should find a transaction by its id', async () => {
-    const data = await transactionService.find('bd8a71caeeab36339ac5baf832bb0e150549629c1992dc749a79ff3cdcd449fc')
-    expect(Object.keys(data).sort()).toEqual(expect.arrayContaining(blockPropertyArray.concat(['asset', 'recipientId']).sort()))
+    const data = await TransactionService.find('bd8a71caeeab36339ac5baf832bb0e150549629c1992dc749a79ff3cdcd449fc')
+    expect(Object.keys(data).sort()).toEqual(expect.arrayContaining(transactionPropertyArray.concat(['asset']).sort()))
   })
 
   it('should fail if no transaction can be found for given id', async () => {
-    await expect(transactionService.find('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')).rejects.toThrow()
+    await expect(TransactionService.find('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')).rejects.toThrow()
   })
 
-  it('should return the transactions for a given block', async () => {
-    const data = await transactionService.findByBlock('8034780571166969612')
-    expect(data).toHaveLength(1)
-    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
-  })
-
-  it('should return no transactions if offset is larger than the amount of transactions', async () => {
-    const data = await transactionService.findByBlock('8034780571166969612', 2)
-    expect(data).toHaveLength(0)
-  })
-
-  it('should return and empty list if no transactions in a block', async () => {
-    const data = await transactionService.findByBlock('7818295669546141032')
-    expect(data).toHaveLength(0)
-  })
-
-  it('should return an empty list of transactions when an incorrect block id is given', async () => {
-    const data = await transactionService.findByBlock('0')
-    expect(data).toHaveLength(0)
-  })
-
-  it('should return the latest registrations', async () => {
-    const data = await transactionService.latestRegistrations()
-    if (!data[0].hasOwnProperty('signSignature')) data[0].signSignature = ''
-    expect(data).toHaveLength(5)
-    expect(Object.keys(data[0]).sort()).toEqual(blockPropertyArray.concat(['asset', 'signSignature']).sort())
-    expect(data[0].type).toBe(2)
-    expect(data[0].timestamp < data[1].timestamp)
-  })
-
-  it('should return the latest votes', async () => {
-    const data = await transactionService.latestVotes()
-    expect(data).toHaveLength(5)
-    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
-    expect(data[0].type).toBe(3)
-    expect(data[0].timestamp < data[1].timestamp)
-  })
-
-  it('should return all transactions for an address', async () => {
-    const data = await transactionService.allByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs')
+  it('should return latest transactions with page offset', async() => {
+    const data = await TransactionService.paginate(1)
     expect(data).toHaveLength(25)
-    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
+    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(transactionPropertyArray))
     expect(data[0].timestamp < data[1].timestamp)
   })
 
-  it('should return all transactions for an address, with offset', async () => {
-    const data = await transactionService.allByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs', 3, 40)
+  it('should return latest transactions with page offset and given limit', async() => {
+    const data = await TransactionService.paginate(2, 40)
     expect(data).toHaveLength(40)
-    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
-    expect(data[0].timestamp < data[1].timestamp)
-  })
-
-  it('should fail when searching for transactions if address does not exist', async () => {
-    await expect(transactionService.allByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects.toThrow()
-  })
-
-  it('should return all outgoing transactions for an address', async () => {
-    const data = await transactionService.sentByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs')
-    expect(data).toHaveLength(25)
-    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
-    expect(data[0].timestamp < data[1].timestamp)
-  })
-
-  it('should return all outgoing transactions for an address, with offset', async () => {
-    const data = await transactionService.sentByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs', 3, 40)
-    expect(data).toHaveLength(40)
-    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
-    expect(data[0].timestamp < data[1].timestamp)
-  })
-
-  it('should fail when searching for outgoing transactions if address does not exist', async () => {
-    await expect(transactionService.sentByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects.toThrow()
-  })
-
-  it('should return all incoming transactions for an address', async () => {
-    const data = await transactionService.receivedByAddress('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK')
-    expect(data).toHaveLength(25)
-    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
-    expect(data[0].timestamp < data[1].timestamp)
-  })
-
-  it('should return all incoming transactions for an address, with offset', async () => {
-    const data = await transactionService.receivedByAddress('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK', 3, 40)
-    expect(data).toHaveLength(40)
-    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
-    expect(data[0].timestamp < data[1].timestamp)
-  })
-
-  it('should fail when searching for incoming transactions if address does not exist', async () => {
-    await expect(transactionService.receivedByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects.toThrow()
-  })
-
-  it('should return count of outgoing transactions for an address', async () => {
-    const data = await transactionService.sentByAddressCount('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK')
-    expect(Number(data)).toBeGreaterThan(0)
-  })
-
-  it('should return count of incoming transactions for an address', async () => {
-    const data = await transactionService.receivedByAddressCount('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK')
-    expect(Number(data)).toBeGreaterThan(0)
-  })
-
-  it('should return count of transactions in given block', async () => {
-    const data = await transactionService.findByBlockCount('14744703911220072486')
-    expect(Number(data)).toBe(1)
-  })
-
-  it('should return latest transactions with offset', async() => {
-    const data = await transactionService.paginate(0)
-    expect(data).toHaveLength(25)
-    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
-    expect(data[0].timestamp < data[1].timestamp)
-  })
-
-  it('should return latest transactions with offset and given limit', async() => {
-    const data = await transactionService.paginate(2, 40)
-    expect(data).toHaveLength(40)
-    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
-    expect(data[0].timestamp < data[1].timestamp)
-  })
-
-  it('should return latest transactions for an address with offset', async() => {
-    const data = await transactionService.paginateByAddress('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK', 0)
-    expect(data).toHaveLength(25)
-    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
-    expect(data[0].timestamp < data[1].timestamp)
-  })
-
-  it('should return latest transactions for an address with offset and given limit', async() => {
-    const data = await transactionService.paginateByAddress('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK', 2, 40)
-    expect(data).toHaveLength(40)
-    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
+    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(transactionPropertyArray))
     expect(data[0].timestamp < data[1].timestamp)
   })
 
   it('should filter the transactions and only return type 3 transactions', async() => {
-    const data = await transactionService.filterByType(1, 3)
+    const data = await TransactionService.filterByType(1, 3)
     expect(data).toHaveLength(25)
-    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
-    expect(data[0].type === data[1].type)
+    data.forEach(transaction => {
+      expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray))
+      expect(transaction.type === 3)
+    })
   })
 })

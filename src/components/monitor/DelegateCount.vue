@@ -5,17 +5,36 @@
     </div>
     <div>
       <div class="text-grey mb-2">{{ $t("Delegates") }}</div>
-      <div class="text-lg text-white semibold truncate">{{ delegateCount }}</div>
+      <div class="text-lg text-white semibold truncate">{{ count }}</div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+import { mapGetters } from 'vuex'
+
 export default {
-  props: {
-    delegateCount: {
-      type: Number,
-      required: true
+  data: () => ({
+    count: 0
+  }),
+
+  computed: {
+    ...mapGetters('delegates', ['delegates'])
+  },
+
+  mounted() {
+    this.prepareComponent()
+  },
+
+  methods: {
+    prepareComponent() {
+      this.getDelegateCount()
+
+      this.$store.watch(state => state.delegates.delegates, value => this.getDelegateCount())
+    },
+
+    getDelegateCount() {
+      this.count = this.delegates.length
     }
   }
 }

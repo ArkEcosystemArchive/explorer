@@ -33,13 +33,12 @@ export default {
   data: () => ({
     wallet: {},
     activeTab: 'all',
-    isVoting: false,
     username: ''
   }),
 
   computed: {
     isDelegate() {
-      return this.isDelegateByAddress(this.$route.params.address)
+      return this.wallet.isDelegate
     },
   },
 
@@ -63,15 +62,7 @@ export default {
   methods: {
     async setWallet(wallet) {
       this.wallet = wallet
-
-      try {
-        const vote = await WalletService.vote(wallet.address)
-        this.isVoting = vote
-      } catch(e) {
-        console.log(e.message || e.data.error)
-        this.isVoting = false
-      }
-    },
+    }
   },
 }
 </script>

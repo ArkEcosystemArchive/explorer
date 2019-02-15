@@ -2,7 +2,7 @@
   <div class="max-w-2xl mx-auto md:pt-5">
     <content-header>{{ $t("Delegate Monitor") }}</content-header>
 
-    <delegate-detail :delegateCount="delegateCount"></delegate-detail>
+    <delegate-detail></delegate-detail>
 
     <section class="page-section py-5 md:py-10">
       <nav class="mx-5 sm:mx-10 mb-4 border-b flex items-end">
@@ -18,11 +18,11 @@
         </div>
       </nav>
 
-      <forging :delegates="delegates" v-show="activeTab === 'active'"></forging>
+      <forging :delegates="delegates" v-show="activeTab === 'active'" />
 
-      <active-delegates v-if="activeTab === 'active'" :delegates="delegates"></active-delegates>
+      <active-delegates v-if="activeTab === 'active'" :delegates="delegates" />
 
-      <standby-delegates v-if="activeTab === 'standby'"></standby-delegates>
+      <standby-delegates v-if="activeTab === 'standby'" />
     </section>
   </div>
 </template>
@@ -44,7 +44,6 @@ export default {
 
   data: () => ({
     delegates: null,
-    delegateCount: 0,
     activeTab: 'active'
   }),
 
@@ -60,9 +59,7 @@ export default {
     },
 
     async getDelegates() {
-      const response = await DelegateService.activeDelegates()
-      this.delegates = response.delegates
-      this.delegateCount = response.delegateCount
+      this.delegates = await DelegateService.active()
     }
   }
 }

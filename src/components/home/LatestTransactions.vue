@@ -50,7 +50,7 @@ export default {
     },
 
     async getTransactions() {
-      const response = await TransactionService.filterByType(0, this.transactionType)
+      const response = await TransactionService.filterByType(1, this.transactionType)
       this.transactions = response
     }
   }

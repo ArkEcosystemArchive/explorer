@@ -34,10 +34,10 @@
 
     <div class="w-1/2 lg:w-1/4 flex items-center px-6 my-6 flex-col sm:flex-row text-center sm:text-left">
       <div class="meter flex-none text-blue mb-4 sm:mb-0">
-        <ark-meter :percentage="percentage(totals.awaitingSlot)"></ark-meter>
+        <ark-meter :percentage="percentage(totals.remainingBlocks)"></ark-meter>
       </div>
       <div class="p-0 sm:pl-4">
-        <div class="text-3xl semibold">{{ totals.awaitingSlot }}</div>
+        <div class="text-3xl semibold">{{ totals.remainingBlocks }}</div>
         <div class="text-grey">{{ $t("In queue for forging") }}</div>
       </div>
     </div>

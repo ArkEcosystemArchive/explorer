@@ -65,9 +65,7 @@
   "Total forged (token)": "Totaal geforged ({token})",
   "Forging": "Aan het forgen",
   "Missing": "Missend",
-  "Missed block, awaiting slot": "Block gemist, Wachten op plek",
   "Not forging": "Niet aan het forgen",
-  "Awaiting slot": "Wachten op een plek",
   "Never": "Nooit",
   "Last block at height on": "Last block @ {height} on",
 

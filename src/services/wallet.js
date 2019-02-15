@@ -1,36 +1,70 @@
-import NodeService from '@/services/node'
+import ApiService from '@/services/api'
+import DelegateService from '@/services/delegate'
 
 class WalletService {
   async find(address) {
-    const response = await NodeService.get('accounts', {
-      params: {address}
-    })
-    return response.data.account
+    const response = await ApiService.get(`wallets/${address}`)
+    return response.data
   }
 
-  async vote(address) {
-    const response = await NodeService.get('accounts/delegates', {
+  async allByAddress(address, page = 1, limit = 25) {
+    const response = await ApiService.get(`wallets/${address}/transactions`, {
       params: {
-        address
+        page,
+        limit
       }
     })
+    return response.data
+  }
 
-    const delegate = response.data.delegates[0]
+  async sentByAddress(address, page = 1, limit = 25) {
+    const response = await ApiService.get(`wallets/${address}/transactions/sent`, {
+      params: {
+        page,
+        limit
+      }
+    })
+    return response.data
+  }
 
-    return delegate || false
+  async receivedByAddress(address, page = 1, limit = 25) {
+    const response = await ApiService.get(`wallets/${address}/transactions/received`, {
+      params: {
+        page,
+        limit
+      }
+    })
+    return response.data
+  }
+
+  async sentByAddressCount(senderId) {
+    const response = await ApiService.get('transactions', {
+      params: {
+        senderId,
+        limit: 1
+      }
+    })
+    return response.meta.totalCount
+  }
+
+  async receivedByAddressCount(recipientId) {
+    const response = await ApiService.get('transactions', {
+      params: {
+        recipientId,
+        limit: 1
+      }
+    })
+    return response.meta.totalCount
   }
 
   async top(page = 1, limit = 25) {
-    const offset = page > 1 ? (page - 1) * limit : 0
-
-    const response = await NodeService.get('accounts/top', {
+    const response = await ApiService.get('wallets/top', {
       params: {
-        orderBy: 'balance:desc',
-        limit,
-        offset
+        page,
+        limit
       }
     })
-    return response.data.accounts
+    return response.data
   }
 }
 

@@ -20,6 +20,10 @@ const incomingAddress = 'AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv'
 const outgoingAddress = 'AN7BURQn5oqBRBADeWhmmUMJGQTy5Seey3'
 
 describe('Utils/TransactionAmount', () => {
+  beforeAll(() => {
+    store.dispatch('network/setSymbol', 'Ѧ')
+  })
+
   it('Should display an outgoing transaction in red', () => {
     const $route = {
       params: {
@@ -29,8 +33,8 @@ describe('Utils/TransactionAmount', () => {
     const wrapper = mount(TransactionAmount, {
       propsData: {
         transaction: {
-          senderId: incomingAddress,
-          recipientId: outgoingAddress,
+          sender: incomingAddress,
+          recipient: outgoingAddress,
           amount: 100000000
         },
         type: 0
@@ -57,8 +61,8 @@ describe('Utils/TransactionAmount', () => {
     const wrapper = mount(TransactionAmount, {
       propsData: {
         transaction: {
-          senderId: outgoingAddress,
-          recipientId: incomingAddress,
+          sender: outgoingAddress,
+          recipient: incomingAddress,
           amount: 100000000
         },
         type: 0
@@ -85,8 +89,8 @@ describe('Utils/TransactionAmount', () => {
     const wrapper = mount(TransactionAmount, {
       propsData: {
         transaction: {
-          senderId: incomingAddress,
-          recipientId: incomingAddress,
+          sender: incomingAddress,
+          recipient: incomingAddress,
           amount: 100000000
         },
         type: 1

@@ -10,14 +10,14 @@
     <div class="hidden md:block">
       <div class="text-grey mb-2 min-w-0">{{ $t("Forged") }}</div>
       <div class="text-lg text-white truncate">
-        {{ readableCrypto(block.totalForged) }} {{ $tc("from transactions", block.numberOfTransactions, { count: block.numberOfTransactions }) }}
+        <span v-if="block.forged">{{ readableCrypto(block.forged.total) }}</span> {{ $tc("from transactions", block.transactions, { count: block.transactions }) }}
       </div>
     </div>
 
     <div class="w-32">
       <div class="text-grey mb-2 min-w-0">{{ $t("Delegate") }}</div>
       <div class="text-lg text-white truncate semibold">
-        <link-wallet :public-key="block.generatorPublicKey"></link-wallet>
+        <link-wallet v-if="block.generator" :address="block.generator.address"></link-wallet>
       </div>
     </div>
   </div>

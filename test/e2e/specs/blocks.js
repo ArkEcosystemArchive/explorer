@@ -80,7 +80,7 @@ module.exports = {
     browser
       .url(devServer)
       .useCss()
-      .waitForElementVisible('div.table-component')
+      .waitForElementVisible('div.table-component', 10000)
       .useXpath()
       .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[5]//a[1]")
       .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[5]//a[1]")
