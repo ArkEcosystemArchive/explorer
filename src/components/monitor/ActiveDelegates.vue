@@ -1,31 +1,64 @@
 <template>
   <loader :data="delegates">
-    <table-component v-if="delegates && delegates.length > 0" :data="delegates" sort-by="rate" sort-order="asc" :show-filter="false" :show-caption="false" table-class="w-full text-xs md:text-base">
-      <table-column show="rate" :label="$t('Rank')" header-class="p-4 pl-8 sm:pl-10 text-left w-32" cell-class="p-3 pl-8 sm:pl-10 text-left border-none">
+    <table-component
+      v-if="delegates && delegates.length > 0"
+      :data="delegates"
+      sort-by="rank"
+      sort-order="asc"
+      :show-filter="false"
+      :show-caption="false"
+      table-class="w-full text-xs md:text-base"
+    >
+      <table-column
+        show="rank"
+        :label="$t('Rank')"
+        header-class="p-4 pl-8 sm:pl-10 text-left w-32"
+        cell-class="p-3 pl-8 sm:pl-10 text-left border-none"
+      >
         <template slot-scope="row">
           {{ row.rank }}
         </template>
       </table-column>
 
-      <table-column show="username" :label="$t('Name')" header-class="left-header-cell" cell-class="py-3 px-4 text-left border-none">
+      <table-column
+        show="username"
+        :label="$t('Name')"
+        header-class="left-header-cell"
+        cell-class="py-3 px-4 text-left border-none"
+      >
         <template slot-scope="row">
           <link-wallet :address="row.address"></link-wallet>
         </template>
       </table-column>
 
-      <table-column show="producedblocks" :label="$t('Forged blocks')" header-class="left-header-cell hidden xl:table-cell" cell-class="py-3 px-4 text-left border-none hidden xl:table-cell">
+      <table-column
+        show="blocks.produced"
+        :label="$t('Forged blocks')"
+        header-class="left-header-cell hidden xl:table-cell"
+        cell-class="py-3 px-4 text-left border-none hidden xl:table-cell"
+      >
         <template slot-scope="row">
           {{ readableNumber(row.blocks.produced, 0, true) }}
         </template>
       </table-column>
 
-      <table-column show="blocksAt" :label="$t('Last forged')" header-class="left-header-cell hidden sm:table-cell" cell-class="py-3 px-4 text-left border-none hidden sm:table-cell">
+      <table-column
+        show="blocks.last.timestamp.unix"
+        :label="$t('Last forged')"
+        header-class="left-header-cell hidden sm:table-cell"
+        cell-class="py-3 px-4 text-left border-none hidden sm:table-cell"
+      >
         <template slot-scope="row">
           {{ lastForgingTime(row) }}
         </template>
       </table-column>
 
-      <table-column sort-by="status" show="forgingStatus" :label="$t('Status')" header-class="base-header-cell pr-5 sm:pr-10 md:pr-4 w-24 md:w-auto" cell-class="py-3 px-4 pr-5 sm:pr-10 md:pr-4 text-center border-none">
+      <table-column
+        :sortable="false"
+        :label="$t('Status')"
+        header-class="base-header-cell pr-5 sm:pr-10 md:pr-4 w-24 md:w-auto"
+        cell-class="py-3 px-4 pr-5 sm:pr-10 md:pr-4 text-center border-none"
+      >
         <template slot-scope="row">
           <svg
            xmlns="http://www.w3.org/2000/svg"
@@ -38,13 +71,23 @@
         </template>
       </table-column>
 
-      <table-column show="productivity" :label="$t('Productivity')" header-class="right-header-cell hidden md:table-cell" cell-class="py-3 px-4 text-right border-none hidden md:table-cell">
+      <table-column
+        show="production.productivity"
+        :label="$t('Productivity')"
+        header-class="right-header-cell hidden md:table-cell"
+        cell-class="py-3 px-4 text-right border-none hidden md:table-cell"
+      >
         <template slot-scope="row">
           {{ percentageString(row.production.productivity) }}
         </template>
       </table-column>
 
-      <table-column show="approval" :label="$t('Vote %')" header-class="right-header-cell pr-5 md:pr-10 hidden md:table-cell" cell-class="py-3 px-4 md:pr-10 text-right border-none hidden md:table-cell">
+      <table-column
+        show="production.approval"
+        :label="$t('Vote %')"
+        header-class="right-header-cell pr-5 md:pr-10 hidden md:table-cell"
+        cell-class="py-3 px-4 md:pr-10 text-right border-none hidden md:table-cell"
+      >
         <template slot-scope="row">
           <span v-tooltip="{ content: readableCrypto(row.vote, true, 2), placement: 'top' }">
             {{ percentageString(row.production.approval) }}
@@ -52,6 +95,7 @@
         </template>
       </table-column>
     </table-component>
+
     <div v-else class="px-5 md:px-10">
       <span>{{ $t("No results") }}</span>
     </div>
