@@ -54,7 +54,7 @@
       </table-column>
 
       <table-column
-        :sortable="false"
+        show="forgingStatus"
         :label="$t('Status')"
         header-class="base-header-cell pr-5 sm:pr-10 md:pr-4 w-24 md:w-auto"
         cell-class="py-3 px-4 pr-5 sm:pr-10 md:pr-4 text-center border-none"
@@ -89,7 +89,7 @@
         cell-class="py-3 px-4 md:pr-10 text-right border-none hidden md:table-cell"
       >
         <template slot-scope="row">
-          <span v-tooltip="{ content: readableCrypto(row.vote, true, 2), placement: 'top' }">
+          <span v-tooltip="{ content: readableCrypto(row.votes, true, 2), placement: 'top' }">
             {{ percentageString(row.production.approval) }}
           </span>
         </template>

@@ -9,7 +9,7 @@
 
         <div v-if="transaction.timestamp"  class="list-row-border-b">
           <div>{{ $t("Timestamp") }}</div>
-          <div>{{ readableTimestamp(transaction.timestamp) }}</div>
+          <div>{{ readableTimestamp(transaction.timestamp.unix) }}</div>
         </div>
 
         <div class="list-row-border-b">
