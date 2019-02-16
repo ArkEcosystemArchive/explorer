@@ -76,13 +76,14 @@ const createWebpackConfig = (baseUrl, network, networkConfig, routerMode) => {
           path.join(__dirname, './../src/**/*.js')
         ]),
         whitelist: [
-          'tooltip', 'tooltip-inner', 'tooltip-arrow',
+          'border-theme-page-background',
           'table-component__th--sort-asc', 'table-component__th--sort-desc',
-          'tr', 'td'
+          'tooltip', 'tooltip-inner', 'tooltip-arrow',
+          'tr', 'td',
+          'v-spinner'
         ],
         whitelistPatterns: [
-          /^tooltip-bg-/,
-          /^border-theme-page-background/
+          /^tooltip-bg-/
         ],
         extractors: [{
           extractor: TailwindExtractor,
