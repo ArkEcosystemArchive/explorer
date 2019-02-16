@@ -174,7 +174,7 @@ export default {
 
       try {
         const transaction = await TransactionService.find(this.transaction.id)
-        const average = await CryptoCompareService.dailyAverage(transaction.timestamp)
+        const average = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
         this.setTransaction(transaction)
         this.setAverage(average)
         this.transactionNotFound = false
