@@ -102,7 +102,6 @@ class DelegateService {
 
     const response = await ApiService.get('delegates', {
       params: {
-        orderBy: 'rate:asc',
         limit: activeDelegates
       }
     })
@@ -118,7 +117,6 @@ class DelegateService {
   async activeDelegatesCount() {
     const response = await ApiService.get('delegates', {
       params: {
-        orderBy: 'rate:asc',
         limit: 1
       }
     })

@@ -15,11 +15,11 @@
     </template>
 
     <template v-else>
-      <identity :block="block" :prev-handler="prevBlock" :next-handler="nextBlock"></identity>
+      <identity :block="block" :prev-handler="prevBlock" :next-handler="nextBlock" />
 
-      <block-details :block="block"></block-details>
+      <block-details :block="block" />
 
-      <transactions :block="block"></transactions>
+      <transactions :block="block" />
     </template>
   </div>
 </template>

@@ -17,7 +17,7 @@
     <div class="w-32">
       <div class="text-grey mb-2 min-w-0">{{ $t("Delegate") }}</div>
       <div class="text-lg text-white truncate semibold">
-        <link-wallet v-if="block.generator" :address="block.generator.address"></link-wallet>
+        <link-wallet v-if="block.generator" :address="block.generator.address" />
       </div>
     </div>
   </div>

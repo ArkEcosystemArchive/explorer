@@ -17,7 +17,9 @@
         </router-link>
       </span>
       <router-link v-else v-tooltip="getAddress()" :to="{ name: 'wallet', params: { address: walletAddress } }">
-        <span v-if="hasDefaultSlot"><slot></slot></span>
+        <span v-if="hasDefaultSlot">
+          <slot />
+        </span>
         <span v-else-if="delegate">{{ delegate.username }}</span>
         <span v-else-if="address">
           <span class="hidden md:inline-block">{{ trunc ? truncate(address) : address }}</span>

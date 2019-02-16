@@ -28,7 +28,8 @@
               </div>
               <clipboard
                 v-if="transaction.id"
-                :value="transaction.id"></clipboard>
+                :value="transaction.id"
+              />
             </div>
           </div>
         </div>
@@ -39,14 +40,14 @@
           <div class="list-row-border-b">
             <div>{{ $t("Sender") }}</div>
             <div class="truncate">
-              <link-wallet :address="transaction.sender" :trunc="false"></link-wallet>
+              <link-wallet :address="transaction.sender" :trunc="false" />
             </div>
           </div>
 
           <div class="list-row-border-b">
             <div>{{ $t("Recipient") }}</div>
             <div class="truncate">
-              <link-wallet :address="transaction.recipient" :type="transaction.type" :asset="transaction.asset" :trunc="false"></link-wallet>
+              <link-wallet :address="transaction.recipient" :type="transaction.type" :asset="transaction.asset" :trunc="false" />
             </div>
           </div>
 

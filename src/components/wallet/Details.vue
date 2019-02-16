@@ -38,7 +38,7 @@
           <div class="text-lg text-white semibold truncate">
             <span class="mr-2">{{ wallet.address }}</span>
           </div>
-          <clipboard v-if="wallet.address" :value="wallet.address"></clipboard>
+          <clipboard v-if="wallet.address" :value="wallet.address" />
         </div>
       </div>
 
@@ -50,7 +50,7 @@
           <div class="text-lg text-white semibold truncate mr-2">
             <span class="mr-2">{{ wallet.publicKey }}</span>
           </div>
-          <clipboard v-if="wallet.publicKey" :value="wallet.publicKey"></clipboard>
+          <clipboard v-if="wallet.publicKey" :value="wallet.publicKey" />
         </div>
       </div>
 
@@ -103,7 +103,7 @@
     <div class="px-5 sm:px-10 py-10 bg-theme-feature-background md:hidden" v-if="wallet.address">
       <div class="flex justify-center mb-10">
         <div class="flex items-center p-2 bg-white rounded mx-auto">
-          <qr-code :value="wallet.address" :options="{ size: 160 }"></qr-code>
+          <qr-code :value="wallet.address" :options="{ size: 160 }" />
         </div>
       </div>
       <div class="px-2">
@@ -125,14 +125,14 @@
             </div>
             <div class="text-white flex">
               <span class="mr-2">{{ truncate(wallet.address) }}</span>
-              <clipboard v-if="wallet.address" :value="wallet.address"></clipboard>
+              <clipboard v-if="wallet.address" :value="wallet.address" />
             </div>
           </div>
           <div class="md:w-1/2 px-6 w-full" v-if="wallet.publicKey">
             <div class="text-grey mb-2">{{ $t("Public key") }}</div>
             <div class="text-white flex">
               <span class="mr-2">{{ truncate(wallet.publicKey) }}</span>
-              <clipboard v-if="wallet.publicKey" :value="wallet.publicKey"></clipboard>
+              <clipboard v-if="wallet.publicKey" :value="wallet.publicKey" />
             </div>
           </div>
         </div>
@@ -167,7 +167,7 @@
       <div class="text-center px-10 py-2">
         <p class="semibold text-3xl mb-4">{{ $t("QR Code") }}</p>
         <p class="mb-10">{{ $t("Scan for Address") }}</p>
-        <qr-code :value="wallet.address" :options="{ size: 160 }"></qr-code>
+        <qr-code :value="wallet.address" :options="{ size: 160 }" />
       </div>
     </modal>
   </section>

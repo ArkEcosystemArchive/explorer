@@ -20,12 +20,12 @@
 
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <table-blocks :blocks="blocks"></table-blocks>
+        <table-blocks :blocks="blocks" />
       </div>
       <div class="sm:hidden">
-        <table-blocks-mobile :blocks="blocks"></table-blocks-mobile>
+        <table-blocks-mobile :blocks="blocks" />
       </div>
-      <paginator v-if="blocks && blocks.length" :start="+this.page" :count="totalBlocks"></paginator>
+      <paginator v-if="blocks && blocks.length" :start="+this.page" :count="totalBlocks" />
     </section>
   </div>
 </template>

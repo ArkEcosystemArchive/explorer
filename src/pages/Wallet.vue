@@ -2,16 +2,16 @@
   <div class="max-w-2xl mx-auto md:pt-5">
     <content-header>{{ $t("Wallet summary") }}</content-header>
 
-    <wallet-details :wallet="wallet"></wallet-details>
+    <wallet-details :wallet="wallet" />
 
     <section class="page-section mb-5" :class="{ 'py-5 md:py-10': isDelegate }" v-show="isDelegate">
       <div class="px-5 sm:px-10">
-        <delegate :wallet="wallet" v-show="isDelegate" v-on:username="username = $event"></delegate>
-        <voters :wallet="wallet" :username="username" v-show="isDelegate"></voters>
+        <delegate :wallet="wallet" v-show="isDelegate" v-on:username="username = $event" />
+        <voters :wallet="wallet" :username="username" v-show="isDelegate" />
       </div>
     </section>
 
-    <transactions :wallet="wallet" v-if="wallet"></transactions>
+    <transactions :wallet="wallet" v-if="wallet" />
   </div>
 </template>
 

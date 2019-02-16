@@ -3,7 +3,7 @@
     <content-header>{{ $t("Latest transactions and blocks") }}</content-header>
 
     <section v-if="priceChart" class="hidden md:block mb-5 bg-theme-feature-background xl:rounded-lg">
-      <chart-wrapper></chart-wrapper>
+      <chart-wrapper />
     </section>
 
     <section class="page-section py-5 md:py-10">
@@ -29,7 +29,7 @@
         <selection-type
           v-if="dataView === 'transactions'"
           @change="onTypeChange"
-        ></selection-type>
+        />
       </div>
 
       <latest-transactions v-if="dataView === 'transactions'" :transaction-type="transactionType" />

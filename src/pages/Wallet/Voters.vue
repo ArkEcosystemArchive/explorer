@@ -3,12 +3,12 @@
     <content-header>{{ $t("Voters") }} <span v-if="delegate">- {{ delegate.username }}</span></content-header>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <table-wallets :wallets="wallets" :total="delegate ? delegate.votes : 0"></table-wallets>
+        <table-wallets :wallets="wallets" :total="delegate ? delegate.votes : 0" />
       </div>
       <div class="sm:hidden">
-        <table-wallets-mobile :wallets="wallets" :total="delegate ? delegate.votes : 0"></table-wallets-mobile>
+        <table-wallets-mobile :wallets="wallets" :total="delegate ? delegate.votes : 0" />
       </div>
-      <paginator v-if="wallets && wallets.length" :start="+this.page" :count="voterCount"></paginator>
+      <paginator v-if="wallets && wallets.length" :start="+this.page" :count="voterCount" />
     </section>
   </div>
 </template>

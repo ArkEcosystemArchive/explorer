@@ -18,7 +18,7 @@
     <router-link @click.native="closeMenu" :to="{ name: 'delegate-monitor' }" tag="button" class="menu-button">{{ $t("Delegate Monitor") }}</router-link>
     <!-- <router-link :to="{ name: 'statistics' }" tag="button" class="menu-button">Statistics</router-link> -->
 
-    <div class="flex-auto"></div>
+    <div class="flex-auto" />
 
     <!-- <a href="#" class="menu-button">
       <span class="mr-2">Snapshots</span>
