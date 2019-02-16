@@ -42,7 +42,6 @@
 
       <table-column
         :sortable="false"
-        show="balance"
         :label="$t('Supply')"
         header-class="right-header-end-cell"
         cell-class="right-end-cell w-24"
