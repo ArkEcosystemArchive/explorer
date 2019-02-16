@@ -1,9 +1,9 @@
 <template>
-  <div class="list-row-border-t" v-show="Object.keys(voters).length">
+  <div class="list-row-border-t" v-show="voterCount">
     <div>{{ $t("Voters") }}</div>
     <div class="whitespace-no-wrap">
-      <span v-tooltip="{ content: $t('Only voters with more than 0.1 token', { token: networkToken() }), placement: 'left' }" :class="voters.length ? 'mr-2' : ''">{{ voters.length }}</span>
-      <router-link v-if="wallet.address && voters.length" :to="{ name: 'wallet-voters', params: { address: wallet.address, username: wallet.username, page: 1 } }">{{ $t("See all") }}</router-link>
+      <span v-tooltip="{ content: $t('Only voters with more than 0.1 token', { token: networkToken() }), placement: 'left' }" :class="voterCount ? 'mr-2' : ''">{{ voterCount }}</span>
+      <router-link v-if="wallet.address && voterCount" :to="{ name: 'wallet-voters', params: { address: wallet.address, username: wallet.username, page: 1 } }">{{ $t("See all") }}</router-link>
     </div>
   </div>
 </template>
@@ -19,18 +19,22 @@ export default {
     }
   },
 
-  data: () => ({ voters: {} }),
+  data: () => ({
+    voterCount: 0
+  }),
 
   watch: {
-    wallet(wallet) {
-      if (wallet.username) this.getVoters()
+    async wallet(wallet) {
+      if (wallet.username) {
+        await this.getVoterCount()
+      }
     }
   },
 
   methods: {
-    async getVoters() {
-      const response = await DelegateService.voters(this.wallet.username)
-      this.voters = response
+    async getVoterCount() {
+      const count = await DelegateService.voterCount(this.wallet.publicKey)
+      this.voterCount = count
     }
   }
 }

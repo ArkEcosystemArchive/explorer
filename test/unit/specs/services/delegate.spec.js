@@ -38,21 +38,12 @@ describe('Delegate Service', () => {
     })
   })
 
-  it('should retrieve the voters based on given delegate public key, excluding low balances', async() => {
+  it('should retrieve the voters based on given delegate public key', async() => {
     const data = await DelegateService.voters('02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b')
     data.forEach(voter => {
       expect(Object.keys(voter).sort()).toEqual(voterPropertyArray)
-      expect(voter.balance).toBeGreaterThan(0.1 * Math.pow(10, 8))
+      expect(voter.vote).toEqual('02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b')
     })
-  })
-
-  it('should retrieve the voters based on given delegate public key, including low balances', async() => {
-    const data = await DelegateService.voters('02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b', false)
-    data.forEach(voter => {
-      expect(Object.keys(voter).sort()).toEqual(voterPropertyArray)
-    })
-    const excluding = await DelegateService.voters('02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b')
-    expect(data.length).toBeGreaterThanOrEqual(excluding.length)
   })
 
   it('should fail when retrieving voters of delegate with non-existing public key', async() => {

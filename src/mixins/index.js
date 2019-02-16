@@ -98,7 +98,7 @@ const methods = {
     value *= rate || store.getters['currency/rate']
 
     if (normalise) {
-      value /= Math.pow(10, 8)
+      value /= 1e8
     }
 
     const cryptos = {
@@ -122,7 +122,7 @@ const methods = {
 
   readableCrypto(value, appendCurrency = true, decimals = 8) {
     if (typeof value !== 'undefined') {
-      value = (value /= Math.pow(10, 8)).toLocaleString(locale, {
+      value = (value /= 1e8).toLocaleString(locale, {
         maximumFractionDigits: decimals,
       })
 

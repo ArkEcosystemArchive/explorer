@@ -1,6 +1,6 @@
 import ApiService from '@/services/api'
-import block from '@/services/block'
-import forging from '@/services/forging'
+import WalletService from '@/services/wallet'
+import ForgingService from '@/services/forging'
 import store from '@/store'
 import _ from 'lodash'
 
@@ -33,18 +33,30 @@ class DelegateService {
       .reduce((a, b) => [...a, ...b])
   }
 
-  async voters(publicKey, excludeLowBalances = true) {
-    const response = await ApiService.get(`delegates/${publicKey}/voters`)
+  async voters(query, page, limit = 25) {
+    const response = await ApiService.get(`delegates/${query}/voters`, {
+      params: {
+        page,
+        limit
+      }
+    })
 
-    let voters = response.data
+    return response.data
+  }
 
-    if (excludeLowBalances) {
-      voters = _.filter(voters, account => {
-        return account.balance > 0.1 * Math.pow(10, 8)
-      })
-    }
+  async voterCount(publicKey, excludeLowBalances = true) {
+    const response = await WalletService.search({
+      vote: publicKey,
+      balance: {
+        from: excludeLowBalances ? 1e7 : 0
+      }
+    }, {
+      params: {
+        limit: 1
+      }
+    })
 
-    return voters
+    return response.meta.totalCount
   }
 
   async find(query) {
@@ -63,7 +75,7 @@ class DelegateService {
     })
 
     return response.data.map(delegate => {
-      delegate.forgingStatus = forging.status(
+      delegate.forgingStatus = ForgingService.status(
         delegate,
         height
       )

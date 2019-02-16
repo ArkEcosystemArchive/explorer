@@ -66,6 +66,11 @@ class WalletService {
     })
     return response.data
   }
+
+  async search(data, config = {}) {
+    const response = await ApiService.post('wallets/search', data, config)
+    return response
+  }
 }
 
 export default new WalletService()
