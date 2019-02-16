@@ -9,7 +9,7 @@
             <img src="@/assets/images/icons/cross.svg" />
           </button>
 
-          <slot></slot>
+          <slot />
         </div>
       </div>
     </div>

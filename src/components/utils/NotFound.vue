@@ -7,7 +7,7 @@
       v-else
       src="@/assets/images/not-found/dark.png" />
     <h1>{{ $t('Ooops!') }}</h1>
-    <p v-html="$t('Sorry, dataType dataId could not be found on the blockchain', { dataId: truncate(dataId, 20), dataType })"></p>
+    <p v-html="$t('Sorry, dataType dataId could not be found on the blockchain', { dataId: truncate(dataId, 20), dataType })" />
   </div>
 </template>
 

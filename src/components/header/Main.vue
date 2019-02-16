@@ -9,26 +9,26 @@
       <img class="logo max-w-25px md:max-w-38px" src="@/assets/images/logo.png" />
     </router-link>
     <div class="w-full relative hidden xl:flex">
-      <header-search v-if="headerType === 'search'"></header-search>
+      <header-search v-if="headerType === 'search'" />
 
-      <header-desktop-currencies v-else-if="headerType === 'currencies'"></header-desktop-currencies>
+      <header-desktop-currencies v-else-if="headerType === 'currencies'" />
 
-      <header-desktop-languages v-else-if="headerType === 'languages'"></header-desktop-languages>
+      <header-desktop-languages v-else-if="headerType === 'languages'" />
 
-      <header-default v-else></header-default>
+      <header-default v-else />
 
-      <header-desktop-menu v-if="menuVisible"></header-desktop-menu>
+      <header-desktop-menu v-if="menuVisible" />
     </div>
     <div class="w-full relative flex xl:hidden">
-      <header-search v-if="headerType === 'search'"></header-search>
+      <header-search v-if="headerType === 'search'" />
 
-      <header-default v-else></header-default>
+      <header-default v-else />
     </div>
-    <header-mobile-menu v-if="menuVisible"></header-mobile-menu>
+    <header-mobile-menu v-if="menuVisible" />
 
-    <header-mobile-currencies v-else-if="headerType === 'currencies'"></header-mobile-currencies>
+    <header-mobile-currencies v-else-if="headerType === 'currencies'" />
 
-    <header-mobile-languages v-else-if="headerType === 'languages'"></header-mobile-languages>
+    <header-mobile-languages v-else-if="headerType === 'languages'" />
 
   </header>
 </template>

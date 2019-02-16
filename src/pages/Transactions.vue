@@ -13,23 +13,23 @@
           </div>
         </div>
         <div class="flex flex-col w-full sm:w-auto sm:ml-4 sm:-mr-10">
-          <selection-type :in-banner="true" @change="onTypeChange"></selection-type>
+          <selection-type :in-banner="true" @change="onTypeChange" />
         </div>
       </div>
     </section>
 
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <table-transactions :transactions="transactions"></table-transactions>
+        <table-transactions :transactions="transactions" />
       </div>
       <div class="sm:hidden">
         <div class="mx-5 mb-4">
-          <selection-type @change="onTypeChange"></selection-type>
+          <selection-type @change="onTypeChange" />
         </div>
 
-        <table-transactions-mobile :transactions="transactions"></table-transactions-mobile>
+        <table-transactions-mobile :transactions="transactions" />
       </div>
-      <paginator v-if="transactions && transactions.length" :start="+this.$route.params.page"></paginator>
+      <paginator v-if="transactions && transactions.length" :start="+this.$route.params.page" />
     </section>
   </div>
 </template>

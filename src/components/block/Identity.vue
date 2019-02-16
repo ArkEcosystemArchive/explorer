@@ -10,7 +10,8 @@
           </div>
           <clipboard
             v-if="block.id"
-            :value="block.id"></clipboard>
+            :value="block.id"
+          />
         </div>
       </div>
     </div>

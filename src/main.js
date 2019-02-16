@@ -25,7 +25,7 @@ Vue.use(VTooltip, {
   defaultContainer: 'main'
 })
 Vue.use(TableComponent, {
-  sortHandler: (rows, column, order) => _.orderBy(rows, (row) => (row.data[column]), order),
+  sortHandler: (rows, column, order) => _.orderBy(rows, `data.${column}`, order),
   filterNoResults: i18n.t('No results')
 })
 

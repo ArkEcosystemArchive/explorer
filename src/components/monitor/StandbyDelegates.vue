@@ -1,25 +1,53 @@
 <template>
   <loader :data="delegates">
-    <table-component v-if="delegates && delegates.length > 0" :data="delegates" sort-by="approval" sort-order="desc" :show-filter="false" :show-caption="false" table-class="w-full text-xs md:text-base">
-      <table-column show="rate" :label="$t('Rank')" header-class="p-4 pl-8 sm:pl-10 text-left w-32" cell-class="p-3 pl-8 sm:pl-10 text-left border-none">
+    <table-component
+      v-if="delegates && delegates.length > 0"
+      :data="delegates"
+      sort-by="rank"
+      sort-order="asc"
+      :show-filter="false"
+      :show-caption="false"
+      table-class="w-full text-xs md:text-base"
+    >
+      <table-column
+        show="rank"
+        :label="$t('Rank')"
+        header-class="p-4 pl-8 sm:pl-10 text-left w-32"
+        cell-class="p-3 pl-8 sm:pl-10 text-left border-none"
+      >
         <template slot-scope="row">
           {{ row.rank }}
         </template>
       </table-column>
 
-      <table-column show="address" :label="$t('Name')" header-class="left-header-cell" cell-class="left-cell">
+      <table-column
+        show="username"
+        :label="$t('Name')"
+        header-class="left-header-cell"
+        cell-class="left-cell"
+      >
         <template slot-scope="row">
-          <link-wallet :address="row.address"></link-wallet>
+          <link-wallet :address="row.address" />
         </template>
       </table-column>
 
-      <table-column show="productivity" :label="$t('Productivity')" header-class="right-header-cell hidden md:table-cell" cell-class="right-cell hidden md:table-cell">
+      <table-column
+        show="production.productivity"
+        :label="$t('Productivity')"
+        header-class="right-header-cell hidden md:table-cell"
+        cell-class="right-cell hidden md:table-cell"
+      >
         <template slot-scope="row">
           {{ percentageString(row.production.productivity) }}
         </template>
       </table-column>
 
-      <table-column show="approval" :label="$t('Vote %')" header-class="right-header-cell sm:pr-10 hidden md:table-cell" cell-class="right-end-cell hidden md:table-cell w-40">
+      <table-column
+        show="production.approval"
+        :label="$t('Vote %')"
+        header-class="right-header-cell sm:pr-10 hidden md:table-cell"
+        cell-class="right-end-cell hidden md:table-cell w-40"
+      >
         <template slot-scope="row">
           <span v-tooltip="{ content: readableCrypto(row.vote, true, 2), placement: 'top' }">
             {{ percentageString(row.production.approval) }}
@@ -27,6 +55,7 @@
         </template>
       </table-column>
     </table-component>
+
     <div v-else class="px-5 md:px-10">
       <span>{{ $t("No results") }}</span>
     </div>

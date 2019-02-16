@@ -1,10 +1,10 @@
 <template>
   <span>
     <div class="text-center" v-if="data === null">
-      <pulse-loader color="#037cff"></pulse-loader>
+      <pulse-loader color="#037cff" />
     </div>
 
-    <slot v-else></slot>
+    <slot v-else />
   </span>
 </template>
 

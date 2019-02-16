@@ -2,10 +2,10 @@
   <div>
     <loader :data="transactions">
       <div class="hidden sm:block">
-        <table-transactions :transactions="transactions"></table-transactions>
+        <table-transactions :transactions="transactions" />
       </div>
       <div class="sm:hidden">
-          <table-transactions-mobile :transactions="transactions"></table-transactions-mobile>
+        <table-transactions-mobile :transactions="transactions" />
       </div>
       <div class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
         <router-link :to="{ name: 'transactions', params: { page: 2 } }" tag="button" class="show-more-button">

@@ -119,6 +119,7 @@ module.exports = {
       .waitForElementVisible("//h1[text() = 'Wallet summary']")
     browser
       .assert.urlContains('/wallets/')
+      .end()
   },
 
   'it should be possible to switch to standby delegates': function (browser) {

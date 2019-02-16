@@ -3,12 +3,12 @@
     <content-header>{{ $t("Voters") }} <span v-show="username">- {{ username }}</span></content-header>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <table-wallets :wallets="filteredWallets" :total="votes"></table-wallets>
+        <table-wallets :wallets="filteredWallets" :total="votes" />
       </div>
       <div class="sm:hidden">
-        <table-wallets-mobile :wallets="filteredWallets" :total="votes"></table-wallets-mobile>
+        <table-wallets-mobile :wallets="filteredWallets" :total="votes" />
       </div>
-      <paginator v-if="wallets && wallets.length" :start="+this.page" :count="count"></paginator>
+      <paginator v-if="wallets && wallets.length" :start="+this.page" :count="count" />
     </section>
   </div>
 </template>
