@@ -14,19 +14,6 @@ const blockPropertyArray = [
   'timestamp'
 ].sort()
 
-const transactionPropertyArray = [
-  'id',
-  'blockId',
-  'type',
-  'timestamp',
-  'amount',
-  'fee',
-  'sender',
-  'recipient',
-  'signature',
-  'confirmations'
-].sort()
-
 describe('Block Service', () => {
   beforeAll(() => {
     store.dispatch('network/setServer', 'https://explorer.ark.io/api/v2')
@@ -35,8 +22,10 @@ describe('Block Service', () => {
   it('should return the latest blocks', async () => {
     const data = await BlockService.latest()
     expect(data).toHaveLength(25)
-    expect(Object.keys(data[0]).sort()).toEqual(blockPropertyArray)
-    expect(data[0].height < data[1].height)
+    data.forEach(block => {
+      expect(Object.keys(block).sort()).toEqual(blockPropertyArray)
+    })
+    expect(data.sort((a, b) => a.height > b.height)).toEqual(data)
   })
 
   it('should return the last block', async () => {
@@ -54,51 +43,29 @@ describe('Block Service', () => {
     await expect(BlockService.find('0')).rejects.toThrow()
   })
 
-  it('should return the transactions for a given block', async () => {
-    const data = await BlockService.transactionsByBlock('8034780571166969612')
-    expect(data).toHaveLength(1)
-    expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(transactionPropertyArray))
-  })
-
-  it('should return an empty list if page offset is larger than the amount of transactions', async () => {
-    const data = await BlockService.transactionsByBlock('8034780571166969612', 2)
-    expect(data).toHaveLength(0)
-  })
-
-  xit('should return and empty list if no transactions in a block', async () => {
-    const data = await BlockService.transactionsByBlock('7818295669546141032')
-    expect(data).toHaveLength(0)
-  })
-
-  xit('should return an empty list of transactions when an incorrect block id is given', async () => {
-    const data = await BlockService.transactionsByBlock('0')
-    expect(data).toHaveLength(0)
-  })
-
-  it('should return count of transactions in given block', async () => {
-    const data = await BlockService.transactionsByBlockCount('14744703911220072486')
-    expect(Number(data)).toBe(1)
-  })
-
   it('should return the blocks by an offset', async () => {
     jest.setTimeout(30000)
-    const data = await BlockService.paginate()
+    const { meta, data } = await BlockService.paginate()
     expect(data).toHaveLength(25)
-    expect(Object.keys(data[0]).sort()).toEqual(blockPropertyArray)
-    expect(data[0].height < data[1].height)
+    data.forEach(block => {
+      expect(Object.keys(block).sort()).toEqual(blockPropertyArray)
+    })
+    expect(data.sort((a, b) => a.height > b.height)).toEqual(data)
   })
 
-  it('should return the blocks for given generator public key', async () => {
+  it('should return the blocks for given generator address', async () => {
     jest.setTimeout(30000)
-    const data = await BlockService.getByPublicKey('0257581c82d1931c4b0b2df9d658ecd303fcf2a6ea4ec291669ed06f44fb75c8fe')
+    const { meta, data } = await BlockService.byAddress('AeaqhUKfBtVqNhtMct3piBiWfdhbRwbg4W')
     expect(data).toHaveLength(25)
-    expect(Object.keys(data[0]).sort()).toEqual(blockPropertyArray)
-    expect(data[0].height < data[1].height)
+    data.forEach(block => {
+      expect(Object.keys(block).sort()).toEqual(blockPropertyArray)
+    })
+    expect(data.sort((a, b) => a.height > b.height)).toEqual(data)
   })
 
-  xit('should return an empty list when given generator public key is incorrect', async () => {
+  xit('should return an empty list when given generator address is incorrect', async () => {
     jest.setTimeout(30000)
-    const data = await BlockService.getByPublicKey('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
+    const { meta, data } = await BlockService.byAddress('XeaqhUKfBtVqNhtMct3piBiWfdhbRwbg4W')
     expect(data).toHaveLength(0)
   })
 

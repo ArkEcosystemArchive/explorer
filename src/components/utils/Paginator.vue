@@ -1,8 +1,8 @@
 <template>
-  <div class="mx-5 sm:mx-10 mt-5 md:mt-10" :class="[ showPaginator ? 'flex flex-wrap' : 'hidden' ]">
+  <div class="flex flex-wrap mx-5 sm:mx-10 mt-5 md:mt-10">
     <button
-      @click="prev"
-      :class="{ 'hidden' : page <= 1, 'flex' : page > 1 }"
+      @click="emitPrevious"
+      :class="previous ? 'flex' : 'hidden'"
       class="mr-auto pager-button items-center">
       <svg
        class="inline"
@@ -16,8 +16,8 @@
     </button>
 
     <button
-      @click="next"
-      :class="{ 'hidden' : page >= totalPages, 'flex' : page < totalPages }"
+      @click="emitNext"
+      :class="next ? 'flex' : 'hidden'"
       class="ml-auto pager-button items-center float-right">
       <span class="mr-2">{{ $t("Next") }}</span>
       <svg
@@ -35,48 +35,24 @@
 <script type="text/ecmascript-6">
 export default {
   props: {
-    start: {
-      type: Number,
-      require: true,
+    previous: {
+      required: true
     },
-    perPage: {
-      type: Number,
-      default: 25
-    },
-    count: {
-      type: Number
+    next: {
+      required: true
     }
   },
-
-  data: () => ({
-    page: 1,
-  }),
 
   computed: {
-    totalPages() {
-      return Math.ceil(this.count / this.perPage)
-    },
-
-    showPaginator() {
-      return this.count ? this.page > 1 || this.page < this.totalPages : true
-    }
-  },
-
-  mounted() {
-    this.page = this.start
   },
 
   methods: {
-    prev() {
-      if (this.page > 1) this.page--
-
-      this.$parent.$emit('paginatorChanged', this.page)
+    emitPrevious() {
+      this.$emit('previous')
     },
 
-    next() {
-      if (!this.count || this.page < this.totalPages) this.page++
-
-      this.$parent.$emit('paginatorChanged', this.page)
+    emitNext() {
+      this.$emit('next')
     },
   },
 }

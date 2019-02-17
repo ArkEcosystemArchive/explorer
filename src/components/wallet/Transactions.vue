@@ -70,7 +70,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import WalletService from '@/services/wallet'
+import TransactionService from '@/services/transaction'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -112,17 +112,17 @@ export default {
       this.transactions = null
 
       if (this.wallet.address !== undefined) {
-        const transactions = await WalletService[`${this.type}ByAddress`](
+        const { meta, data } = await TransactionService[`${this.type}ByAddress`](
           this.wallet.address,
           this.page
         )
-        this.transactions = transactions
+        this.transactions = data
       }
     },
 
     async getReceivedCount() {
       if (this.wallet && this.wallet.address) {
-        const response = await WalletService.receivedByAddressCount(this.wallet.address)
+        const response = await TransactionService.receivedByAddressCount(this.wallet.address)
         this.receivedCount = response
       } else {
         this.receivedCount = 0
@@ -131,7 +131,7 @@ export default {
 
     async getSentCount() {
       if (this.wallet && this.wallet.address) {
-        const response = await WalletService.sentByAddressCount(this.wallet.address)
+        const response = await TransactionService.sentByAddressCount(this.wallet.address)
         this.sentCount = response
       } else {
         this.sentCount = 0

@@ -8,7 +8,13 @@
       <div class="sm:hidden">
         <table-wallets-mobile :wallets="wallets" :total="supply" />
       </div>
-      <paginator v-if="wallets && wallets.length" :start="+this.$route.params.page" />
+      <paginator
+        v-if="showPaginator"
+        :previous="this.meta.previous"
+        :next="this.meta.next"
+        @previous="onPrevious"
+        @next="onNext"
+      />
     </section>
   </div>
 </template>
@@ -18,36 +24,77 @@ import { mapGetters } from 'vuex'
 import WalletService from '@/services/wallet'
 
 export default {
-  data: () => ({ wallets: null }),
-
-  async beforeRouteEnter (to, from, next) {
-    const response = await WalletService.top(to.params.page)
-    next(vm => vm.setWallets(response))
-  },
-
-  async beforeRouteUpdate (to, from, next) {
-    this.wallets = null
-
-    const response = await WalletService.top(to.params.page)
-    this.setWallets(response)
-    next()
-  },
+  data: () => ({
+    wallets: null,
+    meta: null,
+    currentPage: 0
+  }),
 
   computed: {
-    ...mapGetters('network', ['supply'])
+    ...mapGetters('network', ['supply']),
+
+    showPaginator() {
+      return this.meta && (this.meta.previous || this.meta.next)
+    }
   },
 
   created() {
     this.$on('paginatorChanged', page => this.changePage(page))
   },
 
+  watch: {
+    currentPage() {
+      this.changePage()
+    }
+  },
+
+  async beforeRouteEnter (to, from, next) {
+    try {
+      const { meta, data } = await WalletService.top(to.params.page)
+      next(vm => {
+        vm.currentPage = to.params.page
+        vm.setWallets(data)
+        vm.setMeta(meta)
+      })
+    } catch(e) { next({ name: '404' }) }
+  },
+
+  async beforeRouteUpdate (to, from, next) {
+    this.wallets = null
+    this.meta = null
+
+    try {
+      const { meta, data } = await WalletService.top(to.params.page)
+      this.setWallets(data)
+      this.setMeta(meta)
+      next()
+    } catch(e) { next({ name: '404' }) }
+  },
+
   methods: {
-    setWallets (wallets) {
+    setWallets(wallets) {
       this.wallets = wallets
     },
 
-    changePage(page) {
-      this.$router.push({ name: 'top-wallets', params: { page } })
+    setMeta(meta) {
+      this.meta = meta
+    },
+
+    onPrevious() {
+      this.currentPage = Number(this.currentPage) - 1
+    },
+
+    onNext() {
+      this.currentPage = Number(this.currentPage) + 1
+    },
+
+    changePage() {
+      this.$router.push({
+        name: 'top-wallets',
+        params: {
+          page: this.currentPage
+        }
+      })
     }
   }
 }

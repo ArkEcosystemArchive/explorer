@@ -20,7 +20,8 @@ describe('Utils/Paginator', () => {
   it('Should display a paginator component', () => {
     const wrapper = mount(Paginator, {
       propsData: {
-        start: 1
+        previous: 'previous',
+        next: 'next'
       },
       i18n,
       localVue,
@@ -36,7 +37,8 @@ describe('Utils/Paginator', () => {
   it('Should not show previous if no previous page', () => {
     const wrapper = mount(Paginator, {
       propsData: {
-        start: 1
+        previous: null,
+        next: 'next'
       },
       i18n,
       localVue,
@@ -52,9 +54,8 @@ describe('Utils/Paginator', () => {
   it('Should not show next if no next page', () => {
     const wrapper = mount(Paginator, {
       propsData: {
-        start: 1,
-        perPage: 25,
-        count: 25
+        previous: 'previous',
+        next: null
       },
       i18n,
       localVue,
@@ -63,14 +64,15 @@ describe('Utils/Paginator', () => {
     })
     const buttons = wrapper.findAll('button')
     expect(buttons).toHaveLength(2)
-    expect(buttons.at(0).classes()).toContain('hidden')
+    expect(buttons.at(0).classes()).not.toContain('hidden')
     expect(buttons.at(1).classes()).toContain('hidden')
   })
 
   it('Should emit event if pressing previous or next page', () => {
     const parentWrapper = mount(Paginator, {
       propsData: {
-        start: 1
+        previous: 'previous',
+        next: 'next'
       },
       i18n,
       localVue,
@@ -79,28 +81,22 @@ describe('Utils/Paginator', () => {
     })
     const wrapper = mount(Paginator, {
       propsData: {
-        start: 1
+        previous: 'previous',
+        next: 'next'
       },
       i18n,
       localVue,
       mixins,
       store
     })
-    wrapper.vm.$parent = parentWrapper.vm
+
     const buttons = wrapper.findAll('button')
     expect(buttons).toHaveLength(2)
 
     buttons.at(1).trigger('click') // Next
-    expect(parentWrapper.emitted().paginatorChanged).toBeTruthy()
-    expect(parentWrapper.emitted().paginatorChanged.length).toBe(1)
-    expect(parentWrapper.emitted().paginatorChanged[0]).toEqual([2])
+    expect(wrapper.emitted().next).toBeTruthy()
 
     buttons.at(0).trigger('click') // Previous
-    expect(parentWrapper.emitted().paginatorChanged.length).toBe(2)
-    expect(parentWrapper.emitted().paginatorChanged[1]).toEqual([1])
-
-    buttons.at(0).trigger('click') // Previous
-    expect(parentWrapper.emitted().paginatorChanged.length).toBe(3)
-    expect(parentWrapper.emitted().paginatorChanged[2]).toEqual([1])
+    expect(wrapper.emitted().previous).toBeTruthy()
   })
 })

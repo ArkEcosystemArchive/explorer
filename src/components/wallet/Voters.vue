@@ -29,8 +29,8 @@ export default {
 
   methods: {
     async getVoters() {
-      const response = await DelegateService.voters(this.wallet.username)
-      this.voters = response
+      const { meta, data } = await DelegateService.voters(this.wallet.username)
+      this.voters = data
     }
   }
 }

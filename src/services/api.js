@@ -6,7 +6,7 @@ class ApiService {
     const server = store.getters['network/server']
 
     const response = await axios.get(`${server}/${url}`, config)
-    
+
     if (response.error) {
       return Promise.reject(new Error(`Error GET ${url} : ${JSON.stringify(response)}`))
     }

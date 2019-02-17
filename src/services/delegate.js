@@ -33,18 +33,15 @@ class DelegateService {
       .reduce((a, b) => [...a, ...b])
   }
 
-  async voters(publicKey, excludeLowBalances = true) {
-    const response = await ApiService.get(`delegates/${publicKey}/voters`)
+  async voters(query, page, limit = 25) {
+    const response = await ApiService.get(`delegates/${query}/voters`, {
+      params: {
+        page,
+        limit
+      }
+    })
 
-    let voters = response.data
-
-    if (excludeLowBalances) {
-      voters = _.filter(voters, account => {
-        return account.balance > 0.1 * Math.pow(10, 8)
-      })
-    }
-
-    return voters
+    return response
   }
 
   async find(query) {
