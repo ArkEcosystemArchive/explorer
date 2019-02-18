@@ -73,6 +73,7 @@ export default {
     try {
       const { meta, data } = await BlockService.byAddress(to.params.address, to.params.page)
 
+      this.currentPage = to.params.page
       this.setBlocks(data)
       this.setMeta(meta)
       next()

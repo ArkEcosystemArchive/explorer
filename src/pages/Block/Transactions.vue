@@ -54,6 +54,7 @@ export default {
     try {
       const { meta, data } = await TransactionService.byBlock(to.params.id, to.params.page)
 
+      this.currentPage = to.params.page
       this.setTransactions(data)
       this.setMeta(meta)
       next()

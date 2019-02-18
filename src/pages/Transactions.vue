@@ -100,6 +100,7 @@ export default {
         Number(localStorage.getItem('transactionType') || -1)
       )
 
+      this.currentPage = to.params.page
       this.setTransactions(data)
       this.setMeta(meta)
       next()

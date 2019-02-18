@@ -20,7 +20,6 @@
 </template>
 
 <script type="text/ecmascript-6">
-import WalletService from '@/services/wallet'
 import DelegateService from '@/services/delegate'
 import sumBy from 'lodash/sumBy'
 
@@ -69,6 +68,7 @@ export default {
       const delegate = await DelegateService.find(to.params.address)
       const { meta, data } = await DelegateService.voters(to.params.address, to.params.page)
 
+      this.currentPage = to.params.page
       this.setDelegate(delegate)
       this.setWallets(data)
       this.setMeta(meta)

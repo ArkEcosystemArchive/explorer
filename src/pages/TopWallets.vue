@@ -51,6 +51,7 @@ export default {
   async beforeRouteEnter (to, from, next) {
     try {
       const { meta, data } = await WalletService.top(to.params.page)
+
       next(vm => {
         vm.currentPage = to.params.page
         vm.setWallets(data)
@@ -65,6 +66,8 @@ export default {
 
     try {
       const { meta, data } = await WalletService.top(to.params.page)
+
+      this.currentPage = to.params.page
       this.setWallets(data)
       this.setMeta(meta)
       next()
