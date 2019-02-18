@@ -49,7 +49,7 @@
         cell-class="right-end-cell hidden md:table-cell w-40"
       >
         <template slot-scope="row">
-          <span v-tooltip="{ content: readableCrypto(row.vote, true, 2), placement: 'top' }">
+          <span v-tooltip="{ content: readableCrypto(row.votes, true, 2), placement: 'top' }">
             {{ percentageString(row.production.approval) }}
           </span>
         </template>
