@@ -4,21 +4,25 @@
       <p class="mb-4">
         {{ $t('The chart data could not be loaded') }}
       </p>
-      <button @click="renderChart" :disabled="isLoading" class="mt-4 pager-button items-center">
-        <span>{{ !isLoading ? $t('Reload chart') : $t('Loading...') }}</span>
+      <button @click="renderChart()" :disabled="isLoading" class="mt-4 pager-button items-center">
+        <span v-if="!isLoading">{{ $t('Reload chart') }}</span>
+        <loader v-else :data="null" />
       </button>
     </div>
 
     <div :key="componentKey" :class="{ 'blur': hasError }">
-
       <div class="flex justify-between items-center px-10 py-8">
         <h2 class="text-white m-0 text-xl font-normal">{{ $t("Price in") }} {{ currencyName }}</h2>
         <div>
-          <button @click="period('day')"  :class="{ 'chart-tab-active': type === 'day' }" class="chart-tab">{{ $t("Day") }}</button>
-          <button @click="period('week')"  :class="{ 'chart-tab-active': type === 'week' }" class="chart-tab">{{ $t("Week") }}</button>
-          <button @click="period('month')"  :class="{ 'chart-tab-active': type === 'month' }" class="chart-tab">{{ $t("Month") }}</button>
-          <button @click="period('quarter')"  :class="{ 'chart-tab-active': type === 'quarter' }" class="chart-tab">{{ $t("Quarter") }}</button>
-          <button @click="period('year')"  :class="{ 'chart-tab-active': type === 'year' }" class="chart-tab">{{ $t("Year") }}</button>
+          <template v-for="period in ['day', 'week', 'month', 'quarter', 'year']">
+            <button
+              @click="setPeriod(period)"
+              :class="{ 'chart-tab-active': currentPeriod === period }"
+              class="chart-tab"
+            >
+              {{ $t(capitalize(period)) }}
+            </button>
+          </template>
         </div>
       </div>
 
@@ -41,7 +45,6 @@ export default {
   data: () => ({
     error: null,
     isLoading: false,
-    type: 'day',
     componentKey: 0,
     labels: [],
     datasets: [],
@@ -139,6 +142,7 @@ export default {
   computed: {
     ...mapGetters('currency', { currencyName: 'name' }),
     ...mapGetters('network', ['token']),
+    ...mapGetters('ui', { currentPeriod: 'priceChartPeriod' }),
 
     chartData() {
       return {
@@ -165,30 +169,33 @@ export default {
 
   mounted() {
     window.addEventListener('resize', this.handleResize)
-    this.prepareComponent()
+    this.renderChart()
+  },
+
+  watch: {
+    token() {
+      this.renderChart()
+    },
+
+    currencyName() {
+      this.renderChart()
+    }
   },
 
   methods: {
-    prepareComponent() {
-      this.renderChart()
-
-      this.watchCurrencyName()
-      this.watchNetworkToken()
-    },
-
-    period(type) {
-      this.type = type
+    setPeriod(period) {
+      this.$store.dispatch('ui/setPriceChartPeriod', period)
 
       if (!!this.token) {
         this.renderChart()
       }
     },
 
-    async renderChart(type) {
+    async renderChart(delay = false) {
       this.isLoading = true
 
       try {
-        const response = await CryptoCompareService[this.type]()
+        const response = await CryptoCompareService[this.currentPeriod]()
         this.labels = response.labels
         this.datasets = response.datasets
 
@@ -201,14 +208,6 @@ export default {
       } finally {
         this.isLoading = false
       }
-    },
-
-    watchCurrencyName() {
-      this.$store.watch((state) => state.currency.name, (value) => this.renderChart())
-    },
-
-    watchNetworkToken() {
-      this.$store.watch((state) => state.network.token, (value) => this.renderChart())
     },
 
     handleResize() {

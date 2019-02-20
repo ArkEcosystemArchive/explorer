@@ -81,6 +81,11 @@ export default {
       localStorage.getItem('priceChart') || network.defaults.priceChart
     )
 
+    this.$store.dispatch(
+      'ui/setPriceChartPeriod',
+      localStorage.getItem('priceChartPeriod') || network.defaults.priceChartPeriod
+    )
+
     this.updateI18n()
     this.updateLocale()
     this.updateCurrencyRate()

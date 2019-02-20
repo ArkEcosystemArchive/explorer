@@ -1,6 +1,6 @@
 <template>
   <button
-    @click="$store.dispatch('ui/setPriceChart', !priceChart)"
+    @click="toggleChart()"
     :class="[
       priceChart ? 'text-chart-active' : 'text-chart-inactive',
       'px-2 py-4 hidden md:flex flex-none items-center border-b-2 margin-t-2 border-transparent hover:border-red hover:text-blue transition'
@@ -21,5 +21,11 @@ export default {
   computed: {
     ...mapGetters('ui', ['priceChart']),
   },
+
+  methods: {
+    toggleChart() {
+      this.$store.dispatch('ui/setPriceChart', !this.priceChart)
+    }
+  }
 }
 </script>
