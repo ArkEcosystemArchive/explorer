@@ -42,6 +42,7 @@ module.exports = {
   },
 
   // Header tests
+
   'header should be able to toggle chart': function(browser) {
     browser
       .assert.visible('#line-chart')
@@ -93,6 +94,7 @@ module.exports = {
   },
 
   // Footer tests
+
   'footer should contain links': function(browser) {
     browser
       .assert.visible('footer > div.text-center')
@@ -101,10 +103,46 @@ module.exports = {
       })
   },
 
+  // Chart tests
+
+  'price chart should contain buttons for the period': function(browser) {
+    const periods = ['Day', 'Week', 'Month', 'Quarter', 'Year']
+
+    periods.forEach(period => {
+      browser
+        .useXpath()
+        .assert.visible(`//button[contains(@class, 'chart-tab') and contains(., '${period}')]`)
+    })
+  },
+
+  'should be possible to change period': function(browser) {
+    browser
+      .useXpath()
+      .assert.cssClassPresent("//button[contains(@class, 'chart-tab') and contains(., 'Day')]", 'chart-tab-active')
+    browser
+      .click("//button[contains(@class, 'chart-tab') and contains(., 'Week')]")
+    browser
+      .assert.cssClassNotPresent("//button[contains(@class, 'chart-tab') and contains(., 'Day')]", 'chart-tab-active')
+      .assert.cssClassPresent("//button[contains(@class, 'chart-tab') and contains(., 'Week')]", 'chart-tab-active')
+  },
+
+  'should still display the selected period after changing pages': function(browser) {
+    const devServer = browser.globals.devServerURL + '/transactions'
+
+    browser
+      .url(devServer)
+      .waitForElementVisible("//a[contains(@class, 'logo-container')]")
+      .click("//a[contains(@class, 'logo-container')]")
+      .waitForElementVisible("//button[contains(@class, 'chart-tab')]")
+    browser
+      .assert.cssClassPresent("//button[contains(@class, 'chart-tab') and contains(., 'Week')]", 'chart-tab-active')
+  },
+
   // Language switcher tests
 
   'language menu should open and close': function(browser) {
     browser
+      .useCss()
       .click('#language-icon')
       .pause(500)
 
@@ -157,6 +195,7 @@ module.exports = {
   },
 
   // Menu tests
+
   'menu should be able to be opened and closed': function(browser) {
     const devServer = browser.globals.devServerURL
     browser
@@ -253,6 +292,7 @@ module.exports = {
   },
 
   // Search tests
+
   'it should be possible to search for a known wallet': function (browser) {
     const devServer = browser.globals.devServerURL
 
