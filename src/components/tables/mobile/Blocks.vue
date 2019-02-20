@@ -14,7 +14,7 @@
 
         <div class="list-row-border-b">
           <div>{{ $t("Timestamp") }}</div>
-          <div v-id="block.timestamp">{{ readableTimestamp(block.timestamp.unix) }}</div>
+          <div v-if="block.timestamp">{{ readableTimestamp(block.timestamp.unix) }}</div>
         </div>
 
         <div class="list-row-border-b">
@@ -31,12 +31,12 @@
 
         <div class="list-row-border-b">
           <div>{{ $t("Amount (token)", { token: networkToken() }) }}</div>
-          <div>{{ readableCrypto(block.totalForged) }}</div>
+          <div v-if="block.forged">{{ readableCrypto(block.forged.total) }}</div>
         </div>
 
         <div class="list-row">
           <div>{{ $t("Fee (token)", { token: networkToken() }) }}</div>
-          <div>{{ readableCrypto(block.totalFee) }}</div>
+          <div v-if="block.forged">{{ readableCrypto(block.forged.fee) }}</div>
         </div>
       </div>
       <div v-if="blocks && !blocks.length" class="px-5 md:px-10">
