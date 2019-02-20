@@ -7,6 +7,7 @@ export default {
     locale: navigator.language || 'en-gb',
     nightMode: false,
     priceChart: true,
+    priceChartPeriod: 'day',
     headerType: null,
     menuVisible: false
   },
@@ -28,6 +29,9 @@ export default {
     },
     [types.SET_UI_PRICE_CHART](state, payload) {
       state.priceChart = payload.value
+    },
+    [types.SET_UI_PRICE_CHART_PERIOD](state, payload) {
+      state.priceChartPeriod = payload.value
     },
   },
   actions: {
@@ -82,10 +86,16 @@ export default {
     setPriceChart: ({ commit }, value) => {
       localStorage.setItem('priceChart', value)
 
-      value = JSON.parse(value)
-
       commit({
         type: types.SET_UI_PRICE_CHART,
+        value: JSON.parse(value),
+      })
+    },
+    setPriceChartPeriod: ({ commit }, value) => {
+      localStorage.setItem('priceChartPeriod', value)
+
+      commit({
+        type: types.SET_UI_PRICE_CHART_PERIOD,
         value,
       })
     },
@@ -95,6 +105,7 @@ export default {
     locale: state => state.locale,
     nightMode: state => state.nightMode,
     priceChart: state => state.priceChart,
+    priceChartPeriod: state => state.priceChartPeriod,
     headerType: state => state.headerType,
     menuVisible: state => state.menuVisible,
   },

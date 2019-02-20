@@ -96,7 +96,7 @@ a:hover {
 }
 
 .transition {
-  transition: all .1s ease-in
+  transition: all .1s ease-in;
 }
 
 table {
@@ -126,7 +126,7 @@ button:disabled {
 }
 
 .hover-button-shadow:hover {
-  @apply .hover-button-shadow-definition
+  @apply .hover-button-shadow-definition;
 }
 
 hr {
@@ -145,7 +145,7 @@ hr {
 /** Tables */
 
 tbody tr {
-  @apply .transition
+  @apply .transition;
 }
 
 tbody tr:nth-child(even) {
@@ -173,14 +173,14 @@ tr:hover td:last-child {
 }
 
 .table-component__message {
-  @apply .p-4 .pl-10
+  @apply .p-4 .pl-10;
 }
 
 /** Sticky Table Header */
 
 thead tr {
-    background-color: var(--color-theme-table-row-sticky);
-    @apply .text-theme-text-thead .text-xs
+  background-color: var(--color-theme-table-row-sticky);
+  @apply .text-theme-text-thead .text-xs;
 }
 
 thead th {
@@ -223,77 +223,77 @@ thead th {
 
 
 .show-more-button {
-  @apply .mx-auto .bg-theme-button .text-theme-button-text .semibold .py-5 .px-8 .border-transparent .rounded .transition
+  @apply .mx-auto .bg-theme-button .text-theme-button-text .semibold .py-5 .px-8 .border-transparent .rounded .transition;
 }
 
 .show-more-button:hover {
-  @apply .bg-blue .text-white .hover-button-shadow-definition
+  @apply .bg-blue .text-white .hover-button-shadow-definition;
 }
 
 .page-section {
-  @apply .bg-theme-content-background .shadow-theme
+  @apply .bg-theme-content-background .shadow-theme;
 }
 
 @screen xl {
   .page-section {
-    @apply .rounded-lg
+    @apply .rounded-lg;
   }
 }
 
 /* Table Cells */
 
 .base-cell {
-  @apply .p-4 .border-none
+  @apply .p-4 .border-none;
 }
 
 .left-cell {
-  @apply .base-cell .text-left
+  @apply .base-cell .text-left;
 }
 
 .left-start-cell {
-  @apply .left-cell .pl-10
+  @apply .left-cell .pl-10;
 }
 
 .right-cell {
-  @apply .base-cell .text-right
+  @apply .base-cell .text-right;
 }
 
 .right-end-cell {
-  @apply .right-cell .pr-10
+  @apply .right-cell .pr-10;
 }
 
 /* Table Header Cells */
 
 .base-header-cell {
-  @apply .p-4
+  @apply .p-4;
 }
 
 .left-header-cell {
-  @apply .base-header-cell .text-left
+  @apply .base-header-cell .text-left;
 }
 
 .left-header-start-cell {
-  @apply .left-header-cell .pl-10
+  @apply .left-header-cell .pl-10;
 }
 
 .right-header-cell {
-  @apply .base-header-cell .text-right
+  @apply .base-header-cell .text-right;
 }
 
 .right-header-end-cell {
-  @apply .right-header-cell .pr-10
+  @apply .right-header-cell .pr-10;
 }
 
 .list-row {
-  @apply .py-4 .flex .justify-between .flex-wrap
+  @apply .py-4 .flex .justify-between .flex-wrap;
 }
 
 .list-row-border-b {
-  @apply .list-row .border-b
+  @apply .list-row .border-b;
 }
 
 .list-row-border-t {
-  @apply .list-row .border-t
+  @apply .list-row .border-t;
 }
 
 .list-row-border-b-no-wrap {
@@ -301,75 +301,75 @@ thead th {
 }
 
 .row-mobile {
-  @apply .px-5 .py-4
+  @apply .px-5 .py-4;
 }
 
 .base-tab {
-  @apply .mr-4 .py-4 .px-2 .cursor-pointer .border-b-3
+  @apply .mr-4 .py-4 .px-2 .cursor-pointer .border-b-3;
 }
 
 .active-tab {
-  @apply .base-tab .text-lg .border-blue .text-theme-text-primary .transition
+  @apply .base-tab .text-lg .border-blue .text-theme-text-primary .transition;
 }
 
 .inactive-tab {
-  @apply .base-tab .text-theme-text-secondary .border-transparent .transition
+  @apply .base-tab .text-theme-text-secondary .border-transparent .transition;
 }
 
 .active-tab:hover,
 .inactive-tab:hover {
-  @apply .text-theme-text-primary .border-blue
+  @apply .text-theme-text-primary .border-blue;
 }
 
 @screen sm {
   .active-tab {
-    @apply .text-2xl
+    @apply .text-2xl;
   }
 
   .inactive-tab {
-    @apply .text-lg
+    @apply .text-lg;
   }
 }
 
 /* Chart */
 
 .chart-tab {
-  @apply .py-2 .px-4 .bg-transparent .rounded-md .text-blue-light .font-normal .text-xs
+  @apply .ml-1 .py-2 .px-4 .bg-transparent .rounded-md .text-blue-light .font-normal .text-xs;
 }
 
 .chart-tab-active, .chart-tab:hover {
-  @apply .bg-blue-darker .text-white
+  @apply .bg-blue-darker .text-white;
 }
 
 /* Pager */
 
 .pager-button {
-  @apply .bg-theme-button .text-theme-button-text .semibold .py-5 .px-8 .border-transparent .rounded .transition .cursor-pointer
+  @apply .bg-theme-button .text-theme-button-text .semibold .py-5 .px-8 .border-transparent .rounded .transition .cursor-pointer;
 }
 
 .pager-button:enabled:hover,
 .block-pager-button:enabled:hover {
-  @apply .bg-blue .text-white .hover-button-shadow-definition
+  @apply .bg-blue .text-white .hover-button-shadow-definition;
 }
 
 .block-pager-button {
-  @apply .py-4 .px-5 .bg-transparent .bg-blue-darker .rounded-md .text-white .font-normal .text-xs .transition
+  @apply .py-4 .px-5 .bg-transparent .bg-blue-darker .rounded-md .text-white .font-normal .text-xs .transition;
 }
 
 /** Menu */
 
 .menu-button {
-  @apply .flex .items-center .p-4 .border-b-2 .border-transparent .margin-t-2 .text-theme-text-secondary .transition
+  @apply .flex .items-center .p-4 .border-b-2 .border-transparent .margin-t-2 .text-theme-text-secondary .transition;
 }
 
 .menu-button:hover {
-  @apply .border-red
+  @apply .border-red;
 }
 
 /** Dropdown */
 
 .dropdown-button {
-  @apply .flex .items-center .p-4 .text-theme-text-secondary .transition .cursor-pointer
+  @apply .flex .items-center .p-4 .text-theme-text-secondary .transition .cursor-pointer;
 }
 
 .dropdown-button:hover {
@@ -385,4 +385,8 @@ thead th {
 .flag-image {
   width: 20px;
   height: 20px;
+}
+
+.v-spinner {
+  @apply .flex .items-center .justify-center
 }
