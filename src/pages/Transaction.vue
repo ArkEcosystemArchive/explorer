@@ -58,7 +58,7 @@
 
           <div class="list-row-border-b">
             <div>{{ $t("Amount") }}</div>
-            <div v-if="average" v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(transaction.amount, average)}`, placement: 'left' }">{{ readableCrypto(transaction.amount) }}</div>
+            <div v-if="price" v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(transaction.amount, price)}`, placement: 'left' }">{{ readableCrypto(transaction.amount) }}</div>
             <div v-else>{{ readableCrypto(transaction.amount) }}</div>
           </div>
 
@@ -102,7 +102,7 @@ export default {
     transactionNotFound: false,
     initialBlockHeight: 0,
     isFetching: false,
-    average: 1
+    price: 1
   }),
 
   computed: {
@@ -117,7 +117,7 @@ export default {
 
   watch: {
     async currencySymbol() {
-      await this.updateAverage(this.transaction)
+      await this.updatePrice(this.transaction)
     }
   },
 
@@ -126,7 +126,7 @@ export default {
       const transaction = await TransactionService.find(to.params.id)
       next(vm => {
         vm.setTransaction(transaction),
-        vm.updateAverage(transaction)
+        vm.updatePrice(transaction)
       })
     } catch(e) {
       next(vm => {
@@ -144,7 +144,7 @@ export default {
     try {
       const transaction = await TransactionService.find(to.params.id)
       this.setTransaction(transaction)
-      this.updateAverage(transaction)
+      this.updatePrice(transaction)
       next()
     } catch(e) {
       console.log(e.message || e.data.error)
@@ -161,7 +161,7 @@ export default {
       try {
         const transaction = await TransactionService.find(this.transaction.id)
         this.setTransaction(transaction)
-        this.updateAverage(transaction)
+        this.updatePrice(transaction)
         this.transactionNotFound = false
       } catch(e) {
         console.log(e.message || e.data.error)
@@ -170,8 +170,8 @@ export default {
       }
     },
 
-    async updateAverage(transaction) {
-      this.average = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
+    async updatePrice(transaction) {
+      this.price = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
     },
 
     setTransaction(transaction) {
