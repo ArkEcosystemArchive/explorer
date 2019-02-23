@@ -99,8 +99,8 @@ export default {
 
   data: () => ({
     transaction: {},
-    initialBlockHeight: 0,
     transactionNotFound: false,
+    initialBlockHeight: 0,
     isFetching: false,
     average: 1
   }),
@@ -117,23 +117,16 @@ export default {
 
   watch: {
     async currencySymbol() {
-      await this.updateAverage()
-    },
-
-    height() {
-      if (!this.initialBlockHeight) {
-        this.initialBlockHeight = this.height - (this.transaction.confirmations + 1)
-      }
+      await this.updateAverage(this.transaction)
     }
   },
 
   async beforeRouteEnter(to, from, next) {
     try {
       const transaction = await TransactionService.find(to.params.id)
-      const average = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
       next(vm => {
         vm.setTransaction(transaction),
-        vm.setAverage(average)
+        vm.updateAverage(transaction)
       })
     } catch(e) {
       next(vm => {
@@ -150,9 +143,8 @@ export default {
 
     try {
       const transaction = await TransactionService.find(to.params.id)
-      const average = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
       this.setTransaction(transaction)
-      this.setAverage(average)
+      this.updateAverage(transaction)
       next()
     } catch(e) {
       console.log(e.message || e.data.error)
@@ -163,19 +155,13 @@ export default {
   },
 
   methods: {
-    async updateAverage() {
-      const average = await CryptoCompareService.dailyAverage(this.transaction.timestamp.unix)
-      this.setAverage(average)
-    },
-
     async fetchTransaction() {
       this.isFetching = true
 
       try {
         const transaction = await TransactionService.find(this.transaction.id)
-        const average = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
         this.setTransaction(transaction)
-        this.setAverage(average)
+        this.updateAverage(transaction)
         this.transactionNotFound = false
       } catch(e) {
         console.log(e.message || e.data.error)
@@ -184,12 +170,13 @@ export default {
       }
     },
 
-    setTransaction(transaction) {
-      this.transaction = transaction
+    async updateAverage(transaction) {
+      this.average = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
     },
 
-    setAverage(average) {
-      this.average = average
+    setTransaction(transaction) {
+      this.transaction = transaction
+      this.initialBlockHeight = this.height - (this.transaction.confirmations + 1)
     },
   },
 }
