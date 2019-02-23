@@ -177,7 +177,7 @@ export default {
 
     setTransaction(transaction) {
       this.transaction = transaction
-      this.initialBlockHeight = this.height - (this.transaction.confirmations + 1)
+      this.initialBlockHeight = this.height - this.transaction.confirmations
     },
   },
 }
