@@ -76,6 +76,18 @@ module.exports = {
       .assert.urlContains('/transaction/')
   },
 
+  'it should refresh the confirmation count automatically': function (browser) {
+    const element = "//div[contains(@class, 'list-row-border-b')][3]//div[2]"
+
+    browser
+      .useCss()
+      .waitForElementVisible('div.list-row-border-b')
+      .useXpath()
+      .getText(element, function(result) {
+        browser.expect.element(element).text.to.not.contain(result.value).after(20000)
+      })
+  },
+
   'it should be possible to click on the sender': function (browser) {
     const devServer = browser.globals.devServerURL + '/#/transactions/1'
 
