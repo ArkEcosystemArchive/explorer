@@ -53,7 +53,7 @@
 
           <div class="list-row-border-b">
             <div>{{ $t("Confirmations") }}</div>
-            <div>{{ getConfirmations() }}</div>
+            <div>{{ confirmations }}</div>
           </div>
 
           <div class="list-row-border-b">
@@ -108,11 +108,23 @@ export default {
   computed: {
     ...mapGetters('delegates', ['delegates']),
     ...mapGetters('currency', { currencySymbol: 'symbol' }),
-    ...mapGetters('network', ['height'])
+    ...mapGetters('network', ['height']),
+
+    confirmations() {
+      return this.initialBlockHeight ? this.height - this.initialBlockHeight : this.transaction.confirmations
+    }
   },
 
-  async mounted() {
-    await this.prepareComponent()
+  watch: {
+    async currencySymbol() {
+      await this.updateAverage()
+    },
+
+    height() {
+      if (!this.initialBlockHeight) {
+        this.initialBlockHeight = this.height - (this.transaction.confirmations + 1)
+      }
+    }
   },
 
   async beforeRouteEnter(to, from, next) {
@@ -151,19 +163,6 @@ export default {
   },
 
   methods: {
-    async prepareComponent() {
-      this.getConfirmations()
-
-      this.$store.watch(state => {
-        state.currency.name, value => this.updateAverage()
-        state.network.height, value => this.getConfirmations()
-      })
-    },
-
-    getConfirmations() {
-      return this.transaction.confirmations ? this.height - this.initialBlockHeight : ''
-    },
-
     async updateAverage() {
       const average = await CryptoCompareService.dailyAverage(this.transaction.timestamp.unix)
       this.setAverage(average)
@@ -187,7 +186,6 @@ export default {
 
     setTransaction(transaction) {
       this.transaction = transaction
-      this.initialBlockHeight = this.height - this.transaction.confirmations
     },
 
     setAverage(average) {

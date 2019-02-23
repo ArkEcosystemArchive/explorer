@@ -8,7 +8,7 @@
 
       <div class="list-row-border-b">
         <div>{{ $t("Confirmations") }}</div>
-        <div>{{ getConfirmations() }}</div>
+        <div v-if="confirmations >= 0">{{ confirmations }}</div>
       </div>
 
       <div class="list-row-border-b">
@@ -64,17 +64,9 @@ export default {
 
   computed: {
     ...mapGetters('network', ['height']),
-  },
 
-  methods: {
-    prepareComponent() {
-      this.getConfirmations()
-
-      this.$store.watch(state => state.network.height, value => this.getConfirmations())
-    },
-
-    getConfirmations() {
-      return this.block.height ? this.height - this.block.height : ''
+    confirmations() {
+      return this.height - this.block.height
     }
   }
 }
