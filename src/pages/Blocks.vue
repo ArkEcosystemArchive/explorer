@@ -8,7 +8,13 @@
       <div class="sm:hidden">
         <table-blocks-mobile :blocks="blocks" />
       </div>
-      <paginator v-if="blocks && blocks.length" :start="+this.$route.params.page" />
+      <paginator
+        v-if="showPaginator"
+        :previous="this.meta.previous"
+        :next="this.meta.next"
+        @previous="onPrevious"
+        @next="onNext"
+      />
     </section>
   </div>
 </template>
@@ -17,34 +23,78 @@
 import BlockService from '@/services/block'
 
 export default {
-  data: () => ({ blocks: null }),
+  data: () => ({
+    blocks: null,
+    meta: null,
+    currentPage: 0
+  }),
 
-  created() {
-    this.$on('paginatorChanged', page => this.changePage(page))
+  computed: {
+    showPaginator() {
+      return this.meta && (this.meta.previous || this.meta.next)
+    }
+  },
+
+  watch: {
+    currentPage() {
+      this.changePage()
+    }
   },
 
   async beforeRouteEnter (to, from, next) {
-    const response = await BlockService.paginate(to.params.page)
-    next(vm => vm.setBlocks(response))
+    try {
+      const { meta, data } = await BlockService.paginate(to.params.page)
+
+      next(vm => {
+        vm.currentPage = to.params.page
+        vm.setBlocks(data)
+        vm.setMeta(meta)
+      })
+    } catch(e) { next({ name: '404' }) }
   },
 
   async beforeRouteUpdate (to, from, next) {
     this.blocks = null
+    this.meta = null
 
-    const response = await BlockService.paginate(to.params.page)
-    this.setBlocks(response)
-    next()
+    try {
+      const { meta, data } = await BlockService.paginate(to.params.page)
+
+      this.currentPage = to.params.page
+      this.setBlocks(data)
+      this.setMeta(meta)
+      next()
+    } catch(e) { next({ name: '404' }) }
   },
 
   methods: {
     setBlocks (blocks) {
-      if (!blocks) return
+      if (!blocks) {
+        return
+      }
 
       this.blocks = blocks
     },
 
-    changePage(page) {
-      this.$router.push({ name: 'blocks', params: { page } })
+    setMeta(meta) {
+      this.meta = meta
+    },
+
+    onPrevious() {
+      this.currentPage = Number(this.currentPage) - 1
+    },
+
+    onNext() {
+      this.currentPage = Number(this.currentPage) + 1
+    },
+
+    changePage() {
+      this.$router.push({
+        name: 'blocks',
+        params: {
+          page: this.currentPage
+        }
+      })
     }
   }
 }
