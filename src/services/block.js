@@ -26,42 +26,26 @@ class BlockService {
     return response.data
   }
 
-  async transactionsByBlock(id, page = 1, limit = 25) {
-    const response = await ApiService.get(`blocks/${id}/transactions`, {
+  async paginate(page, limit = 25) {
+    const response = await ApiService.get('blocks', {
       params: {
         page,
         limit
       }
     })
-    return response.data
+
+    return response
   }
 
-  async transactionsByBlockCount(id) {
-    const response = await ApiService.get(`blocks/${id}`)
-    return response.data.transactions
-  }
-
-  async paginate(page, limit = 25) {
-    const response = await ApiService.get('blocks', {
-      params: {
-        limit,
-        page
-      }
-    })
-
-    return response.data
-  }
-
-  async getByPublicKey(generatorPublicKey, page, limit = 25) {
-    const response = await ApiService.get('blocks', {
+  async byAddress(address, page, limit = 25) {
+    const response = await ApiService.get(`delegates/${address}/blocks`, {
       params: {
         page,
-        limit,
-        generatorPublicKey
+        limit
       }
     })
 
-    return response.data
+    return response
   }
 
   async findPrevious(height) {

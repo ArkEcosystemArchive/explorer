@@ -30,17 +30,72 @@ class TransactionService {
     const response = await ApiService.get('transactions', {
       params: params
     })
-    return response.data
+
+    return response
   }
 
-  async paginate(page, limit = 25) {
-    const response = await ApiService.get('transactions', {
+  async byBlock(id, page = 1, limit = 25) {
+    const response = await ApiService.get(`blocks/${id}/transactions`, {
       params: {
         page,
         limit
       }
     })
-    return response.data
+
+    return response
+  }
+
+  async allByAddress(address, page = 1, limit = 25) {
+    const response = await ApiService.get(`wallets/${address}/transactions`, {
+      params: {
+        page,
+        limit
+      }
+    })
+    
+    return response
+  }
+
+  async sentByAddress(address, page = 1, limit = 25) {
+    const response = await ApiService.get(`wallets/${address}/transactions/sent`, {
+      params: {
+        page,
+        limit
+      }
+    })
+
+    return response
+  }
+
+  async receivedByAddress(address, page = 1, limit = 25) {
+    const response = await ApiService.get(`wallets/${address}/transactions/received`, {
+      params: {
+        page,
+        limit
+      }
+    })
+
+    return response
+  }
+
+  async sentByAddressCount(senderId) {
+    const response = await ApiService.get('transactions', {
+      params: {
+        senderId,
+        limit: 1
+      }
+    })
+    return response.meta.totalCount
+  }
+
+  async receivedByAddressCount(recipientId) {
+    const response = await ApiService.get('transactions', {
+      params: {
+        recipientId,
+        limit: 1
+      }
+    })
+    return response.meta.totalCount
   }
 }
 
