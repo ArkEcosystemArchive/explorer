@@ -58,13 +58,14 @@
 
           <div class="list-row-border-b">
             <div>{{ $t("Amount") }}</div>
-            <div v-if="average" v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(transaction.amount, average)}`, placement: 'left' }">{{ readableCrypto(transaction.amount) }}</div>
+            <div v-if="price" v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(transaction.amount, price)}`, placement: 'left' }">{{ readableCrypto(transaction.amount) }}</div>
             <div v-else>{{ readableCrypto(transaction.amount) }}</div>
           </div>
 
           <div class="list-row-border-b">
             <div>{{ $t("Fee") }}</div>
-            <div>{{ readableCrypto(transaction.fee) }}</div>
+            <div v-if="price" v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(transaction.fee, price)}`, placement: 'left' }">{{ readableCrypto(transaction.fee) }}</div>
+            <div v-else>{{ readableCrypto(transaction.fee) }}</div>
           </div>
 
           <div class="list-row-border-b">
@@ -99,10 +100,10 @@ export default {
 
   data: () => ({
     transaction: {},
-    initialBlockHeight: 0,
     transactionNotFound: false,
+    initialBlockHeight: 0,
     isFetching: false,
-    average: 1
+    price: 1
   }),
 
   computed: {
@@ -117,23 +118,16 @@ export default {
 
   watch: {
     async currencySymbol() {
-      await this.updateAverage()
-    },
-
-    height() {
-      if (!this.initialBlockHeight) {
-        this.initialBlockHeight = this.height - (this.transaction.confirmations + 1)
-      }
+      await this.updatePrice(this.transaction)
     }
   },
 
   async beforeRouteEnter(to, from, next) {
     try {
       const transaction = await TransactionService.find(to.params.id)
-      const average = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
       next(vm => {
         vm.setTransaction(transaction),
-        vm.setAverage(average)
+        vm.updatePrice(transaction)
       })
     } catch(e) {
       next(vm => {
@@ -150,9 +144,8 @@ export default {
 
     try {
       const transaction = await TransactionService.find(to.params.id)
-      const average = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
       this.setTransaction(transaction)
-      this.setAverage(average)
+      this.updatePrice(transaction)
       next()
     } catch(e) {
       console.log(e.message || e.data.error)
@@ -163,19 +156,13 @@ export default {
   },
 
   methods: {
-    async updateAverage() {
-      const average = await CryptoCompareService.dailyAverage(this.transaction.timestamp.unix)
-      this.setAverage(average)
-    },
-
     async fetchTransaction() {
       this.isFetching = true
 
       try {
         const transaction = await TransactionService.find(this.transaction.id)
-        const average = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
         this.setTransaction(transaction)
-        this.setAverage(average)
+        this.updatePrice(transaction)
         this.transactionNotFound = false
       } catch(e) {
         console.log(e.message || e.data.error)
@@ -184,12 +171,13 @@ export default {
       }
     },
 
-    setTransaction(transaction) {
-      this.transaction = transaction
+    async updatePrice(transaction) {
+      this.price = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
     },
 
-    setAverage(average) {
-      this.average = average
+    setTransaction(transaction) {
+      this.transaction = transaction
+      this.initialBlockHeight = this.height - this.transaction.confirmations
     },
   },
 }
