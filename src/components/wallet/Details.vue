@@ -174,8 +174,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import WalletService from '@/services/wallet'
-import DelegateService from '@/services/delegate'
+import { DelegateService, WalletService } from '@/services'
 import { mapGetters } from 'vuex'
 
 
