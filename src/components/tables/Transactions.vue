@@ -85,7 +85,8 @@
       >
         <template slot-scope="row">
           <span class="whitespace-no-wrap">
-            {{ readableCrypto(row.fee) }}
+            <div v-if="price" v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(row.fee, price)}`, placement: 'top' }">{{ readableCrypto(row.fee) }}</div>
+            <div v-else>{{ readableCrypto(row.fee) }}</div>
           </span>
         </template>
       </table-column>
@@ -98,6 +99,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     transactions: {
@@ -107,6 +110,8 @@ export default {
   },
 
   computed: {
+    ...mapGetters('currency', { price: 'rate' }),
+
     showSmartBridgeIcon() {
       return this.transactions.some(transaction => {
         return !!transaction.vendorField

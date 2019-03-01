@@ -74,7 +74,8 @@
       >
         <template slot-scope="row">
           <span class="whitespace-no-wrap">
-            {{ readableCrypto(row.fee) }}
+            <div v-if="price" v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(row.fee, price)}`, placement: 'top' }">{{ readableCrypto(row.fee) }}</div>
+            <div v-else>{{ readableCrypto(row.fee) }}</div>
           </span>
         </template>
       </table-column>
@@ -122,6 +123,7 @@ export default {
   },
 
   computed: {
+    ...mapGetters('currency', { price: 'rate' }),
     ...mapGetters('network', ['activeDelegates']),
 
     showSmartBridgeIcon() {

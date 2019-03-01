@@ -36,7 +36,10 @@
 
         <div class="list-row">
           <div>{{ $t("Fee (token)", { token: networkToken() }) }}</div>
-          <div>{{ readableCrypto(transaction.fee) }}</div>
+          <div>
+            <div v-if="price" v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(transaction.fee, price)}`, placement: 'top' }">{{ readableCrypto(transaction.fee) }}</div>
+            <div v-else>{{ readableCrypto(transaction.fee) }}</div>
+          </div>
         </div>
       </div>
       <div v-if="transactions && !transactions.length" class="px-5 md:px-10">
@@ -47,12 +50,18 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     transactions: {
       // type: Array or null
       required: true,
     }
+  },
+
+  computed: {
+    ...mapGetters('currency', { price: 'rate' })
   }
 }
 </script>
