@@ -31,8 +31,6 @@ describe('SelectionType', () => {
   })
 
   it('Should close the dropdown after selecting a type', () => {
-    const closeDropdown = jest.fn()
-
     const wrapper = mount(SelectionType, {
       i18n,
       localVue,

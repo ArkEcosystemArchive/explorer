@@ -1,5 +1,4 @@
 import ApiService from '@/services/api'
-import DelegateService from '@/services/delegate'
 
 class WalletService {
   async find(address) {

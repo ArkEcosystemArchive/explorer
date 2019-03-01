@@ -35,7 +35,7 @@ describe('Wallet Service', () => {
   })
 
   it('should return a list of top wallet accounts', async () => {
-    const { meta, data } = await WalletService.top()
+    const { data } = await WalletService.top()
     expect(data).toHaveLength(25)
     data.forEach(wallet => {
       expect(Object.keys(wallet).sort()).toEqual(walletPropertyArray.sort())
@@ -43,7 +43,7 @@ describe('Wallet Service', () => {
   })
 
   it('should return top wallets with page offset', async() => {
-    const { meta, data } = await WalletService.top(1)
+    const { data } = await WalletService.top(1)
     expect(data).toHaveLength(25)
     data.forEach(wallet => {
       expect(Object.keys(wallet).sort()).toEqual(walletPropertyArray.sort())
@@ -52,7 +52,7 @@ describe('Wallet Service', () => {
   })
 
   it('should return top wallets with page offset and given limit', async() => {
-    const { meta, data } = await WalletService.top(2, 20)
+    const { data } = await WalletService.top(2, 20)
     expect(data).toHaveLength(20)
     data.forEach(wallet => {
       expect(Object.keys(wallet).sort()).toEqual(walletPropertyArray.sort())
