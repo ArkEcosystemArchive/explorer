@@ -58,14 +58,28 @@
 
           <div class="list-row-border-b">
             <div>{{ $t("Amount") }}</div>
-            <div v-if="price" v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(transaction.amount, price)}`, placement: 'left' }">{{ readableCrypto(transaction.amount) }}</div>
-            <div v-else>{{ readableCrypto(transaction.amount) }}</div>
+            <div
+              v-tooltip="{
+                trigger: 'hover click',
+                content: price ? readableCurrency(transaction.amount, price) : '',
+                placement: 'left'
+              }"
+            >
+              {{ readableCurrency(transaction.amount) }}
+            </div>
           </div>
 
           <div class="list-row-border-b">
             <div>{{ $t("Fee") }}</div>
-            <div v-if="price" v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(transaction.fee, price)}`, placement: 'left' }">{{ readableCrypto(transaction.fee) }}</div>
-            <div v-else>{{ readableCrypto(transaction.fee) }}</div>
+            <div
+              v-tooltip="{
+                trigger: 'hover click',
+                content: price ? readableCurrency(transaction.fee, price) : '',
+                placement: 'left'
+              }"
+            >
+              {{ readableCurrency(transaction.fee) }}
+            </div>
           </div>
 
           <div class="list-row-border-b">
@@ -96,14 +110,16 @@ import CryptoCompareService from '@/services/crypto-compare'
 import { mapGetters } from 'vuex'
 
 export default {
-  components: {NotFound},
+  components: {
+    NotFound
+  },
 
   data: () => ({
     transaction: {},
     transactionNotFound: false,
     initialBlockHeight: 0,
     isFetching: false,
-    price: 1
+    price: 0
   }),
 
   computed: {
