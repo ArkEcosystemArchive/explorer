@@ -1,7 +1,7 @@
 <template>
   <loader :data="delegates">
     <table-component
-      v-if="delegates && delegates.length > 0"
+      v-if="delegates && delegates.length"
       :data="delegates"
       sort-by="rank"
       sort-order="asc"
@@ -111,8 +111,8 @@ import moment from 'moment'
 export default {
   props: {
     delegates: {
-      // type: Array, or null
-      required: true,
+      // type: Array,
+      required: true
     },
   },
 

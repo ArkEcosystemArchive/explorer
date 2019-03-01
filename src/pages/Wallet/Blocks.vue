@@ -53,7 +53,7 @@ export default {
       this.changePage()
     }
   },
-  
+
   async beforeRouteEnter (to, from, next) {
     try {
       const { meta, data } = await BlockService.byAddress(to.params.address, to.params.page)

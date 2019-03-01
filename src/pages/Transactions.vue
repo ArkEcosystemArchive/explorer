@@ -132,7 +132,7 @@ export default {
       if (this.transactionType !== type) {
         this.transactionType = type
         this.currentPage = 1
-        
+
         this.changePage()
       }
     },
