@@ -1,4 +1,9 @@
-import { BlockService, DelegateService, WalletService, TransactionService } from '@/services'
+import {
+  BlockService,
+  DelegateService,
+  WalletService,
+  TransactionService
+} from '@/services'
 
 class SearchService {
   async walletByAddress(address) {

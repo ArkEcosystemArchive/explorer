@@ -177,7 +177,6 @@
 import { DelegateService, WalletService } from '@/services'
 import { mapGetters } from 'vuex'
 
-
 export default {
   props: {
     wallet: {

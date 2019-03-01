@@ -137,7 +137,7 @@ const methods = {
   networkToken() {
     return store.getters['network/token'] ||
       store.getters['network/defaults'].token ||
-      ""
+      ''
   },
 
   capitalize(value) {
