@@ -65,7 +65,7 @@
                 placement: 'left'
               }"
             >
-              {{ readableCurrency(transaction.amount) }}
+              {{ readableCrypto(transaction.amount) }}
             </div>
           </div>
 
@@ -78,7 +78,7 @@
                 placement: 'left'
               }"
             >
-              {{ readableCurrency(transaction.fee) }}
+              {{ readableCrypto(transaction.fee) }}
             </div>
           </div>
 

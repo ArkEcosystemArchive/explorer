@@ -26,7 +26,7 @@
             placement: 'left'
           }"
         >
-          {{ readableCurrency(block.forged.reward) }}
+          {{ readableCrypto(block.forged.reward) }}
         </div>
       </div>
 
@@ -40,7 +40,7 @@
             placement: 'left'
           }"
         >
-          {{ readableCurrency(block.forged.fee) }}
+          {{ readableCrypto(block.forged.fee) }}
         </div>
       </div>
 
@@ -54,7 +54,7 @@
             placement: 'left'
           }"
         >
-          {{ readableCurrency(block.forged.total) }}
+          {{ readableCrypto(block.forged.total) }}
         </div>
       </div>
 
@@ -68,7 +68,7 @@
             placement: 'left'
           }"
         >
-          {{ readableCurrency(block.forged.amount) }}
+          {{ readableCrypto(block.forged.amount) }}
         </div>
       </div>
 
