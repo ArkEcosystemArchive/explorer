@@ -98,6 +98,12 @@ export default {
 
     async currencySymbol() {
       await this.updatePrice()
+    },
+
+    height(newValue, oldValue) {
+      if (!oldValue) {
+        this.setInitialBlockHeight()
+      }
     }
   },
 
