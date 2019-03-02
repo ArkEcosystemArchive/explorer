@@ -124,6 +124,10 @@ export default {
 
   methods: {
     async updatePrice() {
+      if (!this.block.id) {
+        return
+      }
+
       this.price = await CryptoCompareService.dailyAverage(this.block.timestamp.unix)
     }
   }
