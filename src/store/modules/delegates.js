@@ -2,10 +2,12 @@ import * as types from '../mutation-types'
 
 export default {
   namespaced: true,
+
   state: {
     delegates: [],
     forged: []
   },
+
   mutations: {
     [types.SET_DELEGATES](state, payload) {
       state.delegates = payload.value
@@ -14,6 +16,7 @@ export default {
       state.forged = payload.value
     }
   },
+
   actions: {
     setDelegates: ({commit}, value) => {
       commit({
@@ -28,8 +31,21 @@ export default {
       })
     }
   },
+
   getters: {
     delegates: state => state.delegates,
-    forged: state => state.forged
+    forged: state => state.forged,
+
+    byPublicKey: (state) => publicKey => {
+      return state.delegates.find(delegate => {
+        return delegate.publicKey === publicKey
+      }) || false
+    },
+
+    byAddress: state => address => {
+      return state.delegates.find(delegate => {
+        return delegate.address === address
+      }) || false
+    }
   }
 }
