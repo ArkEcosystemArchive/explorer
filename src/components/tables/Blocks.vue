@@ -1,8 +1,8 @@
 <template>
-  <loader :data="blocks">
+  <loader :data="blocks && updatedBlocks">
     <table-component
-      v-if="blocks && blocks.length > 0"
-      :data="blocks"
+      v-if="updatedBlocks && updatedBlocks.length"
+      :data="updatedBlocks"
       sort-by="height"
       sort-order="desc"
       :show-filter="false"
@@ -71,7 +71,13 @@
         cell-class="right-cell"
       >
         <template slot-scope="row">
-          <span class="whitespace-no-wrap">
+          <span
+            class="whitespace-no-wrap"
+            v-tooltip="{
+              trigger: 'hover',
+              content: readableCurrency(row.forged.total, row.price)
+            }"
+          >
             {{ readableCrypto(row.forged.total) }}
           </span>
         </template>
@@ -84,7 +90,13 @@
         cell-class="right-end-cell"
       >
         <template slot-scope="row">
-          <span class="whitespace-no-wrap">
+          <span
+            class="whitespace-no-wrap"
+            v-tooltip="{
+              trigger: 'hover',
+              content: row.forged.fee ? readableCurrency(row.forged.fee, row.price) : ''
+            }"
+          >
             {{ readableCrypto(row.forged.fee) }}
           </span>
         </template>
@@ -98,12 +110,45 @@
 </template>
 
 <script type="text/ecmascript-6">
+import CryptoCompareService from '@/services/crypto-compare'
+
 export default {
   props: {
     blocks: {
-      // type: Array or null
-      required: true,
+      // type: Array, or null
+      required: true
     },
+  },
+
+  data: () => ({
+    updatedBlocks: null
+  }),
+
+  created() {
+    this.updateBlocks()
+  },
+
+  watch: {
+    async blocks(newValue, oldValue) {
+      if (!oldValue) {
+        this.updateBlocks()
+      }
+    }
+  },
+
+  methods: {
+    async updateBlocks() {
+      if (!this.blocks) {
+        return
+      }
+
+      const mappedBlocks = this.blocks.map(async block => {
+        const price = await CryptoCompareService.dailyAverage(block.timestamp.unix)
+        return { ...block, price }
+      })
+
+      this.updatedBlocks = await Promise.all(mappedBlocks)
+    }
   }
 }
 </script>

@@ -2,6 +2,8 @@ import axios from 'axios'
 import moment from 'moment'
 import store from '@/store'
 
+const SECONDS_PER_DAY = 86400
+
 class CryptoCompareService {
   async price(currency) {
     const response = await axios.get(`https://min-api.cryptocompare.com/data/price?fsym=ARK&tsyms=${currency}`)
@@ -62,7 +64,7 @@ class CryptoCompareService {
     ts = ts.unix()
 
     // get last second of the day as unix timestamp
-    ts = ts - (ts % 86400) + 86400 - 1
+    ts = ts - (ts % SECONDS_PER_DAY) + SECONDS_PER_DAY - 1
 
     const targetCurrency = store.getters['currency/name']
     const lastConversion = store.getters['currency/lastConversion']
@@ -74,14 +76,14 @@ class CryptoCompareService {
     const token = store.getters['network/token']
     const cache = JSON.parse(localStorage.getItem(`rates_${targetCurrency}`))
 
-    if (cache && cache.hasOwnProperty(timestamp)) {
+    if (cache && cache.hasOwnProperty(ts)) {
       store.dispatch('currency/setLastConversion', {
         to: targetCurrency,
-        timestamp: timestamp,
-        rate: cache[timestamp]
+        timestamp: ts,
+        rate: cache[ts]
       })
 
-      return cache[timestamp]
+      return cache[ts]
     }
 
     const response = await axios
