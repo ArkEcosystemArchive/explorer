@@ -125,14 +125,14 @@ export default {
   }),
 
   created() {
-    this.updateBlocks()
+    if (!this.updatedBlocks) {
+      this.updateBlocks()
+    }
   },
 
   watch: {
-    async blocks(newValue, oldValue) {
-      if (!oldValue) {
-        this.updateBlocks()
-      }
+    async blocks() {
+      this.updateBlocks()
     }
   },
 
