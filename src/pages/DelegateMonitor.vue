@@ -33,6 +33,7 @@ import ActiveDelegates from '@/components/monitor/ActiveDelegates'
 import StandbyDelegates from '@/components/monitor/StandbyDelegates'
 import Forging from '@/components/monitor/Forging'
 import DelegateService from '@/services/delegate'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -47,19 +48,25 @@ export default {
     activeTab: 'active'
   }),
 
-  async mounted() {
-    await this.prepareComponent()
+  computed: {
+    ...mapGetters('network', ['height']),
+  },
+
+  async created() {
+    await this.setDelegates()
+  },
+
+  watch: {
+    async height() {
+      await this.setDelegates()
+    }
   },
 
   methods: {
-    async prepareComponent() {
-      await this.getDelegates()
-
-      this.$store.watch(state => state.network.height, value => this.getDelegates())
-    },
-
-    async getDelegates() {
-      this.delegates = await DelegateService.active()
+    async setDelegates() {
+      if (this.height) {
+        this.delegates = await DelegateService.active()
+      }
     }
   }
 }

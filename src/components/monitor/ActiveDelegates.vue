@@ -1,7 +1,7 @@
 <template>
   <loader :data="delegates">
     <table-component
-      v-if="delegates && delegates.length > 0"
+      v-if="delegates && delegates.length"
       :data="delegates"
       sort-by="rank"
       sort-order="asc"
@@ -27,7 +27,9 @@
         cell-class="py-3 px-4 text-left border-none"
       >
         <template slot-scope="row">
-          <link-wallet :address="row.address" />
+          <link-wallet :address="row.address">
+            {{ row.username }}
+          </link-wallet>
         </template>
       </table-column>
 
@@ -109,8 +111,8 @@ import moment from 'moment'
 export default {
   props: {
     delegates: {
-      // type: Array, or null
-      required: true,
+      // type: Array,
+      required: true
     },
   },
 
