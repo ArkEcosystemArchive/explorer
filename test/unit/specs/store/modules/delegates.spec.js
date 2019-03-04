@@ -22,15 +22,15 @@ describe('delegates store modules', () => {
     expect(store.getters['delegates/byAddress']('test-address-1')).toEqual(delegates[0])
   })
 
-  it('should return false when delegate with address does not exist', () => {
-    expect(store.getters['delegates/byAddress']('wrong address')).toBe(false)
+  it('should return null when delegate with address does not exist', () => {
+    expect(store.getters['delegates/byAddress']('wrong address')).toBe(null)
   })
 
   it('should get a single delegate by its public key', () => {
     expect(store.getters['delegates/byPublicKey']('pubkey-2')).toEqual(delegates[1])
   })
 
-  it('should return false when delegate with public key does not exist', () => {
-    expect(store.getters['delegates/byPublicKey']('wrong public key')).toBe(false)
+  it('should return null when delegate with public key does not exist', () => {
+    expect(store.getters['delegates/byPublicKey']('wrong public key')).toBe(null)
   })
 })
