@@ -39,13 +39,13 @@ export default {
     byPublicKey: (state) => publicKey => {
       return state.delegates.find(delegate => {
         return delegate.publicKey === publicKey
-      }) || false
+      }) || null
     },
 
     byAddress: state => address => {
       return state.delegates.find(delegate => {
         return delegate.address === address
-      }) || false
+      }) || null
     }
   }
 }
