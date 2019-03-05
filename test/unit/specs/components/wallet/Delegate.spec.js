@@ -16,12 +16,23 @@ const i18n = new VueI18n({
   silentTranslationWarn: true
 })
 
+const mocks = {
+  $store: {
+    getters: {
+      'delegates/byPublicKey': publicKey => {
+        return { username: '' }
+      }
+    }
+  }
+}
+
 describe('wallet/Delegate', () => {
   it('Should show the delegate info', () => {
     const wrapper = mount(delegate, {
       i18n,
       localVue,
       mixins,
+      mocks,
       stubs: {
         RouterLinkStub
       },
