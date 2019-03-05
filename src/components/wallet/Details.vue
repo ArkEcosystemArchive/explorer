@@ -66,16 +66,18 @@
         v-if="view === 'public'"
         class="flex-none border-r border-grey-dark px-9">
         <div class="text-grey mb-2">{{ $t("Voting for") }}</div>
-        <link-wallet v-if="delegate.address" :address="delegate.address">
-          <span class="text-lg text-white semibold truncate">{{ delegate.username }}</span>
+        <link-wallet v-if="votedDelegate.address" :address="votedDelegate.address">
+          <span class="text-lg text-white semibold truncate">{{ votedDelegate.username }}</span>
         </link-wallet>
       </div>
 
       <div class="flex-none px-8">
         <button
-          @click="view = 'public'"
+          @click="setView('public')"
           :disabled="!wallet.publicKey"
-          :class="[view === 'public' ? 'bg-blue-darker' : 'bg-transparent text-blue-light', 'py-3 px-3 rounded-md text-white font-normal text-xs hover:text-blue']">
+          :class="view === 'public' ? 'bg-blue-darker' : 'bg-transparent text-blue-light'"
+          class="py-3 px-3 rounded-md text-white font-normal text-xs hover:text-blue"
+        >
           <svg
             class="block"
             xmlns="http://www.w3.org/2000/svg"
@@ -86,8 +88,10 @@
         </button>
         <button
           v-if="wallet.publicKey"
-          @click="view = 'private'"
-          :class="[view === 'private' ? 'bg-blue-darker' : 'bg-transparent text-blue-light', 'py-3 px-3 rounded-md text-white font-normal text-xs hover:text-blue']">
+          @click="setView('private')"
+          :class="view === 'private' ? 'bg-blue-darker' : 'bg-transparent text-blue-light'"
+          class="py-3 px-3 rounded-md text-white font-normal text-xs hover:text-blue"
+        >
           <svg
             class="block"
             xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +141,7 @@
           </div>
         </div>
         <div class="flex -mx-6">
-          <div class="md:w-1/2 px-6 w-full" :class="{ 'border-r border-grey-dark' : isVoting}">
+          <div class="md:w-1/2 px-6 w-full" :class="{ 'border-r border-grey-dark' : isVoting }">
             <div class="text-grey mb-2">{{ $t("Balance (token)", { token: networkToken() }) }}</div>
             <div class="text-white">
               <span
@@ -154,8 +158,8 @@
             class="md:w-1/2 px-6 w-full"
           >
             <div class="text-grey mb-2">{{ $t("Voting for") }}</div>
-            <link-wallet v-if="delegate.address" :address="delegate.address">
-              <span class="text-white semibold truncate">{{ delegate.username }}</span>
+            <link-wallet v-if="votedDelegate.address" :address="votedDelegate.address">
+              <span class="text-white semibold truncate">{{ votedDelegate.username }}</span>
             </link-wallet>
           </div>
         </div>
@@ -174,7 +178,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { DelegateService, WalletService } from '@/services'
+import WalletService from '@/services/wallet'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -185,6 +189,11 @@ export default {
     },
   },
 
+  data: () => ({
+    view: 'public',
+    showModal: false
+  }),
+
   computed: {
     ...mapGetters('network', ['knownWallets']),
 
@@ -194,42 +203,22 @@ export default {
 
     isDelegate() {
       return this.isDelegateByAddress(this.wallet.address)
+    },
+
+    votedDelegate() {
+      return this.$store.getters['delegates/byPublicKey'](this.wallet.vote) || {}
+    },
+
+    isVoting() {
+      return !!this.wallet.vote
     }
   },
 
-  data: () => ({
-    view: 'public',
-    showModal: false,
-    delegate: {},
-    isVoting: false,
-  }),
-
-  watch: {
-    wallet(wallet) {
-      if (!wallet.address) return
-      this.getVotedDelegate()
-    },
-  },
-
   methods: {
-    async getVotedDelegate() {
-      if (this.wallet.vote) {
-        try {
-          this.delegate = await DelegateService.find(this.wallet.vote)
-          if (this.delegate) {
-            this.isVoting = true
-          }
-        } catch(e) {
-          console.log(e.message || e.data.error)
-          this.delegate = {}
-          this.isVoting = false
-        }
-      } else {
-        this.delegate = {}
-        this.isVoting = false
-      }
-    },
-  },
+    setView(view) {
+      this.view = view
+    }
+  }
 }
 </script>
 

@@ -42,7 +42,9 @@ class ForgingService {
   }
 
   round(height) {
-    if (isNaN(height)) return 0
+    if (isNaN(height)) {
+      return 0
+    }
 
     const activeDelegates = store.getters['network/activeDelegates']
 

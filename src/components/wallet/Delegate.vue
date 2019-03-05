@@ -1,5 +1,5 @@
 <template>
-  <div v-show="Object.keys(delegate).length">
+  <div v-if="delegate">
     <div class="list-row-border-b">
       <div>{{ $t("Delegate") }}</div>
       <div>{{ delegate.username }}</div>
@@ -49,22 +49,9 @@ export default {
     }
   },
 
-  data: () => ({ delegate: {} }),
-
-  watch: {
-    async wallet(wallet) {
-      if (wallet.username) await this.getDelegate(wallet.username)
-    }
-  },
-
-  methods: {
-    async getDelegate(username) {
-      try {
-        const response = await DelegateService.find(username)
-        this.delegate = response
-
-        this.$emit('username', response.username)
-      } catch(e) { console.log(e.message || e.data.error) }
+  computed: {
+    delegate() {
+      return this.$store.getters['delegates/byPublicKey'](this.wallet.publicKey)
     }
   }
 }

@@ -55,7 +55,19 @@ export default {
     },
   },
 
-  data: () => ({ totals: {} }),
+  data: () => ({
+    totals: {}
+  }),
+
+  computed: {
+    activeDelegates() {
+      return this.$store.getters['network/activeDelegates']
+    }
+  },
+
+  created() {
+    this.getTotals()
+  },
 
   watch: {
     delegates() {
@@ -65,13 +77,15 @@ export default {
 
   methods: {
     getTotals() {
+      if (!this.delegates) {
+        return
+      }
+
       this.totals = ForgingService.totals(this.delegates)
     },
 
     percentage(value) {
-      const activeDelegates = this.$store.getters['network/activeDelegates']
-
-      return value / activeDelegates * 100
+      return value / this.activeDelegates * 100
     },
   },
 }
