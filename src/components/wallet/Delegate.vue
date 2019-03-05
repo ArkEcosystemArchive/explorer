@@ -1,5 +1,5 @@
 <template>
-  <div v-show="delegate">
+  <div v-if="delegate">
     <div class="list-row-border-b">
       <div>{{ $t("Delegate") }}</div>
       <div>{{ delegate.username }}</div>
