@@ -113,12 +113,12 @@ export default {
   },
 
   watch: {
-    async block() {
+    block() {
       this.updatePrice()
     },
 
-    async currencySymbol() {
-      await this.updatePrice()
+    currencySymbol() {
+      this.updatePrice()
     }
   },
 
