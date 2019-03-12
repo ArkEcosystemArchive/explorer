@@ -23,6 +23,12 @@ const store = new Vuex.Store({
       getters: {
         height: state => 1000000
       }
+    },
+    currency: {
+      namespaced: true,
+      getters: {
+        symbol: state => '$'
+      }
     }
   },
   strict: true
