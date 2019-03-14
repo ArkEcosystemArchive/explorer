@@ -1,8 +1,8 @@
 <template>
-  <loader :data="blocks && updatedBlocks">
+  <loader :data="blocks">
     <table-component
-      v-if="updatedBlocks && updatedBlocks.length"
-      :data="updatedBlocks"
+      v-if="blocks && blocks.length"
+      :data="blocks"
       sort-by="height"
       sort-order="desc"
       :show-filter="false"
@@ -120,10 +120,6 @@ export default {
     },
   },
 
-  data: () => ({
-    updatedBlocks: null
-  }),
-
   created() {
     if (!this.updatedBlocks) {
       this.updateBlocks()
@@ -142,12 +138,9 @@ export default {
         return
       }
 
-      const mappedBlocks = this.blocks.map(async block => {
-        const price = await CryptoCompareService.dailyAverage(block.timestamp.unix)
-        return { ...block, price }
-      })
-
-      this.updatedBlocks = await Promise.all(mappedBlocks)
+      for (const block of this.blocks) {
+        block.price = await CryptoCompareService.dailyAverage(block.timestamp.unix)
+      }
     }
   }
 }
