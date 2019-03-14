@@ -11,6 +11,6 @@ describe('i18n', () => {
     expect(i18n.t('No results', 'pt-br')).toBe('Sem resultados')
     expect(i18n.t('No results', 'pl')).toBe('Brak wyników')
     expect(i18n.t('No results', 'fr')).toBe('Pas de résultats')
-    expect(i18n.t('No results', 'it-IT')).toBe('Nessun risultato')
+    expect(i18n.t('No results', 'it-it')).toBe('Nessun risultato')
   })
 })
