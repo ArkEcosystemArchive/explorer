@@ -1,7 +1,7 @@
 <template>
   <loader :data="blocks">
     <table-component
-      v-if="blocks && blocks.length > 0"
+      v-if="blocks && blocks.length"
       :data="blocks"
       sort-by="height"
       sort-order="desc"
@@ -71,7 +71,13 @@
         cell-class="right-cell"
       >
         <template slot-scope="row">
-          <span class="whitespace-no-wrap">
+          <span
+            class="whitespace-no-wrap"
+            v-tooltip="{
+              trigger: 'hover',
+              content: readableCurrency(row.forged.total, row.price)
+            }"
+          >
             {{ readableCrypto(row.forged.total) }}
           </span>
         </template>
@@ -84,7 +90,13 @@
         cell-class="right-end-cell"
       >
         <template slot-scope="row">
-          <span class="whitespace-no-wrap">
+          <span
+            class="whitespace-no-wrap"
+            v-tooltip="{
+              trigger: 'hover',
+              content: row.forged.fee ? readableCurrency(row.forged.fee, row.price) : ''
+            }"
+          >
             {{ readableCrypto(row.forged.fee) }}
           </span>
         </template>
@@ -98,12 +110,38 @@
 </template>
 
 <script type="text/ecmascript-6">
+import CryptoCompareService from '@/services/crypto-compare'
+
 export default {
   props: {
     blocks: {
-      // type: Array or null
-      required: true,
+      // type: Array, or null
+      required: true
     },
+  },
+
+  created() {
+    if (!this.updatedBlocks) {
+      this.updateBlocks()
+    }
+  },
+
+  watch: {
+    async blocks() {
+      this.updateBlocks()
+    }
+  },
+
+  methods: {
+    async updateBlocks() {
+      if (!this.blocks) {
+        return
+      }
+
+      for (const block of this.blocks) {
+        block.price = await CryptoCompareService.dailyAverage(block.timestamp.unix)
+      }
+    }
   }
 }
 </script>

@@ -1,7 +1,7 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
 
-import Details from '@/components/block/Details'
+import Details from '@/components/transaction/Details'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 
@@ -34,23 +34,26 @@ const store = new Vuex.Store({
   strict: true
 })
 
-describe('Block/Details', () => {
-  it('Should display the block details', () => {
+describe('transaction/Details', () => {
+  it('Should display the transaction details', () => {
     const wrapper = mount(Details, {
       propsData: {
-        block: {
-          height: 1
+        transaction: {
+          id: 'transaction-id',
+          vendorField: 'vendor-field'
         }
       },
       stubs: {
-        'link-wallet': '<div></div>'
+        'link-wallet': '<div></div>',
+        'link-block': '<div></div>'
       },
       i18n,
       localVue,
       mixins,
       store
     })
-    expect(wrapper.findAll('.list-row-border-b')).toHaveLength(8)
+    expect(wrapper.findAll('.list-row-border-b')).toHaveLength(6)
+    expect(wrapper.findAll('.list-row-border-b-no-wrap')).toHaveLength(1)
     expect(wrapper.findAll('.list-row')).toHaveLength(1)
   })
 })

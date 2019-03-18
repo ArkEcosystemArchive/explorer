@@ -69,16 +69,6 @@ describe('Utils/Paginator', () => {
   })
 
   it('Should emit event if pressing previous or next page', () => {
-    const parentWrapper = mount(Paginator, {
-      propsData: {
-        previous: 'previous',
-        next: 'next'
-      },
-      i18n,
-      localVue,
-      mixins,
-      store
-    })
     const wrapper = mount(Paginator, {
       propsData: {
         previous: 'previous',

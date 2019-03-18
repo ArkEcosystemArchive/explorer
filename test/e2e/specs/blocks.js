@@ -19,6 +19,7 @@ module.exports = {
   'it should show 25 blocks in the table': function (browser) {
     browser
       .useCss()
+      .waitForElementVisible('div.hidden.sm\\:block div.table-component tbody.table-component__table__body')
       .expect.element('div.hidden.sm\\:block').to.be.present
     browser
       .elements('css selector', 'div.hidden.sm\\:block div.table-component tbody.table-component__table__body tr', function(result) {

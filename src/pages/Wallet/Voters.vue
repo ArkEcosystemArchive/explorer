@@ -21,7 +21,6 @@
 
 <script type="text/ecmascript-6">
 import DelegateService from '@/services/delegate'
-import sumBy from 'lodash/sumBy'
 
 export default {
   data: () => ({

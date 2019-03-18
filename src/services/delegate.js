@@ -1,8 +1,5 @@
-import ApiService from '@/services/api'
-import WalletService from '@/services/wallet'
-import ForgingService from '@/services/forging'
+import { ApiService, ForgingService, WalletService } from '@/services'
 import store from '@/store'
-import _ from 'lodash'
 
 class DelegateService {
   async all() {
