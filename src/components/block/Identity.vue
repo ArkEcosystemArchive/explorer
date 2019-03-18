@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="flex w-full md:block md:w-auto justify-between">
-      <button @click="prevHandler" :disabled="block.height == 1" class="block-pager-button mr-5">
+      <button @click="prevHandler" :disabled="isFirstBlock" class="block-pager-button mr-5">
         <svg
          class="inline"
          xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +28,7 @@
         <span class="ml-2 hidden md:block inline-button">{{ $t("Previous block") }}</span>
         <span class="ml-2 md:hidden">{{ $t("Previous") }}</span>
       </button>
-      <button @click="nextHandler" :disabled="block.confirmations == 1" class="block-pager-button">
+      <button @click="nextHandler" :disabled="isLastBlock" class="block-pager-button">
         <span class="mr-2 hidden md:block inline-button">{{ $t("Next block") }}</span>
         <span class="mr-2 md:hidden">{{ $t("Next") }}</span>
         <svg
@@ -45,21 +45,37 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     block: {
       type: Object,
       required: true
     },
+
     prevHandler: {
       type: Function,
       required: true
     },
+
     nextHandler: {
       type: Function,
       required: true
     }
   },
+
+  computed: {
+    ...mapGetters('network', ['height']),
+
+    isFirstBlock() {
+      return this.block.height === 1
+    },
+
+    isLastBlock() {
+      return this.height === this.block.height
+    }
+  }
 }
 </script>
 

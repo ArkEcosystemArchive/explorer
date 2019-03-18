@@ -37,8 +37,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import WalletService from '@/services/wallet'
-import BlockService from '@/services/block'
+import { BlockService, WalletService } from '@/services'
 
 export default {
   data: () => ({

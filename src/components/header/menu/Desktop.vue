@@ -13,9 +13,33 @@
       </svg>
     </button>
 
-    <router-link @click.native="closeMenu" :to="{ name: 'home' }" tag="button" class="menu-button">{{ $t("Home") }}</router-link>
-    <router-link @click.native="closeMenu" :to="{ name: 'top-wallets', params: { page: 1 } }" tag="button" class="menu-button">{{ $t("Top Wallets") }}</router-link>
-    <router-link @click.native="closeMenu" :to="{ name: 'delegate-monitor' }" tag="button" class="menu-button">{{ $t("Delegate Monitor") }}</router-link>
+    <router-link
+      @click.native="closeMenu"
+      :to="{ name: 'home' }"
+      tag="button"
+      class="menu-button"
+    >
+      {{ $t("Home") }}
+    </router-link>
+
+    <router-link
+      @click.native="closeMenu"
+      :to="{ name: 'top-wallets', params: { page: 1 } }"
+      tag="button"
+      class="menu-button"
+    >
+      {{ $t("Top Wallets") }}
+    </router-link>
+
+    <router-link
+      @click.native="closeMenu"
+      :to="{ name: 'delegate-monitor' }"
+      tag="button"
+      class="menu-button"
+    >
+      {{ $t("Delegate Monitor") }}
+    </router-link>
+
     <!-- <router-link :to="{ name: 'statistics' }" tag="button" class="menu-button">Statistics</router-link> -->
 
     <div class="flex-auto" />

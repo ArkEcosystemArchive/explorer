@@ -18,22 +18,58 @@
 
       <div class="list-row-border-b">
         <div>{{ $t("Reward") }}</div>
-        <div v-if="block.forged">{{ readableCrypto(block.forged.reward) }}</div>
+        <div
+          v-if="block.forged"
+          v-tooltip="{
+            trigger: 'hover click',
+            content: price ? readableCurrency(block.forged.reward, price) : '',
+            placement: 'left'
+          }"
+        >
+          {{ readableCrypto(block.forged.reward) }}
+        </div>
       </div>
 
       <div class="list-row-border-b">
         <div>{{ $t("Total fee") }}</div>
-        <div v-if="block.forged">{{ readableCrypto(block.forged.fee) }}</div>
+        <div
+          v-if="block.forged"
+          v-tooltip="{
+            trigger: 'hover click',
+            content: price ? readableCurrency(block.forged.fee, price) : '',
+            placement: 'left'
+          }"
+        >
+          {{ readableCrypto(block.forged.fee) }}
+        </div>
       </div>
 
       <div class="list-row-border-b">
         <div>{{ $t("Total forged") }}</div>
-        <div v-if="block.forged">{{ readableCrypto(block.forged.total) }}</div>
+        <div
+          v-if="block.forged"
+          v-tooltip="{
+            trigger: 'hover click',
+            content: price ? readableCurrency(block.forged.total, price) : '',
+            placement: 'left'
+          }"
+        >
+          {{ readableCrypto(block.forged.total) }}
+        </div>
       </div>
 
       <div class="list-row-border-b">
         <div>{{ $t("Total amount") }}</div>
-        <div v-if="block.forged">{{ readableCrypto(block.forged.amount) }}</div>
+        <div
+          v-if="block.forged"
+          v-tooltip="{
+            trigger: 'hover click',
+            content: price ? readableCurrency(block.forged.amount, price) : '',
+            placement: 'left'
+          }"
+        >
+          {{ readableCrypto(block.forged.amount) }}
+        </div>
       </div>
 
       <div class="list-row-border-b">
@@ -52,9 +88,14 @@
 </template>
 
 <script type="text/ecmascript-6">
+import CryptoCompareService from '@/services/crypto-compare'
 import { mapGetters } from 'vuex'
 
 export default {
+  data: () => ({
+    price: 0
+  }),
+
   props: {
     block: {
       type: Object,
@@ -63,10 +104,31 @@ export default {
   },
 
   computed: {
+    ...mapGetters('currency', { currencySymbol: 'symbol' }),
     ...mapGetters('network', ['height']),
 
     confirmations() {
       return this.height - this.block.height
+    }
+  },
+
+  watch: {
+    block() {
+      this.updatePrice()
+    },
+
+    currencySymbol() {
+      this.updatePrice()
+    }
+  },
+
+  methods: {
+    async updatePrice() {
+      if (!this.block.id) {
+        return
+      }
+
+      this.price = await CryptoCompareService.dailyAverage(this.block.timestamp.unix)
     }
   }
 }

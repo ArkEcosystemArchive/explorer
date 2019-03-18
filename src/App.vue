@@ -14,11 +14,7 @@
 <script type="text/ecmascript-6">
 import AppHeader from '@/components/header/Main'
 import AppFooter from '@/components/Footer'
-import CryptoCompareService from '@/services/crypto-compare'
-import BlockService from '@/services/block'
-import BlockchainService from '@/services/blockchain'
-import DelegateService from '@/services/delegate'
-import NodeService from '@/services/node'
+import { BlockService, BlockchainService, CryptoCompareService, DelegateService, NodeService } from '@/services'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 

@@ -45,7 +45,7 @@ describe('Block Service', () => {
 
   it('should return the blocks by an offset', async () => {
     jest.setTimeout(30000)
-    const { meta, data } = await BlockService.paginate()
+    const { data } = await BlockService.paginate()
     expect(data).toHaveLength(25)
     data.forEach(block => {
       expect(Object.keys(block).sort()).toEqual(blockPropertyArray)
@@ -55,7 +55,7 @@ describe('Block Service', () => {
 
   it('should return the blocks for given generator address', async () => {
     jest.setTimeout(30000)
-    const { meta, data } = await BlockService.byAddress('AeaqhUKfBtVqNhtMct3piBiWfdhbRwbg4W')
+    const { data } = await BlockService.byAddress('AeaqhUKfBtVqNhtMct3piBiWfdhbRwbg4W')
     expect(data).toHaveLength(25)
     data.forEach(block => {
       expect(Object.keys(block).sort()).toEqual(blockPropertyArray)
@@ -65,7 +65,7 @@ describe('Block Service', () => {
 
   xit('should return an empty list when given generator address is incorrect', async () => {
     jest.setTimeout(30000)
-    const { meta, data } = await BlockService.byAddress('XeaqhUKfBtVqNhtMct3piBiWfdhbRwbg4W')
+    const { data } = await BlockService.byAddress('XeaqhUKfBtVqNhtMct3piBiWfdhbRwbg4W')
     expect(data).toHaveLength(0)
   })
 

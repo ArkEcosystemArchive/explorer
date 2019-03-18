@@ -22,6 +22,8 @@ const outgoingAddress = 'AN7BURQn5oqBRBADeWhmmUMJGQTy5Seey3'
 describe('Utils/TransactionAmount', () => {
   beforeAll(() => {
     store.dispatch('network/setSymbol', 'Ѧ')
+    store.dispatch('currency/setName', 'USD')
+    store.dispatch('currency/setSymbol', '$')
   })
 
   it('Should display an outgoing transaction in red', () => {

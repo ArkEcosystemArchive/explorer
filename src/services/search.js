@@ -1,7 +1,9 @@
-import WalletService from '@/services/wallet'
-import DelegateService from '@/services/delegate'
-import BlockService from '@/services/block'
-import TransactionService from '@/services/transaction'
+import {
+  BlockService,
+  DelegateService,
+  WalletService,
+  TransactionService
+} from '@/services'
 
 class SearchService {
   async walletByAddress(address) {

@@ -4,7 +4,7 @@
       <span v-if="hasDefaultSlot">
         <slot />
       </span>
-      <span v-tooltip="id" v-else>{{ truncate(id) }}</span>
+      <span v-else v-tooltip="id">{{ truncate(id) }}</span>
     </router-link>
     <router-link :to="{ name: 'block', params: { id } }" class="md:hidden">
       <span v-tooltip="id">{{ truncate(id) }}</span>
