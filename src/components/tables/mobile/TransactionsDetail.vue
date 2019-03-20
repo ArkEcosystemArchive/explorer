@@ -36,10 +36,7 @@
 
         <div class="list-row-border-b">
           <div>{{ $t("Fee") }}</div>
-          <div>
-            <div v-if="price" v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(transaction.fee, price)}`, placement: 'top' }">{{ readableCrypto(transaction.fee) }}</div>
-            <div v-else>{{ readableCrypto(transaction.fee) }}</div>
-          </div>
+          <div>{{ readableCrypto(transaction.fee) }}</div>
         </div>
 
         <div class="list-row">
@@ -76,7 +73,6 @@ export default {
   },
 
   computed: {
-    ...mapGetters('currency', { price: 'rate' }),
     ...mapGetters('network', ['activeDelegates'])
   }
 }
