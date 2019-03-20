@@ -121,9 +121,7 @@ export default {
   },
 
   created() {
-    if (!this.updatedBlocks) {
-      this.updateBlocks()
-    }
+    this.updateBlocks()
   },
 
   watch: {
