@@ -1,12 +1,46 @@
 import axios from 'axios'
 import moment from 'moment'
+import genericPool from 'generic-pool'
 import store from '@/store'
 
+// CryptoCompare API supports until 50 requests per second
+const MAX_REQUEST_PER_SECOND = 50
 const SECONDS_PER_DAY = 86400
 
+let active = 0
+
+const requestFactory = {
+  create () {
+    return axios
+  },
+  destroy (resource) {
+    return Promise.resolve()
+  }
+}
+
+const requestPool = genericPool.createPool(requestFactory, {
+  max: MAX_REQUEST_PER_SECOND
+})
+
 class CryptoCompareService {
+  async get(url, options) {
+    const client = await requestPool.acquire()
+    const response = await client.get(url, options)
+
+    // @see https://github.com/coopernurse/node-pool/issues/206
+    try {
+      await requestPool.release(client)
+    } catch (error) {
+      if (error.message !== 'Resource not currently part of this pool') {
+        throw error
+      }
+    }
+
+    return response
+  }
+
   async price(currency) {
-    const response = await axios.get(`https://min-api.cryptocompare.com/data/price?fsym=ARK&tsyms=${currency}`)
+    const response = await this.get(`https://min-api.cryptocompare.com/data/price?fsym=ARK&tsyms=${currency}`)
     if (response.data.hasOwnProperty(currency)) {
       return Number(response.data[currency])
     }
@@ -41,15 +75,15 @@ class CryptoCompareService {
       targetCurrency = store.getters['currency/name']
     }
 
-    const response = await axios
-      .get(`https://min-api.cryptocompare.com/data/histo${type}`, {
-        params: {
-          fsym: token,
-          tsym: targetCurrency,
-          toTs: date,
-          limit
-        }
-      })
+    const response = await this.get(`https://min-api.cryptocompare.com/data/histo${type}`, {
+      params: {
+        fsym: token,
+        tsym: targetCurrency,
+        toTs: date,
+        limit
+      }
+    })
+
     return this.transform(response.data.Data, dateTimeFormat)
   }
 
@@ -86,14 +120,13 @@ class CryptoCompareService {
       return cache[ts]
     }
 
-    const response = await axios
-      .get('https://min-api.cryptocompare.com/data/dayAvg', {
-        params: {
-          fsym: token,
-          tsym: targetCurrency,
-          toTs: ts
-        }
-      })
+    const response = await this.get('https://min-api.cryptocompare.com/data/dayAvg', {
+      params: {
+        fsym: token,
+        tsym: targetCurrency,
+        toTs: ts
+      }
+    })
 
     if (response.data.Response === 'Error') {
       return null
