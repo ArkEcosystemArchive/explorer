@@ -125,7 +125,7 @@ export default {
   },
 
   watch: {
-    async blocks() {
+    blocks() {
       this.updateBlocks()
     }
   },

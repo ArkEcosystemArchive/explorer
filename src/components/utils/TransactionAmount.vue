@@ -9,7 +9,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
+import CryptoCompareService from '@/services/crypto-compare'
 
 export default {
   props: {
@@ -24,8 +24,6 @@ export default {
   },
 
   computed: {
-    ...mapGetters('currency', { price: 'rate' }),
-
     isTransfer() {
       if (this.type !== undefined) {
         // 0 = transfer, 6 = timelock transfer, 7 = multipayment
@@ -33,6 +31,27 @@ export default {
       }
       return false
     }
+  },
+
+  data: () => ({
+    price: null
+  }),
+
+  created() {
+    this.updatePrice()
+  },
+
+  watch: {
+    transaction() {
+      this.updatePrice()
+    }
+  },
+
+  methods: {
+    async updatePrice() {
+      this.price = await CryptoCompareService.dailyAverage(this.transaction.timestamp.unix)
+    }
   }
+
 }
 </script>

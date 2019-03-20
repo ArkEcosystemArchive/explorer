@@ -85,8 +85,7 @@
       >
         <template slot-scope="row">
           <span class="whitespace-no-wrap">
-            <div v-if="price" v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(row.fee, price)}`, placement: 'top' }">{{ readableCrypto(row.fee) }}</div>
-            <div v-else>{{ readableCrypto(row.fee) }}</div>
+            <div v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(row.fee, row.price)}`, placement: 'top' }">{{ readableCrypto(row.fee) }}</div>
           </span>
         </template>
       </table-column>
@@ -99,7 +98,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
+import CryptoCompareService from '@/services/crypto-compare'
 
 export default {
   props: {
@@ -110,12 +109,32 @@ export default {
   },
 
   computed: {
-    ...mapGetters('currency', { price: 'rate' }),
-
     showSmartBridgeIcon() {
       return this.transactions.some(transaction => {
         return !!transaction.vendorField
       })
+    }
+  },
+
+  created() {
+    this.updatePrices()
+  },
+
+  watch: {
+    transactions() {
+      this.updatePrices()
+    }
+  },
+
+  methods: {
+    async updatePrices() {
+      if (!this.transactions) {
+        return
+      }
+
+      for (const transaction of this.transactions) {
+        transaction.price = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
+      }
     }
   }
 }
