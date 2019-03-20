@@ -22,8 +22,7 @@ const dummyDelegate = {
     }
   },
   production: {
-    approval: 1.42,
-    productivity: 99.51,
+    approval: 1.42
   },
   forged: {
     fees: 1149050072665,

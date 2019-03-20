@@ -6,11 +6,6 @@
     </div>
 
     <div class="list-row-border-b">
-      <div>{{ $t("Uptime") }}</div>
-      <div v-if="delegate.production">{{ percentageString(delegate.production.productivity) }}</div>
-    </div>
-
-    <div class="list-row-border-b">
       <div>{{ $t("Rank/Status") }}</div>
       <div>{{ delegate.rank }}</div>
     </div>
