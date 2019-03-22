@@ -30,12 +30,13 @@
     <div class="list-row">
       <div>{{ $t("Blocks") }}</div>
       <div v-if="delegate.blocks">
-        <span :class="{ 'mr-2': delegate.blocks.produced }">
+        <span>
           {{ delegate.blocks.produced }}
         </span>
         <router-link
           v-if="delegate.blocks.produced"
           :to="{ name: 'wallet-blocks', params: { address: delegate.address, username: delegate.username, page: 1 } }"
+          class="ml-2"
         >
           {{ $t("See all") }}
         </router-link>
