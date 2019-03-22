@@ -10,7 +10,6 @@ const dummyDelegate = {
   rank: 1,
   blocks: {
     produced: 93305,
-    missed: 459,
     last: {
       id: '9909051139056065485',
       height: 4781311,
