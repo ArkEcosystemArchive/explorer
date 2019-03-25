@@ -18,12 +18,16 @@ module.exports = {
     '.*\\.(vue)$': '<rootDir>/node_modules/vue-jest'
   },
   testPathIgnorePatterns: [
-    '<rootDir>/test/e2e'
+    '<rootDir>/__tests__/unit/coverage',
+    '<rootDir>/__tests__/unit/jest.conf.js',
+    '<rootDir>/__tests__/unit/jest.setup.js',
+    '<rootDir>/__tests__/unit/setup.js',
+    '<rootDir>/__tests__/e2e'
   ],
   snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue'],
-  setupFilesAfterEnv: ['<rootDir>/test/unit/jest.setup.js'],
-  setupFiles: ['jest-localstorage-mock', '<rootDir>/test/unit/setup'],
-  coverageDirectory: '<rootDir>/test/unit/coverage',
+  setupFilesAfterEnv: ['<rootDir>/__tests__/unit/jest.setup.js'],
+  setupFiles: ['jest-localstorage-mock', '<rootDir>/__tests__/unit/setup'],
+  coverageDirectory: '<rootDir>/__tests__/unit/coverage',
   collectCoverage: true,
   collectCoverageFrom: [
     'src/**/*.{js,vue}',

@@ -9,7 +9,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import { PulseLoader } from 'vue-spinner/dist/vue-spinner.min.js'
 
 export default {
   components: {
