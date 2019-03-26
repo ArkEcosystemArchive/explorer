@@ -73,7 +73,7 @@ export default {
     },
 
     isLastBlock() {
-      return this.height === this.block.height
+      return this.block.height === this.height
     }
   }
 }

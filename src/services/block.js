@@ -49,13 +49,23 @@ class BlockService {
   }
 
   async findPrevious(height) {
-    const response = await ApiService.get(`blocks/${height - 1}`)
-    return response.data
+    const response = await ApiService.get('blocks', {
+      params: {
+        height: height - 1
+      }
+    })
+
+    return response.data[0]
   }
 
   async findNext(height) {
-    const response = await ApiService.get(`blocks/${height + 1}`)
-    return response.data
+    const response = await ApiService.get('blocks', {
+      params: {
+        height: height + 1
+      }
+    })
+
+    return response.data[0]
   }
 }
 
