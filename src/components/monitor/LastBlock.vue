@@ -3,14 +3,16 @@
     <div>
       <div class="text-grey mb-2 min-w-0">{{ $t("Last block") }}</div>
       <div class="text-lg truncate" v-if="block.id">
-        <link-block :id="block.id">{{ block.id }}</link-block>
+        <link-block :id="block.id" :length="20" />
       </div>
     </div>
 
     <div class="hidden md:block">
       <div class="text-grey mb-2 min-w-0">{{ $t("Forged") }}</div>
       <div class="text-lg text-white truncate">
-        <span v-if="block.forged">{{ readableCrypto(block.forged.total) }}</span> {{ $tc("from transactions", block.transactions, { count: block.transactions }) }}
+        <span v-if="block.forged">
+          {{ readableCrypto(block.forged.total) }} {{ $tc("from transactions", block.transactions, { count: block.transactions }) }}
+        </span>
       </div>
     </div>
 
