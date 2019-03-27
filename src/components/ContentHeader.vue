@@ -5,10 +5,18 @@
         <slot />
       </h1>
       <div class="hidden sm:flex items-center text-theme-text-tertiary text-2xs px-3 sm:px-8 xl:px-6 py-3 mb-5 md:mb-6 bg-stat-background rounded-md">
-        <div class="pr-6">{{ $t("Height") }}: {{ height.toLocaleString() }}</div>
-        <div class="pr-6">{{ $t("Network") }}: {{ $t(alias) }}</div>
-        <div :class="{ 'pr-6': alias == 'Main' }">{{ $t("Supply") }}: <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }}</span></div>
-        <div v-if="alias == 'Main'">{{ $t("Market Cap") }}: <currency :amount="+supply" /></div>
+        <div class="pr-6">
+          {{ $t("Height") }}: {{ height.toLocaleString() }}
+        </div>
+        <div class="pr-6">
+          {{ $t("Network") }}: {{ $t(alias) }}
+        </div>
+        <div :class="{ 'pr-6': isMain }">
+          {{ $t("Supply") }}: <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }}</span>
+        </div>
+        <div v-if="isMain">
+          {{ $t("Market Cap") }}: <currency :amount="+supply" />
+        </div>
       </div>
     </div>
     <div class="sm:hidden flex items-center justify-between text-theme-text-tertiary text-2xs px-5 sm:px-8 xl:px-6 py-3 bg-stat-background">
@@ -35,6 +43,10 @@ export default {
   computed: {
     ...mapGetters('network', ['alias', 'supply', 'height']),
     ...mapGetters('currency', ['name', 'rate', 'symbol']),
-  },
+
+    isMain () {
+      return this.alias === 'Main'
+    }
+  }
 }
 </script>

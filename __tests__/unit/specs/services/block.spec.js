@@ -80,11 +80,11 @@ describe('Block Service', () => {
     await expect(BlockService.findPrevious(1234567891234567890)).rejects.toThrow()
   })
 
-  it('should fail when an no parameter is given (findPrevious)', async() => {
+  it('should fail when an no parameter is given (findPrevious)', async () => {
     await expect(BlockService.findPrevious()).rejects.toThrow()
   })
 
-  it('should fail when an empty string is given (findPrevious)', async() => {
+  it('should fail when an empty string is given (findPrevious)', async () => {
     await expect(BlockService.findPrevious('')).rejects.toThrow()
   })
 
@@ -98,11 +98,11 @@ describe('Block Service', () => {
     await expect(BlockService.findNext(1234567891234567890)).rejects.toThrow()
   })
 
-  it('should fail when no parameter is given (findNext)', async() => {
+  it('should fail when no parameter is given (findNext)', async () => {
     await expect(BlockService.findNext()).rejects.toThrow()
   })
 
-  it('should return the block at height 1 when an empty string is given (findNext)', async() => {
+  it('should return the block at height 1 when an empty string is given (findNext)', async () => {
     jest.setTimeout(30000)
     const data = await BlockService.findNext('')
     expect(Object.keys(data).sort()).toEqual(blockPropertyArray)

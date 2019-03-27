@@ -6,19 +6,19 @@ import {
 } from '@/services'
 
 class SearchService {
-  async walletByAddress(address) {
+  async walletByAddress (address) {
     return WalletService.find(address)
   }
 
-  async delegateByQuery(query) {
+  async delegateByQuery (query) {
     return DelegateService.find(query)
   }
 
-  async blockByQuery(id) {
+  async blockByQuery (id) {
     return BlockService.find(id)
   }
 
-  async transactionById(id) {
+  async transactionById (id) {
     return TransactionService.find(id)
   }
 }

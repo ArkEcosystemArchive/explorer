@@ -8,7 +8,9 @@
 
       <div class="list-row-border-b">
         <div>{{ $t("Confirmations") }}</div>
-        <div v-if="confirmations >= 0">{{ confirmations }}</div>
+        <div v-if="confirmations >= 0">
+          {{ confirmations }}
+        </div>
       </div>
 
       <div class="list-row-border-b">
@@ -74,7 +76,9 @@
 
       <div class="list-row-border-b">
         <div>{{ $t("Timestamp") }}</div>
-        <div v-if="block.timestamp">{{ readableTimestamp(block.timestamp.unix) }}</div>
+        <div v-if="block.timestamp">
+          {{ readableTimestamp(block.timestamp.unix) }}
+        </div>
       </div>
 
       <div class="list-row">
@@ -92,9 +96,6 @@ import CryptoCompareService from '@/services/crypto-compare'
 import { mapGetters } from 'vuex'
 
 export default {
-  data: () => ({
-    price: 0
-  }),
 
   props: {
     block: {
@@ -102,28 +103,31 @@ export default {
       required: true
     }
   },
+  data: () => ({
+    price: 0
+  }),
 
   computed: {
     ...mapGetters('currency', { currencySymbol: 'symbol' }),
     ...mapGetters('network', ['height']),
 
-    confirmations() {
+    confirmations () {
       return this.height - this.block.height
     }
   },
 
   watch: {
-    block() {
+    block () {
       this.updatePrice()
     },
 
-    currencySymbol() {
+    currencySymbol () {
       this.updatePrice()
     }
   },
 
   methods: {
-    async updatePrice() {
+    async updatePrice () {
       if (!this.block.id) {
         return
       }

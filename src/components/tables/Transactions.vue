@@ -16,7 +16,11 @@
         cell-class="left-start-cell"
       >
         <template slot-scope="row">
-          <link-transaction :id="row.id" :smart-bridge="row.vendorField" :show-smart-bridge-icon="showSmartBridgeIcon" />
+          <link-transaction
+            :id="row.id"
+            :smart-bridge="row.vendorField"
+            :show-smart-bridge-icon="showSmartBridgeIcon"
+          />
         </template>
       </table-column>
 
@@ -49,7 +53,11 @@
         cell-class="left-cell"
       >
         <template slot-scope="row">
-          <link-wallet :address="row.recipient" :type="row.type" :asset="row.asset" />
+          <link-wallet
+            :address="row.recipient"
+            :type="row.type"
+            :asset="row.asset"
+          />
         </template>
       </table-column>
 
@@ -72,7 +80,10 @@
       >
         <template slot-scope="row">
           <span class="whitespace-no-wrap">
-            <transaction-amount :transaction="row" :type="row.type" />
+            <transaction-amount
+              :transaction="row"
+              :type="row.type"
+            />
           </span>
         </template>
       </table-column>
@@ -91,7 +102,10 @@
       </table-column>
     </table-component>
 
-    <div v-else class="px-5 md:px-10">
+    <div
+      v-else
+      class="px-5 md:px-10"
+    >
       <span>{{ $t("No results") }}</span>
     </div>
   </loader>
@@ -101,13 +115,13 @@
 export default {
   props: {
     transactions: {
-      // type: Array or null
-      required: true,
+      type: Array,
+      required: true
     }
   },
 
   computed: {
-    showSmartBridgeIcon() {
+    showSmartBridgeIcon () {
       return this.transactions.some(transaction => {
         return !!transaction.vendorField
       })

@@ -2,7 +2,7 @@ import { ApiService, ForgingService, WalletService } from '@/services'
 import store from '@/store'
 
 class DelegateService {
-  async all() {
+  async all () {
     const response = await ApiService.get('delegates')
 
     const requests = []
@@ -30,7 +30,7 @@ class DelegateService {
       .reduce((a, b) => [...a, ...b])
   }
 
-  async voters(query, page, limit = 25) {
+  async voters (query, page, limit = 25) {
     const response = await ApiService.get(`delegates/${query}/voters`, {
       params: {
         page,
@@ -41,7 +41,7 @@ class DelegateService {
     return response
   }
 
-  async voterCount(publicKey, excludeLowBalances = true) {
+  async voterCount (publicKey, excludeLowBalances = true) {
     const response = await WalletService.search({
       vote: publicKey,
       balance: {
@@ -56,12 +56,12 @@ class DelegateService {
     return response.meta.totalCount
   }
 
-  async find(query) {
+  async find (query) {
     const response = await ApiService.get(`delegates/${query}`)
     return response.data
   }
 
-  async active() {
+  async active () {
     const activeDelegates = store.getters['network/activeDelegates']
     const height = store.getters['network/height']
 
@@ -81,7 +81,7 @@ class DelegateService {
     })
   }
 
-  async standby() {
+  async standby () {
     const activeDelegates = store.getters['network/activeDelegates']
 
     const response = await ApiService.get('delegates', {
@@ -94,7 +94,7 @@ class DelegateService {
     return response.data
   }
 
-  async forged() {
+  async forged () {
     const activeDelegates = store.getters['network/activeDelegates']
 
     const response = await ApiService.get('delegates', {
@@ -111,7 +111,7 @@ class DelegateService {
     })
   }
 
-  async activeDelegatesCount() {
+  async activeDelegatesCount () {
     const response = await ApiService.get('delegates', {
       params: {
         limit: 1

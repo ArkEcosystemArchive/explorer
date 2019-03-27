@@ -3,15 +3,21 @@
     <content-header>{{ $t("Top Wallets") }}</content-header>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <table-wallets :wallets="wallets" :total="supply" />
+        <table-wallets
+          :wallets="wallets"
+          :total="supply"
+        />
       </div>
       <div class="sm:hidden">
-        <table-wallets-mobile :wallets="wallets" :total="supply" />
+        <table-wallets-mobile
+          :wallets="wallets"
+          :total="supply"
+        />
       </div>
       <paginator
         v-if="showPaginator"
-        :previous="this.meta.previous"
-        :next="this.meta.next"
+        :previous="meta.previous"
+        :next="meta.next"
         @previous="onPrevious"
         @next="onNext"
       />
@@ -33,19 +39,19 @@ export default {
   computed: {
     ...mapGetters('network', ['supply']),
 
-    showPaginator() {
+    showPaginator () {
       return this.meta && (this.meta.previous || this.meta.next)
     }
   },
 
-  created() {
-    this.$on('paginatorChanged', page => this.changePage(page))
-  },
-
   watch: {
-    currentPage() {
+    currentPage () {
       this.changePage()
     }
+  },
+
+  created () {
+    this.$on('paginatorChanged', page => this.changePage(page))
   },
 
   async beforeRouteEnter (to, from, next) {
@@ -57,7 +63,7 @@ export default {
         vm.setWallets(data)
         vm.setMeta(meta)
       })
-    } catch(e) { next({ name: '404' }) }
+    } catch (e) { next({ name: '404' }) }
   },
 
   async beforeRouteUpdate (to, from, next) {
@@ -71,27 +77,27 @@ export default {
       this.setWallets(data)
       this.setMeta(meta)
       next()
-    } catch(e) { next({ name: '404' }) }
+    } catch (e) { next({ name: '404' }) }
   },
 
   methods: {
-    setWallets(wallets) {
+    setWallets (wallets) {
       this.wallets = wallets
     },
 
-    setMeta(meta) {
+    setMeta (meta) {
       this.meta = meta
     },
 
-    onPrevious() {
+    onPrevious () {
       this.currentPage = Number(this.currentPage) - 1
     },
 
-    onNext() {
+    onNext () {
       this.currentPage = Number(this.currentPage) + 1
     },
 
-    changePage() {
+    changePage () {
       this.$router.push({
         name: 'top-wallets',
         params: {

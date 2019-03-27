@@ -8,7 +8,11 @@
         <table-blocks-mobile :blocks="blocks" />
       </div>
       <div class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
-        <router-link :to="{ name: 'blocks', params: { page: 2 } }" tag="button" class="show-more-button">
+        <router-link
+          :to="{ name: 'blocks', params: { page: 2 } }"
+          tag="button"
+          class="show-more-button"
+        >
           {{ $t("Show more") }}
         </router-link>
       </div>
@@ -24,18 +28,18 @@ export default {
     blocks: null
   }),
 
-  async mounted() {
+  async mounted () {
     await this.prepareComponent()
   },
 
   methods: {
-    async prepareComponent() {
+    async prepareComponent () {
       await this.getBlocks()
 
       this.$store.watch(state => state.network.height, value => this.getBlocks())
     },
 
-    async getBlocks() {
+    async getBlocks () {
       const response = await BlockService.latest()
       this.blocks = response
     }

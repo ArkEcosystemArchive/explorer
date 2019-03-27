@@ -1,7 +1,10 @@
 <template>
   <span>
-    <div class="text-center" v-if="data === null">
-      <pulse-loader color="#037cff" />
+    <div
+      v-if="data === null"
+      class="text-center"
+    >
+      <PulseLoader color="#037cff" />
     </div>
 
     <slot v-else />
@@ -18,6 +21,7 @@ export default {
 
   props: {
     data: {
+      type: Array,
       required: true
     }
   }

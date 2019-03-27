@@ -30,7 +30,7 @@ const store = new Vuex.Store({
         rewardOffset: state => networkState.rewardOffset
       },
       mutations: {
-        setHeight(state, payload) {
+        setHeight (state, payload) {
           state.height = payload.value
         }
       },
@@ -38,11 +38,11 @@ const store = new Vuex.Store({
         setHeight: ({ commit }, value) => {
           commit({
             type: 'setHeight',
-            value,
+            value
           })
         }
       }
-    },
+    }
   },
   strict: true
 })

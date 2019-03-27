@@ -9,22 +9,22 @@ export default {
   },
 
   mutations: {
-    [types.SET_DELEGATES](state, payload) {
+    [types.SET_DELEGATES] (state, payload) {
       state.delegates = payload.value
     },
-    [types.SET_FORGED](state, payload) {
+    [types.SET_FORGED] (state, payload) {
       state.forged = payload.value
     }
   },
 
   actions: {
-    setDelegates: ({commit}, value) => {
+    setDelegates: ({ commit }, value) => {
       commit({
         type: types.SET_DELEGATES,
         value
       })
     },
-    setForged: ({commit}, value) => {
+    setForged: ({ commit }, value) => {
       commit({
         type: types.SET_FORGED,
         value

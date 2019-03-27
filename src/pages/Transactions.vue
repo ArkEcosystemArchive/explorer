@@ -5,7 +5,9 @@
     <section class="hidden sm:block mb-5">
       <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
         <div class="flex-auto min-w-0">
-          <div class="text-grey mb-2">{{ $t("Transaction type") }}</div>
+          <div class="text-grey mb-2">
+            {{ $t("Transaction type") }}
+          </div>
           <div class="flex">
             <div class="text-lg text-white semibold truncate">
               <span class="mr-2">{{ types[transactionType + 1] }}</span>
@@ -13,7 +15,10 @@
           </div>
         </div>
         <div class="flex flex-col w-full sm:w-auto sm:ml-4 sm:-mr-10">
-          <selection-type :in-banner="true" @change="setType" />
+          <SelectionType
+            :in-banner="true"
+            @change="setType"
+          />
         </div>
       </div>
     </section>
@@ -24,15 +29,15 @@
       </div>
       <div class="sm:hidden">
         <div class="mx-5 mb-4">
-          <selection-type @change="setType" />
+          <SelectionType @change="setType" />
         </div>
 
         <table-transactions-mobile :transactions="transactions" />
       </div>
       <paginator
         v-if="showPaginator"
-        :previous="this.meta.previous"
-        :next="this.meta.next"
+        :previous="meta.previous"
+        :next="meta.next"
         @previous="onPrevious"
         @next="onNext"
       />
@@ -60,19 +65,19 @@ export default {
   }),
 
   computed: {
-    showPaginator() {
+    showPaginator () {
       return this.meta && (this.meta.previous || this.meta.next)
     }
   },
 
-  created() {
-    this.transactionType = Number(localStorage.getItem('transactionType') || -1)
-  },
-
   watch: {
-    currentPage() {
+    currentPage () {
       this.changePage()
     }
+  },
+
+  created () {
+    this.transactionType = Number(localStorage.getItem('transactionType') || -1)
   },
 
   async beforeRouteEnter (to, from, next) {
@@ -87,7 +92,7 @@ export default {
         vm.setTransactions(data)
         vm.setMeta(meta)
       })
-    } catch(e) { next({ name: '404' }) }
+    } catch (e) { next({ name: '404' }) }
   },
 
   async beforeRouteUpdate (to, from, next) {
@@ -104,11 +109,11 @@ export default {
       this.setTransactions(data)
       this.setMeta(meta)
       next()
-    } catch(e) { next({ name: '404' }) }
+    } catch (e) { next({ name: '404' }) }
   },
 
   methods: {
-    setTransactions(transactions) {
+    setTransactions (transactions) {
       if (!transactions) {
         return
       }
@@ -116,19 +121,19 @@ export default {
       this.transactions = transactions
     },
 
-    setMeta(meta) {
+    setMeta (meta) {
       this.meta = meta
     },
 
-    onPrevious() {
+    onPrevious () {
       this.currentPage = Number(this.currentPage) - 1
     },
 
-    onNext() {
+    onNext () {
       this.currentPage = Number(this.currentPage) + 1
     },
 
-    setType(type) {
+    setType (type) {
       if (this.transactionType !== type) {
         this.transactionType = type
         this.currentPage = 1
@@ -137,7 +142,7 @@ export default {
       }
     },
 
-    changePage() {
+    changePage () {
       this.$router.push({
         name: 'transactions',
         params: {

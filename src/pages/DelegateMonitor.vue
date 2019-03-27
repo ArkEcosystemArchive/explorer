@@ -2,27 +2,35 @@
   <div class="max-w-2xl mx-auto md:pt-5">
     <content-header>{{ $t("Delegate Monitor") }}</content-header>
 
-    <delegate-detail />
+    <DelegateDetail />
 
     <section class="page-section py-5 md:py-10">
       <nav class="mx-5 sm:mx-10 mb-4 border-b flex items-end">
         <div
+          :class="activeTab === 'active' ? 'active-tab' : 'inactive-tab'"
           @click="activeTab = 'active'"
-          :class="activeTab === 'active' ? 'active-tab' : 'inactive-tab'">
+        >
           {{ $t("Active") }}
         </div>
         <div
+          :class="activeTab === 'standby' ? 'active-tab' : 'inactive-tab'"
           @click="activeTab = 'standby'"
-          :class="activeTab === 'standby' ? 'active-tab' : 'inactive-tab'">
+        >
           {{ $t("Standby") }}
         </div>
       </nav>
 
-      <forging :delegates="delegates" v-show="activeTab === 'active'" />
+      <Forging
+        v-show="activeTab === 'active'"
+        :delegates="delegates"
+      />
 
-      <active-delegates v-if="activeTab === 'active'" :delegates="delegates" />
+      <ActiveDelegates
+        v-if="activeTab === 'active'"
+        :delegates="delegates"
+      />
 
-      <standby-delegates v-if="activeTab === 'standby'" />
+      <StandbyDelegates v-if="activeTab === 'standby'" />
     </section>
   </div>
 </template>
@@ -40,7 +48,7 @@ export default {
     DelegateDetail,
     Forging,
     ActiveDelegates,
-    StandbyDelegates,
+    StandbyDelegates
   },
 
   data: () => ({
@@ -49,21 +57,21 @@ export default {
   }),
 
   computed: {
-    ...mapGetters('network', ['height']),
-  },
-
-  async created() {
-    await this.setDelegates()
+    ...mapGetters('network', ['height'])
   },
 
   watch: {
-    async height() {
+    async height () {
       await this.setDelegates()
     }
   },
 
+  async created () {
+    await this.setDelegates()
+  },
+
   methods: {
-    async setDelegates() {
+    async setDelegates () {
       if (this.height) {
         this.delegates = await DelegateService.active()
       }

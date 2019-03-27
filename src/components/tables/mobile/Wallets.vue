@@ -1,7 +1,11 @@
 <template>
   <div>
     <loader :data="wallets">
-      <div v-for="(row, index) in wallets" :key="row.address" class="row-mobile">
+      <div
+        v-for="(row, index) in wallets"
+        :key="row.address"
+        class="row-mobile"
+      >
         <div class="list-row-border-b">
           <div>{{ $t("Rank") }}</div>
           <div>{{ getRank(index) }}</div>
@@ -22,7 +26,10 @@
           <div>{{ readableNumber((row.balance / total) * 100) }}%</div>
         </div>
       </div>
-      <div v-if="wallets && !wallets.length" class="px-5 md:px-10">
+      <div
+        v-if="wallets && !wallets.length"
+        class="px-5 md:px-10"
+      >
         <span>{{ $t("No results") }}</span>
       </div>
     </loader>
@@ -35,13 +42,13 @@ import { mapGetters } from 'vuex'
 export default {
   props: {
     wallets: {
-      // type: Array or null
-      required: true,
+      type: Array,
+      required: true
     },
     total: {
       type: Number,
       required: true
-    },
+    }
   },
 
   computed: {
@@ -49,7 +56,7 @@ export default {
   },
 
   methods: {
-    getRank(index) {
+    getRank (index) {
       const page = this.$route.params.page > 1 ? this.$route.params.page - 1 : 0
 
       return page * 25 + (index + 1)

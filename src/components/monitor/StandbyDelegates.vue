@@ -58,7 +58,10 @@
       </table-column>
     </table-component>
 
-    <div v-else class="px-5 md:px-10">
+    <div
+      v-else
+      class="px-5 md:px-10"
+    >
       <span>{{ $t("No results") }}</span>
     </div>
   </loader>
@@ -67,7 +70,6 @@
 <script type="text/ecmascript-6">
 import DelegateService from '@/services/delegate'
 import { mapGetters } from 'vuex'
-import moment from 'moment'
 
 export default {
   data: () => ({
@@ -75,18 +77,18 @@ export default {
   }),
 
   computed: {
-    ...mapGetters('network', ['activeDelegates']),
+    ...mapGetters('network', ['activeDelegates'])
   },
 
-  async mounted() {
+  async mounted () {
     await this.getDelegates()
   },
 
   methods: {
-    async getDelegates() {
+    async getDelegates () {
       const response = await DelegateService.standby()
       this.delegates = response
-    },
-  },
+    }
+  }
 }
 </script>

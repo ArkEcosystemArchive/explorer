@@ -2,8 +2,11 @@
   <div class="max-w-2xl mx-auto md:pt-5">
     <content-header>{{ $t("Latest transactions and blocks") }}</content-header>
 
-    <section v-if="priceChart" class="hidden md:block mb-5 bg-theme-feature-background xl:rounded-lg">
-      <chart-wrapper />
+    <section
+      v-if="priceChart"
+      class="hidden md:block mb-5 bg-theme-feature-background xl:rounded-lg"
+    >
+      <ChartWrapper />
     </section>
 
     <section class="page-section py-5 md:py-10">
@@ -26,15 +29,18 @@
           </div>
         </nav>
 
-        <selection-type
+        <SelectionType
           v-if="dataView === 'transactions'"
           @change="onTypeChange"
         />
       </div>
 
-      <latest-transactions v-if="dataView === 'transactions'" :transaction-type="transactionType" />
+      <LatestTransactions
+        v-if="dataView === 'transactions'"
+        :transaction-type="transactionType"
+      />
 
-      <latest-blocks v-if="dataView === 'blocks'" />
+      <LatestBlocks v-if="dataView === 'blocks'" />
     </section>
   </div>
 </template>
@@ -59,16 +65,16 @@ export default {
     transactionType: -1
   }),
 
+  computed: {
+    ...mapGetters('ui', ['priceChart'])
+  },
+
   created () {
     this.transactionType = Number(localStorage.getItem('transactionType') || -1)
   },
 
-  computed: {
-    ...mapGetters('ui', ['priceChart']),
-  },
-
   methods: {
-    onTypeChange(type) {
+    onTypeChange (type) {
       this.transactionType = type
     }
   }

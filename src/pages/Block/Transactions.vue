@@ -10,8 +10,8 @@
       </div>
       <paginator
         v-if="showPaginator"
-        :previous="this.meta.previous"
-        :next="this.meta.next"
+        :previous="meta.previous"
+        :next="meta.next"
         @previous="onPrevious"
         @next="onNext"
       />
@@ -29,8 +29,18 @@ export default {
     currentPage: 0
   }),
 
+  computed: {
+    showPaginator () {
+      return this.meta && (this.meta.previous || this.meta.next)
+    },
+
+    id () {
+      return this.$route.params.id
+    }
+  },
+
   watch: {
-    currentPage() {
+    currentPage () {
       this.changePage()
     }
   },
@@ -44,7 +54,7 @@ export default {
         vm.setTransactions(data)
         vm.setMeta(meta)
       })
-    } catch(e) { next({ name: '404' }) }
+    } catch (e) { next({ name: '404' }) }
   },
 
   async beforeRouteUpdate (to, from, next) {
@@ -58,21 +68,11 @@ export default {
       this.setTransactions(data)
       this.setMeta(meta)
       next()
-    } catch(e) { next({ name: '404' }) }
-  },
-
-  computed: {
-    showPaginator() {
-      return this.meta && (this.meta.previous || this.meta.next)
-    },
-
-    id() {
-      return this.$route.params.id
-    }
+    } catch (e) { next({ name: '404' }) }
   },
 
   methods: {
-    setTransactions(transactions) {
+    setTransactions (transactions) {
       if (!transactions) {
         return
       }
@@ -80,19 +80,19 @@ export default {
       this.transactions = transactions
     },
 
-    setMeta(meta) {
+    setMeta (meta) {
       this.meta = meta
     },
 
-    onPrevious() {
+    onPrevious () {
       this.currentPage = Number(this.currentPage) - 1
     },
 
-    onNext() {
+    onNext () {
       this.currentPage = Number(this.currentPage) + 1
     },
 
-    changePage(page) {
+    changePage (page) {
       this.$router.push({
         name: 'block-transactions',
         params: {

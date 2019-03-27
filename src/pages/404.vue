@@ -6,10 +6,12 @@
       <div class="my-10 text-center">
         <img
           v-if="!nightMode"
-          src="@/assets/images/404/light.png" />
+          src="@/assets/images/404/light.png"
+        >
         <img
           v-else
-          src="@/assets/images/404/dark.png" />
+          src="@/assets/images/404/dark.png"
+        >
         <h1>{{ $t("Ooops!") }}!</h1>
         <p>{{ $t("Sorry, page not found") }}</p>
       </div>
@@ -22,7 +24,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters('ui', ['nightMode']),
-  },
+    ...mapGetters('ui', ['nightMode'])
+  }
 }
 </script>

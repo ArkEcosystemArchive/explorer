@@ -1,11 +1,22 @@
 <template>
   <div class="language-menu w-full px-5 hidden xl:flex items-center justify-end">
-    <button v-for="lang in languages" @click="setLanguage(lang)" :key="lang" class="menu-button">
-      <img :src="getLanguageFlag(lang)" class="flag-image">
+    <button
+      v-for="lang in languages"
+      :key="lang"
+      class="menu-button"
+      @click="setLanguage(lang)"
+    >
+      <img
+        :src="getLanguageFlag(lang)"
+        class="flag-image"
+      >
     </button>
 
-    <button @click="$store.dispatch('ui/setHeaderType', null)" class="flex flex-none p-2 close-button">
-      <img src="@/assets/images/icons/cross.svg" />
+    <button
+      class="flex flex-none p-2 close-button"
+      @click="$store.dispatch('ui/setHeaderType', null)"
+    >
+      <img src="@/assets/images/icons/cross.svg">
     </button>
   </div>
 </template>
@@ -18,7 +29,7 @@ export default {
   computed: {
     ...mapGetters('ui', ['language']),
 
-    languages() {
+    languages () {
       return Object.keys(this.$i18n.messages).filter(
         lang => lang !== this.language && lang !== 'en'
       )
@@ -26,7 +37,7 @@ export default {
   },
 
   methods: {
-    setLanguage(language) {
+    setLanguage (language) {
       this.$store.dispatch('ui/setLanguage', language)
       this.$i18n.locale = language
 
@@ -36,7 +47,7 @@ export default {
       this.$store.dispatch('ui/setHeaderType', null)
     },
 
-    getLanguageFlag(language) {
+    getLanguageFlag (language) {
       // TODO: consider using flag plugin, for example `flag-icon-css`
       return require(`@/assets/images/flags/${language}.svg`)
     }

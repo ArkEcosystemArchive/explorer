@@ -1,7 +1,11 @@
 <template>
   <div>
     <loader :data="blocks">
-      <div v-for="block in blocks" :key="block.id" class="row-mobile">
+      <div
+        v-for="block in blocks"
+        :key="block.id"
+        class="row-mobile"
+      >
         <div class="list-row-border-b">
           <div>{{ $t("ID") }}</div>
           <link-block :id="block.id" />
@@ -14,7 +18,9 @@
 
         <div class="list-row-border-b">
           <div>{{ $t("Timestamp") }}</div>
-          <div v-if="block.timestamp">{{ readableTimestamp(block.timestamp.unix) }}</div>
+          <div v-if="block.timestamp">
+            {{ readableTimestamp(block.timestamp.unix) }}
+          </div>
         </div>
 
         <div class="list-row-border-b">
@@ -31,15 +37,22 @@
 
         <div class="list-row-border-b">
           <div>{{ $t("Amount (token)", { token: networkToken() }) }}</div>
-          <div v-if="block.forged">{{ readableCrypto(block.forged.total) }}</div>
+          <div v-if="block.forged">
+            {{ readableCrypto(block.forged.total) }}
+          </div>
         </div>
 
         <div class="list-row">
           <div>{{ $t("Fee (token)", { token: networkToken() }) }}</div>
-          <div v-if="block.forged">{{ readableCrypto(block.forged.fee) }}</div>
+          <div v-if="block.forged">
+            {{ readableCrypto(block.forged.fee) }}
+          </div>
         </div>
       </div>
-      <div v-if="blocks && !blocks.length" class="px-5 md:px-10">
+      <div
+        v-if="blocks && !blocks.length"
+        class="px-5 md:px-10"
+      >
         <span>{{ $t("No results") }}</span>
       </div>
     </loader>
@@ -50,8 +63,8 @@
 export default {
   props: {
     blocks: {
-      // type: Array or null
-      required: true,
+      type: Array,
+      required: true
     }
   }
 }

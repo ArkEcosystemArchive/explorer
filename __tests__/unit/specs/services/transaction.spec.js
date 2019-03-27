@@ -38,7 +38,7 @@ describe('Transaction Service', () => {
     await expect(TransactionService.find('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')).rejects.toThrow()
   })
 
-  it('should filter the transactions and only return type 3 transactions', async() => {
+  it('should filter the transactions and only return type 3 transactions', async () => {
     const { data } = await TransactionService.filterByType(1, 3)
     expect(data).toHaveLength(25)
     data.forEach(transaction => {
@@ -47,7 +47,7 @@ describe('Transaction Service', () => {
     })
   })
 
-  it('should return latest transactions for an address and page offset', async() => {
+  it('should return latest transactions for an address and page offset', async () => {
     const { data } = await TransactionService.allByAddress('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK', 1)
     expect(data).toHaveLength(25)
     data.forEach(transaction => {
@@ -56,7 +56,7 @@ describe('Transaction Service', () => {
     expect(data.sort((a, b) => a.timestamp.unix < b.timestamp.unix)).toEqual(data)
   })
 
-  it('should return latest transactions for an address with page offset and given limit', async() => {
+  it('should return latest transactions for an address with page offset and given limit', async () => {
     const { data } = await TransactionService.allByAddress('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK', 2, 40)
     expect(data).toHaveLength(40)
     data.forEach(transaction => {

@@ -1,24 +1,40 @@
 <template>
   <div class="relative">
-    <div v-if="hasError" class="absolute pin flex flex-col items-center justify-center text-white z-10">
+    <div
+      v-if="hasError"
+      class="absolute pin flex flex-col items-center justify-center text-white z-10"
+    >
       <p class="mb-4">
         {{ $t('The chart data could not be loaded') }}
       </p>
-      <button @click="renderChart()" :disabled="isLoading" class="mt-4 pager-button items-center">
+      <button
+        :disabled="isLoading"
+        class="mt-4 pager-button items-center"
+        @click="renderChart()"
+      >
         <span v-if="!isLoading">{{ $t('Reload chart') }}</span>
-        <loader v-else :data="null" />
+        <loader
+          v-else
+          :data="null"
+        />
       </button>
     </div>
 
-    <div :key="componentKey" :class="{ 'blur': hasError }">
+    <div
+      :key="componentKey"
+      :class="{ 'blur': hasError }"
+    >
       <div class="flex justify-between items-center px-10 py-8">
-        <h2 class="text-white m-0 text-xl font-normal">{{ $t("Price in") }} {{ currencyName }}</h2>
+        <h2 class="text-white m-0 text-xl font-normal">
+          {{ $t("Price in") }} {{ currencyName }}
+        </h2>
         <div>
           <template v-for="period in ['day', 'week', 'month', 'quarter', 'year']">
             <button
-              @click="setPeriod(period)"
+              :key="period"
               :class="{ 'chart-tab-active': currentPeriod === period }"
               class="chart-tab"
+              @click="setPeriod(period)"
             >
               {{ $t(capitalize(period)) }}
             </button>
@@ -26,7 +42,11 @@
         </div>
       </div>
 
-      <price-chart :chartData="chartData" :options="options" :height="314" />
+      <PriceChart
+        :chart-data="chartData"
+        :options="options"
+        :height="314"
+      />
     </div>
   </div>
 </template>
@@ -53,21 +73,21 @@ export default {
       responsive: true,
       maintainAspectRatio: false,
       hover: {
-          intersect: false
+        intersect: false
       },
       animation: {
-          duration: 0
+        duration: 0
       },
       responsiveAnimationDuration: 0,
       legend: {
-        display: false,
+        display: false
       },
       layout: {
         padding: {
           left: 50,
           right: 50,
           top: 0,
-          bottom: 50,
+          bottom: 50
         }
       },
       scales: {
@@ -85,25 +105,25 @@ export default {
                 return store.getters['currency/symbol'] + value.toFixed(2)
               },
               fontColor: '#838a9b',
-              fontSize: 13,
+              fontSize: 13
             },
             gridLines: {
-              color: '#282b38',
-            },
-          },
+              color: '#282b38'
+            }
+          }
         ],
         xAxes: [
           {
             gridLines: {
               display: true,
-              color: '#282b38',
+              color: '#282b38'
             },
             ticks: {
               fontColor: '#838a9b',
-              fontSize: 13,
-            },
-          },
-        ],
+              fontSize: 13
+            }
+          }
+        ]
       },
       tooltips: {
         backgroundColor: '#272936',
@@ -145,7 +165,7 @@ export default {
     ...mapGetters('network', ['token']),
     ...mapGetters('ui', { currentPeriod: 'priceChartPeriod' }),
 
-    chartData() {
+    chartData () {
       return {
         labels: this.labels,
         datasets: [{
@@ -163,36 +183,36 @@ export default {
       }
     },
 
-    hasError() {
+    hasError () {
       return !!this.error
     }
   },
 
-  mounted() {
-    window.addEventListener('resize', this.handleResize)
-    this.renderChart()
-  },
-
   watch: {
-    token() {
+    token () {
       this.renderChart()
     },
 
-    currencyName() {
+    currencyName () {
       this.renderChart()
     }
   },
 
+  mounted () {
+    window.addEventListener('resize', this.handleResize)
+    this.renderChart()
+  },
+
   methods: {
-    setPeriod(period) {
+    setPeriod (period) {
       this.$store.dispatch('ui/setPriceChartPeriod', period)
 
-      if (!!this.token) {
+      if (this.token) {
         this.renderChart()
       }
     },
 
-    async renderChart(delay = false) {
+    async renderChart (delay = false) {
       this.isLoading = true
 
       try {
@@ -201,7 +221,7 @@ export default {
         this.datasets = response.datasets
 
         this.error = null
-      } catch(error) {
+      } catch (error) {
         this.labels = []
         this.datasets = []
 
@@ -211,11 +231,11 @@ export default {
       }
     },
 
-    handleResize() {
+    handleResize () {
       // trick to re-mount the chart on resize
       // https://stackoverflow.com/questions/47459837/how-to-re-mount-a-component
       this.componentKey++
-    },
+    }
   }
 }
 </script>

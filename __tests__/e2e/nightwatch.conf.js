@@ -22,7 +22,7 @@ module.exports = {
     default: {
       webdriver: {
         webdriver_port: 4444,
-        webdriver_host: '127.0.0.1',
+        webdriver_host: '127.0.0.1'
       },
       silent: true,
       globals: {

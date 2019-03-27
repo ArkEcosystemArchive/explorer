@@ -23,7 +23,7 @@ describe('Link/Transaction', () => {
         id: testTransaction
       },
       stubs: {
-        RouterLink: RouterLinkStub,
+        RouterLink: RouterLinkStub
       },
       i18n,
       localVue,
@@ -44,7 +44,7 @@ describe('Link/Transaction', () => {
         showSmartBridgeIcon: true
       },
       stubs: {
-        RouterLink: RouterLinkStub,
+        RouterLink: RouterLinkStub
       },
       i18n,
       localVue,
@@ -65,7 +65,7 @@ describe('Link/Transaction', () => {
         showSmartBridgeIcon: false
       },
       stubs: {
-        RouterLink: RouterLinkStub,
+        RouterLink: RouterLinkStub
       },
       i18n,
       localVue,

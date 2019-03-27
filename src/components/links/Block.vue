@@ -1,12 +1,21 @@
 <template>
   <span>
-    <router-link :to="{ name: 'block', params: { id } }" class="hidden md:inline-block">
+    <router-link
+      :to="{ name: 'block', params: { id } }"
+      class="hidden md:inline-block"
+    >
       <span v-if="hasDefaultSlot">
         <slot />
       </span>
-      <span v-else v-tooltip="id">{{ truncate(id, length) }}</span>
+      <span
+        v-else
+        v-tooltip="id"
+      >{{ truncate(id, length) }}</span>
     </router-link>
-    <router-link :to="{ name: 'block', params: { id } }" class="md:hidden">
+    <router-link
+      :to="{ name: 'block', params: { id } }"
+      class="md:hidden"
+    >
       <span v-tooltip="id">{{ truncate(id) }}</span>
     </router-link>
   </span>

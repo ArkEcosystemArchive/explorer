@@ -2,12 +2,26 @@
   <div>
     <img
       v-if="!nightMode"
-      src="@/assets/images/not-found/light.png" />
+      src="@/assets/images/not-found/light.png"
+    >
     <img
       v-else
-      src="@/assets/images/not-found/dark.png" />
+      src="@/assets/images/not-found/dark.png"
+    >
     <h1>{{ $t('Ooops!') }}</h1>
-    <p v-html="$t('Sorry, dataType dataId could not be found on the blockchain', { dataId: truncate(dataId, 20), dataType })" />
+    <i18n
+      tag="p"
+      path="Sorry, dataType dataId could not be found on the blockchain"
+      class="mt-2"
+    >
+      <span place="dataType">{{ dataType }}</span>
+      <span
+        class="semibold"
+        place="dataId"
+      >
+        {{ dataId }}
+      </span>
+    </i18n>
   </div>
 </template>
 

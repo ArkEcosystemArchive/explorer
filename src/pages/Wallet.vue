@@ -2,16 +2,31 @@
   <div class="max-w-2xl mx-auto md:pt-5">
     <content-header>{{ $t("Wallet summary") }}</content-header>
 
-    <wallet-details :wallet="wallet" />
+    <WalletDetails :wallet="wallet" />
 
-    <section class="page-section mb-5" :class="{ 'py-5 md:py-10': isDelegate }" v-show="isDelegate">
+    <section
+      v-show="isDelegate"
+      class="page-section mb-5"
+      :class="{ 'py-5 md:py-10': isDelegate }"
+    >
       <div class="px-5 sm:px-10">
-        <delegate :wallet="wallet" v-show="isDelegate" v-on:username="username = $event" />
-        <voters :wallet="wallet" :username="username" v-show="isDelegate" />
+        <Delegate
+          v-show="isDelegate"
+          :wallet="wallet"
+          @username="username = $event"
+        />
+        <Voters
+          v-show="isDelegate"
+          :wallet="wallet"
+          :username="username"
+        />
       </div>
     </section>
 
-    <transactions :wallet="wallet" v-if="wallet" />
+    <Transactions
+      v-if="wallet"
+      :wallet="wallet"
+    />
   </div>
 </template>
 
@@ -27,7 +42,7 @@ export default {
     WalletDetails,
     Delegate,
     Voters,
-    Transactions,
+    Transactions
   },
 
   data: () => ({
@@ -37,32 +52,32 @@ export default {
   }),
 
   computed: {
-    isDelegate() {
+    isDelegate () {
       return this.wallet.isDelegate
-    },
+    }
   },
 
-  async beforeRouteEnter(to, from, next) {
+  async beforeRouteEnter (to, from, next) {
     try {
       const response = await WalletService.find(to.params.address)
       next(vm => vm.setWallet(response))
-    } catch(e) { next({ name: '404' }) }
+    } catch (e) { next({ name: '404' }) }
   },
 
-  async beforeRouteUpdate(to, from, next) {
+  async beforeRouteUpdate (to, from, next) {
     this.wallet = {}
 
     try {
       const response = await WalletService.find(to.params.address)
       this.setWallet(response)
       next()
-    } catch(e) { next({ name: '404' }) }
+    } catch (e) { next({ name: '404' }) }
   },
 
   methods: {
-    async setWallet(wallet) {
+    async setWallet (wallet) {
       this.wallet = wallet
     }
-  },
+  }
 }
 </script>

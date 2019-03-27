@@ -35,11 +35,11 @@ const store = new Vuex.Store({
     network: {
       namespaced: true,
       state: {
-        currencies: {'USD': '$'},
+        currencies: { 'USD': '$' }
       },
       getters: {
-        currencies: state => ({'USD': '$'})
-      },
+        currencies: state => ({ 'USD': '$' })
+      }
     }
   },
   strict: true

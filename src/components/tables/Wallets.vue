@@ -25,7 +25,10 @@
         cell-class="left-cell"
       >
         <template slot-scope="row">
-          <link-wallet :address="row.address" :trunc="false" />
+          <link-wallet
+            :address="row.address"
+            :trunc="false"
+          />
         </template>
       </table-column>
 
@@ -52,7 +55,10 @@
       </table-column>
     </table-component>
 
-    <div v-else class="px-5 md:px-10">
+    <div
+      v-else
+      class="px-5 md:px-10"
+    >
       <span>{{ $t("No results") }}</span>
     </div>
   </loader>
@@ -64,7 +70,7 @@ import { mapGetters } from 'vuex'
 export default {
   props: {
     wallets: {
-      // type: Array or null
+      type: Array,
       required: true
     },
     total: {
@@ -78,7 +84,7 @@ export default {
   },
 
   methods: {
-    getRank(index) {
+    getRank (index) {
       const page = this.$route.params.page > 1 ? this.$route.params.page - 1 : 0
 
       return page * 25 + (index + 1)

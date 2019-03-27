@@ -3,15 +3,21 @@
     <content-header>{{ $t("Voters") }} <span v-if="delegate">- {{ delegate.username }}</span></content-header>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <table-wallets :wallets="wallets" :total="delegate ? delegate.votes : 0" />
+        <table-wallets
+          :wallets="wallets"
+          :total="delegate ? delegate.votes : 0"
+        />
       </div>
       <div class="sm:hidden">
-        <table-wallets-mobile :wallets="wallets" :total="delegate ? delegate.votes : 0" />
+        <table-wallets-mobile
+          :wallets="wallets"
+          :total="delegate ? delegate.votes : 0"
+        />
       </div>
       <paginator
         v-if="showPaginator"
-        :previous="this.meta.previous"
-        :next="this.meta.next"
+        :previous="meta.previous"
+        :next="meta.next"
         @previous="onPrevious"
         @next="onNext"
       />
@@ -31,21 +37,21 @@ export default {
   }),
 
   computed: {
-    showPaginator() {
+    showPaginator () {
       return this.meta && (this.meta.previous || this.meta.next)
     },
-    address() {
+    address () {
       return this.$route.params.address
     }
   },
 
   watch: {
-    currentPage() {
+    currentPage () {
       this.changePage()
     }
   },
 
-  async beforeRouteEnter(to, from, next) {
+  async beforeRouteEnter (to, from, next) {
     try {
       const delegate = await DelegateService.find(to.params.address)
       const { meta, data } = await DelegateService.voters(to.params.address, to.params.page)
@@ -56,10 +62,10 @@ export default {
         vm.setWallets(data)
         vm.setMeta(meta)
       })
-    } catch(e) { next({ name: '404' }) }
+    } catch (e) { next({ name: '404' }) }
   },
 
-  async beforeRouteUpdate(to, from, next) {
+  async beforeRouteUpdate (to, from, next) {
     this.wallets = null
     this.meta = null
 
@@ -72,31 +78,31 @@ export default {
       this.setWallets(data)
       this.setMeta(meta)
       next()
-    } catch(e) { next({ name: '404' }) }
+    } catch (e) { next({ name: '404' }) }
   },
 
   methods: {
-    setDelegate(delegate) {
+    setDelegate (delegate) {
       this.delegate = delegate
     },
 
-    setWallets(wallets) {
+    setWallets (wallets) {
       this.wallets = wallets
     },
 
-    setMeta(meta) {
+    setMeta (meta) {
       this.meta = meta
     },
 
-    onPrevious() {
+    onPrevious () {
       this.currentPage = Number(this.currentPage) - 1
     },
 
-    onNext() {
+    onNext () {
       this.currentPage = Number(this.currentPage) + 1
     },
 
-    changePage(page) {
+    changePage (page) {
       this.$router.push({
         name: 'wallet-voters',
         params: {

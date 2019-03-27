@@ -1,11 +1,11 @@
 <template>
   <section class="mb-5">
     <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
-      <delegate-count />
+      <DelegateCount />
 
-      <total-forged />
+      <TotalForged />
 
-      <last-block />
+      <LastBlock />
     </div>
   </section>
 </template>

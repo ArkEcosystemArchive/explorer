@@ -16,7 +16,7 @@ module.exports = {
       .waitForElementVisible("//h1[text() = 'Block']")
   },
 
-  'it should be possible to navigate to next block and back': function(browser) {
+  'it should be possible to navigate to next block and back': function (browser) {
     browser
       .waitForElementVisible("//div[contains(@class, 'semibold') and contains(@class, 'truncate')]/span[contains(text(), '3487084709104787070')]")
       .click("//button[contains(., 'Next')]")
@@ -26,7 +26,7 @@ module.exports = {
       .waitForElementVisible("//div[contains(@class, 'semibold') and contains(@class, 'truncate')]/span[contains(text(), '3487084709104787070')]")
   },
 
-  'it should not contain a transaction table if block has no transactions': function(browser) {
+  'it should not contain a transaction table if block has no transactions': function (browser) {
     browser
       .useXpath().assert.containsText("//div[.='Transactions']/following-sibling::div[1]", '0')
     browser
@@ -36,7 +36,7 @@ module.exports = {
     browser.end()
   },
 
-  'it should contain a transaction table if block has 1 or more transactions': function(browser) {
+  'it should contain a transaction table if block has 1 or more transactions': function (browser) {
     browser
       .url(browser.globals.devServerURL + '/#/block/12287662939647858585')
       .pause(500)
@@ -46,7 +46,7 @@ module.exports = {
     browser
       .expect.element('div.table-component').to.be.present
     browser
-      .elements('css selector', '.table-component__table__body tr', function(result) {
+      .elements('css selector', '.table-component__table__body tr', function (result) {
         browser.assert.equal(1, result.value.length)
       })
   },
@@ -65,12 +65,12 @@ module.exports = {
     browser
       .waitForElementVisible('div.list-row-border-b')
       .useXpath()
-      .getText(element, function(result) {
-        browser.expect.element(element).text.to.not.contain(result.value).after(20000)
+      .getText(element, function (result) {
+        browser.expect.element(element).text.to.not.contain(result.value.trim()).after(20000)
       })
   },
 
-  'it should be possible to click on the delegate': function(browser) {
+  'it should be possible to click on the delegate': function (browser) {
     browser
       .useXpath()
       .waitForElementVisible("//div[contains(@class, 'list-row')]//a")

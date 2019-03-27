@@ -22,7 +22,7 @@ module.exports = {
       .waitForElementVisible('div.hidden.sm\\:block div.table-component tbody.table-component__table__body')
       .expect.element('div.hidden.sm\\:block').to.be.present
     browser
-      .elements('css selector', 'div.hidden.sm\\:block div.table-component tbody.table-component__table__body tr', function(result) {
+      .elements('css selector', 'div.hidden.sm\\:block div.table-component tbody.table-component__table__body tr', function (result) {
         browser.assert.equal(25, result.value.length)
       })
   },

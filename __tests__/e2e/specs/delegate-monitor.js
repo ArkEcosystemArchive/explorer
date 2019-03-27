@@ -22,29 +22,29 @@ module.exports = {
       .waitForElementVisible('.bg-theme-feature-background')
       .pause(2000)
       .useXpath()
-    browser.expect.element("//div[text() = 'Delegates']").to.be.visible
-    browser.expect.element("//div[text() = 'Total forged (ARK)']").to.be.visible
-    browser.expect.element("//div[text() = 'Last block']").to.be.visible
-    browser.expect.element("//div[text() = 'Forged']").to.be.visible
-    browser.expect.element("//div[text() = 'Delegate']").to.be.visible
+    browser.expect.element("//div[contains(text(), 'Delegates')]").to.be.visible
+    browser.expect.element("//div[contains(text(), 'Total forged (ARK)')]").to.be.visible
+    browser.expect.element("//div[contains(text(), 'Last block')]").to.be.visible
+    browser.expect.element("//div[contains(text(), 'Forged')]").to.be.visible
+    browser.expect.element("//div[contains(text(), 'Delegate')]").to.be.visible
   },
 
   'it should fetch the latest block automatically': function (browser) {
-    const element = "//div[text() = 'Last block']/following-sibling::div//a[1]/span"
+    const element = "//div[contains(text(), 'Last block')]/following-sibling::div//a[1]/span"
 
     browser
       .useXpath().waitForElementVisible(element)
-      .getText(element, function(result) {
+      .getText(element, function (result) {
         browser.expect.element(element).text.to.not.contain(result.value).after(20000)
       })
   },
 
   'it should fetch the delegates automatically': function (browser) {
-    const element = "//div[text() = 'In queue for forging']/preceding-sibling::div"
+    const element = "//div[contains(text(), 'In queue for forging')]/preceding-sibling::div"
 
     browser
       .useXpath().waitForElementVisible(element)
-      .getText(element, function(result) {
+      .getText(element, function (result) {
         browser.expect.element(element).text.to.not.contain(result.value).after(20000)
       })
   },
@@ -52,7 +52,7 @@ module.exports = {
   'it should be possible to click on the last block': function (browser) {
     browser
       .useXpath()
-      .click("//div[text() = 'Last block']/following-sibling::div//a[1]")
+      .click("//div[contains(text(), 'Last block')]/following-sibling::div//a[1]")
       .pause(500)
       .waitForElementVisible("//h1[text() = 'Block']")
       .assert.urlContains('/block/')
@@ -64,8 +64,8 @@ module.exports = {
     browser
       .url(devServer)
       .useXpath()
-      .waitForElementVisible("//div[contains(@class, 'bg-theme-feature-background')]/div[3]//div[text() = 'Delegate']/following-sibling::div//a[1]")
-      .click("//div[contains(@class, 'bg-theme-feature-background')]/div[3]//div[text() = 'Delegate']/following-sibling::div//a[1]")
+      .waitForElementVisible("//div[contains(@class, 'bg-theme-feature-background')]/div[3]//div[contains(text(), 'Delegate')]/following-sibling::div//a[1]")
+      .click("//div[contains(@class, 'bg-theme-feature-background')]/div[3]//div[contains(text(), 'Delegate')]/following-sibling::div//a[1]")
       .pause(500)
     browser
       .waitForElementVisible("//h1[text() = 'Wallet summary']")
@@ -79,15 +79,15 @@ module.exports = {
       .useCss()
       .waitForElementVisible('.bg-theme-feature-background')
     browser
-      .elements('css selector', 'div.meter', function(result) {
+      .elements('css selector', 'div.meter', function (result) {
         browser.assert.equal(4, result.value.length)
       })
     browser
       .useXpath()
-      .expect.element("//div[text() = 'Forged block recently']").to.be.visible
-    browser.expect.element("//div[text() = 'Missed block']").to.be.visible
-    browser.expect.element("//div[text() = 'Not forging']").to.be.visible
-    browser.expect.element("//div[text() = 'In queue for forging']").to.be.visible
+      .expect.element("//div[contains(text(), 'Forged block recently')]").to.be.visible
+    browser.expect.element("//div[contains(text(), 'Missed block')]").to.be.visible
+    browser.expect.element("//div[contains(text(), 'Not forging')]").to.be.visible
+    browser.expect.element("//div[contains(text(), 'In queue for forging')]").to.be.visible
   },
 
   'it should be possible to sort the active delegates': function (browser) {
@@ -140,10 +140,10 @@ module.exports = {
   'it should not show forging stats for standby delegates': function (browser) {
     browser
       .useXpath()
-      .expect.element("//div[text() = 'Forged block recently']").to.not.be.visible
-    browser.expect.element("//div[text() = 'Missed block']").to.not.be.visible
-    browser.expect.element("//div[text() = 'Not forging']").to.not.be.visible
-    browser.expect.element("//div[text() = 'In queue for forging']").to.not.be.visible
+      .expect.element("//div[contains(text(), 'Forged block recently')]").to.not.be.visible
+    browser.expect.element("//div[contains(text(), 'Missed block')]").to.not.be.visible
+    browser.expect.element("//div[contains(text(), 'Not forging')]").to.not.be.visible
+    browser.expect.element("//div[contains(text(), 'In queue for forging')]").to.not.be.visible
   },
 
   'it should be possible to sort the standby delegates': function (browser) {

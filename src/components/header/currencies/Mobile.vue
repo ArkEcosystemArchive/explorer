@@ -1,10 +1,15 @@
 <template>
   <ul class="menu-container w-full text-center max-w-480px justify-center bg-table-row list-reset absolute pin-b pin-r py-5 block xl:hidden">
-    <li v-for="(symbol, currency) in currencies"
-            @click="setCurrency(currency, symbol)"
-            :key="currency"
-            :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'inline-flex justify-center']">
-      <a href="#" class="cursor-pointer py-3 w-32 flex-none">{{ currency }}</a>
+    <li
+      v-for="(symbol, currency) in currencies"
+      :key="currency"
+      :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'inline-flex justify-center']"
+      @click="setCurrency(currency, symbol)"
+    >
+      <a
+        href="#"
+        class="cursor-pointer py-3 w-32 flex-none"
+      >{{ currency }}</a>
     </li>
   </ul>
 </template>
@@ -21,12 +26,12 @@ export default {
   },
 
   methods: {
-    async setCurrency(currency, symbol) {
+    async setCurrency (currency, symbol) {
       const rate = await CryptoCompareService.price(currency)
       this.storeCurrency(currency, rate, symbol)
     },
 
-    storeCurrency(currency, rate, symbol) {
+    storeCurrency (currency, rate, symbol) {
       this.$store.dispatch('currency/setName', currency)
       this.$store.dispatch('currency/setRate', rate)
       this.$store.dispatch('currency/setSymbol', symbol)

@@ -32,7 +32,7 @@ const store = new Vuex.Store({
       actions: {
         setMenuVisible: jest.fn()
       }
-    },
+    }
   },
   strict: true
 })

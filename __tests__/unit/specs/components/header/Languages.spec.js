@@ -32,7 +32,7 @@ const store = new Vuex.Store({
         nightMode: state => false,
         language: state => 'en-gb'
       }
-    },
+    }
   },
   strict: true
 })

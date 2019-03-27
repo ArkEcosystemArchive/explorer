@@ -4,24 +4,24 @@ export default {
   props: {
     value: {
       type: String,
-      required: true,
+      required: true
     },
     options: {
-      type: Object,
+      type: Object
     }
   },
 
   watch: {
-    value() {
+    value () {
       this.generate()
     },
 
-    options() {
+    options () {
       this.generate()
     }
   },
 
-  mounted() {
+  mounted () {
     this.generate()
   },
 
@@ -30,10 +30,11 @@ export default {
   },
 
   methods: {
-    generate() {
+    generate () {
+      /* eslint-disable no-new */
       new QRious(Object.assign({
         element: this.$el,
-        value: this.value,
+        value: this.value
       }, this.options))
     }
   }

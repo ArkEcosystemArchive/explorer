@@ -16,7 +16,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('currency', { currencySymbol: 'symbol' }),
+    ...mapGetters('currency', { currencySymbol: 'symbol' })
   }
 }
 </script>

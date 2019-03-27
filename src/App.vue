@@ -1,20 +1,22 @@
 <template>
-  <main :class="[
-    nightMode ? 'theme-dark' : 'theme-light',
-    'bg-theme-page-background text-theme-text-content min-h-screen font-sans xl:pt-8'
-  ]">
-    <app-header />
+  <main
+    :class="[
+      nightMode ? 'theme-dark' : 'theme-light',
+      'bg-theme-page-background text-theme-text-content min-h-screen font-sans xl:pt-8'
+    ]"
+  >
+    <AppHeader />
 
     <router-view />
 
-    <app-footer />
+    <AppFooter />
   </main>
 </template>
 
 <script type="text/ecmascript-6">
 import AppHeader from '@/components/header/Main'
 import AppFooter from '@/components/Footer'
-import { BlockService, BlockchainService, CryptoCompareService, DelegateService, NodeService } from '@/services'
+import { BlockchainService, CryptoCompareService, DelegateService, NodeService } from '@/services'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 
@@ -28,12 +30,18 @@ export default {
     networkTimer: null
   }),
 
-  async created() {
+  computed: {
+    ...mapGetters('currency', { currencyName: 'name' }),
+    ...mapGetters('ui', ['language', 'locale', 'nightMode']),
+    ...mapGetters('network', ['token'])
+  },
+
+  async created () {
     const network = require(`../networks/${process.env.EXPLORER_CONFIG}`)
 
     this.$store.dispatch(
       'ui/setNightMode',
-      localStorage.getItem('nightMode') || ((network.alias === 'Development') ? true : false)
+      localStorage.getItem('nightMode') || ((network.alias === 'Development'))
     )
 
     this.$store.dispatch('network/setDefaults', network.defaults)
@@ -90,52 +98,50 @@ export default {
     this.updateDelegates()
   },
 
-  mounted() {
+  mounted () {
     this.prepareComponent()
   },
 
-  computed: {
-    ...mapGetters('currency', { currencyName: 'name' }),
-    ...mapGetters('ui', ['language', 'locale', 'nightMode']),
-    ...mapGetters('network', ['token']),
+  beforeDestroy () {
+    this.clearTimers()
   },
 
   methods: {
-    prepareComponent() {
+    prepareComponent () {
       this.initialiseTimers()
     },
 
-    async updateCurrencyRate() {
+    async updateCurrencyRate () {
       if (this.currencyName !== this.token) {
         const rate = await CryptoCompareService.price(this.currencyName)
         this.$store.dispatch('currency/setRate', rate)
       }
     },
 
-    async updateSupply() {
+    async updateSupply () {
       const supply = await BlockchainService.supply()
       this.$store.dispatch('network/setSupply', supply)
     },
 
-    async updateHeight() {
+    async updateHeight () {
       const height = await BlockchainService.height()
       this.$store.dispatch('network/setHeight', height)
     },
 
-    async updateDelegates() {
+    async updateDelegates () {
       const delegates = await DelegateService.all()
       this.$store.dispatch('delegates/setDelegates', delegates)
     },
 
-    updateI18n() {
+    updateI18n () {
       this.$i18n.locale = this.language
     },
 
-    updateLocale() {
+    updateLocale () {
       moment.locale(this.locale)
     },
 
-    initialiseTimers() {
+    initialiseTimers () {
       this.currencyTimer = setInterval(() => {
         this.updateCurrencyRate()
       }, 5 * 60 * 1000)
@@ -147,14 +153,10 @@ export default {
       }, 8 * 1000)
     },
 
-    clearTimers() {
+    clearTimers () {
       clearInterval(this.currencyTimer)
       clearInterval(this.networkTimer)
     }
-  },
-
-  beforeDestroy() {
-    this.clearTimers()
-  },
+  }
 }
 </script>

@@ -72,11 +72,11 @@
       >
         <template slot-scope="row">
           <span
-            class="whitespace-no-wrap"
             v-tooltip="{
               trigger: 'hover',
               content: readableCurrency(row.forged.total, row.price)
             }"
+            class="whitespace-no-wrap"
           >
             {{ readableCrypto(row.forged.total) }}
           </span>
@@ -91,11 +91,11 @@
       >
         <template slot-scope="row">
           <span
-            class="whitespace-no-wrap"
             v-tooltip="{
               trigger: 'hover',
               content: row.forged.fee ? readableCurrency(row.forged.fee, row.price) : ''
             }"
+            class="whitespace-no-wrap"
           >
             {{ readableCrypto(row.forged.fee) }}
           </span>
@@ -103,7 +103,10 @@
       </table-column>
     </table-component>
 
-    <div v-else class="px-5 md:px-10">
+    <div
+      v-else
+      class="px-5 md:px-10"
+    >
       <span>{{ $t("No results") }}</span>
     </div>
   </loader>
@@ -115,25 +118,25 @@ import CryptoCompareService from '@/services/crypto-compare'
 export default {
   props: {
     blocks: {
-      // type: Array, or null
+      type: Array,
       required: true
-    },
+    }
   },
 
-  created() {
+  watch: {
+    async blocks () {
+      this.updateBlocks()
+    }
+  },
+
+  created () {
     if (!this.updatedBlocks) {
       this.updateBlocks()
     }
   },
 
-  watch: {
-    async blocks() {
-      this.updateBlocks()
-    }
-  },
-
   methods: {
-    async updateBlocks() {
+    async updateBlocks () {
       if (!this.blocks) {
         return
       }

@@ -1,35 +1,38 @@
 <template>
   <header
-    class="header min-h-50px md:min-h-80px z-50 max-w-2xl mx-auto flex bg-theme-nav-background shadow-theme xl:rounded-md mb-5 sm:mb-10"
     v-click-outside="closeHeader"
+    class="header min-h-50px md:min-h-80px z-50 max-w-2xl mx-auto flex bg-theme-nav-background shadow-theme xl:rounded-md mb-5 sm:mb-10"
   >
     <router-link
       :to="{ name: 'home' }"
-      class="logo-container w-50px md:w-80px h-50px md:h-80px flex-none bg-red text-2xl xl:rounded-l-md flex justify-center items-center">
-      <img class="logo max-w-25px md:max-w-38px" src="@/assets/images/logo.png" />
+      class="logo-container w-50px md:w-80px h-50px md:h-80px flex-none bg-red text-2xl xl:rounded-l-md flex justify-center items-center"
+    >
+      <img
+        class="logo max-w-25px md:max-w-38px"
+        src="@/assets/images/logo.png"
+      >
     </router-link>
     <div class="w-full relative hidden xl:flex">
-      <header-search v-if="headerType === 'search'" />
+      <HeaderSearch v-if="headerType === 'search'" />
 
-      <header-desktop-currencies v-else-if="headerType === 'currencies'" />
+      <HeaderDesktopCurrencies v-else-if="headerType === 'currencies'" />
 
-      <header-desktop-languages v-else-if="headerType === 'languages'" />
+      <HeaderDesktopLanguages v-else-if="headerType === 'languages'" />
 
-      <header-default v-else />
+      <HeaderDefault v-else />
 
-      <header-desktop-menu v-if="menuVisible" />
+      <HeaderDesktopMenu v-if="menuVisible" />
     </div>
     <div class="w-full relative flex xl:hidden">
-      <header-search v-if="headerType === 'search'" />
+      <HeaderSearch v-if="headerType === 'search'" />
 
-      <header-default v-else />
+      <HeaderDefault v-else />
     </div>
-    <header-mobile-menu v-if="menuVisible" />
+    <HeaderMobileMenu v-if="menuVisible" />
 
-    <header-mobile-currencies v-else-if="headerType === 'currencies'" />
+    <HeaderMobileCurrencies v-else-if="headerType === 'currencies'" />
 
-    <header-mobile-languages v-else-if="headerType === 'languages'" />
-
+    <HeaderMobileLanguages v-else-if="headerType === 'languages'" />
   </header>
 </template>
 
@@ -53,11 +56,11 @@ export default {
     HeaderDesktopLanguages,
     HeaderMobileLanguages,
     HeaderDesktopMenu,
-    HeaderMobileMenu,
+    HeaderMobileMenu
   },
 
   computed: {
-    ...mapGetters('ui', ['headerType', 'menuVisible']),
+    ...mapGetters('ui', ['headerType', 'menuVisible'])
   },
 
   methods: {
