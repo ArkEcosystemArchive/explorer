@@ -138,7 +138,7 @@ module.exports = {
     browser.expect.element("//div[text() = 'Delegate']").to.be.present
     browser.expect.element("//div[text() = 'Rank/Status']").to.be.present
     browser.expect.element("//div[text() = 'Uptime']").to.be.present
-    browser.expect.element("//div[text() = 'Vote %']").to.be.present
+    browser.expect.element("//div[text() = 'Votes']").to.be.present
     browser.expect.element("//div[text() = 'Forged']").to.be.present
     browser.expect.element("//div[text() = 'Blocks']").to.be.present
   },

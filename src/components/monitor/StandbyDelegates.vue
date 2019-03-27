@@ -46,13 +46,13 @@
 
       <table-column
         show="production.approval"
-        :label="$t('Vote %')"
+        :label="$t('Votes')"
         header-class="right-header-cell sm:pr-10 hidden md:table-cell"
         cell-class="right-end-cell hidden md:table-cell w-40"
       >
         <template slot-scope="row">
-          <span v-tooltip="{ content: readableCrypto(row.votes, true, 2), placement: 'top' }">
-            {{ percentageString(row.production.approval) }}
+          <span v-tooltip="percentageString(row.production.approval)">
+            {{ readableCrypto(row.votes, true, 2) }}
           </span>
         </template>
       </table-column>

@@ -8,6 +8,8 @@
   color: #172130;
   border-radius: 6px;
   padding: 5px 10px 4px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .tooltip .tooltip-arrow {

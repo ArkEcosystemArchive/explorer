@@ -45,7 +45,7 @@ describe('wallet/Delegate', () => {
     expect(divs.at(0).text()).toBe('Delegate')
     expect(divs.at(1).text()).toContain('Uptime')
     expect(divs.at(2).text()).toBe('Rank/Status')
-    expect(divs.at(3).text()).toContain('Vote %')
+    expect(divs.at(3).text()).toContain('Votes')
     expect(divs.at(4).text()).toBe('Forged')
     divs = wrapper.findAll('div.list-row')
     expect(divs).toHaveLength(1)
