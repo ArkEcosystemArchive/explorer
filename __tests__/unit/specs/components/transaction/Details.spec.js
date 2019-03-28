@@ -1,7 +1,7 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
 
-import Details from '@/components/transaction/Details'
+import TransactionDetails from '@/components/transaction/Details'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 
@@ -36,7 +36,7 @@ const store = new Vuex.Store({
 
 describe('transaction/Details', () => {
   it('Should display the transaction details', () => {
-    const wrapper = mount(Details, {
+    const wrapper = mount(TransactionDetails, {
       propsData: {
         transaction: {
           id: 'transaction-id',
