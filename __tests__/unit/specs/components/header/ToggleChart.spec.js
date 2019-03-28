@@ -1,7 +1,7 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
 
-import ToggleChart from '@/components/header/ToggleChart'
+import ToggleChart from '@/components/header/toggles/ToggleChart'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 

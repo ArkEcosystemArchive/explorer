@@ -18,6 +18,8 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'ToggleCurrency',
+
   computed: {
     ...mapGetters('currency', {
       currencyName: 'name',

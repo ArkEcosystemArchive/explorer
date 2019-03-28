@@ -1,7 +1,7 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
 
-import ToggleTheme from '@/components/header/ToggleTheme'
+import ToggleTheme from '@/components/header/toggles/ToggleTheme'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 

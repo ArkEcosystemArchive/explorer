@@ -78,7 +78,7 @@ import {
   ToggleCurrency,
   ToggleLanguage,
   ToggleTheme
-} from '@/components/header'
+} from '@/components/header/toggles'
 import { mapGetters } from 'vuex'
 
 export default {

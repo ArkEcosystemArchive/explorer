@@ -23,6 +23,8 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'ToggleLanguage',
+
   computed: {
     ...mapGetters('ui', ['headerType']),
 

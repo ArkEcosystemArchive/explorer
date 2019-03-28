@@ -25,6 +25,8 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'ToggleChart',
+
   computed: {
     ...mapGetters('ui', ['priceChart'])
   },

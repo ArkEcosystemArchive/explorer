@@ -1,7 +1,7 @@
-import WalletDelegate from './WalletDelegate'
-import WalletDetails from './WalletDetails'
-import WalletTransactions from './WalletTransactions'
-import WalletVoters from './WalletVoters'
+import WalletDelegate from './Delegate'
+import WalletDetails from './Details'
+import WalletTransactions from './Transactions'
+import WalletVoters from './Voters'
 
 export {
   WalletDelegate,
