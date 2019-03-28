@@ -15,24 +15,24 @@
     <div class="w-full relative hidden xl:flex">
       <HeaderSearch v-if="headerType === 'search'" />
 
-      <HeaderDesktopCurrencies v-else-if="headerType === 'currencies'" />
+      <HeaderCurrenciesDesktop v-else-if="headerType === 'currencies'" />
 
-      <HeaderDesktopLanguages v-else-if="headerType === 'languages'" />
+      <HeaderLanguagesDesktop v-else-if="headerType === 'languages'" />
 
       <HeaderDefault v-else />
 
-      <HeaderDesktopMenu v-if="menuVisible" />
+      <HeaderMenuDesktop v-if="menuVisible" />
     </div>
     <div class="w-full relative flex xl:hidden">
       <HeaderSearch v-if="headerType === 'search'" />
 
       <HeaderDefault v-else />
     </div>
-    <HeaderMobileMenu v-if="menuVisible" />
+    <HeaderMenuMobile v-if="menuVisible" />
 
-    <HeaderMobileCurrencies v-else-if="headerType === 'currencies'" />
+    <HeaderCurrenciesMobile v-else-if="headerType === 'currencies'" />
 
-    <HeaderMobileLanguages v-else-if="headerType === 'languages'" />
+    <HeaderLanguagesMobile v-else-if="headerType === 'languages'" />
   </header>
 </template>
 
