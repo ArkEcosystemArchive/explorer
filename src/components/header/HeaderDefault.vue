@@ -73,13 +73,17 @@
 </template>
 
 <script type="text/ecmascript-6">
-import ToggleTheme from './ToggleTheme'
-import ToggleChart from './ToggleChart'
-import ToggleCurrency from './ToggleCurrency'
-import ToggleLanguage from './ToggleLanguage'
+import {
+  ToggleChart,
+  ToggleCurrency,
+  ToggleLanguage,
+  ToggleTheme
+} from '@/components/header'
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'HeaderDefault',
+
   components: {
     ToggleTheme,
     ToggleCurrency,

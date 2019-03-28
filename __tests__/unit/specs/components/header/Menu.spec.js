@@ -1,7 +1,6 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
-import DesktopMenu from '@/components/header/menu/Desktop'
-import MobileMenu from '@/components/header/menu/Mobile'
+import { HeaderMenuDesktop, HeaderMenuMobile } from '@/components/header'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 import router from '@/router/index'
@@ -44,7 +43,7 @@ describe('header/menu/Desktop', () => {
     })
     router.push = pushMock
 
-    const wrapper = mount(DesktopMenu, {
+    const wrapper = mount(HeaderMenuDesktop, {
       i18n,
       localVue,
       mixins,
@@ -64,7 +63,7 @@ describe('header/menu/Desktop', () => {
     const dispatchMock = jest.fn()
     store.dispatch = dispatchMock
 
-    const wrapper = mount(DesktopMenu, {
+    const wrapper = mount(HeaderMenuDesktop, {
       i18n,
       localVue,
       mixins,
@@ -85,7 +84,7 @@ describe('header/menu/Mobile', () => {
     })
     router.push = pushMock
 
-    const wrapper = mount(MobileMenu, {
+    const wrapper = mount(HeaderMenuMobile, {
       i18n,
       localVue,
       mixins,

@@ -1,6 +1,8 @@
 import QRious from 'qrious'
 
 export default {
+  name: 'QrCode',
+
   props: {
     value: {
       type: String,

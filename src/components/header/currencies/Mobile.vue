@@ -19,6 +19,8 @@ import CryptoCompareService from '@/services/crypto-compare'
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'HeaderCurrenciesMobile',
+
   computed: {
     ...mapGetters('ui', ['nightMode']),
     ...mapGetters('currency', { currencyName: 'name' }),

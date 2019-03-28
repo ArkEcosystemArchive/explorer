@@ -43,6 +43,8 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'HeaderMenuMobile',
+
   computed: {
     ...mapGetters('ui', ['nightMode'])
   }

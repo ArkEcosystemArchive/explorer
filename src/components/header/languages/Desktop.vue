@@ -26,6 +26,8 @@ import { mapGetters } from 'vuex'
 import moment from 'moment'
 
 export default {
+  name: 'HeaderLanguagesDesktop',
+
   computed: {
     ...mapGetters('ui', ['language']),
 

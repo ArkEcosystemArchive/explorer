@@ -23,6 +23,8 @@ import CryptoCompareService from '@/services/crypto-compare'
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'HeaderCurrenciesDesktop',
+
   computed: {
     ...mapGetters('currency', { currencyName: 'name' }),
     ...mapGetters('network', ['currencies'])

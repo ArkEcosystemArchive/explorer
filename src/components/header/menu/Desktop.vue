@@ -61,6 +61,8 @@
 <script type="text/ecmascript-6">
 
 export default {
+  name: 'HeaderMenuDesktop',
+
   methods: {
     closeMenu () {
       this.$store.dispatch('ui/setMenuVisible', false)

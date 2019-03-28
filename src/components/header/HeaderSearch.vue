@@ -44,6 +44,8 @@ import SearchService from '@/services/search'
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'HeaderSearch',
+
   data: () => ({
     query: null,
     nothingFound: false,

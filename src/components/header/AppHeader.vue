@@ -37,14 +37,16 @@
 </template>
 
 <script type="text/ecmascript-6">
-import HeaderDefault from '@/components/header/Default'
-import HeaderSearch from '@/components/header/Search'
-import HeaderDesktopCurrencies from '@/components/header/currencies/Desktop'
-import HeaderMobileCurrencies from '@/components/header/currencies/Mobile'
-import HeaderDesktopLanguages from '@/components/header/languages/Desktop'
-import HeaderMobileLanguages from '@/components/header/languages/Mobile'
-import HeaderDesktopMenu from '@/components/header/menu/Desktop'
-import HeaderMobileMenu from '@/components/header/menu/Mobile'
+import {
+  HeaderDefault,
+  HeaderSearch,
+  HeaderCurrenciesDesktop,
+  HeaderCurrenciesMobile,
+  HeaderLanguagesDesktop,
+  HeaderLanguagesMobile,
+  HeaderMenuDesktop,
+  HeaderMenuMobile
+} from '@/components/header'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -53,12 +55,12 @@ export default {
   components: {
     HeaderDefault,
     HeaderSearch,
-    HeaderDesktopCurrencies,
-    HeaderMobileCurrencies,
-    HeaderDesktopLanguages,
-    HeaderMobileLanguages,
-    HeaderDesktopMenu,
-    HeaderMobileMenu
+    HeaderCurrenciesDesktop,
+    HeaderCurrenciesMobile,
+    HeaderLanguagesDesktop,
+    HeaderLanguagesMobile,
+    HeaderMenuDesktop,
+    HeaderMenuMobile
   },
 
   computed: {
