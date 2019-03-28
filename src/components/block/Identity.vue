@@ -1,6 +1,6 @@
 <template>
   <section class="mb-5 bg-theme-feature-background xl:rounded-lg flex flex-col md:flex-row items-center px-5 sm:px-10 py-8">
-    <div class="flex items-center flex-auto w-full md:w-auto mb-5 md:mb-0">
+    <div class="flex items-center flex-auto w-full md:w-auto mb-5 md:mb-0 truncate md:mr-10">
       <img class="mr-6" src="@/assets/images/icons/block.svg" />
       <div class="flex-auto min-w-0">
         <div class="text-grey mb-2">{{ $t("Block ID") }}</div>
@@ -15,7 +15,7 @@
         </div>
       </div>
     </div>
-    <div class="flex w-full md:block md:w-auto justify-between">
+    <div class="flex w-full md:block md:w-auto justify-between whitespace-no-wrap">
       <button @click="prevHandler" :disabled="isFirstBlock" class="block-pager-button mr-5">
         <svg
          class="inline"
