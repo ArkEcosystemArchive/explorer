@@ -8,7 +8,7 @@
       >
         <div class="list-row-border-b">
           <div>{{ $t("ID") }}</div>
-          <link-transaction
+          <LinkTransaction
             :id="transaction.id"
             :smart-bridge="transaction.vendorField"
           />
@@ -23,12 +23,12 @@
 
         <div class="list-row-border-b">
           <div>{{ $t("Sender") }}</div>
-          <link-wallet :address="transaction.sender" />
+          <LinkWallet :address="transaction.sender" />
         </div>
 
         <div class="list-row-border-b">
           <div>{{ $t("Recipient") }}</div>
-          <link-wallet
+          <LinkWallet
             :address="transaction.recipient"
             :type="transaction.type"
             :asset="transaction.asset"

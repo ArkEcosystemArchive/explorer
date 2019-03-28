@@ -8,7 +8,7 @@
         v-if="block.id"
         class="text-lg truncate"
       >
-        <link-block
+        <LinkBlock
           :id="block.id"
           :length="20"
         />
@@ -31,12 +31,12 @@
         {{ $t("Delegate") }}
       </div>
       <div class="text-lg text-white truncate semibold">
-        <link-wallet
+        <LinkWallet
           v-if="block.generator"
           :address="block.generator.address"
         >
           {{ block.generator.username }}
-        </link-wallet>
+        </LinkWallet>
       </div>
     </div>
   </div>

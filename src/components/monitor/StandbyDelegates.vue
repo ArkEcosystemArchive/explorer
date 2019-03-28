@@ -27,9 +27,9 @@
         cell-class="left-cell"
       >
         <template slot-scope="row">
-          <link-wallet :address="row.address">
+          <LinkWallet :address="row.address">
             {{ row.username }}
-          </link-wallet>
+          </LinkWallet>
         </template>
       </table-column>
 

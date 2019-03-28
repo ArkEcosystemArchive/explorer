@@ -25,7 +25,7 @@
         cell-class="left-cell"
       >
         <template slot-scope="row">
-          <link-wallet
+          <LinkWallet
             :address="row.address"
             :trunc="false"
           />

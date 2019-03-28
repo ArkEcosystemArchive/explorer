@@ -13,7 +13,7 @@
 
         <div class="list-row-border-b">
           <div>{{ $t("Address") }}</div>
-          <link-wallet :address="row.address" />
+          <LinkWallet :address="row.address" />
         </div>
 
         <div class="list-row-border-b">

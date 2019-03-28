@@ -64,6 +64,8 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'LinkWallet',
+
   props: {
     address: {
       type: String,

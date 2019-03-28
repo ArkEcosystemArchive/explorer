@@ -16,7 +16,7 @@
         cell-class="left-start-cell"
       >
         <template slot-scope="row">
-          <link-transaction
+          <LinkTransaction
             :id="row.id"
             :smart-bridge="row.vendorField"
             :show-smart-bridge-icon="showSmartBridgeIcon"
@@ -42,7 +42,7 @@
         cell-class="left-cell"
       >
         <template slot-scope="row">
-          <link-wallet :address="row.sender" />
+          <LinkWallet :address="row.sender" />
         </template>
       </table-column>
 
@@ -53,7 +53,7 @@
         cell-class="left-cell"
       >
         <template slot-scope="row">
-          <link-wallet
+          <LinkWallet
             :address="row.recipient"
             :type="row.type"
             :asset="row.asset"

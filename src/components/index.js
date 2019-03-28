@@ -10,9 +10,9 @@ Vue.component('qr-code', require('@/components/utils/QrCode').default)
 Vue.component('transaction-amount', require('@/components/utils/TransactionAmount').default)
 
 // Links
-Vue.component('link-block', require('@/components/links/Block').default)
-Vue.component('link-transaction', require('@/components/links/Transaction').default)
-Vue.component('link-wallet', require('@/components/links/Wallet').default)
+Vue.component('LinkBlock', require('@/components/links/LinkBlock').default)
+Vue.component('LinkTransaction', require('@/components/links/LinkTransaction').default)
+Vue.component('LinkWallet', require('@/components/links/LinkWallet').default)
 
 // Tables
 Vue.component('table-blocks', require('@/components/tables/Blocks').default)

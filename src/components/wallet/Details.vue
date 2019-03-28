@@ -106,12 +106,12 @@
         <div class="text-grey mb-2">
           {{ $t("Voting for") }}
         </div>
-        <link-wallet
+        <LinkWallet
           v-if="votedDelegate.address"
           :address="votedDelegate.address"
         >
           <span class="text-lg text-white semibold truncate">{{ votedDelegate.username }}</span>
-        </link-wallet>
+        </LinkWallet>
       </div>
 
       <div class="flex-none px-8">
@@ -251,12 +251,12 @@
             <div class="text-grey mb-2">
               {{ $t("Voting for") }}
             </div>
-            <link-wallet
+            <LinkWallet
               v-if="votedDelegate.address"
               :address="votedDelegate.address"
             >
               <span class="text-white semibold truncate">{{ votedDelegate.username }}</span>
-            </link-wallet>
+            </LinkWallet>
           </div>
         </div>
       </div>

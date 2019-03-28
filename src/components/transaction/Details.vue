@@ -4,7 +4,7 @@
       <div class="list-row-border-b">
         <div>{{ $t("Sender") }}</div>
         <div class="truncate">
-          <link-wallet
+          <LinkWallet
             :address="transaction.sender"
             :trunc="false"
           />
@@ -14,7 +14,7 @@
       <div class="list-row-border-b">
         <div>{{ $t("Recipient") }}</div>
         <div class="truncate">
-          <link-wallet
+          <LinkWallet
             :address="transaction.recipient"
             :type="transaction.type"
             :asset="transaction.asset"
@@ -76,12 +76,12 @@
       <div class="list-row">
         <div>{{ $t("Block") }}</div>
         <div>
-          <link-block
+          <LinkBlock
             v-if="transaction.blockId"
             :id="transaction.blockId"
           >
             {{ transaction.blockId }}
-          </link-block>
+          </LinkBlock>
         </div>
       </div>
     </div>
