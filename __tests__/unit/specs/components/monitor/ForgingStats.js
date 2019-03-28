@@ -1,7 +1,7 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
 
-import forging from '@/components/monitor/Forging'
+import ForgingStats from '@/components/monitor/ForgingStats'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 
@@ -16,7 +16,7 @@ const i18n = new VueI18n({
   silentTranslationWarn: true
 })
 
-describe('monitor/Forging', () => {
+describe('monitor/ForgingStats', () => {
   it('Should show the forging info', () => {
     const store = new Vuex.Store({
       modules: {
@@ -28,7 +28,7 @@ describe('monitor/Forging', () => {
       strict: true
     })
 
-    const wrapper = mount(forging, {
+    const wrapper = mount(ForgingStats, {
       i18n,
       localVue,
       mixins,

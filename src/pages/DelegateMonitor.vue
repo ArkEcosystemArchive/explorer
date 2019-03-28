@@ -2,7 +2,7 @@
   <div class="max-w-2xl mx-auto md:pt-5">
     <ContentHeader>{{ $t("Delegate Monitor") }}</ContentHeader>
 
-    <DelegateDetail />
+    <MonitorHeader />
 
     <section class="page-section py-5 md:py-10">
       <nav class="mx-5 sm:mx-10 mb-4 border-b flex items-end">
@@ -20,7 +20,7 @@
         </div>
       </nav>
 
-      <Forging
+      <ForgingStats
         v-show="activeTab === 'active'"
         :delegates="delegates"
       />
@@ -36,18 +36,20 @@
 </template>
 
 <script type="text/ecmascript-6">
-import DelegateDetail from '@/components/monitor/Details'
-import ActiveDelegates from '@/components/monitor/ActiveDelegates'
-import StandbyDelegates from '@/components/monitor/StandbyDelegates'
-import Forging from '@/components/monitor/Forging'
+import {
+  ActiveDelegates,
+  MonitorHeader,
+  ForgingStats,
+  StandbyDelegates
+} from '@/components/monitor'
 import DelegateService from '@/services/delegate'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
-    DelegateDetail,
-    Forging,
     ActiveDelegates,
+    MonitorHeader,
+    ForgingStats,
     StandbyDelegates
   },
 

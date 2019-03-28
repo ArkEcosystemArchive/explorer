@@ -114,6 +114,8 @@
 
 <script type="text/ecmascript-6">
 export default {
+  name: 'ActiveDelegates',
+
   props: {
     delegates: {
       type: Array,

@@ -21,6 +21,8 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'DelegateCount',
+
   data: () => ({
     count: 0
   }),

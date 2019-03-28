@@ -64,6 +64,8 @@
 import ForgingService from '@/services/forging'
 
 export default {
+  name: 'ForgingStats',
+
   props: {
     delegates: {
       type: Array,

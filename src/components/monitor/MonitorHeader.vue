@@ -11,11 +11,11 @@
 </template>
 
 <script type="text/ecmascript-6">
-import DelegateCount from '@/components/monitor/DelegateCount'
-import LastBlock from '@/components/monitor/LastBlock'
-import TotalForged from '@/components/monitor/TotalForged'
+import { DelegateCount, LastBlock, TotalForged } from '@/components/monitor/header'
 
 export default {
+  name: 'MonitorHeader',
+
   components: {
     DelegateCount,
     LastBlock,

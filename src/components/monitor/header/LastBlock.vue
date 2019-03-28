@@ -46,6 +46,8 @@
 import BlockService from '@/services/block'
 
 export default {
+  name: 'LastBlock',
+
   data: () => ({
     block: {}
   }),

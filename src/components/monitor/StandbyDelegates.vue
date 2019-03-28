@@ -72,6 +72,8 @@ import DelegateService from '@/services/delegate'
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'StandbyDelegates',
+
   data: () => ({
     delegates: null
   }),

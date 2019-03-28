@@ -13,6 +13,8 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'TotalForged',
+
   data: () => ({ forged: 0 }),
 
   computed: {
