@@ -51,8 +51,9 @@
         cell-class="right-end-cell hidden md:table-cell w-40"
       >
         <template slot-scope="row">
-          <span v-tooltip="percentageString(row.production.approval)">
-            {{ readableCrypto(row.votes, true, 2) }}
+          {{ readableCrypto(row.votes, true, 2) }}
+          <span v-tooltip="$t('Percentage of the total supply')">
+            ({{ percentageString(row.production.approval) }})
           </span>
         </template>
       </table-column>

@@ -3,13 +3,17 @@
   z-index: 10000;
 }
 
+.tooltip[x-placement=top] .tooltip-inner,
+.tooltip[x-placement=bottom] .tooltip-inner {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .tooltip .tooltip-inner {
   background: #f1f3fc;
   color: #172130;
   border-radius: 6px;
   padding: 5px 10px 4px;
-  margin-left: 10px;
-  margin-right: 10px;
 }
 
 .tooltip .tooltip-arrow {

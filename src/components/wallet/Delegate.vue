@@ -19,13 +19,17 @@
       <div>{{ $t("Votes") }}</div>
       <div
         v-if="delegate.production"
-        v-tooltip="delegate.votes ? {
-          trigger: 'hover click',
-          content: percentageString(delegate.production.approval),
-          placement: 'left'
-        } : {}"
       >
         {{ readableCrypto(delegate.votes, true, 2) }}
+        <span
+          v-tooltip="delegate.votes ? {
+            trigger: 'hover click',
+            content: $t('Percentage of the total supply'),
+            placement: 'left'
+          } : {}"
+        >
+          ({{ percentageString(delegate.production.approval) }})
+        </span>
       </div>
     </div>
 
