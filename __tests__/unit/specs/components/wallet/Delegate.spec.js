@@ -1,7 +1,7 @@
 import { mount, createLocalVue, RouterLinkStub } from '@vue/test-utils'
 import mixins from '@/mixins'
 
-import delegate from '@/components/wallet/Delegate'
+import WalletDelegate from '@/components/wallet/Delegate'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 
@@ -28,7 +28,7 @@ const mocks = {
 
 describe('wallet/Delegate', () => {
   it('Should show the delegate info', () => {
-    const wrapper = mount(delegate, {
+    const wrapper = mount(WalletDelegate, {
       i18n,
       localVue,
       mixins,

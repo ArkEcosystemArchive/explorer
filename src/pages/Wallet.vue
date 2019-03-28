@@ -10,12 +10,12 @@
       :class="{ 'py-5 md:py-10': isDelegate }"
     >
       <div class="px-5 sm:px-10">
-        <Delegate
+        <WalletDelegate
           v-show="isDelegate"
           :wallet="wallet"
           @username="username = $event"
         />
-        <Voters
+        <WalletVoters
           v-show="isDelegate"
           :wallet="wallet"
           :username="username"
@@ -23,7 +23,7 @@
       </div>
     </section>
 
-    <Transactions
+    <WalletTransactions
       v-if="wallet"
       :wallet="wallet"
     />
@@ -31,18 +31,20 @@
 </template>
 
 <script type="text/ecmascript-6">
-import WalletDetails from '@/components/wallet/Details'
-import Delegate from '@/components/wallet/Delegate'
-import Voters from '@/components/wallet/Voters'
-import Transactions from '@/components/wallet/Transactions'
+import {
+  WalletDelegate,
+  WalletDetails,
+  WalletTransactions,
+  WalletVoters
+} from '@/components/wallet'
 import WalletService from '@/services/wallet'
 
 export default {
   components: {
+    WalletDelegate,
     WalletDetails,
-    Delegate,
-    Voters,
-    Transactions
+    WalletTransactions,
+    WalletVoters
   },
 
   data: () => ({

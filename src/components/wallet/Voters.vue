@@ -23,6 +23,8 @@
 import DelegateService from '@/services/delegate'
 
 export default {
+  name: 'WalletVoters',
+
   props: {
     wallet: {
       type: Object,

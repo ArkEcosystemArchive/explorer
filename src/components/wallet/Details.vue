@@ -287,6 +287,8 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'WalletDetails',
+
   props: {
     wallet: {
       type: Object,

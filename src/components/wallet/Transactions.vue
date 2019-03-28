@@ -73,6 +73,8 @@
 import TransactionService from '@/services/transaction'
 
 export default {
+  name: 'WalletTransactions',
+
   props: {
     wallet: {
       type: Object,
