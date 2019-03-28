@@ -30,6 +30,8 @@
 import TransactionService from '@/services/transaction'
 
 export default {
+  name: 'BlockTransactions',
+
   props: {
     block: {
       type: Object,

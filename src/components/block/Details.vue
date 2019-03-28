@@ -96,6 +96,7 @@ import CryptoCompareService from '@/services/crypto-compare'
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'BlockDetails',
 
   props: {
     block: {

@@ -1,7 +1,7 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
 
-import Details from '@/components/block/Details'
+import BlockDetails from '@/components/block/Details'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 
@@ -36,7 +36,7 @@ const store = new Vuex.Store({
 
 describe('Block/Details', () => {
   it('Should display the block details', () => {
-    const wrapper = mount(Details, {
+    const wrapper = mount(BlockDetails, {
       propsData: {
         block: {
           height: 1

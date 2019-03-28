@@ -25,7 +25,7 @@
     </template>
 
     <template v-else>
-      <Identity
+      <BlockIdentity
         :block="block"
         :prev-handler="prevBlock"
         :next-handler="nextBlock"
@@ -33,20 +33,23 @@
 
       <BlockDetails :block="block" />
 
-      <Transactions :block="block" />
+      <BlockTransactions :block="block" />
     </template>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import Identity from '@/components/block/Identity'
+import { BlockDetails, BlockIdentity, BlockTransactions } from '@/components/block'
 import NotFound from '@/components/utils/NotFound'
-import BlockDetails from '@/components/block/Details'
-import Transactions from '@/components/block/Transactions'
 import BlockService from '@/services/block'
 
 export default {
-  components: { NotFound, Identity, BlockDetails, Transactions },
+  components: {
+    BlockDetails,
+    BlockIdentity,
+    BlockTransactions,
+    NotFound
+  },
 
   data: () => ({
     block: {},

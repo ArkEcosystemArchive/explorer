@@ -71,6 +71,8 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'BlockIdentity',
+
   props: {
     block: {
       type: Object,
