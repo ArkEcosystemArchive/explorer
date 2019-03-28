@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <content-header>{{ $t("Latest transactions and blocks") }}</content-header>
+    <ContentHeader>{{ $t("Latest transactions and blocks") }}</ContentHeader>
 
     <section
       v-if="priceChart"

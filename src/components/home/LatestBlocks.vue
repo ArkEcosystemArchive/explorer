@@ -1,6 +1,6 @@
 <template>
   <div>
-    <loader :data="blocks">
+    <Loader :data="blocks">
       <div class="hidden sm:block">
         <table-blocks :blocks="blocks" />
       </div>
@@ -16,7 +16,7 @@
           {{ $t("Show more") }}
         </router-link>
       </div>
-    </loader>
+    </Loader>
   </div>
 </template>
 

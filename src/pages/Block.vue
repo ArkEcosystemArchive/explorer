@@ -3,7 +3,7 @@
     v-if="block"
     class="max-w-2xl mx-auto md:pt-5"
   >
-    <content-header>{{ $t("Block") }}</content-header>
+    <ContentHeader>{{ $t("Block") }}</ContentHeader>
 
     <template v-if="blockNotFound">
       <section class="page-section py-5 md:py-10 px-6">

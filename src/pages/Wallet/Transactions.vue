@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <content-header>{{ $t("Transactions") }}</content-header>
+    <ContentHeader>{{ $t("Transactions") }}</ContentHeader>
 
     <section class="mb-5">
       <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
@@ -18,7 +18,7 @@
             <div class="text-lg text-white semibold truncate">
               <span class="mr-2">{{ address }}</span>
             </div>
-            <clipboard
+            <Clipboard
               v-if="address"
               :value="address"
             />
@@ -73,7 +73,7 @@
       <div class="sm:hidden">
         <table-transactions-mobile :transactions="transactions" />
       </div>
-      <paginator
+      <Paginator
         v-if="showPaginator"
         :previous="meta.previous"
         :next="meta.next"

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <loader :data="wallets">
+    <Loader :data="wallets">
       <div
         v-for="(row, index) in wallets"
         :key="row.address"
@@ -32,7 +32,7 @@
       >
         <span>{{ $t("No results") }}</span>
       </div>
-    </loader>
+    </Loader>
   </div>
 </template>
 

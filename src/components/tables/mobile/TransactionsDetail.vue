@@ -1,6 +1,6 @@
 <template>
   <div>
-    <loader :data="transactions">
+    <Loader :data="transactions">
       <div
         v-for="transaction in transactions"
         :key="transaction.id"
@@ -48,7 +48,7 @@
         <div class="list-row-border-b">
           <div>{{ $t("Amount") }}</div>
           <div>
-            <transaction-amount
+            <TransactionAmount
               :transaction="transaction"
               :type="transaction.type"
             />
@@ -87,7 +87,7 @@
       >
         <span>{{ $t("No results") }}</span>
       </div>
-    </loader>
+    </Loader>
   </div>
 </template>
 

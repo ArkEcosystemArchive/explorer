@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <content-header>{{ $t("Delegate Monitor") }}</content-header>
+    <ContentHeader>{{ $t("Delegate Monitor") }}</ContentHeader>
 
     <DelegateDetail />
 

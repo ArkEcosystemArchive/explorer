@@ -3,7 +3,7 @@
     v-if="transaction"
     class="max-w-2xl mx-auto md:pt-5"
   >
-    <content-header>{{ $t("Transaction") }}</content-header>
+    <ContentHeader>{{ $t("Transaction") }}</ContentHeader>
 
     <template v-if="transactionNotFound">
       <section class="page-section py-5 md:py-10 px-6">
@@ -41,7 +41,7 @@
               <div class="text-xl text-white semibold truncate">
                 <span class="mr-2">{{ transaction.id }}</span>
               </div>
-              <clipboard
+              <Clipboard
                 v-if="transaction.id"
                 :value="transaction.id"
               />

@@ -1,5 +1,5 @@
 <template>
-  <loader :data="delegates">
+  <Loader :data="delegates">
     <table-component
       v-if="delegates && delegates.length"
       :data="delegates"
@@ -109,7 +109,7 @@
     >
       <span>{{ $t("No results") }}</span>
     </div>
-  </loader>
+  </Loader>
 </template>
 
 <script type="text/ecmascript-6">

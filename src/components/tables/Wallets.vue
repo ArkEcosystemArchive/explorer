@@ -1,5 +1,5 @@
 <template>
-  <loader :data="wallets">
+  <Loader :data="wallets">
     <table-component
       v-if="wallets && wallets.length > 0"
       :data="wallets"
@@ -61,7 +61,7 @@
     >
       <span>{{ $t("No results") }}</span>
     </div>
-  </loader>
+  </Loader>
 </template>
 
 <script type="text/ecmascript-6">

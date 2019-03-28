@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <content-header>{{ $t("Voters") }} <span v-if="delegate">- {{ delegate.username }}</span></content-header>
+    <ContentHeader>{{ $t("Voters") }} <span v-if="delegate">- {{ delegate.username }}</span></ContentHeader>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
         <table-wallets
@@ -14,7 +14,7 @@
           :total="delegate ? delegate.votes : 0"
         />
       </div>
-      <paginator
+      <Paginator
         v-if="showPaginator"
         :previous="meta.previous"
         :next="meta.next"

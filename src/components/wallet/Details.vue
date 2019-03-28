@@ -58,7 +58,7 @@
           <div class="text-lg text-white semibold truncate">
             <span class="mr-2">{{ wallet.address }}</span>
           </div>
-          <clipboard
+          <Clipboard
             v-if="wallet.address"
             :value="wallet.address"
           />
@@ -76,7 +76,7 @@
           <div class="text-lg text-white semibold truncate mr-2">
             <span class="mr-2">{{ wallet.publicKey }}</span>
           </div>
-          <clipboard
+          <Clipboard
             v-if="wallet.publicKey"
             :value="wallet.publicKey"
           />
@@ -165,7 +165,7 @@
     >
       <div class="flex justify-center mb-10">
         <div class="flex items-center p-2 bg-white rounded mx-auto">
-          <qr-code
+          <QrCode
             :value="wallet.address"
             :options="{ size: 160 }"
           />
@@ -204,7 +204,7 @@
             </div>
             <div class="text-white flex">
               <span class="mr-2">{{ truncate(wallet.address) }}</span>
-              <clipboard
+              <Clipboard
                 v-if="wallet.address"
                 :value="wallet.address"
               />
@@ -219,7 +219,7 @@
             </div>
             <div class="text-white flex">
               <span class="mr-2">{{ truncate(wallet.publicKey) }}</span>
-              <clipboard
+              <Clipboard
                 v-if="wallet.publicKey"
                 :value="wallet.publicKey"
               />
@@ -263,7 +263,7 @@
     </div>
 
     <!-- Modal -->
-    <modal
+    <Modal
       v-if="showModal"
       @close="showModal = false"
     >
@@ -274,12 +274,12 @@
         <p class="mb-10">
           {{ $t("Scan for Address") }}
         </p>
-        <qr-code
+        <QrCode
           :value="wallet.address"
           :options="{ size: 160 }"
         />
       </div>
-    </modal>
+    </Modal>
   </section>
 </template>
 

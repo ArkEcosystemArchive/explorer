@@ -15,7 +15,7 @@
           {{ $t("Supply") }}: <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }}</span>
         </div>
         <div v-if="isMain">
-          {{ $t("Market Cap") }}: <currency :amount="+supply" />
+          {{ $t("Market Cap") }}: <Currency :amount="+supply" />
         </div>
       </div>
     </div>
@@ -40,6 +40,8 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'ContentHeader',
+
   computed: {
     ...mapGetters('network', ['alias', 'supply', 'height']),
     ...mapGetters('currency', ['name', 'rate', 'symbol']),

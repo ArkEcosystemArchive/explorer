@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <content-header>{{ $t("Transactions") }}</content-header>
+    <ContentHeader>{{ $t("Transactions") }}</ContentHeader>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
         <table-transactions :transactions="transactions" />
@@ -8,7 +8,7 @@
       <div class="sm:hidden">
         <table-transactions-mobile :transactions="transactions" />
       </div>
-      <paginator
+      <Paginator
         v-if="showPaginator"
         :previous="meta.previous"
         :next="meta.next"

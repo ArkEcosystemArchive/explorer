@@ -13,7 +13,7 @@
           <div class="text-xl text-white semibold truncate">
             <span class="mr-2">{{ block.id ? block.id : "&nbsp;" }}</span>
           </div>
-          <clipboard
+          <Clipboard
             v-if="block.id"
             :value="block.id"
           />

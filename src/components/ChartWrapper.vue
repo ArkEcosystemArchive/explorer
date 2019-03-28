@@ -13,7 +13,7 @@
         @click="renderChart()"
       >
         <span v-if="!isLoading">{{ $t('Reload chart') }}</span>
-        <loader
+        <Loader
           v-else
           :data="null"
         />

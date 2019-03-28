@@ -48,6 +48,8 @@ import HeaderMobileMenu from '@/components/header/menu/Mobile'
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'AppHeader',
+
   components: {
     HeaderDefault,
     HeaderSearch,

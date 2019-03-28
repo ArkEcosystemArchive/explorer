@@ -15,6 +15,8 @@
 import { PulseLoader } from 'vue-spinner/dist/vue-spinner.min.js'
 
 export default {
+  name: 'Loader',
+
   components: {
     PulseLoader
   },

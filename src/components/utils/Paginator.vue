@@ -46,6 +46,8 @@
 
 <script type="text/ecmascript-6">
 export default {
+  name: 'Paginator',
+
   props: {
     previous: {
       type: null,

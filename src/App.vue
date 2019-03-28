@@ -14,8 +14,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-import AppHeader from '@/components/header/Main'
-import AppFooter from '@/components/Footer'
+import AppHeader from '@/components/header/AppHeader'
+import AppFooter from '@/components/AppFooter'
 import { BlockchainService, CryptoCompareService, DelegateService, NodeService } from '@/services'
 import { mapGetters } from 'vuex'
 import moment from 'moment'

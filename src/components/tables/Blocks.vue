@@ -1,5 +1,5 @@
 <template>
-  <loader :data="blocks">
+  <Loader :data="blocks">
     <table-component
       v-if="blocks && blocks.length"
       :data="blocks"
@@ -109,7 +109,7 @@
     >
       <span>{{ $t("No results") }}</span>
     </div>
-  </loader>
+  </Loader>
 </template>
 
 <script type="text/ecmascript-6">

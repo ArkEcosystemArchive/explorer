@@ -1,5 +1,5 @@
 <template>
-  <loader :data="stats">
+  <Loader :data="stats">
     <div class="px-5 sm:px-10 pt-8 flex flex-wrap flex-col sm:flex-row">
       <div class="mr-4 mb-4 flex flex-row justify-between sm:flex-col">
         <div class="text-grey mb-1">
@@ -46,7 +46,7 @@
         </div>
       </div>
     </div>
-  </loader>
+  </Loader>
 </template>
 
 <script type="text/ecmascript-6">

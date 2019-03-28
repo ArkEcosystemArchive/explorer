@@ -282,6 +282,8 @@
 import moment from 'moment'
 
 export default {
+  name: 'AppFooter',
+
   computed: {
     year () {
       return moment().format('Y')

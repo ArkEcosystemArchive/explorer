@@ -1,6 +1,6 @@
 <template>
   <div>
-    <loader :data="blocks">
+    <Loader :data="blocks">
       <div
         v-for="block in blocks"
         :key="block.id"
@@ -55,7 +55,7 @@
       >
         <span>{{ $t("No results") }}</span>
       </div>
-    </loader>
+    </Loader>
   </div>
 </template>
 

@@ -29,6 +29,8 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'NotFound',
+
   props: {
     dataType: {
       type: String,
