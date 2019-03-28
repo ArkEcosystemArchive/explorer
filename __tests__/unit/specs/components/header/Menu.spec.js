@@ -1,6 +1,6 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
-import { HeaderMenuDesktop, HeaderMenuMobile } from '@/components/header'
+import { HeaderMenuDesktop, HeaderMenuMobile } from '@/components/header/menu'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 import router from '@/router/index'

@@ -1,6 +1,6 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
-import { HeaderLanguagesDesktop, HeaderLanguagesMobile } from '@/components/header'
+import { HeaderLanguagesDesktop, HeaderLanguagesMobile } from '@/components/header/languages'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 import moment from 'moment'

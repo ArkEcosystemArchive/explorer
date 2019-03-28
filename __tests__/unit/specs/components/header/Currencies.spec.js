@@ -1,6 +1,6 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
-import { HeaderCurrenciesDesktop, HeaderCurrenciesMobile } from '@/components/header'
+import { HeaderCurrenciesDesktop, HeaderCurrenciesMobile } from '@/components/header/currencies'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 
