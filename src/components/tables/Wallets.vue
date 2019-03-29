@@ -68,11 +68,14 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'TableWalletsDesktop',
+
   props: {
     wallets: {
       type: Array,
       required: true
     },
+
     total: {
       type: Number,
       required: true

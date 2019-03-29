@@ -2,10 +2,10 @@
   <div>
     <Loader :data="transactions">
       <div class="hidden sm:block">
-        <table-transactions :transactions="transactions" />
+        <TableTransactionsDesktop :transactions="transactions" />
       </div>
       <div class="sm:hidden">
-        <table-transactions-mobile :transactions="transactions" />
+        <TableTransactionsMobile :transactions="transactions" />
       </div>
       <div class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
         <router-link
@@ -24,6 +24,8 @@
 import TransactionService from '@/services/transaction'
 
 export default {
+  name: 'LatestTransactions',
+
   props: {
     transactionType: {
       type: Number,

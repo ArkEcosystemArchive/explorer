@@ -95,6 +95,8 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'TableTransactionDetailsMobile',
+
   props: {
     transactions: {
       type: Array,

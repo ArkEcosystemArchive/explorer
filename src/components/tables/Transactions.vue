@@ -113,6 +113,8 @@
 
 <script type="text/ecmascript-6">
 export default {
+  name: 'TableTransactionsDesktop',
+
   props: {
     transactions: {
       type: Array,

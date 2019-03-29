@@ -131,6 +131,8 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'TableTransactionDetailsDesktop',
+
   props: {
     transactions: {
       type: Array,

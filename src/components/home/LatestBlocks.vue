@@ -2,10 +2,10 @@
   <div>
     <Loader :data="blocks">
       <div class="hidden sm:block">
-        <table-blocks :blocks="blocks" />
+        <TableBlocksDesktop :blocks="blocks" />
       </div>
       <div class="sm:hidden">
-        <table-blocks-mobile :blocks="blocks" />
+        <TableBlocksMobile :blocks="blocks" />
       </div>
       <div class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
         <router-link
@@ -24,6 +24,8 @@
 import BlockService from '@/services/block'
 
 export default {
+  name: 'LatestBlocks',
+
   data: () => ({
     blocks: null
   }),

@@ -68,10 +68,10 @@
 
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <table-transactions :transactions="transactions" />
+        <TableTransactionsDesktop :transactions="transactions" />
       </div>
       <div class="sm:hidden">
-        <table-transactions-mobile :transactions="transactions" />
+        <TableTransactionsMobile :transactions="transactions" />
       </div>
       <Paginator
         v-if="showPaginator"

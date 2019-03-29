@@ -25,14 +25,14 @@
 
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <table-transactions :transactions="transactions" />
+        <TableTransactionsDesktop :transactions="transactions" />
       </div>
       <div class="sm:hidden">
         <div class="mx-5 mb-4">
           <SelectionType @change="setType" />
         </div>
 
-        <table-transactions-mobile :transactions="transactions" />
+        <TableTransactionsMobile :transactions="transactions" />
       </div>
       <Paginator
         v-if="showPaginator"

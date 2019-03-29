@@ -3,13 +3,13 @@
     <ContentHeader>{{ $t("Voters") }} <span v-if="delegate">- {{ delegate.username }}</span></ContentHeader>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <table-wallets
+        <TableWalletsDesktop
           :wallets="wallets"
           :total="delegate ? delegate.votes : 0"
         />
       </div>
       <div class="sm:hidden">
-        <table-wallets-mobile
+        <TableWalletsMobile
           :wallets="wallets"
           :total="delegate ? delegate.votes : 0"
         />

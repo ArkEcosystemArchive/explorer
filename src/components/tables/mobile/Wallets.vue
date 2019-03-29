@@ -40,11 +40,14 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'TableWalletsMobile',
+
   props: {
     wallets: {
       type: Array,
       required: true
     },
+
     total: {
       type: Number,
       required: true

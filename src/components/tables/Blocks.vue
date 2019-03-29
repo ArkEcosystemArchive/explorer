@@ -116,6 +116,8 @@
 import CryptoCompareService from '@/services/crypto-compare'
 
 export default {
+  name: 'TableBlocksDesktop',
+
   props: {
     blocks: {
       type: Array,

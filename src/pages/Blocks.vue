@@ -3,10 +3,10 @@
     <ContentHeader>{{ $t("Blocks") }}</ContentHeader>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <table-blocks :blocks="blocks" />
+        <TableBlocksDesktop :blocks="blocks" />
       </div>
       <div class="sm:hidden">
-        <table-blocks-mobile :blocks="blocks" />
+        <TableBlocksMobile :blocks="blocks" />
       </div>
       <Paginator
         v-if="showPaginator"

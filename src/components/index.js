@@ -16,14 +16,15 @@ Vue.component('LinkTransaction', require('@/components/links/LinkTransaction').d
 Vue.component('LinkWallet', require('@/components/links/LinkWallet').default)
 
 // Tables
-Vue.component('table-blocks', require('@/components/tables/Blocks').default)
-Vue.component('table-blocks-mobile', require('@/components/tables/mobile/Blocks').default)
-Vue.component('table-transactions', require('@/components/tables/Transactions').default)
-Vue.component('table-transactions-detail', require('@/components/tables/TransactionsDetail').default)
-Vue.component('table-transactions-detail-mobile', require('@/components/tables/mobile/TransactionsDetail').default)
-Vue.component('table-transactions-mobile', require('@/components/tables/mobile/Transactions').default)
-Vue.component('table-wallets', require('@/components/tables/Wallets').default)
-Vue.component('table-wallets-mobile', require('@/components/tables/mobile/Wallets').default)
+Vue.component('TableBlocksDesktop', require('@/components/tables/Blocks').default)
+Vue.component('TableTransactionsDesktop', require('@/components/tables/Transactions').default)
+Vue.component('TableTransactionDetailsDesktop', require('@/components/tables/TransactionDetails').default)
+Vue.component('TableWalletsDesktop', require('@/components/tables/Wallets').default)
+
+Vue.component('TableBlocksMobile', require('@/components/tables/mobile/Blocks').default)
+Vue.component('TableTransactionsMobile', require('@/components/tables/mobile/Transactions').default)
+Vue.component('TableTransactionDetailsMobile', require('@/components/tables/mobile/TransactionDetails').default)
+Vue.component('TableWalletsMobile', require('@/components/tables/mobile/Wallets').default)
 
 // Misc.
 Vue.component('ArkMeter', require('@/components/ArkMeter').default)

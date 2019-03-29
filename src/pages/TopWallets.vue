@@ -3,13 +3,13 @@
     <ContentHeader>{{ $t("Top Wallets") }}</ContentHeader>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <table-wallets
+        <TableWalletsDesktop
           :wallets="wallets"
           :total="supply"
         />
       </div>
       <div class="sm:hidden">
-        <table-wallets-mobile
+        <TableWalletsMobile
           :wallets="wallets"
           :total="supply"
         />
