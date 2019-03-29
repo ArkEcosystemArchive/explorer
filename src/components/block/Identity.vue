@@ -6,7 +6,12 @@
         <div class="text-grey mb-2">{{ $t("Block ID") }}</div>
         <div class="flex">
           <div class="text-xl text-white semibold truncate">
-            <span class="mr-2">{{ block.id ? block.id : "&nbsp;" }}</span>
+            <span
+              v-tooltip="block.id"
+              class="mr-2"
+            >
+              {{ block.id }}
+            </span>
           </div>
           <clipboard
             v-if="block.id"
