@@ -7,7 +7,7 @@
   >
     <AppHeader />
 
-    <router-view />
+    <RouterView />
 
     <AppFooter />
   </main>

@@ -14,13 +14,13 @@
         v-if="transactions.length >= 25"
         class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap"
       >
-        <router-link
+        <RouterLink
           :to="{ name: 'block-transactions', params: { block: block.id, page: 2 } }"
           tag="button"
           class="show-more-button"
         >
           {{ $t("Show more") }}
-        </router-link>
+        </RouterLink>
       </div>
     </section>
   </div>

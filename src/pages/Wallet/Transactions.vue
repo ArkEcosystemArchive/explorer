@@ -53,12 +53,12 @@
                 v-for="txType in ['all', 'sent', 'received']"
                 :key="txType"
               >
-                <router-link
+                <RouterLink
                   :to="{ name: 'wallet-transactions', params: { address: address, type: txType, page: 1 } }"
                   class="dropdown-button"
                 >
                   {{ $t(capitalize(txType)) }}
-                </router-link>
+                </RouterLink>
               </li>
             </ul>
           </div>

@@ -20,34 +20,34 @@
       </svg>
     </button>
 
-    <router-link
+    <RouterLink
       :to="{ name: 'home' }"
       tag="button"
       class="menu-button"
       @click.native="closeMenu"
     >
       {{ $t("Home") }}
-    </router-link>
+    </RouterLink>
 
-    <router-link
+    <RouterLink
       :to="{ name: 'top-wallets', params: { page: 1 } }"
       tag="button"
       class="menu-button"
       @click.native="closeMenu"
     >
       {{ $t("Top Wallets") }}
-    </router-link>
+    </RouterLink>
 
-    <router-link
+    <RouterLink
       :to="{ name: 'delegate-monitor' }"
       tag="button"
       class="menu-button"
       @click.native="closeMenu"
     >
       {{ $t("Delegate Monitor") }}
-    </router-link>
+    </RouterLink>
 
-    <!-- <router-link :to="{ name: 'statistics' }" tag="button" class="menu-button">Statistics</router-link> -->
+    <!-- <RouterLink :to="{ name: 'statistics' }" tag="button" class="menu-button">Statistics</RouterLink> -->
 
     <div class="flex-auto" />
 

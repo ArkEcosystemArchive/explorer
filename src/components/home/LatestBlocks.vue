@@ -8,13 +8,13 @@
         <TableBlocksMobile :blocks="blocks" />
       </div>
       <div class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
-        <router-link
+        <RouterLink
           :to="{ name: 'blocks', params: { page: 2 } }"
           tag="button"
           class="show-more-button"
         >
           {{ $t("Show more") }}
-        </router-link>
+        </RouterLink>
       </div>
     </Loader>
   </div>

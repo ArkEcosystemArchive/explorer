@@ -1,6 +1,6 @@
 <template>
   <span>
-    <router-link
+    <RouterLink
       :to="{ name: 'block', params: { id } }"
       class="hidden md:inline-block"
     >
@@ -11,13 +11,13 @@
         v-else
         v-tooltip="id"
       >{{ truncate(id, length) }}</span>
-    </router-link>
-    <router-link
+    </RouterLink>
+    <RouterLink
       :to="{ name: 'block', params: { id } }"
       class="md:hidden"
     >
       <span v-tooltip="id">{{ truncate(id) }}</span>
-    </router-link>
+    </RouterLink>
   </span>
 </template>
 

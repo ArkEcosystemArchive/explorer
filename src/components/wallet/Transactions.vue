@@ -57,13 +57,13 @@
         v-if="transactions && transactions.length >= 25"
         class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap"
       >
-        <router-link
+        <RouterLink
           :to="{ name: 'wallet-transactions', params: { address: wallet.address, type, page: 2 } }"
           tag="button"
           class="show-more-button"
         >
           {{ $t("Show more") }}
-        </router-link>
+        </RouterLink>
       </div>
     </section>
   </div>

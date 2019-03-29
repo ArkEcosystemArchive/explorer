@@ -43,12 +43,12 @@
           class="text-grey"
           :class="{ 'mr-2': delegate.blocks.produced }"
         >({{ delegate.blocks.missed }} {{ $t("missed") }})</span>
-        <router-link
+        <RouterLink
           v-if="delegate.blocks.produced"
           :to="{ name: 'wallet-blocks', params: { address: delegate.address, username: delegate.username, page: 1 } }"
         >
           {{ $t("See all") }}
-        </router-link>
+        </RouterLink>
       </div>
     </div>
   </div>

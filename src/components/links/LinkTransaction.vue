@@ -1,5 +1,5 @@
 <template>
-  <router-link
+  <RouterLink
     :to="{ name: 'transaction', params: { id } }"
     class="flex items-center whitespace-no-wrap"
   >
@@ -57,7 +57,7 @@
         </span>
       </span>
     </template>
-  </router-link>
+  </RouterLink>
 </template>
 
 <script type="text/ecmascript-6">
