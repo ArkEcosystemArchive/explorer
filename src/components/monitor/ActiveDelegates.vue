@@ -91,14 +91,18 @@
 
       <table-column
         show="production.approval"
-        :label="$t('Vote %')"
+        :label="$t('Votes')"
         header-class="right-header-cell pr-5 md:pr-10 hidden md:table-cell"
         cell-class="py-3 px-4 md:pr-10 text-right border-none hidden md:table-cell"
       >
         <template slot-scope="row">
-          <span v-tooltip="{ content: readableCrypto(row.votes, true, 2), placement: 'top' }">
+          <span
+            v-tooltip="$t('Percentage of the total supply')"
+            class="text-grey text-2xs mr-1"
+          >
             {{ percentageString(row.production.approval) }}
           </span>
+          {{ readableCrypto(row.votes, true, 2) }}
         </template>
       </table-column>
     </table-component>
@@ -141,6 +145,7 @@ export default {
       const lastBlock = row.blocks.last
 
       return {
+        trigger: 'hover click',
         content: lastBlock ? `[${status}] ${
           this.$i18n.t('Last block at height on', { height: lastBlock.height })
         } ${this.readableTimestamp(lastBlock.timestamp.unix)}`

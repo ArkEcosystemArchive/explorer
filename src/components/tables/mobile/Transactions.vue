@@ -42,7 +42,7 @@
           <div class="mr-4">
             {{ $t("Smartbridge") }}
           </div>
-          <div class="truncate">
+          <div class="text-right truncate">
             {{ emojify(transaction.vendorField) }}
           </div>
         </div>
