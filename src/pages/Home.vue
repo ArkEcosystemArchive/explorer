@@ -47,16 +47,15 @@
 
 <script type="text/ecmascript-6">
 import ChartWrapper from '@/components/ChartWrapper'
-import LatestTransactions from '@/components/home/LatestTransactions'
+import { LatestBlocks, LatestTransactions } from '@/components/home'
 import SelectionType from '@/components/SelectionType'
-import LatestBlocks from '@/components/home/LatestBlocks'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
     ChartWrapper,
-    LatestTransactions,
     LatestBlocks,
+    LatestTransactions,
     SelectionType
   },
 
