@@ -48,13 +48,16 @@
         show="production.approval"
         :label="$t('Votes')"
         header-class="right-header-cell sm:pr-10 hidden md:table-cell"
-        cell-class="right-end-cell hidden md:table-cell w-40"
+        cell-class="right-end-cell hidden md:table-cell w-40 whitespace-no-wrap"
       >
         <template slot-scope="row">
-          {{ readableCrypto(row.votes, true, 2) }}
-          <span v-tooltip="$t('Percentage of the total supply')">
-            ({{ percentageString(row.production.approval) }})
+          <span
+            v-tooltip="$t('Percentage of the total supply')"
+            class="text-grey text-2xs mr-1"
+          >
+            {{ percentageString(row.production.approval) }}
           </span>
+          {{ readableCrypto(row.votes, true, 2) }}
         </template>
       </table-column>
     </table-component>
