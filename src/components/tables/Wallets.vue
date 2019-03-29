@@ -72,7 +72,9 @@ export default {
 
   props: {
     wallets: {
-      type: Array,
+      validator: value => {
+        return Array.isArray(value) || value === null
+      },
       required: true
     },
 

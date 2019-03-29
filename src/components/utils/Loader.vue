@@ -23,7 +23,9 @@ export default {
 
   props: {
     data: {
-      type: Array,
+      validator: value => {
+        return Array.isArray(value) || value === null
+      },
       required: true
     }
   }

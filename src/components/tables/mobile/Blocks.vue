@@ -65,7 +65,9 @@ export default {
 
   props: {
     blocks: {
-      type: Array,
+      validator: value => {
+        return Array.isArray(value) || value === null
+      },
       required: true
     }
   }

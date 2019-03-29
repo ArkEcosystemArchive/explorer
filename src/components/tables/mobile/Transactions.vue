@@ -78,7 +78,9 @@ export default {
 
   props: {
     transactions: {
-      type: Array,
+      validator: value => {
+        return Array.isArray(value) || value === null
+      },
       required: true
     }
   }
