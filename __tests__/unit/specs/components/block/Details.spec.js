@@ -43,7 +43,7 @@ describe('Block/Details', () => {
         }
       },
       stubs: {
-        'link-wallet': '<div></div>'
+        'LinkWallet': '<div></div>'
       },
       i18n,
       localVue,

@@ -44,8 +44,8 @@ describe('transaction/Details', () => {
         }
       },
       stubs: {
-        'link-wallet': '<div></div>',
-        'link-block': '<div></div>'
+        'LinkWallet': '<div></div>',
+        'LinkBlock': '<div></div>'
       },
       i18n,
       localVue,
