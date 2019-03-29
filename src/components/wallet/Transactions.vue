@@ -48,10 +48,10 @@
         </div>
       </nav>
       <div class="hidden sm:block">
-        <TableTransactionDetailsDesktop :transactions="transactions" />
+        <TableTransactionsDetailDesktop :transactions="transactions" />
       </div>
       <div class="sm:hidden">
-        <TableTransactionDetailsMobile :transactions="transactions" />
+        <TableTransactionsDetailMobile :transactions="transactions" />
       </div>
       <div
         v-if="transactions && transactions.length >= 25"
