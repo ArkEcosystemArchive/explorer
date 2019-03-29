@@ -10,7 +10,7 @@ import i18n from './i18n'
 import directives from './directives'
 import VTooltip from 'v-tooltip'
 import TableComponent from 'vue-table-component'
-import _ from 'lodash'
+import { orderBy } from 'lodash'
 
 require('./components')
 require('./mixins')
@@ -25,7 +25,7 @@ Vue.use(VTooltip, {
   defaultContainer: 'main'
 })
 Vue.use(TableComponent, {
-  sortHandler: (rows, column, order) => _.orderBy(rows, `data.${column}`, order),
+  sortHandler: (rows, column, order) => orderBy(rows, `data.${column}`, order),
   filterNoResults: i18n.t('No results')
 })
 
