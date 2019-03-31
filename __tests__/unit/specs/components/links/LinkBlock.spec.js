@@ -2,7 +2,7 @@ import { mount, createLocalVue, RouterLinkStub } from '@vue/test-utils'
 import mixins from '@/mixins'
 import store from '@/store'
 
-import Block from '@/components/links/Block'
+import { LinkBlock } from '@/components/links'
 import VueI18n from 'vue-i18n'
 
 const localVue = createLocalVue()
@@ -18,7 +18,7 @@ const testBlock = '8900581355787753944'
 
 describe('Link/Block', () => {
   it('Should display a truncated link to a block', () => {
-    const wrapper = mount(Block, {
+    const wrapper = mount(LinkBlock, {
       propsData: {
         id: testBlock
       },

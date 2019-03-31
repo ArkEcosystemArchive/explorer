@@ -16,7 +16,7 @@ module.exports = {
       .waitForElementVisible("//h1[text() = 'Transaction']")
   },
 
-  'it should be possible to copy the transaction id': function(browser) {
+  'it should be possible to copy the transaction id': function (browser) {
     browser
       .useCss()
       .waitForElementVisible('img.block')
@@ -26,7 +26,7 @@ module.exports = {
       .waitForElementVisible('img.block.animated')
   },
 
-  'it should be possible to click on the sender': function(browser) {
+  'it should be possible to click on the sender': function (browser) {
     browser
       .useXpath()
       .click("//div/div[contains(@class, 'list-row')][1]//a[1]")
@@ -36,7 +36,7 @@ module.exports = {
       .assert.urlContains('wallets/AFrPtEmzu6wdVpa2CnRDEKGQQMWgq8nE9V')
   },
 
-  'it should be possible to click on the recipient': function(browser) {
+  'it should be possible to click on the recipient': function (browser) {
     const devServer = browser.globals.devServerURL + '/#/transaction/818c157383c814a353efbfbbdd3dccabb13cb35e156bb70d31e77248166657a7'
 
     browser
@@ -53,7 +53,7 @@ module.exports = {
       .assert.urlContains('wallets/ATJDMLxBXPxn9bss911HTFCp9PhBHih9uL')
   },
 
-  'it should be possible to click on the transaction block id': function(browser) {
+  'it should be possible to click on the transaction block id': function (browser) {
     const devServer = browser.globals.devServerURL + '/#/transaction/818c157383c814a353efbfbbdd3dccabb13cb35e156bb70d31e77248166657a7'
 
     browser
@@ -70,7 +70,7 @@ module.exports = {
       .assert.urlContains('block/12374209887221238137')
   },
 
-  'it should emojify the vendor field': function(browser) {
+  'it should emojify the vendor field': function (browser) {
     const devServer = browser.globals.devServerURL + '/#/transaction/80aa5f3c1520481c26ab606b9e15fae1c3424dbabbce3719fc8f381e8bb19d29'
 
     browser

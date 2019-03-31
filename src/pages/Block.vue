@@ -1,13 +1,23 @@
 <template>
-  <div class="max-w-2xl mx-auto md:pt-5" v-if="block">
-    <content-header>{{ $t("Block") }}</content-header>
+  <div
+    v-if="block"
+    class="max-w-2xl mx-auto md:pt-5"
+  >
+    <ContentHeader>{{ $t("Block") }}</ContentHeader>
 
     <template v-if="blockNotFound">
       <section class="page-section py-5 md:py-10 px-6">
         <div class="my-10 text-center">
-          <not-found data-type="block" :data-id="block.id" />
+          <NotFound
+            data-type="block"
+            :data-id="block.id"
+          />
 
-          <button @click="fetchBlock" :disabled="isFetching" class="mt-4 pager-button items-center">
+          <button
+            :disabled="isFetching"
+            class="mt-4 pager-button items-center"
+            @click="fetchBlock"
+          >
             <span>{{ !isFetching ? $t('Reload this page') : $t('Loading...') }}</span>
           </button>
         </div>
@@ -15,24 +25,31 @@
     </template>
 
     <template v-else>
-      <identity :block="block" :prev-handler="prevBlock" :next-handler="nextBlock" />
+      <BlockIdentity
+        :block="block"
+        :prev-handler="prevBlock"
+        :next-handler="nextBlock"
+      />
 
-      <block-details :block="block" />
+      <BlockDetails :block="block" />
 
-      <transactions :block="block" />
+      <BlockTransactions :block="block" />
     </template>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import Identity from '@/components/block/Identity'
+import { BlockDetails, BlockIdentity, BlockTransactions } from '@/components/block'
 import NotFound from '@/components/utils/NotFound'
-import BlockDetails from '@/components/block/Details'
-import Transactions from '@/components/block/Transactions'
 import BlockService from '@/services/block'
 
 export default {
-  components: {NotFound, Identity, BlockDetails, Transactions},
+  components: {
+    BlockDetails,
+    BlockIdentity,
+    BlockTransactions,
+    NotFound
+  },
 
   data: () => ({
     block: {},
@@ -44,7 +61,7 @@ export default {
     try {
       const response = await BlockService.find(to.params.id)
       next(vm => vm.setBlock(response))
-    } catch(e) {
+    } catch (e) {
       next(vm => {
         console.log(e.message || e.data.error)
 
@@ -61,7 +78,7 @@ export default {
       const response = await BlockService.find(to.params.id)
       this.setBlock(response)
       next()
-    } catch(e) {
+    } catch (e) {
       console.log(e.message || e.data.error)
 
       this.blockNotFound = true
@@ -70,49 +87,49 @@ export default {
   },
 
   methods: {
-    async prepareComponent() {
+    async prepareComponent () {
       this.$store.watch(state => state.network.height, value => this.updateBlock())
     },
 
-    async updateBlock() {
+    async updateBlock () {
       try {
         const response = await BlockService.find(this.block.id)
         this.setBlock(response)
-      } catch(e) {
+      } catch (e) {
         console.log(e.message || e.data.error)
       }
     },
 
-    async fetchBlock() {
+    async fetchBlock () {
       this.isFetching = true
 
       try {
         const block = await BlockService.find(this.block.id)
         this.setBlock(block)
         this.blockNotFound = false
-      } catch(e) {
+      } catch (e) {
         console.log(e.message || e.data.error)
       } finally {
         this.isFetching = false
       }
     },
 
-    setBlock(block) {
+    setBlock (block) {
       this.block = block
     },
 
-    async prevBlock() {
+    async prevBlock () {
       try {
         const response = await BlockService.findPrevious(this.block.height)
         this.$router.push({ name: 'block', params: { id: response.id } })
-      } catch(e) { console.log(e.message || e.data.error) }
+      } catch (e) { console.log(e.message || e.data.error) }
     },
 
-    async nextBlock() {
+    async nextBlock () {
       try {
         const response = await BlockService.findNext(this.block.height)
         this.$router.push({ name: 'block', params: { id: response.id } })
-      } catch(e) { console.log(e.message || e.data.error) }
+      } catch (e) { console.log(e.message || e.data.error) }
     }
   }
 }

@@ -1,11 +1,18 @@
 <template>
   <div class="hidden lg:flex items-center">
     <div class="mr-6 flex-none">
-      <img class="block" src="@/assets/images/icons/group.svg" />
+      <img
+        class="block"
+        src="@/assets/images/icons/group.svg"
+      >
     </div>
     <div>
-      <div class="text-grey mb-2">{{ $t("Delegates") }}</div>
-      <div class="text-lg text-white semibold truncate">{{ count }}</div>
+      <div class="text-grey mb-2">
+        {{ $t("Delegates") }}
+      </div>
+      <div class="text-lg text-white semibold truncate">
+        {{ count }}
+      </div>
     </div>
   </div>
 </template>
@@ -14,6 +21,8 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'DelegateCount',
+
   data: () => ({
     count: 0
   }),
@@ -22,18 +31,18 @@ export default {
     ...mapGetters('delegates', ['delegates'])
   },
 
-  mounted() {
+  mounted () {
     this.prepareComponent()
   },
 
   methods: {
-    prepareComponent() {
+    prepareComponent () {
       this.getDelegateCount()
 
       this.$store.watch(state => state.delegates.delegates, value => this.getDelegateCount())
     },
 
-    getDelegateCount() {
+    getDelegateCount () {
       this.count = this.delegates.length
     }
   }

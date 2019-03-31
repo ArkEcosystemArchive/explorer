@@ -1,4 +1,4 @@
-(async function() {
+(async function () {
   // 1. start the dev server using production config
   process.env.NODE_ENV = 'testing'
 

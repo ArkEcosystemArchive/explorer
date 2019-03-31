@@ -2,7 +2,7 @@ import { mount, createLocalVue, RouterLinkStub } from '@vue/test-utils'
 import mixins from '@/mixins'
 import store from '@/store'
 
-import Transaction from '@/components/links/Transaction'
+import { LinkTransaction } from '@/components/links'
 import VueI18n from 'vue-i18n'
 
 const localVue = createLocalVue()
@@ -18,12 +18,12 @@ const testTransaction = '1b245c4f1a449da655a43e8b804ed635cc8d1cc6fb50c062d2c00ac
 
 describe('Link/Transaction', () => {
   it('Should display a truncated link to a transaction', () => {
-    const wrapper = mount(Transaction, {
+    const wrapper = mount(LinkTransaction, {
       propsData: {
         id: testTransaction
       },
       stubs: {
-        RouterLink: RouterLinkStub,
+        RouterLink: RouterLinkStub
       },
       i18n,
       localVue,
@@ -37,14 +37,14 @@ describe('Link/Transaction', () => {
   })
 
   it('Should display a smartbridge icon if transaction contains one', () => {
-    const wrapper = mount(Transaction, {
+    const wrapper = mount(LinkTransaction, {
       propsData: {
         id: testTransaction,
         smartBridge: 'Hello',
         showSmartBridgeIcon: true
       },
       stubs: {
-        RouterLink: RouterLinkStub,
+        RouterLink: RouterLinkStub
       },
       i18n,
       localVue,
@@ -58,14 +58,14 @@ describe('Link/Transaction', () => {
   })
 
   it('Should not display a smartbridge icon if set to false', () => {
-    const wrapper = mount(Transaction, {
+    const wrapper = mount(LinkTransaction, {
       propsData: {
         id: testTransaction,
         smartBridge: 'Hello',
         showSmartBridgeIcon: false
       },
       stubs: {
-        RouterLink: RouterLinkStub,
+        RouterLink: RouterLinkStub
       },
       i18n,
       localVue,

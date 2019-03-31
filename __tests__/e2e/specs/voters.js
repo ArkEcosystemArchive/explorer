@@ -66,7 +66,7 @@ module.exports = {
       .useCss()
       .expect.element('div.hidden.sm\\:block').to.be.present
     browser
-      .elements('css selector', 'div.hidden.sm\\:block div.table-component tbody.table-component__table__body tr', function(result) {
+      .elements('css selector', 'div.hidden.sm\\:block div.table-component tbody.table-component__table__body tr', function (result) {
         browser.assert.equal(25, result.value.length)
       })
   },
@@ -83,7 +83,7 @@ module.exports = {
       .assert.urlContains('/wallets/')
   },
 
-  'it should redirect to 404 if the wallet address is invalid': function(browser) {
+  'it should redirect to 404 if the wallet address is invalid': function (browser) {
     const devServer = browser.globals.devServerURL + '/#/wallets/ffffffffffffffffffffffffffffffffff/voters/1'
 
     browser

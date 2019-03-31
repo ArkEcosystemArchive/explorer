@@ -1,7 +1,6 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
-import DesktopLanguage from '@/components/header/languages/Desktop'
-import MobileLanguage from '@/components/header/languages/Mobile'
+import { HeaderLanguagesDesktop, HeaderLanguagesMobile } from '@/components/header/languages'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 import moment from 'moment'
@@ -32,7 +31,7 @@ const store = new Vuex.Store({
         nightMode: state => false,
         language: state => 'en-gb'
       }
-    },
+    }
   },
   strict: true
 })
@@ -45,7 +44,7 @@ describe('header/languages/Desktop', () => {
     const dispatchMock = jest.fn()
     store.dispatch = dispatchMock
 
-    const wrapper = mount(DesktopLanguage, {
+    const wrapper = mount(HeaderLanguagesDesktop, {
       i18n,
       localVue,
       mixins,
@@ -67,7 +66,7 @@ describe('header/languages/Desktop', () => {
     const dispatchMock = jest.fn()
     store.dispatch = dispatchMock
 
-    const wrapper = mount(DesktopLanguage, {
+    const wrapper = mount(HeaderLanguagesDesktop, {
       i18n,
       localVue,
       mixins,
@@ -88,7 +87,7 @@ describe('header/languages/Mobile', () => {
     const dispatchMock = jest.fn()
     store.dispatch = dispatchMock
 
-    const wrapper = mount(MobileLanguage, {
+    const wrapper = mount(HeaderLanguagesMobile, {
       i18n,
       localVue,
       mixins,

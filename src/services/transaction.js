@@ -1,7 +1,7 @@
 import ApiService from '@/services/api'
 
 class TransactionService {
-  async latest(limit = 25) {
+  async latest (limit = 25) {
     const response = await ApiService.get('transactions', {
       params: {
         orderBy: 'timestamp:desc',
@@ -12,12 +12,12 @@ class TransactionService {
     return response.data
   }
 
-  async find(id) {
+  async find (id) {
     const response = await ApiService.get(`transactions/${id}`)
     return response.data
   }
 
-  async filterByType(page, type, limit = 25) {
+  async filterByType (page, type, limit = 25) {
     const params = {
       page,
       limit
@@ -34,7 +34,7 @@ class TransactionService {
     return response
   }
 
-  async byBlock(id, page = 1, limit = 25) {
+  async byBlock (id, page = 1, limit = 25) {
     const response = await ApiService.get(`blocks/${id}/transactions`, {
       params: {
         page,
@@ -45,7 +45,7 @@ class TransactionService {
     return response
   }
 
-  async allByAddress(address, page = 1, limit = 25) {
+  async allByAddress (address, page = 1, limit = 25) {
     const response = await ApiService.get(`wallets/${address}/transactions`, {
       params: {
         page,
@@ -56,7 +56,7 @@ class TransactionService {
     return response
   }
 
-  async sentByAddress(address, page = 1, limit = 25) {
+  async sentByAddress (address, page = 1, limit = 25) {
     const response = await ApiService.get(`wallets/${address}/transactions/sent`, {
       params: {
         page,
@@ -67,7 +67,7 @@ class TransactionService {
     return response
   }
 
-  async receivedByAddress(address, page = 1, limit = 25) {
+  async receivedByAddress (address, page = 1, limit = 25) {
     const response = await ApiService.get(`wallets/${address}/transactions/received`, {
       params: {
         page,
@@ -78,7 +78,7 @@ class TransactionService {
     return response
   }
 
-  async sentByAddressCount(senderId) {
+  async sentByAddressCount (senderId) {
     const response = await ApiService.get('transactions', {
       params: {
         senderId,
@@ -88,7 +88,7 @@ class TransactionService {
     return response.meta.totalCount
   }
 
-  async receivedByAddressCount(recipientId) {
+  async receivedByAddressCount (recipientId) {
     const response = await ApiService.get('transactions', {
       params: {
         recipientId,

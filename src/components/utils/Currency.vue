@@ -8,6 +8,8 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'Currency',
+
   props: {
     amount: {
       type: Number,
@@ -16,7 +18,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('currency', { currencySymbol: 'symbol' }),
+    ...mapGetters('currency', { currencySymbol: 'symbol' })
   }
 }
 </script>

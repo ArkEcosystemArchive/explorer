@@ -1,18 +1,22 @@
 <template>
   <div>
-    <loader :data="transactions">
+    <Loader :data="transactions">
       <div class="hidden sm:block">
-        <table-transactions :transactions="transactions" />
+        <TableTransactionsDesktop :transactions="transactions" />
       </div>
       <div class="sm:hidden">
-        <table-transactions-mobile :transactions="transactions" />
+        <TableTransactionsMobile :transactions="transactions" />
       </div>
       <div class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
-        <router-link :to="{ name: 'transactions', params: { page: 2 } }" tag="button" class="show-more-button">
+        <RouterLink
+          :to="{ name: 'transactions', params: { page: 2 } }"
+          tag="button"
+          class="show-more-button"
+        >
           {{ $t("Show more") }}
-        </router-link>
+        </RouterLink>
       </div>
-    </loader>
+    </Loader>
   </div>
 </template>
 
@@ -20,6 +24,8 @@
 import TransactionService from '@/services/transaction'
 
 export default {
+  name: 'LatestTransactions',
+
   props: {
     transactionType: {
       type: Number,
@@ -32,25 +38,25 @@ export default {
   }),
 
   watch: {
-    async transactionType() {
+    async transactionType () {
       this.transactions = null
       await this.getTransactions()
     }
   },
 
-  async mounted() {
+  async mounted () {
     await this.prepareComponent()
   },
 
   methods: {
-    async prepareComponent() {
+    async prepareComponent () {
       await this.getTransactions()
 
       this.$store.watch(state => state.network.height, value => this.getTransactions())
     },
 
-    async getTransactions() {
-      const { meta, data } = await TransactionService.filterByType(1, this.transactionType)
+    async getTransactions () {
+      const { data } = await TransactionService.filterByType(1, this.transactionType)
       this.transactions = data
     }
   }

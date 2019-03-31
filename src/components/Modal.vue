@@ -1,12 +1,19 @@
 <template>
   <transition name="modal">
-    <div class="modal-mask" @click="$emit('close')">
+    <div
+      class="modal-mask"
+      @click="$emit('close')"
+    >
       <div class="flex items-center justify-center absolute pin">
-        <div class="modal-container bg-theme-page-background text-theme-text-content rounded shadow mx-auto relative p-10" @click.stop="">
+        <div
+          class="modal-container bg-theme-page-background text-theme-text-content rounded shadow mx-auto relative p-10"
+          @click.stop=""
+        >
           <button
+            class="absolute pin-t pin-r p-5"
             @click="$emit('close')"
-            class="absolute pin-t pin-r p-5">
-            <img src="@/assets/images/icons/cross.svg" />
+          >
+            <img src="@/assets/images/icons/cross.svg">
           </button>
 
           <slot />
@@ -15,6 +22,12 @@
     </div>
   </transition>
 </template>
+
+<script>
+export default {
+  name: 'Modal'
+}
+</script>
 
 <style scoped>
 .modal-mask {

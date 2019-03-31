@@ -1,17 +1,17 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <content-header>{{ $t("Blocks") }}</content-header>
+    <ContentHeader>{{ $t("Blocks") }}</ContentHeader>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <table-blocks :blocks="blocks" />
+        <TableBlocksDesktop :blocks="blocks" />
       </div>
       <div class="sm:hidden">
-        <table-blocks-mobile :blocks="blocks" />
+        <TableBlocksMobile :blocks="blocks" />
       </div>
-      <paginator
+      <Paginator
         v-if="showPaginator"
-        :previous="this.meta.previous"
-        :next="this.meta.next"
+        :previous="meta.previous"
+        :next="meta.next"
         @previous="onPrevious"
         @next="onNext"
       />
@@ -30,13 +30,13 @@ export default {
   }),
 
   computed: {
-    showPaginator() {
+    showPaginator () {
       return this.meta && (this.meta.previous || this.meta.next)
     }
   },
 
   watch: {
-    currentPage() {
+    currentPage () {
       this.changePage()
     }
   },
@@ -50,7 +50,7 @@ export default {
         vm.setBlocks(data)
         vm.setMeta(meta)
       })
-    } catch(e) { next({ name: '404' }) }
+    } catch (e) { next({ name: '404' }) }
   },
 
   async beforeRouteUpdate (to, from, next) {
@@ -64,7 +64,7 @@ export default {
       this.setBlocks(data)
       this.setMeta(meta)
       next()
-    } catch(e) { next({ name: '404' }) }
+    } catch (e) { next({ name: '404' }) }
   },
 
   methods: {
@@ -76,19 +76,19 @@ export default {
       this.blocks = blocks
     },
 
-    setMeta(meta) {
+    setMeta (meta) {
       this.meta = meta
     },
 
-    onPrevious() {
+    onPrevious () {
       this.currentPage = Number(this.currentPage) - 1
     },
 
-    onNext() {
+    onNext () {
       this.currentPage = Number(this.currentPage) + 1
     },
 
-    changePage() {
+    changePage () {
       this.$router.push({
         name: 'blocks',
         params: {

@@ -11,7 +11,7 @@ describe('readable timestamp mixin', () => {
         date: 3,
         hour: 20,
         minute: 31,
-        second: 40,
+        second: 40
       })
       .local()
 

@@ -2,7 +2,7 @@ import { mount, createLocalVue, RouterLinkStub } from '@vue/test-utils'
 import mixins from '@/mixins'
 import store from '@/store'
 
-import Wallet from '@/components/links/Wallet'
+import { LinkWallet } from '@/components/links'
 import VueI18n from 'vue-i18n'
 
 const localVue = createLocalVue()
@@ -21,7 +21,7 @@ const testDelegatePublicKey = '03aa4863c93d170d89675a6e381d08a451c1067fc0f6fed47
 
 describe('Link/Wallet', () => {
   it('Should display a full link to a wallet', () => {
-    const wrapper = mount(Wallet, {
+    const wrapper = mount(LinkWallet, {
       propsData: {
         address: testAddress,
         publicKey: testPublicKey,
@@ -43,7 +43,7 @@ describe('Link/Wallet', () => {
   })
 
   it('Should display a truncated link to a wallet', () => {
-    const wrapper = mount(Wallet, {
+    const wrapper = mount(LinkWallet, {
       propsData: {
         address: testAddress,
         publicKey: testPublicKey,
@@ -65,7 +65,7 @@ describe('Link/Wallet', () => {
 
   it('Should display the name of a known address', () => {
     store.dispatch('network/setKnownWallets', { 'AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv': 'TestKnownWallet' })
-    const wrapper = mount(Wallet, {
+    const wrapper = mount(LinkWallet, {
       propsData: {
         address: testAddress,
         publicKey: testPublicKey,
@@ -89,7 +89,7 @@ describe('Link/Wallet', () => {
 
   it('Should display the name of a delegate', done => {
     store.dispatch('delegates/setDelegates', [ { username: 'TestDelegate', address: testDelegateAddress, publicKey: testDelegatePublicKey } ])
-    const wrapper = mount(Wallet, {
+    const wrapper = mount(LinkWallet, {
       propsData: {
         address: testDelegateAddress,
         type: 0
@@ -115,7 +115,7 @@ describe('Link/Wallet', () => {
 
   it('Should also find the delegate by public key', done => {
     store.dispatch('delegates/setDelegates', [ { username: 'TestDelegate', address: testDelegateAddress, publicKey: testDelegatePublicKey } ])
-    const wrapper = mount(Wallet, {
+    const wrapper = mount(LinkWallet, {
       propsData: {
         publicKey: testDelegatePublicKey,
         type: 0
@@ -141,7 +141,7 @@ describe('Link/Wallet', () => {
 
   describe('When given a transaction type > 0', () => {
     it('Should display 2nd Signature Registration for type 1', () => {
-      const wrapper = mount(Wallet, {
+      const wrapper = mount(LinkWallet, {
         propsData: { type: 1 },
         stubs: {
           RouterLink: RouterLinkStub
@@ -156,7 +156,7 @@ describe('Link/Wallet', () => {
     })
 
     it('Should display Delegate Registration for type 2', () => {
-      const wrapper = mount(Wallet, {
+      const wrapper = mount(LinkWallet, {
         propsData: { type: 2 },
         stubs: {
           RouterLink: RouterLinkStub
@@ -172,7 +172,7 @@ describe('Link/Wallet', () => {
 
     it('Should display Vote for type 3', () => {
       store.dispatch('delegates/setDelegates', [ { username: 'TestDelegate', address: testDelegateAddress, publicKey: testDelegatePublicKey } ])
-      const wrapper = mount(Wallet, {
+      const wrapper = mount(LinkWallet, {
         propsData: {
           type: 3,
           asset: {
@@ -193,7 +193,7 @@ describe('Link/Wallet', () => {
     })
 
     it('Should display Multisignature Registration for type 4', () => {
-      const wrapper = mount(Wallet, {
+      const wrapper = mount(LinkWallet, {
         propsData: { type: 4 },
         stubs: {
           RouterLink: RouterLinkStub
@@ -208,7 +208,7 @@ describe('Link/Wallet', () => {
     })
 
     it('Should display IPFS for type 5', () => {
-      const wrapper = mount(Wallet, {
+      const wrapper = mount(LinkWallet, {
         propsData: { type: 5 },
         stubs: {
           RouterLink: RouterLinkStub
@@ -223,7 +223,7 @@ describe('Link/Wallet', () => {
     })
 
     it('Should display Timelock Transfer for type 6', () => {
-      const wrapper = mount(Wallet, {
+      const wrapper = mount(LinkWallet, {
         propsData: { type: 6 },
         stubs: {
           RouterLink: RouterLinkStub
@@ -238,7 +238,7 @@ describe('Link/Wallet', () => {
     })
 
     it('Should display Multipayment for type 7', () => {
-      const wrapper = mount(Wallet, {
+      const wrapper = mount(LinkWallet, {
         propsData: { type: 7 },
         stubs: {
           RouterLink: RouterLinkStub
@@ -253,7 +253,7 @@ describe('Link/Wallet', () => {
     })
 
     it('Should display Delegate Resignation for type 8', () => {
-      const wrapper = mount(Wallet, {
+      const wrapper = mount(LinkWallet, {
         propsData: { type: 8 },
         stubs: {
           RouterLink: RouterLinkStub

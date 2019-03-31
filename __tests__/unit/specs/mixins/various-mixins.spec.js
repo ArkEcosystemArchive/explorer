@@ -1,11 +1,11 @@
 import mixins from '@/mixins'
 import store from '@/store'
 
-const displayCrypto = function(value) {
+const displayCrypto = function (value) {
   return value.toLocaleString(undefined, { maximumFractionDigits: 8 })
 }
 
-const displayFiat = function(value) {
+const displayFiat = function (value) {
   return value.toLocaleString(undefined, { minimumFractionDigits: 2 })
 }
 

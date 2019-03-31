@@ -1,7 +1,6 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
-import DesktopCurrency from '@/components/header/currencies/Desktop'
-import MobileCurrency from '@/components/header/currencies/Mobile'
+import { HeaderCurrenciesDesktop, HeaderCurrenciesMobile } from '@/components/header/currencies'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 
@@ -35,11 +34,11 @@ const store = new Vuex.Store({
     network: {
       namespaced: true,
       state: {
-        currencies: {'USD': '$'},
+        currencies: { 'USD': '$' }
       },
       getters: {
-        currencies: state => ({'USD': '$'})
-      },
+        currencies: state => ({ 'USD': '$' })
+      }
     }
   },
   strict: true
@@ -51,7 +50,7 @@ describe('header/currencies/Desktop', () => {
     store.dispatch = dispatchMock
     expect.assertions(6)
 
-    const wrapper = mount(DesktopCurrency, {
+    const wrapper = mount(HeaderCurrenciesDesktop, {
       i18n,
       localVue,
       mixins,
@@ -76,7 +75,7 @@ describe('header/currencies/Desktop', () => {
     const dispatchMock = jest.fn()
     store.dispatch = dispatchMock
 
-    const wrapper = mount(DesktopCurrency, {
+    const wrapper = mount(HeaderCurrenciesDesktop, {
       i18n,
       localVue,
       mixins,
@@ -95,7 +94,7 @@ describe('header/currencies/Mobile', () => {
     store.dispatch = dispatchMock
     expect.assertions(6)
 
-    const wrapper = mount(MobileCurrency, {
+    const wrapper = mount(HeaderCurrenciesMobile, {
       i18n,
       localVue,
       mixins,

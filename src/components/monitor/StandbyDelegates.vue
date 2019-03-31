@@ -1,5 +1,5 @@
 <template>
-  <loader :data="delegates">
+  <Loader :data="delegates">
     <table-component
       v-if="delegates && delegates.length > 0"
       :data="delegates"
@@ -27,9 +27,9 @@
         cell-class="left-cell"
       >
         <template slot-scope="row">
-          <link-wallet :address="row.address">
+          <LinkWallet :address="row.address">
             {{ row.username }}
-          </link-wallet>
+          </LinkWallet>
         </template>
       </table-column>
 
@@ -62,35 +62,39 @@
       </table-column>
     </table-component>
 
-    <div v-else class="px-5 md:px-10">
+    <div
+      v-else
+      class="px-5 md:px-10"
+    >
       <span>{{ $t("No results") }}</span>
     </div>
-  </loader>
+  </Loader>
 </template>
 
 <script type="text/ecmascript-6">
 import DelegateService from '@/services/delegate'
 import { mapGetters } from 'vuex'
-import moment from 'moment'
 
 export default {
+  name: 'StandbyDelegates',
+
   data: () => ({
     delegates: null
   }),
 
   computed: {
-    ...mapGetters('network', ['activeDelegates']),
+    ...mapGetters('network', ['activeDelegates'])
   },
 
-  async mounted() {
+  async mounted () {
     await this.getDelegates()
   },
 
   methods: {
-    async getDelegates() {
+    async getDelegates () {
       const response = await DelegateService.standby()
       this.delegates = response
-    },
-  },
+    }
+  }
 }
 </script>

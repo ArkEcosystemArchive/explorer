@@ -1,13 +1,13 @@
 import ApiService from '@/services/api'
 
 class NodeService {
-  async config() {
+  async config () {
     const response = await ApiService.get('node/configuration')
 
     return response.data
   }
 
-  async status() {
+  async status () {
     const response = await ApiService.get('node/status')
 
     return response.data

@@ -1,5 +1,5 @@
 class CryptoCompareService {
-  async price(currency) {
+  async price (currency) {
     return 12.34
   }
 }

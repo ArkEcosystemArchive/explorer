@@ -1,7 +1,7 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
 
-import ToggleCurrency from '@/components/header/ToggleCurrency'
+import ToggleCurrency from '@/components/header/toggles/ToggleCurrency'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 

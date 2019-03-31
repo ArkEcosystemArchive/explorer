@@ -4,14 +4,22 @@
       <div class="list-row-border-b">
         <div>{{ $t("Sender") }}</div>
         <div class="truncate">
-          <link-wallet :address="transaction.sender" :trunc="false" />
+          <LinkWallet
+            :address="transaction.sender"
+            :trunc="false"
+          />
         </div>
       </div>
 
       <div class="list-row-border-b">
         <div>{{ $t("Recipient") }}</div>
         <div class="truncate">
-          <link-wallet :address="transaction.recipient" :type="transaction.type" :asset="transaction.asset" :trunc="false" />
+          <LinkWallet
+            :address="transaction.recipient"
+            :type="transaction.type"
+            :asset="transaction.asset"
+            :trunc="false"
+          />
         </div>
       </div>
 
@@ -48,17 +56,33 @@
 
       <div class="list-row-border-b">
         <div>{{ $t("Timestamp") }}</div>
-        <div v-if="transaction.timestamp">{{ readableTimestamp(transaction.timestamp.unix) }}</div>
+        <div v-if="transaction.timestamp">
+          {{ readableTimestamp(transaction.timestamp.unix) }}
+        </div>
       </div>
 
-      <div class="list-row-border-b-no-wrap" v-if="transaction.vendorField">
-        <div class="mr-4">{{ $t("Smartbridge") }}</div>
-        <div class="text-right">{{ emojify(transaction.vendorField) }}</div>
+      <div
+        v-if="transaction.vendorField"
+        class="list-row-border-b-no-wrap"
+      >
+        <div class="mr-4">
+          {{ $t("Smartbridge") }}
+        </div>
+        <div class="text-right">
+          {{ emojify(transaction.vendorField) }}
+        </div>
       </div>
 
       <div class="list-row">
         <div>{{ $t("Block") }}</div>
-        <div><link-block v-if="transaction.blockId" :id="transaction.blockId">{{ transaction.blockId }}</link-block></div>
+        <div>
+          <LinkBlock
+            v-if="transaction.blockId"
+            :id="transaction.blockId"
+          >
+            {{ transaction.blockId }}
+          </LinkBlock>
+        </div>
       </div>
     </div>
   </section>
@@ -69,10 +93,7 @@ import CryptoCompareService from '@/services/crypto-compare'
 import { mapGetters } from 'vuex'
 
 export default {
-  data: () => ({
-    initialBlockHeight: 0,
-    price: 0
-  }),
+  name: 'TransactionDetails',
 
   props: {
     transaction: {
@@ -80,27 +101,31 @@ export default {
       required: true
     }
   },
+  data: () => ({
+    initialBlockHeight: 0,
+    price: 0
+  }),
 
   computed: {
     ...mapGetters('currency', { currencySymbol: 'symbol' }),
     ...mapGetters('network', ['height']),
 
-    confirmations() {
+    confirmations () {
       return this.initialBlockHeight ? this.height - this.initialBlockHeight : this.transaction.confirmations
     }
   },
 
   watch: {
-    async transaction() {
+    async transaction () {
       this.updatePrice()
       this.setInitialBlockHeight()
     },
 
-    async currencySymbol() {
+    async currencySymbol () {
       await this.updatePrice()
     },
 
-    height(newValue, oldValue) {
+    height (newValue, oldValue) {
       if (!oldValue) {
         this.setInitialBlockHeight()
       }
@@ -108,11 +133,11 @@ export default {
   },
 
   methods: {
-    async updatePrice() {
+    async updatePrice () {
       this.price = await CryptoCompareService.dailyAverage(this.transaction.timestamp.unix)
     },
 
-    setInitialBlockHeight() {
+    setInitialBlockHeight () {
       this.initialBlockHeight = this.height - this.transaction.confirmations
     }
   }

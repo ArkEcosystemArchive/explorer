@@ -1,27 +1,40 @@
 <template>
   <div class="w-full flex items-center px-5 sm:px-10">
-    <button @click="$store.dispatch('ui/setHeaderType', null)" class="flex flex-none p-2">
-      <img src="@/assets/images/icons/cross.svg" />
+    <button
+      class="flex flex-none p-2"
+      @click="$store.dispatch('ui/setHeaderType', null)"
+    >
+      <img src="@/assets/images/icons/cross.svg">
     </button>
 
-    <label for="search" class="hidden">{{ $t("Search") }}</label>
+    <label
+      for="search"
+      class="hidden"
+    >{{ $t("Search") }}</label>
 
     <input
-      type="search"
       ref="search"
-      :placeholder=placeholder
-      class="search-input w-full flex-auto mr-2 py-4 pl-4 bg-transparent"
-      :class="{ 'text-grey': nightMode }"
       v-model="query"
       v-tooltip="{ show: nothingFound, content: $t('Nothing matched your search'), trigger: 'manual', placement: 'bottom-start', classes: 'search-tip' }"
-      @keyup.enter="search" />
+      type="search"
+      :placeholder="placeholder"
+      class="search-input w-full flex-auto mr-2 py-4 pl-4 bg-transparent"
+      :class="{ 'text-grey': nightMode }"
+      @keyup.enter="search"
+    >
 
     <button
       class="search-icon text-grey hover:text-blue p-3 md:p-4 transition"
       :disabled="!hasInput"
       @click="search"
     >
-      <svg class="fill-current" width="20" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1216 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z"/></svg>
+      <svg
+        class="fill-current"
+        width="20"
+        height="20"
+        viewBox="0 0 1792 1792"
+        xmlns="http://www.w3.org/2000/svg"
+      ><path d="M1216 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z" /></svg>
     </button>
   </div>
 </template>
@@ -31,6 +44,8 @@ import SearchService from '@/services/search'
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'HeaderSearch',
+
   data: () => ({
     query: null,
     nothingFound: false,
@@ -43,12 +58,12 @@ export default {
     ...mapGetters('ui', ['nightMode']),
     ...mapGetters('network', ['knownWallets']),
 
-    hasInput() {
+    hasInput () {
       return !!this.query
     }
   },
 
-  mounted() {
+  mounted () {
     this.$refs.search.focus()
 
     const WIDTH_THRESHOLD = 1024
@@ -60,7 +75,7 @@ export default {
   },
 
   methods: {
-    async search() {
+    async search () {
       if (!this.query) {
         return
       }
@@ -82,35 +97,35 @@ export default {
         this.changePage('wallet', { address: del.address })
         return
       } else {
-        this.updateSearchCount({ message: 'No delegate with that username could be found' });
+        this.updateSearchCount({ message: 'No delegate with that username could be found' })
       }
 
       try {
         const responseAddress = await SearchService.walletByAddress(this.query)
         this.changePage('wallet', { address: responseAddress.address })
         return
-      } catch(e) { this.updateSearchCount(e) }
+      } catch (e) { this.updateSearchCount(e) }
 
       try {
         const responseDelegate = await SearchService.delegateByQuery(this.query.toLowerCase())
         this.changePage('wallet', { address: responseDelegate.address })
         return
-      } catch(e) { this.updateSearchCount(e) }
+      } catch (e) { this.updateSearchCount(e) }
 
       try {
         const responseBlock = await SearchService.blockByQuery(this.query)
         this.changePage('block', { id: responseBlock.id })
         return
-      } catch(e) { this.updateSearchCount(e) }
+      } catch (e) { this.updateSearchCount(e) }
 
       try {
         const responseTransaction = await SearchService.transactionById(this.query)
         this.changePage('transaction', { id: responseTransaction.id })
         return
-      } catch(e) { this.updateSearchCount(e) }
+      } catch (e) { this.updateSearchCount(e) }
     },
 
-    updateSearchCount(err) {
+    updateSearchCount (err) {
       if (err !== null) {
         console.log(err.message || err.data.error)
       }
@@ -123,18 +138,18 @@ export default {
       }
     },
 
-    setMobilePlaceholder(showMobile) {
+    setMobilePlaceholder (showMobile) {
       this.placeholder = showMobile
         ? this.$i18n.t('Search')
         : this.$i18n.t('Find a block, transaction, address or delegate')
     },
 
-    changePage(name, params) {
+    changePage (name, params) {
       this.$router.push({ name, params })
       this.$store.dispatch('ui/setHeaderType', null)
     },
 
-    findByNameInKnownWallets(name) {
+    findByNameInKnownWallets (name) {
       if (name !== null) {
         for (const address in this.knownWallets) {
           if (this.knownWallets.hasOwnProperty(address)) {
@@ -144,8 +159,8 @@ export default {
           }
         }
       }
-    },
-  },
+    }
+  }
 }
 </script>
 

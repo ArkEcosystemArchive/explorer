@@ -13,21 +13,21 @@ export default {
     }
   },
   mutations: {
-    [types.SET_CURRENCY_NAME](state, payload) {
+    [types.SET_CURRENCY_NAME] (state, payload) {
       state.name = payload.value
     },
-    [types.SET_CURRENCY_RATE](state, payload) {
+    [types.SET_CURRENCY_RATE] (state, payload) {
       state.rate = payload.value
     },
-    [types.SET_CURRENCY_SYMBOL](state, payload) {
+    [types.SET_CURRENCY_SYMBOL] (state, payload) {
       state.symbol = payload.value
     },
-    [types.SET_CURRENCY_LAST_CONVERSION](state, payload) {
+    [types.SET_CURRENCY_LAST_CONVERSION] (state, payload) {
       state.lastConversion = payload.value
     }
   },
   actions: {
-    setName: ({commit}, value) => {
+    setName: ({ commit }, value) => {
       localStorage.setItem('currencyName', value)
 
       commit({
@@ -35,7 +35,7 @@ export default {
         value
       })
     },
-    setRate: ({commit}, value) => {
+    setRate: ({ commit }, value) => {
       localStorage.setItem('currencyRate', value)
 
       commit({
@@ -43,7 +43,7 @@ export default {
         value
       })
     },
-    setSymbol: ({commit}, value) => {
+    setSymbol: ({ commit }, value) => {
       localStorage.setItem('currencySymbol', value)
 
       commit({
@@ -51,7 +51,7 @@ export default {
         value
       })
     },
-    setLastConversion: ({commit}, value) => {
+    setLastConversion: ({ commit }, value) => {
       let rates = JSON.parse(localStorage.getItem(`rates_${value.to}`))
 
       rates = rates || {}

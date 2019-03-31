@@ -1,6 +1,6 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
-import TotalForged from '@/components/monitor/TotalForged'
+import TotalForged from '@/components/monitor/header/TotalForged'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 const localVue = createLocalVue()
@@ -30,7 +30,7 @@ const store = new Vuex.Store({
         rewardOffset: state => networkState.rewardOffset
       },
       mutations: {
-        setHeight(state, payload) {
+        setHeight (state, payload) {
           state.height = payload.value
         }
       },
@@ -38,11 +38,11 @@ const store = new Vuex.Store({
         setHeight: ({ commit }, value) => {
           commit({
             type: 'setHeight',
-            value,
+            value
           })
         }
       }
-    },
+    }
   },
   strict: true
 })
@@ -51,7 +51,7 @@ const getTotalForged = (height, offset) => {
   return height > offset ? (height - offset) * 2 : 0
 }
 
-describe('monitor/TotalForged', () => {
+describe('monitor/header/TotalForged', () => {
   it('Should display calculated result', (done) => {
     expect.assertions(1)
 

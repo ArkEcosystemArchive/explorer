@@ -1,11 +1,14 @@
 <template>
   <button
+    class="px-2 py-2 md:py-4 text-yellow flex-none flex items-center border-b-2 margin-t-2 border-transparent hover:border-red transition"
     @click="$store.dispatch('ui/setNightMode', !nightMode)"
     @mouseover="changeImageSource"
     @mouseleave="setImageSource"
-    class="px-2 py-2 md:py-4 text-yellow flex-none flex items-center border-b-2 margin-t-2 border-transparent hover:border-red transition">
-
-    <img :src="imageSource" width="30" />
+  >
+    <img
+      :src="imageSource"
+      width="30"
+    >
   </button>
 </template>
 
@@ -13,32 +16,34 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  computed: {
-    ...mapGetters('ui', ['nightMode']),
-  },
+  name: 'ToggleTheme',
 
   data: () => ({
     imageSource: null
   }),
 
-  mounted() {
+  computed: {
+    ...mapGetters('ui', ['nightMode'])
+  },
+
+  mounted () {
     this.prepareComponent()
   },
 
   methods: {
-    prepareComponent() {
+    prepareComponent () {
       this.setImageSource()
 
       this.$store.watch((state) => state.ui.nightMode, (value) => this.setImageSource())
     },
 
-    setImageSource() {
+    setImageSource () {
       const name = this.nightMode ? 'sun' : 'moon'
 
       this.imageSource = require(`@/assets/images/theme/${name}.svg`)
     },
 
-    changeImageSource() {
+    changeImageSource () {
       const name = this.nightMode ? 'sun' : 'moon'
 
       this.imageSource = require(`@/assets/images/theme/hover/${name}.svg`)
