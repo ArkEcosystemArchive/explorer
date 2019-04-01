@@ -1,5 +1,5 @@
 <template>
-  <loader :data="transactions">
+  <Loader :data="transactions">
     <table-component
       v-if="transactions && transactions.length > 0"
       :data="transactions"
@@ -16,7 +16,11 @@
         cell-class="left-start-cell"
       >
         <template slot-scope="row">
-          <link-transaction :id="row.id" :smart-bridge="row.vendorField" :show-smart-bridge-icon="showSmartBridgeIcon" />
+          <LinkTransaction
+            :id="row.id"
+            :smart-bridge="row.vendorField"
+            :show-smart-bridge-icon="showSmartBridgeIcon"
+          />
         </template>
       </table-column>
 
@@ -38,7 +42,7 @@
         cell-class="left-cell"
       >
         <template slot-scope="row">
-          <link-wallet :address="row.sender" />
+          <LinkWallet :address="row.sender" />
         </template>
       </table-column>
 
@@ -49,7 +53,11 @@
         cell-class="left-cell"
       >
         <template slot-scope="row">
-          <link-wallet :address="row.recipient" :type="row.type" :asset="row.asset" />
+          <LinkWallet
+            :address="row.recipient"
+            :type="row.type"
+            :asset="row.asset"
+          />
         </template>
       </table-column>
 
@@ -61,7 +69,10 @@
       >
         <template slot-scope="row">
           <span class="whitespace-no-wrap">
-            <transaction-amount :transaction="row" :type="row.type" />
+            <TransactionAmount
+              :transaction="row"
+              :type="row.type"
+            />
           </span>
         </template>
       </table-column>
@@ -92,7 +103,10 @@
               class="flex items-center justify-end whitespace-no-wrap"
             >
               <span class="text-green inline-block mr-2">{{ row.confirmations }}</span>
-              <img class="icon flex-none" src="@/assets/images/icons/clock.svg" />
+              <img
+                class="icon flex-none"
+                src="@/assets/images/icons/clock.svg"
+              >
             </div>
             <div v-else>
               <div v-tooltip="row.confirmations + ' ' + $t('Confirmations')">
@@ -104,32 +118,41 @@
       </table-column>
     </table-component>
 
-    <div v-else class="px-5 md:px-10">
+    <div
+      v-else
+      class="px-5 md:px-10"
+    >
       <span>{{ $t("No results") }}</span>
     </div>
-  </loader>
+  </Loader>
 </template>
 
 <script type="text/ecmascript-6">
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'TableTransactionsDetailDesktop',
+
   props: {
     transactions: {
-      // type: Array or null
-      required: true,
+      validator: value => {
+        return Array.isArray(value) || value === null
+      },
+      required: true
     }
   },
 
   computed: {
     ...mapGetters('network', ['activeDelegates']),
 
-    showSmartBridgeIcon() {
+    showSmartBridgeIcon () {
       if (this.transactions) {
         return this.transactions.some(transaction => {
           return !!transaction.vendorField
         })
       }
+
+      return false
     }
   }
 }

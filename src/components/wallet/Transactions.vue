@@ -6,21 +6,21 @@
     <section class="page-section py-5 md:py-10">
       <nav class="mx-5 md:mx-10 mb-8 border-b flex items-end">
         <div
-          @click="setType('all')"
           :class="[
             !isTypeSent && !isTypeReceived ? 'text-2xl border-blue text-theme-text-primary' : 'text-lg text-theme-text-secondary border-transparent',
             'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-primary hover:border-blue'
           ]"
+          @click="setType('all')"
         >
           {{ $t("All") }}
         </div>
         <div
-          @click="setType('sent')"
           :class="[
             isTypeSent ? 'text-2xl border-blue text-theme-text-primary' : 'text-lg text-theme-text-secondary border-transparent',
             !sentCount ? 'pointer-events-none text-theme-text-tertiary' : '',
             'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-text-primary hover:border-blue'
           ]"
+          @click="setType('sent')"
         >
           {{ $t("Sent") }}
           <span
@@ -31,12 +31,12 @@
           </span>
         </div>
         <div
-          @click="setType('received')"
           :class="[
             isTypeReceived ? 'text-2xl border-blue text-theme-text-primary' : 'text-lg text-theme-text-secondary border-transparent',
             !receivedCount ? 'pointer-events-none text-theme-text-tertiary' : '',
             'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-text-primary hover:border-blue'
           ]"
+          @click="setType('received')"
         >
           {{ $t("Received") }}
           <span
@@ -48,22 +48,22 @@
         </div>
       </nav>
       <div class="hidden sm:block">
-        <table-transactions-detail :transactions="transactions" />
+        <TableTransactionsDetailDesktop :transactions="transactions" />
       </div>
       <div class="sm:hidden">
-        <table-transactions-detail-mobile :transactions="transactions" />
+        <TableTransactionsDetailMobile :transactions="transactions" />
       </div>
-      <div 
+      <div
         v-if="transactions && transactions.length >= 25"
         class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap"
       >
-        <router-link
-          :to="{ name: 'wallet-transactions', params: { address: this.wallet.address, type, page: 2 } }"
+        <RouterLink
+          :to="{ name: 'wallet-transactions', params: { address: wallet.address, type, page: 2 } }"
           tag="button"
           class="show-more-button"
         >
           {{ $t("Show more") }}
-        </router-link>
+        </RouterLink>
       </div>
     </section>
   </div>
@@ -71,14 +71,15 @@
 
 <script type="text/ecmascript-6">
 import TransactionService from '@/services/transaction'
-import { mapGetters } from 'vuex'
 
 export default {
+  name: 'WalletTransactions',
+
   props: {
     wallet: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
 
   data: () => ({
@@ -89,17 +90,17 @@ export default {
   }),
 
   computed: {
-    isTypeSent() {
+    isTypeSent () {
       return this.type === 'sent'
     },
 
-    isTypeReceived() {
+    isTypeReceived () {
       return this.type === 'received'
     }
   },
 
   watch: {
-    wallet() {
+    wallet () {
       this.getTransactions()
 
       this.getSentCount()
@@ -108,11 +109,11 @@ export default {
   },
 
   methods: {
-    async getTransactions() {
+    async getTransactions () {
       this.transactions = null
 
       if (this.wallet.address !== undefined) {
-        const { meta, data } = await TransactionService[`${this.type}ByAddress`](
+        const { data } = await TransactionService[`${this.type}ByAddress`](
           this.wallet.address,
           this.page
         )
@@ -120,7 +121,7 @@ export default {
       }
     },
 
-    async getReceivedCount() {
+    async getReceivedCount () {
       if (this.wallet && this.wallet.address) {
         const response = await TransactionService.receivedByAddressCount(this.wallet.address)
         this.receivedCount = response
@@ -129,7 +130,7 @@ export default {
       }
     },
 
-    async getSentCount() {
+    async getSentCount () {
       if (this.wallet && this.wallet.address) {
         const response = await TransactionService.sentByAddressCount(this.wallet.address)
         this.sentCount = response
@@ -138,11 +139,11 @@ export default {
       }
     },
 
-    setType(type) {
+    setType (type) {
       this.type = type
 
       this.getTransactions()
     }
-  },
+  }
 }
 </script>

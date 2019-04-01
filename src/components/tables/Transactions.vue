@@ -1,5 +1,5 @@
 <template>
-  <loader :data="transactions">
+  <Loader :data="transactions">
     <table-component
       v-if="transactions && transactions.length > 0"
       :data="transactions"
@@ -16,7 +16,11 @@
         cell-class="left-start-cell"
       >
         <template slot-scope="row">
-          <link-transaction :id="row.id" :smart-bridge="row.vendorField" :show-smart-bridge-icon="showSmartBridgeIcon" />
+          <LinkTransaction
+            :id="row.id"
+            :smart-bridge="row.vendorField"
+            :show-smart-bridge-icon="showSmartBridgeIcon"
+          />
         </template>
       </table-column>
 
@@ -38,7 +42,7 @@
         cell-class="left-cell"
       >
         <template slot-scope="row">
-          <link-wallet :address="row.sender" />
+          <LinkWallet :address="row.sender" />
         </template>
       </table-column>
 
@@ -49,7 +53,11 @@
         cell-class="left-cell"
       >
         <template slot-scope="row">
-          <link-wallet :address="row.recipient" :type="row.type" :asset="row.asset" />
+          <LinkWallet
+            :address="row.recipient"
+            :type="row.type"
+            :asset="row.asset"
+          />
         </template>
       </table-column>
 
@@ -72,7 +80,10 @@
       >
         <template slot-scope="row">
           <span class="whitespace-no-wrap">
-            <transaction-amount :transaction="row" :type="row.type" />
+            <TransactionAmount
+              :transaction="row"
+              :type="row.type"
+            />
           </span>
         </template>
       </table-column>
@@ -91,23 +102,30 @@
       </table-column>
     </table-component>
 
-    <div v-else class="px-5 md:px-10">
+    <div
+      v-else
+      class="px-5 md:px-10"
+    >
       <span>{{ $t("No results") }}</span>
     </div>
-  </loader>
+  </Loader>
 </template>
 
 <script type="text/ecmascript-6">
 export default {
+  name: 'TableTransactionsDesktop',
+
   props: {
     transactions: {
-      // type: Array or null
-      required: true,
+      validator: value => {
+        return Array.isArray(value) || value === null
+      },
+      required: true
     }
   },
 
   computed: {
-    showSmartBridgeIcon() {
+    showSmartBridgeIcon () {
       return this.transactions.some(transaction => {
         return !!transaction.vendorField
       })

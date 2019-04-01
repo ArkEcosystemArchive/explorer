@@ -1,16 +1,34 @@
 <template>
   <ul class="menu-container w-full max-w-480px bg-table-row list-reset absolute pin-b pin-l py-5 block xl:hidden">
     <li :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
-      <router-link :to="{ name: 'home' }" tag="div" class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border">{{ $t("Home") }}</router-link>
+      <RouterLink
+        :to="{ name: 'home' }"
+        tag="div"
+        class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border"
+      >
+        {{ $t("Home") }}
+      </RouterLink>
     </li>
     <li :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
-      <router-link :to="{ name: 'top-wallets', params: { page: 1 } }" tag="div" class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border">{{ $t("Top Wallets") }}</router-link>
+      <RouterLink
+        :to="{ name: 'top-wallets', params: { page: 1 } }"
+        tag="div"
+        class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border"
+      >
+        {{ $t("Top Wallets") }}
+      </RouterLink>
     </li>
     <li :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
-      <router-link :to="{ name: 'delegate-monitor' }" tag="div" class="cursor-pointer py-5 w-64 flex-none">{{ $t("Delegate Monitor") }}</router-link>
+      <RouterLink
+        :to="{ name: 'delegate-monitor' }"
+        tag="div"
+        class="cursor-pointer py-5 w-64 flex-none"
+      >
+        {{ $t("Delegate Monitor") }}
+      </RouterLink>
     </li>
     <!-- <li :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
-      <router-link :to="{ name: 'statistics' }" tag="div" class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border">Statistics</router-link>
+      <RouterLink :to="{ name: 'statistics' }" tag="div" class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border">Statistics</RouterLink>
     </li> -->
     <!-- <li :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
       <div class="py-5 w-64 flex-none">
@@ -25,6 +43,8 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'HeaderMenuMobile',
+
   computed: {
     ...mapGetters('ui', ['nightMode'])
   }

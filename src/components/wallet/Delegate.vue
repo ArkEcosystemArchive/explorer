@@ -11,12 +11,21 @@
     </div>
 
     <div class="list-row-border-b">
-      <div>{{ $t("Vote %") }}</div>
+      <div>{{ $t("Votes") }}</div>
       <div
         v-if="delegate.production"
-        v-tooltip="delegate.votes ? { trigger: 'hover click', content: readableCrypto(delegate.votes, true, 2), placement: 'left' } : {}"
       >
-        {{ percentageString(delegate.production.approval) }}
+        <span
+          v-tooltip="delegate.votes ? {
+            trigger: 'hover click',
+            content: $t('Percentage of the total supply'),
+            placement: 'left'
+          } : {}"
+          class="text-grey text-2xs mr-1"
+        >
+          {{ percentageString(delegate.production.approval) }}
+        </span>
+        {{ readableCrypto(delegate.votes, true, 2) }}
       </div>
     </div>
 
@@ -33,22 +42,22 @@
         <span>
           {{ delegate.blocks.produced }}
         </span>
-        <router-link
+        <RouterLink
           v-if="delegate.blocks.produced"
           :to="{ name: 'wallet-blocks', params: { address: delegate.address, username: delegate.username, page: 1 } }"
           class="ml-2"
         >
           {{ $t("See all") }}
-        </router-link>
+        </RouterLink>
       </div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import DelegateService from '@/services/delegate'
-
 export default {
+  name: 'WalletDelegate',
+
   props: {
     wallet: {
       type: Object,
@@ -57,7 +66,7 @@ export default {
   },
 
   computed: {
-    delegate() {
+    delegate () {
       return this.$store.getters['delegates/byPublicKey'](this.wallet.publicKey)
     }
   }

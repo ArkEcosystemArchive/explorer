@@ -8,7 +8,7 @@ const ForgeStatus = Object.freeze({
 })
 
 class ForgingService {
-  status(delegate, height) {
+  status (delegate, height) {
     let forgingStatus
 
     if (delegate.blocks.last === undefined) {
@@ -41,7 +41,7 @@ class ForgingService {
     return forgingStatus
   }
 
-  round(height) {
+  round (height) {
     if (isNaN(height)) {
       return 0
     }
@@ -51,7 +51,7 @@ class ForgingService {
     return Math.floor(height / activeDelegates) + (height % activeDelegates > 0 ? 1 : 0)
   }
 
-  totals(delegates) {
+  totals (delegates) {
     let forging = 0
     let missedBlock = 0
     let notForging = 0

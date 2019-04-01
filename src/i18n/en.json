@@ -55,7 +55,7 @@
   "Forged blocks": "Forged blocks",
   "Last forged": "Last forged",
   "Status": "Status",
-  "Vote %": "Vote %",
+  "Percentage of the total supply": "Percentage of the total supply",
   "Delegates": "Delegates",
   "Delegate": "Delegate",
   "Forged block recently": "Forged block recently",
@@ -108,7 +108,7 @@
 
   "Ooops!": "Ooops!",
   "Sorry, page not found": "Sorry, page not found",
-  "Sorry, dataType dataId could not be found on the blockchain": "Sorry, {dataType} <b>{dataId}</b> could not be found on the blockchain",
+  "Sorry, dataType dataId could not be found on the blockchain": "Sorry, {dataType} {dataId} could not be found on the blockchain",
   "Reload this page": "Reload this page",
   "Loading...": "Loading...",
   "Active": "Active",

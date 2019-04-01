@@ -1,16 +1,27 @@
 <template>
-  <button class="flex-none" @click="copy" v-tooltip="getTooltip()">
-    <img class="block" :class="{ 'animated wobble': copying }" src="@/assets/images/icons/copy.svg" ref="copyImage" />
+  <button
+    v-tooltip="getTooltip()"
+    class="flex-none"
+    @click="copy"
+  >
+    <img
+      ref="copyImage"
+      class="block"
+      :class="{ 'animated wobble': copying }"
+      src="@/assets/images/icons/copy.svg"
+    >
   </button>
 </template>
 
 <script type="text/ecmascript-6">
 export default {
+  name: 'Clipboard',
+
   props: {
     value: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
 
   data: () => ({
@@ -19,7 +30,7 @@ export default {
   }),
 
   methods: {
-    getTooltip() {
+    getTooltip () {
       const tooltip = {
         content: this.$i18n.t('Copy to clipboard'),
         trigger: 'hover',
@@ -32,17 +43,17 @@ export default {
 
         if (this.notSupported) {
           tooltip.content = this.$i18n.t('Error!')
-          tooltip.classes ='tooltip-bg-2'
+          tooltip.classes = 'tooltip-bg-2'
         } else {
           tooltip.content = this.$i18n.t('Copied!')
-          tooltip.classes ='tooltip-bg-0'
+          tooltip.classes = 'tooltip-bg-0'
         }
       }
 
       return tooltip
     },
 
-    copy() {
+    copy () {
       let textArea = document.createElement('textarea')
       textArea.value = this.value
       textArea.style.cssText =
@@ -62,7 +73,7 @@ export default {
       }
 
       document.body.removeChild(textArea)
-    },
-  },
+    }
+  }
 }
 </script>

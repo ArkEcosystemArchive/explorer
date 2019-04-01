@@ -19,7 +19,7 @@ const NotFoundComponent = () => import('@/pages/404')
 
 Vue.use(Router)
 
-function getTitle(title) {
+function getTitle (title) {
   return `${title} - ${process.env.TITLE}`
 }
 
@@ -202,7 +202,7 @@ const router = new Router({
       return null
     }
 
-    return {x: 0, y: 0}
+    return { x: 0, y: 0 }
   }
 })
 

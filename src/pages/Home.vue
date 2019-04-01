@@ -1,9 +1,12 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <content-header>{{ $t("Latest transactions and blocks") }}</content-header>
+    <ContentHeader>{{ $t("Latest transactions and blocks") }}</ContentHeader>
 
-    <section v-if="priceChart" class="hidden md:block mb-5 bg-theme-feature-background xl:rounded-lg">
-      <chart-wrapper />
+    <section
+      v-if="priceChart"
+      class="hidden md:block mb-5 bg-theme-feature-background xl:rounded-lg"
+    >
+      <ChartWrapper />
     </section>
 
     <section class="page-section py-5 md:py-10">
@@ -26,31 +29,33 @@
           </div>
         </nav>
 
-        <selection-type
+        <SelectionType
           v-if="dataView === 'transactions'"
           @change="onTypeChange"
         />
       </div>
 
-      <latest-transactions v-if="dataView === 'transactions'" :transaction-type="transactionType" />
+      <LatestTransactions
+        v-if="dataView === 'transactions'"
+        :transaction-type="transactionType"
+      />
 
-      <latest-blocks v-if="dataView === 'blocks'" />
+      <LatestBlocks v-if="dataView === 'blocks'" />
     </section>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 import ChartWrapper from '@/components/ChartWrapper'
-import LatestTransactions from '@/components/home/LatestTransactions'
+import { LatestBlocks, LatestTransactions } from '@/components/home'
 import SelectionType from '@/components/SelectionType'
-import LatestBlocks from '@/components/home/LatestBlocks'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
     ChartWrapper,
-    LatestTransactions,
     LatestBlocks,
+    LatestTransactions,
     SelectionType
   },
 
@@ -59,16 +64,16 @@ export default {
     transactionType: -1
   }),
 
+  computed: {
+    ...mapGetters('ui', ['priceChart'])
+  },
+
   created () {
     this.transactionType = Number(localStorage.getItem('transactionType') || -1)
   },
 
-  computed: {
-    ...mapGetters('ui', ['priceChart']),
-  },
-
   methods: {
-    onTypeChange(type) {
+    onTypeChange (type) {
       this.transactionType = type
     }
   }

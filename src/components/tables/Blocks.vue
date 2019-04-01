@@ -1,5 +1,5 @@
 <template>
-  <loader :data="blocks">
+  <Loader :data="blocks">
     <table-component
       v-if="blocks && blocks.length"
       :data="blocks"
@@ -16,7 +16,7 @@
         cell-class="left-start-cell"
       >
         <template slot-scope="row">
-          <link-block :id="row.id" />
+          <LinkBlock :id="row.id" />
         </template>
       </table-column>
 
@@ -60,7 +60,7 @@
         cell-class="right-cell hidden lg:table-cell"
       >
         <template slot-scope="row">
-          <link-wallet :address="row.generator.address" />
+          <LinkWallet :address="row.generator.address" />
         </template>
       </table-column>
 
@@ -72,11 +72,11 @@
       >
         <template slot-scope="row">
           <span
-            class="whitespace-no-wrap"
             v-tooltip="{
               trigger: 'hover',
               content: readableCurrency(row.forged.total, row.price)
             }"
+            class="whitespace-no-wrap"
           >
             {{ readableCrypto(row.forged.total) }}
           </span>
@@ -91,11 +91,11 @@
       >
         <template slot-scope="row">
           <span
-            class="whitespace-no-wrap"
             v-tooltip="{
               trigger: 'hover',
               content: row.forged.fee ? readableCurrency(row.forged.fee, row.price) : ''
             }"
+            class="whitespace-no-wrap"
           >
             {{ readableCrypto(row.forged.fee) }}
           </span>
@@ -103,37 +103,44 @@
       </table-column>
     </table-component>
 
-    <div v-else class="px-5 md:px-10">
+    <div
+      v-else
+      class="px-5 md:px-10"
+    >
       <span>{{ $t("No results") }}</span>
     </div>
-  </loader>
+  </Loader>
 </template>
 
 <script type="text/ecmascript-6">
 import CryptoCompareService from '@/services/crypto-compare'
 
 export default {
+  name: 'TableBlocksDesktop',
+
   props: {
     blocks: {
-      // type: Array, or null
+      validator: value => {
+        return Array.isArray(value) || value === null
+      },
       required: true
-    },
+    }
   },
 
-  created() {
+  watch: {
+    async blocks () {
+      this.updateBlocks()
+    }
+  },
+
+  created () {
     if (!this.updatedBlocks) {
       this.updateBlocks()
     }
   },
 
-  watch: {
-    async blocks() {
-      this.updateBlocks()
-    }
-  },
-
   methods: {
-    async updateBlocks() {
+    async updateBlocks () {
       if (!this.blocks) {
         return
       }

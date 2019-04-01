@@ -1,7 +1,7 @@
 import ApiService from '@/services/api'
 
 class BlockService {
-  async latest(limit = 25) {
+  async latest (limit = 25) {
     const response = await ApiService.get('blocks', {
       params: {
         limit
@@ -11,7 +11,7 @@ class BlockService {
     return response.data
   }
 
-  async last() {
+  async last () {
     const response = await ApiService.get('blocks', {
       params: {
         limit: 1
@@ -21,12 +21,12 @@ class BlockService {
     return response.data[0]
   }
 
-  async find(id) {
+  async find (id) {
     const response = await ApiService.get(`blocks/${id}`)
     return response.data
   }
 
-  async paginate(page, limit = 25) {
+  async paginate (page, limit = 25) {
     const response = await ApiService.get('blocks', {
       params: {
         page,
@@ -37,7 +37,7 @@ class BlockService {
     return response
   }
 
-  async byAddress(address, page, limit = 25) {
+  async byAddress (address, page, limit = 25) {
     const response = await ApiService.get(`delegates/${address}/blocks`, {
       params: {
         page,
@@ -48,14 +48,24 @@ class BlockService {
     return response
   }
 
-  async findPrevious(height) {
-    const response = await ApiService.get(`blocks/${height - 1}`)
-    return response.data
+  async findPrevious (height) {
+    const response = await ApiService.get('blocks', {
+      params: {
+        height: height - 1
+      }
+    })
+
+    return response.data[0]
   }
 
-  async findNext(height) {
-    const response = await ApiService.get(`blocks/${height + 1}`)
-    return response.data
+  async findNext (height) {
+    const response = await ApiService.get('blocks', {
+      params: {
+        height: height + 1
+      }
+    })
+
+    return response.data[0]
   }
 }
 
