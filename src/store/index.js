@@ -14,7 +14,7 @@ export default new Vuex.Store({
     currency: CurrencyModule,
     delegates: DelegatesModule,
     network: NetworkModule,
-    ui: UserInterfaceModule,
+    ui: UserInterfaceModule
   },
   strict: true
 })

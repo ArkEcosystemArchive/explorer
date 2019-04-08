@@ -20,10 +20,11 @@
     "dev:mainnet": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --env.network=mainnet",
     "dev:devnet": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --env.network=devnet",
     "dev:testnet": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --env.network=testnet",
-    "unit": "jest --config test/unit/jest.conf.js",
-    "e2e": "node test/e2e/runner.js",
+    "unit": "jest --config __tests__/unit/jest.conf.js",
+    "e2e": "node __tests__/e2e/runner.js",
     "test": "yarn unit && yarn e2e",
-    "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs --fix"
+    "lint": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter src __tests__",
+    "lint:fix": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter --fix src __tests__"
   },
   "dependencies": {
     "animate.css": "^3.7.0",
@@ -58,7 +59,7 @@
     "@vue/test-utils": "^1.0.0-beta.24",
     "autoprefixer": "^9.1.1",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^8.2.6",
+    "babel-eslint": "^10.0.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-jest": "^24.4.0",
     "babel-loader": "^8.0.5",
@@ -74,23 +75,25 @@
     "css-loader": "^1.0.0",
     "es6-promise": "^4.2.4",
     "es6-promise-promise": "^1.0.0",
-    "eslint": "^5.3.0",
-    "eslint-config-standard": "^11.0.0",
+    "eslint": "^5.15.3",
+    "eslint-config-standard": "^12.0.0",
     "eslint-friendly-formatter": "^4.0.1",
-    "eslint-loader": "^2.1.0",
+    "eslint-loader": "^2.1.2",
     "eslint-plugin-html": "^4.0.5",
     "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^3.8.0",
-    "eslint-plugin-standard": "^3.1.0",
-    "eslint-plugin-vue": "^4.7.1",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^5.2.2",
     "file-loader": "^1.1.11",
     "friendly-errors-webpack-plugin": "1.7.0",
     "glob-all": "^3.1.0",
     "html-webpack-plugin": "3.2.0",
+    "husky": "^1.3.1",
     "jest": "^24.4.0",
     "jest-localstorage-mock": "^2.2.0",
     "jest-serializer-vue": "^2.0.2",
+    "lint-staged": "^8.1.5",
     "mini-css-extract-plugin": "^0.4.1",
     "minimist": "^1.2.0",
     "moment-timezone": "^0.5.21",
@@ -133,5 +136,10 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }

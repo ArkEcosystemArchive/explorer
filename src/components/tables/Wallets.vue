@@ -1,5 +1,5 @@
 <template>
-  <loader :data="wallets">
+  <Loader :data="wallets">
     <table-component
       v-if="wallets && wallets.length > 0"
       :data="wallets"
@@ -8,8 +8,8 @@
       table-class="w-full"
     >
       <table-column
-        show="vueTableComponentInternalRowId"
         :label="$t('Rank')"
+        show="vueTableComponentInternalRowId"
         header-class="left-header-start-cell w-32"
         cell-class="left-start-cell"
       >
@@ -19,19 +19,22 @@
       </table-column>
 
       <table-column
-        show="address"
         :label="$t('Address')"
+        show="address"
         header-class="left-header-cell"
         cell-class="left-cell"
       >
         <template slot-scope="row">
-          <link-wallet :address="row.address" :trunc="false" />
+          <LinkWallet
+            :address="row.address"
+            :trunc="false"
+          />
         </template>
       </table-column>
 
       <table-column
-        show="balance"
         :label="$t('Balance')"
+        show="balance"
         header-class="right-header-cell"
         cell-class="right-cell"
       >
@@ -52,21 +55,29 @@
       </table-column>
     </table-component>
 
-    <div v-else class="px-5 md:px-10">
+    <div
+      v-else
+      class="px-5 md:px-10"
+    >
       <span>{{ $t("No results") }}</span>
     </div>
-  </loader>
+  </Loader>
 </template>
 
 <script type="text/ecmascript-6">
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'TableWalletsDesktop',
+
   props: {
     wallets: {
-      // type: Array or null
+      validator: value => {
+        return Array.isArray(value) || value === null
+      },
       required: true
     },
+
     total: {
       type: Number,
       required: true
@@ -78,7 +89,7 @@ export default {
   },
 
   methods: {
-    getRank(index) {
+    getRank (index) {
       const page = this.$route.params.page > 1 ? this.$route.params.page - 1 : 0
 
       return page * 25 + (index + 1)

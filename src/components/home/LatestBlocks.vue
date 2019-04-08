@@ -1,18 +1,22 @@
 <template>
   <div>
-    <loader :data="blocks">
+    <Loader :data="blocks">
       <div class="hidden sm:block">
-        <table-blocks :blocks="blocks" />
+        <TableBlocksDesktop :blocks="blocks" />
       </div>
       <div class="sm:hidden">
-        <table-blocks-mobile :blocks="blocks" />
+        <TableBlocksMobile :blocks="blocks" />
       </div>
       <div class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
-        <router-link :to="{ name: 'blocks', params: { page: 2 } }" tag="button" class="show-more-button">
+        <RouterLink
+          :to="{ name: 'blocks', params: { page: 2 } }"
+          tag="button"
+          class="show-more-button"
+        >
           {{ $t("Show more") }}
-        </router-link>
+        </RouterLink>
       </div>
-    </loader>
+    </Loader>
   </div>
 </template>
 
@@ -20,22 +24,24 @@
 import BlockService from '@/services/block'
 
 export default {
+  name: 'LatestBlocks',
+
   data: () => ({
     blocks: null
   }),
 
-  async mounted() {
+  async mounted () {
     await this.prepareComponent()
   },
 
   methods: {
-    async prepareComponent() {
+    async prepareComponent () {
       await this.getBlocks()
 
       this.$store.watch(state => state.network.height, value => this.getBlocks())
     },
 
-    async getBlocks() {
+    async getBlocks () {
       const response = await BlockService.latest()
       this.blocks = response
     }

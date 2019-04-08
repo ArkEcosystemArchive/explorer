@@ -2,7 +2,7 @@ import axios from 'axios'
 import store from '@/store'
 
 class ApiService {
-  async get(url, config = {}) {
+  async get (url, config = {}) {
     const server = store.getters['network/server']
 
     const response = await axios.get(`${server}/${url}`, config)
@@ -14,7 +14,7 @@ class ApiService {
     return response.data
   }
 
-  async post(url, data = {}, config = {}) {
+  async post (url, data = {}, config = {}) {
     config.headers || (config.headers = {
       'Content-Type': 'application/json'
     })

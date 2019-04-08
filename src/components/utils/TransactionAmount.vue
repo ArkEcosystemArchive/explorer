@@ -1,9 +1,14 @@
 <template>
-  <span :class="{
-    'text-red': transaction.sender === $route.params.address,
-    'text-green': transaction.recipient === $route.params.address && isTransfer,
-  }">
-    <div v-if="price" v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(transaction.amount, price)}`, placement: 'top' }">{{ readableCrypto(transaction.amount) }}</div>
+  <span
+    :class="{
+      'text-red': transaction.sender === $route.params.address,
+      'text-green': transaction.recipient === $route.params.address && isTransfer,
+    }"
+  >
+    <div
+      v-if="price"
+      v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(transaction.amount, price)}`, placement: 'top' }"
+    >{{ readableCrypto(transaction.amount) }}</div>
     <div v-else>{{ readableCrypto(transaction.amount) }}</div>
   </span>
 </template>
@@ -12,6 +17,8 @@
 import CryptoCompareService from '@/services/crypto-compare'
 
 export default {
+  name: 'TransactionAmount',
+
   props: {
     transaction: {
       type: Object,
@@ -23,8 +30,12 @@ export default {
     }
   },
 
+  data: () => ({
+    price: null
+  }),
+
   computed: {
-    isTransfer() {
+    isTransfer () {
       if (this.type !== undefined) {
         // 0 = transfer, 6 = timelock transfer, 7 = multipayment
         return this.type === 0 || this.type === 6 || this.type === 7
@@ -33,22 +44,18 @@ export default {
     }
   },
 
-  data: () => ({
-    price: null
-  }),
-
-  created() {
-    this.updatePrice()
-  },
-
   watch: {
-    transaction() {
+    transaction () {
       this.updatePrice()
     }
   },
 
+  created () {
+    this.updatePrice()
+  },
+
   methods: {
-    async updatePrice() {
+    async updatePrice () {
       this.price = await CryptoCompareService.dailyAverage(this.transaction.timestamp.unix)
     }
   }
