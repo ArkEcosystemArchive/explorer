@@ -55,7 +55,7 @@ export default {
 
     copy () {
       let textArea = document.createElement('textarea')
-      let isiOSDevice = navigator.userAgent.match(/ipad|iphone/i)
+      const isiOSDevice = navigator.userAgent.match(/ipad|iphone/i)
       textArea.value = this.value
       textArea.style.cssText =
         'position:absolute;top:0;left:0;z-index:-9999;opacity:0;'
