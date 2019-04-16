@@ -55,24 +55,25 @@ export default {
 
     copy () {
       let textArea = document.createElement('textarea')
-      const isiOSDevice = navigator.userAgent.match(/ipad|iphone/i)
       textArea.value = this.value
       textArea.style.cssText =
         'position:absolute;top:0;left:0;z-index:-9999;opacity:0;'
 
       document.body.appendChild(textArea)
 
+      const isiOSDevice = navigator.userAgent.match(/ipad|iphone/i)
+
       if (isiOSDevice) {
-        let editable = textArea.contentEditable
-        let readOnly = textArea.readOnly
+        const editable = textArea.contentEditable
+        const readOnly = textArea.readOnly
 
         textArea.contentEditable = true
         textArea.readOnly = false
 
-        let range = document.createRange()
+        const range = document.createRange()
         range.selectNodeContents(textArea)
 
-        let selection = window.getSelection()
+        const selection = window.getSelection()
         selection.removeAllRanges()
         selection.addRange(range)
 
