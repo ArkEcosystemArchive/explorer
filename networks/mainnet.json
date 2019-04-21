@@ -25,6 +25,7 @@
     "AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs": "Ark Bounty",
     "AagJoLEnpXYkxYdYkmdDSNMLjjBkLJ6T67": "ACF Hot Wallet",
     "AWkBFnqvCF4jhqPSdE2HBPJiwaf67tgfGR": "ACF Hot Wallet (old)",
+    "ANvR7ny44GrLy4NTfuVqjGYr4EAwK7vnkW": "Altilly",
     "ANkHGk5uZqNrKFNY5jtd4A88zzFR3LnJbe": "Ark Hot Wallet",
     "AZmQJ2P9xg5j6VPZWjcTzWDD4w7Qww2KGX": "Ark GitHub Bounty",
     "AdTyTzaXPtj1J1DzTgVksa9NYdUuXCRbm1": "Ark Shield",
@@ -40,8 +41,7 @@
     "AewxfHQobSc49a4radHp74JZCGP8LRe4xA": "Genesis Wallet",
     "AcVHEfEmFJkgoyuNczpgyxEA3MZ747DRAu": "Livecoin",
     "AZcK6t1P9Z2ndiYvdVaS7srzYbTn5DHmck": "OKEx",
-    "ANQftoXeWoa9ud9q9dd2ZrUpuKinpdejAJ": "Upbit",
-    "ANvR7ny44GrLy4NTfuVqjGYr4EAwK7vnkW": "Altilly"
+    "ANQftoXeWoa9ud9q9dd2ZrUpuKinpdejAJ": "Upbit"
   },
   "defaults": {
     "token": "ARK",
