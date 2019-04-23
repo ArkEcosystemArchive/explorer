@@ -10,7 +10,6 @@ const dummyDelegate = {
   rank: 1,
   blocks: {
     produced: 93305,
-    missed: 459,
     last: {
       id: '9909051139056065485',
       height: 4781311,
@@ -22,8 +21,7 @@ const dummyDelegate = {
     }
   },
   production: {
-    approval: 1.42,
-    productivity: 99.51
+    approval: 1.42
   },
   forged: {
     fees: 1149050072665,

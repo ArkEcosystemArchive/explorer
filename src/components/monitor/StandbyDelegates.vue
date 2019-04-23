@@ -34,19 +34,8 @@
       </table-column>
 
       <table-column
-        :label="$t('Productivity')"
-        show="production.productivity"
-        header-class="right-header-cell hidden md:table-cell"
-        cell-class="right-cell hidden md:table-cell"
-      >
-        <template slot-scope="row">
-          {{ percentageString(row.production.productivity) }}
-        </template>
-      </table-column>
-
-      <table-column
-        :label="$t('Votes')"
         show="production.approval"
+        :label="$t('Votes')"
         header-class="right-header-cell sm:pr-10 hidden md:table-cell"
         cell-class="right-end-cell hidden md:table-cell w-40 whitespace-no-wrap"
       >
