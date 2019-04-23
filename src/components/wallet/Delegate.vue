@@ -6,13 +6,6 @@
     </div>
 
     <div class="list-row-border-b">
-      <div>{{ $t("Uptime") }}</div>
-      <div v-if="delegate.production">
-        {{ percentageString(delegate.production.productivity) }}
-      </div>
-    </div>
-
-    <div class="list-row-border-b">
       <div>{{ $t("Rank/Status") }}</div>
       <div>{{ delegate.rank }}</div>
     </div>
@@ -46,15 +39,13 @@
     <div class="list-row">
       <div>{{ $t("Blocks") }}</div>
       <div v-if="delegate.blocks">
-        <span :class="{ 'mr-2': !delegate.blocks.missed && delegate.blocks.produced }">{{ delegate.blocks.produced }}</span>
-        <span
-          v-if="delegate.blocks.missed"
-          class="text-grey"
-          :class="{ 'mr-2': delegate.blocks.produced }"
-        >({{ delegate.blocks.missed }} {{ $t("missed") }})</span>
+        <span>
+          {{ delegate.blocks.produced }}
+        </span>
         <RouterLink
           v-if="delegate.blocks.produced"
           :to="{ name: 'wallet-blocks', params: { address: delegate.address, username: delegate.username, page: 1 } }"
+          class="ml-2"
         >
           {{ $t("See all") }}
         </RouterLink>
