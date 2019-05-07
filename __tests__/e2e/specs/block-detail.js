@@ -28,7 +28,7 @@ module.exports = {
 
   'it should not contain a transaction table if block has no transactions': function (browser) {
     browser
-      .useXpath().assert.containsText("//div[.='Transactions']/following-sibling::div[1]", '0')
+      .useXpath().assert.containsText("//div[contains(., 'Transactions')]/following-sibling::div[1]", '0')
     browser
       .useCss().expect.element('h2').to.not.be.present
     browser
@@ -41,7 +41,7 @@ module.exports = {
       .url(browser.globals.devServerURL + '/#/block/12287662939647858585')
       .pause(500)
       .waitForElementVisible('div.table-component')
-      .useXpath().assert.containsText("//div[.='Transactions']/following-sibling::div[1]", '1')
+      .useXpath().assert.containsText("//div[contains(., 'Transactions')]/following-sibling::div[1]", '1')
       .useCss().expect.element('h2').to.be.present
     browser
       .expect.element('div.table-component').to.be.present
