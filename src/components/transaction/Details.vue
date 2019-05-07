@@ -80,7 +80,7 @@
         <div class="mr-4">
           {{ $t("Smartbridge") }}
         </div>
-        <div class="overflow-auto break-words">
+        <div class="overflow-hidden break-words">
           {{ emojify(transaction.vendorField) }}
         </div>
       </div>
