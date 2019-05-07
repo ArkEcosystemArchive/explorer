@@ -15,9 +15,11 @@ describe('Node Service', () => {
       'explorer',
       'version',
       'ports',
+      'slip44',
       'constants',
       'feeStatistics',
-      'transactionPool'
+      'transactionPool',
+      'wif'
     ].sort())
   })
 

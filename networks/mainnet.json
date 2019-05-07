@@ -22,11 +22,12 @@
     "USD": "$"
   },
   "knownWallets": {
-    "AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs": "Ark Bounty",
     "AagJoLEnpXYkxYdYkmdDSNMLjjBkLJ6T67": "ACF Hot Wallet",
     "AWkBFnqvCF4jhqPSdE2HBPJiwaf67tgfGR": "ACF Hot Wallet (old)",
-    "ANkHGk5uZqNrKFNY5jtd4A88zzFR3LnJbe": "Ark Hot Wallet",
+    "ANvR7ny44GrLy4NTfuVqjGYr4EAwK7vnkW": "Altilly",
+    "AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs": "Ark Bounty",
     "AZmQJ2P9xg5j6VPZWjcTzWDD4w7Qww2KGX": "Ark GitHub Bounty",
+    "ANkHGk5uZqNrKFNY5jtd4A88zzFR3LnJbe": "Ark Hot Wallet",
     "AdTyTzaXPtj1J1DzTgVksa9NYdUuXCRbm1": "Ark Shield",
     "AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv": "Ark Team",
     "AFrPtEmzu6wdVpa2CnRDEKGQQMWgq8nE9V": "Binance",
