@@ -7,25 +7,33 @@
         class="row-mobile"
       >
         <div class="list-row-border-b">
-          <div>{{ $t("ID") }}</div>
+          <div class="mr-4">
+            {{ $t("ID") }}
+          </div>
           <LinkTransaction :id="transaction.id" />
         </div>
 
         <div
           v-if="transaction.timestamp"
-          class="list-row-border-b"
+          class="list-row-border-b-no-wrap"
         >
-          <div>{{ $t("Timestamp") }}</div>
+          <div class="mr-4">
+            {{ $t("Timestamp") }}
+          </div>
           <div>{{ readableTimestamp(transaction.timestamp.unix) }}</div>
         </div>
 
         <div class="list-row-border-b">
-          <div>{{ $t("Sender") }}</div>
+          <div class="mr-4">
+            {{ $t("Sender") }}
+          </div>
           <LinkWallet :address="transaction.sender" />
         </div>
 
         <div class="list-row-border-b">
-          <div>{{ $t("Recipient") }}</div>
+          <div class="mr-4">
+            {{ $t("Recipient") }}
+          </div>
           <LinkWallet
             :address="transaction.recipient"
             :type="transaction.type"
@@ -46,7 +54,9 @@
         </div>
 
         <div class="list-row-border-b">
-          <div>{{ $t("Amount") }}</div>
+          <div class="mr-4">
+            {{ $t("Amount") }}
+          </div>
           <div>
             <TransactionAmount
               :transaction="transaction"
@@ -56,27 +66,29 @@
         </div>
 
         <div class="list-row-border-b">
-          <div>{{ $t("Fee") }}</div>
+          <div class="mr-4">
+            {{ $t("Fee") }}
+          </div>
           <div>{{ readableCrypto(transaction.fee) }}</div>
         </div>
 
         <div class="list-row">
-          <div>{{ $t("Confirmations") }}</div>
-          <div>
-            <div class="flex items-center justify-end">
-              <div
-                v-if="transaction.confirmations <= activeDelegates"
-                class="flex items-center justify-end whitespace-no-wrap"
+          <div class="mr-4">
+            {{ $t("Confirmations") }}
+          </div>
+          <div class="flex items-center justify-end">
+            <div
+              v-if="transaction.confirmations <= activeDelegates"
+              class="flex items-center justify-end whitespace-no-wrap"
+            >
+              <span class="text-green inline-block mr-2">{{ transaction.confirmations }}</span>
+              <img
+                class="icon flex-none"
+                src="@/assets/images/icons/clock.svg"
               >
-                <span class="text-green inline-block mr-2">{{ transaction.confirmations }}</span>
-                <img
-                  class="icon flex-none"
-                  src="@/assets/images/icons/clock.svg"
-                >
-              </div>
-              <div v-else>
-                {{ $t("Well confirmed") }}
-              </div>
+            </div>
+            <div v-else>
+              {{ $t("Well confirmed") }}
             </div>
           </div>
         </div>

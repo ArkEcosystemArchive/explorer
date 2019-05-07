@@ -50,7 +50,8 @@ describe('Block/Details', () => {
       mixins,
       store
     })
-    expect(wrapper.findAll('.list-row-border-b')).toHaveLength(8)
+    expect(wrapper.findAll('.list-row-border-b')).toHaveLength(7)
+    expect(wrapper.findAll('.list-row-border-b-no-wrap')).toHaveLength(1)
     expect(wrapper.findAll('.list-row')).toHaveLength(1)
   })
 })

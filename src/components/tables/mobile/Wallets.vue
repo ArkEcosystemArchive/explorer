@@ -7,22 +7,30 @@
         class="row-mobile"
       >
         <div class="list-row-border-b">
-          <div>{{ $t("Rank") }}</div>
+          <div class="mr-4">
+            {{ $t("Rank") }}
+          </div>
           <div>{{ getRank(index) }}</div>
         </div>
 
         <div class="list-row-border-b">
-          <div>{{ $t("Address") }}</div>
+          <div class="mr-4">
+            {{ $t("Address") }}
+          </div>
           <LinkWallet :address="row.address" />
         </div>
 
         <div class="list-row-border-b">
-          <div>{{ $t("Balance") }}</div>
+          <div class="mr-4">
+            {{ $t("Balance") }}
+          </div>
           <div>{{ readableCrypto(row.balance) }}</div>
         </div>
 
         <div class="list-row">
-          <div>{{ $t("Supply") }}</div>
+          <div class="mr-4">
+            {{ $t("Supply") }}
+          </div>
           <div>{{ readableNumber((row.balance / total) * 100) }}%</div>
         </div>
       </div>

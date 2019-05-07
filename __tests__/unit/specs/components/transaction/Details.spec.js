@@ -52,8 +52,8 @@ describe('transaction/Details', () => {
       mixins,
       store
     })
-    expect(wrapper.findAll('.list-row-border-b')).toHaveLength(6)
-    expect(wrapper.findAll('.list-row-border-b-no-wrap')).toHaveLength(1)
+    expect(wrapper.findAll('.list-row-border-b')).toHaveLength(5)
+    expect(wrapper.findAll('.list-row-border-b-no-wrap')).toHaveLength(2)
     expect(wrapper.findAll('.list-row')).toHaveLength(1)
   })
 })
