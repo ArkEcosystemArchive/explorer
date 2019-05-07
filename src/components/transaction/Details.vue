@@ -68,7 +68,7 @@
         <div class="mr-4">
           {{ $t("Smartbridge") }}
         </div>
-        <div class="text-right">
+        <div class="text-right overflow-auto break-words">
           {{ emojify(transaction.vendorField) }}
         </div>
       </div>
