@@ -2,7 +2,9 @@
   <section class="page-section py-5 md:py-10 mb-5">
     <div class="px-5 sm:px-10">
       <div class="list-row-border-b">
-        <div>{{ $t("Sender") }}</div>
+        <div class="mr-4">
+          {{ $t("Sender") }}
+        </div>
         <div class="truncate">
           <LinkWallet
             :address="transaction.sender"
@@ -12,7 +14,9 @@
       </div>
 
       <div class="list-row-border-b">
-        <div>{{ $t("Recipient") }}</div>
+        <div class="mr-4">
+          {{ $t("Recipient") }}
+        </div>
         <div class="truncate">
           <LinkWallet
             :address="transaction.recipient"
@@ -24,12 +28,16 @@
       </div>
 
       <div class="list-row-border-b">
-        <div>{{ $t("Confirmations") }}</div>
+        <div class="mr-4">
+          {{ $t("Confirmations") }}
+        </div>
         <div>{{ confirmations }}</div>
       </div>
 
       <div class="list-row-border-b">
-        <div>{{ $t("Amount") }}</div>
+        <div class="mr-4">
+          {{ $t("Amount") }}
+        </div>
         <div
           v-tooltip="{
             trigger: 'hover click',
@@ -42,7 +50,9 @@
       </div>
 
       <div class="list-row-border-b">
-        <div>{{ $t("Fee") }}</div>
+        <div class="mr-4">
+          {{ $t("Fee") }}
+        </div>
         <div
           v-tooltip="{
             trigger: 'hover click',
@@ -54,8 +64,10 @@
         </div>
       </div>
 
-      <div class="list-row-border-b">
-        <div>{{ $t("Timestamp") }}</div>
+      <div class="list-row-border-b-no-wrap">
+        <div class="mr-4">
+          {{ $t("Timestamp") }}
+        </div>
         <div v-if="transaction.timestamp">
           {{ readableTimestamp(transaction.timestamp.unix) }}
         </div>
@@ -68,13 +80,15 @@
         <div class="mr-4">
           {{ $t("Smartbridge") }}
         </div>
-        <div class="text-right">
+        <div class="overflow-hidden break-words">
           {{ emojify(transaction.vendorField) }}
         </div>
       </div>
 
       <div class="list-row">
-        <div>{{ $t("Block") }}</div>
+        <div class="mr-4">
+          {{ $t("Block") }}
+        </div>
         <div>
           <LinkBlock
             v-if="transaction.blockId"
@@ -143,3 +157,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.list-row-border-b-no-wrap > div:last-child {
+  text-align: right;
+}
+</style>

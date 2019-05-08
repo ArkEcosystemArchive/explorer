@@ -1,6 +1,7 @@
 .tooltip {
   display: block !important;
   z-index: 10000;
+  max-width: calc(100% - 9px);
 }
 
 .tooltip[x-placement=top] .tooltip-inner,
@@ -14,6 +15,7 @@
   color: #172130;
   border-radius: 6px;
   padding: 5px 10px 4px;
+  word-wrap: break-word;
 }
 
 .tooltip .tooltip-arrow {
