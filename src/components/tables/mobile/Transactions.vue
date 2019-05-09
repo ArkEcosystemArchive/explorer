@@ -7,27 +7,38 @@
         class="row-mobile"
       >
         <div class="list-row-border-b">
-          <div>{{ $t("ID") }}</div>
+          <div class="mr-4">
+            {{ $t("ID") }}
+          </div>
           <LinkTransaction
             :id="transaction.id"
             :smart-bridge="transaction.vendorField"
           />
         </div>
 
-        <div class="list-row-border-b">
-          <div>{{ $t("Timestamp") }}</div>
-          <div v-if="transaction.timestamp">
+        <div class="list-row-border-b-no-wrap">
+          <div class="mr-4">
+            {{ $t("Timestamp") }}
+          </div>
+          <div
+            v-if="transaction.timestamp"
+            class="text-right"
+          >
             {{ readableTimestamp(transaction.timestamp.unix) }}
           </div>
         </div>
 
         <div class="list-row-border-b">
-          <div>{{ $t("Sender") }}</div>
+          <div class="mr-4">
+            {{ $t("Sender") }}
+          </div>
           <LinkWallet :address="transaction.sender" />
         </div>
 
         <div class="list-row-border-b">
-          <div>{{ $t("Recipient") }}</div>
+          <div class="mr-4">
+            {{ $t("Recipient") }}
+          </div>
           <LinkWallet
             :address="transaction.recipient"
             :type="transaction.type"
@@ -48,7 +59,9 @@
         </div>
 
         <div class="list-row-border-b">
-          <div>{{ $t("Amount (token)", { token: networkToken() }) }}</div>
+          <div class="mr-4">
+            {{ $t("Amount (token)", { token: networkToken() }) }}
+          </div>
           <div>
             <TransactionAmount
               :transaction="transaction"
@@ -58,7 +71,9 @@
         </div>
 
         <div class="list-row">
-          <div>{{ $t("Fee (token)", { token: networkToken() }) }}</div>
+          <div class="mr-4">
+            {{ $t("Fee (token)", { token: networkToken() }) }}
+          </div>
           <div>{{ readableCrypto(transaction.fee) }}</div>
         </div>
       </div>
