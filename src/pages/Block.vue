@@ -9,8 +9,8 @@
       <section class="page-section py-5 md:py-10 px-6">
         <div class="my-10 text-center">
           <NotFound
-            data-type="block"
             :data-id="block.id"
+            data-type="block"
           />
 
           <button

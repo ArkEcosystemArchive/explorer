@@ -6,8 +6,8 @@
   >
     <img
       ref="copyImage"
-      class="block"
       :class="{ 'animated wobble': copying }"
+      class="block"
       src="@/assets/images/icons/copy.svg"
     >
   </button>

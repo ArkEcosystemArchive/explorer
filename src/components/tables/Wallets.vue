@@ -8,8 +8,8 @@
       table-class="w-full"
     >
       <table-column
-        show="vueTableComponentInternalRowId"
         :label="$t('Rank')"
+        show="vueTableComponentInternalRowId"
         header-class="left-header-start-cell w-32"
         cell-class="left-start-cell"
       >
@@ -19,8 +19,8 @@
       </table-column>
 
       <table-column
-        show="address"
         :label="$t('Address')"
+        show="address"
         header-class="left-header-cell"
         cell-class="left-cell"
       >
@@ -33,8 +33,8 @@
       </table-column>
 
       <table-column
-        show="balance"
         :label="$t('Balance')"
+        show="balance"
         header-class="right-header-cell"
         cell-class="right-cell"
       >

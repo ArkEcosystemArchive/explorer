@@ -6,8 +6,8 @@
 
     <section
       v-show="isDelegate"
-      class="page-section mb-5"
       :class="{ 'py-5 md:py-10': isDelegate }"
+      class="page-section mb-5"
     >
       <div class="px-5 sm:px-10">
         <WalletDelegate

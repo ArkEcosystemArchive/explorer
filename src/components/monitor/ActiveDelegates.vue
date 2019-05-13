@@ -3,15 +3,15 @@
     <table-component
       v-if="delegates && delegates.length"
       :data="delegates"
-      sort-by="rank"
-      sort-order="asc"
       :show-filter="false"
       :show-caption="false"
+      sort-by="rank"
+      sort-order="asc"
       table-class="w-full text-xs md:text-base"
     >
       <table-column
-        show="rank"
         :label="$t('Rank')"
+        show="rank"
         header-class="p-4 pl-8 sm:pl-10 text-left w-32"
         cell-class="p-3 pl-8 sm:pl-10 text-left border-none"
       >
@@ -21,8 +21,8 @@
       </table-column>
 
       <table-column
-        show="username"
         :label="$t('Name')"
+        show="username"
         header-class="left-header-cell"
         cell-class="py-3 px-4 text-left border-none"
       >
@@ -34,8 +34,8 @@
       </table-column>
 
       <table-column
-        show="blocks.produced"
         :label="$t('Forged blocks')"
+        show="blocks.produced"
         header-class="left-header-cell hidden xl:table-cell"
         cell-class="py-3 px-4 text-left border-none hidden xl:table-cell"
       >
@@ -45,8 +45,8 @@
       </table-column>
 
       <table-column
-        show="blocks.last.timestamp.unix"
         :label="$t('Last forged')"
+        show="blocks.last.timestamp.unix"
         header-class="left-header-cell hidden sm:table-cell"
         cell-class="py-3 px-4 text-left border-none hidden sm:table-cell"
       >
@@ -56,8 +56,8 @@
       </table-column>
 
       <table-column
-        show="forgingStatus"
         :label="$t('Status')"
+        show="forgingStatus"
         header-class="base-header-cell pr-5 sm:pr-10 md:pr-4 w-24 md:w-auto"
         cell-class="py-3 px-4 pr-5 sm:pr-10 md:pr-4 text-center border-none"
       >
@@ -70,8 +70,8 @@
             height="19px"
           >
             <path
-              fill-rule="evenodd"
               :fill="statusColor(row)"
+              fill-rule="evenodd"
               d="M9.500,-0.000 C14.746,-0.000 18.999,4.253 18.999,9.500 C18.999,14.747 14.746,19.000 9.500,19.000 C4.253,19.000 -0.001,14.747 -0.001,9.500 C-0.001,4.253 4.253,-0.000 9.500,-0.000 Z"
             />
           </svg>

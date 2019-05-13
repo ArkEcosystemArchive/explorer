@@ -1,20 +1,20 @@
 <template>
   <span
     v-click-outside="closeDropdown"
-    class="flex w-full sm:w-auto relative z-20 sm:mr-10"
     :class="{ 'sm:mb-4': !inBanner }"
+    class="flex w-full sm:w-auto relative z-20 sm:mr-10"
   >
     <div class="flex sm:hidden w-full">
       <span
-        class="flex items-center rounded-l py-4 px-6 text-xs"
         :class="`bg-${backgroundColor} text-${secondaryTextColor}`"
+        class="flex items-center rounded-l py-4 px-6 text-xs"
       >
         {{ $t("Type") }}
       </span>
 
       <span
-        class="flex flex-1 items-center justify-between border rounded-r cursor-pointer p-4"
         :class="`border-${backgroundColor} text-${primaryTextColor}`"
+        class="flex flex-1 items-center justify-between border rounded-r cursor-pointer p-4"
         @click="toggleDropdown"
       >
         <span class="font-bold">
@@ -22,9 +22,9 @@
         </span>
 
         <svg
+          :class="{ 'rotate-180': isOpen }"
           xmlns="http://www.w3.org/2000/svg"
           class="fill-current"
-          :class="{ 'rotate-180': isOpen }"
           viewBox="0 0 20 20"
           width="16px"
           height="16px"
@@ -51,15 +51,15 @@
 
     <div class="hidden sm:block">
       <span
-        class="block mb-2 text-xs"
         :class="[ inBanner ? bannerClasses : 'text-theme-text-thead' ]"
+        class="block mb-2 text-xs"
       >
         {{ $t("Type") }}
       </span>
 
       <span
-        class="flex items-center cursor-pointer"
         :class="`border-${backgroundColor} text-${primaryTextColor}`"
+        class="flex items-center cursor-pointer"
         @click="toggleDropdown"
       >
         <span class="mr-1 md:whitespace-no-wrap">{{ $t(types[transactionType + 1]) }}</span>

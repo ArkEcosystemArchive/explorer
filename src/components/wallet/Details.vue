@@ -175,8 +175,8 @@
       <div class="px-2">
         <div class="flex -mx-6 mb-8">
           <div
-            class="md:w-1/2 px-6 w-full border-grey-dark"
             :class="{ 'border-r': wallet.publicKey }"
+            class="md:w-1/2 px-6 w-full border-grey-dark"
           >
             <div class="flex items-center text-grey mb-2">
               <span class="mr-2">{{ $t("Address") }}</span>
@@ -229,8 +229,8 @@
         </div>
         <div class="flex -mx-6">
           <div
-            class="md:w-1/2 px-6 w-full"
             :class="{ 'border-r border-grey-dark' : isVoting }"
+            class="md:w-1/2 px-6 w-full"
           >
             <div class="text-grey mb-2">
               {{ $t("Balance (token)", { token: networkToken() }) }}

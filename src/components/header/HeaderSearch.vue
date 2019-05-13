@@ -16,16 +16,16 @@
       ref="search"
       v-model="query"
       v-tooltip="{ show: nothingFound, content: $t('Nothing matched your search'), trigger: 'manual', placement: 'bottom-start', classes: 'search-tip' }"
-      type="search"
       :placeholder="placeholder"
-      class="search-input w-full flex-auto mr-2 py-4 pl-4 bg-transparent"
       :class="{ 'text-grey': nightMode }"
+      type="search"
+      class="search-input w-full flex-auto mr-2 py-4 pl-4 bg-transparent"
       @keyup.enter="search"
     >
 
     <button
-      class="search-icon text-grey hover:text-blue p-3 md:p-4 transition"
       :disabled="!hasInput"
+      class="search-icon text-grey hover:text-blue p-3 md:p-4 transition"
       @click="search"
     >
       <svg

@@ -3,15 +3,15 @@
     <table-component
       v-if="delegates && delegates.length > 0"
       :data="delegates"
-      sort-by="rank"
-      sort-order="asc"
       :show-filter="false"
       :show-caption="false"
+      sort-by="rank"
+      sort-order="asc"
       table-class="w-full text-xs md:text-base"
     >
       <table-column
-        show="rank"
         :label="$t('Rank')"
+        show="rank"
         header-class="p-4 pl-8 sm:pl-10 text-left w-32"
         cell-class="p-3 pl-8 sm:pl-10 text-left border-none"
       >
@@ -21,8 +21,8 @@
       </table-column>
 
       <table-column
-        show="username"
         :label="$t('Name')"
+        show="username"
         header-class="left-header-cell"
         cell-class="left-cell"
       >

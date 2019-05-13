@@ -12,8 +12,8 @@
     <section class="page-section py-5 md:py-10">
       <div class="flex flex-col sm:flex-row items-center mx-5 sm:mx-0 mb-4 sm:mb-8">
         <nav
-          class="flex items-end w-full border-b mx-5 sm:mx-10"
           :class="dataView === 'transactions' ? 'mb-8 sm:mb-4' : 'mb-4'"
+          class="flex items-end w-full border-b mx-5 sm:mx-10"
         >
           <div
             :class="dataView === 'transactions' ? 'active-tab' : 'inactive-tab'"

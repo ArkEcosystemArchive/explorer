@@ -1,25 +1,25 @@
 <template>
   <svg
-    style="transform: rotate(-90deg);"
     :viewBox="`0 0 ${width} ${width}`"
+    style="transform: rotate(-90deg);"
   >
     <circle
-      fill="none"
-      stroke="var(--ark-meter)"
       :cx="width / 2"
       :cy="width / 2"
       :r="radius"
       :stroke-width="stroke"
+      fill="none"
+      stroke="var(--ark-meter)"
     />
     <circle
       v-if="percentage"
       :style="{strokeDashoffset: dashoffset, strokeDasharray: circumference }"
-      stroke-linecap="round"
-      fill="none"
       :cx="width / 2"
       :cy="width / 2"
       :r="radius"
       :stroke-width="stroke"
+      stroke-linecap="round"
+      fill="none"
       stroke="currentColor"
     />
   </svg>
