@@ -13,7 +13,7 @@
     </div>
     <div class="text-center">
       <a
-        href="https://www.facebook.com/arkecosystem"
+        href="https://facebook.ark.io"
         target="_blank"
       >
         <svg
@@ -33,7 +33,7 @@
       </a>
 
       <a
-        href="https://twitter.com/ArkEcosystem"
+        href="https://twitter.ark.io"
         target="_blank"
       >
         <svg
@@ -53,7 +53,7 @@
       </a>
 
       <a
-        href="https://www.youtube.com/channel/UCpc2k6zOOutGT9y56urDClg"
+        href="https://youtube.ark.io"
         target="_blank"
       >
         <svg
@@ -113,7 +113,7 @@
       </a>
 
       <a
-        href="https://www.reddit.com/r/arkecosystem"
+        href="https://reddit.ark.io"
         target="_blank"
       >
         <svg
@@ -133,7 +133,7 @@
       </a>
 
       <a
-        href="https://github.com/ArkEcosystem"
+        href="https://github.ark.io"
         target="_blank"
       >
         <svg
@@ -153,7 +153,7 @@
       </a>
 
       <a
-        href="https://bitcointalk.org/index.php?topic=1649695.0"
+        href="https://bitcointalk.ark.io"
         target="_blank"
       >
         <svg
@@ -173,7 +173,7 @@
       </a>
 
       <a
-        href="https://ark.io/slack"
+        href="https://slack.ark.io"
         target="_blank"
       >
         <svg
@@ -197,7 +197,7 @@
       </a>
 
       <a
-        href="https://ark.io/discord"
+        href="https://discord.ark.io"
         target="_blank"
       >
         <svg
@@ -236,7 +236,7 @@
       </a>
 
       <a
-        href="https://steemit.com/@arkecosystem"
+        href="https://steemit.ark.io"
         target="_blank"
       >
         <svg
