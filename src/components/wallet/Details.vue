@@ -237,7 +237,10 @@
             </div>
             <div class="text-white">
               <span
-                v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(wallet.balance)}` }"
+                v-tooltip="{
+                  trigger: 'hover click',
+                  content: readableCurrency(wallet.balance)
+                }"
               >
                 {{ readableCrypto(wallet.balance, false) }}
               </span>

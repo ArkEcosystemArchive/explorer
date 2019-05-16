@@ -2,7 +2,7 @@
   <span
     v-tooltip="{
       trigger: 'hover click',
-      content: transaction.amount && price ? `${readableCurrency(transaction.amount, price)}` : '',
+      content: transaction.amount && price ? readableCurrency(transaction.amount, price) : '',
       placement: 'top'
     }"
     :class="{

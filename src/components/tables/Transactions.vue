@@ -98,7 +98,7 @@
           <span
             v-tooltip="{
               trigger: 'hover click',
-              content: `${readableCurrency(row.fee, row.price)}`,
+              content: row.price ? readableCurrency(row.fee, row.price) : '',
               placement: 'top'
             }"
             class="whitespace-no-wrap"
