@@ -1,15 +1,16 @@
 <template>
   <span
+    v-tooltip="{
+      trigger: 'hover click',
+      content: transaction.amount && price ? readableCurrency(transaction.amount, price) : '',
+      placement: 'top'
+    }"
     :class="{
       'text-red': transaction.sender === $route.params.address,
       'text-green': transaction.recipient === $route.params.address && isTransfer,
     }"
   >
-    <div
-      v-if="price"
-      v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(transaction.amount, price)}`, placement: 'top' }"
-    >{{ readableCrypto(transaction.amount) }}</div>
-    <div v-else>{{ readableCrypto(transaction.amount) }}</div>
+    {{ readableCrypto(transaction.amount) }}
   </span>
 </template>
 

@@ -95,8 +95,15 @@
         cell-class="right-end-cell hidden lg:table-cell"
       >
         <template slot-scope="row">
-          <span class="whitespace-no-wrap">
-            <div v-tooltip="{ trigger: 'hover click', content: `${readableCurrency(row.fee, row.price)}`, placement: 'top' }">{{ readableCrypto(row.fee) }}</div>
+          <span
+            v-tooltip="{
+              trigger: 'hover click',
+              content: row.price ? readableCurrency(row.fee, row.price) : '',
+              placement: 'top'
+            }"
+            class="whitespace-no-wrap"
+          >
+            {{ readableCrypto(row.fee) }}
           </span>
         </template>
       </table-column>
