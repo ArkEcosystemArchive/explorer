@@ -390,3 +390,7 @@ thead th {
 .v-spinner {
   @apply .flex .items-center .justify-center
 }
+
+.word-break-all {
+  word-break: break-all;
+}

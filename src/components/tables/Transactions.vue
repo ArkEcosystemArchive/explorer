@@ -65,7 +65,7 @@
         :label="$t('Smartbridge')"
         show="vendorField"
         header-class="right-header-cell hidden lg:table-cell"
-        cell-class="right-cell hidden lg:table-cell"
+        cell-class="right-cell hidden lg:table-cell word-break-all"
       >
         <template slot-scope="row">
           {{ truncate(emojify(row.vendorField) || '', 20, 'right') }}
