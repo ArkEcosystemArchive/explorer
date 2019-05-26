@@ -68,7 +68,7 @@
         cell-class="right-cell cell-smartbridge"
       >
         <template slot-scope="row">
-          <div class="cell-smartbridge-word-break">
+          <div class="cell-smartbridge-truncate">
             {{ emojify(row.vendorField) }}
           </div>
         </template>
