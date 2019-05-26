@@ -64,11 +64,13 @@
       <table-column
         :label="$t('Smartbridge')"
         show="vendorField"
-        header-class="right-header-cell hidden lg:table-cell"
-        cell-class="right-cell hidden lg:table-cell word-break-words"
+        header-class="right-header-cell cell-smartbridge"
+        cell-class="right-cell cell-smartbridge"
       >
         <template slot-scope="row">
-          {{ truncate(emojify(row.vendorField) || '', 20, 'right') }}
+          <div class="cell-smartbridge-word-break">
+            {{ emojify(row.vendorField) }}
+          </div>
         </template>
       </table-column>
 
