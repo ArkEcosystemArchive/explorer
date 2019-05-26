@@ -391,6 +391,6 @@ thead th {
   @apply .flex .items-center .justify-center
 }
 
-.word-break-all {
-  word-break: break-all;
+.word-break-words {
+  word-break: break-word;
 }
