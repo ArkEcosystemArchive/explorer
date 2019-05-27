@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: Update npm to @latest
-          command: 'sudo npm install -g npm@latest'
+          command: "sudo npm install -g npm@latest"
       - run: mkdir test-reports
       - run:
           name: Download Selenium
@@ -49,16 +49,20 @@ jobs:
           destination: test-results
       - store_test_results:
           path: test-reports/
-      
-  test-node-stable:
+  test-node-11:
     working_directory: ~/explorer
     docker:
-      - image: circleci/node:latest-browsers
+      - image: circleci/node:11-browsers
     steps: *teststeps
-
+  test-node-12:
+    working_directory: ~/explorer
+    docker:
+      - image: circleci/node:12-browsers
+    steps: *teststeps
 workflows:
   version: 2
   test:
     jobs:
       - test-node-10
-      - test-node-stable
+      - test-node-11
+      - test-node-12
