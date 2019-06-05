@@ -54,7 +54,7 @@ export default {
   },
 
   data: () => ({
-    delegates: null,
+    delegates: [],
     activeTab: 'active'
   }),
 
