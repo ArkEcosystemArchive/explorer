@@ -7,7 +7,14 @@
 
     <div class="list-row-border-b">
       <div>{{ $t("Rank/Status") }}</div>
-      <div>{{ delegate.rank }}</div>
+      <div>
+        <span v-if="delegate.rank === undefined">
+          {{ $t('Not yet available') }}
+        </span>
+        <span v-else>
+          {{ delegate.rank }}
+        </span>
+      </div>
     </div>
 
     <div class="list-row-border-b">
