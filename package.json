@@ -43,7 +43,7 @@
     "vue-i18n": "^8.0.0",
     "vue-router": "^3.0.2",
     "vue-spinner": "^1.0.3",
-    "vue-table-component": "github:faustbrian/vue-table-component",
+    "vue-table-component": "https://github.com/ItsANameToo/vue-table-component",
     "vuex": "^3.0.1",
     "vuex-router-sync": "^5.0.0"
   },
