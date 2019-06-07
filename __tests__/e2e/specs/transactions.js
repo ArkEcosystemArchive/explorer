@@ -6,113 +6,113 @@
 
 module.exports = {
   // Default test, which also serves as setup for correct url
-  'transaction page should be available': function (browser) {
-    const devServer = browser.globals.devServerURL + '/#/transactions/1'
+  'transaction page should be available': function (browserName) {
+    const devServer = browserName.globals.devServerURL + '/#/transactions/1'
 
-    browser
+    browserName
       .url(devServer)
       .waitForElementVisible('main.theme-light')
       .useXpath()
       .waitForElementVisible("//h1[text() = 'Transactions']")
   },
 
-  'it should show 25 transactions in the table': function (browser) {
-    browser
+  'it should show 25 transactions in the table': function (browserName) {
+    browserName
       .useCss()
       .expect.element('div.hidden.sm\\:block').to.be.present
-    browser
+    browserName
       .elements('css selector', 'div.hidden.sm\\:block div.table-component tbody.table-component__table__body tr', function (result) {
-        browser.assert.equal(25, result.value.length)
+        browserName.assert.equal(25, result.value.length)
       })
   },
 
-  'it should be possible to sort the table': function (browser) {
-    browser
+  'it should be possible to sort the table': function (browserName) {
+    browserName
       .useXpath().expect.element("//th[contains(., 'ID')]").to.be.present
-    browser
+    browserName
       .assert.cssClassPresent("//th[contains(., 'ID')]", 'table-component__th--sort')
       .assert.cssClassNotPresent("//th[contains(., 'ID')]", 'table-component__th--sort-asc')
       .assert.cssClassNotPresent("//th[contains(., 'ID')]", 'table-component__th--sort-desc')
-    browser
+    browserName
       .click("//th[contains(., 'ID')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(., 'ID')]", 'table-component__th--sort-asc')
-    browser
+    browserName.assert.cssClassPresent("//th[contains(., 'ID')]", 'table-component__th--sort-asc')
+    browserName
       .click("//th[contains(., 'ID')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(., 'ID')]", 'table-component__th--sort-desc')
+    browserName.assert.cssClassPresent("//th[contains(., 'ID')]", 'table-component__th--sort-desc')
   },
 
-  'it should be possible to navigate to the next page and back': function (browser) {
-    browser
+  'it should be possible to navigate to the next page and back': function (browserName) {
+    browserName
       .assert.urlContains('/transactions/1')
       .useXpath().expect.element("//button[contains(., 'Previous')]").to.not.be.visible
-    browser
+    browserName
       .expect.element("//button[contains(., 'Next')]").to.be.visible
-    browser
+    browserName
       .click("//button[contains(., 'Next')]")
       .pause(500)
       .useCss().waitForElementVisible('div.table-component')
-    browser
+    browserName
       .assert.urlContains('/transactions/2')
       .useXpath().click("//button[contains(., 'Previous')]")
       .pause(500)
       .useCss().waitForElementVisible('div.table-component')
-    browser
+    browserName
       .assert.urlContains('/transactions/1')
   },
 
-  'it should be possible to click on the transaction id': function (browser) {
-    browser
+  'it should be possible to click on the transaction id': function (browserName) {
+    browserName
       .useCss()
       .waitForElementVisible('main.theme-light')
       .useXpath()
       .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[1]//a[1]")
-    browser
+    browserName
       .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[1]//a[1]")
       .pause(500)
-    browser
+    browserName
       .waitForElementVisible("//h1[text() = 'Transaction']")
       .assert.urlContains('/transaction/')
   },
 
-  'it should refresh the confirmation count automatically': function (browser) {
+  'it should refresh the confirmation count automatically': function (browserName) {
     const element = "//div[contains(@class, 'list-row-border-b')][3]//div[2]"
 
-    browser
+    browserName
       .useCss()
       .waitForElementVisible('div.list-row-border-b')
       .useXpath()
       .getText(element, function (result) {
-        browser.expect.element(element).text.to.not.contain(result.value).after(20000)
+        browserName.expect.element(element).text.to.not.contain(result.value).after(20000)
       })
   },
 
-  'it should be possible to click on the sender': function (browser) {
-    const devServer = browser.globals.devServerURL + '/#/transactions/1'
+  'it should be possible to click on the sender': function (browserName) {
+    const devServer = browserName.globals.devServerURL + '/#/transactions/1'
 
-    browser
+    browserName
       .url(devServer)
       .useCss()
       .waitForElementVisible('main.theme-light')
       .useXpath()
       .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[3]//a[1]")
-    browser
+    browserName
       .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[3]//a[1]")
       .pause(500)
-    browser
+    browserName
       .waitForElementVisible("//h1[text() = 'Wallet summary']")
       .assert.urlContains('/wallets/')
   },
 
-  'it should be possible to click on the recipient if it contains a link': function (browser) {
-    const devServer = browser.globals.devServerURL + '/#/transactions/1'
+  'it should be possible to click on the recipient if it contains a link': function (browserName) {
+    const devServer = browserName.globals.devServerURL + '/#/transactions/1'
 
-    browser
+    browserName
       .url(devServer)
       .useCss()
       .waitForElementVisible('main.theme-light')
-    browser
+    browserName
       .useXpath()
       .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]")
       .element('xpath', "//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]", (result) => {
@@ -120,33 +120,33 @@ module.exports = {
           console.log('No link present')
         } else {
           console.log('Link is present')
-          browser
+          browserName
             .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]")
             .pause(500)
             .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]")
             .pause(500)
-          browser
+          browserName
             .waitForElementVisible("//h1[text() = 'Wallet summary']")
             .assert.urlContains('/wallets/')
         }
       })
-    browser.end()
+    browserName.end()
   },
 
-  'it should contain a dropdown allowing to filter transactions types': function (browser) {
-    const devServer = browser.globals.devServerURL + '/#/transactions/1'
+  'it should contain a dropdown allowing to filter transactions types': function (browserName) {
+    const devServer = browserName.globals.devServerURL + '/#/transactions/1'
 
-    browser
+    browserName
       .url(devServer)
       .assert.urlContains('/transactions/1')
-    browser
+    browserName
       .useXpath()
       .waitForElementVisible("//span[contains(@class, 'mr-1') and text() = 'All']")
       .click("//span[contains(@class, 'mr-1') and text() = 'All']")
-    browser
+    browserName
       .waitForElementVisible("(//div[contains(@class, 'dropdown-button') and text() = 'Vote'])[2]")
       .click("(//div[contains(@class, 'dropdown-button') and text() = 'Vote'])[2]")
       .waitForElementVisible("//span[contains(@class, 'mr-1') and text() = 'Vote']")
-    browser.end()
+    browserName.end()
   }
 }
