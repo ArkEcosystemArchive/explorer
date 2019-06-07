@@ -29,6 +29,8 @@ export default {
 
   methods: {
     async setCurrency (currency, symbol) {
+      this.$store.dispatch('ui/setHeaderType', null)
+
       const rate = await CryptoCompareService.price(currency)
       this.storeCurrency(currency, rate, symbol)
     },
@@ -37,8 +39,6 @@ export default {
       this.$store.dispatch('currency/setName', currency)
       this.$store.dispatch('currency/setRate', rate)
       this.$store.dispatch('currency/setSymbol', symbol)
-
-      this.$store.dispatch('ui/setHeaderType', null)
     }
   }
 }
