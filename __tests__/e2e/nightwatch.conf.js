@@ -29,7 +29,7 @@ module.exports = {
         devServerURL: 'http://127.0.0.1:' + (process.env.PORT || config.dev.port)
       },
       desiredCapabilities: {
-        chromeOptions: {
+        firefoxOptions: {
           args: [
             'window-size=1920,1080',
             'disable-dev-shm-usage'
@@ -38,17 +38,17 @@ module.exports = {
       }
     },
 
-    chrome: {
+    firefox: {
       desiredCapabilities: {
-        browserName: 'chrome',
+        browserName: 'firefox',
         javascriptEnabled: true,
         acceptSslCerts: true
       }
     },
 
-    firefox: {
+    chrome: {
       desiredCapabilities: {
-        browserName: 'firefox',
+        browserName: 'chrome',
         javascriptEnabled: true,
         acceptSslCerts: true
       }
