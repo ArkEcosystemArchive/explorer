@@ -32,7 +32,7 @@
     opts = opts.concat(['--config', '__tests__/e2e/nightwatch.conf.js'])
   }
   if (opts.indexOf('--env') === -1) {
-    opts = opts.concat(['--env', 'chrome'])
+    opts = opts.concat(['--env', 'firefox'])
   }
 
   const spawn = require('cross-spawn')

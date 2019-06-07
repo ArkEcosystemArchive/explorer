@@ -6,74 +6,74 @@
 
 module.exports = {
   // Default test, which also serves as setup for correct url
-  'top wallets page should be available': function (browserName) {
-    const devServer = browserName.globals.devServerURL + '/#/top-wallets/1'
+  'top wallets page should be available': function (browser) {
+    const devServer = browser.globals.devServerURL + '/#/top-wallets/1'
 
-    browserName
+    browser
       .url(devServer)
       .waitForElementVisible('main.theme-light')
       .useXpath()
       .waitForElementVisible("//h1[text() = 'Top Wallets']")
   },
 
-  'it should be possible to navigate to the next page and back': function (browserName) {
-    browserName
+  'it should be possible to navigate to the next page and back': function (browser) {
+    browser
       .assert.urlContains('/top-wallets/1')
       .useXpath().expect.element("//button[contains(., 'Previous')]").to.not.be.visible
-    browserName
+    browser
       .expect.element("//button[contains(., 'Next')]").to.be.visible
-    browserName
+    browser
       .click("//button[contains(., 'Next')]")
       .pause(500)
       .useCss().waitForElementVisible('div.table-component')
-    browserName
+    browser
       .assert.urlContains('/top-wallets/2')
       .useXpath().click("//button[contains(., 'Previous')]")
       .pause(500)
       .useCss().waitForElementVisible('div.table-component')
-    browserName
+    browser
       .assert.urlContains('/top-wallets/1')
   },
 
-  'it should be possible to sort the wallets': function (browserName) {
-    browserName
+  'it should be possible to sort the wallets': function (browser) {
+    browser
       .useCss()
       .waitForElementVisible('div.table-component')
       .useXpath().expect.element("//th[contains(., 'Address')]").to.be.present
-    browserName
+    browser
       .assert.cssClassPresent("//th[contains(., 'Address')]", 'table-component__th--sort')
       .assert.cssClassNotPresent("//th[contains(., 'Address')]", 'table-component__th--sort-asc')
       .assert.cssClassNotPresent("//th[contains(., 'Address')]", 'table-component__th--sort-desc')
-    browserName
+    browser
       .click("//th[contains(., 'Address')]")
       .pause(500)
-    browserName.assert.cssClassPresent("//th[contains(., 'Address')]", 'table-component__th--sort-asc')
-    browserName
+    browser.assert.cssClassPresent("//th[contains(., 'Address')]", 'table-component__th--sort-asc')
+    browser
       .click("//th[contains(., 'Address')]")
       .pause(500)
-    browserName.assert.cssClassPresent("//th[contains(., 'Address')]", 'table-component__th--sort-desc')
+    browser.assert.cssClassPresent("//th[contains(., 'Address')]", 'table-component__th--sort-desc')
   },
 
-  'it should contain 25 wallets on a page': function (browserName) {
-    browserName
+  'it should contain 25 wallets on a page': function (browser) {
+    browser
       .useCss()
       .expect.element('div.hidden.sm\\:block').to.be.present
-    browserName
+    browser
       .elements('css selector', 'div.hidden.sm\\:block div.table-component tbody.table-component__table__body tr', function (result) {
-        browserName.assert.equal(25, result.value.length)
+        browser.assert.equal(25, result.value.length)
       })
   },
 
-  'it should be possible to click on a wallet address': function (browserName) {
-    browserName
+  'it should be possible to click on a wallet address': function (browser) {
+    browser
       .useCss()
       .waitForElementVisible('div.table-component')
       .useXpath().click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]//a[1]")
       .pause(500)
-    browserName
+    browser
       .useXpath()
       .waitForElementVisible("//h1[text() = 'Wallet summary']")
       .assert.urlContains('/wallets/')
-    browserName.end()
+    browser.end()
   }
 }
