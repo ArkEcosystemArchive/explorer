@@ -30,10 +30,7 @@ module.exports = {
       },
       desiredCapabilities: {
         firefoxOptions: {
-          args: [
-            'window-size=1920,1080',
-            'disable-dev-shm-usage'
-          ]
+          args: []
         }
       }
     },
@@ -42,6 +39,7 @@ module.exports = {
       desiredCapabilities: {
         browserName: 'firefox',
         javascriptEnabled: true,
+        acceptInsecureCerts: true,
         acceptSslCerts: true
       }
     },
