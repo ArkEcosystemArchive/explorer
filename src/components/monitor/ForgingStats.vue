@@ -36,7 +36,7 @@
       </div>
       <div class="p-0 sm:pl-4">
         <div class="text-3xl semibold">
-          {{ totals.notForging }}
+          {{ totals.notForging + totals.neverForged }}
         </div>
         <div class="text-grey">
           {{ $t("Not forging") }}
