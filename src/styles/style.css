@@ -1,8 +1,7 @@
 @import '../../node_modules/animate.css/animate.css';
 @import './tooltips.css';
 
-@tailwind preflight;
-@tailwind utilities;
+@tailwind base;
 
 .theme-light {
   --color-theme-text-thead: #C5C7CB;
@@ -76,6 +75,10 @@
   color: #43475c;
 }
 
+html {
+  line-height: 1.15;
+}
+
 @font-face {
   font-family: 'Proxima Nova Regular';
   src: url('../assets/fonts/Proxima_Nova_Regular.otf');
@@ -102,6 +105,15 @@ a:hover {
 table {
   border-spacing: 0;
   border-collapse: collapse;
+}
+
+/* Form elements */
+button,
+input,
+optgroup,
+select,
+textarea {
+  line-height: 1.15;
 }
 
 /* Remove blue outline on chrome - This is bad for accessability */
@@ -417,3 +429,5 @@ thead th {
     max-width: 180px;
   }
 }
+
+@tailwind utilities;

@@ -1,7 +1,7 @@
 <template>
   <header
     v-click-outside="closeHeader"
-    class="header min-h-50px md:min-h-80px z-50 max-w-2xl mx-auto flex bg-theme-nav-background shadow-theme xl:rounded-md mb-5 sm:mb-10"
+    class="AppHeader min-h-50px md:min-h-80px mb-5 sm:mb-10 xl:rounded-md"
   >
     <RouterLink
       :to="{ name: 'home' }"
@@ -12,26 +12,22 @@
         src="@/assets/images/logo.png"
       >
     </RouterLink>
+
     <div class="w-full relative hidden xl:flex">
       <HeaderSearch v-if="headerType === 'search'" />
-
       <HeaderCurrenciesDesktop v-else-if="headerType === 'currencies'" />
-
       <HeaderLanguagesDesktop v-else-if="headerType === 'languages'" />
-
       <HeaderDefault v-else />
-
       <HeaderMenuDesktop v-if="menuVisible" />
     </div>
+
     <div class="w-full relative flex xl:hidden">
       <HeaderSearch v-if="headerType === 'search'" />
-
       <HeaderDefault v-else />
     </div>
+
     <HeaderMenuMobile v-if="menuVisible" />
-
     <HeaderCurrenciesMobile v-else-if="headerType === 'currencies'" />
-
     <HeaderLanguagesMobile v-else-if="headerType === 'languages'" />
   </header>
 </template>
@@ -76,8 +72,7 @@ export default {
 </script>
 
 <style scoped>
-.header {
-  position: sticky;
-  top: 0;
+.AppHeader {
+  @apply .flex .sticky .top-0 .z-50 .max-w-2xl .mx-auto .bg-theme-nav-background .shadow-theme;
 }
 </style>

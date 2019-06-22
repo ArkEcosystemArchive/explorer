@@ -2,13 +2,17 @@
   <div>
     <img
       v-if="!nightMode"
+      class="mx-auto"
       src="@/assets/images/not-found/light.png"
     >
     <img
       v-else
+      class="mx-auto"
       src="@/assets/images/not-found/dark.png"
     >
-    <h1>{{ $t('Ooops!') }}</h1>
+    <h1 class="text-3xl">
+      {{ $t('Ooops!') }}
+    </h1>
     <i18n
       tag="p"
       path="Sorry, dataType dataId could not be found on the blockchain"
