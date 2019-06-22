@@ -91,7 +91,7 @@ module.exports = {
       .click('button.address-button')
       .waitForElementVisible('div.modal-container')
     browser
-      .click('button.absolute.pin-t')
+      .click('button.absolute.top-0')
       .waitForElementNotPresent('div.modal-container')
   },
 
