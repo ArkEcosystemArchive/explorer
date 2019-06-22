@@ -55,6 +55,7 @@ class ForgingService {
     let forging = 0
     let missedBlock = 0
     let notForging = 0
+    let neverForged = 0
 
     const height = store.getters['network/height']
     const activeDelegates = store.getters['network/activeDelegates']
@@ -78,6 +79,11 @@ class ForgingService {
           notForging++
           break
         }
+        case ForgeStatus.NEVER_FORGED:
+        {
+          neverForged++
+          break
+        }
         default:
         {
           break
@@ -89,6 +95,7 @@ class ForgingService {
       forging,
       missedBlock,
       notForging,
+      neverForged,
       remainingBlocks
     }
   }
