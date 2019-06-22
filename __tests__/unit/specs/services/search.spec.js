@@ -1,6 +1,25 @@
 import SearchService from '@/services/search'
 import store from '@/store'
 
+const walletPropertyArray = [
+  'address',
+  'balance',
+  'isDelegate',
+  'publicKey'
+].sort()
+// Note: secondPublicKey, username and vote can also be returned, but are optional
+
+const delegatePropertyArray = [
+  'username',
+  'address',
+  'publicKey',
+  'votes',
+  'rank',
+  'blocks',
+  'production',
+  'forged'
+].sort()
+
 describe('Search Service', () => {
   beforeAll(() => {
     jest.setTimeout(60000)
@@ -8,53 +27,27 @@ describe('Search Service', () => {
     store.dispatch('network/setServer', 'https://explorer.ark.io/api/v2')
   })
 
-  it('should return address when searching for existing wallet', async () => {
+  it('should return an object when searching for existing wallet', async () => {
     const data = await SearchService.walletByAddress('ATsPMTAHNsUwKedzNpjTNRfcj1oRGaX5xC')
-    expect(Object.keys(data).sort()).toEqual([
-      'address',
-      'balance',
-      'isDelegate',
-      'publicKey',
-      'secondPublicKey',
-      'username',
-      'vote'
-    ].sort())
+    expect(Object.keys(data).sort()).toEqual(expect.arrayContaining(walletPropertyArray))
   })
 
   it('should fail when searching for non-existing wallet', async () => {
     await expect(SearchService.walletByAddress('ATsPMTAHNsUwKedzNpjTNRfcj1oRGaX5xz')).rejects.toThrow()
   })
 
-  it('should return delegate address when searching for existing username', async () => {
+  it('should return an object when searching for existing username', async () => {
     const data = await SearchService.delegateByQuery('arkpool')
-    expect(Object.keys(data).sort()).toEqual([
-      'username',
-      'address',
-      'publicKey',
-      'votes',
-      'rank',
-      'blocks',
-      'production',
-      'forged'
-    ].sort())
+    expect(Object.keys(data).sort()).toEqual(delegatePropertyArray)
   })
 
   it('should fail when searching for non-matching username', async () => {
     await expect(SearchService.delegateByQuery('asdhfajksdhfakjsdfasdf')).rejects.toThrow()
   })
 
-  it('should return delegate address when searching for existing public key', async () => {
+  it('should return an object when searching for existing public key', async () => {
     const data = await SearchService.delegateByQuery('02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b')
-    expect(Object.keys(data).sort()).toEqual([
-      'username',
-      'address',
-      'publicKey',
-      'votes',
-      'rank',
-      'blocks',
-      'production',
-      'forged'
-    ].sort())
+    expect(Object.keys(data).sort()).toEqual(delegatePropertyArray)
   })
 
   it('should fail when searching for non-matching public key', async () => {
@@ -72,6 +65,7 @@ describe('Search Service', () => {
       'payload',
       'generator',
       'signature',
+      'confirmations',
       'transactions',
       'timestamp'
     ].sort())
@@ -91,6 +85,7 @@ describe('Search Service', () => {
       'amount',
       'fee',
       'sender',
+      'senderPublicKey',
       'recipient',
       'signature',
       'confirmations',
