@@ -18,11 +18,9 @@ const voterPropertyArray = [
   'address',
   'balance',
   'isDelegate',
-  'publicKey',
-  'secondPublicKey',
-  'username',
-  'vote'
+  'publicKey'
 ].sort()
+// Note: secondPublicKey, username and vote can also be returned, but are optional
 
 describe('Delegate Service', () => {
   beforeAll(() => {
@@ -41,7 +39,7 @@ describe('Delegate Service', () => {
   it('should retrieve the voters based on given delegate address', async () => {
     const { meta, data } = await DelegateService.voters('ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ')
     data.forEach(voter => {
-      expect(Object.keys(voter).sort()).toEqual(voterPropertyArray)
+      expect(Object.keys(voter).sort()).toEqual(expect.arrayContaining(voterPropertyArray))
     })
   })
 

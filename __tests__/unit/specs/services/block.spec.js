@@ -10,6 +10,7 @@ const blockPropertyArray = [
   'payload',
   'generator',
   'signature',
+  'confirmations',
   'transactions',
   'timestamp'
 ].sort()
