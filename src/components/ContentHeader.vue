@@ -11,10 +11,10 @@
         <div class="pr-6">
           {{ $t("Network") }}: {{ $t(alias) }}
         </div>
-        <div :class="{ 'pr-6': isMain }">
+        <div :class="{ 'pr-6': isMainWithCurrency }">
           {{ $t("Supply") }}: <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }}</span>
         </div>
-        <div v-if="isMain">
+        <div v-if="isMainWithCurrency">
           {{ $t("Market Cap") }}: <Currency :amount="+supply" />
         </div>
       </div>
@@ -47,7 +47,7 @@ export default {
     ...mapGetters('currency', ['name', 'rate', 'symbol']),
 
     isMain () {
-      return this.alias === 'Main'
+      return this.alias === 'Main' && this.name && this.name !== 'ARK'
     }
   }
 }
