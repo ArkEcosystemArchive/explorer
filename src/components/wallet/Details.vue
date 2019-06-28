@@ -4,7 +4,7 @@
     <div class="py-8 bg-theme-feature-background hidden md:flex xl:rounded-lg items-center">
       <button
         class="address-button ml-10 mr-6 p-3 rounded flex-none hover-button-shadow transition"
-        @click="showModal = !showModal"
+        @click="toggleModal()"
       >
         <img
           class="block"
@@ -269,7 +269,7 @@
     <!-- Modal -->
     <Modal
       v-if="showModal"
-      @close="showModal = false"
+      @close="toggleModal()"
     >
       <div class="text-center px-10 py-2">
         <p class="semibold text-3xl mb-4">
@@ -328,6 +328,10 @@ export default {
   methods: {
     setView (view) {
       this.view = view
+    },
+
+    toggleModal () {
+      this.showModal = !this.showModal
     }
   }
 }
