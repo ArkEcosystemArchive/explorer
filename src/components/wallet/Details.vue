@@ -276,7 +276,7 @@
           {{ $t("QR Code") }}
         </p>
         <p class="mb-10">
-          {{ $t("Scan for Address") }}
+          {{ $t("Scan for address") }}
         </p>
         <QrCode
           :value="wallet.address"
