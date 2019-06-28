@@ -40,6 +40,7 @@ module.exports = {
           prefs: { 'profile.managed_default_content_settings.notifications': 1 },
           args: [
             'window-size=1920,1080',
+            'no-sandbox',
             'disable-dev-shm-usage'
           ]
         },

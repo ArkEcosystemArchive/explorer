@@ -1,5 +1,5 @@
 <template>
-  <footer class="max-w-2xl mx-auto px-5 md:px-10 py-8 text-theme-text-tertiary flex flex-col lg:flex-row flex-wrap justify-between items-center">
+  <footer class="AppFooter px-5 md:px-10 flex-col lg:flex-row">
     <div class="mb-4 lg:mb-0 text-center md:text-left">
       <span class="block md:inline-block mb-4 md:mb-0 text-center">&copy; <a
         href="https://ark.io"
@@ -300,3 +300,13 @@ export default {
   }
 }
 </script>
+
+<style>
+.AppFooter {
+  @apply .flex .flex-wrap .max-w-2xl .mx-auto .py-8 .text-theme-text-tertiary .justify-between .items-center;
+}
+
+.AppFooter svg {
+  @apply .inline;
+}
+</style>

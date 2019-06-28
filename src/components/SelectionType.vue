@@ -35,7 +35,7 @@
 
       <ul
         v-show="isOpen"
-        class="absolute pin-x mt-10 bg-white shadow rounded border overflow-hidden list-reset text-sm"
+        class="absolute inset-x-0 mt-10 bg-white shadow rounded border overflow-hidden text-sm"
       >
         <li
           v-for="(type, index) in types"
@@ -77,7 +77,7 @@
 
       <ul
         v-show="isOpen"
-        class="absolute pin-r mt-2 bg-white shadow rounded border overflow-hidden list-reset text-sm"
+        class="absolute right-0 mt-2 bg-white shadow rounded border overflow-hidden text-sm"
       >
         <li
           v-for="(type, index) in types"

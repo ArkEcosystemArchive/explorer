@@ -1,6 +1,6 @@
 <template>
   <button
-    class="px-2 md:px-4 py-3 md:py-6 flex items-center text-sm border-b-2 margin-t-2 border-transparent hover:border-red transition"
+    class="px-2 md:px-4 py-3 md:py-6 flex items-center text-sm border-b-2 mt-2px border-transparent hover:border-red transition"
     @click="$store.dispatch('ui/setHeaderType', isCurrencyMenu ? null : 'currencies')"
   >
     <img

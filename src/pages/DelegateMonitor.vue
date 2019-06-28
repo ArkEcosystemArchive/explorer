@@ -22,7 +22,7 @@
 
       <ForgingStats
         v-show="activeTab === 'active'"
-        :delegates="delegates"
+        :delegates="delegates || []"
       />
 
       <ActiveDelegates
@@ -54,7 +54,7 @@ export default {
   },
 
   data: () => ({
-    delegates: [],
+    delegates: null,
     activeTab: 'active'
   }),
 

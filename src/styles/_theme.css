@@ -1,0 +1,71 @@
+.theme-light {
+  --color-theme-text-thead: #C5C7CB;
+  --color-theme-table-row-sticky: #fff;
+
+  --color-theme-page-background-primary: #f5f6fa;
+  --color-theme-content-background-primary: #fff;
+  --color-theme-feature-background: #20222d;
+  --color-theme-table-row: #f8f9fd;
+  --color-theme-table-row-hover: #fff;
+  --color-theme-text-primary: #172130;
+  --color-theme-text-secondary: #395174;
+  --color-theme-text-content: #172130;
+  --color-theme-text-placeholder: #a0a6c8;
+  --theme-shadow: 0 1px 9px rgba(203, 208, 228, 0.19);
+  --theme-table-hover-shadow: 0 5px 30px rgba(124, 138, 192, 0.22);
+  --theme-border: #eeeeee;
+  --theme-border-secondary: #e8eeff;
+  --nav-background: #ffffff;
+  --nav-border: #f1f3fc;
+  --stat-background: #fafbfe;
+  --theme-text-tertiary: #838a9b;
+  --ark-meter: #e4ece9;
+  --chart-active: #395174;
+  --chart-inactive: #a0a6c8;
+  --theme-button: #e0f0fd;
+  --theme-button-text: #037cff;
+  --language-icon: #395174;
+}
+
+.theme-light footer a {
+  color: #838a9b;
+}
+.theme-light footer a:hover {
+  color: #7b8291;
+}
+
+.theme-dark {
+  --color-theme-text-thead: #A1A2A6;
+  --color-theme-table-row-sticky: #25262c;
+
+  --color-theme-page-background-primary: #1a1b1f;
+  --color-theme-content-background-primary: #202126;
+  --color-theme-feature-background: #202126;
+  --color-theme-table-row: #25262c;
+  --color-theme-table-row-hover: #2a2b31;
+  --color-theme-text-primary: #ffffff;
+  --color-theme-text-secondary: #a1a2a6;
+  --color-theme-text-content: #a1a2a6;
+  --color-theme-text-placeholder: #787a86;
+  --theme-shadow: none;
+  --theme-table-hover-shadow: none;
+  --theme-border: #25262c;
+  --theme-border-secondary: #25262c;
+  --nav-background: #2a2b31;
+  --nav-border: #282a30;
+  --stat-background: #202126;
+  --theme-text-tertiary: #626466;
+  --ark-meter: #26272c;
+  --chart-active: #a1a2a6;
+  --chart-inactive: #585a68;
+  --theme-button: #2a2b31;
+  --theme-button-text: #fff;
+  --language-icon: #a1a2a6;
+}
+
+.theme-dark footer a {
+  color: #414348;
+}
+.theme-dark footer a:hover {
+  color: #43475c;
+}

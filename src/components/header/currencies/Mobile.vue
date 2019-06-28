@@ -1,5 +1,5 @@
 <template>
-  <ul class="menu-container w-full text-center max-w-480px justify-center bg-table-row list-reset absolute pin-b pin-r py-5 block xl:hidden">
+  <ul class="menu-container w-full text-center max-w-480px justify-center bg-table-row absolute bottom-0 right-0 py-5 block xl:hidden">
     <li
       v-for="(symbol, currency) in currencies"
       :key="currency"

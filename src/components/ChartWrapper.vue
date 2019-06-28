@@ -2,7 +2,7 @@
   <div class="relative">
     <div
       v-if="hasError"
-      class="absolute pin flex flex-col items-center justify-center text-white z-10"
+      class="absolute inset-0 flex flex-col items-center justify-center text-white z-10"
     >
       <p class="mb-4">
         {{ $t('The chart data could not be loaded') }}
