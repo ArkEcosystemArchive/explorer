@@ -46,7 +46,7 @@ export default {
     ...mapGetters('network', ['alias', 'supply', 'height']),
     ...mapGetters('currency', ['name', 'rate', 'symbol']),
 
-    isMain () {
+    isMainWithCurrency () {
       return this.alias === 'Main' && this.name && this.name !== 'ARK'
     }
   }
