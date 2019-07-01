@@ -91,11 +91,10 @@
         <div class="text-grey mb-2">
           {{ $t("Balance (token)", { token: networkToken() }) }}
         </div>
-        <div
-          v-tooltip="readableCurrency(wallet.balance)"
-          class="text-lg text-white semibold"
-        >
-          {{ readableCrypto(wallet.balance, false) }}
+        <div class="text-lg text-white semibold">
+          <span v-tooltip="readableCurrency(wallet.balance)">
+            {{ readableCrypto(wallet.balance, false) }}
+          </span>
         </div>
       </div>
 
