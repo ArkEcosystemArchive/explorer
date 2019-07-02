@@ -1,66 +1,38 @@
 <template>
   <Loader :data="wallets">
-    <table-component
-      v-if="wallets && wallets.length > 0"
-      :data="wallets"
-      :show-filter="false"
-      :show-caption="false"
-      table-class="w-full"
+    <TableWrapper
+      v-bind="$attrs"
+      :has-pagination="false"
+      :columns="columns"
+      :rows="wallets"
+      :sort-query="{ field: 'originalIndex', type: 'asc' }"
+      :no-data-message="$t('No results')"
     >
-      <table-column
-        :label="$t('Rank')"
-        show="vueTableComponentInternalRowId"
-        header-class="left-header-start-cell w-32"
-        cell-class="left-start-cell"
+      <template
+        slot-scope="data"
       >
-        <template slot-scope="row">
-          {{ getRank(row.vueTableComponentInternalRowId) }}
-        </template>
-      </table-column>
+        <div v-if="data.column.field === 'originalIndex'">
+          {{ getRank(data.row.originalIndex) }}
+        </div>
 
-      <table-column
-        :label="$t('Address')"
-        show="address"
-        header-class="left-header-cell"
-        cell-class="left-cell"
-      >
-        <template slot-scope="row">
+        <div v-else-if="data.column.field === 'address'">
           <LinkWallet
-            :address="row.address"
+            :address="data.row.address"
             :trunc="false"
           />
-        </template>
-      </table-column>
+        </div>
 
-      <table-column
-        :label="$t('Balance')"
-        show="balance"
-        header-class="right-header-cell"
-        cell-class="right-cell"
-      >
-        <template slot-scope="row">
-          {{ readableCrypto(row.balance) }}
-        </template>
-      </table-column>
+        <div v-else-if="data.column.field === 'balance'">
+          <span>
+            {{ readableCrypto(data.row.balance) }}
+          </span>
+        </div>
 
-      <table-column
-        :sortable="false"
-        :label="$t('Supply')"
-        header-class="right-header-end-cell"
-        cell-class="right-end-cell w-24"
-      >
-        <template slot-scope="row">
-          {{ readableNumber((row.balance / total) * 100) }}%
-        </template>
-      </table-column>
-    </table-component>
-
-    <div
-      v-else
-      class="px-5 md:px-10"
-    >
-      <span>{{ $t("No results") }}</span>
-    </div>
+        <div v-else-if="data.column.field === 'supply'">
+          {{ readableNumber((data.row.balance / total) * 100) }}%
+        </div>
+      </template>
+    </TableWrapper>
   </Loader>
 </template>
 
@@ -85,14 +57,45 @@ export default {
   },
 
   computed: {
-    ...mapGetters('network', ['supply'])
+    ...mapGetters('network', ['supply']),
+
+    columns () {
+      const columns = [
+        {
+          label: this.$t('Rank'),
+          field: 'originalIndex',
+          type: 'number',
+          thClass: 'start-cell w-32',
+          tdClass: 'start-cell w-32'
+        },
+        {
+          label: this.$t('Address'),
+          field: 'address'
+        },
+        {
+          label: this.$t('Balance'),
+          field: 'balance',
+          type: 'number'
+        },
+        {
+          label: this.$t('Supply'),
+          field: 'supply',
+          type: 'number',
+          sortable: false,
+          thClass: 'end-cell w-24',
+          tdClass: 'end-cell w-24'
+        }
+      ]
+
+      return columns
+    }
   },
 
   methods: {
-    getRank (index) {
+    getRank (value) {
       const page = this.$route.params.page > 1 ? this.$route.params.page - 1 : 0
 
-      return page * 25 + (index + 1)
+      return page * 25 + (value + 1)
     }
   }
 }

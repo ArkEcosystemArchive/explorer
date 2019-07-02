@@ -117,15 +117,35 @@
 }
 
 .vgt-table .start-cell {
-  @apply .pl-10;
+  @apply .pl-10 .text-left;
 }
 
 .vgt-table .end-cell {
-  @apply .pr-10;
+  @apply .pr-10 .text-right;
 }
 
 @media (min-width: 1024px) {
   .vgt-table .lg\:base-cell {
       @apply .p-4;
   }
+}
+
+.list-row {
+  @apply .py-4 .flex .justify-between .flex-wrap;
+}
+
+.list-row-border-b {
+  @apply .list-row .border-b;
+}
+
+.list-row-border-t {
+  @apply .list-row .border-t;
+}
+
+.list-row-border-b-no-wrap {
+  @apply .list-row-border-b .flex-no-wrap;
+}
+
+.row-mobile {
+  @apply .px-5 .py-4;
 }

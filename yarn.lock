@@ -9857,10 +9857,6 @@ vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-"vue-table-component@https://github.com/ItsANameToo/vue-table-component":
-  version "1.9.2"
-  resolved "https://github.com/ItsANameToo/vue-table-component#6d6e729db49a88adc38fe8d5adb3c93692949384"
-
 vue-template-compiler@^2.6.10:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.6.10.tgz#323b4f3495f04faa3503337a82f5d6507799c9cc"

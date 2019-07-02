@@ -1,122 +1,71 @@
 <template>
   <Loader :data="transactions">
-    <table-component
-      v-if="transactions && transactions.length > 0"
-      :data="transactions"
-      :show-filter="false"
-      :show-caption="false"
-      sort-by="timestamp.unix"
-      sort-order="desc"
-      table-class="w-full"
+    <TableWrapper
+      v-bind="$attrs"
+      :has-pagination="false"
+      :columns="columns"
+      :rows="transactions"
+      :sort-query="{ field: 'timestamp', type: 'desc' }"
+      :no-data-message="$t('No results')"
     >
-      <table-column
-        :label="$t('ID')"
-        show="id"
-        header-class="left-header-start-cell"
-        cell-class="left-start-cell"
+      <template
+        slot-scope="data"
       >
-        <template slot-scope="row">
+        <div v-if="data.column.field === 'id'">
           <LinkTransaction
-            :id="row.id"
-            :smart-bridge="row.vendorField"
+            :id="data.row.id"
+            :smart-bridge="data.row.vendorField"
             :show-smart-bridge-icon="showSmartBridgeIcon"
           />
-        </template>
-      </table-column>
+        </div>
 
-      <table-column
-        :label="$t('Timestamp')"
-        show="timestamp.unix"
-        header-class="left-header-cell hidden md:table-cell"
-        cell-class="left-cell hidden md:table-cell wrap-timestamp"
-      >
-        <template slot-scope="row">
-          {{ readableTimestamp(row.timestamp.unix) }}
-        </template>
-      </table-column>
+        <div v-else-if="data.column.field === 'timestamp'">
+          <span>
+            {{ data.formattedRow['timestamp'] }}
+          </span>
+        </div>
 
-      <table-column
-        :label="$t('Sender')"
-        show="sender"
-        header-class="left-header-cell"
-        cell-class="left-cell"
-      >
-        <template slot-scope="row">
-          <LinkWallet :address="row.sender" />
-        </template>
-      </table-column>
+        <div v-else-if="data.column.field === 'sender'">
+          <LinkWallet :address="data.row.sender" />
+        </div>
 
-      <table-column
-        :label="$t('Recipient')"
-        show="recipient"
-        header-class="left-header-cell"
-        cell-class="left-cell"
-      >
-        <template slot-scope="row">
+        <div v-else-if="data.column.field === 'recipient'">
           <LinkWallet
-            :address="row.recipient"
-            :type="row.type"
-            :asset="row.asset"
+            :address="data.row.recipient"
+            :type="data.row.type"
+            :asset="data.row.asset"
           />
-        </template>
-      </table-column>
+        </div>
 
-      <table-column
-        :label="$t('Smartbridge')"
-        show="vendorField"
-        header-class="right-header-cell cell-smartbridge"
-        cell-class="right-cell cell-smartbridge"
-      >
-        <template slot-scope="row">
+        <div v-else-if="data.column.field === 'vendorField'">
           <div class="cell-smartbridge-truncate">
-            {{ emojify(row.vendorField) }}
+            {{ emojify(data.row.vendorField) }}
           </div>
-        </template>
-      </table-column>
+        </div>
 
-      <table-column
-        :label="$t('Amount (token)', { token: networkToken() })"
-        show="amount"
-        header-class="right-header-end-cell lg:pr-4"
-        cell-class="right-end-cell lg:pr-4"
-      >
-        <template slot-scope="row">
+        <div v-else-if="data.column.field === 'amount'">
           <span class="whitespace-no-wrap">
             <TransactionAmount
-              :transaction="row"
-              :type="row.type"
+              :transaction="data.row"
+              :type="data.row.type"
             />
           </span>
-        </template>
-      </table-column>
+        </div>
 
-      <table-column
-        :label="$t('Fee (token)', { token: networkToken() })"
-        show="fee"
-        header-class="right-header-end-cell hidden lg:table-cell"
-        cell-class="right-end-cell hidden lg:table-cell"
-      >
-        <template slot-scope="row">
+        <div v-else-if="data.column.field === 'fee'">
           <span
             v-tooltip="{
               trigger: 'hover click',
-              content: row.price ? readableCurrency(row.fee, row.price) : '',
+              content: data.row.price ? readableCurrency(data.row.fee, data.row.price) : '',
               placement: 'top'
             }"
             class="whitespace-no-wrap"
           >
-            {{ readableCrypto(row.fee) }}
+            {{ readableCrypto(data.row.fee) }}
           </span>
-        </template>
-      </table-column>
-    </table-component>
-
-    <div
-      v-else
-      class="px-5 md:px-10"
-    >
-      <span>{{ $t("No results") }}</span>
-    </div>
+        </div>
+      </template>
+    </TableWrapper>
   </Loader>
 </template>
 
@@ -136,6 +85,55 @@ export default {
   },
 
   computed: {
+    columns () {
+      const columns = [
+        {
+          label: this.$t('ID'),
+          field: 'id',
+          thClass: 'start-cell',
+          tdClass: 'start-cell'
+        },
+        {
+          label: this.$t('Timestamp'),
+          field: 'timestamp',
+          type: 'date',
+          formatFn: this.formatDate,
+          thClass: 'text-left hidden md:table-cell',
+          tdClass: 'text-left hidden md:table-cell wrap-timestamp'
+        },
+        {
+          label: this.$t('Sender'),
+          field: 'sender'
+        },
+        {
+          label: this.$t('Recipient'),
+          field: 'recipient'
+        },
+        {
+          label: this.$t('Smartbridge'),
+          field: 'vendorField',
+          thClass: 'text-right cell-smartbridge',
+          tdClass: 'text-right cell-smartbridge'
+        },
+        {
+          label: this.$t('Amount (token)', { token: this.networkToken() }),
+          field: 'amount',
+          type: 'number',
+          thClass: 'end-cell lg:base-cell lg:pr-4',
+          tdClass: 'end-cell lg:base-cell lg:pr-4'
+        },
+        {
+          label: this.$t('Fee (token)', { token: this.networkToken() }),
+          field: 'fee',
+          type: 'number',
+          thClass: 'end-cell hidden lg:table-cell',
+          tdClass: 'end-cell hidden lg:table-cell'
+        }
+      ]
+
+      return columns
+    },
+
     showSmartBridgeIcon () {
       return this.transactions.some(transaction => {
         return !!transaction.vendorField
@@ -154,6 +152,10 @@ export default {
   },
 
   methods: {
+    formatDate (timestamp) {
+      return this.readableTimestamp(timestamp.unix)
+    },
+
     async updatePrices () {
       if (!this.transactions) {
         return
