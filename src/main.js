@@ -9,6 +9,7 @@ import store from './store'
 import i18n from './i18n'
 import directives from './directives'
 import VTooltip from 'v-tooltip'
+import VueGoodTablePlugin from 'vue-good-table'
 import TableComponent from 'vue-table-component'
 import { orderBy } from 'lodash'
 
@@ -24,6 +25,7 @@ Vue.use(VTooltip, {
   defaultHtml: false,
   defaultContainer: 'main'
 })
+Vue.use(VueGoodTablePlugin)
 Vue.use(TableComponent, {
   sortHandler: (rows, column, order) => orderBy(rows, `data.${column}`, order),
   filterNoResults: i18n.t('No results')
