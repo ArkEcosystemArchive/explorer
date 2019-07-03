@@ -47,6 +47,15 @@
       {{ $t("Delegate Monitor") }}
     </RouterLink>
 
+    <RouterLink
+      :to="{ name: 'search' }"
+      tag="button"
+      class="menu-button"
+      @click.native="closeMenu"
+    >
+      {{ $t("Advanced Search") }}
+    </RouterLink>
+
     <!-- <RouterLink :to="{ name: 'statistics' }" tag="button" class="menu-button">Statistics</RouterLink> -->
 
     <div class="flex-auto" />
