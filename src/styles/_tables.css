@@ -130,6 +130,33 @@
   }
 }
 
+.cell-smartbridge-truncate {
+  max-width: 76px;
+  @apply .ml-auto .truncate;
+}
+
+.cell-smartbridge {
+  @apply .hidden;
+}
+
+@media only screen and (min-width: 768px) {
+  .cell-smartbridge {
+    @apply .table-cell;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .cell-smartbridge-truncate {
+    max-width: 110px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .cell-smartbridge-truncate {
+    max-width: 180px;
+  }
+}
+
 .list-row {
   @apply .py-4 .flex .justify-between .flex-wrap;
 }
