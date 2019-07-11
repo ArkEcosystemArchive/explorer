@@ -32,7 +32,7 @@ module.exports = {
     browser
       .useCss().expect.element('h2').to.not.be.present
     browser
-      .expect.element('div.table-component').to.not.be.present
+      .expect.element('table.vgt-table').to.not.be.present
     browser.end()
   },
 
@@ -40,13 +40,13 @@ module.exports = {
     browser
       .url(browser.globals.devServerURL + '/#/block/12287662939647858585')
       .pause(500)
-      .waitForElementVisible('div.table-component')
+      .waitForElementVisible('table.vgt-table')
       .useXpath().assert.containsText("//div[contains(., 'Transactions')]/following-sibling::div[1]", '1')
       .useCss().expect.element('h2').to.be.present
     browser
-      .expect.element('div.table-component').to.be.present
+      .expect.element('table.vgt-table').to.be.present
     browser
-      .elements('css selector', '.table-component__table__body tr', function (result) {
+      .elements('css selector', '.vgt-table tbody tr', function (result) {
         browser.assert.equal(1, result.value.length)
       })
   },
