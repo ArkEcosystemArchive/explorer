@@ -131,21 +131,19 @@
 }
 
 .cell-smartbridge-truncate {
-  max-width: 76px;
   @apply .ml-auto .truncate;
+  max-width: 76px;
 }
 
 .cell-smartbridge {
   @apply .hidden;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1100px) {
   .cell-smartbridge {
     @apply .table-cell;
   }
-}
 
-@media only screen and (min-width: 1024px) {
   .cell-smartbridge-truncate {
     max-width: 110px;
   }
