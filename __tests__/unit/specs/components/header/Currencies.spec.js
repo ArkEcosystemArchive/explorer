@@ -63,10 +63,10 @@ describe('header/currencies/Desktop', () => {
 
     wrapper.vm.$nextTick(() => {
       expect(dispatchMock).toHaveBeenCalledTimes(4)
-      expect(dispatchMock).toHaveBeenNthCalledWith(1, 'currency/setName', 'USD')
-      expect(dispatchMock).toHaveBeenNthCalledWith(2, 'currency/setRate', 12.34)
-      expect(dispatchMock).toHaveBeenNthCalledWith(3, 'currency/setSymbol', '$')
-      expect(dispatchMock).toHaveBeenNthCalledWith(4, 'ui/setHeaderType', null)
+      expect(dispatchMock).toHaveBeenNthCalledWith(1, 'ui/setHeaderType', null)
+      expect(dispatchMock).toHaveBeenNthCalledWith(2, 'currency/setName', 'USD')
+      expect(dispatchMock).toHaveBeenNthCalledWith(3, 'currency/setRate', 12.34)
+      expect(dispatchMock).toHaveBeenNthCalledWith(4, 'currency/setSymbol', '$')
       done()
     })
   })
@@ -107,10 +107,10 @@ describe('header/currencies/Mobile', () => {
 
     wrapper.vm.$nextTick(() => {
       expect(dispatchMock).toHaveBeenCalledTimes(4)
-      expect(dispatchMock).toHaveBeenNthCalledWith(1, 'currency/setName', 'USD')
-      expect(dispatchMock).toHaveBeenNthCalledWith(2, 'currency/setRate', 12.34)
-      expect(dispatchMock).toHaveBeenNthCalledWith(3, 'currency/setSymbol', '$')
-      expect(dispatchMock).toHaveBeenNthCalledWith(4, 'ui/setHeaderType', null)
+      expect(dispatchMock).toHaveBeenNthCalledWith(1, 'ui/setHeaderType', null)
+      expect(dispatchMock).toHaveBeenNthCalledWith(2, 'currency/setName', 'USD')
+      expect(dispatchMock).toHaveBeenNthCalledWith(3, 'currency/setRate', 12.34)
+      expect(dispatchMock).toHaveBeenNthCalledWith(4, 'currency/setSymbol', '$')
       done()
     })
   })

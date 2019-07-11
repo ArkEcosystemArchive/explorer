@@ -5,11 +5,9 @@ const walletPropertyArray = [
   'address',
   'balance',
   'isDelegate',
-  'publicKey',
-  'secondPublicKey',
-  'username',
-  'vote'
+  'publicKey'
 ].sort()
+// Note: secondPublicKey, username and vote can also be returned, but are optional
 
 describe('Wallet Service', () => {
   beforeAll(() => {
@@ -18,16 +16,7 @@ describe('Wallet Service', () => {
 
   it('should return address when searching for existing wallet', async () => {
     const data = await WalletService.find('ATsPMTAHNsUwKedzNpjTNRfcj1oRGaX5xC')
-    // Response should contain all these properties
-    expect(Object.keys(data).sort()).toEqual([
-      'address',
-      'balance',
-      'isDelegate',
-      'publicKey',
-      'secondPublicKey',
-      'username',
-      'vote'
-    ].sort())
+    expect(Object.keys(data).sort()).toEqual(expect.arrayContaining(walletPropertyArray))
   })
 
   it('should fail when searching for incorrect wallet address', async () => {
@@ -38,7 +27,7 @@ describe('Wallet Service', () => {
     const { data } = await WalletService.top()
     expect(data).toHaveLength(25)
     data.forEach(wallet => {
-      expect(Object.keys(wallet).sort()).toEqual(walletPropertyArray.sort())
+      expect(Object.keys(wallet).sort()).toEqual(expect.arrayContaining(walletPropertyArray))
     })
   })
 
@@ -46,7 +35,7 @@ describe('Wallet Service', () => {
     const { data } = await WalletService.top(1)
     expect(data).toHaveLength(25)
     data.forEach(wallet => {
-      expect(Object.keys(wallet).sort()).toEqual(walletPropertyArray.sort())
+      expect(Object.keys(wallet).sort()).toEqual(expect.arrayContaining(walletPropertyArray))
     })
     expect(data.sort((a, b) => a.balance > b.balance)).toEqual(data)
   })
@@ -55,7 +44,7 @@ describe('Wallet Service', () => {
     const { data } = await WalletService.top(2, 20)
     expect(data).toHaveLength(20)
     data.forEach(wallet => {
-      expect(Object.keys(wallet).sort()).toEqual(walletPropertyArray.sort())
+      expect(Object.keys(wallet).sort()).toEqual(expect.arrayContaining(walletPropertyArray))
     })
     expect(data.sort((a, b) => a.balance > b.balance)).toEqual(data)
   })

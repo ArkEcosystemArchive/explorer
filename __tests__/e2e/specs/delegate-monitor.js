@@ -95,25 +95,24 @@ module.exports = {
       .useXpath()
       .expect.element("//th[contains(., 'Name')]").to.be.present
     browser
-      .assert.cssClassPresent("//th[contains(., 'Name')]", 'table-component__th--sort')
-      .assert.cssClassNotPresent("//th[contains(., 'Name')]", 'table-component__th--sort-asc')
-      .assert.cssClassNotPresent("//th[contains(., 'Name')]", 'table-component__th--sort-desc')
+      .assert.cssClassNotPresent("//th[contains(., 'Name')]", 'sorting-asc')
+      .assert.cssClassNotPresent("//th[contains(., 'Name')]", 'sorting-desc')
     browser
       .click("//th[contains(., 'Name')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(., 'Name')]", 'table-component__th--sort-asc')
+    browser.assert.cssClassPresent("//th[contains(., 'Name')]", 'sorting-asc')
     browser
       .click("//th[contains(., 'Name')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(., 'Name')]", 'table-component__th--sort-desc')
+    browser.assert.cssClassPresent("//th[contains(., 'Name')]", 'sorting-desc')
   },
 
   'it should be possible to click on an active delegates name': function (browser) {
     browser
       .useCss()
-      .waitForElementVisible('div.table-component')
+      .waitForElementVisible('table.vgt-table')
       .useXpath()
-      .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]//a[1]")
+      .click('//tbody//tr[1]//td[2]//a[1]')
       .pause(500)
     browser
       .waitForElementVisible("//h1[text() = 'Wallet summary']")
@@ -150,24 +149,23 @@ module.exports = {
     browser
       .useXpath().expect.element("//th[contains(., 'Name')]").to.be.present
     browser
-      .assert.cssClassPresent("//th[contains(., 'Name')]", 'table-component__th--sort')
-      .assert.cssClassNotPresent("//th[contains(., 'Name')]", 'table-component__th--sort-asc')
-      .assert.cssClassNotPresent("//th[contains(., 'Name')]", 'table-component__th--sort-desc')
+      .assert.cssClassNotPresent("//th[contains(., 'Name')]", 'sorting-asc')
+      .assert.cssClassNotPresent("//th[contains(., 'Name')]", 'sorting-desc')
     browser
       .click("//th[contains(., 'Name')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(., 'Name')]", 'table-component__th--sort-asc')
+    browser.assert.cssClassPresent("//th[contains(., 'Name')]", 'sorting-asc')
     browser
       .click("//th[contains(., 'Name')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(., 'Name')]", 'table-component__th--sort-desc')
+    browser.assert.cssClassPresent("//th[contains(., 'Name')]", 'sorting-desc')
   },
 
   'it should be possible to click on the standby delegates name': function (browser) {
     browser
       .useXpath()
-      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]//a[1]")
-      .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]//a[1]")
+      .waitForElementVisible('//tbody//tr[1]//td[2]//a[1]')
+      .click('//tbody//tr[1]//td[2]//a[1]')
       .pause(500)
     browser
       .useXpath()

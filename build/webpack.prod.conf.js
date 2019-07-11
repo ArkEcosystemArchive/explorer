@@ -9,7 +9,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin')
 const glob = require('glob-all')
 const gitRevision = require('./utils/git-revision')()
@@ -51,15 +51,6 @@ const createWebpackConfig = (baseUrl, network, networkConfig, routerMode) => {
         },
         GIT_VERSION: JSON.stringify(gitRevision.version),
         GIT_DATE: JSON.stringify(gitRevision.date)
-      }),
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          compress: {
-            warnings: false
-          }
-        },
-        sourceMap: config.build.productionSourceMap,
-        parallel: true
       }),
       new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output
@@ -159,7 +150,12 @@ const createWebpackConfig = (baseUrl, network, networkConfig, routerMode) => {
             minChunks: 3
           }
         }
-      }
+      },
+      minimizer: [
+        new TerserPlugin({
+          test: /\.js(\?.*)?$/i,
+        }),
+      ]
     }
   })
 }
@@ -175,7 +171,7 @@ module.exports = (env) => {
 
     webpackConfig.plugins.push(
       new CompressionWebpackPlugin({
-        asset: '[path].gz[query]',
+        filename: '[path].gz[query]',
         algorithm: 'gzip',
         test: new RegExp(
           '\\.(' +

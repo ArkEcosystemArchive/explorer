@@ -21,7 +21,7 @@ module.exports = {
       .useCss()
       .expect.element('div.hidden.sm\\:block').to.be.present
     browser
-      .elements('css selector', 'div.hidden.sm\\:block div.table-component tbody.table-component__table__body tr', function (result) {
+      .elements('css selector', 'div.hidden.sm\\:block table.vgt-table tbody tr', function (result) {
         browser.assert.equal(25, result.value.length)
       })
   },
@@ -30,17 +30,16 @@ module.exports = {
     browser
       .useXpath().expect.element("//th[contains(., 'ID')]").to.be.present
     browser
-      .assert.cssClassPresent("//th[contains(., 'ID')]", 'table-component__th--sort')
-      .assert.cssClassNotPresent("//th[contains(., 'ID')]", 'table-component__th--sort-asc')
-      .assert.cssClassNotPresent("//th[contains(., 'ID')]", 'table-component__th--sort-desc')
+      .assert.cssClassNotPresent("//th[contains(., 'ID')]", 'sorting-asc')
+      .assert.cssClassNotPresent("//th[contains(., 'ID')]", 'sorting-desc')
     browser
       .click("//th[contains(., 'ID')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(., 'ID')]", 'table-component__th--sort-asc')
+    browser.assert.cssClassPresent("//th[contains(., 'ID')]", 'sorting-asc')
     browser
       .click("//th[contains(., 'ID')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(., 'ID')]", 'table-component__th--sort-desc')
+    browser.assert.cssClassPresent("//th[contains(., 'ID')]", 'sorting-desc')
   },
 
   'it should be possible to navigate to the next page and back': function (browser) {
@@ -52,12 +51,12 @@ module.exports = {
     browser
       .click("//button[contains(., 'Next')]")
       .pause(500)
-      .useCss().waitForElementVisible('div.table-component')
+      .useCss().waitForElementVisible('table.vgt-table')
     browser
       .assert.urlContains('/transactions/2')
       .useXpath().click("//button[contains(., 'Previous')]")
       .pause(500)
-      .useCss().waitForElementVisible('div.table-component')
+      .useCss().waitForElementVisible('table.vgt-table')
     browser
       .assert.urlContains('/transactions/1')
   },
@@ -67,9 +66,9 @@ module.exports = {
       .useCss()
       .waitForElementVisible('main.theme-light')
       .useXpath()
-      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[1]//a[1]")
+      .waitForElementVisible('//tbody//tr[1]//td[1]//a[1]')
     browser
-      .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[1]//a[1]")
+      .click('//tbody//tr[1]//td[1]//a[1]')
       .pause(500)
     browser
       .waitForElementVisible("//h1[text() = 'Transaction']")
@@ -96,9 +95,9 @@ module.exports = {
       .useCss()
       .waitForElementVisible('main.theme-light')
       .useXpath()
-      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[3]//a[1]")
+      .waitForElementVisible('//tbody//tr[1]//td[3]//a[1]')
     browser
-      .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[3]//a[1]")
+      .click('//tbody//tr[1]//td[3]//a[1]')
       .pause(500)
     browser
       .waitForElementVisible("//h1[text() = 'Wallet summary']")
@@ -114,16 +113,16 @@ module.exports = {
       .waitForElementVisible('main.theme-light')
     browser
       .useXpath()
-      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]")
-      .element('xpath', "//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]", (result) => {
+      .waitForElementVisible('//tbody//tr[1]')
+      .element('xpath', '//tbody//tr[1]//td[4]//a[1]', (result) => {
         if (result.status === -1) {
           console.log('No link present')
         } else {
           console.log('Link is present')
           browser
-            .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]")
+            .waitForElementVisible('//tbody//tr[1]//td[4]//a[1]')
             .pause(500)
-            .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]")
+            .click('//tbody//tr[1]//td[4]//a[1]')
             .pause(500)
           browser
             .waitForElementVisible("//h1[text() = 'Wallet summary']")

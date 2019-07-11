@@ -278,13 +278,13 @@ module.exports = {
 
   'latest block table should refresh automatically': function (browser) {
     const devServer = browser.globals.devServerURL
-    const element = "//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]"
+    const element = '//tbody//tr[1]//td[2]'
 
     browser
       .url(devServer)
       .useXpath()
       .click("//div[contains(@class, 'inactive-tab') and contains(text(), 'Latest blocks')]")
-      .waitForElementVisible("//thead[contains(@class, 'table-component__table__head')]//tr[1]//th[4][contains(., 'Transactions')]")
+      .waitForElementVisible("//thead//tr[1]//th[4][contains(., 'Transactions')]")
     browser
       .getText(element, function (result) {
         browser.expect.element(element).text.to.not.contain(result.value).after(20000)
@@ -299,7 +299,7 @@ module.exports = {
     browser
       .url(devServer)
       .useXpath()
-      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]")
+      .waitForElementVisible('//tbody')
       .useCss()
       .waitForElementVisible('input#search')
     browser
@@ -320,7 +320,7 @@ module.exports = {
     browser
       .url(devServer)
       .useXpath()
-      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]")
+      .waitForElementVisible('//tbody')
       .useCss()
       .waitForElementVisible('input#search')
     browser
@@ -341,7 +341,7 @@ module.exports = {
     browser
       .url(devServer)
       .useXpath()
-      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]")
+      .waitForElementVisible('//tbody')
       .useCss()
       .waitForElementVisible('input#search')
     browser
@@ -362,7 +362,7 @@ module.exports = {
     browser
       .url(devServer)
       .useXpath()
-      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]")
+      .waitForElementVisible('//tbody')
       .useCss()
       .waitForElementVisible('input#search')
     browser
@@ -383,7 +383,7 @@ module.exports = {
     browser
       .url(devServer)
       .useXpath()
-      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]")
+      .waitForElementVisible('//tbody')
       .useCss()
       .waitForElementVisible('input#search')
     browser
@@ -404,7 +404,7 @@ module.exports = {
     browser
       .url(devServer)
       .useXpath()
-      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]")
+      .waitForElementVisible('//tbody')
       .useCss()
       .waitForElementVisible('input#search')
     browser
@@ -425,7 +425,7 @@ module.exports = {
     browser
       .url(devServer)
       .useXpath()
-      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]")
+      .waitForElementVisible('//tbody')
       .useCss()
       .waitForElementVisible('input#search')
     browser

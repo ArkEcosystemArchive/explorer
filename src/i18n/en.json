@@ -14,6 +14,7 @@
   "Date": "Date",
 
   "No results": "No results",
+  "Not yet available": "Not yet available",
   "This is a verified address": "This is a verified address",
 
   "Transaction": "Transaction",
@@ -91,8 +92,12 @@
   "Received": "Received",
   "Second signature enabled": "Second signature enabled",
 
-  "Previous": "Previous",
+  "All": "All",
   "Next": "Next",
+  "Of": "Of",
+  "Page": "Page",
+  "Previous": "Previous",
+  "Rows per page": "Rows per page",
 
   "ID": "ID",
   "Reward (token)": "Reward ({token})",

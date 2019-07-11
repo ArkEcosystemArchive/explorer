@@ -17,7 +17,6 @@ describe('Node Service', () => {
       'ports',
       'slip44',
       'constants',
-      'feeStatistics',
       'transactionPool',
       'wif'
     ].sort())
@@ -28,7 +27,8 @@ describe('Node Service', () => {
     expect(Object.keys(data).sort()).toEqual([
       'synced',
       'now',
-      'blocksCount'
+      'blocksCount',
+      'timestamp'
     ].sort())
   })
 })

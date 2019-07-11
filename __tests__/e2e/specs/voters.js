@@ -26,7 +26,7 @@ module.exports = {
   'it should be possible to navigate to the next page and back': function (browser) {
     browser
       .useCss()
-      .waitForElementVisible('div.table-component')
+      .waitForElementVisible('table.vgt-table')
       .assert.urlContains('/voters/1')
       .useXpath().expect.element("//button[contains(., 'Previous')]").to.not.be.visible
     browser
@@ -45,20 +45,19 @@ module.exports = {
   'it should be possible to sort the voters': function (browser) {
     browser
       .useCss()
-      .waitForElementVisible('div.table-component')
+      .waitForElementVisible('table.vgt-table')
       .useXpath().expect.element("//th[contains(., 'Address')]").to.be.present
     browser
-      .assert.cssClassPresent("//th[contains(., 'Address')]", 'table-component__th--sort')
-      .assert.cssClassNotPresent("//th[contains(., 'Address')]", 'table-component__th--sort-asc')
-      .assert.cssClassNotPresent("//th[contains(., 'Address')]", 'table-component__th--sort-desc')
+      .assert.cssClassNotPresent("//th[contains(., 'Address')]", 'sorting-asc')
+      .assert.cssClassNotPresent("//th[contains(., 'Address')]", 'sorting-desc')
     browser
       .click("//th[contains(., 'Address')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(., 'Address')]", 'table-component__th--sort-asc')
+    browser.assert.cssClassPresent("//th[contains(., 'Address')]", 'sorting-asc')
     browser
       .click("//th[contains(., 'Address')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(., 'Address')]", 'table-component__th--sort-desc')
+    browser.assert.cssClassPresent("//th[contains(., 'Address')]", 'sorting-desc')
   },
 
   'it should contain 25 wallets on a page': function (browser) {
@@ -66,7 +65,7 @@ module.exports = {
       .useCss()
       .expect.element('div.hidden.sm\\:block').to.be.present
     browser
-      .elements('css selector', 'div.hidden.sm\\:block div.table-component tbody.table-component__table__body tr', function (result) {
+      .elements('css selector', 'div.hidden.sm\\:block table.vgt-table tbody tr', function (result) {
         browser.assert.equal(25, result.value.length)
       })
   },
@@ -74,8 +73,8 @@ module.exports = {
   'it should be possible to click on a wallet address': function (browser) {
     browser
       .useXpath()
-      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]//a[1]")
-      .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]//a[1]")
+      .waitForElementVisible('//tbody//tr[1]//td[2]//a[1]')
+      .click('//tbody//tr[1]//td[2]//a[1]')
       .pause(500)
     browser
       .useXpath()

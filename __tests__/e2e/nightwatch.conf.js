@@ -21,26 +21,29 @@ module.exports = {
   test_settings: {
     default: {
       webdriver: {
+        use_legacy_jsonwire: true,
+        default_path_prefix: '/wd/hub',
         webdriver_port: 4444,
         webdriver_host: '127.0.0.1'
       },
       silent: true,
       globals: {
         devServerURL: 'http://127.0.0.1:' + (process.env.PORT || config.dev.port)
-      },
-      desiredCapabilities: {
-        chromeOptions: {
-          args: [
-            'window-size=1920,1080',
-            'disable-dev-shm-usage'
-          ]
-        }
       }
     },
 
     chrome: {
       desiredCapabilities: {
         browserName: 'chrome',
+        'goog:chromeOptions': {
+          w3c: false,
+          prefs: { 'profile.managed_default_content_settings.notifications': 1 },
+          args: [
+            'window-size=1920,1080',
+            'no-sandbox',
+            'disable-dev-shm-usage'
+          ]
+        },
         javascriptEnabled: true,
         acceptSslCerts: true
       }

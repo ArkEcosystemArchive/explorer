@@ -6,13 +6,17 @@
       <div class="my-10 text-center">
         <img
           v-if="!nightMode"
+          class="mx-auto"
           src="@/assets/images/404/light.png"
         >
         <img
           v-else
+          class="mx-auto"
           src="@/assets/images/404/dark.png"
         >
-        <h1>{{ $t("Ooops!") }}!</h1>
+        <h1 class="text-3xl">
+          {{ $t("Ooops!") }}!
+        </h1>
         <p>{{ $t("Sorry, page not found") }}</p>
       </div>
     </section>

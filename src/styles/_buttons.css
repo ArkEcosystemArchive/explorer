@@ -1,0 +1,55 @@
+button:disabled {
+  cursor: default;
+  color: #838a9b !important;
+}
+
+.hover-button-shadow-definition {
+  box-shadow: 0 5px 15px rgba(9, 100, 228, 0.34);
+}
+
+.hover-button-shadow:hover {
+  @apply .hover-button-shadow-definition;
+}
+
+/* Pagination Buttons */
+
+.show-more-button {
+  @apply .mx-auto .bg-theme-button .text-theme-button-text .semibold .py-5 .px-8 .border-transparent .rounded .transition;
+}
+
+.show-more-button:hover {
+  @apply .bg-blue .text-white .hover-button-shadow-definition;
+}
+
+.pager-button {
+  @apply .bg-theme-button .text-theme-button-text .semibold .py-5 .px-8 .border-transparent .rounded .transition .cursor-pointer;
+}
+
+.pager-button:enabled:hover,
+.block-pager-button:enabled:hover {
+  @apply .bg-blue .text-white .hover-button-shadow-definition;
+}
+
+.block-pager-button {
+  @apply .py-4 .px-5 .bg-transparent .bg-blue-darker .rounded-md .text-white .font-normal .text-xs .transition;
+}
+
+/* Menu Buttons */
+
+.menu-button {
+  @apply .flex .items-center .p-4 .border-b-2 .border-transparent .mt-2px .text-theme-text-secondary .transition;
+}
+
+.menu-button:hover {
+  @apply .border-red;
+}
+
+/* Dropdown Buttons */
+
+.dropdown-button {
+  @apply .flex .items-center .p-4 .text-theme-text-secondary .transition .cursor-pointer;
+}
+
+.dropdown-button:hover {
+  color: #1461ff;
+}

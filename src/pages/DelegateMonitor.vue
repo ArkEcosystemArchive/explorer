@@ -22,7 +22,7 @@
 
       <ForgingStats
         v-show="activeTab === 'active'"
-        :delegates="delegates"
+        :delegates="delegates || []"
       />
 
       <ActiveDelegates

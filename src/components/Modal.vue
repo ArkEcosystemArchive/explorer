@@ -1,16 +1,19 @@
 <template>
-  <transition name="modal">
+  <transition
+    name="modal"
+    appear
+  >
     <div
       class="modal-mask"
       @click="$emit('close')"
     >
-      <div class="flex items-center justify-center absolute pin">
+      <div class="flex items-center justify-center absolute inset-0">
         <div
           class="modal-container bg-theme-page-background text-theme-text-content rounded shadow mx-auto relative p-10"
-          @click.stop=""
+          @click.stop
         >
           <button
-            class="absolute pin-t pin-r p-5"
+            class="absolute top-0 right-0 p-5"
             @click="$emit('close')"
           >
             <img src="@/assets/images/icons/cross.svg">
@@ -43,11 +46,6 @@ export default {
 }
 
 .modal-container {
-  /* margin: 0px auto;
-  padding: 20px 30px;
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33); */
   transition: all 0.3s ease;
 }
 
@@ -60,16 +58,9 @@ export default {
  * these styles.
  */
 
-.modal-enter {
-  opacity: 0;
-}
-
-.modal-leave-active {
-  opacity: 0;
-}
-
 .modal-enter .modal-container,
-.modal-leave-active .modal-container {
+.modal-leave-to .modal-container {
+  opacity: 0;
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }

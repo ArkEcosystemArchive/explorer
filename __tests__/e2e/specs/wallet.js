@@ -48,9 +48,9 @@ module.exports = {
   'it should show a list of transactions, including show more button': function (browser) {
     browser
       .useCss()
-      .waitForElementVisible('div.hidden.sm\\:block div.table-component tbody.table-component__table__body tr')
+      .waitForElementVisible('div.hidden.sm\\:block table.vgt-table tbody tr')
     browser
-      .elements('css selector', 'div.hidden.sm\\:block div.table-component tbody.table-component__table__body tr', function (result) {
+      .elements('css selector', 'div.hidden.sm\\:block table.vgt-table tbody tr', function (result) {
         browser.assert.equal(25, result.value.length)
       })
     browser
@@ -91,7 +91,7 @@ module.exports = {
       .click('button.address-button')
       .waitForElementVisible('div.modal-container')
     browser
-      .click('button.absolute.pin-t')
+      .click('button.absolute.top-0')
       .waitForElementNotPresent('div.modal-container')
   },
 
