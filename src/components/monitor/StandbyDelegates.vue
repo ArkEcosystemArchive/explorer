@@ -66,8 +66,8 @@ export default {
           label: this.$t('Votes'),
           field: 'votes',
           type: 'number',
-          thClass: 'end-cell',
-          tdClass: 'end-cell'
+          thClass: 'end-cell hidden sm:table-cell',
+          tdClass: 'end-cell hidden sm:table-cell'
         }
       ]
 
