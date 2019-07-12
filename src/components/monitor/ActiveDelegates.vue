@@ -91,16 +91,16 @@ export default {
           label: this.$t('Forged blocks'),
           field: 'blocks.produced',
           type: 'number',
-          thClass: 'text-left',
-          tdClass: 'text-left'
+          thClass: 'text-left hidden xl:table-cell',
+          tdClass: 'text-left hidden xl:table-cell'
         },
         {
           label: this.$t('Last forged'),
           field: this.lastBlockHeight,
           type: 'number',
           sortFn: this.sortByLastBlockHeight,
-          thClass: 'text-left',
-          tdClass: 'text-left'
+          thClass: 'text-left hidden sm:table-cell',
+          tdClass: 'text-left hidden sm:table-cell'
         },
         {
           label: this.$t('Status'),
@@ -113,8 +113,8 @@ export default {
           label: this.$t('Votes'),
           field: 'votes',
           type: 'number',
-          thClass: 'end-cell',
-          tdClass: 'end-cell'
+          thClass: 'end-cell hidden md:table-cell',
+          tdClass: 'end-cell hidden md:table-cell'
         }
       ]
 
