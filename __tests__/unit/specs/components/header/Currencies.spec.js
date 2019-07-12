@@ -27,17 +27,17 @@ const store = new Vuex.Store({
         nightMode: false
       },
       getters: {
-        headerType: state => 'currencies',
-        nightMode: state => false
+        headerType: () => 'currencies',
+        nightMode: () => false
       }
     },
     network: {
       namespaced: true,
       state: {
-        currencies: { 'USD': '$' }
+        currencies: { USD: '$' }
       },
       getters: {
-        currencies: state => ({ 'USD': '$' })
+        currencies: state => ({ USD: '$' })
       }
     }
   },
@@ -57,7 +57,7 @@ describe('header/currencies/Desktop', () => {
       store
     })
 
-    let el = wrapper.find('.menu-button')
+    const el = wrapper.find('.menu-button')
     expect(el.text()).toBe('USD')
     el.trigger('click')
 
@@ -101,7 +101,7 @@ describe('header/currencies/Mobile', () => {
       store
     })
 
-    let el = wrapper.find('.menu-container > li')
+    const el = wrapper.find('.menu-container > li')
     expect(el.text()).toBe('USD')
     el.trigger('click')
 

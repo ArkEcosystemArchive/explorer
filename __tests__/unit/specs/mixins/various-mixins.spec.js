@@ -11,24 +11,24 @@ const displayFiat = function (value) {
 
 describe('isDelegateByAddress mixin', () => {
   it('should return true when correct address is given', () => {
-    store.dispatch('delegates/setDelegates', [ { username: 'DummyDelegate', address: 'DummyAddress' } ])
+    store.dispatch('delegates/setDelegates', [{ username: 'DummyDelegate', address: 'DummyAddress' }])
     expect(mixins.isDelegateByAddress('DummyAddress')).toBe(true)
   })
 
   it('should return false when no delegate can be found for given address', () => {
-    store.dispatch('delegates/setDelegates', [ { username: 'DummyDelegate', address: 'DummyAddress' } ])
+    store.dispatch('delegates/setDelegates', [{ username: 'DummyDelegate', address: 'DummyAddress' }])
     expect(mixins.isDelegateByAddress('UnknownDummyAddress')).toBe(false)
   })
 })
 
 describe('isDelegateByPublicKey mixin', () => {
   it('should return true when correct public key is given', () => {
-    store.dispatch('delegates/setDelegates', [ { username: 'DummyDelegate', publicKey: 'DummyKey' } ])
+    store.dispatch('delegates/setDelegates', [{ username: 'DummyDelegate', publicKey: 'DummyKey' }])
     expect(mixins.isDelegateByPublicKey('DummyKey')).toBe(true)
   })
 
   it('should return false when no delegate can be found for given public key', () => {
-    store.dispatch('delegates/setDelegates', [ { username: 'DummyDelegate', publicKey: 'DummyKey' } ])
+    store.dispatch('delegates/setDelegates', [{ username: 'DummyDelegate', publicKey: 'DummyKey' }])
     expect(mixins.isDelegateByPublicKey('UnknownDummyKey')).toBe(false)
   })
 })

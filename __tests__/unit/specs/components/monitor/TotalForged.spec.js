@@ -80,11 +80,11 @@ describe('monitor/header/TotalForged', () => {
     })
 
     wrapper.vm.$nextTick(() => {
-      let textBeforeChange = wrapper.find('div > div.text-lg').text()
+      const textBeforeChange = wrapper.find('div > div.text-lg').text()
       store.dispatch('network/setHeight', 13518)
 
       wrapper.vm.$nextTick(() => {
-        let textAfterChange = wrapper.find('div > div.text-lg').text()
+        const textAfterChange = wrapper.find('div > div.text-lg').text()
         expect(textAfterChange)
           .toBe(getTotalForged(store.getters['network/height'], store.getters['network/rewardOffset']).toLocaleString())
         expect(textBeforeChange).not.toBe(textAfterChange)

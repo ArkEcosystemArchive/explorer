@@ -37,7 +37,7 @@ describe('page/404', () => {
       mixins,
       store,
       stubs: {
-        'ContentHeader': '<div></div>'
+        ContentHeader: '<div></div>'
       }
     })
     expect(wrapper.find('h1').text()).toEqual('Ooops!!')
@@ -62,7 +62,7 @@ describe('page/404', () => {
       mixins,
       store,
       stubs: {
-        'ContentHeader': '<div></div>'
+        ContentHeader: '<div></div>'
       }
     })
     expect(wrapper.find('h1').text()).toEqual('Ooops!!')
