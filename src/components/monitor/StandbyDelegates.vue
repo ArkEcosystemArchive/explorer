@@ -60,7 +60,9 @@ export default {
         },
         {
           label: this.$t('Name'),
-          field: 'username'
+          field: 'username',
+          thClass: 'end-cell sm:base-cell text-left',
+          tdClass: 'end-cell sm:base-cell text-left'
         },
         {
           label: this.$t('Votes'),
