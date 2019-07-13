@@ -116,11 +116,11 @@
 }
 
 .start-cell {
-  @apply .pl-8 .text-left;
+  @apply .pl-5 .text-left;
 }
 
 .end-cell {
-  @apply .pr-8 .text-right;
+  @apply .pr-5 .text-right;
 }
 
 th, td {
