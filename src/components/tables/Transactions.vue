@@ -5,7 +5,7 @@
       :has-pagination="false"
       :columns="columns"
       :rows="transactions"
-      :sort-query="{ field: 'timestamp', type: 'desc' }"
+      :sort-query="{ field: 'timestamp.unix', type: 'desc' }"
       :no-data-message="$t('No results')"
     >
       <template
@@ -19,9 +19,9 @@
           />
         </div>
 
-        <div v-else-if="data.column.field === 'timestamp'">
+        <div v-else-if="data.column.field === 'timestamp.unix'">
           <span>
-            {{ data.formattedRow['timestamp'] }}
+            {{ readableTimestamp(data.row.timestamp.unix) }}
           </span>
         </div>
 
@@ -95,9 +95,8 @@ export default {
         },
         {
           label: this.$t('Timestamp'),
-          field: 'timestamp',
-          type: 'date',
-          formatFn: this.formatDate,
+          field: 'timestamp.unix',
+          type: 'number',
           thClass: 'text-left hidden md:table-cell',
           tdClass: 'text-left hidden md:table-cell wrap-timestamp'
         },
@@ -152,10 +151,6 @@ export default {
   },
 
   methods: {
-    formatDate (timestamp) {
-      return this.readableTimestamp(timestamp.unix)
-    },
-
     async updatePrices () {
       if (!this.transactions) {
         return

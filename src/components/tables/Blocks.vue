@@ -21,9 +21,9 @@
           </span>
         </div>
 
-        <div v-else-if="data.column.field === 'timestamp'">
+        <div v-else-if="data.column.field === 'timestamp.unix'">
           <span>
-            {{ data.formattedRow['timestamp'] }}
+            {{ readableTimestamp(data.row.timestamp.unix) }}
           </span>
         </div>
 
@@ -98,9 +98,8 @@ export default {
         },
         {
           label: this.$t('Timestamp'),
-          field: 'timestamp',
-          type: 'date',
-          formatFn: this.formatDate,
+          field: 'timestamp.unix',
+          type: 'number',
           thClass: 'text-left hidden md:table-cell',
           tdClass: 'text-left hidden md:table-cell wrap-timestamp'
         },
@@ -144,10 +143,6 @@ export default {
   },
 
   methods: {
-    formatDate (timestamp) {
-      return this.readableTimestamp(timestamp.unix)
-    },
-
     async updateBlocks () {
       if (!this.blocks) {
         return
