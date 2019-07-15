@@ -4,18 +4,18 @@ import SelectionType from '@/components/SelectionType'
 import clickOutside from '@/directives/click-outside'
 import VueI18n from 'vue-i18n'
 
-const localVue = createLocalVue()
-localVue.use(VueI18n)
-localVue.directive('click-outside', clickOutside)
+describe('Components > SelectionType', () => {
+  const localVue = createLocalVue()
+  localVue.use(VueI18n)
+  localVue.directive('click-outside', clickOutside)
 
-const i18n = new VueI18n({
-  locale: 'en-gb',
-  fallbackLocale: 'en-gb',
-  messages: { 'en-gb': {} },
-  silentTranslationWarn: true
-})
+  const i18n = new VueI18n({
+    locale: 'en-gb',
+    fallbackLocale: 'en-gb',
+    messages: { 'en-gb': {} },
+    silentTranslationWarn: true
+  })
 
-describe('SelectionType', () => {
   it('Should be possible to open and close the dropdown', () => {
     const wrapper = mount(SelectionType, {
       i18n,

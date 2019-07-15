@@ -47,7 +47,7 @@
       <div>{{ $t("Blocks") }}</div>
       <div v-if="delegate.blocks">
         <span>
-          {{ delegate.blocks.produced }}
+          {{ readableNumber(delegate.blocks.produced, 0) }}
         </span>
         <RouterLink
           v-if="delegate.blocks.produced"

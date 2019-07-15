@@ -30,29 +30,29 @@ const dummyDelegate = {
   }
 }
 
-describe('Forging Service', () => {
+describe('Services > Forging', () => {
   beforeAll(() => {
     store.dispatch('network/setActiveDelegates', 51)
   })
 
-  it('should return the status for the given delegate', () => {
+  it('Should return the status for the given delegate', () => {
     const data = ForgingService.status(dummyDelegate, 4781312)
     expect(data).toBe(0)
   })
 
-  it('should return the correct round', () => {
+  it('Should return the correct round', () => {
     expect(ForgingService.round(4781111)).toBe(93747 + 1)
   })
 
-  it('should return the correct round, when modulo is 0', () => {
+  it('Should return the correct round, when modulo is 0', () => {
     expect(ForgingService.round(4781097)).toBe(93747)
   })
 
-  it('should return 0 when given round is not a number', () => {
+  it('Should return 0 when given round is not a number', () => {
     expect(ForgingService.round('a')).toBe(0)
   })
 
-  it('should return an object of forging stats for the given delegates', () => {
+  it('Should return an object of forging stats for the given delegates', () => {
     const data = ForgingService.totals([
       { forgingStatus: 0 },
       { forgingStatus: 1 },

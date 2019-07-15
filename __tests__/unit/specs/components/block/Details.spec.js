@@ -5,36 +5,36 @@ import BlockDetails from '@/components/block/Details'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 
-const localVue = createLocalVue()
-localVue.use(VueI18n)
-localVue.use(Vuex)
+describe('Components > Block > Details', () => {
+  const localVue = createLocalVue()
+  localVue.use(VueI18n)
+  localVue.use(Vuex)
 
-const i18n = new VueI18n({
-  locale: 'en-gb',
-  fallbackLocale: 'en-gb',
-  messages: { 'en-gb': {} },
-  silentTranslationWarn: true
-})
+  const i18n = new VueI18n({
+    locale: 'en-gb',
+    fallbackLocale: 'en-gb',
+    messages: { 'en-gb': {} },
+    silentTranslationWarn: true
+  })
 
-const store = new Vuex.Store({
-  modules: {
-    network: {
-      namespaced: true,
-      getters: {
-        height: state => 1000000
+  const store = new Vuex.Store({
+    modules: {
+      network: {
+        namespaced: true,
+        getters: {
+          height: state => 1000000
+        }
+      },
+      currency: {
+        namespaced: true,
+        getters: {
+          symbol: state => '$'
+        }
       }
     },
-    currency: {
-      namespaced: true,
-      getters: {
-        symbol: state => '$'
-      }
-    }
-  },
-  strict: true
-})
+    strict: true
+  })
 
-describe('Block/Details', () => {
   it('Should display the block details', () => {
     const wrapper = mount(BlockDetails, {
       propsData: {
@@ -50,6 +50,7 @@ describe('Block/Details', () => {
       mixins,
       store
     })
+
     expect(wrapper.findAll('.list-row-border-b')).toHaveLength(7)
     expect(wrapper.findAll('.list-row-border-b-no-wrap')).toHaveLength(1)
     expect(wrapper.findAll('.list-row')).toHaveLength(1)

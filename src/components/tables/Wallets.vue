@@ -29,7 +29,7 @@
         </div>
 
         <div v-else-if="data.column.field === 'supply'">
-          {{ readableNumber((data.row.balance / total) * 100) }}%
+          {{ percentageString((data.row.balance / total) * 100) }}
         </div>
       </template>
     </TableWrapper>
@@ -59,16 +59,6 @@ export default {
   data: () => ({
     windowWidth: 0
   }),
-
-  mounted () {
-    this.windowWidth = window.innerWidth
-
-    this.$nextTick(() => {
-      window.addEventListener('resize', () => {
-        this.windowWidth = window.innerWidth
-      })
-    })
-  },
 
   computed: {
     ...mapGetters('network', ['supply']),
@@ -108,6 +98,16 @@ export default {
 
       return columns
     }
+  },
+
+  mounted () {
+    this.windowWidth = window.innerWidth
+
+    this.$nextTick(() => {
+      window.addEventListener('resize', () => {
+        this.windowWidth = window.innerWidth
+      })
+    })
   },
 
   methods: {

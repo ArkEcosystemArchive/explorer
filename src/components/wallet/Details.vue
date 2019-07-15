@@ -312,7 +312,7 @@ export default {
     },
 
     isDelegate () {
-      return this.isDelegateByAddress(this.wallet.address)
+      return this.wallet.isDelegate
     },
 
     votedDelegate () {

@@ -6,17 +6,18 @@ import Paginator from '@/components/utils/Paginator'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 
-const localVue = createLocalVue()
-localVue.use(VueI18n)
-localVue.use(Vuex)
-const i18n = new VueI18n({
-  locale: 'en-gb',
-  fallbackLocale: 'en-gb',
-  messages: { 'en-gb': {} },
-  silentTranslationWarn: true
-})
+describe('Components > Utils > Paginator', () => {
+  const localVue = createLocalVue()
+  localVue.use(VueI18n)
+  localVue.use(Vuex)
 
-describe('Utils/Paginator', () => {
+  const i18n = new VueI18n({
+    locale: 'en-gb',
+    fallbackLocale: 'en-gb',
+    messages: { 'en-gb': {} },
+    silentTranslationWarn: true
+  })
+
   it('Should display a paginator component', () => {
     const wrapper = mount(Paginator, {
       propsData: {

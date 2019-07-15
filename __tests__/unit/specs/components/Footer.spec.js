@@ -3,20 +3,20 @@ import sinon from 'sinon'
 import AppFooter from '@/components/AppFooter'
 import VueI18n from 'vue-i18n'
 
-const localVue = createLocalVue()
-localVue.use(VueI18n)
-
-const i18n = new VueI18n({
-  locale: 'en-gb',
-  fallbackLocale: 'en-gb',
-  messages: { 'en-gb': {} },
-  silentTranslationWarn: true
-})
-
 global.GIT_VERSION = '43496685190e3e768c3f5b1bc322ff8b7ed4c696'
 global.GIT_DATE = '2018-01-01'
 
-describe('Footer', () => {
+describe('Components > Footer', () => {
+  const localVue = createLocalVue()
+  localVue.use(VueI18n)
+
+  const i18n = new VueI18n({
+    locale: 'en-gb',
+    fallbackLocale: 'en-gb',
+    messages: { 'en-gb': {} },
+    silentTranslationWarn: true
+  })
+
   it('uses the current year always', () => {
     const year = 1984
 

@@ -5,20 +5,20 @@ import errorPage from '@/pages/404'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 
-const localVue = createLocalVue()
-localVue.use(VueI18n)
-localVue.use(Vuex)
+describe('Pages > 404', () => {
+  const localVue = createLocalVue()
+  localVue.use(VueI18n)
+  localVue.use(Vuex)
 
-const i18n = new VueI18n({
-  locale: 'en-gb',
-  fallbackLocale: 'en-gb',
-  messages: { 'en-gb': {} },
-  silentTranslationWarn: true
-})
+  const i18n = new VueI18n({
+    locale: 'en-gb',
+    fallbackLocale: 'en-gb',
+    messages: { 'en-gb': {} },
+    silentTranslationWarn: true
+  })
 
-const uiAction = { setNightMode: jest.fn() }
+  const uiAction = { setNightMode: jest.fn() }
 
-describe('page/404', () => {
   it('Should show the correct image for nightmode', () => {
     const store = new Vuex.Store({
       modules: {
@@ -40,6 +40,7 @@ describe('page/404', () => {
         'ContentHeader': '<div></div>'
       }
     })
+
     expect(wrapper.find('h1').text()).toEqual('Ooops!!')
     expect(wrapper.find('img').attributes().src).toBe('@/assets/images/404/dark.png')
   })
@@ -65,6 +66,7 @@ describe('page/404', () => {
         'ContentHeader': '<div></div>'
       }
     })
+
     expect(wrapper.find('h1').text()).toEqual('Ooops!!')
     expect(wrapper.find('img').attributes().src).toBe('@/assets/images/404/light.png')
   })
