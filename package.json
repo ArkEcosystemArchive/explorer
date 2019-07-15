@@ -129,8 +129,7 @@
     "webpack-merge": "4.2.1"
   },
   "engines": {
-    "node": ">= 11.0.0",
-    "npm": ">= 6.5.0"
+    "node": ">= 11.0.0"
   },
   "browserslist": [
     "> 1%",
