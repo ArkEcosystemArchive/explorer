@@ -1,62 +1,37 @@
 <template>
   <Loader :data="delegates">
-    <table-component
-      v-if="delegates && delegates.length > 0"
-      :data="delegates"
-      :show-filter="false"
-      :show-caption="false"
-      sort-by="rank"
-      sort-order="asc"
-      table-class="w-full text-xs md:text-base"
+    <TableWrapper
+      v-bind="$attrs"
+      :has-pagination="false"
+      :columns="columns"
+      :rows="delegates"
+      :sort-query="{ field: 'rank', type: 'asc' }"
+      :no-data-message="$t('No results')"
     >
-      <table-column
-        :label="$t('Rank')"
-        show="rank"
-        header-class="p-4 pl-8 sm:pl-10 text-left w-32"
-        cell-class="p-3 pl-8 sm:pl-10 text-left border-none"
+      <template
+        slot-scope="data"
       >
-        <template slot-scope="row">
-          {{ row.rank }}
-        </template>
-      </table-column>
-
-      <table-column
-        :label="$t('Name')"
-        show="username"
-        header-class="left-header-cell"
-        cell-class="left-cell"
-      >
-        <template slot-scope="row">
-          <LinkWallet :address="row.address">
-            {{ row.username }}
+        <div v-if="data.column.field === 'username'">
+          <LinkWallet :address="data.row.address">
+            {{ data.row.username }}
           </LinkWallet>
-        </template>
-      </table-column>
+        </div>
 
-      <table-column
-        show="production.approval"
-        :label="$t('Votes')"
-        header-class="right-header-cell sm:pr-10 hidden md:table-cell"
-        cell-class="right-end-cell hidden md:table-cell w-40 whitespace-no-wrap"
-      >
-        <template slot-scope="row">
+        <div v-else-if="data.column.field === 'votes'">
           <span
             v-tooltip="$t('Percentage of the total supply')"
             class="text-grey text-2xs mr-1"
           >
-            {{ percentageString(row.production.approval) }}
+            {{ percentageString(data.row.production.approval) }}
           </span>
-          {{ readableCrypto(row.votes, true, 2) }}
-        </template>
-      </table-column>
-    </table-component>
+          {{ readableCrypto(data.row.votes, true, 2) }}
+        </div>
 
-    <div
-      v-else
-      class="px-5 md:px-10"
-    >
-      <span>{{ $t("No results") }}</span>
-    </div>
+        <span v-else>
+          {{ data.formattedRow[data.column.field] }}
+        </span>
+      </template>
+    </TableWrapper>
   </Loader>
 </template>
 
@@ -72,7 +47,32 @@ export default {
   }),
 
   computed: {
-    ...mapGetters('network', ['activeDelegates'])
+    ...mapGetters('network', ['activeDelegates']),
+
+    columns () {
+      const columns = [
+        {
+          label: this.$t('Rank'),
+          field: 'rank',
+          type: 'number',
+          thClass: 'start-cell w-32',
+          tdClass: 'start-cell w-32'
+        },
+        {
+          label: this.$t('Name'),
+          field: 'username'
+        },
+        {
+          label: this.$t('Votes'),
+          field: 'votes',
+          type: 'number',
+          thClass: 'end-cell hidden sm:table-cell',
+          tdClass: 'end-cell hidden sm:table-cell'
+        }
+      ]
+
+      return columns
+    }
   },
 
   async mounted () {

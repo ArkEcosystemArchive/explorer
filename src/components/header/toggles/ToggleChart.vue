@@ -2,7 +2,7 @@
   <button
     :class="[
       priceChart ? 'text-chart-active' : 'text-chart-inactive',
-      'px-2 py-4 hidden md:flex flex-none items-center border-b-2 margin-t-2 border-transparent hover:border-red hover:text-blue transition'
+      'px-2 py-4 hidden md:flex flex-none items-center border-b-2 mt-2px border-transparent hover:border-red hover:text-blue transition'
     ]"
     @click="toggleChart()"
   >

@@ -1,0 +1,176 @@
+.vgt-right-align {
+  @apply .text-right
+}
+
+.vgt-left-align {
+  @apply .text-left
+}
+
+.vgt-center-align {
+  @apply .text-center
+}
+
+.vgt-pull-left {
+  @apply .float-left
+}
+
+.vgt-pull-right {
+  @apply .float-right
+}
+
+.vgt-clearfix::after {
+  @apply .block;
+  content: "";
+  clear: both;
+}
+
+.vgt-table {
+  @apply .w-full .min-w-full .bg-transparent;
+  table-layout: auto;
+  border-collapse: collapse;
+}
+
+.vgt-table tr {
+  @apply .transition;
+}
+
+.vgt-table tr:nth-child(even) {
+  background-color: var(--color-theme-table-row);
+}
+
+.vgt-table tbody tr:hover {
+  background-color: var(--color-theme-table-row-hover);
+  transform: scale(1.015);
+  box-shadow: var(--theme-table-hover-shadow);
+  z-index: 999;
+  border-radius: 7px;
+}
+
+.vgt-table tbody tr:hover td {
+  background-color: var(--color-theme-table-row-hover);
+}
+
+.vgt-table tbody tr:hover td:first-child {
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+
+.vgt-table tbody tr:hover td:last-child {
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+/** Sticky Table Header */
+
+.vgt-table thead tr {
+  background-color: var(--color-theme-table-row-sticky);
+  @apply .text-theme-text-thead .text-xs;
+}
+
+.vgt-table thead th {
+  @apply .sticky .z-10;
+  top: 50px;
+  background-color: var(--color-theme-table-row-sticky);
+}
+
+.vgt-table thead th {
+  @apply .cursor-pointer;
+}
+
+.vgt-table thead th.not-sortable:hover {
+  @apply .cursor-default;
+}
+
+@screen md {
+  .vgt-table thead th {
+    top: 80px;
+  }
+}
+
+/** Table Arrows*/
+
+.vgt-table .sorting {
+  cursor: pointer;
+}
+
+.vgt-table .sorting-asc:after {
+  @apply .inline-block .ml-1;
+  background-image: url('../assets/images/arrows/asc.svg');
+  width: 12px;
+  height: 12px;
+  content: "";
+}
+
+.vgt-table .sorting-desc:after {
+  @apply .inline-block .ml-1;
+  background-image: url('../assets/images/arrows/desc.svg');
+  width: 12px;
+  height: 12px;
+  content: "";
+}
+
+/* Table Cells */
+
+.vgt-table th,
+.vgt-table td {
+  @apply .p-4 .border-none;
+}
+
+.vgt-table .start-cell {
+  @apply .pl-10 .text-left;
+}
+
+.vgt-table .end-cell {
+  @apply .pr-10 .text-right;
+}
+
+@media (min-width: 1024px) {
+  .vgt-table .lg\:base-cell {
+      @apply .p-4;
+  }
+}
+
+.cell-smartbridge-truncate {
+  @apply .ml-auto .truncate;
+  max-width: 76px;
+}
+
+.cell-smartbridge {
+  @apply .hidden;
+}
+
+@media only screen and (min-width: 1100px) {
+  .cell-smartbridge {
+    @apply .table-cell;
+  }
+
+  .cell-smartbridge-truncate {
+    max-width: 110px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .cell-smartbridge-truncate {
+    max-width: 180px;
+  }
+}
+
+.list-row {
+  @apply .py-4 .flex .justify-between .flex-wrap;
+}
+
+.list-row-border-b {
+  @apply .list-row .border-b;
+}
+
+.list-row-border-t {
+  @apply .list-row .border-t;
+}
+
+.list-row-border-b-no-wrap {
+  @apply .list-row-border-b .flex-no-wrap;
+}
+
+.row-mobile {
+  @apply .px-5 .py-4;
+}

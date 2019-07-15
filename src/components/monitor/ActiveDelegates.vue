@@ -1,107 +1,62 @@
 <template>
   <Loader :data="delegates">
-    <table-component
-      v-if="delegates && delegates.length"
-      :data="delegates"
-      :show-filter="false"
-      :show-caption="false"
-      sort-by="rank"
-      sort-order="asc"
-      table-class="w-full text-xs md:text-base"
+    <TableWrapper
+      v-bind="$attrs"
+      :has-pagination="false"
+      :columns="columns"
+      :rows="delegates"
+      :sort-query="{ field: 'rank', type: 'asc' }"
+      :no-data-message="$t('No results')"
     >
-      <table-column
-        :label="$t('Rank')"
-        show="rank"
-        header-class="p-4 pl-8 sm:pl-10 text-left w-32"
-        cell-class="p-3 pl-8 sm:pl-10 text-left border-none"
+      <template
+        slot-scope="data"
       >
-        <template slot-scope="row">
-          {{ row.rank }}
-        </template>
-      </table-column>
-
-      <table-column
-        :label="$t('Name')"
-        show="username"
-        header-class="left-header-cell"
-        cell-class="py-3 px-4 text-left border-none"
-      >
-        <template slot-scope="row">
-          <LinkWallet :address="row.address">
-            {{ row.username }}
+        <div v-if="data.column.field === 'username'">
+          <LinkWallet :address="data.row.address">
+            {{ data.row.username }}
           </LinkWallet>
-        </template>
-      </table-column>
+        </div>
 
-      <table-column
-        :label="$t('Forged blocks')"
-        show="blocks.produced"
-        header-class="left-header-cell hidden xl:table-cell"
-        cell-class="py-3 px-4 text-left border-none hidden xl:table-cell"
-      >
-        <template slot-scope="row">
-          {{ readableNumber(row.blocks.produced, 0, true) }}
-        </template>
-      </table-column>
+        <div v-else-if="data.column.field === 'blocks.produced'">
+          {{ readableNumber(data.row.blocks.produced, 0, true) }}
+        </div>
 
-      <table-column
-        :label="$t('Last forged')"
-        show="blocks.last.timestamp.unix"
-        header-class="left-header-cell hidden sm:table-cell"
-        cell-class="py-3 px-4 text-left border-none hidden sm:table-cell"
-      >
-        <template slot-scope="row">
-          {{ lastForgingTime(row) }}
-        </template>
-      </table-column>
+        <div v-else-if="data.column.label === $t('Last forged')">
+          {{ lastForgingTime(data.row) }}
+        </div>
 
-      <table-column
-        :label="$t('Status')"
-        show="forgingStatus"
-        header-class="base-header-cell pr-5 sm:pr-10 md:pr-4 w-24 md:w-auto"
-        cell-class="py-3 px-4 pr-5 sm:pr-10 md:pr-4 text-center border-none"
-      >
-        <template slot-scope="row">
+        <div v-else-if="data.column.field === 'forgingStatus'">
           <svg
-            v-tooltip="statusMessage(row)"
+            v-tooltip="statusMessage(data.row)"
+            class="mx-auto"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             width="19px"
             height="19px"
           >
             <path
-              :fill="statusColor(row)"
+              :fill="statusColor(data.row)"
               fill-rule="evenodd"
               d="M9.500,-0.000 C14.746,-0.000 18.999,4.253 18.999,9.500 C18.999,14.747 14.746,19.000 9.500,19.000 C4.253,19.000 -0.001,14.747 -0.001,9.500 C-0.001,4.253 4.253,-0.000 9.500,-0.000 Z"
             />
           </svg>
-        </template>
-      </table-column>
+        </div>
 
-      <table-column
-        show="production.approval"
-        :label="$t('Votes')"
-        header-class="right-header-cell pr-5 md:pr-10 hidden md:table-cell"
-        cell-class="py-3 px-4 md:pr-10 text-right border-none hidden md:table-cell"
-      >
-        <template slot-scope="row">
+        <div v-else-if="data.column.field === 'votes'">
           <span
             v-tooltip="$t('Percentage of the total supply')"
             class="text-grey text-2xs mr-1"
           >
-            {{ percentageString(row.production.approval) }}
+            {{ percentageString(data.row.production.approval) }}
           </span>
-          {{ readableCrypto(row.votes, true, 2) }}
-        </template>
-      </table-column>
-    </table-component>
+          {{ readableCrypto(data.row.votes, true, 2) }}
+        </div>
 
-    <div
-      v-else
-      class="px-5 md:px-10"
-    >
-      <span>{{ $t("No results") }}</span>
-    </div>
+        <span v-else>
+          {{ data.formattedRow[data.column.field] }}
+        </span>
+      </template>
+    </TableWrapper>
   </Loader>
 </template>
 
@@ -115,6 +70,55 @@ export default {
         return Array.isArray(value) || value === null
       },
       required: true
+    }
+  },
+
+  computed: {
+    columns () {
+      const columns = [
+        {
+          label: this.$t('Rank'),
+          field: 'rank',
+          type: 'number',
+          thClass: 'start-cell w-32',
+          tdClass: 'start-cell w-32'
+        },
+        {
+          label: this.$t('Name'),
+          field: 'username'
+        },
+        {
+          label: this.$t('Forged blocks'),
+          field: 'blocks.produced',
+          type: 'number',
+          thClass: 'text-left hidden xl:table-cell',
+          tdClass: 'text-left hidden xl:table-cell'
+        },
+        {
+          label: this.$t('Last forged'),
+          field: this.lastBlockHeight,
+          type: 'number',
+          sortFn: this.sortByLastBlockHeight,
+          thClass: 'text-left hidden sm:table-cell',
+          tdClass: 'text-left hidden sm:table-cell'
+        },
+        {
+          label: this.$t('Status'),
+          field: 'forgingStatus',
+          type: 'number',
+          thClass: 'text-center',
+          tdClass: 'text-center'
+        },
+        {
+          label: this.$t('Votes'),
+          field: 'votes',
+          type: 'number',
+          thClass: 'end-cell hidden md:table-cell',
+          tdClass: 'end-cell hidden md:table-cell'
+        }
+      ]
+
+      return columns
     }
   },
 
@@ -150,6 +154,14 @@ export default {
         2: '#ef192d', // Not forging
         3: '#ef192d' // Never forged
       }[row.forgingStatus]
+    },
+
+    lastBlockHeight (row) {
+      return row.blocks.last ? row.blocks.last.height : -1
+    },
+
+    sortByLastBlockHeight (x, y, col, rowX, rowY) {
+      return x > y ? -1 : (x < y ? 1 : 0)
     }
   }
 }

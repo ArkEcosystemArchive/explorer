@@ -19,6 +19,7 @@ class TransactionService {
 
   async filterByType (page, type, limit = 25) {
     const params = {
+      orderBy: 'timestamp:desc',
       page,
       limit
     }
@@ -37,6 +38,7 @@ class TransactionService {
   async byBlock (id, page = 1, limit = 25) {
     const response = await ApiService.get(`blocks/${id}/transactions`, {
       params: {
+        orderBy: 'timestamp:desc',
         page,
         limit
       }
@@ -48,6 +50,7 @@ class TransactionService {
   async allByAddress (address, page = 1, limit = 25) {
     const response = await ApiService.get(`wallets/${address}/transactions`, {
       params: {
+        orderBy: 'timestamp:desc',
         page,
         limit
       }
@@ -59,6 +62,7 @@ class TransactionService {
   async sentByAddress (address, page = 1, limit = 25) {
     const response = await ApiService.get(`wallets/${address}/transactions/sent`, {
       params: {
+        orderBy: 'timestamp:desc',
         page,
         limit
       }
@@ -70,6 +74,7 @@ class TransactionService {
   async receivedByAddress (address, page = 1, limit = 25) {
     const response = await ApiService.get(`wallets/${address}/transactions/received`, {
       params: {
+        orderBy: 'timestamp:desc',
         page,
         limit
       }

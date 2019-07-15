@@ -8,6 +8,7 @@ Vue.component('Currency', require('@/components/utils/Currency').default)
 Vue.component('Loader', require('@/components/utils/Loader').default)
 Vue.component('Paginator', require('@/components/utils/Paginator').default)
 Vue.component('QrCode', require('@/components/utils/QrCode').default)
+Vue.component('TableWrapper', require('@/components/utils/TableWrapper').default)
 Vue.component('TransactionAmount', require('@/components/utils/TransactionAmount').default)
 
 // Links

@@ -27,7 +27,8 @@ describe('Node Service', () => {
     expect(Object.keys(data).sort()).toEqual([
       'synced',
       'now',
-      'blocksCount'
+      'blocksCount',
+      'timestamp'
     ].sort())
   })
 })

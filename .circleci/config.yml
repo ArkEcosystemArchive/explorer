@@ -1,9 +1,9 @@
 version: 2
 jobs:
-  test-node-10:
+  test-node-11:
     working_directory: ~/explorer
     docker:
-      - image: circleci/node:10-browsers
+      - image: circleci/node:11-browsers
     steps: &teststeps
       - checkout
       - run:
@@ -49,11 +49,6 @@ jobs:
           destination: test-results
       - store_test_results:
           path: test-reports/
-  test-node-11:
-    working_directory: ~/explorer
-    docker:
-      - image: circleci/node:11-browsers
-    steps: *teststeps
   test-node-12:
     working_directory: ~/explorer
     docker:
@@ -63,6 +58,5 @@ workflows:
   version: 2
   test:
     jobs:
-      - test-node-10
       - test-node-11
       - test-node-12
