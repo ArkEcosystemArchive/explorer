@@ -24,7 +24,7 @@
 
         <div v-else-if="data.column.field === 'balance'">
           <span>
-            {{ readableCrypto(data.row.balance) }}
+            {{ readableCrypto(data.row.balance, true, truncateBalance ? 2 : 8) }}
           </span>
         </div>
 
@@ -56,8 +56,26 @@ export default {
     }
   },
 
+  data: () => ({
+    windowWidth: 0
+  }),
+
+  mounted () {
+    this.windowWidth = window.innerWidth
+
+    this.$nextTick(() => {
+      window.addEventListener('resize', () => {
+        this.windowWidth = window.innerWidth
+      })
+    })
+  },
+
   computed: {
     ...mapGetters('network', ['supply']),
+
+    truncateBalance () {
+      return this.windowWidth < 700
+    },
 
     columns () {
       const columns = [
@@ -75,7 +93,8 @@ export default {
         {
           label: this.$t('Balance'),
           field: 'balance',
-          type: 'number'
+          type: 'number',
+          tdClass: 'whitespace-no-wrap'
         },
         {
           label: this.$t('Supply'),
