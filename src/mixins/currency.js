@@ -21,11 +21,11 @@ export default {
     readableCurrency (value, rate = null, currency = null, normalise = true) {
       const currencyName = currency || store.getters['currency/name']
 
-      value *= rate || store.getters['currency/rate']
-
       if (normalise) {
-        value /= 1e8
+        value = parseInt(value) / 1e8
       }
+
+      value *= rate || store.getters['currency/rate']
 
       const cryptos = {
         'ARK': 'Ѧ',
