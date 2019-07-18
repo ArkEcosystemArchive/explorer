@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import Modal from '@/components/Modal'
 
-describe('Modal', () => {
+describe('Components > Modal', () => {
   describe('when instantiated', () => {
     it('should show a modal with a mask overlay', () => {
       const wrapper = mount(Modal)

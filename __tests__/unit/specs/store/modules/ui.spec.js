@@ -1,6 +1,6 @@
 import store from '@/store'
 
-describe('ui store module', () => {
+describe('Store > UI', () => {
   it('should enable the night mode', () => {
     store.dispatch('ui/setNightMode', true)
 

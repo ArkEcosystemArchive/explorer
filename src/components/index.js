@@ -4,7 +4,6 @@ import Vue from 'vue'
 
 // Utilities
 Vue.component('Clipboard', require('@/components/utils/Clipboard').default)
-Vue.component('Currency', require('@/components/utils/Currency').default)
 Vue.component('Loader', require('@/components/utils/Loader').default)
 Vue.component('Paginator', require('@/components/utils/Paginator').default)
 Vue.component('QrCode', require('@/components/utils/QrCode').default)
@@ -28,6 +27,6 @@ Vue.component('TableTransactionsDetailMobile', require('@/components/tables/mobi
 Vue.component('TableWalletsMobile', require('@/components/tables/mobile/Wallets').default)
 
 // Misc.
-Vue.component('ArkMeter', require('@/components/ArkMeter').default)
+Vue.component('ArkMeter', require('@/components/monitor/ArkMeter').default)
 Vue.component('ContentHeader', require('@/components/ContentHeader').default)
 Vue.component('Modal', require('@/components/Modal').default)

@@ -5,19 +5,19 @@ import ForgingStats from '@/components/monitor/ForgingStats'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 
-const localVue = createLocalVue()
-localVue.use(VueI18n)
-localVue.use(Vuex)
+describe('Components > Monitor > ForgingStats', () => {
+  const localVue = createLocalVue()
+  localVue.use(VueI18n)
+  localVue.use(Vuex)
 
-const i18n = new VueI18n({
-  locale: 'en-gb',
-  fallbackLocale: 'en-gb',
-  messages: { 'en-gb': {} },
-  silentTranslationWarn: true
-})
+  const i18n = new VueI18n({
+    locale: 'en-gb',
+    fallbackLocale: 'en-gb',
+    messages: { 'en-gb': {} },
+    silentTranslationWarn: true
+  })
 
-describe('monitor/ForgingStats', () => {
-  it('Should show the forging info', () => {
+  it('should show the forging info', () => {
     const store = new Vuex.Store({
       modules: {
         network: {
@@ -40,6 +40,7 @@ describe('monitor/ForgingStats', () => {
         delegates: []
       }
     })
+
     const divs = wrapper.findAll('div.text-grey')
     expect(divs).toHaveLength(4)
     expect(divs.at(0).text()).toBe('Forged block recently')

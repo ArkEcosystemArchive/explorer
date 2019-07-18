@@ -15,7 +15,7 @@ const transactionPropertyArray = [
 ].sort()
 // Note: asset, recipientId, signSignature and vendorField can also be returned, but are optional
 
-describe('Transaction Service', () => {
+describe('Services > Transaction', () => {
   beforeAll(() => {
     store.dispatch('network/setServer', 'https://explorer.ark.io/api/v2')
   })

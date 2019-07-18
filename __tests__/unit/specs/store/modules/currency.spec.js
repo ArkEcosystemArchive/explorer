@@ -1,6 +1,6 @@
 import store from '@/store'
 
-describe('currency store modules', () => {
+describe('Store > Currency', () => {
   it('should set the currency name', () => {
     store.dispatch('currency/setName', 'magical-pixel-currency')
 

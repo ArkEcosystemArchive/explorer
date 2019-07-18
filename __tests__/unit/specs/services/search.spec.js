@@ -20,7 +20,7 @@ const delegatePropertyArray = [
   'forged'
 ].sort()
 
-describe('Search Service', () => {
+describe('Services > Search', () => {
   beforeAll(() => {
     jest.setTimeout(60000)
 
