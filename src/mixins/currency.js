@@ -22,7 +22,7 @@ export default {
       const currencyName = currency || store.getters['currency/name']
 
       if (normalise) {
-        value = parseInt(value) / 1e8
+        value = parseInt(value, 10) / 1e8
       }
 
       value *= rate || store.getters['currency/rate']
