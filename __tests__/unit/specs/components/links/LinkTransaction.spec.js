@@ -18,7 +18,7 @@ describe('Components > Links > Transaction', () => {
 
   const testTransaction = '1b245c4f1a449da655a43e8b804ed635cc8d1cc6fb50c062d2c00ac126845e40'
 
-  it('Should display a truncated link to a transaction', () => {
+  it('should display a truncated link to a transaction', () => {
     const wrapper = mount(LinkTransaction, {
       propsData: {
         id: testTransaction
@@ -38,7 +38,7 @@ describe('Components > Links > Transaction', () => {
     expect(wrapper.text()).toEqual(expect.stringContaining(wrapper.vm.truncate(testTransaction)))
   })
 
-  it('Should display a smartbridge icon if transaction contains one', () => {
+  it('should display a smartbridge icon if transaction contains one', () => {
     const wrapper = mount(LinkTransaction, {
       propsData: {
         id: testTransaction,
@@ -60,7 +60,7 @@ describe('Components > Links > Transaction', () => {
     expect(wrapper.text()).toEqual(expect.stringContaining(wrapper.vm.truncate(testTransaction)))
   })
 
-  it('Should not display a smartbridge icon if set to false', () => {
+  it('should not display a smartbridge icon if set to false', () => {
     const wrapper = mount(LinkTransaction, {
       propsData: {
         id: testTransaction,

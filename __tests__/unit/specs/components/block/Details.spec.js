@@ -35,7 +35,7 @@ describe('Components > Block > Details', () => {
     strict: true
   })
 
-  it('Should display the block details', () => {
+  it('should display the block details', () => {
     const wrapper = mount(BlockDetails, {
       propsData: {
         block: {

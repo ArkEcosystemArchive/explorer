@@ -29,7 +29,7 @@ describe('Mixins > Currency', () => {
   }
 
   describe('rawCurrency', () => {
-    it('Should display selected cryptocurrency with 8 digits or less', () => {
+    it('should display selected cryptocurrency with 8 digits or less', () => {
       store.dispatch('network/setToken', 'ARK')
       expect(wrapper.vm.rawCurrency(10.1234567891234, 'ARK')).toEqual(displayCrypto(10.12345679))
       expect(wrapper.vm.rawCurrency(10.1234567891234, 'ETH')).toEqual(displayCrypto(10.12345679))
@@ -37,7 +37,7 @@ describe('Mixins > Currency', () => {
       expect(wrapper.vm.rawCurrency(10.12345, 'ARK')).toEqual(displayCrypto(10.12345))
     })
 
-    it('Should display non-cryptocurrency always with 2 digits', () => {
+    it('should display non-cryptocurrency always with 2 digits', () => {
       store.dispatch('network/setToken', 'ARK')
       expect(wrapper.vm.rawCurrency(10.1234567891, 'USD')).toEqual(displayFiat(10.12))
       expect(wrapper.vm.rawCurrency(10.1234567891, 'AUD')).toEqual(displayFiat(10.12))
@@ -48,7 +48,7 @@ describe('Mixins > Currency', () => {
   })
 
   describe('readableCrypto', () => {
-    it('Should return crypto value in readable format', () => {
+    it('should return crypto value in readable format', () => {
       expect(wrapper.vm.readableCrypto(10 * Math.pow(10, 8), false)).toEqual(displayCrypto(10))
       expect(wrapper.vm.readableCrypto(10.12345678912345 * Math.pow(10, 8), false)).toEqual(displayCrypto(10.12345679))
       expect(wrapper.vm.readableCrypto(10.1234 * Math.pow(10, 8), false)).toEqual(displayCrypto(10.1234))
@@ -57,7 +57,7 @@ describe('Mixins > Currency', () => {
       expect(wrapper.vm.readableCrypto(10.123456789123456789 * Math.pow(10, 8), false, 10)).toEqual(Number(10.123456789123456789).toLocaleString(undefined, { maximumFractionDigits: 10 }))
     })
 
-    it('Should return crypto value in readable format, including symbol', () => {
+    it('should return crypto value in readable format, including symbol', () => {
       store.dispatch('network/setSymbol', 'Ѧ')
       expect(wrapper.vm.readableCrypto(10 * Math.pow(10, 8))).toEqual(displayCrypto(10) + ' Ѧ')
       expect(wrapper.vm.readableCrypto(10 * Math.pow(10, 8), true)).toEqual(displayCrypto(10) + ' Ѧ')
@@ -65,7 +65,7 @@ describe('Mixins > Currency', () => {
       expect(wrapper.vm.readableCrypto(10.1234 * Math.pow(10, 8), true)).toEqual(displayCrypto(10.1234) + ' Ѧ')
     })
 
-    it('Should return nothing if undefined value is given', () => {
+    it('should return nothing if undefined value is given', () => {
       expect(wrapper.vm.readableCrypto()).toBeUndefined()
       expect(wrapper.vm.readableCrypto(undefined)).toBeUndefined()
     })
@@ -81,14 +81,14 @@ describe('Mixins > Currency', () => {
 
     store.dispatch('network/setToken', 'ARK')
 
-    it('Should properly format the given data', () => {
+    it('should properly format the given data', () => {
       expect(wrapper.vm.readableCurrency(100000000, null, 'ARK')).toEqual('1 Ѧ')
       expect(wrapper.vm.readableCurrency(1000000000, null, 'BTC')).toEqual('10 Ƀ')
       expect(wrapper.vm.readableCurrency(10000000000, null, 'ETH')).toEqual('100 Ξ')
       expect(wrapper.vm.readableCurrency(100000000000, null, 'LTC')).toEqual(`${Number(1000).toLocaleString()} Ł`)
     })
 
-    it('Should format currency with 2 decimals', () => {
+    it('should format currency with 2 decimals', () => {
       expect(wrapper.vm.readableCurrency(10, 1, 'eur', false)).toEqual(displayCurrency(10))
       expect(wrapper.vm.readableCurrency(10.3, 1, 'eur', false)).toEqual(displayCurrency(10.30))
       expect(wrapper.vm.readableCurrency(10.34, 1, 'eur', false)).toEqual(displayCurrency(10.34))

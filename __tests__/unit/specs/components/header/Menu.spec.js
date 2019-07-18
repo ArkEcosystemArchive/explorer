@@ -60,7 +60,7 @@ describe('Components > Header > Menu', () => {
       })
     })
 
-    it('Should be possible to click on menu option', () => {
+    it('should be possible to click on menu option', () => {
       const items = wrapper.findAll('.menu-button')
 
       for (let i = 0; i < items.length; ++i) {
@@ -70,7 +70,7 @@ describe('Components > Header > Menu', () => {
       }
     })
 
-    it('Should be possible to close menu on desktop', () => {
+    it('should be possible to close menu on desktop', () => {
       wrapper.find('div > button:not(.menu-button)').trigger('click')
 
       expect(dispatchMock).toHaveBeenCalledTimes(1)
@@ -97,7 +97,7 @@ describe('Components > Header > Menu', () => {
       })
     })
 
-    it('Should be possible to click on menu option', () => {
+    it('should be possible to click on menu option', () => {
       const items = wrapper.findAll('.menu-container > li > div')
 
       for (let i = 0; i < items.length; ++i) {

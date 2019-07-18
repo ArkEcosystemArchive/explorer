@@ -21,7 +21,7 @@ describe('Compontents > Links > Wallet', () => {
   const testDelegateAddress = 'ALgvTAoz5Vi9easHqBK6aEMKatHb4beCXm'
   const testDelegatePublicKey = '03aa4863c93d170d89675a6e381d08a451c1067fc0f6fed479571d9ecb178963b3'
 
-  it('Should display a full link to a wallet', () => {
+  it('should display a full link to a wallet', () => {
     const wrapper = mount(LinkWallet, {
       propsData: {
         address: testAddress,
@@ -44,7 +44,7 @@ describe('Compontents > Links > Wallet', () => {
     expect(wrapper.text()).toEqual(expect.stringContaining(wrapper.vm.truncate(testAddress)))
   })
 
-  it('Should display a truncated link to a wallet', () => {
+  it('should display a truncated link to a wallet', () => {
     const wrapper = mount(LinkWallet, {
       propsData: {
         address: testAddress,
@@ -66,7 +66,7 @@ describe('Compontents > Links > Wallet', () => {
     expect(wrapper.text()).toEqual(expect.stringContaining(wrapper.vm.truncate(testAddress)))
   })
 
-  it('Should display the name of a known address', () => {
+  it('should display the name of a known address', () => {
     store.dispatch('network/setKnownWallets', { 'AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv': 'TestKnownWallet' })
     const wrapper = mount(LinkWallet, {
       propsData: {
@@ -91,7 +91,7 @@ describe('Compontents > Links > Wallet', () => {
     expect(wrapper.text()).toEqual(expect.stringContaining('TestKnownWallet'))
   })
 
-  it('Should display the name of a delegate', done => {
+  it('should display the name of a delegate', done => {
     store.dispatch('delegates/setDelegates', [ { username: 'TestDelegate', address: testDelegateAddress, publicKey: testDelegatePublicKey } ])
     const wrapper = mount(LinkWallet, {
       propsData: {
@@ -118,7 +118,7 @@ describe('Compontents > Links > Wallet', () => {
     }, 500)
   })
 
-  it('Should also find the delegate by public key', done => {
+  it('should also find the delegate by public key', done => {
     store.dispatch('delegates/setDelegates', [ { username: 'TestDelegate', address: testDelegateAddress, publicKey: testDelegatePublicKey } ])
     const wrapper = mount(LinkWallet, {
       propsData: {
@@ -146,7 +146,7 @@ describe('Compontents > Links > Wallet', () => {
   })
 
   describe('When given a transaction type > 0', () => {
-    it('Should display 2nd Signature Registration for type 1', () => {
+    it('should display 2nd Signature Registration for type 1', () => {
       const wrapper = mount(LinkWallet, {
         propsData: { type: 1 },
         stubs: {
@@ -162,7 +162,7 @@ describe('Compontents > Links > Wallet', () => {
       expect(wrapper.text()).toEqual(expect.stringContaining('2nd Signature Registration'))
     })
 
-    it('Should display Delegate Registration for type 2', () => {
+    it('should display Delegate Registration for type 2', () => {
       const wrapper = mount(LinkWallet, {
         propsData: { type: 2 },
         stubs: {
@@ -178,7 +178,7 @@ describe('Compontents > Links > Wallet', () => {
       expect(wrapper.text()).toEqual(expect.stringContaining('Delegate Registration'))
     })
 
-    it('Should display Vote for type 3', () => {
+    it('should display Vote for type 3', () => {
       store.dispatch('delegates/setDelegates', [ { username: 'TestDelegate', address: testDelegateAddress, publicKey: testDelegatePublicKey } ])
 
       const wrapper = mount(LinkWallet, {
@@ -202,7 +202,7 @@ describe('Compontents > Links > Wallet', () => {
       }, 500)
     })
 
-    it('Should display Multisignature Registration for type 4', () => {
+    it('should display Multisignature Registration for type 4', () => {
       const wrapper = mount(LinkWallet, {
         propsData: { type: 4 },
         stubs: {
@@ -218,7 +218,7 @@ describe('Compontents > Links > Wallet', () => {
       expect(wrapper.text()).toEqual(expect.stringContaining('Multisignature Registration'))
     })
 
-    it('Should display IPFS for type 5', () => {
+    it('should display IPFS for type 5', () => {
       const wrapper = mount(LinkWallet, {
         propsData: { type: 5 },
         stubs: {
@@ -234,7 +234,7 @@ describe('Compontents > Links > Wallet', () => {
       expect(wrapper.text()).toEqual(expect.stringContaining('IPFS'))
     })
 
-    it('Should display Timelock Transfer for type 6', () => {
+    it('should display Timelock Transfer for type 6', () => {
       const wrapper = mount(LinkWallet, {
         propsData: { type: 6 },
         stubs: {
@@ -250,7 +250,7 @@ describe('Compontents > Links > Wallet', () => {
       expect(wrapper.text()).toEqual(expect.stringContaining('Timelock Transfer'))
     })
 
-    it('Should display Multipayment for type 7', () => {
+    it('should display Multipayment for type 7', () => {
       const wrapper = mount(LinkWallet, {
         propsData: { type: 7 },
         stubs: {
@@ -266,7 +266,7 @@ describe('Compontents > Links > Wallet', () => {
       expect(wrapper.text()).toEqual(expect.stringContaining('Multipayment'))
     })
 
-    it('Should display Delegate Resignation for type 8', () => {
+    it('should display Delegate Resignation for type 8', () => {
       const wrapper = mount(LinkWallet, {
         propsData: { type: 8 },
         stubs: {

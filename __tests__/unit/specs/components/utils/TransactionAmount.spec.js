@@ -27,7 +27,7 @@ describe('Components > Utils > TransactionAmount', () => {
     store.dispatch('currency/setSymbol', '$')
   })
 
-  it('Should display an outgoing transaction in red', () => {
+  it('should display an outgoing transaction in red', () => {
     const $route = {
       params: {
         address: incomingAddress
@@ -57,7 +57,7 @@ describe('Components > Utils > TransactionAmount', () => {
     expect(wrapper.text()).toEqual(wrapper.vm.readableCrypto(100000000).trim())
   })
 
-  it('Should display an incoming transaction in green', () => {
+  it('should display an incoming transaction in green', () => {
     const $route = {
       params: {
         address: incomingAddress
@@ -87,7 +87,7 @@ describe('Components > Utils > TransactionAmount', () => {
     expect(wrapper.text()).toEqual(wrapper.vm.readableCrypto(100000000).trim())
   })
 
-  it('Should display special transactions in red', () => {
+  it('should display special transactions in red', () => {
     const $route = {
       params: {
         address: incomingAddress

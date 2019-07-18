@@ -31,7 +31,7 @@ describe('Components > Header > ToggleChart', () => {
     strict: true
   })
 
-  it('Should be possible to toggle the chart', () => {
+  it('should be possible to toggle the chart', () => {
     const wrapper = mount(ToggleChart, {
       i18n,
       localVue,

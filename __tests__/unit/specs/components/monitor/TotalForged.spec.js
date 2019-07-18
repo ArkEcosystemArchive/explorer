@@ -66,7 +66,7 @@ describe('Components > Monitor > TotalForged', () => {
     })
   })
 
-  it('Should display calculated result', (done) => {
+  it('should display calculated result', (done) => {
     expect.assertions(1)
 
     wrapper.vm.$nextTick(() => {
@@ -76,7 +76,7 @@ describe('Components > Monitor > TotalForged', () => {
     })
   })
 
-  it('Should change calculated result when height changes', (done) => {
+  it('should change calculated result when height changes', (done) => {
     expect.assertions(2)
 
     wrapper.vm.$nextTick(() => {
@@ -94,7 +94,7 @@ describe('Components > Monitor > TotalForged', () => {
     })
   })
 
-  it('Should handle offsets greater than heights', (done) => {
+  it('should handle offsets greater than heights', (done) => {
     expect.assertions(1)
 
     store.dispatch('network/setHeight', 1)

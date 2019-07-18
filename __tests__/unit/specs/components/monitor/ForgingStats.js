@@ -17,7 +17,7 @@ describe('Components > Monitor > ForgingStats', () => {
     silentTranslationWarn: true
   })
 
-  it('Should show the forging info', () => {
+  it('should show the forging info', () => {
     const store = new Vuex.Store({
       modules: {
         network: {

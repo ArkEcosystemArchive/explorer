@@ -19,7 +19,7 @@ describe('Pages > 404', () => {
 
   const uiAction = { setNightMode: jest.fn() }
 
-  it('Should show the correct image for nightmode', () => {
+  it('should show the correct image for nightmode', () => {
     const store = new Vuex.Store({
       modules: {
         ui: {
@@ -45,7 +45,7 @@ describe('Pages > 404', () => {
     expect(wrapper.find('img').attributes().src).toBe('@/assets/images/404/dark.png')
   })
 
-  it('Should show the correct image for daymode', () => {
+  it('should show the correct image for daymode', () => {
     const store = new Vuex.Store({
       modules: {
         ui: {

@@ -22,7 +22,7 @@ describe('Mixins > Misc', () => {
   })
 
   describe('readableTimestamp', () => {
-    it('Should properly format the given data', () => {
+    it('should properly format the given data', () => {
       const result = moment()
         .utc()
         .set({
@@ -40,13 +40,13 @@ describe('Mixins > Misc', () => {
   })
 
   describe('readableTimestamp', () => {
-    it('Should properly format the given data', () => {
+    it('should properly format the given data', () => {
       expect(wrapper.vm.readableTimestampAgo(22231900, 26231900)).toEqual('2 months ago')
     })
   })
 
   describe('readableNumber', () => {
-    it('Should properly format the given data', () => {
+    it('should properly format the given data', () => {
       expect(wrapper.vm.readableNumber(1)).toEqual('1.00')
       expect(wrapper.vm.readableNumber(10)).toEqual('10.00')
       expect(wrapper.vm.readableNumber(100)).toEqual('100.00')
@@ -54,7 +54,7 @@ describe('Mixins > Misc', () => {
       expect(wrapper.vm.readableNumber(1234.56789, 2, true)).toEqual('1234.57')
     })
 
-    it('Should format to the specified decimals', () => {
+    it('should format to the specified decimals', () => {
       expect(wrapper.vm.readableNumber(1, 3)).toEqual('1.000')
       expect(wrapper.vm.readableNumber(1.23456, 3)).toEqual('1.235')
       expect(wrapper.vm.readableNumber(100, 8)).toEqual('100.00000000')

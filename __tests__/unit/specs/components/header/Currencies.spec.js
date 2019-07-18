@@ -61,7 +61,7 @@ describe('Components > Header > Currencies', () => {
       })
     })
 
-    it('Should change currency with current rate', (done) => {
+    it('should change currency with current rate', (done) => {
       expect.assertions(6)
 
       let el = wrapper.find('.menu-button')
@@ -78,7 +78,7 @@ describe('Components > Header > Currencies', () => {
       })
     })
 
-    it('Should be possible to close currency menu on desktop', () => {
+    it('should be possible to close currency menu on desktop', () => {
       wrapper.find('.close-button').trigger('click')
       expect(dispatchMock).toHaveBeenCalledTimes(1)
       expect(dispatchMock).toHaveBeenCalledWith('ui/setHeaderType', null)
@@ -98,7 +98,7 @@ describe('Components > Header > Currencies', () => {
       })
     })
 
-    it('Should change currency with current rate', (done) => {
+    it('should change currency with current rate', (done) => {
       expect.assertions(6)
 
       let el = wrapper.find('.menu-container > li')

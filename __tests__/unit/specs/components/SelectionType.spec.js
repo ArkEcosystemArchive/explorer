@@ -16,7 +16,7 @@ describe('Components > SelectionType', () => {
     silentTranslationWarn: true
   })
 
-  it('Should be possible to open and close the dropdown', () => {
+  it('should be possible to open and close the dropdown', () => {
     const wrapper = mount(SelectionType, {
       i18n,
       localVue,
@@ -30,7 +30,7 @@ describe('Components > SelectionType', () => {
     expect(wrapper.findAll('ul').at(1).isVisible()).toBeFalsy()
   })
 
-  it('Should close the dropdown after selecting a type', () => {
+  it('should close the dropdown after selecting a type', () => {
     const wrapper = mount(SelectionType, {
       i18n,
       localVue,
@@ -42,7 +42,7 @@ describe('Components > SelectionType', () => {
     expect(wrapper.vm.selectOpen).toBeFalsy()
   })
 
-  it('Should save the selected type to localStorage', () => {
+  it('should save the selected type to localStorage', () => {
     const wrapper = mount(SelectionType, {
       i18n,
       localVue,

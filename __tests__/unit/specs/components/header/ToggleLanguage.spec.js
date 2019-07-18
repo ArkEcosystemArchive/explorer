@@ -37,7 +37,7 @@ describe('Components > Header > ToggleLanguage', () => {
     strict: true
   })
 
-  it('Should be possible to show language list', () => {
+  it('should be possible to show language list', () => {
     const wrapper = mount(ToggleLanguage, {
       i18n,
       localVue,

@@ -36,7 +36,7 @@ describe('Components > Transaction > Details', () => {
     strict: true
   })
 
-  it('Should display the transaction details', () => {
+  it('should display the transaction details', () => {
     const wrapper = mount(TransactionDetails, {
       propsData: {
         transaction: {

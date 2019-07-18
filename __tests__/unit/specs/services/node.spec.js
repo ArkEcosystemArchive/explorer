@@ -6,7 +6,7 @@ describe('Services > Node', () => {
     store.dispatch('network/setServer', 'https://explorer.ark.io/api/v2')
   })
 
-  it('Should return network settings', async () => {
+  it('should return network settings', async () => {
     const data = await NodeService.config()
     expect(Object.keys(data).sort()).toEqual([
       'nethash',
@@ -22,7 +22,7 @@ describe('Services > Node', () => {
     ].sort())
   })
 
-  it('Should return the node status', async () => {
+  it('should return the node status', async () => {
     const data = await NodeService.status()
     expect(Object.keys(data).sort()).toEqual([
       'synced',

@@ -51,7 +51,7 @@ describe('Components > Header > Languages', () => {
     })
   })
 
-  it('Should change language', () => {
+  it('should change language', () => {
     i18n.locale = 'en-gb'
     moment.locale('en-gb')
 
@@ -67,7 +67,7 @@ describe('Components > Header > Languages', () => {
     expect(i18n.locale).toBe('nl')
   })
 
-  it('Should be possible to close language menu on desktop', () => {
+  it('should be possible to close language menu on desktop', () => {
     wrapper.find('.close-button').trigger('click')
 
     expect(dispatchMock).toHaveBeenCalledTimes(1)

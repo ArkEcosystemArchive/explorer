@@ -18,7 +18,7 @@ describe('Components > Utils > Paginator', () => {
     silentTranslationWarn: true
   })
 
-  it('Should display a paginator component', () => {
+  it('should display a paginator component', () => {
     const wrapper = mount(Paginator, {
       propsData: {
         previous: 'previous',
@@ -35,7 +35,7 @@ describe('Components > Utils > Paginator', () => {
     expect(buttonTexts.at(1).text()).toEqual('Next')
   })
 
-  it('Should not show previous if no previous page', () => {
+  it('should not show previous if no previous page', () => {
     const wrapper = mount(Paginator, {
       propsData: {
         previous: null,
@@ -52,7 +52,7 @@ describe('Components > Utils > Paginator', () => {
     expect(buttons.at(1).classes()).not.toContain('hidden')
   })
 
-  it('Should not show next if no next page', () => {
+  it('should not show next if no next page', () => {
     const wrapper = mount(Paginator, {
       propsData: {
         previous: 'previous',
@@ -69,7 +69,7 @@ describe('Components > Utils > Paginator', () => {
     expect(buttons.at(1).classes()).toContain('hidden')
   })
 
-  it('Should emit event if pressing previous or next page', () => {
+  it('should emit event if pressing previous or next page', () => {
     const wrapper = mount(Paginator, {
       propsData: {
         previous: 'previous',

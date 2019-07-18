@@ -14,16 +14,16 @@ describe('Services > Wallet', () => {
     store.dispatch('network/setServer', 'https://explorer.ark.io/api/v2')
   })
 
-  it('Should return address when searching for existing wallet', async () => {
+  it('should return address when searching for existing wallet', async () => {
     const data = await WalletService.find('ATsPMTAHNsUwKedzNpjTNRfcj1oRGaX5xC')
     expect(Object.keys(data).sort()).toEqual(expect.arrayContaining(walletPropertyArray))
   })
 
-  it('Should fail when searching for incorrect wallet address', async () => {
+  it('should fail when searching for incorrect wallet address', async () => {
     await expect(WalletService.find('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gsx')).rejects.toThrow()
   })
 
-  it('Should return a list of top wallet accounts', async () => {
+  it('should return a list of top wallet accounts', async () => {
     const { data } = await WalletService.top()
     expect(data).toHaveLength(25)
     data.forEach(wallet => {
@@ -31,7 +31,7 @@ describe('Services > Wallet', () => {
     })
   })
 
-  it('Should return top wallets with page offset', async () => {
+  it('should return top wallets with page offset', async () => {
     const { data } = await WalletService.top(1)
     expect(data).toHaveLength(25)
     data.forEach(wallet => {
@@ -40,7 +40,7 @@ describe('Services > Wallet', () => {
     expect(data.sort((a, b) => a.balance > b.balance)).toEqual(data)
   })
 
-  it('Should return top wallets with page offset and given limit', async () => {
+  it('should return top wallets with page offset and given limit', async () => {
     const { data } = await WalletService.top(2, 20)
     expect(data).toHaveLength(20)
     data.forEach(wallet => {

@@ -44,7 +44,7 @@ describe('Components > Header > ToggleCurrency', () => {
     strict: true
   })
 
-  it('Should be possible to toggle the currency', () => {
+  it('should be possible to toggle the currency', () => {
     const wrapper = mount(ToggleCurrency, {
       i18n,
       localVue,

@@ -19,7 +19,7 @@ describe('Components > Header > ToggleTheme', () => {
 
   const uiAction = { setNightMode: jest.fn() }
 
-  it('Should be possible to toggle the theme (nightmode)', () => {
+  it('should be possible to toggle the theme (nightmode)', () => {
     const store = new Vuex.Store({
       modules: {
         ui: {
@@ -44,7 +44,7 @@ describe('Components > Header > ToggleTheme', () => {
     wrapper.vm.changeImageSource()
   })
 
-  it('Should be possible to toggle the theme (daymode)', () => {
+  it('should be possible to toggle the theme (daymode)', () => {
     const store = new Vuex.Store({
       modules: {
         ui: {

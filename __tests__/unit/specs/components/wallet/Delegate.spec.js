@@ -27,7 +27,7 @@ describe('Components > Wallet > Delegate', () => {
     }
   }
 
-  it('Should show the delegate info', () => {
+  it('should show the delegate info', () => {
     const wrapper = mount(WalletDelegate, {
       i18n,
       localVue,

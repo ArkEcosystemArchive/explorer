@@ -6,12 +6,12 @@ describe('Blockchain Service', () => {
     store.dispatch('network/setServer', 'https://explorer.ark.io/api/v2')
   })
 
-  it('Should return the block height', async () => {
+  it('should return the block height', async () => {
     const data = await BlockchainService.height()
     expect(data).toBeGreaterThan(4771470)
   })
 
-  it('Should return the supply', async () => {
+  it('should return the supply', async () => {
     const data = await BlockchainService.supply()
     expect(data).toBeDefined()
   })

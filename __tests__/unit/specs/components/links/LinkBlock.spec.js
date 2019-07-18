@@ -18,7 +18,7 @@ describe('Components > Links > Block', () => {
 
   const testBlock = '8900581355787753944'
 
-  it('Should display a truncated link to a block', () => {
+  it('should display a truncated link to a block', () => {
     const wrapper = mount(LinkBlock, {
       propsData: {
         id: testBlock

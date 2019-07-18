@@ -6,31 +6,31 @@ const delegates = [
 ]
 
 describe('Store > Delegates', () => {
-  it('Should set the delegates rate', () => {
+  it('should set the delegates rate', () => {
     store.dispatch('delegates/setDelegates', delegates)
 
     expect(store.getters['delegates/delegates']).toEqual(delegates)
   })
 
-  it('Should set the delegates rate', () => {
+  it('should set the delegates rate', () => {
     store.dispatch('delegates/setForged', delegates)
 
     expect(store.getters['delegates/forged']).toEqual(delegates)
   })
 
-  it('Should get a single delegate by its address', () => {
+  it('should get a single delegate by its address', () => {
     expect(store.getters['delegates/byAddress']('test-address-1')).toEqual(delegates[0])
   })
 
-  it('Should return null when delegate with address does not exist', () => {
+  it('should return null when delegate with address does not exist', () => {
     expect(store.getters['delegates/byAddress']('wrong address')).toBe(null)
   })
 
-  it('Should get a single delegate by its public key', () => {
+  it('should get a single delegate by its public key', () => {
     expect(store.getters['delegates/byPublicKey']('pubkey-2')).toEqual(delegates[1])
   })
 
-  it('Should return null when delegate with public key does not exist', () => {
+  it('should return null when delegate with public key does not exist', () => {
     expect(store.getters['delegates/byPublicKey']('wrong public key')).toBe(null)
   })
 })
