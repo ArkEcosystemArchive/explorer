@@ -8,14 +8,12 @@
   const webpackConfigPromise = require('../../build/webpack.prod.conf')
   const devConfigPromise = require('../../build/webpack.dev.conf')
 
-  let server
-
   const devConfig = await devConfigPromise(null)
   const webpackConfig = await webpackConfigPromise(null)
 
   const devServerOptions = devConfig.devServer
   const compiler = webpack(webpackConfig)
-  server = new DevServer(compiler, devServerOptions)
+  const server = new DevServer(compiler, devServerOptions)
   const port = devServerOptions.port
   const host = devServerOptions.host
   server.listen(port, host)

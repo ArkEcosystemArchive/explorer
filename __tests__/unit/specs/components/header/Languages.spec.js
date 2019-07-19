@@ -16,7 +16,7 @@ describe('Components > Header > Languages', () => {
   const i18n = new VueI18n({
     locale: 'en-gb',
     fallbackLocale: 'en-gb',
-    messages: { 'nl': {} },
+    messages: { nl: {} },
     silentTranslationWarn: true
   })
 
@@ -30,9 +30,9 @@ describe('Components > Header > Languages', () => {
           language: 'en-gb'
         },
         getters: {
-          headerType: state => 'languages',
-          nightMode: state => false,
-          language: state => 'en-gb'
+          headerType: () => 'languages',
+          nightMode: () => false,
+          language: () => 'en-gb'
         }
       }
     },

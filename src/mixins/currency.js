@@ -28,10 +28,10 @@ export default {
       value *= rate || store.getters['currency/rate']
 
       const cryptos = {
-        'ARK': 'Ѧ',
-        'BTC': 'Ƀ',
-        'ETH': 'Ξ',
-        'LTC': 'Ł'
+        ARK: 'Ѧ',
+        BTC: 'Ƀ',
+        ETH: 'Ξ',
+        LTC: 'Ł'
       }
 
       return [store.getters['network/token'], 'BTC', 'ETH', 'LTC'].some(
