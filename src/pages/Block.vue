@@ -3,7 +3,7 @@
     v-if="block"
     class="max-w-2xl mx-auto md:pt-5"
   >
-    <ContentHeader>{{ $t("Block") }}</ContentHeader>
+    <ContentHeader>{{ $t('COMMON.BLOCK') }}</ContentHeader>
 
     <template v-if="blockNotFound">
       <section class="page-section py-5 md:py-10 px-6">
@@ -18,7 +18,7 @@
             class="mt-4 pager-button items-center"
             @click="fetchBlock"
           >
-            <span>{{ !isFetching ? $t('Reload this page') : $t('Loading...') }}</span>
+            <span>{{ !isFetching ? $t('COMMON.RELOAD') : $t('COMMON.LOADING') }}</span>
           </button>
         </div>
       </section>

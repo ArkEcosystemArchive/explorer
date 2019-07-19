@@ -3,18 +3,11 @@ import StringsMixin from '@/mixins/strings'
 import store from '@/store'
 
 import { LinkWallet } from '@/components/links'
-import VueI18n from 'vue-i18n'
+import { useI18n } from '../../../../__utils__/i18n'
 
 describe('Compontents > Links > Wallet', () => {
   const localVue = createLocalVue()
-  localVue.use(VueI18n)
-
-  const i18n = new VueI18n({
-    locale: 'en-gb',
-    fallbackLocale: 'en-gb',
-    messages: { 'en-gb': {} },
-    silentTranslationWarn: true
-  })
+  const i18n = useI18n(localVue)
 
   const testAddress = 'AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv'
   const testPublicKey = '021d03bace0687a1a5e797f884b13fb46f817ec32de1374a7f223f24404401d220'
@@ -202,7 +195,7 @@ describe('Compontents > Links > Wallet', () => {
       }, 500)
     })
 
-    it('should display Multisignature Registration for type 4', () => {
+    it('should display Multi Signature for type 4', () => {
       const wrapper = mount(LinkWallet, {
         propsData: { type: 4 },
         stubs: {
@@ -250,7 +243,7 @@ describe('Compontents > Links > Wallet', () => {
       expect(wrapper.text()).toEqual(expect.stringContaining('Timelock Transfer'))
     })
 
-    it('should display Multipayment for type 7', () => {
+    it('should display Multi Payment for type 7', () => {
       const wrapper = mount(LinkWallet, {
         propsData: { type: 7 },
         stubs: {

@@ -3,20 +3,14 @@ import CurrencyMixin from '@/mixins/currency'
 import store from '@/store'
 
 import TransactionAmount from '@/components/utils/TransactionAmount'
-import VueI18n from 'vue-i18n'
+import { useI18n } from '../../../../__utils__/i18n'
 import Vuex from 'vuex'
 
 describe('Components > Utils > TransactionAmount', () => {
   const localVue = createLocalVue()
-  localVue.use(VueI18n)
   localVue.use(Vuex)
 
-  const i18n = new VueI18n({
-    locale: 'en-gb',
-    fallbackLocale: 'en-gb',
-    messages: { 'en-gb': {} },
-    silentTranslationWarn: true
-  })
+  const i18n = useI18n(localVue)
 
   const incomingAddress = 'AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv'
   const outgoingAddress = 'AN7BURQn5oqBRBADeWhmmUMJGQTy5Seey3'
@@ -39,7 +33,10 @@ describe('Components > Utils > TransactionAmount', () => {
         transaction: {
           sender: incomingAddress,
           recipient: outgoingAddress,
-          amount: 100000000
+          amount: 100000000,
+          timestamp: {
+            unix: 1535190579
+          }
         },
         type: 0
       },
@@ -69,7 +66,10 @@ describe('Components > Utils > TransactionAmount', () => {
         transaction: {
           sender: outgoingAddress,
           recipient: incomingAddress,
-          amount: 100000000
+          amount: 100000000,
+          timestamp: {
+            unix: 1535190579
+          }
         },
         type: 0
       },
@@ -99,7 +99,10 @@ describe('Components > Utils > TransactionAmount', () => {
         transaction: {
           sender: incomingAddress,
           recipient: incomingAddress,
-          amount: 100000000
+          amount: 100000000,
+          timestamp: {
+            unix: 1535190579
+          }
         },
         type: 1
       },

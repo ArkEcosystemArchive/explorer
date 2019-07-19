@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <ContentHeader>{{ $t("Delegate Monitor") }}</ContentHeader>
+    <ContentHeader>{{ $t('PAGES.DELEGATE_MONITOR.TITLE') }}</ContentHeader>
 
     <MonitorHeader />
 
@@ -10,13 +10,13 @@
           :class="activeTab === 'active' ? 'active-tab' : 'inactive-tab'"
           @click="activeTab = 'active'"
         >
-          {{ $t("Active") }}
+          {{ $t('PAGES.DELEGATE_MONITOR.ACTIVE') }}
         </div>
         <div
           :class="activeTab === 'standby' ? 'active-tab' : 'inactive-tab'"
           @click="activeTab = 'standby'"
         >
-          {{ $t("Standby") }}
+          {{ $t('PAGES.DELEGATE_MONITOR.STANDBY') }}
         </div>
       </nav>
 

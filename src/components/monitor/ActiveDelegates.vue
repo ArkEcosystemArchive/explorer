@@ -6,7 +6,7 @@
       :columns="columns"
       :rows="delegates"
       :sort-query="{ field: 'rank', type: 'asc' }"
-      :no-data-message="$t('No results')"
+      :no-data-message="$t('COMMON.NO_RESULTS')"
     >
       <template
         slot-scope="data"
@@ -21,7 +21,7 @@
           {{ readableNumber(data.row.blocks.produced, 0) }}
         </div>
 
-        <div v-else-if="data.column.label === $t('Last forged')">
+        <div v-else-if="data.column.label === $t('PAGES.DELEGATE_MONITOR.LAST_FORGED')">
           {{ lastForgingTime(data.row) }}
         </div>
 
@@ -44,7 +44,7 @@
 
         <div v-else-if="data.column.field === 'votes'">
           <span
-            v-tooltip="$t('Percentage of the total supply')"
+            v-tooltip="$t('COMMON.SUPPLY_PERCENTAGE')"
             class="text-grey text-2xs mr-1"
           >
             {{ percentageString(data.row.production.approval) }}
@@ -77,25 +77,25 @@ export default {
     columns () {
       const columns = [
         {
-          label: this.$t('Rank'),
+          label: this.$t('COMMON.RANK'),
           field: 'rank',
           type: 'number',
           thClass: 'start-cell w-32',
           tdClass: 'start-cell w-32'
         },
         {
-          label: this.$t('Name'),
+          label: this.$t('WALLET.DELEGATE.USERNAME'),
           field: 'username'
         },
         {
-          label: this.$t('Forged blocks'),
+          label: this.$t('PAGES.DELEGATE_MONITOR.FORGED_BLOCKS'),
           field: 'blocks.produced',
           type: 'number',
           thClass: 'text-left hidden xl:table-cell',
           tdClass: 'text-left hidden xl:table-cell'
         },
         {
-          label: this.$t('Last forged'),
+          label: this.$t('PAGES.DELEGATE_MONITOR.LAST_FORGED'),
           field: this.lastBlockHeight,
           type: 'number',
           sortFn: this.sortByLastBlockHeight,
@@ -103,14 +103,14 @@ export default {
           tdClass: 'text-left hidden sm:table-cell'
         },
         {
-          label: this.$t('Status'),
+          label: this.$t('PAGES.DELEGATE_MONITOR.STATUS.TITLE'),
           field: 'forgingStatus',
           type: 'number',
           thClass: 'end-cell md:base-cell text-center',
           tdClass: 'end-cell md:base-cell text-center'
         },
         {
-          label: this.$t('Votes'),
+          label: this.$t('PAGES.DELEGATE_MONITOR.VOTES'),
           field: 'votes',
           type: 'number',
           thClass: 'end-cell hidden md:table-cell',
@@ -124,15 +124,15 @@ export default {
 
   methods: {
     lastForgingTime (delegate) {
-      return delegate.blocks.last ? this.readableTimestampAgo(delegate.blocks.last.timestamp.unix) : this.$i18n.t('Never')
+      return delegate.blocks.last ? this.readableTimestampAgo(delegate.blocks.last.timestamp.unix) : this.$i18n.t('PAGES.DELEGATE_MONITOR.NEVER')
     },
 
     statusMessage (row) {
       const status = {
-        0: this.$i18n.t('Forging'),
-        1: this.$i18n.t('Missing'),
-        2: this.$i18n.t('Not forging'),
-        3: this.$i18n.t('Never forged')
+        0: this.$i18n.t('PAGES.DELEGATE_MONITOR.STATUS.FORGING'),
+        1: this.$i18n.t('PAGES.DELEGATE_MONITOR.STATUS.MISSING'),
+        2: this.$i18n.t('PAGES.DELEGATE_MONITOR.STATUS.NOT_FORGING'),
+        3: this.$i18n.t('PAGES.DELEGATE_MONITOR.STATUS.NEVER_FORGED')
       }[row.forgingStatus]
 
       const lastBlock = row.blocks.last
@@ -140,7 +140,7 @@ export default {
       return {
         trigger: 'hover click',
         content: lastBlock ? `[${status}] ${
-          this.$i18n.t('Last block at height on', { height: lastBlock.height })
+          this.$i18n.t('PAGES.DELEGATE_MONITOR.TOOLTIP', { height: lastBlock.height })
         } ${this.readableTimestamp(lastBlock.timestamp.unix)}`
           : status,
         classes: [`tooltip-bg-${row.forgingStatus}`, 'font-sans']

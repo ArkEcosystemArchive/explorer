@@ -20,6 +20,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { I18N } from '@/config'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 
@@ -30,8 +31,8 @@ export default {
     ...mapGetters('ui', ['nightMode', 'language']),
 
     languages () {
-      return Object.keys(this.$i18n.messages).filter(
-        lang => lang !== this.language && lang !== 'en'
+      return I18N.enabledLocales.filter(
+        locale => locale !== this.language
       )
     }
   },
@@ -48,7 +49,11 @@ export default {
     },
 
     getLanguageFlag (language) {
-      return require(`@/assets/images/flags/${language}.svg`)
+      try {
+        return require(`@/assets/images/flags/${language}.svg`)
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 }

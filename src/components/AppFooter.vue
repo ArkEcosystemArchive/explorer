@@ -4,11 +4,11 @@
       <span class="block md:inline-block mb-4 md:mb-0 text-center">&copy; <a
         href="https://ark.io"
         target="_blank"
-      >Ark.io</a> | {{ year }}. {{ $t("All rights reserved") }}</span> <div class="block md:inline-block">
-        <span class="hidden md:inline-block"> | </span> <span>{{ $t("Version") }}: <a
+      >Ark.io</a> | {{ year }}. {{ $t('FOOTER.ALL_RIGHTS_RESERVED') }}</span> <div class="block md:inline-block">
+        <span class="hidden md:inline-block"> | </span> <span>{{ $t('FOOTER.VERSION') }}: <a
           :href="versionLink"
           target="_blank"
-        >{{ version }}</a> | {{ $t("Date") }}: {{ date }}</span>
+        >{{ version }}</a> | {{ $t('FOOTER.DATE') }}: {{ date }}</span>
       </div>
     </div>
     <div class="text-center">

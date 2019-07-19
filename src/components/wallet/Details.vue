@@ -16,10 +16,10 @@
         class="pr-8 flex-auto min-w-0"
       >
         <div class="flex items-center text-grey mb-2">
-          <span>{{ $t("Address") }}</span>
+          <span>{{ $t('WALLET.ADDRESS') }}</span>
           <svg
             v-if="wallet.secondPublicKey"
-            v-tooltip="$t('Second signature enabled')"
+            v-tooltip="$t('WALLET.SECOND_PASSPHRASE_ENABLED')"
             class="fill-current ml-2"
             viewBox="0 0 448 512"
             xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@
           </span>
           <svg
             v-if="name"
-            v-tooltip="$t('This is a verified address')"
+            v-tooltip="$t('WALLET.VERIFIED')"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             width="16px"
@@ -71,7 +71,7 @@
         class="pr-8 flex-auto min-w-0"
       >
         <div class="text-grey mb-2">
-          {{ $t("Public key") }}
+          {{ $t('WALLET.PUBLIC_KEY') }}
         </div>
         <div class="flex">
           <div class="text-lg text-white semibold truncate mr-2">
@@ -89,7 +89,7 @@
         class="flex-none border-r border-grey-dark px-9"
       >
         <div class="text-grey mb-2">
-          {{ $t("Balance (token)", { token: networkToken() }) }}
+          {{ $t('WALLET.BALANCE', { token: networkToken() }) }}
         </div>
         <div class="text-lg text-white semibold">
           <span v-tooltip="readableCurrency(wallet.balance)">
@@ -104,7 +104,7 @@
         class="flex-none border-r border-grey-dark px-9"
       >
         <div class="text-grey mb-2">
-          {{ $t("Voting for") }}
+          {{ $t('WALLET.VOTING_FOR') }}
         </div>
         <LinkWallet
           v-if="votedDelegate.address"
@@ -178,10 +178,10 @@
             class="md:w-1/2 px-6 w-full border-grey-dark"
           >
             <div class="flex items-center text-grey mb-2">
-              <span class="mr-2">{{ $t("Address") }}</span>
+              <span class="mr-2">{{ $t('WALLET.ADDRESS') }}</span>
               <svg
                 v-if="wallet.secondPublicKey"
-                v-tooltip="{ trigger: 'click', content: $t('Second signature enabled') }"
+                v-tooltip="{ trigger: 'click', content: $t('WALLET.SECOND_PASSPHRASE_ENABLED') }"
                 class="fill-current"
                 viewBox="0 0 448 512"
                 xmlns="http://www.w3.org/2000/svg"
@@ -215,7 +215,7 @@
             class="md:w-1/2 px-6 w-full"
           >
             <div class="text-grey mb-2">
-              {{ $t("Public key") }}
+              {{ $t('WALLET.PUBLIC_KEY') }}
             </div>
             <div class="text-white flex">
               <span class="mr-2">{{ truncate(wallet.publicKey) }}</span>
@@ -232,7 +232,7 @@
             class="md:w-1/2 px-6 w-full"
           >
             <div class="text-grey mb-2">
-              {{ $t("Balance (token)", { token: networkToken() }) }}
+              {{ $t('WALLET.BALANCE', { token: networkToken() }) }}
             </div>
             <div class="text-white">
               <span
@@ -252,7 +252,7 @@
             class="md:w-1/2 px-6 w-full"
           >
             <div class="text-grey mb-2">
-              {{ $t("Voting for") }}
+              {{ $t('WALLET.VOTING_FOR') }}
             </div>
             <LinkWallet
               v-if="votedDelegate.address"
@@ -272,10 +272,10 @@
     >
       <div class="text-center px-10 py-2">
         <p class="semibold text-3xl mb-4">
-          {{ $t("QR Code") }}
+          {{ $t('WALLET.QR_CODE') }}
         </p>
         <p class="mb-10">
-          {{ $t("Scan for address") }}
+          {{ $t('WALLET.SCAN_FOR_ADDRESS') }}
         </p>
         <QrCode
           :value="wallet.address"

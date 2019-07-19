@@ -6,7 +6,7 @@
       :columns="columns"
       :rows="transactions"
       :sort-query="{ field: 'timestamp.unix', type: 'desc' }"
-      :no-data-message="$t('No results')"
+      :no-data-message="$t('COMMON.NO_RESULTS')"
     >
       <template
         slot-scope="data"
@@ -88,41 +88,41 @@ export default {
     columns () {
       const columns = [
         {
-          label: this.$t('ID'),
+          label: this.$t('COMMON.ID'),
           field: 'id',
           thClass: 'start-cell',
           tdClass: 'start-cell'
         },
         {
-          label: this.$t('Timestamp'),
+          label: this.$t('COMMON.TIMESTAMP'),
           field: 'timestamp.unix',
           type: 'number',
           thClass: 'text-left hidden md:table-cell',
           tdClass: 'text-left hidden md:table-cell wrap-timestamp'
         },
         {
-          label: this.$t('Sender'),
+          label: this.$t('TRANSACTION.SENDER'),
           field: 'sender'
         },
         {
-          label: this.$t('Recipient'),
+          label: this.$t('TRANSACTION.RECIPIENT'),
           field: 'recipient'
         },
         {
-          label: this.$t('Smartbridge'),
+          label: this.$t('TRANSACTION.SMARTBRIDGE'),
           field: 'vendorField',
           thClass: 'text-right cell-smartbridge',
           tdClass: 'text-right cell-smartbridge'
         },
         {
-          label: this.$t('Amount (token)', { token: this.networkToken() }),
+          label: this.$t('TRANSACTION.AMOUNT'),
           field: 'amount',
           type: 'number',
           thClass: 'end-cell lg:base-cell lg:pr-4',
           tdClass: 'end-cell lg:base-cell lg:pr-4'
         },
         {
-          label: this.$t('Fee (token)', { token: this.networkToken() }),
+          label: this.$t('TRANSACTION.FEE'),
           field: 'fee',
           type: 'number',
           thClass: 'end-cell hidden lg:table-cell',

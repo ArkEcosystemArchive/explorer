@@ -1,12 +1,12 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <ContentHeader>{{ $t("Transactions") }}</ContentHeader>
+    <ContentHeader>{{ $t('COMMON.TRANSACTIONS') }}</ContentHeader>
 
     <section class="hidden sm:block mb-5">
       <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
         <div class="flex-auto min-w-0">
           <div class="text-grey mb-2">
-            {{ $t("Transaction type") }}
+            {{ $t('TRANSACTION.TYPE') }}
           </div>
           <div class="flex">
             <div class="text-lg text-white semibold truncate">

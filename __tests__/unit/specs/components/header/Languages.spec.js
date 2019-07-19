@@ -1,7 +1,7 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
 import { HeaderLanguagesDesktop } from '@/components/header/languages'
-import VueI18n from 'vue-i18n'
+import { useI18n } from '../../../../__utils__/i18n'
 import Vuex from 'vuex'
 import moment from 'moment'
 
@@ -10,15 +10,9 @@ describe('Components > Header > Languages', () => {
   let dispatchMock
 
   const localVue = createLocalVue()
-  localVue.use(VueI18n)
   localVue.use(Vuex)
 
-  const i18n = new VueI18n({
-    locale: 'en-gb',
-    fallbackLocale: 'en-gb',
-    messages: { 'nl': {} },
-    silentTranslationWarn: true
-  })
+  const i18n = useI18n(localVue)
 
   const store = new Vuex.Store({
     modules: {
@@ -27,12 +21,12 @@ describe('Components > Header > Languages', () => {
         state: {
           headerType: 'currencies',
           nightMode: false,
-          language: 'en-gb'
+          language: 'en-GB'
         },
         getters: {
           headerType: state => 'languages',
           nightMode: state => false,
-          language: state => 'en-gb'
+          language: state => 'en-GB'
         }
       }
     },
@@ -52,19 +46,19 @@ describe('Components > Header > Languages', () => {
   })
 
   it('should change language', () => {
-    i18n.locale = 'en-gb'
-    moment.locale('en-gb')
+    i18n.locale = 'en-GB'
+    moment.locale('en-GB')
 
-    expect(i18n.locale).not.toBe('nl')
-    expect(moment.locale()).not.toBe('nl')
+    expect(i18n.locale).not.toBe('it-IT')
+    expect(moment.locale()).not.toBe('it-IT')
 
-    wrapper.find('.menu-button').trigger('click')
+    wrapper.findAll('.menu-button').at(1).trigger('click')
 
     expect(dispatchMock).toHaveBeenCalledTimes(3)
-    expect(dispatchMock).toHaveBeenNthCalledWith(1, 'ui/setLanguage', 'nl')
-    expect(dispatchMock).toHaveBeenNthCalledWith(2, 'ui/setLocale', 'nl')
+    expect(dispatchMock).toHaveBeenNthCalledWith(1, 'ui/setLanguage', 'it-IT')
+    expect(dispatchMock).toHaveBeenNthCalledWith(2, 'ui/setLocale', 'it-IT')
     expect(dispatchMock).toHaveBeenNthCalledWith(3, 'ui/setHeaderType', null)
-    expect(i18n.locale).toBe('nl')
+    expect(i18n.locale).toBe('it-IT')
   })
 
   it('should be possible to close language menu on desktop', () => {

@@ -1,21 +1,19 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import store from '@/store'
+import { I18N } from '@/config'
 
 Vue.use(VueI18n)
 
-const messages = {
-  en: require('./en.json'),
-  'en-gb': require('./en.json'),
-  'en-us': require('./en.json'),
-  nl: require('./nl.json'),
-  'pt-br': require('./pt.json'),
-  pl: require('./pl.json'),
-  fr: require('./fr.json'),
-  'it-it': require('./it.json')
-}
+const messages = {}
+
+const messagesContext = require.context('./locales', true, /\.js$/)
+
+I18N.enabledLocales.forEach(locale => {
+  messages[locale] = messagesContext(`./${locale}.js`).default
+})
 
 export default new VueI18n({
-  locale: store.getters['ui/language'],
+  locale: I18N.defaultLocale,
+  fallbackLocale: I18N.defaultLocale,
   messages
 })

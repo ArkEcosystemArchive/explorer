@@ -18,7 +18,7 @@
           d="M4.054,8.000 L5.000,7.067 L1.892,4.000 L5.000,0.933 L4.054,0.000 L-0.000,4.000 L4.054,8.000 Z"
         />
       </svg>
-      <span class="ml-2">{{ $t("Previous") }}</span>
+      <span class="ml-2">{{ $t('PAGINATION.PREVIOUS') }}</span>
     </button>
 
     <button
@@ -26,7 +26,7 @@
       class="ml-auto pager-button items-center float-right"
       @click="emitNext"
     >
-      <span class="mr-2">{{ $t("Next") }}</span>
+      <span class="mr-2">{{ $t('PAGINATION.NEXT') }}</span>
       <svg
         class="inline"
         xmlns="http://www.w3.org/2000/svg"

@@ -7,7 +7,7 @@
       >
       <div class="flex-auto min-w-0">
         <div class="text-grey mb-2">
-          {{ $t("Block ID") }}
+          {{ $t('BLOCK.ID') }}
         </div>
         <div class="flex">
           <div class="text-xl text-white semibold truncate">
@@ -44,16 +44,16 @@
             d="M4.054,8.000 L5.000,7.067 L1.892,4.000 L5.000,0.933 L4.054,0.000 L-0.000,4.000 L4.054,8.000 Z"
           />
         </svg>
-        <span class="ml-2 hidden md:block inline-button">{{ $t("Previous block") }}</span>
-        <span class="ml-2 md:hidden">{{ $t("Previous") }}</span>
+        <span class="ml-2 hidden md:block inline-button">{{ $t('BLOCK.PAGINATION.PREVIOUS') }}</span>
+        <span class="ml-2 md:hidden">{{ $t('PAGINATION.PREVIOUS') }}</span>
       </button>
       <button
         :disabled="isLastBlock"
         class="block-pager-button"
         @click="nextHandler"
       >
-        <span class="mr-2 hidden md:block inline-button">{{ $t("Next block") }}</span>
-        <span class="mr-2 md:hidden">{{ $t("Next") }}</span>
+        <span class="mr-2 hidden md:block inline-button">{{ $t('BLOCK.PAGINATION.NEXT') }}</span>
+        <span class="mr-2 md:hidden">{{ $t('PAGINATION.NEXT') }}</span>
         <svg
           class="inline"
           xmlns="http://www.w3.org/2000/svg"

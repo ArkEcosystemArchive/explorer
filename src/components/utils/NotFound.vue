@@ -11,11 +11,11 @@
       src="@/assets/images/not-found/dark.png"
     >
     <h1 class="text-3xl">
-      {{ $t('Ooops!') }}
+      {{ $t('PAGES.NOT_FOUND.ERROR') }}
     </h1>
     <i18n
       tag="p"
-      path="Sorry, dataType dataId could not be found on the blockchain"
+      path="PAGES.NOT_FOUND.DATA"
       class="mt-2"
     >
       <span place="dataType">{{ dataType }}</span>

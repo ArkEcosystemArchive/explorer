@@ -10,7 +10,7 @@
             {{ knownWallets[address] }}
           </span>
           <svg
-            v-tooltip="$t('This is a verified address')"
+            v-tooltip="$t('WALLET.VERIFIED')"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             width="16px"
@@ -41,22 +41,22 @@
       </RouterLink>
     </template>
 
-    <span v-else-if="type === 1">{{ $t("2nd Signature Registration") }}</span>
-    <span v-else-if="type === 2">{{ $t("Delegate Registration") }}</span>
+    <span v-else-if="type === 1">{{ $t('TRANSACTION.TYPES.SECOND_SIGNATURE') }}</span>
+    <span v-else-if="type === 2">{{ $t('TRANSACTION.TYPES.DELEGATE_REGISTRATION') }}</span>
     <span v-else-if="type === 3">
       <RouterLink
         v-if="votedDelegateAddress"
         v-tooltip="votedDelegateAddress"
         :to="{ name: 'wallet', params: { address: votedDelegateAddress } }"
       >
-        <span :class="getVoteColor">{{ isUnvote ? $t("Unvote") : $t("Vote") }} <span class="italic">({{ votedDelegateUsername }})</span></span>
+        <span :class="getVoteColor">{{ isUnvote ? $t('TRANSACTION.TYPES.UNVOTE') : $t('TRANSACTION.TYPES.VOTE') }} <span class="italic">({{ votedDelegateUsername }})</span></span>
       </RouterLink>
     </span>
-    <span v-else-if="type === 4">{{ $t("Multisignature Registration") }}</span>
-    <span v-else-if="type === 5">{{ $t("IPFS") }}</span>
-    <span v-else-if="type === 6">{{ $t("Timelock Transfer") }}</span>
-    <span v-else-if="type === 7">{{ $t("Multipayment") }}</span>
-    <span v-else-if="type === 8">{{ $t("Delegate Resignation") }}</span>
+    <span v-else-if="type === 4">{{ $t('TRANSACTION.TYPES.MULTI_SIGNATURE') }}</span>
+    <span v-else-if="type === 5">{{ $t('TRANSACTION.TYPES.IPFS') }}</span>
+    <span v-else-if="type === 6">{{ $t('TRANSACTION.TYPES.TIMELOCK_TRANSFER') }}</span>
+    <span v-else-if="type === 7">{{ $t('TRANSACTION.TYPES.MULTI_PAYMENT') }}</span>
+    <span v-else-if="type === 8">{{ $t('TRANSACTION.TYPES.DELEGATE_RESIGNATION') }}</span>
   </span>
 </template>
 

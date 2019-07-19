@@ -6,7 +6,7 @@
       :columns="columns"
       :rows="delegates"
       :sort-query="{ field: 'rank', type: 'asc' }"
-      :no-data-message="$t('No results')"
+      :no-data-message="$t('COMMON.NO_RESULTS')"
     >
       <template
         slot-scope="data"
@@ -19,7 +19,7 @@
 
         <div v-else-if="data.column.field === 'votes'">
           <span
-            v-tooltip="$t('Percentage of the total supply')"
+            v-tooltip="$t('COMMON.SUPPLY_PERCENTAGE')"
             class="text-grey text-2xs mr-1"
           >
             {{ percentageString(data.row.production.approval) }}
@@ -52,20 +52,20 @@ export default {
     columns () {
       const columns = [
         {
-          label: this.$t('Rank'),
+          label: this.$t('COMMON.RANK'),
           field: 'rank',
           type: 'number',
           thClass: 'start-cell w-32',
           tdClass: 'start-cell w-32'
         },
         {
-          label: this.$t('Name'),
+          label: this.$t('WALLET.DELEGATE.USERNAME'),
           field: 'username',
           thClass: 'end-cell sm:base-cell text-left',
           tdClass: 'end-cell sm:base-cell text-left'
         },
         {
-          label: this.$t('Votes'),
+          label: this.$t('PAGES.DELEGATE_MONITOR.VOTES'),
           field: 'votes',
           type: 'number',
           thClass: 'end-cell hidden sm:table-cell',
