@@ -87,7 +87,7 @@
   }
 }
 
-/** Table Arrows*/
+/* Table Arrows*/
 
 .vgt-table .sorting {
   cursor: pointer;
@@ -111,22 +111,51 @@
 
 /* Table Cells */
 
-.vgt-table th,
-.vgt-table td {
+.base-cell {
   @apply .p-4 .border-none;
 }
 
-.vgt-table .start-cell {
-  @apply .pl-10 .text-left;
+.start-cell {
+  @apply .pl-5 .text-left;
 }
 
-.vgt-table .end-cell {
-  @apply .pr-10 .text-right;
+.end-cell {
+  @apply .pr-5 .text-right;
+}
+
+th, td {
+  @apply .base-cell;
+}
+
+th.not-sortable:hover {
+  @apply .cursor-default;
+}
+
+@media (min-width: 576px) {
+  .start-cell {
+    @apply .pl-10;
+  }
+
+  .end-cell {
+    @apply .pr-10;
+  }
+}
+
+@media (min-width: 576px) {
+  .sm\:base-cell {
+    @apply .base-cell;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:base-cell {
+    @apply .base-cell;
+  }
 }
 
 @media (min-width: 1024px) {
-  .vgt-table .lg\:base-cell {
-      @apply .p-4;
+  .lg\:base-cell {
+    @apply .base-cell;
   }
 }
 

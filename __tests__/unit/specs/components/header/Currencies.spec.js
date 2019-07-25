@@ -7,111 +7,112 @@ import Vuex from 'vuex'
 // mock crypto compare service to avoid querying api
 jest.mock('@/services/crypto-compare')
 
-const localVue = createLocalVue()
-localVue.use(VueI18n)
-localVue.use(Vuex)
+describe('Components > Header > Currencies', () => {
+  let wrapper
+  let dispatchMock
 
-const i18n = new VueI18n({
-  locale: 'en-gb',
-  fallbackLocale: 'en-gb',
-  messages: { 'en-gb': {} },
-  silentTranslationWarn: true
-})
+  const localVue = createLocalVue()
+  localVue.use(VueI18n)
+  localVue.use(Vuex)
 
-const store = new Vuex.Store({
-  modules: {
-    ui: {
-      namespaced: true,
-      state: {
-        headerType: 'currencies',
-        nightMode: false
+  const i18n = new VueI18n({
+    locale: 'en-gb',
+    fallbackLocale: 'en-gb',
+    messages: { 'en-gb': {} },
+    silentTranslationWarn: true
+  })
+
+  const store = new Vuex.Store({
+    modules: {
+      ui: {
+        namespaced: true,
+        state: {
+          headerType: 'currencies',
+          nightMode: false
+        },
+        getters: {
+          headerType: () => 'currencies',
+          nightMode: () => false
+        }
       },
-      getters: {
-        headerType: state => 'currencies',
-        nightMode: state => false
+      network: {
+        namespaced: true,
+        state: {
+          currencies: { USD: '$' }
+        },
+        getters: {
+          currencies: () => ({ USD: '$' })
+        }
       }
     },
-    network: {
-      namespaced: true,
-      state: {
-        currencies: { 'USD': '$' }
-      },
-      getters: {
-        currencies: state => ({ 'USD': '$' })
-      }
-    }
-  },
-  strict: true
-})
+    strict: true
+  })
 
-describe('header/currencies/Desktop', () => {
-  it('Should change currency with current rate', (done) => {
-    const dispatchMock = jest.fn()
-    store.dispatch = dispatchMock
-    expect.assertions(6)
+  describe('Desktop', () => {
+    beforeEach(() => {
+      dispatchMock = jest.fn()
+      store.dispatch = dispatchMock
 
-    const wrapper = mount(HeaderCurrenciesDesktop, {
-      i18n,
-      localVue,
-      mixins,
-      store
+      wrapper = mount(HeaderCurrenciesDesktop, {
+        i18n,
+        localVue,
+        mixins,
+        store
+      })
     })
 
-    let el = wrapper.find('.menu-button')
-    expect(el.text()).toBe('USD')
-    el.trigger('click')
+    it('should change currency with current rate', (done) => {
+      expect.assertions(6)
 
-    wrapper.vm.$nextTick(() => {
-      expect(dispatchMock).toHaveBeenCalledTimes(4)
-      expect(dispatchMock).toHaveBeenNthCalledWith(1, 'ui/setHeaderType', null)
-      expect(dispatchMock).toHaveBeenNthCalledWith(2, 'currency/setName', 'USD')
-      expect(dispatchMock).toHaveBeenNthCalledWith(3, 'currency/setRate', 12.34)
-      expect(dispatchMock).toHaveBeenNthCalledWith(4, 'currency/setSymbol', '$')
-      done()
+      const el = wrapper.find('.menu-button')
+      expect(el.text()).toBe('USD')
+      el.trigger('click')
+
+      wrapper.vm.$nextTick(() => {
+        expect(dispatchMock).toHaveBeenCalledTimes(4)
+        expect(dispatchMock).toHaveBeenNthCalledWith(1, 'ui/setHeaderType', null)
+        expect(dispatchMock).toHaveBeenNthCalledWith(2, 'currency/setName', 'USD')
+        expect(dispatchMock).toHaveBeenNthCalledWith(3, 'currency/setRate', 12.34)
+        expect(dispatchMock).toHaveBeenNthCalledWith(4, 'currency/setSymbol', '$')
+        done()
+      })
+    })
+
+    it('should be possible to close currency menu on desktop', () => {
+      wrapper.find('.close-button').trigger('click')
+      expect(dispatchMock).toHaveBeenCalledTimes(1)
+      expect(dispatchMock).toHaveBeenCalledWith('ui/setHeaderType', null)
     })
   })
 
-  it('Should be possible to close currency menu on desktop', () => {
-    const dispatchMock = jest.fn()
-    store.dispatch = dispatchMock
+  describe('Mobile', () => {
+    beforeEach(() => {
+      dispatchMock = jest.fn()
+      store.dispatch = dispatchMock
 
-    const wrapper = mount(HeaderCurrenciesDesktop, {
-      i18n,
-      localVue,
-      mixins,
-      store
+      wrapper = mount(HeaderCurrenciesMobile, {
+        i18n,
+        localVue,
+        mixins,
+        store
+      })
     })
 
-    wrapper.find('.close-button').trigger('click')
-    expect(dispatchMock).toHaveBeenCalledTimes(1)
-    expect(dispatchMock).toHaveBeenCalledWith('ui/setHeaderType', null)
-  })
-})
+    it('should change currency with current rate', (done) => {
+      expect.assertions(6)
 
-describe('header/currencies/Mobile', () => {
-  it('Should change currency with current rate', (done) => {
-    const dispatchMock = jest.fn()
-    store.dispatch = dispatchMock
-    expect.assertions(6)
+      const el = wrapper.find('.menu-container > li')
+      expect(el.text()).toBe('USD')
+      el.trigger('click')
 
-    const wrapper = mount(HeaderCurrenciesMobile, {
-      i18n,
-      localVue,
-      mixins,
-      store
-    })
-
-    let el = wrapper.find('.menu-container > li')
-    expect(el.text()).toBe('USD')
-    el.trigger('click')
-
-    wrapper.vm.$nextTick(() => {
-      expect(dispatchMock).toHaveBeenCalledTimes(4)
-      expect(dispatchMock).toHaveBeenNthCalledWith(1, 'ui/setHeaderType', null)
-      expect(dispatchMock).toHaveBeenNthCalledWith(2, 'currency/setName', 'USD')
-      expect(dispatchMock).toHaveBeenNthCalledWith(3, 'currency/setRate', 12.34)
-      expect(dispatchMock).toHaveBeenNthCalledWith(4, 'currency/setSymbol', '$')
-      done()
+      wrapper.vm.$nextTick(() => {
+        expect(dispatchMock).toHaveBeenCalledTimes(4)
+        expect(dispatchMock).toHaveBeenNthCalledWith(1, 'ui/setHeaderType', null)
+        expect(dispatchMock).toHaveBeenNthCalledWith(2, 'currency/setName', 'USD')
+        expect(dispatchMock).toHaveBeenNthCalledWith(3, 'currency/setRate', 12.34)
+        expect(dispatchMock).toHaveBeenNthCalledWith(4, 'currency/setSymbol', '$')
+        done()
+      })
     })
   })
 })

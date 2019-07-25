@@ -18,7 +18,7 @@
         </div>
 
         <div v-else-if="data.column.field === 'blocks.produced'">
-          {{ readableNumber(data.row.blocks.produced, 0, true) }}
+          {{ readableNumber(data.row.blocks.produced, 0) }}
         </div>
 
         <div v-else-if="data.column.label === $t('Last forged')">
@@ -106,8 +106,8 @@ export default {
           label: this.$t('Status'),
           field: 'forgingStatus',
           type: 'number',
-          thClass: 'text-center',
-          tdClass: 'text-center'
+          thClass: 'end-cell md:base-cell text-center',
+          tdClass: 'end-cell md:base-cell text-center'
         },
         {
           label: this.$t('Votes'),

@@ -1,52 +1,54 @@
 import { mount, createLocalVue } from '@vue/test-utils'
-import mixins from '@/mixins'
+import NetworkMixin from '@/mixins/network'
+import CurrencyMixin from '@/mixins/currency'
 
 import ToggleCurrency from '@/components/header/toggles/ToggleCurrency'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 
-const localVue = createLocalVue()
-localVue.use(VueI18n)
-localVue.use(Vuex)
+describe('Components > Header > ToggleCurrency', () => {
+  const localVue = createLocalVue()
 
-const i18n = new VueI18n({
-  locale: 'en-gb',
-  fallbackLocale: 'en-gb',
-  messages: { 'en-gb': {} },
-  silentTranslationWarn: true
-})
+  localVue.use(VueI18n)
+  localVue.use(Vuex)
 
-const uiAction = { setHeaderType: jest.fn() }
+  const i18n = new VueI18n({
+    locale: 'en-gb',
+    fallbackLocale: 'en-gb',
+    messages: { 'en-gb': {} },
+    silentTranslationWarn: true
+  })
 
-const store = new Vuex.Store({
-  modules: {
-    ui: {
-      namespaced: true,
-      state: { headerType: null },
-      actions: uiAction,
-      getters: { headerType: state => null }
-    },
-    currency: {
-      namespaced: true,
-      state: {
-        name: 'USD',
-        rate: 1.5
+  const uiAction = { setHeaderType: jest.fn() }
+
+  const store = new Vuex.Store({
+    modules: {
+      ui: {
+        namespaced: true,
+        state: { headerType: null },
+        actions: uiAction,
+        getters: { headerType: () => null }
       },
-      getters: {
-        name: state => 'USD',
-        rate: state => 1.5
+      currency: {
+        namespaced: true,
+        state: {
+          name: 'USD',
+          rate: 1.5
+        },
+        getters: {
+          name: () => 'USD',
+          rate: () => 1.5
+        }
       }
-    }
-  },
-  strict: true
-})
+    },
+    strict: true
+  })
 
-describe('header/ToggleCurrency', () => {
-  it('Should be possible to toggle the currency', () => {
+  it('should be possible to toggle the currency', () => {
     const wrapper = mount(ToggleCurrency, {
       i18n,
       localVue,
-      mixins,
+      mixins: [CurrencyMixin, NetworkMixin],
       store
     })
     wrapper.find('button').trigger('click')

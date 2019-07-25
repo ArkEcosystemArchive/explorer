@@ -5,8 +5,8 @@
       :has-pagination="false"
       :columns="columns"
       :rows="transactions"
-      :sort-query="{ field: 'timestamp', type: 'desc' }"
       :no-data-message="$t('No results')"
+      @on-sort-change="emitSortChange"
     >
       <template
         slot-scope="data"
@@ -19,9 +19,9 @@
           />
         </div>
 
-        <div v-else-if="data.column.field === 'timestamp'">
+        <div v-else-if="data.column.field === 'timestamp.unix'">
           <span>
-            {{ data.formattedRow['timestamp'] }}
+            {{ readableTimestamp(data.row.timestamp.unix) }}
           </span>
         </div>
 
@@ -64,12 +64,33 @@
             {{ readableCrypto(data.row.fee) }}
           </span>
         </div>
+
+        <div v-else-if="data.column.field === 'confirmations'">
+          <div class="flex items-center justify-end whitespace-no-wrap">
+            <div
+              v-if="data.row.confirmations <= activeDelegates"
+              class="flex items-center justify-end whitespace-no-wrap"
+            >
+              <span class="text-green inline-block mr-2">{{ data.row.confirmations }}</span>
+              <img
+                class="icon flex-none"
+                src="@/assets/images/icons/clock.svg"
+              >
+            </div>
+            <div v-else>
+              <div v-tooltip="data.row.confirmations + ' ' + $t('Confirmations')">
+                {{ $t("Well confirmed") }}
+              </div>
+            </div>
+          </div>
+        </div>
       </template>
     </TableWrapper>
   </Loader>
 </template>
 
 <script type="text/ecmascript-6">
+import { mapGetters } from 'vuex'
 import CryptoCompareService from '@/services/crypto-compare'
 
 export default {
@@ -81,12 +102,23 @@ export default {
         return Array.isArray(value) || value === null
       },
       required: true
+    },
+    showConfirmations: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
 
   computed: {
+    ...mapGetters('network', ['activeDelegates']),
+
     columns () {
-      const columns = [
+      const feeClasses = ['hidden', 'md:table-cell']
+
+      feeClasses.push(this.showConfirmations ? 'pr-10 xl:pr-4' : 'end-cell')
+
+      let columns = [
         {
           label: this.$t('ID'),
           field: 'id',
@@ -95,9 +127,8 @@ export default {
         },
         {
           label: this.$t('Timestamp'),
-          field: 'timestamp',
-          type: 'date',
-          formatFn: this.formatDate,
+          field: 'timestamp.unix',
+          type: 'number',
           thClass: 'text-left hidden md:table-cell',
           tdClass: 'text-left hidden md:table-cell wrap-timestamp'
         },
@@ -119,17 +150,30 @@ export default {
           label: this.$t('Amount (token)', { token: this.networkToken() }),
           field: 'amount',
           type: 'number',
-          thClass: 'end-cell lg:base-cell lg:pr-4',
-          tdClass: 'end-cell lg:base-cell lg:pr-4'
+          thClass: 'end-cell lg:base-cell',
+          tdClass: 'end-cell lg:base-cell'
         },
         {
           label: this.$t('Fee (token)', { token: this.networkToken() }),
           field: 'fee',
           type: 'number',
-          thClass: 'end-cell hidden lg:table-cell',
-          tdClass: 'end-cell hidden lg:table-cell'
+          thClass: feeClasses.join(' '),
+          tdClass: feeClasses.join(' ')
         }
       ]
+
+      if (this.showConfirmations) {
+        columns = columns.filter(column => column.field !== 'vendorField')
+
+        columns.push({
+          label: this.$t('Confirmations'),
+          field: 'confirmations',
+          type: 'number',
+          sortable: false,
+          thClass: 'end-cell hidden xl:table-cell not-sortable',
+          tdClass: 'end-cell hidden xl:table-cell'
+        })
+      }
 
       return columns
     },
@@ -152,10 +196,6 @@ export default {
   },
 
   methods: {
-    formatDate (timestamp) {
-      return this.readableTimestamp(timestamp.unix)
-    },
-
     async updatePrices () {
       if (!this.transactions) {
         return
@@ -164,12 +204,21 @@ export default {
       for (const transaction of this.transactions) {
         transaction.price = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
       }
+    },
+
+    emitSortChange (params) {
+      this.$emit('on-sort-change', params[0])
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
+  .icon {
+    width: 16px;
+    height: 16px;
+  }
+
   .wrap-timestamp {
     white-space: normal;
   }

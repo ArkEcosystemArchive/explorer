@@ -39,7 +39,7 @@ class CryptoCompareService {
 
   async price (currency) {
     const response = await this.get(`https://min-api.cryptocompare.com/data/price?fsym=ARK&tsyms=${currency}`)
-    if (response.data.hasOwnProperty(currency)) {
+    if (response.data[currency]) {
       return Number(response.data[currency])
     }
   }
@@ -108,7 +108,7 @@ class CryptoCompareService {
     const token = store.getters['network/token']
     const cache = JSON.parse(localStorage.getItem(`rates_${targetCurrency}`))
 
-    if (cache && cache.hasOwnProperty(ts)) {
+    if (cache && cache[ts]) {
       store.dispatch('currency/setLastConversion', {
         to: targetCurrency,
         timestamp: ts,

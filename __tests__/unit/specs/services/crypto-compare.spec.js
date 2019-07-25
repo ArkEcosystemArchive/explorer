@@ -1,7 +1,7 @@
 import CryptoCompareService from '@/services/crypto-compare'
 import store from '@/store'
 
-describe('CryptoCompare Service', () => {
+describe('Services > CryptoCompare', () => {
   beforeAll(() => {
     store.dispatch('network/setServer', 'https://explorer.ark.io/api/v2')
     store.dispatch('network/setAlias', 'Main')

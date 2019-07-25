@@ -1,41 +1,42 @@
 import { mount, createLocalVue } from '@vue/test-utils'
-import mixins from '@/mixins'
+import CurrencyMixin from '@/mixins/currency'
+import StringsMixin from '@/mixins/strings'
 
 import TransactionDetails from '@/components/transaction/Details'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 
-const localVue = createLocalVue()
-localVue.use(VueI18n)
-localVue.use(Vuex)
+describe('Components > Transaction > Details', () => {
+  const localVue = createLocalVue()
+  localVue.use(VueI18n)
+  localVue.use(Vuex)
 
-const i18n = new VueI18n({
-  locale: 'en-gb',
-  fallbackLocale: 'en-gb',
-  messages: { 'en-gb': {} },
-  silentTranslationWarn: true
-})
+  const i18n = new VueI18n({
+    locale: 'en-gb',
+    fallbackLocale: 'en-gb',
+    messages: { 'en-gb': {} },
+    silentTranslationWarn: true
+  })
 
-const store = new Vuex.Store({
-  modules: {
-    network: {
-      namespaced: true,
-      getters: {
-        height: state => 1000000
+  const store = new Vuex.Store({
+    modules: {
+      network: {
+        namespaced: true,
+        getters: {
+          height: () => 1000000
+        }
+      },
+      currency: {
+        namespaced: true,
+        getters: {
+          symbol: () => '$'
+        }
       }
     },
-    currency: {
-      namespaced: true,
-      getters: {
-        symbol: state => '$'
-      }
-    }
-  },
-  strict: true
-})
+    strict: true
+  })
 
-describe('transaction/Details', () => {
-  it('Should display the transaction details', () => {
+  it('should display the transaction details', () => {
     const wrapper = mount(TransactionDetails, {
       propsData: {
         transaction: {
@@ -44,12 +45,12 @@ describe('transaction/Details', () => {
         }
       },
       stubs: {
-        'LinkWallet': '<div></div>',
-        'LinkBlock': '<div></div>'
+        LinkWallet: '<div></div>',
+        LinkBlock: '<div></div>'
       },
       i18n,
       localVue,
-      mixins,
+      mixins: [CurrencyMixin, StringsMixin],
       store
     })
     expect(wrapper.findAll('.list-row-border-b')).toHaveLength(5)

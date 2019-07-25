@@ -5,27 +5,27 @@ import ToggleTheme from '@/components/header/toggles/ToggleTheme'
 import VueI18n from 'vue-i18n'
 import Vuex from 'vuex'
 
-const localVue = createLocalVue()
-localVue.use(VueI18n)
-localVue.use(Vuex)
+describe('Components > Header > ToggleTheme', () => {
+  const localVue = createLocalVue()
+  localVue.use(VueI18n)
+  localVue.use(Vuex)
 
-const i18n = new VueI18n({
-  locale: 'en-gb',
-  fallbackLocale: 'en-gb',
-  messages: { 'en-gb': {} },
-  silentTranslationWarn: true
-})
+  const i18n = new VueI18n({
+    locale: 'en-gb',
+    fallbackLocale: 'en-gb',
+    messages: { 'en-gb': {} },
+    silentTranslationWarn: true
+  })
 
-const uiAction = { setNightMode: jest.fn() }
+  const uiAction = { setNightMode: jest.fn() }
 
-describe('header/ToggleTheme', () => {
-  it('Should be possible to toggle the theme (nightmode)', () => {
+  it('should be possible to toggle the theme (nightmode)', () => {
     const store = new Vuex.Store({
       modules: {
         ui: {
           namespaced: true,
           actions: uiAction,
-          getters: { nightMode: state => true }
+          getters: { nightMode: () => true }
         }
       },
       strict: true
@@ -37,19 +37,20 @@ describe('header/ToggleTheme', () => {
       mixins,
       store
     })
+
     wrapper.find('button').trigger('click')
     expect(uiAction.setNightMode).toHaveBeenCalled()
 
     wrapper.vm.changeImageSource()
   })
 
-  it('Should be possible to toggle the theme (daymode)', () => {
+  it('should be possible to toggle the theme (daymode)', () => {
     const store = new Vuex.Store({
       modules: {
         ui: {
           namespaced: true,
           actions: uiAction,
-          getters: { nightMode: state => false }
+          getters: { nightMode: () => false }
         }
       },
       strict: true
@@ -61,6 +62,7 @@ describe('header/ToggleTheme', () => {
       mixins,
       store
     })
+
     wrapper.find('button').trigger('click')
     expect(uiAction.setNightMode).toHaveBeenCalled()
 
