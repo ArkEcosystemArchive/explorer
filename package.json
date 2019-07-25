@@ -20,7 +20,7 @@
     "dev:mainnet": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --env.network=mainnet",
     "dev:devnet": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --env.network=devnet",
     "dev:testnet": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --env.network=testnet",
-    "unit": "jest --config __tests__/unit/jest.conf.js",
+    "unit": "jest --maxWorkers=2 --config __tests__/unit/jest.conf.js",
     "e2e": "node __tests__/e2e/runner.js",
     "test": "yarn unit && yarn e2e",
     "lint": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter src __tests__",
