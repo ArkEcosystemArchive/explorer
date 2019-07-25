@@ -31,17 +31,17 @@ describe('Components > Header > Currencies', () => {
           nightMode: false
         },
         getters: {
-          headerType: state => 'currencies',
-          nightMode: state => false
+          headerType: () => 'currencies',
+          nightMode: () => false
         }
       },
       network: {
         namespaced: true,
         state: {
-          currencies: { 'USD': '$' }
+          currencies: { USD: '$' }
         },
         getters: {
-          currencies: state => ({ 'USD': '$' })
+          currencies: () => ({ USD: '$' })
         }
       }
     },
@@ -64,7 +64,7 @@ describe('Components > Header > Currencies', () => {
     it('should change currency with current rate', (done) => {
       expect.assertions(6)
 
-      let el = wrapper.find('.menu-button')
+      const el = wrapper.find('.menu-button')
       expect(el.text()).toBe('USD')
       el.trigger('click')
 
@@ -101,7 +101,7 @@ describe('Components > Header > Currencies', () => {
     it('should change currency with current rate', (done) => {
       expect.assertions(6)
 
-      let el = wrapper.find('.menu-container > li')
+      const el = wrapper.find('.menu-container > li')
       expect(el.text()).toBe('USD')
       el.trigger('click')
 
