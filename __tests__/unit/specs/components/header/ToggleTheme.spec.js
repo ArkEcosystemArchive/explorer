@@ -25,7 +25,7 @@ describe('Components > Header > ToggleTheme', () => {
         ui: {
           namespaced: true,
           actions: uiAction,
-          getters: { nightMode: state => true }
+          getters: { nightMode: () => true }
         }
       },
       strict: true
@@ -50,7 +50,7 @@ describe('Components > Header > ToggleTheme', () => {
         ui: {
           namespaced: true,
           actions: uiAction,
-          getters: { nightMode: state => false }
+          getters: { nightMode: () => false }
         }
       },
       strict: true

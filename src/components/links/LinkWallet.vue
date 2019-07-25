@@ -103,7 +103,7 @@ export default {
     ...mapGetters('network', ['knownWallets']),
 
     isKnown () {
-      return this.knownWallets.hasOwnProperty(this.address)
+      return this.knownWallets[this.address]
     },
 
     walletAddress () {
