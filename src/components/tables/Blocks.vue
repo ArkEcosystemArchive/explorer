@@ -5,8 +5,8 @@
       :has-pagination="false"
       :columns="columns"
       :rows="blocks"
-      :sort-query="{ field: 'height', type: 'desc' }"
       :no-data-message="$t('No results')"
+      @on-sort-change="emitSortChange"
     >
       <template
         slot-scope="data"
@@ -151,6 +151,10 @@ export default {
       for (const block of this.blocks) {
         block.price = await CryptoCompareService.dailyAverage(block.timestamp.unix)
       }
+    },
+
+    emitSortChange (params) {
+      this.$emit('on-sort-change', params[0])
     }
   }
 }
