@@ -114,7 +114,7 @@ export default {
     ...mapGetters('network', ['activeDelegates']),
 
     columns () {
-      let feeClasses = ['hidden', 'md:table-cell']
+      const feeClasses = ['hidden', 'md:table-cell']
 
       feeClasses.push(this.showConfirmations ? 'pr-10 xl:pr-4' : 'end-cell')
 
