@@ -34,7 +34,7 @@
 
         <div class="list-row-border-b">
           <div class="mr-4">
-            {{ $t(COMMON.TRANSACTIONS) }}
+            {{ $t('COMMON.TRANSACTIONS') }}
           </div>
           <div>{{ block.transactions }}</div>
         </div>
@@ -59,7 +59,7 @@
 
         <div class="list-row">
           <div class="mr-4">
-            {{ $t('BLOCKS.FEES') }}
+            {{ $t('BLOCK.FEES') }}
           </div>
           <div v-if="block.forged">
             {{ readableCrypto(block.forged.fee) }}

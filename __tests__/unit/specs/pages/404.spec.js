@@ -19,7 +19,7 @@ describe('Pages > 404', () => {
         ui: {
           namespaced: true,
           actions: uiAction,
-          getters: { nightMode: state => true }
+          getters: { nightMode: () => true }
         }
       },
       strict: true
@@ -31,7 +31,7 @@ describe('Pages > 404', () => {
       mixins,
       store,
       stubs: {
-        'ContentHeader': '<div></div>'
+        ContentHeader: '<div></div>'
       }
     })
 
@@ -45,7 +45,7 @@ describe('Pages > 404', () => {
         ui: {
           namespaced: true,
           actions: uiAction,
-          getters: { nightMode: state => false }
+          getters: { nightMode: () => false }
         }
       },
       strict: true
@@ -57,7 +57,7 @@ describe('Pages > 404', () => {
       mixins,
       store,
       stubs: {
-        'ContentHeader': '<div></div>'
+        ContentHeader: '<div></div>'
       }
     })
 

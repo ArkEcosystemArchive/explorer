@@ -16,13 +16,13 @@ describe('Components > Block > Details', () => {
       network: {
         namespaced: true,
         getters: {
-          height: state => 1000000
+          height: () => 1000000
         }
       },
       currency: {
         namespaced: true,
         getters: {
-          symbol: state => '$'
+          symbol: () => '$'
         }
       }
     },
@@ -37,7 +37,7 @@ describe('Components > Block > Details', () => {
         }
       },
       stubs: {
-        'LinkWallet': '<div></div>'
+        LinkWallet: '<div></div>'
       },
       i18n,
       localVue,

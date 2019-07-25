@@ -2,7 +2,11 @@
   <div>
     <Loader :data="transactions">
       <div class="hidden sm:block">
-        <TableTransactionsDesktop :transactions="transactions" />
+        <TableTransactionsDesktop
+          :transactions="transactions"
+          :sort-query="sortParams"
+          @on-sort-change="onSortChange"
+        />
       </div>
       <div class="sm:hidden">
         <TableTransactionsMobile :transactions="transactions" />
@@ -37,6 +41,21 @@ export default {
     transactions: null
   }),
 
+  computed: {
+    sortParams: {
+      get () {
+        return this.$store.getters['ui/transactionSortParams']
+      },
+
+      set (params) {
+        this.$store.dispatch('ui/setTransactionSortParams', {
+          field: params.field,
+          type: params.type
+        })
+      }
+    }
+  },
+
   watch: {
     async transactionType () {
       this.transactions = null
@@ -58,6 +77,10 @@ export default {
     async getTransactions () {
       const { data } = await TransactionService.filterByType(1, this.transactionType)
       this.transactions = data
+    },
+
+    onSortChange (params) {
+      this.sortParams = params
     }
   }
 }

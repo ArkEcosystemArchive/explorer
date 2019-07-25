@@ -5,8 +5,8 @@
       :has-pagination="false"
       :columns="columns"
       :rows="blocks"
-      :sort-query="{ field: 'height', type: 'desc' }"
       :no-data-message="$t('COMMON.NO_RESULTS')"
+      @on-sort-change="emitSortChange"
     >
       <template
         slot-scope="data"
@@ -33,11 +33,11 @@
           </span>
         </div>
 
-        <div v-else-if="data.column.field === 'generator'">
+        <div v-else-if="data.column.field === 'generator.username'">
           <LinkWallet :address="data.row.generator.address" />
         </div>
 
-        <div v-else-if="data.column.field === 'totalForged'">
+        <div v-else-if="data.column.field === 'forged.total'">
           <span
             v-tooltip="{
               trigger: 'hover',
@@ -49,7 +49,7 @@
           </span>
         </div>
 
-        <div v-else-if="data.column.field === 'fee'">
+        <div v-else-if="data.column.field === 'forged.fee'">
           <span
             v-tooltip="{
               trigger: 'hover',
@@ -110,18 +110,18 @@ export default {
         },
         {
           label: this.$t('BLOCK.GENERATED_BY'),
-          field: 'generator',
+          field: 'generator.username',
           thClass: 'text-right',
           tdClass: 'text-right'
         },
         {
           label: this.$t('BLOCK.TOTAL_FORGED'),
-          field: 'totalForged',
+          field: 'forged.total',
           type: 'number'
         },
         {
           label: this.$t('BLOCK.FEES'),
-          field: 'fee',
+          field: 'forged.fee',
           type: 'number',
           thClass: 'end-cell',
           tdClass: 'end-cell'
@@ -151,6 +151,10 @@ export default {
       for (const block of this.blocks) {
         block.price = await CryptoCompareService.dailyAverage(block.timestamp.unix)
       }
+    },
+
+    emitSortChange (params) {
+      this.$emit('on-sort-change', params[0])
     }
   }
 }

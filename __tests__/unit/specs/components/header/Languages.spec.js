@@ -24,9 +24,9 @@ describe('Components > Header > Languages', () => {
           language: 'en-GB'
         },
         getters: {
-          headerType: state => 'languages',
-          nightMode: state => false,
-          language: state => 'en-GB'
+          headerType: () => 'languages',
+          nightMode: () => false,
+          language: () => 'en-GB'
         }
       }
     },

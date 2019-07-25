@@ -1,20 +1,21 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import CurrencyModule from './modules/currency'
-import DelegatesModule from './modules/delegates'
-import NetworkModule from './modules/network'
-import UserInterfaceModule from './modules/ui'
+
+import CurrencyModule from '@/store/modules/currency'
+import DelegatesModule from '@/store/modules/delegates'
+import NetworkModule from '@/store/modules/network'
+import UserInterfaceModule from '@/store/modules/ui'
 
 Vue.use(Vuex)
 
-export const strict = false
+const modules = {
+  currency: CurrencyModule,
+  delegates: DelegatesModule,
+  network: NetworkModule,
+  ui: UserInterfaceModule
+}
 
 export default new Vuex.Store({
-  modules: {
-    currency: CurrencyModule,
-    delegates: DelegatesModule,
-    network: NetworkModule,
-    ui: UserInterfaceModule
-  },
-  strict: true
+  modules,
+  strict: process.env.NODE_ENV !== 'production'
 })

@@ -60,7 +60,7 @@ describe('Compontents > Links > Wallet', () => {
   })
 
   it('should display the name of a known address', () => {
-    store.dispatch('network/setKnownWallets', { 'AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv': 'TestKnownWallet' })
+    store.dispatch('network/setKnownWallets', { AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv: 'TestKnownWallet' })
     const wrapper = mount(LinkWallet, {
       propsData: {
         address: testAddress,
@@ -85,7 +85,7 @@ describe('Compontents > Links > Wallet', () => {
   })
 
   it('should display the name of a delegate', done => {
-    store.dispatch('delegates/setDelegates', [ { username: 'TestDelegate', address: testDelegateAddress, publicKey: testDelegatePublicKey } ])
+    store.dispatch('delegates/setDelegates', [{ username: 'TestDelegate', address: testDelegateAddress, publicKey: testDelegatePublicKey }])
     const wrapper = mount(LinkWallet, {
       propsData: {
         address: testDelegateAddress,
@@ -112,7 +112,7 @@ describe('Compontents > Links > Wallet', () => {
   })
 
   it('should also find the delegate by public key', done => {
-    store.dispatch('delegates/setDelegates', [ { username: 'TestDelegate', address: testDelegateAddress, publicKey: testDelegatePublicKey } ])
+    store.dispatch('delegates/setDelegates', [{ username: 'TestDelegate', address: testDelegateAddress, publicKey: testDelegatePublicKey }])
     const wrapper = mount(LinkWallet, {
       propsData: {
         publicKey: testDelegatePublicKey,
@@ -172,7 +172,7 @@ describe('Compontents > Links > Wallet', () => {
     })
 
     it('should display Vote for type 3', () => {
-      store.dispatch('delegates/setDelegates', [ { username: 'TestDelegate', address: testDelegateAddress, publicKey: testDelegatePublicKey } ])
+      store.dispatch('delegates/setDelegates', [{ username: 'TestDelegate', address: testDelegateAddress, publicKey: testDelegatePublicKey }])
 
       const wrapper = mount(LinkWallet, {
         propsData: {

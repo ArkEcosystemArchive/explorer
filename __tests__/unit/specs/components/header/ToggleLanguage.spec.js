@@ -23,8 +23,8 @@ describe('Components > Header > ToggleLanguage', () => {
         },
         actions: uiAction,
         getters: {
-          language: state => 'en-GB',
-          headerType: state => null
+          language: () => 'en-GB',
+          headerType: () => null
         }
       }
     },

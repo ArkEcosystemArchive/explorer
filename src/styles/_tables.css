@@ -127,6 +127,10 @@ th, td {
   @apply .base-cell;
 }
 
+th.not-sortable:hover {
+  @apply .cursor-default;
+}
+
 @media (min-width: 576px) {
   .start-cell {
     @apply .pl-10;
@@ -151,7 +155,7 @@ th, td {
 
 @media (min-width: 1024px) {
   .lg\:base-cell {
-      @apply .base-cell;
+    @apply .base-cell;
   }
 }
 

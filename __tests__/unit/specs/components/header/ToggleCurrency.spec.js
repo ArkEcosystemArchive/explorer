@@ -20,7 +20,7 @@ describe('Components > Header > ToggleCurrency', () => {
         namespaced: true,
         state: { headerType: null },
         actions: uiAction,
-        getters: { headerType: state => null }
+        getters: { headerType: () => null }
       },
       currency: {
         namespaced: true,
@@ -29,8 +29,8 @@ describe('Components > Header > ToggleCurrency', () => {
           rate: 1.5
         },
         getters: {
-          name: state => 'USD',
-          rate: state => 1.5
+          name: () => 'USD',
+          rate: () => 1.5
         }
       }
     },

@@ -24,8 +24,8 @@ describe('Components > Header > Menu', () => {
           nightMode: false
         },
         getters: {
-          menuVisible: state => true,
-          nightMode: state => false
+          menuVisible: () => true,
+          nightMode: () => false
         },
         actions: {
           setMenuVisible: jest.fn()

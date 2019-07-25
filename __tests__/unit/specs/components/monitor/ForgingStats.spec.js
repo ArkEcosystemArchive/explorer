@@ -16,7 +16,7 @@ describe('Components > Monitor > ForgingStats', () => {
       modules: {
         network: {
           namespaced: true,
-          getters: { activeDelegates: state => 51 }
+          getters: { activeDelegates: () => 51 }
         }
       },
       strict: true
@@ -28,7 +28,7 @@ describe('Components > Monitor > ForgingStats', () => {
       mixins,
       store,
       stubs: {
-        'ArkMeter': '<div></div>'
+        ArkMeter: '<div></div>'
       },
       propsData: {
         delegates: []

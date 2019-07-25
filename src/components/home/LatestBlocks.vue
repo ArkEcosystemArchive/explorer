@@ -2,7 +2,11 @@
   <div>
     <Loader :data="blocks">
       <div class="hidden sm:block">
-        <TableBlocksDesktop :blocks="blocks" />
+        <TableBlocksDesktop
+          :blocks="blocks"
+          :sort-query="sortParams"
+          @on-sort-change="onSortChange"
+        />
       </div>
       <div class="sm:hidden">
         <TableBlocksMobile :blocks="blocks" />
@@ -30,6 +34,21 @@ export default {
     blocks: null
   }),
 
+  computed: {
+    sortParams: {
+      get () {
+        return this.$store.getters['ui/blockSortParams']
+      },
+
+      set (params) {
+        this.$store.dispatch('ui/setBlockSortParams', {
+          field: params.field,
+          type: params.type
+        })
+      }
+    }
+  },
+
   async mounted () {
     await this.prepareComponent()
   },
@@ -44,6 +63,10 @@ export default {
     async getBlocks () {
       const response = await BlockService.latest()
       this.blocks = response
+    },
+
+    onSortChange (params) {
+      this.sortParams = params
     }
   }
 }
