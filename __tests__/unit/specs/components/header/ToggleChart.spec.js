@@ -25,7 +25,7 @@ describe('Components > Header > ToggleChart', () => {
         namespaced: true,
         state: { priceChart: false },
         actions: uiAction,
-        getters: { priceChart: state => false }
+        getters: { priceChart: () => false }
       }
     },
     strict: true
