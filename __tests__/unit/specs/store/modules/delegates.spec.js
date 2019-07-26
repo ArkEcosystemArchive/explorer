@@ -7,7 +7,7 @@ const delegates = [
 
 describe('Store > Delegates', () => {
   it('should set the delegates rate', () => {
-    store.dispatch('delegates/setDelegates', delegates)
+    store.dispatch('delegates/setDelegates', { delegates })
 
     expect(store.getters['delegates/delegates']).toEqual(delegates)
   })
