@@ -39,7 +39,10 @@ describe('Components > Utils > TransactionAmount', () => {
         transaction: {
           sender: incomingAddress,
           recipient: outgoingAddress,
-          amount: 100000000
+          amount: 100000000,
+          timestamp: {
+            unix: 1
+          }
         },
         type: 0
       },
@@ -69,7 +72,10 @@ describe('Components > Utils > TransactionAmount', () => {
         transaction: {
           sender: outgoingAddress,
           recipient: incomingAddress,
-          amount: 100000000
+          amount: 100000000,
+          timestamp: {
+            unix: 1
+          }
         },
         type: 0
       },
@@ -99,7 +105,10 @@ describe('Components > Utils > TransactionAmount', () => {
         transaction: {
           sender: incomingAddress,
           recipient: incomingAddress,
-          amount: 100000000
+          amount: 100000000,
+          timestamp: {
+            unix: 1
+          }
         },
         type: 1
       },
