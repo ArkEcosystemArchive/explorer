@@ -9,7 +9,8 @@ const messages = {}
 const messagesContext = require.context('./locales', true, /\.js$/)
 
 I18N.enabledLocales.forEach(locale => {
-  messages[locale] = messagesContext(`./${locale}.js`).default
+  const source = locale === 'en-US' ? 'en-GB' : locale
+  messages[locale] = messagesContext(`./${source}.js`).default
 })
 
 export default new VueI18n({
