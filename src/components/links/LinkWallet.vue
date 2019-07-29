@@ -176,7 +176,6 @@ export default {
     },
 
     findByPublicKey () {
-      console.log(this.delegates)
       this.delegate = this.delegates.find(d => d.publicKey === this.publicKey)
     },
 
