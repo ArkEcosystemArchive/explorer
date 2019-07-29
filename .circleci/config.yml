@@ -37,11 +37,6 @@ jobs:
           when: on_success
           command: bash <(curl -s https://codecov.io/bash)
       - run:
-          name: e2e tests
-          command: yarn e2e
-          environment:
-            WITHOUT_SELENIUM_SERVER: true
-      - run:
           name: Build
           command: yarn build
       - store_artifacts:

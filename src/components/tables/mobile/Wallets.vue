@@ -31,7 +31,7 @@
           <div class="mr-4">
             {{ $t("Supply") }}
           </div>
-          <div>{{ readableNumber((row.balance / total) * 100) }}%</div>
+          <div>{{ percentageString((row.balance / total) * 100) }}</div>
         </div>
       </div>
       <div

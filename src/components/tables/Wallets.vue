@@ -5,8 +5,8 @@
       :has-pagination="false"
       :columns="columns"
       :rows="wallets"
-      :sort-query="{ field: 'originalIndex', type: 'asc' }"
       :no-data-message="$t('No results')"
+      @on-sort-change="emitSortChange"
     >
       <template
         slot-scope="data"
@@ -29,7 +29,7 @@
         </div>
 
         <div v-else-if="data.column.field === 'supply'">
-          {{ readableNumber((data.row.balance / total) * 100) }}%
+          {{ percentageString((data.row.balance / total) * 100) }}
         </div>
       </template>
     </TableWrapper>
@@ -59,16 +59,6 @@ export default {
   data: () => ({
     windowWidth: 0
   }),
-
-  mounted () {
-    this.windowWidth = window.innerWidth
-
-    this.$nextTick(() => {
-      window.addEventListener('resize', () => {
-        this.windowWidth = window.innerWidth
-      })
-    })
-  },
 
   computed: {
     ...mapGetters('network', ['supply']),
@@ -101,7 +91,7 @@ export default {
           field: 'supply',
           type: 'number',
           sortable: false,
-          thClass: 'end-cell w-24',
+          thClass: 'end-cell w-24 not-sortable',
           tdClass: 'end-cell w-24'
         }
       ]
@@ -110,11 +100,25 @@ export default {
     }
   },
 
+  mounted () {
+    this.windowWidth = window.innerWidth
+
+    this.$nextTick(() => {
+      window.addEventListener('resize', () => {
+        this.windowWidth = window.innerWidth
+      })
+    })
+  },
+
   methods: {
     getRank (value) {
       const page = this.$route.params.page > 1 ? this.$route.params.page - 1 : 0
 
       return page * 25 + (value + 1)
+    },
+
+    emitSortChange (params) {
+      this.$emit('on-sort-change', params[0])
     }
   }
 }

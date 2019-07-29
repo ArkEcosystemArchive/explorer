@@ -1,6 +1,6 @@
 import store from '@/store'
 
-describe('ui store module', () => {
+describe('Store > UI', () => {
   it('should enable the night mode', () => {
     store.dispatch('ui/setNightMode', true)
 
@@ -71,5 +71,29 @@ describe('ui store module', () => {
     store.dispatch('ui/setMenuVisible', false)
 
     expect(store.getters['ui/menuVisible']).toEqual(false)
+  })
+
+  it('should set the block sort params', () => {
+    const params = { field: 'test' }
+
+    store.dispatch('ui/setBlockSortParams', params)
+
+    expect(store.getters['ui/blockSortParams']).toEqual(params)
+  })
+
+  it('should set the transaction sort params', () => {
+    const params = { field: 'test' }
+
+    store.dispatch('ui/setTransactionSortParams', params)
+
+    expect(store.getters['ui/transactionSortParams']).toEqual(params)
+  })
+
+  it('should set the block sort params', () => {
+    const params = { field: 'test' }
+
+    store.dispatch('ui/setWalletSortParams', params)
+
+    expect(store.getters['ui/walletSortParams']).toEqual(params)
   })
 })

@@ -5,9 +5,9 @@ const delegates = [
   { address: 'test-address-2', publicKey: 'pubkey-2' }
 ]
 
-describe('delegates store modules', () => {
+describe('Store > Delegates', () => {
   it('should set the delegates rate', () => {
-    store.dispatch('delegates/setDelegates', delegates)
+    store.dispatch('delegates/setDelegates', { delegates })
 
     expect(store.getters['delegates/delegates']).toEqual(delegates)
   })

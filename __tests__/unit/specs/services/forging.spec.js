@@ -30,7 +30,7 @@ const dummyDelegate = {
   }
 }
 
-describe('Forging Service', () => {
+describe('Services > Forging', () => {
   beforeAll(() => {
     store.dispatch('network/setActiveDelegates', 51)
   })

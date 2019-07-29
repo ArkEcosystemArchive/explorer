@@ -6,6 +6,8 @@
         <TableWalletsDesktop
           :wallets="wallets"
           :total="delegate ? delegate.votes : 0"
+          :sort-query="sortParams"
+          @on-sort-change="onSortChange"
         />
       </div>
       <div class="sm:hidden">
@@ -40,8 +42,22 @@ export default {
     showPaginator () {
       return this.meta && (this.meta.previous || this.meta.next)
     },
+
     address () {
       return this.$route.params.address
+    },
+
+    sortParams: {
+      get () {
+        return this.$store.getters['ui/walletSortParams']
+      },
+
+      set (params) {
+        this.$store.dispatch('ui/setWalletSortParams', {
+          field: params.field,
+          type: params.type
+        })
+      }
     }
   },
 
@@ -110,6 +126,10 @@ export default {
           page: this.currentPage
         }
       })
+    },
+
+    onSortChange (params) {
+      this.sortParams = params
     }
   }
 }

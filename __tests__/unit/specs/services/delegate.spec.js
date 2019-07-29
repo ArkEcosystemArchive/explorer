@@ -22,7 +22,7 @@ const voterPropertyArray = [
 ].sort()
 // Note: secondPublicKey, username and vote can also be returned, but are optional
 
-describe('Delegate Service', () => {
+describe('Services > Delegate', () => {
   beforeAll(() => {
     store.dispatch('network/setServer', 'https://explorer.ark.io/api/v2')
     store.dispatch('network/setActiveDelegates', 51)

@@ -1,6 +1,6 @@
 import store from '@/store'
 
-describe('network store modules', () => {
+describe('Store > Network', () => {
   it('should set the network defaults', () => {
     store.dispatch('network/setDefaults', 'setDefaults')
 

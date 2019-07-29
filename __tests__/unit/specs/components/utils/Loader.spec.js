@@ -1,8 +1,8 @@
 import { shallowMount } from '@vue/test-utils'
 import Loader from '@/components/utils/Loader'
 
-describe('Loader', () => {
-  it('Should render Loader', () => {
+describe('Components > Utils > Loader', () => {
+  it('should render Loader', () => {
     const wrapper = shallowMount(Loader, {
       propsData: {
         data: null

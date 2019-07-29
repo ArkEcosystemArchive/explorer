@@ -1,23 +1,24 @@
 import { mount, createLocalVue, RouterLinkStub } from '@vue/test-utils'
-import mixins from '@/mixins'
+import StringsMixin from '@/mixins/strings'
 import store from '@/store'
 
 import { LinkBlock } from '@/components/links'
 import VueI18n from 'vue-i18n'
 
-const localVue = createLocalVue()
-localVue.use(VueI18n)
-const i18n = new VueI18n({
-  locale: 'en-gb',
-  fallbackLocale: 'en-gb',
-  messages: { 'en-gb': {} },
-  silentTranslationWarn: true
-})
+describe('Components > Links > Block', () => {
+  const localVue = createLocalVue()
+  localVue.use(VueI18n)
 
-const testBlock = '8900581355787753944'
+  const i18n = new VueI18n({
+    locale: 'en-gb',
+    fallbackLocale: 'en-gb',
+    messages: { 'en-gb': {} },
+    silentTranslationWarn: true
+  })
 
-describe('Link/Block', () => {
-  it('Should display a truncated link to a block', () => {
+  const testBlock = '8900581355787753944'
+
+  it('should display a truncated link to a block', () => {
     const wrapper = mount(LinkBlock, {
       propsData: {
         id: testBlock
@@ -27,11 +28,11 @@ describe('Link/Block', () => {
       },
       i18n,
       localVue,
-      mixins,
+      mixins: [StringsMixin],
       store
     })
     expect(wrapper.contains('a')).toBe(true)
     expect(wrapper.findAll('a')).toHaveLength(2)
-    expect(wrapper.text()).toEqual(expect.stringContaining(mixins.truncate(testBlock)))
+    expect(wrapper.text()).toEqual(expect.stringContaining(wrapper.vm.truncate(testBlock)))
   })
 })

@@ -4,7 +4,7 @@ export default {
   namespaced: true,
 
   state: {
-    delegates: [],
+    delegates: null,
     forged: []
   },
 
@@ -18,12 +18,16 @@ export default {
   },
 
   actions: {
-    setDelegates: ({ commit }, value) => {
+    setDelegates: ({ commit }, { delegates, timestamp }) => {
+      localStorage.setItem('delegates', JSON.stringify(delegates))
+      localStorage.setItem('delegatesFetchedAt', timestamp)
+
       commit({
         type: types.SET_DELEGATES,
-        value
+        value: delegates
       })
     },
+
     setForged: ({ commit }, value) => {
       commit({
         type: types.SET_FORGED,
@@ -33,19 +37,26 @@ export default {
   },
 
   getters: {
-    delegates: state => state.delegates,
+    delegates: state => {
+      return state.delegates ? state.delegates : (JSON.parse(localStorage.getItem('delegates')) || [])
+    },
+
     forged: state => state.forged,
 
-    byPublicKey: (state) => publicKey => {
-      return state.delegates.find(delegate => {
+    byPublicKey: (_, getters) => publicKey => {
+      return getters.delegates.find(delegate => {
         return delegate.publicKey === publicKey
       }) || null
     },
 
-    byAddress: state => address => {
-      return state.delegates.find(delegate => {
+    byAddress: (_, getters) => address => {
+      return getters.delegates.find(delegate => {
         return delegate.address === address
       }) || null
+    },
+
+    stateHasDelegates: state => {
+      return !!state.delegates
     }
   }
 }

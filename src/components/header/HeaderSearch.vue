@@ -152,7 +152,7 @@ export default {
     findByNameInKnownWallets (name) {
       if (name !== null) {
         for (const address in this.knownWallets) {
-          if (this.knownWallets.hasOwnProperty(address)) {
+          if (this.knownWallets[address]) {
             if (name.toLowerCase() === this.knownWallets[address].toLowerCase()) {
               return address
             }
