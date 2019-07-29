@@ -32,7 +32,7 @@ export default {
   methods: {
     getTooltip () {
       const tooltip = {
-        content: this.$i18n.t('BUTTON_CLIPBOARD'),
+        content: this.$i18n.t('BUTTON_CLIPBOARD.COPY_TO_CLIPBOARD'),
         trigger: 'hover',
         show: this.copying,
         hideOnTargetClick: this.copying
