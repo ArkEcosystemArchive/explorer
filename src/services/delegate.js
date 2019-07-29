@@ -3,12 +3,16 @@ import store from '@/store'
 
 class DelegateService {
   async all () {
-    const response = await ApiService.get('delegates')
+    const response = await ApiService.get('delegates', {
+      params: {
+        page: 1
+      }
+    })
 
     const requests = []
 
     for (
-      let index = 1;
+      let index = 2;
       index <= response.meta.pageCount;
       index++
     ) {
@@ -23,11 +27,7 @@ class DelegateService {
 
     const results = await Promise.all(requests)
 
-    return results
-      .map(result => {
-        return result.data
-      })
-      .reduce((a, b) => [...a, ...b])
+    return response.data.concat(results.map(result => result.data).flat(1))
   }
 
   async voters (query, page, limit = 25) {
