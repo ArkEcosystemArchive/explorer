@@ -32,8 +32,9 @@ export default {
 
   computed: {
     ...mapGetters('currency', { currencyName: 'name' }),
-    ...mapGetters('ui', ['language', 'locale', 'nightMode']),
-    ...mapGetters('network', ['token'])
+    ...mapGetters('delegates', ['stateHasDelegates']),
+    ...mapGetters('network', ['token']),
+    ...mapGetters('ui', ['language', 'locale', 'nightMode'])
   },
 
   async created () {
@@ -129,8 +130,19 @@ export default {
     },
 
     async updateDelegates () {
-      const delegates = await DelegateService.all()
-      this.$store.dispatch('delegates/setDelegates', delegates)
+      const fetchedAt = localStorage.getItem('delegatesFetchedAt')
+
+      if (!this.stateHasDelegates || !fetchedAt || this.updateRequired(fetchedAt)) {
+        const delegates = await DelegateService.all()
+        this.$store.dispatch('delegates/setDelegates', {
+          delegates,
+          timestamp: Math.floor(Date.now() / 1000)
+        })
+      }
+    },
+
+    updateRequired (timestamp) {
+      return timestamp < moment().subtract(2, 'minute').unix()
     },
 
     updateI18n () {
