@@ -26,20 +26,12 @@
         </div>
 
         <div v-else-if="data.column.field === 'forgingStatus'">
-          <svg
+          <img
             v-tooltip="statusMessage(data.row)"
             class="mx-auto"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
             width="19px"
-            height="19px"
+            :src="require(`@/assets/images/icons/${statusImage(data.row)}.svg`)"
           >
-            <path
-              :fill="statusColor(data.row)"
-              fill-rule="evenodd"
-              d="M9.500,-0.000 C14.746,-0.000 18.999,4.253 18.999,9.500 C18.999,14.747 14.746,19.000 9.500,19.000 C4.253,19.000 -0.001,14.747 -0.001,9.500 C-0.001,4.253 4.253,-0.000 9.500,-0.000 Z"
-            />
-          </svg>
         </div>
 
         <div v-else-if="data.column.field === 'votes'">
@@ -145,6 +137,15 @@ export default {
           : status,
         classes: [`tooltip-bg-${row.forgingStatus}`, 'font-sans']
       }
+    },
+
+    statusImage (row) {
+      return {
+        0: 'forging',
+        1: 'missed-block',
+        2: 'not-forging',
+        3: 'not-forging'
+      }[row.forgingStatus]
     },
 
     statusColor (row) {
