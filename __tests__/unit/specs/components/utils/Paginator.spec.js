@@ -91,33 +91,4 @@ describe('Components > Utils > Paginator', () => {
     expect(buttons.at(3).classes()).toContain('disabled')
     expect(buttons.at(4).classes()).toContain('disabled')
   })
-
-  it('should emit event if pressing first or last page', () => {
-    const wrapper = mount(Paginator, {
-      propsData: {
-        meta: {
-          pageCount: 10,
-          self: '5',
-          first: '1',
-          last: '10',
-          previous: '4',
-          next: '6'
-        },
-        currentPage: 5
-      },
-      i18n,
-      localVue,
-      mixins,
-      store
-    })
-
-    const buttons = wrapper.findAll('button')
-    expect(buttons.length).toBeGreaterThanOrEqual(5)
-
-    buttons.at(buttons.length - 1).trigger('click') // Next
-    expect(wrapper.emitted('page-change')).toBeTruthy()
-
-    buttons.at(0).trigger('click') // Previous
-    expect(wrapper.emitted('page-change')).toBeTruthy()
-  })
 })

@@ -102,11 +102,11 @@ describe('Services > Transaction', () => {
   })
 
   it('should fail when searching for outgoing transactions if address does not exist', async () => {
-    expect(TransactionService.sentByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects.toThrow()
+    await expect(TransactionService.sentByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects.toThrow()
   })
 
   it('should fail when searching for incoming transactions if address does not exist', async () => {
-    expect(TransactionService.receivedByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects.toThrow()
+    await expect(TransactionService.receivedByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects.toThrow()
   })
 
   it('should return count of outgoing transactions for an address', async () => {
@@ -132,13 +132,12 @@ describe('Services > Transaction', () => {
     expect(data).toHaveLength(0)
   })
 
-  xit('should return and empty list if no transactions in a block', async () => {
-    const data = await TransactionService.byBlock('7818295669546141032')
+  it('should return and empty list if no transactions in a block', async () => {
+    const { data } = await TransactionService.byBlock('7818295669546141032')
     expect(data).toHaveLength(0)
   })
 
-  xit('should return an empty list of transactions when an incorrect block id is given', async () => {
-    const data = await TransactionService.byBlock('0')
-    expect(data).toHaveLength(0)
+  it('should fail with a 404 statusCode when an incorrect block id is given', async () => {
+    await expect(TransactionService.byBlock('0')).rejects.toThrow()
   })
 })
