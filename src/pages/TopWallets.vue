@@ -18,10 +18,9 @@
       </div>
       <Paginator
         v-if="showPaginator"
-        :previous="meta.previous"
-        :next="meta.next"
-        @previous="onPrevious"
-        @next="onNext"
+        :meta="meta"
+        :current-page="currentPage"
+        @page-change="onPageChange"
       />
     </section>
   </div>
@@ -42,7 +41,7 @@ export default {
     ...mapGetters('network', ['supply']),
 
     showPaginator () {
-      return this.meta && (this.meta.previous || this.meta.next)
+      return this.meta && this.meta.pageCount
     },
 
     sortParams: {
@@ -104,12 +103,8 @@ export default {
       this.meta = meta
     },
 
-    onPrevious () {
-      this.currentPage = Number(this.currentPage) - 1
-    },
-
-    onNext () {
-      this.currentPage = Number(this.currentPage) + 1
+    onPageChange (page) {
+      this.currentPage = page
     },
 
     changePage () {

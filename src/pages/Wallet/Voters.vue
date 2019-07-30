@@ -18,10 +18,9 @@
       </div>
       <Paginator
         v-if="showPaginator"
-        :previous="meta.previous"
-        :next="meta.next"
-        @previous="onPrevious"
-        @next="onNext"
+        :meta="meta"
+        :current-page="currentPage"
+        @page-change="onPageChange"
       />
     </section>
   </div>
@@ -40,7 +39,7 @@ export default {
 
   computed: {
     showPaginator () {
-      return this.meta && (this.meta.previous || this.meta.next)
+      return this.meta && this.meta.pageCount
     },
 
     address () {
@@ -110,12 +109,8 @@ export default {
       this.meta = meta
     },
 
-    onPrevious () {
-      this.currentPage = Number(this.currentPage) - 1
-    },
-
-    onNext () {
-      this.currentPage = Number(this.currentPage) + 1
+    onPageChange (page) {
+      this.currentPage = page
     },
 
     changePage (page) {

@@ -22,12 +22,16 @@ button:disabled {
 }
 
 .pager-button {
-  @apply .bg-theme-button .text-theme-button-text .semibold .py-5 .px-8 .border-transparent .rounded .transition .cursor-pointer;
+  @apply .bg-theme-button .text-theme-button-text .semibold .py-4 .px-6 .border-transparent .rounded .transition .cursor-pointer .flex .flex-no-wrap .justify-center .items-center;
 }
 
 .pager-button:enabled:hover,
 .block-pager-button:enabled:hover {
   @apply .bg-blue .text-white .hover-button-shadow-definition;
+}
+
+.pager-button > span {
+  @apply .border-theme-text-tertiary;
 }
 
 .block-pager-button {

@@ -36,10 +36,9 @@
       </div>
       <Paginator
         v-if="showPaginator"
-        :previous="meta.previous"
-        :next="meta.next"
-        @previous="onPrevious"
-        @next="onNext"
+        :meta="meta"
+        :current-page="currentPage"
+        @page-change="onPageChange"
       />
     </section>
   </div>
@@ -66,7 +65,7 @@ export default {
 
   computed: {
     showPaginator () {
-      return this.meta && (this.meta.previous || this.meta.next)
+      return this.meta && this.meta.pageCount
     }
   },
 
@@ -88,11 +87,13 @@ export default {
       )
 
       next(vm => {
-        vm.currentPage = to.params.page
+        vm.currentPage = Number(to.params.page)
         vm.setTransactions(data)
         vm.setMeta(meta)
       })
-    } catch (e) { next({ name: '404' }) }
+    } catch (e) {
+      next({ name: '404' })
+    }
   },
 
   async beforeRouteUpdate (to, from, next) {
@@ -105,11 +106,13 @@ export default {
         Number(localStorage.getItem('transactionType') || -1)
       )
 
-      this.currentPage = to.params.page
+      this.currentPage = Number(to.params.page)
       this.setTransactions(data)
       this.setMeta(meta)
       next()
-    } catch (e) { next({ name: '404' }) }
+    } catch (e) {
+      next({ name: '404' })
+    }
   },
 
   methods: {
@@ -125,12 +128,8 @@ export default {
       this.meta = meta
     },
 
-    onPrevious () {
-      this.currentPage = Number(this.currentPage) - 1
-    },
-
-    onNext () {
-      this.currentPage = Number(this.currentPage) + 1
+    onPageChange (page) {
+      this.currentPage = page
     },
 
     setType (type) {
