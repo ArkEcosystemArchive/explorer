@@ -2,6 +2,7 @@
   <div class="flex flex-no-wrap mx-5 sm:mx-10 mt-5 md:mt-10">
     <button
       :disabled="self === first"
+      :class="{ 'disabled': self === first }"
       class="pager-button mr-1 hidden xl:flex"
       @click="emitFirst"
     >
@@ -27,7 +28,8 @@
     </button>
 
     <button
-      :disabled="self === first"
+      :disabled="!previous"
+      :class="{ 'disabled': !previous }"
       class="mr-auto xl:ml-0 pager-button"
       @click="emitPrevious"
     >
@@ -64,7 +66,8 @@
     </button>
 
     <button
-      :disabled="self === last"
+      :disabled="!next"
+      :class="{ 'disabled': !next }"
       class="ml-auto xl:ml-1 pager-button"
       @click="emitNext"
     >
@@ -86,6 +89,7 @@
 
     <button
       :disabled="self === last"
+      :class="{ 'disabled': self === last }"
       class="pager-button ml-1 hidden xl:flex"
       @click="emitLast"
     >

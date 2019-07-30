@@ -21,8 +21,15 @@ describe('Components > Utils > Paginator', () => {
   it('should display a paginator component', () => {
     const wrapper = mount(Paginator, {
       propsData: {
-        previous: 'previous',
-        next: 'next'
+        meta: {
+          pageCount: 2,
+          self: '1',
+          first: '1',
+          last: '2',
+          previous: null,
+          next: '2'
+        },
+        currentPage: 1
       },
       i18n,
       localVue,
@@ -30,16 +37,25 @@ describe('Components > Utils > Paginator', () => {
       store
     })
     const buttonTexts = wrapper.findAll('button > span')
-    expect(buttonTexts).toHaveLength(2)
-    expect(buttonTexts.at(0).text()).toEqual('Previous')
-    expect(buttonTexts.at(1).text()).toEqual('Next')
+    expect(buttonTexts).toHaveLength(6)
+    expect(buttonTexts.at(0).text()).toEqual('First')
+    expect(buttonTexts.at(1).text()).toEqual('Previous')
+    expect(buttonTexts.at(4).text()).toEqual('Next')
+    expect(buttonTexts.at(5).text()).toEqual('Last')
   })
 
-  it('should not show previous if no previous page', () => {
+  it('should disable the previous and first buttons if no previous page', () => {
     const wrapper = mount(Paginator, {
       propsData: {
-        previous: null,
-        next: 'next'
+        meta: {
+          pageCount: 1,
+          self: '1',
+          first: '1',
+          last: '1',
+          previous: null,
+          next: null
+        },
+        currentPage: 1
       },
       i18n,
       localVue,
@@ -47,16 +63,23 @@ describe('Components > Utils > Paginator', () => {
       store
     })
     const buttons = wrapper.findAll('button')
-    expect(buttons).toHaveLength(2)
-    expect(buttons.at(0).classes()).toContain('hidden')
-    expect(buttons.at(1).classes()).not.toContain('hidden')
+    expect(buttons).toHaveLength(5)
+    expect(buttons.at(0).classes()).toContain('disabled')
+    expect(buttons.at(1).classes()).toContain('disabled')
   })
 
-  it('should not show next if no next page', () => {
+  it('should disable the next and last buttons if no next page', () => {
     const wrapper = mount(Paginator, {
       propsData: {
-        previous: 'previous',
-        next: null
+        meta: {
+          pageCount: 1,
+          self: '1',
+          first: '1',
+          last: '1',
+          previous: null,
+          next: null
+        },
+        currentPage: 1
       },
       i18n,
       localVue,
@@ -64,16 +87,23 @@ describe('Components > Utils > Paginator', () => {
       store
     })
     const buttons = wrapper.findAll('button')
-    expect(buttons).toHaveLength(2)
-    expect(buttons.at(0).classes()).not.toContain('hidden')
-    expect(buttons.at(1).classes()).toContain('hidden')
+    expect(buttons).toHaveLength(5)
+    expect(buttons.at(3).classes()).toContain('disabled')
+    expect(buttons.at(4).classes()).toContain('disabled')
   })
 
-  it('should emit event if pressing previous or next page', () => {
+  it('should emit event if pressing first or last page', () => {
     const wrapper = mount(Paginator, {
       propsData: {
-        previous: 'previous',
-        next: 'next'
+        meta: {
+          pageCount: 10,
+          self: '5',
+          first: '1',
+          last: '10',
+          previous: '4',
+          next: '6'
+        },
+        currentPage: 5
       },
       i18n,
       localVue,
@@ -82,12 +112,12 @@ describe('Components > Utils > Paginator', () => {
     })
 
     const buttons = wrapper.findAll('button')
-    expect(buttons).toHaveLength(2)
+    expect(buttons.length).toBeGreaterThanOrEqual(5)
 
-    buttons.at(1).trigger('click') // Next
-    expect(wrapper.emitted().next).toBeTruthy()
+    buttons.at(buttons.length - 1).trigger('click') // Next
+    expect(wrapper.emitted('page-change')).toBeTruthy()
 
     buttons.at(0).trigger('click') // Previous
-    expect(wrapper.emitted().previous).toBeTruthy()
+    expect(wrapper.emitted('page-change')).toBeTruthy()
   })
 })
