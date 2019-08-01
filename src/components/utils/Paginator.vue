@@ -3,7 +3,7 @@
     <button
       :disabled="self === first"
       :class="{ 'disabled': self === first }"
-      class="pager-button mr-1 hidden xl:flex"
+      class="pager-button ml-auto mr-1 hidden lg:flex"
       @click="emitFirst"
     >
       <svg
@@ -30,7 +30,7 @@
     <button
       :disabled="!previous"
       :class="{ 'disabled': !previous }"
-      class="mr-auto xl:ml-0 pager-button"
+      class="pager-button mr-auto lg:mr-2"
       @click="emitPrevious"
     >
       <svg
@@ -49,26 +49,23 @@
       <span class="ml-2">{{ $t("Previous") }}</span>
     </button>
 
-    <button
-      v-for="page in pageButtons"
-      :key="page"
-      :disabled="isSpacer(page) || page === currentPage"
-      :class="{ 'flex-1' : !isSpacer(page) }"
-      class="pager-button ml-1 p-4 hidden xl:flex"
-      @click="emitPageChange(page)"
-    >
-      <span
-        :class="{ 'border-b': currentPage === page }"
-        class="px-1"
+    <div class="flex hidden lg:flex">
+      <button
+        v-for="page in pageButtons"
+        :key="page"
+        :disabled="isSpacer(page) || page === currentPage"
+        :class="{ 'active': page === currentPage }"
+        class="Paginator__Button transition"
+        @click="emitPageChange(page)"
       >
-        {{ page }}
-      </span>
-    </button>
+        <span>{{ page }}</span>
+      </button>
+    </div>
 
     <button
       :disabled="!next"
       :class="{ 'disabled': !next }"
-      class="ml-auto xl:ml-1 pager-button"
+      class="pager-button ml-auto lg:ml-2"
       @click="emitNext"
     >
       <span class="mr-2">{{ $t("Next") }}</span>
@@ -90,7 +87,7 @@
     <button
       :disabled="self === last"
       :class="{ 'disabled': self === last }"
-      class="pager-button ml-1 hidden xl:flex"
+      class="pager-button mr-auto ml-1 hidden lg:flex "
       @click="emitLast"
     >
       <span class="mr-2">{{ $t("Last") }}</span>
@@ -170,10 +167,10 @@ export default {
       if (this.pageCount <= this.buttonCount) {
         buttons = Array.apply(null, Array(this.pageCount)).map((_, i) => i + 1)
       } else if (this.currentPage <= this.subRangeLength + 1) {
-        buttons = Array.apply(null, Array(this.buttonCount + 1)).map((_, i) => i + 1).concat('...')
+        buttons = Array.apply(null, Array(this.buttonCount)).map((_, i) => i + 1).concat('...')
       } else if (this.currentPage >= this.pageCount - this.subRangeLength) {
-        buttons = ['...', ...Array.apply(null, Array(this.buttonCount + 1)).map((_, i) => {
-          return this.pageCount - this.buttonCount + i
+        buttons = ['...', ...Array.apply(null, Array(this.buttonCount)).map((_, i) => {
+          return this.pageCount - this.buttonCount + i + 1
         })]
       } else {
         buttons = ['...', ...Array.apply(null, Array(this.buttonCount)).map((_, i) => {
@@ -212,3 +209,32 @@ export default {
   }
 }
 </script>
+
+<style>
+.Paginator__Button {
+  @apply .bg-theme-button .text-theme-button-text .p-3 .cursor-pointer .flex .flex-no-wrap .items-center;
+}
+
+.Paginator__Button:first-child {
+  @apply .rounded-l;
+}
+
+.Paginator__Button:last-child {
+  @apply .rounded-r;
+}
+
+.Paginator__Button.active {
+  @apply .bg-theme-button-active .text-theme-button-text;
+}
+
+.Paginator__Button:disabled {
+  @apply .text-theme-button-text;
+}
+
+.Paginator__Button:not(:disabled):hover {
+  @apply .rounded .bg-blue .text-white;
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+</style>

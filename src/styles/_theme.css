@@ -23,6 +23,7 @@
   --chart-active: #395174;
   --chart-inactive: #a0a6c8;
   --theme-button: #e0f0fd;
+  --theme-button-active: #c6dbec;
   --theme-button-text: #037cff;
   --language-icon: #395174;
 }
@@ -59,6 +60,7 @@
   --chart-active: #a1a2a6;
   --chart-inactive: #585a68;
   --theme-button: #2a2b31;
+  --theme-button-active: #42434c;
   --theme-button-text: #fff;
   --language-icon: #a1a2a6;
 }
