@@ -98,6 +98,7 @@
   "Page": "Page",
   "Previous": "Previous",
   "Rows per page": "Rows per page",
+  "Page x of y": "Page {x} of {y}",
 
   "ID": "ID",
   "Reward (token)": "Reward ({token})",

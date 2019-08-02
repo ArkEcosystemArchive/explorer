@@ -2,7 +2,7 @@
   <div class="flex flex-no-wrap justify-center mx-5 sm:mx-10 mt-5 md:mt-10">
     <button
       v-if="showFirst"
-      class="pager-button mr-2 hidden lg:flex"
+      class="pager-button mr-2"
       @click="emitFirst"
     >
       <svg
@@ -27,7 +27,7 @@
 
     <button
       v-if="showPrevious"
-      class="pager-button lg:mr-2"
+      class="pager-button mr-2"
       @click="emitPrevious"
     >
       <svg
@@ -46,7 +46,7 @@
       <span class="ml-2 hidden lg:inline">{{ $t("Previous") }}</span>
     </button>
 
-    <div class="flex hidden lg:flex px-3 bg-theme-button rounded">
+    <div class="hidden md:flex px-3 bg-theme-button rounded">
       <button
         v-if="pageButtons[0] !== 1"
         class="Paginator__Button Paginator__Button--search"
@@ -68,11 +68,8 @@
       <button
         v-for="page in pageButtons"
         :key="page"
-        :disabled="isSpacer(page) || page === currentPage"
-        :class="{
-          'active': page === currentPage,
-          'Paginator__Button--search': isSpacer(page)
-        }"
+        :disabled="page === currentPage"
+        :class="{ 'active': page === currentPage }"
         class="Paginator__Button transition"
         @click="emitPageChange(page)"
       >
@@ -98,9 +95,15 @@
       </button>
     </div>
 
+    <div class="flex md:hidden px-3 bg-theme-button rounded">
+      <button class="Paginator__Button">
+        <span>{{ $t("Page x of y", { x: currentPage, y: pageCount }) }}</span>
+      </button>
+    </div>
+
     <button
       v-if="showNext"
-      class="pager-button lg:ml-2"
+      class="pager-button ml-2"
       @click="emitNext"
     >
       <span class="mr-2 hidden lg:inline">{{ $t("Next") }}</span>
@@ -121,7 +124,7 @@
 
     <button
       v-if="showLast"
-      class="pager-button ml-2 hidden lg:flex "
+      class="pager-button ml-2"
       @click="emitLast"
     >
       <svg
@@ -250,10 +253,6 @@ export default {
 
     emitLast () {
       this.emitPageChange(this.pageCount)
-    },
-
-    isSpacer (value) {
-      return !Number(value)
     }
   }
 }
