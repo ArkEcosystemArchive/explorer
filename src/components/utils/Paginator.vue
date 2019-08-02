@@ -267,6 +267,13 @@ export default {
   @apply .bg-theme-button-active .text-theme-button-text;
 }
 
+.Paginator__Button:not(:disabled):hover {
+  @apply .rounded .bg-blue .text-white;
+  box-shadow: 0 5px 15px rgba(9, 100, 228, 0.34);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
 .Paginator__Button:disabled {
   @apply .text-theme-button-text;
 }
@@ -291,12 +298,6 @@ export default {
 
 .Paginator__Button--search:hover .icon {
   @apply .block;
-}
-
-.Paginator__Button:not(:disabled):hover {
-  @apply .rounded .bg-blue .text-white;
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
 }
 
 </style>
