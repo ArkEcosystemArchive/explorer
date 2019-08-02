@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-no-wrap justify-center mx-5 sm:mx-10 mt-5 md:mt-10">
+  <div class="Pagination mx-5 sm:mx-10 mt-5 md:mt-10">
     <button
       v-if="showFirst"
-      class="pager-button mr-2"
+      class="Pagination__Button--first pager-button mr-2"
       @click="emitFirst"
     >
       <svg
@@ -27,7 +27,7 @@
 
     <button
       v-if="showPrevious"
-      class="pager-button mr-2"
+      class="Pagination__Button--previous pager-button mr-2"
       @click="emitPrevious"
     >
       <svg
@@ -97,7 +97,7 @@
 
     <button
       v-if="showNext"
-      class="pager-button ml-2"
+      class="Pagination__Button--next pager-button ml-2"
       @click="emitNext"
     >
       <span class="mr-2 hidden lg:inline">{{ $t('PAGINATION.NEXT') }}</span>
@@ -118,7 +118,7 @@
 
     <button
       v-if="showLast"
-      class="pager-button ml-2"
+      class="Pagination__Button--last pager-button ml-2"
       @click="emitLast"
     >
       <svg
@@ -276,6 +276,10 @@ export default {
 </script>
 
 <style>
+.Pagination {
+  @apply .flex .flex-no-wrap .justify-center;
+}
+
 .Pagination__Button {
   @apply .text-theme-button-text .p-3 .cursor-pointer .flex .flex-no-wrap .items-center;
 }
