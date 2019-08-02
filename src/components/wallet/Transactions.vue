@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="text-2xl mb-5 md:mb-6 px-5 sm:hidden text-theme-text-primary">
-      {{ $t("Transactions") }}
+      {{ $t('COMMON.TRANSACTIONS') }}
     </h2>
     <section class="page-section py-5 md:py-10">
       <nav class="mx-5 md:mx-10 mb-8 border-b flex items-end">
@@ -12,7 +12,7 @@
           ]"
           @click="setType('all')"
         >
-          {{ $t("All") }}
+          {{ $t('TRANSACTION.TYPES.ALL') }}
         </div>
         <div
           :class="[
@@ -22,7 +22,7 @@
           ]"
           @click="setType('sent')"
         >
-          {{ $t("Sent") }}
+          {{ $t('TRANSACTION.TYPES.SENT') }}
           <span
             :class="isTypeSent ? 'text-theme-text-secondary' : 'text-theme-text-tertiary'"
             class="text-xs text-theme-text-secondary"
@@ -38,7 +38,7 @@
           ]"
           @click="setType('received')"
         >
-          {{ $t("Received") }}
+          {{ $t('TRANSACTION.TYPES.RECEIVED') }}
           <span
             :class="isTypeReceived ? 'text-theme-text-secondary' : 'text-theme-text-tertiary'"
             class="text-xs"
@@ -68,7 +68,7 @@
           tag="button"
           class="show-more-button"
         >
-          {{ $t("Show more") }}
+          {{ $t('PAGINATION.SHOW_MORE') }}
         </RouterLink>
       </div>
     </section>

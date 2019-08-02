@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <ContentHeader>{{ $t("Ooops!") }}</ContentHeader>
+    <ContentHeader>{{ $t('PAGES.NOT_FOUND.TITLE') }}</ContentHeader>
 
     <section class="page-section py-5 md:py-10 px-6">
       <div class="my-10 text-center">
@@ -15,9 +15,9 @@
           src="@/assets/images/404/dark.png"
         >
         <h1 class="text-3xl">
-          {{ $t("Ooops!") }}!
+          {{ $t('PAGES.NOT_FOUND.TITLE') }}
         </h1>
-        <p>{{ $t("Sorry, page not found") }}</p>
+        <p>{{ $t('PAGES.NOT_FOUND.PAGE') }}</p>
       </div>
     </section>
   </div>

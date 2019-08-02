@@ -8,7 +8,7 @@
       v-model.trim="page"
       v-tooltip="{
         show: hasError,
-        content: $t('Nothing matched your search'),
+        content: $t('PAGINATION.NO_RESULTS'),
         trigger: 'manual',
         placement: 'bottom-start',
         classes: 'search-tip'
@@ -95,8 +95,8 @@ export default {
 
     setMobilePlaceholder (showMobile) {
       this.placeholder = showMobile
-        ? this.$i18n.t('Page #')
-        : this.$i18n.t('Enter the page number')
+        ? this.$i18n.t('PAGINATION.PLACEHOLDER.SHORT')
+        : this.$i18n.t('PAGINATION.PLACEHOLDER.LONG')
     },
 
     emitPageChange (page) {

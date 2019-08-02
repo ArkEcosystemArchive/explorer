@@ -38,7 +38,7 @@ export default {
     noDataMessage: {
       type: String,
       required: false,
-      default: i18n.t('No results')
+      default: i18n.t('COMMON.NO_RESULTS')
     }
   },
 
@@ -55,12 +55,12 @@ export default {
           dropdownAllowAll: false,
           perPage: this.perPage,
           perPageDropdown: this.perPageDropdown,
-          nextLabel: this.$t('Next'),
-          prevLabel: this.$t('Previous'),
-          rowsPerPageLabel: this.$t('Rows per page'),
-          ofLabel: this.$t('Of'),
-          pageLabel: this.$t('Page'),
-          allLabel: this.$t('All')
+          nextLabel: this.$t('PAGINATION.NEXT'),
+          prevLabel: this.$t('PAGINATION.PREVIOUS'),
+          rowsPerPageLabel: this.$t('PAGINATION.ROWS_PER_PAGE'),
+          ofLabel: this.$t('PAGINATION.OF'),
+          pageLabel: this.$t('PAGINATION.PAGE'),
+          allLabel: this.$t('PAGINATION.ALL')
         },
         ...this.$attrs
       },

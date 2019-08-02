@@ -3,18 +3,11 @@ import StringsMixin from '@/mixins/strings'
 import store from '@/store'
 
 import { LinkTransaction } from '@/components/links'
-import VueI18n from 'vue-i18n'
+import { useI18n } from '../../../../__utils__/i18n'
 
 describe('Components > Links > Transaction', () => {
   const localVue = createLocalVue()
-  localVue.use(VueI18n)
-
-  const i18n = new VueI18n({
-    locale: 'en-gb',
-    fallbackLocale: 'en-gb',
-    messages: { 'en-gb': {} },
-    silentTranslationWarn: true
-  })
+  const i18n = useI18n(localVue)
 
   const testTransaction = '1b245c4f1a449da655a43e8b804ed635cc8d1cc6fb50c062d2c00ac126845e40'
 

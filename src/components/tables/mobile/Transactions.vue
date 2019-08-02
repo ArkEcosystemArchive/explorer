@@ -8,14 +8,14 @@
       >
         <div class="list-row-border-b">
           <div class="mr-4">
-            {{ $t("ID") }}
+            {{ $t('COMMON.ID') }}
           </div>
           <LinkTransaction :id="transaction.id" />
         </div>
 
         <div class="list-row-border-b-no-wrap">
           <div class="mr-4">
-            {{ $t("Timestamp") }}
+            {{ $t('COMMON.TIMESTAMP') }}
           </div>
           <div
             v-if="transaction.timestamp"
@@ -27,14 +27,14 @@
 
         <div class="list-row-border-b">
           <div class="mr-4">
-            {{ $t("Sender") }}
+            {{ $t('TRANSACTION.SENDER') }}
           </div>
           <LinkWallet :address="transaction.sender" />
         </div>
 
         <div class="list-row-border-b">
           <div class="mr-4">
-            {{ $t("Recipient") }}
+            {{ $t('TRANSACTION.RECIPIENT') }}
           </div>
           <LinkWallet
             :address="transaction.recipient"
@@ -48,7 +48,7 @@
           class="list-row-border-b-no-wrap"
         >
           <div class="mr-4">
-            {{ $t("Smartbridge") }}
+            {{ $t('TRANSACTION.SMARTBRIDGE') }}
           </div>
           <div class="text-right truncate">
             {{ emojify(transaction.vendorField) }}
@@ -57,7 +57,7 @@
 
         <div class="list-row-border-b">
           <div class="mr-4">
-            {{ $t("Amount (token)", { token: networkToken() }) }}
+            {{ $t('TRANSACTION.AMOUNT') }}
           </div>
           <div>
             <TransactionAmount
@@ -69,7 +69,7 @@
 
         <div class="list-row">
           <div class="mr-4">
-            {{ $t("Fee (token)", { token: networkToken() }) }}
+            {{ $t('TRANSACTION.FEE') }}
           </div>
           <div>{{ readableCrypto(transaction.fee) }}</div>
         </div>
@@ -79,7 +79,7 @@
           class="list-row"
         >
           <div class="mr-4">
-            {{ $t("Confirmations") }}
+            {{ $t('COMMON.CONFIRMATIONS') }}
           </div>
           <div class="flex items-center justify-end">
             <div
@@ -93,7 +93,7 @@
               >
             </div>
             <div v-else>
-              {{ $t("Well confirmed") }}
+              {{ $t('TRANSACTION.WELL_CONFIRMED') }}
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@
         v-if="transactions && !transactions.length"
         class="px-5 md:px-10"
       >
-        <span>{{ $t("No results") }}</span>
+        <span>{{ $t('COMMON.NO_RESULTS') }}</span>
       </div>
     </Loader>
   </div>

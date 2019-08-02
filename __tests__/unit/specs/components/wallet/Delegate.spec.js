@@ -2,20 +2,14 @@ import { mount, createLocalVue, RouterLinkStub } from '@vue/test-utils'
 import mixins from '@/mixins'
 
 import WalletDelegate from '@/components/wallet/Delegate'
-import VueI18n from 'vue-i18n'
+import { useI18n } from '../../../../__utils__/i18n'
 import Vuex from 'vuex'
 
 describe('Components > Wallet > Delegate', () => {
   const localVue = createLocalVue()
-  localVue.use(VueI18n)
   localVue.use(Vuex)
 
-  const i18n = new VueI18n({
-    locale: 'en-gb',
-    fallbackLocale: 'en-gb',
-    messages: { 'en-gb': {} },
-    silentTranslationWarn: true
-  })
+  const i18n = useI18n(localVue)
 
   const mocks = {
     $store: {
@@ -43,13 +37,13 @@ describe('Components > Wallet > Delegate', () => {
 
     let divs = wrapper.findAll('div.list-row-border-b')
     expect(divs).toHaveLength(4)
-    expect(divs.at(0).text()).toBe('Delegate')
-    expect(divs.at(1).text()).toContain('Rank/Status')
+    expect(divs.at(0).text()).toBe('Username')
+    expect(divs.at(1).text()).toContain('Rank')
     expect(divs.at(2).text()).toContain('Votes')
     expect(divs.at(3).text()).toBe('Forged')
 
     divs = wrapper.findAll('div.list-row')
     expect(divs).toHaveLength(1)
-    expect(divs.at(0).text()).toBe('Blocks')
+    expect(divs.at(0).text()).toBe('Forged blocks')
   })
 })

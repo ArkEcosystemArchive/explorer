@@ -1,6 +1,7 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <ContentHeader>{{ $t("Blocks") }}</ContentHeader>
+    <ContentHeader>{{ $t('COMMON.BLOCKS') }}</ContentHeader>
+
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
         <TableBlocksDesktop :blocks="blocks" />

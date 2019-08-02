@@ -135,11 +135,11 @@ module.exports = {
       .useXpath()
       .waitForElementVisible("//h1[text() = 'Wallet summary']")
 
-    browser.expect.element("//div[text() = 'Delegate']").to.be.present
-    browser.expect.element("//div[text() = 'Rank/Status']").to.be.present
+    browser.expect.element("//div[text() = 'Username']").to.be.present
+    browser.expect.element("//div[text() = 'Rank']").to.be.present
     browser.expect.element("//div[text() = 'Votes']").to.be.present
     browser.expect.element("//div[text() = 'Forged']").to.be.present
-    browser.expect.element("//div[text() = 'Blocks']").to.be.present
+    browser.expect.element("//div[text() = 'Forged blocks']").to.be.present
   },
 
   'it should be possible to show the list of forged blocks': function (browser) {

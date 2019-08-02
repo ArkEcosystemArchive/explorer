@@ -73,7 +73,7 @@ describe('Mixins > Currency', () => {
 
   describe('readableCurrency', () => {
     const displayCurrency = function (value) {
-      return value.toLocaleString('en-gb', {
+      return value.toLocaleString('en-GB', {
         style: 'currency',
         currency: 'eur'
       })

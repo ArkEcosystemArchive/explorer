@@ -3,7 +3,7 @@
     v-if="transaction"
     class="max-w-2xl mx-auto md:pt-5"
   >
-    <ContentHeader>{{ $t("Transaction") }}</ContentHeader>
+    <ContentHeader>{{ $t('COMMON.TRANSACTION') }}</ContentHeader>
 
     <template v-if="transactionNotFound">
       <section class="page-section py-5 md:py-10 px-6">
@@ -18,7 +18,7 @@
             class="mt-4 pager-button items-center"
             @click="fetchTransaction"
           >
-            <span>{{ !isFetching ? $t('Reload this page') : $t('Loading...') }}</span>
+            <span>{{ !isFetching ? $t('COMMON.RELOAD') : $t('COMMON.LOADING') }}</span>
           </button>
         </div>
       </section>
@@ -35,7 +35,7 @@
           </div>
           <div class="flex-auto min-w-0">
             <div class="text-grey mb-2">
-              {{ $t("Transaction ID") }}
+              {{ $t('TRANSACTION.ID') }}
             </div>
             <div class="flex">
               <div class="text-xl text-white semibold truncate">

@@ -1,7 +1,7 @@
 <template>
   <div v-if="transactions && transactions.length > 0">
     <h2 class="text-2xl mb-5 md:mb-6 px-5 sm:hidden text-theme-text-primary">
-      {{ $t("Transactions") }}
+      {{ $t('COMMON.TRANSACTIONS') }}
     </h2>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
@@ -19,7 +19,7 @@
           tag="button"
           class="show-more-button"
         >
-          {{ $t("Show more") }}
+          {{ $t('PAGINATION.SHOW_MORE') }}
         </RouterLink>
       </div>
     </section>

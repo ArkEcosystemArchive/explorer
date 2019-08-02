@@ -9,7 +9,7 @@
           {{ totals.forging }}
         </div>
         <div class="text-grey">
-          {{ $t("Forged block recently") }}
+          {{ $t('PAGES.DELEGATE_MONITOR.STATS.FORGED') }}
         </div>
       </div>
     </div>
@@ -23,7 +23,7 @@
           {{ totals.missedBlock }}
         </div>
         <div class="text-grey">
-          {{ $t("Missed block") }}
+          {{ $t('PAGES.DELEGATE_MONITOR.STATS.MISSED') }}
         </div>
       </div>
     </div>
@@ -39,7 +39,7 @@
           {{ totals.notForging + totals.neverForged }}
         </div>
         <div class="text-grey">
-          {{ $t("Not forging") }}
+          {{ $t('PAGES.DELEGATE_MONITOR.STATS.NOT_FORGING') }}
         </div>
       </div>
     </div>
@@ -53,7 +53,7 @@
           {{ totals.remainingBlocks }}
         </div>
         <div class="text-grey">
-          {{ $t("In queue for forging") }}
+          {{ $t('PAGES.DELEGATE_MONITOR.STATS.IN_QUEUE') }}
         </div>
       </div>
     </div>

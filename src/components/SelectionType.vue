@@ -9,7 +9,7 @@
         :class="`bg-${backgroundColor} text-${secondaryTextColor}`"
         class="flex items-center rounded-l py-4 px-6 text-xs"
       >
-        {{ $t("Type") }}
+        {{ $t('COMMON.TYPE') }}
       </span>
 
       <span
@@ -18,7 +18,7 @@
         @click="toggleDropdown"
       >
         <span class="font-bold">
-          {{ $t(types[transactionType + 1]) }}
+          {{ $t(`TRANSACTION.TYPES.${types[transactionType + 1]}`) }}
         </span>
 
         <svg
@@ -44,7 +44,7 @@
           <div
             class="dropdown-button"
             @click="filterTransactions(index - 1)"
-          >{{ $t(type) }}</div>
+          >{{ $t(`TRANSACTION.TYPES.${type}`) }}</div>
         </li>
       </ul>
     </div>
@@ -54,7 +54,7 @@
         :class="[ inBanner ? bannerClasses : 'text-theme-text-thead' ]"
         class="block mb-2 text-xs"
       >
-        {{ $t("Type") }}
+        {{ $t('COMMON.TYPE') }}
       </span>
 
       <span
@@ -62,7 +62,7 @@
         class="flex items-center cursor-pointer"
         @click="toggleDropdown"
       >
-        <span class="mr-1 md:whitespace-no-wrap">{{ $t(types[transactionType + 1]) }}</span>
+        <span class="mr-1 md:whitespace-no-wrap">{{ $t(`TRANSACTION.TYPES.${types[transactionType + 1]}`) }}</span>
         <svg
           :class="{ 'rotate-180': isOpen }"
           class="fill-current"
@@ -86,7 +86,7 @@
           <div
             class="dropdown-button"
             @click="filterTransactions(index - 1)"
-          >{{ $t(type) }}</div>
+          >{{ $t(`TRANSACTION.TYPES.${type}`) }}</div>
         </li>
       </ul>
     </div>
@@ -105,7 +105,12 @@ export default {
 
   data: () => ({
     types: [
-      'All', 'Transfer', 'Second Signature', 'Delegate Registration', 'Vote', 'Multisignature Registration'
+      'ALL',
+      'TRANSFER',
+      'SECOND_SIGNATURE',
+      'DELEGATE_REGISTRATION',
+      'VOTE',
+      'MULTI_SIGNATURE'
     ],
     transactionType: -1,
     selectOpen: false
