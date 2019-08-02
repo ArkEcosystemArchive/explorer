@@ -46,59 +46,51 @@
       <span class="ml-2 hidden lg:inline">{{ $t("Previous") }}</span>
     </button>
 
-    <div class="hidden md:flex px-3 bg-theme-button rounded">
-      <button
-        v-if="pageButtons[0] !== 1"
-        class="Paginator__Button Paginator__Button--search"
-      >
-        <span>...</span>
-        <span class="icon">
-          <svg
-            class="fill-current"
-            width="16"
-            height="16"
-            viewBox="0 0 1792 1792"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M1216 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z" />
-          </svg>
-        </span>
-      </button>
+    <div
+      v-click-outside="closePageInput"
+      class="flex relative"
+    >
+      <PaginationPageInput
+        :is-visible="showPageInput"
+        class="Pagination__Input"
+        @close="closePageInput"
+      />
 
-      <button
-        v-for="page in pageButtons"
-        :key="page"
-        :disabled="page === currentPage"
-        :class="{ 'active': page === currentPage }"
-        class="Paginator__Button transition"
-        @click="emitPageChange(page)"
+      <div
+        :class="{ 'opacity-0': showPageInput }"
+        class="hidden md:flex px-3 bg-theme-button rounded"
       >
-        <span>{{ page }}</span>
-      </button>
+        <PaginationSearchButton
+          :is-visible="pageButtons[0] !== 1"
+          @click="openPageInput"
+        />
 
-      <button
-        v-if="pageButtons[pageButtons.length - 1] !== pageCount"
-        class="Paginator__Button Paginator__Button--search"
-      >
-        <span>...</span>
-        <span class="icon">
-          <svg
-            class="fill-current"
-            width="16"
-            height="16"
-            viewBox="0 0 1792 1792"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M1216 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z" />
-          </svg>
-        </span>
-      </button>
-    </div>
+        <button
+          v-for="page in pageButtons"
+          :key="page"
+          :disabled="page === currentPage"
+          :class="{ 'active': page === currentPage }"
+          class="Pagination__Button transition"
+          @click="emitPageChange(page)"
+        >
+          <span>{{ page }}</span>
+        </button>
 
-    <div class="flex md:hidden px-3 bg-theme-button rounded">
-      <button class="Paginator__Button">
-        <span>{{ $t("Page x of y", { x: currentPage, y: pageCount }) }}</span>
-      </button>
+        <PaginationSearchButton
+          :is-visible="pageButtons[pageButtons.length - 1] !== pageCount"
+          @click="openPageInput"
+        />
+      </div>
+
+      <div class="flex md:hidden bg-theme-button rounded">
+        <PaginationSearchButton
+          :class="{ 'opacity-0': showPageInput }"
+          :hover-scale="false"
+          @click="openPageInput"
+        >
+          {{ $t("Page x of y", { x: currentPage, y: pageCount }) }}
+        </PaginationSearchButton>
+      </div>
     </div>
 
     <button
@@ -150,8 +142,15 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { PaginationPageInput, PaginationSearchButton } from '@/components/utils/pagination'
+
 export default {
-  name: 'Paginator',
+  name: 'Pagination',
+
+  components: {
+    PaginationPageInput,
+    PaginationSearchButton
+  },
 
   props: {
     meta: {
@@ -164,7 +163,15 @@ export default {
     }
   },
 
+  data: () => ({
+    pageInputVisible: false
+  }),
+
   computed: {
+    showPageInput () {
+      return this.pageInputVisible
+    },
+
     buttonCount () {
       return this.currentPage < 100 ? 7 : 5
     },
@@ -235,69 +242,54 @@ export default {
   },
 
   methods: {
-    emitPageChange (page) {
-      this.$emit('page-change', page)
-    },
-
-    emitNext () {
-      this.emitPageChange(this.currentPage + 1)
+    emitFirst () {
+      this.emitPageChange(1)
     },
 
     emitPrevious () {
       this.emitPageChange(this.currentPage - 1)
     },
 
-    emitFirst () {
-      this.emitPageChange(1)
+    emitNext () {
+      this.emitPageChange(this.currentPage + 1)
     },
 
     emitLast () {
       this.emitPageChange(this.pageCount)
+    },
+
+    emitPageChange (page) {
+      this.$emit('page-change', page)
+    },
+
+    openPageInput () {
+      this.pageInputVisible = true
+    },
+
+    closePageInput () {
+      this.pageInputVisible = false
     }
   }
 }
 </script>
 
 <style>
-.Paginator__Button {
-  @apply .bg-theme-button .text-theme-button-text .p-3 .cursor-pointer .flex .flex-no-wrap .items-center;
+.Pagination__Button {
+  @apply .text-theme-button-text .p-3 .cursor-pointer .flex .flex-no-wrap .items-center;
 }
 
-.Paginator__Button.active {
+.Pagination__Button.active {
   @apply .bg-theme-button-active .text-theme-button-text;
 }
 
-.Paginator__Button:not(:disabled):hover {
-  @apply .rounded .bg-blue .text-white;
+.Pagination__Button:not(:disabled):hover {
+  @apply .bg-blue .text-white .rounded;
   box-shadow: 0 5px 15px rgba(9, 100, 228, 0.34);
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
 
-.Paginator__Button:disabled {
+.Pagination__Button:disabled {
   @apply .text-theme-button-text;
 }
-
-.Paginator__Button--search {
-  @apply .relative;
-}
-
-.Paginator__Button--search .icon {
-  @apply .hidden .absolute;
-  left: 50%;
-}
-
-.Paginator__Button--search .icon svg {
-  @apply .relative;
-  left: -50%;
-}
-
-.Paginator__Button--search:hover span:not(.icon) {
-  @apply .opacity-0;
-}
-
-.Paginator__Button--search:hover .icon {
-  @apply .block;
-}
-
 </style>

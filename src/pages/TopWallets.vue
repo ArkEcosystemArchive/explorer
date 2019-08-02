@@ -16,8 +16,8 @@
           :total="supply"
         />
       </div>
-      <Paginator
-        v-if="showPaginator"
+      <Pagination
+        v-if="showPagination"
         :meta="meta"
         :current-page="currentPage"
         @page-change="onPageChange"
@@ -40,7 +40,7 @@ export default {
   computed: {
     ...mapGetters('network', ['supply']),
 
-    showPaginator () {
+    showPagination () {
       return this.meta && this.meta.pageCount
     },
 
@@ -62,10 +62,6 @@ export default {
     currentPage () {
       this.changePage()
     }
-  },
-
-  created () {
-    this.$on('paginatorChanged', page => this.changePage(page))
   },
 
   async beforeRouteEnter (to, from, next) {

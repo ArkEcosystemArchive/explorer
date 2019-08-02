@@ -8,8 +8,8 @@
       <div class="sm:hidden">
         <TableTransactionsMobile :transactions="transactions" />
       </div>
-      <Paginator
-        v-if="showPaginator"
+      <Pagination
+        v-if="showPagination"
         :meta="meta"
         :current-page="currentPage"
         @page-change="onPageChange"
@@ -29,7 +29,7 @@ export default {
   }),
 
   computed: {
-    showPaginator () {
+    showPagination () {
       return this.meta && this.meta.pageCount
     },
 
