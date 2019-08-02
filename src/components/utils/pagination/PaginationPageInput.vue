@@ -85,7 +85,7 @@ export default {
 
       const pageNumber = parseInt(this.page, 10)
 
-      if (!pageNumber || pageNumber > this.pageCount) {
+      if (!pageNumber || pageNumber < 1 || pageNumber > this.pageCount) {
         this.hasError = true
         setTimeout(() => (this.hasError = false), 1500)
       } else {
