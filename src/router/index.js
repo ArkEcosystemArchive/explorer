@@ -12,7 +12,6 @@ const WalletBlocksComponent = () => import('@/pages/Wallet/Blocks')
 const WalletTransactionsComponent = () => import('@/pages/Wallet/Transactions')
 const TransactionComponent = () => import('@/pages/Transaction')
 const TransactionsComponent = () => import('@/pages/Transactions')
-// const StatisticsComponent = () => import('@/pages/Statistics')
 const DelegateMonitorComponent = () => import('@/pages/DelegateMonitor')
 const TopWalletsComponent = () => import('@/pages/TopWallets')
 const NotFoundComponent = () => import('@/pages/404')
@@ -153,11 +152,6 @@ const router = new Router({
       component: TopWalletsComponent,
       meta: { title: route => { return getTitle('Top Wallets') } }
     },
-    // {
-    //   path: '/statistics',
-    //   name: 'statistics',
-    //   component: StatisticsComponent
-    // },
     {
       path: '/404',
       name: '404',

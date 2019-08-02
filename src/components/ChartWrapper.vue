@@ -5,14 +5,14 @@
       class="absolute inset-0 flex flex-col items-center justify-center text-white z-10"
     >
       <p class="mb-4">
-        {{ $t('The chart data could not be loaded') }}
+        {{ $t('MARKET_CHART.ERROR') }}
       </p>
       <button
         :disabled="isLoading"
         class="mt-4 pager-button items-center"
         @click="renderChart()"
       >
-        <span v-if="!isLoading">{{ $t('Reload chart') }}</span>
+        <span v-if="!isLoading">{{ $t('MARKET_CHART.RELOAD') }}</span>
         <Loader
           v-else
           :data="null"
@@ -26,7 +26,7 @@
     >
       <div class="flex justify-between items-center px-10 py-8">
         <h2 class="text-white m-0 text-xl font-normal">
-          {{ $t("Price in") }} {{ currencyName }}
+          {{ $t('MARKET_CHART.PRICE_IN') }} {{ currencyName }}
         </h2>
         <div>
           <template v-for="period in ['day', 'week', 'month', 'quarter', 'year']">
@@ -36,7 +36,7 @@
               class="chart-tab"
               @click="setPeriod(period)"
             >
-              {{ $t(capitalize(period)) }}
+              {{ $t(`MARKET_CHART.${period.toUpperCase()}`) }}
             </button>
           </template>
         </div>

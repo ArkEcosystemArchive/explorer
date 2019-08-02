@@ -26,7 +26,7 @@
       class="menu-button"
       @click.native="closeMenu"
     >
-      {{ $t("Home") }}
+      {{ $t('PAGES.HOME.TITLE') }}
     </RouterLink>
 
     <RouterLink
@@ -35,7 +35,7 @@
       class="menu-button"
       @click.native="closeMenu"
     >
-      {{ $t("Top Wallets") }}
+      {{ $t('PAGES.TOP_WALLETS.TITLE') }}
     </RouterLink>
 
     <RouterLink
@@ -44,17 +44,10 @@
       class="menu-button"
       @click.native="closeMenu"
     >
-      {{ $t("Delegate Monitor") }}
+      {{ $t('PAGES.DELEGATE_MONITOR.TITLE') }}
     </RouterLink>
 
-    <!-- <RouterLink :to="{ name: 'statistics' }" tag="button" class="menu-button">Statistics</RouterLink> -->
-
     <div class="flex-auto" />
-
-    <!-- <a href="#" class="menu-button">
-      <span class="mr-2">Snapshots</span>
-      <img src="@/assets/images/icons/download.svg" />
-    </a> -->
   </div>
 </template>
 

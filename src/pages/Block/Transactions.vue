@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <ContentHeader>{{ $t("Transactions") }}</ContentHeader>
+    <ContentHeader>{{ $t('COMMON.TRANSACTIONS') }}</ContentHeader>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
         <TableTransactionsDesktop :transactions="transactions" />

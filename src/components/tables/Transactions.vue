@@ -5,7 +5,7 @@
       :has-pagination="false"
       :columns="columns"
       :rows="transactions"
-      :no-data-message="$t('No results')"
+      :no-data-message="$t('COMMON.NO_RESULTS')"
       @on-sort-change="emitSortChange"
     >
       <template
@@ -78,8 +78,8 @@
               >
             </div>
             <div v-else>
-              <div v-tooltip="data.row.confirmations + ' ' + $t('Confirmations')">
-                {{ $t("Well confirmed") }}
+              <div v-tooltip="data.row.confirmations + ' ' + $t('COMMON.CONFIRMATIONS')">
+                {{ $t('TRANSACTION.WELL_CONFIRMED') }}
               </div>
             </div>
           </div>
@@ -120,41 +120,41 @@ export default {
 
       let columns = [
         {
-          label: this.$t('ID'),
+          label: this.$t('COMMON.ID'),
           field: 'id',
           thClass: 'start-cell',
           tdClass: 'start-cell'
         },
         {
-          label: this.$t('Timestamp'),
+          label: this.$t('COMMON.TIMESTAMP'),
           field: 'timestamp.unix',
           type: 'number',
           thClass: 'text-left hidden md:table-cell',
           tdClass: 'text-left hidden md:table-cell wrap-timestamp'
         },
         {
-          label: this.$t('Sender'),
+          label: this.$t('TRANSACTION.SENDER'),
           field: 'sender'
         },
         {
-          label: this.$t('Recipient'),
+          label: this.$t('TRANSACTION.RECIPIENT'),
           field: 'recipient'
         },
         {
-          label: this.$t('Smartbridge'),
+          label: this.$t('TRANSACTION.SMARTBRIDGE'),
           field: 'vendorField',
           thClass: 'text-right cell-smartbridge',
           tdClass: 'text-right cell-smartbridge'
         },
         {
-          label: this.$t('Amount (token)', { token: this.networkToken() }),
+          label: this.$t('TRANSACTION.AMOUNT'),
           field: 'amount',
           type: 'number',
           thClass: 'end-cell lg:base-cell',
           tdClass: 'end-cell lg:base-cell'
         },
         {
-          label: this.$t('Fee (token)', { token: this.networkToken() }),
+          label: this.$t('TRANSACTION.FEE'),
           field: 'fee',
           type: 'number',
           thClass: feeClasses.join(' '),
@@ -166,7 +166,7 @@ export default {
         columns = columns.filter(column => column.field !== 'vendorField')
 
         columns.push({
-          label: this.$t('Confirmations'),
+          label: this.$t('COMMON.CONFIRMATIONS'),
           field: 'confirmations',
           type: 'number',
           sortable: false,

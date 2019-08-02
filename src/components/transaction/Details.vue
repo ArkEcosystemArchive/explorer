@@ -3,7 +3,7 @@
     <div class="px-5 sm:px-10">
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t("Sender") }}
+          {{ $t('TRANSACTION.SENDER') }}
         </div>
         <div class="truncate">
           <LinkWallet
@@ -15,7 +15,7 @@
 
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t("Recipient") }}
+          {{ $t('TRANSACTION.RECIPIENT') }}
         </div>
         <div class="truncate">
           <LinkWallet
@@ -29,14 +29,14 @@
 
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t("Confirmations") }}
+          {{ $t('COMMON.CONFIRMATIONS') }}
         </div>
         <div>{{ confirmations }}</div>
       </div>
 
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t("Amount") }}
+          {{ $t('TRANSACTION.AMOUNT') }}
         </div>
         <div
           v-tooltip="{
@@ -51,7 +51,7 @@
 
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t("Fee") }}
+          {{ $t('TRANSACTION.FEE') }}
         </div>
         <div
           v-tooltip="{
@@ -66,7 +66,7 @@
 
       <div class="list-row-border-b-no-wrap">
         <div class="mr-4">
-          {{ $t("Timestamp") }}
+          {{ $t('COMMON.TIMESTAMP') }}
         </div>
         <div v-if="transaction.timestamp">
           {{ readableTimestamp(transaction.timestamp.unix) }}
@@ -78,7 +78,7 @@
         class="list-row-border-b-no-wrap"
       >
         <div class="mr-4">
-          {{ $t("Smartbridge") }}
+          {{ $t('TRANSACTION.SMARTBRIDGE') }}
         </div>
         <div class="overflow-hidden break-words">
           {{ emojify(transaction.vendorField) }}
@@ -87,7 +87,7 @@
 
       <div class="list-row">
         <div class="mr-4">
-          {{ $t("Block") }}
+          {{ $t('TRANSACTION.BLOCK_ID') }}
         </div>
         <div>
           <LinkBlock

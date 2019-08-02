@@ -17,7 +17,7 @@
           tag="button"
           class="show-more-button"
         >
-          {{ $t("Show more") }}
+          {{ $t('PAGINATION.SHOW_MORE') }}
         </RouterLink>
       </div>
     </Loader>
