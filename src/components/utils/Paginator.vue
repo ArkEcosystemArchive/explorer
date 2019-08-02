@@ -1,9 +1,8 @@
 <template>
-  <div class="flex flex-no-wrap mx-5 sm:mx-10 mt-5 md:mt-10">
+  <div class="flex flex-no-wrap justify-center mx-5 sm:mx-10 mt-5 md:mt-10">
     <button
-      :disabled="self === first"
-      :class="{ 'disabled': self === first }"
-      class="pager-button ml-auto mr-1 hidden lg:flex"
+      v-if="showFirst"
+      class="pager-button mr-2 hidden lg:flex"
       @click="emitFirst"
     >
       <svg
@@ -24,13 +23,11 @@
           d="m7.054,8l0.946,-0.933l-3.108,-3.067l3.108,-3.067l-0.946,-0.933l-4.054,4l4.054,4z"
         />
       </svg>
-      <span class="ml-2">{{ $t("First") }}</span>
     </button>
 
     <button
-      :disabled="!previous"
-      :class="{ 'disabled': !previous }"
-      class="pager-button mr-auto lg:mr-2"
+      v-if="showPrevious"
+      class="pager-button lg:mr-2"
       @click="emitPrevious"
     >
       <svg
@@ -46,29 +43,67 @@
           d="M4.054,8.000 L5.000,7.067 L1.892,4.000 L5.000,0.933 L4.054,0.000 L-0.000,4.000 L4.054,8.000 Z"
         />
       </svg>
-      <span class="ml-2">{{ $t("Previous") }}</span>
+      <span class="ml-2 hidden lg:inline">{{ $t("Previous") }}</span>
     </button>
 
-    <div class="flex hidden lg:flex">
+    <div class="flex hidden lg:flex px-3 bg-theme-button rounded">
+      <button
+        v-if="pageButtons[0] !== 1"
+        class="Paginator__Button Paginator__Button--search"
+      >
+        <span>...</span>
+        <span class="icon">
+          <svg
+            class="fill-current"
+            width="16"
+            height="16"
+            viewBox="0 0 1792 1792"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M1216 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z" />
+          </svg>
+        </span>
+      </button>
+
       <button
         v-for="page in pageButtons"
         :key="page"
         :disabled="isSpacer(page) || page === currentPage"
-        :class="{ 'active': page === currentPage }"
+        :class="{
+          'active': page === currentPage,
+          'Paginator__Button--search': isSpacer(page)
+        }"
         class="Paginator__Button transition"
         @click="emitPageChange(page)"
       >
         <span>{{ page }}</span>
       </button>
+
+      <button
+        v-if="pageButtons[pageButtons.length - 1] !== pageCount"
+        class="Paginator__Button Paginator__Button--search"
+      >
+        <span>...</span>
+        <span class="icon">
+          <svg
+            class="fill-current"
+            width="16"
+            height="16"
+            viewBox="0 0 1792 1792"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M1216 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z" />
+          </svg>
+        </span>
+      </button>
     </div>
 
     <button
-      :disabled="!next"
-      :class="{ 'disabled': !next }"
-      class="pager-button ml-auto lg:ml-2"
+      v-if="showNext"
+      class="pager-button lg:ml-2"
       @click="emitNext"
     >
-      <span class="mr-2">{{ $t("Next") }}</span>
+      <span class="mr-2 hidden lg:inline">{{ $t("Next") }}</span>
       <svg
         class="inline"
         xmlns="http://www.w3.org/2000/svg"
@@ -85,12 +120,10 @@
     </button>
 
     <button
-      :disabled="self === last"
-      :class="{ 'disabled': self === last }"
-      class="pager-button mr-auto ml-1 hidden lg:flex "
+      v-if="showLast"
+      class="pager-button ml-2 hidden lg:flex "
       @click="emitLast"
     >
-      <span class="mr-2">{{ $t("Last") }}</span>
       <svg
         class="inline"
         xmlns="http://www.w3.org/2000/svg"
@@ -130,7 +163,7 @@ export default {
 
   computed: {
     buttonCount () {
-      return this.currentPage < 100 ? 9 : (this.currentPage < 10000 ? 7 : 5)
+      return this.currentPage < 100 ? 7 : 5
     },
 
     pageCount () {
@@ -157,6 +190,22 @@ export default {
       return this.meta.last
     },
 
+    showFirst () {
+      return !this.pageButtons.includes(1) && this.first !== this.previous
+    },
+
+    showPrevious () {
+      return this.currentPage > 1
+    },
+
+    showNext () {
+      return this.currentPage < this.pageCount
+    },
+
+    showLast () {
+      return !this.pageButtons.includes(this.pageCount) && this.last !== this.next
+    },
+
     subRangeLength () {
       return Math.floor(this.buttonCount / 2)
     },
@@ -167,15 +216,15 @@ export default {
       if (this.pageCount <= this.buttonCount) {
         buttons = Array.apply(null, Array(this.pageCount)).map((_, i) => i + 1)
       } else if (this.currentPage <= this.subRangeLength + 1) {
-        buttons = Array.apply(null, Array(this.buttonCount)).map((_, i) => i + 1).concat('...')
+        buttons = Array.apply(null, Array(this.buttonCount)).map((_, i) => i + 1)
       } else if (this.currentPage >= this.pageCount - this.subRangeLength) {
-        buttons = ['...', ...Array.apply(null, Array(this.buttonCount)).map((_, i) => {
+        buttons = Array.apply(null, Array(this.buttonCount)).map((_, i) => {
           return this.pageCount - this.buttonCount + i + 1
-        })]
+        })
       } else {
-        buttons = ['...', ...Array.apply(null, Array(this.buttonCount)).map((_, i) => {
+        buttons = Array.apply(null, Array(this.buttonCount)).map((_, i) => {
           return this.currentPage - this.subRangeLength + i
-        }), '...']
+        })
       }
 
       return buttons
@@ -215,20 +264,34 @@ export default {
   @apply .bg-theme-button .text-theme-button-text .p-3 .cursor-pointer .flex .flex-no-wrap .items-center;
 }
 
-.Paginator__Button:first-child {
-  @apply .rounded-l;
-}
-
-.Paginator__Button:last-child {
-  @apply .rounded-r;
-}
-
 .Paginator__Button.active {
   @apply .bg-theme-button-active .text-theme-button-text;
 }
 
 .Paginator__Button:disabled {
   @apply .text-theme-button-text;
+}
+
+.Paginator__Button--search {
+  @apply .relative;
+}
+
+.Paginator__Button--search .icon {
+  @apply .hidden .absolute;
+  left: 50%;
+}
+
+.Paginator__Button--search .icon svg {
+  @apply .relative;
+  left: -50%;
+}
+
+.Paginator__Button--search:hover span:not(.icon) {
+  @apply .opacity-0;
+}
+
+.Paginator__Button--search:hover .icon {
+  @apply .block;
 }
 
 .Paginator__Button:not(:disabled):hover {
