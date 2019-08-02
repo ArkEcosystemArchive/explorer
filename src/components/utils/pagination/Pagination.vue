@@ -52,7 +52,9 @@
     >
       <PaginationPageInput
         :is-visible="showPageInput"
+        :page-count="pageCount"
         class="Pagination__Input"
+        @page-change="emitPageChange"
         @close="closePageInput"
       />
 

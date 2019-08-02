@@ -25,6 +25,7 @@
   --theme-button: #e0f0fd;
   --theme-button-active: #c6dbec;
   --theme-button-text: #037cff;
+  --theme-button-close: #a0a6c8;
   --language-icon: #395174;
 }
 
@@ -62,6 +63,7 @@
   --theme-button: #2a2b31;
   --theme-button-active: #42434c;
   --theme-button-text: #fff;
+  --theme-button-close: #787a86;
   --language-icon: #a1a2a6;
 }
 

@@ -79,6 +79,7 @@ module.exports = {
       'theme-button': 'var(--theme-button)',
       'theme-button-active': 'var(--theme-button-active)',
       'theme-button-text': 'var(--theme-button-text)',
+      'theme-button-close': 'var(--theme-button-close)',
       'language-icon': 'var(--language-icon)',
 
       'theme-text-thead': 'var(--color-theme-text-thead)',
