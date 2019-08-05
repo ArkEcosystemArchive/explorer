@@ -279,7 +279,7 @@ export default {
     },
 
     setMobileView (isMobile) {
-      this.mobileView = isMobile
+      this.mobileView = !!isMobile
     }
   }
 }

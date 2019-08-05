@@ -100,14 +100,12 @@ export default {
 
   watch: {
     isMobile (showMobile) {
-      this.setMobilePlaceholder(showMobile)
+      this.setPlaceholder(showMobile)
     }
   },
 
   mounted () {
-    if (this.isMobile) {
-      this.setMobilePlaceholder()
-    }
+    this.setPlaceholder()
   },
 
   methods: {
@@ -126,7 +124,7 @@ export default {
       }
     },
 
-    setMobilePlaceholder (showMobile) {
+    setPlaceholder (showMobile) {
       this.placeholder = showMobile
         ? this.$i18n.t('PAGINATION.PLACEHOLDER.SHORT')
         : this.$i18n.t('PAGINATION.PLACEHOLDER.LONG')
