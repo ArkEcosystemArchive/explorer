@@ -163,7 +163,12 @@ export default {
     PAGE: 'Strona',
     PREVIOUS: 'Poprzedni',
     ROWS_PER_PAGE: 'Wiersze na stronę',
-    SHOW_MORE: 'Pokaż więcej'
+    SHOW_MORE: 'Pokaż więcej',
+    PLACEHOLDER: {
+      SHORT: '# strony',
+      LONG: 'Wprowadź numer strony'
+    },
+    NO_RESULTS: 'Nieprawidłowy numer strony'
   },
 
   HEADER: {

@@ -64,10 +64,8 @@ describe('Services > Block', () => {
     expect(data.sort((a, b) => a.height > b.height)).toEqual(data)
   })
 
-  xit('should return an empty list when given generator address is incorrect', async () => {
-    jest.setTimeout(30000)
-    const { data } = await BlockService.byAddress('XeaqhUKfBtVqNhtMct3piBiWfdhbRwbg4W')
-    expect(data).toHaveLength(0)
+  it('should fail when given generator address is incorrect', async () => {
+    await expect(BlockService.byAddress('XeaqhUKfBtVqNhtMct3piBiWfdhbRwbg4W')).rejects.toThrow()
   })
 
   it('should return the previous block for the given height', async () => {

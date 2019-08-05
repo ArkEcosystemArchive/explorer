@@ -22,8 +22,10 @@
   --ark-meter: #e4ece9;
   --chart-active: #395174;
   --chart-inactive: #a0a6c8;
-  --theme-button: #e0f0fd;
+  --theme-button: #e5f0f9;
+  --theme-button-active: #c5dbed;
   --theme-button-text: #037cff;
+  --theme-button-close: #a0a6c8;
   --language-icon: #395174;
 }
 
@@ -59,7 +61,9 @@
   --chart-active: #a1a2a6;
   --chart-inactive: #585a68;
   --theme-button: #2a2b31;
+  --theme-button-active: #42434c;
   --theme-button-text: #fff;
+  --theme-button-close: #787a86;
   --language-icon: #a1a2a6;
 }
 
