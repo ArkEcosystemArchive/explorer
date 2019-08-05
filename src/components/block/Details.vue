@@ -105,7 +105,10 @@
           {{ $t('BLOCK.GENERATED_BY') }}
         </div>
         <div v-if="block.generator">
-          <LinkWallet :address="block.generator.address" />
+          <LinkWallet
+            :address="block.generator.address"
+            tooltip-placement="left"
+          />
         </div>
       </div>
     </div>

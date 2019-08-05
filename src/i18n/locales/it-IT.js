@@ -79,7 +79,7 @@ export default {
     PUBLIC_KEY: 'Chiave pubblica',
     VERIFIED: 'Questo è un indirizzo verificato',
     VOTING_FOR: 'Vota per',
-    BALANCE: 'Saldo',
+    BALANCE: 'Saldo ({token})',
     SECOND_PASSPHRASE_ENABLED: 'Seconda firma abilitata',
     SUMMARY: 'Sommario portafoglio',
     QR_CODE: 'Codice QR',

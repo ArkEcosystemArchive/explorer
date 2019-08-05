@@ -6,11 +6,19 @@
           :to="{ name: 'wallet', params: { address: walletAddress } }"
           class="flex items-center"
         >
-          <span v-tooltip="getAddress()">
+          <span
+            v-tooltip="{
+              content: getAddress(),
+              placement: tooltipPlacement
+            }"
+          >
             {{ knownWallets[address] }}
           </span>
           <svg
-            v-tooltip="$t('WALLET.VERIFIED')"
+            v-tooltip="{
+              content: $t('WALLET.VERIFIED'),
+              placement: tooltipPlacement
+            }"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             width="16px"
@@ -27,7 +35,10 @@
       </span>
       <RouterLink
         v-else
-        v-tooltip="getAddress()"
+        v-tooltip="{
+          content: getAddress(),
+          placement: tooltipPlacement
+        }"
         :to="{ name: 'wallet', params: { address: walletAddress } }"
       >
         <span v-if="hasDefaultSlot">
@@ -46,7 +57,10 @@
     <span v-else-if="type === 3">
       <RouterLink
         v-if="votedDelegateAddress"
-        v-tooltip="votedDelegateAddress"
+        v-tooltip="{
+          content: votedDelegateAddress,
+          placement: tooltipPlacement
+        }"
         :to="{ name: 'wallet', params: { address: votedDelegateAddress } }"
       >
         <span :class="getVoteColor">{{ isUnvote ? $t('TRANSACTION.TYPES.UNVOTE') : $t('TRANSACTION.TYPES.VOTE') }} <span class="italic">({{ votedDelegateUsername }})</span></span>
@@ -90,6 +104,11 @@ export default {
     trunc: {
       type: Boolean,
       default: true
+    },
+    tooltipPlacement: {
+      type: String,
+      required: false,
+      default: 'top'
     }
   },
 

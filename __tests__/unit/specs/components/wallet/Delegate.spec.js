@@ -40,7 +40,7 @@ describe('Components > Wallet > Delegate', () => {
     expect(divs.at(0).text()).toBe('Username')
     expect(divs.at(1).text()).toContain('Rank')
     expect(divs.at(2).text()).toContain('Votes')
-    expect(divs.at(3).text()).toBe('Forged')
+    expect(divs.at(3).text()).toBe('Total forged')
 
     divs = wrapper.findAll('div.list-row')
     expect(divs).toHaveLength(1)
