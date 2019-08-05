@@ -1,6 +1,5 @@
 export default {
   COMMON: {
-    BALANCE: 'Balance',
     BLOCK: 'Block',
     BLOCKS: 'Blocks',
     CONFIRMATIONS: 'Confirmations',
@@ -79,14 +78,14 @@ export default {
     PUBLIC_KEY: 'Public key',
     VERIFIED: 'This is a verified address',
     VOTING_FOR: 'Voting for',
-    BALANCE: 'Balance',
+    BALANCE: 'Balance ({token})',
     SECOND_PASSPHRASE_ENABLED: 'Second signature enabled',
     SUMMARY: 'Wallet summary',
     QR_CODE: 'QR Code',
     SCAN_FOR_ADDRESS: 'Scan for address',
     DELEGATE: {
       FORGED_BLOCKS: 'Forged blocks',
-      TOTAL_FORGED: 'Forged',
+      TOTAL_FORGED: 'Total forged',
       RANK: 'Rank',
       RANK_NOT_AVAILABLE: 'Not yet available',
       USERNAME: 'Username',

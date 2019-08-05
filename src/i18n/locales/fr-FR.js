@@ -1,6 +1,5 @@
 export default {
   COMMON: {
-    BALANCE: 'Solde',
     BLOCK: 'Bloc',
     BLOCKS: 'Blocs',
     CONFIRMATIONS: 'Confirmations',
@@ -79,7 +78,7 @@ export default {
     PUBLIC_KEY: 'Clé publique',
     VERIFIED: 'Ceci est une adresse vérifiée',
     VOTING_FOR: 'Votes pour',
-    BALANCE: 'Solde',
+    BALANCE: 'Solde ({token})',
     SECOND_PASSPHRASE_ENABLED: 'Seconde signature activée',
     SUMMARY: 'Résumé du portefeuille',
     QR_CODE: 'QR Code',

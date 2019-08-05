@@ -1,6 +1,5 @@
 export default {
   COMMON: {
-    BALANCE: 'Balans',
     BLOCK: 'Block',
     BLOCKS: 'Blocks',
     CONFIRMATIONS: 'Confirmaties',
@@ -79,14 +78,14 @@ export default {
     PUBLIC_KEY: 'Public key',
     VERIFIED: 'Dit is een geverifieerd adres',
     VOTING_FOR: 'Stemt voor',
-    BALANCE: 'Balans',
+    BALANCE: 'Balans ({token})',
     SECOND_PASSPHRASE_ENABLED: '2e Handtekening Ingeschakeld',
     SUMMARY: 'Wallet samenvatting',
     QR_CODE: 'QR Code',
     SCAN_FOR_ADDRESS: 'Scan voor Adres',
     DELEGATE: {
       FORGED_BLOCKS: 'Blocks geforged',
-      TOTAL_FORGED: 'Forged',
+      TOTAL_FORGED: 'Totaal geforged',
       RANK: 'Rang',
       RANK_NOT_AVAILABLE: 'Nog niet beschikbaar',
       USERNAME: 'Gebruikersnaam',

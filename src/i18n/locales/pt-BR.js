@@ -1,6 +1,5 @@
 export default {
   COMMON: {
-    BALANCE: 'Balanço',
     BLOCK: 'Bloco',
     BLOCKS: 'Blocos',
     CONFIRMATIONS: 'Confirmações',
@@ -79,7 +78,7 @@ export default {
     PUBLIC_KEY: 'Public key',
     VERIFIED: 'Este é um endereço confirmado',
     VOTING_FOR: 'Votos para',
-    BALANCE: 'Balanço',
+    BALANCE: 'Balanço ({token})',
     SECOND_PASSPHRASE_ENABLED: 'Senha Secundária ativada',
     SUMMARY: 'Sumário da carteira',
     QR_CODE: 'Código QR',
