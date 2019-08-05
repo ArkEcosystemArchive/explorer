@@ -93,18 +93,18 @@ module.exports = {
   'it should be possible to sort the active delegates': function (browser) {
     browser
       .useXpath()
-      .expect.element("//th[contains(., 'Name')]").to.be.present
+      .expect.element("//th[contains(., 'Username')]").to.be.present
     browser
-      .assert.cssClassNotPresent("//th[contains(., 'Name')]", 'sorting-asc')
-      .assert.cssClassNotPresent("//th[contains(., 'Name')]", 'sorting-desc')
+      .assert.cssClassNotPresent("//th[contains(., 'Username')]", 'sorting-asc')
+      .assert.cssClassNotPresent("//th[contains(., 'Username')]", 'sorting-desc')
     browser
-      .click("//th[contains(., 'Name')]")
+      .click("//th[contains(., 'Username')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(., 'Name')]", 'sorting-asc')
+    browser.assert.cssClassPresent("//th[contains(., 'Username')]", 'sorting-asc')
     browser
-      .click("//th[contains(., 'Name')]")
+      .click("//th[contains(., 'Username')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(., 'Name')]", 'sorting-desc')
+    browser.assert.cssClassPresent("//th[contains(., 'Username')]", 'sorting-desc')
   },
 
   'it should be possible to click on an active delegates name': function (browser) {
@@ -147,18 +147,18 @@ module.exports = {
 
   'it should be possible to sort the standby delegates': function (browser) {
     browser
-      .useXpath().expect.element("//th[contains(., 'Name')]").to.be.present
+      .useXpath().expect.element("//th[contains(., 'Username')]").to.be.present
     browser
-      .assert.cssClassNotPresent("//th[contains(., 'Name')]", 'sorting-asc')
-      .assert.cssClassNotPresent("//th[contains(., 'Name')]", 'sorting-desc')
+      .assert.cssClassNotPresent("//th[contains(., 'Username')]", 'sorting-asc')
+      .assert.cssClassNotPresent("//th[contains(., 'Username')]", 'sorting-desc')
     browser
-      .click("//th[contains(., 'Name')]")
+      .click("//th[contains(., 'Username')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(., 'Name')]", 'sorting-asc')
+    browser.assert.cssClassPresent("//th[contains(., 'Username')]", 'sorting-asc')
     browser
-      .click("//th[contains(., 'Name')]")
+      .click("//th[contains(., 'Username')]")
       .pause(500)
-    browser.assert.cssClassPresent("//th[contains(., 'Name')]", 'sorting-desc')
+    browser.assert.cssClassPresent("//th[contains(., 'Username')]", 'sorting-desc')
   },
 
   'it should be possible to click on the standby delegates name': function (browser) {

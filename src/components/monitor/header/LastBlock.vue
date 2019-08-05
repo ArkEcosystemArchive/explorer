@@ -2,7 +2,7 @@
   <div class="flex-auto flex justify-between lg:ml-10">
     <div>
       <div class="text-grey mb-2 min-w-0">
-        {{ $t("Last block") }}
+        {{ $t('PAGES.DELEGATE_MONITOR.HEADER.LAST_BLOCK') }}
       </div>
       <div
         v-if="block.id"
@@ -17,18 +17,18 @@
 
     <div class="hidden md:block">
       <div class="text-grey mb-2 min-w-0">
-        {{ $t("Forged") }}
+        {{ $t('PAGES.DELEGATE_MONITOR.HEADER.FORGED') }}
       </div>
       <div class="text-lg text-white truncate">
         <span v-if="block.forged">
-          {{ readableCrypto(block.forged.total) }} {{ $tc("from transactions", block.transactions, { count: block.transactions }) }}
+          {{ readableCrypto(block.forged.total) }} {{ $tc('PAGES.DELEGATE_MONITOR.HEADER.TX_COUNT', block.transactions, { count: block.transactions }) }}
         </span>
       </div>
     </div>
 
     <div class="w-32">
       <div class="text-grey mb-2 min-w-0">
-        {{ $t("Delegate") }}
+        {{ $t('COMMON.DELEGATE') }}
       </div>
       <div class="text-lg text-white truncate semibold">
         <LinkWallet

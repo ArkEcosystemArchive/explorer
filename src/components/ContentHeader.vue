@@ -6,22 +6,22 @@
       </h1>
       <div class="hidden sm:flex items-center text-theme-text-tertiary text-2xs px-3 sm:px-8 xl:px-6 py-3 mb-5 md:mb-6 bg-stat-background rounded-md">
         <div class="pr-6">
-          {{ $t("Height") }}: {{ readableNumber(height, 0) }}
+          {{ $t('COMMON.HEIGHT') }}: {{ readableNumber(height, 0) }}
         </div>
         <div class="pr-6">
-          {{ $t("Network") }}: {{ $t(alias) }}
+          {{ $t('HEADER.NETWORK') }}: {{ $t(`HEADER.${alias.toUpperCase()}`) }}
         </div>
         <div :class="{ 'pr-6': isMain }">
-          {{ $t("Supply") }}: <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }}</span>
+          {{ $t('HEADER.SUPPLY') }}: <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }}</span>
         </div>
         <div v-if="isMain">
-          {{ $t("Market Cap") }}: <span class="whitespace-no-wrap">{{ readableCurrency(supply) }}</span>
+          {{ $t('HEADER.MARKET_CAP') }}: <span class="whitespace-no-wrap">{{ readableCurrency(supply) }}</span>
         </div>
       </div>
     </div>
     <div class="sm:hidden flex items-center justify-between text-theme-text-tertiary text-2xs px-5 sm:px-8 xl:px-6 py-3 bg-stat-background">
       <div class="mr-2">
-        <span>{{ $t("Height") }}:</span>
+        <span>{{ $t('COMMON.HEIGHT') }}:</span>
         <span class="block md:inline-block">{{ readableNumber(height, 0) }}</span>
       </div>
       <div class="mr-2">
@@ -29,7 +29,7 @@
         <span class="block md:inline-block">{{ rawCurrency(rate, name) }}</span>
       </div>
       <div>
-        <span>{{ $t("Supply") }}:</span>
+        <span>{{ $t('HEADER.SUPPLY') }}:</span>
         <span class="block md:inline-block whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }}</span>
       </div>
     </div>

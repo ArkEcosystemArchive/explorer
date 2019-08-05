@@ -1,7 +1,7 @@
 <template>
   <div class="hidden xl:block border-l border-r border-grey-dark px-10 ml-10">
     <div class="text-grey mb-2 min-w-0">
-      {{ $t("Total forged (token)", { token: networkToken() }) }}
+      {{ $t('PAGES.DELEGATE_MONITOR.HEADER.TOTAL_FORGED', { token: networkToken() }) }}
     </div>
     <div class="text-lg text-white truncate">
       {{ readableCrypto(forged, false) }}

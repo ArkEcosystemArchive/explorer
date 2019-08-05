@@ -10,12 +10,14 @@
     <label
       for="search"
       class="hidden"
-    >{{ $t("Search") }}</label>
+    >
+      {{ $t('SEARCH.PLACEHOLDER.SHORT') }}
+    </label>
 
     <input
       ref="search"
       v-model="query"
-      v-tooltip="{ show: nothingFound, content: $t('Nothing matched your search'), trigger: 'manual', placement: 'bottom-start', classes: 'search-tip' }"
+      v-tooltip="{ show: nothingFound, content: $t('SEARCH.NO_RESULTS'), trigger: 'manual', placement: 'bottom-start', classes: 'search-tip' }"
       :placeholder="placeholder"
       :class="{ 'text-grey': nightMode }"
       type="search"
@@ -140,8 +142,8 @@ export default {
 
     setMobilePlaceholder (showMobile) {
       this.placeholder = showMobile
-        ? this.$i18n.t('Search')
-        : this.$i18n.t('Find a block, transaction, address or delegate')
+        ? this.$i18n.t('SEARCH.PLACEHOLDER.SHORT')
+        : this.$i18n.t('SEARCH.PLACEHOLDER.LONG')
     },
 
     changePage (name, params) {

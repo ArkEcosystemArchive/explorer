@@ -36,23 +36,23 @@ describe('Store > UI', () => {
   })
 
   it('should have English set as default language', () => {
-    expect(store.getters['ui/language']).toEqual('en-gb')
+    expect(store.getters['ui/language']).toEqual('en-GB')
   })
 
   it('should set the language', () => {
-    store.dispatch('ui/setLanguage', 'nl')
+    store.dispatch('ui/setLanguage', 'nl-NL')
 
-    expect(store.getters['ui/language']).toEqual('nl')
+    expect(store.getters['ui/language']).toEqual('nl-NL')
   })
 
   it('should have navigator or English set as default locale', () => {
-    expect(store.getters['ui/locale']).toEqual(navigator.language || 'en-gb')
+    expect(store.getters['ui/locale']).toEqual(navigator.language || 'en-GB')
   })
 
   it('should set the locale', () => {
-    store.dispatch('ui/setLocale', 'nl')
+    store.dispatch('ui/setLocale', 'nl-NL')
 
-    expect(store.getters['ui/locale']).toEqual('nl')
+    expect(store.getters['ui/locale']).toEqual('nl-NL')
   })
 
   it('should set the header type', () => {

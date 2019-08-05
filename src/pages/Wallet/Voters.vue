@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <ContentHeader>{{ $t("Voters") }} <span v-if="delegate">- {{ delegate.username }}</span></ContentHeader>
+    <ContentHeader>{{ $t('WALLET.DELEGATE.VOTERS') }} <span v-if="delegate">- {{ delegate.username }}</span></ContentHeader>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
         <TableWalletsDesktop

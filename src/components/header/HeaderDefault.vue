@@ -22,14 +22,14 @@
             d="M13.499,3.000 L1.499,3.000 C0.671,3.000 -0.001,2.328 -0.001,1.500 C-0.001,0.671 0.671,-0.000 1.499,-0.000 L13.499,-0.000 C14.328,-0.000 14.999,0.671 14.999,1.500 C14.999,2.328 14.328,3.000 13.499,3.000 ZM1.499,5.000 L7.499,5.000 C8.328,5.000 9.000,5.671 9.000,6.500 C9.000,7.328 8.328,8.000 7.499,8.000 L1.499,8.000 C0.671,8.000 -0.001,7.328 -0.001,6.500 C-0.001,5.671 0.671,5.000 1.499,5.000 ZM1.499,10.000 L9.499,10.000 C10.328,10.000 11.000,10.671 11.000,11.500 C11.000,12.328 10.328,13.000 9.499,13.000 L1.499,13.000 C0.671,13.000 -0.001,12.328 -0.001,11.500 C-0.001,10.671 0.671,10.000 1.499,10.000 Z"
           />
         </svg>
-        <span class="semibold">{{ $t("Menu") }}</span>
+        <span class="semibold">{{ $t('HEADER.MENU') }}</span>
       </button>
       <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4" />
       <div class="flex-auto flex items-center justify-center">
         <label
           for="search"
           class="hidden"
-        >{{ $t("Search") }}</label>
+        >{{ $t('SEARCH.PLACEHOLDER.SHORT') }}</label>
         <input
           id="search"
           :placeholder="placeholder"
@@ -120,8 +120,8 @@ export default {
   methods: {
     setMobilePlaceholder (showMobile) {
       this.placeholder = showMobile
-        ? this.$i18n.t('Search')
-        : this.$i18n.t('Find a block, transaction, address or delegate')
+        ? this.$i18n.t('SEARCH.PLACEHOLDER.SHORT')
+        : this.$i18n.t('SEARCH.PLACEHOLDER.LONG')
     }
   }
 }
