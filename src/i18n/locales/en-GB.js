@@ -1,5 +1,6 @@
 export default {
   COMMON: {
+    BALANCE: 'Balance',
     BLOCK: 'Block',
     BLOCKS: 'Blocks',
     CONFIRMATIONS: 'Confirmations',

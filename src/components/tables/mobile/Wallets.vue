@@ -22,7 +22,7 @@
 
         <div class="list-row-border-b">
           <div class="mr-4">
-            {{ $t('WALLET.BALANCE') }}
+            {{ $t('COMMON.BALANCE') }}
           </div>
           <div>{{ readableCrypto(row.balance) }}</div>
         </div>
