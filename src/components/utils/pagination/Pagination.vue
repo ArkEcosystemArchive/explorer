@@ -9,18 +9,13 @@
         class="inline"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="8px"
-        height="8px"
+        width="13px"
+        height="13px"
       >
         <path
           fill-rule="evenodd"
           fill="currentColor"
-          d="m4.054,8l0.946,-0.933l-3.108,-3.067l3.108,-3.067l-0.946,-0.933l-4.054,4l4.054,4z"
-        />
-        <path
-          fill-rule="evenodd"
-          fill="currentColor"
-          d="m7.054,8l0.946,-0.933l-3.108,-3.067l3.108,-3.067l-0.946,-0.933l-4.054,4l4.054,4z"
+          d="M8.1,6.5l3.7-4c0.3-0.3,0.3-0.9,0-1.3c-0.3-0.3-0.9-0.3-1.2,0L6.3,5.9c-0.3,0.3-0.3,0.9,0,1.2l4.3,4.6c0.2,0.2,0.4,0.3,0.6,0.3c0.2,0,0.4-0.1,0.6-0.3c0.3-0.3,0.3-0.9,0-1.3L8.1,6.5z M3.1,6.5l3.7-4c0.3-0.3,0.3-0.9,0-1.3c-0.3-0.3-0.9-0.3-1.2,0L1.3,5.9c-0.3,0.3-0.3,0.9,0,1.2l4.3,4.6C5.7,11.9,5.9,12,6.1,12c0.2,0,0.4-0.1,0.6-0.3c0.3-0.3,0.3-0.9,0-1.3L3.1,6.5z"
         />
       </svg>
     </button>
@@ -34,16 +29,16 @@
         class="inline"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="5px"
-        height="8px"
+        width="13px"
+        height="13px"
       >
         <path
           fill-rule="evenodd"
           fill="currentColor"
-          d="M4.054,8.000 L5.000,7.067 L1.892,4.000 L5.000,0.933 L4.054,0.000 L-0.000,4.000 L4.054,8.000 Z"
+          d="M6.1,6.5l3.7-4c0.3-0.3,0.3-0.9,0-1.3c-0.3-0.3-0.9-0.3-1.2,0L4.3,5.9c-0.3,0.3-0.3,0.9,0,1.2l4.3,4.6C8.7,11.9,8.9,12,9.1,12c0.2,0,0.4-0.1,0.6-0.3c0.3-0.3,0.3-0.9,0-1.3L6.1,6.5z"
         />
       </svg>
-      <span class="ml-2 hidden lg:inline">{{ $t('PAGINATION.PREVIOUS') }}</span>
+      <span class="ml-1 hidden lg:inline">{{ $t('PAGINATION.PREVIOUS') }}</span>
     </button>
 
     <div
@@ -53,6 +48,7 @@
       <PaginationPageInput
         :is-visible="showPageInput"
         :page-count="pageCount"
+        :is-mobile="isMobile"
         class="Pagination__Input"
         @page-change="emitPageChange"
         @close="closePageInput"
@@ -100,18 +96,18 @@
       class="Pagination__Button--next pager-button ml-2"
       @click="emitNext"
     >
-      <span class="mr-2 hidden lg:inline">{{ $t('PAGINATION.NEXT') }}</span>
+      <span class="mr-1 hidden lg:inline">{{ $t('PAGINATION.NEXT') }}</span>
       <svg
         class="inline"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="5px"
-        height="8px"
+        width="13px"
+        height="13px"
       >
         <path
           fill-rule="evenodd"
           fill="currentColor"
-          d="M0.946,-0.001 L-0.000,0.933 L3.107,4.000 L-0.000,7.066 L0.946,8.000 L4.999,4.000 L0.946,-0.001 Z"
+          d="M9.7,5.9L5.5,1.3c-0.3-0.3-0.9-0.3-1.2,0c-0.3,0.3-0.3,0.9,0,1.3l3.7,4l-3.7,4c-0.3,0.3-0.3,0.9,0,1.3C4.4,11.9,4.6,12,4.9,12c0.2,0,0.4-0.1,0.6-0.3l4.3-4.6C10.1,6.8,10.1,6.2,9.7,5.9z"
         />
       </svg>
     </button>
@@ -125,18 +121,13 @@
         class="inline"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="8px"
-        height="8px"
+        width="13px"
+        height="13px"
       >
         <path
           fill-rule="evenodd"
           fill="currentColor"
-          d="m0.946,-0.001l-0.946,0.934l3.107,3.067l-3.107,3.066l0.946,0.934l4.053,-4l-4.053,-4.001z"
-        />
-        <path
-          fill-rule="evenodd"
-          fill="currentColor"
-          d="m3.946,0l-0.946,0.934l3.107,3.067l-3.107,3.066l0.946,0.934l4.053,-4l-4.053,-4.001z"
+          d="M6.7,5.9L2.5,1.3c-0.3-0.3-0.9-0.3-1.2,0c-0.3,0.3-0.3,0.9,0,1.3l3.7,4l-3.7,4c-0.3,0.3-0.3,0.9,0,1.3C1.4,11.9,1.6,12,1.9,12c0.2,0,0.4-0.1,0.6-0.3l4.3-4.6C7.1,6.8,7.1,6.2,6.7,5.9z M11.7,5.9L7.5,1.3c-0.3-0.3-0.9-0.3-1.2,0s-0.3,0.9,0,1.3l3.7,4l-3.7,4c-0.3,0.3-0.3,0.9,0,1.3C6.4,11.9,6.6,12,6.9,12c0.2,0,0.4-0.1,0.6-0.3l4.3-4.6C12.1,6.8,12.1,6.2,11.7,5.9z"
         />
       </svg>
     </button>
@@ -159,6 +150,7 @@ export default {
       type: Object,
       required: true
     },
+
     currentPage: {
       type: Number,
       required: true
@@ -166,7 +158,8 @@ export default {
   },
 
   data: () => ({
-    pageInputVisible: false
+    pageInputVisible: false,
+    mobileView: false
   }),
 
   computed: {
@@ -203,7 +196,7 @@ export default {
     },
 
     showFirst () {
-      return !this.pageButtons.includes(1) && this.first !== this.previous
+      return (this.first !== this.previous && !this.pageButtons.includes(1)) || (this.first !== this.self && this.isMobile)
     },
 
     showPrevious () {
@@ -215,7 +208,7 @@ export default {
     },
 
     showLast () {
-      return !this.pageButtons.includes(this.pageCount) && this.last !== this.next
+      return (this.last !== this.next && !this.pageButtons.includes(this.pageCount)) || (this.last !== this.self && this.isMobile)
     },
 
     subRangeLength () {
@@ -240,7 +233,20 @@ export default {
       }
 
       return buttons
+    },
+
+    isMobile () {
+      return this.mobileView
     }
+  },
+
+  mounted () {
+    const WIDTH_THRESHOLD = 768
+    const widthQuery = window.matchMedia(`(max-width: ${WIDTH_THRESHOLD}px)`)
+
+    widthQuery.addListener(e => this.setMobileView(e.matches))
+
+    this.setMobileView(window.innerWidth < WIDTH_THRESHOLD)
   },
 
   methods: {
@@ -270,6 +276,10 @@ export default {
 
     closePageInput () {
       this.pageInputVisible = false
+    },
+
+    setMobileView (isMobile) {
+      this.mobileView = isMobile
     }
   }
 }
