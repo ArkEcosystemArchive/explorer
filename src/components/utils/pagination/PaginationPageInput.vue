@@ -15,6 +15,9 @@
       :placeholder="placeholder"
       :class="{ 'text-grey': nightMode }"
       class="search-input"
+      type="number"
+      min="1"
+      step="1"
       @keyup.enter="search"
     >
 
@@ -143,6 +146,14 @@ export default {
 <style>
 .Pagination__Input {
   @apply .flex .items-center .absolute .inset-0 .z-10 .bg-theme-button .px-3 .rounded;
+}
+
+.Pagination__Input input[type=number]::-webkit-inner-spin-button,
+.Pagination__Input input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
 }
 
 .control-button {
