@@ -22,6 +22,7 @@ module.exports = {
     '<rootDir>/__tests__/unit/jest.conf.js',
     '<rootDir>/__tests__/unit/jest.setup.js',
     '<rootDir>/__tests__/unit/setup.js',
+    '<rootDir>/__tests__/unit/__mocks__',
     '<rootDir>/__tests__/__utils__',
     '<rootDir>/__tests__/e2e'
   ],

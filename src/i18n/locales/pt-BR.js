@@ -162,7 +162,12 @@ export default {
     PAGE: 'Página',
     PREVIOUS: 'Anterior',
     ROWS_PER_PAGE: 'Linhas por página',
-    SHOW_MORE: 'Mostrar mais'
+    SHOW_MORE: 'Mostrar mais',
+    PLACEHOLDER: {
+      SHORT: '# de página',
+      LONG: 'Digite um número de página'
+    },
+    NO_RESULTS: 'Número de página inválido'
   },
 
   HEADER: {

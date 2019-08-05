@@ -162,7 +162,12 @@ export default {
     PAGE: 'Pagina',
     PREVIOUS: 'Vorige',
     ROWS_PER_PAGE: 'Rijen per pagina',
-    SHOW_MORE: 'Meer laden'
+    SHOW_MORE: 'Meer laden',
+    PLACEHOLDER: {
+      SHORT: 'Pagina #',
+      LONG: 'Voer een paginanummer in'
+    },
+    NO_RESULTS: 'Ongeldig paginanummer'
   },
 
   HEADER: {

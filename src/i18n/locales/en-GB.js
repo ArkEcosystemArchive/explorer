@@ -158,11 +158,16 @@ export default {
   PAGINATION: {
     ALL: 'All',
     NEXT: 'Next',
-    OF: 'Of',
+    OF: 'of',
     PAGE: 'Page',
     PREVIOUS: 'Previous',
     ROWS_PER_PAGE: 'Rows per page',
-    SHOW_MORE: 'Show more'
+    SHOW_MORE: 'Show more',
+    PLACEHOLDER: {
+      SHORT: 'Page #',
+      LONG: 'Enter a page number'
+    },
+    NO_RESULTS: 'Invalid page number'
   },
 
   HEADER: {
