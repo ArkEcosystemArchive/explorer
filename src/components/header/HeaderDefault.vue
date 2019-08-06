@@ -119,6 +119,7 @@ export default {
 
   methods: {
     setMobilePlaceholder (showMobile) {
+      if (!this.$i18n) return
       this.placeholder = showMobile
         ? this.$i18n.t('SEARCH.PLACEHOLDER.SHORT')
         : this.$i18n.t('SEARCH.PLACEHOLDER.LONG')
