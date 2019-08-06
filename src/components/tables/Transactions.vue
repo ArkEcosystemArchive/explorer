@@ -134,11 +134,13 @@ export default {
         },
         {
           label: this.$t('TRANSACTION.SENDER'),
-          field: 'sender'
+          field: 'sender',
+          tdClass: 'break-all'
         },
         {
           label: this.$t('TRANSACTION.RECIPIENT'),
-          field: 'recipient'
+          field: 'recipient',
+          tdClass: 'break-all'
         },
         {
           label: this.$t('TRANSACTION.SMARTBRIDGE'),
