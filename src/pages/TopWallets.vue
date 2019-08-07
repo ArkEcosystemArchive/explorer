@@ -41,7 +41,7 @@ export default {
     ...mapGetters('network', ['supply']),
 
     showPagination () {
-      return this.meta && this.meta.pageCount
+      return this.meta && this.meta.pageCount > 1
     },
 
     sortParams: {
