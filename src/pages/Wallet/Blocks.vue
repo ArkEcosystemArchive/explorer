@@ -57,7 +57,7 @@ export default {
 
   computed: {
     showPagination () {
-      return this.meta && this.meta.pageCount
+      return this.meta && this.meta.pageCount > 1
     },
 
     address () {
