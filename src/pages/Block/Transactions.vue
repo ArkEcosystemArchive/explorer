@@ -3,7 +3,11 @@
     <ContentHeader>{{ $t('COMMON.TRANSACTIONS') }}</ContentHeader>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <TableTransactionsDesktop :transactions="transactions" />
+        <TableTransactionsDesktop
+          :transactions="transactions"
+          :sort-query="sortParams"
+          @on-sort-change="onSortChange"
+        />
       </div>
       <div class="sm:hidden">
         <TableTransactionsMobile :transactions="transactions" />
@@ -35,6 +39,19 @@ export default {
 
     id () {
       return this.$route.params.id
+    },
+
+    sortParams: {
+      get () {
+        return this.$store.getters['ui/transactionSortParams']
+      },
+
+      set (params) {
+        this.$store.dispatch('ui/setTransactionSortParams', {
+          field: params.field,
+          type: params.type
+        })
+      }
     }
   },
 
@@ -95,6 +112,10 @@ export default {
           page: this.currentPage
         }
       })
+    },
+
+    onSortChange (params) {
+      this.sortParams = params
     }
   }
 }
