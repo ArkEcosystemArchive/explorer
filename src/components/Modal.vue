@@ -9,7 +9,7 @@
     >
       <div class="flex items-center justify-center absolute inset-0">
         <div
-          class="modal-container bg-theme-page-background text-theme-text-content rounded shadow mx-auto relative p-10"
+          class="modal-container bg-theme-page-background text-theme-text-content rounded shadow-theme mx-auto relative p-10"
           @click.stop
         >
           <button

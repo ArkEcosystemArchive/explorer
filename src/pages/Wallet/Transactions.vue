@@ -48,7 +48,7 @@
             </span>
             <ul
               v-show="selectOpen"
-              class="absolute right-0 mt-px bg-white shadow rounded border overflow-hidden text-sm"
+              class="absolute right-0 mt-px bg-theme-content-background shadow-theme rounded border overflow-hidden text-sm"
             >
               <li
                 v-for="txType in ['all', 'sent', 'received']"
