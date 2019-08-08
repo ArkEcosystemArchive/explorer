@@ -72,7 +72,7 @@ export default {
       const { meta, data } = await DelegateService.voters(to.params.address, to.params.page)
 
       next(vm => {
-        vm.currentPage = to.params.page
+        vm.currentPage = Number(to.params.page)
         vm.setDelegate(delegate)
         vm.setWallets(data)
         vm.setMeta(meta)
@@ -88,7 +88,7 @@ export default {
       const delegate = await DelegateService.find(to.params.address)
       const { meta, data } = await DelegateService.voters(to.params.address, to.params.page)
 
-      this.currentPage = to.params.page
+      this.currentPage = Number(to.params.page)
       this.setDelegate(delegate)
       this.setWallets(data)
       this.setMeta(meta)

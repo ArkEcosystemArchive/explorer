@@ -137,7 +137,7 @@ export default {
       const { meta, data } = await TransactionService[`${to.params.type}ByAddress`](to.params.address, to.params.page)
 
       next(vm => {
-        vm.currentPage = to.params.page
+        vm.currentPage = Number(to.params.page)
         vm.setTransactions(data)
         vm.setMeta(meta)
       })
@@ -152,7 +152,7 @@ export default {
     try {
       const { meta, data } = await TransactionService[`${to.params.type}ByAddress`](to.params.address, to.params.page)
 
-      this.currentPage = to.params.page
+      this.currentPage = Number(to.params.page)
       this.setTransactions(data)
       this.setMeta(meta)
       next()

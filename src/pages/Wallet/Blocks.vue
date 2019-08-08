@@ -89,7 +89,7 @@ export default {
       const { meta, data } = await BlockService.byAddress(to.params.address, to.params.page)
 
       next(vm => {
-        vm.currentPage = to.params.page
+        vm.currentPage = Number(to.params.page)
         vm.setBlocks(data)
         vm.setMeta(meta)
       })
@@ -103,7 +103,7 @@ export default {
     try {
       const { meta, data } = await BlockService.byAddress(to.params.address, to.params.page)
 
-      this.currentPage = to.params.page
+      this.currentPage = Number(to.params.page)
       this.setBlocks(data)
       this.setMeta(meta)
       next()
