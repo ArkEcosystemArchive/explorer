@@ -112,7 +112,7 @@
 /* Table Cells */
 
 .base-cell {
-  @apply .p-4 .border-none;
+  @apply .py-4 .px-2 .border-none;
 }
 
 .start-cell {
@@ -180,7 +180,7 @@ th.not-sortable:hover {
 
 @media only screen and (min-width: 1280px) {
   .cell-smartbridge-truncate {
-    max-width: 180px;
+    max-width: 160px;
   }
 }
 
