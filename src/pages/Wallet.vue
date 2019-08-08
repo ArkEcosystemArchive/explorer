@@ -9,17 +9,11 @@
       :class="{ 'py-5 md:py-10': isDelegate }"
       class="page-section mb-5"
     >
-      <div class="px-5 sm:px-10">
-        <WalletDelegate
-          v-show="isDelegate"
-          :wallet="wallet"
-          @username="username = $event"
-        />
-        <WalletVoters
-          v-show="isDelegate"
-          :wallet="wallet"
-          :username="username"
-        />
+      <div
+        v-show="isDelegate"
+        class="px-5 sm:px-10"
+      >
+        <WalletDelegate :wallet="wallet" />
       </div>
     </section>
 
@@ -34,8 +28,7 @@
 import {
   WalletDelegate,
   WalletDetails,
-  WalletTransactions,
-  WalletVoters
+  WalletTransactions
 } from '@/components/wallet'
 import WalletService from '@/services/wallet'
 
@@ -43,14 +36,12 @@ export default {
   components: {
     WalletDelegate,
     WalletDetails,
-    WalletTransactions,
-    WalletVoters
+    WalletTransactions
   },
 
   data: () => ({
     wallet: {},
-    activeTab: 'all',
-    username: ''
+    activeTab: 'all'
   }),
 
   computed: {
@@ -77,7 +68,7 @@ export default {
   },
 
   methods: {
-    async setWallet (wallet) {
+    setWallet (wallet) {
       this.wallet = wallet
     }
   }

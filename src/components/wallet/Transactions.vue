@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="WalletTransactions">
     <h2 class="text-2xl mb-5 md:mb-6 px-5 sm:hidden text-theme-text-primary">
       {{ $t('COMMON.TRANSACTIONS') }}
     </h2>
