@@ -102,6 +102,19 @@ export default {
 
     isTypeReceived () {
       return this.type === 'received'
+    },
+
+    sortParams: {
+      get () {
+        return this.$store.getters['ui/transactionSortParams']
+      },
+
+      set (params) {
+        this.$store.dispatch('ui/setTransactionSortParams', {
+          field: params.field,
+          type: params.type
+        })
+      }
     }
   },
 
@@ -149,6 +162,10 @@ export default {
       this.type = type
 
       this.getTransactions()
+    },
+
+    onSortChange (params) {
+      this.sortParams = params
     }
   }
 }

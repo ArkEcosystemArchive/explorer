@@ -4,7 +4,11 @@
 
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <TableBlocksDesktop :blocks="blocks" />
+        <TableBlocksDesktop
+          :blocks="blocks"
+          :sort-query="sortParams"
+          @on-sort-change="onSortChange"
+        />
       </div>
       <div class="sm:hidden">
         <TableBlocksMobile :blocks="blocks" />
@@ -32,6 +36,19 @@ export default {
   computed: {
     showPagination () {
       return this.meta && this.meta.pageCount
+    },
+
+    sortParams: {
+      get () {
+        return this.$store.getters['ui/blockSortParams']
+      },
+
+      set (params) {
+        this.$store.dispatch('ui/setBlockSortParams', {
+          field: params.field,
+          type: params.type
+        })
+      }
     }
   },
 
@@ -46,7 +63,7 @@ export default {
       const { meta, data } = await BlockService.paginate(to.params.page)
 
       next(vm => {
-        vm.currentPage = to.params.page
+        vm.currentPage = Number(to.params.page)
         vm.setBlocks(data)
         vm.setMeta(meta)
       })
@@ -60,7 +77,7 @@ export default {
     try {
       const { meta, data } = await BlockService.paginate(to.params.page)
 
-      this.currentPage = to.params.page
+      this.currentPage = Number(to.params.page)
       this.setBlocks(data)
       this.setMeta(meta)
       next()
@@ -91,6 +108,10 @@ export default {
           page: this.currentPage
         }
       })
+    },
+
+    onSortChange (params) {
+      this.sortParams = params
     }
   }
 }
