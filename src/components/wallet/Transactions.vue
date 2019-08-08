@@ -4,49 +4,38 @@
       {{ $t('COMMON.TRANSACTIONS') }}
     </h2>
     <section class="page-section py-5 md:py-10">
-      <nav class="mx-5 md:mx-10 mb-8 border-b flex items-end">
+      <nav class="TransactionsNavigation mx-5 md:mx-10">
         <div
-          :class="[
-            !isTypeSent && !isTypeReceived ? 'text-2xl border-blue text-theme-text-primary' : 'text-lg text-theme-text-secondary border-transparent',
-            'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-primary hover:border-blue'
-          ]"
+          :class="{ 'active': !isTypeSent && !isTypeReceived }"
+          class="TransactionsNavigation--tab"
           @click="setType('all')"
         >
           {{ $t('TRANSACTION.TYPES.ALL') }}
         </div>
         <div
-          :class="[
-            isTypeSent ? 'text-2xl border-blue text-theme-text-primary' : 'text-lg text-theme-text-secondary border-transparent',
-            !sentCount ? 'pointer-events-none text-theme-text-tertiary' : '',
-            'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-text-primary hover:border-blue'
-          ]"
+          :class="{
+            'active': isTypeSent,
+            'disabled': !sentCount
+          }"
+          class="TransactionsNavigation--tab"
           @click="setType('sent')"
         >
           {{ $t('TRANSACTION.TYPES.SENT') }}
-          <span
-            :class="isTypeSent ? 'text-theme-text-secondary' : 'text-theme-text-tertiary'"
-            class="text-xs text-theme-text-secondary"
-          >
-            {{ sentCount }}
-          </span>
+          <span>{{ sentCount }}</span>
         </div>
         <div
-          :class="[
-            isTypeReceived ? 'text-2xl border-blue text-theme-text-primary' : 'text-lg text-theme-text-secondary border-transparent',
-            !receivedCount ? 'pointer-events-none text-theme-text-tertiary' : '',
-            'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-text-primary hover:border-blue'
-          ]"
+          :class="{
+            'active': isTypeReceived,
+            'disabled': !receivedCount
+          }"
+          class="TransactionsNavigation--tab"
           @click="setType('received')"
         >
           {{ $t('TRANSACTION.TYPES.RECEIVED') }}
-          <span
-            :class="isTypeReceived ? 'text-theme-text-secondary' : 'text-theme-text-tertiary'"
-            class="text-xs"
-          >
-            {{ receivedCount }}
-          </span>
+          <span>{{ receivedCount }}</span>
         </div>
       </nav>
+
       <div class="hidden sm:block">
         <TableTransactionsDesktop
           :show-confirmations="true"
@@ -59,6 +48,7 @@
           :transactions="transactions"
         />
       </div>
+
       <div
         v-if="transactions && transactions.length >= 25"
         class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap"
@@ -170,3 +160,33 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.TransactionsNavigation {
+  @apply .flex .items-end .mb-8 .border-b;
+}
+
+.TransactionsNavigation--tab {
+  @apply .text-lg .text-theme-text-secondary .border-transparent .mr-4 .py-4 .px-2 .cursor-pointer .border-b-3;
+}
+
+.TransactionsNavigation--tab:hover {
+  @apply .text-theme-text-primary .border-blue;
+}
+
+.TransactionsNavigation--tab.active {
+  @apply .TransactionsNavigation--tab .text-2xl .border-blue .text-theme-text-primary;
+}
+
+.TransactionsNavigation--tab.disabled {
+  @apply .pointer-events-none .text-theme-text-tertiary
+}
+
+.TransactionsNavigation--tab > span {
+  @apply .text-xs .text-theme-text-tertiary;
+}
+
+.TransactionsNavigation--tab.active > span {
+  @apply .text-theme-text-secondary;
+}
+</style>
