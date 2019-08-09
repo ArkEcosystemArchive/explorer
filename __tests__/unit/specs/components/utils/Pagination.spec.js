@@ -6,7 +6,7 @@ import mixins from '@/mixins'
 import store from '@/store'
 
 import Pagination from '@/components/utils/pagination/Pagination'
-import { useI18n } from '../../../../__utils__/i18n'
+import { useI18n } from '../../../__utils__/i18n'
 import Vuex from 'vuex'
 
 describe('Components > Utils > Pagination', () => {

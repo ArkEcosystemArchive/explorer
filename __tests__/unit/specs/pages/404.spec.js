@@ -2,7 +2,7 @@ import { shallowMount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
 
 import errorPage from '@/pages/404'
-import { useI18n } from '../../../__utils__/i18n'
+import { useI18n } from '../../__utils__/i18n'
 import Vuex from 'vuex'
 
 describe('Pages > 404', () => {

@@ -3,7 +3,7 @@ import NetworkMixin from '@/mixins/network'
 import CurrencyMixin from '@/mixins/currency'
 
 import ToggleCurrency from '@/components/header/toggles/ToggleCurrency'
-import { useI18n } from '../../../../__utils__/i18n'
+import { useI18n } from '../../../__utils__/i18n'
 import Vuex from 'vuex'
 
 describe('Components > Header > ToggleCurrency', () => {

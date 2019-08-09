@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import en from '../../src/i18n/locales/en-GB'
+import en from '../../../src/i18n/locales/en-GB'
 
 const locale = 'en-GB'
 

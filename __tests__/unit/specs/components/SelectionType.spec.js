@@ -2,7 +2,7 @@ import { mount, createLocalVue } from '@vue/test-utils'
 
 import SelectionType from '@/components/SelectionType'
 import clickOutside from '@/directives/click-outside'
-import { useI18n } from '../../../__utils__/i18n'
+import { useI18n } from '../../__utils__/i18n'
 
 describe('Components > SelectionType', () => {
   const localVue = createLocalVue()

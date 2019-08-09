@@ -3,7 +3,7 @@ import CurrencyMixin from '@/mixins/currency'
 import StringsMixin from '@/mixins/strings'
 
 import TransactionDetails from '@/components/transaction/Details'
-import { useI18n } from '../../../../__utils__/i18n'
+import { useI18n } from '../../../__utils__/i18n'
 import Vuex from 'vuex'
 
 describe('Components > Transaction > Details', () => {
