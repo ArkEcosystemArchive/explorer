@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex">
+  <div class="HeaderDefault">
     <div class="px-4 md:px-8 flex-auto flex">
       <button
         :class="[
@@ -129,9 +129,14 @@ export default {
 </script>
 
 <style scoped>
+.HeaderDefault {
+  @apply .w-full .flex
+}
+
 .search-input::placeholder {
   color: var(--color-theme-text-placeholder);
 }
+
 .search-icon:hover {
   box-shadow: 0 0 13px 2px rgba(197, 197, 213, 0.24);
   cursor: pointer;
