@@ -4,10 +4,9 @@ import store from '@/store'
 const walletPropertyArray = [
   'address',
   'balance',
-  'isDelegate',
-  'publicKey'
+  'isDelegate'
 ].sort()
-// Note: secondPublicKey, username and vote can also be returned, but are optional
+// Note: publicKey, secondPublicKey, username and vote can also be returned, but are optional
 
 describe('Services > Wallet', () => {
   beforeAll(() => {
