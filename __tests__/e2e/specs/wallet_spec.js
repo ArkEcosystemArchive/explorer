@@ -48,8 +48,8 @@ describe('Wallet', () => {
     cy.get('div.modal-container').should('not.exist')
   })
 
-  it('should show who the wallet voted for', () => {
-    cy.visit('wallets/AKzB7dWkCsYnt4u9P4Sch6iKyZ7QnDjBav')
+  xit('should show who the wallet voted for', () => {
+    cy.visit('wallets/ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ')
 
     cy.get('.WalletHeaderDesktop div').contains('Voting for').should('exist').and('be.visible')
     cy.get('.WalletHeaderDesktop div').contains('Voting for').siblings().last().find('a').should('exist')
@@ -61,7 +61,7 @@ describe('Wallet', () => {
     cy.get('.WalletHeaderDesktop div').contains('Voting for').should('exist').and('not.be.visible')
   })
 
-  it('should show delegate information', () => {
+  xit('should show delegate information', () => {
     cy.visit('wallets/ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ')
 
     cy.get('.WalletDelegate').within(() => {
@@ -74,7 +74,7 @@ describe('Wallet', () => {
     })
   })
 
-  it('should be possible to navigate to the list of forged blocks', () => {
+  xit('should be possible to navigate to the list of forged blocks', () => {
     cy.visit('wallets/ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ')
 
     cy.get('h1').contains('Wallet summary').should('exist').then($heading => {
@@ -91,7 +91,7 @@ describe('Wallet', () => {
     })
   })
 
-  it('should be possible to navigate to the list of voters', () => {
+  xit('should be possible to navigate to the list of voters', () => {
     cy.visit('wallets/ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ')
 
     cy.get('h1').contains('Wallet summary').should('exist').then($heading => {
