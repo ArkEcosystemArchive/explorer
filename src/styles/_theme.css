@@ -49,8 +49,8 @@
   --color-theme-text-secondary: #a1a2a6;
   --color-theme-text-content: #a1a2a6;
   --color-theme-text-placeholder: #787a86;
-  --theme-shadow: none;
-  --theme-table-hover-shadow: none;
+  --theme-shadow: 0 1px 9px rgba(0, 0, 0, 0.15);
+  --theme-table-hover-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
   --theme-border: #25262c;
   --theme-border-secondary: #25262c;
   --nav-background: #2a2b31;
