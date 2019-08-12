@@ -24,14 +24,14 @@ jobs:
           command: yarn lint
       - run:
           name: Unit tests
-          command: yarn unit
+          command: yarn test:unit
       - run:
           name: Codecov
           when: on_success
           command: bash <(curl -s https://codecov.io/bash)
       - run:
           name: e2e tests
-          command: yarn e2e
+          command: yarn test:e2e:ci
       - run:
           name: Build
           command: yarn build
