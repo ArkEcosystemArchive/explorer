@@ -48,7 +48,7 @@
             </span>
             <ul
               v-show="selectOpen"
-              class="absolute right-0 mt-px bg-white shadow rounded border overflow-hidden text-sm"
+              class="absolute right-0 mt-px bg-theme-content-background shadow-theme rounded border overflow-hidden text-sm"
             >
               <li
                 v-for="txType in ['all', 'sent', 'received']"
@@ -137,7 +137,7 @@ export default {
       const { meta, data } = await TransactionService[`${to.params.type}ByAddress`](to.params.address, to.params.page)
 
       next(vm => {
-        vm.currentPage = to.params.page
+        vm.currentPage = Number(to.params.page)
         vm.setTransactions(data)
         vm.setMeta(meta)
       })
@@ -152,7 +152,7 @@ export default {
     try {
       const { meta, data } = await TransactionService[`${to.params.type}ByAddress`](to.params.address, to.params.page)
 
-      this.currentPage = to.params.page
+      this.currentPage = Number(to.params.page)
       this.setTransactions(data)
       this.setMeta(meta)
       next()
