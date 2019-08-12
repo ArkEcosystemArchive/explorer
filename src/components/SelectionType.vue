@@ -165,7 +165,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .SelectionType {
   @apply .flex .relative .z-20
 }
