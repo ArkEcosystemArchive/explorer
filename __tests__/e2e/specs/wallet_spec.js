@@ -48,11 +48,19 @@ describe('Wallet', () => {
     cy.get('button.show-more-button').should('exist').and('be.visible')
   })
 
-  it('should be possible to click on the show more button', () => {
+  it('should be possible to click on the show more button and switch transaction type', () => {
     cy.visit('wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs')
 
     cy.get('button.show-more-button', { timeout: 20000 }).click()
     cy.url().should('include', 'wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs/transactions/all/2')
+
+    cy.get('.bg-theme-feature-background').within(() => {
+      cy.get('span').last().contains('All').click()
+      cy.get('.dropdown-button').contains('Received').click()
+      cy.get('span').last().invoke('text').should('include', 'Received')
+    })
+
+    cy.url().should('include', 'wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs/transactions/received/1')
   })
 
   it('should be possible to toggle the QR code', () => {
