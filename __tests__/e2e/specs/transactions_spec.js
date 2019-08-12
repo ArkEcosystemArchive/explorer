@@ -79,7 +79,7 @@ describe('Transactions', () => {
 
             cy.get('h1').should($heading2 => {
               expect($heading2.text()).not.to.eq(heading)
-            })
+            }, { timeout: 20000 })
 
             cy.url().should('include', 'wallets/')
           }
