@@ -175,7 +175,7 @@ export default {
 }
 
 .TransactionsNavigation--tab.active {
-  @apply .TransactionsNavigation--tab .text-2xl .border-blue .text-theme-text-primary;
+  @apply .text-2xl .border-blue .text-theme-text-primary;
 }
 
 .TransactionsNavigation--tab.disabled {
