@@ -7,6 +7,15 @@ describe('Wallet', () => {
     cy.get('@btn').click().should('have.class', 'animated')
   })
 
+  it('should show the wallet\'s balance', () => {
+    cy.visit('wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs')
+
+    cy.get('.WalletHeaderDesktop').within(() => {
+      cy.get('div').contains('Balance').should('be.visible')
+      cy.get('div').contains('Balance').siblings().first().should('be.visible')
+    })
+  })
+
   it('should contain transaction tabs and transaction count', () => {
     cy.visit('wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs')
 
