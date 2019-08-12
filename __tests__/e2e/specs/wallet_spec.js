@@ -30,6 +30,16 @@ describe('Wallet', () => {
     })
   })
 
+  it('should be possible to switch to other transaction types', () => {
+    cy.visit('wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs')
+
+    cy.get('.TransactionsNavigation').within(() => {
+      cy.get('.TransactionsNavigation--tab').contains('Sent').click()
+      cy.get('.TransactionsNavigation--tab').contains('Sent').should('have.class', 'active')
+      cy.get('.TransactionsNavigation--tab').contains('All').should('not.have.class', 'active')
+    })
+  })
+
   it('should show a list of transactions, including show more button', () => {
     cy.visit('wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs')
 
