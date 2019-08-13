@@ -19,7 +19,8 @@ export default {
     TIMESTAMP: 'Timestamp',
     TRANSACTION: 'Transaction',
     TRANSACTIONS: 'Transactions',
-    TYPE: 'Type'
+    TYPE: 'Type',
+    WALLETS: 'Wallets'
   },
 
   MARKET_CHART: {
@@ -111,6 +112,10 @@ export default {
   },
 
   PAGES: {
+    ADVANCED_SEARCH: {
+      TITLE: 'Advanced Search',
+      RESULTS: 'Results'
+    },
     HOME: {
       TITLE: 'Home',
       HEADER: 'Latest transactions and blocks',

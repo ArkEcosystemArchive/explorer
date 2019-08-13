@@ -169,10 +169,11 @@ describe('Homepage', () => {
       cy.get('.HeaderMenuDesktop').should('be.visible').as('menu')
 
       cy.get('@menu').find('.menu-button').should($items => {
-        expect($items).to.have.length(3)
+        expect($items).to.have.length(4)
         expect($items[0]).to.contain.text('Home')
         expect($items[1]).to.contain.text('Top Wallets')
         expect($items[2]).to.contain.text('Delegate Monitor')
+        expect($items[3]).to.contain.text('Advanced Search')
       })
 
       cy.get('@menu').find('button').first().click()
@@ -180,9 +181,13 @@ describe('Homepage', () => {
     })
 
     it('should be possible to navigate to other pages and back', () => {
-      const pages = ['Top Wallets', 'Delegate Monitor']
+      const pages = {
+        'Top Wallets': 'top-wallets',
+        'Delegate Monitor': 'delegate-monitor',
+        'Advanced Search': 'search'
+      }
 
-      pages.forEach(page => {
+      for (const page in pages) {
         cy.get('h1').then($heading => {
           const heading = $heading.text()
 
@@ -194,7 +199,7 @@ describe('Homepage', () => {
           })
         })
 
-        cy.url().should('include', page.replace(' ', '-').toLowerCase())
+        cy.url().should('include', pages[page])
 
         cy.get('h1').then($heading => {
           const heading = $heading.text()
@@ -208,7 +213,7 @@ describe('Homepage', () => {
         })
 
         cy.url().should('eq', `${Cypress.config().baseUrl}/`)
-      })
+      }
     })
   })
 
