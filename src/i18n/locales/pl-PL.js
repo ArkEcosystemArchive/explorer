@@ -79,14 +79,14 @@ export default {
     PUBLIC_KEY: 'Klucz publiczny',
     VERIFIED: 'To jest zweryfikowany adres',
     VOTING_FOR: 'Głosy dla',
-    BALANCE: 'Saldo',
+    BALANCE: 'Saldo ({token})',
     SECOND_PASSPHRASE_ENABLED: 'Aktywowany Drugi Podpis',
     SUMMARY: 'Podsumowanie Portfela',
     QR_CODE: 'Kod QR',
     SCAN_FOR_ADDRESS: 'Zeskanuj adres',
     DELEGATE: {
       FORGED_BLOCKS: 'Wydobytych bloków',
-      TOTAL_FORGED: 'Wydobyto',
+      TOTAL_FORGED: 'Łącznie wydobyto',
       RANK: 'L.p.',
       RANK_NOT_AVAILABLE: 'Jeszcze nie dostępne',
       USERNAME: 'Nazwa Użytkownika',
@@ -163,7 +163,12 @@ export default {
     PAGE: 'Strona',
     PREVIOUS: 'Poprzedni',
     ROWS_PER_PAGE: 'Wiersze na stronę',
-    SHOW_MORE: 'Pokaż więcej'
+    SHOW_MORE: 'Pokaż więcej',
+    PLACEHOLDER: {
+      SHORT: '# strony',
+      LONG: 'Wprowadź numer strony'
+    },
+    NO_RESULTS: 'Nieprawidłowy numer strony'
   },
 
   HEADER: {

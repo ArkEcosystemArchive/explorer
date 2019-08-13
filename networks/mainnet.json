@@ -1,6 +1,6 @@
 {
   "title": "Ark Explorer",
-  "server": "https://explorer.ark.io/api/v2",
+  "server": "https://explorer.ark.io/api",
   "alias": "Main",
   "activeDelegates": 51,
   "rewardOffset": 75600,

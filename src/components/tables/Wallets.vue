@@ -81,7 +81,7 @@ export default {
           field: 'address'
         },
         {
-          label: this.$t('WALLET.BALANCE'),
+          label: this.$t('COMMON.BALANCE'),
           field: 'balance',
           type: 'number',
           tdClass: 'whitespace-no-wrap'

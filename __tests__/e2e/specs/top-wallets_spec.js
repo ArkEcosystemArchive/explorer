@@ -1,0 +1,50 @@
+describe('Top Wallets', () => {
+  beforeEach(() => {
+    cy.visit('/top-wallets/1')
+  })
+
+  it('should show 25 rows in the table', () => {
+    cy.get('table.vgt-table tbody tr').should('have.length', 25)
+  })
+
+  it('should be possible to sort the table', () => {
+    cy.get('th').eq(1).as('address').should('exist')
+    cy.get('@address').invoke('text').should('include', 'Address')
+
+    cy.get('@address').should('not.have.class', 'sorting-asc')
+    cy.get('@address').should('not.have.class', 'sorting-desc')
+
+    cy.get('@address').click()
+    cy.get('@address').should('have.class', 'sorting-asc')
+
+    cy.get('@address').click()
+    cy.get('@address').should('have.class', 'sorting-desc')
+  })
+
+  it('should be possible to navigate to the next page and back', () => {
+    cy.get('.Pagination__Button--previous').should('not.exist')
+    cy.get('.Pagination__Button--next').should('exist').click()
+
+    cy.url().should('include', 'top-wallets/2')
+
+    cy.get('.Pagination__Button--previous').should('exist').click()
+
+    cy.url().should('include', 'top-wallets/1')
+  })
+
+  it('should be possible to click on a wallet address', () => {
+    cy.get('h1').contains('Top Wallets').should('exist').then($heading => {
+      const heading = $heading.text()
+
+      cy.get('tbody tr').first().within(() => {
+        cy.get('a').first().click()
+      })
+
+      cy.get('h1').should($heading2 => {
+        expect($heading2.text()).not.to.eq(heading)
+      })
+
+      cy.url().should('include', 'wallets/')
+    })
+  })
+})

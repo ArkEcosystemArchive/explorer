@@ -9,6 +9,7 @@
           <LinkWallet
             :address="transaction.sender"
             :trunc="false"
+            tooltip-placement="left"
           />
         </div>
       </div>
@@ -23,6 +24,7 @@
             :type="transaction.type"
             :asset="transaction.asset"
             :trunc="false"
+            tooltip-placement="left"
           />
         </div>
       </div>

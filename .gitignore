@@ -6,6 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 /__tests__/unit/coverage/
 /__tests__/e2e/reports/
+/__tests__/e2e/videos/
+/__tests__/e2e/screenshots/
 selenium-debug.log
 
 package-lock.json

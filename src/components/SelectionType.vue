@@ -2,7 +2,7 @@
   <span
     v-click-outside="closeDropdown"
     :class="{ 'sm:mb-4': !inBanner }"
-    class="flex w-full sm:w-auto relative z-20 sm:mr-10"
+    class="SelectionType w-full sm:w-auto sm:mr-10"
   >
     <div class="flex sm:hidden w-full">
       <span
@@ -35,7 +35,7 @@
 
       <ul
         v-show="isOpen"
-        class="absolute inset-x-0 mt-10 bg-white shadow rounded border overflow-hidden text-sm"
+        class="SelectionType--options inset-x-0 mt-10"
       >
         <li
           v-for="(type, index) in types"
@@ -77,7 +77,7 @@
 
       <ul
         v-show="isOpen"
-        class="absolute right-0 mt-2 bg-white shadow rounded border overflow-hidden text-sm"
+        class="SelectionType--options right-0 mt-2"
       >
         <li
           v-for="(type, index) in types"
@@ -164,3 +164,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.SelectionType {
+  @apply .flex .relative .z-20
+}
+
+.SelectionType--options {
+  @apply .absolute .bg-theme-content-background .shadow-theme .rounded .border .overflow-hidden .text-sm
+}
+</style>

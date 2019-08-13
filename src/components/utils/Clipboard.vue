@@ -1,7 +1,7 @@
 <template>
   <button
     v-tooltip="getTooltip()"
-    class="flex-none"
+    class="ClipboardButton"
     @click="copy"
   >
     <img
@@ -99,3 +99,9 @@ export default {
   }
 }
 </script>
+
+<style>
+  .ClipboardButton {
+    @apply .flex-none
+  }
+</style>

@@ -3,7 +3,7 @@ import StringsMixin from '@/mixins/strings'
 import store from '@/store'
 
 import { LinkWallet } from '@/components/links'
-import { useI18n } from '../../../../__utils__/i18n'
+import { useI18n } from '../../../__utils__/i18n'
 
 describe('Compontents > Links > Wallet', () => {
   const localVue = createLocalVue()

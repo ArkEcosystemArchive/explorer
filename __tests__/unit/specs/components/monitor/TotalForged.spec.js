@@ -2,7 +2,7 @@ import { mount, createLocalVue } from '@vue/test-utils'
 import CurrencyMixin from '@/mixins/currency'
 import NetworkMixin from '@/mixins/network'
 import TotalForged from '@/components/monitor/header/TotalForged'
-import { useI18n } from '../../../../__utils__/i18n'
+import { useI18n } from '../../../__utils__/i18n'
 import Vuex from 'vuex'
 
 const getTotalForged = (height, offset) => {

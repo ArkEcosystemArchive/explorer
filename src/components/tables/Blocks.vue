@@ -117,14 +117,16 @@ export default {
         {
           label: this.$t('BLOCK.TOTAL_FORGED'),
           field: 'forged.total',
-          type: 'number'
+          type: 'number',
+          thClass: 'end-cell lg:base-cell',
+          tdClass: 'end-cell lg:base-cell'
         },
         {
           label: this.$t('BLOCK.FEES'),
           field: 'forged.fee',
           type: 'number',
-          thClass: 'end-cell',
-          tdClass: 'end-cell'
+          thClass: 'end-cell hidden lg:table-cell',
+          tdClass: 'end-cell hidden lg:table-cell'
         }
       ]
 

@@ -1,7 +1,7 @@
 <template>
   <section class="mb-5">
     <!-- Desktop -->
-    <div class="py-8 bg-theme-feature-background hidden md:flex xl:rounded-lg items-center">
+    <div class="WalletHeaderDesktop hidden md:flex xl:rounded-lg">
       <button
         class="address-button ml-10 mr-6 p-3 rounded flex-none hover-button-shadow transition"
         @click="toggleModal()"
@@ -337,6 +337,10 @@ export default {
 </script>
 
 <style scoped>
+.WalletHeaderDesktop {
+  @apply .bg-theme-feature-background .items-center .py-8
+}
+
 .address-button {
   background-color: #0964e4;
 }

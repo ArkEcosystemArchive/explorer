@@ -16,12 +16,11 @@
           :total="supply"
         />
       </div>
-      <Paginator
-        v-if="showPaginator"
-        :previous="meta.previous"
-        :next="meta.next"
-        @previous="onPrevious"
-        @next="onNext"
+      <Pagination
+        v-if="showPagination"
+        :meta="meta"
+        :current-page="currentPage"
+        @page-change="onPageChange"
       />
     </section>
   </div>
@@ -41,8 +40,8 @@ export default {
   computed: {
     ...mapGetters('network', ['supply']),
 
-    showPaginator () {
-      return this.meta && (this.meta.previous || this.meta.next)
+    showPagination () {
+      return this.meta && this.meta.pageCount > 1
     },
 
     sortParams: {
@@ -65,16 +64,12 @@ export default {
     }
   },
 
-  created () {
-    this.$on('paginatorChanged', page => this.changePage(page))
-  },
-
   async beforeRouteEnter (to, from, next) {
     try {
       const { meta, data } = await WalletService.top(to.params.page)
 
       next(vm => {
-        vm.currentPage = to.params.page
+        vm.currentPage = Number(to.params.page)
         vm.setWallets(data)
         vm.setMeta(meta)
       })
@@ -88,7 +83,7 @@ export default {
     try {
       const { meta, data } = await WalletService.top(to.params.page)
 
-      this.currentPage = to.params.page
+      this.currentPage = Number(to.params.page)
       this.setWallets(data)
       this.setMeta(meta)
       next()
@@ -104,12 +99,8 @@ export default {
       this.meta = meta
     },
 
-    onPrevious () {
-      this.currentPage = Number(this.currentPage) - 1
-    },
-
-    onNext () {
-      this.currentPage = Number(this.currentPage) + 1
+    onPageChange (page) {
+      this.currentPage = page
     },
 
     changePage () {

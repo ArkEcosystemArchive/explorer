@@ -4,17 +4,20 @@
 
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <TableBlocksDesktop :blocks="blocks" />
+        <TableBlocksDesktop
+          :blocks="blocks"
+          :sort-query="sortParams"
+          @on-sort-change="onSortChange"
+        />
       </div>
       <div class="sm:hidden">
         <TableBlocksMobile :blocks="blocks" />
       </div>
-      <Paginator
-        v-if="showPaginator"
-        :previous="meta.previous"
-        :next="meta.next"
-        @previous="onPrevious"
-        @next="onNext"
+      <Pagination
+        v-if="showPagination"
+        :meta="meta"
+        :current-page="currentPage"
+        @page-change="onPageChange"
       />
     </section>
   </div>
@@ -31,8 +34,21 @@ export default {
   }),
 
   computed: {
-    showPaginator () {
-      return this.meta && (this.meta.previous || this.meta.next)
+    showPagination () {
+      return this.meta && this.meta.pageCount
+    },
+
+    sortParams: {
+      get () {
+        return this.$store.getters['ui/blockSortParams']
+      },
+
+      set (params) {
+        this.$store.dispatch('ui/setBlockSortParams', {
+          field: params.field,
+          type: params.type
+        })
+      }
     }
   },
 
@@ -47,7 +63,7 @@ export default {
       const { meta, data } = await BlockService.paginate(to.params.page)
 
       next(vm => {
-        vm.currentPage = to.params.page
+        vm.currentPage = Number(to.params.page)
         vm.setBlocks(data)
         vm.setMeta(meta)
       })
@@ -61,7 +77,7 @@ export default {
     try {
       const { meta, data } = await BlockService.paginate(to.params.page)
 
-      this.currentPage = to.params.page
+      this.currentPage = Number(to.params.page)
       this.setBlocks(data)
       this.setMeta(meta)
       next()
@@ -81,12 +97,8 @@ export default {
       this.meta = meta
     },
 
-    onPrevious () {
-      this.currentPage = Number(this.currentPage) - 1
-    },
-
-    onNext () {
-      this.currentPage = Number(this.currentPage) + 1
+    onPageChange (page) {
+      this.currentPage = page
     },
 
     changePage () {
@@ -96,6 +108,10 @@ export default {
           page: this.currentPage
         }
       })
+    },
+
+    onSortChange (params) {
+      this.sortParams = params
     }
   }
 }

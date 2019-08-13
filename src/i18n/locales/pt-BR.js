@@ -79,7 +79,7 @@ export default {
     PUBLIC_KEY: 'Public key',
     VERIFIED: 'Este é um endereço confirmado',
     VOTING_FOR: 'Votos para',
-    BALANCE: 'Balanço',
+    BALANCE: 'Balanço ({token})',
     SECOND_PASSPHRASE_ENABLED: 'Senha Secundária ativada',
     SUMMARY: 'Sumário da carteira',
     QR_CODE: 'Código QR',
@@ -163,7 +163,12 @@ export default {
     PAGE: 'Página',
     PREVIOUS: 'Anterior',
     ROWS_PER_PAGE: 'Linhas por página',
-    SHOW_MORE: 'Mostrar mais'
+    SHOW_MORE: 'Mostrar mais',
+    PLACEHOLDER: {
+      SHORT: '# de página',
+      LONG: 'Digite um número de página'
+    },
+    NO_RESULTS: 'Número de página inválido'
   },
 
   HEADER: {

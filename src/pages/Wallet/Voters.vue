@@ -16,12 +16,11 @@
           :total="delegate ? delegate.votes : 0"
         />
       </div>
-      <Paginator
-        v-if="showPaginator"
-        :previous="meta.previous"
-        :next="meta.next"
-        @previous="onPrevious"
-        @next="onNext"
+      <Pagination
+        v-if="showPagination"
+        :meta="meta"
+        :current-page="currentPage"
+        @page-change="onPageChange"
       />
     </section>
   </div>
@@ -39,8 +38,8 @@ export default {
   }),
 
   computed: {
-    showPaginator () {
-      return this.meta && (this.meta.previous || this.meta.next)
+    showPagination () {
+      return this.meta && this.meta.pageCount > 1
     },
 
     address () {
@@ -73,7 +72,7 @@ export default {
       const { meta, data } = await DelegateService.voters(to.params.address, to.params.page)
 
       next(vm => {
-        vm.currentPage = to.params.page
+        vm.currentPage = Number(to.params.page)
         vm.setDelegate(delegate)
         vm.setWallets(data)
         vm.setMeta(meta)
@@ -89,7 +88,7 @@ export default {
       const delegate = await DelegateService.find(to.params.address)
       const { meta, data } = await DelegateService.voters(to.params.address, to.params.page)
 
-      this.currentPage = to.params.page
+      this.currentPage = Number(to.params.page)
       this.setDelegate(delegate)
       this.setWallets(data)
       this.setMeta(meta)
@@ -110,12 +109,8 @@ export default {
       this.meta = meta
     },
 
-    onPrevious () {
-      this.currentPage = Number(this.currentPage) - 1
-    },
-
-    onNext () {
-      this.currentPage = Number(this.currentPage) + 1
+    onPageChange (page) {
+      this.currentPage = page
     },
 
     changePage (page) {

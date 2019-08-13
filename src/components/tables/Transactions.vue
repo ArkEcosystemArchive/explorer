@@ -114,7 +114,7 @@ export default {
     ...mapGetters('network', ['activeDelegates']),
 
     columns () {
-      const feeClasses = ['hidden', 'md:table-cell']
+      const feeClasses = ['hidden', 'lg:table-cell']
 
       feeClasses.push(this.showConfirmations ? 'pr-10 xl:pr-4' : 'end-cell')
 
@@ -134,11 +134,13 @@ export default {
         },
         {
           label: this.$t('TRANSACTION.SENDER'),
-          field: 'sender'
+          field: 'sender',
+          tdClass: 'break-all'
         },
         {
           label: this.$t('TRANSACTION.RECIPIENT'),
-          field: 'recipient'
+          field: 'recipient',
+          tdClass: 'break-all'
         },
         {
           label: this.$t('TRANSACTION.SMARTBRIDGE'),

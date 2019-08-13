@@ -27,7 +27,7 @@ class DelegateService {
 
     const results = await Promise.all(requests)
 
-    return response.data.concat(results.map(result => result.data).flat(1))
+    return response.data.concat([].concat(...results.map(result => result.data)))
   }
 
   async voters (query, page, limit = 25) {

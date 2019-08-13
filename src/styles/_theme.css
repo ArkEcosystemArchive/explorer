@@ -22,8 +22,10 @@
   --ark-meter: #e4ece9;
   --chart-active: #395174;
   --chart-inactive: #a0a6c8;
-  --theme-button: #e0f0fd;
+  --theme-button: #e5f0f9;
+  --theme-button-active: #c5dbed;
   --theme-button-text: #037cff;
+  --theme-button-close: #a0a6c8;
   --language-icon: #395174;
 }
 
@@ -47,8 +49,8 @@
   --color-theme-text-secondary: #a1a2a6;
   --color-theme-text-content: #a1a2a6;
   --color-theme-text-placeholder: #787a86;
-  --theme-shadow: none;
-  --theme-table-hover-shadow: none;
+  --theme-shadow: 0 1px 9px rgba(0, 0, 0, 0.15);
+  --theme-table-hover-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
   --theme-border: #25262c;
   --theme-border-secondary: #25262c;
   --nav-background: #2a2b31;
@@ -59,7 +61,9 @@
   --chart-active: #a1a2a6;
   --chart-inactive: #585a68;
   --theme-button: #2a2b31;
+  --theme-button-active: #42434c;
   --theme-button-text: #fff;
+  --theme-button-close: #787a86;
   --language-icon: #a1a2a6;
 }
 

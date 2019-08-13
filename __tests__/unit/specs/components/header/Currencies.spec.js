@@ -1,7 +1,7 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
 import { HeaderCurrenciesDesktop, HeaderCurrenciesMobile } from '@/components/header/currencies'
-import { useI18n } from '../../../../__utils__/i18n'
+import { useI18n } from '../../../__utils__/i18n'
 import Vuex from 'vuex'
 
 // mock crypto compare service to avoid querying api

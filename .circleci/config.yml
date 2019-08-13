@@ -3,20 +3,12 @@ jobs:
   test-node-11:
     working_directory: ~/explorer
     docker:
-      - image: circleci/node:11-browsers
+      - image: cypress/base:11.13.0
+        environment:
+          TERM: xterm
     steps: &teststeps
       - checkout
-      - run:
-          name: Update npm to @latest
-          command: "sudo npm install -g npm@latest"
       - run: mkdir test-reports
-      - run:
-          name: Download Selenium
-          command: curl -O https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
-      - run:
-          name: Start Selenium
-          command: java -jar selenium-server-standalone-3.141.59.jar -log test-reports/selenium.log
-          background: true
       - restore_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
       - run:
@@ -26,28 +18,35 @@ jobs:
           key: dependency-cache-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
+            - ~/.cache
       - run:
           name: Lint
           command: yarn lint
       - run:
           name: Unit tests
-          command: yarn unit
+          command: yarn test:unit
       - run:
           name: Codecov
           when: on_success
           command: bash <(curl -s https://codecov.io/bash)
       - run:
+          name: e2e tests
+          command: yarn test:e2e:ci
+      - run:
           name: Build
           command: yarn build
-      - store_artifacts:
-          path: test-reports/
-          destination: test-results
       - store_test_results:
           path: test-reports/
+      - store_artifacts:
+          path: __tests__/e2e/videos
+      - store_artifacts:
+          path: __tests__/e2e/screenshots
   test-node-12:
     working_directory: ~/explorer
     docker:
-      - image: circleci/node:12-browsers
+      - image: cypress/base:12.6.0
+        environment:
+          TERM: xterm
     steps: *teststeps
 workflows:
   version: 2

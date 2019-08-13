@@ -24,7 +24,7 @@
       :key="componentKey"
       :class="{ 'blur': hasError }"
     >
-      <div class="flex justify-between items-center px-10 py-8">
+      <div class="flex justify-between items-center px-10 pt-8 pb-4">
         <h2 class="text-white m-0 text-xl font-normal">
           {{ $t('MARKET_CHART.PRICE_IN') }} {{ currencyName }}
         </h2>
@@ -44,8 +44,8 @@
 
       <PriceChart
         :chart-data="chartData"
+        :styles="{ height: '308px' }"
         :options="options"
-        :height="314"
       />
     </div>
   </div>
@@ -86,7 +86,7 @@ export default {
         padding: {
           left: 50,
           right: 50,
-          top: 0,
+          top: 16,
           bottom: 50
         }
       },

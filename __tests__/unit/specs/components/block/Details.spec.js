@@ -2,7 +2,7 @@ import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
 
 import BlockDetails from '@/components/block/Details'
-import { useI18n } from '../../../../__utils__/i18n'
+import { useI18n } from '../../../__utils__/i18n'
 import Vuex from 'vuex'
 
 describe('Components > Block > Details', () => {
