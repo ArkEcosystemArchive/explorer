@@ -119,4 +119,38 @@ describe('Components > Utils > TransactionAmount', () => {
     expect(wrapper.classes()).not.toContain('text-green')
     expect(wrapper.text()).toEqual(wrapper.vm.readableCrypto(100000000).trim())
   })
+
+  it('should display a fee amount without additional coloring', () => {
+    const $route = {
+      params: {
+        address: incomingAddress
+      }
+    }
+
+    const wrapper = mount(TransactionAmount, {
+      propsData: {
+        transaction: {
+          sender: incomingAddress,
+          recipient: outgoingAddress,
+          fee: 100000000,
+          timestamp: {
+            unix: 1535190579
+          }
+        },
+        type: 1,
+        isFee: true
+      },
+      mocks: {
+        $route
+      },
+      i18n,
+      localVue,
+      mixins: [CurrencyMixin],
+      store
+    })
+
+    expect(wrapper.classes()).not.toContain('text-red')
+    expect(wrapper.classes()).not.toContain('text-green')
+    expect(wrapper.text()).toEqual(wrapper.vm.readableCrypto(100000000).trim())
+  })
 })

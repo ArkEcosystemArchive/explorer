@@ -2,15 +2,16 @@
   <span
     v-tooltip="{
       trigger: 'hover click',
-      content: transaction.amount && price ? readableCurrency(transaction.amount, price) : '',
+      content: source && price ? readableCurrency(source, price) : '',
       placement: 'top'
     }"
-    :class="{
+    :class="!isFee ? {
       'text-red': transaction.sender === $route.params.address,
       'text-green': transaction.recipient === $route.params.address && isTransfer,
-    }"
+    } : ''"
+    class="whitespace-no-wrap"
   >
-    {{ readableCrypto(transaction.amount) }}
+    {{ readableCrypto(source) }}
   </span>
 </template>
 
@@ -27,7 +28,13 @@ export default {
     },
     type: {
       type: Number,
-      required: true
+      required: false,
+      default: null
+    },
+    isFee: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
 
@@ -36,6 +43,10 @@ export default {
   }),
 
   computed: {
+    source () {
+      return this.isFee ? this.transaction.fee : this.transaction.amount
+    },
+
     isTransfer () {
       if (this.type !== undefined) {
         // 0 = transfer, 6 = timelock transfer, 7 = multipayment
