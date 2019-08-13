@@ -25,7 +25,8 @@
     "test:e2e": "cypress run",
     "test:e2e:ci": "start-server-and-test dev http://localhost:8080 test:e2e",
     "lint": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter src __tests__",
-    "lint:fix": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter --fix src __tests__"
+    "lint:fix": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter --fix src __tests__",
+    "task:deploy": "cross-env-shell ./scripts/deploy.sh"
   },
   "dependencies": {
     "animate.css": "^3.7.2",
