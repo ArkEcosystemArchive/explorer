@@ -128,6 +128,7 @@ export default {
       required: true
     }
   },
+
   data: () => ({
     price: 0
   }),

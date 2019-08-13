@@ -82,8 +82,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
 import CryptoCompareService from '@/services/crypto-compare'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'TableTransactionsDesktop',
@@ -176,28 +176,39 @@ export default {
       return this.transactions.some(transaction => {
         return !!transaction.vendorField
       })
+    },
+
+    currencySymbol () {
+      return this.$store.getters['currency/symbol']
     }
   },
 
   watch: {
-    transactions () {
-      this.updatePrices()
+    async transactions () {
+      await this.prepareTransactions()
+    },
+
+    async currencySymbol () {
+      await this.updatePrices()
     }
   },
 
-  created () {
-    this.updatePrices()
+  async created () {
+    this.prepareTransactions()
   },
 
   methods: {
-    async updatePrices () {
-      if (!this.transactions) {
-        return
-      }
+    async prepareTransactions () {
+      await this.updatePrices()
+    },
 
-      for (const transaction of this.transactions) {
-        transaction.price = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
-      }
+    async fetchPrice (transaction) {
+      transaction.price = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
+    },
+
+    async updatePrices () {
+      const promises = this.transactions.map(this.fetchPrice)
+      await Promise.all(promises)
     },
 
     emitSortChange (params) {

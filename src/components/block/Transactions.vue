@@ -79,7 +79,7 @@ export default {
 
       if (this.block.transactions) {
         const { data } = await TransactionService.byBlock(this.block.id)
-        this.transactions = data
+        this.transactions = data.map(transaction => ({ ...transaction, price: null }))
       }
     },
 

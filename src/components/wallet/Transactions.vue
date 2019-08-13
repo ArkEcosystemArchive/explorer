@@ -126,7 +126,7 @@ export default {
           this.wallet.address,
           this.page
         )
-        this.transactions = data
+        this.transactions = data.map(transaction => ({ ...transaction, price: null }))
       }
     },
 

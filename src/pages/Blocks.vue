@@ -90,7 +90,7 @@ export default {
         return
       }
 
-      this.blocks = blocks
+      this.blocks = blocks.map(block => ({ ...block, price: null }))
     },
 
     setMeta (meta) {

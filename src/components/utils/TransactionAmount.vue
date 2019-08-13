@@ -16,8 +16,6 @@
 </template>
 
 <script type="text/ecmascript-6">
-import CryptoCompareService from '@/services/crypto-compare'
-
 export default {
   name: 'TransactionAmount',
 
@@ -38,13 +36,13 @@ export default {
     }
   },
 
-  data: () => ({
-    price: null
-  }),
-
   computed: {
     source () {
       return this.isFee ? this.transaction.fee : this.transaction.amount
+    },
+
+    price () {
+      return this.transaction.price
     },
 
     isTransfer () {
@@ -54,23 +52,6 @@ export default {
       }
       return false
     }
-  },
-
-  watch: {
-    transaction () {
-      this.updatePrice()
-    }
-  },
-
-  created () {
-    this.updatePrice()
-  },
-
-  methods: {
-    async updatePrice () {
-      this.price = await CryptoCompareService.dailyAverage(this.transaction.timestamp.unix)
-    }
   }
-
 }
 </script>
