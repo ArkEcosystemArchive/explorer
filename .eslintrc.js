@@ -11,6 +11,7 @@ module.exports = {
   extends: [
     'plugin:vue/recommended',
     'standard',
+    'plugin:cypress/recommended'
   ],
   globals: {
     'GIT_DATE': true,

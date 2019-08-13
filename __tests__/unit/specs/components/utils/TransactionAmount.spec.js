@@ -3,7 +3,7 @@ import CurrencyMixin from '@/mixins/currency'
 import store from '@/store'
 
 import TransactionAmount from '@/components/utils/TransactionAmount'
-import { useI18n } from '../../../../__utils__/i18n'
+import { useI18n } from '../../../__utils__/i18n'
 import Vuex from 'vuex'
 
 describe('Components > Utils > TransactionAmount', () => {

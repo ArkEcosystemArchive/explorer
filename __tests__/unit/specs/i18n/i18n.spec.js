@@ -1,4 +1,4 @@
-import useI18nGlobally from '../../../__utils__/i18n'
+import useI18nGlobally from '../../__utils__/i18n'
 
 const i18n = useI18nGlobally()
 

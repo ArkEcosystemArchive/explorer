@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex items-center px-5 sm:px-10">
+  <div class="HeaderSearch px-5 sm:px-10">
     <button
       class="flex flex-none p-2"
       @click="$store.dispatch('ui/setHeaderType', null)"
@@ -168,6 +168,10 @@ export default {
 </script>
 
 <style>
+.HeaderSearch {
+  @apply .w-full .flex .items-center
+}
+
 .search-input::placeholder {
   color: var(--color-theme-text-placeholder);
 }

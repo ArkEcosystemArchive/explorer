@@ -1,5 +1,8 @@
 <template>
-  <div v-if="delegate">
+  <div
+    v-if="delegate"
+    class="WalletDelegate"
+  >
     <div class="list-row-border-b">
       <div>{{ $t('WALLET.DELEGATE.USERNAME') }}</div>
       <div>{{ delegate.username }}</div>
@@ -58,12 +61,20 @@
         </RouterLink>
       </div>
     </div>
+
+    <WalletVoters :wallet="wallet" />
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+import WalletVoters from '@/components/wallet/Voters'
+
 export default {
   name: 'WalletDelegate',
+
+  components: {
+    WalletVoters
+  },
 
   props: {
     wallet: {

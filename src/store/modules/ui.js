@@ -112,7 +112,9 @@ export default {
       })
     },
     setBlockSortParams: ({ commit }, value) => {
-      localStorage.setItem('blockSortParams', JSON.stringify(value))
+      value = JSON.stringify(value)
+
+      localStorage.setItem('blockSortParams', value)
 
       commit({
         type: types.SET_UI_BLOCK_SORT_PARAMS,
@@ -120,7 +122,9 @@ export default {
       })
     },
     setTransactionSortParams: ({ commit }, value) => {
-      localStorage.setItem('transactionSortParams', JSON.stringify(value))
+      value = JSON.stringify(value)
+
+      localStorage.setItem('transactionSortParams', value)
 
       commit({
         type: types.SET_UI_TRANSACTION_SORT_PARAMS,
@@ -128,7 +132,9 @@ export default {
       })
     },
     setWalletSortParams: ({ commit }, value) => {
-      localStorage.setItem('walletSortParams', JSON.stringify(value))
+      value = JSON.stringify(value)
+
+      localStorage.setItem('walletSortParams', value)
 
       commit({
         type: types.SET_UI_WALLET_SORT_PARAMS,
@@ -146,30 +152,18 @@ export default {
     menuVisible: state => state.menuVisible,
 
     blockSortParams (state) {
-      if (state.blockSortParams) {
-        return state.blockSortParams
-      }
-
-      const storedParams = localStorage.getItem('blockSortParams')
-      return storedParams ? JSON.parse(storedParams) : { field: 'height', type: 'desc' }
+      const params = state.blockSortParams || localStorage.getItem('blockSortParams')
+      return params ? JSON.parse(params) : { field: 'height', type: 'desc' }
     },
 
     transactionSortParams (state) {
-      if (state.transactionSortParams) {
-        return state.transactionSortParams
-      }
-
-      const storedParams = localStorage.getItem('transactionSortParams')
-      return storedParams ? JSON.parse(storedParams) : { field: 'timestamp.unix', type: 'desc' }
+      const params = state.transactionSortParams || localStorage.getItem('transactionSortParams')
+      return params ? JSON.parse(params) : { field: 'timestamp.unix', type: 'desc' }
     },
 
     walletSortParams (state) {
-      if (state.walletSortParams) {
-        return state.walletSortParams
-      }
-
-      const storedParams = localStorage.getItem('walletSortParams')
-      return storedParams ? JSON.parse(storedParams) : { field: 'originalIndex', type: 'asc' }
+      const params = state.walletSortParams || localStorage.getItem('walletSortParams')
+      return params ? JSON.parse(params) : { field: 'originalIndex', type: 'asc' }
     }
   }
 }

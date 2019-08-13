@@ -2,7 +2,7 @@
   <span
     v-click-outside="closeDropdown"
     :class="{ 'sm:mb-4': !inBanner }"
-    class="flex w-full sm:w-auto relative z-20 sm:mr-10"
+    class="SelectionType w-full sm:w-auto sm:mr-10"
   >
     <div class="flex sm:hidden w-full">
       <span
@@ -166,6 +166,10 @@ export default {
 </script>
 
 <style scoped>
+.SelectionType {
+  @apply .flex .relative .z-20
+}
+
 .SelectionType--options {
   @apply .absolute .bg-theme-content-background .shadow-theme .rounded .border .overflow-hidden .text-sm
 }

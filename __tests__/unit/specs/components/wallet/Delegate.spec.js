@@ -2,7 +2,7 @@ import { mount, createLocalVue, RouterLinkStub } from '@vue/test-utils'
 import mixins from '@/mixins'
 
 import WalletDelegate from '@/components/wallet/Delegate'
-import { useI18n } from '../../../../__utils__/i18n'
+import { useI18n } from '../../../__utils__/i18n'
 import Vuex from 'vuex'
 
 describe('Components > Wallet > Delegate', () => {
@@ -28,7 +28,8 @@ describe('Components > Wallet > Delegate', () => {
       mixins,
       mocks,
       stubs: {
-        RouterLinkStub
+        RouterLinkStub,
+        WalletVoters: '<div></div>'
       },
       propsData: {
         wallet: { publicKey: '02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b' }

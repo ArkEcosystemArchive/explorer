@@ -44,6 +44,10 @@ export default {
     }
   },
 
+  async mounted () {
+    await this.getVoterCount()
+  },
+
   methods: {
     async getVoterCount () {
       const count = await DelegateService.voterCount(this.wallet.publicKey)

@@ -2,7 +2,7 @@ import { mount, createLocalVue } from '@vue/test-utils'
 import mixins from '@/mixins'
 
 import ForgingStats from '@/components/monitor/ForgingStats'
-import { useI18n } from '../../../../__utils__/i18n'
+import { useI18n } from '../../../__utils__/i18n'
 import Vuex from 'vuex'
 
 describe('Components > Monitor > ForgingStats', () => {
