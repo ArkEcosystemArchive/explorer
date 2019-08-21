@@ -25,7 +25,7 @@ describe('Store > UI', () => {
     expect(store.getters['ui/priceChart']).toEqual(false)
   })
 
-  it("should have 'day' as the default price chart period", () => {
+  it('should have \'day\' as the default price chart period', () => {
     expect(store.getters['ui/priceChartPeriod']).toEqual('day')
   })
 
@@ -33,6 +33,16 @@ describe('Store > UI', () => {
     store.dispatch('ui/setPriceChartPeriod', 'week')
 
     expect(store.getters['ui/priceChartPeriod']).toEqual('week')
+  })
+
+  it('should have \'price\' as the default price chart type', () => {
+    expect(store.getters['ui/priceChartType']).toEqual('price')
+  })
+
+  it('should set the price chart type', () => {
+    store.dispatch('ui/setPriceChartType', 'price')
+
+    expect(store.getters['ui/priceChartType']).toEqual('price')
   })
 
   it('should have English set as default language', () => {

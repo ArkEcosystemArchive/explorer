@@ -25,15 +25,29 @@
       :class="{ 'blur': hasError }"
     >
       <div class="flex justify-between items-center px-10 pt-8 pb-4">
-        <h2 class="text-white m-0 text-xl font-normal">
-          {{ $t('MARKET_CHART.PRICE_IN') }} {{ currencyName }}
-        </h2>
+        <span class="text-white text-xl mr-2">
+          {{ $t('MARKET_CHART.MARKET_DATA', { currency: currencyName }) }}
+        </span>
+
+        <div class="mr-auto">
+          <template v-for="type in ['price', 'volume']">
+            <button
+              :key="type"
+              :class="{ 'chart-tab-active': currentType === type }"
+              class="chart-tab transition"
+              @click="setType(type)"
+            >
+              {{ $t(`MARKET_CHART.${type.toUpperCase()}`) }}
+            </button>
+          </template>
+        </div>
+
         <div>
           <template v-for="period in ['day', 'week', 'month', 'quarter', 'year']">
             <button
               :key="period"
               :class="{ 'chart-tab-active': currentPeriod === period }"
-              class="chart-tab"
+              class="chart-tab transition"
               @click="setPeriod(period)"
             >
               {{ $t(`MARKET_CHART.${period.toUpperCase()}`) }}
@@ -55,19 +69,18 @@
 import CryptoCompareService from '@/services/crypto-compare'
 import PriceChart from '@/components/charts/price-chart'
 import { mapGetters } from 'vuex'
-import store from '@/store'
 
 export default {
   components: {
     PriceChart
   },
 
-  data: () => ({
+  data: vm => ({
     error: null,
     isLoading: false,
     componentKey: 0,
     labels: [],
-    datasets: [],
+    datasets: {},
     options: {
       showScale: true,
       responsive: true,
@@ -98,11 +111,7 @@ export default {
                 // Skip every second tick
                 if (index % 2 === 0) return
 
-                if ([store.getters['network/token'], 'BTC', 'ETH', 'LTC'].some(c => store.getters['currency/name'].indexOf(c) > -1)) {
-                  return store.getters['currency/symbol'] + value.toFixed(8)
-                }
-
-                return store.getters['currency/symbol'] + value.toFixed(2)
+                return vm.readableCurrency(value, 1, null, false)
               },
               fontColor: '#838a9b',
               fontSize: 13
@@ -143,18 +152,8 @@ export default {
         // borderWidth: 1,
         // borderColor: '#037cff',
         callbacks: {
-          title: tooltipItem => {
-            const name = store.getters['currency/name']
-            const token = store.getters['currency/symbol']
-
-            if ([token, 'BTC', 'ETH', 'LTC'].some(c => name.indexOf(c) > -1)) {
-              return `${name} ${Number(tooltipItem[0].yLabel).toFixed(8)}`
-            }
-
-            return `${name} ${Number(tooltipItem[0].yLabel).toFixed(2)}`
-          },
+          title: tooltipItem => vm.readableCurrency(tooltipItem[0].yLabel, 1, null, false),
           label: tooltipItem => ''
-          // label: tooltipItem => `BTC ${tooltipItem.yLabel}`
         }
       }
     }
@@ -164,6 +163,7 @@ export default {
     ...mapGetters('currency', { currencyName: 'name' }),
     ...mapGetters('network', ['token']),
     ...mapGetters('ui', { currentPeriod: 'priceChartPeriod' }),
+    ...mapGetters('ui', { currentType: 'priceChartType' }),
 
     chartData () {
       return {
@@ -178,9 +178,13 @@ export default {
           pointHoverRadius: 7,
           pointHoverBorderWidth: 4,
           fill: false,
-          data: this.datasets
+          data: this.currentDataset
         }]
       }
+    },
+
+    currentDataset () {
+      return this.currentType === 'price' ? this.datasets.prices : this.datasets.volumes
     },
 
     hasError () {
@@ -212,6 +216,14 @@ export default {
       }
     },
 
+    setType (type) {
+      this.$store.dispatch('ui/setPriceChartType', type)
+
+      if (this.token) {
+        this.renderChart()
+      }
+    },
+
     async renderChart (delay = false) {
       this.isLoading = true
 
@@ -223,7 +235,7 @@ export default {
         this.error = null
       } catch (error) {
         this.labels = []
-        this.datasets = []
+        this.datasets = {}
 
         this.error = error
       } finally {

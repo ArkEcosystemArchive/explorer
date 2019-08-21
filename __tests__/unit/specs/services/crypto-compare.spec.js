@@ -17,38 +17,50 @@ describe('Services > CryptoCompare', () => {
   it('should return day values', async () => {
     const data = await CryptoCompareService.day()
     expect(data.labels.length).toBe(25)
-    expect(data.datasets.length).toBe(25)
+    expect(data.datasets).toBeObject()
+    expect(data.datasets.prices.length).toBe(25)
+    expect(data.datasets.volumes.length).toBe(25)
   })
 
   it('should return week values', async () => {
     const data = await CryptoCompareService.week()
     expect(data.labels.length).toBe(8)
-    expect(data.datasets.length).toBe(8)
+    expect(data.datasets).toBeObject()
+    expect(data.datasets.prices.length).toBe(8)
+    expect(data.datasets.volumes.length).toBe(8)
   })
 
   it('should return month values', async () => {
     const data = await CryptoCompareService.month()
     expect(data.labels.length).toBeGreaterThanOrEqual(29)
-    expect(data.datasets.length).toBeGreaterThanOrEqual(29)
+    expect(data.datasets).toBeObject()
+    expect(data.datasets.prices.length).toBeGreaterThanOrEqual(29)
+    expect(data.datasets.volumes.length).toBeGreaterThanOrEqual(29)
   })
 
   it('should return quarter values', async () => {
     const data = await CryptoCompareService.quarter()
     expect(data.labels.length).toBe(121)
-    expect(data.datasets.length).toBe(121)
+    expect(data.datasets).toBeObject()
+    expect(data.datasets.prices.length).toBe(121)
+    expect(data.datasets.volumes.length).toBe(121)
   })
 
   it('should return year values', async () => {
     const data = await CryptoCompareService.year()
     expect(data.labels.length).toBeGreaterThanOrEqual(366)
-    expect(data.datasets.length).toBeGreaterThanOrEqual(366)
+    expect(data.datasets).toBeObject()
+    expect(data.datasets.prices.length).toBeGreaterThanOrEqual(366)
+    expect(data.datasets.volumes.length).toBeGreaterThanOrEqual(366)
   })
 
   it('should return year values, even if token matches currency', async () => {
     store.dispatch('currency/setName', 'ARK')
     const data = await CryptoCompareService.year()
     expect(data.labels.length).toBeGreaterThanOrEqual(366)
-    expect(data.datasets.length).toBeGreaterThanOrEqual(366)
+    expect(data.datasets).toBeObject()
+    expect(data.datasets.prices.length).toBeGreaterThanOrEqual(366)
+    expect(data.datasets.volumes.length).toBeGreaterThanOrEqual(366)
   })
 
   it('should return the daily average for a given timestamp and valid currency', async () => {

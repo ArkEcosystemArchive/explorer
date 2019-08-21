@@ -23,9 +23,11 @@ export default {
   },
 
   MARKET_CHART: {
+    MARKET_DATA: '{currency} Dane rynkowe',
     ERROR: 'Nie można załadować danych wykresu',
     RELOAD: 'Przeładuj wykres',
-    PRICE_IN: 'Cena w',
+    PRICE: 'Cena',
+    VOLUME: 'Wolumen',
     DAY: 'Dzień',
     WEEK: 'Tydzień',
     MONTH: 'Miesiąc',

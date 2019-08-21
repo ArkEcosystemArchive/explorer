@@ -8,6 +8,7 @@ export default {
     nightMode: false,
     priceChart: true,
     priceChartPeriod: 'day',
+    priceChartType: 'price',
     headerType: null,
     menuVisible: false,
     blockSortParams: null,
@@ -35,6 +36,9 @@ export default {
     },
     [types.SET_UI_PRICE_CHART_PERIOD] (state, payload) {
       state.priceChartPeriod = payload.value
+    },
+    [types.SET_UI_PRICE_CHART_TYPE] (state, payload) {
+      state.priceChartType = payload.value
     },
     [types.SET_UI_BLOCK_SORT_PARAMS] (state, payload) {
       state.blockSortParams = payload.value
@@ -111,6 +115,14 @@ export default {
         value
       })
     },
+    setPriceChartType: ({ commit }, value) => {
+      localStorage.setItem('priceChartType', value)
+
+      commit({
+        type: types.SET_UI_PRICE_CHART_TYPE,
+        value
+      })
+    },
     setBlockSortParams: ({ commit }, value) => {
       value = JSON.stringify(value)
 
@@ -148,6 +160,7 @@ export default {
     nightMode: state => state.nightMode,
     priceChart: state => state.priceChart,
     priceChartPeriod: state => state.priceChartPeriod,
+    priceChartType: state => state.priceChartType,
     headerType: state => state.headerType,
     menuVisible: state => state.menuVisible,
 

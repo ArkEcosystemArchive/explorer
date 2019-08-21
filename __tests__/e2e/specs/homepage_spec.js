@@ -89,16 +89,25 @@ describe('Homepage', () => {
   })
 
   describe('Chart', () => {
-    it('should contain buttons for the period', () => {
-      const periods = ['Day', 'Week', 'Month', 'Quarter', 'Year']
+    it('should contain buttons for the type and period', () => {
+      const buttons = ['Price', 'Volume', 'Day', 'Week', 'Month', 'Quarter', 'Year']
 
       cy.get('button.chart-tab')
         .each(($btn, index, $btns) => {
-          cy.wrap($btn).should('be.visible').invoke('text').should('include', periods[index])
+          cy.wrap($btn).should('be.visible').invoke('text').should('include', buttons[index])
         })
         .then($btns => {
-          cy.wrap($btns).should('have.length', periods.length)
+          cy.wrap($btns).should('have.length', buttons.length)
         })
+    })
+
+    it('should be possible to change type', () => {
+      cy.get('button.chart-tab').contains('Price').should('have.class', 'chart-tab-active')
+
+      cy.get('button.chart-tab').contains('Volume').click()
+
+      cy.get('button.chart-tab').contains('Price').should('not.have.class', 'chart-tab-active')
+      cy.get('button.chart-tab').contains('Volume').should('have.class', 'chart-tab-active')
     })
 
     it('should be possible to change period', () => {
@@ -108,6 +117,25 @@ describe('Homepage', () => {
 
       cy.get('button.chart-tab').contains('Day').should('not.have.class', 'chart-tab-active')
       cy.get('button.chart-tab').contains('Week').should('have.class', 'chart-tab-active')
+    })
+
+    it('should still display the selected type after changing pages', () => {
+      cy.get('button.chart-tab').contains('Volume').click()
+
+      cy.get('h1').then($heading => {
+        const heading = $heading.text()
+
+        cy.get('button.show-more-button').click()
+
+        cy.get('h1').should($heading2 => {
+          expect($heading2.text()).not.to.eq(heading)
+        })
+      })
+
+      cy.get('a.logo-container').click()
+      cy.get('#line-chart').should('be.visible')
+
+      cy.get('button.chart-tab-active').invoke('text').should('include', 'Volume')
     })
 
     it('should still display the selected period after changing pages', () => {

@@ -3,5 +3,6 @@
 }
 
 .chart-tab-active, .chart-tab:hover {
-  @apply .bg-blue-darker .text-white;
+  @apply .text-white;
+  background-color: #e78068;
 }

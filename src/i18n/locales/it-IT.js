@@ -23,9 +23,11 @@ export default {
   },
 
   MARKET_CHART: {
+    MARKET_DATA: '{currency} Dati del mercato',
     ERROR: 'I dati del grafico non possono essere caricati',
     RELOAD: 'Ricarica grafico',
-    PRICE_IN: 'Prezzo in',
+    PRICE: 'Prezzo',
+    VOLUME: 'Volume',
     DAY: 'Giorno',
     WEEK: 'Settimana',
     MONTH: 'Mese',
