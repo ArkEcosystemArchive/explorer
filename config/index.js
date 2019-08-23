@@ -4,6 +4,12 @@
 
 const path = require('path')
 
+// Path used for building
+let assetsPublicPath = '/';
+if (process.env.RELEASE_TYPE === "gh-pages") {
+  assetsPublicPath = "/explorer/";
+}
+
 module.exports = {
   dev: {
     // Paths
@@ -49,7 +55,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: assetsPublicPath,
 
     /**
      * Source Maps
