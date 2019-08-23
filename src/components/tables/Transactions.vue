@@ -104,6 +104,7 @@ export default {
 
   computed: {
     ...mapGetters('network', ['activeDelegates']),
+    ...mapGetters('currency', { currencySymbol: 'symbol' }),
 
     columns () {
       const feeClasses = ['hidden', 'lg:table-cell']
@@ -176,10 +177,6 @@ export default {
       return this.transactions.some(transaction => {
         return !!transaction.vendorField
       })
-    },
-
-    currencySymbol () {
-      return this.$store.getters['currency/symbol']
     }
   },
 

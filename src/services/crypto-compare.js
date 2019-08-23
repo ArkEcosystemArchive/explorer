@@ -3,9 +3,11 @@ import moment from 'moment'
 import genericPool from 'generic-pool'
 import store from '@/store'
 
-// CryptoCompare API supports until 50 requests per second
-const MAX_REQUEST_PER_SECOND = 50
+// CryptoCompare API supports up to 20 requests per second
+const MAX_RESOURCES = 20
 const SECONDS_PER_DAY = 86400
+
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 const requestFactory = {
   create () {
@@ -17,13 +19,15 @@ const requestFactory = {
 }
 
 const requestPool = genericPool.createPool(requestFactory, {
-  max: MAX_REQUEST_PER_SECOND
+  max: MAX_RESOURCES
 })
 
 class CryptoCompareService {
   async get (url, options) {
     const client = await requestPool.acquire()
     const response = await client.get(url, options)
+
+    await sleep(100)
 
     // @see https://github.com/coopernurse/node-pool/issues/206
     try {
