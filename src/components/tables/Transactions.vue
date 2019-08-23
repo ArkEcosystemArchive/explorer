@@ -207,6 +207,10 @@ export default {
     },
 
     async updatePrices () {
+      if (!this.transactions) {
+        return
+      }
+
       const promises = this.transactions.map(this.fetchPrice)
       await Promise.all(promises)
     },
