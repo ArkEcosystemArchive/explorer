@@ -163,7 +163,12 @@ const createWebpackConfig = (baseUrl, network, networkConfig, routerMode) => {
 module.exports = (env) => {
   const args = argumentParser(env)
 
-  const webpackConfig = createWebpackConfig(args.baseUrl, args.network, args.networkConfig, args.routerMode)
+  let baseUrl = args.baseUrl;
+  if (process.env.RELEASE_TYPE === "gh-pages") {
+    baseUrl = "/explorer/";
+  }
+
+  const webpackConfig = createWebpackConfig(baseUrl, args.network, args.networkConfig, args.routerMode)
   webpackConfig.mode = 'production'
 
   if (config.build.productionGzip) {
