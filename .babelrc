@@ -18,7 +18,7 @@
       "plugins": [
         "@vue/babel-plugin-transform-vue-jsx",
         "@babel/plugin-transform-modules-commonjs",
-        "dynamic-import-node"
+        "@babel/plugin-syntax-dynamic-import"
       ]
     }
   }
