@@ -3,18 +3,18 @@ import moment from 'moment'
 import store from '@/store'
 
 const SECONDS_PER_DAY = 86400
-const MAX_REQUESTS_PER_SECOND = 10
-const REQUEST_INTERVAL = 1000
+
+// CryptoCompare supports upto 20 requests per second
+const MAX_REQUESTS_PER_SECOND = 1
+const REQUEST_INTERVAL = 50
 
 const limiter = axios.create({})
-
-let pendingRequests = 0
 
 limiter.interceptors.request.use(config => {
   return new Promise((resolve, reject) => {
     const interval = setInterval(() => {
-      if (pendingRequests < MAX_REQUESTS_PER_SECOND) {
-        pendingRequests++
+      if (CryptoCompareService.pendingRequests < MAX_REQUESTS_PER_SECOND) {
+        CryptoCompareService.pendingRequests++
         clearInterval(interval)
         resolve(config)
       }
@@ -23,10 +23,10 @@ limiter.interceptors.request.use(config => {
 })
 
 limiter.interceptors.response.use(response => {
-  pendingRequests = Math.max(0, pendingRequests - 1)
+  CryptoCompareService.pendingRequests = Math.max(0, CryptoCompareService.pendingRequests - 1)
   return Promise.resolve(response)
 }, error => {
-  pendingRequests = Math.max(0, pendingRequests - 1)
+  CryptoCompareService.pendingRequests = Math.max(0, CryptoCompareService.pendingRequests - 1)
   return Promise.reject(error)
 })
 
@@ -150,5 +150,7 @@ class CryptoCompareService {
     }
   }
 }
+
+CryptoCompareService.pendingRequests = 0
 
 export default new CryptoCompareService()
