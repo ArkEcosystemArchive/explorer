@@ -28,7 +28,6 @@ module.exports = {
   ],
   snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue'],
   setupFilesAfterEnv: [
-    'jest-extended',
     '<rootDir>/__tests__/unit/jest.setup.js'
   ],
   setupFiles: ['jest-localstorage-mock', '<rootDir>/__tests__/unit/setup'],

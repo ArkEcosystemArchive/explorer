@@ -23,6 +23,10 @@ a:hover {
   transform: rotate(180deg);
 }
 
+.blur {
+  filter: blur(4px);
+}
+
 hr {
   border: 0;
   clear: both;

@@ -1,5 +1,5 @@
 <template>
-  <div class="relative">
+  <div class="PriceChart">
     <div
       v-if="hasError"
       class="absolute inset-0 flex flex-col items-center justify-center text-white z-10"
@@ -25,24 +25,44 @@
       :class="{ 'blur': hasError }"
     >
       <div class="flex justify-between items-center px-10 pt-8 pb-4">
-        <span class="text-white text-xl mr-2">
-          {{ $t('MARKET_CHART.MARKET_DATA', { currency: currencyName }) }}
-        </span>
-
-        <div class="mr-auto">
-          <template v-for="type in ['price', 'volume']">
-            <button
-              :key="type"
-              :class="{ 'chart-tab-active': priceChartOptions.type === type }"
-              class="chart-tab transition"
-              @click="setType(type)"
+        <div class="relative">
+          <button
+            v-click-outside="closeDropdown"
+            class="chart-tab chart-tab-active flex items-center ml-0"
+            @click="toggleDropdown"
+          >
+            {{ currencyName }} {{ $t(`MARKET_CHART.${priceChartOptions.type.toUpperCase()}`) }}
+            <svg
+              :class="{ 'rotate-180': isOpen }"
+              xmlns="http://www.w3.org/2000/svg"
+              class="fill-current ml-2"
+              viewBox="0 0 20 20"
+              width="16px"
+              height="16px"
             >
-              {{ $t(`MARKET_CHART.${type.toUpperCase()}`) }}
-            </button>
-          </template>
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg>
+          </button>
+
+          <ul
+            v-show="isOpen"
+            class="absolute left-0 mt-px bg-theme-content-background shadow-theme rounded border overflow-hidden text-sm"
+          >
+            <li
+              v-for="type in ['price', 'volume']"
+              :key="type"
+            >
+              <span
+                class="dropdown-button"
+                @click="setType(type)"
+              >
+                {{ currencyName }} {{ $t(`MARKET_CHART.${type.toUpperCase()}`) }}
+              </span>
+            </li>
+          </ul>
         </div>
 
-        <div>
+        <div class="PriceChart__PeriodButtons">
           <template v-for="period in ['day', 'week', 'month', 'quarter', 'year']">
             <button
               :key="period"
@@ -78,9 +98,10 @@ export default {
   data: vm => ({
     error: null,
     isLoading: false,
+    isOpen: false,
     componentKey: 0,
     labels: [],
-    datasets: {},
+    datasets: [],
     options: {
       showScale: true,
       responsive: true,
@@ -183,7 +204,22 @@ export default {
     },
 
     currentDataset () {
-      return this.priceChartOptions.type === 'price' ? this.datasets.prices : this.datasets.volumes
+      let property
+
+      switch (this.priceChartOptions.type) {
+        case 'price':
+        {
+          property = 'close'
+          break
+        }
+        case 'volume':
+        {
+          property = 'volumeto'
+          break
+        }
+      }
+
+      return this.datasets.map(el => el[property])
     },
 
     hasError () {
@@ -234,7 +270,7 @@ export default {
         this.error = null
       } catch (error) {
         this.labels = []
-        this.datasets = {}
+        this.datasets = []
 
         this.error = error
       } finally {
@@ -246,13 +282,21 @@ export default {
       // trick to re-mount the chart on resize
       // https://stackoverflow.com/questions/47459837/how-to-re-mount-a-component
       this.componentKey++
+    },
+
+    closeDropdown () {
+      this.isOpen = false
+    },
+
+    toggleDropdown () {
+      this.isOpen = !this.isOpen
     }
   }
 }
 </script>
 
-<style>
-.blur {
-  filter: blur(4px)
+<style scoped>
+.PriceChart {
+  @apply .relative
 }
 </style>
