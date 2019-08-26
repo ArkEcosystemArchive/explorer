@@ -1,16 +1,19 @@
 <template>
   <div class="PriceChart">
     <div
-      v-if="hasError"
+      v-if="hasError || isLoading"
       class="absolute inset-0 flex flex-col items-center justify-center text-white z-10"
     >
-      <p class="mb-4">
+      <p
+        v-if="hasError"
+        class="mb-4"
+      >
         {{ $t('MARKET_CHART.ERROR') }}
       </p>
       <button
         :disabled="isLoading"
         class="mt-4 pager-button items-center"
-        @click="renderChart()"
+        @click="renderChart(1000)"
       >
         <span v-if="!isLoading">{{ $t('MARKET_CHART.RELOAD') }}</span>
         <Loader
@@ -22,7 +25,7 @@
 
     <div
       :key="componentKey"
-      :class="{ 'blur': hasError }"
+      :class="{ 'blur': hasError || isLoading }"
     >
       <div class="flex justify-between items-center px-10 pt-8 pb-4">
         <div class="relative">
@@ -259,8 +262,10 @@ export default {
       this.$store.dispatch('ui/setPriceChartOption', { option: 'type', value: type })
     },
 
-    async renderChart (delay = false) {
-      this.isLoading = true
+    async renderChart (delay = 0) {
+      if (!this.datasets.length) {
+        this.isLoading = true
+      }
 
       try {
         const response = await CryptoCompareService[this.priceChartOptions.period]()
@@ -274,7 +279,7 @@ export default {
 
         this.error = error
       } finally {
-        this.isLoading = false
+        setTimeout(() => (this.isLoading = false), delay)
       }
     },
 
