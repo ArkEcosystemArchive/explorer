@@ -184,15 +184,21 @@ export default {
 
     migratePriceChart () {
       const priceChart = localStorage.getItem('priceChart')
+      const priceChartPeriod = localStorage.getItem('priceChartPeriod')
 
-      if (!priceChart) {
+      if (!priceChart || !priceChartPeriod) {
         return
       }
 
-      localStorage.setItem('priceChartOptions', JSON.stringify({
-        ...this.$store.getters['ui/priceChartOptions'],
-        ...{ enabled: JSON.parse(priceChart) }
-      }))
+      localStorage.setItem(
+        'priceChartOptions', JSON.stringify({
+          ...this.$store.getters['ui/priceChartOptions'],
+          ...{
+            enabled: priceChart,
+            period: priceChartPeriod
+          }
+        })
+      )
 
       localStorage.removeItem('priceChart')
     }
