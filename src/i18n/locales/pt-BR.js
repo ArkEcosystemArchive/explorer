@@ -23,7 +23,6 @@ export default {
   },
 
   MARKET_CHART: {
-    MARKET_DATA: '{currency} Dados de mercado',
     ERROR: 'Os dados do gráfico não puderam ser carregados',
     RELOAD: 'Recarregar gráfico',
     PRICE: 'Preço',

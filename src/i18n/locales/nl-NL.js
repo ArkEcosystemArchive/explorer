@@ -23,7 +23,6 @@ export default {
   },
 
   MARKET_CHART: {
-    MARKET_DATA: '{currency} Marktgegevens',
     ERROR: 'De diagram kunnen niet worden geladen',
     RELOAD: 'Herladen diagram',
     PRICE: 'Prijs',

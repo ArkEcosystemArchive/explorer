@@ -23,7 +23,6 @@ export default {
   },
 
   MARKET_CHART: {
-    MARKET_DATA: '{currency} Dane rynkowe',
     ERROR: 'Nie można załadować danych wykresu',
     RELOAD: 'Przeładuj wykres',
     PRICE: 'Cena',
