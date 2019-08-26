@@ -33,7 +33,7 @@
           <template v-for="type in ['price', 'volume']">
             <button
               :key="type"
-              :class="{ 'chart-tab-active': currentType === type }"
+              :class="{ 'chart-tab-active': priceChartOptions.type === type }"
               class="chart-tab transition"
               @click="setType(type)"
             >
@@ -46,7 +46,7 @@
           <template v-for="period in ['day', 'week', 'month', 'quarter', 'year']">
             <button
               :key="period"
-              :class="{ 'chart-tab-active': currentPeriod === period }"
+              :class="{ 'chart-tab-active': priceChartOptions.period === period }"
               class="chart-tab transition"
               @click="setPeriod(period)"
             >
@@ -162,8 +162,7 @@ export default {
   computed: {
     ...mapGetters('currency', { currencyName: 'name' }),
     ...mapGetters('network', ['token']),
-    ...mapGetters('ui', { currentPeriod: 'priceChartPeriod' }),
-    ...mapGetters('ui', { currentType: 'priceChartType' }),
+    ...mapGetters('ui', ['priceChartOptions']),
 
     chartData () {
       return {
@@ -184,7 +183,7 @@ export default {
     },
 
     currentDataset () {
-      return this.currentType === 'price' ? this.datasets.prices : this.datasets.volumes
+      return this.priceChartOptions.type === 'price' ? this.datasets.prices : this.datasets.volumes
     },
 
     hasError () {
@@ -194,6 +193,14 @@ export default {
 
   watch: {
     token () {
+      this.renderChart()
+    },
+
+    'priceChartOptions.period' () {
+      this.renderChart()
+    },
+
+    'priceChartOptions.type' () {
       this.renderChart()
     },
 
@@ -209,26 +216,18 @@ export default {
 
   methods: {
     setPeriod (period) {
-      this.$store.dispatch('ui/setPriceChartPeriod', period)
-
-      if (this.token) {
-        this.renderChart()
-      }
+      this.$store.dispatch('ui/setPriceChartOption', { option: 'period', value: period })
     },
 
     setType (type) {
-      this.$store.dispatch('ui/setPriceChartType', type)
-
-      if (this.token) {
-        this.renderChart()
-      }
+      this.$store.dispatch('ui/setPriceChartOption', { option: 'type', value: type })
     },
 
     async renderChart (delay = false) {
       this.isLoading = true
 
       try {
-        const response = await CryptoCompareService[this.currentPeriod]()
+        const response = await CryptoCompareService[this.priceChartOptions.period]()
         this.labels = response.labels
         this.datasets = response.datasets
 

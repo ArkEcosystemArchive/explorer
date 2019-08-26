@@ -3,7 +3,7 @@
     <ContentHeader>{{ $t('PAGES.HOME.HEADER') }}</ContentHeader>
 
     <section
-      v-if="priceChart"
+      v-if="isChartEnabled"
       class="hidden md:block mb-5 bg-theme-feature-background xl:rounded-lg"
     >
       <ChartWrapper />
@@ -49,7 +49,6 @@
 import ChartWrapper from '@/components/ChartWrapper'
 import { LatestBlocks, LatestTransactions } from '@/components/home'
 import SelectionType from '@/components/SelectionType'
-import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -65,7 +64,9 @@ export default {
   }),
 
   computed: {
-    ...mapGetters('ui', ['priceChart'])
+    isChartEnabled () {
+      return this.$store.getters['ui/priceChartOptions'].enabled
+    }
   },
 
   created () {

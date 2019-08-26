@@ -11,15 +11,23 @@ describe('Components > Header > ToggleChart', () => {
 
   const i18n = useI18n(localVue)
 
-  const uiAction = { setPriceChart: jest.fn() }
+  const uiAction = { setPriceChartOption: jest.fn() }
 
   const store = new Vuex.Store({
     modules: {
       ui: {
         namespaced: true,
-        state: { priceChart: false },
+        state: {
+          priceChartOptions: {
+            enabled: false
+          }
+        },
         actions: uiAction,
-        getters: { priceChart: () => false }
+        getters: {
+          priceChartOptions: () => {
+            return { enabled: false }
+          }
+        }
       }
     },
     strict: true
@@ -34,6 +42,6 @@ describe('Components > Header > ToggleChart', () => {
     })
 
     wrapper.find('button').trigger('click')
-    expect(uiAction.setPriceChart).toHaveBeenCalled()
+    expect(uiAction.setPriceChartOption).toHaveBeenCalled()
   })
 })
