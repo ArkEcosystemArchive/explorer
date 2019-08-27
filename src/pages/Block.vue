@@ -9,17 +9,11 @@
       <section class="page-section py-5 md:py-10 px-6">
         <div class="my-10 text-center">
           <NotFound
+            :is-loading="isLoading"
             :data-id="block.id"
             data-type="block"
+            @reload="onReload"
           />
-
-          <button
-            :disabled="isFetching"
-            class="mt-4 pager-button items-center"
-            @click="fetchBlock"
-          >
-            <span>{{ !isFetching ? $t('COMMON.RELOAD') : $t('COMMON.LOADING') }}</span>
-          </button>
         </div>
       </section>
     </template>
@@ -54,7 +48,7 @@ export default {
   data: () => ({
     block: {},
     blockNotFound: false,
-    isFetching: false
+    isLoading: false
   }),
 
   async beforeRouteEnter (to, from, next) {
@@ -101,7 +95,7 @@ export default {
     },
 
     async fetchBlock () {
-      this.isFetching = true
+      this.isLoading = true
 
       try {
         const block = await BlockService.find(this.block.id)
@@ -110,7 +104,7 @@ export default {
       } catch (e) {
         console.log(e.message || e.data.error)
       } finally {
-        this.isFetching = false
+        setTimeout(() => (this.isLoading = false), 750)
       }
     },
 
@@ -130,6 +124,10 @@ export default {
         const response = await BlockService.findNext(this.block.height)
         this.$router.push({ name: 'block', params: { id: response.id } })
       } catch (e) { console.log(e.message || e.data.error) }
+    },
+
+    onReload () {
+      this.fetchBlock()
     }
   }
 }

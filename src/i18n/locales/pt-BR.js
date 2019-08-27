@@ -9,7 +9,6 @@ export default {
     FEE: 'Taxa',
     HEIGHT: 'Altura',
     ID: 'ID',
-    LOADING: 'Carregando...',
     NO_RESULTS: 'Sem resultados',
     RANK: 'Posição',
     RELOAD: 'Atualize esta página',
