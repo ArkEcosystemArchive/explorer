@@ -72,7 +72,7 @@ describe('Transactions', () => {
 
       cy.get('tbody tr').first().then($row => {
         cy.wrap($row).get('td').eq(3).then($cell => {
-          return $cell.find('a').length ? $cell.get('a') : null
+          return $cell.find('a').length ? $cell.find('a') : null
         }).then(link => {
           if (link) {
             cy.wrap(link).click()

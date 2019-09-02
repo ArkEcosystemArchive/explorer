@@ -44,25 +44,17 @@
         </div>
 
         <div v-else-if="data.column.field === 'amount'">
-          <span class="whitespace-no-wrap">
-            <TransactionAmount
-              :transaction="data.row"
-              :type="data.row.type"
-            />
-          </span>
+          <TransactionAmount
+            :transaction="data.row"
+            :type="data.row.type"
+          />
         </div>
 
         <div v-else-if="data.column.field === 'fee'">
-          <span
-            v-tooltip="{
-              trigger: 'hover click',
-              content: data.row.price ? readableCurrency(data.row.fee, data.row.price) : '',
-              placement: 'top'
-            }"
-            class="whitespace-no-wrap"
-          >
-            {{ readableCrypto(data.row.fee) }}
-          </span>
+          <TransactionAmount
+            :transaction="data.row"
+            :is-fee="true"
+          />
         </div>
 
         <div v-else-if="data.column.field === 'confirmations'">
@@ -90,8 +82,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
 import CryptoCompareService from '@/services/crypto-compare'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'TableTransactionsDesktop',
@@ -112,6 +104,7 @@ export default {
 
   computed: {
     ...mapGetters('network', ['activeDelegates']),
+    ...mapGetters('currency', { currencySymbol: 'symbol' }),
 
     columns () {
       const feeClasses = ['hidden', 'lg:table-cell']
@@ -188,24 +181,35 @@ export default {
   },
 
   watch: {
-    transactions () {
-      this.updatePrices()
+    async transactions () {
+      await this.prepareTransactions()
+    },
+
+    async currencySymbol () {
+      await this.updatePrices()
     }
   },
 
-  created () {
-    this.updatePrices()
+  async created () {
+    this.prepareTransactions()
   },
 
   methods: {
+    async prepareTransactions () {
+      await this.updatePrices()
+    },
+
+    async fetchPrice (transaction) {
+      transaction.price = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
+    },
+
     async updatePrices () {
       if (!this.transactions) {
         return
       }
 
-      for (const transaction of this.transactions) {
-        transaction.price = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
-      }
+      const promises = this.transactions.map(this.fetchPrice)
+      await Promise.all(promises)
     },
 
     emitSortChange (params) {

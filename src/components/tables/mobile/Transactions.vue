@@ -71,7 +71,12 @@
           <div class="mr-4">
             {{ $t('TRANSACTION.FEE') }}
           </div>
-          <div>{{ readableCrypto(transaction.fee) }}</div>
+          <div>
+            <TransactionAmount
+              :transaction="transaction"
+              :is-fee="true"
+            />
+          </div>
         </div>
 
         <div

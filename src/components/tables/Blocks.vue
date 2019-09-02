@@ -131,28 +131,43 @@ export default {
       ]
 
       return columns
+    },
+
+    currencySymbol () {
+      return this.$store.getters['currency/symbol']
     }
   },
 
   watch: {
-    blocks () {
-      this.updateBlocks()
+    async blocks () {
+      await this.prepareBlocks()
+    },
+
+    async currencySymbol () {
+      await this.updatePrices()
     }
   },
 
-  created () {
-    this.updateBlocks()
+  async created () {
+    this.prepareBlocks()
   },
 
   methods: {
-    async updateBlocks () {
+    async prepareBlocks () {
+      await this.updatePrices()
+    },
+
+    async fetchPrice (block) {
+      block.price = await CryptoCompareService.dailyAverage(block.timestamp.unix)
+    },
+
+    async updatePrices () {
       if (!this.blocks) {
         return
       }
 
-      for (const block of this.blocks) {
-        block.price = await CryptoCompareService.dailyAverage(block.timestamp.unix)
-      }
+      const promises = this.blocks.map(this.fetchPrice)
+      await Promise.all(promises)
     },
 
     emitSortChange (params) {

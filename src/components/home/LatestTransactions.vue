@@ -76,7 +76,8 @@ export default {
 
     async getTransactions () {
       const { data } = await TransactionService.filterByType(1, this.transactionType)
-      this.transactions = data
+
+      this.transactions = data.map(transaction => ({ ...transaction, price: null }))
     },
 
     onSortChange (params) {

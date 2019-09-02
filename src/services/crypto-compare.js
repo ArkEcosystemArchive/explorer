@@ -1,40 +1,38 @@
 import axios from 'axios'
 import moment from 'moment'
-import genericPool from 'generic-pool'
 import store from '@/store'
 
-// CryptoCompare API supports until 50 requests per second
-const MAX_REQUEST_PER_SECOND = 50
 const SECONDS_PER_DAY = 86400
 
-const requestFactory = {
-  create () {
-    return axios
-  },
-  destroy (resource) {
-    return Promise.resolve()
-  }
-}
+// CryptoCompare supports upto 20 requests per second
+const MAX_REQUESTS_PER_SECOND = 1
+const REQUEST_INTERVAL = 50
 
-const requestPool = genericPool.createPool(requestFactory, {
-  max: MAX_REQUEST_PER_SECOND
+const limiter = axios.create({})
+
+limiter.interceptors.request.use(config => {
+  return new Promise((resolve, reject) => {
+    const interval = setInterval(() => {
+      if (CryptoCompareService.pendingRequests < MAX_REQUESTS_PER_SECOND) {
+        CryptoCompareService.pendingRequests++
+        clearInterval(interval)
+        resolve(config)
+      }
+    }, REQUEST_INTERVAL)
+  })
+})
+
+limiter.interceptors.response.use(response => {
+  CryptoCompareService.pendingRequests = Math.max(0, CryptoCompareService.pendingRequests - 1)
+  return Promise.resolve(response)
+}, error => {
+  CryptoCompareService.pendingRequests = Math.max(0, CryptoCompareService.pendingRequests - 1)
+  return Promise.reject(error)
 })
 
 class CryptoCompareService {
   async get (url, options) {
-    const client = await requestPool.acquire()
-    const response = await client.get(url, options)
-
-    // @see https://github.com/coopernurse/node-pool/issues/206
-    try {
-      await requestPool.release(client)
-    } catch (error) {
-      if (error.message !== 'Resource not currently part of this pool') {
-        throw error
-      }
-    }
-
-    return response
+    return limiter.get(url, options)
   }
 
   async price (currency) {
@@ -152,5 +150,7 @@ class CryptoCompareService {
     }
   }
 }
+
+CryptoCompareService.pendingRequests = 0
 
 export default new CryptoCompareService()

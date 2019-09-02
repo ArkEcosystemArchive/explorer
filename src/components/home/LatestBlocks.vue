@@ -61,8 +61,8 @@ export default {
     },
 
     async getBlocks () {
-      const response = await BlockService.latest()
-      this.blocks = response
+      const data = await BlockService.latest()
+      this.blocks = data.map(block => ({ ...block, price: null }))
     },
 
     onSortChange (params) {
