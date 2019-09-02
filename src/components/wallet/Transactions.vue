@@ -56,7 +56,7 @@
         <RouterLink
           :to="{ name: 'wallet-transactions', params: { address: wallet.address, type, page: 2 } }"
           tag="button"
-          class="button-big"
+          class="button-lg"
         >
           {{ $t('PAGINATION.SHOW_MORE') }}
         </RouterLink>

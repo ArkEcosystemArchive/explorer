@@ -31,7 +31,7 @@
 
     <button
       :disabled="isLoading"
-      class="button-big mt-4"
+      class="button-lg mt-4"
       @click="emitReload"
     >
       <span v-if="!isLoading">{{ $t('COMMON.RELOAD') }}</span>
