@@ -15,7 +15,7 @@
         <RouterLink
           :to="{ name: 'transactions', params: { page: 2 } }"
           tag="button"
-          class="show-more-button"
+          class="button-big"
         >
           {{ $t('PAGINATION.SHOW_MORE') }}
         </RouterLink>
