@@ -44,25 +44,17 @@
         </div>
 
         <div v-else-if="data.column.field === 'amount'">
-          <span class="whitespace-no-wrap">
-            <TransactionAmount
-              :transaction="data.row"
-              :type="data.row.type"
-            />
-          </span>
+          <TransactionAmount
+            :transaction="data.row"
+            :type="data.row.type"
+          />
         </div>
 
         <div v-else-if="data.column.field === 'fee'">
-          <span
-            v-tooltip="{
-              trigger: 'hover click',
-              content: data.row.price ? readableCurrency(data.row.fee, data.row.price) : '',
-              placement: 'top'
-            }"
-            class="whitespace-no-wrap"
-          >
-            {{ readableCrypto(data.row.fee) }}
-          </span>
+          <TransactionAmount
+            :transaction="data.row"
+            :is-fee="true"
+          />
         </div>
 
         <div v-else-if="data.column.field === 'confirmations'">

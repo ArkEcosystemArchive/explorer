@@ -45,13 +45,13 @@ describe('Wallet', () => {
 
     cy.get('table.vgt-table').should('exist').and('be.visible')
     cy.get('table.vgt-table tbody tr').should('have.length', 25)
-    cy.get('button.show-more-button').should('exist').and('be.visible')
+    cy.get('button.button-big').should('exist').and('be.visible')
   })
 
   it('should be possible to click on the show more button and switch transaction type', () => {
     cy.visit('wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs')
 
-    cy.get('button.show-more-button', { timeout: 20000 }).click()
+    cy.get('button.button-big', { timeout: 20000 }).click()
     cy.url().should('include', 'wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs/transactions/all/2')
 
     cy.get('.bg-theme-feature-background').within(() => {

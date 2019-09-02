@@ -9,17 +9,11 @@
       <section class="page-section py-5 md:py-10 px-6">
         <div class="my-10 text-center">
           <NotFound
+            :is-loading="isLoading"
             :data-id="transaction.id"
             data-type="transaction"
+            @reload="onReload"
           />
-
-          <button
-            :disabled="isFetching"
-            class="mt-4 pager-button items-center"
-            @click="fetchTransaction"
-          >
-            <span>{{ !isFetching ? $t('COMMON.RELOAD') : $t('COMMON.LOADING') }}</span>
-          </button>
         </div>
       </section>
     </template>
@@ -70,7 +64,7 @@ export default {
   data: () => ({
     transaction: {},
     transactionNotFound: false,
-    isFetching: false
+    isLoading: false
   }),
 
   computed: {
@@ -110,7 +104,7 @@ export default {
 
   methods: {
     async fetchTransaction () {
-      this.isFetching = true
+      this.isLoading = true
 
       try {
         const transaction = await TransactionService.find(this.transaction.id)
@@ -119,12 +113,16 @@ export default {
       } catch (e) {
         console.log(e.message || e.data.error)
       } finally {
-        this.isFetching = false
+        setTimeout(() => (this.isLoading = false), 750)
       }
     },
 
     setTransaction (transaction) {
       this.transaction = transaction
+    },
+
+    onReload () {
+      this.fetchTransaction()
     }
   }
 }

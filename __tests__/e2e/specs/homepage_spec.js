@@ -143,7 +143,7 @@ describe('Homepage', () => {
       cy.get('h1').then($heading => {
         const heading = $heading.text()
 
-        cy.get('button.show-more-button').click()
+        cy.get('button.button-big').click()
 
         cy.get('h1').should($heading2 => {
           expect($heading2.text()).not.to.eq(heading)

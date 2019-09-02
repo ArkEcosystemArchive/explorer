@@ -15,7 +15,7 @@
         <RouterLink
           :to="{ name: 'blocks', params: { page: 2 } }"
           tag="button"
-          class="show-more-button"
+          class="button-big"
         >
           {{ $t('PAGINATION.SHOW_MORE') }}
         </RouterLink>
@@ -61,8 +61,8 @@ export default {
     },
 
     async getBlocks () {
-      const response = await BlockService.latest()
-      this.blocks = response
+      const data = await BlockService.latest()
+      this.blocks = data.map(block => ({ ...block, price: null }))
     },
 
     onSortChange (params) {

@@ -93,7 +93,7 @@ export default {
         return
       }
 
-      this.transactions = transactions
+      this.transactions = transactions.map(transaction => ({ ...transaction, price: null }))
     },
 
     setMeta (meta) {

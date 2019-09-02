@@ -15,7 +15,7 @@
         <RouterLink
           :to="{ name: 'transactions', params: { page: 2 } }"
           tag="button"
-          class="show-more-button"
+          class="button-big"
         >
           {{ $t('PAGINATION.SHOW_MORE') }}
         </RouterLink>
@@ -76,7 +76,8 @@ export default {
 
     async getTransactions () {
       const { data } = await TransactionService.filterByType(1, this.transactionType)
-      this.transactions = data
+
+      this.transactions = data.map(transaction => ({ ...transaction, price: null }))
     },
 
     onSortChange (params) {

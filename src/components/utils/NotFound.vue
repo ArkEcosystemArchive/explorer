@@ -10,9 +10,11 @@
       class="mx-auto"
       src="@/assets/images/not-found/dark.png"
     >
+
     <h1 class="text-3xl">
-      {{ $t('PAGES.NOT_FOUND.ERROR') }}
+      {{ $t('PAGES.NOT_FOUND.TITLE') }}
     </h1>
+
     <i18n
       tag="p"
       path="PAGES.NOT_FOUND.DATA"
@@ -26,6 +28,18 @@
         {{ dataId }}
       </span>
     </i18n>
+
+    <button
+      :disabled="isLoading"
+      class="button-big mt-4"
+      @click="emitReload"
+    >
+      <span v-if="!isLoading">{{ $t('COMMON.RELOAD') }}</span>
+      <Loader
+        v-else
+        :data="null"
+      />
+    </button>
   </div>
 </template>
 
@@ -36,6 +50,11 @@ export default {
   name: 'NotFound',
 
   props: {
+    isLoading: {
+      type: Boolean,
+      required: true
+    },
+
     dataType: {
       type: String,
       required: true
@@ -49,6 +68,12 @@ export default {
 
   computed: {
     ...mapGetters('ui', ['nightMode'])
+  },
+
+  methods: {
+    emitReload () {
+      this.$emit('reload')
+    }
   }
 }
 </script>

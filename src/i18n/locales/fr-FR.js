@@ -9,7 +9,6 @@ export default {
     FEE: 'Frais',
     HEIGHT: 'Hauteur',
     ID: 'ID',
-    LOADING: 'Chargement...',
     NO_RESULTS: 'Pas de résultats',
     RANK: 'Rang',
     RELOAD: 'Actualiser cette page',
