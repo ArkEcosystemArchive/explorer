@@ -9,7 +9,6 @@ export default {
     FEE: 'Commissione',
     HEIGHT: 'Altezza',
     ID: 'ID',
-    LOADING: 'Caricamento...',
     NO_RESULTS: 'Nessun risultato',
     RANK: 'Rango',
     RELOAD: 'Ricarica questa pagina',

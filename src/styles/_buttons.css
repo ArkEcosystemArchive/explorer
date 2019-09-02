@@ -13,26 +13,29 @@ button:disabled {
 
 /* Pagination Buttons */
 
-.show-more-button {
-  @apply .mx-auto .bg-theme-button .text-theme-button-text .semibold .py-5 .px-8 .border-transparent .rounded .transition;
+.base-button {
+  @apply .flex .flex-no-wrap .justify-center .items-center .bg-theme-button .text-theme-button-text .semibold .border-transparent .rounded .transition;
 }
 
-.show-more-button:hover {
-  @apply .bg-blue .text-white .hover-button-shadow-definition;
+.button-big {
+  @apply .base-button .mx-auto .py-5 .px-8;
+  max-height: 3.63rem;
 }
 
 .pager-button {
-  @apply .bg-theme-button .text-theme-button-text .semibold .py-3 .px-4 .border-transparent .rounded .transition .flex .flex-no-wrap .justify-center .items-center;
-}
-
-.pager-button:enabled:hover,
-.block-pager-button:enabled:hover {
-  @apply .bg-blue .text-white .hover-button-shadow-definition .cursor-pointer;
+  @apply .base-button .py-3 .px-4;
 }
 
 .block-pager-button {
   @apply .py-4 .px-5 .bg-transparent .bg-blue-darker .rounded-md .text-white .font-normal .text-xs .transition;
 }
+
+.button-big:enabled:hover,
+.page-button:enabled:hover,
+.block-pager-button:enabled:hover {
+  @apply .bg-blue .text-white .hover-button-shadow-definition .cursor-pointer;
+}
+
 
 /* Menu Buttons */
 
