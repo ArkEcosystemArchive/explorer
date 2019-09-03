@@ -30,7 +30,7 @@
             v-tooltip="statusMessage(data.row)"
             class="mx-auto"
             width="19px"
-            :src="require(`@/assets/images/icons/${statusImage(data.row)}.svg`)"
+            :src="require(`@/assets/images/icons/${status(data.row)}.svg`)"
           >
         </div>
 
@@ -135,25 +135,16 @@ export default {
           this.$i18n.t('PAGES.DELEGATE_MONITOR.TOOLTIP', { height: lastBlock.height })
         } ${this.readableTimestamp(lastBlock.timestamp.unix)}`
           : status,
-        classes: [`tooltip-bg-${row.forgingStatus}`, 'font-sans']
+        classes: [`tooltip-bg-${this.status(row)}`, 'font-sans']
       }
     },
 
-    statusImage (row) {
+    status (row) {
       return {
         0: 'forging',
         1: 'missed-block',
         2: 'not-forging',
-        3: 'not-forging'
-      }[row.forgingStatus]
-    },
-
-    statusColor (row) {
-      return {
-        0: '#46b02e', // Forging
-        1: '#f6993f', // Missing
-        2: '#ef192d', // Not forging
-        3: '#ef192d' // Never forged
+        3: 'not-forging' // never-forged
       }[row.forgingStatus]
     },
 

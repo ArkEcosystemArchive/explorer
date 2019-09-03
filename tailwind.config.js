@@ -83,6 +83,10 @@ module.exports = {
       'language-icon': 'var(--language-icon)',
 
       'theme-text-thead': 'var(--color-theme-text-thead)',
+
+      'status-forging': '#40a130',
+      'status-not-forging': '#e23a3e',
+      'status-missed-block': '#f5bd5c',
       // END CUSTOM ADDED
 
       black: '#172130',

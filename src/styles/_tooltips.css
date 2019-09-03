@@ -132,41 +132,41 @@
 }
 
 /* Forging */
-.tooltip.tooltip-bg-0 .tooltip-inner {
-  background-color: #46b02e;
+.tooltip.tooltip-bg-forging .tooltip-inner {
+  background-color: #40a130;
   color: white;
 }
 
-.tooltip.tooltip-bg-0 .tooltip-arrow {
-  border-color: #46b02e;
+.tooltip.tooltip-bg-forging .tooltip-arrow {
+  border-color: #40a130;
 }
 
 /* Missing */
-.tooltip.tooltip-bg-1 .tooltip-inner {
-  background-color: #f6993f;
+.tooltip.tooltip-bg-missed-block .tooltip-inner {
+  background-color: #f5bd5c;
   color: white;
 }
 
-.tooltip.tooltip-bg-1 .tooltip-arrow {
-  border-color: #f6993f;
+.tooltip.tooltip-bg-missed-block .tooltip-arrow {
+  border-color: #f5bd5c;
 }
 
 /* Not Forging */
-.tooltip.tooltip-bg-2 .tooltip-inner {
-  background-color: #ef192d;
+.tooltip.tooltip-bg-not-forging .tooltip-inner {
+  background-color: #e23a3e;
   color: white;
 }
 
-.tooltip.tooltip-bg-2 .tooltip-arrow {
-  border-color: #ef192d;
+.tooltip.tooltip-bg-not-forging .tooltip-arrow {
+  border-color: #e23a3e;
 }
 
 /* Never forged */
-.tooltip.tooltip-bg-3 .tooltip-inner {
-  background-color: #ef192d;
+.tooltip.tooltip-bg-never-forged .tooltip-inner {
+  background-color: #e23a3e;
   color: white;
 }
 
-.tooltip.tooltip-bg-3 .tooltip-arrow {
-  border-color: #ef192d;
+.tooltip.tooltip-bg-never-forged .tooltip-arrow {
+  border-color: #e23a3e;
 }
