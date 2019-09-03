@@ -14,6 +14,7 @@ export default {
     headerType: null,
     menuVisible: false,
     blockSortParams: null,
+    delegateSortParams: null,
     transactionSortParams: null,
     walletSortParams: null
   },
@@ -38,6 +39,9 @@ export default {
     },
     [types.SET_UI_BLOCK_SORT_PARAMS] (state, payload) {
       state.blockSortParams = payload.value
+    },
+    [types.SET_UI_DELEGATE_SORT_PARAMS] (state, payload) {
+      state.delegateSortParams = payload.value
     },
     [types.SET_UI_TRANSACTION_SORT_PARAMS] (state, payload) {
       state.transactionSortParams = payload.value
@@ -119,6 +123,16 @@ export default {
         value
       })
     },
+    setDelegateSortParams: ({ commit }, value) => {
+      value = JSON.stringify(value)
+
+      localStorage.setItem('delegateSortParams', value)
+
+      commit({
+        type: types.SET_UI_DELEGATE_SORT_PARAMS,
+        value
+      })
+    },
     setTransactionSortParams: ({ commit }, value) => {
       value = JSON.stringify(value)
 
@@ -151,6 +165,14 @@ export default {
     blockSortParams (state) {
       const params = state.blockSortParams || localStorage.getItem('blockSortParams')
       return params ? JSON.parse(params) : { field: 'height', type: 'desc' }
+    },
+
+    delegateSortParams (state) {
+      const params = state.delegateSortParams || localStorage.getItem('delegateSortParams')
+      return params ? JSON.parse(params) : {
+        active: { field: 'rank', type: 'asc' },
+        standby: { field: 'rank', type: 'asc' }
+      }
     },
 
     transactionSortParams (state) {

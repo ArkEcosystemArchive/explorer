@@ -103,6 +103,14 @@ describe('Store > UI', () => {
     expect(store.getters['ui/blockSortParams']).toEqual(params)
   })
 
+  it('should set the delegate sort params', () => {
+    const params = { field: 'test' }
+
+    store.dispatch('ui/setDelegateSortParams', params)
+
+    expect(store.getters['ui/delegateSortParams']).toEqual(params)
+  })
+
   it('should set the transaction sort params', () => {
     const params = { field: 'test' }
 
@@ -111,7 +119,7 @@ describe('Store > UI', () => {
     expect(store.getters['ui/transactionSortParams']).toEqual(params)
   })
 
-  it('should set the block sort params', () => {
+  it('should set the wallet sort params', () => {
     const params = { field: 'test' }
 
     store.dispatch('ui/setWalletSortParams', params)
