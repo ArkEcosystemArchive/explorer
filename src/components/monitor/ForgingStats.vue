@@ -40,7 +40,7 @@
 
     <div class="w-1/2 lg:w-1/4 flex items-center px-6 my-6 border-r border-theme-border-secondary flex-col sm:flex-row text-center sm:text-left">
       <div class="Meter mb-4 sm:mb-0 text-status-not-forging">
-        <ArkMeter :percentage="percentage(totals.notForging)" />
+        <ArkMeter :percentage="percentage(totals.notForging + totals.neverForged)" />
         <img
           class="MeterIcon"
           src="@/assets/images/icons/not-forging.svg"
