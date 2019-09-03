@@ -13,7 +13,7 @@
     />
     <circle
       v-if="percentage"
-      :style="{strokeDashoffset: dashoffset, strokeDasharray: circumference }"
+      :style="{ strokeDashoffset: dashoffset, strokeDasharray: circumference }"
       :cx="width / 2"
       :cy="width / 2"
       :r="radius"

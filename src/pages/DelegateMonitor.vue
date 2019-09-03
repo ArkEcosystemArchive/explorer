@@ -99,10 +99,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.meter {
-  width: 50px;
-  height: 50px;
-}
-</style>
