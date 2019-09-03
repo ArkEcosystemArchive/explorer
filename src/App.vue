@@ -183,11 +183,18 @@ export default {
     },
 
     migratePriceChart () {
-      const priceChart = localStorage.getItem('priceChart')
+      let priceChart = localStorage.getItem('priceChart')
       const priceChartPeriod = localStorage.getItem('priceChartPeriod')
 
       if (!priceChart || !priceChartPeriod) {
         return
+      }
+
+      if (priceChart) {
+        priceChart = JSON.parse(priceChart)
+      } else {
+        const network = require(`../networks/${process.env.EXPLORER_CONFIG}`)
+        priceChart = network.priceChartOptions.enabled
       }
 
       localStorage.setItem(
@@ -201,6 +208,7 @@ export default {
       )
 
       localStorage.removeItem('priceChart')
+      localStorage.removeItem('priceChartPeriod')
     }
   }
 }
