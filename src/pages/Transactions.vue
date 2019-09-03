@@ -165,7 +165,7 @@ export default {
       try {
         const { meta, data } = await TransactionService.filterByType(
           this.currentPage,
-          this.transactionType,
+          this.transactionType
         )
 
         this.setTransactions(data)
