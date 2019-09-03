@@ -24,7 +24,8 @@ export default {
   MARKET_CHART: {
     ERROR: 'De diagram kunnen niet worden geladen',
     RELOAD: 'Herladen diagram',
-    PRICE_IN: 'Prijs in',
+    PRICE: 'Prijs',
+    VOLUME: 'Volume',
     DAY: 'Dag',
     WEEK: 'Week',
     MONTH: 'Maand',

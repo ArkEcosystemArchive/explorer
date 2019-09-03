@@ -6,8 +6,11 @@ export default {
     language: 'en-GB',
     locale: navigator.language || 'en-GB',
     nightMode: false,
-    priceChart: true,
-    priceChartPeriod: 'day',
+    priceChartOptions: {
+      enabled: true,
+      period: 'day',
+      type: 'price'
+    },
     headerType: null,
     menuVisible: false,
     blockSortParams: null,
@@ -30,11 +33,8 @@ export default {
     [types.SET_UI_MENU_VISIBLE] (state, payload) {
       state.menuVisible = payload.value
     },
-    [types.SET_UI_PRICE_CHART] (state, payload) {
-      state.priceChart = payload.value
-    },
-    [types.SET_UI_PRICE_CHART_PERIOD] (state, payload) {
-      state.priceChartPeriod = payload.value
+    [types.SET_UI_PRICE_CHART_OPTIONS] (state, payload) {
+      state.priceChartOptions = payload.value
     },
     [types.SET_UI_BLOCK_SORT_PARAMS] (state, payload) {
       state.blockSortParams = payload.value
@@ -95,19 +95,17 @@ export default {
         value
       })
     },
-    setPriceChart: ({ commit }, value) => {
-      localStorage.setItem('priceChart', value)
+    setPriceChartOption: ({ dispatch, getters }, { option, value }) => {
+      const options = { ...getters.priceChartOptions }
+      options[option] = value
 
-      commit({
-        type: types.SET_UI_PRICE_CHART,
-        value: JSON.parse(value)
-      })
+      dispatch('setPriceChartOptions', options)
     },
-    setPriceChartPeriod: ({ commit }, value) => {
-      localStorage.setItem('priceChartPeriod', value)
+    setPriceChartOptions: ({ commit }, value) => {
+      localStorage.setItem('priceChartOptions', JSON.stringify(value))
 
       commit({
-        type: types.SET_UI_PRICE_CHART_PERIOD,
+        type: types.SET_UI_PRICE_CHART_OPTIONS,
         value
       })
     },
@@ -146,8 +144,7 @@ export default {
     language: state => state.language,
     locale: state => state.locale,
     nightMode: state => state.nightMode,
-    priceChart: state => state.priceChart,
-    priceChartPeriod: state => state.priceChartPeriod,
+    priceChartOptions: state => state.priceChartOptions,
     headerType: state => state.headerType,
     menuVisible: state => state.menuVisible,
 

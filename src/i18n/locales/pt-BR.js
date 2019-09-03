@@ -24,7 +24,8 @@ export default {
   MARKET_CHART: {
     ERROR: 'Os dados do gráfico não puderam ser carregados',
     RELOAD: 'Recarregar gráfico',
-    PRICE_IN: 'Preço em',
+    PRICE: 'Preço',
+    VOLUME: 'Volume',
     DAY: 'Dia',
     WEEK: 'Semana',
     MONTH: 'Mês',

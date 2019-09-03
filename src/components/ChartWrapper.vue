@@ -1,16 +1,19 @@
 <template>
-  <div class="relative">
+  <div class="PriceChart">
     <div
-      v-if="hasError"
+      v-if="hasError || isLoading"
       class="absolute inset-0 flex flex-col items-center justify-center text-white z-10"
     >
-      <p class="mb-4">
+      <p
+        v-if="hasError"
+        class="mb-4"
+      >
         {{ $t('MARKET_CHART.ERROR') }}
       </p>
       <button
         :disabled="isLoading"
         class="mt-4 pager-button items-center"
-        @click="renderChart()"
+        @click="renderChart(1000)"
       >
         <span v-if="!isLoading">{{ $t('MARKET_CHART.RELOAD') }}</span>
         <Loader
@@ -22,18 +25,52 @@
 
     <div
       :key="componentKey"
-      :class="{ 'blur': hasError }"
+      :class="{ 'blur': hasError || isLoading }"
     >
       <div class="flex justify-between items-center px-10 pt-8 pb-4">
-        <h2 class="text-white m-0 text-xl font-normal">
-          {{ $t('MARKET_CHART.PRICE_IN') }} {{ currencyName }}
-        </h2>
-        <div>
+        <div class="relative">
+          <button
+            v-click-outside="closeDropdown"
+            class="chart-tab chart-tab-active flex items-center ml-0"
+            @click="toggleDropdown"
+          >
+            {{ currencyName }} {{ $t(`MARKET_CHART.${priceChartOptions.type.toUpperCase()}`) }}
+            <svg
+              :class="{ 'rotate-180': isOpen }"
+              xmlns="http://www.w3.org/2000/svg"
+              class="fill-current ml-2"
+              viewBox="0 0 20 20"
+              width="16px"
+              height="16px"
+            >
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg>
+          </button>
+
+          <ul
+            v-show="isOpen"
+            class="absolute left-0 mt-px bg-theme-content-background shadow-theme rounded border overflow-hidden text-sm"
+          >
+            <li
+              v-for="type in ['price', 'volume']"
+              :key="type"
+            >
+              <span
+                class="dropdown-button"
+                @click="setType(type)"
+              >
+                {{ currencyName }} {{ $t(`MARKET_CHART.${type.toUpperCase()}`) }}
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="PriceChart__PeriodButtons">
           <template v-for="period in ['day', 'week', 'month', 'quarter', 'year']">
             <button
               :key="period"
-              :class="{ 'chart-tab-active': currentPeriod === period }"
-              class="chart-tab"
+              :class="{ 'chart-tab-active': priceChartOptions.period === period }"
+              class="chart-tab transition"
               @click="setPeriod(period)"
             >
               {{ $t(`MARKET_CHART.${period.toUpperCase()}`) }}
@@ -55,16 +92,16 @@
 import CryptoCompareService from '@/services/crypto-compare'
 import PriceChart from '@/components/charts/price-chart'
 import { mapGetters } from 'vuex'
-import store from '@/store'
 
 export default {
   components: {
     PriceChart
   },
 
-  data: () => ({
+  data: vm => ({
     error: null,
     isLoading: false,
+    isOpen: false,
     componentKey: 0,
     labels: [],
     datasets: [],
@@ -98,11 +135,7 @@ export default {
                 // Skip every second tick
                 if (index % 2 === 0) return
 
-                if ([store.getters['network/token'], 'BTC', 'ETH', 'LTC'].some(c => store.getters['currency/name'].indexOf(c) > -1)) {
-                  return store.getters['currency/symbol'] + value.toFixed(8)
-                }
-
-                return store.getters['currency/symbol'] + value.toFixed(2)
+                return vm.readableCurrency(value, 1, null, false)
               },
               fontColor: '#838a9b',
               fontSize: 13
@@ -143,18 +176,8 @@ export default {
         // borderWidth: 1,
         // borderColor: '#037cff',
         callbacks: {
-          title: tooltipItem => {
-            const name = store.getters['currency/name']
-            const token = store.getters['currency/symbol']
-
-            if ([token, 'BTC', 'ETH', 'LTC'].some(c => name.indexOf(c) > -1)) {
-              return `${name} ${Number(tooltipItem[0].yLabel).toFixed(8)}`
-            }
-
-            return `${name} ${Number(tooltipItem[0].yLabel).toFixed(2)}`
-          },
+          title: tooltipItem => vm.readableCurrency(tooltipItem[0].yLabel, 1, null, false),
           label: tooltipItem => ''
-          // label: tooltipItem => `BTC ${tooltipItem.yLabel}`
         }
       }
     }
@@ -163,7 +186,7 @@ export default {
   computed: {
     ...mapGetters('currency', { currencyName: 'name' }),
     ...mapGetters('network', ['token']),
-    ...mapGetters('ui', { currentPeriod: 'priceChartPeriod' }),
+    ...mapGetters('ui', ['priceChartOptions']),
 
     chartData () {
       return {
@@ -178,9 +201,28 @@ export default {
           pointHoverRadius: 7,
           pointHoverBorderWidth: 4,
           fill: false,
-          data: this.datasets
+          data: this.currentDataset
         }]
       }
+    },
+
+    currentDataset () {
+      let property
+
+      switch (this.priceChartOptions.type) {
+        case 'price':
+        {
+          property = 'close'
+          break
+        }
+        case 'volume':
+        {
+          property = 'volumeto'
+          break
+        }
+      }
+
+      return this.datasets.map(el => el[property])
     },
 
     hasError () {
@@ -190,6 +232,14 @@ export default {
 
   watch: {
     token () {
+      this.renderChart()
+    },
+
+    'priceChartOptions.period' () {
+      this.renderChart()
+    },
+
+    'priceChartOptions.type' () {
       this.renderChart()
     },
 
@@ -205,18 +255,20 @@ export default {
 
   methods: {
     setPeriod (period) {
-      this.$store.dispatch('ui/setPriceChartPeriod', period)
-
-      if (this.token) {
-        this.renderChart()
-      }
+      this.$store.dispatch('ui/setPriceChartOption', { option: 'period', value: period })
     },
 
-    async renderChart (delay = false) {
-      this.isLoading = true
+    setType (type) {
+      this.$store.dispatch('ui/setPriceChartOption', { option: 'type', value: type })
+    },
+
+    async renderChart (delay = 0) {
+      if (!this.datasets.length) {
+        this.isLoading = true
+      }
 
       try {
-        const response = await CryptoCompareService[this.currentPeriod]()
+        const response = await CryptoCompareService[this.priceChartOptions.period]()
         this.labels = response.labels
         this.datasets = response.datasets
 
@@ -227,7 +279,7 @@ export default {
 
         this.error = error
       } finally {
-        this.isLoading = false
+        setTimeout(() => (this.isLoading = false), delay)
       }
     },
 
@@ -235,13 +287,21 @@ export default {
       // trick to re-mount the chart on resize
       // https://stackoverflow.com/questions/47459837/how-to-re-mount-a-component
       this.componentKey++
+    },
+
+    closeDropdown () {
+      this.isOpen = false
+    },
+
+    toggleDropdown () {
+      this.isOpen = !this.isOpen
     }
   }
 }
 </script>
 
-<style>
-.blur {
-  filter: blur(4px)
+<style scoped>
+.PriceChart {
+  @apply .relative
 }
 </style>

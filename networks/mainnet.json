@@ -50,7 +50,10 @@
       "name": "USD",
       "symbol": "$"
     },
-    "priceChart": true,
-    "priceChartPeriod": "day"
+    "priceChartOptions": {
+      "enabled": true,
+      "period": "day",
+      "type": "price"
+    }
   }
 }

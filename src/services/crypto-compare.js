@@ -144,9 +144,7 @@ class CryptoCompareService {
       labels: response.map(value => {
         return moment.unix(value.time).format(dateTimeFormat)
       }),
-      datasets: response.map(value => {
-        return value.close
-      })
+      datasets: response
     }
   }
 }

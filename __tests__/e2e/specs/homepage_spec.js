@@ -89,16 +89,43 @@ describe('Homepage', () => {
   })
 
   describe('Chart', () => {
-    it('should contain buttons for the period', () => {
-      const periods = ['Day', 'Week', 'Month', 'Quarter', 'Year']
+    it('should be possible to persistently change type', () => {
+      cy.get('button.chart-tab').contains('Price').should('have.class', 'chart-tab-active')
 
-      cy.get('button.chart-tab')
-        .each(($btn, index, $btns) => {
-          cy.wrap($btn).should('be.visible').invoke('text').should('include', periods[index])
+      cy.get('.PriceChart').within(() => {
+        cy.get('button.chart-tab-active').contains('Price').click()
+        cy.get('.dropdown-button').contains('Volume').click()
+        cy.get('button.chart-tab-active').first().invoke('text').should('include', 'Volume')
+      })
+
+      cy.get('h1').then($heading => {
+        const heading = $heading.text()
+
+        cy.get('button.button-lg').click()
+
+        cy.get('h1').should($heading2 => {
+          expect($heading2.text()).not.to.eq(heading)
         })
-        .then($btns => {
-          cy.wrap($btns).should('have.length', periods.length)
-        })
+      })
+
+      cy.get('a.logo-container').click()
+      cy.get('#line-chart').should('be.visible')
+
+      cy.get('button.chart-tab-active').first().invoke('text').should('include', 'Volume')
+    })
+
+    it('should contain buttons for the period', () => {
+      const buttons = ['Day', 'Week', 'Month', 'Quarter', 'Year']
+
+      cy.get('.PriceChart__PeriodButtons').within(() => {
+        cy.get('button.chart-tab')
+          .each(($btn, index, $btns) => {
+            cy.wrap($btn).should('be.visible').invoke('text').should('include', buttons[index])
+          })
+          .then($btns => {
+            cy.wrap($btns).should('have.length', buttons.length)
+          })
+      })
     })
 
     it('should be possible to change period', () => {
@@ -116,7 +143,7 @@ describe('Homepage', () => {
       cy.get('h1').then($heading => {
         const heading = $heading.text()
 
-        cy.get('button.button-big').click()
+        cy.get('button.button-lg').click()
 
         cy.get('h1').should($heading2 => {
           expect($heading2.text()).not.to.eq(heading)

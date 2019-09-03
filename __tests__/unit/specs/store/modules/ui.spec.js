@@ -14,25 +14,47 @@ describe('Store > UI', () => {
   })
 
   it('should show the price chart', () => {
-    store.dispatch('ui/setPriceChart', true)
+    store.dispatch('ui/setPriceChartOption', {
+      option: 'enabled',
+      value: true
+    })
 
-    expect(store.getters['ui/priceChart']).toEqual(true)
+    expect(store.getters['ui/priceChartOptions'].enabled).toEqual(true)
   })
 
   it('should hide the price chart', () => {
-    store.dispatch('ui/setPriceChart', false)
+    store.dispatch('ui/setPriceChartOption', {
+      option: 'enabled',
+      value: false
+    })
 
-    expect(store.getters['ui/priceChart']).toEqual(false)
+    expect(store.getters['ui/priceChartOptions'].enabled).toEqual(false)
   })
 
-  it("should have 'day' as the default price chart period", () => {
-    expect(store.getters['ui/priceChartPeriod']).toEqual('day')
+  it('should have \'day\' as the default price chart period', () => {
+    expect(store.getters['ui/priceChartOptions'].period).toEqual('day')
   })
 
   it('should set the price chart period', () => {
-    store.dispatch('ui/setPriceChartPeriod', 'week')
+    store.dispatch('ui/setPriceChartOption', {
+      option: 'period',
+      value: 'week'
+    })
 
-    expect(store.getters['ui/priceChartPeriod']).toEqual('week')
+    expect(store.getters['ui/priceChartOptions'].period).toEqual('week')
+  })
+
+  it('should have \'price\' as the default price chart type', () => {
+    expect(store.getters['ui/priceChartOptions'].type).toEqual('price')
+  })
+
+  it('should set the price chart type', () => {
+    store.dispatch('ui/setPriceChartOption', {
+      option: 'type',
+      value: 'volume'
+    })
+
+    expect(store.getters['ui/priceChartOptions'].type).toEqual('volume')
   })
 
   it('should have English set as default language', () => {

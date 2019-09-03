@@ -40,6 +40,7 @@ export default {
 
   async created () {
     this.migrateLanguageKey()
+    this.migratePriceChart()
 
     const network = require(`../networks/${process.env.EXPLORER_CONFIG}`)
 
@@ -85,13 +86,8 @@ export default {
     )
 
     this.$store.dispatch(
-      'ui/setPriceChart',
-      localStorage.getItem('priceChart') || network.defaults.priceChart
-    )
-
-    this.$store.dispatch(
-      'ui/setPriceChartPeriod',
-      localStorage.getItem('priceChartPeriod') || network.defaults.priceChartPeriod
+      'ui/setPriceChartOptions',
+      JSON.parse(localStorage.getItem('priceChartOptions')) || network.defaults.priceChartOptions
     )
 
     this.updateI18n()
@@ -184,6 +180,27 @@ export default {
       language = [parts[0], parts[parts.length > 1 ? 1 : 0].toUpperCase()].join('-')
 
       localStorage.setItem('language', language)
+    },
+
+    migratePriceChart () {
+      const priceChart = localStorage.getItem('priceChart')
+      const priceChartPeriod = localStorage.getItem('priceChartPeriod')
+
+      if (!priceChart || !priceChartPeriod) {
+        return
+      }
+
+      localStorage.setItem(
+        'priceChartOptions', JSON.stringify({
+          ...this.$store.getters['ui/priceChartOptions'],
+          ...{
+            enabled: priceChart,
+            period: priceChartPeriod
+          }
+        })
+      )
+
+      localStorage.removeItem('priceChart')
     }
   }
 }
