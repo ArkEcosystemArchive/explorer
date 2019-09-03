@@ -186,7 +186,7 @@ export default {
       let priceChart = localStorage.getItem('priceChart')
       const priceChartPeriod = localStorage.getItem('priceChartPeriod')
 
-      if (!priceChart || !priceChartPeriod) {
+      if (!priceChart && !priceChartPeriod) {
         return
       }
 
