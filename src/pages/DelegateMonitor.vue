@@ -25,32 +25,23 @@
         :delegates="delegates || []"
       />
 
-      <ActiveDelegates
-        v-if="activeTab === 'active'"
+      <TableDelegates
         :delegates="delegates"
+        :show-standby="activeTab === 'standby'"
       />
-
-      <StandbyDelegates v-if="activeTab === 'standby'" />
     </section>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import {
-  ActiveDelegates,
-  MonitorHeader,
-  ForgingStats,
-  StandbyDelegates
-} from '@/components/monitor'
+import { MonitorHeader, ForgingStats } from '@/components/monitor'
 import DelegateService from '@/services/delegate'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
-    ActiveDelegates,
     MonitorHeader,
-    ForgingStats,
-    StandbyDelegates
+    ForgingStats
   },
 
   data: () => ({
@@ -65,6 +56,11 @@ export default {
   watch: {
     async height () {
       await this.setDelegates()
+    },
+
+    async activeTab () {
+      this.delegates = null
+      await this.setDelegates()
     }
   },
 
@@ -75,7 +71,7 @@ export default {
   methods: {
     async setDelegates () {
       if (this.height) {
-        this.delegates = await DelegateService.active()
+        this.delegates = await DelegateService[this.activeTab]()
       }
     }
   }

@@ -16,6 +16,8 @@ Vue.component('LinkTransaction', require('@/components/links/LinkTransaction').d
 Vue.component('LinkWallet', require('@/components/links/LinkWallet').default)
 
 // Tables
+Vue.component('TableDelegates', require('@/components/tables/Delegates').default)
+
 Vue.component('TableBlocksDesktop', require('@/components/tables/Blocks').default)
 Vue.component('TableTransactionsDesktop', require('@/components/tables/Transactions').default)
 Vue.component('TableWalletsDesktop', require('@/components/tables/Wallets').default)

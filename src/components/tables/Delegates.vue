@@ -54,7 +54,7 @@
 
 <script type="text/ecmascript-6">
 export default {
-  name: 'ActiveDelegates',
+  name: 'TableDelegates',
 
   props: {
     delegates: {
@@ -62,6 +62,11 @@ export default {
         return Array.isArray(value) || value === null
       },
       required: true
+    },
+    showStandby: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
 
@@ -77,7 +82,9 @@ export default {
         },
         {
           label: this.$t('WALLET.DELEGATE.USERNAME'),
-          field: 'username'
+          field: 'username',
+          thClass: `${this.showStandby ? 'end-cell sm:base-cell text-left' : ''}`,
+          tdClass: `${this.showStandby ? 'end-cell sm:base-cell text-left' : ''}`
         },
         {
           label: this.$t('PAGES.DELEGATE_MONITOR.FORGED_BLOCKS'),
@@ -105,10 +112,18 @@ export default {
           label: this.$t('PAGES.DELEGATE_MONITOR.VOTES'),
           field: 'votes',
           type: 'number',
-          thClass: 'end-cell hidden md:table-cell',
-          tdClass: 'end-cell hidden md:table-cell'
+          thClass: `end-cell hidden ${this.showStandby ? 'sm' : 'md'}:table-cell`,
+          tdClass: `end-cell hidden ${this.showStandby ? 'sm' : 'md'}:table-cell`
         }
       ]
+
+      if (this.showStandby) {
+        // remove the columns for blocks, last forged and status
+        const index = columns.findIndex(el => {
+          return el.field === 'blocks.produced'
+        })
+        columns.splice(index, 3)
+      }
 
       return columns
     }
