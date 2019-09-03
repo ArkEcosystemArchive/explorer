@@ -24,7 +24,8 @@ export default {
   MARKET_CHART: {
     ERROR: 'The chart data could not be loaded',
     RELOAD: 'Reload chart',
-    PRICE_IN: 'Price in',
+    PRICE: 'Price',
+    VOLUME: 'Volume',
     DAY: 'Day',
     WEEK: 'Week',
     MONTH: 'Month',

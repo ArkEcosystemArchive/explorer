@@ -1,7 +1,7 @@
 <template>
   <button
     :class="[
-      priceChart ? 'text-chart-active' : 'text-chart-inactive',
+      isChartEnabled ? 'text-chart-active' : 'text-chart-inactive',
       'px-2 py-4 hidden md:flex flex-none items-center border-b-2 mt-2px border-transparent hover:border-red hover:text-blue transition'
     ]"
     @click="toggleChart()"
@@ -22,18 +22,18 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
-
 export default {
   name: 'ToggleChart',
 
   computed: {
-    ...mapGetters('ui', ['priceChart'])
+    isChartEnabled () {
+      return this.$store.getters['ui/priceChartOptions'].enabled
+    }
   },
 
   methods: {
     toggleChart () {
-      this.$store.dispatch('ui/setPriceChart', !this.priceChart)
+      this.$store.dispatch('ui/setPriceChartOption', { option: 'enabled', value: !this.isChartEnabled })
     }
   }
 }

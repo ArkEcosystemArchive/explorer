@@ -97,14 +97,14 @@ export default {
 
   computed: {
     ...mapGetters('network', { networkDefaults: 'defaults' }),
-    ...mapGetters('ui', ['menuVisible', 'priceChart']),
+    ...mapGetters('ui', ['menuVisible']),
 
     shouldDisplayCurrency () {
-      return this.networkDefaults.priceChart
+      return this.networkDefaults.priceChartOptions.enabled
     },
 
     shouldDisplayChart () {
-      return this.$route.name === 'home' && this.networkDefaults.priceChart
+      return this.$route.name === 'home' && this.networkDefaults.priceChartOptions.enabled
     }
   },
 

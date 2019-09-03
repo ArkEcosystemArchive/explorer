@@ -10,6 +10,10 @@
     "token": "TARK",
     "symbol": "TѦ",
     "currency": null,
-    "priceChart": false
+    "priceChartOptions": {
+      "enabled": false,
+      "period": "day",
+      "type": "price"
+    }
   }
 }
