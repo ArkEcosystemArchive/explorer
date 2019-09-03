@@ -2,7 +2,6 @@
   <Loader :data="transactions">
     <TableWrapper
       v-bind="$attrs"
-      :has-pagination="false"
       :columns="columns"
       :rows="transactions"
       :sort-query="{ field: 'timestamp.unix', type: 'desc' }"

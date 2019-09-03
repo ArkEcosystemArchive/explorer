@@ -2,7 +2,6 @@
   <Loader :data="blocks">
     <TableWrapper
       v-bind="$attrs"
-      :has-pagination="false"
       :columns="columns"
       :rows="blocks"
       :no-data-message="$t('COMMON.NO_RESULTS')"

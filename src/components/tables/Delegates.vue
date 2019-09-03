@@ -2,7 +2,6 @@
   <Loader :data="delegates">
     <TableWrapper
       v-bind="$attrs"
-      :has-pagination="false"
       :columns="columns"
       :rows="delegates"
       :sort-query="{ field: 'rank', type: 'asc' }"
