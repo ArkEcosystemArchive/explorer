@@ -28,6 +28,8 @@
       <TableDelegates
         :delegates="delegates"
         :show-standby="activeTab === 'standby'"
+        :sort-query="sortParams[this.activeTab]"
+        @on-sort-change="onSortChange"
       />
     </section>
   </div>
@@ -50,7 +52,23 @@ export default {
   }),
 
   computed: {
-    ...mapGetters('network', ['height'])
+    ...mapGetters('network', ['height']),
+
+    sortParams: {
+      get () {
+        return this.$store.getters['ui/delegateSortParams']
+      },
+
+      set (params) {
+        this.$store.dispatch('ui/setDelegateSortParams', {
+          ...this.sortParams,
+          [this.activeTab]: {
+            field: params.field,
+            type: params.type
+          }
+        })
+      }
+    }
   },
 
   watch: {
@@ -73,6 +91,10 @@ export default {
       if (this.height) {
         this.delegates = await DelegateService[this.activeTab]()
       }
+    },
+
+    onSortChange (params) {
+      this.sortParams = params
     }
   }
 }

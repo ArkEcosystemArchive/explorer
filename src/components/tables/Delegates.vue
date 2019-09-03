@@ -4,8 +4,8 @@
       v-bind="$attrs"
       :columns="columns"
       :rows="delegates"
-      :sort-query="{ field: 'rank', type: 'asc' }"
       :no-data-message="$t('COMMON.NO_RESULTS')"
+      @on-sort-change="emitSortChange"
     >
       <template
         slot-scope="data"
@@ -20,7 +20,7 @@
           {{ readableNumber(data.row.blocks.produced, 0) }}
         </div>
 
-        <div v-else-if="data.column.label === $t('PAGES.DELEGATE_MONITOR.LAST_FORGED')">
+        <div v-else-if="data.column.field === 'lastBlockHeight'">
           {{ lastForgingTime(data.row) }}
         </div>
 
@@ -94,7 +94,7 @@ export default {
         },
         {
           label: this.$t('PAGES.DELEGATE_MONITOR.LAST_FORGED'),
-          field: this.lastBlockHeight,
+          field: 'lastBlockHeight',
           type: 'number',
           sortFn: this.sortByLastBlockHeight,
           thClass: 'text-left hidden sm:table-cell',
@@ -171,12 +171,15 @@ export default {
       }[row.forgingStatus]
     },
 
-    lastBlockHeight (row) {
-      return row.blocks.last ? row.blocks.last.height : -1
+    sortByLastBlockHeight (x, y, col, rowX, rowY) {
+      const heightX = rowX.blocks.last ? rowX.blocks.last.height : -1
+      const heightY = rowY.blocks.last ? rowY.blocks.last.height : -1
+
+      return heightX > heightY ? -1 : (heightX < heightY ? 1 : 0)
     },
 
-    sortByLastBlockHeight (x, y, col, rowX, rowY) {
-      return x > y ? -1 : (x < y ? 1 : 0)
+    emitSortChange (params) {
+      this.$emit('on-sort-change', params[0])
     }
   }
 }
