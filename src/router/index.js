@@ -24,7 +24,6 @@ function getTitle (title) {
 
 const router = new Router({
   mode: process.env.ROUTER_MODE,
-  base: process.env.RELEASE_TYPE === 'gh-pages' ? '/explorer/' : '/',
   routes: [
     {
       path: '/',
