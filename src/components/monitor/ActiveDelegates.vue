@@ -25,13 +25,21 @@
           {{ lastForgingTime(data.row) }}
         </div>
 
-        <div v-else-if="data.column.field === 'forgingStatus'">
-          <img
-            v-tooltip="statusMessage(data.row)"
-            class="mx-auto"
-            width="19px"
-            :src="require(`@/assets/images/icons/${status(data.row)}.svg`)"
+        <div
+          v-else-if="data.column.field === 'forgingStatus'"
+          class="text-0"
+        >
+          <button
+            v-tooltip="statusTooltip(data.row)"
+            role="img"
+            :aria-label="tooltipContent(data.row)"
           >
+            <img
+              class="mx-auto"
+              width="19px"
+              :src="require(`@/assets/images/icons/${status(data.row)}.svg`)"
+            >
+          </button>
         </div>
 
         <div v-else-if="data.column.field === 'votes'">
@@ -119,7 +127,15 @@ export default {
       return delegate.blocks.last ? this.readableTimestampAgo(delegate.blocks.last.timestamp.unix) : this.$i18n.t('PAGES.DELEGATE_MONITOR.NEVER')
     },
 
-    statusMessage (row) {
+    statusTooltip (row) {
+      return {
+        trigger: 'hover click',
+        content: this.tooltipContent(row),
+        classes: [`tooltip-bg-${this.status(row)}`, 'font-sans']
+      }
+    },
+
+    tooltipContent (row) {
       const status = {
         0: this.$i18n.t('PAGES.DELEGATE_MONITOR.STATUS.FORGING'),
         1: this.$i18n.t('PAGES.DELEGATE_MONITOR.STATUS.MISSING'),
@@ -129,14 +145,9 @@ export default {
 
       const lastBlock = row.blocks.last
 
-      return {
-        trigger: 'hover click',
-        content: lastBlock ? `[${status}] ${
-          this.$i18n.t('PAGES.DELEGATE_MONITOR.TOOLTIP', { height: lastBlock.height })
-        } ${this.readableTimestamp(lastBlock.timestamp.unix)}`
-          : status,
-        classes: [`tooltip-bg-${this.status(row)}`, 'font-sans']
-      }
+      return lastBlock ? `[${status}] ${
+        this.$i18n.t('PAGES.DELEGATE_MONITOR.TOOLTIP', { height: lastBlock.height })
+      } ${this.readableTimestamp(lastBlock.timestamp.unix)}` : status
     },
 
     status (row) {
