@@ -194,7 +194,7 @@ export default {
         priceChart = JSON.parse(priceChart)
       } else {
         const network = require(`../networks/${process.env.EXPLORER_CONFIG}`)
-        priceChart = network.priceChartOptions.enabled
+        priceChart = network.defaults.priceChartOptions.enabled
       }
 
       localStorage.setItem(
