@@ -154,7 +154,24 @@ export default {
         this.transactionType = type
         this.currentPage = 1
 
-        this.changePage()
+        this.transactions = null
+        this.meta = null
+
+        this.getTransactions()
+      }
+    },
+
+    async getTransactions () {
+      try {
+        const { meta, data } = await TransactionService.filterByType(
+          this.currentPage,
+          this.transactionType,
+        )
+
+        this.setTransactions(data)
+        this.setMeta(meta)
+      } catch (e) {
+        console.log(e.message || e.data.error)
       }
     },
 
