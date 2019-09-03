@@ -2,7 +2,6 @@
   <Loader :data="wallets">
     <TableWrapper
       v-bind="$attrs"
-      :has-pagination="false"
       :columns="columns"
       :rows="wallets"
       :no-data-message="$t('COMMON.NO_RESULTS')"
