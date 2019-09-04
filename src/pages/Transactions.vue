@@ -41,7 +41,7 @@
       <Pagination
         v-if="showPagination"
         :meta="meta"
-        :current-page="currentPage"
+        :current-page="Number($route.params.page)"
         @page-change="onPageChange"
       />
     </section>
@@ -96,17 +96,10 @@ export default {
     this.transactionType = Number(localStorage.getItem('transactionType') || -1)
   },
 
-  async beforeRouteEnter (to, from, next) {
+  beforeRouteEnter (to, from, next) {
     try {
-      const { meta, data } = await TransactionService.filterByType(
-        to.params.page,
-        Number(localStorage.getItem('transactionType') || -1)
-      )
-
-      next(vm => {
-        vm.currentPage = Number(to.params.page)
-        vm.setTransactions(data)
-        vm.setMeta(meta)
+      next(async vm => {
+        await vm.getTransactions(Number(to.params.page))
       })
     } catch (e) {
       next({ name: '404' })
@@ -114,18 +107,8 @@ export default {
   },
 
   async beforeRouteUpdate (to, from, next) {
-    this.transactions = null
-    this.meta = null
-
     try {
-      const { meta, data } = await TransactionService.filterByType(
-        to.params.page,
-        Number(localStorage.getItem('transactionType') || -1)
-      )
-
-      this.currentPage = Number(to.params.page)
-      this.setTransactions(data)
-      this.setMeta(meta)
+      await this.getTransactions(Number(to.params.page))
       next()
     } catch (e) {
       next({ name: '404' })
@@ -149,30 +132,33 @@ export default {
       this.currentPage = page
     },
 
-    setType (type) {
+    async setType (type) {
       if (this.transactionType !== type) {
         this.transactionType = type
-        this.currentPage = 1
 
-        this.transactions = null
-        this.meta = null
-
-        this.getTransactions()
+        if (this.currentPage === 1) {
+          try {
+            await this.getTransactions()
+          } catch (e) {
+            console.log(e.message || e.data.error)
+          }
+        } else {
+          this.currentPage = 1
+        }
       }
     },
 
-    async getTransactions () {
-      try {
-        const { meta, data } = await TransactionService.filterByType(
-          this.currentPage,
-          this.transactionType
-        )
+    async getTransactions (page = null) {
+      this.transactions = null
+      this.meta = null
 
-        this.setTransactions(data)
-        this.setMeta(meta)
-      } catch (e) {
-        console.log(e.message || e.data.error)
-      }
+      const { meta, data } = await TransactionService.filterByType(
+        page || this.currentPage,
+        this.transactionType
+      )
+
+      this.setTransactions(data)
+      this.setMeta(meta)
     },
 
     changePage () {
