@@ -28,7 +28,7 @@
       <TableDelegates
         :delegates="delegates"
         :show-standby="activeTab === 'standby'"
-        :sort-query="sortParams[this.activeTab]"
+        :sort-query="sortParams[activeTab]"
         @on-sort-change="onSortChange"
       />
     </section>

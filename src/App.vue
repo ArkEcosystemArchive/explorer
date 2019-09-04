@@ -16,8 +16,13 @@
 <script type="text/ecmascript-6">
 import AppHeader from '@/components/header/AppHeader'
 import AppFooter from '@/components/AppFooter'
-import { BlockchainService, CryptoCompareService, DelegateService, NodeService } from '@/services'
-import { I18N } from '@/config'
+import {
+  BlockchainService,
+  CryptoCompareService,
+  DelegateService,
+  MigrationService,
+  NodeService
+} from '@/services'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 
@@ -39,8 +44,7 @@ export default {
   },
 
   async created () {
-    this.migrateLanguageKey()
-    this.migratePriceChart()
+    MigrationService.executeMigrations()
 
     const network = require(`../networks/${process.env.EXPLORER_CONFIG}`)
 
@@ -167,40 +171,6 @@ export default {
     clearTimers () {
       clearInterval(this.currencyTimer)
       clearInterval(this.networkTimer)
-    },
-
-    migrateLanguageKey () {
-      let language = localStorage.getItem('language')
-
-      if (!language || I18N.enabledLocales.includes(language)) {
-        return
-      }
-
-      const parts = language.split('-')
-      language = [parts[0], parts[parts.length > 1 ? 1 : 0].toUpperCase()].join('-')
-
-      localStorage.setItem('language', language)
-    },
-
-    migratePriceChart () {
-      const priceChart = localStorage.getItem('priceChart')
-      const priceChartPeriod = localStorage.getItem('priceChartPeriod')
-
-      if (!priceChart || !priceChartPeriod) {
-        return
-      }
-
-      localStorage.setItem(
-        'priceChartOptions', JSON.stringify({
-          ...this.$store.getters['ui/priceChartOptions'],
-          ...{
-            enabled: priceChart,
-            period: priceChartPeriod
-          }
-        })
-      )
-
-      localStorage.removeItem('priceChart')
     }
   }
 }

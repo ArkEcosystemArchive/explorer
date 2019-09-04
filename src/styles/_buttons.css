@@ -31,7 +31,7 @@ button:disabled {
 }
 
 .button-lg:enabled:hover,
-.page-button:enabled:hover,
+.pager-button:enabled:hover,
 .block-pager-button:enabled:hover {
   @apply .bg-blue .text-white .hover-button-shadow-definition .cursor-pointer;
 }
