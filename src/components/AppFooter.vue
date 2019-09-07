@@ -309,13 +309,13 @@ export default {
       return moment().format('Y')
     },
     version () {
-      return '0' //TODO: GIT_VERSION
+      return process.env.VUE_APP_GIT_VERSION;
     },
     versionLink () {
-      return 'asdf' //TODO: `https://github.com/ArkEcosystem/explorer/commit/${GIT_VERSION}`
+      return `https://github.com/ArkEcosystem/explorer/commit/${process.env.VUE_APP_GIT_VERSION}`
     },
     date () {
-      return '0' //TODO: GIT_DATE
+      return process.env.VUE_APP_GIT_DATE
     }
   }
 }

@@ -8,6 +8,9 @@ if (process.env.RELEASE_TYPE === "dist") {
     publicPath = "/explorer/";
 }
 
+process.env['VUE_APP_GIT_VERSION'] = JSON.stringify(gitRevision.version);
+process.env['VUE_APP_GIT_DATE'] = JSON.stringify(gitRevision.date);
+
 module.exports = {
     publicPath,
     lintOnSave: false,
@@ -15,8 +18,8 @@ module.exports = {
 
     pluginOptions: {
       i18n: {
-        locale: 'en',
-        fallbackLocale: 'en',
+        locale: 'en-GB',
+        fallbackLocale: 'en-GB',
         localeDir: 'locales',
         enableInSFC: true
       }
