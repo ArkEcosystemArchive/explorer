@@ -1,14 +1,32 @@
 {
-  "name": "explorer-vue-cli",
-  "version": "0.1.0",
-  "private": true,
+  "name": "ark-explorer",
+  "version": "3.0.0",
+  "description": "A Blockchain Explorer for ARK using Vue.js and Tailwind CSS",
+  "author": "Brian Faust",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arkecosystem/explorer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/arkecosystem/explorer/issues"
+  },
+  "license": "MIT",
   "scripts": {
-    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
+    "build:mainnet": "vue-cli-service build --network mainnet",
+    "build:devnet": "vue-cli-service build --network devnet",
+    "build:testnet": "vue-cli-service-build --network testnet",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
-    "test:e2e": "vue-cli-service test:e2e",
-    "test:unit": "vue-cli-service test:unit"
+    "lint": "vue-cli-service lint",
+    "serve": "vue-cli-service serve",
+    "serve:mainnet": "vue-cli-service serve --network mainnet",
+    "serve:devnet": "vue-cli-service serve --network devnet",
+    "serve:testnet": "vue-cli-service serve --network testnet",
+    "task:deploy": "cross-env-shell ./scripts/deploy.sh",
+    "test": "yarn test:unit && yarn test:e2e",
+    "test:unit": "jest --maxWorkers=2 --config __tests__/unit/jest.conf.js",
+    "test:e2e": "cypress run",
+    "test:e2e:ci": "start-server-and-test dev http://localhost:8080 test:e2e"
   },
   "dependencies": {
     "animate.css": "^3.7.2",

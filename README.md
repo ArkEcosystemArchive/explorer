@@ -75,19 +75,19 @@ EXPLORER_HOST="127.0.0.1" EXPLORER_PORT="4200" node express-server.js
 #### 4.1 Mainnet
 
 ```bash
-yarn dev # or yarn dev:mainnet
+yarn serve # or yarn serve:mainnet
 ```
 
 #### 4.2 Devnet
 
 ```bash
-yarn dev:devnet
+yarn serve:devnet
 ```
 
 #### 4.3 Custom
 
 ```bash
-yarn dev --env.network=custom
+yarn serve --env.network=custom
 ```
 
 ### 5. History Mode
@@ -103,7 +103,7 @@ yarn build:mainnet --history
 #### 5.2 Development
 
 ```bash
-yarn dev --env.routerMode=history
+yarn serve --env.routerMode=history
 ```
 
 ## Testing
