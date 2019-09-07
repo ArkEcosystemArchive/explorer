@@ -11,10 +11,14 @@ button:disabled {
   @apply .hover-button-shadow-definition;
 }
 
+.transition {
+  /* TODO: */
+}
+
 /* Pagination Buttons */
 
 .base-button {
-  @apply .flex .flex-no-wrap .justify-center .items-center .bg-theme-button .text-theme-button-text .semibold .border-transparent .rounded .transition;
+  @apply .flex .flex-no-wrap .justify-center .items-center .bg-theme-button .text-theme-button-text .font-semibold .border-transparent .rounded .transition;
 }
 
 .button-lg {
@@ -40,7 +44,8 @@ button:disabled {
 /* Menu Buttons */
 
 .menu-button {
-  @apply .flex .items-center .p-4 .border-b-2 .border-transparent .mt-2px .text-theme-text-secondary .transition;
+  /*TODO: .mt-2px */
+  @apply .flex .items-center .p-4 .border-b-2 .border-transparent .text-theme-text-secondary .transition;
 }
 
 .menu-button:hover {

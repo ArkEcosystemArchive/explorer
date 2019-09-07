@@ -1,3 +1,7 @@
+.transition {
+  /* TODO: */
+}
+
 .base-tab {
   @apply .mr-4 .py-4 .px-2 .cursor-pointer .border-b-3;
 }

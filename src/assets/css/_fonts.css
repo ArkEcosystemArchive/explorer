@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'Proxima Nova Regular';
-  src: url('../assets/fonts/Proxima_Nova_Regular.otf');
+  src: url('../fonts/Proxima_Nova_Regular.otf');
 }
 
 @font-face {
   font-family: 'Proxima Nova Semibold';
-  src: url('../assets/fonts/Proxima_Nova_Semibold.otf');
+  src: url('../fonts/Proxima_Nova_Semibold.otf');
 }
 
 .semibold {

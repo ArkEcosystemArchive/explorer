@@ -26,8 +26,6 @@ import {
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 
-import '@/styles/style.css'
-
 export default {
   components: { AppHeader, AppFooter },
 
@@ -46,7 +44,7 @@ export default {
   async created () {
     MigrationService.executeMigrations()
 
-    const network = require(`../networks/${process.env.EXPLORER_CONFIG}`)
+    const network = require('../networks/mainnet.json') //TODO: ${process.env.EXPLORER_CONFIG}`)
 
     this.$store.dispatch(
       'ui/setNightMode',
@@ -149,7 +147,7 @@ export default {
     },
 
     updateI18n () {
-      this.$i18n.locale = this.language
+      //TODO: this.$i18n.locale = this.language
     },
 
     updateLocale () {

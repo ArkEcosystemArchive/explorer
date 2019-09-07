@@ -19,11 +19,12 @@ const NotFoundComponent = () => import('@/pages/404')
 Vue.use(Router)
 
 function getTitle (title) {
-  return `${title} - ${process.env.TITLE}`
+  //TODO:
+  return '${title} - ${process.env.TITLE}'
 }
 
 const router = new Router({
-  mode: process.env.ROUTER_MODE,
+  //TODO: mode: process.env.ROUTER_MODE,
   routes: [
     {
       path: '/',

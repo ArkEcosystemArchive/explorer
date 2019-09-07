@@ -1,17 +1,25 @@
 require('es6-promise').polyfill()
 
-/* eslint-disable import/first */
+import "@/assets/css/style.css";
 import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
-import App from './App'
+// @ts-ignore
+import App from './App.vue'
+// @ts-ignore
 import router from './router'
+// @ts-ignore
 import store from './store'
-import i18n from './i18n'
+// @ts-ignore
 import directives from './directives'
+// @ts-ignore
 import mixins from './mixins'
+// @ts-ignore
 import VTooltip from 'v-tooltip'
+// @ts-ignore
 import VueGoodTablePlugin from 'vue-good-table'
+// @ts-ignore
 import NProgress from 'vue-nprogress'
+import i18n from './i18n'
 
 require('./components')
 
@@ -33,13 +41,9 @@ const nprogress = new NProgress({
   showSpinner: false
 })
 
-/* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  i18n,
   router,
   store,
-  nprogress,
-  components: { App },
-  template: '<App/>'
-})
+  i18n,
+  render: (h) => h(App)
+}).$mount("#app");
