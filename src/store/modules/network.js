@@ -1,4 +1,4 @@
-import * as types from '../mutation-types'
+import * as types from "../mutation-types";
 
 export default {
   namespaced: true,
@@ -14,132 +14,132 @@ export default {
     currencies: [],
     knownWallets: [],
     supply: 0,
-    height: 0
+    height: 0,
   },
   mutations: {
-    [types.SET_NETWORK_DEFAULTS] (state, payload) {
-      state.defaults = payload.value
+    [types.SET_NETWORK_DEFAULTS](state, payload) {
+      state.defaults = payload.value;
     },
-    [types.SET_NETWORK_SERVER] (state, payload) {
-      state.server = payload.value
+    [types.SET_NETWORK_SERVER](state, payload) {
+      state.server = payload.value;
     },
-    [types.SET_NETWORK_NETHASH] (state, payload) {
-      state.nethash = payload.value
+    [types.SET_NETWORK_NETHASH](state, payload) {
+      state.nethash = payload.value;
     },
-    [types.SET_NETWORK_ALIAS] (state, payload) {
-      state.alias = payload.value
+    [types.SET_NETWORK_ALIAS](state, payload) {
+      state.alias = payload.value;
     },
-    [types.SET_NETWORK_ACTIVE_DELEGATES] (state, payload) {
-      state.activeDelegates = payload.value
+    [types.SET_NETWORK_ACTIVE_DELEGATES](state, payload) {
+      state.activeDelegates = payload.value;
     },
-    [types.SET_NETWORK_REWARD_OFFSET] (state, payload) {
-      state.rewardOffset = payload.value
+    [types.SET_NETWORK_REWARD_OFFSET](state, payload) {
+      state.rewardOffset = payload.value;
     },
-    [types.SET_NETWORK_TOKEN] (state, payload) {
-      state.token = payload.value
+    [types.SET_NETWORK_TOKEN](state, payload) {
+      state.token = payload.value;
     },
-    [types.SET_NETWORK_SYMBOL] (state, payload) {
-      state.symbol = payload.value
+    [types.SET_NETWORK_SYMBOL](state, payload) {
+      state.symbol = payload.value;
     },
-    [types.SET_NETWORK_CURRENCIES] (state, payload) {
-      state.currencies = payload.value
+    [types.SET_NETWORK_CURRENCIES](state, payload) {
+      state.currencies = payload.value;
     },
-    [types.SET_NETWORK_KNOWN_WALLETS] (state, payload) {
-      state.knownWallets = payload.value
+    [types.SET_NETWORK_KNOWN_WALLETS](state, payload) {
+      state.knownWallets = payload.value;
     },
-    [types.SET_NETWORK_SUPPLY] (state, payload) {
-      state.supply = payload.value
+    [types.SET_NETWORK_SUPPLY](state, payload) {
+      state.supply = payload.value;
     },
-    [types.SET_NETWORK_HEIGHT] (state, payload) {
-      state.height = payload.value
-    }
+    [types.SET_NETWORK_HEIGHT](state, payload) {
+      state.height = payload.value;
+    },
   },
   actions: {
     setDefaults: ({ commit }, value) => {
       commit({
         type: types.SET_NETWORK_DEFAULTS,
-        value
-      })
+        value,
+      });
     },
     setServer: ({ commit }, value) => {
       commit({
         type: types.SET_NETWORK_SERVER,
-        value
-      })
+        value,
+      });
     },
     setNethash: ({ commit }, value) => {
       commit({
         type: types.SET_NETWORK_NETHASH,
-        value
-      })
+        value,
+      });
     },
     setAlias: ({ commit }, value) => {
       commit({
         type: types.SET_NETWORK_ALIAS,
-        value
-      })
+        value,
+      });
     },
     setActiveDelegates: ({ commit }, value) => {
       commit({
         type: types.SET_NETWORK_ACTIVE_DELEGATES,
-        value
-      })
+        value,
+      });
     },
     setRewardOffset: ({ commit }, value) => {
       commit({
         type: types.SET_NETWORK_REWARD_OFFSET,
-        value
-      })
+        value,
+      });
     },
     setToken: ({ commit }, value) => {
       commit({
         type: types.SET_NETWORK_TOKEN,
-        value
-      })
+        value,
+      });
     },
     setSymbol: ({ commit }, value) => {
       commit({
         type: types.SET_NETWORK_SYMBOL,
-        value
-      })
+        value,
+      });
     },
     setCurrencies: ({ commit }, value) => {
       commit({
         type: types.SET_NETWORK_CURRENCIES,
-        value
-      })
+        value,
+      });
     },
     setKnownWallets: ({ commit }, value) => {
       commit({
         type: types.SET_NETWORK_KNOWN_WALLETS,
-        value
-      })
+        value,
+      });
     },
     setSupply: ({ commit }, value) => {
       commit({
         type: types.SET_NETWORK_SUPPLY,
-        value
-      })
+        value,
+      });
     },
     setHeight: ({ commit }, value) => {
       commit({
         type: types.SET_NETWORK_HEIGHT,
-        value
-      })
-    }
+        value,
+      });
+    },
   },
   getters: {
-    defaults: state => state.defaults,
-    server: state => state.server,
-    nethash: state => state.nethash,
-    alias: state => state.alias,
-    activeDelegates: state => state.activeDelegates,
-    rewardOffset: state => state.rewardOffset,
-    token: state => state.token,
-    symbol: state => state.symbol,
-    currencies: state => state.currencies,
-    knownWallets: state => state.knownWallets,
-    supply: state => state.supply,
-    height: state => state.height
-  }
-}
+    defaults: (state) => state.defaults,
+    server: (state) => state.server,
+    nethash: (state) => state.nethash,
+    alias: (state) => state.alias,
+    activeDelegates: (state) => state.activeDelegates,
+    rewardOffset: (state) => state.rewardOffset,
+    token: (state) => state.token,
+    symbol: (state) => state.symbol,
+    currencies: (state) => state.currencies,
+    knownWallets: (state) => state.knownWallets,
+    supply: (state) => state.supply,
+    height: (state) => state.height,
+  },
+};

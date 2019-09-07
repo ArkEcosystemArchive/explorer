@@ -60,33 +60,17 @@
   </RouterLink>
 </template>
 
-<script type="text/ecmascript-6">
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-export default {
-  name: 'LinkTransaction',
+@Component
+export default class LinkTransaction extends Vue {
+  @Prop({ required: true }) public id: string;
+  @Prop({ required: false, default: "" }) public smartBridge: string;
+  @Prop({ required: false, default: false }) public showSmartBridgeIcon: boolean;
 
-  props: {
-    id: {
-      type: String,
-      required: true,
-      default: ''
-    },
-    smartBridge: {
-      type: String,
-      required: false,
-      default: ''
-    },
-    showSmartBridgeIcon: {
-      type: Boolean,
-      required: false,
-      default: false
-    }
-  },
-
-  computed: {
-    hasDefaultSlot () {
-      return !!this.$slots.default
-    }
+  get hasDefaultSlot(): boolean {
+    return !!this.$slots.default
   }
 }
 </script>

@@ -21,26 +21,16 @@
   </span>
 </template>
 
-<script type="text/ecmascript-6">
-export default {
-  name: 'LinkBlock',
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-  props: {
-    id: {
-      type: String,
-      required: true
-    },
-    length: {
-      type: Number,
-      required: false,
-      default: 13
-    }
-  },
+@Component
+export default class LinkBlock extends Vue {
+  @Prop({ required: true }) public id: string;
+  @Prop({ required: false, default: 13 }) public length: number;
 
-  computed: {
-    hasDefaultSlot () {
-      return !!this.$slots.default
-    }
+  get hasDefaultSlot(): boolean {
+    return !!this.$slots.default
   }
 }
 </script>

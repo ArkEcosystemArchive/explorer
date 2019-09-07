@@ -73,140 +73,117 @@
   </span>
 </template>
 
-<script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import { IDelegate } from "../../interfaces";
 
-export default {
-  name: 'LinkWallet',
-
-  props: {
-    address: {
-      type: String,
-      required: false,
-      default: ''
-    },
-    asset: {
-      type: Object,
-      required: false,
-      default: null
-    },
-    publicKey: {
-      type: String,
-      required: false,
-      default: ''
-    },
-    type: {
-      type: Number,
-      required: false,
-      default: 0
-    },
-    trunc: {
-      type: Boolean,
-      default: true
-    },
-    tooltipPlacement: {
-      type: String,
-      required: false,
-      default: 'top'
-    }
-  },
-
-  data: () => ({
-    delegate: null,
-    votedDelegate: null
-  }),
-
+@Component({
   computed: {
     ...mapGetters('delegates', ['delegates']),
     ...mapGetters('network', ['knownWallets']),
+  }
+})
+export default class LinkWallet extends Vue {
+  @Prop({ required: false, default: "" }) public address: string;
+  @Prop({ required: false, default: null }) public asset: { votes: [string] } | null;
+  @Prop({ required: false, default: "" }) public publicKey: string;
+  @Prop({ required: false, default: 0 }) public type: number;
+  @Prop({ required: false, default: true }) public trunc: boolean;
+  @Prop({ required: false, default: "top" }) public tooltipPlacement: string;
 
-    isKnown () {
-      return this.knownWallets[this.address]
-    },
+  private delegate: IDelegate | null | undefined = null;
+  private votedDelegate: IDelegate | null | undefined = null;
+  private delegates: [IDelegate];
+  private knownWallets: { [key: string]: string };
 
-    walletAddress () {
-      return this.delegate ? this.delegate.address : this.address
-    },
+  get isKnown (): string {
+    return this.knownWallets[this.address]
+  }
 
-    hasDefaultSlot () {
-      return !!this.$slots.default
-    },
+  get walletAddress (): string {
+    return this.delegate ? this.delegate.address : this.address
+  }
 
-    getVoteColor () {
-      return this.isUnvote ? 'text-red' : 'text-green'
-    },
+  get hasDefaultSlot (): boolean {
+    return !!this.$slots.default
+  }
 
-    isUnvote () {
-      if (this.asset && this.asset.votes) {
-        const vote = this.asset.votes[0]
-        return vote.charAt(0) === '-'
-      }
-      return false
-    },
+  get getVoteColor (): string {
+    return this.isUnvote ? 'text-red' : 'text-green'
+  }
 
-    votePublicKey () {
-      if (this.asset && this.asset.votes) {
-        const vote = this.asset.votes[0]
-        return vote.substr(1)
-      }
-      return ''
-    },
-
-    votedDelegateAddress () {
-      return this.votedDelegate ? this.votedDelegate.address : ''
-    },
-
-    votedDelegateUsername () {
-      return this.votedDelegate ? this.votedDelegate.username : ''
+  get isUnvote (): boolean {
+    if (this.asset && this.asset.votes) {
+      const vote = this.asset.votes[0]
+      return vote.charAt(0) === '-'
     }
-  },
+    return false
+  }
 
-  watch: {
-    delegates () {
-      this.determine()
-    },
-    address () {
-      this.determine()
-    },
-    publicKey () {
-      this.determine()
+  get votePublicKey (): string {
+    if (this.asset && this.asset.votes) {
+      const vote = this.asset.votes[0]
+      return vote.substr(1)
     }
-  },
+    return ''
+  }
 
-  mounted () {
+  get votedDelegateAddress (): string {
+    return this.votedDelegate ? this.votedDelegate.address : ''
+  }
+
+  get votedDelegateUsername (): string {
+    return this.votedDelegate ? this.votedDelegate.username : ''
+  }
+
+  @Watch('delegates')
+  onDelegateChanged() {
+    this.determine();
+  }
+
+  @Watch('address')
+  onAddressChanged() {
+    this.determine();
+  }
+
+  @Watch('publicKey')
+  onPublicKeyChanged() {
+    this.determine();
+  }
+
+  public mounted (): void {
     this.determine()
-  },
+  }
 
-  methods: {
-    determine () {
-      this.address ? this.findByAddress() : this.findByPublicKey()
-      if (this.votePublicKey) {
-        this.determineVote()
-      }
-    },
-
-    determineVote () {
-      this.votedDelegate = this.delegates.find(d => d.publicKey === this.votePublicKey)
-    },
-
-    findByAddress () {
-      this.delegate = this.delegates.find(d => d.address === this.address)
-    },
-
-    findByPublicKey () {
-      this.delegate = this.delegates.find(d => d.publicKey === this.publicKey)
-    },
-
-    getAddress () {
-      const knownOrDelegate = this.isKnown || this.delegate
-      const truncated = !this.hasDefaultSlot && this.trunc
-
-      if (knownOrDelegate || truncated) {
-        return this.walletAddress
-      }
-
-      return false
+  private determine (): void {
+    this.address ? this.findByAddress() : this.findByPublicKey()
+    if (this.votePublicKey) {
+      this.determineVote()
     }
+  }
+
+  private determineVote (): void {
+    this.votedDelegate = this.delegates.find(d => d.publicKey === this.votePublicKey)
+  }
+
+  private findByAddress (): void {
+    this.delegate = this.delegates.find(d => d.address === this.address)
+  }
+
+  private findByPublicKey (): void {
+    this.delegate = this.delegates.find(d => d.publicKey === this.publicKey)
+  }
+
+  private getAddress (): string | false {
+    const knownOrDelegate = this.isKnown || this.delegate
+    const truncated = !this.hasDefaultSlot && this.trunc
+
+    if (knownOrDelegate || truncated) {
+      return this.walletAddress
+    }
+
+    return false
   }
 }
 </script>
