@@ -7044,7 +7044,7 @@ npmlog@^4.0.2:
     gauge "~2.7.3"
     set-blocking "~2.0.0"
 
-nprogress@0.2.0:
+nprogress@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/nprogress/-/nprogress-0.2.0.tgz#cb8f34c53213d895723fcbab907e9422adbcafb1"
   integrity sha1-y480xTIT2JVyP8urkH6UIq28r7E=
@@ -10094,13 +10094,6 @@ vue-loader@^15.7.0:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
-
-vue-nprogress@^0.1.5:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/vue-nprogress/-/vue-nprogress-0.1.5.tgz#574b412f1034012daaf46299d5505d5812f406e6"
-  integrity sha1-V0tBLxA0AS2q9GKZ1VBdWBL0BuY=
-  dependencies:
-    nprogress "0.2.0"
 
 vue-property-decorator@^8.1.0:
   version "8.2.2"

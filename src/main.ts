@@ -1,6 +1,8 @@
 require('es6-promise').polyfill()
 
 import "@/assets/css/style.css";
+import 'nprogress/nprogress.css';
+
 import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
 // @ts-ignore
@@ -17,8 +19,6 @@ import mixins from './mixins'
 import VTooltip from 'v-tooltip'
 // @ts-ignore
 import VueGoodTablePlugin from 'vue-good-table'
-// @ts-ignore
-import NProgress from 'vue-nprogress'
 import i18n from './i18n'
 
 require('./components')
@@ -33,13 +33,8 @@ Vue.use(VTooltip, {
   defaultContainer: 'main'
 })
 Vue.use(VueGoodTablePlugin)
-Vue.use(NProgress)
 
 Vue.mixin(mixins)
-
-const nprogress = new NProgress({
-  showSpinner: false
-})
 
 new Vue({
   router,

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@/store'
+import NProgress from 'nprogress'
 
 const HomeComponent = () => import('@/pages/Home')
 const BlockComponent = () => import('@/pages/Block')
@@ -202,11 +203,16 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+  NProgress.start()
   store.dispatch('ui/setHeaderType', null)
   store.dispatch('ui/setMenuVisible', false)
   document.title = to.meta.title(to)
 
   next()
+})
+
+router.afterEach(() => {
+  NProgress.done(true)
 })
 
 export default router
