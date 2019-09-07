@@ -44,7 +44,7 @@ export default {
   async created () {
     MigrationService.executeMigrations()
 
-    const network = require('../networks/mainnet.json') //TODO: ${process.env.EXPLORER_CONFIG}`)
+    const network = require(`../networks/${process.env.VUE_APP_EXPLORER_CONFIG}`)
 
     this.$store.dispatch(
       'ui/setNightMode',
@@ -147,7 +147,7 @@ export default {
     },
 
     updateI18n () {
-      //TODO: this.$i18n.locale = this.language
+      this.$i18n.locale = this.language
     },
 
     updateLocale () {
