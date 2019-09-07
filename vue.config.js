@@ -8,8 +8,8 @@ if (process.env.RELEASE_TYPE === "dist") {
     publicPath = "/explorer/";
 }
 
-process.env['VUE_APP_GIT_VERSION'] = JSON.stringify(gitRevision.version);
-process.env['VUE_APP_GIT_DATE'] = JSON.stringify(gitRevision.date);
+process.env['VUE_APP_GIT_VERSION'] = gitRevision.version;
+process.env['VUE_APP_GIT_DATE'] = gitRevision.date;
 
 module.exports = {
     publicPath,

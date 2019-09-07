@@ -5,7 +5,7 @@
         href="https://ark.io"
         target="_blank"
       >ARK.io</a> | {{ year }}. {{ $t('FOOTER.ALL_RIGHTS_RESERVED') }}</span> <div class="block md:inline-block">
-        <span class="hidden md:inline-block"> | </span> <span>{{ $t('FOOTER.VERSION') }}: <a
+        <span class="hidden md:inline-block">&nbsp;|&nbsp;</span> <span>{{ $t('FOOTER.VERSION') }}: <a
           :href="versionLink"
           target="_blank"
         >{{ version }}</a> | {{ $t('FOOTER.DATE') }}: {{ date }}</span>
