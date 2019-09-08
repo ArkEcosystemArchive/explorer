@@ -54,6 +54,6 @@ export default class HeaderMenuDesktop extends Vue {
 
 <style>
 .HeaderMenuDesktop {
-  @apply .absolute .inset-0 .px-4 .hidden .bg-theme-nav-background;
+  @apply .absolute .inset-0 .px-4 .bg-theme-nav-background;
 }
 </style>

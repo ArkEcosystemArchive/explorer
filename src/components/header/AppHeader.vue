@@ -57,7 +57,7 @@ import {
 })
 export default class AppHeader extends Vue {
   private headerType: string;
-  private menuVisible: string;
+  private menuVisible: boolean;
 
   private closeHeader(): void {
     this.$store.dispatch("ui/setHeaderType", null);
