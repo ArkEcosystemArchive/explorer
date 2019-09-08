@@ -9,7 +9,7 @@
         :class="`bg-${backgroundColor} text-${secondaryTextColor}`"
         class="flex items-center rounded-l py-4 px-6 text-xs"
       >
-        {{ $t('COMMON.TYPE') }}
+        {{ $t("COMMON.TYPE") }}
       </span>
 
       <span
@@ -33,28 +33,18 @@
         </svg>
       </span>
 
-      <ul
-        v-show="isOpen"
-        class="SelectionType--options inset-x-0 mt-10"
-      >
-        <li
-          v-for="(type, index) in types"
-          :key="type"
-        >
-          <div
-            class="dropdown-button"
-            @click="filterTransactions(index - 1)"
-          >{{ $t(`TRANSACTION.TYPES.${type}`) }}</div>
+      <ul v-show="isOpen" class="SelectionType--options inset-x-0 mt-10">
+        <li v-for="(type, index) in types" :key="type">
+          <div class="dropdown-button" @click="filterTransactions(index - 1)">
+            {{ $t(`TRANSACTION.TYPES.${type}`) }}
+          </div>
         </li>
       </ul>
     </div>
 
     <div class="hidden sm:block">
-      <span
-        :class="[ inBanner ? bannerClasses : 'text-theme-text-thead' ]"
-        class="block mb-2 text-xs"
-      >
-        {{ $t('COMMON.TYPE') }}
+      <span :class="[inBanner ? bannerClasses : 'text-theme-text-thead']" class="block mb-2 text-xs">
+        {{ $t("COMMON.TYPE") }}
       </span>
 
       <span
@@ -75,18 +65,11 @@
         </svg>
       </span>
 
-      <ul
-        v-show="isOpen"
-        class="SelectionType--options right-0 mt-2"
-      >
-        <li
-          v-for="(type, index) in types"
-          :key="type"
-        >
-          <div
-            class="dropdown-button"
-            @click="filterTransactions(index - 1)"
-          >{{ $t(`TRANSACTION.TYPES.${type}`) }}</div>
+      <ul v-show="isOpen" class="SelectionType--options right-0 mt-2">
+        <li v-for="(type, index) in types" :key="type">
+          <div class="dropdown-button" @click="filterTransactions(index - 1)">
+            {{ $t(`TRANSACTION.TYPES.${type}`) }}
+          </div>
         </li>
       </ul>
     </div>
@@ -99,78 +82,71 @@ export default {
     inBanner: {
       type: Boolean,
       required: false,
-      default: false
-    }
+      default: false,
+    },
   },
 
   data: () => ({
-    types: [
-      'ALL',
-      'TRANSFER',
-      'SECOND_SIGNATURE',
-      'DELEGATE_REGISTRATION',
-      'VOTE',
-      'MULTI_SIGNATURE'
-    ],
+    types: ["ALL", "TRANSFER", "SECOND_SIGNATURE", "DELEGATE_REGISTRATION", "VOTE", "MULTI_SIGNATURE"],
     transactionType: -1,
-    selectOpen: false
+    selectOpen: false,
   }),
 
   computed: {
-    isOpen () {
-      return this.selectOpen
+    isOpen() {
+      return this.selectOpen;
     },
 
-    backgroundColor () {
-      return this.inBanner ? 'none' : 'theme-page-background'
+    backgroundColor() {
+      return this.inBanner ? "none" : "theme-page-background";
     },
 
-    primaryTextColor () {
-      return this.inBanner ? 'white' : 'theme-text-primary'
+    primaryTextColor() {
+      return this.inBanner ? "white" : "theme-text-primary";
     },
 
-    secondaryTextColor () {
-      return this.inBanner ? 'grey' : 'theme-text-secondary'
+    secondaryTextColor() {
+      return this.inBanner ? "grey" : "theme-text-secondary";
     },
 
-    bannerClasses () {
-      return `bg-${this.backgroundColor} text-${this.secondaryTextColor}`
-    }
+    bannerClasses() {
+      return `bg-${this.backgroundColor} text-${this.secondaryTextColor}`;
+    },
   },
 
-  created () {
-    this.transactionType = Number(localStorage.getItem('transactionType') || -1)
+  created() {
+    this.transactionType = Number(localStorage.getItem("transactionType") || -1);
   },
 
   methods: {
-    filterTransactions (type) {
-      this.closeDropdown()
-      this.setTransactionType(type)
-      this.$emit('change', type)
+    filterTransactions(type) {
+      this.closeDropdown();
+      this.setTransactionType(type);
+      this.$emit("change", type);
     },
 
-    setTransactionType (type) {
-      localStorage.setItem('transactionType', type)
-      this.transactionType = type
+    setTransactionType(type) {
+      localStorage.setItem("transactionType", type);
+      this.transactionType = type;
     },
 
-    closeDropdown () {
-      this.selectOpen = false
+    closeDropdown() {
+      this.selectOpen = false;
     },
 
-    toggleDropdown () {
-      this.selectOpen = !this.selectOpen
-    }
-  }
-}
+    toggleDropdown() {
+      this.selectOpen = !this.selectOpen;
+    },
+  },
+};
 </script>
 
 <style scoped>
 .SelectionType {
-  @apply .flex .relative .z-20
+  @apply .flex .relative .z-20;
 }
 
 .SelectionType--options {
-  @apply .absolute .bg-theme-content-background .shadow-theme .rounded .border .overflow-hidden .text-sm
+  @apply .absolute .bg-theme-content-background .shadow-theme .rounded .border .overflow-hidden .text-sm;
 }
 </style>

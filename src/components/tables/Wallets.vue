@@ -7,18 +7,13 @@
       :no-data-message="$t('COMMON.NO_RESULTS')"
       @on-sort-change="emitSortChange"
     >
-      <template
-        slot-scope="data"
-      >
+      <template slot-scope="data">
         <div v-if="data.column.field === 'originalIndex'">
           {{ getRank(data.row.originalIndex) }}
         </div>
 
         <div v-else-if="data.column.field === 'address'">
-          <LinkWallet
-            :address="data.row.address"
-            :trunc="false"
-          />
+          <LinkWallet :address="data.row.address" :trunc="false" />
         </div>
 
         <div v-else-if="data.column.field === 'balance'">

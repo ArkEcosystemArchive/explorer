@@ -7,9 +7,7 @@
       :no-data-message="$t('COMMON.NO_RESULTS')"
       @on-sort-change="emitSortChange"
     >
-      <template
-        slot-scope="data"
-      >
+      <template slot-scope="data">
         <div v-if="data.column.field === 'id'">
           <LinkTransaction
             :id="data.row.id"
@@ -29,11 +27,7 @@
         </div>
 
         <div v-else-if="data.column.field === 'recipient'">
-          <LinkWallet
-            :address="data.row.recipient"
-            :type="data.row.type"
-            :asset="data.row.asset"
-          />
+          <LinkWallet :address="data.row.recipient" :type="data.row.type" :asset="data.row.asset" />
         </div>
 
         <div v-else-if="data.column.field === 'vendorField'">
@@ -43,17 +37,11 @@
         </div>
 
         <div v-else-if="data.column.field === 'amount'">
-          <TransactionAmount
-            :transaction="data.row"
-            :type="data.row.type"
-          />
+          <TransactionAmount :transaction="data.row" :type="data.row.type" />
         </div>
 
         <div v-else-if="data.column.field === 'fee'">
-          <TransactionAmount
-            :transaction="data.row"
-            :is-fee="true"
-          />
+          <TransactionAmount :transaction="data.row" :is-fee="true" />
         </div>
 
         <div v-else-if="data.column.field === 'confirmations'">
@@ -63,14 +51,11 @@
               class="flex items-center justify-end whitespace-no-wrap"
             >
               <span class="text-green inline-block mr-2">{{ data.row.confirmations }}</span>
-              <img
-                class="icon flex-none"
-                src="@/assets/images/icons/clock.svg"
-              >
+              <img class="icon flex-none" src="@/assets/images/icons/clock.svg" />
             </div>
             <div v-else>
               <div v-tooltip="data.row.confirmations + ' ' + $t('COMMON.CONFIRMATIONS')">
-                {{ $t('TRANSACTION.WELL_CONFIRMED') }}
+                {{ $t("TRANSACTION.WELL_CONFIRMED") }}
               </div>
             </div>
           </div>
@@ -219,18 +204,18 @@ export default {
 </script>
 
 <style scoped>
-  .icon {
-    width: 16px;
-    height: 16px;
-  }
+.icon {
+  width: 16px;
+  height: 16px;
+}
 
+.wrap-timestamp {
+  white-space: normal;
+}
+
+@media (min-width: 870px) {
   .wrap-timestamp {
-    white-space: normal;
+    white-space: nowrap;
   }
-
-  @media(min-width: 870px) {
-    .wrap-timestamp {
-      white-space: nowrap;
-    }
-  }
+}
 </style>

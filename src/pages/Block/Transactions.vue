@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <ContentHeader>{{ $t('COMMON.TRANSACTIONS') }}</ContentHeader>
+    <ContentHeader>{{ $t("COMMON.TRANSACTIONS") }}</ContentHeader>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
         <TableTransactionsDesktop
@@ -12,12 +12,7 @@
       <div class="sm:hidden">
         <TableTransactionsMobile :transactions="transactions" />
       </div>
-      <Pagination
-        v-if="showPagination"
-        :meta="meta"
-        :current-page="currentPage"
-        @page-change="onPageChange"
-      />
+      <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
     </section>
   </div>
 </template>

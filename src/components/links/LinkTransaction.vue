@@ -1,16 +1,10 @@
 <template>
-  <RouterLink
-    :to="{ name: 'transaction', params: { id } }"
-    class="flex items-center whitespace-no-wrap"
-  >
+  <RouterLink :to="{ name: 'transaction', params: { id } }" class="flex items-center whitespace-no-wrap">
     <span v-if="hasDefaultSlot">
       <slot />
     </span>
     <template v-else>
-      <span
-        v-if="showSmartBridgeIcon && smartBridge"
-        v-tooltip="emojify(smartBridge)"
-      >
+      <span v-if="showSmartBridgeIcon && smartBridge" v-tooltip="emojify(smartBridge)">
         <svg
           class="mr-2 fill-current hidden md:block"
           xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +64,7 @@ export default class LinkTransaction extends Vue {
   @Prop({ required: false, default: false }) public showSmartBridgeIcon: boolean;
 
   get hasDefaultSlot(): boolean {
-    return !!this.$slots.default
+    return !!this.$slots.default;
   }
 }
 </script>

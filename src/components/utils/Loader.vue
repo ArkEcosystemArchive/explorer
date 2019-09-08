@@ -1,9 +1,6 @@
 <template>
   <span>
-    <div
-      v-if="data === null"
-      class="text-center"
-    >
+    <div v-if="data === null" class="text-center">
       <PulseLoader color="#037cff" />
     </div>
 

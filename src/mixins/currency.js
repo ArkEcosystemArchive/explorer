@@ -1,62 +1,56 @@
-import store from '@/store'
+import store from "@/store";
 
-const locale = store.getters['ui/locale']
+const locale = store.getters["ui/locale"];
 
 export default {
   methods: {
-    readableCrypto (value, appendCurrency = true, decimals = 8) {
-      if (typeof value !== 'undefined') {
+    readableCrypto(value, appendCurrency = true, decimals = 8) {
+      if (typeof value !== "undefined") {
         value = (value /= 1e8).toLocaleString(locale, {
-          maximumFractionDigits: decimals
-        })
+          maximumFractionDigits: decimals,
+        });
 
-        return appendCurrency ? `${value} ${
-          store.getters['network/symbol'] ||
-            store.getters['network/defaults'].symbol ||
-            ''
-        }` : value
+        return appendCurrency
+          ? `${value} ${store.getters["network/symbol"] || store.getters["network/defaults"].symbol || ""}`
+          : value;
       }
     },
 
-    readableCurrency (value, rate = null, currency = null, normalise = true) {
-      const currencyName = currency || store.getters['currency/name']
+    readableCurrency(value, rate = null, currency = null, normalise = true) {
+      const currencyName = currency || store.getters["currency/name"];
 
       if (normalise) {
-        value = parseInt(value, 10) / 1e8
+        value = parseInt(value, 10) / 1e8;
       }
 
-      value *= rate || store.getters['currency/rate']
+      value *= rate || store.getters["currency/rate"];
 
       const cryptos = {
-        ARK: 'Ѧ',
-        BTC: 'Ƀ',
-        ETH: 'Ξ',
-        LTC: 'Ł'
-      }
+        ARK: "Ѧ",
+        BTC: "Ƀ",
+        ETH: "Ξ",
+        LTC: "Ł",
+      };
 
-      return [store.getters['network/token'], 'BTC', 'ETH', 'LTC'].some(
-        c => currencyName.indexOf(c) > -1
-      )
+      return [store.getters["network/token"], "BTC", "ETH", "LTC"].some(c => currencyName.indexOf(c) > -1)
         ? `${value.toLocaleString(locale, {
-          maximumFractionDigits: 8
-        })} ${cryptos[currencyName]}`
+            maximumFractionDigits: 8,
+          })} ${cryptos[currencyName]}`
         : value.toLocaleString(locale, {
-          style: 'currency',
-          currency: currencyName
-        })
+            style: "currency",
+            currency: currencyName,
+          });
     },
 
-    rawCurrency (value, currencyName) {
-      return [store.getters['network/token'], 'BTC', 'ETH', 'LTC'].some(
-        c => currencyName.indexOf(c) > -1
-      )
+    rawCurrency(value, currencyName) {
+      return [store.getters["network/token"], "BTC", "ETH", "LTC"].some(c => currencyName.indexOf(c) > -1)
         ? value.toLocaleString(locale, {
-          maximumFractionDigits: 8
-        })
+            maximumFractionDigits: 8,
+          })
         : value.toLocaleString(locale, {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        })
-    }
-  }
-}
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          });
+    },
+  },
+};

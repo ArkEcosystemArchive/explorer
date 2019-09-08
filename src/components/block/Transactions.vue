@@ -1,7 +1,7 @@
 <template>
   <div v-if="transactions && transactions.length > 0">
     <h2 class="text-2xl mb-5 md:mb-6 px-5 sm:hidden text-theme-text-primary">
-      {{ $t('COMMON.TRANSACTIONS') }}
+      {{ $t("COMMON.TRANSACTIONS") }}
     </h2>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
@@ -14,16 +14,13 @@
       <div class="sm:hidden">
         <TableTransactionsMobile :transactions="transactions" />
       </div>
-      <div
-        v-if="transactions.length >= 25"
-        class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap"
-      >
+      <div v-if="transactions.length >= 25" class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
         <RouterLink
           :to="{ name: 'block-transactions', params: { block: block.id, page: 2 } }"
           tag="button"
           class="button-lg"
         >
-          {{ $t('PAGINATION.SHOW_MORE') }}
+          {{ $t("PAGINATION.SHOW_MORE") }}
         </RouterLink>
       </div>
     </section>
@@ -33,8 +30,8 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { IBlock, ISortParameters, ITransaction } from "../../interfaces";
-//@ts-ignore
-import TransactionService from '@/services/transaction'
+// @ts-ignore
+import TransactionService from "@/services/transaction";
 
 @Component
 export default class BlockTransactions extends Vue {
@@ -42,38 +39,40 @@ export default class BlockTransactions extends Vue {
 
   public transactions: [ITransaction] | null = null;
 
-  get sortParams (): ISortParameters {
-    return this.$store.getters['ui/transactionSortParams']
+  get sortParams(): ISortParameters {
+    return this.$store.getters["ui/transactionSortParams"];
   }
 
-  set sortParams (params: ISortParameters) {
-    this.$store.dispatch('ui/setTransactionSortParams', {
+  set sortParams(params: ISortParameters) {
+    this.$store.dispatch("ui/setTransactionSortParams", {
       field: params.field,
-      type: params.type
-    })
+      type: params.type,
+    });
   }
 
-  @Watch('block')
-  onBlockChanged() {
-    this.resetTransactions()
-    this.getTransactions()
+  @Watch("block")
+  public onBlockChanged() {
+    this.resetTransactions();
+    this.getTransactions();
   }
 
-  private resetTransactions (): void {
-    this.transactions = null
+  private resetTransactions(): void {
+    this.transactions = null;
   }
 
-  private async getTransactions (): Promise<void> {
-    if (!this.block.id) return
+  private async getTransactions(): Promise<void> {
+    if (!this.block.id) {
+      return;
+    }
 
     if (this.block.transactions) {
-      const { data } = await TransactionService.byBlock(this.block.id)
-      this.transactions = data.map((transaction: ITransaction) => ({ ...transaction, price: null }))
+      const { data } = await TransactionService.byBlock(this.block.id);
+      this.transactions = data.map((transaction: ITransaction) => ({ ...transaction, price: null }));
     }
   }
 
-  private onSortChange (params: ISortParameters): void {
-    this.sortParams = params
+  private onSortChange(params: ISortParameters): void {
+    this.sortParams = params;
   }
 }
 </script>

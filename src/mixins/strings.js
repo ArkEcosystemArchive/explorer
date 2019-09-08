@@ -1,52 +1,48 @@
-import store from '@/store'
-import emoji from 'node-emoji'
+import store from "@/store";
+import emoji from "node-emoji";
 
-const locale = store.getters['ui/locale']
+const locale = store.getters["ui/locale"];
 
 export default {
   methods: {
-    truncate (value, length = 13, truncateWhere = 'middle') {
+    truncate(value, length = 13, truncateWhere = "middle") {
       switch (truncateWhere) {
-        case 'left':
-          return (value.length > length)
-            ? `...${value.slice(value.length - length + 3)}`
-            : value
+        case "left":
+          return value.length > length ? `...${value.slice(value.length - length + 3)}` : value;
 
-        case 'middle':
-          const odd = length % 2
-          const truncationLength = Math.floor((length - 1) / 2)
-          return (value.length > length)
+        case "middle":
+          const odd = length % 2;
+          const truncationLength = Math.floor((length - 1) / 2);
+          return value.length > length
             ? `${value.slice(0, truncationLength - odd)}...${value.slice(value.length - truncationLength + 1)}`
-            : value
+            : value;
 
-        case 'right':
-          return (value.length > length)
-            ? `${value.slice(0, length - 3)}...`
-            : value
+        case "right":
+          return value.length > length ? `${value.slice(0, length - 3)}...` : value;
 
         default:
-          return value
+          return value;
       }
     },
 
-    capitalize (value) {
-      return value.charAt(0).toUpperCase() + value.slice(1)
+    capitalize(value) {
+      return value.charAt(0).toUpperCase() + value.slice(1);
     },
 
-    percentageString (value, decimals = 2) {
-      if (typeof value !== 'undefined') {
+    percentageString(value, decimals = 2) {
+      if (typeof value !== "undefined") {
         return (value / 100).toLocaleString(locale, {
           minimumFractionDigits: decimals,
           maximumFractionDigits: decimals,
-          style: 'percent'
-        })
+          style: "percent",
+        });
       }
 
-      return '-'
+      return "-";
     },
 
-    emojify (text) {
-      return emoji.emojify(text)
-    }
-  }
-}
+    emojify(text) {
+      return emoji.emojify(text);
+    },
+  },
+};

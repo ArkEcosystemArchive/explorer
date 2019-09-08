@@ -108,16 +108,16 @@ yarn serve --env.routerMode=history
 
 ## Testing
 
-``` bash
+```bash
 $ yarn test
 ```
 
 ## Contributing
 
-* If you find any bugs, submit an [issue](../../issues) or open a [pull-request](../../pulls), helping us catch and fix them.
-* Engage with other users and developers on the [ArkEcosystem Slack](https://ark.io/slack/).
-* Join our [gitter](https://gitter.im/ark-developers/Lobby).
-* [Contribute bounties](https://github.com/ArkEcosystem/bounty-program).
+- If you find any bugs, submit an [issue](../../issues) or open a [pull-request](../../pulls), helping us catch and fix them.
+- Engage with other users and developers on the [ArkEcosystem Slack](https://ark.io/slack/).
+- Join our [gitter](https://gitter.im/ark-developers/Lobby).
+- [Contribute bounties](https://github.com/ArkEcosystem/bounty-program).
 
 ## Security
 

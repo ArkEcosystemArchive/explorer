@@ -1,18 +1,15 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <ContentHeader>{{ $t('COMMON.BLOCKS') }}</ContentHeader>
+    <ContentHeader>{{ $t("COMMON.BLOCKS") }}</ContentHeader>
 
     <section class="mb-5">
       <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
         <div class="mr-6 flex-none">
-          <img
-            class="block"
-            src="@/assets/images/icons/block.svg"
-          >
+          <img class="block" src="@/assets/images/icons/block.svg" />
         </div>
         <div class="flex-auto min-w-0">
           <div class="text-grey mb-2">
-            {{ $t('BLOCK.GENERATED_BY') }}
+            {{ $t("BLOCK.GENERATED_BY") }}
           </div>
           <div class="flex">
             <div class="text-lg text-white semibold truncate">
@@ -25,21 +22,12 @@
 
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <TableBlocksDesktop
-          :blocks="blocks"
-          :sort-query="sortParams"
-          @on-sort-change="onSortChange"
-        />
+        <TableBlocksDesktop :blocks="blocks" :sort-query="sortParams" @on-sort-change="onSortChange" />
       </div>
       <div class="sm:hidden">
         <TableBlocksMobile :blocks="blocks" />
       </div>
-      <Pagination
-        v-if="showPagination"
-        :meta="meta"
-        :current-page="currentPage"
-        @page-change="onPageChange"
-      />
+      <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
     </section>
   </div>
 </template>

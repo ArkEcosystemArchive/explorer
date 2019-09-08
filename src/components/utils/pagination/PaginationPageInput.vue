@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-show="isVisible"
-    class="Pagination__Input"
-  >
+  <div v-show="isVisible" class="Pagination__Input">
     <input
       v-model.trim="query"
       v-tooltip="{
@@ -10,7 +7,7 @@
         content: $t('PAGINATION.NO_RESULTS'),
         trigger: 'manual',
         placement: 'bottom-start',
-        classes: 'search-tip'
+        classes: 'search-tip',
       }"
       :placeholder="placeholder"
       :class="{ 'text-grey': nightMode }"
@@ -19,19 +16,10 @@
       min="1"
       step="1"
       @keyup.enter="search"
-    >
+    />
 
-    <button
-      :disabled="!hasInput"
-      class="control-button text-theme-button-close"
-      @click="search"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="13px"
-        height="13px"
-      >
+    <button :disabled="!hasInput" class="control-button text-theme-button-close" @click="search">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13px" height="13px">
         <path
           fill-rule="evenodd"
           fill="currentColor"
@@ -40,16 +28,8 @@
       </svg>
     </button>
 
-    <button
-      class="control-button text-theme-button-close"
-      @click="emitClose"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="13px"
-        height="13px"
-      >
+    <button class="control-button text-theme-button-close" @click="emitClose">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13px" height="13px">
         <path
           fill-rule="evenodd"
           fill="currentColor"
@@ -146,8 +126,8 @@ export default {
   @apply .flex .items-center .absolute .inset-0 .z-10 .bg-theme-button .px-3 .rounded;
 }
 
-.Pagination__Input input[type=number]::-webkit-inner-spin-button,
-.Pagination__Input input[type=number]::-webkit-outer-spin-button {
+.Pagination__Input input[type="number"]::-webkit-inner-spin-button,
+.Pagination__Input input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;

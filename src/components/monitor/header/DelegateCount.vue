@@ -1,14 +1,11 @@
 <template>
   <div class="hidden lg:flex items-center">
     <div class="mr-6 flex-none">
-      <img
-        class="block"
-        src="@/assets/images/icons/group.svg"
-      >
+      <img class="block" src="@/assets/images/icons/group.svg" />
     </div>
     <div>
       <div class="text-grey mb-2">
-        {{ $t('COMMON.DELEGATES') }}
+        {{ $t("COMMON.DELEGATES") }}
       </div>
       <div class="text-lg text-white semibold truncate">
         {{ count }}

@@ -1,15 +1,11 @@
 <template>
   <span class="block md:inline-block">
     <template v-if="!type">
-      <RouterLink
-        v-if="isKnown"
-        :to="{ name: 'wallet', params: { address: walletAddress } }"
-        class="flex items-center"
-      >
+      <RouterLink v-if="isKnown" :to="{ name: 'wallet', params: { address: walletAddress } }" class="flex items-center">
         <span
           v-tooltip="{
             content: getAddress(),
-            placement: tooltipPlacement
+            placement: tooltipPlacement,
           }"
         >
           {{ knownWallets[address] }}
@@ -17,7 +13,7 @@
         <svg
           v-tooltip="{
             content: $t('WALLET.VERIFIED'),
-            placement: tooltipPlacement
+            placement: tooltipPlacement,
           }"
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -36,7 +32,7 @@
         v-else
         v-tooltip="{
           content: getAddress(),
-          placement: tooltipPlacement
+          placement: tooltipPlacement,
         }"
         :to="{ name: 'wallet', params: { address: walletAddress } }"
       >
@@ -51,25 +47,28 @@
       </RouterLink>
     </template>
 
-    <span v-else-if="type === 1">{{ $t('TRANSACTION.TYPES.SECOND_SIGNATURE') }}</span>
-    <span v-else-if="type === 2">{{ $t('TRANSACTION.TYPES.DELEGATE_REGISTRATION') }}</span>
+    <span v-else-if="type === 1">{{ $t("TRANSACTION.TYPES.SECOND_SIGNATURE") }}</span>
+    <span v-else-if="type === 2">{{ $t("TRANSACTION.TYPES.DELEGATE_REGISTRATION") }}</span>
     <span v-else-if="type === 3">
       <RouterLink
         v-if="votedDelegateAddress"
         v-tooltip="{
           content: votedDelegateAddress,
-          placement: tooltipPlacement
+          placement: tooltipPlacement,
         }"
         :to="{ name: 'wallet', params: { address: votedDelegateAddress } }"
       >
-        <span :class="getVoteColor">{{ isUnvote ? $t('TRANSACTION.TYPES.UNVOTE') : $t('TRANSACTION.TYPES.VOTE') }} <span class="italic">({{ votedDelegateUsername }})</span></span>
+        <span :class="getVoteColor"
+          >{{ isUnvote ? $t("TRANSACTION.TYPES.UNVOTE") : $t("TRANSACTION.TYPES.VOTE") }}
+          <span class="italic">({{ votedDelegateUsername }})</span></span
+        >
       </RouterLink>
     </span>
-    <span v-else-if="type === 4">{{ $t('TRANSACTION.TYPES.MULTI_SIGNATURE') }}</span>
-    <span v-else-if="type === 5">{{ $t('TRANSACTION.TYPES.IPFS') }}</span>
-    <span v-else-if="type === 6">{{ $t('TRANSACTION.TYPES.TIMELOCK_TRANSFER') }}</span>
-    <span v-else-if="type === 7">{{ $t('TRANSACTION.TYPES.MULTI_PAYMENT') }}</span>
-    <span v-else-if="type === 8">{{ $t('TRANSACTION.TYPES.DELEGATE_RESIGNATION') }}</span>
+    <span v-else-if="type === 4">{{ $t("TRANSACTION.TYPES.MULTI_SIGNATURE") }}</span>
+    <span v-else-if="type === 5">{{ $t("TRANSACTION.TYPES.IPFS") }}</span>
+    <span v-else-if="type === 6">{{ $t("TRANSACTION.TYPES.TIMELOCK_TRANSFER") }}</span>
+    <span v-else-if="type === 7">{{ $t("TRANSACTION.TYPES.MULTI_PAYMENT") }}</span>
+    <span v-else-if="type === 8">{{ $t("TRANSACTION.TYPES.DELEGATE_RESIGNATION") }}</span>
   </span>
 </template>
 
@@ -80,9 +79,9 @@ import { IDelegate } from "../../interfaces";
 
 @Component({
   computed: {
-    ...mapGetters('delegates', ['delegates']),
-    ...mapGetters('network', ['knownWallets']),
-  }
+    ...mapGetters("delegates", ["delegates"]),
+    ...mapGetters("network", ["knownWallets"]),
+  },
 })
 export default class LinkWallet extends Vue {
   @Prop({ required: false, default: "" }) public address: string;
@@ -97,93 +96,93 @@ export default class LinkWallet extends Vue {
   private delegates: [IDelegate];
   private knownWallets: { [key: string]: string };
 
-  get isKnown (): string {
-    return this.knownWallets[this.address]
+  get isKnown(): string {
+    return this.knownWallets[this.address];
   }
 
-  get walletAddress (): string {
-    return this.delegate ? this.delegate.address : this.address
+  get walletAddress(): string {
+    return this.delegate ? this.delegate.address : this.address;
   }
 
-  get hasDefaultSlot (): boolean {
-    return !!this.$slots.default
+  get hasDefaultSlot(): boolean {
+    return !!this.$slots.default;
   }
 
-  get getVoteColor (): string {
-    return this.isUnvote ? 'text-red' : 'text-green'
+  get getVoteColor(): string {
+    return this.isUnvote ? "text-red" : "text-green";
   }
 
-  get isUnvote (): boolean {
+  get isUnvote(): boolean {
     if (this.asset && this.asset.votes) {
-      const vote = this.asset.votes[0]
-      return vote.charAt(0) === '-'
+      const vote = this.asset.votes[0];
+      return vote.charAt(0) === "-";
     }
-    return false
+    return false;
   }
 
-  get votePublicKey (): string {
+  get votePublicKey(): string {
     if (this.asset && this.asset.votes) {
-      const vote = this.asset.votes[0]
-      return vote.substr(1)
+      const vote = this.asset.votes[0];
+      return vote.substr(1);
     }
-    return ''
+    return "";
   }
 
-  get votedDelegateAddress (): string {
-    return this.votedDelegate ? this.votedDelegate.address : ''
+  get votedDelegateAddress(): string {
+    return this.votedDelegate ? this.votedDelegate.address : "";
   }
 
-  get votedDelegateUsername (): string {
-    return this.votedDelegate ? this.votedDelegate.username : ''
+  get votedDelegateUsername(): string {
+    return this.votedDelegate ? this.votedDelegate.username : "";
   }
 
-  @Watch('delegates')
-  onDelegateChanged() {
+  @Watch("delegates")
+  public onDelegateChanged() {
     this.determine();
   }
 
-  @Watch('address')
-  onAddressChanged() {
+  @Watch("address")
+  public onAddressChanged() {
     this.determine();
   }
 
-  @Watch('publicKey')
-  onPublicKeyChanged() {
+  @Watch("publicKey")
+  public onPublicKeyChanged() {
     this.determine();
   }
 
-  public mounted (): void {
-    this.determine()
+  public mounted(): void {
+    this.determine();
   }
 
-  private determine (): void {
-    this.address ? this.findByAddress() : this.findByPublicKey()
+  private determine(): void {
+    this.address ? this.findByAddress() : this.findByPublicKey();
     if (this.votePublicKey) {
-      this.determineVote()
+      this.determineVote();
     }
   }
 
-  private determineVote (): void {
-    this.votedDelegate = this.delegates.find(d => d.publicKey === this.votePublicKey)
+  private determineVote(): void {
+    this.votedDelegate = this.delegates.find(d => d.publicKey === this.votePublicKey);
   }
 
-  private findByAddress (): void {
-    this.delegate = this.delegates.find(d => d.address === this.address)
+  private findByAddress(): void {
+    this.delegate = this.delegates.find(d => d.address === this.address);
   }
 
-  private findByPublicKey (): void {
-    this.delegate = this.delegates.find(d => d.publicKey === this.publicKey)
+  private findByPublicKey(): void {
+    this.delegate = this.delegates.find(d => d.publicKey === this.publicKey);
   }
 
-  private getAddress (): string | false {
-    const knownOrDelegate = this.isKnown || this.delegate
-    const truncated = !this.hasDefaultSlot && this.trunc
+  private getAddress(): string | false {
+    const knownOrDelegate = this.isKnown || this.delegate;
+    const truncated = !this.hasDefaultSlot && this.trunc;
 
     if (knownOrDelegate || truncated) {
-      return this.walletAddress
+      return this.walletAddress;
     }
 
-    return false
+    return false;
   }
 }
 </script>

@@ -7,9 +7,7 @@
       :no-data-message="$t('COMMON.NO_RESULTS')"
       @on-sort-change="emitSortChange"
     >
-      <template
-        slot-scope="data"
-      >
+      <template slot-scope="data">
         <div v-if="data.column.field === 'id'">
           <LinkBlock :id="data.row.id" />
         </div>
@@ -40,7 +38,7 @@
           <span
             v-tooltip="{
               trigger: 'hover',
-              content: readableCurrency(data.row.forged.total, data.row.price)
+              content: readableCurrency(data.row.forged.total, data.row.price),
             }"
             class="whitespace-no-wrap"
           >
@@ -52,7 +50,7 @@
           <span
             v-tooltip="{
               trigger: 'hover',
-              content: data.row.forged.fee ? readableCurrency(data.row.forged.fee, data.row.price) : ''
+              content: data.row.forged.fee ? readableCurrency(data.row.forged.fee, data.row.price) : '',
             }"
             class="whitespace-no-wrap"
           >
@@ -177,13 +175,13 @@ export default {
 </script>
 
 <style>
-  .wrap-timestamp {
-    white-space: normal;
-  }
+.wrap-timestamp {
+  white-space: normal;
+}
 
-  @media(min-width: 870px) {
-    .wrap-timestamp {
-      white-space: nowrap;
-    }
+@media (min-width: 870px) {
+  .wrap-timestamp {
+    white-space: nowrap;
   }
+}
 </style>

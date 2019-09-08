@@ -3,12 +3,16 @@
     v-tooltip="{
       trigger: 'hover click',
       content: source && price ? readableCurrency(source, price) : '',
-      placement: 'top'
+      placement: 'top',
     }"
-    :class="!isFee ? {
-      'text-red': transaction.sender === $route.params.address,
-      'text-green': transaction.recipient === $route.params.address && isTransfer,
-    } : ''"
+    :class="
+      !isFee
+        ? {
+            'text-red': transaction.sender === $route.params.address,
+            'text-green': transaction.recipient === $route.params.address && isTransfer,
+          }
+        : ''
+    "
     class="whitespace-no-wrap"
   >
     {{ readableCrypto(source) }}

@@ -7,9 +7,7 @@
       :no-data-message="$t('COMMON.NO_RESULTS')"
       @on-sort-change="emitSortChange"
     >
-      <template
-        slot-scope="data"
-      >
+      <template slot-scope="data">
         <div v-if="data.column.field === 'username'">
           <LinkWallet :address="data.row.address">
             {{ data.row.username }}
@@ -24,28 +22,14 @@
           {{ lastForgingTime(data.row) }}
         </div>
 
-        <div
-          v-else-if="data.column.field === 'forgingStatus'"
-          class="text-0"
-        >
-          <button
-            v-tooltip="statusTooltip(data.row)"
-            role="img"
-            :aria-label="tooltipContent(data.row)"
-          >
-            <img
-              class="mx-auto"
-              width="19px"
-              :src="require(`@/assets/images/icons/${status(data.row)}.svg`)"
-            >
+        <div v-else-if="data.column.field === 'forgingStatus'" class="text-0">
+          <button v-tooltip="statusTooltip(data.row)" role="img" :aria-label="tooltipContent(data.row)">
+            <img class="mx-auto" width="19px" :src="require(`@/assets/images/icons/${status(data.row)}.svg`)" />
           </button>
         </div>
 
         <div v-else-if="data.column.field === 'votes'">
-          <span
-            v-tooltip="$t('COMMON.SUPPLY_PERCENTAGE')"
-            class="text-grey text-2xs mr-1"
-          >
+          <span v-tooltip="$t('COMMON.SUPPLY_PERCENTAGE')" class="text-grey text-2xs mr-1">
             {{ percentageString(data.row.production.approval) }}
           </span>
           {{ readableCrypto(data.row.votes, true, 2) }}

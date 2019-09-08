@@ -1,26 +1,16 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <ContentHeader>{{ $t('WALLET.SUMMARY') }}</ContentHeader>
+    <ContentHeader>{{ $t("WALLET.SUMMARY") }}</ContentHeader>
 
     <WalletDetails :wallet="wallet" />
 
-    <section
-      v-show="isDelegate"
-      :class="{ 'py-5 md:py-10': isDelegate }"
-      class="page-section mb-5"
-    >
-      <div
-        v-show="isDelegate"
-        class="px-5 sm:px-10"
-      >
+    <section v-show="isDelegate" :class="{ 'py-5 md:py-10': isDelegate }" class="page-section mb-5">
+      <div v-show="isDelegate" class="px-5 sm:px-10">
         <WalletDelegate :wallet="wallet" />
       </div>
     </section>
 
-    <WalletTransactions
-      v-if="wallet"
-      :wallet="wallet"
-    />
+    <WalletTransactions v-if="wallet" :wallet="wallet" />
   </div>
 </template>
 

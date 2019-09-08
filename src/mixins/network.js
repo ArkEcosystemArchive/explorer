@@ -1,11 +1,9 @@
-import store from '@/store'
+import store from "@/store";
 
 export default {
   methods: {
-    networkToken () {
-      return store.getters['network/token'] ||
-        store.getters['network/defaults'].token ||
-        ''
-    }
-  }
-}
+    networkToken() {
+      return store.getters["network/token"] || store.getters["network/defaults"].token || "";
+    },
+  },
+};

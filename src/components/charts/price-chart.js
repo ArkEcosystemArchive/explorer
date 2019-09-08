@@ -1,4 +1,4 @@
-import { Line, mixins } from 'vue-chartjs'
+import { Line, mixins } from "vue-chartjs";
 
 export default {
   extends: Line,
@@ -8,15 +8,15 @@ export default {
   props: {
     chartData: {
       type: Object,
-      required: true
+      required: true,
     },
     options: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
 
-  mounted () {
-    this.renderChart(this.chartData, this.options)
-  }
-}
+  mounted() {
+    this.renderChart(this.chartData, this.options);
+  },
+};

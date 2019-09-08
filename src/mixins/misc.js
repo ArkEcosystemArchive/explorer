@@ -1,33 +1,33 @@
-import moment from 'moment'
-import store from '@/store'
+import moment from "moment";
+import store from "@/store";
 
-const locale = store.getters['ui/locale']
+const locale = store.getters["ui/locale"];
 
 export default {
   methods: {
-    readableTimestamp (value) {
+    readableTimestamp(value) {
       return moment
         .unix(value)
         .local()
-        .format('L LTS')
+        .format("L LTS");
     },
 
-    readableTimestampAgo (time, compareTime) {
-      const momentTime = moment
-        .unix(time)
-        .local()
-      return typeof compareTime !== 'undefined' ? momentTime.from(moment.unix(compareTime).local()) : momentTime.fromNow()
+    readableTimestampAgo(time, compareTime) {
+      const momentTime = moment.unix(time).local();
+      return typeof compareTime !== "undefined"
+        ? momentTime.from(moment.unix(compareTime).local())
+        : momentTime.fromNow();
     },
 
-    readableNumber (value, digits = 2, omitSeparator = false) {
+    readableNumber(value, digits = 2, omitSeparator = false) {
       if (omitSeparator) {
-        return value.toFixed(digits)
+        return value.toFixed(digits);
       }
 
       return value.toLocaleString(locale, {
         minimumFractionDigits: digits,
-        maximumFractionDigits: digits
-      })
-    }
-  }
-}
+        maximumFractionDigits: digits,
+      });
+    },
+  },
+};

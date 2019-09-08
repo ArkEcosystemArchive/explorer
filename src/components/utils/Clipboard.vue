@@ -1,15 +1,6 @@
 <template>
-  <button
-    v-tooltip="getTooltip()"
-    class="ClipboardButton"
-    @click="copy"
-  >
-    <img
-      ref="copyImage"
-      :class="{ 'animated wobble': copying }"
-      class="block"
-      src="@/assets/images/icons/copy.svg"
-    >
+  <button v-tooltip="getTooltip()" class="ClipboardButton" @click="copy">
+    <img ref="copyImage" :class="{ 'animated wobble': copying }" class="block" src="@/assets/images/icons/copy.svg" />
   </button>
 </template>
 
@@ -101,7 +92,7 @@ export default {
 </script>
 
 <style>
-  .ClipboardButton {
-    @apply .flex-none
-  }
+.ClipboardButton {
+  @apply .flex-none;
+}
 </style>

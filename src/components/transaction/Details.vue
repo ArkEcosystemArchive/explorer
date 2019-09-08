@@ -3,20 +3,16 @@
     <div class="px-5 sm:px-10">
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t('TRANSACTION.SENDER') }}
+          {{ $t("TRANSACTION.SENDER") }}
         </div>
         <div class="truncate">
-          <LinkWallet
-            :address="transaction.sender"
-            :trunc="false"
-            tooltip-placement="left"
-          />
+          <LinkWallet :address="transaction.sender" :trunc="false" tooltip-placement="left" />
         </div>
       </div>
 
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t('TRANSACTION.RECIPIENT') }}
+          {{ $t("TRANSACTION.RECIPIENT") }}
         </div>
         <div class="truncate">
           <LinkWallet
@@ -31,20 +27,20 @@
 
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t('COMMON.CONFIRMATIONS') }}
+          {{ $t("COMMON.CONFIRMATIONS") }}
         </div>
         <div>{{ confirmations }}</div>
       </div>
 
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t('TRANSACTION.AMOUNT') }}
+          {{ $t("TRANSACTION.AMOUNT") }}
         </div>
         <div
           v-tooltip="{
             trigger: 'hover click',
             content: price ? readableCurrency(transaction.amount, price) : '',
-            placement: 'left'
+            placement: 'left',
           }"
         >
           {{ readableCrypto(transaction.amount) }}
@@ -53,13 +49,13 @@
 
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t('TRANSACTION.FEE') }}
+          {{ $t("TRANSACTION.FEE") }}
         </div>
         <div
           v-tooltip="{
             trigger: 'hover click',
             content: price ? readableCurrency(transaction.fee, price) : '',
-            placement: 'left'
+            placement: 'left',
           }"
         >
           {{ readableCrypto(transaction.fee) }}
@@ -68,19 +64,16 @@
 
       <div class="list-row-border-b-no-wrap">
         <div class="mr-4">
-          {{ $t('COMMON.TIMESTAMP') }}
+          {{ $t("COMMON.TIMESTAMP") }}
         </div>
         <div v-if="transaction.timestamp">
           {{ readableTimestamp(transaction.timestamp.unix) }}
         </div>
       </div>
 
-      <div
-        v-if="transaction.vendorField"
-        class="list-row-border-b-no-wrap"
-      >
+      <div v-if="transaction.vendorField" class="list-row-border-b-no-wrap">
         <div class="mr-4">
-          {{ $t('TRANSACTION.SMARTBRIDGE') }}
+          {{ $t("TRANSACTION.SMARTBRIDGE") }}
         </div>
         <div class="overflow-hidden break-words">
           {{ emojify(transaction.vendorField) }}
@@ -89,13 +82,10 @@
 
       <div class="list-row">
         <div class="mr-4">
-          {{ $t('TRANSACTION.BLOCK_ID') }}
+          {{ $t("TRANSACTION.BLOCK_ID") }}
         </div>
         <div>
-          <LinkBlock
-            v-if="transaction.blockId"
-            :id="transaction.blockId"
-          >
+          <LinkBlock v-if="transaction.blockId" :id="transaction.blockId">
             {{ transaction.blockId }}
           </LinkBlock>
         </div>

@@ -1,11 +1,8 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <ContentHeader>{{ $t('PAGES.HOME.HEADER') }}</ContentHeader>
+    <ContentHeader>{{ $t("PAGES.HOME.HEADER") }}</ContentHeader>
 
-    <section
-      v-if="isChartEnabled"
-      class="hidden md:block mb-5 bg-theme-feature-background xl:rounded-lg"
-    >
+    <section v-if="isChartEnabled" class="hidden md:block mb-5 bg-theme-feature-background xl:rounded-lg">
       <ChartWrapper />
     </section>
 
@@ -15,30 +12,18 @@
           :class="dataView === 'transactions' ? 'mb-8 sm:mb-4' : 'mb-4'"
           class="flex items-end w-full border-b mx-5 sm:mx-10"
         >
-          <div
-            :class="dataView === 'transactions' ? 'active-tab' : 'inactive-tab'"
-            @click="dataView = 'transactions'"
-          >
-            {{ $t('PAGES.HOME.LATEST_TRANSACTIONS') }}
+          <div :class="dataView === 'transactions' ? 'active-tab' : 'inactive-tab'" @click="dataView = 'transactions'">
+            {{ $t("PAGES.HOME.LATEST_TRANSACTIONS") }}
           </div>
-          <div
-            :class="dataView === 'blocks' ? 'active-tab' : 'inactive-tab'"
-            @click="dataView = 'blocks'"
-          >
-            {{ $t('PAGES.HOME.LATEST_BLOCKS') }}
+          <div :class="dataView === 'blocks' ? 'active-tab' : 'inactive-tab'" @click="dataView = 'blocks'">
+            {{ $t("PAGES.HOME.LATEST_BLOCKS") }}
           </div>
         </nav>
 
-        <SelectionType
-          v-if="dataView === 'transactions'"
-          @change="onTypeChange"
-        />
+        <SelectionType v-if="dataView === 'transactions'" @change="onTypeChange" />
       </div>
 
-      <LatestTransactions
-        v-if="dataView === 'transactions'"
-        :transaction-type="transactionType"
-      />
+      <LatestTransactions v-if="dataView === 'transactions'" :transaction-type="transactionType" />
 
       <LatestBlocks v-if="dataView === 'blocks'" />
     </section>

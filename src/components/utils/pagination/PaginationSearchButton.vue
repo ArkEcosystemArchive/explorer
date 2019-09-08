@@ -12,12 +12,7 @@
     <span v-else>...</span>
 
     <span class="icon">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="13px"
-        height="13px"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13px" height="13px">
         <path
           fill-rule="evenodd"
           fill="currentColor"
@@ -61,7 +56,7 @@ export default {
 
 <style scoped>
 .Pagination__Button--search {
-  @apply .relative .text-theme-button-text .p-3 .cursor-pointer .flex .flex-no-wrap .items-center;;
+  @apply .relative .text-theme-button-text .p-3 .cursor-pointer .flex .flex-no-wrap .items-center;
 }
 
 .Pagination__Button--search:hover {

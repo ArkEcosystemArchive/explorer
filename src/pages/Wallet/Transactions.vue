@@ -1,32 +1,26 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <ContentHeader>{{ $t('COMMON.TRANSACTIONS') }}</ContentHeader>
+    <ContentHeader>{{ $t("COMMON.TRANSACTIONS") }}</ContentHeader>
 
     <section class="mb-5">
       <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
         <div class="mr-6 flex-none">
-          <img
-            class="block"
-            src="@/assets/images/icons/transaction.svg"
-          >
+          <img class="block" src="@/assets/images/icons/transaction.svg" />
         </div>
         <div class="flex-auto min-w-0">
           <div class="text-grey mb-2">
-            {{ $t('WALLET.ADDRESS') }}
+            {{ $t("WALLET.ADDRESS") }}
           </div>
           <div class="flex">
             <div class="text-lg text-white semibold truncate">
               <span class="mr-2">{{ address }}</span>
             </div>
-            <Clipboard
-              v-if="address"
-              :value="address"
-            />
+            <Clipboard v-if="address" :value="address" />
           </div>
         </div>
         <div class="flex flex-col ml-4">
           <div class="text-grey mb-2">
-            {{ $t('COMMON.TYPE') }}
+            {{ $t("COMMON.TYPE") }}
           </div>
           <div class="relative text-white z-20">
             <span
@@ -50,10 +44,7 @@
               v-show="selectOpen"
               class="absolute right-0 mt-px bg-theme-content-background shadow-theme rounded border overflow-hidden text-sm"
             >
-              <li
-                v-for="txType in ['all', 'sent', 'received']"
-                :key="txType"
-              >
+              <li v-for="txType in ['all', 'sent', 'received']" :key="txType">
                 <RouterLink
                   :to="{ name: 'wallet-transactions', params: { address: address, type: txType, page: 1 } }"
                   class="dropdown-button"
@@ -78,12 +69,7 @@
       <div class="sm:hidden">
         <TableTransactionsMobile :transactions="transactions" />
       </div>
-      <Pagination
-        v-if="showPagination"
-        :meta="meta"
-        :current-page="currentPage"
-        @page-change="onPageChange"
-      />
+      <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
     </section>
   </div>
 </template>

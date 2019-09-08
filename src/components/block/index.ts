@@ -1,9 +1,5 @@
-import BlockDetails from './Details.vue'
-import BlockIdentity from './Identity.vue'
-import BlockTransactions from './Transactions.vue'
+import BlockDetails from "./Details.vue";
+import BlockIdentity from "./Identity.vue";
+import BlockTransactions from "./Transactions.vue";
 
-export {
-  BlockDetails,
-  BlockIdentity,
-  BlockTransactions
-}
+export { BlockDetails, BlockIdentity, BlockTransactions };

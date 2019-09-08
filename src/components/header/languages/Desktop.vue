@@ -1,22 +1,11 @@
 <template>
   <div class="language-menu w-full px-5 hidden xl:flex items-center justify-end">
-    <button
-      v-for="lang in languages"
-      :key="lang"
-      class="menu-button"
-      @click="setLanguage(lang)"
-    >
-      <img
-        :src="getLanguageFlag(lang)"
-        class="flag-image"
-      >
+    <button v-for="lang in languages" :key="lang" class="menu-button" @click="setLanguage(lang)">
+      <img :src="getLanguageFlag(lang)" class="flag-image" />
     </button>
 
-    <button
-      class="flex flex-none p-2 close-button"
-      @click="$store.dispatch('ui/setHeaderType', null)"
-    >
-      <img src="@/assets/images/icons/cross.svg">
+    <button class="flex flex-none p-2 close-button" @click="$store.dispatch('ui/setHeaderType', null)">
+      <img src="@/assets/images/icons/cross.svg" />
     </button>
   </div>
 </template>
@@ -63,7 +52,7 @@ export default {
 </script>
 
 <style scoped>
-  .close-button {
-    margin-left: 0.825rem;
-  }
+.close-button {
+  margin-left: 0.825rem;
+}
 </style>

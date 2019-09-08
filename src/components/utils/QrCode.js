@@ -1,43 +1,48 @@
-import QRious from 'qrious'
+import QRious from "qrious";
 
 export default {
-  name: 'QrCode',
+  name: "QrCode",
 
   props: {
     value: {
       type: String,
-      required: true
+      required: true,
     },
     options: {
-      type: Object
-    }
+      type: Object,
+    },
   },
 
   watch: {
-    value () {
-      this.generate()
+    value() {
+      this.generate();
     },
 
-    options () {
-      this.generate()
-    }
+    options() {
+      this.generate();
+    },
   },
 
-  mounted () {
-    this.generate()
+  mounted() {
+    this.generate();
   },
 
-  render (createElement) {
-    return createElement('canvas', this.$slots.default)
+  render(createElement) {
+    return createElement("canvas", this.$slots.default);
   },
 
   methods: {
-    generate () {
+    generate() {
       /* eslint-disable no-new */
-      new QRious(Object.assign({
-        element: this.$el,
-        value: this.value
-      }, this.options))
-    }
-  }
-}
+      new QRious(
+        Object.assign(
+          {
+            element: this.$el,
+            value: this.value,
+          },
+          this.options,
+        ),
+      );
+    },
+  },
+};

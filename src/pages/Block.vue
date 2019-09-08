@@ -1,29 +1,17 @@
 <template>
-  <div
-    v-if="block"
-    class="max-w-2xl mx-auto md:pt-5"
-  >
-    <ContentHeader>{{ $t('COMMON.BLOCK') }}</ContentHeader>
+  <div v-if="block" class="max-w-2xl mx-auto md:pt-5">
+    <ContentHeader>{{ $t("COMMON.BLOCK") }}</ContentHeader>
 
     <template v-if="blockNotFound">
       <section class="page-section py-5 md:py-10 px-6">
         <div class="my-10 text-center">
-          <NotFound
-            :is-loading="isLoading"
-            :data-id="block.id"
-            data-type="block"
-            @reload="onReload"
-          />
+          <NotFound :is-loading="isLoading" :data-id="block.id" data-type="block" @reload="onReload" />
         </div>
       </section>
     </template>
 
     <template v-else>
-      <BlockIdentity
-        :block="block"
-        :prev-handler="prevBlock"
-        :next-handler="nextBlock"
-      />
+      <BlockIdentity :block="block" :prev-handler="prevBlock" :next-handler="nextBlock" />
 
       <BlockDetails :block="block" />
 

@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-click-outside="closePageInput"
-    class="Pagination mx-5 sm:mx-10 mt-5 md:mt-10"
-  >
+  <div v-click-outside="closePageInput" class="Pagination mx-5 sm:mx-10 mt-5 md:mt-10">
     <div class="PaginationBar--small relative">
       <PaginationPageInput
         :is-visible="showPageInput"
@@ -19,24 +16,14 @@
         :hover-scale="false"
         @click="openPageInput"
       >
-        {{ $t('PAGINATION.PAGE') }} {{ currentPage }} {{ $t('PAGINATION.OF') }} {{ pageCount }}
+        {{ $t("PAGINATION.PAGE") }} {{ currentPage }} {{ $t("PAGINATION.OF") }} {{ pageCount }}
       </PaginationSearchButton>
     </div>
 
     <div class="flex justify-center">
-      <PaginationNavigationButton
-        :is-visible="showFirst"
-        type="first"
-        class="mr-2"
-        @click="emitFirst"
-      />
+      <PaginationNavigationButton :is-visible="showFirst" type="first" class="mr-2" @click="emitFirst" />
 
-      <PaginationNavigationButton
-        :is-visible="showPrevious"
-        type="previous"
-        class="mr-2"
-        @click="emitPrevious"
-      />
+      <PaginationNavigationButton :is-visible="showPrevious" type="previous" class="mr-2" @click="emitPrevious" />
 
       <div class="PaginationBar--large relative">
         <PaginationPageInput
@@ -48,20 +35,14 @@
           @close="closePageInput"
         />
 
-        <div
-          :class="{ 'opacity-0': showPageInput }"
-          class="hidden md:flex px-3 bg-theme-button rounded"
-        >
-          <PaginationSearchButton
-            :is-visible="pageButtons[0] !== 1"
-            @click="openPageInput"
-          />
+        <div :class="{ 'opacity-0': showPageInput }" class="hidden md:flex px-3 bg-theme-button rounded">
+          <PaginationSearchButton :is-visible="pageButtons[0] !== 1" @click="openPageInput" />
 
           <button
             v-for="page in pageButtons"
             :key="page"
             :disabled="page === currentPage"
-            :class="{ 'active': page === currentPage }"
+            :class="{ active: page === currentPage }"
             class="Pagination__Button transition"
             @click="emitPageChange(page)"
           >
@@ -75,29 +56,15 @@
         </div>
 
         <div class="flex md:hidden bg-theme-button rounded">
-          <PaginationSearchButton
-            :hover-scale="false"
-            :class="{ 'opacity-0': showPageInput }"
-            @click="openPageInput"
-          >
-            {{ $t('PAGINATION.PAGE') }} {{ currentPage }} {{ $t('PAGINATION.OF') }} {{ pageCount }}
+          <PaginationSearchButton :hover-scale="false" :class="{ 'opacity-0': showPageInput }" @click="openPageInput">
+            {{ $t("PAGINATION.PAGE") }} {{ currentPage }} {{ $t("PAGINATION.OF") }} {{ pageCount }}
           </PaginationSearchButton>
         </div>
       </div>
 
-      <PaginationNavigationButton
-        :is-visible="showNext"
-        type="next"
-        class="ml-2"
-        @click="emitNext"
-      />
+      <PaginationNavigationButton :is-visible="showNext" type="next" class="ml-2" @click="emitNext" />
 
-      <PaginationNavigationButton
-        :is-visible="showLast"
-        type="last"
-        class="ml-2"
-        @click="emitLast"
-      />
+      <PaginationNavigationButton :is-visible="showLast" type="last" class="ml-2" @click="emitLast" />
     </div>
   </div>
 </template>

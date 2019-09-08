@@ -26,6 +26,6 @@ export default {
 
 <style>
 .MonitorHeader {
-  @apply .bg-theme-feature-background .flex .items-center .justify-between
+  @apply .bg-theme-feature-background .flex .items-center .justify-between;
 }
 </style>

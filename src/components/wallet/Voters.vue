@@ -1,19 +1,17 @@
 <template>
-  <div
-    v-show="voterCount"
-    class="list-row-border-t"
-  >
-    <div>{{ $t('WALLET.DELEGATE.VOTERS') }}</div>
+  <div v-show="voterCount" class="list-row-border-t">
+    <div>{{ $t("WALLET.DELEGATE.VOTERS") }}</div>
     <div class="whitespace-no-wrap">
       <span
         v-tooltip="{ content: $t('WALLET.DELEGATE.VOTER_THRESHOLD', { token: networkToken() }), placement: 'left' }"
         :class="voterCount ? 'mr-2' : ''"
-      >{{ readableNumber(voterCount, 0) }}</span>
+        >{{ readableNumber(voterCount, 0) }}</span
+      >
       <RouterLink
         v-if="wallet.address && voterCount"
         :to="{ name: 'wallet-voters', params: { address: wallet.address, username: wallet.username, page: 1 } }"
       >
-        {{ $t('COMMON.SEE_ALL') }}
+        {{ $t("COMMON.SEE_ALL") }}
       </RouterLink>
     </div>
   </div>

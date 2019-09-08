@@ -1,29 +1,20 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <ContentHeader>{{ $t('PAGES.DELEGATE_MONITOR.TITLE') }}</ContentHeader>
+    <ContentHeader>{{ $t("PAGES.DELEGATE_MONITOR.TITLE") }}</ContentHeader>
 
     <MonitorHeader />
 
     <section class="page-section py-5 md:py-10">
       <nav class="mx-5 sm:mx-10 mb-4 border-b flex items-end">
-        <div
-          :class="activeTab === 'active' ? 'active-tab' : 'inactive-tab'"
-          @click="activeTab = 'active'"
-        >
-          {{ $t('PAGES.DELEGATE_MONITOR.ACTIVE') }}
+        <div :class="activeTab === 'active' ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'active'">
+          {{ $t("PAGES.DELEGATE_MONITOR.ACTIVE") }}
         </div>
-        <div
-          :class="activeTab === 'standby' ? 'active-tab' : 'inactive-tab'"
-          @click="activeTab = 'standby'"
-        >
-          {{ $t('PAGES.DELEGATE_MONITOR.STANDBY') }}
+        <div :class="activeTab === 'standby' ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'standby'">
+          {{ $t("PAGES.DELEGATE_MONITOR.STANDBY") }}
         </div>
       </nav>
 
-      <ForgingStats
-        v-show="activeTab === 'active'"
-        :delegates="delegates || []"
-      />
+      <ForgingStats v-show="activeTab === 'active'" :delegates="delegates || []" />
 
       <TableDelegates
         :delegates="delegates"

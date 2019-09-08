@@ -1,107 +1,107 @@
-import ApiService from '@/services/api'
+import ApiService from "@/services/api";
 
 class TransactionService {
-  async latest (limit = 25) {
-    const response = await ApiService.get('transactions', {
+  async latest(limit = 25) {
+    const response = await ApiService.get("transactions", {
       params: {
-        orderBy: 'timestamp:desc',
-        limit
-      }
-    })
+        orderBy: "timestamp:desc",
+        limit,
+      },
+    });
 
-    return response.data
+    return response.data;
   }
 
-  async find (id) {
-    const response = await ApiService.get(`transactions/${id}`)
-    return response.data
+  async find(id) {
+    const response = await ApiService.get(`transactions/${id}`);
+    return response.data;
   }
 
-  async filterByType (page, type, limit = 25) {
+  async filterByType(page, type, limit = 25) {
     const params = {
-      orderBy: 'timestamp:desc',
+      orderBy: "timestamp:desc",
       page,
-      limit
-    }
+      limit,
+    };
 
     if (type !== -1) {
-      params.type = type
+      params.type = type;
     }
 
-    const response = await ApiService.get('transactions', {
-      params: params
-    })
+    const response = await ApiService.get("transactions", {
+      params: params,
+    });
 
-    return response
+    return response;
   }
 
-  async byBlock (id, page = 1, limit = 25) {
+  async byBlock(id, page = 1, limit = 25) {
     const response = await ApiService.get(`blocks/${id}/transactions`, {
       params: {
-        orderBy: 'timestamp:desc',
+        orderBy: "timestamp:desc",
         page,
-        limit
-      }
-    })
+        limit,
+      },
+    });
 
-    return response
+    return response;
   }
 
-  async allByAddress (address, page = 1, limit = 25) {
+  async allByAddress(address, page = 1, limit = 25) {
     const response = await ApiService.get(`wallets/${address}/transactions`, {
       params: {
-        orderBy: 'timestamp:desc',
+        orderBy: "timestamp:desc",
         page,
-        limit
-      }
-    })
+        limit,
+      },
+    });
 
-    return response
+    return response;
   }
 
-  async sentByAddress (address, page = 1, limit = 25) {
+  async sentByAddress(address, page = 1, limit = 25) {
     const response = await ApiService.get(`wallets/${address}/transactions/sent`, {
       params: {
-        orderBy: 'timestamp:desc',
+        orderBy: "timestamp:desc",
         page,
-        limit
-      }
-    })
+        limit,
+      },
+    });
 
-    return response
+    return response;
   }
 
-  async receivedByAddress (address, page = 1, limit = 25) {
+  async receivedByAddress(address, page = 1, limit = 25) {
     const response = await ApiService.get(`wallets/${address}/transactions/received`, {
       params: {
-        orderBy: 'timestamp:desc',
+        orderBy: "timestamp:desc",
         page,
-        limit
-      }
-    })
+        limit,
+      },
+    });
 
-    return response
+    return response;
   }
 
-  async sentByAddressCount (senderId) {
-    const response = await ApiService.get('transactions', {
+  async sentByAddressCount(senderId) {
+    const response = await ApiService.get("transactions", {
       params: {
         senderId,
-        limit: 1
-      }
-    })
-    return response.meta.totalCount
+        limit: 1,
+      },
+    });
+    return response.meta.totalCount;
   }
 
-  async receivedByAddressCount (recipientId) {
-    const response = await ApiService.get('transactions', {
+  async receivedByAddressCount(recipientId) {
+    const response = await ApiService.get("transactions", {
       params: {
         recipientId,
-        limit: 1
-      }
-    })
-    return response.meta.totalCount
+        limit: 1,
+      },
+    });
+    return response.meta.totalCount;
   }
 }
 
-export default new TransactionService()
+export default new TransactionService();

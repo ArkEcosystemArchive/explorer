@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <ContentHeader>{{ $t('PAGES.TOP_WALLETS.TITLE') }}</ContentHeader>
+    <ContentHeader>{{ $t("PAGES.TOP_WALLETS.TITLE") }}</ContentHeader>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
         <TableWalletsDesktop
@@ -11,17 +11,9 @@
         />
       </div>
       <div class="sm:hidden">
-        <TableWalletsMobile
-          :wallets="wallets"
-          :total="supply"
-        />
+        <TableWalletsMobile :wallets="wallets" :total="supply" />
       </div>
-      <Pagination
-        v-if="showPagination"
-        :meta="meta"
-        :current-page="currentPage"
-        @page-change="onPageChange"
-      />
+      <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
     </section>
   </div>
 </template>

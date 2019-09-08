@@ -5,10 +5,7 @@
     @mouseover="changeImageSource"
     @mouseleave="setImageSource"
   >
-    <img
-      :src="imageSource"
-      width="30"
-    >
+    <img :src="imageSource" width="30" />
   </button>
 </template>
 
