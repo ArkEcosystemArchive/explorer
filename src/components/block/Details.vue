@@ -115,51 +115,46 @@
   </section>
 </template>
 
-<script type="text/ecmascript-6">
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+//@ts-ignore
 import CryptoCompareService from '@/services/crypto-compare'
-import { mapGetters } from 'vuex'
+import { IBlock } from "../../interfaces";
 
-export default {
-  name: 'BlockDetails',
-
-  props: {
-    block: {
-      type: Object,
-      required: true
-    }
-  },
-
-  data: () => ({
-    price: 0
-  }),
-
+@Component({
   computed: {
     ...mapGetters('currency', { currencySymbol: 'symbol' }),
     ...mapGetters('network', ['height']),
+  }
+})
+export default class BlockDetails extends Vue {
+  @Prop({ required: true }) public block: IBlock;
 
-    confirmations () {
-      return this.height - this.block.height
+  private price: number = 0;
+  private currencySymbol: string;
+  private height: number;
+
+  get confirmations (): number {
+    return this.height - this.block.height
+  }
+
+  @Watch('block')
+  onBlockChanged() {
+    this.updatePrice();
+  }
+
+  @Watch('currencySymbol')
+  onCurrencySymbolChanged() {
+    this.updatePrice();
+  }
+
+  private async updatePrice (): Promise<void> {
+    if (!this.block.id) {
+      return
     }
-  },
 
-  watch: {
-    block () {
-      this.updatePrice()
-    },
-
-    currencySymbol () {
-      this.updatePrice()
-    }
-  },
-
-  methods: {
-    async updatePrice () {
-      if (!this.block.id) {
-        return
-      }
-
-      this.price = await CryptoCompareService.dailyAverage(this.block.timestamp.unix)
-    }
+    this.price = await CryptoCompareService.dailyAverage(this.block.timestamp.unix)
   }
 }
 </script>

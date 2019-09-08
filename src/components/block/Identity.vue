@@ -72,39 +72,29 @@
   </section>
 </template>
 
-<script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import { IBlock } from "../../interfaces";
 
-export default {
-  name: 'BlockIdentity',
-
-  props: {
-    block: {
-      type: Object,
-      required: true
-    },
-
-    prevHandler: {
-      type: Function,
-      required: true
-    },
-
-    nextHandler: {
-      type: Function,
-      required: true
-    }
-  },
-
+@Component({
   computed: {
     ...mapGetters('network', ['height']),
+  }
+})
+export default class BlockIdentity extends Vue {
+  @Prop({ required: true }) public block: IBlock;
+  @Prop({ required: true }) public prevHandler: Function;
+  @Prop({ required: true }) public nextHandler: Function;
 
-    isFirstBlock () {
-      return this.block.height === 1
-    },
+  private height: number;
 
-    isLastBlock () {
-      return this.block.height === this.height
-    }
+  get isFirstBlock (): boolean {
+    return this.block.height === 1
+  }
+
+  get isLastBlock (): boolean {
+    return this.block.height === this.height
   }
 }
 </script>

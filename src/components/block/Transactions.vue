@@ -30,62 +30,50 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { IBlock, ISortParameters, ITransaction } from "../../interfaces";
+//@ts-ignore
 import TransactionService from '@/services/transaction'
 
-export default {
-  name: 'BlockTransactions',
+@Component
+export default class BlockTransactions extends Vue {
+  @Prop({ required: true }) public block: IBlock;
 
-  props: {
-    block: {
-      type: Object,
-      required: true
+  public transactions: [ITransaction] | null = null;
+
+  get sortParams (): ISortParameters {
+    return this.$store.getters['ui/transactionSortParams']
+  }
+
+  set sortParams (params: ISortParameters) {
+    this.$store.dispatch('ui/setTransactionSortParams', {
+      field: params.field,
+      type: params.type
+    })
+  }
+
+  @Watch('block')
+  onBlockChanged() {
+    this.resetTransactions()
+    this.getTransactions()
+  }
+
+  private resetTransactions (): void {
+    this.transactions = null
+  }
+
+  private async getTransactions (): Promise<void> {
+    if (!this.block.id) return
+
+    if (this.block.transactions) {
+      const { data } = await TransactionService.byBlock(this.block.id)
+      this.transactions = data.map((transaction: ITransaction) => ({ ...transaction, price: null }))
     }
-  },
+  }
 
-  data: () => ({
-    transactions: null
-  }),
-
-  computed: {
-    sortParams: {
-      get () {
-        return this.$store.getters['ui/transactionSortParams']
-      },
-
-      set (params) {
-        this.$store.dispatch('ui/setTransactionSortParams', {
-          field: params.field,
-          type: params.type
-        })
-      }
-    }
-  },
-
-  watch: {
-    block () {
-      this.resetTransactions()
-      this.getTransactions()
-    }
-  },
-
-  methods: {
-    resetTransactions () {
-      this.transactions = null
-    },
-
-    async getTransactions () {
-      if (!this.block.id) return
-
-      if (this.block.transactions) {
-        const { data } = await TransactionService.byBlock(this.block.id)
-        this.transactions = data.map(transaction => ({ ...transaction, price: null }))
-      }
-    },
-
-    onSortChange (params) {
-      this.sortParams = params
-    }
+  private onSortChange (params: ISortParameters): void {
+    this.sortParams = params
   }
 }
 </script>
