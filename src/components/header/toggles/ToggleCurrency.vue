@@ -10,27 +10,30 @@
   </button>
 </template>
 
-<script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import { mapGetters } from "vuex";
 
-export default {
-  name: 'ToggleCurrency',
-
+@Component({
   computed: {
-    ...mapGetters('currency', {
-      currencyName: 'name',
-      currencyRate: 'rate'
+    ...mapGetters("currency", {
+      currencyName: "name",
+      currencyRate: "rate",
     }),
+    ...mapGetters("ui", ["headerType"]),
+  },
+})
+export default class ToggleCurrency extends Vue {
+  private currencyName: string;
+  private currencyRate: string;
+  private headerType: string;
 
-    ...mapGetters('ui', ['headerType']),
+  get isCurrencyMenu(): boolean {
+    return this.headerType === "currencies";
+  }
 
-    isCurrencyMenu () {
-      return this.headerType === 'currencies'
-    },
-
-    imageSource () {
-      return require(`@/assets/images/currencies/${this.currencyName}.svg`)
-    }
+  get imageSource() {
+    return require(`@/assets/images/currencies/${this.currencyName}.svg`);
   }
 }
 </script>

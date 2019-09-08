@@ -16,20 +16,17 @@
   </button>
 </template>
 
-<script type="text/ecmascript-6">
-export default {
-  name: 'ToggleChart',
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
 
-  computed: {
-    isChartEnabled () {
-      return this.$store.getters['ui/priceChartOptions'].enabled
-    }
-  },
+@Component
+export default class ToggleChart extends Vue {
+  get isChartEnabled(): boolean {
+    return this.$store.getters["ui/priceChartOptions"].enabled;
+  }
 
-  methods: {
-    toggleChart () {
-      this.$store.dispatch('ui/setPriceChartOption', { option: 'enabled', value: !this.isChartEnabled })
-    }
+  private toggleChart(): void {
+    this.$store.dispatch("ui/setPriceChartOption", { option: "enabled", value: !this.isChartEnabled });
   }
 }
 </script>

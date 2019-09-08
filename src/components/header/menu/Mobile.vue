@@ -26,15 +26,17 @@
   </ul>
 </template>
 
-<script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import { mapGetters } from "vuex";
 
-export default {
-  name: 'HeaderMenuMobile',
-
+@Component({
   computed: {
-    ...mapGetters('ui', ['nightMode'])
-  }
+    ...mapGetters("ui", ["nightMode"]),
+  },
+})
+export default class HeaderMenuMobile extends Vue {
+  private nightMode: boolean;
 }
 </script>
 

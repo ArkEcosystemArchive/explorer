@@ -15,41 +15,42 @@
   </ul>
 </template>
 
-<script type="text/ecmascript-6">
-import { I18N } from '@/config'
-import { mapGetters } from 'vuex'
-import moment from 'moment'
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+// @ts-ignore
+import { I18N } from "@/config";
+import moment from "moment";
 
-export default {
-  name: 'HeaderLanguagesMobile',
-
+@Component({
   computed: {
-    ...mapGetters('ui', ['nightMode', 'language']),
-
-    languages () {
-      return I18N.enabledLocales.filter(
-        locale => locale !== this.language
-      )
-    }
+    ...mapGetters("ui", ["nightMode", "language"]),
   },
+})
+export default class HeaderLanguagesMobile extends Vue {
+  private nightMode: boolean;
+  private language: string;
 
-  methods: {
-    setLanguage (language) {
-      this.$store.dispatch('ui/setLanguage', language)
-      this.$i18n.locale = language
+  get languages() {
+    return I18N.enabledLocales.filter((locale: string) => locale !== this.language);
+  }
 
-      this.$store.dispatch('ui/setLocale', language)
-      moment.locale(language)
+  private setLanguage(language: string) {
+    this.$store.dispatch("ui/setLanguage", language);
+    this.$i18n.locale = language;
 
-      this.$store.dispatch('ui/setHeaderType', null)
-    },
+    this.$store.dispatch("ui/setLocale", language);
+    moment.locale(language);
 
-    getLanguageFlag (language) {
-      try {
-        return require(`@/assets/images/flags/${language}.svg`)
-      } catch (e) {
-        console.log(e)
-      }
+    this.$store.dispatch("ui/setHeaderType", null);
+  }
+
+  private getLanguageFlag(language: string) {
+    try {
+      return require(`@/assets/images/flags/${language}.svg`);
+    } catch (e) {
+      // tslint:disable-next-line:no-console
+      console.log(e);
     }
   }
 }

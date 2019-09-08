@@ -41,15 +41,13 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
 
-export default {
-  name: 'HeaderMenuDesktop',
-
-  methods: {
-    closeMenu () {
-      this.$store.dispatch('ui/setMenuVisible', false)
-    }
+@Component
+export default class HeaderMenuDesktop extends Vue {
+  private closeMenu(): void {
+    this.$store.dispatch("ui/setMenuVisible", false);
   }
 }
 </script>
