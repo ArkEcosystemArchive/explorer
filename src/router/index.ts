@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { Route, RouterMode } from 'vue-router';
 import { Position, PositionResult } from 'vue-router/types/router';
-//@ts-ignore
 import store from '@/store'
 import NProgress from 'nprogress'
 

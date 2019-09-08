@@ -1,5 +1,5 @@
-import HeaderDefault from './HeaderDefault'
-import HeaderSearch from './HeaderSearch'
+import HeaderDefault from './HeaderDefault.vue'
+import HeaderSearch from './HeaderSearch.vue'
 
 export * from './currencies'
 export * from './languages'

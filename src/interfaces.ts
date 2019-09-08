@@ -21,3 +21,14 @@ export interface ISortParameters {
     field: string,
     type: string
 }
+
+export interface IApiResponse {
+    error?: string,
+    statusCode?: string,
+    meta?: any,
+    data?: IApiResponseData
+}
+
+export interface IApiResponseData {
+    data: [any]
+}
