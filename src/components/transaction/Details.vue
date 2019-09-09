@@ -94,58 +94,55 @@
   </section>
 </template>
 
-<script type="text/ecmascript-6">
-import CryptoCompareService from '@/services/crypto-compare'
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import { ITransaction } from "@/interfaces";
+// @ts-ignore
+import CryptoCompareService from "@/services/crypto-compare";
 
-export default {
-  name: 'TransactionDetails',
-
-  props: {
-    transaction: {
-      type: Object,
-      required: true
-    }
-  },
-  data: () => ({
-    initialBlockHeight: 0,
-    price: 0
-  }),
-
+@Component({
   computed: {
-    ...mapGetters('currency', { currencySymbol: 'symbol' }),
-    ...mapGetters('network', ['height']),
-
-    confirmations () {
-      return this.initialBlockHeight ? this.height - this.initialBlockHeight : this.transaction.confirmations
-    }
+    ...mapGetters("currency", { currencySymbol: "symbol" }),
+    ...mapGetters("network", ["height"]),
   },
+})
+export default class TransactionDetails extends Vue {
+  @Prop({ required: true }) public transaction: ITransaction;
 
-  watch: {
-    async transaction () {
-      this.updatePrice()
-      this.setInitialBlockHeight()
-    },
+  private initialBlockHeight: number = 0;
+  private price: number = 0;
+  private currencySymbol: string;
+  private height: number;
 
-    async currencySymbol () {
-      await this.updatePrice()
-    },
+  get confirmations() {
+    return this.initialBlockHeight ? this.height - this.initialBlockHeight : this.transaction.confirmations;
+  }
 
-    height (newValue, oldValue) {
-      if (!oldValue) {
-        this.setInitialBlockHeight()
-      }
+  @Watch("transaction")
+  public async onTransactionChanged() {
+    this.updatePrice();
+    this.setInitialBlockHeight();
+  }
+
+  @Watch("currencySymbol")
+  public async onCurrencySymbolChanged() {
+    await this.updatePrice();
+  }
+
+  @Watch("height")
+  public onHeightChanged(newValue: number, oldValue: number) {
+    if (!oldValue) {
+      this.setInitialBlockHeight();
     }
-  },
+  }
 
-  methods: {
-    async updatePrice () {
-      this.price = await CryptoCompareService.dailyAverage(this.transaction.timestamp.unix)
-    },
+  private async updatePrice() {
+    this.price = await CryptoCompareService.dailyAverage(this.transaction.timestamp.unix);
+  }
 
-    setInitialBlockHeight () {
-      this.initialBlockHeight = this.height - this.transaction.confirmations
-    }
+  private setInitialBlockHeight() {
+    this.initialBlockHeight = this.height - this.transaction.confirmations;
   }
 }
 </script>

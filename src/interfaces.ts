@@ -43,6 +43,7 @@ export interface ITransaction {
   timestamp: ITimestamp;
   vendorField: string;
   fee: string;
+  confirmations: number;
 }
 
 export interface ISortParameters {
