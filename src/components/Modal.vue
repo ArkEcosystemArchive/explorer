@@ -17,10 +17,11 @@
   </transition>
 </template>
 
-<script>
-export default {
-  name: "Modal",
-};
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+
+@Component
+export default class Modal extends Vue {}
 </script>
 
 <style scoped>

@@ -1,5 +1,7 @@
 import Vue from "vue";
 
+/* tslint:disable:no-var-requires */
+
 // https://github.com/vuejs/vue-loader/releases/tag/v13.0.0
 
 // Utilities

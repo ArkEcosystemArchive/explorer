@@ -243,25 +243,26 @@
   </footer>
 </template>
 
-<script type="text/ecmascript-6">
-import moment from 'moment'
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import moment from "moment";
 
-export default {
-  name: 'AppFooter',
+@Component
+export default class AppFooter extends Vue {
+  get year() {
+    return moment().format("Y");
+  }
 
-  computed: {
-    year () {
-      return moment().format('Y')
-    },
-    version () {
-      return process.env.VUE_APP_GIT_VERSION;
-    },
-    versionLink () {
-      return `https://github.com/ArkEcosystem/explorer/commit/${process.env.VUE_APP_GIT_VERSION}`
-    },
-    date () {
-      return process.env.VUE_APP_GIT_DATE
-    }
+  get version() {
+    return process.env.VUE_APP_GIT_VERSION;
+  }
+
+  get versionLink() {
+    return `https://github.com/ArkEcosystem/explorer/commit/${process.env.VUE_APP_GIT_VERSION}`;
+  }
+
+  get date() {
+    return process.env.VUE_APP_GIT_DATE;
   }
 }
 </script>

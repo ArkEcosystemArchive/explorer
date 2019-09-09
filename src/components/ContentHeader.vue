@@ -36,19 +36,26 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import { mapGetters } from "vuex";
 
-export default {
-  name: 'ContentHeader',
-
+@Component({
   computed: {
-    ...mapGetters('network', ['alias', 'supply', 'height']),
-    ...mapGetters('currency', ['name', 'rate', 'symbol']),
+    ...mapGetters("network", ["alias", "supply", "height"]),
+    ...mapGetters("currency", ["name", "rate", "symbol"]),
+  },
+})
+export default class ContentHeader extends Vue {
+  private alias: string;
+  private supply: string;
+  private height: number;
+  private name: string;
+  private rate: number;
+  private symbol: string;
 
-    isMain () {
-      return this.alias === 'Main'
-    }
+  get isMain() {
+    return this.alias === "Main";
   }
 }
 </script>
