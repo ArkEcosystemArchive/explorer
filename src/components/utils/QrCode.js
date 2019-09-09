@@ -33,7 +33,6 @@ export default {
 
   methods: {
     generate() {
-      /* eslint-disable no-new */
       new QRious(
         Object.assign(
           {

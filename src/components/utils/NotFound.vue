@@ -21,37 +21,23 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import { IBlock } from "@/interfaces";
 
-export default {
-  name: 'NotFound',
-
-  props: {
-    isLoading: {
-      type: Boolean,
-      required: true
-    },
-
-    dataType: {
-      type: String,
-      required: true
-    },
-
-    dataId: {
-      type: String,
-      required: true
-    }
-  },
-
+@Component({
   computed: {
-    ...mapGetters('ui', ['nightMode'])
+    ...mapGetters("ui", ["nightMode"]),
   },
+})
+export default class NotFound extends Vue {
+  @Prop({ required: true }) public isLoading: boolean;
+  @Prop({ required: true }) public dataType: string;
+  @Prop({ required: true }) public dataId: string;
 
-  methods: {
-    emitReload () {
-      this.$emit('reload')
-    }
+  private emitReload() {
+    this.$emit("reload");
   }
 }
 </script>

@@ -1,9 +1,7 @@
 export interface IBlock {
   id: string;
   height: number;
-  timestamp: {
-    unix: number;
-  };
+  timestamp: ITimestamp;
   transactions: [ITransaction];
   price?: number | null;
 }
@@ -15,21 +13,36 @@ export interface IDelegate {
   blocks: {
     produced: number;
     last: IBlock;
-  }
+  };
+  votes: string;
+  rank: number;
+  production: {
+    approval: number;
+  };
+  forged: {
+    fees: string;
+    rewards: string;
+    total: string;
+  };
 }
 
 export interface ITransaction {
-  amount: number;
+  amount: string;
   price?: number | null;
-  timestamp: {
-    unix: number;
-  };
+  timestamp: ITimestamp;
   vendorField: string;
+  fee: string;
 }
 
 export interface ISortParameters {
   field: string;
   type: string;
+}
+
+export interface ITimestamp {
+  unix: number;
+  epoch: number;
+  human: string;
 }
 
 export interface IWallet {
