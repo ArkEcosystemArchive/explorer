@@ -37,36 +37,32 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { IWallet } from "@/interfaces";
+import { mapGetters } from "vuex";
 
-export default {
-  name: 'TableWalletsMobile',
-
-  props: {
-    wallets: {
-      validator: value => {
-        return Array.isArray(value) || value === null
-      },
-      required: true
-    },
-
-    total: {
-      type: Number,
-      required: true
-    }
-  },
-
+@Component({
   computed: {
-    ...mapGetters('network', ['supply'])
+    ...mapGetters("network", ["supply"]),
   },
+})
+export default class TableWalletsMobile extends Vue {
+  @Prop({
+    required: true,
+    validator: value => {
+      return Array.isArray(value) || value === null;
+    },
+  })
+  public wallets: IWallet[] | null;
+  @Prop({ required: true }) public total: number;
 
-  methods: {
-    getRank (index) {
-      const page = this.$route.params.page > 1 ? this.$route.params.page - 1 : 0
+  private supply: string;
 
-      return page * 25 + (index + 1)
-    }
+  private getRank(index: number) {
+    const page = Number(this.$route.params.page) > 1 ? Number(this.$route.params.page) - 1 : 0;
+
+    return page * 25 + (index + 1);
   }
 }
 </script>

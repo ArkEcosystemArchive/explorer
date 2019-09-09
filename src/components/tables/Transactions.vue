@@ -65,140 +65,139 @@
   </Loader>
 </template>
 
-<script type="text/ecmascript-6">
-import CryptoCompareService from '@/services/crypto-compare'
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import { IDelegate, ISortParameters, ITransaction } from "@/interfaces";
+// @ts-ignore
+import CryptoCompareService from "@/services/crypto-compare";
 
-export default {
-  name: 'TableTransactionsDesktop',
-
-  props: {
-    transactions: {
-      validator: value => {
-        return Array.isArray(value) || value === null
-      },
-      required: true
-    },
-    showConfirmations: {
-      type: Boolean,
-      required: false,
-      default: false
-    }
-  },
-
+@Component({
   computed: {
-    ...mapGetters('network', ['activeDelegates']),
-    ...mapGetters('currency', { currencySymbol: 'symbol' }),
-
-    columns () {
-      const feeClasses = ['hidden', 'lg:table-cell']
-
-      feeClasses.push(this.showConfirmations ? 'pr-10 xl:pr-4' : 'end-cell')
-
-      let columns = [
-        {
-          label: this.$t('COMMON.ID'),
-          field: 'id',
-          thClass: 'start-cell',
-          tdClass: 'start-cell'
-        },
-        {
-          label: this.$t('COMMON.TIMESTAMP'),
-          field: 'timestamp.unix',
-          type: 'number',
-          thClass: 'text-left hidden md:table-cell',
-          tdClass: 'text-left hidden md:table-cell wrap-timestamp'
-        },
-        {
-          label: this.$t('TRANSACTION.SENDER'),
-          field: 'sender',
-          tdClass: 'break-all'
-        },
-        {
-          label: this.$t('TRANSACTION.RECIPIENT'),
-          field: 'recipient',
-          tdClass: 'break-all'
-        },
-        {
-          label: this.$t('TRANSACTION.SMARTBRIDGE'),
-          field: 'vendorField',
-          thClass: 'text-right cell-smartbridge',
-          tdClass: 'text-right cell-smartbridge'
-        },
-        {
-          label: this.$t('TRANSACTION.AMOUNT'),
-          field: 'amount',
-          type: 'number',
-          thClass: 'end-cell lg:base-cell',
-          tdClass: 'end-cell lg:base-cell'
-        },
-        {
-          label: this.$t('TRANSACTION.FEE'),
-          field: 'fee',
-          type: 'number',
-          thClass: feeClasses.join(' '),
-          tdClass: feeClasses.join(' ')
-        }
-      ]
-
-      if (this.showConfirmations) {
-        columns = columns.filter(column => column.field !== 'vendorField')
-
-        columns.push({
-          label: this.$t('COMMON.CONFIRMATIONS'),
-          field: 'confirmations',
-          type: 'number',
-          sortable: false,
-          thClass: 'end-cell hidden xl:table-cell not-sortable',
-          tdClass: 'end-cell hidden xl:table-cell'
-        })
-      }
-
-      return columns
-    },
-
-    showSmartBridgeIcon () {
-      return this.transactions.some(transaction => {
-        return !!transaction.vendorField
-      })
-    }
+    ...mapGetters("network", ["activeDelegates"]),
+    ...mapGetters("currency", { currencySymbol: "symbol" }),
   },
-
-  watch: {
-    async transactions () {
-      await this.prepareTransactions()
+})
+export default class TableTransactionsDesktop extends Vue {
+  @Prop({
+    required: true,
+    validator: value => {
+      return Array.isArray(value) || value === null;
     },
+  })
+  public transactions: ITransaction[] | null;
+  @Prop({ required: false, default: false }) public showConfirmations: boolean;
 
-    async currencySymbol () {
-      await this.updatePrices()
+  private activeDelegates: IDelegate[];
+  private currencySymbol: string;
+
+  get columns() {
+    const feeClasses = ["hidden", "lg:table-cell"];
+
+    feeClasses.push(this.showConfirmations ? "pr-10 xl:pr-4" : "end-cell");
+
+    let columns = [
+      {
+        label: this.$t("COMMON.ID"),
+        field: "id",
+        thClass: "start-cell",
+        tdClass: "start-cell",
+      },
+      {
+        label: this.$t("COMMON.TIMESTAMP"),
+        field: "timestamp.unix",
+        type: "number",
+        thClass: "text-left hidden md:table-cell",
+        tdClass: "text-left hidden md:table-cell wrap-timestamp",
+      },
+      {
+        label: this.$t("TRANSACTION.SENDER"),
+        field: "sender",
+        tdClass: "break-all",
+      },
+      {
+        label: this.$t("TRANSACTION.RECIPIENT"),
+        field: "recipient",
+        tdClass: "break-all",
+      },
+      {
+        label: this.$t("TRANSACTION.SMARTBRIDGE"),
+        field: "vendorField",
+        thClass: "text-right cell-smartbridge",
+        tdClass: "text-right cell-smartbridge",
+      },
+      {
+        label: this.$t("TRANSACTION.AMOUNT"),
+        field: "amount",
+        type: "number",
+        thClass: "end-cell lg:base-cell",
+        tdClass: "end-cell lg:base-cell",
+      },
+      {
+        label: this.$t("TRANSACTION.FEE"),
+        field: "fee",
+        type: "number",
+        thClass: feeClasses.join(" "),
+        tdClass: feeClasses.join(" "),
+      },
+    ];
+
+    if (this.showConfirmations) {
+      columns = columns.filter(column => column.field !== "vendorField");
+
+      columns.push({
+        label: this.$t("COMMON.CONFIRMATIONS"),
+        field: "confirmations",
+        type: "number",
+        // @ts-ignore
+        sortable: false,
+        thClass: "end-cell hidden xl:table-cell not-sortable",
+        tdClass: "end-cell hidden xl:table-cell",
+      });
     }
-  },
 
-  async created () {
-    this.prepareTransactions()
-  },
+    return columns;
+  }
 
-  methods: {
-    async prepareTransactions () {
-      await this.updatePrices()
-    },
+  get showSmartBridgeIcon() {
+    return this.transactions!.some(transaction => {
+      return !!transaction.vendorField;
+    });
+  }
 
-    async fetchPrice (transaction) {
-      transaction.price = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
-    },
+  @Watch("transactions")
+  public async onTransactionsChanged() {
+    await this.prepareTransactions();
+  }
 
-    async updatePrices () {
-      if (!this.transactions) {
-        return
-      }
+  @Watch("currencySymbol")
+  public async onCurrencySymbolChanged() {
+    await this.updatePrices();
+  }
 
-      const promises = this.transactions.map(this.fetchPrice)
-      await Promise.all(promises)
-    },
+  public async created() {
+    this.prepareTransactions();
+  }
 
-    emitSortChange (params) {
-      this.$emit('on-sort-change', params[0])
+  private async prepareTransactions() {
+    await this.updatePrices();
+  }
+
+  private async fetchPrice(transaction: ITransaction) {
+    transaction.price = await CryptoCompareService.dailyAverage(transaction.timestamp.unix);
+  }
+
+  private async updatePrices() {
+    if (!this.transactions) {
+      return;
     }
+
+    const promises = this.transactions.map(this.fetchPrice);
+    await Promise.all(promises);
+  }
+
+  private emitSortChange(params: ISortParameters[]) {
+    this.$emit("on-sort-change", params[0]);
   }
 }
 </script>

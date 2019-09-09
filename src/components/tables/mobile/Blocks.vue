@@ -66,18 +66,19 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-export default {
-  name: 'TableBlocksMobile',
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { IBlock } from "@/interfaces";
 
-  props: {
-    blocks: {
-      validator: value => {
-        return Array.isArray(value) || value === null
-      },
-      required: true
-    }
-  }
+@Component
+export default class TableBlocksMobile extends Vue {
+  @Prop({
+    required: true,
+    validator: value => {
+      return Array.isArray(value) || value === null;
+    },
+  })
+  public blocks: IBlock[] | null;
 }
 </script>
 

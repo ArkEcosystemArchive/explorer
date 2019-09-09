@@ -84,29 +84,27 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { ITransaction, IDelegate } from "@/interfaces";
+import { mapGetters } from "vuex";
 
-export default {
-  name: 'TableTransactionsMobile',
-
-  props: {
-    transactions: {
-      validator: value => {
-        return Array.isArray(value) || value === null
-      },
-      required: true
-    },
-    showConfirmations: {
-      type: Boolean,
-      required: false,
-      default: false
-    }
-  },
-
+@Component({
   computed: {
-    ...mapGetters('network', ['activeDelegates'])
-  }
+    ...mapGetters("network", ["activeDelegates"]),
+  },
+})
+export default class TableTransactionsMobile extends Vue {
+  @Prop({
+    required: true,
+    validator: value => {
+      return Array.isArray(value) || value === null;
+    },
+  })
+  public transactions: ITransaction[] | null;
+  @Prop({ required: false, default: false }) public showConfirmations: boolean;
+
+  private activeDelegates: IDelegate[];
 }
 </script>
 
