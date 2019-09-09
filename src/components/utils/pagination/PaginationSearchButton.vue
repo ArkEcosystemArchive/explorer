@@ -23,33 +23,20 @@
   </button>
 </template>
 
-<script type="text/ecmascript-6">
-export default {
-  name: 'PaginationSearchButton',
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-  props: {
-    isVisible: {
-      type: Boolean,
-      required: false,
-      default: true
-    },
+@Component
+export default class PaginationSearchButton extends Vue {
+  @Prop({ required: false, default: true }) public isVisible: boolean;
+  @Prop({ required: false, default: true }) public hoverScale: boolean;
 
-    hoverScale: {
-      type: Boolean,
-      default: true
-    }
-  },
+  get hasDefaultSlot() {
+    return !!this.$slots.default;
+  }
 
-  computed: {
-    hasDefaultSlot () {
-      return !!this.$slots.default
-    }
-  },
-
-  methods: {
-    emitClick () {
-      this.$emit('click')
-    }
+  private emitClick() {
+    this.$emit("click");
   }
 }
 </script>

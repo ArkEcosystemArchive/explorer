@@ -26,6 +26,17 @@ export interface IDelegate {
   };
 }
 
+export interface IMeta {
+  count: number;
+  pageCount: number;
+  totalCount: number;
+  next: string;
+  previous: string;
+  self: string;
+  first: string;
+  last: string;
+}
+
 export interface ITransaction {
   amount: string;
   price?: number | null;

@@ -69,158 +69,145 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import {
-  PaginationNavigationButton,
-  PaginationPageInput,
-  PaginationSearchButton
-} from '@/components/utils/pagination'
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { IMeta } from "@/interfaces";
+import { PaginationNavigationButton, PaginationPageInput, PaginationSearchButton } from "@/components/utils/pagination";
 
-export default {
-  name: 'Pagination',
-
+@Component({
   components: {
     PaginationNavigationButton,
     PaginationPageInput,
-    PaginationSearchButton
+    PaginationSearchButton,
   },
+})
+export default class Pagination extends Vue {
+  @Prop({ required: true }) public meta: IMeta;
+  @Prop({ required: true }) public currentPage: number;
 
-  props: {
-    meta: {
-      type: Object,
-      required: true
-    },
+  private pageInputVisible: boolean = false;
+  private mobileView: boolean = false;
 
-    currentPage: {
-      type: Number,
-      required: true
+  get showPageInput() {
+    return this.pageInputVisible;
+  }
+
+  get buttonCount() {
+    return this.currentPage < 100 ? 7 : 5;
+  }
+
+  get pageCount() {
+    return this.meta.pageCount;
+  }
+
+  get next() {
+    return this.meta.next;
+  }
+
+  get previous() {
+    return this.meta.previous;
+  }
+
+  get self() {
+    return this.meta.self;
+  }
+
+  get first() {
+    return this.meta.first;
+  }
+
+  get last() {
+    return this.meta.last;
+  }
+
+  get showFirst() {
+    return (
+      (this.first !== this.previous && !this.pageButtons.includes(1)) || (this.first !== this.self && this.isMobile)
+    );
+  }
+
+  get showPrevious() {
+    return this.currentPage > 1;
+  }
+
+  get showNext() {
+    return this.currentPage < this.pageCount;
+  }
+
+  get showLast() {
+    return (
+      (this.last !== this.next && !this.pageButtons.includes(this.pageCount)) ||
+      (this.last !== this.self && this.isMobile)
+    );
+  }
+
+  get subRangeLength() {
+    return Math.floor(this.buttonCount / 2);
+  }
+
+  get pageButtons() {
+    let buttons;
+
+    if (this.pageCount <= this.buttonCount) {
+      buttons = Array.apply(null, Array(this.pageCount)).map((_, i) => i + 1);
+    } else if (this.currentPage <= this.subRangeLength + 1) {
+      buttons = Array.apply(null, Array(this.buttonCount)).map((_, i) => i + 1);
+    } else if (this.currentPage >= this.pageCount - this.subRangeLength) {
+      buttons = Array.apply(null, Array(this.buttonCount)).map((_, i) => {
+        return this.pageCount - this.buttonCount + i + 1;
+      });
+    } else {
+      buttons = Array.apply(null, Array(this.buttonCount)).map((_, i) => {
+        return this.currentPage - this.subRangeLength + i;
+      });
     }
-  },
 
-  data: () => ({
-    pageInputVisible: false,
-    mobileView: false
-  }),
+    return buttons;
+  }
 
-  computed: {
-    showPageInput () {
-      return this.pageInputVisible
-    },
+  get isMobile() {
+    return this.mobileView;
+  }
 
-    buttonCount () {
-      return this.currentPage < 100 ? 7 : 5
-    },
+  public mounted() {
+    const WIDTH_THRESHOLD = 768;
+    const widthQuery = window.matchMedia(`(max-width: ${WIDTH_THRESHOLD}px)`);
 
-    pageCount () {
-      return this.meta.pageCount
-    },
+    widthQuery.addListener(e => this.setMobileView(e.matches));
 
-    next () {
-      return this.meta.next
-    },
+    this.setMobileView(window.innerWidth < WIDTH_THRESHOLD);
+  }
 
-    previous () {
-      return this.meta.previous
-    },
+  private emitFirst() {
+    this.emitPageChange(1);
+  }
 
-    self () {
-      return this.meta.self
-    },
+  private emitPrevious() {
+    this.emitPageChange(this.currentPage - 1);
+  }
 
-    first () {
-      return this.meta.first
-    },
+  private emitNext() {
+    this.emitPageChange(this.currentPage + 1);
+  }
 
-    last () {
-      return this.meta.last
-    },
+  private emitLast() {
+    this.emitPageChange(this.pageCount);
+  }
 
-    showFirst () {
-      return (this.first !== this.previous && !this.pageButtons.includes(1)) || (this.first !== this.self && this.isMobile)
-    },
+  private emitPageChange(page: number) {
+    this.$emit("page-change", page);
+  }
 
-    showPrevious () {
-      return this.currentPage > 1
-    },
+  private openPageInput() {
+    this.pageInputVisible = true;
+  }
 
-    showNext () {
-      return this.currentPage < this.pageCount
-    },
+  private closePageInput() {
+    this.pageInputVisible = false;
+  }
 
-    showLast () {
-      return (this.last !== this.next && !this.pageButtons.includes(this.pageCount)) || (this.last !== this.self && this.isMobile)
-    },
-
-    subRangeLength () {
-      return Math.floor(this.buttonCount / 2)
-    },
-
-    pageButtons () {
-      let buttons
-
-      if (this.pageCount <= this.buttonCount) {
-        buttons = Array.apply(null, Array(this.pageCount)).map((_, i) => i + 1)
-      } else if (this.currentPage <= this.subRangeLength + 1) {
-        buttons = Array.apply(null, Array(this.buttonCount)).map((_, i) => i + 1)
-      } else if (this.currentPage >= this.pageCount - this.subRangeLength) {
-        buttons = Array.apply(null, Array(this.buttonCount)).map((_, i) => {
-          return this.pageCount - this.buttonCount + i + 1
-        })
-      } else {
-        buttons = Array.apply(null, Array(this.buttonCount)).map((_, i) => {
-          return this.currentPage - this.subRangeLength + i
-        })
-      }
-
-      return buttons
-    },
-
-    isMobile () {
-      return this.mobileView
-    }
-  },
-
-  mounted () {
-    const WIDTH_THRESHOLD = 768
-    const widthQuery = window.matchMedia(`(max-width: ${WIDTH_THRESHOLD}px)`)
-
-    widthQuery.addListener(e => this.setMobileView(e.matches))
-
-    this.setMobileView(window.innerWidth < WIDTH_THRESHOLD)
-  },
-
-  methods: {
-    emitFirst () {
-      this.emitPageChange(1)
-    },
-
-    emitPrevious () {
-      this.emitPageChange(this.currentPage - 1)
-    },
-
-    emitNext () {
-      this.emitPageChange(this.currentPage + 1)
-    },
-
-    emitLast () {
-      this.emitPageChange(this.pageCount)
-    },
-
-    emitPageChange (page) {
-      this.$emit('page-change', page)
-    },
-
-    openPageInput () {
-      this.pageInputVisible = true
-    },
-
-    closePageInput () {
-      this.pageInputVisible = false
-    },
-
-    setMobileView (isMobile) {
-      this.mobileView = !!isMobile
-    }
+  private setMobileView(isMobile: boolean) {
+    this.mobileView = !!isMobile;
   }
 }
 </script>

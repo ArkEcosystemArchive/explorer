@@ -40,83 +40,66 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import { LocaleMessage } from "vue-i18n";
 
-export default {
-  name: 'PaginationPageInput',
-
-  props: {
-    isVisible: {
-      type: Boolean,
-      required: true
-    },
-
-    pageCount: {
-      type: Number,
-      required: true
-    },
-
-    isMobile: {
-      type: Boolean,
-      required: true,
-      default: false
-    }
-  },
-
-  data: () => ({
-    query: null,
-    placeholder: null,
-    hasError: false
-  }),
-
+@Component({
   computed: {
-    ...mapGetters('ui', ['nightMode']),
-
-    hasInput () {
-      return !!this.query
-    }
+    ...mapGetters("ui", ["nightMode"]),
   },
+})
+export default class PaginationPageInput extends Vue {
+  @Prop({ required: true }) public isVisible: boolean;
+  @Prop({ required: true }) public pageCount: number;
+  @Prop({ required: true }) public isMobile: boolean;
 
-  watch: {
-    isMobile (showMobile) {
-      this.setPlaceholder(showMobile)
+  private query: string | null = null;
+  private placeholder: LocaleMessage | null = null;
+  private hasError: boolean = false;
+  private nightMode: boolean;
+
+  get hasInput() {
+    return !!this.query;
+  }
+
+  @Watch("isMobile")
+  public onIsMobileChanged(showMobile: boolean) {
+    this.setPlaceholder(showMobile);
+  }
+
+  public mounted() {
+    this.setPlaceholder(this.isMobile);
+  }
+
+  private search() {
+    if (!this.query) {
+      return;
     }
-  },
 
-  mounted () {
-    this.setPlaceholder()
-  },
+    const pageNumber = parseInt(this.query, 10);
 
-  methods: {
-    search () {
-      if (!this.query) {
-        return
-      }
-
-      const pageNumber = parseInt(this.query, 10)
-
-      if (!pageNumber || pageNumber < 1 || pageNumber > this.pageCount) {
-        this.hasError = true
-        setTimeout(() => (this.hasError = false), 1500)
-      } else {
-        this.emitPageChange(pageNumber)
-      }
-    },
-
-    setPlaceholder (showMobile) {
-      this.placeholder = showMobile
-        ? this.$i18n.t('PAGINATION.PLACEHOLDER.SHORT')
-        : this.$i18n.t('PAGINATION.PLACEHOLDER.LONG')
-    },
-
-    emitPageChange (page) {
-      this.$emit('page-change', page)
-    },
-
-    emitClose () {
-      this.$emit('close')
+    if (!pageNumber || pageNumber < 1 || pageNumber > this.pageCount) {
+      this.hasError = true;
+      setTimeout(() => (this.hasError = false), 1500);
+    } else {
+      this.emitPageChange(pageNumber);
     }
+  }
+
+  private setPlaceholder(showMobile: boolean) {
+    this.placeholder = showMobile
+      ? this.$i18n.t("PAGINATION.PLACEHOLDER.SHORT")
+      : this.$i18n.t("PAGINATION.PLACEHOLDER.LONG");
+  }
+
+  private emitPageChange(page: number) {
+    this.$emit("page-change", page);
+  }
+
+  private emitClose() {
+    this.$emit("close");
   }
 }
 </script>
