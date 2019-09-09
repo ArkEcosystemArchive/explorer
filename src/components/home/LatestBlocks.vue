@@ -20,40 +20,40 @@
 import { Component, Vue } from "vue-property-decorator";
 import { IBlock, ISortParameters } from "@/interfaces";
 // @ts-ignore
-import BlockService from "@/services/block"
+import BlockService from "@/services/block";
 
 @Component
 export default class LatestBlocks extends Vue {
   private blocks: IBlock[] | null = null;
 
   get sortParams() {
-    return this.$store.getters["ui/blockSortParams"]
+    return this.$store.getters["ui/blockSortParams"];
   }
 
   set sortParams(params: ISortParameters) {
     this.$store.dispatch("ui/setBlockSortParams", {
       field: params.field,
-      type: params.type
-    })
+      type: params.type,
+    });
   }
 
   public async mounted() {
-    await this.prepareComponent()
+    await this.prepareComponent();
   }
 
-  private async prepareComponent () {
-    await this.getBlocks()
+  private async prepareComponent() {
+    await this.getBlocks();
 
-    this.$store.watch(state => state.network.height, value => this.getBlocks())
+    this.$store.watch(state => state.network.height, value => this.getBlocks());
   }
 
-  private async getBlocks (): Promise<void> {
-    const data = await BlockService.latest()
-    this.blocks = data!.map((block: IBlock) => ({ ...block, price: null }))
+  private async getBlocks(): Promise<void> {
+    const data = await BlockService.latest();
+    this.blocks = data!.map((block: IBlock) => ({ ...block, price: null }));
   }
 
-  private onSortChange (params: ISortParameters) {
-    this.sortParams = params
+  private onSortChange(params: ISortParameters) {
+    this.sortParams = params;
   }
 }
 </script>

@@ -10,18 +10,18 @@
   </section>
 </template>
 
-<script type="text/ecmascript-6">
-import { DelegateCount, LastBlock, TotalForged } from '@/components/monitor/header'
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import { DelegateCount, LastBlock, TotalForged } from "@/components/monitor/header";
 
-export default {
-  name: 'MonitorHeader',
-
+@Component({
   components: {
     DelegateCount,
     LastBlock,
-    TotalForged
-  }
-}
+    TotalForged,
+  },
+})
+export default class MonitorHeader extends Vue {}
 </script>
 
 <style>

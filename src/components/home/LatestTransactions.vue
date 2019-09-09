@@ -24,7 +24,7 @@
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { ISortParameters, ITransaction } from "@/interfaces";
 // @ts-ignore
-import TransactionService from "@/services/transaction"
+import TransactionService from "@/services/transaction";
 
 @Component
 export default class LatestTransactions extends Vue {
@@ -33,40 +33,40 @@ export default class LatestTransactions extends Vue {
   private transactions: ITransaction[] | null = null;
 
   get sortParams() {
-    return this.$store.getters["ui/transactionSortParams"]
+    return this.$store.getters["ui/transactionSortParams"];
   }
 
   set sortParams(params: ISortParameters) {
     this.$store.dispatch("ui/setTransactionSortParams", {
       field: params.field,
-      type: params.type
-    })
+      type: params.type,
+    });
   }
 
   @Watch("transactionType")
   public async onTransactionTypeChanged(): Promise<void> {
-    this.transactions = null
-    await this.getTransactions()
+    this.transactions = null;
+    await this.getTransactions();
   }
 
   public async mounted(): Promise<void> {
-    await this.prepareComponent()
+    await this.prepareComponent();
   }
 
-  private async prepareComponent () {
-    await this.getTransactions()
+  private async prepareComponent() {
+    await this.getTransactions();
 
-    this.$store.watch(state => state.network.height, value => this.getTransactions())
+    this.$store.watch(state => state.network.height, value => this.getTransactions());
   }
 
-  private async getTransactions () {
-    const { data } = await TransactionService.filterByType(1, this.transactionType)
+  private async getTransactions() {
+    const { data } = await TransactionService.filterByType(1, this.transactionType);
 
-    this.transactions = data.map((transaction: ITransaction) => ({ ...transaction, price: null }))
+    this.transactions = data.map((transaction: ITransaction) => ({ ...transaction, price: null }));
   }
 
-  private onSortChange (params: ISortParameters) {
-    this.sortParams = params
+  private onSortChange(params: ISortParameters) {
+    this.sortParams = params;
   }
 }
 </script>

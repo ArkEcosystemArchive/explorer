@@ -69,51 +69,41 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import ForgingService from '@/services/forging'
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { IDelegate } from "@/interfaces";
+// @ts-ignore
+import ForgingService from "@/services/forging";
 
-export default {
-  name: 'ForgingStats',
+@Component
+export default class ForgingStats extends Vue {
+  @Prop({ required: true }) public delegates: IDelegate[];
 
-  props: {
-    delegates: {
-      type: Array,
-      required: true
+  private totals: object = {};
+
+  get activeDelegates() {
+    return this.$store.getters["network/activeDelegates"];
+  }
+
+  @Watch("delegates")
+  public onDelegatesChanged() {
+    this.getTotals();
+  }
+
+  public created() {
+    this.getTotals();
+  }
+
+  private getTotals(): void {
+    if (!this.delegates) {
+      return;
     }
-  },
 
-  data: () => ({
-    totals: {}
-  }),
+    this.totals = ForgingService.totals(this.delegates);
+  }
 
-  computed: {
-    activeDelegates () {
-      return this.$store.getters['network/activeDelegates']
-    }
-  },
-
-  watch: {
-    delegates () {
-      this.getTotals()
-    }
-  },
-
-  created () {
-    this.getTotals()
-  },
-
-  methods: {
-    getTotals () {
-      if (!this.delegates) {
-        return
-      }
-
-      this.totals = ForgingService.totals(this.delegates)
-    },
-
-    percentage (value) {
-      return value / this.activeDelegates * 100
-    }
+  private percentage(value: number): number {
+    return (value / this.activeDelegates) * 100;
   }
 }
 </script>

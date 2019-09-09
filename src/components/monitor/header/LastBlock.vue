@@ -4,7 +4,7 @@
       <div class="text-grey mb-2 min-w-0">
         {{ $t("PAGES.DELEGATE_MONITOR.HEADER.LAST_BLOCK") }}
       </div>
-      <div v-if="block.id" class="text-lg truncate">
+      <div v-if="block && block.id" class="text-lg truncate">
         <LinkBlock :id="block.id" :length="20" />
       </div>
     </div>
@@ -14,7 +14,7 @@
         {{ $t("PAGES.DELEGATE_MONITOR.HEADER.FORGED") }}
       </div>
       <div class="text-lg text-white truncate">
-        <span v-if="block.forged">
+        <span v-if="block && block.forged">
           {{ readableCrypto(block.forged.total) }}
           {{ $tc("PAGES.DELEGATE_MONITOR.HEADER.TX_COUNT", block.transactions, { count: block.transactions }) }}
         </span>
@@ -26,7 +26,7 @@
         {{ $t("COMMON.DELEGATE") }}
       </div>
       <div class="text-lg text-white truncate semibold">
-        <LinkWallet v-if="block.generator" :address="block.generator.address">
+        <LinkWallet v-if="block && block.generator" :address="block.generator.address">
           {{ block.generator.username }}
         </LinkWallet>
       </div>
@@ -34,31 +34,28 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import BlockService from '@/services/block'
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import { IBlock } from "@/interfaces";
+import BlockService from "@/services/block";
 
-export default {
-  name: 'LastBlock',
+@Component
+export default class LastBlock extends Vue {
+  private block: IBlock | null = null;
 
-  data: () => ({
-    block: {}
-  }),
+  public async mounted() {
+    await this.prepareComponent();
+  }
 
-  async mounted () {
-    await this.prepareComponent()
-  },
+  private async prepareComponent() {
+    await this.getBlock();
 
-  methods: {
-    async prepareComponent () {
-      await this.getBlock()
+    this.$store.watch(state => state.network.height, value => this.getBlock());
+  }
 
-      this.$store.watch(state => state.network.height, value => this.getBlock())
-    },
-
-    async getBlock () {
-      const response = await BlockService.last()
-      this.block = response
-    }
+  private async getBlock() {
+    const response = await BlockService.last();
+    this.block = response;
   }
 }
 </script>

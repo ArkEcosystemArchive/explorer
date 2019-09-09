@@ -15,39 +15,27 @@
   </svg>
 </template>
 
-<script type="text/ecmascript-6">
-export default {
-  name: 'ArkMeter',
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-  props: {
-    percentage: {
-      type: Number,
-      default: 0
-    },
-    radius: {
-      type: Number,
-      default: 25
-    },
-    stroke: {
-      type: Number,
-      default: 8
-    }
-  },
+@Component
+export default class ArkMeter extends Vue {
+  @Prop({ required: false, default: 0 }) public percentage: number;
+  @Prop({ required: false, default: 25 }) public radius: number;
+  @Prop({ required: false, default: 8 }) public stroke: number;
 
-  computed: {
-    circumference () {
-      return 2 * Math.PI * this.radius
-    },
+  get circumference(): number {
+    return 2 * Math.PI * this.radius;
+  }
 
-    width () {
-      return this.radius * 2 + this.stroke * 2
-    },
+  get width(): number {
+    return this.radius * 2 + this.stroke * 2;
+  }
 
-    dashoffset () {
-      const progress = this.percentage / 100
+  get dashoffset(): number {
+    const progress = this.percentage / 100;
 
-      return this.circumference * (1 - progress)
-    }
+    return this.circumference * (1 - progress);
   }
 }
 </script>

@@ -14,34 +14,32 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import { IDelegate } from "@/interfaces";
 
-export default {
-  name: 'DelegateCount',
-
-  data: () => ({
-    count: 0
-  }),
-
+@Component({
   computed: {
-    ...mapGetters('delegates', ['delegates'])
+    ...mapGetters("delegates", ["delegates"]),
   },
+})
+export default class DelegateCount extends Vue {
+  private count: number = 0;
+  private delegates: IDelegate[];
 
-  mounted () {
-    this.prepareComponent()
-  },
+  public mounted() {
+    this.prepareComponent();
+  }
 
-  methods: {
-    prepareComponent () {
-      this.getDelegateCount()
+  private prepareComponent() {
+    this.getDelegateCount();
 
-      this.$store.watch(state => state.delegates.delegates, value => this.getDelegateCount())
-    },
+    this.$store.watch(state => state.delegates.delegates, value => this.getDelegateCount());
+  }
 
-    getDelegateCount () {
-      this.count = this.delegates.length
-    }
+  private getDelegateCount() {
+    this.count = this.delegates.length;
   }
 }
 </script>
