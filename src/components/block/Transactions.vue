@@ -56,6 +56,11 @@ export default class BlockTransactions extends Vue {
     this.getTransactions();
   }
 
+  public mounted() {
+    this.resetTransactions();
+    this.getTransactions();
+  }
+
   private resetTransactions(): void {
     this.transactions = null;
   }

@@ -20,106 +20,114 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import DelegateService from '@/services/delegate'
+<script lang="ts">
+import { Component, Vue, Watch } from "vue-property-decorator";
+import { Route } from "vue-router";
+import { IBlock, IDelegate, ISortParameters, IWallet } from "@/interfaces";
+// @ts-ignore
+import DelegateService from "@/services/delegate";
 
-export default {
-  data: () => ({
-    delegate: null,
-    wallets: null,
-    meta: null,
-    currentPage: 0
-  }),
+Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 
-  computed: {
-    showPagination () {
-      return this.meta && this.meta.pageCount > 1
-    },
+@Component
+export default class WalletVoters extends Vue {
+  private delegate: IDelegate | null = null;
+  private wallets: IWallet[] | null = null;
+  private meta: any | null = null;
+  private currentPage: number = 0;
 
-    address () {
-      return this.$route.params.address
-    },
+  get showPagination() {
+    return this.meta && this.meta.pageCount > 1;
+  }
 
-    sortParams: {
-      get () {
-        return this.$store.getters['ui/walletSortParams']
-      },
+  get address() {
+    return this.$route.params.address;
+  }
 
-      set (params) {
-        this.$store.dispatch('ui/setWalletSortParams', {
-          field: params.field,
-          type: params.type
-        })
-      }
-    }
-  },
+  get sortParams() {
+    return this.$store.getters["ui/walletSortParams"];
+  }
 
-  watch: {
-    currentPage () {
-      this.changePage()
-    }
-  },
+  set sortParams(params: ISortParameters) {
+    this.$store.dispatch("ui/setWalletSortParams", {
+      field: params.field,
+      type: params.type,
+    });
+  }
 
-  async beforeRouteEnter (to, from, next) {
+  @Watch("currentPage")
+  public onCurrentPageChanged() {
+    this.changePage();
+  }
+
+  public async beforeRouteEnter(to: Route, from: Route, next: () => void) {
     try {
-      const delegate = await DelegateService.find(to.params.address)
-      const { meta, data } = await DelegateService.voters(to.params.address, to.params.page)
+      const delegate = await DelegateService.find(to.params.address);
+      const { meta, data } = await DelegateService.voters(to.params.address, to.params.page);
 
+      // @ts-ignore
       next(vm => {
-        vm.currentPage = Number(to.params.page)
-        vm.setDelegate(delegate)
-        vm.setWallets(data)
-        vm.setMeta(meta)
-      })
-    } catch (e) { next({ name: '404' }) }
-  },
+        vm.currentPage = Number(to.params.page);
+        vm.setDelegate(delegate);
+        vm.setWallets(data);
+        vm.setMeta(meta);
+      });
+    } catch (e) {
+      // @ts-ignore
+      next({ name: "404" });
+    }
+  }
 
-  async beforeRouteUpdate (to, from, next) {
-    this.wallets = null
-    this.meta = null
+  public async beforeRouteUpdate(to: Route, from: Route, next: () => void) {
+    this.wallets = null;
+    this.meta = null;
 
     try {
-      const delegate = await DelegateService.find(to.params.address)
-      const { meta, data } = await DelegateService.voters(to.params.address, to.params.page)
+      const delegate = await DelegateService.find(to.params.address);
+      const { meta, data } = await DelegateService.voters(to.params.address, to.params.page);
 
-      this.currentPage = Number(to.params.page)
-      this.setDelegate(delegate)
-      this.setWallets(data)
-      this.setMeta(meta)
-      next()
-    } catch (e) { next({ name: '404' }) }
-  },
-
-  methods: {
-    setDelegate (delegate) {
-      this.delegate = delegate
-    },
-
-    setWallets (wallets) {
-      this.wallets = wallets
-    },
-
-    setMeta (meta) {
-      this.meta = meta
-    },
-
-    onPageChange (page) {
-      this.currentPage = page
-    },
-
-    changePage (page) {
-      this.$router.push({
-        name: 'wallet-voters',
-        params: {
-          address: this.address,
-          page: this.currentPage
-        }
-      })
-    },
-
-    onSortChange (params) {
-      this.sortParams = params
+      this.currentPage = Number(to.params.page);
+      // @ts-ignore
+      this.setDelegate(delegate);
+      // @ts-ignore
+      this.setWallets(data);
+      this.setMeta(meta);
+      next();
+    } catch (e) {
+      // @ts-ignore
+      next({ name: "404" });
     }
+  }
+
+  private setDelegate(delegate: IDelegate) {
+    this.delegate = delegate;
+  }
+
+  private setWallets(wallets: IWallet[]) {
+    this.wallets = wallets;
+  }
+
+  private setMeta(meta: any) {
+    this.meta = meta;
+  }
+
+  private onPageChange(page: number) {
+    this.currentPage = page;
+  }
+
+  private changePage() {
+    // @ts-ignore
+    this.$router.push({
+      name: "wallet-voters",
+      params: {
+        address: this.address,
+        page: this.currentPage,
+      },
+    });
+  }
+
+  private onSortChange(params: ISortParameters) {
+    this.sortParams = params;
   }
 }
 </script>

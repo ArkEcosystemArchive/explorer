@@ -32,116 +32,122 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import { BlockService, WalletService } from '@/services'
+<script lang="ts">
+import { Component, Vue, Watch } from "vue-property-decorator";
+import { Route } from "vue-router";
+import { IBlock, ISortParameters, ITransaction } from "@/interfaces";
+// @ts-ignore
+import { BlockService, WalletService } from "@/services";
 
-export default {
-  data: () => ({
-    username: null,
-    blocks: null,
-    meta: null,
-    currentPage: 0
-  }),
+Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 
-  computed: {
-    showPagination () {
-      return this.meta && this.meta.pageCount > 1
-    },
+@Component
+export default class WalletBlocks extends Vue {
+  private username: string | null = null;
+  private blocks: IBlock[] | null = null;
+  private meta: any | null = null;
+  private currentPage: number = 0;
 
-    address () {
-      return this.$route.params.address
-    },
+  get showPagination() {
+    return this.meta && this.meta.pageCount > 1;
+  }
 
-    sortParams: {
-      get () {
-        return this.$store.getters['ui/blockSortParams']
-      },
+  get address() {
+    return this.$route.params.address;
+  }
 
-      set (params) {
-        this.$store.dispatch('ui/setBlockSortParams', {
-          field: params.field,
-          type: params.type
-        })
-      }
-    }
-  },
+  get sortParams() {
+    return this.$store.getters["ui/blockSortParams"];
+  }
 
-  watch: {
-    currentPage () {
-      this.changePage()
-    }
-  },
+  set sortParams(params: ISortParameters) {
+    this.$store.dispatch("ui/setBlockSortParams", {
+      field: params.field,
+      type: params.type,
+    });
+  }
 
-  async beforeRouteEnter (to, from, next) {
+  @Watch("currentPage")
+  public onCurrentPageChanged() {
+    this.changePage();
+  }
+
+  public async beforeRouteEnter(to: Route, from: Route, next: () => void) {
     try {
-      const { meta, data } = await BlockService.byAddress(to.params.address, to.params.page)
+      const { meta, data } = await BlockService.byAddress(to.params.address, to.params.page);
 
+      // @ts-ignore
       next(vm => {
-        vm.currentPage = Number(to.params.page)
-        vm.setBlocks(data)
-        vm.setMeta(meta)
-      })
-    } catch (e) { next({ name: '404' }) }
-  },
+        vm.currentPage = Number(to.params.page);
+        vm.setBlocks(data);
+        vm.setMeta(meta);
+      });
+    } catch (e) {
+      // @ts-ignore
+      next({ name: "404" });
+    }
+  }
 
-  async beforeRouteUpdate (to, from, next) {
-    this.blocks = null
-    this.meta = null
+  public async beforeRouteUpdate(to: Route, from: Route, next: () => void) {
+    this.blocks = null;
+    this.meta = null;
 
     try {
-      const { meta, data } = await BlockService.byAddress(to.params.address, to.params.page)
+      const { meta, data } = await BlockService.byAddress(to.params.address, to.params.page);
 
-      this.currentPage = Number(to.params.page)
-      this.setBlocks(data)
-      this.setMeta(meta)
-      next()
-    } catch (e) { next({ name: '404' }) }
-  },
-
-  mounted () {
-    this.getUsername()
-  },
-
-  methods: {
-    setBlocks (blocks) {
-      if (!blocks) {
-        return
-      }
-
-      this.blocks = blocks.map(block => ({ ...block, price: null }))
-    },
-
-    setMeta (meta) {
-      this.meta = meta
-    },
-
-    async getUsername () {
-      if (this.$route.params.username === undefined) {
-        const wallet = await WalletService.find(this.address)
-        this.username = wallet.username
-      } else {
-        this.username = this.$route.params.username
-      }
-    },
-
-    onPageChange (page) {
-      this.currentPage = page
-    },
-
-    changePage (page) {
-      this.$router.push({
-        name: 'wallet-blocks',
-        params: {
-          address: this.address,
-          username: this.username,
-          page: this.currentPage
-        }
-      })
-    },
-
-    onSortChange (params) {
-      this.sortParams = params
+      this.currentPage = Number(to.params.page);
+      this.setBlocks(data);
+      this.setMeta(meta);
+      next();
+    } catch (e) {
+      // @ts-ignore
+      next({ name: "404" });
     }
+  }
+
+  public mounted() {
+    this.getUsername();
+  }
+
+  private setBlocks(blocks: IBlock[]) {
+    if (!blocks) {
+      return;
+    }
+
+    this.blocks = blocks.map(block => ({ ...block, price: null }));
+  }
+
+  private setMeta(meta: any) {
+    this.meta = meta;
+  }
+
+  private async getUsername() {
+    if (this.$route.params.username === undefined) {
+      const wallet = await WalletService.find(this.address);
+      this.username = wallet.username;
+    } else {
+      this.username = this.$route.params.username;
+    }
+  }
+
+  private onPageChange(page: number) {
+    this.currentPage = page;
+  }
+
+  private changePage() {
+    // @ts-ignore
+    this.$router.push({
+      name: "wallet-blocks",
+      params: {
+        address: this.address,
+        username: this.username,
+        page: this.currentPage,
+      },
+    });
+  }
+
+  private onSortChange(params: ISortParameters) {
+    this.sortParams = params;
   }
 }
 </script>
