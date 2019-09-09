@@ -16,50 +16,44 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import BlockService from '@/services/block'
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import { IBlock, ISortParameters } from "@/interfaces";
+// @ts-ignore
+import BlockService from "@/services/block"
 
-export default {
-  name: 'LatestBlocks',
+@Component
+export default class LatestBlocks extends Vue {
+  private blocks: IBlock[] | null = null;
 
-  data: () => ({
-    blocks: null
-  }),
+  get sortParams() {
+    return this.$store.getters["ui/blockSortParams"]
+  }
 
-  computed: {
-    sortParams: {
-      get () {
-        return this.$store.getters['ui/blockSortParams']
-      },
+  set sortParams(params: ISortParameters) {
+    this.$store.dispatch("ui/setBlockSortParams", {
+      field: params.field,
+      type: params.type
+    })
+  }
 
-      set (params) {
-        this.$store.dispatch('ui/setBlockSortParams', {
-          field: params.field,
-          type: params.type
-        })
-      }
-    }
-  },
-
-  async mounted () {
+  public async mounted() {
     await this.prepareComponent()
-  },
+  }
 
-  methods: {
-    async prepareComponent () {
-      await this.getBlocks()
+  private async prepareComponent () {
+    await this.getBlocks()
 
-      this.$store.watch(state => state.network.height, value => this.getBlocks())
-    },
+    this.$store.watch(state => state.network.height, value => this.getBlocks())
+  }
 
-    async getBlocks () {
-      const data = await BlockService.latest()
-      this.blocks = data.map(block => ({ ...block, price: null }))
-    },
+  private async getBlocks (): Promise<void> {
+    const data = await BlockService.latest()
+    this.blocks = data!.map((block: IBlock) => ({ ...block, price: null }))
+  }
 
-    onSortChange (params) {
-      this.sortParams = params
-    }
+  private onSortChange (params: ISortParameters) {
+    this.sortParams = params
   }
 }
 </script>
