@@ -30,38 +30,34 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import ChartWrapper from '@/components/ChartWrapper'
-import { LatestBlocks, LatestTransactions } from '@/components/home'
-import SelectionType from '@/components/SelectionType'
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import ChartWrapper from "@/components/ChartWrapper.vue";
+import { LatestBlocks, LatestTransactions } from "@/components/home";
+import SelectionType from "@/components/SelectionType.vue";
 
-export default {
+@Component({
   components: {
     ChartWrapper,
     LatestBlocks,
     LatestTransactions,
-    SelectionType
+    SelectionType,
   },
+})
+export default class HomePage extends Vue {
+  private dataView: string = "transactions";
+  private transactionType: number = -1;
 
-  data: () => ({
-    dataView: 'transactions',
-    transactionType: -1
-  }),
+  get isChartEnabled() {
+    return this.$store.getters["ui/priceChartOptions"].enabled;
+  }
 
-  computed: {
-    isChartEnabled () {
-      return this.$store.getters['ui/priceChartOptions'].enabled
-    }
-  },
+  public created() {
+    this.transactionType = Number(localStorage.getItem("transactionType") || -1);
+  }
 
-  created () {
-    this.transactionType = Number(localStorage.getItem('transactionType') || -1)
-  },
-
-  methods: {
-    onTypeChange (type) {
-      this.transactionType = type
-    }
+  private onTypeChange(type: number) {
+    this.transactionType = type;
   }
 }
 </script>

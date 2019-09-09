@@ -98,6 +98,13 @@ export default class WalletTransactions extends Vue {
     this.getReceivedCount();
   }
 
+  public mounted() {
+    this.getTransactions();
+
+    this.getSentCount();
+    this.getReceivedCount();
+  }
+
   private async getTransactions() {
     this.transactions = null;
 

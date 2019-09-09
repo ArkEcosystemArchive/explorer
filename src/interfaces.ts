@@ -38,6 +38,7 @@ export interface IMeta {
 }
 
 export interface ITransaction {
+  id: string;
   amount: string;
   price?: number | null;
   timestamp: ITimestamp;

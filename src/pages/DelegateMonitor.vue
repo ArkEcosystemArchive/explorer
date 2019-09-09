@@ -26,67 +26,65 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import { MonitorHeader, ForgingStats } from '@/components/monitor'
-import DelegateService from '@/services/delegate'
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import { IDelegate, ISortParameters } from "@/interfaces";
+import { MonitorHeader, ForgingStats } from "@/components/monitor";
+// @ts-ignore
+import DelegateService from "@/services/delegate";
 
-export default {
+@Component({
   components: {
     MonitorHeader,
-    ForgingStats
+    ForgingStats,
   },
-
-  data: () => ({
-    delegates: null,
-    activeTab: 'active'
-  }),
-
   computed: {
-    ...mapGetters('network', ['height']),
+    ...mapGetters("network", ["height"]),
+  },
+})
+export default class DelegateMonitor extends Vue {
+  private delegates: IDelegate[] | null = null;
+  private activeTab: string = "active";
+  private height: number;
 
-    sortParams: {
-      get () {
-        return this.$store.getters['ui/delegateSortParams']
+  get sortParams() {
+    return this.$store.getters["ui/delegateSortParams"];
+  }
+
+  set sortParams(params: ISortParameters) {
+    this.$store.dispatch("ui/setDelegateSortParams", {
+      ...this.sortParams,
+      [this.activeTab]: {
+        field: params.field,
+        type: params.type,
       },
+    });
+  }
 
-      set (params) {
-        this.$store.dispatch('ui/setDelegateSortParams', {
-          ...this.sortParams,
-          [this.activeTab]: {
-            field: params.field,
-            type: params.type
-          }
-        })
-      }
+  @Watch("height")
+  public async onHeightChanged() {
+    await this.setDelegates();
+  }
+
+  @Watch("activeTab")
+  public async onActiveTabChanged() {
+    this.delegates = null;
+    await this.setDelegates();
+  }
+
+  public async created() {
+    await this.setDelegates();
+  }
+
+  private async setDelegates() {
+    if (this.height) {
+      this.delegates = await DelegateService[this.activeTab]();
     }
-  },
+  }
 
-  watch: {
-    async height () {
-      await this.setDelegates()
-    },
-
-    async activeTab () {
-      this.delegates = null
-      await this.setDelegates()
-    }
-  },
-
-  async created () {
-    await this.setDelegates()
-  },
-
-  methods: {
-    async setDelegates () {
-      if (this.height) {
-        this.delegates = await DelegateService[this.activeTab]()
-      }
-    },
-
-    onSortChange (params) {
-      this.sortParams = params
-    }
+  private onSortChange(params: ISortParameters) {
+    this.sortParams = params;
   }
 }
 </script>

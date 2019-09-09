@@ -35,81 +35,90 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import NotFound from '@/components/utils/NotFound'
-import TransactionDetails from '@/components/transaction/Details'
-import TransactionService from '@/services/transaction'
-import { mapGetters } from 'vuex'
+<script lang="ts">
+/* tslint:disable:no-console */
+import { Component, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import { Route } from "vue-router";
+import { ISortParameters, ITransaction } from "@/interfaces";
+import NotFound from "@/components/utils/NotFound.vue";
+import TransactionDetails from "@/components/transaction/Details.vue";
+// @ts-ignore
+import TransactionService from "@/services/transaction";
 
-export default {
+Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
+
+@Component({
   components: {
     NotFound,
-    TransactionDetails
+    TransactionDetails,
   },
-
-  data: () => ({
-    transaction: {},
-    transactionNotFound: false,
-    isLoading: false
-  }),
-
   computed: {
-    ...mapGetters('network', ['height'])
+    ...mapGetters("network", ["height"]),
   },
+})
+export default class TransactionPage extends Vue {
+  private transaction: ITransaction | null = null;
+  private transactionNotFound: boolean = false;
+  private isLoading: boolean = false;
+  private height: number;
 
-  async beforeRouteEnter (to, from, next) {
+  public async beforeRouteEnter(to: Route, from: Route, next: () => void) {
     try {
-      const transaction = await TransactionService.find(to.params.id)
+      const transaction = await TransactionService.find(to.params.id);
+      // @ts-ignore
       next(vm => {
-        vm.setTransaction(transaction)
-      })
+        vm.setTransaction(transaction);
+      });
     } catch (e) {
+      // @ts-ignore
       next(vm => {
-        console.log(e.message || e.data.error)
+        console.log(e.message || e.data.error);
 
-        vm.transactionNotFound = true
-        vm.transaction = { id: to.params.id }
-      })
+        vm.transactionNotFound = true;
+        vm.transaction = { id: to.params.id };
+      });
     }
-  },
+  }
 
-  async beforeRouteUpdate (to, from, next) {
-    this.transaction = {}
+  public async beforeRouteUpdate(to: Route, from: Route, next: () => void) {
+    this.transaction = null;
 
     try {
-      const transaction = await TransactionService.find(to.params.id)
-      this.setTransaction(transaction)
-      next()
+      const transaction = await TransactionService.find(to.params.id);
+      // @ts-ignore
+      this.setTransaction(transaction);
+      next();
     } catch (e) {
-      console.log(e.message || e.data.error)
+      console.log(e.message || e.data.error);
 
-      this.transactionNotFound = true
-      this.transaction = { id: to.params.id }
+      this.transactionNotFound = true;
+      // @ts-ignore
+      this.transaction = { id: to.params.id };
     }
-  },
+  }
 
-  methods: {
-    async fetchTransaction () {
-      this.isLoading = true
+  private async fetchTransaction() {
+    this.isLoading = true;
 
-      try {
-        const transaction = await TransactionService.find(this.transaction.id)
-        this.setTransaction(transaction)
-        this.transactionNotFound = false
-      } catch (e) {
-        console.log(e.message || e.data.error)
-      } finally {
-        setTimeout(() => (this.isLoading = false), 750)
-      }
-    },
-
-    setTransaction (transaction) {
-      this.transaction = transaction
-    },
-
-    onReload () {
-      this.fetchTransaction()
+    try {
+      const transaction = await TransactionService.find(this.transaction!.id);
+      // @ts-ignore
+      this.setTransaction(transaction);
+      this.transactionNotFound = false;
+    } catch (e) {
+      console.log(e.message || e.data.error);
+    } finally {
+      setTimeout(() => (this.isLoading = false), 750);
     }
+  }
+
+  private setTransaction(transaction: ITransaction) {
+    this.transaction = transaction;
+  }
+
+  private onReload() {
+    this.fetchTransaction();
   }
 }
 </script>
