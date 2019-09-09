@@ -59,6 +59,10 @@ export interface ITimestamp {
 
 export interface IWallet {
   address: string;
+  username: string;
+  publicKey: string;
+  vote: string;
+  isDelegate: boolean;
 }
 
 export interface IApiResponse {

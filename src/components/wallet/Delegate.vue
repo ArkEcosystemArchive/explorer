@@ -65,27 +65,21 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import WalletVoters from '@/components/wallet/Voters'
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { IWallet } from "@/interfaces";
+import WalletVoters from "@/components/wallet/Voters.vue";
 
-export default {
-  name: 'WalletDelegate',
-
+@Component({
   components: {
-    WalletVoters
+    WalletVoters,
   },
+})
+export default class WalletDelegate extends Vue {
+  @Prop({ required: true }) public wallet: IWallet;
 
-  props: {
-    wallet: {
-      type: Object,
-      required: true
-    }
-  },
-
-  computed: {
-    delegate () {
-      return this.$store.getters['delegates/byPublicKey'](this.wallet.publicKey)
-    }
+  get delegate() {
+    return this.$store.getters["delegates/byPublicKey"](this.wallet.publicKey);
   }
 }
 </script>

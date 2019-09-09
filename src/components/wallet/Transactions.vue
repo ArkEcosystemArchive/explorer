@@ -56,98 +56,83 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import TransactionService from '@/services/transaction'
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { ISortParameters, ITransaction, IWallet } from "@/interfaces";
+// @ts-ignore
+import TransactionService from "@/services/transaction";
 
-export default {
-  name: 'WalletTransactions',
+@Component
+export default class WalletTransactions extends Vue {
+  @Prop({ required: true }) public wallet: IWallet;
 
-  props: {
-    wallet: {
-      type: Object,
-      required: true
+  private transactions: ITransaction[] | null = null;
+  private type: string = "all";
+  private receivedCount: number = 0;
+  private sentCount: number = 0;
+
+  get isTypeSent() {
+    return this.type === "sent";
+  }
+
+  get isTypeReceived() {
+    return this.type === "received";
+  }
+
+  get sortParams() {
+    return this.$store.getters["ui/transactionSortParams"];
+  }
+
+  set sortParams(params: ISortParameters) {
+    this.$store.dispatch("ui/setTransactionSortParams", {
+      field: params.field,
+      type: params.type,
+    });
+  }
+
+  @Watch("wallet")
+  public onWalletChanged() {
+    this.getTransactions();
+
+    this.getSentCount();
+    this.getReceivedCount();
+  }
+
+  private async getTransactions() {
+    this.transactions = null;
+
+    if (this.wallet.address !== undefined) {
+      const { data } = await TransactionService[`${this.type}ByAddress`](this.wallet.address, 1);
+      this.transactions = data.map((transaction: ITransaction) => ({ ...transaction, price: null }));
     }
-  },
+  }
 
-  data: () => ({
-    transactions: null,
-    type: 'all',
-    receivedCount: 0,
-    sentCount: 0
-  }),
-
-  computed: {
-    isTypeSent () {
-      return this.type === 'sent'
-    },
-
-    isTypeReceived () {
-      return this.type === 'received'
-    },
-
-    sortParams: {
-      get () {
-        return this.$store.getters['ui/transactionSortParams']
-      },
-
-      set (params) {
-        this.$store.dispatch('ui/setTransactionSortParams', {
-          field: params.field,
-          type: params.type
-        })
-      }
+  private async getReceivedCount() {
+    if (this.wallet && this.wallet.address) {
+      const response = await TransactionService.receivedByAddressCount(this.wallet.address);
+      this.receivedCount = response;
+    } else {
+      this.receivedCount = 0;
     }
-  },
+  }
 
-  watch: {
-    wallet () {
-      this.getTransactions()
-
-      this.getSentCount()
-      this.getReceivedCount()
+  private async getSentCount() {
+    if (this.wallet && this.wallet.address) {
+      const response = await TransactionService.sentByAddressCount(this.wallet.address);
+      this.sentCount = response;
+    } else {
+      this.sentCount = 0;
     }
-  },
+  }
 
-  methods: {
-    async getTransactions () {
-      this.transactions = null
+  private setType(type: string) {
+    this.type = type;
 
-      if (this.wallet.address !== undefined) {
-        const { data } = await TransactionService[`${this.type}ByAddress`](
-          this.wallet.address,
-          this.page
-        )
-        this.transactions = data.map(transaction => ({ ...transaction, price: null }))
-      }
-    },
+    this.getTransactions();
+  }
 
-    async getReceivedCount () {
-      if (this.wallet && this.wallet.address) {
-        const response = await TransactionService.receivedByAddressCount(this.wallet.address)
-        this.receivedCount = response
-      } else {
-        this.receivedCount = 0
-      }
-    },
-
-    async getSentCount () {
-      if (this.wallet && this.wallet.address) {
-        const response = await TransactionService.sentByAddressCount(this.wallet.address)
-        this.sentCount = response
-      } else {
-        this.sentCount = 0
-      }
-    },
-
-    setType (type) {
-      this.type = type
-
-      this.getTransactions()
-    },
-
-    onSortChange (params) {
-      this.sortParams = params
-    }
+  private onSortChange(params: ISortParameters) {
+    this.sortParams = params;
   }
 }
 </script>

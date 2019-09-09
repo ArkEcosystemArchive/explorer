@@ -17,40 +17,40 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import DelegateService from '@/services/delegate'
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { IWallet } from "@/interfaces";
+// @ts-ignore
+import DelegateService from "@/services/delegate";
 
-export default {
-  name: 'WalletVoters',
-
-  props: {
-    wallet: {
-      type: Object,
-      required: true
-    }
+@Component({
+  components: {
+    WalletVoters,
   },
+})
+export default class WalletVoters extends Vue {
+  @Prop({ required: true }) public wallet: IWallet;
 
-  data: () => ({
-    voterCount: 0
-  }),
+  private voterCount: number = 0;
 
-  watch: {
-    async wallet (wallet) {
-      if (wallet.username) {
-        await this.getVoterCount()
-      }
+  get delegate() {
+    return this.$store.getters["delegates/byPublicKey"](this.wallet.publicKey);
+  }
+
+  @Watch("wallet")
+  public async onWalletChange(wallet: IWallet) {
+    if (wallet.username) {
+      await this.getVoterCount();
     }
-  },
+  }
 
-  async mounted () {
-    await this.getVoterCount()
-  },
+  public async mounted() {
+    await this.getVoterCount();
+  }
 
-  methods: {
-    async getVoterCount () {
-      const count = await DelegateService.voterCount(this.wallet.publicKey)
-      this.voterCount = count
-    }
+  private async getVoterCount() {
+    const count = await DelegateService.voterCount(this.wallet.publicKey);
+    this.voterCount = count;
   }
 }
 </script>

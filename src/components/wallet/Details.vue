@@ -221,52 +221,49 @@
   </section>
 </template>
 
-<script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import { IWallet } from "@/interfaces";
+import WalletVoters from "@/components/wallet/Voters.vue";
 
-export default {
-  name: 'WalletDetails',
-
-  props: {
-    wallet: {
-      type: Object,
-      required: true
-    }
+@Component({
+  components: {
+    WalletVoters,
   },
-
-  data: () => ({
-    view: 'public',
-    showModal: false
-  }),
-
   computed: {
-    ...mapGetters('network', ['knownWallets']),
-
-    name () {
-      return this.knownWallets[this.wallet.address]
-    },
-
-    isDelegate () {
-      return this.wallet.isDelegate
-    },
-
-    votedDelegate () {
-      return this.$store.getters['delegates/byPublicKey'](this.wallet.vote) || {}
-    },
-
-    isVoting () {
-      return !!this.wallet.vote
-    }
+    ...mapGetters("network", ["knownWallets"]),
   },
+})
+export default class WalletDetails extends Vue {
+  @Prop({ required: true }) public wallet: IWallet;
 
-  methods: {
-    setView (view) {
-      this.view = view
-    },
+  private view: string = "public";
+  private showModal: boolean = false;
+  private knownWallets: { [key: string]: string };
 
-    toggleModal () {
-      this.showModal = !this.showModal
-    }
+  get name() {
+    return this.knownWallets[this.wallet.address];
+  }
+
+  get isDelegate() {
+    return this.wallet.isDelegate;
+  }
+
+  get votedDelegate() {
+    return this.$store.getters["delegates/byPublicKey"](this.wallet.vote) || {};
+  }
+
+  get isVoting() {
+    return !!this.wallet.vote;
+  }
+
+  private setView(view: string) {
+    this.view = view;
+  }
+
+  private toggleModal() {
+    this.showModal = !this.showModal;
   }
 }
 </script>
