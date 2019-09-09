@@ -14,96 +14,103 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import BlockService from '@/services/block'
+<script lang="ts">
+import { Component, Vue, Watch } from "vue-property-decorator";
+import { IBlock, ISortParameters } from "@/interfaces";
+import { Route } from "vue-router";
+import BlockService from "@/services/block";
 
-export default {
-  data: () => ({
-    blocks: null,
-    meta: null,
-    currentPage: 0
-  }),
+Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 
-  computed: {
-    showPagination () {
-      return this.meta && this.meta.pageCount
-    },
+@Component
+export default class BlockPage extends Vue {
+  private blocks: IBlock[] | null = null;
+  private meta: any | null = null;
+  private currentPage: number = 0;
 
-    sortParams: {
-      get () {
-        return this.$store.getters['ui/blockSortParams']
-      },
+  get showPagination() {
+    return this.meta && this.meta.pageCount;
+  }
 
-      set (params) {
-        this.$store.dispatch('ui/setBlockSortParams', {
-          field: params.field,
-          type: params.type
-        })
-      }
-    }
-  },
+  get sortParams() {
+    return this.$store.getters["ui/blockSortParams"];
+  }
 
-  watch: {
-    currentPage () {
-      this.changePage()
-    }
-  },
+  set sortParams(params: ISortParameters) {
+    this.$store.dispatch("ui/setBlockSortParams", {
+      field: params.field,
+      type: params.type,
+    });
+  }
 
-  async beforeRouteEnter (to, from, next) {
+  @Watch("currentPage")
+  public onCurrentPageChanged() {
+    this.changePage();
+  }
+
+  public async beforeRouteEnter(to: Route, from: Route, next: () => void) {
     try {
-      const { meta, data } = await BlockService.paginate(to.params.page)
+      // @ts-ignore
+      const { meta, data } = await BlockService.paginate(Number(to.params.page));
 
+      // @ts-ignore
       next(vm => {
-        vm.currentPage = Number(to.params.page)
-        vm.setBlocks(data)
-        vm.setMeta(meta)
-      })
-    } catch (e) { next({ name: '404' }) }
-  },
+        vm.currentPage = Number(to.params.page);
+        vm.setBlocks(data);
+        vm.setMeta(meta);
+      });
+    } catch (e) {
+      // @ts-ignore
+      next({ name: "404" });
+    }
+  }
 
-  async beforeRouteUpdate (to, from, next) {
-    this.blocks = null
-    this.meta = null
+  public async beforeRouteUpdate(to: Route, from: Route, next: () => void) {
+    this.blocks = null;
+    this.meta = null;
 
     try {
-      const { meta, data } = await BlockService.paginate(to.params.page)
+      // @ts-ignore
+      const { meta, data } = await BlockService.paginate(Number(to.params.page));
 
-      this.currentPage = Number(to.params.page)
-      this.setBlocks(data)
-      this.setMeta(meta)
-      next()
-    } catch (e) { next({ name: '404' }) }
-  },
-
-  methods: {
-    setBlocks (blocks) {
-      if (!blocks) {
-        return
-      }
-
-      this.blocks = blocks.map(block => ({ ...block, price: null }))
-    },
-
-    setMeta (meta) {
-      this.meta = meta
-    },
-
-    onPageChange (page) {
-      this.currentPage = page
-    },
-
-    changePage () {
-      this.$router.push({
-        name: 'blocks',
-        params: {
-          page: this.currentPage
-        }
-      })
-    },
-
-    onSortChange (params) {
-      this.sortParams = params
+      this.currentPage = Number(to.params.page);
+      this.setBlocks(data);
+      this.setMeta(meta);
+      next();
+    } catch (e) {
+      // @ts-ignore
+      next({ name: "404" });
     }
+  }
+
+  private setBlocks(blocks: IBlock[]) {
+    if (!blocks) {
+      return;
+    }
+
+    this.blocks = blocks.map(block => ({ ...block, price: null }));
+  }
+
+  private setMeta(meta: any) {
+    this.meta = meta;
+  }
+
+  private onPageChange(page: number) {
+    this.currentPage = page;
+  }
+
+  private changePage() {
+    // @ts-ignore
+    this.$router.push({
+      name: "blocks",
+      params: {
+        page: this.currentPage,
+      },
+    });
+  }
+
+  private onSortChange(params: ISortParameters) {
+    this.sortParams = params;
   }
 }
 </script>

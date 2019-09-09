@@ -21,7 +21,7 @@ class BlockService {
     });
 
     if (response) {
-      return response.data[0];
+      return response.data![0];
     }
   }
 
@@ -63,7 +63,7 @@ class BlockService {
     });
 
     if (response) {
-      return response.data[0];
+      return response.data![0];
     }
   }
 
@@ -75,7 +75,7 @@ class BlockService {
     });
 
     if (response) {
-      return response.data[0];
+      return response.data![0];
     }
   }
 }

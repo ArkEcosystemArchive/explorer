@@ -15,12 +15,16 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import { mapGetters } from "vuex";
 
-export default {
+@Component({
   computed: {
-    ...mapGetters('ui', ['nightMode'])
-  }
+    ...mapGetters("ui", ["nightMode"]),
+  },
+})
+export default class ErrorPage extends Vue {
+  private nightMode: string;
 }
 </script>
