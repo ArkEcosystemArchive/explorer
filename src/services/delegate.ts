@@ -1,13 +1,14 @@
 import { ApiService, ForgingService, WalletService } from "@/services";
 import store from "@/store";
+import { IApiDelegateWrapper, IApiDelegatesWrapper, IApiDelegateVotersWrapper, IDelegate } from "../interfaces";
 
 class DelegateService {
-  async all() {
-    const response = await ApiService.get("delegates", {
+  public async all(): Promise<IDelegate[]> {
+    const response = (await ApiService.get("delegates", {
       params: {
         page: 1,
       },
-    });
+    })) as IApiDelegatesWrapper;
 
     const requests = [];
 
@@ -26,19 +27,19 @@ class DelegateService {
     return response.data.concat([].concat(...results.map(result => result.data)));
   }
 
-  async voters(query, page, limit = 25) {
-    const response = await ApiService.get(`delegates/${query}/voters`, {
+  public async voters(query: string, page: number, limit = 25): Promise<IApiDelegateVotersWrapper> {
+    const response = (await ApiService.get(`delegates/${query}/voters`, {
       params: {
         page,
         limit,
       },
-    });
+    })) as IApiDelegateVotersWrapper;
 
     return response;
   }
 
-  async voterCount(publicKey, excludeLowBalances = true) {
-    const response = await WalletService.search(
+  public async voterCount(publicKey: string, excludeLowBalances: boolean = true): Promise<number> {
+    const response = (await WalletService.search(
       {
         vote: publicKey,
         balance: {
@@ -50,25 +51,25 @@ class DelegateService {
           limit: 1,
         },
       },
-    );
+    )) as IApiDelegateVotersWrapper;
 
     return response.meta.totalCount;
   }
 
-  async find(query) {
-    const response = await ApiService.get(`delegates/${query}`);
+  public async find(query: string): Promise<IDelegate> {
+    const response = (await ApiService.get(`delegates/${query}`)) as IApiDelegateWrapper;
     return response.data;
   }
 
-  async active() {
+  public async active(): Promise<IDelegate[]> {
     const activeDelegates = store.getters["network/activeDelegates"];
     const height = store.getters["network/height"];
 
-    const response = await ApiService.get("delegates", {
+    const response = (await ApiService.get("delegates", {
       params: {
         limit: activeDelegates,
       },
-    });
+    })) as IApiDelegatesWrapper;
 
     return response.data.map(delegate => {
       delegate.forgingStatus = ForgingService.status(delegate, height);
@@ -77,27 +78,27 @@ class DelegateService {
     });
   }
 
-  async standby() {
+  public async standby(): Promise<IDelegate[]> {
     const activeDelegates = store.getters["network/activeDelegates"];
 
-    const response = await ApiService.get("delegates", {
+    const response = (await ApiService.get("delegates", {
       params: {
         offset: activeDelegates,
         limit: activeDelegates,
       },
-    });
+    })) as IApiDelegatesWrapper;
 
     return response.data;
   }
 
-  async forged() {
+  public async forged(): Promise<Array<{ delegate: string; forged: number }>> {
     const activeDelegates = store.getters["network/activeDelegates"];
 
-    const response = await ApiService.get("delegates", {
+    const response = (await ApiService.get("delegates", {
       params: {
         limit: activeDelegates,
       },
-    });
+    })) as IApiDelegatesWrapper;
 
     return response.data.map((delegate, index) => {
       return {
@@ -107,12 +108,12 @@ class DelegateService {
     });
   }
 
-  async activeDelegatesCount() {
-    const response = await ApiService.get("delegates", {
+  public async activeDelegatesCount(): Promise<number> {
+    const response = (await ApiService.get("delegates", {
       params: {
         limit: 1,
       },
-    });
+    })) as IApiDelegatesWrapper;
     return response.meta.totalCount;
   }
 }

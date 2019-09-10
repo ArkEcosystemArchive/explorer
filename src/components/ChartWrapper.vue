@@ -68,9 +68,7 @@
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
-// @ts-ignore
 import CryptoCompareService from "@/services/crypto-compare";
-// @ts-ignore
 import PriceChart from "@/components/charts/price-chart";
 
 @Component({
@@ -254,6 +252,7 @@ export default class ChartWrapper extends Vue {
     }
 
     try {
+      // @ts-ignore
       const response = await CryptoCompareService[this.priceChartOptions.period]();
       this.labels = response.labels;
       this.datasets = response.datasets;

@@ -120,7 +120,11 @@ export default class WalletTransactions extends Vue {
 
   public async beforeRouteEnter(to: Route, from: Route, next: () => void) {
     try {
-      const { meta, data } = await TransactionService[`${to.params.type}ByAddress`](to.params.address, to.params.page);
+      // @ts-ignore
+      const { meta, data } = await TransactionService[`${to.params.type}ByAddress`](
+        to.params.address,
+        Number(to.params.page),
+      );
 
       // @ts-ignore
       next(vm => {
@@ -140,7 +144,11 @@ export default class WalletTransactions extends Vue {
     this.meta = null;
 
     try {
-      const { meta, data } = await TransactionService[`${to.params.type}ByAddress`](to.params.address, to.params.page);
+      // @ts-ignore
+      const { meta, data } = await TransactionService[`${to.params.type}ByAddress`](
+        to.params.address,
+        Number(to.params.page),
+      );
 
       this.currentPage = Number(to.params.page);
       this.setTransactions(data);

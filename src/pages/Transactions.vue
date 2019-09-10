@@ -97,7 +97,7 @@ export default class TransactionsPage extends Vue {
   public async beforeRouteEnter(to: Route, from: Route, next: () => void) {
     try {
       const { meta, data } = await TransactionService.filterByType(
-        to.params.page,
+        Number(to.params.page),
         Number(localStorage.getItem("transactionType") || -1),
       );
 
@@ -119,7 +119,7 @@ export default class TransactionsPage extends Vue {
 
     try {
       const { meta, data } = await TransactionService.filterByType(
-        to.params.page,
+        Number(to.params.page),
         Number(localStorage.getItem("transactionType") || -1),
       );
 

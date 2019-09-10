@@ -2,15 +2,16 @@ import { I18N } from "@/config";
 import store from "@/store";
 
 class MigrationService {
-  executeMigrations() {
+  public executeMigrations(): void {
     const migrations = ["languageKey", "priceChart"];
 
     for (const migration of migrations) {
+      // @ts-ignore
       this[migration]();
     }
   }
 
-  languageKey() {
+  public languageKey(): void {
     let language = localStorage.getItem("language");
 
     if (!language || I18N.enabledLocales.includes(language)) {
@@ -23,7 +24,7 @@ class MigrationService {
     localStorage.setItem("language", language);
   }
 
-  priceChart() {
+  public priceChart(): void {
     let priceChart = localStorage.getItem("priceChart");
     let priceChartPeriod = localStorage.getItem("priceChartPeriod");
 

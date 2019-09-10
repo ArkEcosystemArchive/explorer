@@ -111,7 +111,7 @@ export default class TransactionDetails extends Vue {
   @Prop({ required: true }) public transaction: ITransaction;
 
   private initialBlockHeight: number = 0;
-  private price: number = 0;
+  private price: number | null = 0;
   private currencySymbol: string;
   private height: number;
 
@@ -135,6 +135,10 @@ export default class TransactionDetails extends Vue {
     if (!oldValue) {
       this.setInitialBlockHeight();
     }
+  }
+
+  public async mounted() {
+    this.updatePrice();
   }
 
   private async updatePrice() {

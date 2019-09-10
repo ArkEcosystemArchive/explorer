@@ -30,14 +30,13 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { IBlock, ISortParameters, ITransaction } from "../../interfaces";
-// @ts-ignore
 import TransactionService from "@/services/transaction";
 
 @Component
 export default class BlockTransactions extends Vue {
   @Prop({ required: true }) public block: IBlock;
 
-  public transactions: [ITransaction] | null = null;
+  public transactions: ITransaction[] | null = null;
 
   get sortParams(): ISortParameters {
     return this.$store.getters["ui/transactionSortParams"];

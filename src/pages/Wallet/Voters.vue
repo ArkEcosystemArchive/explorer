@@ -63,7 +63,7 @@ export default class WalletVoters extends Vue {
   public async beforeRouteEnter(to: Route, from: Route, next: () => void) {
     try {
       const delegate = await DelegateService.find(to.params.address);
-      const { meta, data } = await DelegateService.voters(to.params.address, to.params.page);
+      const { meta, data } = await DelegateService.voters(to.params.address, Number(to.params.page));
 
       // @ts-ignore
       next(vm => {
@@ -84,10 +84,9 @@ export default class WalletVoters extends Vue {
 
     try {
       const delegate = await DelegateService.find(to.params.address);
-      const { meta, data } = await DelegateService.voters(to.params.address, to.params.page);
+      const { meta, data } = await DelegateService.voters(to.params.address, Number(to.params.page));
 
       this.currentPage = Number(to.params.page);
-      // @ts-ignore
       this.setDelegate(delegate);
       // @ts-ignore
       this.setWallets(data);

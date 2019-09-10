@@ -112,7 +112,6 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
-// @ts-ignore
 import CryptoCompareService from "@/services/crypto-compare";
 import { IBlock } from "../../interfaces";
 
@@ -125,7 +124,7 @@ import { IBlock } from "../../interfaces";
 export default class BlockDetails extends Vue {
   @Prop({ required: true }) public block: IBlock;
 
-  private price: number = 0;
+  private price: number | null = 0;
   private currencySymbol: string;
   private height: number;
 

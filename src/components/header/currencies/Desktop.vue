@@ -18,7 +18,6 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { mapGetters } from "vuex";
-// @ts-ignore
 import CryptoCompareService from "@/services/crypto-compare";
 
 @Component({
@@ -29,16 +28,16 @@ import CryptoCompareService from "@/services/crypto-compare";
 })
 export default class HeaderCurrenciesDesktop extends Vue {
   private currencyName: string;
-  private currencies: [string];
+  private currencies: string[];
 
   private async setCurrency(currency: string, symbol: string) {
     this.$store.dispatch("ui/setHeaderType", null);
 
     const rate = await CryptoCompareService.price(currency);
-    this.storeCurrency(currency, rate, symbol);
+    this.storeCurrency(currency, rate!, symbol);
   }
 
-  private storeCurrency(currency: string, rate: string, symbol: string) {
+  private storeCurrency(currency: string, rate: number, symbol: string) {
     this.$store.dispatch("currency/setName", currency);
     this.$store.dispatch("currency/setRate", rate);
     this.$store.dispatch("currency/setSymbol", symbol);

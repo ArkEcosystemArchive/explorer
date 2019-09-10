@@ -31,7 +31,6 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { IDelegate, ISortParameters } from "@/interfaces";
 import { MonitorHeader, ForgingStats } from "@/components/monitor";
-// @ts-ignore
 import DelegateService from "@/services/delegate";
 
 @Component({
@@ -79,6 +78,7 @@ export default class DelegateMonitor extends Vue {
 
   private async setDelegates() {
     if (this.height) {
+      // @ts-ignore
       this.delegates = await DelegateService[this.activeTab]();
     }
   }

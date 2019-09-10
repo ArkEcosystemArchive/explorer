@@ -60,7 +60,7 @@ export default class TopWallets extends Vue {
 
   public async beforeRouteEnter(to: Route, from: Route, next: () => void) {
     try {
-      const { meta, data } = await WalletService.top(to.params.page);
+      const { meta, data } = await WalletService.top(Number(to.params.page));
 
       // @ts-ignore
       next(vm => {
@@ -79,7 +79,7 @@ export default class TopWallets extends Vue {
     this.meta = null;
 
     try {
-      const { meta, data } = await WalletService.top(to.params.page);
+      const { meta, data } = await WalletService.top(Number(to.params.page));
 
       this.currentPage = Number(to.params.page);
       this.setWallets(data);

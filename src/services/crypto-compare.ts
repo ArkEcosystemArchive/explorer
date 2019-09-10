@@ -34,38 +34,44 @@ limiter.interceptors.response.use(
 );
 
 class CryptoCompareService {
-  async get(url, options) {
+  public static pendingRequests: number = 0;
+
+  public async get(url: string, options?: any) {
     return limiter.get(url, options);
   }
 
-  async price(currency) {
+  public async price(currency: string): Promise<number | undefined> {
     const response = await this.get(`https://min-api.cryptocompare.com/data/price?fsym=ARK&tsyms=${currency}`);
     if (response.data[currency]) {
       return Number(response.data[currency]);
     }
   }
 
-  async day() {
+  public async day(): Promise<{ datasets: any; labels: any }> {
     return this.sendRequest("hour", 24, "HH:mm");
   }
 
-  async week() {
+  public async week(): Promise<{ datasets: any; labels: any }> {
     return this.sendRequest("day", 7, "DD.MM");
   }
 
-  async month() {
+  public async month(): Promise<{ datasets: any; labels: any }> {
     return this.sendRequest("day", 30, "DD.MM");
   }
 
-  async quarter() {
+  public async quarter(): Promise<{ datasets: any; labels: any }> {
     return this.sendRequest("day", 120, "DD.MM");
   }
 
-  async year() {
+  public async year(): Promise<{ datasets: any; labels: any }> {
     return this.sendRequest("day", 365, "DD.MM");
   }
 
-  async sendRequest(type, limit, dateTimeFormat) {
+  public async sendRequest(
+    type: string,
+    limit: number,
+    dateTimeFormat: string,
+  ): Promise<{ datasets: any; labels: any }> {
     const date = Math.round(new Date().getTime() / 1000);
     const token = store.getters["network/token"];
 
@@ -86,14 +92,13 @@ class CryptoCompareService {
     return this.transform(response.data.Data, dateTimeFormat);
   }
 
-  async dailyAverage(timestamp) {
+  public async dailyAverage(timestamp: number): Promise<number | null> {
     const networkAlias = store.getters["network/alias"];
     if (networkAlias !== "Main") {
       return null;
     }
 
-    let ts = moment.unix(timestamp);
-    ts = ts.unix();
+    let ts = moment.unix(timestamp).unix();
 
     // get last second of the day as unix timestamp
     ts = ts - (ts % SECONDS_PER_DAY) + SECONDS_PER_DAY - 1;
@@ -106,7 +111,7 @@ class CryptoCompareService {
     }
 
     const token = store.getters["network/token"];
-    const cache = JSON.parse(localStorage.getItem(`rates_${targetCurrency}`));
+    const cache = JSON.parse(localStorage.getItem(`rates_${targetCurrency}`) as string);
 
     if (cache && cache[ts]) {
       store.dispatch("currency/setLastConversion", {
@@ -115,7 +120,7 @@ class CryptoCompareService {
         rate: cache[ts],
       });
 
-      return cache[ts];
+      return Number(cache[ts]);
     }
 
     const response = await this.get("https://min-api.cryptocompare.com/data/dayAvg", {
@@ -135,15 +140,15 @@ class CryptoCompareService {
     store.dispatch("currency/setLastConversion", {
       to: targetCurrency,
       timestamp: ts,
-      rate: rate,
+      rate,
     });
 
     return rate;
   }
 
-  transform(response, dateTimeFormat) {
+  public transform(response: any, dateTimeFormat: string): { datasets: any; labels: any } {
     return {
-      labels: response.map(value => {
+      labels: response.map((value: any) => {
         return moment.unix(value.time).format(dateTimeFormat);
       }),
       datasets: response,

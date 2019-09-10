@@ -1,6 +1,7 @@
 import store from "@/store";
+import { IDelegate } from "../interfaces";
 
-const ForgeStatus = Object.freeze({
+const ForgeStatus: { [key: string]: number } = Object.freeze({
   FORGING: 0,
   MISSING: 1,
   NOT_FORGING: 2,
@@ -8,8 +9,8 @@ const ForgeStatus = Object.freeze({
 });
 
 class ForgingService {
-  status(delegate, height) {
-    let forgingStatus;
+  public status(delegate: IDelegate, height: number): number {
+    let forgingStatus: number;
 
     if (delegate.blocks.last === undefined) {
       forgingStatus = ForgeStatus.NEVER_FORGED;
@@ -38,17 +39,17 @@ class ForgingService {
     return forgingStatus;
   }
 
-  round(height) {
+  public round(height: number): number {
     if (isNaN(height)) {
       return 0;
     }
 
-    const activeDelegates = store.getters["network/activeDelegates"];
+    const activeDelegates: number = store.getters["network/activeDelegates"];
 
     return Math.floor(height / activeDelegates) + (height % activeDelegates > 0 ? 1 : 0);
   }
 
-  totals(delegates) {
+  public totals(delegates: IDelegate[]): object {
     let forging = 0;
     let missedBlock = 0;
     let notForging = 0;

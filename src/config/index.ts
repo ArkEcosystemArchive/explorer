@@ -1,4 +1,4 @@
-exports.I18N = {
+export const I18N = {
   defaultLocale: "en-GB",
   enabledLocales: ["en-GB", "en-US", "it-IT", "fr-FR", "nl-NL", "pl-PL", "pt-BR"],
 };

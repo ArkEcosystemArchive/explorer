@@ -1,82 +1,73 @@
 import ApiService from "@/services/api";
+import { IApiBlockWrapper, IApiBlocksWrapper, IBlock } from "../interfaces";
 
 class BlockService {
-  public async latest(limit: number = 25) {
-    const response = await ApiService.get("blocks", {
+  public async latest(limit: number = 25): Promise<IBlock[]> {
+    const response = (await ApiService.get("blocks", {
       params: {
         limit,
       },
-    });
+    })) as IApiBlocksWrapper;
 
-    if (response) {
-      return response.data;
-    }
+    return response.data;
   }
 
-  public async last() {
-    const response = await ApiService.get("blocks", {
+  public async last(): Promise<IBlock> {
+    const response = (await ApiService.get("blocks", {
       params: {
         limit: 1,
       },
-    });
+    })) as IApiBlocksWrapper;
 
-    if (response) {
-      return response.data![0];
-    }
+    return response.data![0];
   }
 
-  public async find(id: string) {
-    const response = await ApiService.get(`blocks/${id}`);
+  public async find(id: string): Promise<IBlock> {
+    const response = (await ApiService.get(`blocks/${id}`)) as IApiBlockWrapper;
 
-    if (response) {
-      return response.data;
-    }
+    return response.data;
   }
 
-  public async paginate(page: number, limit = 25) {
-    const response = await ApiService.get("blocks", {
+  public async paginate(page: number, limit = 25): Promise<IApiBlocksWrapper> {
+    const response = (await ApiService.get("blocks", {
       params: {
         page,
         limit,
       },
-    });
+    })) as IApiBlocksWrapper;
 
     return response;
   }
 
-  public async byAddress(address: string, page: number, limit = 25) {
-    const response = await ApiService.get(`delegates/${address}/blocks`, {
+  public async byAddress(address: string, page: number, limit = 25): Promise<IApiBlocksWrapper> {
+    const response = (await ApiService.get(`delegates/${address}/blocks`, {
       params: {
         page,
         limit,
       },
-    });
+    })) as IApiBlocksWrapper;
 
     return response;
   }
 
-  public async findPrevious(height: number) {
-    const response = await ApiService.get("blocks", {
+  public async findPrevious(height: number): Promise<IBlock> {
+    const response = (await ApiService.get("blocks", {
       params: {
         height: height - 1,
       },
-    });
+    })) as IApiBlocksWrapper;
 
-    if (response) {
-      return response.data![0];
-    }
+    return response.data![0];
   }
 
-  public async findNext(height: number) {
-    const response = await ApiService.get("blocks", {
+  public async findNext(height: number): Promise<IBlock> {
+    const response = (await ApiService.get("blocks", {
       params: {
         height: height + 1,
       },
-    });
+    })) as IApiBlocksWrapper;
 
-    if (response) {
-      return response.data![0];
-    }
+    return response.data![0];
   }
 }
 

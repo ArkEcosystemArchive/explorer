@@ -109,6 +109,7 @@ export default class WalletTransactions extends Vue {
     this.transactions = null;
 
     if (this.wallet.address !== undefined) {
+      // @ts-ignore
       const { data } = await TransactionService[`${this.type}ByAddress`](this.wallet.address, 1);
       this.transactions = data.map((transaction: ITransaction) => ({ ...transaction, price: null }));
     }

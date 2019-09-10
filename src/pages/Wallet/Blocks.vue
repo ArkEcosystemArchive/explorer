@@ -74,7 +74,7 @@ export default class WalletBlocks extends Vue {
 
   public async beforeRouteEnter(to: Route, from: Route, next: () => void) {
     try {
-      const { meta, data } = await BlockService.byAddress(to.params.address, to.params.page);
+      const { meta, data } = await BlockService.byAddress(to.params.address, Number(to.params.page));
 
       // @ts-ignore
       next(vm => {
@@ -93,7 +93,7 @@ export default class WalletBlocks extends Vue {
     this.meta = null;
 
     try {
-      const { meta, data } = await BlockService.byAddress(to.params.address, to.params.page);
+      const { meta, data } = await BlockService.byAddress(to.params.address, Number(to.params.page));
 
       this.currentPage = Number(to.params.page);
       this.setBlocks(data);
