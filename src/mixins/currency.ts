@@ -4,28 +4,31 @@ const locale = store.getters["ui/locale"];
 
 export default {
   methods: {
-    readableCrypto(value, appendCurrency = true, decimals = 8) {
-      if (typeof value !== "undefined") {
-        value = (value /= 1e8).toLocaleString(locale, {
-          maximumFractionDigits: decimals,
-        });
+    readableCrypto(value: number, appendCurrency: boolean = true, decimals: number = 8): string {
+      const normalizedValue: string = (value /= 1e8).toLocaleString(locale, {
+        maximumFractionDigits: decimals,
+      });
 
-        return appendCurrency
-          ? `${value} ${store.getters["network/symbol"] || store.getters["network/defaults"].symbol || ""}`
-          : value;
-      }
+      return appendCurrency
+        ? `${normalizedValue} ${store.getters["network/symbol"] || store.getters["network/defaults"].symbol || ""}`
+        : normalizedValue;
     },
 
-    readableCurrency(value, rate = null, currency = null, normalise = true) {
-      const currencyName = currency || store.getters["currency/name"];
+    readableCurrency(
+      value: number,
+      rate: number | null = null,
+      currency: string | null = null,
+      normalise: boolean = true,
+    ): string {
+      const currencyName: string = currency || store.getters["currency/name"];
 
       if (normalise) {
-        value = parseInt(value, 10) / 1e8;
+        value = parseInt(value.toString(), 10) / 1e8;
       }
 
       value *= rate || store.getters["currency/rate"];
 
-      const cryptos = {
+      const cryptos: { [key: string]: string } = {
         ARK: "Ѧ",
         BTC: "Ƀ",
         ETH: "Ξ",
@@ -42,7 +45,7 @@ export default {
           });
     },
 
-    rawCurrency(value, currencyName) {
+    rawCurrency(value: number, currencyName: string): string {
       return [store.getters["network/token"], "BTC", "ETH", "LTC"].some(c => currencyName.indexOf(c) > -1)
         ? value.toLocaleString(locale, {
             maximumFractionDigits: 8,

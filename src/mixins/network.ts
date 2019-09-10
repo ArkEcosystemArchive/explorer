@@ -2,7 +2,7 @@ import store from "@/store";
 
 export default {
   methods: {
-    networkToken() {
+    networkToken(): string {
       return store.getters["network/token"] || store.getters["network/defaults"].token || "";
     },
   },

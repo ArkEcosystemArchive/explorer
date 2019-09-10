@@ -5,7 +5,7 @@ const locale = store.getters["ui/locale"];
 
 export default {
   methods: {
-    truncate(value, length = 13, truncateWhere = "middle") {
+    truncate(value: string, length: number = 13, truncateWhere: string = "middle"): string {
       switch (truncateWhere) {
         case "left":
           return value.length > length ? `...${value.slice(value.length - length + 3)}` : value;
@@ -25,11 +25,11 @@ export default {
       }
     },
 
-    capitalize(value) {
+    capitalize(value: string): string {
       return value.charAt(0).toUpperCase() + value.slice(1);
     },
 
-    percentageString(value, decimals = 2) {
+    percentageString(value: number, decimals: number = 2): string {
       if (typeof value !== "undefined") {
         return (value / 100).toLocaleString(locale, {
           minimumFractionDigits: decimals,
@@ -41,7 +41,7 @@ export default {
       return "-";
     },
 
-    emojify(text) {
+    emojify(text: string): string {
       return emoji.emojify(text);
     },
   },

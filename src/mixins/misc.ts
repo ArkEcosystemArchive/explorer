@@ -5,21 +5,21 @@ const locale = store.getters["ui/locale"];
 
 export default {
   methods: {
-    readableTimestamp(value) {
+    readableTimestamp(value: number): string {
       return moment
         .unix(value)
         .local()
         .format("L LTS");
     },
 
-    readableTimestampAgo(time, compareTime) {
+    readableTimestampAgo(time: number, compareTime: number | undefined): string {
       const momentTime = moment.unix(time).local();
       return typeof compareTime !== "undefined"
         ? momentTime.from(moment.unix(compareTime).local())
         : momentTime.fromNow();
     },
 
-    readableNumber(value, digits = 2, omitSeparator = false) {
+    readableNumber(value: number, digits: number = 2, omitSeparator: boolean = false): string {
       if (omitSeparator) {
         return value.toFixed(digits);
       }
