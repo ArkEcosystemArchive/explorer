@@ -10,6 +10,9 @@ function loadLocaleMessages(): LocaleMessages {
     const matched = key.match(/([A-Za-z0-9-_]+)\./i);
     if (matched && matched.length > 1) {
       const locale = matched[1];
+      if (locale === "en-GB") {
+        messages["en-US"] = locales(key).default;
+      }
       messages[locale] = locales(key).default;
     }
   });
