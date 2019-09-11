@@ -156,3 +156,56 @@ export interface IApiNodeStatus {
   blockCount: number;
   timestamp: number;
 }
+
+export interface ICurrencyState {
+  name: string;
+  rate: number;
+  symbol: string;
+  lastConversion: {
+    to: string;
+    timestamp: number;
+    rate: number;
+  };
+}
+
+export interface IDelegateState {
+  delegates: string | null;
+  forged: any[];
+}
+
+export interface INetworkState {
+  defaults: {};
+  server: string | null;
+  nethash: string | null;
+  alias: string | null;
+  activeDelegates: number;
+  rewardOffset: number;
+  token: string | null;
+  symbol: string | null;
+  currencies: any[];
+  knownWallets: any[];
+  supply: number;
+  height: number;
+}
+
+export interface IUiState {
+  language: string;
+  locale: string;
+  nightMode: boolean;
+  priceChartOptions: {
+    enabled: boolean;
+    period: string;
+    type: string;
+  };
+  headerType: string | null;
+  menuVisible: boolean;
+  blockSortParams: string | null;
+  delegateSortParams: string | null;
+  transactionSortParams: string | null;
+  walletSortParams: string | null;
+}
+
+export interface IStorePayload {
+  type: string;
+  value: any;
+}

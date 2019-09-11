@@ -1,25 +1,23 @@
 import Vue from "vue";
-import Vuex from "vuex";
+import Vuex, { StoreOptions } from "vuex";
 
-// @ts-ignore
-import CurrencyModule from "@/store/modules/currency";
-// @ts-ignore
-import DelegatesModule from "@/store/modules/delegates";
-// @ts-ignore
-import NetworkModule from "@/store/modules/network";
-// @ts-ignore
-import UserInterfaceModule from "@/store/modules/ui";
+import { currency } from "@/store/modules/currency";
+import { delegates } from "@/store/modules/delegates";
+import { network } from "@/store/modules/network";
+import { ui } from "@/store/modules/ui";
 
 Vue.use(Vuex);
 
 const modules = {
-  currency: CurrencyModule,
-  delegates: DelegatesModule,
-  network: NetworkModule,
-  ui: UserInterfaceModule,
+  currency,
+  delegates,
+  network,
+  ui,
 };
 
-export default new Vuex.Store({
+const store: StoreOptions<{}> = {
   modules,
   strict: process.env.NODE_ENV !== "production",
-});
+};
+
+export default new Vuex.Store<{}>(store);
