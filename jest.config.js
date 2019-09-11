@@ -22,6 +22,7 @@ module.exports = {
     },
   },
   setupFiles: ["jest-localstorage-mock"],
+  setupTestFrameworkScriptFile: "<rootDir>/__tests__/unit/jest.setup.js",
   collectCoverage: true,
   coverageDirectory: "<rootDir>/.coverage",
   collectCoverageFrom: ["src/**/*.ts", "!**/node_modules/**"],
