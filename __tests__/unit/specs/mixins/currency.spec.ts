@@ -21,11 +21,11 @@ describe("Mixins > Currency", () => {
     });
   });
 
-  const displayCrypto = (value) => {
+  const displayCrypto = value => {
     return value.toLocaleString(undefined, { maximumFractionDigits: 8 });
   };
 
-  const displayFiat = (value) => {
+  const displayFiat = value => {
     return value.toLocaleString(undefined, { minimumFractionDigits: 2 });
   };
 
@@ -77,7 +77,7 @@ describe("Mixins > Currency", () => {
   });
 
   describe("readableCurrency", () => {
-    const displayCurrency = (value) => {
+    const displayCurrency = value => {
       return value.toLocaleString("en-GB", {
         style: "currency",
         currency: "eur",
