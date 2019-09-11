@@ -4,10 +4,8 @@ const minimist = require("minimist");
 
 let publicPath = "/";
 
-// TODO: check if this is needed
-if (process.env.RELEASE_TYPE === "dist") {
-  publicPath = "./";
-} else if (process.env.RELEASE_TYPE === "gh-pages") {
+// GitHub pages
+if (process.env.RELEASE_TYPE === "gh-pages") {
   publicPath = "/explorer/";
 }
 
