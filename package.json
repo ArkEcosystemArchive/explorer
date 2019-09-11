@@ -24,7 +24,7 @@
     "serve:testnet": "vue-cli-service serve --network testnet",
     "task:deploy": "cross-env-shell ./scripts/deploy.sh",
     "test": "yarn test:unit && yarn test:e2e",
-    "test:unit": "vue-cli-service test:unit",
+    "test:unit": "vue-cli-service test:unit --maxWorkers=2",
     "test:e2e": "vue-cli-service test:e2e",
     "test:e2e:ci": "vue-cli-service test:e2e --headless"
   },
