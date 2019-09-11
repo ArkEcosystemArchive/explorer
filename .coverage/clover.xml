@@ -1,0 +1,840 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1568218570707" clover="3.2.0">
+  <project timestamp="1568218570707" name="All files">
+    <metrics statements="632" coveredstatements="475" conditionals="187" coveredconditionals="110" methods="188" coveredmethods="123" elements="1007" coveredelements="708" complexity="0" loc="632" ncloc="632" packages="22" files="45" classes="45">
+      <package name="src">
+        <metrics statements="40" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <file name="i18n.ts" path="/Users/michel/projects/explorer/src/i18n.ts">
+          <metrics statements="13" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="2" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+          <line num="2" count="0" type="stmt"/>
+          <line num="4" count="0" type="stmt"/>
+          <line num="7" count="0" type="stmt"/>
+          <line num="8" count="0" type="stmt"/>
+          <line num="9" count="0" type="stmt"/>
+          <line num="10" count="0" type="stmt"/>
+          <line num="11" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="12" count="0" type="stmt"/>
+          <line num="13" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="14" count="0" type="stmt"/>
+          <line num="16" count="0" type="stmt"/>
+          <line num="19" count="0" type="stmt"/>
+        </file>
+        <file name="main.ts" path="/Users/michel/projects/explorer/src/main.ts">
+          <metrics statements="22" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <line num="2" count="0" type="stmt"/>
+          <line num="4" count="0" type="stmt"/>
+          <line num="5" count="0" type="stmt"/>
+          <line num="7" count="0" type="stmt"/>
+          <line num="8" count="0" type="stmt"/>
+          <line num="10" count="0" type="stmt"/>
+          <line num="12" count="0" type="stmt"/>
+          <line num="14" count="0" type="stmt"/>
+          <line num="16" count="0" type="stmt"/>
+          <line num="18" count="0" type="stmt"/>
+          <line num="20" count="0" type="stmt"/>
+          <line num="22" count="0" type="stmt"/>
+          <line num="23" count="0" type="stmt"/>
+          <line num="27" count="0" type="stmt"/>
+          <line num="29" count="0" type="stmt"/>
+          <line num="31" count="0" type="stmt"/>
+          <line num="33" count="0" type="stmt"/>
+          <line num="34" count="0" type="stmt"/>
+          <line num="38" count="0" type="stmt"/>
+          <line num="40" count="0" type="stmt"/>
+          <line num="42" count="0" type="stmt"/>
+          <line num="46" count="0" type="stmt"/>
+        </file>
+        <file name="routerOld.ts" path="/Users/michel/projects/explorer/src/routerOld.ts">
+          <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+          <line num="2" count="0" type="stmt"/>
+          <line num="3" count="0" type="stmt"/>
+          <line num="5" count="0" type="stmt"/>
+          <line num="22" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components">
+        <metrics statements="17" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <file name="index.ts" path="/Users/michel/projects/explorer/src/components/index.ts">
+          <metrics statements="17" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+          <line num="8" count="0" type="stmt"/>
+          <line num="9" count="0" type="stmt"/>
+          <line num="10" count="0" type="stmt"/>
+          <line num="11" count="0" type="stmt"/>
+          <line num="12" count="0" type="stmt"/>
+          <line num="16" count="0" type="stmt"/>
+          <line num="17" count="0" type="stmt"/>
+          <line num="21" count="0" type="stmt"/>
+          <line num="23" count="0" type="stmt"/>
+          <line num="24" count="0" type="stmt"/>
+          <line num="25" count="0" type="stmt"/>
+          <line num="27" count="0" type="stmt"/>
+          <line num="28" count="0" type="stmt"/>
+          <line num="32" count="0" type="stmt"/>
+          <line num="33" count="0" type="stmt"/>
+          <line num="34" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.block">
+        <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <file name="index.ts" path="/Users/michel/projects/explorer/src/components/block/index.ts">
+          <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+          <line num="2" count="0" type="stmt"/>
+          <line num="3" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.charts">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <file name="price-chart.ts" path="/Users/michel/projects/explorer/src/components/charts/price-chart.ts">
+          <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="1" type="stmt"/>
+          <line num="21" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.header">
+        <metrics statements="6" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <file name="index.ts" path="/Users/michel/projects/explorer/src/components/header/index.ts">
+          <metrics statements="6" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="4" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+          <line num="2" count="0" type="stmt"/>
+          <line num="4" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="5" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="6" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
+        </file>
+      </package>
+      <package name="src.components.header.currencies">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <file name="index.ts" path="/Users/michel/projects/explorer/src/components/header/currencies/index.ts">
+          <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="1" type="stmt"/>
+          <line num="2" count="1" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.header.languages">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <file name="index.ts" path="/Users/michel/projects/explorer/src/components/header/languages/index.ts">
+          <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="1" type="stmt"/>
+          <line num="2" count="1" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.header.menu">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <file name="index.ts" path="/Users/michel/projects/explorer/src/components/header/menu/index.ts">
+          <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="1" type="stmt"/>
+          <line num="2" count="1" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.header.toggles">
+        <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <file name="index.ts" path="/Users/michel/projects/explorer/src/components/header/toggles/index.ts">
+          <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+          <line num="2" count="0" type="stmt"/>
+          <line num="3" count="0" type="stmt"/>
+          <line num="4" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.home">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <file name="index.ts" path="/Users/michel/projects/explorer/src/components/home/index.ts">
+          <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="1" type="stmt"/>
+          <line num="2" count="1" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.links">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <file name="index.ts" path="/Users/michel/projects/explorer/src/components/links/index.ts">
+          <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="3" type="stmt"/>
+          <line num="2" count="3" type="stmt"/>
+          <line num="3" count="3" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.monitor">
+        <metrics statements="3" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <file name="index.ts" path="/Users/michel/projects/explorer/src/components/monitor/index.ts">
+          <metrics statements="3" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+          <line num="2" count="0" type="stmt"/>
+          <line num="4" count="0" type="cond" truecount="0" falsecount="2"/>
+        </file>
+      </package>
+      <package name="src.components.monitor.header">
+        <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <file name="index.ts" path="/Users/michel/projects/explorer/src/components/monitor/header/index.ts">
+          <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+          <line num="2" count="0" type="stmt"/>
+          <line num="3" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.utils.pagination">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <file name="index.ts" path="/Users/michel/projects/explorer/src/components/utils/pagination/index.ts">
+          <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="1" type="stmt"/>
+          <line num="2" count="1" type="stmt"/>
+          <line num="3" count="1" type="stmt"/>
+          <line num="4" count="1" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.wallet">
+        <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <file name="index.ts" path="/Users/michel/projects/explorer/src/components/wallet/index.ts">
+          <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+          <line num="2" count="0" type="stmt"/>
+          <line num="3" count="0" type="stmt"/>
+          <line num="4" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.config">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <file name="index.ts" path="/Users/michel/projects/explorer/src/config/index.ts">
+          <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="5" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.directives">
+        <metrics statements="8" coveredstatements="2" conditionals="8" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <file name="click-outside.ts" path="/Users/michel/projects/explorer/src/directives/click-outside.ts">
+          <metrics statements="6" coveredstatements="2" conditionals="8" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <line num="4" count="6" type="stmt"/>
+          <line num="5" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="6" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="7" count="0" type="stmt"/>
+          <line num="11" count="6" type="stmt"/>
+          <line num="14" count="0" type="stmt"/>
+        </file>
+        <file name="index.ts" path="/Users/michel/projects/explorer/src/directives/index.ts">
+          <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="2" count="0" type="stmt"/>
+          <line num="6" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.mixins">
+        <metrics statements="40" coveredstatements="40" conditionals="46" coveredconditionals="38" methods="2" coveredmethods="2"/>
+        <file name="currency.ts" path="/Users/michel/projects/explorer/src/mixins/currency.ts">
+          <metrics statements="12" coveredstatements="12" conditionals="22" coveredconditionals="17" methods="2" coveredmethods="2"/>
+          <line num="1" count="16" type="stmt"/>
+          <line num="3" count="16" type="stmt"/>
+          <line num="8" count="27" type="cond" truecount="2" falsecount="0"/>
+          <line num="9" count="21" type="stmt"/>
+          <line num="13" count="21" type="stmt"/>
+          <line num="25" count="8" type="cond" truecount="1" falsecount="1"/>
+          <line num="27" count="8" type="cond" truecount="2" falsecount="0"/>
+          <line num="28" count="4" type="stmt"/>
+          <line num="31" count="8" type="cond" truecount="2" falsecount="0"/>
+          <line num="33" count="8" type="stmt"/>
+          <line num="40" count="26" type="stmt"/>
+          <line num="51" count="31" type="stmt"/>
+        </file>
+        <file name="index.ts" path="/Users/michel/projects/explorer/src/mixins/index.ts">
+          <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="11" type="stmt"/>
+          <line num="4" count="11" type="stmt"/>
+        </file>
+        <file name="misc.ts" path="/Users/michel/projects/explorer/src/mixins/misc.ts">
+          <metrics statements="9" coveredstatements="9" conditionals="6" coveredconditionals="5" methods="0" coveredmethods="0"/>
+          <line num="1" count="12" type="stmt"/>
+          <line num="2" count="12" type="stmt"/>
+          <line num="4" count="12" type="stmt"/>
+          <line num="9" count="1" type="stmt"/>
+          <line num="16" count="1" type="stmt"/>
+          <line num="17" count="1" type="stmt"/>
+          <line num="23" count="8" type="cond" truecount="2" falsecount="0"/>
+          <line num="24" count="2" type="stmt"/>
+          <line num="27" count="6" type="stmt"/>
+        </file>
+        <file name="network.ts" path="/Users/michel/projects/explorer/src/mixins/network.ts">
+          <metrics statements="2" coveredstatements="2" conditionals="3" coveredconditionals="3" methods="0" coveredmethods="0"/>
+          <line num="1" count="14" type="stmt"/>
+          <line num="6" count="9" type="cond" truecount="3" falsecount="0"/>
+        </file>
+        <file name="strings.ts" path="/Users/michel/projects/explorer/src/mixins/strings.ts">
+          <metrics statements="15" coveredstatements="15" conditionals="15" coveredconditionals="13" methods="0" coveredmethods="0"/>
+          <line num="1" count="16" type="stmt"/>
+          <line num="2" count="16" type="stmt"/>
+          <line num="4" count="16" type="stmt"/>
+          <line num="9" count="37" type="stmt"/>
+          <line num="11" count="1" type="cond" truecount="1" falsecount="1"/>
+          <line num="14" count="34" type="stmt"/>
+          <line num="15" count="34" type="stmt"/>
+          <line num="16" count="34" type="stmt"/>
+          <line num="21" count="1" type="cond" truecount="1" falsecount="1"/>
+          <line num="24" count="1" type="stmt"/>
+          <line num="29" count="4" type="stmt"/>
+          <line num="33" count="6" type="cond" truecount="2" falsecount="0"/>
+          <line num="34" count="4" type="stmt"/>
+          <line num="41" count="2" type="stmt"/>
+          <line num="45" count="3" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.router">
+        <metrics statements="68" coveredstatements="29" conditionals="5" coveredconditionals="0" methods="53" coveredmethods="5"/>
+        <file name="index.ts" path="/Users/michel/projects/explorer/src/router/index.ts">
+          <metrics statements="68" coveredstatements="29" conditionals="5" coveredconditionals="0" methods="53" coveredmethods="5"/>
+          <line num="1" count="1" type="stmt"/>
+          <line num="2" count="1" type="stmt"/>
+          <line num="5" count="1" type="stmt"/>
+          <line num="6" count="1" type="stmt"/>
+          <line num="9" count="2" type="stmt"/>
+          <line num="11" count="1" type="stmt"/>
+          <line num="13" count="1" type="stmt"/>
+          <line num="15" count="1" type="stmt"/>
+          <line num="17" count="1" type="stmt"/>
+          <line num="19" count="1" type="stmt"/>
+          <line num="21" count="1" type="stmt"/>
+          <line num="23" count="1" type="stmt"/>
+          <line num="25" count="1" type="stmt"/>
+          <line num="27" count="1" type="stmt"/>
+          <line num="29" count="1" type="stmt"/>
+          <line num="31" count="1" type="stmt"/>
+          <line num="33" count="1" type="stmt"/>
+          <line num="35" count="1" type="stmt"/>
+          <line num="38" count="1" type="stmt"/>
+          <line num="41" count="1" type="stmt"/>
+          <line num="48" count="1" type="stmt"/>
+          <line num="54" count="0" type="stmt"/>
+          <line num="58" count="0" type="stmt"/>
+          <line num="62" count="0" type="stmt"/>
+          <line num="68" count="0" type="stmt"/>
+          <line num="72" count="0" type="stmt"/>
+          <line num="76" count="0" type="stmt"/>
+          <line num="82" count="0" type="stmt"/>
+          <line num="86" count="0" type="stmt"/>
+          <line num="90" count="0" type="stmt"/>
+          <line num="94" count="0" type="stmt"/>
+          <line num="98" count="0" type="stmt"/>
+          <line num="104" count="0" type="stmt"/>
+          <line num="110" count="0" type="stmt"/>
+          <line num="114" count="0" type="stmt"/>
+          <line num="118" count="0" type="stmt"/>
+          <line num="124" count="0" type="stmt"/>
+          <line num="128" count="0" type="stmt"/>
+          <line num="129" count="0" type="stmt"/>
+          <line num="135" count="0" type="stmt"/>
+          <line num="141" count="0" type="stmt"/>
+          <line num="145" count="0" type="stmt"/>
+          <line num="146" count="0" type="stmt"/>
+          <line num="152" count="0" type="stmt"/>
+          <line num="158" count="0" type="stmt"/>
+          <line num="162" count="0" type="stmt"/>
+          <line num="163" count="0" type="stmt"/>
+          <line num="169" count="0" type="stmt"/>
+          <line num="175" count="0" type="stmt"/>
+          <line num="180" count="0" type="stmt"/>
+          <line num="185" count="0" type="stmt"/>
+          <line num="189" count="0" type="stmt"/>
+          <line num="193" count="0" type="stmt"/>
+          <line num="197" count="0" type="stmt"/>
+          <line num="202" count="0" type="stmt"/>
+          <line num="206" count="0" type="stmt"/>
+          <line num="207" count="0" type="stmt"/>
+          <line num="215" count="0" type="cond" truecount="0" falsecount="5"/>
+          <line num="216" count="0" type="stmt"/>
+          <line num="219" count="0" type="stmt"/>
+          <line num="223" count="1" type="stmt"/>
+          <line num="224" count="1" type="stmt"/>
+          <line num="225" count="1" type="stmt"/>
+          <line num="226" count="1" type="stmt"/>
+          <line num="227" count="1" type="stmt"/>
+          <line num="229" count="1" type="stmt"/>
+          <line num="232" count="1" type="stmt"/>
+          <line num="233" count="1" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.services">
+        <metrics statements="232" coveredstatements="202" conditionals="80" coveredconditionals="53" methods="63" coveredmethods="57"/>
+        <file name="api.ts" path="/Users/michel/projects/explorer/src/services/api.ts">
+          <metrics statements="14" coveredstatements="6" conditionals="9" coveredconditionals="2" methods="2" coveredmethods="1"/>
+          <line num="1" count="9" type="stmt"/>
+          <line num="2" count="9" type="stmt"/>
+          <line num="7" count="73" type="stmt"/>
+          <line num="9" count="73" type="stmt"/>
+          <line num="11" count="53" type="cond" truecount="1" falsecount="1"/>
+          <line num="12" count="0" type="stmt"/>
+          <line num="15" count="53" type="stmt"/>
+          <line num="19" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="20" count="0" type="stmt"/>
+          <line num="25" count="0" type="stmt"/>
+          <line num="27" count="0" type="stmt"/>
+          <line num="29" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="30" count="0" type="stmt"/>
+          <line num="33" count="0" type="stmt"/>
+        </file>
+        <file name="block.ts" path="/Users/michel/projects/explorer/src/services/block.ts">
+          <metrics statements="15" coveredstatements="15" conditionals="3" coveredconditionals="3" methods="7" coveredmethods="7"/>
+          <line num="1" count="5" type="stmt"/>
+          <line num="6" count="1" type="stmt"/>
+          <line num="12" count="1" type="stmt"/>
+          <line num="16" count="1" type="stmt"/>
+          <line num="22" count="1" type="stmt"/>
+          <line num="26" count="4" type="stmt"/>
+          <line num="28" count="2" type="stmt"/>
+          <line num="32" count="1" type="stmt"/>
+          <line num="39" count="1" type="stmt"/>
+          <line num="43" count="2" type="stmt"/>
+          <line num="50" count="1" type="stmt"/>
+          <line num="54" count="4" type="stmt"/>
+          <line num="60" count="1" type="stmt"/>
+          <line num="64" count="4" type="stmt"/>
+          <line num="70" count="2" type="stmt"/>
+        </file>
+        <file name="blockchain.ts" path="/Users/michel/projects/explorer/src/services/blockchain.ts">
+          <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+          <line num="1" count="4" type="stmt"/>
+          <line num="6" count="1" type="stmt"/>
+          <line num="7" count="1" type="stmt"/>
+          <line num="11" count="1" type="stmt"/>
+          <line num="12" count="1" type="stmt"/>
+        </file>
+        <file name="crypto-compare.ts" path="/Users/michel/projects/explorer/src/services/crypto-compare.ts">
+          <metrics statements="59" coveredstatements="54" conditionals="18" coveredconditionals="13" methods="16" coveredmethods="15"/>
+          <line num="1" count="7" type="stmt"/>
+          <line num="2" count="7" type="stmt"/>
+          <line num="3" count="7" type="stmt"/>
+          <line num="5" count="7" type="stmt"/>
+          <line num="8" count="7" type="stmt"/>
+          <line num="9" count="7" type="stmt"/>
+          <line num="11" count="7" type="stmt"/>
+          <line num="13" count="7" type="stmt"/>
+          <line num="14" count="9" type="stmt"/>
+          <line num="15" count="9" type="stmt"/>
+          <line num="16" count="9" type="cond" truecount="1" falsecount="1"/>
+          <line num="17" count="9" type="stmt"/>
+          <line num="18" count="9" type="stmt"/>
+          <line num="19" count="9" type="stmt"/>
+          <line num="25" count="7" type="stmt"/>
+          <line num="27" count="9" type="stmt"/>
+          <line num="28" count="9" type="stmt"/>
+          <line num="31" count="0" type="stmt"/>
+          <line num="32" count="0" type="stmt"/>
+          <line num="37" count="7" type="stmt"/>
+          <line num="40" count="9" type="stmt"/>
+          <line num="44" count="1" type="stmt"/>
+          <line num="45" count="1" type="cond" truecount="1" falsecount="1"/>
+          <line num="46" count="1" type="stmt"/>
+          <line num="51" count="1" type="stmt"/>
+          <line num="55" count="1" type="stmt"/>
+          <line num="59" count="1" type="stmt"/>
+          <line num="63" count="1" type="stmt"/>
+          <line num="67" count="2" type="stmt"/>
+          <line num="75" count="6" type="stmt"/>
+          <line num="76" count="6" type="stmt"/>
+          <line num="78" count="6" type="stmt"/>
+          <line num="79" count="6" type="cond" truecount="2" falsecount="0"/>
+          <line num="80" count="5" type="stmt"/>
+          <line num="83" count="6" type="stmt"/>
+          <line num="92" count="6" type="stmt"/>
+          <line num="96" count="3" type="stmt"/>
+          <line num="97" count="3" type="cond" truecount="2" falsecount="0"/>
+          <line num="98" count="1" type="stmt"/>
+          <line num="101" count="2" type="stmt"/>
+          <line num="104" count="2" type="stmt"/>
+          <line num="106" count="2" type="stmt"/>
+          <line num="107" count="2" type="stmt"/>
+          <line num="109" count="2" type="cond" truecount="3" falsecount="1"/>
+          <line num="110" count="0" type="stmt"/>
+          <line num="113" count="2" type="stmt"/>
+          <line num="114" count="2" type="stmt"/>
+          <line num="116" count="2" type="cond" truecount="2" falsecount="2"/>
+          <line num="117" count="0" type="stmt"/>
+          <line num="123" count="0" type="stmt"/>
+          <line num="126" count="2" type="stmt"/>
+          <line num="134" count="2" type="cond" truecount="2" falsecount="0"/>
+          <line num="135" count="1" type="stmt"/>
+          <line num="138" count="1" type="stmt"/>
+          <line num="140" count="1" type="stmt"/>
+          <line num="146" count="1" type="stmt"/>
+          <line num="150" count="6" type="stmt"/>
+          <line num="152" count="917" type="stmt"/>
+          <line num="159" count="7" type="stmt"/>
+        </file>
+        <file name="delegate.ts" path="/Users/michel/projects/explorer/src/services/delegate.ts">
+          <metrics statements="29" coveredstatements="27" conditionals="4" coveredconditionals="1" methods="11" coveredmethods="10"/>
+          <line num="1" count="3" type="stmt"/>
+          <line num="2" count="3" type="stmt"/>
+          <line num="7" count="1" type="stmt"/>
+          <line num="13" count="1" type="stmt"/>
+          <line num="15" count="1" type="stmt"/>
+          <line num="16" count="10" type="stmt"/>
+          <line num="25" count="1" type="stmt"/>
+          <line num="27" count="10" type="stmt"/>
+          <line num="31" count="2" type="stmt"/>
+          <line num="38" count="1" type="stmt"/>
+          <line num="42" count="0" type="stmt"/>
+          <line num="56" count="0" type="stmt"/>
+          <line num="60" count="8" type="stmt"/>
+          <line num="61" count="4" type="stmt"/>
+          <line num="65" count="1" type="stmt"/>
+          <line num="66" count="1" type="stmt"/>
+          <line num="68" count="1" type="stmt"/>
+          <line num="74" count="1" type="stmt"/>
+          <line num="75" count="51" type="stmt"/>
+          <line num="77" count="51" type="stmt"/>
+          <line num="82" count="1" type="stmt"/>
+          <line num="84" count="1" type="stmt"/>
+          <line num="91" count="1" type="stmt"/>
+          <line num="95" count="1" type="stmt"/>
+          <line num="97" count="1" type="stmt"/>
+          <line num="103" count="1" type="stmt"/>
+          <line num="104" count="51" type="stmt"/>
+          <line num="112" count="1" type="stmt"/>
+          <line num="117" count="1" type="stmt"/>
+        </file>
+        <file name="event-bus.ts" path="/Users/michel/projects/explorer/src/services/event-bus.ts">
+          <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+        </file>
+        <file name="forging.ts" path="/Users/michel/projects/explorer/src/services/forging.ts">
+          <metrics statements="38" coveredstatements="35" conditionals="17" coveredconditionals="14" methods="4" coveredmethods="4"/>
+          <line num="1" count="5" type="stmt"/>
+          <line num="4" count="5" type="stmt"/>
+          <line num="15" count="52" type="cond" truecount="1" falsecount="1"/>
+          <line num="16" count="0" type="stmt"/>
+          <line num="18" count="52" type="stmt"/>
+          <line num="19" count="52" type="stmt"/>
+          <line num="20" count="52" type="stmt"/>
+          <line num="22" count="52" type="stmt"/>
+          <line num="25" count="1" type="stmt"/>
+          <line num="26" count="1" type="stmt"/>
+          <line num="29" count="0" type="stmt"/>
+          <line num="30" count="0" type="stmt"/>
+          <line num="33" count="51" type="stmt"/>
+          <line num="34" count="51" type="stmt"/>
+          <line num="39" count="52" type="stmt"/>
+          <line num="43" count="107" type="cond" truecount="2" falsecount="0"/>
+          <line num="44" count="1" type="stmt"/>
+          <line num="47" count="106" type="stmt"/>
+          <line num="49" count="106" type="cond" truecount="2" falsecount="0"/>
+          <line num="53" count="2" type="stmt"/>
+          <line num="54" count="2" type="stmt"/>
+          <line num="55" count="2" type="stmt"/>
+          <line num="56" count="2" type="stmt"/>
+          <line num="58" count="2" type="stmt"/>
+          <line num="59" count="2" type="stmt"/>
+          <line num="61" count="2" type="cond" truecount="1" falsecount="1"/>
+          <line num="63" count="2" type="stmt"/>
+          <line num="64" count="5" type="stmt"/>
+          <line num="66" count="1" type="stmt"/>
+          <line num="67" count="1" type="stmt"/>
+          <line num="70" count="1" type="stmt"/>
+          <line num="71" count="1" type="stmt"/>
+          <line num="74" count="1" type="stmt"/>
+          <line num="75" count="1" type="stmt"/>
+          <line num="78" count="1" type="stmt"/>
+          <line num="79" count="1" type="stmt"/>
+          <line num="82" count="1" type="stmt"/>
+          <line num="87" count="2" type="stmt"/>
+        </file>
+        <file name="index.ts" path="/Users/michel/projects/explorer/src/services/index.ts">
+          <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="3" type="stmt"/>
+          <line num="2" count="3" type="stmt"/>
+          <line num="3" count="3" type="stmt"/>
+          <line num="5" count="3" type="stmt"/>
+          <line num="6" count="3" type="stmt"/>
+          <line num="8" count="3" type="stmt"/>
+          <line num="10" count="3" type="stmt"/>
+          <line num="12" count="3" type="stmt"/>
+          <line num="14" count="3" type="stmt"/>
+          <line num="16" count="3" type="stmt"/>
+          <line num="18" count="3" type="stmt"/>
+        </file>
+        <file name="migration.ts" path="/Users/michel/projects/explorer/src/services/migration.ts">
+          <metrics statements="21" coveredstatements="12" conditionals="14" coveredconditionals="8" methods="3" coveredmethods="1"/>
+          <line num="1" count="4" type="stmt"/>
+          <line num="2" count="4" type="stmt"/>
+          <line num="6" count="0" type="stmt"/>
+          <line num="8" count="0" type="stmt"/>
+          <line num="10" count="0" type="stmt"/>
+          <line num="15" count="0" type="stmt"/>
+          <line num="17" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="18" count="0" type="stmt"/>
+          <line num="21" count="0" type="stmt"/>
+          <line num="22" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="24" count="0" type="stmt"/>
+          <line num="28" count="3" type="stmt"/>
+          <line num="29" count="3" type="stmt"/>
+          <line num="31" count="3" type="cond" truecount="4" falsecount="0"/>
+          <line num="32" count="1" type="stmt"/>
+          <line num="35" count="2" type="stmt"/>
+          <line num="37" count="2" type="cond" truecount="2" falsecount="0"/>
+          <line num="38" count="2" type="cond" truecount="2" falsecount="0"/>
+          <line num="40" count="2" type="stmt"/>
+          <line num="51" count="2" type="stmt"/>
+          <line num="52" count="2" type="stmt"/>
+        </file>
+        <file name="node.ts" path="/Users/michel/projects/explorer/src/services/node.ts">
+          <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+          <line num="1" count="4" type="stmt"/>
+          <line num="6" count="1" type="stmt"/>
+          <line num="8" count="1" type="stmt"/>
+          <line num="12" count="1" type="stmt"/>
+          <line num="14" count="1" type="stmt"/>
+        </file>
+        <file name="search.ts" path="/Users/michel/projects/explorer/src/services/search.ts">
+          <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+          <line num="1" count="3" type="stmt"/>
+          <line num="6" count="2" type="stmt"/>
+          <line num="10" count="4" type="stmt"/>
+          <line num="14" count="2" type="stmt"/>
+          <line num="18" count="2" type="stmt"/>
+        </file>
+        <file name="transaction.ts" path="/Users/michel/projects/explorer/src/services/transaction.ts">
+          <metrics statements="22" coveredstatements="22" conditionals="12" coveredconditionals="10" methods="9" coveredmethods="9"/>
+          <line num="1" count="5" type="stmt"/>
+          <line num="6" count="1" type="stmt"/>
+          <line num="13" count="1" type="stmt"/>
+          <line num="17" count="4" type="stmt"/>
+          <line num="18" count="2" type="stmt"/>
+          <line num="22" count="1" type="stmt"/>
+          <line num="28" count="1" type="cond" truecount="1" falsecount="1"/>
+          <line num="29" count="1" type="stmt"/>
+          <line num="32" count="1" type="stmt"/>
+          <line num="36" count="1" type="stmt"/>
+          <line num="40" count="4" type="stmt"/>
+          <line num="48" count="3" type="stmt"/>
+          <line num="52" count="2" type="stmt"/>
+          <line num="60" count="2" type="stmt"/>
+          <line num="64" count="3" type="stmt"/>
+          <line num="72" count="2" type="stmt"/>
+          <line num="80" count="3" type="stmt"/>
+          <line num="88" count="2" type="stmt"/>
+          <line num="92" count="1" type="stmt"/>
+          <line num="98" count="1" type="stmt"/>
+          <line num="102" count="1" type="stmt"/>
+          <line num="108" count="1" type="stmt"/>
+        </file>
+        <file name="wallet.ts" path="/Users/michel/projects/explorer/src/services/wallet.ts">
+          <metrics statements="7" coveredstatements="5" conditionals="3" coveredconditionals="2" methods="3" coveredmethods="2"/>
+          <line num="1" count="4" type="stmt"/>
+          <line num="5" count="4" type="stmt"/>
+          <line num="6" count="2" type="stmt"/>
+          <line num="10" count="3" type="stmt"/>
+          <line num="16" count="3" type="stmt"/>
+          <line num="20" count="0" type="stmt"/>
+          <line num="21" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.store">
+        <metrics statements="37" coveredstatements="37" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <file name="index.ts" path="/Users/michel/projects/explorer/src/store/index.ts">
+          <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="36" type="stmt"/>
+          <line num="2" count="36" type="stmt"/>
+          <line num="4" count="36" type="stmt"/>
+          <line num="5" count="36" type="stmt"/>
+          <line num="6" count="36" type="stmt"/>
+          <line num="7" count="36" type="stmt"/>
+          <line num="9" count="36" type="stmt"/>
+          <line num="11" count="36" type="stmt"/>
+          <line num="18" count="36" type="stmt"/>
+        </file>
+        <file name="mutation-types.ts" path="/Users/michel/projects/explorer/src/store/mutation-types.ts">
+          <metrics statements="28" coveredstatements="28" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="2" count="36" type="stmt"/>
+          <line num="3" count="36" type="stmt"/>
+          <line num="4" count="36" type="stmt"/>
+          <line num="5" count="36" type="stmt"/>
+          <line num="8" count="36" type="stmt"/>
+          <line num="9" count="36" type="stmt"/>
+          <line num="10" count="36" type="stmt"/>
+          <line num="11" count="36" type="stmt"/>
+          <line num="12" count="36" type="stmt"/>
+          <line num="13" count="36" type="stmt"/>
+          <line num="14" count="36" type="stmt"/>
+          <line num="15" count="36" type="stmt"/>
+          <line num="16" count="36" type="stmt"/>
+          <line num="17" count="36" type="stmt"/>
+          <line num="20" count="36" type="stmt"/>
+          <line num="21" count="36" type="stmt"/>
+          <line num="24" count="36" type="stmt"/>
+          <line num="25" count="36" type="stmt"/>
+          <line num="26" count="36" type="stmt"/>
+          <line num="27" count="36" type="stmt"/>
+          <line num="28" count="36" type="stmt"/>
+          <line num="29" count="36" type="stmt"/>
+          <line num="30" count="36" type="stmt"/>
+          <line num="31" count="36" type="stmt"/>
+          <line num="32" count="36" type="stmt"/>
+          <line num="33" count="36" type="stmt"/>
+          <line num="34" count="36" type="stmt"/>
+          <line num="35" count="36" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.store.modules">
+        <metrics statements="149" coveredstatements="148" conditionals="28" coveredconditionals="19" methods="60" coveredmethods="59"/>
+        <file name="currency.ts" path="/Users/michel/projects/explorer/src/store/modules/currency.ts">
+          <metrics statements="26" coveredstatements="26" conditionals="2" coveredconditionals="2" methods="8" coveredmethods="8"/>
+          <line num="2" count="36" type="stmt"/>
+          <line num="6" count="36" type="stmt"/>
+          <line num="7" count="36" type="stmt"/>
+          <line num="18" count="36" type="stmt"/>
+          <line num="20" count="7" type="stmt"/>
+          <line num="22" count="7" type="stmt"/>
+          <line num="28" count="1" type="stmt"/>
+          <line num="30" count="1" type="stmt"/>
+          <line num="36" count="2" type="stmt"/>
+          <line num="38" count="2" type="stmt"/>
+          <line num="44" count="2" type="stmt"/>
+          <line num="46" count="2" type="cond" truecount="2" falsecount="0"/>
+          <line num="47" count="2" type="stmt"/>
+          <line num="49" count="2" type="stmt"/>
+          <line num="51" count="2" type="stmt"/>
+          <line num="58" count="36" type="stmt"/>
+          <line num="60" count="7" type="stmt"/>
+          <line num="63" count="1" type="stmt"/>
+          <line num="66" count="2" type="stmt"/>
+          <line num="69" count="2" type="stmt"/>
+          <line num="73" count="36" type="stmt"/>
+          <line num="74" count="5" type="stmt"/>
+          <line num="75" count="2" type="stmt"/>
+          <line num="76" count="1" type="stmt"/>
+          <line num="77" count="3" type="stmt"/>
+          <line num="80" count="36" type="stmt"/>
+        </file>
+        <file name="delegates.ts" path="/Users/michel/projects/explorer/src/store/modules/delegates.ts">
+          <metrics statements="22" coveredstatements="21" conditionals="8" coveredconditionals="8" methods="11" coveredmethods="10"/>
+          <line num="2" count="36" type="stmt"/>
+          <line num="6" count="36" type="stmt"/>
+          <line num="7" count="36" type="stmt"/>
+          <line num="12" count="36" type="stmt"/>
+          <line num="14" count="4" type="stmt"/>
+          <line num="15" count="4" type="stmt"/>
+          <line num="17" count="4" type="stmt"/>
+          <line num="24" count="1" type="stmt"/>
+          <line num="31" count="36" type="stmt"/>
+          <line num="33" count="4" type="stmt"/>
+          <line num="36" count="1" type="stmt"/>
+          <line num="40" count="36" type="stmt"/>
+          <line num="42" count="3" type="cond" truecount="4" falsecount="0"/>
+          <line num="45" count="1" type="stmt"/>
+          <line num="47" count="1" type="stmt"/>
+          <line num="48" count="2" type="stmt"/>
+          <line num="50" count="4" type="stmt"/>
+          <line num="55" count="1" type="stmt"/>
+          <line num="56" count="2" type="stmt"/>
+          <line num="58" count="3" type="stmt"/>
+          <line num="64" count="0" type="stmt"/>
+          <line num="68" count="36" type="stmt"/>
+        </file>
+        <file name="network.ts" path="/Users/michel/projects/explorer/src/store/modules/network.ts">
+          <metrics statements="43" coveredstatements="43" conditionals="0" coveredconditionals="0" methods="24" coveredmethods="24"/>
+          <line num="2" count="36" type="stmt"/>
+          <line num="6" count="36" type="stmt"/>
+          <line num="7" count="36" type="stmt"/>
+          <line num="22" count="36" type="stmt"/>
+          <line num="24" count="3" type="stmt"/>
+          <line num="30" count="9" type="stmt"/>
+          <line num="36" count="1" type="stmt"/>
+          <line num="42" count="3" type="stmt"/>
+          <line num="48" count="3" type="stmt"/>
+          <line num="54" count="1" type="stmt"/>
+          <line num="60" count="7" type="stmt"/>
+          <line num="66" count="3" type="stmt"/>
+          <line num="72" count="1" type="stmt"/>
+          <line num="78" count="2" type="stmt"/>
+          <line num="84" count="1" type="stmt"/>
+          <line num="90" count="1" type="stmt"/>
+          <line num="97" count="36" type="stmt"/>
+          <line num="99" count="3" type="stmt"/>
+          <line num="102" count="9" type="stmt"/>
+          <line num="105" count="1" type="stmt"/>
+          <line num="108" count="3" type="stmt"/>
+          <line num="111" count="3" type="stmt"/>
+          <line num="114" count="1" type="stmt"/>
+          <line num="117" count="7" type="stmt"/>
+          <line num="120" count="3" type="stmt"/>
+          <line num="123" count="1" type="stmt"/>
+          <line num="126" count="2" type="stmt"/>
+          <line num="129" count="1" type="stmt"/>
+          <line num="132" count="1" type="stmt"/>
+          <line num="136" count="36" type="stmt"/>
+          <line num="137" count="5" type="stmt"/>
+          <line num="138" count="8" type="stmt"/>
+          <line num="139" count="1" type="stmt"/>
+          <line num="140" count="3" type="stmt"/>
+          <line num="141" count="4" type="stmt"/>
+          <line num="142" count="1" type="stmt"/>
+          <line num="143" count="7" type="stmt"/>
+          <line num="144" count="3" type="stmt"/>
+          <line num="145" count="1" type="stmt"/>
+          <line num="146" count="3" type="stmt"/>
+          <line num="147" count="1" type="stmt"/>
+          <line num="148" count="4" type="stmt"/>
+          <line num="151" count="36" type="stmt"/>
+        </file>
+        <file name="ui.ts" path="/Users/michel/projects/explorer/src/store/modules/ui.ts">
+          <metrics statements="58" coveredstatements="58" conditionals="18" coveredconditionals="9" methods="17" coveredmethods="17"/>
+          <line num="2" count="36" type="stmt"/>
+          <line num="6" count="36" type="stmt"/>
+          <line num="7" count="36" type="stmt"/>
+          <line num="24" count="36" type="stmt"/>
+          <line num="26" count="1" type="stmt"/>
+          <line num="28" count="1" type="stmt"/>
+          <line num="34" count="1" type="stmt"/>
+          <line num="36" count="1" type="stmt"/>
+          <line num="42" count="2" type="stmt"/>
+          <line num="44" count="2" type="stmt"/>
+          <line num="50" count="2" type="stmt"/>
+          <line num="55" count="2" type="stmt"/>
+          <line num="61" count="3" type="stmt"/>
+          <line num="66" count="3" type="stmt"/>
+          <line num="72" count="4" type="stmt"/>
+          <line num="73" count="4" type="stmt"/>
+          <line num="75" count="4" type="stmt"/>
+          <line num="78" count="4" type="stmt"/>
+          <line num="80" count="4" type="stmt"/>
+          <line num="86" count="1" type="stmt"/>
+          <line num="88" count="1" type="stmt"/>
+          <line num="90" count="1" type="stmt"/>
+          <line num="96" count="1" type="stmt"/>
+          <line num="98" count="1" type="stmt"/>
+          <line num="100" count="1" type="stmt"/>
+          <line num="106" count="1" type="stmt"/>
+          <line num="108" count="1" type="stmt"/>
+          <line num="110" count="1" type="stmt"/>
+          <line num="116" count="1" type="stmt"/>
+          <line num="118" count="1" type="stmt"/>
+          <line num="120" count="1" type="stmt"/>
+          <line num="127" count="36" type="stmt"/>
+          <line num="129" count="1" type="stmt"/>
+          <line num="132" count="1" type="stmt"/>
+          <line num="135" count="2" type="stmt"/>
+          <line num="138" count="5" type="stmt"/>
+          <line num="141" count="5" type="stmt"/>
+          <line num="144" count="4" type="stmt"/>
+          <line num="147" count="1" type="stmt"/>
+          <line num="150" count="1" type="stmt"/>
+          <line num="153" count="1" type="stmt"/>
+          <line num="156" count="1" type="stmt"/>
+          <line num="160" count="36" type="stmt"/>
+          <line num="161" count="2" type="stmt"/>
+          <line num="162" count="23" type="stmt"/>
+          <line num="163" count="3" type="stmt"/>
+          <line num="164" count="6" type="stmt"/>
+          <line num="165" count="1" type="stmt"/>
+          <line num="166" count="2" type="stmt"/>
+          <line num="169" count="1" type="cond" truecount="1" falsecount="1"/>
+          <line num="170" count="1" type="cond" truecount="1" falsecount="1"/>
+          <line num="174" count="1" type="cond" truecount="1" falsecount="1"/>
+          <line num="175" count="1" type="stmt"/>
+          <line num="184" count="1" type="cond" truecount="1" falsecount="1"/>
+          <line num="185" count="1" type="cond" truecount="1" falsecount="1"/>
+          <line num="189" count="1" type="cond" truecount="1" falsecount="1"/>
+          <line num="190" count="1" type="cond" truecount="1" falsecount="1"/>
+          <line num="194" count="36" type="stmt"/>
+        </file>
+      </package>
+    </metrics>
+  </project>
+</coverage>

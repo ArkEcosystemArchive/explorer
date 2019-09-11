@@ -1,4 +1,6 @@
 module.exports = {
+  verbose: true,
+  testURL: "http://localhost/",
   moduleFileExtensions: ["js", "jsx", "json", "vue", "ts", "tsx"],
   transform: {
     "^.+\\.vue$": "vue-jest",
@@ -10,12 +12,18 @@ module.exports = {
     "^@/(.*)$": "<rootDir>/src/$1",
   },
   snapshotSerializers: ["jest-serializer-vue"],
-  testMatch: ["**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"],
+  testMatch: ["**/__tests__/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"],
   testURL: "http://localhost/",
   watchPlugins: ["jest-watch-typeahead/filename", "jest-watch-typeahead/testname"],
   globals: {
     "ts-jest": {
       babelConfig: true,
+      diagnostics: false,
     },
   },
+  setupFiles: ["jest-localstorage-mock"],
+  collectCoverage: true,
+  coverageDirectory: "<rootDir>/.coverage",
+  collectCoverageFrom: ["src/**/*.ts", "!**/node_modules/**"],
+  coverageReporters: ["json", "lcov", "text", "clover", "html"],
 };

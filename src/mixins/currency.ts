@@ -4,14 +4,16 @@ const locale = store.getters["ui/locale"];
 
 export default {
   methods: {
-    readableCrypto(value: number, appendCurrency: boolean = true, decimals: number = 8): string {
-      const normalizedValue: string = (value /= 1e8).toLocaleString(locale, {
-        maximumFractionDigits: decimals,
-      });
+    readableCrypto(value: number | undefined, appendCurrency: boolean = true, decimals: number = 8): string | void {
+      if (value) {
+        const normalizedValue: string = (value /= 1e8).toLocaleString(locale, {
+          maximumFractionDigits: decimals,
+        });
 
-      return appendCurrency
-        ? `${normalizedValue} ${store.getters["network/symbol"] || store.getters["network/defaults"].symbol || ""}`
-        : normalizedValue;
+        return appendCurrency
+          ? `${normalizedValue} ${store.getters["network/symbol"] || store.getters["network/defaults"].symbol || ""}`
+          : normalizedValue;
+      }
     },
 
     readableCurrency(

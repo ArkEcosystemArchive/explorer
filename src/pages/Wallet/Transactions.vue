@@ -181,7 +181,11 @@ export default class WalletTransactions extends Vue {
   }
 
   private changePage() {
-    if (this.currentPage !== Number(this.$route.params.page) || this.address !== this.$route.params.address || this.type !== this.$route.params.type) {
+    if (
+      this.currentPage !== Number(this.$route.params.page) ||
+      this.address !== this.$route.params.address ||
+      this.type !== this.$route.params.type
+    ) {
       // @ts-ignore
       this.$router.push({
         name: "wallet-transactions",

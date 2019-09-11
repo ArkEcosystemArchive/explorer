@@ -12,7 +12,7 @@ const state: IDelegateState = {
 const actions: ActionTree<IDelegateState, {}> = {
   setDelegates: ({ commit }, { delegates, timestamp }) => {
     localStorage.setItem("delegates", JSON.stringify(delegates));
-    localStorage.setItem("delegatesFetchedAt", timestamp.toString());
+    localStorage.setItem("delegatesFetchedAt", timestamp);
 
     commit({
       type: types.SET_DELEGATES,

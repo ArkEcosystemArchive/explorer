@@ -17,16 +17,16 @@
     "build:devnet": "vue-cli-service build --network devnet",
     "build:testnet": "vue-cli-service-build --network testnet",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
-    "lint": "vue-cli-service lint && prettier --write \"./*.{ts,js,json,md,vue}\" \"./src/**/*.{ts,js,json,md,vue}\" \"./tests/**/*.{ts,js,json,md,vue}\"",
+    "lint": "vue-cli-service lint && prettier --write \"./*.{ts,js,json,md,vue}\" \"./src/**/*.{ts,js,json,md,vue}\" \"./__tests__/**/*.{ts,js,json,md,vue}\"",
     "serve": "vue-cli-service serve",
     "serve:mainnet": "vue-cli-service serve --network mainnet",
     "serve:devnet": "vue-cli-service serve --network devnet",
     "serve:testnet": "vue-cli-service serve --network testnet",
     "task:deploy": "cross-env-shell ./scripts/deploy.sh",
     "test": "yarn test:unit && yarn test:e2e",
-    "test:unit": "jest --maxWorkers=2 --config __tests__/unit/jest.conf.js",
-    "test:e2e": "cypress run",
-    "test:e2e:ci": "start-server-and-test dev http://localhost:8080 test:e2e"
+    "test:unit": "vue-cli-service test:unit",
+    "test:e2e": "vue-cli-service test:e2e",
+    "test:e2e:ci": "vue-cli-service test:e2e --headless"
   },
   "dependencies": {
     "@types/nprogress": "^0.2.0",
@@ -74,6 +74,7 @@
     "minimist": "^1.2.0",
     "moment-timezone": "^0.5.26",
     "prettier": "^1.18.2",
+    "sinon": "^7.4.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "tailwindcss": "^1.1.2",
