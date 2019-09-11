@@ -9,27 +9,27 @@ describe("Block Details", () => {
       .should("not.class", "animated");
   });
 
-  it("should be possible to navigate to next block and back", () => {
-    cy.visit("/block/3487084709104787070");
+  // it("should be possible to navigate to next block and back", () => {
+  //   cy.visit("/block/3487084709104787070");
 
-    cy.get("span.has-tooltip")
-      .contains("3487084709104787070")
-      .should("be.visible");
-    cy.get("button")
-      .contains("Next block")
-      .click();
+  //   cy.get("span.has-tooltip")
+  //     .contains("3487084709104787070")
+  //     .should("be.visible");
+  //   cy.get("button")
+  //     .contains("Next block")
+  //     .click();
 
-    cy.get("span.has-tooltip")
-      .contains("12152817243754268433")
-      .should("be.visible");
-    cy.get("button")
-      .contains("Previous block")
-      .click();
+  //   cy.get("span.has-tooltip")
+  //     .contains("12152817243754268433")
+  //     .should("be.visible");
+  //   cy.get("button")
+  //     .contains("Previous block")
+  //     .click();
 
-    cy.get("span.has-tooltip")
-      .contains("3487084709104787070")
-      .should("be.visible");
-  });
+  //   cy.get("span.has-tooltip")
+  //     .contains("3487084709104787070")
+  //     .should("be.visible");
+  // });
 
   it("should not contain a transaction table if block has no transactions", () => {
     cy.visit("/block/3487084709104787070");

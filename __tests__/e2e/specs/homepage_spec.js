@@ -259,7 +259,7 @@ describe("Homepage", () => {
       cy.get("#language-icon").click();
 
       cy.get(".language-menu img.flag-image").each(($flag, index, $flags) => {
-        expect($flag.attr("src")).to.contain("image/svg");
+        expect($flag.attr("src")).to.contain("img/en-US");
       });
     });
 
