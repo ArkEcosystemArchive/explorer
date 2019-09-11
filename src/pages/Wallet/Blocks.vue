@@ -135,15 +135,17 @@ export default class WalletBlocks extends Vue {
   }
 
   private changePage() {
-    // @ts-ignore
-    this.$router.push({
-      name: "wallet-blocks",
-      params: {
-        address: this.address,
-        username: this.username,
-        page: this.currentPage,
-      },
-    });
+    if (this.currentPage !== Number(this.$route.params.page) || this.address !== this.$route.params.address || this.username !== this.$route.params.username) {
+      // @ts-ignore
+      this.$router.push({
+        name: "wallet-blocks",
+        params: {
+          address: this.address,
+          username: this.username,
+          page: this.currentPage,
+        },
+      });
+    }
   }
 
   private onSortChange(params: ISortParameters) {

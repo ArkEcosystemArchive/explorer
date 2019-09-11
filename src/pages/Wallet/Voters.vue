@@ -115,14 +115,16 @@ export default class WalletVoters extends Vue {
   }
 
   private changePage() {
-    // @ts-ignore
-    this.$router.push({
-      name: "wallet-voters",
-      params: {
-        address: this.address,
-        page: this.currentPage,
-      },
-    });
+    if (this.currentPage !== Number(this.$route.params.page) || this.address !== this.$route.params.address) {
+      // @ts-ignore
+      this.$router.push({
+        name: "wallet-voters",
+        params: {
+          address: this.address,
+          page: this.currentPage,
+        },
+      });
+    }
   }
 
   private onSortChange(params: ISortParameters) {

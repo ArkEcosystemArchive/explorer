@@ -100,13 +100,15 @@ export default class BlockPage extends Vue {
   }
 
   private changePage() {
-    // @ts-ignore
-    this.$router.push({
-      name: "blocks",
-      params: {
-        page: this.currentPage,
-      },
-    });
+    if (this.currentPage !== Number(this.$route.params.page)) {
+      // @ts-ignore
+      this.$router.push({
+        name: "blocks",
+        params: {
+          page: this.currentPage,
+        },
+      });
+    }
   }
 
   private onSortChange(params: ISortParameters) {

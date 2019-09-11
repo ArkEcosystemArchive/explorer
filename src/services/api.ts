@@ -8,10 +8,9 @@ class ApiService {
 
     const response = await axios.get(`${server}/${url}`, config);
 
-    // TODO: should be response.data.error
-    // if (response.error) {
-    //   return Promise.reject(new Error(`Error GET ${url} : ${JSON.stringify(response)}`));
-    // }
+    if (response.data.error) {
+      return Promise.reject(new Error(`Error GET ${url} : ${JSON.stringify(response)}`));
+    }
 
     return response.data;
   }
@@ -27,10 +26,9 @@ class ApiService {
 
     const response = await axios.post(`${server}/${url}`, data, config);
 
-    // TODO: should be response.data.error
-    // if (response.error) {
-    //   return Promise.reject(new Error(`Error POST ${url} : ${JSON.stringify(response)}`));
-    // }
+    if (response.data.error) {
+      return Promise.reject(new Error(`Error POST ${url} : ${JSON.stringify(response)}`));
+    }
 
     return response.data;
   }

@@ -100,13 +100,15 @@ export default class TopWallets extends Vue {
   }
 
   public changePage() {
-    // @ts-ignore
-    this.$router.push({
-      name: "top-wallets",
-      params: {
-        page: this.currentPage,
-      },
-    });
+    if (this.currentPage !== Number(this.$route.params.page)) {
+      // @ts-ignore
+      this.$router.push({
+        name: "top-wallets",
+        params: {
+          page: this.currentPage,
+        },
+      });
+    }
   }
 
   private setWallets(wallets: IWallet[]) {

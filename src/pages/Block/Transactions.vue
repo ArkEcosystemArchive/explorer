@@ -106,14 +106,16 @@ export default class BlockTransactions extends Vue {
   }
 
   private changePage() {
-    // @ts-ignore
-    this.$router.push({
-      name: "block-transactions",
-      params: {
-        id: this.id,
-        page: this.currentPage,
-      },
-    });
+    if (this.currentPage !== Number(this.$route.params.page) || this.id !== this.$route.params.id) {
+      // @ts-ignore
+      this.$router.push({
+        name: "block-transactions",
+        params: {
+          id: this.id,
+          page: this.currentPage,
+        },
+      });
+    }
   }
 
   private onSortChange(params: ISortParameters) {
