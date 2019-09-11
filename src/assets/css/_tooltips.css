@@ -132,11 +132,13 @@
 }
 
 /* Forging */
+.tooltip.tooltip-bg-success .tooltip-inner,
 .tooltip.tooltip-bg-forging .tooltip-inner {
   background-color: #40a130;
   color: white;
 }
 
+.tooltip.tooltip-bg-success .tooltip-arrow,
 .tooltip.tooltip-bg-forging .tooltip-arrow {
   border-color: #40a130;
 }
@@ -152,11 +154,13 @@
 }
 
 /* Not Forging */
+.tooltip.tooltip-bg-error .tooltip-inner,
 .tooltip.tooltip-bg-not-forging .tooltip-inner {
   background-color: #e23a3e;
   color: white;
 }
 
+.tooltip.tooltip-bg-error .tooltip-arrow,
 .tooltip.tooltip-bg-not-forging .tooltip-arrow {
   border-color: #e23a3e;
 }

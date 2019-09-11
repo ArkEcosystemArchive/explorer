@@ -28,10 +28,10 @@ export default class Clipboard extends Vue {
 
       if (this.notSupported) {
         tooltip.content = this.$i18n.t("BUTTON_CLIPBOARD.ERROR");
-        tooltip.classes = "tooltip-bg-2";
+        tooltip.classes = "tooltip-bg-error";
       } else {
         tooltip.content = this.$i18n.t("BUTTON_CLIPBOARD.SUCCESS");
-        tooltip.classes = "tooltip-bg-0";
+        tooltip.classes = "tooltip-bg-success";
       }
     }
 
