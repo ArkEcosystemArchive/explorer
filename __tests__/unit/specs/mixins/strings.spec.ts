@@ -61,7 +61,7 @@ describe("Mixins > Strings", () => {
       expect(wrapper.vm.truncate("&ThisIsA25CharacterString", 24)).toEqual("&ThisIsA25C...cterString");
     });
 
-    it("should return original value if incorrect \"where\" is specified", () => {
+    it('should return original value if incorrect "where" is specified', () => {
       expect(wrapper.vm.truncate("Hello World", 8, "something")).toEqual("Hello World");
     });
   });
