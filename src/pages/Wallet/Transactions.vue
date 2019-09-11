@@ -78,7 +78,6 @@
 import { Component, Vue, Watch } from "vue-property-decorator";
 import { Route } from "vue-router";
 import { IBlock, IDelegate, ISortParameters, ITransaction, IWallet } from "@/interfaces";
-// @ts-ignore
 import TransactionService from "@/services/transaction";
 
 Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
@@ -118,7 +117,7 @@ export default class WalletTransactions extends Vue {
     this.changePage();
   }
 
-  public async beforeRouteEnter(to: Route, from: Route, next: () => void) {
+  public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
     try {
       // @ts-ignore
       const { meta, data } = await TransactionService[`${to.params.type}ByAddress`](
@@ -126,19 +125,17 @@ export default class WalletTransactions extends Vue {
         Number(to.params.page),
       );
 
-      // @ts-ignore
-      next(vm => {
+      next((vm: WalletTransactions) => {
         vm.currentPage = Number(to.params.page);
         vm.setTransactions(data);
         vm.setMeta(meta);
       });
     } catch (e) {
-      // @ts-ignore
       next({ name: "404" });
     }
   }
 
-  public async beforeRouteUpdate(to: Route, from: Route, next: () => void) {
+  public async beforeRouteUpdate(to: Route, from: Route, next: (vm?: any) => void) {
     this.selectOpen = false;
     this.transactions = null;
     this.meta = null;
@@ -155,7 +152,6 @@ export default class WalletTransactions extends Vue {
       this.setMeta(meta);
       next();
     } catch (e) {
-      // @ts-ignore
       next({ name: "404" });
     }
   }

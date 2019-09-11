@@ -38,7 +38,6 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
-// @ts-ignore
 import SearchService from "@/services/search";
 import { IDelegate } from "@/interfaces";
 import { LocaleMessage } from "vue-i18n";
@@ -65,8 +64,7 @@ export default class HeaderSearch extends Vue {
   }
 
   public mounted() {
-    // @ts-ignore
-    this.$refs.search.focus();
+    (this.$refs.search as HTMLInputElement).focus();
 
     const WIDTH_THRESHOLD = 1024;
     const widthQuery = window.matchMedia(`(max-width: ${WIDTH_THRESHOLD}px)`);

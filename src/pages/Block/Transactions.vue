@@ -21,7 +21,6 @@
 import { Component, Vue, Watch } from "vue-property-decorator";
 import { Route } from "vue-router";
 import { ISortParameters, ITransaction } from "@/interfaces";
-// @ts-ignore
 import TransactionService from "@/services/transaction";
 
 Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
@@ -56,23 +55,21 @@ export default class BlockTransactions extends Vue {
     this.changePage();
   }
 
-  public async beforeRouteEnter(to: Route, from: Route, next: () => void) {
+  public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
     try {
       const { meta, data } = await TransactionService.byBlock(to.params.id, Number(to.params.page));
 
-      // @ts-ignore
-      next(vm => {
+      next((vm: BlockTransactions) => {
         vm.currentPage = Number(to.params.page);
         vm.setTransactions(data);
         vm.setMeta(meta);
       });
     } catch (e) {
-      // @ts-ignore
       next({ name: "404" });
     }
   }
 
-  public async beforeRouteUpdate(to: Route, from: Route, next: () => void) {
+  public async beforeRouteUpdate(to: Route, from: Route, next: (vm?: any) => void) {
     this.transactions = null;
     this.meta = null;
 
@@ -84,7 +81,6 @@ export default class BlockTransactions extends Vue {
       this.setMeta(meta);
       next();
     } catch (e) {
-      // @ts-ignore
       next({ name: "404" });
     }
   }

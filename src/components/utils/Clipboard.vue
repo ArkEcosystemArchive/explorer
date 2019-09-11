@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { IVTooltip } from "@/interfaces";
 
 @Component
 export default class Clipboard extends Vue {
@@ -15,7 +16,7 @@ export default class Clipboard extends Vue {
   private notSupported: boolean = false;
 
   private getTooltip() {
-    const tooltip = {
+    const tooltip: IVTooltip = {
       content: this.$i18n.t("BUTTON_CLIPBOARD.COPY_TO_CLIPBOARD"),
       trigger: "hover",
       show: this.copying,
@@ -23,16 +24,13 @@ export default class Clipboard extends Vue {
     };
 
     if (this.copying) {
-      // @ts-ignore
       tooltip.delay = { show: 0, hide: 1000 };
 
       if (this.notSupported) {
         tooltip.content = this.$i18n.t("BUTTON_CLIPBOARD.ERROR");
-        // @ts-ignore
         tooltip.classes = "tooltip-bg-2";
       } else {
         tooltip.content = this.$i18n.t("BUTTON_CLIPBOARD.SUCCESS");
-        // @ts-ignore
         tooltip.classes = "tooltip-bg-0";
       }
     }
@@ -53,8 +51,7 @@ export default class Clipboard extends Vue {
       const editable = textArea.contentEditable;
       const readOnly = textArea.readOnly;
 
-      // @ts-ignore
-      textArea.contentEditable = true;
+      textArea.contentEditable = "true";
       textArea.readOnly = false;
 
       const range = document.createRange();

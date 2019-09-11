@@ -19,7 +19,6 @@ import { Component, Vue } from "vue-property-decorator";
 import { Route } from "vue-router";
 import { IWallet } from "@/interfaces";
 import { WalletDelegate, WalletDetails, WalletTransactions } from "@/components/wallet";
-// @ts-ignore
 import WalletService from "@/services/wallet";
 
 Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
@@ -41,18 +40,16 @@ export default class WalletPage extends Vue {
     }
   }
 
-  public async beforeRouteEnter(to: Route, from: Route, next: () => void) {
+  public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
     try {
       const response = await WalletService.find(to.params.address);
-      // @ts-ignore
-      next(vm => vm.setWallet(response));
+      next((vm: WalletPage) => vm.setWallet(response));
     } catch (e) {
-      // @ts-ignore
       next({ name: "404" });
     }
   }
 
-  public async beforeRouteUpdate(to: Route, from: Route, next: () => void) {
+  public async beforeRouteUpdate(to: Route, from: Route, next: (vm?: any) => void) {
     this.wallet = null;
 
     try {
@@ -60,7 +57,6 @@ export default class WalletPage extends Vue {
       this.setWallet(response);
       next();
     } catch (e) {
-      // @ts-ignore
       next({ name: "404" });
     }
   }

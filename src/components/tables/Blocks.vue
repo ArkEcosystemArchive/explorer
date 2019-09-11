@@ -65,7 +65,6 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { IBlock, ISortParameters } from "@/interfaces";
-// @ts-ignore
 import CryptoCompareService from "@/services/crypto-compare";
 
 @Component

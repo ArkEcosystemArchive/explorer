@@ -19,7 +19,6 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { IBlock, ISortParameters } from "@/interfaces";
-// @ts-ignore
 import BlockService from "@/services/block";
 
 @Component

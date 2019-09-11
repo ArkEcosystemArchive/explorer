@@ -72,7 +72,6 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { IDelegate } from "@/interfaces";
-// @ts-ignore
 import ForgingService from "@/services/forging";
 
 @Component

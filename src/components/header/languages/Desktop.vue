@@ -13,7 +13,6 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { mapGetters } from "vuex";
-// @ts-ignore
 import { I18N } from "@/config";
 import moment from "moment";
 

@@ -123,8 +123,7 @@ export default class TableDelegates extends Vue {
       : this.$i18n.t("PAGES.DELEGATE_MONITOR.NEVER");
   }
 
-  // @ts-ignore
-  private statusTooltip(row) {
+  private statusTooltip(row: any) {
     return {
       trigger: "hover click",
       content: this.tooltipContent(row),
@@ -132,8 +131,7 @@ export default class TableDelegates extends Vue {
     };
   }
 
-  // @ts-ignore
-  private tooltipContent(row) {
+  private tooltipContent(row: any) {
     // @ts-ignore
     const status = {
       0: this.$i18n.t("PAGES.DELEGATE_MONITOR.STATUS.FORGING"),
@@ -154,8 +152,7 @@ export default class TableDelegates extends Vue {
       : status;
   }
 
-  // @ts-ignore
-  private status(row) {
+  private status(row: any) {
     // @ts-ignore
     return {
       0: "forging",
@@ -165,8 +162,7 @@ export default class TableDelegates extends Vue {
     }[row.forgingStatus];
   }
 
-  // @ts-ignore
-  private sortByLastBlockHeight(x: number, y: number, col: number, rowX, rowY) {
+  private sortByLastBlockHeight(x: number, y: number, col: number, rowX: any, rowY: any) {
     const heightX = rowX.blocks.last ? rowX.blocks.last.height : -1;
     const heightY = rowY.blocks.last ? rowY.blocks.last.height : -1;
 

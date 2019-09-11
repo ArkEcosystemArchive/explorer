@@ -98,7 +98,6 @@
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { ITransaction } from "@/interfaces";
-// @ts-ignore
 import CryptoCompareService from "@/services/crypto-compare";
 
 @Component({

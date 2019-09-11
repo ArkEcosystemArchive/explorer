@@ -48,29 +48,25 @@ export default class BlockPage extends Vue {
     this.changePage();
   }
 
-  public async beforeRouteEnter(to: Route, from: Route, next: () => void) {
+  public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
     try {
-      // @ts-ignore
       const { meta, data } = await BlockService.paginate(Number(to.params.page));
 
-      // @ts-ignore
-      next(vm => {
+      next((vm: BlockPage) => {
         vm.currentPage = Number(to.params.page);
         vm.setBlocks(data);
         vm.setMeta(meta);
       });
     } catch (e) {
-      // @ts-ignore
       next({ name: "404" });
     }
   }
 
-  public async beforeRouteUpdate(to: Route, from: Route, next: () => void) {
+  public async beforeRouteUpdate(to: Route, from: Route, next: (vm?: any) => void) {
     this.blocks = null;
     this.meta = null;
 
     try {
-      // @ts-ignore
       const { meta, data } = await BlockService.paginate(Number(to.params.page));
 
       this.currentPage = Number(to.params.page);
@@ -78,7 +74,6 @@ export default class BlockPage extends Vue {
       this.setMeta(meta);
       next();
     } catch (e) {
-      // @ts-ignore
       next({ name: "404" });
     }
   }

@@ -23,7 +23,6 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { Route } from "vue-router";
 import { ISortParameters, IWallet } from "@/interfaces";
-// @ts-ignore
 import WalletService from "@/services/wallet";
 
 Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
@@ -58,23 +57,21 @@ export default class TopWallets extends Vue {
     this.changePage();
   }
 
-  public async beforeRouteEnter(to: Route, from: Route, next: () => void) {
+  public async beforeRouteEnter(to: Route, from: Route, next: (vm?: any) => void) {
     try {
       const { meta, data } = await WalletService.top(Number(to.params.page));
 
-      // @ts-ignore
-      next(vm => {
+      next((vm: TopWallets) => {
         vm.currentPage = Number(to.params.page);
         vm.setWallets(data);
         vm.setMeta(meta);
       });
     } catch (e) {
-      // @ts-ignore
       next({ name: "404" });
     }
   }
 
-  public async beforeRouteUpdate(to: Route, from: Route, next: () => void) {
+  public async beforeRouteUpdate(to: Route, from: Route, next: (vm?: any) => void) {
     this.wallets = null;
     this.meta = null;
 
@@ -86,7 +83,6 @@ export default class TopWallets extends Vue {
       this.setMeta(meta);
       next();
     } catch (e) {
-      // @ts-ignore
       next({ name: "404" });
     }
   }

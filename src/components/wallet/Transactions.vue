@@ -59,7 +59,6 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { ISortParameters, ITransaction, IWallet } from "@/interfaces";
-// @ts-ignore
 import TransactionService from "@/services/transaction";
 
 @Component

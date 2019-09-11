@@ -209,3 +209,12 @@ export interface IStorePayload {
   type: string;
   value: any;
 }
+
+export interface IVTooltip {
+  content: any;
+  trigger?: string;
+  show?: boolean;
+  hideOnTargetClick?: boolean;
+  delay?: any;
+  classes?: string;
+}

@@ -43,7 +43,6 @@ import { Route } from "vue-router";
 import { ISortParameters, ITransaction } from "@/interfaces";
 import NotFound from "@/components/utils/NotFound.vue";
 import TransactionDetails from "@/components/transaction/Details.vue";
-// @ts-ignore
 import TransactionService from "@/services/transaction";
 
 Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
@@ -63,19 +62,18 @@ export default class TransactionPage extends Vue {
   private isLoading: boolean = false;
   private height: number;
 
-  public async beforeRouteEnter(to: Route, from: Route, next: () => void) {
+  public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
     try {
       const transaction = await TransactionService.find(to.params.id);
-      // @ts-ignore
-      next(vm => {
+      next((vm: TransactionPage) => {
         vm.setTransaction(transaction);
       });
     } catch (e) {
-      // @ts-ignore
-      next(vm => {
+      next((vm: TransactionPage) => {
         console.log(e.message || e.data.error);
 
         vm.transactionNotFound = true;
+        // @ts-ignore
         vm.transaction = { id: to.params.id };
       });
     }
@@ -86,7 +84,6 @@ export default class TransactionPage extends Vue {
 
     try {
       const transaction = await TransactionService.find(to.params.id);
-      // @ts-ignore
       this.setTransaction(transaction);
       next();
     } catch (e) {
@@ -103,7 +100,6 @@ export default class TransactionPage extends Vue {
 
     try {
       const transaction = await TransactionService.find(this.transaction!.id);
-      // @ts-ignore
       this.setTransaction(transaction);
       this.transactionNotFound = false;
     } catch (e) {

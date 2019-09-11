@@ -44,14 +44,12 @@ export default class BlockPage extends Vue {
   private blockNotFound: boolean = false;
   private isLoading: boolean = false;
 
-  public async beforeRouteEnter(to: Route, from: Route, next: () => void) {
+  public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
     try {
       const response = await BlockService.find(to.params.id);
-      // @ts-ignore
-      next(vm => vm.setBlock(response));
+      next((vm: BlockPage) => vm.setBlock(response));
     } catch (e) {
-      // @ts-ignore
-      next(vm => {
+      next((vm: BlockPage) => {
         console.log(e.message || e.data.error);
 
         vm.blockNotFound = true;
@@ -66,7 +64,6 @@ export default class BlockPage extends Vue {
 
     try {
       const response = await BlockService.find(to.params.id);
-      // @ts-ignore
       this.setBlock(response);
       next();
     } catch (e) {
@@ -85,7 +82,6 @@ export default class BlockPage extends Vue {
   private async updateBlock() {
     try {
       const response = await BlockService.find(this.block!.id);
-      // @ts-ignore
       this.setBlock(response);
     } catch (e) {
       console.log(e.message || e.data.error);
@@ -97,7 +93,6 @@ export default class BlockPage extends Vue {
 
     try {
       const block = await BlockService.find(this.block!.id);
-      // @ts-ignore
       this.setBlock(block);
       this.blockNotFound = false;
     } catch (e) {

@@ -20,7 +20,6 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { IWallet } from "@/interfaces";
-// @ts-ignore
 import DelegateService from "@/services/delegate";
 
 @Component({
