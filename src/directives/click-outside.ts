@@ -3,6 +3,7 @@ export default {
   bind(el: any, binding: any, vnode: any): void {
     el.clickOutsideEvent = (ev: any) => {
       const path = ev.path || (ev.composedPath ? ev.composedPath() : undefined);
+
       if (path ? path.indexOf(el) < 0 : !el.contains(ev.target)) {
         return binding.value.call(vnode.context, ev);
       }

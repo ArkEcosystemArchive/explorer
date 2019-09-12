@@ -67,7 +67,10 @@ export default {
           ...this.$attrs,
         },
         scopedSlots: {
-          "table-row": table => this.$scopedSlots.default({ ...table }),
+          "table-row": table =>
+            this.$scopedSlots.default({
+              ...table,
+            }),
         },
         on: this.$listeners,
       },
