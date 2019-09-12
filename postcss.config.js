@@ -6,7 +6,7 @@ module.exports = {
   plugins: [
     tailwindcss("./tailwind.config.js"),
     autoprefixer(),
-    process.env.NODE_ENV === "production"
+    false
       ? purgecss({
           content: ["./public/index.html", "./src/**/*.vue", "./src/**/*.js", "./src/**/*.ts"],
           extractors: [
