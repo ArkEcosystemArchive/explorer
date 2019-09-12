@@ -5,32 +5,22 @@ import { Position, PositionResult } from "vue-router/types/router";
 import store from "@/store";
 import NProgress from "nprogress";
 
-// @ts-ignore
-const HomeComponent = () => import("@/pages/Home");
-// @ts-ignore
-const BlockComponent = () => import("@/pages/Block");
-// @ts-ignore
-const BlockTransactionsComponent = () => import("@/pages/Block/Transactions");
-// @ts-ignore
-const BlocksComponent = () => import("@/pages/Blocks");
-// @ts-ignore
-const WalletComponent = () => import("@/pages/Wallet");
-// @ts-ignore
-const WalletVotersComponent = () => import("@/pages/Wallet/Voters");
-// @ts-ignore
-const WalletBlocksComponent = () => import("@/pages/Wallet/Blocks");
-// @ts-ignore
-const WalletTransactionsComponent = () => import("@/pages/Wallet/Transactions");
-// @ts-ignore
-const TransactionComponent = () => import("@/pages/Transaction");
-// @ts-ignore
-const TransactionsComponent = () => import("@/pages/Transactions");
-// @ts-ignore
-const DelegateMonitorComponent = () => import("@/pages/DelegateMonitor");
-// @ts-ignore
-const TopWalletsComponent = () => import("@/pages/TopWallets");
-// @ts-ignore
-const NotFoundComponent = () => import("@/pages/404");
+// route level code-splitting
+// this generates a separate chunk (about.[hash].js) for this route
+// which is lazy-loaded when the route is visited.
+const HomeComponent = () => import(/* webpackChunkName: "home" */ "@/pages/Home.vue");
+const BlockComponent = () => import(/* webpackChunkName: "block" */ "@/pages/Block.vue");
+const BlockTransactionsComponent = () => import(/* webpackChunkName: "transactions" */ "@/pages/Block/Transactions.vue");
+const BlocksComponent = () => import(/* webpackChunkName: "blocks" */ "@/pages/Blocks.vue");
+const WalletComponent = () => import(/* webpackChunkName: "wallet" */ "@/pages/Wallet.vue");
+const WalletVotersComponent = () => import(/* webpackChunkName: "voters" */ "@/pages/Wallet/Voters.vue");
+const WalletBlocksComponent = () => import(/* webpackChunkName: "blocks" */ "@/pages/Wallet/Blocks.vue");
+const WalletTransactionsComponent = () => import(/* webpackChunkName: "transactions" */ "@/pages/Wallet/Transactions.vue");
+const TransactionComponent = () => import(/* webpackChunkName: "transaction" */ "@/pages/Transaction.vue");
+const TransactionsComponent = () => import(/* webpackChunkName: "transactions" */ "@/pages/Transactions.vue");
+const DelegateMonitorComponent = () => import(/* webpackChunkName: "delegate-monitor" */ "@/pages/DelegateMonitor.vue");
+const TopWalletsComponent = () => import(/* webpackChunkName: "top-wallets" */ "@/pages/TopWallets.vue");
+const NotFoundComponent = () => import(/* webpackChunkName: "404" */ "@/pages/404.vue");
 
 Vue.use(Router);
 

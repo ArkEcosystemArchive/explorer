@@ -8,13 +8,9 @@ import Vue from "vue";
 import { sync } from "vuex-router-sync";
 // @ts-ignore
 import App from "./App.vue";
-// @ts-ignore
 import router from "./router";
-// @ts-ignore
 import store from "./store";
-// @ts-ignore
 import directives from "./directives";
-// @ts-ignore
 import mixins from "./mixins";
 // @ts-ignore
 import VTooltip from "v-tooltip";
@@ -22,7 +18,6 @@ import VTooltip from "v-tooltip";
 import VueGoodTablePlugin from "vue-good-table";
 import i18n from "./i18n";
 
-// TODO: fix this when we have .ts files
 // tslint:disable-next-line:no-var-requires
 require("./components");
 
