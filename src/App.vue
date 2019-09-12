@@ -46,10 +46,14 @@ export default {
 
     const network = require(`../networks/${process.env.VUE_APP_EXPLORER_CONFIG}`)
 
-    this.$store.dispatch(
-      'ui/setNightMode',
-      localStorage.getItem('nightMode') || ((network.alias === 'Development'))
-    )
+    const nightMode = localStorage.getItem('nightMode')
+
+    let nightModeBoolean = nightMode == 'true' ? true : false;
+    if (nightMode === null) { // Only on first time
+      nightModeBoolean = (network.alias === 'Development')
+    }
+
+    this.$store.dispatch('ui/setNightMode', nightModeBoolean)
 
     this.$store.dispatch('network/setDefaults', network.defaults)
 
