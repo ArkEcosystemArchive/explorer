@@ -34,7 +34,7 @@ class MigrationService {
 
     const network = require(`../../networks/${process.env.VUE_APP_EXPLORER_CONFIG}`);
 
-    priceChart = priceChart ? JSON.parse(priceChart) : network.defaults.priceChartOptions.enabled;
+    priceChart = (priceChart && priceChart !== "undefined") ? JSON.parse(priceChart) : network.defaults.priceChartOptions.enabled;
     priceChartPeriod = priceChartPeriod || network.defaults.priceChartOptions.period;
 
     localStorage.setItem(
