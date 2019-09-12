@@ -32,7 +32,7 @@ class MigrationService {
       return;
     }
 
-    const network = require(`../../networks/${process.env.EXPLORER_CONFIG}`);
+    const network = require(`../../networks/${process.env.VUE_APP_EXPLORER_CONFIG}`);
 
     priceChart = priceChart ? JSON.parse(priceChart) : network.defaults.priceChartOptions.enabled;
     priceChartPeriod = priceChartPeriod || network.defaults.priceChartOptions.period;
