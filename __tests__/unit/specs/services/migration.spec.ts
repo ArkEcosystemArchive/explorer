@@ -1,11 +1,11 @@
 import MigrationService from "@/services/migration";
 
-const EXPLORER_CONFIG = "devnet";
+const VUE_APP_EXPLORER_CONFIG = "devnet";
 
 describe("Services > Migration", () => {
   describe("priceChart", () => {
     beforeEach(() => {
-      process.env = Object.assign(process.env, { EXPLORER_CONFIG });
+      process.env = Object.assign(process.env, { VUE_APP_EXPLORER_CONFIG });
       localStorage.clear();
     });
 
