@@ -2,7 +2,7 @@
   <main
     :class="[
       nightMode ? 'theme-dark' : 'theme-light',
-      'bg-theme-page-background text-theme-text-content min-h-screen font-sans xl:pt-8'
+      'bg-theme-page-background text-theme-text-content min-h-screen font-sans xl:pt-8',
     ]"
   >
     <AppHeader />
@@ -26,8 +26,6 @@ import {
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 
-import '@/styles/style.css'
-
 export default {
   components: { AppHeader, AppFooter },
 
@@ -46,7 +44,7 @@ export default {
   async created () {
     MigrationService.executeMigrations()
 
-    const network = require(`../networks/${process.env.EXPLORER_CONFIG}`)
+    const network = require(`../networks/${process.env.VUE_APP_EXPLORER_CONFIG}`)
 
     this.$store.dispatch(
       'ui/setNightMode',

@@ -1,29 +1,20 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <ContentHeader>{{ $t('PAGES.DELEGATE_MONITOR.TITLE') }}</ContentHeader>
+    <ContentHeader>{{ $t("PAGES.DELEGATE_MONITOR.TITLE") }}</ContentHeader>
 
     <MonitorHeader />
 
     <section class="page-section py-5 md:py-10">
       <nav class="mx-5 sm:mx-10 mb-4 border-b flex items-end">
-        <div
-          :class="activeTab === 'active' ? 'active-tab' : 'inactive-tab'"
-          @click="activeTab = 'active'"
-        >
-          {{ $t('PAGES.DELEGATE_MONITOR.ACTIVE') }}
+        <div :class="activeTab === 'active' ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'active'">
+          {{ $t("PAGES.DELEGATE_MONITOR.ACTIVE") }}
         </div>
-        <div
-          :class="activeTab === 'standby' ? 'active-tab' : 'inactive-tab'"
-          @click="activeTab = 'standby'"
-        >
-          {{ $t('PAGES.DELEGATE_MONITOR.STANDBY') }}
+        <div :class="activeTab === 'standby' ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'standby'">
+          {{ $t("PAGES.DELEGATE_MONITOR.STANDBY") }}
         </div>
       </nav>
 
-      <ForgingStats
-        v-show="activeTab === 'active'"
-        :delegates="delegates || []"
-      />
+      <ForgingStats v-show="activeTab === 'active'" :delegates="delegates || []" />
 
       <TableDelegates
         :delegates="delegates"
@@ -35,67 +26,65 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import { MonitorHeader, ForgingStats } from '@/components/monitor'
-import DelegateService from '@/services/delegate'
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import { IDelegate, ISortParameters } from "@/interfaces";
+import { MonitorHeader, ForgingStats } from "@/components/monitor";
+import DelegateService from "@/services/delegate";
 
-export default {
+@Component({
   components: {
     MonitorHeader,
-    ForgingStats
+    ForgingStats,
   },
-
-  data: () => ({
-    delegates: null,
-    activeTab: 'active'
-  }),
-
   computed: {
-    ...mapGetters('network', ['height']),
+    ...mapGetters("network", ["height"]),
+  },
+})
+export default class DelegateMonitor extends Vue {
+  private delegates: IDelegate[] | null = null;
+  private activeTab: string = "active";
+  private height: number;
 
-    sortParams: {
-      get () {
-        return this.$store.getters['ui/delegateSortParams']
+  get sortParams() {
+    return this.$store.getters["ui/delegateSortParams"];
+  }
+
+  set sortParams(params: ISortParameters) {
+    this.$store.dispatch("ui/setDelegateSortParams", {
+      ...this.sortParams,
+      [this.activeTab]: {
+        field: params.field,
+        type: params.type,
       },
+    });
+  }
 
-      set (params) {
-        this.$store.dispatch('ui/setDelegateSortParams', {
-          ...this.sortParams,
-          [this.activeTab]: {
-            field: params.field,
-            type: params.type
-          }
-        })
-      }
+  @Watch("height")
+  public async onHeightChanged() {
+    await this.setDelegates();
+  }
+
+  @Watch("activeTab")
+  public async onActiveTabChanged() {
+    this.delegates = null;
+    await this.setDelegates();
+  }
+
+  public async created() {
+    await this.setDelegates();
+  }
+
+  private async setDelegates() {
+    if (this.height) {
+      // @ts-ignore
+      this.delegates = await DelegateService[this.activeTab]();
     }
-  },
+  }
 
-  watch: {
-    async height () {
-      await this.setDelegates()
-    },
-
-    async activeTab () {
-      this.delegates = null
-      await this.setDelegates()
-    }
-  },
-
-  async created () {
-    await this.setDelegates()
-  },
-
-  methods: {
-    async setDelegates () {
-      if (this.height) {
-        this.delegates = await DelegateService[this.activeTab]()
-      }
-    },
-
-    onSortChange (params) {
-      this.sortParams = params
-    }
+  private onSortChange(params: ISortParameters) {
+    this.sortParams = params;
   }
 }
 </script>

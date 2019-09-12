@@ -6,17 +6,11 @@
         class="address-button ml-10 mr-6 p-3 rounded flex-none hover-button-shadow transition"
         @click="toggleModal()"
       >
-        <img
-          class="block"
-          src="@/assets/images/icons/qr.svg"
-        >
+        <img class="block" src="@/assets/images/icons/qr.svg" />
       </button>
-      <div
-        v-if="view === 'public'"
-        class="pr-8 flex-auto min-w-0"
-      >
+      <div v-if="view === 'public'" class="pr-8 flex-auto min-w-0">
         <div class="flex items-center text-grey mb-2">
-          <span>{{ $t('WALLET.ADDRESS') }}</span>
+          <span>{{ $t("WALLET.ADDRESS") }}</span>
           <svg
             v-if="wallet.secondPublicKey"
             v-tooltip="$t('WALLET.SECOND_PASSPHRASE_ENABLED')"
@@ -33,10 +27,7 @@
               d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"
             />
           </svg>
-          <span
-            v-if="name"
-            class="ml-2 text-white semibold"
-          >
+          <span v-if="name" class="ml-2 text-white semibold">
             {{ name }}
           </span>
           <svg
@@ -59,37 +50,25 @@
           <div class="text-lg text-white semibold truncate">
             <span class="mr-2">{{ wallet.address }}</span>
           </div>
-          <Clipboard
-            v-if="wallet.address"
-            :value="wallet.address"
-          />
+          <Clipboard v-if="wallet.address" :value="wallet.address" />
         </div>
       </div>
 
-      <div
-        v-if="view === 'private' && wallet.publicKey"
-        class="pr-8 flex-auto min-w-0"
-      >
+      <div v-if="view === 'private' && wallet.publicKey" class="pr-8 flex-auto min-w-0">
         <div class="text-grey mb-2">
-          {{ $t('WALLET.PUBLIC_KEY') }}
+          {{ $t("WALLET.PUBLIC_KEY") }}
         </div>
         <div class="flex">
           <div class="text-lg text-white semibold truncate mr-2">
             <span>{{ wallet.publicKey }}</span>
           </div>
-          <Clipboard
-            v-if="wallet.publicKey"
-            :value="wallet.publicKey"
-          />
+          <Clipboard v-if="wallet.publicKey" :value="wallet.publicKey" />
         </div>
       </div>
 
-      <div
-        v-if="view === 'public'"
-        class="flex-none border-r border-grey-dark px-9"
-      >
+      <div v-if="view === 'public'" class="flex-none border-r border-grey-dark px-9">
         <div class="text-grey mb-2">
-          {{ $t('WALLET.BALANCE', { token: networkToken() }) }}
+          {{ $t("WALLET.BALANCE", { token: networkToken() }) }}
         </div>
         <div class="text-lg text-white semibold">
           <span v-tooltip="readableCurrency(wallet.balance)">
@@ -98,18 +77,11 @@
         </div>
       </div>
 
-      <div
-        v-show="isVoting"
-        v-if="view === 'public'"
-        class="flex-none border-r border-grey-dark px-9"
-      >
+      <div v-show="isVoting" v-if="view === 'public'" class="flex-none border-r border-grey-dark px-9">
         <div class="text-grey mb-2">
-          {{ $t('WALLET.VOTING_FOR') }}
+          {{ $t("WALLET.VOTING_FOR") }}
         </div>
-        <LinkWallet
-          v-if="votedDelegate.address"
-          :address="votedDelegate.address"
-        >
+        <LinkWallet v-if="votedDelegate.address" :address="votedDelegate.address">
           <span class="text-lg text-white semibold truncate">{{ votedDelegate.username }}</span>
         </LinkWallet>
       </div>
@@ -159,26 +131,17 @@
     </div>
 
     <!-- Mobile -->
-    <div
-      v-if="wallet.address"
-      class="px-5 sm:px-10 py-10 bg-theme-feature-background md:hidden"
-    >
+    <div v-if="wallet.address" class="px-5 sm:px-10 py-10 bg-theme-feature-background md:hidden">
       <div class="flex justify-center mb-10">
         <div class="flex items-center p-2 bg-white rounded mx-auto">
-          <QrCode
-            :value="wallet.address"
-            :options="{ size: 160 }"
-          />
+          <QrCode :value="wallet.address" :options="{ size: 160 }" />
         </div>
       </div>
       <div class="px-2">
         <div class="flex -mx-6 mb-8">
-          <div
-            :class="{ 'border-r': wallet.publicKey }"
-            class="md:w-1/2 px-6 w-full border-grey-dark"
-          >
+          <div :class="{ 'border-r': wallet.publicKey }" class="md:w-1/2 px-6 w-full border-grey-dark">
             <div class="flex items-center text-grey mb-2">
-              <span class="mr-2">{{ $t('WALLET.ADDRESS') }}</span>
+              <span class="mr-2">{{ $t("WALLET.ADDRESS") }}</span>
               <svg
                 v-if="wallet.secondPublicKey"
                 v-tooltip="{ trigger: 'click', content: $t('WALLET.SECOND_PASSPHRASE_ENABLED') }"
@@ -196,49 +159,34 @@
                 />
               </svg>
             </div>
-            <div
-              v-if="name"
-              class="text-white semibold flex"
-            >
+            <div v-if="name" class="text-white semibold flex">
               {{ name }}
             </div>
             <div class="text-white flex">
               <span class="mr-2">{{ truncate(wallet.address) }}</span>
-              <Clipboard
-                v-if="wallet.address"
-                :value="wallet.address"
-              />
+              <Clipboard v-if="wallet.address" :value="wallet.address" />
             </div>
           </div>
-          <div
-            v-if="wallet.publicKey"
-            class="md:w-1/2 px-6 w-full"
-          >
+          <div v-if="wallet.publicKey" class="md:w-1/2 px-6 w-full">
             <div class="text-grey mb-2">
-              {{ $t('WALLET.PUBLIC_KEY') }}
+              {{ $t("WALLET.PUBLIC_KEY") }}
             </div>
             <div class="text-white flex">
               <span class="mr-2">{{ truncate(wallet.publicKey) }}</span>
-              <Clipboard
-                v-if="wallet.publicKey"
-                :value="wallet.publicKey"
-              />
+              <Clipboard v-if="wallet.publicKey" :value="wallet.publicKey" />
             </div>
           </div>
         </div>
         <div class="flex -mx-6">
-          <div
-            :class="{ 'border-r border-grey-dark' : isVoting }"
-            class="md:w-1/2 px-6 w-full"
-          >
+          <div :class="{ 'border-r border-grey-dark': isVoting }" class="md:w-1/2 px-6 w-full">
             <div class="text-grey mb-2">
-              {{ $t('WALLET.BALANCE', { token: networkToken() }) }}
+              {{ $t("WALLET.BALANCE", { token: networkToken() }) }}
             </div>
             <div class="text-white">
               <span
                 v-tooltip="{
                   trigger: 'hover click',
-                  content: readableCurrency(wallet.balance)
+                  content: readableCurrency(wallet.balance),
                 }"
               >
                 {{ readableCrypto(wallet.balance, false) }}
@@ -246,18 +194,11 @@
             </div>
           </div>
 
-          <div
-            v-show="isVoting"
-            v-if="view === 'public'"
-            class="md:w-1/2 px-6 w-full"
-          >
+          <div v-show="isVoting" v-if="view === 'public'" class="md:w-1/2 px-6 w-full">
             <div class="text-grey mb-2">
-              {{ $t('WALLET.VOTING_FOR') }}
+              {{ $t("WALLET.VOTING_FOR") }}
             </div>
-            <LinkWallet
-              v-if="votedDelegate.address"
-              :address="votedDelegate.address"
-            >
+            <LinkWallet v-if="votedDelegate.address" :address="votedDelegate.address">
               <span class="text-white semibold truncate">{{ votedDelegate.username }}</span>
             </LinkWallet>
           </div>
@@ -266,79 +207,70 @@
     </div>
 
     <!-- Modal -->
-    <Modal
-      v-if="showModal"
-      @close="toggleModal()"
-    >
+    <Modal v-if="showModal" @close="toggleModal()">
       <div class="text-center px-10 py-2">
         <p class="semibold text-3xl mb-4">
-          {{ $t('WALLET.QR_CODE') }}
+          {{ $t("WALLET.QR_CODE") }}
         </p>
         <p class="mb-10">
-          {{ $t('WALLET.SCAN_FOR_ADDRESS') }}
+          {{ $t("WALLET.SCAN_FOR_ADDRESS") }}
         </p>
-        <QrCode
-          :value="wallet.address"
-          :options="{ size: 160 }"
-        />
+        <QrCode :value="wallet.address" :options="{ size: 160 }" />
       </div>
     </Modal>
   </section>
 </template>
 
-<script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import { IWallet } from "@/interfaces";
+import WalletVoters from "@/components/wallet/Voters.vue";
 
-export default {
-  name: 'WalletDetails',
-
-  props: {
-    wallet: {
-      type: Object,
-      required: true
-    }
+@Component({
+  components: {
+    WalletVoters,
   },
-
-  data: () => ({
-    view: 'public',
-    showModal: false
-  }),
-
   computed: {
-    ...mapGetters('network', ['knownWallets']),
-
-    name () {
-      return this.knownWallets[this.wallet.address]
-    },
-
-    isDelegate () {
-      return this.wallet.isDelegate
-    },
-
-    votedDelegate () {
-      return this.$store.getters['delegates/byPublicKey'](this.wallet.vote) || {}
-    },
-
-    isVoting () {
-      return !!this.wallet.vote
-    }
+    ...mapGetters("network", ["knownWallets"]),
   },
+})
+export default class WalletDetails extends Vue {
+  @Prop({ required: true }) public wallet: IWallet;
 
-  methods: {
-    setView (view) {
-      this.view = view
-    },
+  private view: string = "public";
+  private showModal: boolean = false;
+  private knownWallets: { [key: string]: string };
 
-    toggleModal () {
-      this.showModal = !this.showModal
-    }
+  get name() {
+    return this.knownWallets[this.wallet.address];
+  }
+
+  get isDelegate() {
+    return this.wallet.isDelegate;
+  }
+
+  get votedDelegate() {
+    return this.$store.getters["delegates/byPublicKey"](this.wallet.vote) || {};
+  }
+
+  get isVoting() {
+    return !!this.wallet.vote;
+  }
+
+  private setView(view: string) {
+    this.view = view;
+  }
+
+  private toggleModal() {
+    this.showModal = !this.showModal;
   }
 }
 </script>
 
 <style scoped>
 .WalletHeaderDesktop {
-  @apply .bg-theme-feature-background .items-center .py-8
+  @apply .bg-theme-feature-background .items-center .py-8;
 }
 
 .address-button {

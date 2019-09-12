@@ -9,46 +9,44 @@
       <a href="#">{{ currency }}</a>
     </button>
 
-    <button
-      class="flex flex-none p-2 close-button"
-      @click="$store.dispatch('ui/setHeaderType', null)"
-    >
-      <img src="@/assets/images/icons/cross.svg">
+    <button class="flex flex-none p-2 close-button" @click="$store.dispatch('ui/setHeaderType', null)">
+      <img src="@/assets/images/icons/cross.svg" />
     </button>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import CryptoCompareService from '@/services/crypto-compare'
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import CryptoCompareService from "@/services/crypto-compare";
 
-export default {
-  name: 'HeaderCurrenciesDesktop',
-
+@Component({
   computed: {
-    ...mapGetters('currency', { currencyName: 'name' }),
-    ...mapGetters('network', ['currencies'])
+    ...mapGetters("currency", { currencyName: "name" }),
+    ...mapGetters("network", ["currencies"]),
   },
+})
+export default class HeaderCurrenciesDesktop extends Vue {
+  private currencyName: string;
+  private currencies: string[];
 
-  methods: {
-    async setCurrency (currency, symbol) {
-      this.$store.dispatch('ui/setHeaderType', null)
+  private async setCurrency(currency: string, symbol: string) {
+    this.$store.dispatch("ui/setHeaderType", null);
 
-      const rate = await CryptoCompareService.price(currency)
-      this.storeCurrency(currency, rate, symbol)
-    },
+    const rate = await CryptoCompareService.price(currency);
+    this.storeCurrency(currency, rate!, symbol);
+  }
 
-    storeCurrency (currency, rate, symbol) {
-      this.$store.dispatch('currency/setName', currency)
-      this.$store.dispatch('currency/setRate', rate)
-      this.$store.dispatch('currency/setSymbol', symbol)
-    }
+  private storeCurrency(currency: string, rate: number, symbol: string) {
+    this.$store.dispatch("currency/setName", currency);
+    this.$store.dispatch("currency/setRate", rate);
+    this.$store.dispatch("currency/setSymbol", symbol);
   }
 }
 </script>
 
 <style scoped>
-  .close-button {
-    margin-left: 0.825rem;
-  }
+.close-button {
+  margin-left: 0.825rem;
+}
 </style>

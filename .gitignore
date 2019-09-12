@@ -9,6 +9,7 @@ yarn-error.log*
 /__tests__/e2e/videos/
 /__tests__/e2e/screenshots/
 selenium-debug.log
+.coverage/
 
 package-lock.json
 

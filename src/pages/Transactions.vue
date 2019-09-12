@@ -1,12 +1,12 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <ContentHeader>{{ $t('COMMON.TRANSACTIONS') }}</ContentHeader>
+    <ContentHeader>{{ $t("COMMON.TRANSACTIONS") }}</ContentHeader>
 
     <section class="hidden sm:block mb-5">
       <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
         <div class="flex-auto min-w-0">
           <div class="text-grey mb-2">
-            {{ $t('TRANSACTION.TYPE') }}
+            {{ $t("TRANSACTION.TYPE") }}
           </div>
           <div class="flex">
             <div class="text-lg text-white semibold truncate">
@@ -15,10 +15,7 @@
           </div>
         </div>
         <div class="flex flex-col w-full sm:w-auto sm:ml-4 sm:-mr-10">
-          <SelectionType
-            :in-banner="true"
-            @change="setType"
-          />
+          <SelectionType :in-banner="true" @change="setType" />
         </div>
       </div>
     </section>
@@ -38,155 +35,155 @@
 
         <TableTransactionsMobile :transactions="transactions" />
       </div>
-      <Pagination
-        v-if="showPagination"
-        :meta="meta"
-        :current-page="currentPage"
-        @page-change="onPageChange"
-      />
+      <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
     </section>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import SelectionType from '@/components/SelectionType'
-import TransactionService from '@/services/transaction'
+<script lang="ts">
+/* tslint:disable:no-console */
+import { Component, Vue, Watch } from "vue-property-decorator";
+import { Route } from "vue-router";
+import { ISortParameters, ITransaction } from "@/interfaces";
+import SelectionType from "@/components/SelectionType.vue";
+import TransactionService from "@/services/transaction";
 
-export default {
+Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
+
+@Component({
   components: {
-    SelectionType
+    SelectionType,
   },
+})
+export default class TransactionsPage extends Vue {
+  private transactions: ITransaction[] | null = null;
+  private meta: any | null = null;
+  private currentPage: number = 0;
+  private types: string[] = [
+    "All",
+    "Transfer",
+    "Second Signature",
+    "Delegate Registration",
+    "Vote",
+    "Multisignature Registration",
+  ];
+  private transactionType: number = -1;
 
-  data: () => ({
-    transactions: null,
-    meta: null,
-    currentPage: 0,
-    types: [
-      'All', 'Transfer', 'Second Signature', 'Delegate Registration', 'Vote', 'Multisignature Registration'
-    ],
-    transactionType: -1
-  }),
+  get showPagination() {
+    return this.meta && this.meta.pageCount > 1;
+  }
 
-  computed: {
-    showPagination () {
-      return this.meta && this.meta.pageCount > 1
-    },
+  get sortParams() {
+    return this.$store.getters["ui/transactionSortParams"];
+  }
 
-    sortParams: {
-      get () {
-        return this.$store.getters['ui/transactionSortParams']
-      },
+  set sortParams(params: ISortParameters) {
+    this.$store.dispatch("ui/setTransactionSortParams", {
+      field: params.field,
+      type: params.type,
+    });
+  }
 
-      set (params) {
-        this.$store.dispatch('ui/setTransactionSortParams', {
-          field: params.field,
-          type: params.type
-        })
-      }
-    }
-  },
+  @Watch("currentPage")
+  public onCurrentPageChanged() {
+    this.changePage();
+  }
 
-  watch: {
-    currentPage () {
-      this.changePage()
-    }
-  },
+  public created() {
+    this.transactionType = Number(localStorage.getItem("transactionType") || -1);
+  }
 
-  created () {
-    this.transactionType = Number(localStorage.getItem('transactionType') || -1)
-  },
-
-  async beforeRouteEnter (to, from, next) {
+  public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
     try {
       const { meta, data } = await TransactionService.filterByType(
-        to.params.page,
-        Number(localStorage.getItem('transactionType') || -1)
-      )
+        Number(to.params.page),
+        Number(localStorage.getItem("transactionType") || -1),
+      );
 
-      next(vm => {
-        vm.currentPage = Number(to.params.page)
-        vm.setTransactions(data)
-        vm.setMeta(meta)
-      })
+      next((vm: TransactionsPage) => {
+        vm.currentPage = Number(to.params.page);
+        vm.setTransactions(data);
+        vm.setMeta(meta);
+      });
     } catch (e) {
-      next({ name: '404' })
+      next({ name: "404" });
     }
-  },
+  }
 
-  async beforeRouteUpdate (to, from, next) {
-    this.transactions = null
-    this.meta = null
+  public async beforeRouteUpdate(to: Route, from: Route, next: (vm?: any) => void) {
+    this.transactions = null;
+    this.meta = null;
 
     try {
       const { meta, data } = await TransactionService.filterByType(
-        to.params.page,
-        Number(localStorage.getItem('transactionType') || -1)
-      )
+        Number(to.params.page),
+        Number(localStorage.getItem("transactionType") || -1),
+      );
 
-      this.currentPage = Number(to.params.page)
-      this.setTransactions(data)
-      this.setMeta(meta)
-      next()
+      this.currentPage = Number(to.params.page);
+      this.setTransactions(data);
+      this.setMeta(meta);
+      next();
     } catch (e) {
-      next({ name: '404' })
+      next({ name: "404" });
     }
-  },
+  }
 
-  methods: {
-    setTransactions (transactions) {
-      if (!transactions) {
-        return
-      }
+  private setTransactions(transactions: ITransaction[]) {
+    if (!transactions) {
+      return;
+    }
 
-      this.transactions = transactions.map(transaction => ({ ...transaction, price: null }))
-    },
+    this.transactions = transactions.map(transaction => ({ ...transaction, price: null }));
+  }
 
-    setMeta (meta) {
-      this.meta = meta
-    },
+  private setMeta(meta: any) {
+    this.meta = meta;
+  }
 
-    onPageChange (page) {
-      this.currentPage = page
-    },
+  private onPageChange(page: number) {
+    if (this.currentPage !== page) {
+      this.currentPage = page;
+    }
+  }
 
-    setType (type) {
-      if (this.transactionType !== type) {
-        this.transactionType = type
-        this.currentPage = 1
+  private setType(type: number) {
+    if (this.transactionType !== type) {
+      this.transactionType = type;
+      this.currentPage = 1;
 
-        this.transactions = null
-        this.meta = null
+      this.transactions = null;
+      this.meta = null;
 
-        this.getTransactions()
-      }
-    },
+      this.getTransactions();
+    }
+  }
 
-    async getTransactions () {
-      try {
-        const { meta, data } = await TransactionService.filterByType(
-          this.currentPage,
-          this.transactionType
-        )
+  private async getTransactions() {
+    try {
+      const { meta, data } = await TransactionService.filterByType(this.currentPage, this.transactionType);
 
-        this.setTransactions(data)
-        this.setMeta(meta)
-      } catch (e) {
-        console.log(e.message || e.data.error)
-      }
-    },
+      this.setTransactions(data);
+      this.setMeta(meta);
+    } catch (e) {
+      console.log(e.message || e.data.error);
+    }
+  }
 
-    changePage () {
+  private changePage() {
+    if (this.currentPage !== Number(this.$route.params.page)) {
+      // @ts-ignore
       this.$router.push({
-        name: 'transactions',
+        name: "transactions",
         params: {
-          page: this.currentPage
-        }
-      })
-    },
-
-    onSortChange (params) {
-      this.sortParams = params
+          page: this.currentPage,
+        },
+      });
     }
+  }
+
+  private onSortChange(params: ISortParameters) {
+    this.sortParams = params;
   }
 }
 </script>

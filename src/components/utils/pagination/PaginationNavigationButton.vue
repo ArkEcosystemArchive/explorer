@@ -1,13 +1,6 @@
 <template>
-  <button
-    v-if="isVisible"
-    :class="`Pagination__Button--${type} pager-button`"
-    @click="emitClick"
-  >
-    <span
-      v-if="type === 'next'"
-      class="mr-1 hidden lg:inline"
-    >
+  <button v-if="isVisible" :class="`Pagination__Button--${type} pager-button`" @click="emitClick">
+    <span v-if="type === 'next'" class="mr-1 hidden lg:inline">
       {{ $t(`PAGINATION.${type.toUpperCase()}`) }}
     </span>
 
@@ -47,34 +40,22 @@
       />
     </svg>
 
-    <span
-      v-if="type === 'previous'"
-      class="ml-1 hidden lg:inline"
-    >
+    <span v-if="type === 'previous'" class="ml-1 hidden lg:inline">
       {{ $t(`PAGINATION.${type.toUpperCase()}`) }}
     </span>
   </button>
 </template>
 
-<script type="text/ecmascript-6">
-export default {
-  name: 'PaginationNavigationButton',
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-  props: {
-    isVisible: {
-      type: Boolean,
-      required: true
-    },
-    type: {
-      type: String,
-      required: true
-    }
-  },
+@Component
+export default class PaginationNavigationButton extends Vue {
+  @Prop({ required: true }) public isVisible: boolean;
+  @Prop({ required: true }) public type: string;
 
-  methods: {
-    emitClick () {
-      this.$emit('click')
-    }
+  private emitClick() {
+    this.$emit("click");
   }
 }
 </script>

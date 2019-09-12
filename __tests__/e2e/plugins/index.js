@@ -11,20 +11,20 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-const path = require('path')
+const path = require("path");
 
 module.exports = (on, config) => {
-  const basePath = '__tests__/e2e/'
+  const basePath = "__tests__/e2e/";
 
   return Object.assign({}, config, {
-    baseUrl: 'http://localhost:8080/#',
+    baseUrl: "http://localhost:8080/#",
     defaultCommandTimeout: 10000,
-    fixturesFolder: path.join(basePath, 'fixtures'),
-    integrationFolder: path.join(basePath, 'specs'),
-    screenshotsFolder: path.join(basePath, 'screenshots'),
-    videosFolder: path.join(basePath, 'videos'),
-    supportFile: path.join(basePath, 'support/index.js'),
+    fixturesFolder: path.join(basePath, "fixtures"),
+    integrationFolder: path.join(basePath, "specs"),
+    screenshotsFolder: path.join(basePath, "screenshots"),
+    videosFolder: path.join(basePath, "videos"),
+    supportFile: path.join(basePath, "support/index.js"),
     viewportWidth: 1920,
-    viewportHeight: 1080
-  })
-}
+    viewportHeight: 1080,
+  });
+};

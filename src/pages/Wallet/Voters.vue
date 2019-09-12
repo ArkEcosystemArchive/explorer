@@ -1,6 +1,8 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <ContentHeader>{{ $t('WALLET.DELEGATE.VOTERS') }} <span v-if="delegate">- {{ delegate.username }}</span></ContentHeader>
+    <ContentHeader
+      >{{ $t("WALLET.DELEGATE.VOTERS") }} <span v-if="delegate">- {{ delegate.username }}</span></ContentHeader
+    >
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
         <TableWalletsDesktop
@@ -11,121 +13,119 @@
         />
       </div>
       <div class="sm:hidden">
-        <TableWalletsMobile
-          :wallets="wallets"
-          :total="delegate ? delegate.votes : 0"
-        />
+        <TableWalletsMobile :wallets="wallets" :total="delegate ? delegate.votes : 0" />
       </div>
-      <Pagination
-        v-if="showPagination"
-        :meta="meta"
-        :current-page="currentPage"
-        @page-change="onPageChange"
-      />
+      <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
     </section>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import DelegateService from '@/services/delegate'
+<script lang="ts">
+import { Component, Vue, Watch } from "vue-property-decorator";
+import { Route } from "vue-router";
+import { IBlock, IDelegate, ISortParameters, IWallet } from "@/interfaces";
+import DelegateService from "@/services/delegate";
 
-export default {
-  data: () => ({
-    delegate: null,
-    wallets: null,
-    meta: null,
-    currentPage: 0
-  }),
+Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 
-  computed: {
-    showPagination () {
-      return this.meta && this.meta.pageCount > 1
-    },
+@Component
+export default class WalletVoters extends Vue {
+  private delegate: IDelegate | null = null;
+  private wallets: IWallet[] | null = null;
+  private meta: any | null = null;
+  private currentPage: number = 0;
 
-    address () {
-      return this.$route.params.address
-    },
+  get showPagination() {
+    return this.meta && this.meta.pageCount > 1;
+  }
 
-    sortParams: {
-      get () {
-        return this.$store.getters['ui/walletSortParams']
-      },
+  get address() {
+    return this.$route.params.address;
+  }
 
-      set (params) {
-        this.$store.dispatch('ui/setWalletSortParams', {
-          field: params.field,
-          type: params.type
-        })
-      }
-    }
-  },
+  get sortParams() {
+    return this.$store.getters["ui/walletSortParams"];
+  }
 
-  watch: {
-    currentPage () {
-      this.changePage()
-    }
-  },
+  set sortParams(params: ISortParameters) {
+    this.$store.dispatch("ui/setWalletSortParams", {
+      field: params.field,
+      type: params.type,
+    });
+  }
 
-  async beforeRouteEnter (to, from, next) {
+  @Watch("currentPage")
+  public onCurrentPageChanged() {
+    this.changePage();
+  }
+
+  public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
     try {
-      const delegate = await DelegateService.find(to.params.address)
-      const { meta, data } = await DelegateService.voters(to.params.address, to.params.page)
+      const delegate = await DelegateService.find(to.params.address);
+      const { meta, data } = await DelegateService.voters(to.params.address, Number(to.params.page));
 
-      next(vm => {
-        vm.currentPage = Number(to.params.page)
-        vm.setDelegate(delegate)
-        vm.setWallets(data)
-        vm.setMeta(meta)
-      })
-    } catch (e) { next({ name: '404' }) }
-  },
+      next((vm: WalletVoters) => {
+        vm.currentPage = Number(to.params.page);
+        vm.setDelegate(delegate);
+        // @ts-ignore
+        vm.setWallets(data);
+        vm.setMeta(meta);
+      });
+    } catch (e) {
+      next({ name: "404" });
+    }
+  }
 
-  async beforeRouteUpdate (to, from, next) {
-    this.wallets = null
-    this.meta = null
+  public async beforeRouteUpdate(to: Route, from: Route, next: (vm?: any) => void) {
+    this.wallets = null;
+    this.meta = null;
 
     try {
-      const delegate = await DelegateService.find(to.params.address)
-      const { meta, data } = await DelegateService.voters(to.params.address, to.params.page)
+      const delegate = await DelegateService.find(to.params.address);
+      const { meta, data } = await DelegateService.voters(to.params.address, Number(to.params.page));
 
-      this.currentPage = Number(to.params.page)
-      this.setDelegate(delegate)
-      this.setWallets(data)
-      this.setMeta(meta)
-      next()
-    } catch (e) { next({ name: '404' }) }
-  },
+      this.currentPage = Number(to.params.page);
+      this.setDelegate(delegate);
+      // @ts-ignore
+      this.setWallets(data);
+      this.setMeta(meta);
+      next();
+    } catch (e) {
+      next({ name: "404" });
+    }
+  }
 
-  methods: {
-    setDelegate (delegate) {
-      this.delegate = delegate
-    },
+  private setDelegate(delegate: IDelegate) {
+    this.delegate = delegate;
+  }
 
-    setWallets (wallets) {
-      this.wallets = wallets
-    },
+  private setWallets(wallets: IWallet[]) {
+    this.wallets = wallets;
+  }
 
-    setMeta (meta) {
-      this.meta = meta
-    },
+  private setMeta(meta: any) {
+    this.meta = meta;
+  }
 
-    onPageChange (page) {
-      this.currentPage = page
-    },
+  private onPageChange(page: number) {
+    this.currentPage = page;
+  }
 
-    changePage (page) {
+  private changePage() {
+    if (this.currentPage !== Number(this.$route.params.page) || this.address !== this.$route.params.address) {
+      // @ts-ignore
       this.$router.push({
-        name: 'wallet-voters',
+        name: "wallet-voters",
         params: {
           address: this.address,
-          page: this.currentPage
-        }
-      })
-    },
-
-    onSortChange (params) {
-      this.sortParams = params
+          page: this.currentPage,
+        },
+      });
     }
+  }
+
+  private onSortChange(params: ISortParameters) {
+    this.sortParams = params;
   }
 }
 </script>

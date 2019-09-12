@@ -20,13 +20,8 @@
       </svg>
     </button>
 
-    <RouterLink
-      :to="{ name: 'home' }"
-      tag="button"
-      class="menu-button"
-      @click.native="closeMenu"
-    >
-      {{ $t('PAGES.HOME.TITLE') }}
+    <RouterLink :to="{ name: 'home' }" tag="button" class="menu-button" @click.native="closeMenu">
+      {{ $t("PAGES.HOME.TITLE") }}
     </RouterLink>
 
     <RouterLink
@@ -35,37 +30,30 @@
       class="menu-button"
       @click.native="closeMenu"
     >
-      {{ $t('PAGES.TOP_WALLETS.TITLE') }}
+      {{ $t("PAGES.TOP_WALLETS.TITLE") }}
     </RouterLink>
 
-    <RouterLink
-      :to="{ name: 'delegate-monitor' }"
-      tag="button"
-      class="menu-button"
-      @click.native="closeMenu"
-    >
-      {{ $t('PAGES.DELEGATE_MONITOR.TITLE') }}
+    <RouterLink :to="{ name: 'delegate-monitor' }" tag="button" class="menu-button" @click.native="closeMenu">
+      {{ $t("PAGES.DELEGATE_MONITOR.TITLE") }}
     </RouterLink>
 
     <div class="flex-auto" />
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
 
-export default {
-  name: 'HeaderMenuDesktop',
-
-  methods: {
-    closeMenu () {
-      this.$store.dispatch('ui/setMenuVisible', false)
-    }
+@Component
+export default class HeaderMenuDesktop extends Vue {
+  private closeMenu(): void {
+    this.$store.dispatch("ui/setMenuVisible", false);
   }
 }
 </script>
 
 <style>
-  .HeaderMenuDesktop {
-    @apply .absolute .inset-0 .px-4 .hidden .bg-theme-nav-background
-  }
+.HeaderMenuDesktop {
+  @apply .absolute .inset-0 .px-4 .bg-theme-nav-background;
+}
 </style>

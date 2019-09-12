@@ -2,16 +2,11 @@
   <button
     :class="[
       isChartEnabled ? 'text-chart-active' : 'text-chart-inactive',
-      'px-2 py-4 hidden md:flex flex-none items-center border-b-2 mt-2px border-transparent hover:border-red hover:text-blue transition'
+      'px-2 py-4 hidden md:flex flex-none items-center border-b-2 mt-2px border-transparent hover:border-red hover:text-blue transition',
     ]"
     @click="toggleChart()"
   >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
-      width="18px"
-      height="17px"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="17px">
       <path
         fill-rule="evenodd"
         fill="currentColor"
@@ -21,20 +16,17 @@
   </button>
 </template>
 
-<script type="text/ecmascript-6">
-export default {
-  name: 'ToggleChart',
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
 
-  computed: {
-    isChartEnabled () {
-      return this.$store.getters['ui/priceChartOptions'].enabled
-    }
-  },
+@Component
+export default class ToggleChart extends Vue {
+  get isChartEnabled(): boolean {
+    return this.$store.getters["ui/priceChartOptions"].enabled;
+  }
 
-  methods: {
-    toggleChart () {
-      this.$store.dispatch('ui/setPriceChartOption', { option: 'enabled', value: !this.isChartEnabled })
-    }
+  private toggleChart(): void {
+    this.$store.dispatch("ui/setPriceChartOption", { option: "enabled", value: !this.isChartEnabled });
   }
 }
 </script>

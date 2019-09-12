@@ -4,7 +4,8 @@
 set -e
 
 # build
-yarn build --base https://arkecosystem.github.io/explorer/
+export RELEASE_TYPE="gh-pages"
+yarn build
 
 # navigate into the build output directory
 cd dist

@@ -3,14 +3,14 @@
     <div class="px-5 sm:px-10">
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t('COMMON.TRANSACTIONS') }}
+          {{ $t("COMMON.TRANSACTIONS") }}
         </div>
         <div>{{ block.transactions }}</div>
       </div>
 
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t('COMMON.CONFIRMATIONS') }}
+          {{ $t("COMMON.CONFIRMATIONS") }}
         </div>
         <div v-if="confirmations >= 0">
           {{ confirmations }}
@@ -19,21 +19,21 @@
 
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t('COMMON.HEIGHT') }}
+          {{ $t("COMMON.HEIGHT") }}
         </div>
         <div>{{ block.height }}</div>
       </div>
 
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t('BLOCK.REWARD') }}
+          {{ $t("BLOCK.REWARD") }}
         </div>
         <div
           v-if="block.forged"
           v-tooltip="{
             trigger: 'hover click',
             content: price ? readableCurrency(block.forged.reward, price) : '',
-            placement: 'left'
+            placement: 'left',
           }"
         >
           {{ readableCrypto(block.forged.reward) }}
@@ -42,14 +42,14 @@
 
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t('BLOCK.FEES') }}
+          {{ $t("BLOCK.FEES") }}
         </div>
         <div
           v-if="block.forged"
           v-tooltip="{
             trigger: 'hover click',
             content: price ? readableCurrency(block.forged.fee, price) : '',
-            placement: 'left'
+            placement: 'left',
           }"
         >
           {{ readableCrypto(block.forged.fee) }}
@@ -58,14 +58,14 @@
 
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t('BLOCK.TOTAL_FORGED') }}
+          {{ $t("BLOCK.TOTAL_FORGED") }}
         </div>
         <div
           v-if="block.forged"
           v-tooltip="{
             trigger: 'hover click',
             content: price ? readableCurrency(block.forged.total, price) : '',
-            placement: 'left'
+            placement: 'left',
           }"
         >
           {{ readableCrypto(block.forged.total) }}
@@ -74,14 +74,14 @@
 
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t('BLOCK.PROCESSED_AMOUNT') }}
+          {{ $t("BLOCK.PROCESSED_AMOUNT") }}
         </div>
         <div
           v-if="block.forged"
           v-tooltip="{
             trigger: 'hover click',
             content: price ? readableCurrency(block.forged.amount, price) : '',
-            placement: 'left'
+            placement: 'left',
           }"
         >
           {{ readableCrypto(block.forged.amount) }}
@@ -90,76 +90,64 @@
 
       <div class="list-row-border-b-no-wrap">
         <div class="mr-4">
-          {{ $t('COMMON.TIMESTAMP') }}
+          {{ $t("COMMON.TIMESTAMP") }}
         </div>
-        <div
-          v-if="block.timestamp"
-          class="text-right"
-        >
+        <div v-if="block.timestamp" class="text-right">
           {{ readableTimestamp(block.timestamp.unix) }}
         </div>
       </div>
 
       <div class="list-row">
         <div class="mr-4">
-          {{ $t('BLOCK.GENERATED_BY') }}
+          {{ $t("BLOCK.GENERATED_BY") }}
         </div>
         <div v-if="block.generator">
-          <LinkWallet
-            :address="block.generator.address"
-            tooltip-placement="left"
-          />
+          <LinkWallet :address="block.generator.address" tooltip-placement="left" />
         </div>
       </div>
     </div>
   </section>
 </template>
 
-<script type="text/ecmascript-6">
-import CryptoCompareService from '@/services/crypto-compare'
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import CryptoCompareService from "@/services/crypto-compare";
+import { IBlock } from "../../interfaces";
 
-export default {
-  name: 'BlockDetails',
-
-  props: {
-    block: {
-      type: Object,
-      required: true
-    }
-  },
-
-  data: () => ({
-    price: 0
-  }),
-
+@Component({
   computed: {
-    ...mapGetters('currency', { currencySymbol: 'symbol' }),
-    ...mapGetters('network', ['height']),
-
-    confirmations () {
-      return this.height - this.block.height
-    }
+    ...mapGetters("currency", { currencySymbol: "symbol" }),
+    ...mapGetters("network", ["height"]),
   },
+})
+export default class BlockDetails extends Vue {
+  @Prop({ required: true }) public block: IBlock;
 
-  watch: {
-    block () {
-      this.updatePrice()
-    },
+  private price: number | null = 0;
+  private currencySymbol: string;
+  private height: number;
 
-    currencySymbol () {
-      this.updatePrice()
+  get confirmations(): number {
+    return this.height - this.block.height;
+  }
+
+  @Watch("block")
+  public onBlockChanged() {
+    this.updatePrice();
+  }
+
+  @Watch("currencySymbol")
+  public onCurrencySymbolChanged() {
+    this.updatePrice();
+  }
+
+  private async updatePrice(): Promise<void> {
+    if (!this.block.id) {
+      return;
     }
-  },
 
-  methods: {
-    async updatePrice () {
-      if (!this.block.id) {
-        return
-      }
-
-      this.price = await CryptoCompareService.dailyAverage(this.block.timestamp.unix)
-    }
+    this.price = await CryptoCompareService.dailyAverage(this.block.timestamp.unix);
   }
 }
 </script>

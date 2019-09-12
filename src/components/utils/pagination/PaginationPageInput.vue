@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-show="isVisible"
-    class="Pagination__Input"
-  >
+  <div v-show="isVisible" class="Pagination__Input">
     <input
       v-model.trim="query"
       v-tooltip="{
@@ -10,7 +7,7 @@
         content: $t('PAGINATION.NO_RESULTS'),
         trigger: 'manual',
         placement: 'bottom-start',
-        classes: 'search-tip'
+        classes: 'search-tip',
       }"
       :placeholder="placeholder"
       :class="{ 'text-grey': nightMode }"
@@ -19,19 +16,10 @@
       min="1"
       step="1"
       @keyup.enter="search"
-    >
+    />
 
-    <button
-      :disabled="!hasInput"
-      class="control-button text-theme-button-close"
-      @click="search"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="13px"
-        height="13px"
-      >
+    <button :disabled="!hasInput" class="control-button text-theme-button-close" @click="search">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13px" height="13px">
         <path
           fill-rule="evenodd"
           fill="currentColor"
@@ -40,16 +28,8 @@
       </svg>
     </button>
 
-    <button
-      class="control-button text-theme-button-close"
-      @click="emitClose"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="13px"
-        height="13px"
-      >
+    <button class="control-button text-theme-button-close" @click="emitClose">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13px" height="13px">
         <path
           fill-rule="evenodd"
           fill="currentColor"
@@ -60,83 +40,66 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import { LocaleMessage } from "vue-i18n";
 
-export default {
-  name: 'PaginationPageInput',
-
-  props: {
-    isVisible: {
-      type: Boolean,
-      required: true
-    },
-
-    pageCount: {
-      type: Number,
-      required: true
-    },
-
-    isMobile: {
-      type: Boolean,
-      required: true,
-      default: false
-    }
-  },
-
-  data: () => ({
-    query: null,
-    placeholder: null,
-    hasError: false
-  }),
-
+@Component({
   computed: {
-    ...mapGetters('ui', ['nightMode']),
-
-    hasInput () {
-      return !!this.query
-    }
+    ...mapGetters("ui", ["nightMode"]),
   },
+})
+export default class PaginationPageInput extends Vue {
+  @Prop({ required: true }) public isVisible: boolean;
+  @Prop({ required: true }) public pageCount: number;
+  @Prop({ required: true }) public isMobile: boolean;
 
-  watch: {
-    isMobile (showMobile) {
-      this.setPlaceholder(showMobile)
+  private query: string | null = null;
+  private placeholder: LocaleMessage | null = null;
+  private hasError: boolean = false;
+  private nightMode: boolean;
+
+  get hasInput() {
+    return !!this.query;
+  }
+
+  @Watch("isMobile")
+  public onIsMobileChanged(showMobile: boolean) {
+    this.setPlaceholder(showMobile);
+  }
+
+  public mounted() {
+    this.setPlaceholder(this.isMobile);
+  }
+
+  private search() {
+    if (!this.query) {
+      return;
     }
-  },
 
-  mounted () {
-    this.setPlaceholder()
-  },
+    const pageNumber = parseInt(this.query, 10);
 
-  methods: {
-    search () {
-      if (!this.query) {
-        return
-      }
-
-      const pageNumber = parseInt(this.query, 10)
-
-      if (!pageNumber || pageNumber < 1 || pageNumber > this.pageCount) {
-        this.hasError = true
-        setTimeout(() => (this.hasError = false), 1500)
-      } else {
-        this.emitPageChange(pageNumber)
-      }
-    },
-
-    setPlaceholder (showMobile) {
-      this.placeholder = showMobile
-        ? this.$i18n.t('PAGINATION.PLACEHOLDER.SHORT')
-        : this.$i18n.t('PAGINATION.PLACEHOLDER.LONG')
-    },
-
-    emitPageChange (page) {
-      this.$emit('page-change', page)
-    },
-
-    emitClose () {
-      this.$emit('close')
+    if (!pageNumber || pageNumber < 1 || pageNumber > this.pageCount) {
+      this.hasError = true;
+      setTimeout(() => (this.hasError = false), 1500);
+    } else {
+      this.emitPageChange(pageNumber);
     }
+  }
+
+  private setPlaceholder(showMobile: boolean) {
+    this.placeholder = showMobile
+      ? this.$i18n.t("PAGINATION.PLACEHOLDER.SHORT")
+      : this.$i18n.t("PAGINATION.PLACEHOLDER.LONG");
+  }
+
+  private emitPageChange(page: number) {
+    this.$emit("page-change", page);
+  }
+
+  private emitClose() {
+    this.$emit("close");
   }
 }
 </script>
@@ -146,8 +109,8 @@ export default {
   @apply .flex .items-center .absolute .inset-0 .z-10 .bg-theme-button .px-3 .rounded;
 }
 
-.Pagination__Input input[type=number]::-webkit-inner-spin-button,
-.Pagination__Input input[type=number]::-webkit-outer-spin-button {
+.Pagination__Input input[type="number"]::-webkit-inner-spin-button,
+.Pagination__Input input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;

@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <ContentHeader>{{ $t('COMMON.TRANSACTIONS') }}</ContentHeader>
+    <ContentHeader>{{ $t("COMMON.TRANSACTIONS") }}</ContentHeader>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
         <TableTransactionsDesktop
@@ -12,111 +12,110 @@
       <div class="sm:hidden">
         <TableTransactionsMobile :transactions="transactions" />
       </div>
-      <Pagination
-        v-if="showPagination"
-        :meta="meta"
-        :current-page="currentPage"
-        @page-change="onPageChange"
-      />
+      <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
     </section>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import TransactionService from '@/services/transaction'
+<script lang="ts">
+import { Component, Vue, Watch } from "vue-property-decorator";
+import { Route } from "vue-router";
+import { ISortParameters, ITransaction } from "@/interfaces";
+import TransactionService from "@/services/transaction";
 
-export default {
-  data: () => ({
-    transactions: null,
-    meta: null,
-    currentPage: 0
-  }),
+Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 
-  computed: {
-    showPagination () {
-      return this.meta && this.meta.pageCount > 1
-    },
+@Component
+export default class BlockTransactions extends Vue {
+  private transactions: ITransaction[] | null = null;
+  private meta: any | null = null;
+  private currentPage: number = 0;
 
-    id () {
-      return this.$route.params.id
-    },
+  get showPagination() {
+    return this.meta && this.meta.pageCount > 1;
+  }
 
-    sortParams: {
-      get () {
-        return this.$store.getters['ui/transactionSortParams']
-      },
+  get id() {
+    return this.$route.params.id;
+  }
 
-      set (params) {
-        this.$store.dispatch('ui/setTransactionSortParams', {
-          field: params.field,
-          type: params.type
-        })
-      }
-    }
-  },
+  get sortParams() {
+    return this.$store.getters["ui/transactionSortParams"];
+  }
 
-  watch: {
-    currentPage () {
-      this.changePage()
-    }
-  },
+  set sortParams(params: ISortParameters) {
+    this.$store.dispatch("ui/setTransactionSortParams", {
+      field: params.field,
+      type: params.type,
+    });
+  }
 
-  async beforeRouteEnter (to, from, next) {
+  @Watch("currentPage")
+  public onCurrentPageChanged() {
+    this.changePage();
+  }
+
+  public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
     try {
-      const { meta, data } = await TransactionService.byBlock(to.params.id, to.params.page)
+      const { meta, data } = await TransactionService.byBlock(to.params.id, Number(to.params.page));
 
-      next(vm => {
-        vm.currentPage = Number(to.params.page)
-        vm.setTransactions(data)
-        vm.setMeta(meta)
-      })
-    } catch (e) { next({ name: '404' }) }
-  },
+      next((vm: BlockTransactions) => {
+        vm.currentPage = Number(to.params.page);
+        vm.setTransactions(data);
+        vm.setMeta(meta);
+      });
+    } catch (e) {
+      next({ name: "404" });
+    }
+  }
 
-  async beforeRouteUpdate (to, from, next) {
-    this.transactions = null
-    this.meta = null
+  public async beforeRouteUpdate(to: Route, from: Route, next: (vm?: any) => void) {
+    this.transactions = null;
+    this.meta = null;
 
     try {
-      const { meta, data } = await TransactionService.byBlock(to.params.id, to.params.page)
+      const { meta, data } = await TransactionService.byBlock(to.params.id, Number(to.params.page));
 
-      this.currentPage = Number(to.params.page)
-      this.setTransactions(data)
-      this.setMeta(meta)
-      next()
-    } catch (e) { next({ name: '404' }) }
-  },
+      this.currentPage = Number(to.params.page);
+      this.setTransactions(data);
+      this.setMeta(meta);
+      next();
+    } catch (e) {
+      next({ name: "404" });
+    }
+  }
 
-  methods: {
-    setTransactions (transactions) {
-      if (!transactions) {
-        return
-      }
+  private setTransactions(transactions: ITransaction[]) {
+    if (!transactions) {
+      return;
+    }
 
-      this.transactions = transactions.map(transaction => ({ ...transaction, price: null }))
-    },
+    this.transactions = transactions.map(transaction => ({ ...transaction, price: null }));
+  }
 
-    setMeta (meta) {
-      this.meta = meta
-    },
+  private setMeta(meta: any) {
+    this.meta = meta;
+  }
 
-    onPageChange (page) {
-      this.currentPage = page
-    },
+  private onPageChange(page: number) {
+    this.currentPage = page;
+  }
 
-    changePage (page) {
+  private changePage() {
+    if (this.currentPage !== Number(this.$route.params.page) || this.id !== this.$route.params.id) {
+      // @ts-ignore
       this.$router.push({
-        name: 'block-transactions',
+        name: "block-transactions",
         params: {
           id: this.id,
-          page: this.currentPage
-        }
-      })
-    },
-
-    onSortChange (params) {
-      this.sortParams = params
+          page: this.currentPage,
+        },
+      });
     }
+  }
+
+  private onSortChange(params: ISortParameters) {
+    this.sortParams = params;
   }
 }
 </script>

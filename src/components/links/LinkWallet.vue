@@ -1,15 +1,11 @@
 <template>
   <span class="block md:inline-block">
     <template v-if="!type">
-      <RouterLink
-        v-if="isKnown"
-        :to="{ name: 'wallet', params: { address: walletAddress } }"
-        class="flex items-center"
-      >
+      <RouterLink v-if="isKnown" :to="{ name: 'wallet', params: { address: walletAddress } }" class="flex items-center">
         <span
           v-tooltip="{
             content: getAddress(),
-            placement: tooltipPlacement
+            placement: tooltipPlacement,
           }"
         >
           {{ knownWallets[address] }}
@@ -17,7 +13,7 @@
         <svg
           v-tooltip="{
             content: $t('WALLET.VERIFIED'),
-            placement: tooltipPlacement
+            placement: tooltipPlacement,
           }"
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -36,7 +32,7 @@
         v-else
         v-tooltip="{
           content: getAddress(),
-          placement: tooltipPlacement
+          placement: tooltipPlacement,
         }"
         :to="{ name: 'wallet', params: { address: walletAddress } }"
       >
@@ -51,162 +47,142 @@
       </RouterLink>
     </template>
 
-    <span v-else-if="type === 1">{{ $t('TRANSACTION.TYPES.SECOND_SIGNATURE') }}</span>
-    <span v-else-if="type === 2">{{ $t('TRANSACTION.TYPES.DELEGATE_REGISTRATION') }}</span>
+    <span v-else-if="type === 1">{{ $t("TRANSACTION.TYPES.SECOND_SIGNATURE") }}</span>
+    <span v-else-if="type === 2">{{ $t("TRANSACTION.TYPES.DELEGATE_REGISTRATION") }}</span>
     <span v-else-if="type === 3">
       <RouterLink
         v-if="votedDelegateAddress"
         v-tooltip="{
           content: votedDelegateAddress,
-          placement: tooltipPlacement
+          placement: tooltipPlacement,
         }"
         :to="{ name: 'wallet', params: { address: votedDelegateAddress } }"
       >
-        <span :class="getVoteColor">{{ isUnvote ? $t('TRANSACTION.TYPES.UNVOTE') : $t('TRANSACTION.TYPES.VOTE') }} <span class="italic">({{ votedDelegateUsername }})</span></span>
+        <span :class="getVoteColor"
+          >{{ isUnvote ? $t("TRANSACTION.TYPES.UNVOTE") : $t("TRANSACTION.TYPES.VOTE") }}
+          <span class="italic">({{ votedDelegateUsername }})</span></span
+        >
       </RouterLink>
     </span>
-    <span v-else-if="type === 4">{{ $t('TRANSACTION.TYPES.MULTI_SIGNATURE') }}</span>
-    <span v-else-if="type === 5">{{ $t('TRANSACTION.TYPES.IPFS') }}</span>
-    <span v-else-if="type === 6">{{ $t('TRANSACTION.TYPES.TIMELOCK_TRANSFER') }}</span>
-    <span v-else-if="type === 7">{{ $t('TRANSACTION.TYPES.MULTI_PAYMENT') }}</span>
-    <span v-else-if="type === 8">{{ $t('TRANSACTION.TYPES.DELEGATE_RESIGNATION') }}</span>
+    <span v-else-if="type === 4">{{ $t("TRANSACTION.TYPES.MULTI_SIGNATURE") }}</span>
+    <span v-else-if="type === 5">{{ $t("TRANSACTION.TYPES.IPFS") }}</span>
+    <span v-else-if="type === 6">{{ $t("TRANSACTION.TYPES.TIMELOCK_TRANSFER") }}</span>
+    <span v-else-if="type === 7">{{ $t("TRANSACTION.TYPES.MULTI_PAYMENT") }}</span>
+    <span v-else-if="type === 8">{{ $t("TRANSACTION.TYPES.DELEGATE_RESIGNATION") }}</span>
   </span>
 </template>
 
-<script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import { IDelegate } from "../../interfaces";
 
-export default {
-  name: 'LinkWallet',
-
-  props: {
-    address: {
-      type: String,
-      required: false,
-      default: ''
-    },
-    asset: {
-      type: Object,
-      required: false,
-      default: null
-    },
-    publicKey: {
-      type: String,
-      required: false,
-      default: ''
-    },
-    type: {
-      type: Number,
-      required: false,
-      default: 0
-    },
-    trunc: {
-      type: Boolean,
-      default: true
-    },
-    tooltipPlacement: {
-      type: String,
-      required: false,
-      default: 'top'
-    }
-  },
-
-  data: () => ({
-    delegate: null,
-    votedDelegate: null
-  }),
-
+@Component({
   computed: {
-    ...mapGetters('delegates', ['delegates']),
-    ...mapGetters('network', ['knownWallets']),
-
-    isKnown () {
-      return this.knownWallets[this.address]
-    },
-
-    walletAddress () {
-      return this.delegate ? this.delegate.address : this.address
-    },
-
-    hasDefaultSlot () {
-      return !!this.$slots.default
-    },
-
-    getVoteColor () {
-      return this.isUnvote ? 'text-red' : 'text-green'
-    },
-
-    isUnvote () {
-      if (this.asset && this.asset.votes) {
-        const vote = this.asset.votes[0]
-        return vote.charAt(0) === '-'
-      }
-      return false
-    },
-
-    votePublicKey () {
-      if (this.asset && this.asset.votes) {
-        const vote = this.asset.votes[0]
-        return vote.substr(1)
-      }
-      return ''
-    },
-
-    votedDelegateAddress () {
-      return this.votedDelegate ? this.votedDelegate.address : ''
-    },
-
-    votedDelegateUsername () {
-      return this.votedDelegate ? this.votedDelegate.username : ''
-    }
+    ...mapGetters("delegates", ["delegates"]),
+    ...mapGetters("network", ["knownWallets"]),
   },
+})
+export default class LinkWallet extends Vue {
+  @Prop({ required: false, default: "" }) public address: string;
+  @Prop({ required: false, default: null }) public asset: { votes: [string] } | null;
+  @Prop({ required: false, default: "" }) public publicKey: string;
+  @Prop({ required: false, default: 0 }) public type: number;
+  @Prop({ required: false, default: true }) public trunc: boolean;
+  @Prop({ required: false, default: "top" }) public tooltipPlacement: string;
 
-  watch: {
-    delegates () {
-      this.determine()
-    },
-    address () {
-      this.determine()
-    },
-    publicKey () {
-      this.determine()
+  private delegate: IDelegate | null | undefined = null;
+  private votedDelegate: IDelegate | null | undefined = null;
+  private delegates: [IDelegate];
+  private knownWallets: { [key: string]: string };
+
+  get isKnown(): string {
+    return this.knownWallets[this.address];
+  }
+
+  get walletAddress(): string {
+    return this.delegate ? this.delegate.address : this.address;
+  }
+
+  get hasDefaultSlot(): boolean {
+    return !!this.$slots.default;
+  }
+
+  get getVoteColor(): string {
+    return this.isUnvote ? "text-red" : "text-green";
+  }
+
+  get isUnvote(): boolean {
+    if (this.asset && this.asset.votes) {
+      const vote = this.asset.votes[0];
+      return vote.charAt(0) === "-";
     }
-  },
+    return false;
+  }
 
-  mounted () {
-    this.determine()
-  },
-
-  methods: {
-    determine () {
-      this.address ? this.findByAddress() : this.findByPublicKey()
-      if (this.votePublicKey) {
-        this.determineVote()
-      }
-    },
-
-    determineVote () {
-      this.votedDelegate = this.delegates.find(d => d.publicKey === this.votePublicKey)
-    },
-
-    findByAddress () {
-      this.delegate = this.delegates.find(d => d.address === this.address)
-    },
-
-    findByPublicKey () {
-      this.delegate = this.delegates.find(d => d.publicKey === this.publicKey)
-    },
-
-    getAddress () {
-      const knownOrDelegate = this.isKnown || this.delegate
-      const truncated = !this.hasDefaultSlot && this.trunc
-
-      if (knownOrDelegate || truncated) {
-        return this.walletAddress
-      }
-
-      return false
+  get votePublicKey(): string {
+    if (this.asset && this.asset.votes) {
+      const vote = this.asset.votes[0];
+      return vote.substr(1);
     }
+    return "";
+  }
+
+  get votedDelegateAddress(): string {
+    return this.votedDelegate ? this.votedDelegate.address : "";
+  }
+
+  get votedDelegateUsername(): string {
+    return this.votedDelegate ? this.votedDelegate.username : "";
+  }
+
+  @Watch("delegates")
+  public onDelegateChanged() {
+    this.determine();
+  }
+
+  @Watch("address")
+  public onAddressChanged() {
+    this.determine();
+  }
+
+  @Watch("publicKey")
+  public onPublicKeyChanged() {
+    this.determine();
+  }
+
+  public mounted(): void {
+    this.determine();
+  }
+
+  private determine(): void {
+    this.address ? this.findByAddress() : this.findByPublicKey();
+    if (this.votePublicKey) {
+      this.determineVote();
+    }
+  }
+
+  private determineVote(): void {
+    this.votedDelegate = this.delegates.find(d => d.publicKey === this.votePublicKey);
+  }
+
+  private findByAddress(): void {
+    this.delegate = this.delegates.find(d => d.address === this.address);
+  }
+
+  private findByPublicKey(): void {
+    this.delegate = this.delegates.find(d => d.publicKey === this.publicKey);
+  }
+
+  private getAddress(): string | false {
+    const knownOrDelegate = this.isKnown || this.delegate;
+    const truncated = !this.hasDefaultSlot && this.trunc;
+
+    if (knownOrDelegate || truncated) {
+      return this.walletAddress;
+    }
+
+    return false;
   }
 }
 </script>

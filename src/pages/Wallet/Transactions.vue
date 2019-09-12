@@ -1,32 +1,26 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
-    <ContentHeader>{{ $t('COMMON.TRANSACTIONS') }}</ContentHeader>
+    <ContentHeader>{{ $t("COMMON.TRANSACTIONS") }}</ContentHeader>
 
     <section class="mb-5">
       <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
         <div class="mr-6 flex-none">
-          <img
-            class="block"
-            src="@/assets/images/icons/transaction.svg"
-          >
+          <img class="block" src="@/assets/images/icons/transaction.svg" />
         </div>
         <div class="flex-auto min-w-0">
           <div class="text-grey mb-2">
-            {{ $t('WALLET.ADDRESS') }}
+            {{ $t("WALLET.ADDRESS") }}
           </div>
           <div class="flex">
             <div class="text-lg text-white semibold truncate">
               <span class="mr-2">{{ address }}</span>
             </div>
-            <Clipboard
-              v-if="address"
-              :value="address"
-            />
+            <Clipboard v-if="address" :value="address" />
           </div>
         </div>
         <div class="flex flex-col ml-4">
           <div class="text-grey mb-2">
-            {{ $t('COMMON.TYPE') }}
+            {{ $t("COMMON.TYPE") }}
           </div>
           <div class="relative text-white z-20">
             <span
@@ -50,10 +44,7 @@
               v-show="selectOpen"
               class="absolute right-0 mt-px bg-theme-content-background shadow-theme rounded border overflow-hidden text-sm"
             >
-              <li
-                v-for="txType in ['all', 'sent', 'received']"
-                :key="txType"
-              >
+              <li v-for="txType in ['all', 'sent', 'received']" :key="txType">
                 <RouterLink
                   :to="{ name: 'wallet-transactions', params: { address: address, type: txType, page: 1 } }"
                   class="dropdown-button"
@@ -78,122 +69,133 @@
       <div class="sm:hidden">
         <TableTransactionsMobile :transactions="transactions" />
       </div>
-      <Pagination
-        v-if="showPagination"
-        :meta="meta"
-        :current-page="currentPage"
-        @page-change="onPageChange"
-      />
+      <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
     </section>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import TransactionService from '@/services/transaction'
+<script lang="ts">
+import { Component, Vue, Watch } from "vue-property-decorator";
+import { Route } from "vue-router";
+import { IBlock, IDelegate, ISortParameters, ITransaction, IWallet } from "@/interfaces";
+import TransactionService from "@/services/transaction";
 
-export default {
-  data: () => ({
-    transactions: null,
-    meta: null,
-    currentPage: 0,
-    selectOpen: false
-  }),
+Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 
-  computed: {
-    showPagination () {
-      return this.meta && this.meta.pageCount > 1
-    },
+@Component
+export default class WalletTransactions extends Vue {
+  private transactions: ITransaction[] | null = null;
+  private meta: any | null = null;
+  private currentPage: number = 0;
+  private selectOpen: boolean = false;
 
-    address () {
-      return this.$route.params.address
-    },
+  get showPagination() {
+    return this.meta && this.meta.pageCount > 1;
+  }
 
-    type () {
-      return this.$route.params.type
-    },
+  get address() {
+    return this.$route.params.address;
+  }
 
-    sortParams: {
-      get () {
-        return this.$store.getters['ui/transactionSortParams']
-      },
+  get type() {
+    return this.$route.params.type;
+  }
 
-      set (params) {
-        this.$store.dispatch('ui/setTransactionSortParams', {
-          field: params.field,
-          type: params.type
-        })
-      }
-    }
-  },
+  get sortParams() {
+    return this.$store.getters["ui/transactionSortParams"];
+  }
 
-  watch: {
-    currentPage () {
-      this.changePage()
-    }
-  },
+  set sortParams(params: ISortParameters) {
+    this.$store.dispatch("ui/setTransactionSortParams", {
+      field: params.field,
+      type: params.type,
+    });
+  }
 
-  async beforeRouteEnter (to, from, next) {
+  @Watch("currentPage")
+  public onCurrentPageChanged() {
+    this.changePage();
+  }
+
+  public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
     try {
-      const { meta, data } = await TransactionService[`${to.params.type}ByAddress`](to.params.address, to.params.page)
+      // @ts-ignore
+      const { meta, data } = await TransactionService[`${to.params.type}ByAddress`](
+        to.params.address,
+        Number(to.params.page),
+      );
 
-      next(vm => {
-        vm.currentPage = Number(to.params.page)
-        vm.setTransactions(data)
-        vm.setMeta(meta)
-      })
-    } catch (e) { next({ name: '404' }) }
-  },
+      next((vm: WalletTransactions) => {
+        vm.currentPage = Number(to.params.page);
+        vm.setTransactions(data);
+        vm.setMeta(meta);
+      });
+    } catch (e) {
+      next({ name: "404" });
+    }
+  }
 
-  async beforeRouteUpdate (to, from, next) {
-    this.selectOpen = false
-    this.transactions = null
-    this.meta = null
+  public async beforeRouteUpdate(to: Route, from: Route, next: (vm?: any) => void) {
+    this.selectOpen = false;
+    this.transactions = null;
+    this.meta = null;
 
     try {
-      const { meta, data } = await TransactionService[`${to.params.type}ByAddress`](to.params.address, to.params.page)
+      // @ts-ignore
+      const { meta, data } = await TransactionService[`${to.params.type}ByAddress`](
+        to.params.address,
+        Number(to.params.page),
+      );
 
-      this.currentPage = Number(to.params.page)
-      this.setTransactions(data)
-      this.setMeta(meta)
-      next()
-    } catch (e) { next({ name: '404' }) }
-  },
+      this.currentPage = Number(to.params.page);
+      this.setTransactions(data);
+      this.setMeta(meta);
+      next();
+    } catch (e) {
+      next({ name: "404" });
+    }
+  }
 
-  methods: {
-    setTransactions (transactions) {
-      if (!transactions) {
-        return
-      }
+  private setTransactions(transactions: ITransaction[]) {
+    if (!transactions) {
+      return;
+    }
 
-      this.transactions = transactions.map(transaction => ({ ...transaction, price: null }))
-    },
+    this.transactions = transactions.map(transaction => ({ ...transaction, price: null }));
+  }
 
-    setMeta (meta) {
-      this.meta = meta
-    },
+  private setMeta(meta: any) {
+    this.meta = meta;
+  }
 
-    onPageChange (page) {
-      this.currentPage = page
-    },
+  private onPageChange(page: number) {
+    this.currentPage = page;
+  }
 
-    closeDropdown () {
-      this.selectOpen = false
-    },
+  private closeDropdown() {
+    this.selectOpen = false;
+  }
 
-    changePage () {
+  private changePage() {
+    if (
+      this.currentPage !== Number(this.$route.params.page) ||
+      this.address !== this.$route.params.address ||
+      this.type !== this.$route.params.type
+    ) {
+      // @ts-ignore
       this.$router.push({
-        name: 'wallet-transactions',
+        name: "wallet-transactions",
         params: {
           address: this.address,
           type: this.type,
-          page: this.currentPage
-        }
-      })
-    },
-
-    onSortChange (params) {
-      this.sortParams = params
+          page: this.currentPage,
+        },
+      });
     }
+  }
+
+  private onSortChange(params: ISortParameters) {
+    this.sortParams = params;
   }
 }
 </script>

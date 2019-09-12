@@ -1,16 +1,10 @@
 <template>
-  <header
-    v-click-outside="closeHeader"
-    class="AppHeader min-h-50px md:min-h-80px mb-5 sm:mb-10 xl:rounded-md"
-  >
+  <header v-click-outside="closeHeader" class="AppHeader min-h-50px md:min-h-80px mb-5 sm:mb-10 xl:rounded-md">
     <RouterLink
       :to="{ name: 'home' }"
       class="logo-container w-50px md:w-80px h-50px md:h-80px flex-none bg-red text-2xl xl:rounded-l-md flex justify-center items-center"
     >
-      <img
-        class="logo max-w-25px md:max-w-38px"
-        src="@/assets/images/logo.png"
-      >
+      <img class="logo max-w-25px md:max-w-38px" src="@/assets/images/logo.png" />
     </RouterLink>
 
     <div class="w-full relative hidden xl:flex">
@@ -32,7 +26,9 @@
   </header>
 </template>
 
-<script type="text/ecmascript-6">
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import { mapGetters } from "vuex";
 import {
   HeaderDefault,
   HeaderSearch,
@@ -41,13 +37,10 @@ import {
   HeaderLanguagesDesktop,
   HeaderLanguagesMobile,
   HeaderMenuDesktop,
-  HeaderMenuMobile
-} from '@/components/header'
-import { mapGetters } from 'vuex'
+  HeaderMenuMobile,
+} from "@/components/header";
 
-export default {
-  name: 'AppHeader',
-
+@Component({
   components: {
     HeaderDefault,
     HeaderSearch,
@@ -56,17 +49,18 @@ export default {
     HeaderLanguagesDesktop,
     HeaderLanguagesMobile,
     HeaderMenuDesktop,
-    HeaderMenuMobile
+    HeaderMenuMobile,
   },
-
   computed: {
-    ...mapGetters('ui', ['headerType', 'menuVisible'])
+    ...mapGetters("ui", ["headerType", "menuVisible"]),
   },
+})
+export default class AppHeader extends Vue {
+  private headerType: string;
+  private menuVisible: boolean;
 
-  methods: {
-    closeHeader () {
-      this.$store.dispatch('ui/setHeaderType', null)
-    }
+  private closeHeader(): void {
+    this.$store.dispatch("ui/setHeaderType", null);
   }
 }
 </script>

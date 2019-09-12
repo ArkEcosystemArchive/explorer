@@ -1,16 +1,10 @@
 <template>
-  <RouterLink
-    :to="{ name: 'transaction', params: { id } }"
-    class="flex items-center whitespace-no-wrap"
-  >
+  <RouterLink :to="{ name: 'transaction', params: { id } }" class="flex items-center whitespace-no-wrap">
     <span v-if="hasDefaultSlot">
       <slot />
     </span>
     <template v-else>
-      <span
-        v-if="showSmartBridgeIcon && smartBridge"
-        v-tooltip="emojify(smartBridge)"
-      >
+      <span v-if="showSmartBridgeIcon && smartBridge" v-tooltip="emojify(smartBridge)">
         <svg
           class="mr-2 fill-current hidden md:block"
           xmlns="http://www.w3.org/2000/svg"
@@ -60,33 +54,17 @@
   </RouterLink>
 </template>
 
-<script type="text/ecmascript-6">
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-export default {
-  name: 'LinkTransaction',
+@Component
+export default class LinkTransaction extends Vue {
+  @Prop({ required: true }) public id: string;
+  @Prop({ required: false, default: "" }) public smartBridge: string;
+  @Prop({ required: false, default: false }) public showSmartBridgeIcon: boolean;
 
-  props: {
-    id: {
-      type: String,
-      required: true,
-      default: ''
-    },
-    smartBridge: {
-      type: String,
-      required: false,
-      default: ''
-    },
-    showSmartBridgeIcon: {
-      type: Boolean,
-      required: false,
-      default: false
-    }
-  },
-
-  computed: {
-    hasDefaultSlot () {
-      return !!this.$slots.default
-    }
+  get hasDefaultSlot(): boolean {
+    return !!this.$slots.default;
   }
 }
 </script>

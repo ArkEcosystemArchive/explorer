@@ -1,29 +1,25 @@
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'babel-eslint',
-    sourceType: 'module'
+    parser: "babel-eslint",
+    sourceType: "module",
   },
   env: {
     browser: true,
-    node: true
+    node: true,
   },
-  extends: [
-    'plugin:vue/recommended',
-    'standard',
-    'plugin:cypress/recommended'
-  ],
+  extends: ["plugin:vue/recommended", "standard", "plugin:cypress/recommended"],
   globals: {
-    'GIT_DATE': true,
-    'GIT_VERSION': true
+    GIT_DATE: true,
+    GIT_VERSION: true,
   },
   rules: {
     // allow paren-less arrow functions
-    'arrow-parens': 0,
+    "arrow-parens": 0,
     // allow async-await
-    'generator-star-spacing': 0,
+    "generator-star-spacing": 0,
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    'vue/component-name-in-template-casing': ['warn', 'PascalCase', {}]
-  }
-}
+    "no-debugger": process.env.NODE_ENV === "production" ? 2 : 0,
+    "vue/component-name-in-template-casing": ["warn", "PascalCase", {}],
+  },
+};

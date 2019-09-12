@@ -4,29 +4,16 @@
       v-if="hasError || isLoading"
       class="absolute inset-0 flex flex-col items-center justify-center text-white z-10"
     >
-      <p
-        v-if="hasError"
-        class="mb-4"
-      >
-        {{ $t('MARKET_CHART.ERROR') }}
+      <p v-if="hasError" class="mb-4">
+        {{ $t("MARKET_CHART.ERROR") }}
       </p>
-      <button
-        :disabled="isLoading"
-        class="mt-4 pager-button items-center"
-        @click="renderChart(1000)"
-      >
-        <span v-if="!isLoading">{{ $t('MARKET_CHART.RELOAD') }}</span>
-        <Loader
-          v-else
-          :data="null"
-        />
+      <button :disabled="isLoading" class="mt-4 pager-button items-center" @click="renderChart(1000)">
+        <span v-if="!isLoading">{{ $t("MARKET_CHART.RELOAD") }}</span>
+        <Loader v-else :data="null" />
       </button>
     </div>
 
-    <div
-      :key="componentKey"
-      :class="{ 'blur': hasError || isLoading }"
-    >
+    <div :key="componentKey" :class="{ blur: hasError || isLoading }">
       <div class="flex justify-between items-center px-10 pt-8 pb-4">
         <div class="relative">
           <button
@@ -51,14 +38,8 @@
             v-show="isOpen"
             class="absolute left-0 mt-px bg-theme-content-background shadow-theme rounded border overflow-hidden text-sm"
           >
-            <li
-              v-for="type in ['price', 'volume']"
-              :key="type"
-            >
-              <span
-                class="dropdown-button"
-                @click="setType(type)"
-              >
+            <li v-for="type in ['price', 'volume']" :key="type">
+              <span class="dropdown-button" @click="setType(type)">
                 {{ currencyName }} {{ $t(`MARKET_CHART.${type.toUpperCase()}`) }}
               </span>
             </li>
@@ -79,229 +60,232 @@
         </div>
       </div>
 
-      <PriceChart
-        :chart-data="chartData"
-        :styles="{ height: '308px' }"
-        :options="options"
-      />
+      <PriceChart :chart-data="chartData" :styles="{ height: '308px' }" :options="options" />
     </div>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import CryptoCompareService from '@/services/crypto-compare'
-import PriceChart from '@/components/charts/price-chart'
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import CryptoCompareService from "@/services/crypto-compare";
+import PriceChart from "@/components/charts/price-chart";
 
-export default {
+@Component({
   components: {
-    PriceChart
+    PriceChart,
   },
-
-  data: vm => ({
-    error: null,
-    isLoading: false,
-    isOpen: false,
-    componentKey: 0,
-    labels: [],
-    datasets: [],
-    options: {
-      showScale: true,
-      responsive: true,
-      maintainAspectRatio: false,
-      hover: {
-        intersect: false
-      },
-      animation: {
-        duration: 0
-      },
-      responsiveAnimationDuration: 0,
-      legend: {
-        display: false
-      },
-      layout: {
-        padding: {
-          left: 50,
-          right: 50,
-          top: 16,
-          bottom: 50
-        }
-      },
-      scales: {
-        yAxes: [
-          {
-            ticks: {
-              callback: (value, index, values) => {
-                // Skip every second tick
-                if (index % 2 === 0) return
-
-                return vm.readableCurrency(value, 1, null, false)
-              },
-              fontColor: '#838a9b',
-              fontSize: 13
-            },
-            gridLines: {
-              color: '#282b38'
-            }
-          }
-        ],
-        xAxes: [
-          {
-            gridLines: {
-              display: true,
-              color: '#282b38'
-            },
-            ticks: {
-              fontColor: '#838a9b',
-              fontSize: 13
-            }
-          }
-        ]
-      },
-      tooltips: {
-        backgroundColor: '#272936',
-        titleFontStyle: 'normal',
-        titleFontSize: 18,
-        titleFontFamily: "'Proxima Nova Regular', sans-serif",
-        titleMarginBottom: 0,
-        cornerRadius: 3,
-        bodyFontColor: '#838a9b',
-        bodyFontSize: 14,
-        xPadding: 14,
-        yPadding: 14,
-        caretPadding: 20,
-        displayColors: false,
-        mode: 'index',
-        intersect: false,
-        // borderWidth: 1,
-        // borderColor: '#037cff',
-        callbacks: {
-          title: tooltipItem => vm.readableCurrency(tooltipItem[0].yLabel, 1, null, false),
-          label: tooltipItem => ''
-        }
-      }
-    }
-  }),
-
   computed: {
-    ...mapGetters('currency', { currencyName: 'name' }),
-    ...mapGetters('network', ['token']),
-    ...mapGetters('ui', ['priceChartOptions']),
+    ...mapGetters("currency", { currencyName: "name" }),
+    ...mapGetters("network", ["token"]),
+    ...mapGetters("ui", ["priceChartOptions"]),
+  },
+})
+export default class ChartWrapper extends Vue {
+  private error: string | null = null;
+  private isLoading: boolean = false;
+  private isOpen: boolean = false;
+  private componentKey: number = 0;
+  private labels: string[] = [];
+  private datasets: any[] = [];
+  private options: object = {
+    showScale: true,
+    responsive: true,
+    maintainAspectRatio: false,
+    hover: {
+      intersect: false,
+    },
+    animation: {
+      duration: 0,
+    },
+    responsiveAnimationDuration: 0,
+    legend: {
+      display: false,
+    },
+    layout: {
+      padding: {
+        left: 50,
+        right: 50,
+        top: 16,
+        bottom: 50,
+      },
+    },
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            callback: (value: string, index: number, values: any) => {
+              // Skip every second tick
+              if (index % 2 === 0) {
+                return;
+              }
 
-    chartData () {
-      return {
-        labels: this.labels,
-        datasets: [{
-          type: 'line',
-          pointHoverBackgroundColor: '#fff',
-          borderColor: '#535972',
-          pointHoverBorderColor: '#037cff',
-          pointBackgroundColor: 'rgba(0,0,0,0)',
-          pointBorderColor: 'rgba(0,0,0,0)',
+              // @ts-ignore
+              return this.readableCurrency(value, 1, null, false);
+            },
+            fontColor: "#838a9b",
+            fontSize: 13,
+          },
+          gridLines: {
+            color: "#282b38",
+          },
+        },
+      ],
+      xAxes: [
+        {
+          gridLines: {
+            display: true,
+            color: "#282b38",
+          },
+          ticks: {
+            fontColor: "#838a9b",
+            fontSize: 13,
+          },
+        },
+      ],
+    },
+    tooltips: {
+      backgroundColor: "#272936",
+      titleFontStyle: "normal",
+      titleFontSize: 18,
+      titleFontFamily: "'Proxima Nova Regular', sans-serif",
+      titleMarginBottom: 0,
+      cornerRadius: 3,
+      bodyFontColor: "#838a9b",
+      bodyFontSize: 14,
+      xPadding: 14,
+      yPadding: 14,
+      caretPadding: 20,
+      displayColors: false,
+      mode: "index",
+      intersect: false,
+      // borderWidth: 1,
+      // borderColor: '#037cff',
+      callbacks: {
+        // @ts-ignore
+        title: tooltipItem => this.readableCurrency(tooltipItem[0].yLabel, 1, null, false),
+        label: (tooltipItem: any) => "",
+      },
+    },
+  };
+  private currencyName: string;
+  private token: string;
+  private priceChartOptions: { [key: string]: any };
+
+  get chartData() {
+    return {
+      labels: this.labels,
+      datasets: [
+        {
+          type: "line",
+          pointHoverBackgroundColor: "#fff",
+          borderColor: "#535972",
+          pointHoverBorderColor: "#037cff",
+          pointBackgroundColor: "rgba(0,0,0,0)",
+          pointBorderColor: "rgba(0,0,0,0)",
           pointHoverRadius: 7,
           pointHoverBorderWidth: 4,
           fill: false,
-          data: this.currentDataset
-        }]
+          data: this.currentDataset,
+        },
+      ],
+    };
+  }
+
+  get currentDataset() {
+    let property: string;
+
+    switch (this.priceChartOptions.type) {
+      case "price": {
+        property = "close";
+        break;
       }
-    },
-
-    currentDataset () {
-      let property
-
-      switch (this.priceChartOptions.type) {
-        case 'price':
-        {
-          property = 'close'
-          break
-        }
-        case 'volume':
-        {
-          property = 'volumeto'
-          break
-        }
+      case "volume": {
+        property = "volumeto";
+        break;
       }
-
-      return this.datasets.map(el => el[property])
-    },
-
-    hasError () {
-      return !!this.error
     }
-  },
 
-  watch: {
-    token () {
-      this.renderChart()
-    },
+    return this.datasets.map((el: { [key: string]: string }) => el[property]);
+  }
 
-    'priceChartOptions.period' () {
-      this.renderChart()
-    },
+  get hasError() {
+    return !!this.error;
+  }
 
-    'priceChartOptions.type' () {
-      this.renderChart()
-    },
+  @Watch("token")
+  public onTokenChanged() {
+    this.renderChart();
+  }
 
-    currencyName () {
-      this.renderChart()
+  @Watch("priceChartOptions.period")
+  public onPriceChartOptionsPeriodChanged() {
+    this.renderChart();
+  }
+
+  @Watch("priceChartOptions.type")
+  public onPriceChartOptionsTypeChanged() {
+    this.renderChart();
+  }
+
+  @Watch("currencyName")
+  public onCurrencyNameChanged() {
+    this.renderChart();
+  }
+
+  public mounted() {
+    window.addEventListener("resize", this.handleResize);
+    this.renderChart();
+  }
+
+  private setPeriod(period: string) {
+    this.$store.dispatch("ui/setPriceChartOption", { option: "period", value: period });
+  }
+
+  private setType(type: string) {
+    this.$store.dispatch("ui/setPriceChartOption", { option: "type", value: type });
+  }
+
+  private async renderChart(delay: number = 0) {
+    if (!this.datasets.length) {
+      this.isLoading = true;
     }
-  },
 
-  mounted () {
-    window.addEventListener('resize', this.handleResize)
-    this.renderChart()
-  },
+    try {
+      // @ts-ignore
+      const response = await CryptoCompareService[this.priceChartOptions.period]();
+      this.labels = response.labels;
+      this.datasets = response.datasets;
 
-  methods: {
-    setPeriod (period) {
-      this.$store.dispatch('ui/setPriceChartOption', { option: 'period', value: period })
-    },
+      this.error = null;
+    } catch (error) {
+      this.labels = [];
+      this.datasets = [];
 
-    setType (type) {
-      this.$store.dispatch('ui/setPriceChartOption', { option: 'type', value: type })
-    },
-
-    async renderChart (delay = 0) {
-      if (!this.datasets.length) {
-        this.isLoading = true
-      }
-
-      try {
-        const response = await CryptoCompareService[this.priceChartOptions.period]()
-        this.labels = response.labels
-        this.datasets = response.datasets
-
-        this.error = null
-      } catch (error) {
-        this.labels = []
-        this.datasets = []
-
-        this.error = error
-      } finally {
-        setTimeout(() => (this.isLoading = false), delay)
-      }
-    },
-
-    handleResize () {
-      // trick to re-mount the chart on resize
-      // https://stackoverflow.com/questions/47459837/how-to-re-mount-a-component
-      this.componentKey++
-    },
-
-    closeDropdown () {
-      this.isOpen = false
-    },
-
-    toggleDropdown () {
-      this.isOpen = !this.isOpen
+      this.error = error;
+    } finally {
+      setTimeout(() => (this.isLoading = false), delay);
     }
+  }
+
+  private handleResize() {
+    // trick to re-mount the chart on resize
+    // https://stackoverflow.com/questions/47459837/how-to-re-mount-a-component
+    this.componentKey++;
+  }
+
+  private closeDropdown() {
+    this.isOpen = false;
+  }
+
+  private toggleDropdown() {
+    this.isOpen = !this.isOpen;
   }
 }
 </script>
 
 <style scoped>
 .PriceChart {
-  @apply .relative
+  @apply .relative;
 }
 </style>

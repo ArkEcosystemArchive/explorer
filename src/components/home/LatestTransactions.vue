@@ -12,77 +12,60 @@
         <TableTransactionsMobile :transactions="transactions" />
       </div>
       <div class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
-        <RouterLink
-          :to="{ name: 'transactions', params: { page: 2 } }"
-          tag="button"
-          class="button-lg"
-        >
-          {{ $t('PAGINATION.SHOW_MORE') }}
+        <RouterLink :to="{ name: 'transactions', params: { page: 2 } }" tag="button" class="button-lg">
+          {{ $t("PAGINATION.SHOW_MORE") }}
         </RouterLink>
       </div>
     </Loader>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import TransactionService from '@/services/transaction'
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { ISortParameters, ITransaction } from "@/interfaces";
+import TransactionService from "@/services/transaction";
 
-export default {
-  name: 'LatestTransactions',
+@Component
+export default class LatestTransactions extends Vue {
+  @Prop({ required: true }) public transactionType: number;
 
-  props: {
-    transactionType: {
-      type: Number,
-      required: true
-    }
-  },
+  private transactions: ITransaction[] | null = null;
 
-  data: () => ({
-    transactions: null
-  }),
+  get sortParams() {
+    return this.$store.getters["ui/transactionSortParams"];
+  }
 
-  computed: {
-    sortParams: {
-      get () {
-        return this.$store.getters['ui/transactionSortParams']
-      },
+  set sortParams(params: ISortParameters) {
+    this.$store.dispatch("ui/setTransactionSortParams", {
+      field: params.field,
+      type: params.type,
+    });
+  }
 
-      set (params) {
-        this.$store.dispatch('ui/setTransactionSortParams', {
-          field: params.field,
-          type: params.type
-        })
-      }
-    }
-  },
+  @Watch("transactionType")
+  public async onTransactionTypeChanged(): Promise<void> {
+    this.transactions = null;
+    await this.getTransactions();
+  }
 
-  watch: {
-    async transactionType () {
-      this.transactions = null
-      await this.getTransactions()
-    }
-  },
+  public async mounted(): Promise<void> {
+    await this.prepareComponent();
+  }
 
-  async mounted () {
-    await this.prepareComponent()
-  },
+  private async prepareComponent() {
+    await this.getTransactions();
 
-  methods: {
-    async prepareComponent () {
-      await this.getTransactions()
+    this.$store.watch(state => state.network.height, value => this.getTransactions());
+  }
 
-      this.$store.watch(state => state.network.height, value => this.getTransactions())
-    },
+  private async getTransactions() {
+    const { data } = await TransactionService.filterByType(1, this.transactionType);
 
-    async getTransactions () {
-      const { data } = await TransactionService.filterByType(1, this.transactionType)
+    this.transactions = data.map((transaction: ITransaction) => ({ ...transaction, price: null }));
+  }
 
-      this.transactions = data.map(transaction => ({ ...transaction, price: null }))
-    },
-
-    onSortChange (params) {
-      this.sortParams = params
-    }
+  private onSortChange(params: ISortParameters) {
+    this.sortParams = params;
   }
 }
 </script>

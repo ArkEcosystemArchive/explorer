@@ -12,12 +12,7 @@
     <span v-else>...</span>
 
     <span class="icon">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="13px"
-        height="13px"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13px" height="13px">
         <path
           fill-rule="evenodd"
           fill="currentColor"
@@ -28,40 +23,27 @@
   </button>
 </template>
 
-<script type="text/ecmascript-6">
-export default {
-  name: 'PaginationSearchButton',
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-  props: {
-    isVisible: {
-      type: Boolean,
-      required: false,
-      default: true
-    },
+@Component
+export default class PaginationSearchButton extends Vue {
+  @Prop({ required: false, default: true }) public isVisible: boolean;
+  @Prop({ required: false, default: true }) public hoverScale: boolean;
 
-    hoverScale: {
-      type: Boolean,
-      default: true
-    }
-  },
+  get hasDefaultSlot() {
+    return !!this.$slots.default;
+  }
 
-  computed: {
-    hasDefaultSlot () {
-      return !!this.$slots.default
-    }
-  },
-
-  methods: {
-    emitClick () {
-      this.$emit('click')
-    }
+  private emitClick() {
+    this.$emit("click");
   }
 }
 </script>
 
 <style scoped>
 .Pagination__Button--search {
-  @apply .relative .text-theme-button-text .p-3 .cursor-pointer .flex .flex-no-wrap .items-center;;
+  @apply .relative .text-theme-button-text .p-3 .cursor-pointer .flex .flex-no-wrap .items-center;
 }
 
 .Pagination__Button--search:hover {
