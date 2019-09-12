@@ -59,12 +59,22 @@ export interface IMeta {
 
 export interface ITransaction {
   id: string;
+  blockId: string;
+  version?: number;
+  type: number;
   amount: string;
-  price?: number | null;
-  timestamp: ITimestamp;
-  vendorField: string;
   fee: string;
+  sender: string;
+  senderPublicKey: string;
+  recipient: string;
+  signature: string;
+  vendorField: string;
   confirmations: number;
+  timestamp: ITimestamp;
+  asset?: any;
+  signatures?: string[];
+  price?: number | null;
+  nonce?: string
 }
 
 export interface ISortParameters {

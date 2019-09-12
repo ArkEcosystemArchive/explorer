@@ -66,9 +66,11 @@
     </span>
     <span v-else-if="type === 4">{{ $t("TRANSACTION.TYPES.MULTI_SIGNATURE") }}</span>
     <span v-else-if="type === 5">{{ $t("TRANSACTION.TYPES.IPFS") }}</span>
-    <span v-else-if="type === 6">{{ $t("TRANSACTION.TYPES.TIMELOCK_TRANSFER") }}</span>
-    <span v-else-if="type === 7">{{ $t("TRANSACTION.TYPES.MULTI_PAYMENT") }}</span>
-    <span v-else-if="type === 8">{{ $t("TRANSACTION.TYPES.DELEGATE_RESIGNATION") }}</span>
+    <span v-else-if="type === 6">{{ $t("TRANSACTION.TYPES.MULTI_PAYMENT") }}</span>
+    <span v-else-if="type === 7">{{ $t("TRANSACTION.TYPES.DELEGATE_RESIGNATION") }}</span>
+    <span v-else-if="type === 8">{{ $t("TRANSACTION.TYPES.TIMELOCK") }}</span>
+    <span v-else-if="type === 9">{{ $t("TRANSACTION.TYPES.TIMELOCK_CLAIM") }}</span>
+    <span v-else-if="type === 10">{{ $t("TRANSACTION.TYPES.TIMELOCK_REFUND") }}</span>
   </span>
 </template>
 

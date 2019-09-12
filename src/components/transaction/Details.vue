@@ -80,6 +80,24 @@
         </div>
       </div>
 
+      <div v-if="transaction.nonce" class="list-row-border-b-no-wrap">
+        <div class="mr-4">
+          {{ $t("TRANSACTION.NONCE") }}
+        </div>
+        <div class="overflow-hidden break-words">
+          {{ transaction.nonce }}
+        </div>
+      </div>
+
+      <div v-if="transaction.type === 5" class="list-row-border-b">
+        <div class="mr-4">
+          {{ $t("TRANSACTION.IPFS") }}
+        </div>
+        <div class="overflow-hidden break-words">
+          {{ transaction.asset.ipfs }}
+        </div>
+      </div>
+
       <div class="list-row">
         <div class="mr-4">
           {{ $t("TRANSACTION.BLOCK_ID") }}
