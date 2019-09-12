@@ -33,9 +33,7 @@ export default {
 
   methods: {
     generate() {
-      const qr = new QRious();
-
-      qr.set(
+      new QRious(
         Object.assign(
           {
             element: this.$el,
