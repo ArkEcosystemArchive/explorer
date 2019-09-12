@@ -29,5 +29,14 @@ export default {
         maximumFractionDigits: digits,
       });
     },
+
+    readableTimestampFromEpoch(time: number): string {
+      const epoch = store.getters["network/epoch"] || "";
+      const epochUnix = moment(epoch).unix();
+      return moment
+        .unix(epochUnix + time)
+        .local()
+        .format("L LTS");
+    },
   },
 };

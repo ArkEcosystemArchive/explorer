@@ -17,6 +17,7 @@ const state: INetworkState = {
   knownWallets: [],
   supply: 0,
   height: 0,
+  epoch: null,
 };
 
 const actions: ActionTree<INetworkState, {}> = {
@@ -92,6 +93,12 @@ const actions: ActionTree<INetworkState, {}> = {
       value,
     });
   },
+  setEpoch: ({ commit }, value) => {
+    commit({
+      type: types.SET_NETWORK_EPOCH,
+      value,
+    });
+  },
 };
 
 const mutations: MutationTree<INetworkState> = {
@@ -131,6 +138,9 @@ const mutations: MutationTree<INetworkState> = {
   [types.SET_NETWORK_HEIGHT](state, payload: IStorePayload) {
     state.height = payload.value;
   },
+  [types.SET_NETWORK_EPOCH](state, payload: IStorePayload) {
+    state.epoch = payload.value;
+  },
 };
 
 const getters: GetterTree<INetworkState, {}> = {
@@ -146,6 +156,7 @@ const getters: GetterTree<INetworkState, {}> = {
   knownWallets: state => state.knownWallets,
   supply: state => state.supply,
   height: state => state.height,
+  epoch: state => state.epoch,
 };
 
 export const network: Module<INetworkState, {}> = {

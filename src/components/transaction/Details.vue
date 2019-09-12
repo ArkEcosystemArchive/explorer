@@ -37,6 +37,17 @@
           {{ $t("TRANSACTION.AMOUNT") }}
         </div>
         <div
+          v-if="transaction.type === 6"
+          v-tooltip="{
+            trigger: 'hover click',
+            content: price ? readableCurrency(multipaymentAmount, price) : '',
+            placement: 'left',
+          }"
+        >
+          {{ readableCrypto(multipaymentAmount) }}
+        </div>
+        <div
+          v-else
           v-tooltip="{
             trigger: 'hover click',
             content: price ? readableCurrency(transaction.amount, price) : '',
@@ -98,6 +109,15 @@
         </div>
       </div>
 
+      <div v-if="transaction.type === 8" class="list-row-border-b">
+        <div class="mr-4">
+          {{ $t("TRANSACTION.TIMELOCK_EXPIRATION") }}
+        </div>
+        <div class="overflow-hidden break-words">
+          {{ readableTimestampFromEpoch(transaction.asset.lock.expiration.value) }}
+        </div>
+      </div>
+
       <div class="list-row">
         <div class="mr-4">
           {{ $t("TRANSACTION.BLOCK_ID") }}
@@ -131,6 +151,7 @@ export default class TransactionDetails extends Vue {
   private price: number | null = 0;
   private currencySymbol: string;
   private height: number;
+  private multipaymentAmount: number | null = null;
 
   get confirmations() {
     return this.initialBlockHeight ? this.height - this.initialBlockHeight : this.transaction.confirmations;
@@ -139,6 +160,7 @@ export default class TransactionDetails extends Vue {
   @Watch("transaction")
   public async onTransactionChanged() {
     this.updatePrice();
+    this.calculateMultipaymentAmount();
     this.setInitialBlockHeight();
   }
 
@@ -156,6 +178,7 @@ export default class TransactionDetails extends Vue {
 
   public async mounted() {
     this.updatePrice();
+    this.calculateMultipaymentAmount();
   }
 
   private async updatePrice() {
@@ -164,6 +187,16 @@ export default class TransactionDetails extends Vue {
 
   private setInitialBlockHeight() {
     this.initialBlockHeight = this.height - this.transaction.confirmations;
+  }
+
+  private calculateMultipaymentAmount() {
+    if (this.transaction.type === 6) {
+      this.multipaymentAmount = this.transaction.asset.payments.reduce(
+        (accumulator: number, transaction: { amount: string; recipientId: string }) =>
+          accumulator + Number(transaction.amount),
+        0,
+      );
+    }
   }
 }
 </script>

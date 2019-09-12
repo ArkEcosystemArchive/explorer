@@ -74,7 +74,7 @@ export interface ITransaction {
   asset?: any;
   signatures?: string[];
   price?: number | null;
-  nonce?: string
+  nonce?: string;
 }
 
 export interface ISortParameters {
@@ -196,6 +196,7 @@ export interface INetworkState {
   knownWallets: any[];
   supply: number;
   height: number;
+  epoch: string | null;
 }
 
 export interface IUiState {

@@ -54,6 +54,7 @@ export default {
     IPFS: "IPFS Hash",
     FEE: "Fee",
     NONCE: "Nonce",
+    TIMELOCK_EXPIRATION: "Timelock Expiration",
     TYPE: "Transaction type",
     TYPES: {
       ALL: "All",

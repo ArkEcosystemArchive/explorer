@@ -80,6 +80,7 @@ export default {
     this.$store.dispatch('network/setToken', response.token)
     this.$store.dispatch('network/setSymbol', response.symbol)
     this.$store.dispatch('network/setNethash', response.nethash)
+    this.$store.dispatch('network/setEpoch', response.constants.epoch)
 
     this.$store.dispatch(
       'ui/setLanguage',

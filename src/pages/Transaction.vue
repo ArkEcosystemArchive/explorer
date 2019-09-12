@@ -31,6 +31,8 @@
       </section>
 
       <TransactionDetails :transaction="transaction" />
+
+      <!-- TODO: Multipayment transactions table -->
     </template>
   </div>
 </template>
