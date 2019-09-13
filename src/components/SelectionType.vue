@@ -82,7 +82,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 @Component
 export default class SelectionType extends Vue {
   @Prop({ required: false, default: false }) public inBanner: boolean;
-  private types: string[] = ["ALL", "TRANSFER", "SECOND_SIGNATURE", "DELEGATE_REGISTRATION", "VOTE", "MULTI_SIGNATURE"];
+  private types: string[] = ["ALL", "TRANSFER", "SECOND_SIGNATURE", "DELEGATE_REGISTRATION", "VOTE", "MULTI_SIGNATURE", "IPFS", "MULTI_PAYMENT", "DELEGATE_RESIGNATION", "TIMELOCK", "TIMELOCK_CLAIM", "TIMELOCK_REFUND"];
   private transactionType: number = -1;
   private selectOpen: boolean = false;
 
@@ -137,6 +137,7 @@ export default class SelectionType extends Vue {
 }
 
 .SelectionType--options {
-  @apply .absolute .bg-theme-content-background .shadow-theme .rounded .border .overflow-hidden .text-sm;
+  max-height: 15rem;
+  @apply .absolute .bg-theme-content-background .shadow-theme .rounded .border .overflow-hidden .text-sm .overflow-y-auto;
 }
 </style>
