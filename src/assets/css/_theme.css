@@ -1,6 +1,7 @@
 .theme-light {
   --color-theme-text-thead: #C5C7CB;
   --color-theme-table-row-sticky: #fff;
+  --color-theme-accents: #EF192D;
 
   --color-theme-page-background-primary: #f5f6fa;
   --color-theme-content-background-primary: #fff;
@@ -39,6 +40,7 @@
 .theme-dark {
   --color-theme-text-thead: #A1A2A6;
   --color-theme-table-row-sticky: #25262c;
+  --color-theme-accents: #EF192D;
 
   --color-theme-page-background-primary: #1a1b1f;
   --color-theme-content-background-primary: #202126;

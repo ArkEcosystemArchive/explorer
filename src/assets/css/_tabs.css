@@ -1,5 +1,5 @@
 .transition {
-  /* TODO: */
+  transition: all 0.1s ease-in;
 }
 
 .base-tab {

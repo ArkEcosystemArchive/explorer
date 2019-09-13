@@ -16,7 +16,7 @@ a:hover {
 }
 
 .transition {
-  transition: all .1s ease-in;
+  transition: all 0.1s ease-in;
 }
 
 .rotate-180 {

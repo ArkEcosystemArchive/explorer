@@ -4,10 +4,10 @@
     :viewBox="viewBox"
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink= "http://www.w3.org/1999/xlink"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
     class="SvgIcon fill-current"
   >
-    <use :xlink:href="iconPath"/>
+    <use :xlink:href="iconPath" />
   </svg>
 </template>
 
@@ -20,9 +20,9 @@ export default class SvgIcon extends Vue {
   @Prop({ required: false, default: "0 0 25 25" }) public viewBox: [string] | string;
 
   get styles() {
-    const size = Array.isArray(this.viewBox) ? this.viewBox : this.viewBox.split(" ")
-    const [x, y, width, height] = size.map(i => i + "px")
-    return { x, y, width, height }
+    const size = Array.isArray(this.viewBox) ? this.viewBox : this.viewBox.split(" ");
+    const [x, y, width, height] = size.map(i => i + "px");
+    return { x, y, width, height };
   }
 
   get iconPath() {

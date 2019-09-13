@@ -51,7 +51,7 @@ module.exports = {
       /*
        * The directory containing your SVG files.
        */
-      dir: 'src/assets/images/icons/social',
+      dir: "src/assets/images/icons/social",
       /*
        * The reqex that will be used for the Webpack rule.
        */
@@ -61,21 +61,21 @@ module.exports = {
        */
       loaderOptions: {
         extract: true,
-        spriteFilename: 'img/icons.[hash:8].svg' // or 'img/icons.svg' if filenameHashing == false
+        spriteFilename: "img/icons.[hash:8].svg", // or 'img/icons.svg' if filenameHashing == false
       },
       /*
        * @see https://github.com/kisenka/svg-sprite-loader#configuration
        */
       pluginOptions: {
-        plainSprite: true
-      }
-    }
+        plainSprite: true,
+      },
+    },
   },
 
   chainWebpack: config => {
     config.module
-      .rule('svg-sprite')
-      .use('svgo-loader')
-      .loader('svgo-loader')
-  }
+      .rule("svg-sprite")
+      .use("svgo-loader")
+      .loader("svgo-loader");
+  },
 };
