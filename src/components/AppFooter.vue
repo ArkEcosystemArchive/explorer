@@ -2,7 +2,7 @@
   <footer class="AppFooter px-5 md:px-10 flex-col lg:flex-row">
     <div class="mb-4 lg:mb-0 text-center md:text-left">
       <span class="block md:inline-block mb-4 md:mb-0 text-center"
-        >&copy; <a href="https://ark.io" target="_blank">ARK.io</a> | {{ year }}.
+        >&copy; <a :href="brandData.footer.url" target="_blank">{{ brandData.footer.text }}</a> | {{ year }}.
         {{ $t("FOOTER.ALL_RIGHTS_RESERVED") }}</span
       >
       <div class="block md:inline-block">
@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { socialMedia } from "@/config";
+import { brand, socialMedia } from "@/config";
 import moment from "moment";
 
 @Component
@@ -42,6 +42,10 @@ export default class AppFooter extends Vue {
 
   get date() {
     return process.env.VUE_APP_GIT_DATE;
+  }
+
+  get brandData() {
+    return brand;
   }
 
   get socialMediaData() {

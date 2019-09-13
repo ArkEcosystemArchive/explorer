@@ -3,6 +3,13 @@ export const I18N = {
   enabledLocales: ["en-GB", "en-US", "it-IT", "fr-FR", "nl-NL", "pl-PL", "pt-BR"],
 };
 
+export const brand = {
+  footer: {
+    url: "https://ark.io",
+    text: "ARK.io",
+  }
+}
+
 export const socialMedia = [
   {
     name: "facebook",
