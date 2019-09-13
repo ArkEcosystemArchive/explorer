@@ -60,7 +60,7 @@ describe("Components > SelectionType", () => {
       .findAll(".dropdown-button")
       .at(11)
       .trigger("click");
-    expect(localStorage.setItem).toHaveBeenCalledWith("transactionType", "4");
-    expect(Number(localStorage.__STORE__.transactionType)).toBe(4);
+    expect(localStorage.setItem).toHaveBeenCalledWith("transactionType", "10");
+    expect(Number(localStorage.__STORE__.transactionType)).toBe(10);
   });
 });
