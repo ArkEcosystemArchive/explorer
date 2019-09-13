@@ -12,9 +12,15 @@
 
     <template v-else>
       <section class="mb-5">
-        <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center">
-          <div class="mr-6 flex-none">
+        <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
+          <div class="relative mr-6 flex-none">
             <img class="block" src="@/assets/images/icons/transaction.svg" />
+            <div
+              class="absolute text-theme-transaction-icon text-2xl"
+              style="top: 50%; left: 50%; transform: translate(-50%, -50%);"
+            >
+              {{ networkSymbol }}
+            </div>
           </div>
           <div class="flex-auto min-w-0">
             <div class="text-grey mb-2">
@@ -54,6 +60,7 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
   },
   computed: {
     ...mapGetters("network", ["height"]),
+    ...mapGetters("network", { networkSymbol: "symbol" }),
   },
 })
 export default class TransactionPage extends Vue {
@@ -61,6 +68,7 @@ export default class TransactionPage extends Vue {
   private transactionNotFound: boolean = false;
   private isLoading: boolean = false;
   private height: number;
+  private networkSymbol: string;
 
   public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
     try {
