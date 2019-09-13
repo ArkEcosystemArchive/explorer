@@ -95,7 +95,7 @@
         <div class="mr-4">
           {{ $t("TRANSACTION.NONCE") }}
         </div>
-        <div class="overflow-hidden break-words">
+        <div>
           {{ transaction.nonce }}
         </div>
       </div>
@@ -104,17 +104,31 @@
         <div class="mr-4">
           {{ $t("TRANSACTION.IPFS") }}
         </div>
-        <div class="overflow-hidden break-words">
+        <div class="overflow-hidden break-all">
           {{ transaction.asset.ipfs }}
         </div>
       </div>
 
-      <div v-if="transaction.type === 8" class="list-row-border-b">
-        <div class="mr-4">
-          {{ $t("TRANSACTION.TIMELOCK_EXPIRATION") }}
+      <div v-if="transaction.type === 8">
+        <div v-if="transaction.asset.lock.expiration.type === 1" class="list-row-border-b">
+          <div class="mr-4">
+            {{ $t("TRANSACTION.TIMELOCK_EXPIRATION") }}
+          </div>
+          <div>
+            {{ readableTimestampFromEpoch(transaction.asset.lock.expiration.value) }}
+          </div>
         </div>
-        <div class="overflow-hidden break-words">
-          {{ readableTimestampFromEpoch(transaction.asset.lock.expiration.value) }}
+        <div v-else-if="transaction.asset.lock.expiration.type === 2" class="list-row-border-b">
+          <div class="mr-4">
+            {{ $t("TRANSACTION.TIMELOCK_BLOCKHEIGHT") }}
+          </div>
+          <div v-tooltip="{
+            trigger: 'hover click',
+            content: readableTimestampFromBlockheight(transaction.asset.lock.expiration.value),
+            placement: 'left',
+          }">
+            {{ transaction.asset.lock.expiration.value }}
+          </div>
         </div>
       </div>
 

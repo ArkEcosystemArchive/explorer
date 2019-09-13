@@ -30,6 +30,22 @@ export default {
       });
     },
 
+    readableTimestampFromBlockheight(height: number): string {
+      const blocktime = store.getters["network/blocktime"];
+      const currentHeight = store.getters["network/height"];
+      return moment()
+        .add((height - currentHeight) * blocktime)
+        .local()
+        .format("L LTS");
+    },
+
+    readableTimestampFromOffset(unixOffset: number, time: number): string {
+      return moment
+        .unix(unixOffset + time)
+        .local()
+        .format("L LTS");
+    },
+
     readableTimestampFromEpoch(time: number): string {
       const epoch = store.getters["network/epoch"] || "";
       const epochUnix = moment(epoch).unix();

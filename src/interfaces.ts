@@ -197,6 +197,7 @@ export interface INetworkState {
   supply: number;
   height: number;
   epoch: string | null;
+  blocktime: number;
 }
 
 export interface IUiState {

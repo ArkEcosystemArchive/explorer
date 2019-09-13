@@ -18,6 +18,7 @@ const state: INetworkState = {
   supply: 0,
   height: 0,
   epoch: null,
+  blocktime: 0,
 };
 
 const actions: ActionTree<INetworkState, {}> = {
@@ -99,6 +100,12 @@ const actions: ActionTree<INetworkState, {}> = {
       value,
     });
   },
+  setBlocktime: ({ commit }, value) => {
+    commit({
+      type: types.SET_NETWORK_BLOCKTIME,
+      value,
+    });
+  },
 };
 
 const mutations: MutationTree<INetworkState> = {
@@ -140,6 +147,9 @@ const mutations: MutationTree<INetworkState> = {
   },
   [types.SET_NETWORK_EPOCH](state, payload: IStorePayload) {
     state.epoch = payload.value;
+  },
+  [types.SET_NETWORK_BLOCKTIME](state, payload: IStorePayload) {
+    state.blocktime = payload.value;
   },
 };
 
