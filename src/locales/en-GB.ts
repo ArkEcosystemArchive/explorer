@@ -54,7 +54,12 @@ export default {
     IPFS: "IPFS Hash",
     FEE: "Fee",
     NONCE: "Nonce",
-    TIMELOCK_EXPIRATION: "Timelock Expiration",
+    TIMELOCK: {
+      BLOCKHEIGHT: "Expiration Blockheight",
+      CLAIMED: "Claimed Transaction",
+      EXPIRATION: "Expiration",
+      REFUND: "Refunded Transaction"
+    },
     TYPE: "Transaction type",
     TYPES: {
       ALL: "All",
