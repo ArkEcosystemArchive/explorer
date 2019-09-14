@@ -4,8 +4,14 @@
 
     <section class="mb-5">
       <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
-        <div class="mr-6 flex-none">
+        <div class="relative mr-6 flex-none">
           <img class="block" src="@/assets/images/icons/transaction.svg" />
+          <div
+            class="absolute text-theme-transaction-icon text-2xl"
+            style="top: 50%; left: 50%; transform: translate(-50%, -50%);"
+          >
+            {{ networkSymbol }}
+          </div>
         </div>
         <div class="flex-auto min-w-0">
           <div class="text-grey mb-2">
@@ -76,18 +82,24 @@
 
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
 import { Route } from "vue-router";
 import { IBlock, IDelegate, ISortParameters, ITransaction, IWallet } from "@/interfaces";
 import TransactionService from "@/services/transaction";
 
 Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 
-@Component
+@Component({
+  computed: {
+    ...mapGetters("network", { networkSymbol: "symbol" }),
+  },
+})
 export default class WalletTransactions extends Vue {
   private transactions: ITransaction[] | null = null;
   private meta: any | null = null;
   private currentPage: number = 0;
   private selectOpen: boolean = false;
+  private networkSymbol: string;
 
   get showPagination() {
     return this.meta && this.meta.pageCount > 1;
