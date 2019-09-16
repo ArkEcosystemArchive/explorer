@@ -59,12 +59,22 @@ export default {
     calculateMultipaymentAmount(transaction: ITransaction): number {
       if (transaction.asset && transaction.asset.payments) {
         return transaction.asset.payments.reduce(
-          (sum: number, { amount }: { amount: string }) =>
-            sum + Number(amount),
+          (sum: number, { amount }: { amount: string }) => sum + Number(amount),
           0,
         );
       }
       return 0;
-    }
+    },
+
+    fetchWalletAmountFromMultipayment(transaction: ITransaction, address: string): number {
+      if (transaction.asset && transaction.asset.payments) {
+        return Number(
+          transaction.asset.payments.find(
+            (wallet: { recipientId: string; amount: string }) => wallet.recipientId === address,
+          ).amount,
+        );
+      }
+      return 0;
+    },
   },
 };

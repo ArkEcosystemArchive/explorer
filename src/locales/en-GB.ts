@@ -58,7 +58,7 @@ export default {
       BLOCKHEIGHT: "Expiration Blockheight",
       CLAIMED: "Claimed Transaction",
       EXPIRATION: "Expiration",
-      REFUND: "Refunded Transaction"
+      REFUND: "Refunded Transaction",
     },
     TYPE: "Transaction type",
     TYPES: {

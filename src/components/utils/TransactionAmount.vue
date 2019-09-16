@@ -33,8 +33,16 @@ export default class TransactionAmount extends Vue {
     if (this.isFee) {
       return this.transaction.fee;
     }
-    // @ts-ignore
-    return this.type === 6 ? this.calculateMultipaymentAmount(this.transaction) : this.transaction.amount;
+    if (this.type === 6) {
+      return !this.$route.params.address || this.transaction.sender === this.$route.params.address
+        ? // Needed for ts-ignore
+          // @ts-ignore
+          this.calculateMultipaymentAmount(this.transaction)
+        : // Needed for ts-ignore
+          // @ts-ignore
+          this.fetchWalletAmountFromMultipayment(this.transaction, this.$route.params.address);
+    }
+    return this.transaction.amount;
   }
 
   get price() {
@@ -43,8 +51,8 @@ export default class TransactionAmount extends Vue {
 
   get isTransfer() {
     if (this.type !== undefined) {
-      // 0 = transfer, 6 = multipayment, 8 = timelock
-      return this.type === 0 || this.type === 6 || this.type === 8;
+      // 0 = transfer, 8 = timelock
+      return this.type === 0 || this.type === 8;
     }
     return false;
   }

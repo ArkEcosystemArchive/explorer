@@ -122,11 +122,13 @@
           <div class="mr-4">
             {{ $t("TRANSACTION.TIMELOCK.BLOCKHEIGHT") }}
           </div>
-          <div v-tooltip="{
-            trigger: 'hover click',
-            content: readableTimestampFromBlockheight(transaction.asset.lock.expiration.value),
-            placement: 'left',
-          }">
+          <div
+            v-tooltip="{
+              trigger: 'hover click',
+              content: readableTimestampFromBlockheight(transaction.asset.lock.expiration.value),
+              placement: 'left',
+            }"
+          >
             {{ transaction.asset.lock.expiration.value }}
           </div>
         </div>

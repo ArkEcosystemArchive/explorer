@@ -82,7 +82,20 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 @Component
 export default class SelectionType extends Vue {
   @Prop({ required: false, default: false }) public inBanner: boolean;
-  private types: string[] = ["ALL", "TRANSFER", "SECOND_SIGNATURE", "DELEGATE_REGISTRATION", "VOTE", "MULTI_SIGNATURE", "IPFS", "MULTI_PAYMENT", "DELEGATE_RESIGNATION", "TIMELOCK", "TIMELOCK_CLAIM", "TIMELOCK_REFUND"];
+  private types: string[] = [
+    "ALL",
+    "TRANSFER",
+    "SECOND_SIGNATURE",
+    "DELEGATE_REGISTRATION",
+    "VOTE",
+    "MULTI_SIGNATURE",
+    "IPFS",
+    "MULTI_PAYMENT",
+    "DELEGATE_RESIGNATION",
+    "TIMELOCK",
+    "TIMELOCK_CLAIM",
+    "TIMELOCK_REFUND",
+  ];
   private transactionType: number = -1;
   private selectOpen: boolean = false;
 
