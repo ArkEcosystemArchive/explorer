@@ -3,30 +3,22 @@
   "version": "3.0.0",
   "description": "A Blockchain Explorer for ARK using Vue.js and Tailwind CSS",
   "author": "Brian Faust",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/arkecosystem/explorer.git"
-  },
-  "bugs": {
-    "url": "https://github.com/arkecosystem/explorer/issues"
-  },
-  "license": "MIT",
   "scripts": {
+    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build:mainnet": "vue-cli-service build --network mainnet",
+    "test": "yarn test:unit && yarn test:e2e",
+    "lint": "vue-cli-service lint && prettier --write \"./*.{ts,js,json,md,vue}\" \"./src/**/*.{ts,js,json,md,vue}\" \"./__tests__/**/*.{ts,js,json,md,vue}\"",
     "build:devnet": "vue-cli-service build --network devnet",
+    "build:mainnet": "vue-cli-service build --network mainnet",
     "build:testnet": "vue-cli-service-build --network testnet",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
-    "lint": "vue-cli-service lint && prettier --write \"./*.{ts,js,json,md,vue}\" \"./src/**/*.{ts,js,json,md,vue}\" \"./__tests__/**/*.{ts,js,json,md,vue}\"",
-    "serve": "vue-cli-service serve",
-    "serve:mainnet": "vue-cli-service serve --network mainnet",
     "serve:devnet": "vue-cli-service serve --network devnet",
+    "serve:mainnet": "vue-cli-service serve --network mainnet",
     "serve:testnet": "vue-cli-service serve --network testnet",
     "task:deploy": "cross-env-shell ./scripts/deploy.sh",
-    "test": "yarn test:unit && yarn test:e2e",
-    "test:unit": "vue-cli-service test:unit --maxWorkers=2",
     "test:e2e": "vue-cli-service test:e2e",
-    "test:e2e:ci": "vue-cli-service test:e2e --headless"
+    "test:e2e:ci": "vue-cli-service test:e2e --headless",
+    "test:unit": "vue-cli-service test:unit --maxWorkers=2"
   },
   "dependencies": {
     "@types/nprogress": "^0.2.0",
@@ -78,17 +70,24 @@
     "sinon": "^7.4.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
+    "svgo": "^1.1.0",
+    "svgo-loader": "^2.1.0",
     "tailwindcss": "^1.1.2",
     "ts-jest": "^23.0.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.4.3",
     "vue-cli-plugin-i18n": "^0.6.0",
+    "vue-cli-plugin-svg-sprite": "^1.0.0",
     "vue-good-table": "^2.18.0",
     "vue-template-compiler": "^2.6.10"
+  },
+  "bugs": {
+    "url": "https://github.com/arkecosystem/explorer/issues"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
+  "license": "MIT",
   "lint-staged": {
     "*.ts": [
       "vue-cli-service lint",
@@ -98,5 +97,9 @@
       "vue-cli-service lint",
       "git add"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arkecosystem/explorer.git"
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="HeaderMenuDesktop md:px-8 sm:flex xl:rounded-r-md">
     <button
-      class="px-4 py-3 md:py-6 flex-none flex items-center border-b-2 mt-2px mr-3 border-transparent hover:border-red text-theme-text-secondary"
+      class="px-4 py-3 md:py-6 flex-none flex items-center border-b-2 mt-2px mr-3 border-transparent hover:border-theme-accents text-theme-text-secondary"
       @click="closeMenu"
     >
       <!-- Inline this SVG so we can change color dynamically -->
