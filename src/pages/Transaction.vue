@@ -38,7 +38,8 @@
 
       <TransactionDetails :transaction="transaction" />
 
-      <!-- TODO: Multipayment transactions table -->
+      <MultiPaymentTransactions v-if="transaction.type === 6" :transaction="transaction" />
+
     </template>
   </div>
 </template>
@@ -51,6 +52,7 @@ import { Route } from "vue-router";
 import { ISortParameters, ITransaction } from "@/interfaces";
 import NotFound from "@/components/utils/NotFound.vue";
 import TransactionDetails from "@/components/transaction/Details.vue";
+import MultiPaymentTransactions from "@/components/tables/MultiPaymentTransactions.vue";
 import TransactionService from "@/services/transaction";
 
 Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
