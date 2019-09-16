@@ -94,6 +94,7 @@ export interface IWallet {
   publicKey: string;
   vote: string;
   isDelegate: boolean;
+  isResigned?: boolean;
 }
 
 export interface IApiResponse {

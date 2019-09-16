@@ -6,6 +6,11 @@
     </div>
 
     <div class="list-row-border-b">
+      <div>{{ $t("WALLET.DELEGATE.STATUS.TITLE") }}</div>
+      <div :class="delegateStatus.class">{{ delegateStatus.text }}</div>
+    </div>
+
+    <div class="list-row-border-b">
       <div>{{ $t("WALLET.DELEGATE.RANK") }}</div>
       <div>
         <span v-if="delegate.rank === undefined">
@@ -80,6 +85,17 @@ export default class WalletDelegate extends Vue {
 
   get delegate() {
     return this.$store.getters["delegates/byPublicKey"](this.wallet.publicKey);
+  }
+
+  get delegateStatus() {
+    const activeThreshold = this.$store.getters["network/activeDelegates"];
+    if (this.wallet.isResigned) {
+      return { text: this.$t("WALLET.DELEGATE.STATUS.RESIGNED"), class: "text-status-not-forging" }
+    }
+    if (this.delegate.rank && this.delegate.rank <= activeThreshold) {
+      return { text: this.$t("WALLET.DELEGATE.STATUS.ACTIVE"), class: "text-status-forging" }
+    }
+    return { text: this.$t("WALLET.DELEGATE.STATUS.STANDBY"), class: "text-status-missed-block" }
   }
 }
 </script>

@@ -99,6 +99,12 @@ export default {
       TOTAL_FORGED: "Total forged",
       RANK: "Rank",
       RANK_NOT_AVAILABLE: "Not yet available",
+      STATUS: {
+        TITLE: "Status",
+        ACTIVE: "Active",
+        STANDBY: "Standby",
+        RESIGNED: "Resigned",
+      },
       USERNAME: "Username",
       VOTES: "Votes",
       VOTERS: "Voters",
