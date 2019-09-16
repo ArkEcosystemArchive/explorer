@@ -30,7 +30,11 @@ export default class TransactionAmount extends Vue {
   @Prop({ required: false, default: false }) public isFee: boolean;
 
   get source() {
-    return this.isFee ? this.transaction.fee : this.transaction.amount;
+    if (this.isFee) {
+      return this.transaction.fee;
+    }
+    // @ts-ignore
+    return this.type === 6 ? this.calculateMultipaymentAmount(this.transaction) : this.transaction.amount;
   }
 
   get price() {
@@ -39,8 +43,8 @@ export default class TransactionAmount extends Vue {
 
   get isTransfer() {
     if (this.type !== undefined) {
-      // 0 = transfer, 6 = timelock transfer, 7 = multipayment
-      return this.type === 0 || this.type === 6 || this.type === 7;
+      // 0 = transfer, 6 = multipayment, 8 = timelock
+      return this.type === 0 || this.type === 6 || this.type === 8;
     }
     return false;
   }

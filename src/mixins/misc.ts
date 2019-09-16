@@ -1,5 +1,6 @@
 import moment from "moment";
 import store from "@/store";
+import { ITransaction } from "@/interfaces";
 
 const locale = store.getters["ui/locale"];
 
@@ -54,5 +55,16 @@ export default {
         .local()
         .format("L LTS");
     },
+
+    calculateMultipaymentAmount(transaction: ITransaction): number {
+      if (transaction.asset && transaction.asset.payments) {
+        return transaction.asset.payments.reduce(
+          (sum: number, { amount }: { amount: string }) =>
+            sum + Number(amount),
+          0,
+        );
+      }
+      return 0;
+    }
   },
 };

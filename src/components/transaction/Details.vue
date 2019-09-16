@@ -187,7 +187,7 @@ export default class TransactionDetails extends Vue {
   @Watch("transaction")
   public async onTransactionChanged() {
     this.updatePrice();
-    this.calculateMultipaymentAmount();
+    this.handleMultipayment();
     this.setInitialBlockHeight();
   }
 
@@ -205,7 +205,7 @@ export default class TransactionDetails extends Vue {
 
   public async mounted() {
     this.updatePrice();
-    this.calculateMultipaymentAmount();
+    this.handleMultipayment();
   }
 
   private async updatePrice() {
@@ -216,13 +216,10 @@ export default class TransactionDetails extends Vue {
     this.initialBlockHeight = this.height - this.transaction.confirmations;
   }
 
-  private calculateMultipaymentAmount() {
+  private handleMultipayment() {
     if (this.transaction.type === 6) {
-      this.multipaymentAmount = this.transaction.asset.payments.reduce(
-        (accumulator: number, transaction: { amount: string; recipientId: string }) =>
-          accumulator + Number(transaction.amount),
-        0,
-      );
+      // @ts-ignore
+      this.multipaymentAmount = this.calculateMultipaymentAmount(this.transaction);
     }
   }
 }
