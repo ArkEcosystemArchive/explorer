@@ -46,6 +46,11 @@ export interface IDelegate {
   forgingStatus: number;
 }
 
+export interface IRoundDelegate {
+  publicKey: string;
+  votes: string;
+}
+
 export interface IMeta {
   count: number;
   pageCount: number;
@@ -109,6 +114,10 @@ export interface IApiDelegateWrapper {
 export interface IApiDelegatesWrapper {
   data: IDelegate[];
   meta: IMeta;
+}
+
+export interface IApiRoundDelegatesWrapper {
+  data: IRoundDelegate[];
 }
 
 export interface IApiBlockchainWrapper {

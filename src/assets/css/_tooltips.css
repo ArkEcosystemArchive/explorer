@@ -174,3 +174,13 @@
 .tooltip.tooltip-bg-never-forged .tooltip-arrow {
   border-color: #e23a3e;
 }
+
+/* Voted In */
+.tooltip.tooltip-bg-became-active .tooltip-inner {
+  background-color: #037cff;
+  color: white;
+}
+
+.tooltip.tooltip-bg-became-active .tooltip-arrow {
+  border-color: #037cff;
+}
