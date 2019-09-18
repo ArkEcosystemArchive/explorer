@@ -84,31 +84,28 @@ import { ITransactionType } from "@/interfaces";
 @Component
 export default class SelectionType extends Vue {
   @Prop({ required: false, default: false }) public inBanner: boolean;
-  // TODO: use enums for types
   private types: ITransactionType[] = [
     { key: "ALL", type: -1 },
-    { key: "TRANSFER", type: 0, typeGroup: 1 },
-    { key: "SECOND_SIGNATURE", type: 1, typeGroup: 1 },
-    { key: "DELEGATE_REGISTRATION", type: 2, typeGroup: 1 },
-    { key: "VOTE", type: 3, typeGroup: 1 },
-    { key: "MULTI_SIGNATURE", type: 4, typeGroup: 1 },
-    { key: "IPFS", type: 5, typeGroup: 1 },
-    { key: "MULTI_PAYMENT", type: 6, typeGroup: 1 },
-    { key: "DELEGATE_RESIGNATION", type: 7, typeGroup: 1 },
-    { key: "TIMELOCK", type: 8, typeGroup: 1 },
-    { key: "TIMELOCK_CLAIM", type: 9, typeGroup: 1 },
-    { key: "TIMELOCK_REFUND", type: 10, typeGroup: 1 },
-    { key: "BUSINESS_REGISTRATION", type: 0, typeGroup: 2 },
-    { key: "BUSINESS_RESIGNATION", type: 1, typeGroup: 2 },
-    { key: "BUSINESS_UPDATE", type: 2, typeGroup: 2 },
-    { key: "BRIDGECHAIN_REGISTRATION", type: 3, typeGroup: 2 },
-    { key: "BRIDGECHAIN_RESIGNATION", type: 4, typeGroup: 2 },
-    { key: "BRIDGECHAIN_UPDATE", type: 5, typeGroup: 2 },
+    { key: "TRANSFER", type: DefaultTransaction.TRANSFER, typeGroup: 1 },
+    { key: "SECOND_SIGNATURE", type: DefaultTransaction.SECOND_SIGNATURE, typeGroup: 1 },
+    { key: "DELEGATE_REGISTRATION", type: DefaultTransaction.DELEGATE_REGISTRATION, typeGroup: 1 },
+    { key: "VOTE", type: DefaultTransaction.VOTE, typeGroup: 1 },
+    { key: "MULTI_SIGNATURE", type: DefaultTransaction.MULTI_SIGNATURE, typeGroup: 1 },
+    { key: "IPFS", type: DefaultTransaction.IPFS, typeGroup: 1 },
+    { key: "MULTI_PAYMENT", type: DefaultTransaction.MULTI_PAYMENT, typeGroup: 1 },
+    { key: "DELEGATE_RESIGNATION", type: DefaultTransaction.DELEGATE_RESIGNATION, typeGroup: 1 },
+    { key: "TIMELOCK", type: DefaultTransaction.TIMELOCK, typeGroup: 1 },
+    { key: "TIMELOCK_CLAIM", type: DefaultTransaction.TIMELOCK_CLAIM, typeGroup: 1 },
+    { key: "TIMELOCK_REFUND", type: DefaultTransaction.TIMELOCK_REFUND, typeGroup: 1 },
+    { key: "BUSINESS_REGISTRATION", type: MarketplaceTransaction.BUSINESS_REGISTRATION, typeGroup: 2 },
+    { key: "BUSINESS_RESIGNATION", type: MarketplaceTransaction.BUSINESS_RESIGNATION, typeGroup: 2 },
+    { key: "BUSINESS_UPDATE", type: MarketplaceTransaction.BUSINESS_UPDATE, typeGroup: 2 },
+    { key: "BRIDGECHAIN_REGISTRATION", type: MarketplaceTransaction.BRIDGECHAIN_REGISTRATION, typeGroup: 2 },
+    { key: "BRIDGECHAIN_RESIGNATION", type: MarketplaceTransaction.BRIDGECHAIN_RESIGNATION, typeGroup: 2 },
+    { key: "BRIDGECHAIN_UPDATE", type: MarketplaceTransaction.BRIDGECHAIN_UPDATE, typeGroup: 2 },
   ];
   private transactionType: ITransactionType = { key: "ALL", type: -1 };
   private selectOpen: boolean = false;
-
-  // TODO: add migration for new transactionType stuff
 
   get isOpen() {
     return this.selectOpen;
