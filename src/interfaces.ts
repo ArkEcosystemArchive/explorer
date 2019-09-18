@@ -1,3 +1,5 @@
+import { ForgingStatus } from "./enums";
+
 export interface IBlock {
   id: string;
   version: number;
@@ -43,7 +45,7 @@ export interface IDelegate {
     rewards: string;
     total: string;
   };
-  forgingStatus: number;
+  forgingStatus: ForgingStatus;
 }
 
 export interface IRoundDelegate {

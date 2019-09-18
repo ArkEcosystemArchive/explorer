@@ -175,7 +175,7 @@
   border-color: #e23a3e;
 }
 
-/* Voted In */
+/* Became active */
 .tooltip.tooltip-bg-became-active .tooltip-inner {
   background-color: #037cff;
   color: white;
