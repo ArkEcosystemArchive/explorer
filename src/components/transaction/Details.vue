@@ -6,7 +6,7 @@
           {{ $t("TRANSACTION.SENDER") }}
         </div>
         <div class="truncate">
-          <LinkWallet :address="transaction.sender" :trunc="false" tooltip-placement="left" />
+          <LinkWallet :address="transaction.sender" :trunc="false" tooltip-placement="left"/>
         </div>
       </div>
 
@@ -20,6 +20,7 @@
             :type="transaction.type"
             :asset="transaction.asset"
             :trunc="false"
+            :type-group="transaction.typeGroup"
             tooltip-placement="left"
           />
         </div>

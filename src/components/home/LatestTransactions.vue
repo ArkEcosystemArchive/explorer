@@ -28,6 +28,7 @@ import TransactionService from "@/services/transaction";
 @Component
 export default class LatestTransactions extends Vue {
   @Prop({ required: true }) public transactionType: number;
+  @Prop({ required: true }) public transactionGroup: number;
 
   private transactions: ITransaction[] | null = null;
 
@@ -59,7 +60,7 @@ export default class LatestTransactions extends Vue {
   }
 
   private async getTransactions() {
-    const { data } = await TransactionService.filterByType(1, this.transactionType);
+    const { data } = await TransactionService.filterByType(1, this.transactionType, this.transactionGroup);
 
     this.transactions = data.map((transaction: ITransaction) => ({ ...transaction, price: null }));
   }

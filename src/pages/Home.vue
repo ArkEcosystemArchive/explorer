@@ -23,7 +23,7 @@
         <SelectionType v-if="dataView === 'transactions'" @change="onTypeChange" />
       </div>
 
-      <LatestTransactions v-if="dataView === 'transactions'" :transaction-type="transactionType" />
+      <LatestTransactions v-if="dataView === 'transactions'" :transaction-type="transactionType.type" :transaction-group="transactionType.typeGroup"/>
 
       <LatestBlocks v-if="dataView === 'blocks'" />
     </section>
@@ -46,17 +46,18 @@ import SelectionType from "@/components/SelectionType.vue";
 })
 export default class HomePage extends Vue {
   private dataView: string = "transactions";
-  private transactionType: number = -1;
+  private transactionType: { key: string, type: number, typeGroup?: number } = { key: "ALL", type: -1 };
 
   get isChartEnabled() {
     return this.$store.getters["ui/priceChartOptions"].enabled;
   }
 
   public created() {
-    this.transactionType = Number(localStorage.getItem("transactionType") || -1);
+    const savedType = localStorage.getItem("transactionType");
+    this.transactionType = savedType ? JSON.parse(savedType) : { key: "ALL", type: -1 }
   }
 
-  private onTypeChange(type: number) {
+  private onTypeChange(type: { key: string, type: number, typeGroup?: number }) {
     this.transactionType = type;
   }
 }

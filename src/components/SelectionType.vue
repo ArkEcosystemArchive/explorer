@@ -18,7 +18,7 @@
         @click="toggleDropdown"
       >
         <span class="font-bold">
-          {{ $t(`TRANSACTION.TYPES.${types[transactionType + 1]}`) }}
+          {{ $t(`TRANSACTION.TYPES.${transactionType.key}`) }}
         </span>
 
         <svg
@@ -34,9 +34,9 @@
       </span>
 
       <ul v-show="isOpen" class="SelectionType--options inset-x-0 mt-10">
-        <li v-for="(type, index) in types" :key="type">
-          <div class="dropdown-button" @click="filterTransactions(index - 1)">
-            {{ $t(`TRANSACTION.TYPES.${type}`) }}
+        <li v-for="type in types" :key="type.key">
+          <div class="dropdown-button" @click="filterTransactions(type)">
+            {{ $t(`TRANSACTION.TYPES.${type.key}`) }}
           </div>
         </li>
       </ul>
@@ -52,7 +52,7 @@
         class="flex items-center cursor-pointer"
         @click="toggleDropdown"
       >
-        <span class="mr-1 md:whitespace-no-wrap">{{ $t(`TRANSACTION.TYPES.${types[transactionType + 1]}`) }}</span>
+        <span class="mr-1 md:whitespace-no-wrap">{{ $t(`TRANSACTION.TYPES.${transactionType.key}`) }}</span>
         <svg
           :class="{ 'rotate-180': isOpen }"
           class="fill-current"
@@ -66,9 +66,9 @@
       </span>
 
       <ul v-show="isOpen" class="SelectionType--options right-0 mt-2">
-        <li v-for="(type, index) in types" :key="type">
-          <div class="dropdown-button" @click="filterTransactions(index - 1)">
-            {{ $t(`TRANSACTION.TYPES.${type}`) }}
+        <li v-for="type in types" :key="type.key">
+          <div class="dropdown-button" @click="filterTransactions(type)">
+            {{ $t(`TRANSACTION.TYPES.${type.key}`) }}
           </div>
         </li>
       </ul>
@@ -78,26 +78,36 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { DefaultTransaction, MarketplaceTransaction } from "@/enums";
 
 @Component
 export default class SelectionType extends Vue {
   @Prop({ required: false, default: false }) public inBanner: boolean;
-  private types: string[] = [
-    "ALL",
-    "TRANSFER",
-    "SECOND_SIGNATURE",
-    "DELEGATE_REGISTRATION",
-    "VOTE",
-    "MULTI_SIGNATURE",
-    "IPFS",
-    "MULTI_PAYMENT",
-    "DELEGATE_RESIGNATION",
-    "TIMELOCK",
-    "TIMELOCK_CLAIM",
-    "TIMELOCK_REFUND",
+  // TODO: use enums for types
+  private types: Array<{ key: string, type: number, typeGroup?: number }> = [
+    { key: "ALL", type: -1 },
+    { key: "TRANSFER", type: 0, typeGroup: 1 },
+    { key: "SECOND_SIGNATURE", type: 1, typeGroup: 1 },
+    { key: "DELEGATE_REGISTRATION", type: 2, typeGroup: 1 },
+    { key: "VOTE", type: 3, typeGroup: 1 },
+    { key: "MULTI_SIGNATURE", type: 4, typeGroup: 1 },
+    { key: "IPFS", type: 5, typeGroup: 1 },
+    { key: "MULTI_PAYMENT", type: 6, typeGroup: 1 },
+    { key: "DELEGATE_RESIGNATION", type: 7, typeGroup: 1 },
+    { key: "TIMELOCK", type: 8, typeGroup: 1 },
+    { key: "TIMELOCK_CLAIM", type: 9, typeGroup: 1 },
+    { key: "TIMELOCK_REFUND", type: 10, typeGroup: 1 },
+    { key: "BUSINESS_REGISTRATION", type: 0, typeGroup: 2 },
+    { key: "BUSINESS_RESIGNATION", type: 1, typeGroup: 2 },
+    { key: "BUSINESS_UPDATE", type: 2, typeGroup: 2 },
+    { key: "BRIDGECHAIN_REGISTRATION", type: 3, typeGroup: 2 },
+    { key: "BRIDGECHAIN_RESIGNATION", type: 4, typeGroup: 2 },
+    { key: "BRIDGECHAIN_UPDATE", type: 5, typeGroup: 2 },
   ];
-  private transactionType: number = -1;
+  private transactionType: { key: string, type: number, typeGroup?: number } = { key: "ALL", type: -1 };
   private selectOpen: boolean = false;
+
+  // TODO: add migration for new transactionType stuff
 
   get isOpen() {
     return this.selectOpen;
@@ -120,17 +130,18 @@ export default class SelectionType extends Vue {
   }
 
   public created() {
-    this.transactionType = Number(localStorage.getItem("transactionType") || -1);
+    const savedType = localStorage.getItem("transactionType");
+    this.transactionType = savedType ? JSON.parse(savedType) : { key: "ALL", type: -1 }
   }
 
-  private filterTransactions(type: number) {
+  private filterTransactions(type: { key: string, type: number, typeGroup?: number }) {
     this.closeDropdown();
     this.setTransactionType(type);
     this.$emit("change", type);
   }
 
-  private setTransactionType(type: number) {
-    localStorage.setItem("transactionType", type.toString());
+  private setTransactionType(type: { key: string, type: number, typeGroup?: number }) {
+    localStorage.setItem("transactionType", JSON.stringify(type));
     this.transactionType = type;
   }
 

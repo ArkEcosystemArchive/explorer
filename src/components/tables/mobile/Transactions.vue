@@ -29,7 +29,7 @@
           <div class="mr-4">
             {{ $t("TRANSACTION.RECIPIENT") }}
           </div>
-          <LinkWallet :address="transaction.recipient" :type="transaction.type" :asset="transaction.asset" />
+          <LinkWallet :address="transaction.recipient" :type="transaction.type" :asset="transaction.asset" :type-group="transaction.typeGroup"/>
         </div>
 
         <div v-if="truncate(transaction.vendorField || '')" class="list-row-border-b-no-wrap">
