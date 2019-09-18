@@ -86,6 +86,7 @@ export default {
     },
     SENDER: "Sender",
     RECIPIENT: "Recipient",
+    RECIPIENTS: "Recipients",
     SMARTBRIDGE: "Smartbridge",
     WELL_CONFIRMED: "Well confirmed",
   },

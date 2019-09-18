@@ -40,7 +40,7 @@ export default class MultiPaymentTransactions extends Vue {
   get columns() {
     const columns = [
       {
-        label: this.$t("TRANSACTION.RECIPIENT"),
+        label: this.$t("TRANSACTION.RECIPIENTS"),
         field: "recipientId",
         thClass: "start-cell",
         tdClass: "start-cell break-all",
