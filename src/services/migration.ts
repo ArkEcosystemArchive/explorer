@@ -3,7 +3,7 @@ import store from "@/store";
 
 class MigrationService {
   public executeMigrations(): void {
-    const migrations = ["languageKey", "priceChart"];
+    const migrations = ["languageKey", "priceChart", "selectionType"];
 
     for (const migration of migrations) {
       // @ts-ignore
@@ -51,6 +51,16 @@ class MigrationService {
 
     localStorage.removeItem("priceChart");
     localStorage.removeItem("priceChartPeriod");
+  }
+
+  public selectionType(): void {
+    const transactionType = localStorage.getItem("transactionType");
+
+    if (!transactionType || isNaN(Number(transactionType))) {
+      return;
+    }
+
+    localStorage.setItem("transactionType", JSON.stringify({ key: "ALL", type: -1 }));
   }
 }
 
