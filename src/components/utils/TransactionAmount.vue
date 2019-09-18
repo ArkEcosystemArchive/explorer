@@ -27,13 +27,14 @@ import { ITransaction } from "@/interfaces";
 export default class TransactionAmount extends Vue {
   @Prop({ required: true }) public transaction: ITransaction;
   @Prop({ required: false, default: null }) public type: number;
+  @Prop({ required: false, default: 1 }) public typeGroup: number;
   @Prop({ required: false, default: false }) public isFee: boolean;
 
   get source() {
     if (this.isFee) {
       return this.transaction.fee;
     }
-    if (this.type === 6) {
+    if (this.type === 6 && this.typeGroup === 1) {
       return !this.$route.params.address || this.transaction.sender === this.$route.params.address
         ? // Needed for ts-ignore
           // @ts-ignore
@@ -52,8 +53,8 @@ export default class TransactionAmount extends Vue {
   get isTransfer() {
     if (this.type !== undefined) {
       // 0 = transfer, 8 = timelock
-      return this.type === 0 || this.type === 8;
-    }
+      return (this.type === 0 || this.type === 8) && this.typeGroup === 1;
+      }
     return false;
   }
 }

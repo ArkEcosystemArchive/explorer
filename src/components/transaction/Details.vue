@@ -135,9 +135,18 @@
         </div>
       </div>
 
-      <div v-if="transaction.type === 9 || transaction.type === 10" class="list-row-border-b">
+      <div v-if="transaction.type === 9" class="list-row-border-b">
         <div class="mr-4">
-          {{ transaction.type === 9 ? $t("TRANSACTION.TIMELOCK.CLAIMED") : $t("TRANSACTION.TIMELOCK.REFUND") }}
+          {{ $t("TRANSACTION.TIMELOCK.CLAIMED") }}
+        </div>
+        <div class="overflow-hidden break-all">
+          <LinkTransaction :id="transaction.asset.claim.lockTransactionId" />
+        </div>
+      </div>
+
+      <div v-if="transaction.type === 10" class="list-row-border-b">
+        <div class="mr-4">
+          {{ $t("TRANSACTION.TIMELOCK.REFUND") }}
         </div>
         <div class="overflow-hidden break-all">
           <LinkTransaction :id="transaction.asset.refund.lockTransactionId" />
