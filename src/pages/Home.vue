@@ -35,6 +35,7 @@ import { Component, Vue } from "vue-property-decorator";
 import ChartWrapper from "@/components/ChartWrapper.vue";
 import { LatestBlocks, LatestTransactions } from "@/components/home";
 import SelectionType from "@/components/SelectionType.vue";
+import { ITransactionType } from "@/interfaces";
 
 @Component({
   components: {
@@ -46,7 +47,7 @@ import SelectionType from "@/components/SelectionType.vue";
 })
 export default class HomePage extends Vue {
   private dataView: string = "transactions";
-  private transactionType: { key: string, type: number, typeGroup?: number } = { key: "ALL", type: -1 };
+  private transactionType: ITransactionType = { key: "ALL", type: -1 };
 
   get isChartEnabled() {
     return this.$store.getters["ui/priceChartOptions"].enabled;
@@ -57,7 +58,7 @@ export default class HomePage extends Vue {
     this.transactionType = savedType ? JSON.parse(savedType) : { key: "ALL", type: -1 }
   }
 
-  private onTypeChange(type: { key: string, type: number, typeGroup?: number }) {
+  private onTypeChange(type: ITransactionType) {
     this.transactionType = type;
   }
 }

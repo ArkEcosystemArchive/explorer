@@ -10,7 +10,7 @@
           </div>
           <div class="flex">
             <div class="text-lg text-white semibold truncate">
-              <span class="mr-2">{{ types[transactionType + 1] }}</span>
+              <span class="mr-2">{{ $t(`TRANSACTION.TYPES.${transactionType.key}`) }}</span>
             </div>
           </div>
         </div>
@@ -59,14 +59,6 @@ export default class TransactionsPage extends Vue {
   private transactions: ITransaction[] | null = null;
   private meta: any | null = null;
   private currentPage: number = 0;
-  private types: string[] = [
-    "All",
-    "Transfer",
-    "Second Signature",
-    "Delegate Registration",
-    "Vote",
-    "Multisignature Registration",
-  ];
   private transactionType: { key: string, type: number, typeGroup?: number } = { key: "ALL", type: -1 };
 
   get showPagination() {
@@ -101,6 +93,7 @@ export default class TransactionsPage extends Vue {
 
       const { meta, data } = await TransactionService.filterByType(
         Number(to.params.page),
+        transactionType.type,
         transactionType.typeGroup,
       );
 
@@ -124,6 +117,7 @@ export default class TransactionsPage extends Vue {
 
       const { meta, data } = await TransactionService.filterByType(
         Number(to.params.page),
+        transactionType.type,
         transactionType.typeGroup,
       );
 

@@ -231,3 +231,9 @@ export interface IVTooltip {
   delay?: any;
   classes?: string;
 }
+
+export interface ITransactionType {
+  key: string;
+  type: number;
+  typeGroup?: number;
+}

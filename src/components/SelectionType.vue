@@ -79,12 +79,13 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { DefaultTransaction, MarketplaceTransaction } from "@/enums";
+import { ITransactionType } from "@/interfaces";
 
 @Component
 export default class SelectionType extends Vue {
   @Prop({ required: false, default: false }) public inBanner: boolean;
   // TODO: use enums for types
-  private types: Array<{ key: string, type: number, typeGroup?: number }> = [
+  private types: ITransactionType[] = [
     { key: "ALL", type: -1 },
     { key: "TRANSFER", type: 0, typeGroup: 1 },
     { key: "SECOND_SIGNATURE", type: 1, typeGroup: 1 },
@@ -104,7 +105,7 @@ export default class SelectionType extends Vue {
     { key: "BRIDGECHAIN_RESIGNATION", type: 4, typeGroup: 2 },
     { key: "BRIDGECHAIN_UPDATE", type: 5, typeGroup: 2 },
   ];
-  private transactionType: { key: string, type: number, typeGroup?: number } = { key: "ALL", type: -1 };
+  private transactionType: ITransactionType = { key: "ALL", type: -1 };
   private selectOpen: boolean = false;
 
   // TODO: add migration for new transactionType stuff
@@ -134,13 +135,13 @@ export default class SelectionType extends Vue {
     this.transactionType = savedType ? JSON.parse(savedType) : { key: "ALL", type: -1 }
   }
 
-  private filterTransactions(type: { key: string, type: number, typeGroup?: number }) {
+  private filterTransactions(type: ITransactionType) {
     this.closeDropdown();
     this.setTransactionType(type);
     this.$emit("change", type);
   }
 
-  private setTransactionType(type: { key: string, type: number, typeGroup?: number }) {
+  private setTransactionType(type: ITransactionType) {
     localStorage.setItem("transactionType", JSON.stringify(type));
     this.transactionType = type;
   }
