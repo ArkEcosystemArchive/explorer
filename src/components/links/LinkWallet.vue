@@ -67,7 +67,7 @@
       </span>
       <span v-else-if="type === defaultTransaction.MULTI_SIGNATURE">{{ $t("TRANSACTION.TYPES.MULTI_SIGNATURE") }}</span>
       <span v-else-if="type === defaultTransaction.IPFS">{{ $t("TRANSACTION.TYPES.IPFS") }}</span>
-      <span v-else-if="type === defaultTransaction.MULTI_PAYMENT">{{ $t("TRANSACTION.TYPES.MULTI_PAYMENT") }}</span>
+      <span v-else-if="type === defaultTransaction.MULTI_PAYMENT">{{ $t("TRANSACTION.TYPES.MULTI_PAYMENT") }} ({{ multiPaymentRecipientsCount }})</span>
       <span v-else-if="type === defaultTransaction.DELEGATE_RESIGNATION">{{ $t("TRANSACTION.TYPES.DELEGATE_RESIGNATION") }}</span>
       <span v-else-if="type === defaultTransaction.TIMELOCK">{{ $t("TRANSACTION.TYPES.TIMELOCK") }}</span>
       <span v-else-if="type === defaultTransaction.TIMELOCK_CLAIM">{{ $t("TRANSACTION.TYPES.TIMELOCK_CLAIM") }}</span>
@@ -98,7 +98,7 @@ import { DefaultTransaction, MarketplaceTransaction } from "@/enums";
 })
 export default class LinkWallet extends Vue {
   @Prop({ required: false, default: "" }) public address: string;
-  @Prop({ required: false, default: null }) public asset: { votes: [string] } | null;
+  @Prop({ required: false, default: null }) public asset: { [key: string]: [any] } | null;
   @Prop({ required: false, default: "" }) public publicKey: string;
   @Prop({ required: false, default: 0 }) public type: number;
   @Prop({ required: false, default: 1 }) public typeGroup: number;
@@ -156,6 +156,13 @@ export default class LinkWallet extends Vue {
 
   get marketplaceTransaction() {
     return MarketplaceTransaction;
+  }
+
+  get multiPaymentRecipientsCount() {
+    if (this.asset && this.asset.payments) {
+      return this.asset.payments.length;
+    }
+    return 0;
   }
 
   @Watch("delegates")
