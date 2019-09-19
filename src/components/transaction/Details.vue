@@ -212,14 +212,22 @@ export default class TransactionDetails extends Vue {
   }
 
   get assetField() {
-    if (this.transaction.type === MarketplaceTransaction.BUSINESS_REGISTRATION) {
-      return this.transaction.asset.businessRegistration;
-    } else if (this.transaction.type === MarketplaceTransaction.BUSINESS_RESIGNATION) {
-      return this.transaction.asset.businessResignation;
-    } else if (this.transaction.type === MarketplaceTransaction.BUSINESS_UPDATE) {
-      return this.transaction.asset.businessUpdate;
+    switch(this.transaction.type) {
+      case MarketplaceTransaction.BUSINESS_REGISTRATION:
+        return this.transaction.asset.businessRegistration;
+      case MarketplaceTransaction.BUSINESS_RESIGNATION:
+        return this.transaction.asset.businessResignation;
+      case MarketplaceTransaction.BUSINESS_UPDATE:
+        return this.transaction.asset.businessUpdate;
+      case MarketplaceTransaction.BRIDGECHAIN_REGISTRATION:
+        return this.transaction.asset.bridgechainRegistration;
+      case MarketplaceTransaction.BRIDGECHAIN_RESIGNATION:
+        return this.transaction.asset.bridgechainResignation;
+      case MarketplaceTransaction.BRIDGECHAIN_UPDATE:
+        return this.transaction.asset.bridgechainUpdate;
+      default:
+        return [];
     }
-    return [];
   }
 
   @Watch("transaction")
