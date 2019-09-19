@@ -1,176 +1,191 @@
 <template>
-  <section class="page-section py-5 md:py-10 mb-5">
-    <div class="px-5 sm:px-10">
-      <div class="list-row-border-b">
-        <div class="mr-4">
-          {{ $t("TRANSACTION.SENDER") }}
-        </div>
-        <div class="truncate">
-          <LinkWallet :address="transaction.sender" :trunc="false" tooltip-placement="left"/>
-        </div>
-      </div>
-
-      <div class="list-row-border-b">
-        <div class="mr-4">
-          {{ $t("TRANSACTION.RECIPIENT") }}
-        </div>
-        <div class="truncate">
-          <LinkWallet
-            :address="transaction.recipient"
-            :type="transaction.type"
-            :asset="transaction.asset"
-            :trunc="false"
-            :type-group="transaction.typeGroup"
-            tooltip-placement="left"
-          />
-        </div>
-      </div>
-
-      <div class="list-row-border-b">
-        <div class="mr-4">
-          {{ $t("COMMON.CONFIRMATIONS") }}
-        </div>
-        <div>{{ confirmations }}</div>
-      </div>
-
-      <div class="list-row-border-b">
-        <div class="mr-4">
-          {{ $t("TRANSACTION.AMOUNT") }}
-        </div>
-        <div
-          v-if="transaction.type === 6"
-          v-tooltip="{
-            trigger: 'hover click',
-            content: price ? readableCurrency(multipaymentAmount, price) : '',
-            placement: 'left',
-          }"
-        >
-          {{ readableCrypto(multipaymentAmount) }}
-        </div>
-        <div
-          v-else
-          v-tooltip="{
-            trigger: 'hover click',
-            content: price ? readableCurrency(transaction.amount, price) : '',
-            placement: 'left',
-          }"
-        >
-          {{ readableCrypto(transaction.amount) }}
-        </div>
-      </div>
-
-      <div class="list-row-border-b">
-        <div class="mr-4">
-          {{ $t("TRANSACTION.FEE") }}
-        </div>
-        <div
-          v-tooltip="{
-            trigger: 'hover click',
-            content: price ? readableCurrency(transaction.fee, price) : '',
-            placement: 'left',
-          }"
-        >
-          {{ readableCrypto(transaction.fee) }}
-        </div>
-      </div>
-
-      <div class="list-row-border-b-no-wrap">
-        <div class="mr-4">
-          {{ $t("COMMON.TIMESTAMP") }}
-        </div>
-        <div v-if="transaction.timestamp">
-          {{ readableTimestamp(transaction.timestamp.unix) }}
-        </div>
-      </div>
-
-      <div v-if="transaction.vendorField" class="list-row-border-b-no-wrap">
-        <div class="mr-4">
-          {{ $t("TRANSACTION.SMARTBRIDGE") }}
-        </div>
-        <div class="overflow-hidden break-words">
-          {{ emojify(transaction.vendorField) }}
-        </div>
-      </div>
-
-      <div v-if="transaction.nonce" class="list-row-border-b-no-wrap">
-        <div class="mr-4">
-          {{ $t("TRANSACTION.NONCE") }}
-        </div>
-        <div>
-          {{ transaction.nonce }}
-        </div>
-      </div>
-
-      <div v-if="transaction.type === 5" class="list-row-border-b">
-        <div class="mr-4">
-          {{ $t("TRANSACTION.IPFS") }}
-        </div>
-        <div class="overflow-hidden break-all">
-          {{ transaction.asset.ipfs }}
-        </div>
-      </div>
-
-      <div v-if="transaction.type === 8">
-        <div v-if="transaction.asset.lock.expiration.type === 1" class="list-row-border-b">
+  <div>
+    <section class="page-section py-5 md:py-10 mb-5">
+      <div class="px-5 sm:px-10">
+        <div class="list-row-border-b">
           <div class="mr-4">
-            {{ $t("TRANSACTION.TIMELOCK.EXPIRATION") }}
+            {{ $t("TRANSACTION.SENDER") }}
           </div>
-          <div>
-            {{ readableTimestampFromEpoch(transaction.asset.lock.expiration.value) }}
+          <div class="truncate">
+            <LinkWallet :address="transaction.sender" :trunc="false" tooltip-placement="left"/>
           </div>
         </div>
-        <div v-else-if="transaction.asset.lock.expiration.type === 2" class="list-row-border-b">
+
+        <div class="list-row-border-b">
           <div class="mr-4">
-            {{ $t("TRANSACTION.TIMELOCK.BLOCKHEIGHT") }}
+            {{ $t("TRANSACTION.RECIPIENT") }}
+          </div>
+          <div class="truncate">
+            <LinkWallet
+              :address="transaction.recipient"
+              :type="transaction.type"
+              :asset="transaction.asset"
+              :trunc="false"
+              :type-group="transaction.typeGroup"
+              tooltip-placement="left"
+            />
+          </div>
+        </div>
+
+        <div class="list-row-border-b">
+          <div class="mr-4">
+            {{ $t("COMMON.CONFIRMATIONS") }}
+          </div>
+          <div>{{ confirmations }}</div>
+        </div>
+
+        <div class="list-row-border-b">
+          <div class="mr-4">
+            {{ $t("TRANSACTION.AMOUNT") }}
+          </div>
+          <div
+            v-if="transaction.type === 6"
+            v-tooltip="{
+              trigger: 'hover click',
+              content: price ? readableCurrency(multipaymentAmount, price) : '',
+              placement: 'left',
+            }"
+          >
+            {{ readableCrypto(multipaymentAmount) }}
+          </div>
+          <div
+            v-else
+            v-tooltip="{
+              trigger: 'hover click',
+              content: price ? readableCurrency(transaction.amount, price) : '',
+              placement: 'left',
+            }"
+          >
+            {{ readableCrypto(transaction.amount) }}
+          </div>
+        </div>
+
+        <div class="list-row-border-b">
+          <div class="mr-4">
+            {{ $t("TRANSACTION.FEE") }}
           </div>
           <div
             v-tooltip="{
               trigger: 'hover click',
-              content: readableTimestampFromBlockheight(transaction.asset.lock.expiration.value),
+              content: price ? readableCurrency(transaction.fee, price) : '',
               placement: 'left',
             }"
           >
-            {{ transaction.asset.lock.expiration.value }}
+            {{ readableCrypto(transaction.fee) }}
+          </div>
+        </div>
+
+        <div class="list-row-border-b-no-wrap">
+          <div class="mr-4">
+            {{ $t("COMMON.TIMESTAMP") }}
+          </div>
+          <div v-if="transaction.timestamp">
+            {{ readableTimestamp(transaction.timestamp.unix) }}
+          </div>
+        </div>
+
+        <div v-if="transaction.vendorField" class="list-row-border-b-no-wrap">
+          <div class="mr-4">
+            {{ $t("TRANSACTION.SMARTBRIDGE") }}
+          </div>
+          <div class="overflow-hidden break-words">
+            {{ emojify(transaction.vendorField) }}
+          </div>
+        </div>
+
+        <div v-if="transaction.nonce" class="list-row-border-b-no-wrap">
+          <div class="mr-4">
+            {{ $t("TRANSACTION.NONCE") }}
+          </div>
+          <div>
+            {{ transaction.nonce }}
+          </div>
+        </div>
+
+        <div v-if="transaction.type === 5" class="list-row-border-b">
+          <div class="mr-4">
+            {{ $t("TRANSACTION.IPFS") }}
+          </div>
+          <div class="overflow-hidden break-all">
+            {{ transaction.asset.ipfs }}
+          </div>
+        </div>
+
+        <div v-if="transaction.type === 8">
+          <div v-if="transaction.asset.lock.expiration.type === 1" class="list-row-border-b">
+            <div class="mr-4">
+              {{ $t("TRANSACTION.TIMELOCK.EXPIRATION") }}
+            </div>
+            <div>
+              {{ readableTimestampFromEpoch(transaction.asset.lock.expiration.value) }}
+            </div>
+          </div>
+          <div v-else-if="transaction.asset.lock.expiration.type === 2" class="list-row-border-b">
+            <div class="mr-4">
+              {{ $t("TRANSACTION.TIMELOCK.BLOCKHEIGHT") }}
+            </div>
+            <div
+              v-tooltip="{
+                trigger: 'hover click',
+                content: readableTimestampFromBlockheight(transaction.asset.lock.expiration.value),
+                placement: 'left',
+              }"
+            >
+              {{ transaction.asset.lock.expiration.value }}
+            </div>
+          </div>
+        </div>
+
+        <div v-if="transaction.type === 9" class="list-row-border-b">
+          <div class="mr-4">
+            {{ $t("TRANSACTION.TIMELOCK.CLAIMED") }}
+          </div>
+          <div class="overflow-hidden break-all">
+            <LinkTransaction :id="transaction.asset.claim.lockTransactionId" />
+          </div>
+        </div>
+
+        <div v-if="transaction.type === 10" class="list-row-border-b">
+          <div class="mr-4">
+            {{ $t("TRANSACTION.TIMELOCK.REFUND") }}
+          </div>
+          <div class="overflow-hidden break-all">
+            <LinkTransaction :id="transaction.asset.refund.lockTransactionId" />
+          </div>
+        </div>
+
+        <div class="list-row">
+          <div class="mr-4">
+            {{ $t("TRANSACTION.BLOCK_ID") }}
+          </div>
+          <div>
+            <LinkBlock v-if="transaction.blockId" :id="transaction.blockId">
+              {{ transaction.blockId }}
+            </LinkBlock>
           </div>
         </div>
       </div>
-
-      <div v-if="transaction.type === 9" class="list-row-border-b">
-        <div class="mr-4">
-          {{ $t("TRANSACTION.TIMELOCK.CLAIMED") }}
-        </div>
-        <div class="overflow-hidden break-all">
-          <LinkTransaction :id="transaction.asset.claim.lockTransactionId" />
-        </div>
-      </div>
-
-      <div v-if="transaction.type === 10" class="list-row-border-b">
-        <div class="mr-4">
-          {{ $t("TRANSACTION.TIMELOCK.REFUND") }}
-        </div>
-        <div class="overflow-hidden break-all">
-          <LinkTransaction :id="transaction.asset.refund.lockTransactionId" />
+    </section>
+    <section v-if="transaction.typeGroup === 2" class="page-section py-5 md:py-10 mb-5">
+      <div v-for="(value, prop) in assetField" :key="prop" class="px-5 sm:px-10">
+        <div class="list-row-border-b">
+          <div class="mr-4">
+            {{ prop }}
+          </div>
+          <div class="overflow-hidden break-all">
+            {{ value }}
+          </div>
         </div>
       </div>
-
-      <div class="list-row">
-        <div class="mr-4">
-          {{ $t("TRANSACTION.BLOCK_ID") }}
-        </div>
-        <div>
-          <LinkBlock v-if="transaction.blockId" :id="transaction.blockId">
-            {{ transaction.blockId }}
-          </LinkBlock>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { ITransaction } from "@/interfaces";
+import { MarketplaceTransaction } from "@/enums";
 import { LinkTransaction } from "@/components/links";
 import CryptoCompareService from "@/services/crypto-compare";
 
@@ -194,6 +209,17 @@ export default class TransactionDetails extends Vue {
 
   get confirmations() {
     return this.initialBlockHeight ? this.height - this.initialBlockHeight : this.transaction.confirmations;
+  }
+
+  get assetField() {
+    if (this.transaction.type === MarketplaceTransaction.BUSINESS_REGISTRATION) {
+      return this.transaction.asset.businessRegistration;
+    } else if (this.transaction.type === MarketplaceTransaction.BUSINESS_RESIGNATION) {
+      return this.transaction.asset.businessResignation;
+    } else if (this.transaction.type === MarketplaceTransaction.BUSINESS_UPDATE) {
+      return this.transaction.asset.businessUpdate;
+    }
+    return [];
   }
 
   @Watch("transaction")
