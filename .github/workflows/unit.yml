@@ -23,7 +23,7 @@ jobs:
       - name: Test
         run: yarn test:unit
       - name: Codecov
-        run: bash <(curl -s https://codecov.io/bash)
+        run: ./node_modules/.bin/codecov --token=${{ secrets.CODECOV_TOKEN }}
 
         env:
           CI: true
