@@ -33,9 +33,11 @@ import CryptoCompareService from "@/services/crypto-compare";
 })
 export default class MultiPaymentTransactions extends Vue {
   @Prop({ required: true }) public transaction: ITransaction;
+  @Prop({ required: false, default: -1 }) public page: number;
+  @Prop({ required: false, default: 25 }) public count: number;
 
   private currencySymbol: string;
-  private transactions: Array<{ recipientId: string; amount: string }> | null = null;
+  private transactions: Array<{ recipientId: string; amount: string; price: number | null }> | null = null;
 
   get columns() {
     const columns = [
@@ -67,25 +69,33 @@ export default class MultiPaymentTransactions extends Vue {
     await this.updatePrices();
   }
 
+  @Watch("page")
+  public async onPageChanged() {
+    await this.prepareTransactions();
+  }
+
   public async created() {
     this.prepareTransactions();
   }
 
   private async prepareTransactions() {
-    this.transactions = this.transaction.asset.payments;
+    this.transactions =
+      this.page > -1
+        ? this.transaction.asset.payments.slice(this.page * this.count, (this.page + 1) * this.count)
+        : this.transaction.asset.payments;
     await this.updatePrices();
   }
 
-  private async fetchPrice(transaction: ITransaction) {
+  private async fetchPrice(transaction: { recipientId: string; amount: string; price: number | null }) {
     transaction.price = await CryptoCompareService.dailyAverage(this.transaction.timestamp.unix);
   }
 
   private async updatePrices() {
-    if (!this.transaction) {
+    if (!this.transactions) {
       return;
     }
 
-    const promises = this.transaction.asset.payments.map(this.fetchPrice);
+    const promises = this.transactions.map(this.fetchPrice);
     await Promise.all(promises);
   }
 

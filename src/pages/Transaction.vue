@@ -36,9 +36,12 @@
         </div>
       </section>
 
-      <TransactionDetails :transaction="transaction" />
+      <TransactionDetails :transaction="transaction" ref="transactionDetails" />
 
-      <MultiPaymentTransactions v-if="transaction.type === 6" :transaction="transaction" />
+      <template v-if="transaction.type === 6">
+        <MultiPaymentTransactions :transaction="transaction" :page="currentPage" />
+        <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
+      </template>
     </template>
   </div>
 </template>
@@ -70,14 +73,21 @@ export default class TransactionPage extends Vue {
   private transaction: ITransaction | null = null;
   private transactionNotFound: boolean = false;
   private isLoading: boolean = false;
+  private meta: any | null = null;
+  private currentPage: number = 1;
   private height: number;
   private networkSymbol: string;
+
+  get showPagination() {
+    return this.meta && this.meta.pageCount > 1;
+  }
 
   public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
     try {
       const transaction = await TransactionService.find(to.params.id);
       next((vm: TransactionPage) => {
         vm.setTransaction(transaction);
+        vm.calculateMeta();
       });
     } catch (e) {
       next((vm: TransactionPage) => {
@@ -96,6 +106,7 @@ export default class TransactionPage extends Vue {
     try {
       const transaction = await TransactionService.find(to.params.id);
       this.setTransaction(transaction);
+      this.calculateMeta();
       next();
     } catch (e) {
       console.log(e.message || e.data.error);
@@ -122,6 +133,40 @@ export default class TransactionPage extends Vue {
 
   private setTransaction(transaction: ITransaction) {
     this.transaction = transaction;
+  }
+
+  private setMeta(meta: any) {
+    this.meta = meta;
+  }
+
+  private onPageChange(page: number) {
+    if (this.currentPage !== page) {
+      this.currentPage = page;
+      this.meta.count = page;
+      this.meta.self = page.toString();
+      this.meta.next = (page + 1).toString();
+      this.meta.previous = (page - 1).toString();
+
+      // @ts-ignore
+      this.$refs.transactionDetails.$el.scrollIntoView(false);
+    }
+  }
+
+  private calculateMeta() {
+    if (this.transaction && this.transaction.type === 6) {
+      const transactions = this.transaction.asset.payments.length;
+      const pages = Math.ceil(transactions / 25) - 1;
+      this.meta = {
+        count: 1,
+        pageCount: pages,
+        totalCount: transactions,
+        next: pages ? "2" : null,
+        previous: "0",
+        self: "1",
+        first: "1",
+        last: pages.toString(),
+      };
+    }
   }
 
   private onReload() {
