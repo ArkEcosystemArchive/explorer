@@ -70,6 +70,7 @@ export default {
       UNVOTE: "Unvote",
       MULTI_SIGNATURE: "Multisignature Registration",
       IPFS: "IPFS",
+      LOCKS: "Locks",
       TIMELOCK: "Timelock",
       TIMELOCK_CLAIM: "Timelock Claim",
       TIMELOCK_REFUND: "Timelock Refund",

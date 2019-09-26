@@ -97,6 +97,18 @@ class TransactionService {
     return response;
   }
 
+  public async locksByAddress(address: string, page: number = 1, limit: number = 25): Promise<IApiTransactionsWrapper> {
+    const response = (await ApiService.get(`wallets/${address}/locks`, {
+      params: {
+        orderBy: "timestamp:desc",
+        page,
+        limit,
+      },
+    })) as IApiTransactionsWrapper;
+
+    return response;
+  }
+
   public async sentByAddressCount(senderId: string): Promise<number> {
     const response = (await ApiService.get("transactions", {
       params: {
@@ -111,6 +123,15 @@ class TransactionService {
     const response = (await ApiService.get("transactions", {
       params: {
         recipientId,
+        limit: 1,
+      },
+    })) as IApiTransactionsWrapper;
+    return response.meta.totalCount;
+  }
+
+  public async locksByAddressCount(address: string): Promise<number> {
+    const response = (await ApiService.get(`wallets/${address}/locks`, {
+      params: {
         limit: 1,
       },
     })) as IApiTransactionsWrapper;
