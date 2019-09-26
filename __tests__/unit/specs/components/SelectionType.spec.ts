@@ -60,7 +60,10 @@ describe("Components > SelectionType", () => {
       .findAll(".dropdown-button")
       .at(11)
       .trigger("click");
-    expect(localStorage.setItem).toHaveBeenCalledWith("transactionType", "{\"key\":\"TIMELOCK_REFUND\",\"type\":10,\"typeGroup\":1}");
-    expect(localStorage.__STORE__.transactionType).toBe("{\"key\":\"TIMELOCK_REFUND\",\"type\":10,\"typeGroup\":1}");
+    expect(localStorage.setItem).toHaveBeenCalledWith(
+      "transactionType",
+      '{"key":"TIMELOCK_REFUND","type":10,"typeGroup":1}',
+    );
+    expect(localStorage.__STORE__.transactionType).toBe('{"key":"TIMELOCK_REFUND","type":10,"typeGroup":1}');
   });
 });
