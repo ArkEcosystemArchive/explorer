@@ -1,11 +1,11 @@
-name: Test
+name: Test & Build
 
 on:
-    push:
-        branches:
-            - '**'
-    pull_request:
-        types: [opened]
+  push:
+    branches:
+      - "**"
+  pull_request:
+    types: [ready_for_review, synchronize, opened]
 
 jobs:
   e2e:
@@ -13,45 +13,117 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 11.x, 12.x]
+        node-version: [12.x]
 
     steps:
       - uses: actions/checkout@v1
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: Install
         run: yarn install --frozen-lockfile
+
       - name: Build
         run: yarn build
+
       - name: Test
         run: yarn test:e2e:ci
-
-        env:
-          CI: true
 
   unit:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [10.x, 11.x, 12.x]
+        node-version: [12.x]
 
     steps:
       - uses: actions/checkout@v1
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: Install
         run: yarn install --frozen-lockfile
+
       - name: Build
         run: yarn build
+
       - name: Test
         run: yarn test:unit
+
       - name: Codecov
         run: ./node_modules/.bin/codecov --token=${{ secrets.CODECOV_TOKEN }}
 
-        env:
-          CI: true
+    build-devnet:
+      needs: [e2e, unit]
+
+      runs-on: ubuntu-latest
+
+      strategy:
+        matrix:
+          node-version: [12.x]
+
+      steps:
+        - uses: actions/checkout@v1
+
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v1
+          with:
+            node-version: ${{ matrix.node-version }}
+
+        - name: Install
+          run: yarn install --frozen-lockfile
+
+        - name: Build
+          run: yarn build:devnet
+
+    build-mainnet:
+      needs: [e2e, unit]
+
+      runs-on: ubuntu-latest
+
+      strategy:
+        matrix:
+          node-version: [12.x]
+
+      steps:
+        - uses: actions/checkout@v1
+
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v1
+          with:
+            node-version: ${{ matrix.node-version }}
+
+        - name: Install
+          run: yarn install --frozen-lockfile
+
+        - name: Build
+          run: yarn build:mainnet
+
+    build-testnet:
+      needs: [e2e, unit]
+
+      runs-on: ubuntu-latest
+
+      strategy:
+        matrix:
+          node-version: [12.x]
+
+      steps:
+        - uses: actions/checkout@v1
+
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v1
+          with:
+            node-version: ${{ matrix.node-version }}
+
+        - name: Install
+          run: yarn install --frozen-lockfile
+
+        - name: Build
+          run: yarn build:testnet
