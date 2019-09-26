@@ -90,12 +90,12 @@ export default class WalletDelegate extends Vue {
   get delegateStatus() {
     const activeThreshold = this.$store.getters["network/activeDelegates"];
     if (this.wallet.isResigned) {
-      return { text: this.$t("WALLET.DELEGATE.STATUS.RESIGNED"), class: "text-status-not-forging" }
+      return { text: this.$t("WALLET.DELEGATE.STATUS.RESIGNED"), class: "text-status-not-forging" };
     }
     if (this.delegate.rank && this.delegate.rank <= activeThreshold) {
-      return { text: this.$t("WALLET.DELEGATE.STATUS.ACTIVE"), class: "text-status-forging" }
+      return { text: this.$t("WALLET.DELEGATE.STATUS.ACTIVE"), class: "text-status-forging" };
     }
-    return { text: this.$t("WALLET.DELEGATE.STATUS.STANDBY"), class: "text-status-missed-block" }
+    return { text: this.$t("WALLET.DELEGATE.STATUS.STANDBY"), class: "text-status-missed-block" };
   }
 }
 </script>

@@ -18,7 +18,12 @@ class TransactionService {
     return response.data;
   }
 
-  public async filterByType(page: number, type: number, typeGroup?: number, limit: number = 25): Promise<IApiTransactionsWrapper> {
+  public async filterByType(
+    page: number,
+    type: number,
+    typeGroup?: number,
+    limit: number = 25,
+  ): Promise<IApiTransactionsWrapper> {
     const params: any = {
       orderBy: "timestamp:desc",
       page,

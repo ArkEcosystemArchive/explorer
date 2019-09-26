@@ -98,6 +98,7 @@ export default {
     VOTING_FOR: "Voting for",
     BALANCE: "Balance ({token})",
     SECOND_PASSPHRASE_ENABLED: "Second signature enabled",
+    MULTI_SIGNATURE_WALLET: "Multi signature wallet",
     SUMMARY: "Wallet summary",
     QR_CODE: "QR Code",
     SCAN_FOR_ADDRESS: "Scan for address",

@@ -7,7 +7,7 @@
             {{ $t("TRANSACTION.SENDER") }}
           </div>
           <div class="truncate">
-            <LinkWallet :address="transaction.sender" :trunc="false" tooltip-placement="left"/>
+            <LinkWallet :address="transaction.sender" :trunc="false" tooltip-placement="left" />
           </div>
         </div>
 
@@ -212,7 +212,7 @@ export default class TransactionDetails extends Vue {
   }
 
   get assetField() {
-    switch(this.transaction.type) {
+    switch (this.transaction.type) {
       case MarketplaceTransaction.BUSINESS_REGISTRATION:
         return this.transaction.asset.businessRegistration;
       case MarketplaceTransaction.BUSINESS_RESIGNATION:

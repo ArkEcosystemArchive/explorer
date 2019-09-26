@@ -9,7 +9,7 @@
     >
       <template slot-scope="data">
         <div v-if="data.column.field === 'recipientId'">
-          <LinkWallet :address="data.row.recipientId" :type="0" :trunc="false"/>
+          <LinkWallet :address="data.row.recipientId" :type="0" :trunc="false" />
         </div>
 
         <div v-else-if="data.column.field === 'amount'">
@@ -35,7 +35,7 @@ export default class MultiPaymentTransactions extends Vue {
   @Prop({ required: true }) public transaction: ITransaction;
 
   private currencySymbol: string;
-  private transactions: Array<{ recipientId: string, amount: string }> | null = null;
+  private transactions: Array<{ recipientId: string; amount: string }> | null = null;
 
   get columns() {
     const columns = [

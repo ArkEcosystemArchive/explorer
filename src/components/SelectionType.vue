@@ -129,7 +129,7 @@ export default class SelectionType extends Vue {
 
   public created() {
     const savedType = localStorage.getItem("transactionType");
-    this.transactionType = savedType ? JSON.parse(savedType) : { key: "ALL", type: -1 }
+    this.transactionType = savedType ? JSON.parse(savedType) : { key: "ALL", type: -1 };
   }
 
   private filterTransactions(type: ITransactionType) {

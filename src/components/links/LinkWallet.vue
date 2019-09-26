@@ -2,7 +2,11 @@
   <span class="block md:inline-block">
     <template v-if="typeGroup === 1">
       <template v-if="type === defaultTransaction.TRANSFER">
-        <RouterLink v-if="isKnown" :to="{ name: 'wallet', params: { address: walletAddress } }" class="flex items-center">
+        <RouterLink
+          v-if="isKnown"
+          :to="{ name: 'wallet', params: { address: walletAddress } }"
+          class="flex items-center"
+        >
           <span
             v-tooltip="{
               content: getAddress(),
@@ -48,8 +52,12 @@
         </RouterLink>
       </template>
 
-      <span v-else-if="type === defaultTransaction.SECOND_SIGNATURE">{{ $t("TRANSACTION.TYPES.SECOND_SIGNATURE") }}</span>
-      <span v-else-if="type === defaultTransaction.DELEGATE_REGISTRATION">{{ $t("TRANSACTION.TYPES.DELEGATE_REGISTRATION") }}</span>
+      <span v-else-if="type === defaultTransaction.SECOND_SIGNATURE">{{
+        $t("TRANSACTION.TYPES.SECOND_SIGNATURE")
+      }}</span>
+      <span v-else-if="type === defaultTransaction.DELEGATE_REGISTRATION">{{
+        $t("TRANSACTION.TYPES.DELEGATE_REGISTRATION")
+      }}</span>
       <span v-else-if="type === defaultTransaction.VOTE">
         <RouterLink
           v-if="votedDelegateAddress"
@@ -67,19 +75,35 @@
       </span>
       <span v-else-if="type === defaultTransaction.MULTI_SIGNATURE">{{ $t("TRANSACTION.TYPES.MULTI_SIGNATURE") }}</span>
       <span v-else-if="type === defaultTransaction.IPFS">{{ $t("TRANSACTION.TYPES.IPFS") }}</span>
-      <span v-else-if="type === defaultTransaction.MULTI_PAYMENT">{{ $t("TRANSACTION.TYPES.MULTI_PAYMENT") }} ({{ multiPaymentRecipientsCount }})</span>
-      <span v-else-if="type === defaultTransaction.DELEGATE_RESIGNATION">{{ $t("TRANSACTION.TYPES.DELEGATE_RESIGNATION") }}</span>
+      <span v-else-if="type === defaultTransaction.MULTI_PAYMENT"
+        >{{ $t("TRANSACTION.TYPES.MULTI_PAYMENT") }} ({{ multiPaymentRecipientsCount }})</span
+      >
+      <span v-else-if="type === defaultTransaction.DELEGATE_RESIGNATION">{{
+        $t("TRANSACTION.TYPES.DELEGATE_RESIGNATION")
+      }}</span>
       <span v-else-if="type === defaultTransaction.TIMELOCK">{{ $t("TRANSACTION.TYPES.TIMELOCK") }}</span>
       <span v-else-if="type === defaultTransaction.TIMELOCK_CLAIM">{{ $t("TRANSACTION.TYPES.TIMELOCK_CLAIM") }}</span>
       <span v-else-if="type === defaultTransaction.TIMELOCK_REFUND">{{ $t("TRANSACTION.TYPES.TIMELOCK_REFUND") }}</span>
     </template>
     <template v-else-if="typeGroup === 2">
-      <span v-if="type === marketplaceTransaction.BUSINESS_REGISTRATION">{{ $t("TRANSACTION.TYPES.BUSINESS_REGISTRATION") }}</span>
-      <span v-else-if="type === marketplaceTransaction.BUSINESS_RESIGNATION">{{ $t("TRANSACTION.TYPES.BUSINESS_RESIGNATION") }}</span>
-      <span v-else-if="type === marketplaceTransaction.BUSINESS_UPDATE">{{ $t("TRANSACTION.TYPES.BUSINESS_UPDATE") }}</span>
-      <span v-else-if="type === marketplaceTransaction.BRIDGECHAIN_REGISTRATION">{{ $t("TRANSACTION.TYPES.BRIDGECHAIN_REGISTRATION") }}</span>
-      <span v-else-if="type === marketplaceTransaction.BRIDGECHAIN_RESIGNATION">{{ $t("TRANSACTION.TYPES.BRIDGECHAIN_RESIGNATION") }}</span>
-      <span v-else-if="type === marketplaceTransaction.BRIDGECHAIN_UPDATE">{{ $t("TRANSACTION.TYPES.BRIDGECHAIN_UPDATE") }}</span>
+      <span v-if="type === marketplaceTransaction.BUSINESS_REGISTRATION">{{
+        $t("TRANSACTION.TYPES.BUSINESS_REGISTRATION")
+      }}</span>
+      <span v-else-if="type === marketplaceTransaction.BUSINESS_RESIGNATION">{{
+        $t("TRANSACTION.TYPES.BUSINESS_RESIGNATION")
+      }}</span>
+      <span v-else-if="type === marketplaceTransaction.BUSINESS_UPDATE">{{
+        $t("TRANSACTION.TYPES.BUSINESS_UPDATE")
+      }}</span>
+      <span v-else-if="type === marketplaceTransaction.BRIDGECHAIN_REGISTRATION">{{
+        $t("TRANSACTION.TYPES.BRIDGECHAIN_REGISTRATION")
+      }}</span>
+      <span v-else-if="type === marketplaceTransaction.BRIDGECHAIN_RESIGNATION">{{
+        $t("TRANSACTION.TYPES.BRIDGECHAIN_RESIGNATION")
+      }}</span>
+      <span v-else-if="type === marketplaceTransaction.BRIDGECHAIN_UPDATE">{{
+        $t("TRANSACTION.TYPES.BRIDGECHAIN_UPDATE")
+      }}</span>
     </template>
   </span>
 </template>

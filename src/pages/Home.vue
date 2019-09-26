@@ -23,7 +23,11 @@
         <SelectionType v-if="dataView === 'transactions'" @change="onTypeChange" />
       </div>
 
-      <LatestTransactions v-if="dataView === 'transactions'" :transaction-type="transactionType.type" :transaction-group="transactionType.typeGroup"/>
+      <LatestTransactions
+        v-if="dataView === 'transactions'"
+        :transaction-type="transactionType.type"
+        :transaction-group="transactionType.typeGroup"
+      />
 
       <LatestBlocks v-if="dataView === 'blocks'" />
     </section>
@@ -55,7 +59,7 @@ export default class HomePage extends Vue {
 
   public created() {
     const savedType = localStorage.getItem("transactionType");
-    this.transactionType = savedType ? JSON.parse(savedType) : { key: "ALL", type: -1 }
+    this.transactionType = savedType ? JSON.parse(savedType) : { key: "ALL", type: -1 };
   }
 
   private onTypeChange(type: ITransactionType) {

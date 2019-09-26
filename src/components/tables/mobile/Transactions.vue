@@ -29,7 +29,12 @@
           <div class="mr-4">
             {{ $t("TRANSACTION.RECIPIENT") }}
           </div>
-          <LinkWallet :address="transaction.recipient" :type="transaction.type" :asset="transaction.asset" :type-group="transaction.typeGroup"/>
+          <LinkWallet
+            :address="transaction.recipient"
+            :type="transaction.type"
+            :asset="transaction.asset"
+            :type-group="transaction.typeGroup"
+          />
         </div>
 
         <div v-if="truncate(transaction.vendorField || '')" class="list-row-border-b-no-wrap">
@@ -46,7 +51,11 @@
             {{ $t("TRANSACTION.AMOUNT") }}
           </div>
           <div>
-            <TransactionAmount :transaction="transaction" :type="transaction.type" :type-group="transaction.typeGroup" />
+            <TransactionAmount
+              :transaction="transaction"
+              :type="transaction.type"
+              :type-group="transaction.typeGroup"
+            />
           </div>
         </div>
 

@@ -27,7 +27,12 @@
         </div>
 
         <div v-else-if="data.column.field === 'recipient'">
-          <LinkWallet :address="data.row.recipient" :type="data.row.type" :asset="data.row.asset" :type-group="data.row.typeGroup"/>
+          <LinkWallet
+            :address="data.row.recipient"
+            :type="data.row.type"
+            :asset="data.row.asset"
+            :type-group="data.row.typeGroup"
+          />
         </div>
 
         <div v-else-if="data.column.field === 'vendorField'">

@@ -54,7 +54,7 @@ export default class TransactionAmount extends Vue {
     if (this.type !== undefined) {
       // 0 = transfer, 8 = timelock
       return (this.type === 0 || this.type === 8) && this.typeGroup === 1;
-      }
+    }
     return false;
   }
 }

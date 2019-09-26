@@ -39,7 +39,6 @@
       <TransactionDetails :transaction="transaction" />
 
       <MultiPaymentTransactions v-if="transaction.type === 6" :transaction="transaction" />
-
     </template>
   </div>
 </template>
