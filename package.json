@@ -16,6 +16,7 @@
     "serve:mainnet": "vue-cli-service serve --network mainnet",
     "serve:testnet": "vue-cli-service serve --network testnet",
     "task:deploy": "cross-env-shell ./scripts/deploy.sh",
+    "task:deploy:workflow": "cross-env-shell ./scripts/deploy-via-workflow.sh",
     "test:e2e": "vue-cli-service test:e2e",
     "test:e2e:ci": "vue-cli-service test:e2e --headless",
     "test:unit": "vue-cli-service test:unit --maxWorkers=2"
