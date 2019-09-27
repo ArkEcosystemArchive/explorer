@@ -75,7 +75,7 @@
     "svgo": "^1.1.0",
     "svgo-loader": "^2.1.0",
     "tailwindcss": "^1.1.2",
-    "ts-jest": "^23.0.0",
+    "ts-jest": "^24.0.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.4.3",
     "vue-cli-plugin-i18n": "^0.6.0",
