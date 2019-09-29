@@ -62,6 +62,7 @@ export interface ITransaction {
   blockId: string;
   version?: number;
   type: number;
+  typeGroup: number;
   amount: string;
   fee: string;
   sender: string;

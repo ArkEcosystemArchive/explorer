@@ -109,6 +109,18 @@ class TransactionService {
     return response;
   }
 
+  public async findUnlockedForLocks(
+    transactionIds: string[],
+    page: number = 1,
+    limit: number = 25,
+  ): Promise<IApiTransactionsWrapper> {
+    const response = (await ApiService.post(`locks/unlocked`, {
+      ids: transactionIds,
+    })) as IApiTransactionsWrapper;
+
+    return response;
+  }
+
   public async sentByAddressCount(senderId: string): Promise<number> {
     const response = (await ApiService.get("transactions", {
       params: {

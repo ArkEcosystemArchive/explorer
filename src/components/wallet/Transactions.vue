@@ -47,12 +47,22 @@
         </div>
       </nav>
 
-      <div class="hidden sm:block">
-        <TableTransactionsDesktop :show-confirmations="true" :transactions="transactions" />
-      </div>
-      <div class="sm:hidden">
-        <TableTransactionsMobile :show-confirmations="true" :transactions="transactions" />
-      </div>
+      <template v-if="isTypeLocks">
+        <div class="hidden sm:block">
+          <TableLockTransactionsDesktop :transactions="transactions" />
+        </div>
+        <div class="sm:hidden">
+          <TableLockTransactionsMobile :transactions="transactions" />
+        </div>
+      </template>
+      <template v-else>
+        <div class="hidden sm:block">
+          <TableTransactionsDesktop :show-confirmations="true" :transactions="transactions" />
+        </div>
+        <div class="sm:hidden">
+          <TableTransactionsMobile :show-confirmations="true" :transactions="transactions" />
+        </div>
+      </template>
 
       <div v-if="transactions && transactions.length >= 25" class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
         <RouterLink
@@ -129,6 +139,18 @@ export default class WalletTransactions extends Vue {
       // @ts-ignore
       const { data } = await TransactionService[`${this.type}ByAddress`](this.wallet.address, 1);
       this.transactions = data.map((transaction: ITransaction) => ({ ...transaction, price: null }));
+
+      const timelocks: ITransaction[] = data.filter(
+        (transaction: ITransaction) => transaction.type === 8 && transaction.typeGroup === 1,
+      );
+
+      // TODO: do something with the response and don't loop over the transactions twice but combine it with ^
+      // TODO: no need to do this if we fetch locks for the locks tab
+      const lockIds = [];
+      for (const lock of timelocks) {
+        lockIds.push(lock.id);
+      }
+      const response = await TransactionService.findUnlockedForLocks(lockIds);
     }
   }
 

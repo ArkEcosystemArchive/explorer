@@ -6,6 +6,7 @@ export default {
     CONFIRMATIONS: "Confirmations",
     DELEGATE: "Delegate",
     DELEGATES: "Delegates",
+    EXPIRATION: "Expiration",
     FEE: "Fee",
     HEIGHT: "Height",
     ID: "ID",
