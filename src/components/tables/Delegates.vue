@@ -12,7 +12,9 @@
           <LinkWallet :address="data.row.address">
             {{ data.row.username }}
           </LinkWallet>
-          <span v-if="data.row.isResigned" class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1">{{ $t('WALLET.DELEGATE.STATUS.RESIGNED') }}</span>
+          <span v-if="data.row.isResigned" class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1">{{
+            $t("WALLET.DELEGATE.STATUS.RESIGNED")
+          }}</span>
         </div>
 
         <div v-else-if="data.column.field === 'blocks.produced'">

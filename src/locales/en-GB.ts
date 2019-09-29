@@ -54,6 +54,11 @@ export default {
     ID: "Transaction ID",
     IPFS: "IPFS Hash",
     FEE: "Fee",
+    MULTI_SIGNATURE: {
+      ADDRESS: "Generated Address",
+      MIN: "Minimum Participants",
+      PARTICIPANTS: "Participants",
+    },
     NONCE: "Nonce",
     TIMELOCK: {
       BLOCKHEIGHT: "Expiration Blockheight",

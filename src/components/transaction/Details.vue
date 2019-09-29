@@ -39,7 +39,7 @@
             {{ $t("TRANSACTION.AMOUNT") }}
           </div>
           <div
-            v-if="transaction.type === 6"
+            v-if="transaction.typeGroup === 1 && transaction.type === 6"
             v-tooltip="{
               trigger: 'hover click',
               content: price ? readableCurrency(multipaymentAmount, price) : '',
@@ -102,7 +102,7 @@
           </div>
         </div>
 
-        <div v-if="transaction.type === 5" class="list-row-border-b">
+        <div v-if="transaction.typeGroup === 1 && transaction.type === 5" class="list-row-border-b">
           <div class="mr-4">
             {{ $t("TRANSACTION.IPFS") }}
           </div>
@@ -111,7 +111,7 @@
           </div>
         </div>
 
-        <div v-if="transaction.type === 8">
+        <div v-if="transaction.typeGroup === 1 && transaction.type === 8">
           <div v-if="transaction.asset.lock.expiration.type === 1" class="list-row-border-b">
             <div class="mr-4">
               {{ $t("TRANSACTION.TIMELOCK.EXPIRATION") }}
@@ -136,7 +136,7 @@
           </div>
         </div>
 
-        <div v-if="transaction.type === 9" class="list-row-border-b">
+        <div v-if="transaction.typeGroup === 1 && transaction.type === 9" class="list-row-border-b">
           <div class="mr-4">
             {{ $t("TRANSACTION.TIMELOCK.CLAIMED") }}
           </div>
@@ -145,7 +145,7 @@
           </div>
         </div>
 
-        <div v-if="transaction.type === 10" class="list-row-border-b">
+        <div v-if="transaction.typeGroup === 1 && transaction.type === 10" class="list-row-border-b">
           <div class="mr-4">
             {{ $t("TRANSACTION.TIMELOCK.REFUND") }}
           </div>
@@ -166,9 +166,45 @@
         </div>
       </div>
     </section>
-    <section v-if="transaction.typeGroup === 2" class="page-section py-5 md:py-10 mb-5">
-      <div v-for="(value, prop) in assetField" :key="prop" class="px-5 sm:px-10">
+
+    <section v-if="transaction.typeGroup === 1 && transaction.type === 4" class="page-section py-5 md:py-10 mb-5">
+      <div class="px-5 sm:px-10">
         <div class="list-row-border-b">
+          <div class="mr-4">
+            {{ $t("TRANSACTION.MULTI_SIGNATURE.ADDRESS") }}
+          </div>
+          <div class="truncate">
+            <LinkWallet
+              :address="generateMultiSignatureAddress(transaction.asset.multiSignature)"
+              :trunc="false"
+              tooltip-placement="left"
+            />
+          </div>
+        </div>
+        <div class="list-row-border-b-no-wrap">
+          <div class="mr-4">
+            {{ $t("TRANSACTION.MULTI_SIGNATURE.PARTICIPANTS") }}
+          </div>
+          <ul>
+            <li v-for="publicKey in transaction.asset.multiSignature.publicKeys" :key="publicKey" class="mb-1">
+              <LinkWallet :address="addressFromPublicKey(publicKey)" :trunc="false" tooltip-placement="left" />
+            </li>
+          </ul>
+        </div>
+        <div class="list-row">
+          <div class="mr-4">
+            {{ $t("TRANSACTION.MULTI_SIGNATURE.MIN") }}
+          </div>
+          <div>
+            {{ transaction.asset.multiSignature.min }} / {{ transaction.asset.multiSignature.publicKeys.length }}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section v-if="transaction.typeGroup === 2" class="page-section py-5 md:py-10 mb-5">
+      <div class="px-5 sm:px-10">
+        <div v-for="(value, prop) in assetField" :key="prop" class="list-row-border-b">
           <div class="mr-4">
             {{ prop }}
           </div>
@@ -188,6 +224,7 @@ import { ITransaction } from "@/interfaces";
 import { MarketplaceTransaction } from "@/enums";
 import { LinkTransaction } from "@/components/links";
 import CryptoCompareService from "@/services/crypto-compare";
+import { Managers, Identities } from "@arkecosystem/crypto";
 
 @Component({
   components: {
@@ -267,6 +304,17 @@ export default class TransactionDetails extends Vue {
       // @ts-ignore
       this.multipaymentAmount = this.calculateMultipaymentAmount(this.transaction);
     }
+  }
+
+  // TODO: move to crypto mixin and set proper network info
+  private addressFromPublicKey(publicKey: string) {
+    return Identities.Address.fromPublicKey(publicKey);
+  }
+
+  // TODO: move to crypto mixin and set proper network info
+  private generateMultiSignatureAddress(multiSignatureAsset: any) {
+    Managers.configManager.setFromPreset("testnet"); // TODO: move to app.vue
+    return Identities.Address.fromMultiSignatureAsset(multiSignatureAsset);
   }
 }
 </script>

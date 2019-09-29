@@ -133,7 +133,7 @@ export default class WalletTransactions extends Vue {
   }
 
   get isLocks() {
-    return this.$route.params.type === "locks"
+    return this.$route.params.type === "locks";
   }
 
   @Watch("currentPage")

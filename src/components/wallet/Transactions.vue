@@ -146,11 +146,11 @@ export default class WalletTransactions extends Vue {
 
       // TODO: do something with the response and don't loop over the transactions twice but combine it with ^
       // TODO: no need to do this if we fetch locks for the locks tab
-      const lockIds = [];
-      for (const lock of timelocks) {
-        lockIds.push(lock.id);
-      }
-      const response = await TransactionService.findUnlockedForLocks(lockIds);
+      // const lockIds = [];
+      // for (const lock of timelocks) {
+      //   lockIds.push(lock.id);
+      // }
+      // const response = await TransactionService.findUnlockedForLocks(lockIds);
     }
   }
 
