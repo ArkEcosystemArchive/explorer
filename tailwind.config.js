@@ -67,6 +67,7 @@ module.exports = {
       "language-icon": "var(--language-icon)",
       "theme-accents": "var(--color-theme-accents)",
       "theme-transaction-icon": "var(--color-theme-transaction-icon)",
+      "theme-resigned-label": "var(--theme-resigned-label)",
 
       "theme-text-thead": "var(--color-theme-text-thead)",
 
