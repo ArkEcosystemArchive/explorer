@@ -110,13 +110,46 @@
         </div>
       </div>
 
-      <div v-show="isVoting" v-if="view === 'public'" class="flex-none border-r border-grey-dark px-9">
-        <div class="text-grey mb-2">
-          {{ $t("WALLET.VOTING_FOR") }}
+      <div v-if="view === 'public' && hasLockedBalance" class="flex-none border-r border-grey-dark px-9">
+        <div class="flex items-center text-grey mb-2">
+          {{ $t("WALLET.LOCKED_BALANCE") }}
+          <svg
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 21 18"
+            width="17"
+            height="16"
+            class="fill-current ml-2"
+          >
+            <g>
+              <defs>
+                <rect id="SVGID_1_" width="21" height="18" />
+              </defs>
+              <clipPath id="SVGID_2_">
+                <use xlink:href="#SVGID_1_" style="overflow:visible;" />
+              </clipPath>
+              <g>
+                <path
+                  d="M8.5,16.6c-1.3-0.9-2.3-2.1-2.9-3.6
+                H1.2C0.6,13,0,12.5,0,11.8V7c0-0.5,0.5-1,1-1h1V4c0-1,0.3-2,0.9-2.8C3.5,0.4,4.5,0,5.5,0c1,0,2,0.4,2.6,1.2c0.4,0.6,0.7,1.2,0.8,2
+                c3.8-2.2,8.7-1,11,2.8s1,8.7-2.8,11C14.4,18.5,11,18.4,8.5,16.6z M7,10c0,3.3,2.7,6,6,6s6-2.7,6-6s-2.7-6-6-6C9.7,4,7,6.7,7,10z
+                M4,4v2h2.1C6.3,5.5,6.6,5.1,7,4.7V4c0-1.2-0.1-2.2-1.5-2.2S4,2.8,4,4z M13,11c-0.6,0-1-0.4-1-1V7c0-0.6,0.4-1,1-1s1,0.4,1,1v2h2
+                c0.6,0,1,0.4,1,1s-0.4,1-1,1H13z"
+                />
+              </g>
+            </g>
+          </svg>
         </div>
-        <LinkWallet v-if="votedDelegate.address" :address="votedDelegate.address">
-          <span class="text-lg text-white semibold truncate">{{ votedDelegate.username }}</span>
-        </LinkWallet>
+        <span
+          v-tooltip="{
+            trigger: 'hover click',
+            content: readableCurrency(wallet.lockedBalance || 0),
+          }"
+          class="text-lg text-white semibold"
+        >
+          {{ readableCrypto(wallet.lockedBalance, false) }}
+        </span>
       </div>
 
       <div class="flex-none px-8">
@@ -260,13 +293,45 @@
             </div>
           </div>
 
-          <div v-show="isVoting" v-if="view === 'public'" class="md:w-1/2 px-6 w-full">
-            <div class="text-grey mb-2">
-              {{ $t("WALLET.VOTING_FOR") }}
+          <div v-if="view === 'public' && hasLockedBalance" class="md:w-1/2 px-6 w-full">
+            <div class="flex items-center text-grey mb-2">
+              {{ $t("WALLET.LOCKED_BALANCE") }}
+              <svg
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="17"
+                height="16"
+                class="fill-current ml-2"
+              >
+                <g>
+                  <defs>
+                    <rect id="SVGID_1_" width="21" height="18" />
+                  </defs>
+                  <clipPath id="SVGID_2_">
+                    <use xlink:href="#SVGID_1_" style="overflow:visible;" />
+                  </clipPath>
+                  <g>
+                    <path
+                      d="M8.5,16.6c-1.3-0.9-2.3-2.1-2.9-3.6
+                    H1.2C0.6,13,0,12.5,0,11.8V7c0-0.5,0.5-1,1-1h1V4c0-1,0.3-2,0.9-2.8C3.5,0.4,4.5,0,5.5,0c1,0,2,0.4,2.6,1.2c0.4,0.6,0.7,1.2,0.8,2
+                    c3.8-2.2,8.7-1,11,2.8s1,8.7-2.8,11C14.4,18.5,11,18.4,8.5,16.6z M7,10c0,3.3,2.7,6,6,6s6-2.7,6-6s-2.7-6-6-6C9.7,4,7,6.7,7,10z
+                    M4,4v2h2.1C6.3,5.5,6.6,5.1,7,4.7V4c0-1.2-0.1-2.2-1.5-2.2S4,2.8,4,4z M13,11c-0.6,0-1-0.4-1-1V7c0-0.6,0.4-1,1-1s1,0.4,1,1v2h2
+                    c0.6,0,1,0.4,1,1s-0.4,1-1,1H13z"
+                    />
+                  </g>
+                </g>
+              </svg>
             </div>
-            <LinkWallet v-if="votedDelegate.address" :address="votedDelegate.address">
-              <span class="text-white semibold truncate">{{ votedDelegate.username }}</span>
-            </LinkWallet>
+            <span
+              v-tooltip="{
+                trigger: 'hover click',
+                content: readableCurrency(wallet.lockedBalance),
+              }"
+              class="text-white"
+            >
+              {{ readableCrypto(wallet.lockedBalance, false) }}
+            </span>
           </div>
         </div>
       </div>
@@ -322,6 +387,10 @@ export default class WalletDetails extends Vue {
 
   get isVoting() {
     return !!this.wallet.vote;
+  }
+
+  get hasLockedBalance() {
+    return !!this.wallet.lockedBalance;
   }
 
   private setView(view: string) {

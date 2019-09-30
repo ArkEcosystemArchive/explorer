@@ -96,6 +96,7 @@ export interface IWallet {
   vote: string;
   isDelegate: boolean;
   isResigned?: boolean;
+  lockedBalance?: string;
 }
 
 export interface IApiResponse {

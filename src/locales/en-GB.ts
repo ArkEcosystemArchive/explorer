@@ -104,6 +104,7 @@ export default {
     VERIFIED: "This is a verified address",
     VOTING_FOR: "Voting for",
     BALANCE: "Balance ({token})",
+    LOCKED_BALANCE: "Locked Balance",
     SECOND_PASSPHRASE_ENABLED: "Second signature enabled",
     MULTI_SIGNATURE_WALLET: "Multi signature wallet",
     SUMMARY: "Wallet summary",
