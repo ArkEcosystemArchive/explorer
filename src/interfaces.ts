@@ -190,6 +190,7 @@ export interface INetworkState {
   server: string | null;
   nethash: string | null;
   alias: string | null;
+  addressPrefix: number;
   activeDelegates: number;
   rewardOffset: number;
   token: string | null;

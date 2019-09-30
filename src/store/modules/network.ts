@@ -9,6 +9,7 @@ const state: INetworkState = {
   server: null,
   nethash: null,
   alias: null,
+  addressPrefix: 23,
   activeDelegates: 51,
   rewardOffset: 51,
   token: null,
@@ -43,6 +44,12 @@ const actions: ActionTree<INetworkState, {}> = {
   setAlias: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_ALIAS,
+      value,
+    });
+  },
+  setAddressPrefix: ({ commit }, value) => {
+    commit({
+      type: types.SET_NETWORK_ADDRESS_PREFIX,
       value,
     });
   },
@@ -121,6 +128,9 @@ const mutations: MutationTree<INetworkState> = {
   [types.SET_NETWORK_ALIAS](state, payload: IStorePayload) {
     state.alias = payload.value;
   },
+  [types.SET_NETWORK_ADDRESS_PREFIX](state, payload: IStorePayload) {
+    state.addressPrefix = payload.value;
+  },
   [types.SET_NETWORK_ACTIVE_DELEGATES](state, payload: IStorePayload) {
     state.activeDelegates = payload.value;
   },
@@ -158,6 +168,7 @@ const getters: GetterTree<INetworkState, {}> = {
   server: state => state.server,
   nethash: state => state.nethash,
   alias: state => state.alias,
+  addressPrefix: state => state.addressPrefix,
   activeDelegates: state => state.activeDelegates,
   rewardOffset: state => state.rewardOffset,
   token: state => state.token,
