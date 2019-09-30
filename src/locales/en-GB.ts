@@ -55,16 +55,16 @@ export default {
     IPFS: "IPFS Hash",
     FEE: "Fee",
     MULTI_SIGNATURE: {
-      ADDRESS: "Generated Address",
-      MIN: "Minimum Participants",
+      ADDRESS: "Generated address",
+      MIN: "Minimum participants",
       PARTICIPANTS: "Participants",
     },
     NONCE: "Nonce",
     TIMELOCK: {
-      BLOCKHEIGHT: "Expiration Blockheight",
-      CLAIMED: "Claimed Transaction",
+      BLOCKHEIGHT: "Expiration blockheight",
+      CLAIMED: "Claimed transaction",
       EXPIRATION: "Expiration",
-      REFUND: "Refunded Transaction",
+      REFUND: "Refunded transaction",
     },
     TYPE: "Transaction type",
     TYPES: {
@@ -115,6 +115,7 @@ export default {
       TOTAL_FORGED: "Total forged",
       RANK: "Rank",
       RANK_NOT_AVAILABLE: "Not yet available",
+      RANK_NOT_APPLICABLE: "Not applicable",
       STATUS: {
         TITLE: "Status",
         ACTIVE: "Active",

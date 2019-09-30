@@ -1,6 +1,6 @@
 <template>
   <div v-if="isVoting" class="WalletVote">
-    <div class="list-row-border-b">
+    <div class="list-row-border-t">
       <div>{{ $t("WALLET.VOTING_FOR") }}</div>
       <div>
         <LinkWallet v-if="votedDelegate.address" :address="votedDelegate.address">

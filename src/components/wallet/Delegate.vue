@@ -13,7 +13,10 @@
     <div class="list-row-border-b">
       <div>{{ $t("WALLET.DELEGATE.RANK") }}</div>
       <div>
-        <span v-if="delegate.rank === undefined">
+        <span v-if="delegate.rank === undefined && delegate.isResigned">
+          {{ $t("WALLET.DELEGATE.RANK_NOT_APPLICABLE") }}
+        </span>
+        <span v-else-if="delegate.rank === undefined">
           {{ $t("WALLET.DELEGATE.RANK_NOT_AVAILABLE") }}
         </span>
         <span v-else>
@@ -50,7 +53,7 @@
       </div>
     </div>
 
-    <div :class="isVoting ? 'list-row-border-b' : 'list-row'">
+    <div class="list-row">
       <div>{{ $t("WALLET.DELEGATE.FORGED_BLOCKS") }}</div>
       <div v-if="delegate.blocks">
         <span>
@@ -85,10 +88,6 @@ export default class WalletDelegate extends Vue {
 
   get delegate() {
     return this.$store.getters["delegates/byPublicKey"](this.wallet.publicKey);
-  }
-
-  get isVoting() {
-    return !!this.wallet.vote;
   }
 
   get delegateStatus() {
