@@ -8,8 +8,8 @@
     :class="
       !isFee
         ? {
-            'text-red': transaction.sender === $route.params.address,
-            'text-green': transaction.recipient === $route.params.address && isTransfer,
+            'text-red': isOutgoing,
+            'text-green': isIncoming,
           }
         : ''
     "
@@ -56,6 +56,23 @@ export default class TransactionAmount extends Vue {
       return (this.type === 0 || this.type === 8) && this.typeGroup === 1;
     }
     return false;
+  }
+
+  get isOutgoing() {
+    if (this.transaction.type === 8) {
+      return (
+        (this.$route.params.address !== this.transaction.recipient && this.transaction.lockStatus === 9) ||
+        (this.$route.params.address !== this.transaction.sender && this.transaction.lockStatus === 10)
+      );
+    }
+    return this.transaction.sender === this.$route.params.address;
+  }
+
+  get isIncoming() {
+    if (this.transaction.type === 8) {
+      return this.$route.params.address !== this.transaction.sender && this.transaction.lockStatus === 9;
+    }
+    return this.transaction.recipient === this.$route.params.address && this.isTransfer;
   }
 }
 </script>

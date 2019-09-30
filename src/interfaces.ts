@@ -76,6 +76,7 @@ export interface ITransaction {
   signatures?: string[];
   price?: number | null;
   nonce?: string;
+  lockStatus?: number;
 }
 
 export interface ISortParameters {

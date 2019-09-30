@@ -138,19 +138,43 @@ export default class WalletTransactions extends Vue {
     if (this.wallet.address !== undefined) {
       // @ts-ignore
       const { data } = await TransactionService[`${this.type}ByAddress`](this.wallet.address, 1);
-      this.transactions = data.map((transaction: ITransaction) => ({ ...transaction, price: null }));
 
-      const timelocks: ITransaction[] = data.filter(
-        (transaction: ITransaction) => transaction.type === 8 && transaction.typeGroup === 1,
-      );
+      // Only need to check for sent / received transactions
+      if (!this.isTypeLocks) {
+        // TODO: move to separate function
+        const lockIds: string[] = [];
+        let transactions = data.map((transaction: ITransaction) => {
+          if (transaction.type === 8 && transaction.typeGroup === 1) {
+            lockIds.push(transaction.id);
+          }
+          return { ...transaction, price: null };
+        });
+        if (lockIds.length > 0) {
+          const response = await TransactionService.findUnlockedForLocks(lockIds);
+          const locksHash: { [key: string]: number } = {};
 
-      // TODO: do something with the response and don't loop over the transactions twice but combine it with ^
-      // TODO: no need to do this if we fetch locks for the locks tab
-      // const lockIds = [];
-      // for (const lock of timelocks) {
-      //   lockIds.push(lock.id);
-      // }
-      // const response = await TransactionService.findUnlockedForLocks(lockIds);
+          // Fetch the corresponding timelock id for the claim / refund transactions
+          for (const lockTransaction of response.data) {
+            if (lockTransaction.type === 10) {
+              locksHash[lockTransaction.asset.refund.lockTransactionId] = 10;
+            } else {
+              locksHash[lockTransaction.asset.claim.lockTransactionId] = 9;
+            }
+          }
+
+          // Set an additional property on the locks that got claimed / refunded
+          transactions = transactions.map((transaction: ITransaction) => {
+            if (locksHash[transaction.id]) {
+              return { ...transaction, lockStatus: locksHash[transaction.id] };
+            }
+            return transaction;
+          });
+        }
+        this.transactions = transactions;
+        return;
+      } else {
+        this.transactions = data.map((transaction: ITransaction) => ({ ...transaction, price: null }));
+      }
     }
   }
 
