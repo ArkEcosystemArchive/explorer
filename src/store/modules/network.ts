@@ -178,6 +178,7 @@ const getters: GetterTree<INetworkState, {}> = {
   supply: state => state.supply,
   height: state => state.height,
   epoch: state => state.epoch,
+  blocktime: state => state.blocktime,
 };
 
 export const network: Module<INetworkState, {}> = {

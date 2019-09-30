@@ -35,7 +35,7 @@ export default {
       const blocktime = store.getters["network/blocktime"];
       const currentHeight = store.getters["network/height"];
       return moment()
-        .add((height - currentHeight) * blocktime)
+        .add((height - currentHeight) * blocktime, "seconds")
         .local()
         .format("L LTS");
     },
