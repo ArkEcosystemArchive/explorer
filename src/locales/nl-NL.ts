@@ -142,6 +142,7 @@ export default {
         MISSING: "Missend",
         NOT_FORGING: "Niet aan het forgen",
         NEVER_FORGED: "Nooit geforged",
+        BECAME_ACTIVE: "Werd actief",
       },
       VOTES: "Stemmen",
       TOOLTIP: "Laatste block @ {height} aan",

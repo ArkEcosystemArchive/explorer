@@ -142,6 +142,7 @@ export default {
         MISSING: "Przegapia",
         NOT_FORGING: "Nie wydobywa",
         NEVER_FORGED: "Nigdy nie wydobywał",
+        BECAME_ACTIVE: "Stałem się aktywny",
       },
       VOTES: "Głosy",
       TOOLTIP: "Ostatni blok @ {height} wytworzony",
