@@ -9,10 +9,10 @@
       >
         <div class="pr-6">{{ $t("COMMON.HEIGHT") }}: {{ readableNumber(height, 0) }}</div>
         <div class="pr-6">{{ $t("HEADER.NETWORK") }}: {{ $t(`HEADER.${alias.toUpperCase()}`) }}</div>
-        <div :class="{ 'pr-6': isMain }">
+        <div :class="{ 'pr-6': isMainWithCurrency }">
           {{ $t("HEADER.SUPPLY") }}: <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }}</span>
         </div>
-        <div v-if="isMain">
+        <div v-if="isMainWithCurrency">
           {{ $t("HEADER.MARKET_CAP") }}: <span class="whitespace-no-wrap">{{ readableCurrency(supply) }}</span>
         </div>
       </div>
@@ -54,8 +54,8 @@ export default class ContentHeader extends Vue {
   private rate: number;
   private symbol: string;
 
-  get isMain() {
-    return this.alias === "Main";
+  get isMainWithCurrency() {
+    return this.alias === "Main" && this.name && this.name !== "ARK";
   }
 }
 </script>
