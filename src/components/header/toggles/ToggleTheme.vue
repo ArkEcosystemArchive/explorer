@@ -1,14 +1,11 @@
 <template>
   <button
-    class="px-2 py-2 md:py-4 text-yellow flex-none flex items-center border-b-2 mt-2px border-transparent hover:border-red transition"
+    class="px-2 py-2 md:py-4 text-yellow flex-none flex items-center border-b-2 mt-2px border-transparent hover:border-theme-accents transition"
     @click="$store.dispatch('ui/setNightMode', !nightMode)"
     @mouseover="changeImageSource"
     @mouseleave="setImageSource"
   >
-    <img
-      :src="imageSource"
-      width="30"
-    >
+    <img :src="imageSource" width="30" />
   </button>
 </template>
 

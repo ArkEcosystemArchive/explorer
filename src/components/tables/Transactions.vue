@@ -2,15 +2,12 @@
   <Loader :data="transactions">
     <TableWrapper
       v-bind="$attrs"
-      :has-pagination="false"
       :columns="columns"
       :rows="transactions"
-      :sort-query="{ field: 'timestamp', type: 'desc' }"
-      :no-data-message="$t('No results')"
+      :no-data-message="$t('COMMON.NO_RESULTS')"
+      @on-sort-change="emitSortChange"
     >
-      <template
-        slot-scope="data"
-      >
+      <template slot-scope="data">
         <div v-if="data.column.field === 'id'">
           <LinkTransaction
             :id="data.row.id"
@@ -19,9 +16,9 @@
           />
         </div>
 
-        <div v-else-if="data.column.field === 'timestamp'">
+        <div v-else-if="data.column.field === 'timestamp.unix'">
           <span>
-            {{ data.formattedRow['timestamp'] }}
+            {{ readableTimestamp(data.row.timestamp.unix) }}
           </span>
         </div>
 
@@ -30,11 +27,7 @@
         </div>
 
         <div v-else-if="data.column.field === 'recipient'">
-          <LinkWallet
-            :address="data.row.recipient"
-            :type="data.row.type"
-            :asset="data.row.asset"
-          />
+          <LinkWallet :address="data.row.recipient" :type="data.row.type" :asset="data.row.asset" />
         </div>
 
         <div v-else-if="data.column.field === 'vendorField'">
@@ -44,139 +37,183 @@
         </div>
 
         <div v-else-if="data.column.field === 'amount'">
-          <span class="whitespace-no-wrap">
-            <TransactionAmount
-              :transaction="data.row"
-              :type="data.row.type"
-            />
-          </span>
+          <TransactionAmount :transaction="data.row" :type="data.row.type" />
         </div>
 
         <div v-else-if="data.column.field === 'fee'">
-          <span
-            v-tooltip="{
-              trigger: 'hover click',
-              content: data.row.price ? readableCurrency(data.row.fee, data.row.price) : '',
-              placement: 'top'
-            }"
-            class="whitespace-no-wrap"
-          >
-            {{ readableCrypto(data.row.fee) }}
-          </span>
+          <TransactionAmount :transaction="data.row" :is-fee="true" />
+        </div>
+
+        <div v-else-if="data.column.field === 'confirmations'">
+          <div class="flex items-center justify-end whitespace-no-wrap">
+            <div
+              v-if="data.row.confirmations <= activeDelegates"
+              class="flex items-center justify-end whitespace-no-wrap"
+            >
+              <span class="text-green inline-block mr-2">{{ data.row.confirmations }}</span>
+              <img class="icon flex-none" src="@/assets/images/icons/clock.svg" />
+            </div>
+            <div v-else>
+              <div v-tooltip="data.row.confirmations + ' ' + $t('COMMON.CONFIRMATIONS')">
+                {{ $t("TRANSACTION.WELL_CONFIRMED") }}
+              </div>
+            </div>
+          </div>
         </div>
       </template>
     </TableWrapper>
   </Loader>
 </template>
 
-<script type="text/ecmascript-6">
-import CryptoCompareService from '@/services/crypto-compare'
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import { IDelegate, ISortParameters, ITransaction } from "@/interfaces";
+import CryptoCompareService from "@/services/crypto-compare";
 
-export default {
-  name: 'TableTransactionsDesktop',
-
-  props: {
-    transactions: {
-      validator: value => {
-        return Array.isArray(value) || value === null
-      },
-      required: true
-    }
-  },
-
+@Component({
   computed: {
-    columns () {
-      const columns = [
-        {
-          label: this.$t('ID'),
-          field: 'id',
-          thClass: 'start-cell',
-          tdClass: 'start-cell'
-        },
-        {
-          label: this.$t('Timestamp'),
-          field: 'timestamp',
-          type: 'date',
-          formatFn: this.formatDate,
-          thClass: 'text-left hidden md:table-cell',
-          tdClass: 'text-left hidden md:table-cell wrap-timestamp'
-        },
-        {
-          label: this.$t('Sender'),
-          field: 'sender'
-        },
-        {
-          label: this.$t('Recipient'),
-          field: 'recipient'
-        },
-        {
-          label: this.$t('Smartbridge'),
-          field: 'vendorField',
-          thClass: 'text-right cell-smartbridge',
-          tdClass: 'text-right cell-smartbridge'
-        },
-        {
-          label: this.$t('Amount (token)', { token: this.networkToken() }),
-          field: 'amount',
-          type: 'number',
-          thClass: 'end-cell lg:base-cell lg:pr-4',
-          tdClass: 'end-cell lg:base-cell lg:pr-4'
-        },
-        {
-          label: this.$t('Fee (token)', { token: this.networkToken() }),
-          field: 'fee',
-          type: 'number',
-          thClass: 'end-cell hidden lg:table-cell',
-          tdClass: 'end-cell hidden lg:table-cell'
-        }
-      ]
-
-      return columns
+    ...mapGetters("network", ["activeDelegates"]),
+    ...mapGetters("currency", { currencySymbol: "symbol" }),
+  },
+})
+export default class TableTransactionsDesktop extends Vue {
+  @Prop({
+    required: true,
+    validator: value => {
+      return Array.isArray(value) || value === null;
     },
+  })
+  public transactions: ITransaction[] | null;
+  @Prop({ required: false, default: false }) public showConfirmations: boolean;
 
-    showSmartBridgeIcon () {
-      return this.transactions.some(transaction => {
-        return !!transaction.vendorField
-      })
+  private activeDelegates: IDelegate[];
+  private currencySymbol: string;
+
+  get columns() {
+    const feeClasses = ["hidden", "lg:table-cell"];
+
+    feeClasses.push(this.showConfirmations ? "pr-10 xl:pr-4" : "end-cell");
+
+    let columns = [
+      {
+        label: this.$t("COMMON.ID"),
+        field: "id",
+        thClass: "start-cell",
+        tdClass: "start-cell",
+      },
+      {
+        label: this.$t("COMMON.TIMESTAMP"),
+        field: "timestamp.unix",
+        type: "number",
+        thClass: "text-left hidden md:table-cell",
+        tdClass: "text-left hidden md:table-cell wrap-timestamp",
+      },
+      {
+        label: this.$t("TRANSACTION.SENDER"),
+        field: "sender",
+        tdClass: "break-all",
+      },
+      {
+        label: this.$t("TRANSACTION.RECIPIENT"),
+        field: "recipient",
+        tdClass: "break-all",
+      },
+      {
+        label: this.$t("TRANSACTION.SMARTBRIDGE"),
+        field: "vendorField",
+        thClass: "text-right cell-smartbridge",
+        tdClass: "text-right cell-smartbridge",
+      },
+      {
+        label: this.$t("TRANSACTION.AMOUNT"),
+        field: "amount",
+        type: "number",
+        thClass: "end-cell lg:base-cell",
+        tdClass: "end-cell lg:base-cell",
+      },
+      {
+        label: this.$t("TRANSACTION.FEE"),
+        field: "fee",
+        type: "number",
+        thClass: feeClasses.join(" "),
+        tdClass: feeClasses.join(" "),
+      },
+    ];
+
+    if (this.showConfirmations) {
+      columns = columns.filter(column => column.field !== "vendorField");
+
+      columns.push({
+        label: this.$t("COMMON.CONFIRMATIONS"),
+        field: "confirmations",
+        type: "number",
+        // @ts-ignore
+        sortable: false,
+        thClass: "end-cell hidden xl:table-cell not-sortable",
+        tdClass: "end-cell hidden xl:table-cell",
+      });
     }
-  },
 
-  watch: {
-    transactions () {
-      this.updatePrices()
+    return columns;
+  }
+
+  get showSmartBridgeIcon() {
+    return this.transactions!.some(transaction => {
+      return !!transaction.vendorField;
+    });
+  }
+
+  @Watch("transactions")
+  public async onTransactionsChanged() {
+    await this.prepareTransactions();
+  }
+
+  @Watch("currencySymbol")
+  public async onCurrencySymbolChanged() {
+    await this.updatePrices();
+  }
+
+  public async created() {
+    this.prepareTransactions();
+  }
+
+  private async prepareTransactions() {
+    await this.updatePrices();
+  }
+
+  private async fetchPrice(transaction: ITransaction) {
+    transaction.price = await CryptoCompareService.dailyAverage(transaction.timestamp.unix);
+  }
+
+  private async updatePrices() {
+    if (!this.transactions) {
+      return;
     }
-  },
 
-  created () {
-    this.updatePrices()
-  },
+    const promises = this.transactions.map(this.fetchPrice);
+    await Promise.all(promises);
+  }
 
-  methods: {
-    formatDate (timestamp) {
-      return this.readableTimestamp(timestamp.unix)
-    },
-
-    async updatePrices () {
-      if (!this.transactions) {
-        return
-      }
-
-      for (const transaction of this.transactions) {
-        transaction.price = await CryptoCompareService.dailyAverage(transaction.timestamp.unix)
-      }
-    }
+  private emitSortChange(params: ISortParameters[]) {
+    this.$emit("on-sort-change", params[0]);
   }
 }
 </script>
 
-<style>
-  .wrap-timestamp {
-    white-space: normal;
-  }
+<style scoped>
+.icon {
+  width: 16px;
+  height: 16px;
+}
 
-  @media(min-width: 870px) {
-    .wrap-timestamp {
-      white-space: nowrap;
-    }
+.wrap-timestamp {
+  white-space: normal;
+}
+
+@media (min-width: 870px) {
+  .wrap-timestamp {
+    white-space: nowrap;
   }
+}
 </style>

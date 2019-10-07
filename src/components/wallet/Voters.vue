@@ -1,54 +1,55 @@
 <template>
-  <div
-    v-show="voterCount"
-    class="list-row-border-t"
-  >
-    <div>{{ $t("Voters") }}</div>
+  <div v-show="voterCount" class="list-row-border-t">
+    <div>{{ $t("WALLET.DELEGATE.VOTERS") }}</div>
     <div class="whitespace-no-wrap">
       <span
-        v-tooltip="{ content: $t('Only voters with more than 0.1 token', { token: networkToken() }), placement: 'left' }"
+        v-tooltip="{ content: $t('WALLET.DELEGATE.VOTER_THRESHOLD', { token: networkToken() }), placement: 'left' }"
         :class="voterCount ? 'mr-2' : ''"
-      >{{ voterCount }}</span>
+        >{{ readableNumber(voterCount, 0) }}</span
+      >
       <RouterLink
         v-if="wallet.address && voterCount"
         :to="{ name: 'wallet-voters', params: { address: wallet.address, username: wallet.username, page: 1 } }"
       >
-        {{ $t("See all") }}
+        {{ $t("COMMON.SEE_ALL") }}
       </RouterLink>
     </div>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import DelegateService from '@/services/delegate'
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { IWallet } from "@/interfaces";
+import DelegateService from "@/services/delegate";
 
-export default {
-  name: 'WalletVoters',
-
-  props: {
-    wallet: {
-      type: Object,
-      required: true
-    }
+@Component({
+  components: {
+    WalletVoters,
   },
+})
+export default class WalletVoters extends Vue {
+  @Prop({ required: true }) public wallet: IWallet;
 
-  data: () => ({
-    voterCount: 0
-  }),
+  private voterCount: number = 0;
 
-  watch: {
-    async wallet (wallet) {
-      if (wallet.username) {
-        await this.getVoterCount()
-      }
+  get delegate() {
+    return this.$store.getters["delegates/byPublicKey"](this.wallet.publicKey);
+  }
+
+  @Watch("wallet")
+  public async onWalletChange(wallet: IWallet) {
+    if (wallet.username) {
+      await this.getVoterCount();
     }
-  },
+  }
 
-  methods: {
-    async getVoterCount () {
-      const count = await DelegateService.voterCount(this.wallet.publicKey)
-      this.voterCount = count
-    }
+  public async mounted() {
+    await this.getVoterCount();
+  }
+
+  private async getVoterCount() {
+    const count = await DelegateService.voterCount(this.wallet.publicKey);
+    this.voterCount = count;
   }
 }
 </script>

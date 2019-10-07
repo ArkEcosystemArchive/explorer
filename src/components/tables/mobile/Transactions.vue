@@ -1,57 +1,40 @@
 <template>
   <div>
     <Loader :data="transactions">
-      <div
-        v-for="transaction in transactions"
-        :key="transaction.id"
-        class="row-mobile"
-      >
+      <div v-for="transaction in transactions" :key="transaction.id" class="row-mobile">
         <div class="list-row-border-b">
           <div class="mr-4">
-            {{ $t("ID") }}
+            {{ $t("COMMON.ID") }}
           </div>
-          <LinkTransaction
-            :id="transaction.id"
-            :smart-bridge="transaction.vendorField"
-          />
+          <LinkTransaction :id="transaction.id" />
         </div>
 
         <div class="list-row-border-b-no-wrap">
           <div class="mr-4">
-            {{ $t("Timestamp") }}
+            {{ $t("COMMON.TIMESTAMP") }}
           </div>
-          <div
-            v-if="transaction.timestamp"
-            class="text-right"
-          >
+          <div v-if="transaction.timestamp" class="text-right">
             {{ readableTimestamp(transaction.timestamp.unix) }}
           </div>
         </div>
 
         <div class="list-row-border-b">
           <div class="mr-4">
-            {{ $t("Sender") }}
+            {{ $t("TRANSACTION.SENDER") }}
           </div>
           <LinkWallet :address="transaction.sender" />
         </div>
 
         <div class="list-row-border-b">
           <div class="mr-4">
-            {{ $t("Recipient") }}
+            {{ $t("TRANSACTION.RECIPIENT") }}
           </div>
-          <LinkWallet
-            :address="transaction.recipient"
-            :type="transaction.type"
-            :asset="transaction.asset"
-          />
+          <LinkWallet :address="transaction.recipient" :type="transaction.type" :asset="transaction.asset" />
         </div>
 
-        <div
-          v-if="truncate(transaction.vendorField || '')"
-          class="list-row-border-b-no-wrap"
-        >
+        <div v-if="truncate(transaction.vendorField || '')" class="list-row-border-b-no-wrap">
           <div class="mr-4">
-            {{ $t("Smartbridge") }}
+            {{ $t("TRANSACTION.SMARTBRIDGE") }}
           </div>
           <div class="text-right truncate">
             {{ emojify(transaction.vendorField) }}
@@ -60,45 +43,68 @@
 
         <div class="list-row-border-b">
           <div class="mr-4">
-            {{ $t("Amount (token)", { token: networkToken() }) }}
+            {{ $t("TRANSACTION.AMOUNT") }}
           </div>
           <div>
-            <TransactionAmount
-              :transaction="transaction"
-              :type="transaction.type"
-            />
+            <TransactionAmount :transaction="transaction" :type="transaction.type" />
           </div>
         </div>
 
         <div class="list-row">
           <div class="mr-4">
-            {{ $t("Fee (token)", { token: networkToken() }) }}
+            {{ $t("TRANSACTION.FEE") }}
           </div>
-          <div>{{ readableCrypto(transaction.fee) }}</div>
+          <div>
+            <TransactionAmount :transaction="transaction" :is-fee="true" />
+          </div>
+        </div>
+
+        <div v-if="showConfirmations" class="list-row">
+          <div class="mr-4">
+            {{ $t("COMMON.CONFIRMATIONS") }}
+          </div>
+          <div class="flex items-center justify-end">
+            <div
+              v-if="transaction.confirmations <= activeDelegates"
+              class="flex items-center justify-end whitespace-no-wrap"
+            >
+              <span class="text-green inline-block mr-2">{{ transaction.confirmations }}</span>
+              <img class="icon flex-none" src="@/assets/images/icons/clock.svg" />
+            </div>
+            <div v-else>
+              {{ $t("TRANSACTION.WELL_CONFIRMED") }}
+            </div>
+          </div>
         </div>
       </div>
-      <div
-        v-if="transactions && !transactions.length"
-        class="px-5 md:px-10"
-      >
-        <span>{{ $t("No results") }}</span>
+      <div v-if="transactions && !transactions.length" class="px-5 md:px-10">
+        <span>{{ $t("COMMON.NO_RESULTS") }}</span>
       </div>
     </Loader>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-export default {
-  name: 'TableTransactionsMobile',
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { ITransaction, IDelegate } from "@/interfaces";
+import { mapGetters } from "vuex";
 
-  props: {
-    transactions: {
-      validator: value => {
-        return Array.isArray(value) || value === null
-      },
-      required: true
-    }
-  }
+@Component({
+  computed: {
+    ...mapGetters("network", ["activeDelegates"]),
+  },
+})
+export default class TableTransactionsMobile extends Vue {
+  @Prop({
+    required: true,
+    validator: value => {
+      return Array.isArray(value) || value === null;
+    },
+  })
+  public transactions: ITransaction[] | null;
+  @Prop({ required: false, default: false }) public showConfirmations: boolean;
+
+  private activeDelegates: IDelegate[];
 }
 </script>
 

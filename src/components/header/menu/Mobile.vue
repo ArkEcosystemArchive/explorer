@@ -6,7 +6,7 @@
         tag="div"
         class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border"
       >
-        {{ $t("Home") }}
+        {{ $t("PAGES.HOME.TITLE") }}
       </RouterLink>
     </li>
     <li :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
@@ -15,39 +15,28 @@
         tag="div"
         class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border"
       >
-        {{ $t("Top Wallets") }}
+        {{ $t("PAGES.TOP_WALLETS.TITLE") }}
       </RouterLink>
     </li>
     <li :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
-      <RouterLink
-        :to="{ name: 'delegate-monitor' }"
-        tag="div"
-        class="cursor-pointer py-5 w-64 flex-none"
-      >
-        {{ $t("Delegate Monitor") }}
+      <RouterLink :to="{ name: 'delegate-monitor' }" tag="div" class="cursor-pointer py-5 w-64 flex-none">
+        {{ $t("PAGES.DELEGATE_MONITOR.TITLE") }}
       </RouterLink>
     </li>
-    <!-- <li :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
-      <RouterLink :to="{ name: 'statistics' }" tag="div" class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border">Statistics</RouterLink>
-    </li> -->
-    <!-- <li :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
-      <div class="py-5 w-64 flex-none">
-        <span class="mr-2">Snapshots</span>
-        <img src="@/assets/images/icons/download.svg" />
-      </div>
-    </li> -->
   </ul>
 </template>
 
-<script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import { mapGetters } from "vuex";
 
-export default {
-  name: 'HeaderMenuMobile',
-
+@Component({
   computed: {
-    ...mapGetters('ui', ['nightMode'])
-  }
+    ...mapGetters("ui", ["nightMode"]),
+  },
+})
+export default class HeaderMenuMobile extends Vue {
+  private nightMode: boolean;
 }
 </script>
 

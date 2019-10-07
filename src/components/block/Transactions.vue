@@ -1,68 +1,82 @@
 <template>
   <div v-if="transactions && transactions.length > 0">
     <h2 class="text-2xl mb-5 md:mb-6 px-5 sm:hidden text-theme-text-primary">
-      {{ $t("Transactions") }}
+      {{ $t("COMMON.TRANSACTIONS") }}
     </h2>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <TableTransactionsDesktop :transactions="transactions" />
+        <TableTransactionsDesktop
+          :transactions="transactions"
+          :sort-query="sortParams"
+          @on-sort-change="onSortChange"
+        />
       </div>
       <div class="sm:hidden">
         <TableTransactionsMobile :transactions="transactions" />
       </div>
-      <div
-        v-if="transactions.length >= 25"
-        class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap"
-      >
+      <div v-if="transactions.length >= 25" class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
         <RouterLink
           :to="{ name: 'block-transactions', params: { block: block.id, page: 2 } }"
           tag="button"
-          class="show-more-button"
+          class="button-lg"
         >
-          {{ $t("Show more") }}
+          {{ $t("PAGINATION.SHOW_MORE") }}
         </RouterLink>
       </div>
     </section>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-import TransactionService from '@/services/transaction'
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { IBlock, ISortParameters, ITransaction } from "../../interfaces";
+import TransactionService from "@/services/transaction";
 
-export default {
-  name: 'BlockTransactions',
+@Component
+export default class BlockTransactions extends Vue {
+  @Prop({ required: true }) public block: IBlock;
 
-  props: {
-    block: {
-      type: Object,
-      required: true
+  public transactions: ITransaction[] | null = null;
+
+  get sortParams(): ISortParameters {
+    return this.$store.getters["ui/transactionSortParams"];
+  }
+
+  set sortParams(params: ISortParameters) {
+    this.$store.dispatch("ui/setTransactionSortParams", {
+      field: params.field,
+      type: params.type,
+    });
+  }
+
+  @Watch("block")
+  public onBlockChanged() {
+    this.resetTransactions();
+    this.getTransactions();
+  }
+
+  public mounted() {
+    this.resetTransactions();
+    this.getTransactions();
+  }
+
+  private resetTransactions(): void {
+    this.transactions = null;
+  }
+
+  private async getTransactions(): Promise<void> {
+    if (!this.block.id) {
+      return;
     }
-  },
 
-  data: () => ({
-    transactions: null
-  }),
-
-  watch: {
-    block () {
-      this.resetTransactions()
-      this.getTransactions()
+    if (this.block.transactions) {
+      const { data } = await TransactionService.byBlock(this.block.id);
+      this.transactions = data.map((transaction: ITransaction) => ({ ...transaction, price: null }));
     }
-  },
+  }
 
-  methods: {
-    resetTransactions () {
-      this.transactions = null
-    },
-
-    async getTransactions () {
-      if (!this.block.id) return
-
-      if (this.block.transactions) {
-        const { data } = await TransactionService.byBlock(this.block.id)
-        this.transactions = data
-      }
-    }
+  private onSortChange(params: ISortParameters): void {
+    this.sortParams = params;
   }
 }
 </script>

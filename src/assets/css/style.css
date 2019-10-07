@@ -1,0 +1,26 @@
+@import './_tailwind-base.css';
+
+@import '../../../node_modules/animate.css/animate.min.css';
+
+@import './_buttons.css';
+@import './_charts.css';
+@import './_fonts.css';
+@import './_general.css';
+@import './_progress-bar.css';
+@import './_tables.css';
+@import './_tabs.css';
+@import './_theme.css';
+@import './_tooltips.css';
+
+/* Configuration */
+
+.flag-image {
+  width: 20px;
+  height: 20px;
+}
+
+.v-spinner {
+  @apply .flex .items-center .justify-center
+}
+
+@tailwind utilities;

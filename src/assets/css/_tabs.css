@@ -1,0 +1,30 @@
+.transition {
+  transition: all 0.1s ease-in;
+}
+
+.base-tab {
+  @apply .mr-4 .py-4 .px-2 .cursor-pointer .border-b-3;
+}
+
+.active-tab {
+  @apply .base-tab .text-lg .border-blue .text-theme-text-primary .transition;
+}
+
+.inactive-tab {
+  @apply .base-tab .text-theme-text-secondary .border-transparent .transition;
+}
+
+.active-tab:hover,
+.inactive-tab:hover {
+  @apply .text-theme-text-primary .border-blue;
+}
+
+@screen sm {
+  .active-tab {
+    @apply .text-2xl;
+  }
+
+  .inactive-tab {
+    @apply .text-lg;
+  }
+}

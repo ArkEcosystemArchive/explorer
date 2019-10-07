@@ -2,64 +2,47 @@
   <span
     v-tooltip="{
       trigger: 'hover click',
-      content: transaction.amount && price ? readableCurrency(transaction.amount, price) : '',
-      placement: 'top'
+      content: source && price ? readableCurrency(source, price) : '',
+      placement: 'top',
     }"
-    :class="{
-      'text-red': transaction.sender === $route.params.address,
-      'text-green': transaction.recipient === $route.params.address && isTransfer,
-    }"
+    :class="
+      !isFee
+        ? {
+            'text-red': transaction.sender === $route.params.address,
+            'text-green': transaction.recipient === $route.params.address && isTransfer,
+          }
+        : ''
+    "
+    class="whitespace-no-wrap"
   >
-    {{ readableCrypto(transaction.amount) }}
+    {{ readableCrypto(source) }}
   </span>
 </template>
 
-<script type="text/ecmascript-6">
-import CryptoCompareService from '@/services/crypto-compare'
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { ITransaction } from "@/interfaces";
 
-export default {
-  name: 'TransactionAmount',
+@Component
+export default class TransactionAmount extends Vue {
+  @Prop({ required: true }) public transaction: ITransaction;
+  @Prop({ required: false, default: null }) public type: number;
+  @Prop({ required: false, default: false }) public isFee: boolean;
 
-  props: {
-    transaction: {
-      type: Object,
-      required: true
-    },
-    type: {
-      type: Number,
-      required: true
-    }
-  },
-
-  data: () => ({
-    price: null
-  }),
-
-  computed: {
-    isTransfer () {
-      if (this.type !== undefined) {
-        // 0 = transfer, 6 = timelock transfer, 7 = multipayment
-        return this.type === 0 || this.type === 6 || this.type === 7
-      }
-      return false
-    }
-  },
-
-  watch: {
-    transaction () {
-      this.updatePrice()
-    }
-  },
-
-  created () {
-    this.updatePrice()
-  },
-
-  methods: {
-    async updatePrice () {
-      this.price = await CryptoCompareService.dailyAverage(this.transaction.timestamp.unix)
-    }
+  get source() {
+    return this.isFee ? this.transaction.fee : this.transaction.amount;
   }
 
+  get price() {
+    return this.transaction.price;
+  }
+
+  get isTransfer() {
+    if (this.type !== undefined) {
+      // 0 = transfer, 6 = timelock transfer, 7 = multipayment
+      return this.type === 0 || this.type === 6 || this.type === 7;
+    }
+    return false;
+  }
 }
 </script>

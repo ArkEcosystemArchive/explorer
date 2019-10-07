@@ -14,8 +14,7 @@
       "delegate": {
         "username": "calidelegate",
         "address": "AMvZYkTSMXCqFLPP4bxJyq84FfMg9m2V81",
-        "publicKey":
-          "037b4730e7c63252912825510423487e9ee507e1a5719dfeef52187d8ababe3048",
+        "publicKey": "037b4730e7c63252912825510423487e9ee507e1a5719dfeef52187d8ababe3048",
         "vote": "137842758365804",
         "producedblocks": 22480,
         "missedblocks": 257,
@@ -37,8 +36,7 @@
       "delegate": {
         "username": "arknet",
         "address": "AXzEMF7TC1aH3ax1Luxk6XdyKXDRxnBj4f",
-        "publicKey":
-          "0217ff1ec656f2354a899bde097bb3131a9730fe491bb87dedb96489120be9154f",
+        "publicKey": "0217ff1ec656f2354a899bde097bb3131a9730fe491bb87dedb96489120be9154f",
         "vote": "140540220038209",
         "producedblocks": 43426,
         "missedblocks": 30,
@@ -60,8 +58,7 @@
       "delegate": {
         "username": "ares",
         "address": "ARESrXpca6ehHWyVkhh1wvDgAiNwpsA2VH",
-        "publicKey":
-          "02c44cc9787fae3ce5c8873ff541deadb86cd8ddb56a90dba37049ca6506d022f5",
+        "publicKey": "02c44cc9787fae3ce5c8873ff541deadb86cd8ddb56a90dba37049ca6506d022f5",
         "vote": "136250945720271",
         "producedblocks": 59398,
         "missedblocks": 668,
@@ -83,8 +80,7 @@
       "delegate": {
         "username": "ozpooldelegate",
         "address": "AandN2kp4fkm4gscqdcJHTeaigP2q6BxPr",
-        "publicKey":
-          "02f2f5c5f10084edc5e14f7f1e69d444ade37e9c6fa1b60130425e15c13418ef26",
+        "publicKey": "02f2f5c5f10084edc5e14f7f1e69d444ade37e9c6fa1b60130425e15c13418ef26",
         "vote": "136082717326331",
         "producedblocks": 5517,
         "missedblocks": 36,
@@ -106,8 +102,7 @@
       "delegate": {
         "username": "arkpool",
         "address": "ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ",
-        "publicKey":
-          "02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b",
+        "publicKey": "02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b",
         "vote": "172180538868896",
         "producedblocks": 61157,
         "missedblocks": 304,
@@ -129,8 +124,7 @@
       "delegate": {
         "username": "anamix",
         "address": "AHazk56nvQ3isZrYkarJV1RPcDUrQocmfR",
-        "publicKey":
-          "02a0ed5604868461a87639f58bd3a55f661774c3cbb705a735f58c50087f942c3d",
+        "publicKey": "02a0ed5604868461a87639f58bd3a55f661774c3cbb705a735f58c50087f942c3d",
         "vote": "136202174352580",
         "producedblocks": 40986,
         "missedblocks": 1074,
@@ -152,8 +146,7 @@
       "delegate": {
         "username": "hippopotamus",
         "address": "AbkG2erJoFRFK4H1VuVkb9Mgx4cA1oSG43",
-        "publicKey":
-          "03331b3bdebd082d0c43d08b20a687c7b55adde6e39766d96bf6188d6646330aef",
+        "publicKey": "03331b3bdebd082d0c43d08b20a687c7b55adde6e39766d96bf6188d6646330aef",
         "vote": "138748589949589",
         "producedblocks": 10943,
         "missedblocks": 219,
@@ -175,8 +168,7 @@
       "delegate": {
         "username": "ravelou",
         "address": "AXvBF7JoNyM6ztMrgr45KrqQf7LA7RgZhf",
-        "publicKey":
-          "021f277f1e7a48c88f9c02988f06ca63d6f1781471f78dba49d58bab85eb3964c6",
+        "publicKey": "021f277f1e7a48c88f9c02988f06ca63d6f1781471f78dba49d58bab85eb3964c6",
         "vote": "145912639517133",
         "producedblocks": 55611,
         "missedblocks": 485,
@@ -198,8 +190,7 @@
       "delegate": {
         "username": "jarunik",
         "address": "Aasu14aTs9ipZdy1FMv7ay1Vqn3jPskA8t",
-        "publicKey":
-          "02c7455bebeadde04728441e0f57f82f972155c088252bf7c1365eb0dc84fbf5de",
+        "publicKey": "02c7455bebeadde04728441e0f57f82f972155c088252bf7c1365eb0dc84fbf5de",
         "vote": "142028742525536",
         "producedblocks": 52216,
         "missedblocks": 242,
@@ -221,8 +212,7 @@
       "delegate": {
         "username": "ozpooldelegate",
         "address": "AandN2kp4fkm4gscqdcJHTeaigP2q6BxPr",
-        "publicKey":
-          "02f2f5c5f10084edc5e14f7f1e69d444ade37e9c6fa1b60130425e15c13418ef26",
+        "publicKey": "02f2f5c5f10084edc5e14f7f1e69d444ade37e9c6fa1b60130425e15c13418ef26",
         "vote": "136082717326331",
         "producedblocks": 5517,
         "missedblocks": 36,
@@ -244,8 +234,7 @@
       "delegate": {
         "username": "arkland",
         "address": "ATHAwQnSZCRXvNkBtWn5AkGyVrFdSRH756",
-        "publicKey":
-          "0386d5a3cd292ffaa9a3b73c556453326780e092015141efaed347c4c50c7886bb",
+        "publicKey": "0386d5a3cd292ffaa9a3b73c556453326780e092015141efaed347c4c50c7886bb",
         "vote": "136060237372618",
         "producedblocks": 6841,
         "missedblocks": 80,
@@ -267,8 +256,7 @@
       "delegate": {
         "username": "calidelegate",
         "address": "AMvZYkTSMXCqFLPP4bxJyq84FfMg9m2V81",
-        "publicKey":
-          "037b4730e7c63252912825510423487e9ee507e1a5719dfeef52187d8ababe3048",
+        "publicKey": "037b4730e7c63252912825510423487e9ee507e1a5719dfeef52187d8ababe3048",
         "vote": "137842758365804",
         "producedblocks": 22480,
         "missedblocks": 257,
@@ -290,8 +278,7 @@
       "delegate": {
         "username": "arkpool",
         "address": "ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ",
-        "publicKey":
-          "02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b",
+        "publicKey": "02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b",
         "vote": "172180538868896",
         "producedblocks": 61157,
         "missedblocks": 304,
@@ -313,8 +300,7 @@
       "delegate": {
         "username": "biz_private",
         "address": "AaAy8BZkjV86YN7xUtZ35iwyXRMQKtKoAy",
-        "publicKey":
-          "02fa6902e91e127d6d3410f6abc271a79ae24029079caa0db5819757e3c1c1c5a4",
+        "publicKey": "02fa6902e91e127d6d3410f6abc271a79ae24029079caa0db5819757e3c1c1c5a4",
         "vote": "138452993922565",
         "producedblocks": 15090,
         "missedblocks": 149,
@@ -336,8 +322,7 @@
       "delegate": {
         "username": "emotive_ark",
         "address": "APzMVrARso9qatWF5VPCyDTttBFKjcNccL",
-        "publicKey":
-          "035a0302ddd571bb821f6b069450814cb29fc927f14f146491fd5c9b3ab57d8ca8",
+        "publicKey": "035a0302ddd571bb821f6b069450814cb29fc927f14f146491fd5c9b3ab57d8ca8",
         "vote": "135930312976804",
         "producedblocks": 57453,
         "missedblocks": 727,
@@ -359,8 +344,7 @@
       "delegate": {
         "username": "toad",
         "address": "AXW2vq7bNvAJS7uRcZBdyRWca9Dehtr8ds",
-        "publicKey":
-          "031c110968941f29c76f3752d5752d5541cfe65f23f5d7f9115d2f4eb194f41c47",
+        "publicKey": "031c110968941f29c76f3752d5752d5541cfe65f23f5d7f9115d2f4eb194f41c47",
         "vote": "135959150574501",
         "producedblocks": 50318,
         "missedblocks": 437,
@@ -382,8 +366,7 @@
       "delegate": {
         "username": "wes",
         "address": "AHUzSzYLVhqJuXpPubmhdE2dD2otMBvLQZ",
-        "publicKey":
-          "0354319db3f22fb8d4588a09ebbb3e91631cbc2202ba58c69149b75c1a47eb7686",
+        "publicKey": "0354319db3f22fb8d4588a09ebbb3e91631cbc2202ba58c69149b75c1a47eb7686",
         "vote": "141075073046429",
         "producedblocks": 61496,
         "missedblocks": 472,
@@ -405,8 +388,7 @@
       "delegate": {
         "username": "biz_classic",
         "address": "AKdr5d9AMEnsKYxpDcoHdyyjSCKVx3r9Nj",
-        "publicKey":
-          "020431436cf94f3c6a6ba566fe9e42678db8486590c732ca6c3803a10a86f50b92",
+        "publicKey": "020431436cf94f3c6a6ba566fe9e42678db8486590c732ca6c3803a10a86f50b92",
         "vote": "140953776263216",
         "producedblocks": 41040,
         "missedblocks": 220,
@@ -428,8 +410,7 @@
       "delegate": {
         "username": "bioly",
         "address": "AbUdMhk96FbzxH7vDYAwdyqUELmLopZV5x",
-        "publicKey":
-          "02c0b645f19ab304d25aae3add139edd9f6ca9fd0d98e57a808100de0e93832181",
+        "publicKey": "02c0b645f19ab304d25aae3add139edd9f6ca9fd0d98e57a808100de0e93832181",
         "vote": "164718353764664",
         "producedblocks": 61487,
         "missedblocks": 271,
@@ -451,8 +432,7 @@
       "delegate": {
         "username": "criptodogg",
         "address": "AKmcaBfVepg8YwZxCb8gSYKWWNaeJxwu5d",
-        "publicKey":
-          "034920a86224835ed039cbfdd6dbaf74061a750377126747c7ce68fd5ef8c8b9d4",
+        "publicKey": "034920a86224835ed039cbfdd6dbaf74061a750377126747c7ce68fd5ef8c8b9d4",
         "vote": "136146573573164",
         "producedblocks": 23956,
         "missedblocks": 587,

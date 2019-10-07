@@ -1,6 +1,6 @@
 {
   "title": "DARK Explorer",
-  "server": "https://dexplorer.ark.io/api/v2",
+  "server": "https://dexplorer.ark.io/api",
   "alias": "Development",
   "activeDelegates": 51,
   "rewardOffset": 10800,
@@ -10,6 +10,10 @@
     "token": "DARK",
     "symbol": "DѦ",
     "currency": null,
-    "priceChart": false
+    "priceChartOptions": {
+      "enabled": false,
+      "period": "day",
+      "type": "price"
+    }
   }
 }

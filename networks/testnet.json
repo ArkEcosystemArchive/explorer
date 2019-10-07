@@ -1,6 +1,6 @@
 {
   "title": "TARK Explorer",
-  "server": "http://127.0.0.1:4003/api/v2",
+  "server": "http://127.0.0.1:4003/api",
   "alias": "Testnet local",
   "activeDelegates": 51,
   "rewardOffset": 75600,
@@ -10,6 +10,10 @@
     "token": "TARK",
     "symbol": "TѦ",
     "currency": null,
-    "priceChart": false
+    "priceChartOptions": {
+      "enabled": false,
+      "period": "day",
+      "type": "price"
+    }
   }
 }

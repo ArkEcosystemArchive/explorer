@@ -2,14 +2,14 @@
   <span
     v-click-outside="closeDropdown"
     :class="{ 'sm:mb-4': !inBanner }"
-    class="flex w-full sm:w-auto relative z-20 sm:mr-10"
+    class="SelectionType w-full sm:w-auto sm:mr-10"
   >
     <div class="flex sm:hidden w-full">
       <span
         :class="`bg-${backgroundColor} text-${secondaryTextColor}`"
         class="flex items-center rounded-l py-4 px-6 text-xs"
       >
-        {{ $t("Type") }}
+        {{ $t("COMMON.TYPE") }}
       </span>
 
       <span
@@ -18,7 +18,7 @@
         @click="toggleDropdown"
       >
         <span class="font-bold">
-          {{ $t(types[transactionType + 1]) }}
+          {{ $t(`TRANSACTION.TYPES.${types[transactionType + 1]}`) }}
         </span>
 
         <svg
@@ -33,28 +33,18 @@
         </svg>
       </span>
 
-      <ul
-        v-show="isOpen"
-        class="absolute inset-x-0 mt-10 bg-white shadow rounded border overflow-hidden text-sm"
-      >
-        <li
-          v-for="(type, index) in types"
-          :key="type"
-        >
-          <div
-            class="dropdown-button"
-            @click="filterTransactions(index - 1)"
-          >{{ $t(type) }}</div>
+      <ul v-show="isOpen" class="SelectionType--options inset-x-0 mt-10">
+        <li v-for="(type, index) in types" :key="type">
+          <div class="dropdown-button" @click="filterTransactions(index - 1)">
+            {{ $t(`TRANSACTION.TYPES.${type}`) }}
+          </div>
         </li>
       </ul>
     </div>
 
     <div class="hidden sm:block">
-      <span
-        :class="[ inBanner ? bannerClasses : 'text-theme-text-thead' ]"
-        class="block mb-2 text-xs"
-      >
-        {{ $t("Type") }}
+      <span :class="[inBanner ? bannerClasses : 'text-theme-text-thead']" class="block mb-2 text-xs">
+        {{ $t("COMMON.TYPE") }}
       </span>
 
       <span
@@ -62,7 +52,7 @@
         class="flex items-center cursor-pointer"
         @click="toggleDropdown"
       >
-        <span class="mr-1 md:whitespace-no-wrap">{{ $t(types[transactionType + 1]) }}</span>
+        <span class="mr-1 md:whitespace-no-wrap">{{ $t(`TRANSACTION.TYPES.${types[transactionType + 1]}`) }}</span>
         <svg
           :class="{ 'rotate-180': isOpen }"
           class="fill-current"
@@ -75,87 +65,78 @@
         </svg>
       </span>
 
-      <ul
-        v-show="isOpen"
-        class="absolute right-0 mt-2 bg-white shadow rounded border overflow-hidden text-sm"
-      >
-        <li
-          v-for="(type, index) in types"
-          :key="type"
-        >
-          <div
-            class="dropdown-button"
-            @click="filterTransactions(index - 1)"
-          >{{ $t(type) }}</div>
+      <ul v-show="isOpen" class="SelectionType--options right-0 mt-2">
+        <li v-for="(type, index) in types" :key="type">
+          <div class="dropdown-button" @click="filterTransactions(index - 1)">
+            {{ $t(`TRANSACTION.TYPES.${type}`) }}
+          </div>
         </li>
       </ul>
     </div>
   </span>
 </template>
 
-<script>
-export default {
-  props: {
-    inBanner: {
-      type: Boolean,
-      required: false,
-      default: false
-    }
-  },
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-  data: () => ({
-    types: [
-      'All', 'Transfer', 'Second Signature', 'Delegate Registration', 'Vote', 'Multisignature Registration'
-    ],
-    transactionType: -1,
-    selectOpen: false
-  }),
+@Component
+export default class SelectionType extends Vue {
+  @Prop({ required: false, default: false }) public inBanner: boolean;
+  private types: string[] = ["ALL", "TRANSFER", "SECOND_SIGNATURE", "DELEGATE_REGISTRATION", "VOTE", "MULTI_SIGNATURE"];
+  private transactionType: number = -1;
+  private selectOpen: boolean = false;
 
-  computed: {
-    isOpen () {
-      return this.selectOpen
-    },
+  get isOpen() {
+    return this.selectOpen;
+  }
 
-    backgroundColor () {
-      return this.inBanner ? 'none' : 'theme-page-background'
-    },
+  get backgroundColor() {
+    return this.inBanner ? "none" : "theme-page-background";
+  }
 
-    primaryTextColor () {
-      return this.inBanner ? 'white' : 'theme-text-primary'
-    },
+  get primaryTextColor() {
+    return this.inBanner ? "white" : "theme-text-primary";
+  }
 
-    secondaryTextColor () {
-      return this.inBanner ? 'grey' : 'theme-text-secondary'
-    },
+  get secondaryTextColor() {
+    return this.inBanner ? "grey" : "theme-text-secondary";
+  }
 
-    bannerClasses () {
-      return `bg-${this.backgroundColor} text-${this.secondaryTextColor}`
-    }
-  },
+  get bannerClasses() {
+    return `bg-${this.backgroundColor} text-${this.secondaryTextColor}`;
+  }
 
-  created () {
-    this.transactionType = Number(localStorage.getItem('transactionType') || -1)
-  },
+  public created() {
+    this.transactionType = Number(localStorage.getItem("transactionType") || -1);
+  }
 
-  methods: {
-    filterTransactions (type) {
-      this.closeDropdown()
-      this.setTransactionType(type)
-      this.$emit('change', type)
-    },
+  private filterTransactions(type: number) {
+    this.closeDropdown();
+    this.setTransactionType(type);
+    this.$emit("change", type);
+  }
 
-    setTransactionType (type) {
-      localStorage.setItem('transactionType', type)
-      this.transactionType = type
-    },
+  private setTransactionType(type: number) {
+    localStorage.setItem("transactionType", type.toString());
+    this.transactionType = type;
+  }
 
-    closeDropdown () {
-      this.selectOpen = false
-    },
+  private closeDropdown() {
+    this.selectOpen = false;
+  }
 
-    toggleDropdown () {
-      this.selectOpen = !this.selectOpen
-    }
+  private toggleDropdown() {
+    this.selectOpen = !this.selectOpen;
   }
 }
 </script>
+
+<style scoped>
+.SelectionType {
+  @apply .flex .relative .z-20;
+}
+
+.SelectionType--options {
+  @apply .absolute .bg-theme-content-background .shadow-theme .rounded .border .overflow-hidden .text-sm;
+}
+</style>

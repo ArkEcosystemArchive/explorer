@@ -1,9 +1,6 @@
 <template>
   <span>
-    <div
-      v-if="data === null"
-      class="text-center"
-    >
+    <div v-if="data === null" class="text-center">
       <PulseLoader color="#037cff" />
     </div>
 
@@ -11,23 +8,24 @@
   </span>
 </template>
 
-<script type="text/ecmascript-6">
-import { PulseLoader } from 'vue-spinner/dist/vue-spinner.min.js'
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { ISortParameters, IWallet } from "@/interfaces";
+// @ts-ignore
+import { PulseLoader } from "vue-spinner/dist/vue-spinner.min.js";
 
-export default {
-  name: 'Loader',
-
+@Component({
   components: {
-    PulseLoader
+    PulseLoader,
   },
-
-  props: {
-    data: {
-      validator: value => {
-        return Array.isArray(value) || value === null
-      },
-      required: true
-    }
-  }
+})
+export default class Loader extends Vue {
+  @Prop({
+    required: true,
+    validator: value => {
+      return Array.isArray(value) || value === null;
+    },
+  })
+  public data: any[] | null;
 }
 </script>

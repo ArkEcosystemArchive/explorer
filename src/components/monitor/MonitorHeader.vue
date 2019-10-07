@@ -1,6 +1,6 @@
 <template>
   <section class="mb-5">
-    <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
+    <div class="MonitorHeader px-5 sm:px-10 py-8 xl:rounded-lg">
       <DelegateCount />
 
       <TotalForged />
@@ -10,16 +10,22 @@
   </section>
 </template>
 
-<script type="text/ecmascript-6">
-import { DelegateCount, LastBlock, TotalForged } from '@/components/monitor/header'
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import { DelegateCount, LastBlock, TotalForged } from "@/components/monitor/header";
 
-export default {
-  name: 'MonitorHeader',
-
+@Component({
   components: {
     DelegateCount,
     LastBlock,
-    TotalForged
-  }
-}
+    TotalForged,
+  },
+})
+export default class MonitorHeader extends Vue {}
 </script>
+
+<style>
+.MonitorHeader {
+  @apply .bg-theme-feature-background .flex .items-center .justify-between;
+}
+</style>

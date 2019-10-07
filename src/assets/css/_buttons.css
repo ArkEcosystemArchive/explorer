@@ -1,0 +1,63 @@
+button:disabled {
+  cursor: default;
+  color: #838a9b;
+}
+
+.hover-button-shadow-definition {
+  box-shadow: 0 5px 15px rgba(9, 100, 228, 0.34);
+}
+
+.hover-button-shadow:hover {
+  @apply .hover-button-shadow-definition;
+}
+
+.transition {
+  transition: all 0.1s ease-in;
+}
+
+/* Pagination Buttons */
+
+.base-button {
+  @apply .flex .flex-no-wrap .justify-center .items-center .bg-theme-button .text-theme-button-text .font-semibold .border-transparent .rounded .transition;
+}
+
+.button-lg {
+  @apply .base-button .mx-auto .py-5 .px-8;
+  max-height: 3.63rem;
+}
+
+.pager-button {
+  @apply .base-button .py-3 .px-4;
+}
+
+.block-pager-button {
+  @apply .py-4 .px-5 .bg-transparent .bg-blue-darker .rounded-md .text-white .font-normal .text-xs .transition;
+}
+
+.button-lg:enabled:hover,
+.pager-button:enabled:hover,
+.block-pager-button:enabled:hover {
+  @apply .bg-blue .text-white .hover-button-shadow-definition .cursor-pointer;
+}
+
+
+/* Menu Buttons */
+
+.menu-button {
+  /*TODO: .mt-2px */
+  @apply .flex .items-center .p-4 .border-b-2 .border-transparent .text-theme-text-secondary .transition;
+}
+
+.menu-button:hover {
+  @apply .border-red;
+}
+
+/* Dropdown Buttons */
+
+.dropdown-button {
+  @apply .flex .items-center .p-4 .text-theme-text-secondary .transition .cursor-pointer;
+}
+
+.dropdown-button:hover {
+  color: #1461ff;
+}

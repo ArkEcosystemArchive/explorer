@@ -2,7 +2,7 @@
   <main
     :class="[
       nightMode ? 'theme-dark' : 'theme-light',
-      'bg-theme-page-background text-theme-text-content min-h-screen font-sans xl:pt-8'
+      'bg-theme-page-background text-theme-text-content min-h-screen font-sans xl:pt-8',
     ]"
   >
     <AppHeader />
@@ -16,11 +16,15 @@
 <script type="text/ecmascript-6">
 import AppHeader from '@/components/header/AppHeader'
 import AppFooter from '@/components/AppFooter'
-import { BlockchainService, CryptoCompareService, DelegateService, NodeService } from '@/services'
+import {
+  BlockchainService,
+  CryptoCompareService,
+  DelegateService,
+  MigrationService,
+  NodeService
+} from '@/services'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
-
-import '@/styles/style.css'
 
 export default {
   components: { AppHeader, AppFooter },
@@ -32,17 +36,24 @@ export default {
 
   computed: {
     ...mapGetters('currency', { currencyName: 'name' }),
-    ...mapGetters('ui', ['language', 'locale', 'nightMode']),
-    ...mapGetters('network', ['token'])
+    ...mapGetters('delegates', ['stateHasDelegates']),
+    ...mapGetters('network', ['token']),
+    ...mapGetters('ui', ['language', 'locale', 'nightMode'])
   },
 
   async created () {
-    const network = require(`../networks/${process.env.EXPLORER_CONFIG}`)
+    MigrationService.executeMigrations()
 
-    this.$store.dispatch(
-      'ui/setNightMode',
-      localStorage.getItem('nightMode') || ((network.alias === 'Development'))
-    )
+    const network = require(`../networks/${process.env.VUE_APP_EXPLORER_CONFIG}`)
+
+    const nightMode = localStorage.getItem('nightMode')
+
+    let nightModeBoolean = nightMode == 'true' ? true : false;
+    if (nightMode === null) { // Only on first time
+      nightModeBoolean = (network.alias === 'Development')
+    }
+
+    this.$store.dispatch('ui/setNightMode', nightModeBoolean)
 
     this.$store.dispatch('network/setDefaults', network.defaults)
 
@@ -72,22 +83,17 @@ export default {
 
     this.$store.dispatch(
       'ui/setLanguage',
-      localStorage.getItem('language') || 'en-gb'
+      localStorage.getItem('language') || 'en-GB'
     )
 
     this.$store.dispatch(
       'ui/setLocale',
-      localStorage.getItem('locale') || navigator.language || 'en-gb'
+      localStorage.getItem('locale') || navigator.language || 'en-GB'
     )
 
     this.$store.dispatch(
-      'ui/setPriceChart',
-      localStorage.getItem('priceChart') || network.defaults.priceChart
-    )
-
-    this.$store.dispatch(
-      'ui/setPriceChartPeriod',
-      localStorage.getItem('priceChartPeriod') || network.defaults.priceChartPeriod
+      'ui/setPriceChartOptions',
+      JSON.parse(localStorage.getItem('priceChartOptions')) || network.defaults.priceChartOptions
     )
 
     this.updateI18n()
@@ -129,8 +135,19 @@ export default {
     },
 
     async updateDelegates () {
-      const delegates = await DelegateService.all()
-      this.$store.dispatch('delegates/setDelegates', delegates)
+      const fetchedAt = localStorage.getItem('delegatesFetchedAt')
+
+      if (!this.stateHasDelegates || !fetchedAt || this.updateRequired(fetchedAt)) {
+        const delegates = await DelegateService.all()
+        this.$store.dispatch('delegates/setDelegates', {
+          delegates,
+          timestamp: Math.floor(Date.now() / 1000)
+        })
+      }
+    },
+
+    updateRequired (timestamp) {
+      return timestamp < moment().subtract(2, 'minute').unix()
     },
 
     updateI18n () {

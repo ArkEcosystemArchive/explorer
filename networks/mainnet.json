@@ -1,6 +1,6 @@
 {
   "title": "Ark Explorer",
-  "server": "https://explorer.ark.io/api/v2",
+  "server": "https://explorer.ark.io/api",
   "alias": "Main",
   "activeDelegates": 51,
   "rewardOffset": 75600,
@@ -50,7 +50,10 @@
       "name": "USD",
       "symbol": "$"
     },
-    "priceChart": true,
-    "priceChartPeriod": "day"
+    "priceChartOptions": {
+      "enabled": true,
+      "period": "day",
+      "type": "price"
+    }
   }
 }
