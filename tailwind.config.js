@@ -73,6 +73,7 @@ module.exports = {
       "status-forging": "#40a130",
       "status-not-forging": "#e23a3e",
       "status-missed-block": "#f5bd5c",
+      "status-became-active": "#037cff",
       // END CUSTOM ADDED
 
       black: "#172130",
