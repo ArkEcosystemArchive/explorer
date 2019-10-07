@@ -22,17 +22,17 @@ class ForgingService {
     }
 
     switch (roundDelta) {
-      // the delegate is either still waiting for their slot or has missed it
+      // the delegate is either still waiting for their turn to forge or has failed to forge
       case 1: {
         return ForgingStatus.Forging;
       }
-      // the delegate has missed their slot in the previous round and is now
-      // either still waiting for their slot or has missed their slot
+      // the delegate has failed to forge in the previous round and is now
+      // either still waiting for their turn or has failed to forge again
       case 2: {
         return ForgingStatus.Missing;
       }
-      // the delegate has missed their slot in at least the previous two rounds
-      // and is now either still waiting for their slot or has missed again
+      // the delegate has failed to forge in at least the previous two rounds and
+      // is now either still waiting for their turn or has failed to forge again
       default: {
         return ForgingStatus.NotForging;
       }
