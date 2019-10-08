@@ -138,6 +138,7 @@ export default class TableDelegates extends Vue {
       1: this.$i18n.t("PAGES.DELEGATE_MONITOR.STATUS.MISSING"),
       2: this.$i18n.t("PAGES.DELEGATE_MONITOR.STATUS.NOT_FORGING"),
       3: this.$i18n.t("PAGES.DELEGATE_MONITOR.STATUS.NEVER_FORGED"),
+      4: this.$i18n.t("PAGES.DELEGATE_MONITOR.STATUS.BECAME_ACTIVE"),
     }[row.forgingStatus];
 
     const lastBlock = row.blocks.last;
@@ -159,6 +160,7 @@ export default class TableDelegates extends Vue {
       1: "missed-block",
       2: "not-forging",
       3: "not-forging", // never-forged
+      4: "became-active",
     }[row.forgingStatus];
   }
 

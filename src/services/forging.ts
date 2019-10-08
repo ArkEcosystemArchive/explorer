@@ -1,52 +1,42 @@
 import store from "@/store";
-import { IDelegate } from "../interfaces";
-
-const ForgeStatus: { [key: string]: number } = Object.freeze({
-  FORGING: 0,
-  MISSING: 1,
-  NOT_FORGING: 2,
-  NEVER_FORGED: 3,
-});
+import { IDelegate, IRoundDelegate } from "../interfaces";
+import { ForgingStatus } from "../enums";
+import { roundFromHeight } from "@/utils";
 
 class ForgingService {
-  public status(delegate: IDelegate, height: number): number {
-    let forgingStatus: number;
-
+  public status(delegate: IDelegate, height: number, previousDelegates: IRoundDelegate[]): ForgingStatus {
     if (delegate.blocks.last === undefined) {
-      forgingStatus = ForgeStatus.NEVER_FORGED;
-    } else {
-      const networkRound = this.round(height);
-      const lastBlockRound = this.round(delegate.blocks.last.height);
-      const roundDelta = networkRound - lastBlockRound;
+      return ForgingStatus.NeverForged;
+    }
 
-      switch (roundDelta) {
-        case 0:
-        case 1: {
-          forgingStatus = ForgeStatus.FORGING;
-          break;
-        }
-        case 2: {
-          forgingStatus = ForgeStatus.MISSING;
-          break;
-        }
-        default: {
-          forgingStatus = ForgeStatus.NOT_FORGING;
-          break;
-        }
+    const networkRound = roundFromHeight(height);
+    const lastBlockRound = roundFromHeight(delegate.blocks.last.height);
+    const roundDelta = networkRound - lastBlockRound;
+
+    if (!roundDelta) {
+      return ForgingStatus.Forging;
+    }
+
+    if (!previousDelegates.find(el => el.publicKey === delegate.publicKey)) {
+      return ForgingStatus.BecameActive;
+    }
+
+    switch (roundDelta) {
+      // the delegate is either still waiting for their turn to forge or has failed to forge
+      case 1: {
+        return ForgingStatus.Forging;
+      }
+      // the delegate has failed to forge in the previous round and is now
+      // either still waiting for their turn or has failed to forge again
+      case 2: {
+        return ForgingStatus.Missing;
+      }
+      // the delegate has failed to forge in at least the previous two rounds and
+      // is now either still waiting for their turn or has failed to forge again
+      default: {
+        return ForgingStatus.NotForging;
       }
     }
-
-    return forgingStatus;
-  }
-
-  public round(height: number): number {
-    if (isNaN(height)) {
-      return 0;
-    }
-
-    const activeDelegates: number = store.getters["network/activeDelegates"];
-
-    return Math.floor(height / activeDelegates) + (height % activeDelegates > 0 ? 1 : 0);
   }
 
   public totals(delegates: IDelegate[]): object {
@@ -54,6 +44,7 @@ class ForgingService {
     let missedBlock = 0;
     let notForging = 0;
     let neverForged = 0;
+    let becameActive = 0;
 
     const height = store.getters["network/height"];
     const activeDelegates = store.getters["network/activeDelegates"];
@@ -62,20 +53,24 @@ class ForgingService {
 
     delegates.forEach(delegate => {
       switch (delegate.forgingStatus) {
-        case ForgeStatus.FORGING: {
+        case ForgingStatus.Forging: {
           forging++;
           break;
         }
-        case ForgeStatus.MISSING: {
+        case ForgingStatus.Missing: {
           missedBlock++;
           break;
         }
-        case ForgeStatus.NOT_FORGING: {
+        case ForgingStatus.NotForging: {
           notForging++;
           break;
         }
-        case ForgeStatus.NEVER_FORGED: {
+        case ForgingStatus.NeverForged: {
           neverForged++;
+          break;
+        }
+        case ForgingStatus.BecameActive: {
+          becameActive++;
           break;
         }
         default: {
@@ -89,6 +84,7 @@ class ForgingService {
       missedBlock,
       notForging,
       neverForged,
+      becameActive,
       remainingBlocks,
     };
   }

@@ -1,4 +1,5 @@
-import { ApiService, ForgingService, WalletService } from "@/services";
+import { ApiService, ForgingService, WalletService, RoundService } from "@/services";
+import { roundFromHeight } from "@/utils";
 import store from "@/store";
 import { IApiDelegateWrapper, IApiDelegatesWrapper, IApiDelegateVotersWrapper, IDelegate } from "../interfaces";
 
@@ -64,6 +65,7 @@ class DelegateService {
   public async active(): Promise<IDelegate[]> {
     const activeDelegates = store.getters["network/activeDelegates"];
     const height = store.getters["network/height"];
+    const previousDelegates = await RoundService.delegates(roundFromHeight(height) - 1);
 
     const response = (await ApiService.get("delegates", {
       params: {
@@ -72,7 +74,7 @@ class DelegateService {
     })) as IApiDelegatesWrapper;
 
     return response.data.map(delegate => {
-      delegate.forgingStatus = ForgingService.status(delegate, height);
+      delegate.forgingStatus = ForgingService.status(delegate, height, previousDelegates);
 
       return delegate;
     });
