@@ -20,13 +20,13 @@
     <div
       class="w-1/2 lg:w-1/4 flex items-center px-6 my-6 lg:border-r border-theme-border-secondary flex-col sm:flex-row text-center sm:text-left"
     >
-      <div class="Meter mb-4 sm:mb-0 text-status-missed-block">
-        <ArkMeter :percentage="percentage(totals.missedBlock)" />
-        <img class="MeterIcon" src="@/assets/images/icons/missed-block.svg" />
+      <div class="Meter mb-4 sm:mb-0 text-status-missed-round">
+        <ArkMeter :percentage="percentage(totals.missedRound)" />
+        <img class="MeterIcon" src="@/assets/images/icons/missed-round.svg" />
       </div>
       <div class="p-0 sm:pl-4">
         <div class="text-3xl semibold">
-          {{ totals.missedBlock }}
+          {{ totals.missedRound }}
         </div>
         <div class="text-grey">
           {{ $t("PAGES.DELEGATE_MONITOR.STATS.MISSED") }}

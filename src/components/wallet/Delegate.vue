@@ -98,7 +98,7 @@ export default class WalletDelegate extends Vue {
     if (this.delegate.rank && this.delegate.rank <= activeThreshold) {
       return { text: this.$t("WALLET.DELEGATE.STATUS.ACTIVE"), class: "text-status-forging" };
     }
-    return { text: this.$t("WALLET.DELEGATE.STATUS.STANDBY"), class: "text-status-missed-block" };
+    return { text: this.$t("WALLET.DELEGATE.STATUS.STANDBY"), class: "text-status-missed-round" };
   }
 }
 </script>

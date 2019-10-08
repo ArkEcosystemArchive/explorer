@@ -160,7 +160,7 @@ export default class TableDelegates extends Vue {
     // @ts-ignore
     return {
       0: "forging",
-      1: "missed-block",
+      1: "missed-round",
       2: "not-forging",
       3: "not-forging", // never-forged
       4: "became-active",

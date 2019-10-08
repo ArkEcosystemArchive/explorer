@@ -143,12 +143,12 @@
 }
 
 /* Missing */
-.tooltip.tooltip-bg-missed-block .tooltip-inner {
-  @apply text-white bg-status-missed-block;
+.tooltip.tooltip-bg-missed-round .tooltip-inner {
+  @apply text-white bg-status-missed-round;
 }
 
-.tooltip.tooltip-bg-missed-block .tooltip-arrow {
-  @apply border-status-missed-block;
+.tooltip.tooltip-bg-missed-round .tooltip-arrow {
+  @apply border-status-missed-round;
 }
 
 /* Not Forging */
