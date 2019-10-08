@@ -1,5 +1,6 @@
 <template>
   <svg
+    v-if="name"
     v-bind="styles"
     :viewBox="viewBox"
     version="1.1"
@@ -16,7 +17,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class SvgIcon extends Vue {
-  @Prop({ required: true }) public name: string;
+  @Prop({ required: true }) public name: string | null;
   @Prop({ required: false, default: "0 0 25 25" }) public viewBox: [string] | string;
 
   get styles() {
