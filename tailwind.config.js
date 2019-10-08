@@ -74,6 +74,8 @@ module.exports = {
       "status-not-forging": "#e23a3e",
       "status-missed-block": "#f5bd5c",
       "status-became-active": "#037cff",
+
+      "link-color": "#3790ff",
       // END CUSTOM ADDED
 
       black: "#172130",
