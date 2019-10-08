@@ -4,7 +4,7 @@ describe("Transaction Details", () => {
   });
 
   it("should be possible to copy the transaction id", () => {
-    cy.get(".ClipboardButton img.block").as("btn");
+    cy.get(".ClipboardButton svg.block").as("btn");
     cy.get("@btn").should("not.have.class", "animated");
     cy.get("@btn")
       .click()
