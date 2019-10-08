@@ -55,7 +55,7 @@ describe("Services > Forging", () => {
     ]);
     expect(data).toEqual({
       forging: 1,
-      missedBlock: 1,
+      missedRound: 1,
       notForging: 1,
       neverForged: 1,
       becameActive: 1,
