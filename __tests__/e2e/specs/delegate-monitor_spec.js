@@ -121,7 +121,7 @@ describe("Delegate Monitor", () => {
       cy.get("@fields")
         .eq(1)
         .invoke("text")
-        .should("include", "Missed block");
+        .should("include", "Missed round");
       cy.get("@fields")
         .eq(2)
         .invoke("text")
