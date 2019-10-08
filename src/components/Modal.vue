@@ -7,7 +7,7 @@
           @click.stop
         >
           <button class="absolute top-0 right-0 p-5" @click="$emit('close')">
-            <img src="@/assets/images/icons/cross.svg" />
+            <SvgIcon name="cross" view-box="0 0 14 14" />
           </button>
 
           <slot />

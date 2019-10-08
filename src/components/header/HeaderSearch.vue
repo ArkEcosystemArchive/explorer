@@ -1,7 +1,7 @@
 <template>
   <div class="HeaderSearch px-5 sm:px-10">
     <button class="flex flex-none p-2" @click="$store.dispatch('ui/setHeaderType', null)">
-      <img src="@/assets/images/icons/cross.svg" />
+      <SvgIcon name="cross" view-box="0 0 14 14" />
     </button>
 
     <label for="search" class="hidden">

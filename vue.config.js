@@ -51,7 +51,7 @@ module.exports = {
       /*
        * The directory containing your SVG files.
        */
-      dir: "src/assets/images/icons/social",
+      dir: "src/assets/images/icons",
       /*
        * The reqex that will be used for the Webpack rule.
        */

@@ -6,7 +6,7 @@
         class="address-button ml-10 mr-6 p-3 rounded flex-none hover-button-shadow transition"
         @click="toggleModal()"
       >
-        <img class="block" src="@/assets/images/icons/qr.svg" />
+        <SvgIcon class="block" name="qr" view-box="0 0 29 29" />
       </button>
       <div v-if="view === 'public'" class="pr-8 flex-auto min-w-0">
         <div class="flex items-center text-grey mb-2">

@@ -26,7 +26,7 @@ export default class SvgIcon extends Vue {
   }
 
   get iconPath() {
-    let icon = require(`@/assets/images/icons/social/${this.name}.svg`);
+    let icon = require(`@/assets/images/icons/${this.name}.svg`);
     if (Object.prototype.hasOwnProperty.call(icon, "default")) {
       icon = icon.default;
     }

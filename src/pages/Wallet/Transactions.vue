@@ -5,7 +5,7 @@
     <section class="mb-5">
       <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
         <div class="relative mr-6 flex-none">
-          <img class="block" src="@/assets/images/icons/transaction.svg" />
+          <SvgIcon class="block" name="transaction" view-box="0 0 43 39" />
           <div
             class="absolute text-theme-transaction-icon text-2xl"
             style="top: 50%; left: 50%; transform: translate(-50%, -50%);"
