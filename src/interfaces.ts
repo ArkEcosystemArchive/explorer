@@ -1,3 +1,5 @@
+import { ForgingStatus } from "./enums";
+
 export interface IBlock {
   id: string;
   version: number;
@@ -43,7 +45,12 @@ export interface IDelegate {
     rewards: string;
     total: string;
   };
-  forgingStatus: number;
+  forgingStatus: ForgingStatus;
+}
+
+export interface IRoundDelegate {
+  publicKey: string;
+  votes: string;
 }
 
 export interface IMeta {
@@ -123,6 +130,10 @@ export interface IApiDelegateWrapper {
 export interface IApiDelegatesWrapper {
   data: IDelegate[];
   meta: IMeta;
+}
+
+export interface IApiRoundDelegatesWrapper {
+  data: IRoundDelegate[];
 }
 
 export interface IApiBlockchainWrapper {

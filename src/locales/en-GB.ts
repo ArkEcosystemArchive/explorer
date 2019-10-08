@@ -175,6 +175,7 @@ export default {
         MISSING: "Missing",
         NOT_FORGING: "Not forging",
         NEVER_FORGED: "Never forged",
+        BECAME_ACTIVE: "Became active",
       },
       VOTES: "Votes",
       TOOLTIP: "Last block @ {height} on",

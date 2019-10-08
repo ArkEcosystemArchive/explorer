@@ -20,3 +20,11 @@ export enum MarketplaceTransaction {
   BRIDGECHAIN_RESIGNATION = 4,
   BRIDGECHAIN_UPDATE = 5,
 }
+
+export enum ForgingStatus {
+  Forging,
+  Missing,
+  NotForging,
+  NeverForged,
+  BecameActive,
+}

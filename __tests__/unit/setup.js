@@ -1,6 +1,6 @@
-import Vue from "vue";
-import moment from "moment-timezone";
-import VTooltip from "v-tooltip";
+const Vue = require("vue");
+const moment = require("moment-timezone");
+const VTooltip = require("v-tooltip");
 
 Vue.config.productionTip = false;
 Vue.use(VTooltip, { defaultHtml: false });

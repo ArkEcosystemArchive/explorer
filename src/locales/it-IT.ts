@@ -142,6 +142,7 @@ export default {
         MISSING: "Sta mancando",
         NOT_FORGING: "Non sta forgiando",
         NEVER_FORGED: "Mai fiorgiato",
+        BECAME_ACTIVE: "Diventato attivo",
       },
       VOTES: "Voti",
       TOOLTIP: "Ultimo blocco @ {height}",

@@ -142,6 +142,7 @@ export default {
         MISSING: "Manquant",
         NOT_FORGING: "Ne forge(nt) pas",
         NEVER_FORGED: "Jamais forgé",
+        BECAME_ACTIVE: "Devenu actif",
       },
       VOTES: "Votes",
       TOOLTIP: "Dernier bloc @ {height}",

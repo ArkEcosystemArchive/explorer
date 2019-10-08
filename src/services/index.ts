@@ -7,6 +7,7 @@ import ForgingService from "./forging";
 import MigrationService from "./migration";
 import NodeService from "./node";
 import SearchService from "./search";
+import RoundService from "./round";
 import TransactionService from "./transaction";
 import WalletService from "./wallet";
 
@@ -20,6 +21,7 @@ export {
   MigrationService,
   NodeService,
   SearchService,
+  RoundService,
   TransactionService,
   WalletService,
 };
