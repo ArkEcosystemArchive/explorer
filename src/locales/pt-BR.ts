@@ -133,7 +133,7 @@ export default {
       STATS: {
         FORGED: "Bloco forjado recentemente",
         IN_QUEUE: "Em espera para forjar",
-        MISSED: "Bloco perdido",
+        MISSED: "Volta perdido",
         NOT_FORGING: "Não está forjando",
       },
       STATUS: {

@@ -133,7 +133,7 @@ export default {
       STATS: {
         FORGED: "Niedawno wydobyło blok",
         IN_QUEUE: "W kolejce do wydobycia",
-        MISSED: "Przeoczyło blok",
+        MISSED: "Przeoczyło kolejka",
         NOT_FORGING: "Nie wydobywa",
       },
       STATUS: {

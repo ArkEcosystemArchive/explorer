@@ -166,7 +166,7 @@ export default {
       STATS: {
         FORGED: "Forged block recently",
         IN_QUEUE: "In queue for forging",
-        MISSED: "Missed block",
+        MISSED: "Missed round",
         NOT_FORGING: "Not forging",
       },
       STATUS: {
