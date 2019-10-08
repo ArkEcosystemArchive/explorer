@@ -212,6 +212,7 @@ export default {
     DEVELOPMENT: "Development",
     SUPPLY: "Supply",
     MARKET_CAP: "Market Cap",
+    TESTNET: "Testnet Local"
   },
 
   FOOTER: {
