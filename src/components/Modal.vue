@@ -6,7 +6,7 @@
           class="modal-container bg-theme-page-background text-theme-text-content rounded shadow-theme mx-auto relative p-10"
           @click.stop
         >
-          <button class="absolute top-0 right-0 p-5" @click="$emit('close')">
+          <button class="absolute top-0 right-0 p-5 text-theme-button-close" @click="$emit('close')">
             <SvgIcon name="cross" view-box="0 0 14 14" />
           </button>
 

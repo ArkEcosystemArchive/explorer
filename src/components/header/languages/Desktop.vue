@@ -4,7 +4,10 @@
       <img :src="getLanguageFlag(lang)" class="flag-image" />
     </button>
 
-    <button class="flex flex-none p-2 close-button" @click="$store.dispatch('ui/setHeaderType', null)">
+    <button
+      class="flex flex-none p-2 text-theme-button-close close-button"
+      @click="$store.dispatch('ui/setHeaderType', null)"
+    >
       <SvgIcon name="cross" view-box="0 0 14 14" />
     </button>
   </div>

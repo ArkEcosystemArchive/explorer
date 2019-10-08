@@ -35,16 +35,7 @@
               @click="selectOpen = !selectOpen"
             >
               <span class="mr-1">{{ $t(`TRANSACTION.TYPES.${type.toUpperCase()}`) }}</span>
-              <svg
-                :class="{ 'rotate-180': selectOpen }"
-                class="fill-current"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                width="16px"
-                height="16px"
-              >
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-              </svg>
+              <SvgIcon :class="{ 'rotate-180': selectOpen }" name="caret" view-box="0 0 16 16" />
             </span>
             <ul
               v-show="selectOpen"
