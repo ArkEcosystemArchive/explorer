@@ -1,7 +1,7 @@
 import { mount, createLocalVue, RouterLinkStub, Wrapper } from "@vue/test-utils";
 import StringsMixin from "@/mixins/strings";
 import store from "@/store";
-import merge from 'lodash/merge'
+import merge from "lodash/merge";
 
 import { LinkWallet } from "@/components/links";
 import SvgIcon from "@/components/SvgIcon";
@@ -21,16 +21,22 @@ describe("Compontents > Links > Wallet", () => {
   const delegates = [{ username: "TestDelegate", address: testDelegateAddress, publicKey: testDelegatePublicKey }];
 
   const mountComponent = config => {
-    return mount(LinkWallet, merge({
-      stubs: {
-        RouterLink: RouterLinkStub,
-        SvgIcon: "<svg></svg>",
-      },
-      i18n,
-      localVue,
-      mixins: [StringsMixin],
-      store,
-    }, config))
+    return mount(
+      LinkWallet,
+      merge(
+        {
+          stubs: {
+            RouterLink: RouterLinkStub,
+            SvgIcon: "<svg></svg>",
+          },
+          i18n,
+          localVue,
+          mixins: [StringsMixin],
+          store,
+        },
+        config,
+      ),
+    );
   };
 
   it("should display a full link to a wallet", () => {
