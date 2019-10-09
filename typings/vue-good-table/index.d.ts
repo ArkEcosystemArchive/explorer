@@ -1,3 +1,1 @@
-declare module "vue-good-table" {
- // TODO
-}
+declare module "vue-good-table";
