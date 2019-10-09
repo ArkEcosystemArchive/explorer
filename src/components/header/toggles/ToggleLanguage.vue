@@ -14,18 +14,20 @@
   </button>
 </template>
 
-<script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import { mapGetters } from "vuex";
 
-export default {
-  name: 'ToggleLanguage',
-
+@Component({
   computed: {
-    ...mapGetters('ui', ['headerType']),
+    ...mapGetters("ui", ["headerType"]),
+  },
+})
+export default class ToggleLanguage extends Vue {
+  private headerType: string;
 
-    isLanguagesMenu () {
-      return this.headerType === 'languages'
-    }
+  get isLanguagesMenu() {
+    return this.headerType === "languages";
   }
 }
 </script>
