@@ -10,7 +10,7 @@ export default class TableWrapper extends Vue {
   @Prop({ required: false, default: 10 }) public perPage: number;
   @Prop({ required: false, default: () => [10, 20, 30, 40, 50] }) public perPageDropdown: number[];
   @Prop({ required: false, default: false }) public isRemote: boolean;
-  @Prop({ required: false, default: {} }) public sortQuery: object;
+  @Prop({ required: false, default: () => ({}) }) public sortQuery: object;
   @Prop({ required: false, default: i18n.t("COMMON.NO_RESULTS") }) public noDataMessage: string;
 
   public render(createElement: CreateElement): VNode {
