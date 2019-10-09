@@ -16,7 +16,6 @@ interface QRiousOptions {
   value?: string
 }
 
-
 declare module "qrious" {
   export = QRious;
 }

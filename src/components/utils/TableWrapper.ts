@@ -1,49 +1,20 @@
+import { Component, Prop, Vue } from "vue-property-decorator";
 import { VueGoodTable } from "vue-good-table";
+import { CreateElement, VNode } from "vue";
 import i18n from "@/i18n";
 
-export default {
-  name: "TableWrapper",
+@Component
+export default class TableWrapper extends Vue {
+  @Prop({ required: false, default: 1 }) public currentPage: number;
+  @Prop({ required: false, default: false }) public hasPagination: boolean;
+  @Prop({ required: false, default: 10 }) public perPage: number;
+  @Prop({ required: false, default: () => [10, 20, 30, 40, 50] }) public perPageDropdown: number[];
+  @Prop({ required: false, default: false }) public isRemote: boolean;
+  @Prop({ required: false, default: {} }) public sortQuery: object;
+  @Prop({ required: false, default: i18n.t("COMMON.NO_RESULTS") }) public noDataMessage: string;
 
-  props: {
-    currentPage: {
-      type: Number,
-      required: false,
-      default: 1,
-    },
-    hasPagination: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    perPage: {
-      type: Number,
-      required: false,
-      default: 10,
-    },
-    perPageDropdown: {
-      type: Array,
-      required: false,
-      default: () => [10, 20, 30, 40, 50],
-    },
-    isRemote: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    sortQuery: {
-      type: Object,
-      required: false,
-      default: () => ({}),
-    },
-    noDataMessage: {
-      type: String,
-      required: false,
-      default: i18n.t("COMMON.NO_RESULTS"),
-    },
-  },
-
-  render(h) {
-    return h(
+  public render(createElement: CreateElement): VNode {
+    return createElement(
       VueGoodTable,
       {
         props: {
@@ -68,21 +39,21 @@ export default {
         },
         scopedSlots: {
           "table-row": table =>
-            this.$scopedSlots.default({
+            this.$scopedSlots.default!({
               ...table,
             }),
         },
         on: this.$listeners,
       },
       [
-        h(
+        createElement(
           "div",
           {
             slot: "emptystate",
             class: "flex justify-center font-semibold",
           },
           [
-            h(
+            createElement(
               "span",
               {
                 class: "text-theme-page-text-light",
@@ -93,5 +64,5 @@ export default {
         ),
       ],
     );
-  },
-};
+  }
+}
