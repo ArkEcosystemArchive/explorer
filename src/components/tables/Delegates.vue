@@ -24,7 +24,12 @@
 
         <div v-else-if="data.column.field === 'forgingStatus'" class="text-0">
           <button v-tooltip="statusTooltip(data.row)" role="img" :aria-label="tooltipContent(data.row)">
-            <img class="mx-auto" width="19px" :src="require(`@/assets/images/icons/${status(data.row)}.svg`)" />
+            <SvgIcon
+              :class="`text-status-${status(data.row)}`"
+              class="mx-auto"
+              :name="status(data.row)"
+              view-box="0 0 19 17"
+            />
           </button>
         </div>
 

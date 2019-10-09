@@ -2,7 +2,7 @@ describe("Block Details", () => {
   it("should be possible to copy the block id", () => {
     cy.visit("/block/3487084709104787070");
 
-    cy.get(".ClipboardButton img.block").as("btn");
+    cy.get(".ClipboardButton svg.block").as("btn");
     cy.get("@btn").should("not.have.class", "animated");
     cy.get("@btn")
       .click()

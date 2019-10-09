@@ -22,16 +22,7 @@
             @click="toggleDropdown"
           >
             {{ currencyName }} {{ $t(`MARKET_CHART.${priceChartOptions.type.toUpperCase()}`) }}
-            <svg
-              :class="{ 'rotate-180': isOpen }"
-              xmlns="http://www.w3.org/2000/svg"
-              class="fill-current ml-2"
-              viewBox="0 0 20 20"
-              width="16px"
-              height="16px"
-            >
-              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-            </svg>
+            <SvgIcon :class="{ 'rotate-180': isOpen }" class="ml-2" name="caret" view-box="0 0 16 16" />
           </button>
 
           <ul
