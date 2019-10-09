@@ -53,10 +53,10 @@
           <div class="flex items-center justify-end whitespace-no-wrap">
             <div
               v-if="data.row.confirmations <= activeDelegates"
-              class="flex items-center justify-end whitespace-no-wrap"
+              class="flex items-center justify-end whitespace-no-wrap text-green"
             >
-              <span class="text-green inline-block mr-2">{{ data.row.confirmations }}</span>
-              <img class="icon flex-none" src="@/assets/images/icons/clock.svg" />
+              <span class="inline-block mr-2">{{ data.row.confirmations }}</span>
+              <SvgIcon class="icon flex-none" name="became-active" view-box="0 0 16 16" />
             </div>
             <div v-else>
               <div v-tooltip="data.row.confirmations + ' ' + $t('COMMON.CONFIRMATIONS')">

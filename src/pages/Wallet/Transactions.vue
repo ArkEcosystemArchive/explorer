@@ -5,7 +5,7 @@
     <section class="mb-5">
       <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
         <div class="relative mr-6 flex-none">
-          <img class="block" src="@/assets/images/icons/transaction.svg" />
+          <SvgIcon class="block" name="transaction" view-box="0 0 43 39" />
           <div
             class="absolute text-theme-transaction-icon text-2xl"
             style="top: 50%; left: 50%; transform: translate(-50%, -50%);"
@@ -35,16 +35,7 @@
               @click="selectOpen = !selectOpen"
             >
               <span class="mr-1">{{ $t(`TRANSACTION.TYPES.${type.toUpperCase()}`) }}</span>
-              <svg
-                :class="{ 'rotate-180': selectOpen }"
-                class="fill-current"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                width="16px"
-                height="16px"
-              >
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-              </svg>
+              <SvgIcon :class="{ 'rotate-180': selectOpen }" name="caret" view-box="0 0 16 16" />
             </span>
             <ul
               v-show="selectOpen"

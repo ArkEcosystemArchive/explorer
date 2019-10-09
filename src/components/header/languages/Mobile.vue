@@ -9,7 +9,7 @@
       @click="setLanguage(lang)"
     >
       <a href="#" class="cursor-pointer py-3 px-3 w-20 flex-none">
-        <img :src="getLanguageFlag(lang)" class="flag-image" />
+        <SvgIcon class="flag-image" :name="`flags/${lang}`" view-box="0 0 20 20" />
       </a>
     </li>
   </ul>
@@ -42,15 +42,6 @@ export default class HeaderLanguagesMobile extends Vue {
     moment.locale(language);
 
     this.$store.dispatch("ui/setHeaderType", null);
-  }
-
-  private getLanguageFlag(language: string) {
-    try {
-      return require(`@/assets/images/flags/${language}.svg`);
-    } catch (e) {
-      // tslint:disable-next-line:no-console
-      console.log(e);
-    }
   }
 }
 </script>

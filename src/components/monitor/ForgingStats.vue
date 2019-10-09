@@ -5,7 +5,7 @@
     >
       <div class="Meter mb-4 sm:mb-0 text-status-forging">
         <ArkMeter :percentage="percentage(totals.forging)" />
-        <img class="MeterIcon" src="@/assets/images/icons/forging.svg" />
+        <SvgIcon class="MeterIcon" name="forging" view-box="0 0 19 17" />
       </div>
       <div class="p-0 sm:pl-4">
         <div class="text-3xl semibold">
@@ -22,7 +22,7 @@
     >
       <div class="Meter mb-4 sm:mb-0 text-status-missed-round">
         <ArkMeter :percentage="percentage(totals.missedRound)" />
-        <img class="MeterIcon" src="@/assets/images/icons/missed-round.svg" />
+        <SvgIcon class="MeterIcon" name="missed-round" view-box="0 0 19 17" />
       </div>
       <div class="p-0 sm:pl-4">
         <div class="text-3xl semibold">
@@ -41,7 +41,7 @@
     >
       <div class="Meter mb-4 sm:mb-0 text-status-not-forging">
         <ArkMeter :percentage="percentage(totals.notForging + totals.neverForged)" />
-        <img class="MeterIcon" src="@/assets/images/icons/not-forging.svg" />
+        <SvgIcon class="MeterIcon" name="not-forging" view-box="0 0 19 17" />
       </div>
       <div class="p-0 sm:pl-4">
         <div class="text-3xl semibold">

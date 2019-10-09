@@ -1,11 +1,14 @@
 <template>
   <div class="language-menu w-full px-5 hidden xl:flex items-center justify-end">
     <button v-for="lang in languages" :key="lang" class="menu-button" @click="setLanguage(lang)">
-      <img :src="getLanguageFlag(lang)" class="flag-image" />
+      <SvgIcon class="flag-image" :name="`flags/${lang}`" view-box="0 0 20 20" />
     </button>
 
-    <button class="flex flex-none p-2 close-button" @click="$store.dispatch('ui/setHeaderType', null)">
-      <img src="@/assets/images/icons/cross.svg" />
+    <button
+      class="flex flex-none p-2 text-theme-button-close close-button"
+      @click="$store.dispatch('ui/setHeaderType', null)"
+    >
+      <SvgIcon name="cross" view-box="0 0 14 14" />
     </button>
   </div>
 </template>
@@ -36,16 +39,6 @@ export default class HeaderLanguagesDesktop extends Vue {
     moment.locale(language);
 
     this.$store.dispatch("ui/setHeaderType", null);
-  }
-
-  private getLanguageFlag(language: string) {
-    // TODO: consider using flag plugin, for example `flag-icon-css`
-    try {
-      return require(`@/assets/images/flags/${language}.svg`);
-    } catch (e) {
-      // tslint:disable-next-line:no-console
-      console.log(e);
-    }
   }
 }
 </script>

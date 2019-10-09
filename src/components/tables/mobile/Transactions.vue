@@ -75,10 +75,10 @@
           <div class="flex items-center justify-end">
             <div
               v-if="transaction.confirmations <= activeDelegates"
-              class="flex items-center justify-end whitespace-no-wrap"
+              class="flex items-center justify-end whitespace-no-wrap text-green"
             >
-              <span class="text-green inline-block mr-2">{{ transaction.confirmations }}</span>
-              <img class="icon flex-none" src="@/assets/images/icons/clock.svg" />
+              <span class="inline-block mr-2">{{ transaction.confirmations }}</span>
+              <SvgIcon class="icon flex-none" name="became-active" view-box="0 0 16 16" />
             </div>
             <div v-else>
               {{ $t("TRANSACTION.WELL_CONFIRMED") }}

@@ -2,7 +2,7 @@ describe("Wallet", () => {
   it("should be possible to copy the wallet address", () => {
     cy.visit("wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs");
 
-    cy.get(".ClipboardButton img.block")
+    cy.get(".ClipboardButton svg.block")
       .first()
       .as("btn");
     cy.get("@btn").should("not.have.class", "animated");

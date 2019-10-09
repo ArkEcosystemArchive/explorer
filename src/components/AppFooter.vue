@@ -15,7 +15,7 @@
     </div>
     <div class="text-center">
       <a v-for="social in socialMediaData" :key="social.name" :href="social.url" target="_blank">
-        <SvgIcon class="m-1" :name="social.name" :view-box="social.viewBox" />
+        <SvgIcon class="m-1" :name="`social/${social.name}`" :view-box="social.viewBox" />
       </a>
     </div>
   </footer>

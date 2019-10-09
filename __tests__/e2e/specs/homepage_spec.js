@@ -258,9 +258,7 @@ describe("Homepage", () => {
     it("should contain flag images", () => {
       cy.get("#language-icon").click();
 
-      cy.get(".language-menu img.flag-image").each(($flag, index, $flags) => {
-        expect($flag.attr("src")).to.contain("img/");
-      });
+      cy.get(".language-menu .flag-image").should("have.length.greaterThan", 0);
     });
 
     it("should be possible to change language", () => {

@@ -1,11 +1,15 @@
-import { mount, createLocalVue, RouterLinkStub } from "@vue/test-utils";
+import { mount, createLocalVue, RouterLinkStub, Wrapper } from "@vue/test-utils";
 import StringsMixin from "@/mixins/strings";
 import store from "@/store";
+import merge from "lodash/merge";
 
 import { LinkWallet } from "@/components/links";
+import SvgIcon from "@/components/SvgIcon";
 import { useI18n } from "../../../__utils__/i18n";
 
 describe("Compontents > Links > Wallet", () => {
+  let wrapper: Wrapper<Vue>;
+
   const localVue = createLocalVue();
   const i18n = useI18n(localVue);
 
@@ -16,21 +20,33 @@ describe("Compontents > Links > Wallet", () => {
 
   const delegates = [{ username: "TestDelegate", address: testDelegateAddress, publicKey: testDelegatePublicKey }];
 
+  const mountComponent = config => {
+    return mount(
+      LinkWallet,
+      merge(
+        {
+          stubs: {
+            RouterLink: RouterLinkStub,
+            SvgIcon: "<svg></svg>",
+          },
+          i18n,
+          localVue,
+          mixins: [StringsMixin],
+          store,
+        },
+        config,
+      ),
+    );
+  };
+
   it("should display a full link to a wallet", () => {
-    const wrapper = mount(LinkWallet, {
+    wrapper = mountComponent({
       propsData: {
         address: testAddress,
         publicKey: testPublicKey,
         type: 0,
         trunc: false,
       },
-      stubs: {
-        RouterLink: RouterLinkStub,
-      },
-      i18n,
-      localVue,
-      mixins: [StringsMixin],
-      store,
     });
 
     expect(wrapper.contains("a")).toBe(true);
@@ -40,19 +56,12 @@ describe("Compontents > Links > Wallet", () => {
   });
 
   it("should display a truncated link to a wallet", () => {
-    const wrapper = mount(LinkWallet, {
+    wrapper = mountComponent({
       propsData: {
         address: testAddress,
         publicKey: testPublicKey,
         type: 0,
       },
-      stubs: {
-        RouterLink: RouterLinkStub,
-      },
-      i18n,
-      localVue,
-      mixins: [StringsMixin],
-      store,
     });
 
     expect(wrapper.contains("a")).toBe(true);
@@ -63,19 +72,12 @@ describe("Compontents > Links > Wallet", () => {
 
   it("should display the name of a known address", () => {
     store.dispatch("network/setKnownWallets", { AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv: "TestKnownWallet" });
-    const wrapper = mount(LinkWallet, {
+    wrapper = mountComponent({
       propsData: {
         address: testAddress,
         publicKey: testPublicKey,
         type: 0,
       },
-      stubs: {
-        RouterLink: RouterLinkStub,
-      },
-      i18n,
-      localVue,
-      mixins: [StringsMixin],
-      store,
     });
 
     expect(wrapper.contains("a")).toBe(true);
@@ -88,18 +90,11 @@ describe("Compontents > Links > Wallet", () => {
 
   it("should display the name of a delegate", done => {
     store.dispatch("delegates/setDelegates", { delegates });
-    const wrapper = mount(LinkWallet, {
+    wrapper = mountComponent({
       propsData: {
         address: testDelegateAddress,
         type: 0,
       },
-      stubs: {
-        RouterLink: RouterLinkStub,
-      },
-      i18n,
-      localVue,
-      mixins: [StringsMixin],
-      store,
     });
 
     // Delegate name is set after function call in mounted(), so we need to wait a little while
@@ -115,18 +110,11 @@ describe("Compontents > Links > Wallet", () => {
 
   it("should also find the delegate by public key", done => {
     store.dispatch("delegates/setDelegates", { delegates });
-    const wrapper = mount(LinkWallet, {
+    wrapper = mountComponent({
       propsData: {
         publicKey: testDelegatePublicKey,
         type: 0,
       },
-      stubs: {
-        RouterLink: RouterLinkStub,
-      },
-      i18n,
-      localVue,
-      mixins: [StringsMixin],
-      store,
     });
 
     // Delegate name is set after function call in mounted(), so we need to wait a little while
@@ -142,15 +130,8 @@ describe("Compontents > Links > Wallet", () => {
 
   describe("When given a transaction type > 0", () => {
     it("should display 2nd Signature Registration for type 1", () => {
-      const wrapper = mount(LinkWallet, {
+      wrapper = mountComponent({
         propsData: { type: 1 },
-        stubs: {
-          RouterLink: RouterLinkStub,
-        },
-        i18n,
-        localVue,
-        mixins: [StringsMixin],
-        store,
       });
 
       expect(wrapper.contains("a")).toBe(false);
@@ -158,15 +139,8 @@ describe("Compontents > Links > Wallet", () => {
     });
 
     it("should display Delegate Registration for type 2", () => {
-      const wrapper = mount(LinkWallet, {
+      wrapper = mountComponent({
         propsData: { type: 2 },
-        stubs: {
-          RouterLink: RouterLinkStub,
-        },
-        i18n,
-        localVue,
-        mixins: [StringsMixin],
-        store,
       });
 
       expect(wrapper.contains("a")).toBe(false);
@@ -176,20 +150,13 @@ describe("Compontents > Links > Wallet", () => {
     it("should display Vote for type 3", () => {
       store.dispatch("delegates/setDelegates", { delegates });
 
-      const wrapper = mount(LinkWallet, {
+      wrapper = mountComponent({
         propsData: {
           type: 3,
           asset: {
             votes: ["+testDelegatePublicKey"],
           },
         },
-        stubs: {
-          RouterLink: RouterLinkStub,
-        },
-        i18n,
-        localVue,
-        mixins: [StringsMixin],
-        store,
       });
 
       setTimeout(() => {
@@ -198,15 +165,8 @@ describe("Compontents > Links > Wallet", () => {
     });
 
     it("should display Multi Signature for type 4", () => {
-      const wrapper = mount(LinkWallet, {
+      wrapper = mountComponent({
         propsData: { type: 4 },
-        stubs: {
-          RouterLink: RouterLinkStub,
-        },
-        i18n,
-        localVue,
-        mixins: [StringsMixin],
-        store,
       });
 
       expect(wrapper.contains("a")).toBe(false);
@@ -214,63 +174,35 @@ describe("Compontents > Links > Wallet", () => {
     });
 
     it("should display IPFS for type 5", () => {
-      const wrapper = mount(LinkWallet, {
+      wrapper = mountComponent({
         propsData: { type: 5 },
-        stubs: {
-          RouterLink: RouterLinkStub,
-        },
-        i18n,
-        localVue,
-        mixins: [StringsMixin],
-        store,
       });
 
       expect(wrapper.contains("a")).toBe(false);
       expect(wrapper.text()).toEqual(expect.stringContaining("IPFS"));
     });
 
-    it("should display Multipayment for type 6", () => {
-      const wrapper = mount(LinkWallet, {
+    it("should display Timelock Transfer for type 6", () => {
+      wrapper = mountComponent({
         propsData: { type: 6 },
-        stubs: {
-          RouterLink: RouterLinkStub,
-        },
-        i18n,
-        localVue,
-        mixins: [StringsMixin],
-        store,
       });
 
       expect(wrapper.contains("a")).toBe(false);
       expect(wrapper.text()).toEqual(expect.stringContaining("Multipayment"));
     });
 
-    it("should display Delegate Resignation for type 7", () => {
-      const wrapper = mount(LinkWallet, {
+    it("should display Multi Payment for type 7", () => {
+      wrapper = mountComponent({
         propsData: { type: 7 },
-        stubs: {
-          RouterLink: RouterLinkStub,
-        },
-        i18n,
-        localVue,
-        mixins: [StringsMixin],
-        store,
       });
 
       expect(wrapper.contains("a")).toBe(false);
       expect(wrapper.text()).toEqual(expect.stringContaining("Delegate Resignation"));
     });
 
-    it("should display Timeelock for type 8", () => {
-      const wrapper = mount(LinkWallet, {
+    it("should display Delegate Resignation for type 8", () => {
+      wrapper = mountComponent({
         propsData: { type: 8 },
-        stubs: {
-          RouterLink: RouterLinkStub,
-        },
-        i18n,
-        localVue,
-        mixins: [StringsMixin],
-        store,
       });
 
       expect(wrapper.contains("a")).toBe(false);
