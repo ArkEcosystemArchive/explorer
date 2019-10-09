@@ -1,6 +1,6 @@
 <template>
   <div class="hidden lg:flex items-center">
-    <div class="mr-6 flex-none">
+    <div class="mr-6 flex-none text-blue">
       <SvgIcon class="block" name="group" view-box="0 0 47 38" />
     </div>
     <div>
