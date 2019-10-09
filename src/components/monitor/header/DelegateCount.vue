@@ -1,7 +1,7 @@
 <template>
   <div class="hidden lg:flex items-center">
     <div class="mr-6 flex-none">
-      <img class="block" src="@/assets/images/icons/group.svg" />
+      <SvgIcon class="block" name="group" view-box="0 0 47 38" />
     </div>
     <div>
       <div class="text-grey mb-2">
