@@ -33,7 +33,7 @@ import CryptoCompareService from "@/services/crypto-compare";
 })
 export default class MultiPaymentTransactions extends Vue {
   @Prop({ required: true }) public transaction: ITransaction;
-  @Prop({ required: false, default: -1 }) public page: number;
+  @Prop({ required: false, default: 0 }) public page: number;
   @Prop({ required: false, default: 25 }) public count: number;
 
   private currencySymbol: string;
@@ -80,8 +80,8 @@ export default class MultiPaymentTransactions extends Vue {
 
   private async prepareTransactions() {
     this.transactions =
-      this.page > -1
-        ? this.transaction.asset.payments.slice(this.page * this.count, (this.page + 1) * this.count)
+      this.page > 0
+        ? this.transaction.asset.payments.slice((this.page - 1) * this.count, this.page * this.count)
         : this.transaction.asset.payments;
     await this.updatePrices();
   }

@@ -79,7 +79,7 @@ export default class TransactionPage extends Vue {
   private networkSymbol: string;
 
   get showPagination() {
-    return this.meta && this.meta.pageCount > 1;
+    return this.meta && this.meta.pageCount >= 1;
   }
 
   public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
@@ -155,7 +155,7 @@ export default class TransactionPage extends Vue {
   private calculateMeta() {
     if (this.transaction && this.transaction.type === 6) {
       const transactions = this.transaction.asset.payments.length;
-      const pages = Math.ceil(transactions / 25) - 1;
+      const pages = Math.ceil(transactions / 25);
       this.meta = {
         count: 1,
         pageCount: pages,
