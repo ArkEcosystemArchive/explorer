@@ -29,7 +29,7 @@
         <div class="mr-4">
           {{ $t("COMMON.CONFIRMATIONS") }}
         </div>
-        <div>{{ confirmations }}</div>
+        <div>{{ readableNumber(confirmations) }}</div>
       </div>
 
       <div class="list-row-border-b">

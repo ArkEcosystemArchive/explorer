@@ -48,9 +48,9 @@ describe("Mixins > Misc", () => {
 
   describe("readableNumber", () => {
     it("should properly format the given data", () => {
-      expect(wrapper.vm.readableNumber(1)).toEqual("1.00");
-      expect(wrapper.vm.readableNumber(10)).toEqual("10.00");
-      expect(wrapper.vm.readableNumber(100)).toEqual("100.00");
+      expect(wrapper.vm.readableNumber(1)).toEqual("1");
+      expect(wrapper.vm.readableNumber(10)).toEqual("10");
+      expect(wrapper.vm.readableNumber(100)).toEqual("100");
       expect(wrapper.vm.readableNumber(1000, 2, true)).toEqual("1000.00");
       expect(wrapper.vm.readableNumber(1234.56789, 2, true)).toEqual("1234.57");
     });

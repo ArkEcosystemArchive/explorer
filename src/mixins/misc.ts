@@ -19,7 +19,7 @@ export default {
         : momentTime.fromNow();
     },
 
-    readableNumber(value: number, digits: number = 2, omitSeparator: boolean = false): string {
+    readableNumber(value: number, digits: number = 0, omitSeparator: boolean = false): string {
       if (omitSeparator) {
         return value.toFixed(digits);
       }

@@ -7,7 +7,7 @@
       <div
         class="hidden sm:flex items-center text-theme-text-tertiary text-2xs px-3 sm:px-8 xl:px-6 py-3 mb-5 md:mb-6 bg-stat-background rounded-md"
       >
-        <div class="pr-6">{{ $t("COMMON.HEIGHT") }}: {{ readableNumber(height, 0) }}</div>
+        <div class="pr-6">{{ $t("COMMON.HEIGHT") }}: {{ readableNumber(height) }}</div>
         <div class="pr-6">{{ $t("HEADER.NETWORK") }}: {{ $t(`HEADER.${alias.toUpperCase()}`) }}</div>
         <div :class="{ 'pr-6': isMainWithCurrency }">
           {{ $t("HEADER.SUPPLY") }}: <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }}</span>
@@ -22,7 +22,7 @@
     >
       <div class="mr-2">
         <span>{{ $t("COMMON.HEIGHT") }}:</span>
-        <span class="block md:inline-block">{{ readableNumber(height, 0) }}</span>
+        <span class="block md:inline-block">{{ readableNumber(height) }}</span>
       </div>
       <div class="mr-2">
         <span>{{ networkToken() }}/{{ name }}:</span>
