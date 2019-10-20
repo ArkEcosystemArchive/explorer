@@ -13,7 +13,7 @@
           {{ $t("COMMON.CONFIRMATIONS") }}
         </div>
         <div v-if="confirmations >= 0">
-          {{ confirmations }}
+          {{ readableNumber(confirmations) }}
         </div>
       </div>
 
@@ -21,7 +21,7 @@
         <div class="mr-4">
           {{ $t("COMMON.HEIGHT") }}
         </div>
-        <div>{{ block.height }}</div>
+        <div>{{ readableNumber(block.height) }}</div>
       </div>
 
       <div class="list-row-border-b">

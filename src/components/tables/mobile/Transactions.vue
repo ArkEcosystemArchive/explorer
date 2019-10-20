@@ -51,11 +51,7 @@
             {{ $t("TRANSACTION.AMOUNT") }}
           </div>
           <div>
-            <TransactionAmount
-              :transaction="transaction"
-              :type="transaction.type"
-              :type-group="transaction.typeGroup"
-            />
+            <TransactionAmount :transaction="transaction" :type="transaction.type" :type-group="transaction.typeGroup" tooltip-placement="left" />
           </div>
         </div>
 
@@ -64,7 +60,7 @@
             {{ $t("TRANSACTION.FEE") }}
           </div>
           <div>
-            <TransactionAmount :transaction="transaction" :is-fee="true" :type-group="transaction.typeGroup" />
+            <TransactionAmount :transaction="transaction" :is-fee="true" :type-group="transaction.typeGroup" tooltip-placement="left" />
           </div>
         </div>
 
@@ -77,10 +73,17 @@
               v-if="transaction.confirmations <= activeDelegates"
               class="flex items-center justify-end whitespace-no-wrap text-green"
             >
-              <span class="inline-block mr-2">{{ transaction.confirmations }}</span>
+              <span class="inline-block mr-2">{{ readableNumber(transaction.confirmations) }}</span>
               <SvgIcon class="icon flex-none" name="became-active" view-box="0 0 16 16" />
             </div>
-            <div v-else>
+            <div
+              v-else
+              v-tooltip="{
+                content: readableNumber(transaction.confirmations) + ' ' + $t('COMMON.CONFIRMATIONS'),
+                trigger: 'hover click',
+                placement: 'left'
+              }"
+            >
               {{ $t("TRANSACTION.WELL_CONFIRMED") }}
             </div>
           </div>

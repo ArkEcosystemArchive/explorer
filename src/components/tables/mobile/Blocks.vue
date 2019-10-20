@@ -13,7 +13,7 @@
           <div class="mr-4">
             {{ $t("COMMON.HEIGHT") }}
           </div>
-          <div>{{ block.height }}</div>
+          <div>{{ readableNumber(block.height) }}</div>
         </div>
 
         <div class="list-row-border-b-no-wrap">

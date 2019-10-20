@@ -13,36 +13,41 @@
   </main>
 </template>
 
-<script type="text/ecmascript-6">
-import AppHeader from "@/components/header/AppHeader";
-import AppFooter from "@/components/AppFooter";
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import AppHeader from "@/components/header/AppHeader.vue";
+import AppFooter from "@/components/AppFooter.vue";
 import { BlockchainService, CryptoCompareService, DelegateService, MigrationService, NodeService } from "@/services";
 import { mapGetters } from "vuex";
 import moment from "moment";
 
-export default {
-  components: { AppHeader, AppFooter },
-
-  data: () => ({
-    currencyTimer: null,
-    networkTimer: null,
-  }),
-
+@Component({
   computed: {
     ...mapGetters("currency", { currencyName: "name" }),
     ...mapGetters("delegates", ["stateHasDelegates"]),
     ...mapGetters("network", ["token"]),
     ...mapGetters("ui", ["language", "locale", "nightMode"]),
   },
+  components: { AppHeader, AppFooter },
+})
+export default class App extends Vue {
+  public currencyTimer: NodeJS.Timeout;
+  public networkTimer: NodeJS.Timeout;
+  private currencyName: string;
+  private stateHasDelegates: boolean;
+  private token: string;
+  private language: string;
+  private locale: string;
+  private nightMode: boolean;
 
-  async created() {
+  public async created() {
     MigrationService.executeMigrations();
 
     const network = require(`../networks/${process.env.VUE_APP_EXPLORER_CONFIG}`);
 
     const nightMode = localStorage.getItem("nightMode");
 
-    let nightModeBoolean = nightMode == "true" ? true : false;
+    let nightModeBoolean = nightMode === "true" ? true : false;
     if (nightMode === null) {
       // Only on first time
       nightModeBoolean = network.alias === "Development";
@@ -80,9 +85,10 @@ export default {
 
     this.$store.dispatch("ui/setLocale", localStorage.getItem("locale") || navigator.language || "en-GB");
 
+    const storedPriceChartOptions = localStorage.getItem("priceChartOptions") || "";
     this.$store.dispatch(
       "ui/setPriceChartOptions",
-      JSON.parse(localStorage.getItem("priceChartOptions")) || network.defaults.priceChartOptions,
+      storedPriceChartOptions ? JSON.parse(storedPriceChartOptions) : network.defaults.priceChartOptions,
     );
 
     this.updateI18n();
@@ -91,83 +97,81 @@ export default {
     this.updateSupply();
     this.updateHeight();
     this.updateDelegates();
-  },
+  }
 
-  mounted() {
+  public mounted() {
     this.prepareComponent();
-  },
+  }
 
-  beforeDestroy() {
+  public beforeDestroy() {
     this.clearTimers();
-  },
+  }
 
-  methods: {
-    prepareComponent() {
-      this.initialiseTimers();
-    },
+  public prepareComponent() {
+    this.initialiseTimers();
+  }
 
-    async updateCurrencyRate() {
-      if (this.currencyName !== this.token) {
-        const rate = await CryptoCompareService.price(this.currencyName);
-        this.$store.dispatch("currency/setRate", rate);
-      }
-    },
+  public async updateCurrencyRate() {
+    if (this.currencyName !== this.token) {
+      const rate = await CryptoCompareService.price(this.currencyName);
+      this.$store.dispatch("currency/setRate", rate);
+    }
+  }
 
-    async updateSupply() {
-      const supply = await BlockchainService.supply();
-      this.$store.dispatch("network/setSupply", supply);
-    },
+  public async updateSupply() {
+    const supply = await BlockchainService.supply();
+    this.$store.dispatch("network/setSupply", supply);
+  }
 
-    async updateHeight() {
-      const height = await BlockchainService.height();
-      this.$store.dispatch("network/setHeight", height);
-    },
+  public async updateHeight() {
+    const height = await BlockchainService.height();
+    this.$store.dispatch("network/setHeight", height);
+  }
 
-    async updateDelegates() {
-      const fetchedAt = localStorage.getItem("delegatesFetchedAt");
+  public async updateDelegates() {
+    const fetchedAt: number = parseInt(localStorage.getItem("delegatesFetchedAt") || "0", 10);
 
-      if (!this.stateHasDelegates || !fetchedAt || this.updateRequired(fetchedAt)) {
-        const delegates = await DelegateService.all();
-        this.$store.dispatch("delegates/setDelegates", {
-          delegates,
-          timestamp: Math.floor(Date.now() / 1000),
-        });
-      }
-    },
+    if (!this.stateHasDelegates || !fetchedAt || this.updateRequired(fetchedAt)) {
+      const delegates = await DelegateService.all();
+      this.$store.dispatch("delegates/setDelegates", {
+        delegates,
+        timestamp: Math.floor(Date.now() / 1000),
+      });
+    }
+  }
 
-    updateRequired(timestamp) {
-      return (
-        timestamp <
-        moment()
-          .subtract(2, "minute")
-          .unix()
-      );
-    },
+  public updateRequired(timestamp: number): boolean {
+    return (
+      timestamp <
+      moment()
+        .subtract(2, "minute")
+        .unix()
+    );
+  }
 
-    updateI18n() {
-      this.$i18n.locale = this.language;
-    },
+  public updateI18n() {
+    this.$i18n.locale = this.language;
+  }
 
-    updateLocale() {
-      moment.locale(this.locale);
-    },
+  public updateLocale() {
+    moment.locale(this.locale);
+  }
 
-    initialiseTimers() {
-      this.currencyTimer = setInterval(() => {
-        this.updateCurrencyRate();
-      }, 5 * 60 * 1000);
+  public initialiseTimers() {
+    this.currencyTimer = setInterval(() => {
+      this.updateCurrencyRate();
+    }, 5 * 60 * 1000);
 
-      this.networkTimer = setInterval(() => {
-        this.updateSupply();
-        this.updateHeight();
-        this.updateDelegates();
-      }, 8 * 1000);
-    },
+    this.networkTimer = setInterval(() => {
+      this.updateSupply();
+      this.updateHeight();
+      this.updateDelegates();
+    }, 8 * 1000);
+  }
 
-    clearTimers() {
-      clearInterval(this.currencyTimer);
-      clearInterval(this.networkTimer);
-    },
-  },
-};
+  public clearTimers() {
+    clearInterval(this.currencyTimer);
+    clearInterval(this.networkTimer);
+  }
+}
 </script>

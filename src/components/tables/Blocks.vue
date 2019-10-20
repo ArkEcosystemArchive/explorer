@@ -14,7 +14,7 @@
 
         <div v-else-if="data.column.field === 'height'">
           <span>
-            {{ data.row.height }}
+            {{ readableNumber(data.row.height) }}
           </span>
         </div>
 

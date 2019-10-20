@@ -18,7 +18,7 @@
         </div>
 
         <div v-else-if="data.column.field === 'blocks.produced'">
-          {{ readableNumber(data.row.blocks.produced, 0) }}
+          {{ readableNumber(data.row.blocks.produced) }}
         </div>
 
         <div v-else-if="data.column.field === 'lastBlockHeight'">
