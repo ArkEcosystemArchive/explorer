@@ -13,167 +13,162 @@
   </main>
 </template>
 
-<script type="text/ecmascript-6">
-import AppHeader from '@/components/header/AppHeader'
-import AppFooter from '@/components/AppFooter'
-import {
-  BlockchainService,
-  CryptoCompareService,
-  DelegateService,
-  MigrationService,
-  NodeService
-} from '@/services'
-import { mapGetters } from 'vuex'
-import moment from 'moment'
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import AppHeader from "@/components/header/AppHeader.vue";
+import AppFooter from "@/components/AppFooter.vue";
+import { BlockchainService, CryptoCompareService, DelegateService, MigrationService, NodeService } from "@/services";
+import { mapGetters } from "vuex";
+import moment from "moment";
 
-export default {
-  components: { AppHeader, AppFooter },
-
-  data: () => ({
-    currencyTimer: null,
-    networkTimer: null
-  }),
-
+@Component({
   computed: {
-    ...mapGetters('currency', { currencyName: 'name' }),
-    ...mapGetters('delegates', ['stateHasDelegates']),
-    ...mapGetters('network', ['token']),
-    ...mapGetters('ui', ['language', 'locale', 'nightMode'])
+    ...mapGetters("currency", { currencyName: "name" }),
+    ...mapGetters("delegates", ["stateHasDelegates"]),
+    ...mapGetters("network", ["token"]),
+    ...mapGetters("ui", ["language", "locale", "nightMode"]),
   },
+  components: { AppHeader, AppFooter },
+})
+export default class App extends Vue {
+  public currencyTimer: NodeJS.Timeout;
+  public networkTimer: NodeJS.Timeout;
+  private currencyName: string;
+  private stateHasDelegates: boolean;
+  private token: string;
+  private language: string;
+  private locale: string;
+  private nightMode: boolean;
 
-  async created () {
-    MigrationService.executeMigrations()
+  public async created() {
+    MigrationService.executeMigrations();
 
-    const network = require(`../networks/${process.env.VUE_APP_EXPLORER_CONFIG}`)
+    const network = require(`../networks/${process.env.VUE_APP_EXPLORER_CONFIG}`);
 
-    const nightMode = localStorage.getItem('nightMode')
+    const nightMode = localStorage.getItem("nightMode");
 
-    let nightModeBoolean = nightMode == 'true' ? true : false;
-    if (nightMode === null) { // Only on first time
-      nightModeBoolean = (network.alias === 'Development')
+    let nightModeBoolean = nightMode === "true" ? true : false;
+    if (nightMode === null) {
+      // Only on first time
+      nightModeBoolean = network.alias === "Development";
     }
 
-    this.$store.dispatch('ui/setNightMode', nightModeBoolean)
+    this.$store.dispatch("ui/setNightMode", nightModeBoolean);
 
-    this.$store.dispatch('network/setDefaults', network.defaults)
+    this.$store.dispatch("network/setDefaults", network.defaults);
 
-    this.$store.dispatch('network/setServer', network.server)
-    this.$store.dispatch('network/setAlias', network.alias)
-    this.$store.dispatch('network/setActiveDelegates', network.activeDelegates)
-    this.$store.dispatch('network/setRewardOffset', network.rewardOffset)
-    this.$store.dispatch('network/setCurrencies', network.currencies)
-    this.$store.dispatch('network/setKnownWallets', network.knownWallets)
+    this.$store.dispatch("network/setServer", network.server);
+    this.$store.dispatch("network/setAlias", network.alias);
+    this.$store.dispatch("network/setActiveDelegates", network.activeDelegates);
+    this.$store.dispatch("network/setRewardOffset", network.rewardOffset);
+    this.$store.dispatch("network/setCurrencies", network.currencies);
+    this.$store.dispatch("network/setKnownWallets", network.knownWallets);
 
     if (network.defaults.currency) {
-      this.$store.dispatch(
-        'currency/setName',
-        localStorage.getItem('currencyName') || network.defaults.currency.name
-      )
+      this.$store.dispatch("currency/setName", localStorage.getItem("currencyName") || network.defaults.currency.name);
 
       this.$store.dispatch(
-        'currency/setSymbol',
-        localStorage.getItem('currencySymbol') || network.defaults.currency.symbol
-      )
+        "currency/setSymbol",
+        localStorage.getItem("currencySymbol") || network.defaults.currency.symbol,
+      );
     }
 
-    const response = await NodeService.config()
-    this.$store.dispatch('network/setToken', response.token)
-    this.$store.dispatch('network/setSymbol', response.symbol)
-    this.$store.dispatch('network/setNethash', response.nethash)
+    const response = await NodeService.config();
+    this.$store.dispatch("network/setToken", response.token);
+    this.$store.dispatch("network/setSymbol", response.symbol);
+    this.$store.dispatch("network/setNethash", response.nethash);
 
+    this.$store.dispatch("ui/setLanguage", localStorage.getItem("language") || "en-GB");
+
+    this.$store.dispatch("ui/setLocale", localStorage.getItem("locale") || navigator.language || "en-GB");
+
+    const storedPriceChartOptions = localStorage.getItem("priceChartOptions") || "";
     this.$store.dispatch(
-      'ui/setLanguage',
-      localStorage.getItem('language') || 'en-GB'
-    )
+      "ui/setPriceChartOptions",
+      storedPriceChartOptions ? JSON.parse(storedPriceChartOptions) : network.defaults.priceChartOptions,
+    );
 
-    this.$store.dispatch(
-      'ui/setLocale',
-      localStorage.getItem('locale') || navigator.language || 'en-GB'
-    )
+    this.updateI18n();
+    this.updateLocale();
+    this.updateCurrencyRate();
+    this.updateSupply();
+    this.updateHeight();
+    this.updateDelegates();
+  }
 
-    this.$store.dispatch(
-      'ui/setPriceChartOptions',
-      JSON.parse(localStorage.getItem('priceChartOptions')) || network.defaults.priceChartOptions
-    )
+  public mounted() {
+    this.prepareComponent();
+  }
 
-    this.updateI18n()
-    this.updateLocale()
-    this.updateCurrencyRate()
-    this.updateSupply()
-    this.updateHeight()
-    this.updateDelegates()
-  },
+  public beforeDestroy() {
+    this.clearTimers();
+  }
 
-  mounted () {
-    this.prepareComponent()
-  },
+  public prepareComponent() {
+    this.initialiseTimers();
+  }
 
-  beforeDestroy () {
-    this.clearTimers()
-  },
-
-  methods: {
-    prepareComponent () {
-      this.initialiseTimers()
-    },
-
-    async updateCurrencyRate () {
-      if (this.currencyName !== this.token) {
-        const rate = await CryptoCompareService.price(this.currencyName)
-        this.$store.dispatch('currency/setRate', rate)
-      }
-    },
-
-    async updateSupply () {
-      const supply = await BlockchainService.supply()
-      this.$store.dispatch('network/setSupply', supply)
-    },
-
-    async updateHeight () {
-      const height = await BlockchainService.height()
-      this.$store.dispatch('network/setHeight', height)
-    },
-
-    async updateDelegates () {
-      const fetchedAt = localStorage.getItem('delegatesFetchedAt')
-
-      if (!this.stateHasDelegates || !fetchedAt || this.updateRequired(fetchedAt)) {
-        const delegates = await DelegateService.all()
-        this.$store.dispatch('delegates/setDelegates', {
-          delegates,
-          timestamp: Math.floor(Date.now() / 1000)
-        })
-      }
-    },
-
-    updateRequired (timestamp) {
-      return timestamp < moment().subtract(2, 'minute').unix()
-    },
-
-    updateI18n () {
-      this.$i18n.locale = this.language
-    },
-
-    updateLocale () {
-      moment.locale(this.locale)
-    },
-
-    initialiseTimers () {
-      this.currencyTimer = setInterval(() => {
-        this.updateCurrencyRate()
-      }, 5 * 60 * 1000)
-
-      this.networkTimer = setInterval(() => {
-        this.updateSupply()
-        this.updateHeight()
-        this.updateDelegates()
-      }, 8 * 1000)
-    },
-
-    clearTimers () {
-      clearInterval(this.currencyTimer)
-      clearInterval(this.networkTimer)
+  public async updateCurrencyRate() {
+    if (this.currencyName !== this.token) {
+      const rate = await CryptoCompareService.price(this.currencyName);
+      this.$store.dispatch("currency/setRate", rate);
     }
+  }
+
+  public async updateSupply() {
+    const supply = await BlockchainService.supply();
+    this.$store.dispatch("network/setSupply", supply);
+  }
+
+  public async updateHeight() {
+    const height = await BlockchainService.height();
+    this.$store.dispatch("network/setHeight", height);
+  }
+
+  public async updateDelegates() {
+    const fetchedAt: number = parseInt(localStorage.getItem("delegatesFetchedAt") || "0", 10);
+
+    if (!this.stateHasDelegates || !fetchedAt || this.updateRequired(fetchedAt)) {
+      const delegates = await DelegateService.all();
+      this.$store.dispatch("delegates/setDelegates", {
+        delegates,
+        timestamp: Math.floor(Date.now() / 1000),
+      });
+    }
+  }
+
+  public updateRequired(timestamp: number): boolean {
+    return (
+      timestamp <
+      moment()
+        .subtract(2, "minute")
+        .unix()
+    );
+  }
+
+  public updateI18n() {
+    this.$i18n.locale = this.language;
+  }
+
+  public updateLocale() {
+    moment.locale(this.locale);
+  }
+
+  public initialiseTimers() {
+    this.currencyTimer = setInterval(() => {
+      this.updateCurrencyRate();
+    }, 5 * 60 * 1000);
+
+    this.networkTimer = setInterval(() => {
+      this.updateSupply();
+      this.updateHeight();
+      this.updateDelegates();
+    }, 8 * 1000);
+  }
+
+  public clearTimers() {
+    clearInterval(this.currencyTimer);
+    clearInterval(this.networkTimer);
   }
 }
 </script>
