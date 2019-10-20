@@ -5,7 +5,7 @@
       <span
         v-tooltip="{ content: $t('WALLET.DELEGATE.VOTER_THRESHOLD', { token: networkToken() }), placement: 'left' }"
         :class="voterCount ? 'mr-2' : ''"
-        >{{ readableNumber(voterCount, 0) }}</span
+        >{{ readableNumber(voterCount) }}</span
       >
       <RouterLink
         v-if="wallet.address && voterCount"

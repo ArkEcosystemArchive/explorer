@@ -50,11 +50,11 @@
               v-if="data.row.confirmations <= activeDelegates"
               class="flex items-center justify-end whitespace-no-wrap text-green"
             >
-              <span class="inline-block mr-2">{{ data.row.confirmations }}</span>
+              <span class="inline-block mr-2">{{ readableNumber(data.row.confirmations) }}</span>
               <SvgIcon class="icon flex-none" name="became-active" view-box="0 0 16 16" />
             </div>
             <div v-else>
-              <div v-tooltip="data.row.confirmations + ' ' + $t('COMMON.CONFIRMATIONS')">
+              <div v-tooltip="readableNumber(data.row.confirmations) + ' ' + $t('COMMON.CONFIRMATIONS')">
                 {{ $t("TRANSACTION.WELL_CONFIRMED") }}
               </div>
             </div>

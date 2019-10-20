@@ -1,5 +1,5 @@
 import { mount, createLocalVue } from "@vue/test-utils";
-import mixins from "@/mixins";
+import MiscMixin from "@/mixins/misc";
 
 import BlockDetails from "@/components/block/Details";
 import { useI18n } from "../../../__utils__/i18n";
@@ -41,7 +41,7 @@ describe("Components > Block > Details", () => {
       },
       i18n,
       localVue,
-      mixins,
+      mixins: [MiscMixin],
       store,
     });
 

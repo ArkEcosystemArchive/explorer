@@ -49,7 +49,7 @@
       <div>{{ $t("WALLET.DELEGATE.FORGED_BLOCKS") }}</div>
       <div v-if="delegate.blocks">
         <span>
-          {{ readableNumber(delegate.blocks.produced, 0) }}
+          {{ readableNumber(delegate.blocks.produced) }}
         </span>
         <RouterLink
           v-if="delegate.blocks.produced"

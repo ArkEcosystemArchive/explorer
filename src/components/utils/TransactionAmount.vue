@@ -3,7 +3,7 @@
     v-tooltip="{
       trigger: 'hover click',
       content: source && price ? readableCurrency(source, price) : '',
-      placement: 'top',
+      placement: tooltipPlacement,
     }"
     :class="
       !isFee
@@ -28,6 +28,7 @@ export default class TransactionAmount extends Vue {
   @Prop({ required: true }) public transaction: ITransaction;
   @Prop({ required: false, default: null }) public type: number;
   @Prop({ required: false, default: false }) public isFee: boolean;
+  @Prop({ required: false, default: "top" }) public tooltipPlacement: string;
 
   get source() {
     return this.isFee ? this.transaction.fee : this.transaction.amount;
