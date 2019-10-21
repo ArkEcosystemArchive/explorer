@@ -11,7 +11,7 @@
       <div class="sm:hidden">
         <TableTransactionsMobile :transactions="transactions" />
       </div>
-      <div class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
+      <div v-if="transactions && transactions.length === 25" class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
         <RouterLink :to="{ name: 'transactions', params: { page: 2 } }" tag="button" class="button-lg">
           {{ $t("PAGINATION.SHOW_MORE") }}
         </RouterLink>
@@ -28,6 +28,7 @@ import TransactionService from "@/services/transaction";
 @Component
 export default class LatestTransactions extends Vue {
   @Prop({ required: true }) public transactionType: number;
+  @Prop({ required: true }) public transactionGroup: number;
 
   private transactions: ITransaction[] | null = null;
 
@@ -59,7 +60,7 @@ export default class LatestTransactions extends Vue {
   }
 
   private async getTransactions() {
-    const { data } = await TransactionService.filterByType(1, this.transactionType);
+    const { data } = await TransactionService.filterByType(1, this.transactionType, this.transactionGroup);
 
     this.transactions = data.map((transaction: ITransaction) => ({ ...transaction, price: null }));
   }

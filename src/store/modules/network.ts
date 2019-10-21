@@ -9,6 +9,7 @@ const state: INetworkState = {
   server: null,
   nethash: null,
   alias: null,
+  addressPrefix: 23,
   activeDelegates: 51,
   rewardOffset: 51,
   token: null,
@@ -17,6 +18,8 @@ const state: INetworkState = {
   knownWallets: [],
   supply: 0,
   height: 0,
+  epoch: null,
+  blocktime: 0,
 };
 
 const actions: ActionTree<INetworkState, {}> = {
@@ -41,6 +44,12 @@ const actions: ActionTree<INetworkState, {}> = {
   setAlias: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_ALIAS,
+      value,
+    });
+  },
+  setAddressPrefix: ({ commit }, value) => {
+    commit({
+      type: types.SET_NETWORK_ADDRESS_PREFIX,
       value,
     });
   },
@@ -92,6 +101,18 @@ const actions: ActionTree<INetworkState, {}> = {
       value,
     });
   },
+  setEpoch: ({ commit }, value) => {
+    commit({
+      type: types.SET_NETWORK_EPOCH,
+      value,
+    });
+  },
+  setBlocktime: ({ commit }, value) => {
+    commit({
+      type: types.SET_NETWORK_BLOCKTIME,
+      value,
+    });
+  },
 };
 
 const mutations: MutationTree<INetworkState> = {
@@ -106,6 +127,9 @@ const mutations: MutationTree<INetworkState> = {
   },
   [types.SET_NETWORK_ALIAS](state, payload: IStorePayload) {
     state.alias = payload.value;
+  },
+  [types.SET_NETWORK_ADDRESS_PREFIX](state, payload: IStorePayload) {
+    state.addressPrefix = payload.value;
   },
   [types.SET_NETWORK_ACTIVE_DELEGATES](state, payload: IStorePayload) {
     state.activeDelegates = payload.value;
@@ -131,6 +155,12 @@ const mutations: MutationTree<INetworkState> = {
   [types.SET_NETWORK_HEIGHT](state, payload: IStorePayload) {
     state.height = payload.value;
   },
+  [types.SET_NETWORK_EPOCH](state, payload: IStorePayload) {
+    state.epoch = payload.value;
+  },
+  [types.SET_NETWORK_BLOCKTIME](state, payload: IStorePayload) {
+    state.blocktime = payload.value;
+  },
 };
 
 const getters: GetterTree<INetworkState, {}> = {
@@ -138,6 +168,7 @@ const getters: GetterTree<INetworkState, {}> = {
   server: state => state.server,
   nethash: state => state.nethash,
   alias: state => state.alias,
+  addressPrefix: state => state.addressPrefix,
   activeDelegates: state => state.activeDelegates,
   rewardOffset: state => state.rewardOffset,
   token: state => state.token,
@@ -146,6 +177,8 @@ const getters: GetterTree<INetworkState, {}> = {
   knownWallets: state => state.knownWallets,
   supply: state => state.supply,
   height: state => state.height,
+  epoch: state => state.epoch,
+  blocktime: state => state.blocktime,
 };
 
 export const network: Module<INetworkState, {}> = {

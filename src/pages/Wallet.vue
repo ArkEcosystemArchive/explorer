@@ -4,9 +4,10 @@
 
     <WalletDetails :wallet="wallet" />
 
-    <section v-show="isDelegate" :class="{ 'py-5 md:py-10': isDelegate }" class="page-section mb-5">
-      <div v-show="isDelegate" class="px-5 sm:px-10">
-        <WalletDelegate :wallet="wallet" />
+    <section v-show="isDelegate || wallet.vote" :class="{ 'py-5 md:py-10': isDelegate }" class="page-section mb-5">
+      <div class="px-5 sm:px-10">
+        <WalletDelegate v-if="isDelegate" :wallet="wallet" />
+        <WalletVote v-if="wallet.vote" :wallet="wallet" />
       </div>
     </section>
 
@@ -18,7 +19,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import { Route } from "vue-router";
 import { IWallet } from "@/interfaces";
-import { WalletDelegate, WalletDetails, WalletTransactions } from "@/components/wallet";
+import { WalletDelegate, WalletDetails, WalletTransactions, WalletVote } from "@/components/wallet";
 import WalletService from "@/services/wallet";
 
 Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
@@ -28,6 +29,7 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
     WalletDelegate,
     WalletDetails,
     WalletTransactions,
+    WalletVote,
   },
 })
 export default class WalletPage extends Vue {

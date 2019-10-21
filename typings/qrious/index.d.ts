@@ -1,9 +1,9 @@
 declare class QRious {
   constructor(options?: QRiousOptions);
-  toDataURL(mime?: string): string;
+  public toDataURL(mime?: string): string;
 }
 
-type CorrectionLevel = 'L' | 'M' | 'Q' | 'H';
+type CorrectionLevel = "L" | "M" | "Q" | "H";
 
 interface QRiousOptions {
   background?: string;

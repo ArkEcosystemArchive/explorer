@@ -41,7 +41,7 @@
               v-show="selectOpen"
               class="absolute right-0 mt-px bg-theme-content-background shadow-theme rounded border overflow-hidden text-sm"
             >
-              <li v-for="txType in ['all', 'sent', 'received']" :key="txType">
+              <li v-for="txType in ['all', 'sent', 'received', 'locks']" :key="txType">
                 <RouterLink
                   :to="{ name: 'wallet-transactions', params: { address: address, type: txType, page: 1 } }"
                   class="dropdown-button"
@@ -58,13 +58,21 @@
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
         <TableTransactionsDesktop
+          v-if="!isLocks"
+          :transactions="transactions"
+          :sort-query="sortParams"
+          @on-sort-change="onSortChange"
+        />
+        <TableLockTransactionsDesktop
+          v-else
           :transactions="transactions"
           :sort-query="sortParams"
           @on-sort-change="onSortChange"
         />
       </div>
       <div class="sm:hidden">
-        <TableTransactionsMobile :transactions="transactions" />
+        <TableTransactionsMobile v-if="!isLocks" :transactions="transactions" />
+        <TableLockTransactionsMobile v-else :transactions="transactions" />
       </div>
       <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
     </section>
@@ -113,6 +121,10 @@ export default class WalletTransactions extends Vue {
       field: params.field,
       type: params.type,
     });
+  }
+
+  get isLocks() {
+    return this.$route.params.type === "locks";
   }
 
   @Watch("currentPage")
@@ -197,6 +209,7 @@ export default class WalletTransactions extends Vue {
     }
   }
 
+  // TODO: handle difference in locks vs all / received / sent pages
   private onSortChange(params: ISortParameters) {
     this.sortParams = params;
   }

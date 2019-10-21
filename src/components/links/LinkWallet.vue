@@ -1,73 +1,110 @@
 <template>
   <span class="block md:inline-block">
-    <template v-if="!type">
-      <RouterLink v-if="isKnown" :to="{ name: 'wallet', params: { address: walletAddress } }" class="flex items-center">
-        <span
+    <template v-if="typeGroup === 1">
+      <template v-if="type === defaultTransaction.TRANSFER">
+        <RouterLink
+          v-if="isKnown"
+          :to="{ name: 'wallet', params: { address: walletAddress } }"
+          class="flex items-center"
+        >
+          <span
+            v-tooltip="{
+              content: getAddress(),
+              placement: tooltipPlacement,
+            }"
+          >
+            {{ knownWallets[address] }}
+          </span>
+          <SvgIcon
+            v-tooltip="{
+              content: $t('WALLET.VERIFIED'),
+              placement: tooltipPlacement,
+            }"
+            class="flex flex-none ml-2"
+            name="verified"
+            view-box="0 0 16 17"
+          />
+        </RouterLink>
+        <RouterLink
+          v-else
           v-tooltip="{
             content: getAddress(),
             placement: tooltipPlacement,
           }"
+          :to="{ name: 'wallet', params: { address: walletAddress } }"
         >
-          {{ knownWallets[address] }}
-        </span>
-        <SvgIcon
+          <span v-if="hasDefaultSlot">
+            <slot />
+          </span>
+          <span v-else-if="delegate">{{ delegate.username }}</span>
+          <span v-else-if="address">
+            <span class="hidden md:inline-block">{{ trunc ? truncate(address) : address }}</span>
+            <span class="md:hidden">{{ truncate(address) }}</span>
+          </span>
+        </RouterLink>
+      </template>
+
+      <span v-else-if="type === defaultTransaction.SECOND_SIGNATURE">{{
+        $t("TRANSACTION.TYPES.SECOND_SIGNATURE")
+      }}</span>
+      <span v-else-if="type === defaultTransaction.DELEGATE_REGISTRATION">{{
+        $t("TRANSACTION.TYPES.DELEGATE_REGISTRATION")
+      }}</span>
+      <span v-else-if="type === defaultTransaction.VOTE">
+        <RouterLink
+          v-if="votedDelegateAddress"
           v-tooltip="{
-            content: $t('WALLET.VERIFIED'),
+            content: votedDelegateAddress,
             placement: tooltipPlacement,
           }"
-          class="flex flex-none ml-2"
-          name="verified"
-          view-box="0 0 16 17"
-        />
-      </RouterLink>
-      <RouterLink
-        v-else
-        v-tooltip="{
-          content: getAddress(),
-          placement: tooltipPlacement,
-        }"
-        :to="{ name: 'wallet', params: { address: walletAddress } }"
-      >
-        <span v-if="hasDefaultSlot">
-          <slot />
-        </span>
-        <span v-else-if="delegate">{{ delegate.username }}</span>
-        <span v-else-if="address">
-          <span class="hidden md:inline-block">{{ trunc ? truncate(address) : address }}</span>
-          <span class="md:hidden">{{ truncate(address) }}</span>
-        </span>
-      </RouterLink>
-    </template>
-
-    <span v-else-if="type === 1">{{ $t("TRANSACTION.TYPES.SECOND_SIGNATURE") }}</span>
-    <span v-else-if="type === 2">{{ $t("TRANSACTION.TYPES.DELEGATE_REGISTRATION") }}</span>
-    <span v-else-if="type === 3">
-      <RouterLink
-        v-if="votedDelegateAddress"
-        v-tooltip="{
-          content: votedDelegateAddress,
-          placement: tooltipPlacement,
-        }"
-        :to="{ name: 'wallet', params: { address: votedDelegateAddress } }"
-      >
-        <span :class="getVoteColor"
-          >{{ isUnvote ? $t("TRANSACTION.TYPES.UNVOTE") : $t("TRANSACTION.TYPES.VOTE") }}
-          <span class="italic">({{ votedDelegateUsername }})</span></span
+          :to="{ name: 'wallet', params: { address: votedDelegateAddress } }"
         >
-      </RouterLink>
-    </span>
-    <span v-else-if="type === 4">{{ $t("TRANSACTION.TYPES.MULTI_SIGNATURE") }}</span>
-    <span v-else-if="type === 5">{{ $t("TRANSACTION.TYPES.IPFS") }}</span>
-    <span v-else-if="type === 6">{{ $t("TRANSACTION.TYPES.TIMELOCK_TRANSFER") }}</span>
-    <span v-else-if="type === 7">{{ $t("TRANSACTION.TYPES.MULTI_PAYMENT") }}</span>
-    <span v-else-if="type === 8">{{ $t("TRANSACTION.TYPES.DELEGATE_RESIGNATION") }}</span>
+          <span :class="getVoteColor"
+            >{{ isUnvote ? $t("TRANSACTION.TYPES.UNVOTE") : $t("TRANSACTION.TYPES.VOTE") }}
+            <span class="italic">({{ votedDelegateUsername }})</span></span
+          >
+        </RouterLink>
+      </span>
+      <span v-else-if="type === defaultTransaction.MULTI_SIGNATURE">{{ $t("TRANSACTION.TYPES.MULTI_SIGNATURE") }}</span>
+      <span v-else-if="type === defaultTransaction.IPFS">{{ $t("TRANSACTION.TYPES.IPFS") }}</span>
+      <span v-else-if="type === defaultTransaction.MULTI_PAYMENT"
+        >{{ $t("TRANSACTION.TYPES.MULTI_PAYMENT") }} ({{ multiPaymentRecipientsCount }})</span
+      >
+      <span v-else-if="type === defaultTransaction.DELEGATE_RESIGNATION">{{
+        $t("TRANSACTION.TYPES.DELEGATE_RESIGNATION")
+      }}</span>
+      <span v-else-if="type === defaultTransaction.TIMELOCK">{{ $t("TRANSACTION.TYPES.TIMELOCK") }}</span>
+      <span v-else-if="type === defaultTransaction.TIMELOCK_CLAIM">{{ $t("TRANSACTION.TYPES.TIMELOCK_CLAIM") }}</span>
+      <span v-else-if="type === defaultTransaction.TIMELOCK_REFUND">{{ $t("TRANSACTION.TYPES.TIMELOCK_REFUND") }}</span>
+    </template>
+    <template v-else-if="typeGroup === 2">
+      <span v-if="type === marketplaceTransaction.BUSINESS_REGISTRATION">{{
+        $t("TRANSACTION.TYPES.BUSINESS_REGISTRATION")
+      }}</span>
+      <span v-else-if="type === marketplaceTransaction.BUSINESS_RESIGNATION">{{
+        $t("TRANSACTION.TYPES.BUSINESS_RESIGNATION")
+      }}</span>
+      <span v-else-if="type === marketplaceTransaction.BUSINESS_UPDATE">{{
+        $t("TRANSACTION.TYPES.BUSINESS_UPDATE")
+      }}</span>
+      <span v-else-if="type === marketplaceTransaction.BRIDGECHAIN_REGISTRATION">{{
+        $t("TRANSACTION.TYPES.BRIDGECHAIN_REGISTRATION")
+      }}</span>
+      <span v-else-if="type === marketplaceTransaction.BRIDGECHAIN_RESIGNATION">{{
+        $t("TRANSACTION.TYPES.BRIDGECHAIN_RESIGNATION")
+      }}</span>
+      <span v-else-if="type === marketplaceTransaction.BRIDGECHAIN_UPDATE">{{
+        $t("TRANSACTION.TYPES.BRIDGECHAIN_UPDATE")
+      }}</span>
+    </template>
   </span>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
-import { IDelegate } from "../../interfaces";
+import { IDelegate } from "@/interfaces";
+import { DefaultTransaction, MarketplaceTransaction } from "@/enums";
 
 @Component({
   computed: {
@@ -77,9 +114,10 @@ import { IDelegate } from "../../interfaces";
 })
 export default class LinkWallet extends Vue {
   @Prop({ required: false, default: "" }) public address: string;
-  @Prop({ required: false, default: null }) public asset: { votes: [string] } | null;
+  @Prop({ required: false, default: null }) public asset: { [key: string]: [any] } | null;
   @Prop({ required: false, default: "" }) public publicKey: string;
   @Prop({ required: false, default: 0 }) public type: number;
+  @Prop({ required: false, default: 1 }) public typeGroup: number;
   @Prop({ required: false, default: true }) public trunc: boolean;
   @Prop({ required: false, default: "top" }) public tooltipPlacement: string;
 
@@ -126,6 +164,21 @@ export default class LinkWallet extends Vue {
 
   get votedDelegateUsername(): string {
     return this.votedDelegate ? this.votedDelegate.username : "";
+  }
+
+  get defaultTransaction() {
+    return DefaultTransaction;
+  }
+
+  get marketplaceTransaction() {
+    return MarketplaceTransaction;
+  }
+
+  get multiPaymentRecipientsCount() {
+    if (this.asset && this.asset.payments) {
+      return this.asset.payments.length;
+    }
+    return 0;
   }
 
   @Watch("delegates")

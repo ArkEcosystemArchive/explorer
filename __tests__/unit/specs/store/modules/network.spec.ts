@@ -25,6 +25,12 @@ describe("Store > Network", () => {
     expect(store.getters["network/alias"]).toEqual("setAlias");
   });
 
+  it("should set the network address prefix", () => {
+    store.dispatch("network/setAddressPrefix", "setAddressPrefix");
+
+    expect(store.getters["network/addressPrefix"]).toEqual("setAddressPrefix");
+  });
+
   it("should set the network active delegates", () => {
     store.dispatch("network/setActiveDelegates", "setActiveDelegates");
 

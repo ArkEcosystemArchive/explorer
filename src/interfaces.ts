@@ -66,12 +66,24 @@ export interface IMeta {
 
 export interface ITransaction {
   id: string;
+  blockId: string;
+  version?: number;
+  type: number;
+  typeGroup: number;
   amount: string;
-  price?: number | null;
-  timestamp: ITimestamp;
-  vendorField: string;
   fee: string;
+  sender: string;
+  senderPublicKey: string;
+  recipient: string;
+  signature: string;
+  vendorField: string;
   confirmations: number;
+  timestamp: ITimestamp;
+  asset?: any;
+  signatures?: string[];
+  price?: number | null;
+  nonce?: string;
+  lockStatus?: number;
 }
 
 export interface ISortParameters {
@@ -91,6 +103,8 @@ export interface IWallet {
   publicKey: string;
   vote: string;
   isDelegate: boolean;
+  isResigned?: boolean;
+  lockedBalance?: string;
 }
 
 export interface IApiResponse {
@@ -189,6 +203,7 @@ export interface INetworkState {
   server: string | null;
   nethash: string | null;
   alias: string | null;
+  addressPrefix: number;
   activeDelegates: number;
   rewardOffset: number;
   token: string | null;
@@ -197,6 +212,8 @@ export interface INetworkState {
   knownWallets: any[];
   supply: number;
   height: number;
+  epoch: string | null;
+  blocktime: number;
 }
 
 export interface IUiState {
@@ -228,4 +245,10 @@ export interface IVTooltip {
   hideOnTargetClick?: boolean;
   delay?: any;
   classes?: string;
+}
+
+export interface ITransactionType {
+  key: string;
+  type: number;
+  typeGroup?: number;
 }

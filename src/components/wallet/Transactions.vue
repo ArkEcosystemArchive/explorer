@@ -6,7 +6,7 @@
     <section class="page-section py-5 md:py-10">
       <nav class="TransactionsNavigation mx-5 md:mx-10">
         <div
-          :class="{ active: !isTypeSent && !isTypeReceived }"
+          :class="{ active: !isTypeSent && !isTypeReceived && !isTypeLocks }"
           class="TransactionsNavigation--tab"
           @click="setType('all')"
         >
@@ -34,14 +34,35 @@
           {{ $t("TRANSACTION.TYPES.RECEIVED") }}
           <span>{{ receivedCount }}</span>
         </div>
+        <div
+          :class="{
+            active: isTypeLocks,
+            disabled: !locksCount,
+          }"
+          class="TransactionsNavigation--tab"
+          @click="setType('locks')"
+        >
+          {{ $t("TRANSACTION.TYPES.LOCKS") }}
+          <span>{{ locksCount }}</span>
+        </div>
       </nav>
 
-      <div class="hidden sm:block">
-        <TableTransactionsDesktop :show-confirmations="true" :transactions="transactions" />
-      </div>
-      <div class="sm:hidden">
-        <TableTransactionsMobile :show-confirmations="true" :transactions="transactions" />
-      </div>
+      <template v-if="isTypeLocks">
+        <div class="hidden sm:block">
+          <TableLockTransactionsDesktop :transactions="transactions" />
+        </div>
+        <div class="sm:hidden">
+          <TableLockTransactionsMobile :transactions="transactions" />
+        </div>
+      </template>
+      <template v-else>
+        <div class="hidden sm:block">
+          <TableTransactionsDesktop :show-confirmations="true" :transactions="transactions" />
+        </div>
+        <div class="sm:hidden">
+          <TableTransactionsMobile :show-confirmations="true" :transactions="transactions" />
+        </div>
+      </template>
 
       <div v-if="transactions && transactions.length >= 25" class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
         <RouterLink
@@ -69,6 +90,7 @@ export default class WalletTransactions extends Vue {
   private type: string = "all";
   private receivedCount: number = 0;
   private sentCount: number = 0;
+  private locksCount: number = 0;
 
   get isTypeSent() {
     return this.type === "sent";
@@ -76,6 +98,10 @@ export default class WalletTransactions extends Vue {
 
   get isTypeReceived() {
     return this.type === "received";
+  }
+
+  get isTypeLocks() {
+    return this.type === "locks";
   }
 
   get sortParams() {
@@ -95,6 +121,7 @@ export default class WalletTransactions extends Vue {
 
     this.getSentCount();
     this.getReceivedCount();
+    this.getLocksCount();
   }
 
   public mounted() {
@@ -102,6 +129,7 @@ export default class WalletTransactions extends Vue {
 
     this.getSentCount();
     this.getReceivedCount();
+    this.getLocksCount();
   }
 
   private async getTransactions() {
@@ -110,7 +138,43 @@ export default class WalletTransactions extends Vue {
     if (this.wallet.address !== undefined) {
       // @ts-ignore
       const { data } = await TransactionService[`${this.type}ByAddress`](this.wallet.address, 1);
-      this.transactions = data.map((transaction: ITransaction) => ({ ...transaction, price: null }));
+
+      // Only need to check for sent / received transactions
+      if (!this.isTypeLocks) {
+        // TODO: move to separate function
+        const lockIds: string[] = [];
+        let transactions = data.map((transaction: ITransaction) => {
+          if (transaction.type === 8 && transaction.typeGroup === 1) {
+            lockIds.push(transaction.id);
+          }
+          return { ...transaction, price: null };
+        });
+        if (lockIds.length > 0) {
+          const response = await TransactionService.findUnlockedForLocks(lockIds);
+          const locksHash: { [key: string]: number } = {};
+
+          // Fetch the corresponding timelock id for the claim / refund transactions
+          for (const lockTransaction of response.data) {
+            if (lockTransaction.type === 10) {
+              locksHash[lockTransaction.asset.refund.lockTransactionId] = 10;
+            } else {
+              locksHash[lockTransaction.asset.claim.lockTransactionId] = 9;
+            }
+          }
+
+          // Set an additional property on the locks that got claimed / refunded
+          transactions = transactions.map((transaction: ITransaction) => {
+            if (locksHash[transaction.id]) {
+              return { ...transaction, lockStatus: locksHash[transaction.id] };
+            }
+            return transaction;
+          });
+        }
+        this.transactions = transactions;
+        return;
+      } else {
+        this.transactions = data.map((transaction: ITransaction) => ({ ...transaction, price: null }));
+      }
     }
   }
 
@@ -132,6 +196,15 @@ export default class WalletTransactions extends Vue {
     }
   }
 
+  private async getLocksCount() {
+    if (this.wallet && this.wallet.address) {
+      const response = await TransactionService.locksByAddressCount(this.wallet.address);
+      this.locksCount = response;
+    } else {
+      this.locksCount = 0;
+    }
+  }
+
   private setType(type: string) {
     this.type = type;
 
@@ -146,7 +219,7 @@ export default class WalletTransactions extends Vue {
 
 <style scoped>
 .TransactionsNavigation {
-  @apply .flex .items-end .mb-8 .border-b;
+  @apply .flex .items-end .mb-8 .border-b .whitespace-no-wrap .overflow-y-auto;
 }
 
 .TransactionsNavigation--tab {

@@ -120,11 +120,11 @@ describe("Wallet", () => {
   it("should show who the wallet voted for", () => {
     cy.visit("wallets/ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ");
 
-    cy.get(".WalletHeaderDesktop div")
+    cy.get(".WalletVote div")
       .contains("Voting for")
       .should("exist")
       .and("be.visible");
-    cy.get(".WalletHeaderDesktop div")
+    cy.get(".WalletVote div")
       .contains("Voting for")
       .siblings()
       .last()
@@ -132,13 +132,11 @@ describe("Wallet", () => {
       .should("exist");
   });
 
-  it("should hide the container if the wallet is not voting", () => {
+  it("should not show the container if the wallet is not voting", () => {
     cy.visit("wallets/AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv");
 
-    cy.get(".WalletHeaderDesktop div")
-      .contains("Voting for")
-      .should("exist")
-      .and("not.be.visible");
+    cy.get(".WalletVote")
+      .should("not.exist")
   });
 
   it("should show delegate information", () => {

@@ -8,27 +8,34 @@
       @on-sort-change="emitSortChange"
     >
       <template slot-scope="data">
-        <div v-if="data.column.field === 'id'">
+        <div v-if="data.column.field === 'lockId'">
           <LinkTransaction
-            :id="data.row.id"
+            :id="data.row.lockId"
             :smart-bridge="data.row.vendorField"
             :show-smart-bridge-icon="showSmartBridgeIcon"
           />
         </div>
 
-        <div v-else-if="data.column.field === 'timestamp.unix'">
-          <span>
-            {{ readableTimestamp(data.row.timestamp.unix) }}
+        <div v-else-if="data.column.field === 'expirationValue'">
+          <span v-if="data.row.expirationType === 1">
+            {{ readableTimestampFromEpoch(data.row.expirationValue) }}
+          </span>
+          <span v-if="data.row.expirationType === 2">
+            <div
+              v-tooltip="{
+                trigger: 'hover click',
+                content: readableTimestampFromBlockheight(data.row.expirationValue),
+                placement: 'top',
+              }"
+            >
+              {{ data.row.expirationValue }}
+            </div>
           </span>
         </div>
 
-        <div v-else-if="data.column.field === 'sender'">
-          <LinkWallet :address="data.row.sender" />
-        </div>
-
-        <div v-else-if="data.column.field === 'recipient'">
+        <div v-else-if="data.column.field === 'recipientId'">
           <LinkWallet
-            :address="data.row.recipient"
+            :address="data.row.recipientId"
             :type="data.row.type"
             :asset="data.row.asset"
             :type-group="data.row.typeGroup"
@@ -43,27 +50,6 @@
 
         <div v-else-if="data.column.field === 'amount'">
           <TransactionAmount :transaction="data.row" :type="data.row.type" />
-        </div>
-
-        <div v-else-if="data.column.field === 'fee'">
-          <TransactionAmount :transaction="data.row" :is-fee="true" />
-        </div>
-
-        <div v-else-if="data.column.field === 'confirmations'">
-          <div class="flex items-center justify-end whitespace-no-wrap">
-            <div
-              v-if="data.row.confirmations <= activeDelegates"
-              class="flex items-center justify-end whitespace-no-wrap text-green"
-            >
-              <span class="inline-block mr-2">{{ readableNumber(data.row.confirmations) }}</span>
-              <SvgIcon class="icon flex-none" name="became-active" view-box="0 0 16 16" />
-            </div>
-            <div v-else>
-              <div v-tooltip="readableNumber(data.row.confirmations) + ' ' + $t('COMMON.CONFIRMATIONS')">
-                {{ $t("TRANSACTION.WELL_CONFIRMED") }}
-              </div>
-            </div>
-          </div>
         </div>
       </template>
     </TableWrapper>
@@ -82,7 +68,7 @@ import CryptoCompareService from "@/services/crypto-compare";
     ...mapGetters("currency", { currencySymbol: "symbol" }),
   },
 })
-export default class TableTransactionsDesktop extends Vue {
+export default class LockTransactionsDesktop extends Vue {
   @Prop({
     required: true,
     validator: value => {
@@ -90,38 +76,28 @@ export default class TableTransactionsDesktop extends Vue {
     },
   })
   public transactions: ITransaction[] | null;
-  @Prop({ required: false, default: false }) public showConfirmations: boolean;
 
   private activeDelegates: IDelegate[];
   private currencySymbol: string;
 
   get columns() {
-    const feeClasses = ["hidden", "lg:table-cell"];
-
-    feeClasses.push(this.showConfirmations ? "pr-10 xl:pr-4" : "end-cell");
-
-    let columns = [
+    const columns = [
       {
         label: this.$t("COMMON.ID"),
-        field: "id",
+        field: "lockId",
         thClass: "start-cell",
         tdClass: "start-cell",
       },
       {
-        label: this.$t("COMMON.TIMESTAMP"),
-        field: "timestamp.unix",
+        label: this.$t("COMMON.EXPIRATION"),
+        field: "expirationValue",
         type: "number",
         thClass: "text-left hidden md:table-cell",
         tdClass: "text-left hidden md:table-cell wrap-timestamp",
       },
       {
-        label: this.$t("TRANSACTION.SENDER"),
-        field: "sender",
-        tdClass: "break-all",
-      },
-      {
         label: this.$t("TRANSACTION.RECIPIENT"),
-        field: "recipient",
+        field: "recipientId",
         tdClass: "break-all",
       },
       {
@@ -134,31 +110,10 @@ export default class TableTransactionsDesktop extends Vue {
         label: this.$t("TRANSACTION.AMOUNT"),
         field: "amount",
         type: "number",
-        thClass: "end-cell lg:base-cell",
-        tdClass: "end-cell lg:base-cell",
-      },
-      {
-        label: this.$t("TRANSACTION.FEE"),
-        field: "fee",
-        type: "number",
-        thClass: feeClasses.join(" "),
-        tdClass: feeClasses.join(" "),
+        thClass: "end-cell",
+        tdClass: "end-cell",
       },
     ];
-
-    if (this.showConfirmations) {
-      columns = columns.filter(column => column.field !== "vendorField");
-
-      columns.push({
-        label: this.$t("COMMON.CONFIRMATIONS"),
-        field: "confirmations",
-        type: "number",
-        // @ts-ignore
-        sortable: false,
-        thClass: "end-cell hidden xl:table-cell not-sortable",
-        tdClass: "end-cell hidden xl:table-cell",
-      });
-    }
 
     return columns;
   }

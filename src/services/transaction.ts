@@ -18,7 +18,12 @@ class TransactionService {
     return response.data;
   }
 
-  public async filterByType(page: number, type: number, limit: number = 25): Promise<IApiTransactionsWrapper> {
+  public async filterByType(
+    page: number,
+    type: number,
+    typeGroup?: number,
+    limit: number = 25,
+  ): Promise<IApiTransactionsWrapper> {
     const params: any = {
       orderBy: "timestamp:desc",
       page,
@@ -27,6 +32,10 @@ class TransactionService {
 
     if (type !== -1) {
       params.type = type;
+    }
+
+    if (typeGroup) {
+      params.typeGroup = typeGroup;
     }
 
     const response = (await ApiService.get("transactions", {
@@ -88,6 +97,30 @@ class TransactionService {
     return response;
   }
 
+  public async locksByAddress(address: string, page: number = 1, limit: number = 25): Promise<IApiTransactionsWrapper> {
+    const response = (await ApiService.get(`wallets/${address}/locks`, {
+      params: {
+        orderBy: "timestamp:desc",
+        page,
+        limit,
+      },
+    })) as IApiTransactionsWrapper;
+
+    return response;
+  }
+
+  public async findUnlockedForLocks(
+    transactionIds: string[],
+    page: number = 1,
+    limit: number = 25,
+  ): Promise<IApiTransactionsWrapper> {
+    const response = (await ApiService.post(`locks/unlocked`, {
+      ids: transactionIds,
+    })) as IApiTransactionsWrapper;
+
+    return response;
+  }
+
   public async sentByAddressCount(senderId: string): Promise<number> {
     const response = (await ApiService.get("transactions", {
       params: {
@@ -102,6 +135,15 @@ class TransactionService {
     const response = (await ApiService.get("transactions", {
       params: {
         recipientId,
+        limit: 1,
+      },
+    })) as IApiTransactionsWrapper;
+    return response.meta.totalCount;
+  }
+
+  public async locksByAddressCount(address: string): Promise<number> {
+    const response = (await ApiService.get(`wallets/${address}/locks`, {
+      params: {
         limit: 1,
       },
     })) as IApiTransactionsWrapper;

@@ -10,7 +10,7 @@
           </div>
           <div class="flex">
             <div class="text-lg text-white semibold truncate">
-              <span class="mr-2">{{ types[transactionType + 1] }}</span>
+              <span class="mr-2">{{ $t(`TRANSACTION.TYPES.${transactionType.key}`) }}</span>
             </div>
           </div>
         </div>
@@ -59,15 +59,7 @@ export default class TransactionsPage extends Vue {
   private transactions: ITransaction[] | null = null;
   private meta: any | null = null;
   private currentPage: number = 0;
-  private types: string[] = [
-    "All",
-    "Transfer",
-    "Second Signature",
-    "Delegate Registration",
-    "Vote",
-    "Multisignature Registration",
-  ];
-  private transactionType: number = -1;
+  private transactionType: { key: string; type: number; typeGroup?: number } = { key: "ALL", type: -1 };
 
   get showPagination() {
     return this.meta && this.meta.pageCount > 1;
@@ -90,14 +82,19 @@ export default class TransactionsPage extends Vue {
   }
 
   public created() {
-    this.transactionType = Number(localStorage.getItem("transactionType") || -1);
+    const savedType = localStorage.getItem("transactionType");
+    this.transactionType = savedType ? JSON.parse(savedType) : { key: "ALL", type: -1 };
   }
 
   public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
     try {
+      const savedType = localStorage.getItem("transactionType");
+      const transactionType = savedType ? JSON.parse(savedType) : { key: "ALL", type: -1 };
+
       const { meta, data } = await TransactionService.filterByType(
         Number(to.params.page),
-        Number(localStorage.getItem("transactionType") || -1),
+        transactionType.type,
+        transactionType.typeGroup,
       );
 
       next((vm: TransactionsPage) => {
@@ -115,9 +112,13 @@ export default class TransactionsPage extends Vue {
     this.meta = null;
 
     try {
+      const savedType = localStorage.getItem("transactionType");
+      const transactionType = savedType ? JSON.parse(savedType) : { key: "ALL", type: -1 };
+
       const { meta, data } = await TransactionService.filterByType(
         Number(to.params.page),
-        Number(localStorage.getItem("transactionType") || -1),
+        transactionType.type,
+        transactionType.typeGroup,
       );
 
       this.currentPage = Number(to.params.page);
@@ -147,7 +148,7 @@ export default class TransactionsPage extends Vue {
     }
   }
 
-  private setType(type: number) {
+  private setType(type: { key: string; type: number; typeGroup?: number }) {
     if (this.transactionType !== type) {
       this.transactionType = type;
       this.currentPage = 1;
@@ -161,7 +162,11 @@ export default class TransactionsPage extends Vue {
 
   private async getTransactions() {
     try {
-      const { meta, data } = await TransactionService.filterByType(this.currentPage, this.transactionType);
+      const { meta, data } = await TransactionService.filterByType(
+        this.currentPage,
+        this.transactionType.type,
+        this.transactionType.typeGroup,
+      );
 
       this.setTransactions(data);
       this.setMeta(meta);

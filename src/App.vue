@@ -74,9 +74,12 @@ export default class App extends Vue {
     }
 
     const response = await NodeService.config();
+    this.$store.dispatch("network/setAddressPrefix", response.version);
     this.$store.dispatch("network/setToken", response.token);
     this.$store.dispatch("network/setSymbol", response.symbol);
     this.$store.dispatch("network/setNethash", response.nethash);
+    this.$store.dispatch("network/setEpoch", response.constants.epoch);
+    this.$store.dispatch("network/setBlocktime", response.constants.blocktime);
 
     this.$store.dispatch("ui/setLanguage", localStorage.getItem("language") || "en-GB");
 

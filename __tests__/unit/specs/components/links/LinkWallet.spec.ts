@@ -188,7 +188,7 @@ describe("Compontents > Links > Wallet", () => {
       });
 
       expect(wrapper.contains("a")).toBe(false);
-      expect(wrapper.text()).toEqual(expect.stringContaining("Timelock Transfer"));
+      expect(wrapper.text()).toEqual(expect.stringContaining("Multipayment"));
     });
 
     it("should display Multi Payment for type 7", () => {
@@ -197,7 +197,7 @@ describe("Compontents > Links > Wallet", () => {
       });
 
       expect(wrapper.contains("a")).toBe(false);
-      expect(wrapper.text()).toEqual(expect.stringContaining("Multipayment"));
+      expect(wrapper.text()).toEqual(expect.stringContaining("Delegate Resignation"));
     });
 
     it("should display Delegate Resignation for type 8", () => {
@@ -206,7 +206,39 @@ describe("Compontents > Links > Wallet", () => {
       });
 
       expect(wrapper.contains("a")).toBe(false);
-      expect(wrapper.text()).toEqual(expect.stringContaining("Delegate Resignation"));
+      expect(wrapper.text()).toEqual(expect.stringContaining("Timelock"));
+    });
+
+    it("should display Timeelock Claim for type 9", () => {
+      const wrapper = mount(LinkWallet, {
+        propsData: { type: 9 },
+        stubs: {
+          RouterLink: RouterLinkStub,
+        },
+        i18n,
+        localVue,
+        mixins: [StringsMixin],
+        store,
+      });
+
+      expect(wrapper.contains("a")).toBe(false);
+      expect(wrapper.text()).toEqual(expect.stringContaining("Timelock Claim"));
+    });
+
+    it("should display Timeelock Refund for type 10", () => {
+      const wrapper = mount(LinkWallet, {
+        propsData: { type: 10 },
+        stubs: {
+          RouterLink: RouterLinkStub,
+        },
+        i18n,
+        localVue,
+        mixins: [StringsMixin],
+        store,
+      });
+
+      expect(wrapper.contains("a")).toBe(false);
+      expect(wrapper.text()).toEqual(expect.stringContaining("Timelock Refund"));
     });
   });
 });

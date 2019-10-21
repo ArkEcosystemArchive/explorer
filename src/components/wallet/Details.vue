@@ -18,6 +18,13 @@
             name="second-passphrase"
             view-box="0 0 14 14"
           />
+          <SvgIcon
+            v-if="wallet.multiSignature"
+            v-tooltip="$t('WALLET.MULTI_SIGNATURE_WALLET')"
+            class="ml-2"
+            name="multi-signature"
+            view-box="0 0 14 14"
+          />
           <span v-if="name" class="ml-2 text-white semibold">
             {{ name }}
           </span>
@@ -60,13 +67,24 @@
         </div>
       </div>
 
-      <div v-show="isVoting" v-if="view === 'public'" class="flex-none border-r border-grey-dark px-9">
-        <div class="text-grey mb-2">
-          {{ $t("WALLET.VOTING_FOR") }}
+      <div v-if="view === 'public' && hasLockedBalance" class="flex-none border-r border-grey-dark px-9">
+        <div class="flex items-center text-grey mb-2">
+          {{ $t("WALLET.LOCKED_BALANCE") }}
+          <SvgIcon
+            class="ml-2"
+            name="locked-balance"
+            view-box="0 0 16 17"
+          />
         </div>
-        <LinkWallet v-if="votedDelegate.address" :address="votedDelegate.address">
-          <span class="text-lg text-white semibold truncate">{{ votedDelegate.username }}</span>
-        </LinkWallet>
+        <span
+          v-tooltip="{
+            trigger: 'hover click',
+            content: readableCurrency(wallet.lockedBalance || 0),
+          }"
+          class="text-lg text-white semibold"
+        >
+          {{ readableCrypto(wallet.lockedBalance, false) }}
+        </span>
       </div>
 
       <div class="flex-none px-8">
@@ -107,6 +125,13 @@
                 name="second-passphrase"
                 view-box="0 0 14 14"
               />
+              <SvgIcon
+                v-if="wallet.multiSignature"
+                v-tooltip="$t('WALLET.MULTI_SIGNATURE_WALLET')"
+                class="ml-2"
+                name="multi-signature"
+                view-box="0 0 14 14"
+              />
             </div>
             <div v-if="name" class="text-white semibold flex">
               {{ name }}
@@ -143,13 +168,24 @@
             </div>
           </div>
 
-          <div v-show="isVoting" v-if="view === 'public'" class="md:w-1/2 px-6 w-full">
-            <div class="text-grey mb-2">
-              {{ $t("WALLET.VOTING_FOR") }}
+          <div v-if="view === 'public' && hasLockedBalance" class="md:w-1/2 px-6 w-full">
+            <div class="flex items-center text-grey mb-2">
+              {{ $t("WALLET.LOCKED_BALANCE") }}
+              <SvgIcon
+                class="ml-2"
+                name="locked-balance"
+                view-box="0 0 16 17"
+              />
             </div>
-            <LinkWallet v-if="votedDelegate.address" :address="votedDelegate.address">
-              <span class="text-white semibold truncate">{{ votedDelegate.username }}</span>
-            </LinkWallet>
+            <span
+              v-tooltip="{
+                trigger: 'hover click',
+                content: readableCurrency(wallet.lockedBalance),
+              }"
+              class="text-white"
+            >
+              {{ readableCrypto(wallet.lockedBalance, false) }}
+            </span>
           </div>
         </div>
       </div>
@@ -205,6 +241,10 @@ export default class WalletDetails extends Vue {
 
   get isVoting() {
     return !!this.wallet.vote;
+  }
+
+  get hasLockedBalance() {
+    return !!this.wallet.lockedBalance;
   }
 
   private setView(view: string) {

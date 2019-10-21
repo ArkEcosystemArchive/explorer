@@ -41,7 +41,7 @@ class ForgingService {
 
   public totals(delegates: IDelegate[]): object {
     let forging = 0;
-    let missedBlock = 0;
+    let missedRound = 0;
     let notForging = 0;
     let neverForged = 0;
     let becameActive = 0;
@@ -58,7 +58,7 @@ class ForgingService {
           break;
         }
         case ForgingStatus.Missing: {
-          missedBlock++;
+          missedRound++;
           break;
         }
         case ForgingStatus.NotForging: {
@@ -81,7 +81,7 @@ class ForgingService {
 
     return {
       forging,
-      missedBlock,
+      missedRound,
       notForging,
       neverForged,
       becameActive,

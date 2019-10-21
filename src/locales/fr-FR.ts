@@ -133,7 +133,7 @@ export default {
       STATS: {
         FORGED: "Ont forgé récemment",
         IN_QUEUE: "En file pour forgeage",
-        MISSED: "Ont manqué un bloc",
+        MISSED: "Ont manqué une ronde",
         NOT_FORGING: "Ne forge(nt) pas",
       },
       STATUS: {

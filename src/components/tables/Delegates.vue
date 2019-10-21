@@ -8,10 +8,13 @@
       @on-sort-change="emitSortChange"
     >
       <template slot-scope="data">
-        <div v-if="data.column.field === 'username'">
+        <div v-if="data.column.field === 'username'" class="flex items-center">
           <LinkWallet :address="data.row.address">
             {{ data.row.username }}
           </LinkWallet>
+          <span v-if="data.row.isResigned" class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1">{{
+            $t("WALLET.DELEGATE.STATUS.RESIGNED")
+          }}</span>
         </div>
 
         <div v-else-if="data.column.field === 'blocks.produced'">
@@ -162,7 +165,7 @@ export default class TableDelegates extends Vue {
     // @ts-ignore
     return {
       0: "forging",
-      1: "missed-block",
+      1: "missed-round",
       2: "not-forging",
       3: "not-forging", // never-forged
       4: "became-active",

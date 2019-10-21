@@ -133,7 +133,7 @@ export default {
       STATS: {
         FORGED: "Recentelijk block geforged",
         IN_QUEUE: "In de rij om te forgen",
-        MISSED: "Block gemist",
+        MISSED: "Ronde gemist",
         NOT_FORGING: "Niet aan het forgen",
       },
       STATUS: {
