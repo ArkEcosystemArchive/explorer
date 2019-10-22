@@ -23,7 +23,7 @@
     <div class="flex justify-center">
       <PaginationNavigationButton :is-visible="showFirst" type="first" class="mr-2" @click="emitFirst" />
 
-      <PaginationNavigationButton :is-visible="showPrevious" type="previous" class="mr-2" @click="emitPrevious" />
+      <PaginationNavigationButton :is-visible="showPrevious" type="previous" :class="{ 'no-margin': !showNext }" class="mr-2" @click="emitPrevious" />
 
       <div class="PaginationBar--large relative">
         <PaginationPageInput
@@ -62,7 +62,7 @@
         </div>
       </div>
 
-      <PaginationNavigationButton :is-visible="showNext" type="next" class="ml-2" @click="emitNext" />
+      <PaginationNavigationButton :is-visible="showNext" type="next" :class="{ 'no-margin': !showPrevious }" class="ml-2" @click="emitNext" />
 
       <PaginationNavigationButton :is-visible="showLast" type="last" class="ml-2" @click="emitLast" />
     </div>
@@ -250,6 +250,20 @@ button[class*="Pagination__Button--"] {
 
 .PaginationBar--large {
   @apply .hidden;
+}
+
+@media (max-width: 449px) {
+  .Pagination__Button--previous {
+    @apply .mr-1;
+  }
+
+  .Pagination__Button--next {
+    @apply .ml-1;
+  }
+
+  button[class*="Pagination__Button--"].no-margin {
+    @apply .mx-0;
+  }
 }
 
 @media (min-width: 450px) {
