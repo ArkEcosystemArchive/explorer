@@ -81,6 +81,14 @@ describe("Services > Delegate", () => {
     });
   });
 
+  it("should retrieve the resigned delegates", async () => {
+    const data = await DelegateService.resigned();
+    expect(data).toBeArray();
+    data.forEach(delegate => {
+      expect(Object.keys(delegate).sort()).toEqual(delegatePropertyArray);
+    });
+  });
+
   it("should return a list of active delegates and their stats", async () => {
     jest.setTimeout(20000); // Allow this function to take longer than the specified 5 seconds
     const data = await DelegateService.active();

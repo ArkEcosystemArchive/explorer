@@ -64,7 +64,7 @@ export default class TableDelegates extends Vue {
     },
   })
   public delegates: IDelegate[] | null;
-  @Prop({ required: false, default: false }) public showStandby: boolean;
+  @Prop({ required: false, default: true }) public showFull: boolean;
 
   get columns() {
     const columns = [
@@ -78,8 +78,8 @@ export default class TableDelegates extends Vue {
       {
         label: this.$t("WALLET.DELEGATE.USERNAME"),
         field: "username",
-        thClass: `${this.showStandby ? "end-cell sm:base-cell text-left" : ""}`,
-        tdClass: `${this.showStandby ? "end-cell sm:base-cell text-left" : ""}`,
+        thClass: `${!this.showFull ? "end-cell sm:base-cell text-left" : ""}`,
+        tdClass: `${!this.showFull ? "end-cell sm:base-cell text-left" : ""}`,
       },
       {
         label: this.$t("PAGES.DELEGATE_MONITOR.FORGED_BLOCKS"),
@@ -107,12 +107,12 @@ export default class TableDelegates extends Vue {
         label: this.$t("PAGES.DELEGATE_MONITOR.VOTES"),
         field: "votes",
         type: "number",
-        thClass: `end-cell hidden ${this.showStandby ? "sm" : "md"}:table-cell`,
-        tdClass: `end-cell hidden ${this.showStandby ? "sm" : "md"}:table-cell`,
+        thClass: `end-cell hidden ${this.showFull ? "md" : "sm"}:table-cell`,
+        tdClass: `end-cell hidden ${this.showFull ? "md" : "sm"}:table-cell`,
       },
     ];
 
-    if (this.showStandby) {
+    if (!this.showFull) {
       // remove the columns for blocks, last forged and status
       const index = columns.findIndex(el => {
         return el.field === "blocks.produced";

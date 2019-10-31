@@ -12,13 +12,16 @@
         <div :class="activeTab === 'standby' ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'standby'">
           {{ $t("PAGES.DELEGATE_MONITOR.STANDBY") }}
         </div>
+        <div :class="activeTab === 'resigned' ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'resigned'">
+          {{ $t("PAGES.DELEGATE_MONITOR.RESIGNED") }}
+        </div>
       </nav>
 
       <ForgingStats v-show="activeTab === 'active'" :delegates="delegates || []" />
 
       <TableDelegates
         :delegates="delegates"
-        :show-standby="activeTab === 'standby'"
+        :show-full="activeTab === 'active'"
         :sort-query="sortParams[activeTab]"
         @on-sort-change="onSortChange"
       />
