@@ -5,7 +5,7 @@
     <MonitorHeader />
 
     <section class="page-section py-5 md:py-10">
-      <nav class="mx-5 sm:mx-10 mb-4 border-b flex items-end">
+      <nav class="mx-5 sm:mx-10 mb-4 border-b flex items-end overflow-x-auto">
         <div :class="activeTab === 'active' ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'active'">
           {{ $t("PAGES.DELEGATE_MONITOR.ACTIVE") }}
         </div>
