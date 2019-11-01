@@ -44,9 +44,7 @@
         </RouterLink>
       </template>
 
-      <span v-else-if="type === coreTransaction.SECOND_SIGNATURE">{{
-        $t("TRANSACTION.TYPES.SECOND_SIGNATURE")
-      }}</span>
+      <span v-else-if="type === coreTransaction.SECOND_SIGNATURE">{{ $t("TRANSACTION.TYPES.SECOND_SIGNATURE") }}</span>
       <span v-else-if="type === coreTransaction.DELEGATE_REGISTRATION">{{
         $t("TRANSACTION.TYPES.DELEGATE_REGISTRATION")
       }}</span>

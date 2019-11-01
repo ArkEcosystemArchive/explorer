@@ -70,11 +70,7 @@
       <div v-if="view === 'public' && hasLockedBalance" class="flex-none border-r border-grey-dark px-9">
         <div class="flex items-center text-grey mb-2">
           {{ $t("WALLET.LOCKED_BALANCE") }}
-          <SvgIcon
-            class="ml-2"
-            name="locked-balance"
-            view-box="0 0 16 17"
-          />
+          <SvgIcon class="ml-2" name="locked-balance" view-box="0 0 16 17" />
         </div>
         <span
           v-tooltip="{
@@ -171,11 +167,7 @@
           <div v-if="view === 'public' && hasLockedBalance" class="md:w-1/2 px-6 w-full">
             <div class="flex items-center text-grey mb-2">
               {{ $t("WALLET.LOCKED_BALANCE") }}
-              <SvgIcon
-                class="ml-2"
-                name="locked-balance"
-                view-box="0 0 16 17"
-              />
+              <SvgIcon class="ml-2" name="locked-balance" view-box="0 0 16 17" />
             </div>
             <span
               v-tooltip="{

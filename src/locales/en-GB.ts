@@ -64,7 +64,10 @@ export default {
       BLOCKHEIGHT: "Expiration blockheight",
       CLAIMED: "Claimed transaction",
       EXPIRATION: "Expiration",
+      OPEN: "Open lock",
       REFUND: "Refunded transaction",
+      STATUS: "Timelock status",
+      UNKNOWN: "Unknown",
     },
     TYPE: "Transaction type",
     TYPES: {
@@ -212,7 +215,7 @@ export default {
     DEVELOPMENT: "Development",
     SUPPLY: "Supply",
     MARKET_CAP: "Market Cap",
-    TESTNET: "Testnet Local"
+    TESTNET: "Testnet Local",
   },
 
   FOOTER: {

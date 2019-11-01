@@ -80,12 +80,32 @@ export default class SelectionType extends Vue {
     { key: "TIMELOCK", type: CoreTransaction.TIMELOCK, typeGroup: TypeGroupTransaction.CORE },
     { key: "TIMELOCK_CLAIM", type: CoreTransaction.TIMELOCK_CLAIM, typeGroup: TypeGroupTransaction.CORE },
     { key: "TIMELOCK_REFUND", type: CoreTransaction.TIMELOCK_REFUND, typeGroup: TypeGroupTransaction.CORE },
-    { key: "BUSINESS_REGISTRATION", type: MagistrateTransaction.BUSINESS_REGISTRATION, typeGroup: TypeGroupTransaction.MAGISTRATE },
-    { key: "BUSINESS_RESIGNATION", type: MagistrateTransaction.BUSINESS_RESIGNATION, typeGroup: TypeGroupTransaction.MAGISTRATE },
+    {
+      key: "BUSINESS_REGISTRATION",
+      type: MagistrateTransaction.BUSINESS_REGISTRATION,
+      typeGroup: TypeGroupTransaction.MAGISTRATE,
+    },
+    {
+      key: "BUSINESS_RESIGNATION",
+      type: MagistrateTransaction.BUSINESS_RESIGNATION,
+      typeGroup: TypeGroupTransaction.MAGISTRATE,
+    },
     { key: "BUSINESS_UPDATE", type: MagistrateTransaction.BUSINESS_UPDATE, typeGroup: TypeGroupTransaction.MAGISTRATE },
-    { key: "BRIDGECHAIN_REGISTRATION", type: MagistrateTransaction.BRIDGECHAIN_REGISTRATION, typeGroup: TypeGroupTransaction.MAGISTRATE },
-    { key: "BRIDGECHAIN_RESIGNATION", type: MagistrateTransaction.BRIDGECHAIN_RESIGNATION, typeGroup: TypeGroupTransaction.MAGISTRATE },
-    { key: "BRIDGECHAIN_UPDATE", type: MagistrateTransaction.BRIDGECHAIN_UPDATE, typeGroup: TypeGroupTransaction.MAGISTRATE },
+    {
+      key: "BRIDGECHAIN_REGISTRATION",
+      type: MagistrateTransaction.BRIDGECHAIN_REGISTRATION,
+      typeGroup: TypeGroupTransaction.MAGISTRATE,
+    },
+    {
+      key: "BRIDGECHAIN_RESIGNATION",
+      type: MagistrateTransaction.BRIDGECHAIN_RESIGNATION,
+      typeGroup: TypeGroupTransaction.MAGISTRATE,
+    },
+    {
+      key: "BRIDGECHAIN_UPDATE",
+      type: MagistrateTransaction.BRIDGECHAIN_UPDATE,
+      typeGroup: TypeGroupTransaction.MAGISTRATE,
+    },
   ];
   private transactionType: ITransactionType = { key: "ALL", type: -1 };
   private selectOpen: boolean = false;

@@ -135,8 +135,7 @@ describe("Wallet", () => {
   it("should not show the container if the wallet is not voting", () => {
     cy.visit("wallets/AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv");
 
-    cy.get(".WalletVote")
-      .should("not.exist")
+    cy.get(".WalletVote").should("not.exist");
   });
 
   it("should show delegate information", () => {
