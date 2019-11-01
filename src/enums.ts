@@ -1,4 +1,4 @@
-export enum DefaultTransaction {
+export enum CoreTransaction {
   TRANSFER = 0,
   SECOND_SIGNATURE = 1,
   DELEGATE_REGISTRATION = 2,
@@ -12,13 +12,18 @@ export enum DefaultTransaction {
   TIMELOCK_REFUND = 10,
 }
 
-export enum MarketplaceTransaction {
+export enum MagistrateTransaction {
   BUSINESS_REGISTRATION = 0,
   BUSINESS_RESIGNATION = 1,
   BUSINESS_UPDATE = 2,
   BRIDGECHAIN_REGISTRATION = 3,
   BRIDGECHAIN_RESIGNATION = 4,
   BRIDGECHAIN_UPDATE = 5,
+}
+
+export enum TypeGroupTransaction {
+  CORE = 1,
+  MAGISTRATE = 2,
 }
 
 export enum ForgingStatus {

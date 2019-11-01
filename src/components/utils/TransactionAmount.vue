@@ -22,6 +22,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { ITransaction } from "@/interfaces";
+import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
 
 @Component
 export default class TransactionAmount extends Vue {
@@ -35,7 +36,7 @@ export default class TransactionAmount extends Vue {
     if (this.isFee) {
       return this.transaction.fee;
     }
-    if (this.type === 6 && this.typeGroup === 1) {
+    if (this.type === CoreTransaction.MULTI_PAYMENT && this.typeGroup === TypeGroupTransaction.CORE) {
       return !this.$route.params.address || this.transaction.sender === this.$route.params.address
         ? // Needed for ts-ignore
           // @ts-ignore
@@ -53,25 +54,24 @@ export default class TransactionAmount extends Vue {
 
   get isTransfer() {
     if (this.type !== undefined) {
-      // 0 = transfer, 8 = timelock
-      return (this.type === 0 || this.type === 8) && this.typeGroup === 1;
+      return (this.type === CoreTransaction.TRANSFER || this.type === CoreTransaction.TIMELOCK) && this.typeGroup === TypeGroupTransaction.CORE;
     }
     return false;
   }
 
   get isOutgoing() {
-    if (this.transaction.type === 8) {
+    if (this.transaction.type === CoreTransaction.TIMELOCK && this.typeGroup === TypeGroupTransaction.CORE) {
       return (
-        (this.$route.params.address !== this.transaction.recipient && this.transaction.lockStatus === 9) ||
-        (this.$route.params.address !== this.transaction.sender && this.transaction.lockStatus === 10)
+        (this.$route.params.address !== this.transaction.recipient && this.transaction.lockStatus === CoreTransaction.TIMELOCK_CLAIM) ||
+        (this.$route.params.address !== this.transaction.sender && this.transaction.lockStatus === CoreTransaction.TIMELOCK_REFUND)
       );
     }
     return this.transaction.sender === this.$route.params.address;
   }
 
   get isIncoming() {
-    if (this.transaction.type === 8) {
-      return this.$route.params.address !== this.transaction.sender && this.transaction.lockStatus === 9;
+    if (this.transaction.type === CoreTransaction.TIMELOCK && this.typeGroup === TypeGroupTransaction.CORE) {
+      return this.$route.params.address !== this.transaction.sender && this.transaction.lockStatus === CoreTransaction.TIMELOCK_CLAIM;
     }
     return this.transaction.recipient === this.$route.params.address && this.isTransfer;
   }

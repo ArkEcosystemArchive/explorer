@@ -61,7 +61,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { DefaultTransaction, MarketplaceTransaction } from "@/enums";
+import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
 import { ITransactionType } from "@/interfaces";
 
 @Component
@@ -69,23 +69,23 @@ export default class SelectionType extends Vue {
   @Prop({ required: false, default: false }) public inBanner: boolean;
   private types: ITransactionType[] = [
     { key: "ALL", type: -1 },
-    { key: "TRANSFER", type: DefaultTransaction.TRANSFER, typeGroup: 1 },
-    { key: "SECOND_SIGNATURE", type: DefaultTransaction.SECOND_SIGNATURE, typeGroup: 1 },
-    { key: "DELEGATE_REGISTRATION", type: DefaultTransaction.DELEGATE_REGISTRATION, typeGroup: 1 },
-    { key: "VOTE", type: DefaultTransaction.VOTE, typeGroup: 1 },
-    { key: "MULTI_SIGNATURE", type: DefaultTransaction.MULTI_SIGNATURE, typeGroup: 1 },
-    { key: "IPFS", type: DefaultTransaction.IPFS, typeGroup: 1 },
-    { key: "MULTI_PAYMENT", type: DefaultTransaction.MULTI_PAYMENT, typeGroup: 1 },
-    { key: "DELEGATE_RESIGNATION", type: DefaultTransaction.DELEGATE_RESIGNATION, typeGroup: 1 },
-    { key: "TIMELOCK", type: DefaultTransaction.TIMELOCK, typeGroup: 1 },
-    { key: "TIMELOCK_CLAIM", type: DefaultTransaction.TIMELOCK_CLAIM, typeGroup: 1 },
-    { key: "TIMELOCK_REFUND", type: DefaultTransaction.TIMELOCK_REFUND, typeGroup: 1 },
-    { key: "BUSINESS_REGISTRATION", type: MarketplaceTransaction.BUSINESS_REGISTRATION, typeGroup: 2 },
-    { key: "BUSINESS_RESIGNATION", type: MarketplaceTransaction.BUSINESS_RESIGNATION, typeGroup: 2 },
-    { key: "BUSINESS_UPDATE", type: MarketplaceTransaction.BUSINESS_UPDATE, typeGroup: 2 },
-    { key: "BRIDGECHAIN_REGISTRATION", type: MarketplaceTransaction.BRIDGECHAIN_REGISTRATION, typeGroup: 2 },
-    { key: "BRIDGECHAIN_RESIGNATION", type: MarketplaceTransaction.BRIDGECHAIN_RESIGNATION, typeGroup: 2 },
-    { key: "BRIDGECHAIN_UPDATE", type: MarketplaceTransaction.BRIDGECHAIN_UPDATE, typeGroup: 2 },
+    { key: "TRANSFER", type: CoreTransaction.TRANSFER, typeGroup: TypeGroupTransaction.CORE },
+    { key: "SECOND_SIGNATURE", type: CoreTransaction.SECOND_SIGNATURE, typeGroup: TypeGroupTransaction.CORE },
+    { key: "DELEGATE_REGISTRATION", type: CoreTransaction.DELEGATE_REGISTRATION, typeGroup: TypeGroupTransaction.CORE },
+    { key: "VOTE", type: CoreTransaction.VOTE, typeGroup: TypeGroupTransaction.CORE },
+    { key: "MULTI_SIGNATURE", type: CoreTransaction.MULTI_SIGNATURE, typeGroup: TypeGroupTransaction.CORE },
+    { key: "IPFS", type: CoreTransaction.IPFS, typeGroup: TypeGroupTransaction.CORE },
+    { key: "MULTI_PAYMENT", type: CoreTransaction.MULTI_PAYMENT, typeGroup: TypeGroupTransaction.CORE },
+    { key: "DELEGATE_RESIGNATION", type: CoreTransaction.DELEGATE_RESIGNATION, typeGroup: TypeGroupTransaction.CORE },
+    { key: "TIMELOCK", type: CoreTransaction.TIMELOCK, typeGroup: TypeGroupTransaction.CORE },
+    { key: "TIMELOCK_CLAIM", type: CoreTransaction.TIMELOCK_CLAIM, typeGroup: TypeGroupTransaction.CORE },
+    { key: "TIMELOCK_REFUND", type: CoreTransaction.TIMELOCK_REFUND, typeGroup: TypeGroupTransaction.CORE },
+    { key: "BUSINESS_REGISTRATION", type: MagistrateTransaction.BUSINESS_REGISTRATION, typeGroup: TypeGroupTransaction.MAGISTRATE },
+    { key: "BUSINESS_RESIGNATION", type: MagistrateTransaction.BUSINESS_RESIGNATION, typeGroup: TypeGroupTransaction.MAGISTRATE },
+    { key: "BUSINESS_UPDATE", type: MagistrateTransaction.BUSINESS_UPDATE, typeGroup: TypeGroupTransaction.MAGISTRATE },
+    { key: "BRIDGECHAIN_REGISTRATION", type: MagistrateTransaction.BRIDGECHAIN_REGISTRATION, typeGroup: TypeGroupTransaction.MAGISTRATE },
+    { key: "BRIDGECHAIN_RESIGNATION", type: MagistrateTransaction.BRIDGECHAIN_RESIGNATION, typeGroup: TypeGroupTransaction.MAGISTRATE },
+    { key: "BRIDGECHAIN_UPDATE", type: MagistrateTransaction.BRIDGECHAIN_UPDATE, typeGroup: TypeGroupTransaction.MAGISTRATE },
   ];
   private transactionType: ITransactionType = { key: "ALL", type: -1 };
   private selectOpen: boolean = false;

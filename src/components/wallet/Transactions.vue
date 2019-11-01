@@ -81,6 +81,7 @@
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { ISortParameters, ITransaction, IWallet } from "@/interfaces";
 import TransactionService from "@/services/transaction";
+import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
 
 @Component
 export default class WalletTransactions extends Vue {
@@ -144,7 +145,7 @@ export default class WalletTransactions extends Vue {
         // TODO: move to separate function
         const lockIds: string[] = [];
         let transactions = data.map((transaction: ITransaction) => {
-          if (transaction.type === 8 && transaction.typeGroup === 1) {
+          if (transaction.type === CoreTransaction.TIMELOCK && transaction.typeGroup === TypeGroupTransaction.CORE) {
             lockIds.push(transaction.id);
           }
           return { ...transaction, price: null };
@@ -155,7 +156,7 @@ export default class WalletTransactions extends Vue {
 
           // Fetch the corresponding timelock id for the claim / refund transactions
           for (const lockTransaction of response.data) {
-            if (lockTransaction.type === 10) {
+            if (lockTransaction.type === CoreTransaction.TIMELOCK_REFUND) {
               locksHash[lockTransaction.asset.refund.lockTransactionId] = 10;
             } else {
               locksHash[lockTransaction.asset.claim.lockTransactionId] = 9;
