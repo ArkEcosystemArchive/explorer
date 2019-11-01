@@ -54,7 +54,10 @@ export default class TransactionAmount extends Vue {
 
   get isTransfer() {
     if (this.type !== undefined) {
-      return (this.type === CoreTransaction.TRANSFER || this.type === CoreTransaction.TIMELOCK) && this.typeGroup === TypeGroupTransaction.CORE;
+      return (
+        (this.type === CoreTransaction.TRANSFER || this.type === CoreTransaction.TIMELOCK) &&
+        this.typeGroup === TypeGroupTransaction.CORE
+      );
     }
     return false;
   }
@@ -62,8 +65,10 @@ export default class TransactionAmount extends Vue {
   get isOutgoing() {
     if (this.transaction.type === CoreTransaction.TIMELOCK && this.typeGroup === TypeGroupTransaction.CORE) {
       return (
-        (this.$route.params.address !== this.transaction.recipient && this.transaction.lockStatus === CoreTransaction.TIMELOCK_CLAIM) ||
-        (this.$route.params.address !== this.transaction.sender && this.transaction.lockStatus === CoreTransaction.TIMELOCK_REFUND)
+        (this.$route.params.address !== this.transaction.recipient &&
+          this.transaction.lockStatus === CoreTransaction.TIMELOCK_CLAIM) ||
+        (this.$route.params.address !== this.transaction.sender &&
+          this.transaction.lockStatus === CoreTransaction.TIMELOCK_REFUND)
       );
     }
     return this.transaction.sender === this.$route.params.address;
@@ -71,7 +76,10 @@ export default class TransactionAmount extends Vue {
 
   get isIncoming() {
     if (this.transaction.type === CoreTransaction.TIMELOCK && this.typeGroup === TypeGroupTransaction.CORE) {
-      return this.$route.params.address !== this.transaction.sender && this.transaction.lockStatus === CoreTransaction.TIMELOCK_CLAIM;
+      return (
+        this.$route.params.address !== this.transaction.sender &&
+        this.transaction.lockStatus === CoreTransaction.TIMELOCK_CLAIM
+      );
     }
     return this.transaction.recipient === this.$route.params.address && this.isTransfer;
   }

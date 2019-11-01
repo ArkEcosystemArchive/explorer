@@ -31,7 +31,9 @@
         <div class="list-row-border-b">
           <div class="mr-4">{{ $t("TRANSACTION.AMOUNT") }}</div>
           <div
-            v-if="transaction.typeGroup === typeGroupTransaction.CORE && transaction.type === coreTransaction.MULTI_PAYMENT"
+            v-if="
+              transaction.typeGroup === typeGroupTransaction.CORE && transaction.type === coreTransaction.MULTI_PAYMENT
+            "
             v-tooltip="{
               trigger: 'hover click',
               content: price ? readableCurrency(multipaymentAmount, price) : '',
@@ -80,12 +82,17 @@
           <div>{{ transaction.nonce }}</div>
         </div>
 
-        <div v-if="transaction.typeGroup === typeGroupTransaction.CORE && transaction.type === coreTransaction.IPFS" class="list-row-border-b">
+        <div
+          v-if="transaction.typeGroup === typeGroupTransaction.CORE && transaction.type === coreTransaction.IPFS"
+          class="list-row-border-b"
+        >
           <div class="mr-4">{{ $t("TRANSACTION.IPFS") }}</div>
           <div class="overflow-hidden break-all">{{ transaction.asset.ipfs }}</div>
         </div>
 
-        <div v-if="transaction.typeGroup === typeGroupTransaction.CORE && transaction.type === coreTransaction.TIMELOCK">
+        <div
+          v-if="transaction.typeGroup === typeGroupTransaction.CORE && transaction.type === coreTransaction.TIMELOCK"
+        >
           <div v-if="transaction.asset.lock.expiration.type === 1" class="list-row-border-b">
             <div class="mr-4">{{ $t("TRANSACTION.TIMELOCK.EXPIRATION") }}</div>
             <div>{{ readableTimestampFromEpoch(transaction.asset.lock.expiration.value) }}</div>
@@ -102,16 +109,34 @@
               {{ transaction.asset.lock.expiration.value }}
             </div>
           </div>
+
+          <div class="list-row-border-b-no-wrap">
+            <div class="mr-4">{{ $t("TRANSACTION.TIMELOCK.STATUS") }}</div>
+            <div v-if="timelockLink">
+              <LinkTransaction :id="timelockLink">{{ timelockStatus }}</LinkTransaction>
+            </div>
+            <div v-else>{{ timelockStatus }}</div>
+          </div>
         </div>
 
-        <div v-if="transaction.typeGroup === typeGroupTransaction.CORE && transaction.type === coreTransaction.TIMELOCK_CLAIM" class="list-row-border-b">
+        <div
+          v-if="
+            transaction.typeGroup === typeGroupTransaction.CORE && transaction.type === coreTransaction.TIMELOCK_CLAIM
+          "
+          class="list-row-border-b"
+        >
           <div class="mr-4">{{ $t("TRANSACTION.TIMELOCK.CLAIMED") }}</div>
           <div class="overflow-hidden break-all">
             <LinkTransaction :id="transaction.asset.claim.lockTransactionId" />
           </div>
         </div>
 
-        <div v-if="transaction.typeGroup === typeGroupTransaction.CORE && transaction.type === coreTransaction.TIMELOCK_REFUND" class="list-row-border-b">
+        <div
+          v-if="
+            transaction.typeGroup === typeGroupTransaction.CORE && transaction.type === coreTransaction.TIMELOCK_REFUND
+          "
+          class="list-row-border-b"
+        >
           <div class="mr-4">{{ $t("TRANSACTION.TIMELOCK.REFUND") }}</div>
           <div class="overflow-hidden break-all">
             <LinkTransaction :id="transaction.asset.refund.lockTransactionId" />
@@ -127,7 +152,10 @@
       </div>
     </section>
 
-    <section v-if="transaction.typeGroup === typeGroupTransaction.CORE && transaction.type === coreTransaction.MULTI_SIGNATURE" class="page-section py-5 md:py-10 mb-5">
+    <section
+      v-if="transaction.typeGroup === typeGroupTransaction.CORE && transaction.type === coreTransaction.MULTI_SIGNATURE"
+      class="page-section py-5 md:py-10 mb-5"
+    >
       <div class="px-5 sm:px-10">
         <div class="list-row-border-b">
           <div class="mr-4">{{ $t("TRANSACTION.MULTI_SIGNATURE.ADDRESS") }}</div>
@@ -169,11 +197,13 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { TranslateResult } from "vue-i18n";
 import { mapGetters } from "vuex";
 import { ITransaction } from "@/interfaces";
 import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
 import { LinkTransaction } from "@/components/links";
 import CryptoCompareService from "@/services/crypto-compare";
+import TransactionService from "@/services/transaction";
 
 @Component({
   components: {
@@ -192,6 +222,8 @@ export default class TransactionDetails extends Vue {
   private currencySymbol: string;
   private height: number;
   private multipaymentAmount: number | null = null;
+  private timelockStatus: TranslateResult | null = null;
+  private timelockLink: string | null = null;
 
   get confirmations() {
     return this.initialBlockHeight ? this.height - this.initialBlockHeight : this.transaction.confirmations;
@@ -232,6 +264,7 @@ export default class TransactionDetails extends Vue {
   public async onTransactionChanged() {
     this.updatePrice();
     this.handleMultipayment();
+    this.getTimelockStatus();
     this.setInitialBlockHeight();
   }
 
@@ -250,6 +283,7 @@ export default class TransactionDetails extends Vue {
   public async mounted() {
     this.updatePrice();
     this.handleMultipayment();
+    this.getTimelockStatus();
   }
 
   private async updatePrice() {
@@ -261,9 +295,32 @@ export default class TransactionDetails extends Vue {
   }
 
   private handleMultipayment() {
-    if (this.transaction.type === CoreTransaction.MULTI_PAYMENT && this.transaction.typeGroup === TypeGroupTransaction.CORE) {
+    if (
+      this.transaction.type === CoreTransaction.MULTI_PAYMENT &&
+      this.transaction.typeGroup === TypeGroupTransaction.CORE
+    ) {
       // @ts-ignore
       this.multipaymentAmount = this.calculateMultipaymentAmount(this.transaction);
+    }
+  }
+
+  private async getTimelockStatus() {
+    if (
+      this.transaction.type === CoreTransaction.TIMELOCK &&
+      this.transaction.typeGroup === TypeGroupTransaction.CORE
+    ) {
+      const response = await TransactionService.findUnlockedForLocks([this.transaction.id]);
+      if (response.data.length === 0) {
+        this.timelockStatus = this.$t("TRANSACTION.TIMELOCK.OPEN");
+      } else if (response.data[0].type === CoreTransaction.TIMELOCK_CLAIM) {
+        this.timelockStatus = this.$t("TRANSACTION.TIMELOCK.CLAIMED");
+        this.timelockLink = response.data[0].id;
+      } else if (response.data[0].type === CoreTransaction.TIMELOCK_REFUND) {
+        this.timelockStatus = this.$t("TRANSACTION.TIMELOCK.REFUNDED");
+        this.timelockLink = response.data[0].id;
+      }
+    } else {
+      this.timelockStatus = this.$t("TRANSACTION.TIMELOCK.UNKNOWN");
     }
   }
 }
