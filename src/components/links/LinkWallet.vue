@@ -1,7 +1,7 @@
 <template>
   <span class="block md:inline-block">
-    <template v-if="typeGroup === 1">
-      <template v-if="type === defaultTransaction.TRANSFER">
+    <template v-if="typeGroup === typeGroupTransaction.CORE">
+      <template v-if="type === coreTransaction.TRANSFER">
         <RouterLink
           v-if="isKnown"
           :to="{ name: 'wallet', params: { address: walletAddress } }"
@@ -44,13 +44,13 @@
         </RouterLink>
       </template>
 
-      <span v-else-if="type === defaultTransaction.SECOND_SIGNATURE">{{
+      <span v-else-if="type === coreTransaction.SECOND_SIGNATURE">{{
         $t("TRANSACTION.TYPES.SECOND_SIGNATURE")
       }}</span>
-      <span v-else-if="type === defaultTransaction.DELEGATE_REGISTRATION">{{
+      <span v-else-if="type === coreTransaction.DELEGATE_REGISTRATION">{{
         $t("TRANSACTION.TYPES.DELEGATE_REGISTRATION")
       }}</span>
-      <span v-else-if="type === defaultTransaction.VOTE">
+      <span v-else-if="type === coreTransaction.VOTE">
         <RouterLink
           v-if="votedDelegateAddress"
           v-tooltip="{
@@ -65,35 +65,35 @@
           >
         </RouterLink>
       </span>
-      <span v-else-if="type === defaultTransaction.MULTI_SIGNATURE">{{ $t("TRANSACTION.TYPES.MULTI_SIGNATURE") }}</span>
-      <span v-else-if="type === defaultTransaction.IPFS">{{ $t("TRANSACTION.TYPES.IPFS") }}</span>
-      <span v-else-if="type === defaultTransaction.MULTI_PAYMENT"
+      <span v-else-if="type === coreTransaction.MULTI_SIGNATURE">{{ $t("TRANSACTION.TYPES.MULTI_SIGNATURE") }}</span>
+      <span v-else-if="type === coreTransaction.IPFS">{{ $t("TRANSACTION.TYPES.IPFS") }}</span>
+      <span v-else-if="type === coreTransaction.MULTI_PAYMENT"
         >{{ $t("TRANSACTION.TYPES.MULTI_PAYMENT") }} ({{ multiPaymentRecipientsCount }})</span
       >
-      <span v-else-if="type === defaultTransaction.DELEGATE_RESIGNATION">{{
+      <span v-else-if="type === coreTransaction.DELEGATE_RESIGNATION">{{
         $t("TRANSACTION.TYPES.DELEGATE_RESIGNATION")
       }}</span>
-      <span v-else-if="type === defaultTransaction.TIMELOCK">{{ $t("TRANSACTION.TYPES.TIMELOCK") }}</span>
-      <span v-else-if="type === defaultTransaction.TIMELOCK_CLAIM">{{ $t("TRANSACTION.TYPES.TIMELOCK_CLAIM") }}</span>
-      <span v-else-if="type === defaultTransaction.TIMELOCK_REFUND">{{ $t("TRANSACTION.TYPES.TIMELOCK_REFUND") }}</span>
+      <span v-else-if="type === coreTransaction.TIMELOCK">{{ $t("TRANSACTION.TYPES.TIMELOCK") }}</span>
+      <span v-else-if="type === coreTransaction.TIMELOCK_CLAIM">{{ $t("TRANSACTION.TYPES.TIMELOCK_CLAIM") }}</span>
+      <span v-else-if="type === coreTransaction.TIMELOCK_REFUND">{{ $t("TRANSACTION.TYPES.TIMELOCK_REFUND") }}</span>
     </template>
-    <template v-else-if="typeGroup === 2">
-      <span v-if="type === marketplaceTransaction.BUSINESS_REGISTRATION">{{
+    <template v-else-if="typeGroup === typeGroupTransaction.MAGISTRATE">
+      <span v-if="type === magistrateTransaction.BUSINESS_REGISTRATION">{{
         $t("TRANSACTION.TYPES.BUSINESS_REGISTRATION")
       }}</span>
-      <span v-else-if="type === marketplaceTransaction.BUSINESS_RESIGNATION">{{
+      <span v-else-if="type === magistrateTransaction.BUSINESS_RESIGNATION">{{
         $t("TRANSACTION.TYPES.BUSINESS_RESIGNATION")
       }}</span>
-      <span v-else-if="type === marketplaceTransaction.BUSINESS_UPDATE">{{
+      <span v-else-if="type === magistrateTransaction.BUSINESS_UPDATE">{{
         $t("TRANSACTION.TYPES.BUSINESS_UPDATE")
       }}</span>
-      <span v-else-if="type === marketplaceTransaction.BRIDGECHAIN_REGISTRATION">{{
+      <span v-else-if="type === magistrateTransaction.BRIDGECHAIN_REGISTRATION">{{
         $t("TRANSACTION.TYPES.BRIDGECHAIN_REGISTRATION")
       }}</span>
-      <span v-else-if="type === marketplaceTransaction.BRIDGECHAIN_RESIGNATION">{{
+      <span v-else-if="type === magistrateTransaction.BRIDGECHAIN_RESIGNATION">{{
         $t("TRANSACTION.TYPES.BRIDGECHAIN_RESIGNATION")
       }}</span>
-      <span v-else-if="type === marketplaceTransaction.BRIDGECHAIN_UPDATE">{{
+      <span v-else-if="type === magistrateTransaction.BRIDGECHAIN_UPDATE">{{
         $t("TRANSACTION.TYPES.BRIDGECHAIN_UPDATE")
       }}</span>
     </template>
@@ -104,7 +104,7 @@
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { IDelegate } from "@/interfaces";
-import { DefaultTransaction, MarketplaceTransaction } from "@/enums";
+import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
 
 @Component({
   computed: {
@@ -166,12 +166,16 @@ export default class LinkWallet extends Vue {
     return this.votedDelegate ? this.votedDelegate.username : "";
   }
 
-  get defaultTransaction() {
-    return DefaultTransaction;
+  get coreTransaction() {
+    return CoreTransaction;
   }
 
-  get marketplaceTransaction() {
-    return MarketplaceTransaction;
+  get magistrateTransaction() {
+    return MagistrateTransaction;
+  }
+
+  get typeGroupTransaction() {
+    return TypeGroupTransaction;
   }
 
   get multiPaymentRecipientsCount() {
