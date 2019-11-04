@@ -21,7 +21,7 @@
 
       <TableDelegates
         :delegates="delegates"
-        :show-full="activeTab === 'active'"
+        :active-tab="activeTab"
         :sort-query="sortParams[activeTab]"
         @on-sort-change="onSortChange"
       />
