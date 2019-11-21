@@ -14,6 +14,17 @@ const delegatePropertyArray = [
   "forged",
 ].sort();
 
+const resignedDelegatePropertyArray = [
+  "username",
+  "address",
+  "publicKey",
+  "votes",
+  "isResigned",
+  "blocks",
+  "production",
+  "forged",
+].sort();
+
 const voterPropertyArray = ["address", "balance", "isDelegate", "publicKey"].sort();
 // Note: secondPublicKey, username and vote can also be returned, but are optional
 
@@ -88,7 +99,7 @@ describe("Services > Delegate", () => {
     const data = await DelegateService.resigned();
     expect(data).toBeArray();
     data.forEach(delegate => {
-      expect(Object.keys(delegate).sort()).toEqual(delegatePropertyArray);
+      expect(Object.keys(delegate).sort()).toEqual(resignedDelegatePropertyArray);
     });
   });
 
