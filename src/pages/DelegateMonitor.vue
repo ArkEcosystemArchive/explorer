@@ -5,12 +5,15 @@
     <MonitorHeader />
 
     <section class="page-section py-5 md:py-10">
-      <nav class="mx-5 sm:mx-10 mb-4 border-b flex items-end">
+      <nav class="mx-5 sm:mx-10 mb-4 border-b flex items-end overflow-x-auto">
         <div :class="activeTab === 'active' ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'active'">
           {{ $t("PAGES.DELEGATE_MONITOR.ACTIVE") }}
         </div>
         <div :class="activeTab === 'standby' ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'standby'">
           {{ $t("PAGES.DELEGATE_MONITOR.STANDBY") }}
+        </div>
+        <div :class="activeTab === 'resigned' ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'resigned'">
+          {{ $t("PAGES.DELEGATE_MONITOR.RESIGNED") }}
         </div>
       </nav>
 
@@ -18,7 +21,7 @@
 
       <TableDelegates
         :delegates="delegates"
-        :show-standby="activeTab === 'standby'"
+        :active-tab="activeTab"
         :sort-query="sortParams[activeTab]"
         @on-sort-change="onSortChange"
       />

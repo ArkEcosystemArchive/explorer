@@ -12,7 +12,7 @@
           <LinkWallet :address="data.row.address">
             {{ data.row.username }}
           </LinkWallet>
-          <span v-if="data.row.isResigned" class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1">{{
+          <span v-if="isActiveTab && data.row.isResigned" class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1">{{
             $t("WALLET.DELEGATE.STATUS.RESIGNED")
           }}</span>
         </div>
@@ -64,10 +64,10 @@ export default class TableDelegates extends Vue {
     },
   })
   public delegates: IDelegate[] | null;
-  @Prop({ required: false, default: false }) public showStandby: boolean;
+  @Prop({ required: false, default: "active" }) public activeTab: string;
 
   get columns() {
-    const columns = [
+    let columns = [
       {
         label: this.$t("COMMON.RANK"),
         field: "rank",
@@ -78,8 +78,8 @@ export default class TableDelegates extends Vue {
       {
         label: this.$t("WALLET.DELEGATE.USERNAME"),
         field: "username",
-        thClass: `${this.showStandby ? "end-cell sm:base-cell text-left" : ""}`,
-        tdClass: `${this.showStandby ? "end-cell sm:base-cell text-left" : ""}`,
+        thClass: `text-left ${this.isActiveTab ? "end-cell sm:base-cell" : this.isResignedTab ? "start-cell" : ""}`,
+        tdClass: `text-left ${this.isActiveTab ? "end-cell sm:base-cell" : this.isResignedTab ? "start-cell" : ""}`,
       },
       {
         label: this.$t("PAGES.DELEGATE_MONITOR.FORGED_BLOCKS"),
@@ -107,12 +107,12 @@ export default class TableDelegates extends Vue {
         label: this.$t("PAGES.DELEGATE_MONITOR.VOTES"),
         field: "votes",
         type: "number",
-        thClass: `end-cell hidden ${this.showStandby ? "sm" : "md"}:table-cell`,
-        tdClass: `end-cell hidden ${this.showStandby ? "sm" : "md"}:table-cell`,
+        thClass: `end-cell hidden ${this.isActiveTab ? "md" : "sm"}:table-cell`,
+        tdClass: `end-cell hidden ${this.isActiveTab ? "md" : "sm"}:table-cell`,
       },
     ];
 
-    if (this.showStandby) {
+    if (this.activeTab !== "active") {
       // remove the columns for blocks, last forged and status
       const index = columns.findIndex(el => {
         return el.field === "blocks.produced";
@@ -120,7 +120,19 @@ export default class TableDelegates extends Vue {
       columns.splice(index, 3);
     }
 
+    if (this.activeTab === "resigned") {
+      // remove the rank column
+      columns = columns.splice(1);
+    }
     return columns;
+  }
+
+  get isActiveTab() {
+    return this.activeTab === "active"
+  }
+
+  get isResignedTab() {
+    return this.activeTab === "resigned"
   }
 
   private lastForgingTime(delegate: IDelegate) {

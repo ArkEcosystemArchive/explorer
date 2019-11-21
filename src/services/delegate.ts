@@ -93,6 +93,16 @@ class DelegateService {
     return response.data;
   }
 
+  public async resigned(): Promise<IDelegate[]> {
+    const response = (await ApiService.get("delegates", {
+      params: {
+        type: "resigned",
+      },
+    })) as IApiDelegatesWrapper;
+
+    return response.data;
+  }
+
   public async forged(): Promise<Array<{ delegate: string; forged: number }>> {
     const activeDelegates = store.getters["network/activeDelegates"];
 

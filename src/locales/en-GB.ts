@@ -163,6 +163,7 @@ export default {
       },
       ACTIVE: "Active",
       STANDBY: "Standby",
+      RESIGNED: "Resigned",
       NEVER: "Never",
       FORGED_BLOCKS: "Forged blocks",
       LAST_FORGED: "Last forged",
