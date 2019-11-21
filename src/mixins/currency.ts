@@ -1,12 +1,14 @@
 import store from "@/store";
+import { BigNumber } from "@/utils";
 
 const locale = store.getters["ui/locale"];
 
 export default {
   methods: {
-    readableCrypto(value: number | undefined, appendCurrency: boolean = true, decimals: number = 8): string | void {
+    readableCrypto(value: string | undefined, appendCurrency: boolean = true, decimals: number = 8): string | void {
       if (value) {
-        const normalizedValue: string = (value /= 1e8).toLocaleString(locale, {
+        const bigNumberValue = BigNumber.make(value);
+        const normalizedValue: string = Number(bigNumberValue.dividedBy(1e8)).toLocaleString(locale, {
           maximumFractionDigits: decimals,
         });
 
@@ -17,7 +19,7 @@ export default {
     },
 
     readableCurrency(
-      value: number,
+      value: string | number,
       rate: number | null = null,
       currency: string | null = null,
       normalise: boolean = true,
@@ -28,7 +30,9 @@ export default {
         value = parseInt(value.toString(), 10) / 1e8;
       }
 
-      value *= rate || store.getters["currency/rate"];
+      let bigNumberValue = BigNumber.make(value);
+
+      bigNumberValue = bigNumberValue.times(rate) || BigNumber.make(store.getters["currency/rate"]);
 
       const cryptos: { [key: string]: string } = {
         ARK: "Ѧ",
@@ -38,10 +42,10 @@ export default {
       };
 
       return [store.getters["network/token"], "BTC", "ETH", "LTC"].some(c => currencyName.indexOf(c) > -1)
-        ? `${value.toLocaleString(locale, {
+        ? `${Number(value).toLocaleString(locale, {
             maximumFractionDigits: 8,
           })} ${cryptos[currencyName]}`
-        : value.toLocaleString(locale, {
+        : Number(value).toLocaleString(locale, {
             style: "currency",
             currency: currencyName,
           });

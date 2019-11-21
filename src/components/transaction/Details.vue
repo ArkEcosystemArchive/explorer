@@ -197,6 +197,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { BigNumber } from "@/utils/BigNumber";
 import { TranslateResult } from "vue-i18n";
 import { mapGetters } from "vuex";
 import { ITransaction } from "@/interfaces";
@@ -221,7 +222,7 @@ export default class TransactionDetails extends Vue {
   private price: number | null = 0;
   private currencySymbol: string;
   private height: number;
-  private multipaymentAmount: number | null = null;
+  private multipaymentAmount: BigNumber | null = null;
   private timelockStatus: TranslateResult | null = null;
   private timelockLink: string | null = null;
 

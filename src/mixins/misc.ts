@@ -1,6 +1,7 @@
 import moment from "moment";
 import store from "@/store";
 import { ITransaction } from "@/interfaces";
+import { BigNumber } from "@/utils";
 
 const locale = store.getters["ui/locale"];
 
@@ -56,25 +57,25 @@ export default {
         .format("L LTS");
     },
 
-    calculateMultipaymentAmount(transaction: ITransaction): number {
+    calculateMultipaymentAmount(transaction: ITransaction): BigNumber {
       if (transaction.asset && transaction.asset.payments) {
         return transaction.asset.payments.reduce(
-          (sum: number, { amount }: { amount: string }) => sum + Number(amount),
-          0,
+          (sum: BigNumber, { amount }: { amount: string }) => sum.plus(amount),
+          BigNumber.ZERO,
         );
       }
-      return 0;
+      return BigNumber.ZERO;
     },
 
-    fetchWalletAmountFromMultipayment(transaction: ITransaction, address: string): number {
+    fetchWalletAmountFromMultipayment(transaction: ITransaction, address: string): BigNumber {
       if (transaction.asset && transaction.asset.payments) {
-        return Number(
+        return BigNumber.make(
           transaction.asset.payments.find(
             (wallet: { recipientId: string; amount: string }) => wallet.recipientId === address,
           ).amount,
         );
       }
-      return 0;
+      return BigNumber.ZERO;
     },
   },
 };
