@@ -19,7 +19,7 @@ const voterPropertyArray = ["address", "balance", "isDelegate", "publicKey"].sor
 
 describe("Services > Delegate", () => {
   beforeAll(() => {
-    store.dispatch("network/setServer", "https://explorer.ark.io/api/v2");
+    store.dispatch("network/setServer", "https://explorer.ark.io/api");
     store.dispatch("network/setActiveDelegates", 51);
   });
 
@@ -82,6 +82,9 @@ describe("Services > Delegate", () => {
   });
 
   it("should retrieve the resigned delegates", async () => {
+    // temporary set to devnet so the test passes
+    store.dispatch("network/setServer", "https://dexplorer.ark.io/api");
+
     const data = await DelegateService.resigned();
     expect(data).toBeArray();
     data.forEach(delegate => {
