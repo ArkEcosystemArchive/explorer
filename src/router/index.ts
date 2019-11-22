@@ -22,6 +22,7 @@ const TransactionComponent = () => import(/* webpackChunkName: "transaction" */ 
 const TransactionsComponent = () => import(/* webpackChunkName: "transactions" */ "@/pages/Transactions.vue");
 const DelegateMonitorComponent = () => import(/* webpackChunkName: "delegate-monitor" */ "@/pages/DelegateMonitor.vue");
 const TopWalletsComponent = () => import(/* webpackChunkName: "top-wallets" */ "@/pages/TopWallets.vue");
+const BusinessesComponent = () => import(/* webpackChunkName: "businesses" */ "@/pages/Businesses.vue");
 const NotFoundComponent = () => import(/* webpackChunkName: "404" */ "@/pages/404.vue");
 
 Vue.use(Router);
@@ -159,6 +160,17 @@ const router = new Router({
       name: "top-wallets",
       component: TopWalletsComponent,
       meta: { title: (route: Route) => getTitle("Top Wallets") },
+    },
+    {
+      path: "/businesses",
+      redirect: to => ({ name: "businesses", params: { page: 1 } }),
+      meta: { title: (route: Route) => getTitle("Businesses") },
+    },
+    {
+      path: "/businesses/:page(\\d+)",
+      name: "businesses",
+      component: BusinessesComponent,
+      meta: { title: (route: Route) => getTitle("Businesses") },
     },
     {
       path: "/404",

@@ -153,6 +153,13 @@ export default {
       LATEST_TRANSACTIONS: "Latest transactions",
       LATEST_BLOCKS: "Latest blocks",
     },
+    BUSINESSES: {
+      TITLE: "Businesses",
+      NAME: "Business Name",
+      CREATOR: "Creator",
+      WEBSITE: "Website",
+      REPOSITORY: "Repository"
+    },
     DELEGATE_MONITOR: {
       TITLE: "Delegate Monitor",
       HEADER: {

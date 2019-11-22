@@ -1,0 +1,96 @@
+<template>
+  <Loader :data="businesses">
+    <TableWrapper
+      v-bind="$attrs"
+      :columns="columns"
+      :rows="businesses"
+      :no-data-message="$t('COMMON.NO_RESULTS')"
+      @on-sort-change="emitSortChange"
+    >
+      <template slot-scope="data">
+        <div v-if="data.column.field === 'name'">
+          <span>
+            {{ data.row.name }}
+          </span>
+        </div>
+
+        <div v-else-if="data.column.field === 'address'">
+          <LinkWallet :address="data.row.address" />
+        </div>
+
+        <div v-else-if="data.column.field === 'website'">
+          <span>
+            {{ data.row.website }}
+          </span>
+        </div>
+
+        <div v-else-if="data.column.field === 'repository'">
+          <span>
+            {{ data.row.repository }}
+          </span>
+        </div>
+      </template>
+    </TableWrapper>
+  </Loader>
+</template>
+
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { IBusiness, ISortParameters } from "@/interfaces";
+
+@Component
+export default class TableBusinessesDesktop extends Vue {
+  @Prop({
+    required: true,
+    validator: value => {
+      return Array.isArray(value) || value === null;
+    },
+  })
+  public businesses: IBusiness[] | null;
+
+  get columns() {
+    const columns = [
+      {
+        label: this.$t("PAGES.BUSINESSES.NAME"),
+        field: "name",
+        thClass: "start-cell",
+        tdClass: "start-cell",
+      },
+      {
+        label: this.$t("PAGES.BUSINESSES.CREATOR"),
+        field: "address",
+        thClass: "text-left hidden md:table-cell",
+        tdClass: "text-left hidden md:table-cell",
+      },
+      {
+        label: this.$t("PAGES.BUSINESSES.WEBSITE"),
+        field: "website",
+      },
+      {
+        label: this.$t("PAGES.BUSINESSES.REPOSITORY"),
+        field: "repository",
+        thClass: "end-cell hidden lg:table-cell",
+        tdClass: "end-cell hidden lg:table-cell",
+      },
+    ];
+
+    return columns;
+  }
+
+  private emitSortChange(params: ISortParameters[]) {
+    this.$emit("on-sort-change", params[0]);
+  }
+}
+</script>
+
+<style>
+.wrap-timestamp {
+  white-space: normal;
+}
+
+@media (min-width: 870px) {
+  .wrap-timestamp {
+    white-space: nowrap;
+  }
+}
+</style>

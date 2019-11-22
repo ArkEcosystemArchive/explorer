@@ -228,6 +228,7 @@ export interface IUiState {
   headerType: string | null;
   menuVisible: boolean;
   blockSortParams: string | null;
+  businessSortParams: string | null;
   delegateSortParams: string | null;
   transactionSortParams: string | null;
   walletSortParams: string | null;
@@ -251,4 +252,17 @@ export interface ITransactionType {
   key: string;
   type: number;
   typeGroup?: number;
+}
+
+export interface IApiBusinessesWrapper {
+  data: IBusiness[];
+  meta: IMeta;
+}
+
+export interface IBusiness {
+  address: string;
+  publicKey: string;
+  name: string;
+  website: string;
+  repository?: string;
 }

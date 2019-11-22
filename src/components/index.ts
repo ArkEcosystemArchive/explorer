@@ -25,6 +25,7 @@ Vue.component("TableBlocksDesktop", require("@/components/tables/Blocks").defaul
 Vue.component("TableTransactionsDesktop", require("@/components/tables/Transactions").default);
 Vue.component("TableWalletsDesktop", require("@/components/tables/Wallets").default);
 Vue.component("TableLockTransactionsDesktop", require("@/components/tables/LockTransactions").default);
+Vue.component("TableBusinessesDesktop", require("@/components/tables/Businesses").default);
 
 Vue.component("TableBlocksMobile", require("@/components/tables/mobile/Blocks").default);
 Vue.component("TableTransactionsMobile", require("@/components/tables/mobile/Transactions").default);
