@@ -5,6 +5,7 @@ const locale = store.getters["ui/locale"];
 
 export default {
   methods: {
+    // Note: due to BigNumber config the max decimals is 8
     readableCrypto(value: string | undefined, appendCurrency: boolean = true, decimals: number = 8): string | void {
       if (value) {
         const bigNumberValue = BigNumber.make(value);
