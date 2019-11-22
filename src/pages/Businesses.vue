@@ -10,7 +10,7 @@
         />
       </div>
       <div class="sm:hidden">
-        <!-- <TableWalletsMobile :wallets="wallets" :total="supply" /> -->
+        <TableBusinessesMobile :businesses="businesses" />
       </div>
       <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
     </section>

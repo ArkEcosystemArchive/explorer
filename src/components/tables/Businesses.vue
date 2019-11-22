@@ -84,13 +84,5 @@ export default class TableBusinessesDesktop extends Vue {
 </script>
 
 <style>
-.wrap-timestamp {
-  white-space: normal;
-}
 
-@media (min-width: 870px) {
-  .wrap-timestamp {
-    white-space: nowrap;
-  }
-}
 </style>
