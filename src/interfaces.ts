@@ -1,4 +1,5 @@
 import { ForgingStatus } from "./enums";
+import { BigNumber } from "@/utils";
 
 export interface IBlock {
   id: string;
@@ -6,10 +7,10 @@ export interface IBlock {
   height: number;
   previous: string;
   forged: {
-    reward: string;
-    fee: string;
-    total: string;
-    amount: string;
+    reward: BigNumber;
+    fee: BigNumber;
+    total: BigNumber;
+    amount: BigNumber;
   };
   payload: {
     hash: string;
@@ -41,9 +42,9 @@ export interface IDelegate {
     approval: number;
   };
   forged: {
-    fees: string;
-    rewards: string;
-    total: string;
+    fees: BigNumber;
+    rewards: BigNumber;
+    total: BigNumber;
   };
   forgingStatus: ForgingStatus;
 }
@@ -70,7 +71,7 @@ export interface ITransaction {
   version?: number;
   type: number;
   typeGroup: number;
-  amount: string;
+  amount: BigNumber;
   fee: string;
   sender: string;
   senderPublicKey: string;
@@ -104,7 +105,7 @@ export interface IWallet {
   vote: string;
   isDelegate: boolean;
   isResigned?: boolean;
-  lockedBalance?: string;
+  lockedBalance?: BigNumber;
 }
 
 export interface IApiResponse {

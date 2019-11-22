@@ -23,7 +23,7 @@
         </div>
 
         <div v-else-if="data.column.field === 'supply'">
-          {{ percentageString((data.row.balance / total) * 100) }}
+          {{ supplyPercentage(data.row.balance) }}
         </div>
       </template>
     </TableWrapper>
@@ -34,6 +34,7 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { ISortParameters, IWallet } from "@/interfaces";
 import { mapGetters } from "vuex";
+import { BigNumber } from "@/utils";
 
 @Component({
   computed: {
@@ -41,17 +42,6 @@ import { mapGetters } from "vuex";
   },
 })
 export default class TableWalletsDesktop extends Vue {
-  @Prop({
-    required: true,
-    validator: value => {
-      return Array.isArray(value) || value === null;
-    },
-  })
-  public wallets: IWallet[] | null;
-  @Prop({ required: true }) public total: number;
-
-  private windowWidth: number = 0;
-  private supply: string;
 
   get truncateBalance() {
     return this.windowWidth < 700;
@@ -88,6 +78,17 @@ export default class TableWalletsDesktop extends Vue {
 
     return columns;
   }
+  @Prop({
+    required: true,
+    validator: value => {
+      return Array.isArray(value) || value === null;
+    },
+  })
+  public wallets: IWallet[] | null;
+  @Prop({ required: true }) public total: number;
+
+  private windowWidth: number = 0;
+  private supply: string;
 
   public mounted() {
     this.windowWidth = window.innerWidth;
@@ -97,6 +98,11 @@ export default class TableWalletsDesktop extends Vue {
         this.windowWidth = window.innerWidth;
       });
     });
+  }
+
+  public supplyPercentage(balance: string): string {
+    // @ts-ignore
+    return this.percentageString(BigNumber.make(balance).dividedBy(this.total).times(100).toNumber())
   }
 
   private getRank(index: number) {
