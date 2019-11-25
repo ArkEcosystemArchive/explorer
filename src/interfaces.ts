@@ -230,6 +230,7 @@ export interface IUiState {
   menuVisible: boolean;
   blockSortParams: string | null;
   businessSortParams: string | null;
+  bridgechainSortParams: string | null;
   delegateSortParams: string | null;
   transactionSortParams: string | null;
   walletSortParams: string | null;
@@ -266,4 +267,18 @@ export interface IBusiness {
   name: string;
   website: string;
   repository?: string;
+}
+
+export interface IApiBridgechainsWrapper {
+  data: IBridgechain[];
+  meta: IMeta;
+}
+
+export interface IBridgechain {
+  publicKey: string;
+  name: string;
+  seedNodes: string[];
+  genesisHash: string;
+  bridgechainRepository?: string;
+  ports: object;
 }

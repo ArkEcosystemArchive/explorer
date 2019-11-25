@@ -153,6 +153,13 @@ export default {
       LATEST_TRANSACTIONS: "Latest transactions",
       LATEST_BLOCKS: "Latest blocks",
     },
+    BRIDGECHAINS: {
+      TITLE: "Bridgechains",
+      NAME: "Name",
+      CREATOR: "Creator",
+      SEED_SERVER: "Seed Server",
+      REPOSITORY: "Repository"
+    },
     BUSINESSES: {
       TITLE: "Businesses",
       NAME: "Business Name",

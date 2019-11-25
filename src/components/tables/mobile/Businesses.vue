@@ -1,7 +1,7 @@
 <template>
   <div>
     <Loader :data="businesses">
-      <div v-for="business in businesses" :key="business.address" class="row-mobile">
+      <div v-for="business in businesses" :key="business.name" class="row-mobile">
         <div class="list-row-border-b">
           <div class="mr-4">
             {{ $t("PAGES.BUSINESSES.NAME") }}
