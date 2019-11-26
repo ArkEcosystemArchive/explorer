@@ -124,7 +124,7 @@ describe("Store > UI", () => {
 
     store.dispatch("ui/setBridgechainSortParams", params);
 
-    expect(store.getters["ui/BridgechainSortParams"]).toEqual(params);
+    expect(store.getters["ui/bridgechainSortParams"]).toEqual(params);
   });
 
   it("should set the transaction sort params", () => {
