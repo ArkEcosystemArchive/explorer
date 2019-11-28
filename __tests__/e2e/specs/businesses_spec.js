@@ -1,14 +1,26 @@
 describe("Businesses", () => {
-    it("should show up to 25 rows in the table", () => {
+    it("should show a disclaimer", () => {
       cy.visit("/businesses/1");
 
+      cy.get("div.modal-container").should('be.visible')
+    });
+
+    it("should be possible to dismiss the disclaimer", () => {
+      cy.visit("/businesses/1");
+
+      cy.get("div.modal-container button")
+        .contains("Accept")
+        .click()
+
+        cy.get("div.modal-container").should('not.be.visible')
+    });
+
+    it("should show up to 25 rows in the table", () => {
       cy.get("table.vgt-table tbody tr").should('have.length.of.at.most', 25);
     });
 
     it("should be possible to sort the table", () => {
-      cy.visit("/businesses/1");
-
-      cy.get('body').then(($body) => {
+      cy.get('div.max-w-2xl').then(($body) => {
         if ($body.find('table').length) {
           cy.get("th")
             .eq(1)
@@ -31,7 +43,7 @@ describe("Businesses", () => {
     });
 
     it("should be possible to navigate to the next page and back", () => {
-      cy.get('body').then(($body) => {
+      cy.get('div.max-w-2xl').then(($body) => {
         if ($body.find('table').length) {
           cy.get(".Pagination__Button--previous").should("not.exist");
           cy.get(".Pagination__Button--next")
@@ -50,9 +62,7 @@ describe("Businesses", () => {
     });
 
     it("should be possible to click on a creator address", () => {
-      cy.visit("/businesses/1");
-
-      cy.get('body').then(($body) => {
+      cy.get('div.max-w-2xl').then(($body) => {
         if ($body.find('table').length) {
           cy.get("h1")
             .contains("Businesses")

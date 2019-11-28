@@ -1,5 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
+    <DisclaimerModal />
     <ContentHeader>{{ $t("PAGES.BUSINESSES.TITLE") }}</ContentHeader>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">

@@ -38,5 +38,6 @@ Vue.component("TableBridgechainsMobile", require("@/components/tables/mobile/Bri
 // Misc.
 Vue.component("ArkMeter", require("@/components/monitor/ArkMeter").default);
 Vue.component("ContentHeader", require("@/components/ContentHeader").default);
+Vue.component("DisclaimerModal", require("@/components/DisclaimerModal").default);
 Vue.component("Modal", require("@/components/Modal").default);
 Vue.component("SvgIcon", require("@/components/SvgIcon").default);

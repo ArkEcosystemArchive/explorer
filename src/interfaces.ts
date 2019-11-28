@@ -234,6 +234,7 @@ export interface IUiState {
   delegateSortParams: string | null;
   transactionSortParams: string | null;
   walletSortParams: string | null;
+  hasAcceptedLinkDisclaimer: boolean;
 }
 
 export interface IStorePayload {

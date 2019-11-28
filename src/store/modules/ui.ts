@@ -15,6 +15,7 @@ const state: IUiState = {
   },
   headerType: null,
   menuVisible: false,
+  hasAcceptedLinkDisclaimer: false,
   blockSortParams: null,
   businessSortParams: null,
   bridgechainSortParams: null,
@@ -67,6 +68,14 @@ const actions: ActionTree<IUiState, {}> = {
 
     commit({
       type: types.SET_UI_MENU_VISIBLE,
+      value,
+    });
+  },
+  setHasAcceptedLinkDisclaimer: ({ commit }, value: boolean) => {
+    localStorage.setItem("hasAcceptedLinkDisclaimer", JSON.stringify(value));
+
+    commit({
+      type: types.SET_UI_HAS_ACCEPTED_LINK_DISCLAIMER,
       value,
     });
   },
@@ -162,6 +171,9 @@ const mutations: MutationTree<IUiState> = {
   [types.SET_UI_MENU_VISIBLE](state, payload: IStorePayload) {
     state.menuVisible = payload.value;
   },
+  [types.SET_UI_HAS_ACCEPTED_LINK_DISCLAIMER](state, payload: IStorePayload) {
+    state.hasAcceptedLinkDisclaimer = payload.value;
+  },
   [types.SET_UI_PRICE_CHART_OPTIONS](state, payload: IStorePayload) {
     state.priceChartOptions = payload.value;
   },
@@ -192,6 +204,10 @@ const getters: GetterTree<IUiState, {}> = {
   priceChartOptions: state => state.priceChartOptions,
   headerType: state => state.headerType,
   menuVisible: state => state.menuVisible,
+
+  hasAcceptedLinkDisclaimer(state) {
+    return state.hasAcceptedLinkDisclaimer || localStorage.getItem("hasAcceptedLinkDisclaimer")
+  },
 
   blockSortParams(state) {
     const params = state.blockSortParams || localStorage.getItem("blockSortParams");

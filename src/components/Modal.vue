@@ -1,12 +1,12 @@
 <template>
   <transition name="modal" appear>
-    <div class="modal-mask" @click="$emit('close')">
+    <div class="modal-mask" @click="emitOutsideClick()">
       <div class="flex items-center justify-center absolute inset-0">
         <div
-          class="modal-container bg-theme-page-background text-theme-text-content rounded shadow-theme mx-auto relative p-10"
+          class="modal-container bg-theme-page-background text-theme-text-content rounded shadow-theme mx-4 sm:mx-auto relative p-6 sm:p-10"
           @click.stop
         >
-          <button class="absolute top-0 right-0 p-5 text-theme-button-close" @click="$emit('close')">
+          <button v-if="showCancel" class="absolute top-0 right-0 p-5 text-theme-button-close" @click="$emit('close')">
             <SvgIcon name="cross" view-box="0 0 14 14" />
           </button>
 
@@ -18,10 +18,19 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
-export default class Modal extends Vue {}
+export default class Modal extends Vue {
+  @Prop({ required: false, default: true }) public closeOutside: boolean;
+  @Prop({ required: false, default: true }) public showCancel: boolean;
+
+  private emitOutsideClick() {
+    if (this.closeOutside) {
+      this.$emit("close");
+    }
+  }
+}
 </script>
 
 <style scoped>
