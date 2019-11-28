@@ -1,11 +1,11 @@
 describe("Bridgechains", () => {
-  it("should show a disclaimer", () => {
+  xit("should show a disclaimer", () => {
     cy.visit("/bridgechains/1");
 
     cy.get("div.modal-container").should('be.visible')
   });
 
-  it("should be possible to dismiss the disclaimer", () => {
+  xit("should be possible to dismiss the disclaimer", () => {
     cy.visit("/bridgechains/1");
 
     cy.get("div.modal-container button")
@@ -15,11 +15,11 @@ describe("Bridgechains", () => {
       cy.get("div.modal-container").should('not.be.visible')
   });
 
-  it("should show up to 25 rows in the table", () => {
+  xit("should show up to 25 rows in the table", () => {
     cy.get("table.vgt-table tbody tr").should('have.length.of.at.most', 25);
   });
 
-  it("should be possible to sort the table", () => {
+  xit("should be possible to sort the table", () => {
     cy.get('div.max-w-2xl').then(($body) => {
       if ($body.find('table').length) {
         cy.get("th")
@@ -42,7 +42,7 @@ describe("Bridgechains", () => {
     });
   });
 
-  it("should be possible to navigate to the next page and back", () => {
+  xit("should be possible to navigate to the next page and back", () => {
     cy.get('div.max-w-2xl').then(($body) => {
       if ($body.find('table').length) {
         cy.get(".Pagination__Button--previous").should("not.exist");
@@ -61,7 +61,7 @@ describe("Bridgechains", () => {
     });
   });
 
-  it("should be possible to click on a creator address", () => {
+  xit("should be possible to click on a creator address", () => {
     cy.get('div.max-w-2xl').then(($body) => {
       if ($body.find('table').length) {
         cy.get("h1")
