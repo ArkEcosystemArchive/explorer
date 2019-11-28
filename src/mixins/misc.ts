@@ -70,10 +70,11 @@ export default {
     fetchWalletAmountFromMultipayment(transaction: ITransaction, address: string): BigNumber {
       if (transaction.asset && transaction.asset.payments) {
         return transaction.asset.payments.reduce(
-          (sum: BigNumber, { recipientId, amount }: { recipientId: string; amount: string }
-        ) => {
-          return recipientId === address ? sum.plus(amount) : sum;
-        }, BigNumber.ZERO);
+          (sum: BigNumber, { recipientId, amount }: { recipientId: string; amount: string }) => {
+            return recipientId === address ? sum.plus(amount) : sum;
+          },
+          BigNumber.ZERO,
+        );
       }
       return BigNumber.ZERO;
     },
