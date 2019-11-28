@@ -62,7 +62,7 @@ describe("Mixins > Misc", () => {
     });
   });
 
-  describe("fetchWalletAmountFromMultipayment", () => {
+  describe("calculateMultipaymentAmount", () => {
     const transaction = {
       asset: {
         payments: [
@@ -82,12 +82,16 @@ describe("Mixins > Misc", () => {
       },
     };
 
+    it("should return the correct amount if no address given", () => {
+      expect(wrapper.vm.calculateMultipaymentAmount(transaction).toFixed()).toEqual("300");
+    });
+
     it("should return the correct amount if there is only one payment to the given address", () => {
-      expect(wrapper.vm.fetchWalletAmountFromMultipayment(transaction, "A2").toFixed()).toEqual("100");
+      expect(wrapper.vm.calculateMultipaymentAmount(transaction, "A2").toFixed()).toEqual("100");
     });
 
     it("should return the correct amount if there are multiple payments to the given address", () => {
-      expect(wrapper.vm.fetchWalletAmountFromMultipayment(transaction, "A1").toFixed()).toEqual("200");
+      expect(wrapper.vm.calculateMultipaymentAmount(transaction, "A1").toFixed()).toEqual("200");
     });
   });
 });

@@ -57,21 +57,11 @@ export default {
         .format("L LTS");
     },
 
-    calculateMultipaymentAmount(transaction: ITransaction): BigNumber {
-      if (transaction.asset && transaction.asset.payments) {
-        return transaction.asset.payments.reduce(
-          (sum: BigNumber, { amount }: { amount: string }) => sum.plus(amount),
-          BigNumber.ZERO,
-        );
-      }
-      return BigNumber.ZERO;
-    },
-
-    fetchWalletAmountFromMultipayment(transaction: ITransaction, address: string): BigNumber {
+    calculateMultipaymentAmount(transaction: ITransaction, address?: string): BigNumber {
       if (transaction.asset && transaction.asset.payments) {
         return transaction.asset.payments.reduce(
           (sum: BigNumber, { recipientId, amount }: { recipientId: string; amount: string }) => {
-            return recipientId === address ? sum.plus(amount) : sum;
+            return !address || recipientId === address ? sum.plus(amount) : sum;
           },
           BigNumber.ZERO,
         );

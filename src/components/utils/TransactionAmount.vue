@@ -37,13 +37,12 @@ export default class TransactionAmount extends Vue {
       return this.transaction.fee;
     }
     if (this.type === CoreTransaction.MULTI_PAYMENT && this.typeGroup === TypeGroupTransaction.CORE) {
-      return !this.$route.params.address || this.transaction.sender === this.$route.params.address
-        ? // Needed for ts-ignore
-          // @ts-ignore
-          this.calculateMultipaymentAmount(this.transaction)
-        : // Needed for ts-ignore
-          // @ts-ignore
-          this.fetchWalletAmountFromMultipayment(this.transaction, this.$route.params.address);
+      const address =
+        this.$route.params.address || this.transaction.sender !== this.$route.params.address
+          ? this.$route.params.address
+          : undefined;
+      // @ts-ignore
+      return this.calculateMultipaymentAmount(this.transaction, address);
     }
     return this.transaction.amount;
   }
