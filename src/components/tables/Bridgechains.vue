@@ -25,9 +25,7 @@
         </div>
 
         <div v-else-if="data.column.field === 'bridgechainRepository'">
-          <span>
-            {{ data.row.bridgechainRepository }}
-          </span>
+          <a :href="data.row.bridgechainRepository" target="_blank" rel="noopener noreferrer nofollow">{{ data.row.bridgechainRepository }}</a>
         </div>
       </template>
     </TableWrapper>

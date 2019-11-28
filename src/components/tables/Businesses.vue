@@ -19,15 +19,11 @@
         </div>
 
         <div v-else-if="data.column.field === 'website'">
-          <span>
-            {{ data.row.website }}
-          </span>
+          <a :href="data.row.website" target="_blank" rel="noopener noreferrer nofollow">{{ data.row.website }}</a>
         </div>
 
         <div v-else-if="data.column.field === 'repository'">
-          <span>
-            {{ data.row.repository }}
-          </span>
+          <a :href="data.row.repository" target="_blank" rel="noopener noreferrer nofollow">{{ data.row.repository }}</a>
         </div>
       </template>
     </TableWrapper>

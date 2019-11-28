@@ -20,14 +20,14 @@
           <div class="mr-4">
             {{ $t("PAGES.BUSINESSES.WEBSITE") }}
           </div>
-          <div>{{ business.website }}</div>
+          <div><a :href="business.website" target="_blank" rel="noopener noreferrer nofollow">{{ business.website }}</a></div>
         </div>
 
         <div v-if="business.repository" class="list-row">
           <div class="mr-4">
             {{ $t("PAGES.BUSINESSES.REPOSITORY") }}
           </div>
-          <div>{{ business.repository }}</div>
+          <div><a :href="business.repository" target="_blank" rel="noopener noreferrer nofollow">{{ business.repository }}</a></div>
         </div>
       </div>
       <div v-if="businesses && !businesses.length" class="px-5 md:px-10">
