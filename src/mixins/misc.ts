@@ -69,12 +69,10 @@ export default {
 
     fetchWalletAmountFromMultipayment(transaction: ITransaction, address: string): BigNumber {
       if (transaction.asset && transaction.asset.payments) {
-        const payments = transaction.asset.payments.filter(
-            (wallet: { recipientId: string; amount: string }) => wallet.recipientId === address,
-        );
-
-        return payments.reduce((sum, payment) => {
-          return sum.plus(payment.amount);
+        return transaction.asset.payments.reduce(
+          (sum: BigNumber, { recipientId, amount }: { recipientId: string; amount: string }
+        ) => {
+          return recipientId === address ? sum.plus(amount) : sum;
         }, BigNumber.ZERO);
       }
       return BigNumber.ZERO;
