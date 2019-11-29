@@ -1,16 +1,19 @@
 <template>
   <div>
     <div class="flex justify-between flex-wrap px-5 sm:px-10 xl:px-0">
-      <h1 class="text-2xl md:text-3xl mb-5 md:mb-6 text-theme-text-primary sm:mr-5">
+      <h1 class="text-2xl md:text-3xl mb-5 md:mb-6 text-white sm:mr-5">
         <slot />
       </h1>
       <div
         class="hidden sm:flex items-center text-theme-text-tertiary text-2xs px-3 sm:px-8 xl:px-6 py-3 mb-5 md:mb-6 bg-stat-background rounded-md"
       >
         <div class="pr-6">{{ $t("COMMON.HEIGHT") }}: {{ readableNumber(height) }}</div>
-        <div class="pr-6">{{ $t("HEADER.NETWORK") }}: {{ $t(`HEADER.${alias.toUpperCase()}`) }}</div>
+        <div class="pr-6" :class="{ 'text-red font-black': !isMainWithCurrency }">
+          {{ $t("HEADER.NETWORK") }}: {{ $t(`HEADER.${alias.toUpperCase()}`) }}
+        </div>
         <div :class="{ 'pr-6': isMainWithCurrency }">
-          {{ $t("HEADER.SUPPLY") }}: <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }}</span>
+          {{ $t("HEADER.SUPPLY") }}:
+          <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }} / {{ unikSupply }} UNIK</span>
         </div>
         <div v-if="isMainWithCurrency">
           {{ $t("HEADER.MARKET_CAP") }}: <span class="whitespace-no-wrap">{{ readableCurrency(supply) }}</span>
@@ -30,7 +33,9 @@
       </div>
       <div>
         <span>{{ $t("HEADER.SUPPLY") }}:</span>
-        <span class="block md:inline-block whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }}</span>
+        <span class="block md:inline-block whitespace-no-wrap"
+          >{{ readableCrypto(supply, true, 0) }} / {{ unikSupply }} UNIK</span
+        >
       </div>
     </div>
   </div>
@@ -42,7 +47,7 @@ import { mapGetters } from "vuex";
 
 @Component({
   computed: {
-    ...mapGetters("network", ["alias", "supply", "height"]),
+    ...mapGetters("network", ["alias", "supply", "height", "unikSupply"]),
     ...mapGetters("currency", ["name", "rate", "symbol"]),
   },
 })
@@ -55,7 +60,7 @@ export default class ContentHeader extends Vue {
   private symbol: string;
 
   get isMainWithCurrency() {
-    return this.alias === "Main" && this.name && this.name !== "ARK";
+    return this.alias === "Main" && this.name && this.name !== "UNS";
   }
 }
 </script>

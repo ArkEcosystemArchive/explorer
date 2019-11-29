@@ -7,7 +7,7 @@
 }
 
 .active-tab {
-  @apply .base-tab .text-lg .border-blue .text-theme-text-primary .transition;
+  @apply .base-tab .text-lg .border-orange .text-theme-text-primary .transition;
 }
 
 .inactive-tab {
@@ -16,7 +16,7 @@
 
 .active-tab:hover,
 .inactive-tab:hover {
-  @apply .text-theme-text-primary .border-blue;
+  @apply .text-theme-text-primary .border-orange;
 }
 
 @screen sm {

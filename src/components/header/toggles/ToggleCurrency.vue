@@ -1,6 +1,6 @@
 <template>
   <button
-    class="px-2 md:px-4 py-3 md:py-6 flex items-center text-sm border-b-2 mt-2px border-transparent hover:border-theme-accents transition"
+    class="px-2 md:px-4 py-3 md:py-6 flex items-center text-sm border-b-2 mt-2px border-transparent hover:border-orange transition"
     @click="$store.dispatch('ui/setHeaderType', isCurrencyMenu ? null : 'currencies')"
   >
     <SvgIcon class="md:mr-2 flex-none text-link-color" :name="`currencies/${currencyName}`" view-box="0 0 22 16" />

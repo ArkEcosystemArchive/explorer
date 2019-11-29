@@ -2,7 +2,7 @@
   <div class="max-w-2xl mx-auto md:pt-5">
     <ContentHeader>{{ $t("PAGES.HOME.HEADER") }}</ContentHeader>
 
-    <section v-if="isChartEnabled" class="hidden md:block mb-5 bg-theme-feature-background xl:rounded-lg">
+    <section v-if="isChartEnabled === true" class="hidden md:block mb-5 bg-theme-feature-background xl:rounded-lg">
       <ChartWrapper />
     </section>
 

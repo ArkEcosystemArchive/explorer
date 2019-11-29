@@ -78,6 +78,29 @@
     <span v-else-if="isBridgechainRegistration(type, typeGroup)">{{ $t("TRANSACTION.TYPES.BRIDGECHAIN_REGISTRATION") }}</span>
     <span v-else-if="isBridgechainResignation(type, typeGroup)">{{ $t("TRANSACTION.TYPES.BRIDGECHAIN_RESIGNATION") }}</span>
     <span v-else-if="isBridgechainUpdate(type, typeGroup)">{{ $t("TRANSACTION.TYPES.BRIDGECHAIN_UPDATE") }}</span>
+
+    <span v-else-if="isNftTransfer(type, typeGroup)">
+      <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
+        >{{ $t("UNIK.TRANSFER") }}
+      </RouterLink>
+    </span>
+    <span v-else-if="isNftUpdate(type, typeGroup)">
+      <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
+        >{{ $t("UNIK.UPDATE") }}
+      </RouterLink>
+    </span>
+    <span v-else-if="isNftMint(type, typeGroup)">
+      <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
+        >{{ $t("UNIK.CREATION") }}
+      </RouterLink>
+    </span>
+    <span v-else-if="isUnsDiscloseExplicit(type, typeGroup)">
+      <RouterLink
+        v-tooltip="asset['disclose-demand'].payload.sub"
+        :to="{ name: 'unik', params: { id: asset['disclose-demand'].payload.sub } }"
+        >{{ $t("UNIK.DISCLOSE") }}
+      </RouterLink>
+    </span>
   </span>
 </template>
 

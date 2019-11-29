@@ -1,6 +1,6 @@
 <template>
   <div class="WalletTransactions">
-    <h2 class="text-2xl mb-5 md:mb-6 px-5 sm:hidden text-theme-text-primary">
+    <h2 class="text-2xl mb-5 md:mb-6 px-5 sm:hidden text-white">
       {{ $t("COMMON.TRANSACTIONS") }}
     </h2>
     <section class="page-section py-5 md:py-10">
@@ -236,11 +236,11 @@ export default class WalletTransactions extends Vue {
 }
 
 .TransactionsNavigation--tab:hover {
-  @apply .text-theme-text-primary .border-blue;
+  @apply .text-theme-text-primary .border-orange;
 }
 
 .TransactionsNavigation--tab.active {
-  @apply .text-2xl .border-blue .text-theme-text-primary;
+  @apply .text-2xl .border-orange .text-theme-text-primary;
 }
 
 .TransactionsNavigation--tab.disabled {

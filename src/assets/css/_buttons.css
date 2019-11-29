@@ -4,7 +4,7 @@ button:disabled {
 }
 
 .hover-button-shadow-definition {
-  box-shadow: 0 5px 15px rgba(9, 100, 228, 0.34);
+  box-shadow: 0 5px 15px rgba(228, 151, 9, 0.34);
 }
 
 .hover-button-shadow:hover {
@@ -31,13 +31,13 @@ button:disabled {
 }
 
 .block-pager-button {
-  @apply .py-4 .px-5 .bg-transparent .bg-blue-darker .rounded-md .text-white .font-normal .text-xs .transition;
+  @apply .py-4 .px-5 .bg-transparent .bg-orange-darker .rounded-md .text-white .font-normal .text-xs .transition;
 }
 
 .button-lg:enabled:hover,
 .pager-button:enabled:hover,
 .block-pager-button:enabled:hover {
-  @apply .bg-blue .text-white .hover-button-shadow-definition .cursor-pointer;
+  @apply .bg-orange .text-white .hover-button-shadow-definition .cursor-pointer;
 }
 
 
@@ -49,7 +49,7 @@ button:disabled {
 }
 
 .menu-button:hover {
-  @apply .border-red;
+  @apply .border-orange;
 }
 
 /* Dropdown Buttons */

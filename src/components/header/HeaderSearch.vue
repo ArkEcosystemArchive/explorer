@@ -25,7 +25,7 @@
       @keyup.enter="search"
     />
 
-    <button :disabled="!hasInput" class="search-icon text-grey hover:text-blue p-3 md:p-4 transition" @click="search">
+    <button :disabled="!hasInput" class="search-icon text-grey hover:text-orange p-3 md:p-4 transition" @click="search">
       <SvgIcon name="search" view-box="0 0 16 16" />
     </button>
   </div>
@@ -122,6 +122,14 @@ export default class HeaderSearch extends Vue {
     try {
       const responseTransaction = await SearchService.transactionById(this.query);
       this.changePage("transaction", { id: responseTransaction.id });
+      return;
+    } catch (e) {
+      this.updateSearchCount(e);
+    }
+
+    try {
+      const responseUnik = await SearchService.unikById(this.query);
+      this.changePage("unik", { id: responseUnik.id });
       return;
     } catch (e) {
       this.updateSearchCount(e);

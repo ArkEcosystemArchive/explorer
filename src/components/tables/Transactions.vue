@@ -120,7 +120,7 @@ export default class TableTransactionsDesktop extends Vue {
         tdClass: "break-all",
       },
       {
-        label: this.$t("TRANSACTION.RECIPIENT"),
+        label: this.$t("TRANSACTION.RECIPIENT_OR_TYPE"),
         field: "recipient",
         tdClass: "break-all",
       },

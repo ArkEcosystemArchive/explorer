@@ -10,7 +10,7 @@
         </div>
 
         <div class="list-row-border-b">
-          <div class="mr-4">{{ $t("TRANSACTION.RECIPIENT") }}</div>
+          <div class="mr-4">{{ $t("TRANSACTION.RECIPIENT_OR_TYPE") }}</div>
           <div class="truncate">
             <LinkWallet
               :address="transaction.recipient"

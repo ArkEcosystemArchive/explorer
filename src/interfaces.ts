@@ -212,6 +212,7 @@ export interface INetworkState {
   currencies: any[];
   knownWallets: any[];
   supply: number;
+  unikSupply: number;
   height: number;
   epoch: string | null;
   blocktime: number;
@@ -283,4 +284,24 @@ export interface IBridgechain {
   genesisHash: string;
   bridgechainRepository?: string;
   ports: object;
+}
+export interface IUnikProperties {
+  [_: string]: string;
+}
+
+export interface IUnikTransactions {
+  first: {
+    id: string;
+  };
+  last: {
+    id: string;
+  };
+}
+
+export interface IUnik {
+  id: string;
+  transactions?: IUnikTransactions;
+  properties?: IUnikProperties[];
+  type?: string;
+  creation?: number;
 }

@@ -37,7 +37,7 @@ export default class AppFooter extends Vue {
   }
 
   get versionLink() {
-    return `https://github.com/ArkEcosystem/explorer/commit/${process.env.VUE_APP_GIT_VERSION}`;
+    return `https://github.com/unik-name/explorer/commit/${process.env.VUE_APP_GIT_VERSION}`;
   }
 
   get date() {

@@ -61,7 +61,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
+import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction, NftTransaction, UNSTransaction } from "@/enums";
 import { ITransactionType } from "@/interfaces";
 
 @Component
@@ -106,6 +106,26 @@ export default class SelectionType extends Vue {
       type: MagistrateTransaction.BRIDGECHAIN_UPDATE,
       typeGroup: TypeGroupTransaction.MAGISTRATE,
     },
+    {
+      key: "UNIK_CREATION",
+      type: NftTransaction.NFT_MINT,
+      typeGroup: TypeGroupTransaction.NFT,
+    },
+    {
+      key: "UNIK_UPDATE",
+      type: NftTransaction.NFT_UPDATE,
+      typeGroup: TypeGroupTransaction.NFT,
+    },
+    {
+      key: "UNIK_TRANSFER",
+      type: NftTransaction.NFT_TRANSFER,
+      typeGroup: TypeGroupTransaction.NFT,
+    },
+    {
+      key: "UNS_DISCLOSE",
+      type: UNSTransaction.DISCLOSE_EXPLICIT,
+      typeGroup: TypeGroupTransaction.UNS,
+    },
   ];
   private transactionType: ITransactionType = { key: "ALL", type: -1 };
   private selectOpen: boolean = false;
@@ -123,7 +143,7 @@ export default class SelectionType extends Vue {
   }
 
   get secondaryTextColor() {
-    return this.inBanner ? "grey" : "theme-text-secondary";
+    return this.inBanner ? "grey" : "theme-content-background";
   }
 
   get bannerClasses() {

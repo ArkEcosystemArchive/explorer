@@ -4,10 +4,10 @@
   --color-theme-accents: #EF192D;
   --color-theme-transaction-icon: #037cff;
 
-  --color-theme-page-background-primary: #f5f6fa;
+  --color-theme-page-background-primary: #090d82;
   --color-theme-content-background-primary: #fff;
   --color-theme-feature-background: #20222d;
-  --color-theme-table-row: #f8f9fd;
+  --color-theme-table-row: #fdfbf8;
   --color-theme-table-row-hover: #fff;
   --color-theme-text-primary: #172130;
   --color-theme-text-secondary: #395174;
@@ -24,9 +24,9 @@
   --ark-meter: #e4ece9;
   --chart-active: #395174;
   --chart-inactive: #a0a6c8;
-  --theme-button: #e5f0f9;
+  --theme-button: #faefdb;
   --theme-button-active: #c5dbed;
-  --theme-button-text: #037cff;
+  --theme-button-text: #ffa407;
   --theme-button-close: #a0a6c8;
   --language-icon: #395174;
   --theme-resigned-label: #c53a4a;

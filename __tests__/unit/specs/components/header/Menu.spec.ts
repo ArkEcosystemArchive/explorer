@@ -92,8 +92,7 @@ describe("Components > Header > Menu", () => {
     });
 
     it("should be possible to click on menu option", () => {
-      const items = wrapper.findAll(".menu-container > li > div");
-
+      const items = wrapper.findAll(".menu-container > li > div, .menu-container > li > a");
       for (let i = 0; i < items.length; ++i) {
         items.at(i).trigger("click");
         expect(pushMock).toHaveBeenCalledTimes(i + 1);

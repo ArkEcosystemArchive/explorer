@@ -3,8 +3,8 @@
     <div class="px-4 md:px-8 flex-auto flex">
       <button
         :class="[
-          menuVisible ? 'border-theme-accents' : 'border-transparent',
-          'px-2 sm:px-4 py-3 md:py-6 flex-none flex items-center border-b-2 mt-2px hover:border-theme-accents text-theme-text-secondary transition',
+          menuVisible ? 'border-orange' : 'border-transparent',
+          'px-2 sm:px-4 py-3 md:py-6 flex-none flex items-center border-b-2 mt-2px hover:border-orange text-theme-text-secondary transition',
         ]"
         @click="$store.dispatch('ui/setMenuVisible', !menuVisible)"
       >

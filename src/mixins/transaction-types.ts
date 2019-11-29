@@ -1,4 +1,4 @@
-import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
+import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction, NftTransaction, UNSTransaction } from "@/enums";
 
 const isCoreTypeGroup = (typeGroup: number): boolean => {
   return typeGroup === TypeGroupTransaction.CORE;
@@ -6,6 +6,14 @@ const isCoreTypeGroup = (typeGroup: number): boolean => {
 
 const isMagistrateTypeGroup = (typeGroup: number): boolean => {
   return typeGroup === TypeGroupTransaction.MAGISTRATE;
+};
+
+const isNFTTypeGroup = (typeGroup: number): boolean => {
+  return typeGroup === TypeGroupTransaction.NFT;
+};
+
+const isUNSTypeGroup = (typeGroup: number): boolean => {
+  return typeGroup === TypeGroupTransaction.UNS;
 };
 
 export default {
@@ -76,6 +84,22 @@ export default {
 
     isBridgechainUpdate(type: number, typeGroup: number): boolean {
       return isMagistrateTypeGroup(typeGroup) && type === MagistrateTransaction.BRIDGECHAIN_UPDATE;
+    },
+
+    isNftMint(type: number, typeGroup: number): boolean {
+      return isNFTTypeGroup(typeGroup) && type === NftTransaction.NFT_MINT;
+    },
+
+    isNftTransfer(type: number, typeGroup: number): boolean {
+      return isNFTTypeGroup(typeGroup) && type === NftTransaction.NFT_TRANSFER;
+    },
+
+    isNftUpdate(type: number, typeGroup: number): boolean {
+      return isNFTTypeGroup(typeGroup) && type === NftTransaction.NFT_UPDATE;
+    },
+
+    isUnsDiscloseExplicit(type: number, typeGroup: number): boolean {
+      return isUNSTypeGroup(typeGroup) && type === UNSTransaction.DISCLOSE_EXPLICIT;
     },
   },
 };

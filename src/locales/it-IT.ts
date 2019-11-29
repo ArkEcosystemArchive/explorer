@@ -4,8 +4,6 @@ export default {
     BLOCK: "Blocco",
     BLOCKS: "Blocchi",
     CONFIRMATIONS: "Conferme",
-    DELEGATE: "Delegato",
-    DELEGATES: "Delegati",
     FEE: "Commissione",
     HEIGHT: "Altezza",
     ID: "ID",
@@ -57,14 +55,12 @@ export default {
       ALL: "Tutto",
       TRANSFER: "Trasferimento",
       SECOND_SIGNATURE: "Registrazione 2ª Firma",
-      DELEGATE_REGISTRATION: "Registrazione Delegato",
       VOTE: "Voto",
       UNVOTE: "Voto rimosso",
       MULTI_SIGNATURE: "Registrazione Multisignature",
       IPFS: "IPFS",
       TIMELOCK_TRANSFER: "Trasferimento Timelock",
       MULTI_PAYMENT: "Pagamento multiplo",
-      DELEGATE_RESIGNATION: "Dimissione Delegato",
       SENT: "Inviato",
       RECEIVED: "Ricevuto",
     },
@@ -99,7 +95,6 @@ export default {
   SEARCH: {
     PLACEHOLDER: {
       SHORT: "Cerca",
-      LONG: "Trova un blocco, transazione, indirizzo o delegato",
     },
     NO_RESULTS: "Niente corrisponde alla tua ricerca",
   },
@@ -118,7 +113,6 @@ export default {
       LATEST_BLOCKS: "Ultimi blocchi",
     },
     DELEGATE_MONITOR: {
-      TITLE: "Monitor Delegati",
       HEADER: {
         LAST_BLOCK: "Ultimo blocco",
         FORGED: "Forgiato",

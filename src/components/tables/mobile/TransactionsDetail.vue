@@ -25,7 +25,7 @@
 
         <div class="list-row-border-b">
           <div class="mr-4">
-            {{ $t("TRANSACTION.RECIPIENT") }}
+            {{ $t("TRANSACTION.RECIPIENT_OR_TYPE") }}
           </div>
           <LinkWallet
             :address="transaction.recipient"

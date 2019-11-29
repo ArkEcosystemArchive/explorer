@@ -1,0 +1,18 @@
+[build]
+    publish = "dist/"
+
+[context."devnet"]
+  command = "yarn build:devnet --verbose"
+
+[context."develop"]
+  command = "yarn build:dalinet --verbose"
+
+# Remove this line after deployment test
+[context."uns-develop"]
+  command = "yarn build:dalinet --verbose"
+
+[[redirects]]
+  from = "https://explorer.uns.network/*"
+  to = "https://devnet.explorer.uns.network/"
+  status = 302
+  force = true

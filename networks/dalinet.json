@@ -1,0 +1,17 @@
+{
+  "title": "uns.network DALINET Explorer",
+  "server": "https://forger1.dalinet.uns.network/api/v2",
+  "alias": "Dalinet",
+  "activeDelegates": 3,
+  "rewardOffset": 1,
+  "currencies": [],
+  "knownWallets": {},
+  "defaults": {
+    "token": "DUNS",
+    "symbol": "DUNS",
+    "currency": null,
+    "priceChartOptions": {
+      "enabled": false
+    }
+  }
+}

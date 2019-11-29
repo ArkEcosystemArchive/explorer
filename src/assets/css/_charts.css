@@ -1,5 +1,5 @@
 .chart-tab {
-  @apply .ml-1 .py-2 .px-4 .bg-transparent .rounded-md .text-blue-light .font-normal .text-xs;
+  @apply .ml-1 .py-2 .px-4 .bg-transparent .rounded-md .text-orange-light .font-normal .text-xs;
 }
 
 .chart-tab-active, .chart-tab:hover {

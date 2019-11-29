@@ -4,8 +4,6 @@ export default {
     BLOCK: "Block",
     BLOCKS: "Blocks",
     CONFIRMATIONS: "Confirmaties",
-    DELEGATE: "Afgevaardigde",
-    DELEGATES: "Afgevaardigden",
     FEE: "Kosten",
     HEIGHT: "Hoogte",
     ID: "ID",
@@ -57,14 +55,12 @@ export default {
       ALL: "Alles",
       TRANSFER: "Transfer",
       SECOND_SIGNATURE: "Registratie 2e Handtekening",
-      DELEGATE_REGISTRATION: "Registratie Afgevaardigde",
       VOTE: "Stem",
       UNVOTE: "Stem weggehaald",
       MULTI_SIGNATURE: "Registratie Multisignature",
       IPFS: "IPFS",
       TIMELOCK_TRANSFER: "Timelock Transfer",
       MULTI_PAYMENT: "Multipayment",
-      DELEGATE_RESIGNATION: "Aftreden Afgevaardigde",
       SENT: "Verzonden",
       RECEIVED: "Ontvangen",
     },
@@ -99,7 +95,6 @@ export default {
   SEARCH: {
     PLACEHOLDER: {
       SHORT: "Zoeken",
-      LONG: "Vind een block, transactie, adres of afgevaardigde",
     },
     NO_RESULTS: "We konden niets vinden",
   },
@@ -118,7 +113,6 @@ export default {
       LATEST_BLOCKS: "Laatste Blocks",
     },
     DELEGATE_MONITOR: {
-      TITLE: "Afgevaardigde Monitor",
       HEADER: {
         LAST_BLOCK: "Laatste block",
         FORGED: "Geforged",

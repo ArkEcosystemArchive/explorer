@@ -145,7 +145,7 @@ describe("Components > Links > Wallet", () => {
       });
 
       expect(wrapper.contains("a")).toBe(false);
-      expect(wrapper.text()).toEqual(expect.stringContaining("Delegate Registration"));
+      expect(wrapper.text()).toEqual(expect.stringContaining("Network player Registration"));
     });
 
     it("should display Vote for type 3", () => {
@@ -198,7 +198,7 @@ describe("Components > Links > Wallet", () => {
       });
 
       expect(wrapper.contains("a")).toBe(false);
-      expect(wrapper.text()).toEqual(expect.stringContaining("Delegate Resignation"));
+      expect(wrapper.text()).toEqual(expect.stringContaining("Network player Resignation"));
     });
 
     it("should display Delegate Resignation for type 8", () => {

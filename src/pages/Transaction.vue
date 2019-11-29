@@ -14,7 +14,13 @@
       <section class="mb-5">
         <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
           <div class="relative mr-6 flex-none">
-            <SvgIcon class="block" name="transaction" view-box="0 0 43 39" />
+            <SvgIcon
+              v-if="isNftMint(transaction.type, transaction.typeGroup)"
+              class="block"
+              name="transaction-unik"
+              view-box="0 0 43 39"
+            />
+            <SvgIcon v-else class="block" name="transaction" view-box="0 0 43 39" />
             <div
               class="absolute text-theme-transaction-icon text-2xl"
               style="top: 50%; left: 50%; transform: translate(-50%, -50%);"

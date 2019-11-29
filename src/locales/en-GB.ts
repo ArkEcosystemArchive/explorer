@@ -4,8 +4,8 @@ export default {
     BLOCK: "Block",
     BLOCKS: "Blocks",
     CONFIRMATIONS: "Confirmations",
-    DELEGATE: "Delegate",
-    DELEGATES: "Delegates",
+    DELEGATE: "Network player",
+    DELEGATES: "Network players",
     EXPIRATION: "Expiration",
     FEE: "Fee",
     HEIGHT: "Height",
@@ -84,7 +84,7 @@ export default {
       ALL: "All",
       TRANSFER: "Transfer",
       SECOND_SIGNATURE: "2nd Signature Registration",
-      DELEGATE_REGISTRATION: "Delegate Registration",
+      DELEGATE_REGISTRATION: "Network player Registration",
       VOTE: "Vote",
       UNVOTE: "Unvote",
       MULTI_SIGNATURE: "Multisignature Registration",
@@ -94,7 +94,7 @@ export default {
       TIMELOCK_CLAIM: "Timelock Claim",
       TIMELOCK_REFUND: "Timelock Refund",
       MULTI_PAYMENT: "Multipayment",
-      DELEGATE_RESIGNATION: "Delegate Resignation",
+      DELEGATE_RESIGNATION: "Network player Resignation",
       BUSINESS_REGISTRATION: "Business Registration",
       BUSINESS_RESIGNATION: "Business Resignation",
       BUSINESS_UPDATE: "Business Update",
@@ -103,6 +103,10 @@ export default {
       BRIDGECHAIN_UPDATE: "Bridgechain Update",
       SENT: "Sent",
       RECEIVED: "Received",
+      UNIK_CREATION: "UNIK creation",
+      UNIK_UPDATE: "UNIK Update",
+      UNIK_TRANSFER: "UNIK Transfer",
+      UNS_DISCLOSE: "Disclose Explicit",
     },
     ASSET: {
       BRIDGECHAINID: "Bridgechain ID",
@@ -117,6 +121,7 @@ export default {
     },
     SENDER: "Sender",
     RECIPIENT: "Recipient",
+    RECIPIENT_OR_TYPE: "Recipient or type",
     RECIPIENTS: "Recipients",
     SMARTBRIDGE: "Smartbridge",
     WELL_CONFIRMED: "Well confirmed",
@@ -156,7 +161,7 @@ export default {
   SEARCH: {
     PLACEHOLDER: {
       SHORT: "Search",
-      LONG: "Find a block, transaction, address or delegate",
+      LONG: "Find a block, transaction, address or network player or UNIK",
     },
     NO_RESULTS: "Nothing matched your search",
   },
@@ -189,7 +194,7 @@ export default {
       REPOSITORY: "Repository",
     },
     DELEGATE_MONITOR: {
-      TITLE: "Delegate Monitor",
+      TITLE: "Network player Monitor",
       HEADER: {
         LAST_BLOCK: "Last block",
         FORGED: "Forged",
@@ -249,14 +254,42 @@ export default {
     NETWORK: "Network",
     MAIN: "Main",
     DEVELOPMENT: "Development",
+    DALINET: "Dalinet",
     SUPPLY: "Supply",
     MARKET_CAP: "Market Cap",
-    TESTNET: "Testnet Local",
+    TESTNET: "Testnet",
   },
 
   FOOTER: {
     ALL_RIGHTS_RESERVED: "All rights reserved",
     VERSION: "Version",
     DATE: "Date",
+  },
+
+  UNIK: {
+    SUMMARY: "UNIK summary",
+    ID: "UNIK ID",
+    CREATION: "UNIK Creation",
+    UPDATE: "UNIK Update",
+    TRANSFER: "UNIK Transfer",
+    OWNER: "Owner",
+    CREATION_DATE: "Creation date",
+    CATEGORY: "Category",
+    PROPERTIES: "Properties",
+    NO_PROPERTIES: "No properties",
+    INDIVIDUAL: "Individual",
+    ORGANIZATION: "Organization",
+    NETWORK: "Network",
+    KEY: "Key",
+    VALUE: "Value",
+    MENU_ITEM: {
+      NETWORK: "uns.network",
+      FORUM: "Forum",
+      DOCS: "Docs"
+    }
+  },
+
+  UNS: {
+    DISCLOSE: "Disclose",
   },
 };

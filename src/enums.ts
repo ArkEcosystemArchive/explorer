@@ -21,9 +21,21 @@ export enum MagistrateTransaction {
   BRIDGECHAIN_UPDATE = 5,
 }
 
+export enum NftTransaction {
+  NFT_MINT = 0,
+  NFT_UPDATE = 1,
+  NFT_TRANSFER = 2,
+}
+
+export enum UNSTransaction {
+  DISCLOSE_EXPLICIT = 0,
+}
+
 export enum TypeGroupTransaction {
   CORE = 1,
   MAGISTRATE = 2,
+  NFT = 2000,
+  UNS = 2001,
 }
 
 export enum ForgingStatus {
