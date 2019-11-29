@@ -34,12 +34,13 @@ describe("Components > Utils > TransactionAmount", () => {
         transaction: {
           sender: incomingAddress,
           recipient: outgoingAddress,
-          amount: 100000000,
+          amount: "100000000",
           timestamp: {
             unix: 1535190579,
           },
+          type: 0,
+          typeGroup: 1,
         },
-        type: 0,
       },
       mocks: {
         $route,
@@ -67,12 +68,13 @@ describe("Components > Utils > TransactionAmount", () => {
         transaction: {
           sender: outgoingAddress,
           recipient: incomingAddress,
-          amount: 100000000,
+          amount: "100000000",
           timestamp: {
             unix: 1535190579,
           },
+          type: 0,
+          typeGroup: 1,
         },
-        type: 0,
       },
       mocks: {
         $route,
@@ -100,12 +102,13 @@ describe("Components > Utils > TransactionAmount", () => {
         transaction: {
           sender: incomingAddress,
           recipient: incomingAddress,
-          amount: 100000000,
+          amount: "100000000",
           timestamp: {
             unix: 1535190579,
           },
+          type: 1,
+          typeGroup: 1,
         },
-        type: 1,
       },
       mocks: {
         $route,
@@ -133,12 +136,13 @@ describe("Components > Utils > TransactionAmount", () => {
         transaction: {
           sender: incomingAddress,
           recipient: outgoingAddress,
-          fee: 100000000,
+          fee: "100000000",
           timestamp: {
             unix: 1535190579,
           },
+          type: 1,
+          typeGroup: 1,
         },
-        type: 1,
         isFee: true,
       },
       mocks: {
