@@ -1,16 +1,24 @@
 <template>
-  <main
+  <div
     :class="[
       nightMode ? 'theme-dark' : 'theme-light',
       'bg-theme-page-background text-theme-text-content min-h-screen font-sans xl:pt-8',
     ]"
   >
-    <AppHeader />
+    <main :class="{ 'blur': hasBlurFilter }">
+      <AppHeader />
 
-    <RouterView />
+      <RouterView />
 
-    <AppFooter />
-  </main>
+      <AppFooter />
+    </main>
+
+    <PortalTarget
+      name="modal"
+      multiple
+      @change="onPortalChange"
+    />
+  </div>
 </template>
 
 <script lang="ts">
@@ -39,6 +47,7 @@ export default class App extends Vue {
   private language: string;
   private locale: string;
   private nightMode: boolean;
+  private hasBlurFilter: boolean = false;
 
   public async created() {
     MigrationService.executeMigrations();
@@ -111,6 +120,14 @@ export default class App extends Vue {
     this.initialiseTimers();
   }
 
+  public setBlurFilter(isActive) {
+    this.hasBlurFilter = isActive;
+  }
+
+  public onPortalChange(isActive) {
+    this.hasBlurFilter = isActive;
+  }
+
   public async updateCurrencyRate() {
     if (this.currencyName !== this.token) {
       const rate = await CryptoCompareService.price(this.currencyName);
@@ -175,3 +192,9 @@ export default class App extends Vue {
   }
 }
 </script>
+
+<style scoped>
+.blur {
+  filter: blur(4px)
+}
+</style>
