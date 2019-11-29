@@ -292,10 +292,12 @@ describe("Homepage", () => {
       cy.get("@menu")
         .find(".menu-button")
         .should($items => {
-          expect($items).to.have.length(3);
+          expect($items).to.have.length(5);
           expect($items[0]).to.contain.text("Home");
           expect($items[1]).to.contain.text("Top Wallets");
           expect($items[2]).to.contain.text("Delegate Monitor");
+          expect($items[3]).to.contain.text("Bridgechains");
+          expect($items[4]).to.contain.text("Businesses");
         });
 
       cy.get("@menu")
