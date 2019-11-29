@@ -1,4 +1,5 @@
 html {
+  @apply .text-base;
   line-height: 1.15;
 }
 
