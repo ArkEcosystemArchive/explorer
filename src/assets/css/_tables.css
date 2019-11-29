@@ -77,6 +77,10 @@
   background-color: var(--color-theme-table-row-sticky);
 }
 
+.vgt-table thead th span {
+  @apply .text-sm;
+}
+
 .vgt-table thead th {
   @apply .cursor-pointer;
 }

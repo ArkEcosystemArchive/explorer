@@ -200,8 +200,8 @@ module.exports = {
     fontSize: {
       "0": 0,
       "2xs": ".75rem", // 12px
-      xs: ".8125rem", // 13px
-      sm: ".875rem", // 14px
+      xs: ".75", // 12px
+      sm: ".8125rem", // 13px
       base: "0.9375rem", // 15px
       lg: "1rem", // 16px
       xl: "1.125rem", // 18px
