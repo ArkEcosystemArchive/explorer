@@ -1,5 +1,6 @@
 import { mount, createLocalVue } from "@vue/test-utils";
 import CurrencyMixin from "@/mixins/currency";
+import TransactionTypesMixin from "@/mixins/transaction-types";
 import store from "@/store";
 
 import TransactionAmount from "@/components/utils/TransactionAmount";
@@ -45,7 +46,7 @@ describe("Components > Utils > TransactionAmount", () => {
       },
       i18n,
       localVue,
-      mixins: [CurrencyMixin],
+      mixins: [CurrencyMixin, TransactionTypesMixin],
       store,
     });
 
@@ -78,7 +79,7 @@ describe("Components > Utils > TransactionAmount", () => {
       },
       i18n,
       localVue,
-      mixins: [CurrencyMixin],
+      mixins: [CurrencyMixin, TransactionTypesMixin],
       store,
     });
 
@@ -111,7 +112,7 @@ describe("Components > Utils > TransactionAmount", () => {
       },
       i18n,
       localVue,
-      mixins: [CurrencyMixin],
+      mixins: [CurrencyMixin, TransactionTypesMixin],
       store,
     });
 
@@ -145,7 +146,7 @@ describe("Components > Utils > TransactionAmount", () => {
       },
       i18n,
       localVue,
-      mixins: [CurrencyMixin],
+      mixins: [CurrencyMixin, TransactionTypesMixin],
       store,
     });
 
