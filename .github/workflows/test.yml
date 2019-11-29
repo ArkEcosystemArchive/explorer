@@ -58,7 +58,10 @@ jobs:
         run: yarn test:unit
 
       - name: Codecov
-        run: ./node_modules/.bin/codecov --token=${{ secrets.CODECOV_TOKEN }}
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: unittests
 
   build-devnet:
     needs: [e2e, unit]
