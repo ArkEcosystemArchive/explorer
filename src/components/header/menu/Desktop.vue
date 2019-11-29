@@ -24,6 +24,14 @@
       {{ $t("PAGES.DELEGATE_MONITOR.TITLE") }}
     </RouterLink>
 
+    <RouterLink :to="{ name: 'bridgechains', params: { page: 1 } }" tag="button" class="menu-button" @click.native="closeMenu">
+      {{ $t("PAGES.BRIDGECHAINS.TITLE") }}
+    </RouterLink>
+
+    <RouterLink :to="{ name: 'businesses', params: { page: 1 } }" tag="button" class="menu-button" @click.native="closeMenu">
+      {{ $t("PAGES.BUSINESSES.TITLE") }}
+    </RouterLink>
+
     <div class="flex-auto" />
   </div>
 </template>

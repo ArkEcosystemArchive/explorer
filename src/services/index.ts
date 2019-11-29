@@ -1,6 +1,8 @@
 import ApiService from "./api";
 import BlockService from "./block";
 import BlockchainService from "./blockchain";
+import BridgechainService from "./bridgechain";
+import BusinessService from "./business";
 import CryptoCompareService from "./crypto-compare";
 import DelegateService from "./delegate";
 import ForgingService from "./forging";
@@ -15,6 +17,8 @@ export {
   ApiService,
   BlockService,
   BlockchainService,
+  BridgechainService,
+  BusinessService,
   CryptoCompareService,
   DelegateService,
   ForgingService,

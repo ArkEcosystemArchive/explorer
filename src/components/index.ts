@@ -25,14 +25,19 @@ Vue.component("TableBlocksDesktop", require("@/components/tables/Blocks").defaul
 Vue.component("TableTransactionsDesktop", require("@/components/tables/Transactions").default);
 Vue.component("TableWalletsDesktop", require("@/components/tables/Wallets").default);
 Vue.component("TableLockTransactionsDesktop", require("@/components/tables/LockTransactions").default);
+Vue.component("TableBusinessesDesktop", require("@/components/tables/Businesses").default);
+Vue.component("TableBridgechainsDesktop", require("@/components/tables/Bridgechains").default);
 
 Vue.component("TableBlocksMobile", require("@/components/tables/mobile/Blocks").default);
 Vue.component("TableTransactionsMobile", require("@/components/tables/mobile/Transactions").default);
 Vue.component("TableWalletsMobile", require("@/components/tables/mobile/Wallets").default);
 Vue.component("TableLockTransactionsMobile", require("@/components/tables/mobile/LockTransactions").default);
+Vue.component("TableBusinessesMobile", require("@/components/tables/mobile/Businesses").default);
+Vue.component("TableBridgechainsMobile", require("@/components/tables/mobile/Bridgechains").default);
 
 // Misc.
 Vue.component("ArkMeter", require("@/components/monitor/ArkMeter").default);
 Vue.component("ContentHeader", require("@/components/ContentHeader").default);
+Vue.component("DisclaimerModal", require("@/components/DisclaimerModal").default);
 Vue.component("Modal", require("@/components/Modal").default);
 Vue.component("SvgIcon", require("@/components/SvgIcon").default);
