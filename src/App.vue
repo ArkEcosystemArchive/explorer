@@ -1,24 +1,24 @@
 <template>
-  <div
+  <main
     :class="[
       nightMode ? 'theme-dark' : 'theme-light',
       'bg-theme-page-background text-theme-text-content min-h-screen font-sans xl:pt-8',
     ]"
   >
-    <main :class="{ 'blur': hasBlurFilter }">
+    <div :class="{ 'blur': hasBlurFilter }">
       <AppHeader />
 
       <RouterView />
 
       <AppFooter />
-    </main>
+    </div>
 
     <PortalTarget
       name="modal"
       multiple
       @change="onPortalChange"
     />
-  </div>
+  </main>
 </template>
 
 <script lang="ts">
