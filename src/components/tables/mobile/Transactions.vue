@@ -51,12 +51,7 @@
             {{ $t("TRANSACTION.AMOUNT") }}
           </div>
           <div>
-            <TransactionAmount
-              :transaction="transaction"
-              :type="transaction.type"
-              :type-group="transaction.typeGroup"
-              tooltip-placement="left"
-            />
+            <TransactionAmount :transaction="transaction" tooltip-placement="left" />
           </div>
         </div>
 
@@ -65,12 +60,7 @@
             {{ $t("TRANSACTION.FEE") }}
           </div>
           <div>
-            <TransactionAmount
-              :transaction="transaction"
-              :is-fee="true"
-              :type-group="transaction.typeGroup"
-              tooltip-placement="left"
-            />
+            <TransactionAmount :transaction="transaction" :is-fee="true" tooltip-placement="left" />
           </div>
         </div>
 

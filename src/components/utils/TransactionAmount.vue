@@ -27,8 +27,6 @@ import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/
 @Component
 export default class TransactionAmount extends Vue {
   @Prop({ required: true }) public transaction: ITransaction;
-  @Prop({ required: false, default: null }) public type: number;
-  @Prop({ required: false, default: 1 }) public typeGroup: number;
   @Prop({ required: false, default: false }) public isFee: boolean;
   @Prop({ required: false, default: "top" }) public tooltipPlacement: string;
 
@@ -42,7 +40,7 @@ export default class TransactionAmount extends Vue {
     }
 
     // @ts-ignore
-    if (this.isMultiPayment(this.type, this.typeGroup)) {
+    if (this.isMultiPayment(this.transaction.type, this.transaction.typeGroup)) {
       const address =
         this.$route.params.address || this.transaction.sender !== this.$route.params.address
           ? this.$route.params.address
@@ -61,7 +59,7 @@ export default class TransactionAmount extends Vue {
 
   get isOutgoing() {
     // @ts-ignore
-    if (this.isTimelock(this.type, this.typeGroup)) {
+    if (this.isTimelock(this.transaction.type, this.transaction.typeGroup)) {
       return (
         (this.$route.params.address !== this.transaction.recipient &&
           this.transaction.lockStatus === CoreTransaction.TIMELOCK_CLAIM) ||
@@ -74,7 +72,7 @@ export default class TransactionAmount extends Vue {
 
   get isIncoming() {
     // @ts-ignore
-    if (this.isTimelock(this.type, this.typeGroup)) {
+    if (this.isTimelock(this.transaction.type, this.transaction.typeGroup)) {
       return (
         this.$route.params.address !== this.transaction.sender &&
         this.transaction.lockStatus === CoreTransaction.TIMELOCK_CLAIM
@@ -82,7 +80,7 @@ export default class TransactionAmount extends Vue {
     }
 
     // @ts-ignore
-    if (this.isMultiPayment(this.type, this.typeGroup)) {
+    if (this.isMultiPayment(this.transaction.type, this.transaction.typeGroup)) {
       return (
         this.transaction.asset.payments.find(payment => payment.recipientId === this.$route.params.address) &&
         (this.transactionTab === "received" || this.transaction.sender !== this.$route.params.address)
