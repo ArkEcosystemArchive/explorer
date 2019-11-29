@@ -61,7 +61,15 @@ export default {
       if (transaction.asset && transaction.asset.payments) {
         return transaction.asset.payments.reduce(
           (sum: BigNumber, { recipientId, amount }: { recipientId: string; amount: string }) => {
-            return !address || recipientId === address ? sum.plus(amount) : sum;
+            if (!address) {
+              return sum.plus(amount);
+            }
+
+            if (transaction.sender === address) {
+              return recipientId !== address ? sum.plus(amount) : sum;
+            }
+
+            return recipientId === address ? sum.plus(amount) : sum;
           },
           BigNumber.ZERO,
         );

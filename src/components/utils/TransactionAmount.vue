@@ -74,11 +74,21 @@ export default class TransactionAmount extends Vue {
   }
 
   get isIncoming() {
-    if (this.transaction.type === CoreTransaction.TIMELOCK && this.typeGroup === TypeGroupTransaction.CORE) {
-      return (
-        this.$route.params.address !== this.transaction.sender &&
-        this.transaction.lockStatus === CoreTransaction.TIMELOCK_CLAIM
-      );
+    if (this.typeGroup === TypeGroupTransaction.CORE) {
+      switch (this.transaction.type) {
+        case CoreTransaction.TIMELOCK: {
+          return (
+            this.$route.params.address !== this.transaction.sender &&
+            this.transaction.lockStatus === CoreTransaction.TIMELOCK_CLAIM
+          );
+        }
+        case CoreTransaction.MULTI_PAYMENT: {
+          return (
+            this.transaction.sender !== this.$route.params.address &&
+            this.transaction.asset.payments.find(payment => payment.recipientId === this.$route.params.address)
+          );
+        }
+      }
     }
     return this.transaction.recipient === this.$route.params.address && this.isTransfer;
   }
