@@ -57,7 +57,7 @@ export default {
         .format("L LTS");
     },
 
-    calculateMultipaymentAmount(transaction: ITransaction, address?: string): BigNumber {
+    calculateMultipaymentAmount(transaction: ITransaction, address?: string, type: string = "all"): BigNumber {
       if (transaction.asset && transaction.asset.payments) {
         return transaction.asset.payments.reduce(
           (sum: BigNumber, { recipientId, amount }: { recipientId: string; amount: string }) => {
@@ -65,11 +65,18 @@ export default {
               return sum.plus(amount);
             }
 
-            if (transaction.sender === address) {
-              return recipientId !== address ? sum.plus(amount) : sum;
-            }
+            switch (type) {
+              case "all":
+                if (transaction.sender === address) {
+                  return recipientId !== address ? sum.plus(amount) : sum;
+                }
 
-            return recipientId === address ? sum.plus(amount) : sum;
+              case "received":
+                return recipientId === address ? sum.plus(amount) : sum;
+
+              case "sent":
+                return sum.plus(amount);
+            }
           },
           BigNumber.ZERO,
         );

@@ -32,6 +32,10 @@ export default class TransactionAmount extends Vue {
   @Prop({ required: false, default: false }) public isFee: boolean;
   @Prop({ required: false, default: "top" }) public tooltipPlacement: string;
 
+  get transactionTab() {
+    return this.$store.getters["ui/walletTransactionTab"];
+  }
+
   get source() {
     if (this.isFee) {
       return this.transaction.fee;
@@ -43,8 +47,9 @@ export default class TransactionAmount extends Vue {
         this.$route.params.address || this.transaction.sender !== this.$route.params.address
           ? this.$route.params.address
           : undefined;
+
       // @ts-ignore
-      return this.calculateMultipaymentAmount(this.transaction, address);
+      return this.calculateMultipaymentAmount(this.transaction, address, this.transactionTab);
     }
 
     return this.transaction.amount;
@@ -52,14 +57,6 @@ export default class TransactionAmount extends Vue {
 
   get price() {
     return this.transaction.price;
-  }
-
-  get isTransferType() {
-    if (this.type !== undefined) {
-      // @ts-ignore
-      return this.isTransfer(this.type, this.typeGroup) || this.isTimelock(this.type, this.typeGroup);
-    }
-    return false;
   }
 
   get isOutgoing() {
@@ -87,11 +84,16 @@ export default class TransactionAmount extends Vue {
     // @ts-ignore
     if (this.isMultiPayment(this.type, this.typeGroup)) {
       return (
-        this.transaction.asset.payments.find(payment => payment.recipientId === this.$route.params.address)
+        this.transaction.asset.payments.find(payment => payment.recipientId === this.$route.params.address) &&
+        (this.transactionTab === "received" || this.transaction.sender !== this.$route.params.address)
       );
     }
 
-    return this.transaction.recipient === this.$route.params.address && this.isTransferType;
+    // @ts-ignore
+    return (
+      this.transaction.recipient === this.$route.params.address &&
+      this.isTransfer(this.transaction.type, this.transaction.typeGroup)
+    );
   }
 }
 </script>

@@ -88,7 +88,6 @@ export default class WalletTransactions extends Vue {
   @Prop({ required: true }) public wallet: IWallet;
 
   private transactions: ITransaction[] | null = null;
-  private type: string = "all";
   private receivedCount: number = 0;
   private sentCount: number = 0;
   private locksCount: number = 0;
@@ -103,6 +102,14 @@ export default class WalletTransactions extends Vue {
 
   get isTypeLocks() {
     return this.type === "locks";
+  }
+
+  get type() {
+    return this.$store.getters["ui/walletTransactionTab"];
+  }
+
+  set type(type: string) {
+    this.$store.dispatch("ui/setWalletTransactionTab", type);
   }
 
   get sortParams() {
