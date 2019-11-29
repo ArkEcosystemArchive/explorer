@@ -1,73 +1,81 @@
 import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
 
+const isCoreTypeGroup = (typeGroup: number): boolean => {
+  return typeGroup === TypeGroupTransaction.CORE;
+};
+
+const isMagistrateTypeGroup = (typeGroup: number): boolean => {
+  return typeGroup === TypeGroupTransaction.MAGISTRATE;
+};
+
 export default {
   methods: {
     isTransfer(type: number, typeGroup: number): boolean {
-      return typeGroup === TypeGroupTransaction.CORE && type === CoreTransaction.TRANSFER;
+      return isCoreTypeGroup(typeGroup) && type === CoreTransaction.TRANSFER;
     },
 
     isSecondSignature(type: number, typeGroup: number): boolean {
-      return typeGroup === TypeGroupTransaction.CORE && type === CoreTransaction.SECOND_SIGNATURE;
+      return isCoreTypeGroup(typeGroup) && type === CoreTransaction.SECOND_SIGNATURE;
     },
 
     isDelegateRegistration(type: number, typeGroup: number): boolean {
-      return typeGroup === TypeGroupTransaction.CORE && type === CoreTransaction.DELEGATE_REGISTRATION;
+      return isCoreTypeGroup(typeGroup) && type === CoreTransaction.DELEGATE_REGISTRATION;
     },
 
     isVote(type: number, typeGroup: number): boolean {
-      return typeGroup === TypeGroupTransaction.CORE && type === CoreTransaction.VOTE;
+      return isCoreTypeGroup(typeGroup) && type === CoreTransaction.VOTE;
     },
 
     isMultiSignature(type: number, typeGroup: number): boolean {
-      return typeGroup === TypeGroupTransaction.CORE && type === CoreTransaction.MULTI_SIGNATURE;
+      return isCoreTypeGroup(typeGroup) && type === CoreTransaction.MULTI_SIGNATURE;
     },
 
     isIpfs(type: number, typeGroup: number): boolean {
-      return typeGroup === TypeGroupTransaction.CORE && type === CoreTransaction.IPFS;
+      return isCoreTypeGroup(typeGroup) && type === CoreTransaction.IPFS;
     },
 
     isDelegateResignation(type: number, typeGroup: number): boolean {
-      return typeGroup === TypeGroupTransaction.CORE && type === CoreTransaction.DELEGATE_RESIGNATION;
+      return isCoreTypeGroup(typeGroup) && type === CoreTransaction.DELEGATE_RESIGNATION;
     },
 
     isMultiPayment(type: number, typeGroup: number): boolean {
-      return typeGroup === TypeGroupTransaction.CORE && type === CoreTransaction.MULTI_PAYMENT;
+      return isCoreTypeGroup(typeGroup) && type === CoreTransaction.MULTI_PAYMENT;
     },
 
     isTimelock(type: number, typeGroup: number): boolean {
-      return typeGroup === TypeGroupTransaction.CORE && type === CoreTransaction.TIMELOCK;
+      return isCoreTypeGroup(typeGroup) && type === CoreTransaction.TIMELOCK;
     },
 
     isTimelockClaim(type: number, typeGroup: number): boolean {
-      return typeGroup === TypeGroupTransaction.CORE && type === CoreTransaction.TIMELOCK_CLAIM;
+      return isCoreTypeGroup(typeGroup) && type === CoreTransaction.TIMELOCK_CLAIM;
     },
 
     isTimelockRefund(type: number, typeGroup: number): boolean {
-      return typeGroup === TypeGroupTransaction.CORE && type === CoreTransaction.TIMELOCK_REFUND;
+      return isCoreTypeGroup(typeGroup) && type === CoreTransaction.TIMELOCK_REFUND;
     },
 
     isBusinessRegistration(type: number, typeGroup: number): boolean {
-      return typeGroup === TypeGroupTransaction.MAGISTRATE && type === MagistrateTransaction.BUSINESS_REGISTRATION;
+      return isMagistrateTypeGroup(typeGroup) && type === MagistrateTransaction.BUSINESS_REGISTRATION;
     },
 
     isBusinessResignation(type: number, typeGroup: number): boolean {
-      return typeGroup === TypeGroupTransaction.MAGISTRATE && type === MagistrateTransaction.BUSINESS_RESIGNATION;
+      return isMagistrateTypeGroup(typeGroup) && type === MagistrateTransaction.BUSINESS_RESIGNATION;
     },
 
     isBusinessUpdate(type: number, typeGroup: number): boolean {
-      return typeGroup === TypeGroupTransaction.MAGISTRATE && type === MagistrateTransaction.BUSINESS_UPDATE;
+      return isMagistrateTypeGroup(typeGroup) && type === MagistrateTransaction.BUSINESS_UPDATE;
     },
 
     isBridgechainRegistration(type: number, typeGroup: number): boolean {
-      return typeGroup === TypeGroupTransaction.MAGISTRATE && type === MagistrateTransaction.BRIDGECHAIN_REGISTRATION;
+      return isMagistrateTypeGroup(typeGroup) && type === MagistrateTransaction.BRIDGECHAIN_REGISTRATION;
     },
 
     isBridgechainResignation(type: number, typeGroup: number): boolean {
-      return typeGroup === TypeGroupTransaction.MAGISTRATE && type === MagistrateTransaction.BRIDGECHAIN_RESIGNATION;
+      return isMagistrateTypeGroup(typeGroup) && type === MagistrateTransaction.BRIDGECHAIN_RESIGNATION;
     },
 
     isBridgechainUpdate(type: number, typeGroup: number): boolean {
-      return typeGroup === TypeGroupTransaction.MAGISTRATE && type === MagistrateTransaction.BRIDGECHAIN_UPDATE;
+      return isMagistrateTypeGroup(typeGroup) && type === MagistrateTransaction.BRIDGECHAIN_UPDATE;
     },
   },
 };

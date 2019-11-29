@@ -89,9 +89,9 @@ export default class TransactionAmount extends Vue {
       );
     }
 
-    // @ts-ignore
     return (
       this.transaction.recipient === this.$route.params.address &&
+      // @ts-ignore
       this.isTransfer(this.transaction.type, this.transaction.typeGroup)
     );
   }
