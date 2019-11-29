@@ -36,7 +36,9 @@ export default class TransactionAmount extends Vue {
     if (this.isFee) {
       return this.transaction.fee;
     }
-    if (this.type === CoreTransaction.MULTI_PAYMENT && this.typeGroup === TypeGroupTransaction.CORE) {
+
+    // @ts-ignore
+    if (this.isMultiPayment(this.type, this.typeGroup)) {
       const address =
         this.$route.params.address || this.transaction.sender !== this.$route.params.address
           ? this.$route.params.address
@@ -44,6 +46,7 @@ export default class TransactionAmount extends Vue {
       // @ts-ignore
       return this.calculateMultipaymentAmount(this.transaction, address);
     }
+
     return this.transaction.amount;
   }
 
@@ -51,18 +54,17 @@ export default class TransactionAmount extends Vue {
     return this.transaction.price;
   }
 
-  get isTransfer() {
+  get isTransferType() {
     if (this.type !== undefined) {
-      return (
-        (this.type === CoreTransaction.TRANSFER || this.type === CoreTransaction.TIMELOCK) &&
-        this.typeGroup === TypeGroupTransaction.CORE
-      );
+      // @ts-ignore
+      return this.isTransfer(this.type, this.typeGroup) || this.isTimelock(this.type, this.typeGroup);
     }
     return false;
   }
 
   get isOutgoing() {
-    if (this.transaction.type === CoreTransaction.TIMELOCK && this.typeGroup === TypeGroupTransaction.CORE) {
+    // @ts-ignore
+    if (this.isTimelock(this.type, this.typeGroup)) {
       return (
         (this.$route.params.address !== this.transaction.recipient &&
           this.transaction.lockStatus === CoreTransaction.TIMELOCK_CLAIM) ||
@@ -74,23 +76,22 @@ export default class TransactionAmount extends Vue {
   }
 
   get isIncoming() {
-    if (this.typeGroup === TypeGroupTransaction.CORE) {
-      switch (this.transaction.type) {
-        case CoreTransaction.TIMELOCK: {
-          return (
-            this.$route.params.address !== this.transaction.sender &&
-            this.transaction.lockStatus === CoreTransaction.TIMELOCK_CLAIM
-          );
-        }
-        case CoreTransaction.MULTI_PAYMENT: {
-          return (
-            this.transaction.sender !== this.$route.params.address &&
-            this.transaction.asset.payments.find(payment => payment.recipientId === this.$route.params.address)
-          );
-        }
-      }
+    // @ts-ignore
+    if (this.isTimelock(this.type, this.typeGroup)) {
+      return (
+        this.$route.params.address !== this.transaction.sender &&
+        this.transaction.lockStatus === CoreTransaction.TIMELOCK_CLAIM
+      );
     }
-    return this.transaction.recipient === this.$route.params.address && this.isTransfer;
+
+    // @ts-ignore
+    if (this.isMultiPayment(this.type, this.typeGroup)) {
+      return (
+        this.transaction.asset.payments.find(payment => payment.recipientId === this.$route.params.address)
+      );
+    }
+
+    return this.transaction.recipient === this.$route.params.address && this.isTransferType;
   }
 }
 </script>

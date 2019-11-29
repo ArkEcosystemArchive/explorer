@@ -7,6 +7,7 @@ const mixins = [
   require("./misc").default,
   require("./network").default,
   require("./strings").default,
+  require("./transaction-types").default,
 ];
 
 export default merge([], ...mixins);

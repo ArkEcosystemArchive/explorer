@@ -145,7 +145,8 @@ export default class WalletTransactions extends Vue {
         // TODO: move to separate function
         const lockIds: string[] = [];
         let transactions = data.map((transaction: ITransaction) => {
-          if (transaction.type === CoreTransaction.TIMELOCK && transaction.typeGroup === TypeGroupTransaction.CORE) {
+          // @ts-ignore
+          if (this.isTimelock(transaction.type, transaction.typeGroup)) {
             lockIds.push(transaction.id);
           }
           return { ...transaction, price: null };
