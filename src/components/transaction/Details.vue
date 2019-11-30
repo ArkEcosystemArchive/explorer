@@ -137,7 +137,7 @@
           "
           class="list-row-border-b"
         >
-          <div class="mr-4">{{ $t("TRANSACTION.TIMELOCK.REFUND") }}</div>
+          <div class="mr-4">{{ $t("TRANSACTION.TIMELOCK.REFUNDED") }}</div>
           <div class="overflow-hidden break-all">
             <LinkTransaction :id="transaction.asset.refund.lockTransactionId" />
           </div>

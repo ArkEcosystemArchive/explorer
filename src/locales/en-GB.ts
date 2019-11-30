@@ -73,7 +73,7 @@ export default {
       CLAIMED: "Claimed transaction",
       EXPIRATION: "Expiration",
       OPEN: "Open lock",
-      REFUND: "Refunded transaction",
+      REFUNDED: "Refunded transaction",
       STATUS: "Timelock status",
       UNKNOWN: "Unknown",
     },
