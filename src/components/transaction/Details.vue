@@ -184,7 +184,13 @@
       </div>
     </section>
 
-    <section v-if="transaction.typeGroup === typeGroupTransaction.MAGISTRATE" class="page-section py-5 md:py-10 mb-5">
+    <section
+      v-if="
+        transaction.typeGroup === typeGroupTransaction.MAGISTRATE &&
+          transaction.type !== magistrateTransaction.BUSINESS_RESIGNATION
+      "
+      class="page-section py-5 md:py-10 mb-5"
+    >
       <div class="px-5 sm:px-10">
         <div v-for="(value, prop) in assetField" :key="prop" class="list-row-border-b">
           <div class="mr-4">{{ $t(`TRANSACTION.ASSET.${prop.toUpperCase()}`) }}</div>
@@ -246,8 +252,6 @@ export default class TransactionDetails extends Vue {
     switch (this.transaction.type) {
       case MagistrateTransaction.BUSINESS_REGISTRATION:
         return this.transaction.asset.businessRegistration;
-      case MagistrateTransaction.BUSINESS_RESIGNATION:
-        return this.transaction.asset.businessResignation;
       case MagistrateTransaction.BUSINESS_UPDATE:
         return this.transaction.asset.businessUpdate;
       case MagistrateTransaction.BRIDGECHAIN_REGISTRATION:

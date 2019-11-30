@@ -21,12 +21,13 @@ export default {
     TRANSACTIONS: "Transactions",
     TYPE: "Type",
     ACCEPT: "Accept",
-    CANCEL: "Cancel"
+    CANCEL: "Cancel",
   },
 
   DISCLAIMER: {
     TITLE: "Disclaimer",
-    TEXT1: "The following page is a directory for informational purposes only. {website} is in no way affiliated with the listed individuals and/or business entities listed herein. All links provided herein are third party websites that have not been verified and are owned by independent parties over which {website} has no control. {website} does not endorse or approve and makes no warranties, representations or undertakings relating to the content of third party websites.",
+    TEXT1:
+      "The following page is a directory for informational purposes only. {website} is in no way affiliated with the listed individuals and/or business entities listed herein. All links provided herein are third party websites that have not been verified and are owned by independent parties over which {website} has no control. {website} does not endorse or approve and makes no warranties, representations or undertakings relating to the content of third party websites.",
     TEXT2: "By clicking “Accept” you will be confirming that you have read and are in agreement with all terms herein.",
   },
 
@@ -109,7 +110,7 @@ export default {
       NAME: "Name",
       PORTS: "Ports",
       SEEDNODES: "Seed nodes",
-      WEBSITE: "Website"
+      WEBSITE: "Website",
     },
     SENDER: "Sender",
     RECIPIENT: "Recipient",
@@ -175,14 +176,14 @@ export default {
       NAME: "Name",
       CREATOR: "Creator",
       SEED_SERVER: "Seed Server",
-      REPOSITORY: "Repository"
+      REPOSITORY: "Repository",
     },
     BUSINESSES: {
       TITLE: "Businesses",
       NAME: "Business Name",
       CREATOR: "Creator",
       WEBSITE: "Website",
-      REPOSITORY: "Repository"
+      REPOSITORY: "Repository",
     },
     DELEGATE_MONITOR: {
       TITLE: "Delegate Monitor",
