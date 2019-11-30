@@ -187,7 +187,7 @@
     <section v-if="transaction.typeGroup === typeGroupTransaction.MAGISTRATE" class="page-section py-5 md:py-10 mb-5">
       <div class="px-5 sm:px-10">
         <div v-for="(value, prop) in assetField" :key="prop" class="list-row-border-b">
-          <div class="mr-4">{{ prop }}</div>
+          <div class="mr-4">{{ $t(`TRANSACTION.ASSET.${prop.toUpperCase()}`) }}</div>
           <div class="overflow-hidden break-all">{{ value }}</div>
         </div>
       </div>

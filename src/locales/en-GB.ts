@@ -102,6 +102,15 @@ export default {
       SENT: "Sent",
       RECEIVED: "Received",
     },
+    ASSET: {
+      BRIDGECHAINID: "Bridgechain ID",
+      BRIDGECHAINREPOSITORY: "Bridgechain repository",
+      GENESISHASH: "Genesis hash",
+      NAME: "Name",
+      PORTS: "Ports",
+      SEEDNODES: "Seed nodes",
+      WEBSITE: "Website"
+    },
     SENDER: "Sender",
     RECIPIENT: "Recipient",
     RECIPIENTS: "Recipients",
