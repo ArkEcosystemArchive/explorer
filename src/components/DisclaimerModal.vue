@@ -12,7 +12,7 @@
       <p class="mt-3">{{ $t("DISCLAIMER.TEXT2") }}</p>
       <div class="flex justify-center">
         <button class="button-lg mt-5 mr-10 mx-0" @click="acceptTerms()">{{ $t("COMMON.ACCEPT") }}</button>
-        <RouterLink :to="{ name: 'home' }" tag="button" class="text-white mt-5 hover:underline">
+        <RouterLink :to="{ name: 'home' }" tag="button" class="text-theme-text-secondary mt-5 hover:underline">
           {{ $t("COMMON.CANCEL") }}
         </RouterLink>
       </div>

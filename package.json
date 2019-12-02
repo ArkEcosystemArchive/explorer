@@ -36,6 +36,7 @@
     "moment": "^2.24.0",
     "node-emoji": "^1.10.0",
     "nprogress": "^0.2.0",
+    "portal-vue": "^2.1.6",
     "qrious": "^4.0.2",
     "ripemd160": "^2.0.2",
     "secp256k1": "^3.7.1",
