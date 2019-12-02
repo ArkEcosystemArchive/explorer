@@ -1,50 +1,44 @@
 <template>
-  <Loader :data="properties">
-    <table-component
-      v-if="properties && properties.length > 0"
-      :data="properties"
-      :show-filter="false"
-      :show-caption="false"
+  <TableWrapper v-if="properties"
+    v-bind="$attrs"
+    :columns="columns"
+    :rows="properties"
+    :no-data-message="$t('UNIK.NO_PROPERTIES')"
     >
-      <table-column
-        :label="$t('Key')"
-        show="key"
-        header-class="right-header-cell"
-        cell-class="right-cell"
-        :sortable="false"
-        :filterable="false"
-      />
-
-      <table-column
-        :label="$t('Value')"
-        show="value"
-        header-class="left-header-cell"
-        cell-class="left-cell"
-        :sortable="false"
-        :filterable="false"
-      />
-    </table-component>
-
-    <div v-else class="px-5 md:px-10">
-      <span>{{ $t("No properties") }}</span>
-    </div>
-  </Loader>
+    <template slot-scope="data">
+      <div>
+        {{ data.row.key }}
+      </div>
+      <div>
+        {{ data.row.value }}
+      </div>
+    </template>
+  </TableWrapper>
 </template>
 
 <script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
 
-// const styles = {
-//   string: '#002b36',
-//   arrowSize: '12px'
-// }
-
 @Component
 export default class UnikProperties extends Vue {
   @Prop({ required: true, default: [] }) public properties: Array<{ key: any; value: any }>;
 
-  // get styles() {
-  //   return styles;
-  // }
+  get columns() {
+    let columns = [
+      {
+        label: this.$t("UNIK.KEY"),
+        field: "key",
+        thClass: "text-right",
+        tdClass: "text-right",
+      },
+      {
+        label: this.$t("UNIK.VALUE"),
+        field: "value",
+        thClass: "text-left",
+        tdClass: "text-left",
+      }
+    ];
+    return columns;
+  }
 }
 </script>

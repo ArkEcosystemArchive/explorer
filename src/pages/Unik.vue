@@ -1,6 +1,6 @@
 <template>
   <div v-if="unik" class="max-w-2xl mx-auto md:pt-5">
-    <ContentHeader>{{ $t("UNIK summary") }}</ContentHeader>
+    <ContentHeader>{{ $t("UNIK.SUMMARY") }}</ContentHeader>
 
     <template v-if="unikNotFound">
       <section class="page-section py-5 md:py-10 px-6">
@@ -18,11 +18,11 @@
       <section class="mb-5">
         <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center">
           <div class="mr-6 flex-none">
-            <img class="block" src="@/assets/images/svg/unik.svg" />
+            <SvgIcon class="icon" name="unik" view-box="0 0 64 64" />
           </div>
           <div class="flex-auto min-w-0">
             <div class="text-grey mb-2">
-              {{ $t("UNIK ID") }}
+              {{ $t("UNIK.ID") }}
             </div>
             <div class="flex">
               <div class="text-xl text-white semibold truncate">
@@ -56,7 +56,7 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
   },
 })
 export default class Unik extends Vue {
-  private unik: IUnik;
+  private unik: IUnik | null = null;
   private unikNotFound: boolean = false;
   private isFetching: boolean = false;
 

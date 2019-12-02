@@ -3,7 +3,7 @@
     <div class="px-5 sm:px-10">
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t("Owner") }}
+          {{ $t("UNIK.OWNER") }}
         </div>
         <div class="truncate">
           <LinkWallet :address="unik.ownerId" :trunc="false" />
@@ -12,14 +12,14 @@
 
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t("Type") }}
+          {{ $t("UNIK.TYPE") }}
         </div>
         {{ $t(unik.type) }}
       </div>
 
       <div class="list-row-border-b-no-wrap">
         <div class="mr-4">
-          {{ $t("Creation date") }}
+          {{ $t("UNIK.CREATION_DATE") }}
         </div>
         <div v-if="unik.creation">
           {{ readableTimestamp(unik.creation) }}
@@ -33,7 +33,7 @@
     <div class="px-5 sm:px-10">
       <div class="list-row">
         <div class="mr-4">
-          {{ $t("Properties") }}
+          {{ $t("UNIK.PROPERTIES") }}
         </div>
       </div>
       <div class="py-2">

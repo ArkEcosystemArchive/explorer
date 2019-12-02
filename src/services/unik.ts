@@ -1,6 +1,6 @@
 import { DIDTypes } from "@uns/ts-sdk/dist";
 import { ApiService, TransactionService } from "@/services";
-import { IUnik, IUnikProperties } from "@/interfaces";
+import { IUnik } from "@/interfaces";
 
 export class UnikService {
   public async findUnikProperties(unikId) {
@@ -31,11 +31,6 @@ export class UnikService {
   public async supply(): Promise<number> {
     const response = await ApiService.get("uniks");
     return response.meta.totalCount;
-  }
-
-  public extractTypeFromProperties(unik: IUnik): string {
-    const typeProperty: IUnikProperties = unik.properties.find(property => !!property.type);
-    return typeProperty.type;
   }
 
   public async extractUnikCreationUnixTimestamp(unik: IUnik): Promise<number> {
