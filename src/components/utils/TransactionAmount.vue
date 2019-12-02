@@ -13,9 +13,19 @@
           }
         : ''
     "
-    class="whitespace-no-wrap"
+    class="flex items-center whitespace-no-wrap"
   >
-    {{ readableCrypto(source) }}
+    <span class="ml-auto">{{ readableCrypto(source) }}</span>
+    <SvgIcon
+      v-if="showAmountInformation"
+      v-tooltip="{
+        trigger: 'hover click',
+        content: $t('TRANSACTION.AMOUNT_TO_SELF', { amount: readableCrypto(amountToSelf) }),
+      }"
+      class="ml-2"
+      name="information"
+      view-box="0 0 16 16"
+    />
   </span>
 </template>
 
@@ -34,6 +44,16 @@ export default class TransactionAmount extends Vue {
     return this.$store.getters["ui/walletTransactionTab"];
   }
 
+  get address() {
+    return this.$route.params.address || this.transaction.sender !== this.$route.params.address
+        ? this.$route.params.address
+        : undefined;
+  }
+
+  get showAmountInformation() {
+    return !this.isFee && this.transactionTab === "all" && this.address && this.amountToSelf
+  }
+
   get source() {
     if (this.isFee) {
       return this.transaction.fee;
@@ -41,16 +61,19 @@ export default class TransactionAmount extends Vue {
 
     // @ts-ignore
     if (this.isMultiPayment(this.transaction.type, this.transaction.typeGroup)) {
-      const address =
-        this.$route.params.address || this.transaction.sender !== this.$route.params.address
-          ? this.$route.params.address
-          : undefined;
-
       // @ts-ignore
-      return this.calculateMultipaymentAmount(this.transaction, address, this.transactionTab);
+      return this.calculateMultipaymentAmount(this.transaction, this.address, this.transactionTab);
     }
 
     return this.transaction.amount;
+  }
+
+  get amountToSelf() {
+    // @ts-ignore
+    if (this.isMultiPayment(this.transaction.type, this.transaction.typeGroup)) {
+      // @ts-ignore
+      return this.calculateMultipaymentAmount(this.transaction, this.address, "received");
+    }
   }
 
   get price() {
