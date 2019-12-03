@@ -51,7 +51,7 @@ export default class TransactionAmount extends Vue {
   }
 
   get showAmountInformation() {
-    return !this.isFee && this.transactionTab === "all" && this.address && this.amountToSelf
+    return !this.isFee && this.transactionTab === "all" && this.address && this.amountToSelf && !this.amountToSelf.isZero()
   }
 
   get source() {
