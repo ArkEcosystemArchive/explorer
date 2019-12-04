@@ -31,9 +31,7 @@
         <div class="list-row-border-b">
           <div class="mr-4">{{ $t("TRANSACTION.AMOUNT") }}</div>
           <div
-            v-if="
-              transaction.typeGroup === typeGroupTransaction.CORE && transaction.type === coreTransaction.MULTI_PAYMENT
-            "
+            v-if="isMultiPayment(transaction.type, transaction.typeGroup)"
             v-tooltip="{
               trigger: 'hover click',
               content: price ? readableCurrency(multipaymentAmount, price) : '',
@@ -83,7 +81,7 @@
         </div>
 
         <div
-          v-if="transaction.typeGroup === typeGroupTransaction.CORE && transaction.type === coreTransaction.IPFS"
+          v-if="isIpfs(transaction.type, transaction.typeGroup)"
           class="list-row-border-b"
         >
           <div class="mr-4">{{ $t("TRANSACTION.IPFS") }}</div>
@@ -91,7 +89,7 @@
         </div>
 
         <div
-          v-if="transaction.typeGroup === typeGroupTransaction.CORE && transaction.type === coreTransaction.TIMELOCK"
+          v-if="isTimelock(transaction.type, transaction.typeGroup)"
         >
           <div v-if="transaction.asset.lock.expiration.type === 1" class="list-row-border-b">
             <div class="mr-4">{{ $t("TRANSACTION.TIMELOCK.EXPIRATION") }}</div>
@@ -121,7 +119,7 @@
 
         <div
           v-if="
-            transaction.typeGroup === typeGroupTransaction.CORE && transaction.type === coreTransaction.TIMELOCK_CLAIM
+            isTimelockClaim(transaction.type, transaction.typeGroup)
           "
           class="list-row-border-b"
         >
@@ -133,7 +131,7 @@
 
         <div
           v-if="
-            transaction.typeGroup === typeGroupTransaction.CORE && transaction.type === coreTransaction.TIMELOCK_REFUND
+            isTimelockRefund(transaction.type, transaction.typeGroup)
           "
           class="list-row-border-b"
         >
@@ -153,7 +151,7 @@
     </section>
 
     <section
-      v-if="transaction.typeGroup === typeGroupTransaction.CORE && transaction.type === coreTransaction.MULTI_SIGNATURE"
+      v-if="isMultiSignature(transaction.type, transaction.typeGroup)"
       class="page-section py-5 md:py-10 mb-5"
     >
       <div class="px-5 sm:px-10">
@@ -300,20 +298,16 @@ export default class TransactionDetails extends Vue {
   }
 
   private handleMultipayment() {
-    if (
-      this.transaction.type === CoreTransaction.MULTI_PAYMENT &&
-      this.transaction.typeGroup === TypeGroupTransaction.CORE
-    ) {
+    // @ts-ignore
+    if (this.isMultiPayment(this.transaction.type, this.transaction.typeGroup)) {
       // @ts-ignore
       this.multipaymentAmount = this.calculateMultipaymentAmount(this.transaction);
     }
   }
 
   private async getTimelockStatus() {
-    if (
-      this.transaction.type === CoreTransaction.TIMELOCK &&
-      this.transaction.typeGroup === TypeGroupTransaction.CORE
-    ) {
+    // @ts-ignore
+    if (this.isTimelock(this.transaction.type, this.transaction.typeGroup)) {
       const response = await TransactionService.findUnlockedForLocks([this.transaction.id]);
       if (response.data.length === 0) {
         this.timelockStatus = this.$t("TRANSACTION.TIMELOCK.OPEN");

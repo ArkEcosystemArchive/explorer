@@ -1,5 +1,6 @@
 import { mount, createLocalVue, RouterLinkStub, Wrapper } from "@vue/test-utils";
 import StringsMixin from "@/mixins/strings";
+import TransactionTypesMixin from "@/mixins/transaction-types";
 import store from "@/store";
 import merge from "lodash/merge";
 
@@ -7,7 +8,7 @@ import { LinkWallet } from "@/components/links";
 import SvgIcon from "@/components/SvgIcon";
 import { useI18n } from "../../../__utils__/i18n";
 
-describe("Compontents > Links > Wallet", () => {
+describe("Components > Links > Wallet", () => {
   let wrapper: Wrapper<Vue>;
 
   const localVue = createLocalVue();
@@ -31,7 +32,7 @@ describe("Compontents > Links > Wallet", () => {
           },
           i18n,
           localVue,
-          mixins: [StringsMixin],
+          mixins: [StringsMixin, TransactionTypesMixin],
           store,
         },
         config,
@@ -217,7 +218,7 @@ describe("Compontents > Links > Wallet", () => {
         },
         i18n,
         localVue,
-        mixins: [StringsMixin],
+        mixins: [StringsMixin, TransactionTypesMixin],
         store,
       });
 
@@ -233,7 +234,7 @@ describe("Compontents > Links > Wallet", () => {
         },
         i18n,
         localVue,
-        mixins: [StringsMixin],
+        mixins: [StringsMixin, TransactionTypesMixin],
         store,
       });
 

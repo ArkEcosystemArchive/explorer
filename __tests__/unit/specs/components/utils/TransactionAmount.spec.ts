@@ -1,5 +1,6 @@
 import { mount, createLocalVue } from "@vue/test-utils";
 import CurrencyMixin from "@/mixins/currency";
+import TransactionTypesMixin from "@/mixins/transaction-types";
 import store from "@/store";
 
 import TransactionAmount from "@/components/utils/TransactionAmount";
@@ -33,19 +34,20 @@ describe("Components > Utils > TransactionAmount", () => {
         transaction: {
           sender: incomingAddress,
           recipient: outgoingAddress,
-          amount: 100000000,
+          amount: "100000000",
           timestamp: {
             unix: 1535190579,
           },
+          type: 0,
+          typeGroup: 1,
         },
-        type: 0,
       },
       mocks: {
         $route,
       },
       i18n,
       localVue,
-      mixins: [CurrencyMixin],
+      mixins: [CurrencyMixin, TransactionTypesMixin],
       store,
     });
 
@@ -66,19 +68,20 @@ describe("Components > Utils > TransactionAmount", () => {
         transaction: {
           sender: outgoingAddress,
           recipient: incomingAddress,
-          amount: 100000000,
+          amount: "100000000",
           timestamp: {
             unix: 1535190579,
           },
+          type: 0,
+          typeGroup: 1,
         },
-        type: 0,
       },
       mocks: {
         $route,
       },
       i18n,
       localVue,
-      mixins: [CurrencyMixin],
+      mixins: [CurrencyMixin, TransactionTypesMixin],
       store,
     });
 
@@ -99,19 +102,20 @@ describe("Components > Utils > TransactionAmount", () => {
         transaction: {
           sender: incomingAddress,
           recipient: incomingAddress,
-          amount: 100000000,
+          amount: "100000000",
           timestamp: {
             unix: 1535190579,
           },
+          type: 1,
+          typeGroup: 1,
         },
-        type: 1,
       },
       mocks: {
         $route,
       },
       i18n,
       localVue,
-      mixins: [CurrencyMixin],
+      mixins: [CurrencyMixin, TransactionTypesMixin],
       store,
     });
 
@@ -132,12 +136,13 @@ describe("Components > Utils > TransactionAmount", () => {
         transaction: {
           sender: incomingAddress,
           recipient: outgoingAddress,
-          fee: 100000000,
+          fee: "100000000",
           timestamp: {
             unix: 1535190579,
           },
+          type: 1,
+          typeGroup: 1,
         },
-        type: 1,
         isFee: true,
       },
       mocks: {
@@ -145,7 +150,7 @@ describe("Components > Utils > TransactionAmount", () => {
       },
       i18n,
       localVue,
-      mixins: [CurrencyMixin],
+      mixins: [CurrencyMixin, TransactionTypesMixin],
       store,
     });
 

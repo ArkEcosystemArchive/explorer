@@ -59,6 +59,7 @@ export default {
 
   TRANSACTION: {
     AMOUNT: "Amount",
+    AMOUNT_TO_SELF: "Excluding {amount} the sender sent to themself",
     BLOCK_ID: "Block ID",
     ID: "Transaction ID",
     IPFS: "IPFS Hash",
