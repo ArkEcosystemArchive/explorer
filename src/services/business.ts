@@ -12,6 +12,17 @@ class BusinessService {
 
     return response;
   }
+
+  public async isEnabled(): Promise<boolean> {
+    try {
+      const response = (await ApiService.get("businesses", {
+
+      })) as IApiBusinessesWrapper;
+      return response.data ? true : false;
+    } catch {
+      return false;
+    }
+  }
 }
 
 export default new BusinessService();

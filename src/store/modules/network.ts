@@ -20,6 +20,8 @@ const state: INetworkState = {
   height: 0,
   epoch: null,
   blocktime: 0,
+  hasBridgechainsEnabled: false,
+  hasBusinessesEnabled: false,
 };
 
 const actions: ActionTree<INetworkState, {}> = {
@@ -113,6 +115,18 @@ const actions: ActionTree<INetworkState, {}> = {
       value,
     });
   },
+  setHasBridgechainsEnabled: ({ commit }, value: boolean) => {
+    commit({
+      type: types.SET_NETWORK_HAS_BRIDGECHAINS_ENABLED,
+      value,
+    });
+  },
+  setHasBusinessesEnabled: ({ commit }, value: boolean) => {
+    commit({
+      type: types.SET_NETWORK_HAS_BUSINESSES_ENABLED,
+      value,
+    });
+  },
 };
 
 const mutations: MutationTree<INetworkState> = {
@@ -161,6 +175,12 @@ const mutations: MutationTree<INetworkState> = {
   [types.SET_NETWORK_BLOCKTIME](state, payload: IStorePayload) {
     state.blocktime = payload.value;
   },
+  [types.SET_NETWORK_HAS_BRIDGECHAINS_ENABLED](state, payload: IStorePayload) {
+    state.hasBridgechainsEnabled = payload.value;
+  },
+  [types.SET_NETWORK_HAS_BUSINESSES_ENABLED](state, payload: IStorePayload) {
+    state.hasBusinessesEnabled = payload.value;
+  },
 };
 
 const getters: GetterTree<INetworkState, {}> = {
@@ -179,6 +199,8 @@ const getters: GetterTree<INetworkState, {}> = {
   height: state => state.height,
   epoch: state => state.epoch,
   blocktime: state => state.blocktime,
+  hasBridgechainsEnabled: state => state.hasBridgechainsEnabled,
+  hasBusinessesEnabled: state => state.hasBusinessesEnabled,
 };
 
 export const network: Module<INetworkState, {}> = {

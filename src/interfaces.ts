@@ -215,6 +215,8 @@ export interface INetworkState {
   height: number;
   epoch: string | null;
   blocktime: number;
+  hasBridgechainsEnabled: boolean;
+  hasBusinessesEnabled: boolean;
 }
 
 export interface IUiState {
