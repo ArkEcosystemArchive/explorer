@@ -1,16 +1,20 @@
 [build]
-    publish = "dist/"
+  publish = "dist/"
+  command = "yarn build:dalinet --verbose"
+
+[context."develop"]
+# Nothing today
 
 [context."devnet"]
   command = "yarn build:devnet --verbose"
 
-[context."develop"]
-  command = "yarn build:dalinet --verbose"
+[context."sandbox"]
+# Nothing today
 
-# Remove this line after deployment test
-[context."uns-develop"]
-  command = "yarn build:dalinet --verbose"
+# Livenet
+[context."master"]
 
+# To remove when Livenet will be live
 [[redirects]]
   from = "https://explorer.uns.network/*"
   to = "https://devnet.explorer.uns.network/"
