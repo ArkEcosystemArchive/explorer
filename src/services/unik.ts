@@ -29,7 +29,7 @@ export class UnikService {
   }
 
   public async supply(): Promise<number> {
-    const response = await ApiService.get("uniks");
+    const response = await ApiService.get("uniks?limit=1");
     return response.meta.totalCount;
   }
 
