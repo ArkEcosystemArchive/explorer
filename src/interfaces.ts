@@ -215,6 +215,7 @@ export interface INetworkState {
   height: number;
   epoch: string | null;
   blocktime: number;
+  hasMagistrateEnabled: boolean;
 }
 
 export interface IUiState {

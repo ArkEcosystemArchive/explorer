@@ -35,4 +35,16 @@ describe("Services > Business", () => {
     });
     expect(data.sort((a, b) => a.balance > b.balance)).toEqual(data);
   });
+
+  it("should return true if business endpoint is enabled", async () => {
+    const value = await BusinessService.isEnabled();
+    expect(value).toBe(true);
+  });
+
+  it("should return false if business endpoint does not exist", async () => {
+    // Set to dummy value for the test
+    store.dispatch("network/setServer", "https://dexplorer.ark.io/api/asdf");
+    const value = await BusinessService.isEnabled();
+    expect(value).toBe(false);
+  });
 });
