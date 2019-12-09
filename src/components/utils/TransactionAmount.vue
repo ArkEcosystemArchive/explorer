@@ -70,7 +70,7 @@ export default class TransactionAmount extends Vue {
 
   get amountToSelf() {
     // @ts-ignore
-    if (this.isMultiPayment(this.transaction.type, this.transaction.typeGroup)) {
+    if (this.transaction.sender === this.address && this.isMultiPayment(this.transaction.type, this.transaction.typeGroup)) {
       // @ts-ignore
       return this.calculateMultipaymentAmount(this.transaction, this.address, "received");
     }
