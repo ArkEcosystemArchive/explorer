@@ -35,4 +35,9 @@ describe("Services > Business", () => {
     });
     expect(data.sort((a, b) => a.balance > b.balance)).toEqual(data);
   });
+
+  it("should return true if business endpoint is enabled", async () => {
+    const value = await BusinessService.isEnabled();
+    expect(value).toBe(true);
+  });
 });
