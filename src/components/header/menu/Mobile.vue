@@ -27,7 +27,7 @@
         {{ $t("PAGES.DELEGATE_MONITOR.TITLE") }}
       </RouterLink>
     </li>
-    <li v-if="hasBridgechainsEnabled" :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
+    <li v-if="hasMagistrateEnabled" :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
       <RouterLink
         :to="{ name: 'bridgechains', params: { page: 1 } }"
         tag="div"
@@ -36,7 +36,7 @@
         {{ $t("PAGES.BRIDGECHAINS.TITLE") }}
       </RouterLink>
     </li>
-    <li v-if="hasBusinessesEnabled" :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
+    <li v-if="hasMagistrateEnabled" :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
       <RouterLink :to="{ name: 'businesses', params: { page: 1 } }" tag="div" class="cursor-pointer py-5 w-64 flex-none">
         {{ $t("PAGES.BUSINESSES.TITLE") }}
       </RouterLink>
@@ -51,7 +51,7 @@ import { mapGetters } from "vuex";
 @Component({
   computed: {
     ...mapGetters("ui", ["nightMode"]),
-    ...mapGetters("network", ["hasBridgechainsEnabled", "hasBusinessesEnabled"]),
+    ...mapGetters("network", ["hasMagistrateEnabled"]),
   },
 })
 export default class HeaderMenuMobile extends Vue {

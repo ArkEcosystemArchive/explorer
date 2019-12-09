@@ -25,7 +25,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import AppHeader from "@/components/header/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
-import { BlockchainService, BridgechainService, BusinessService, CryptoCompareService, DelegateService, MigrationService, NodeService } from "@/services";
+import { BlockchainService, BusinessService, CryptoCompareService, DelegateService, MigrationService, NodeService } from "@/services";
 import { mapGetters } from "vuex";
 import moment from "moment";
 
@@ -106,7 +106,7 @@ export default class App extends Vue {
     this.updateSupply();
     this.updateHeight();
     this.updateDelegates();
-    this.checkForBusinessAndBridgechain();
+    this.checkForMagistrateEnabled();
   }
 
   public mounted() {
@@ -158,12 +158,9 @@ export default class App extends Vue {
     }
   }
 
-  public async checkForBusinessAndBridgechain() {
-    const hasBusinessesEnabled = await BusinessService.isEnabled();
-    const hasBridgechainsEnabled = await BridgechainService.isEnabled();
-
-    this.$store.dispatch("network/setHasBusinessesEnabled", hasBusinessesEnabled);
-    this.$store.dispatch("network/setHasBridgechainsEnabled", hasBridgechainsEnabled);
+  public async checkForMagistrateEnabled() {
+    const hasMagistrateEnabled = await BusinessService.isEnabled();
+    this.$store.dispatch("network/setHasMagistrateEnabled", hasMagistrateEnabled);
   }
 
   public updateRequired(timestamp: number): boolean {

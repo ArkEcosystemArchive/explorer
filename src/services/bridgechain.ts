@@ -12,17 +12,6 @@ class BridgechainService {
 
     return response;
   }
-
-  public async isEnabled(): Promise<boolean> {
-    try {
-      const response = (await ApiService.get("businesses", {
-
-      })) as IApiBridgechainsWrapper;
-      return response.data ? true : false;
-    } catch {
-      return false;
-    }
-  }
 }
 
 export default new BridgechainService();
