@@ -78,4 +78,16 @@ describe("Store > Network", () => {
 
     expect(store.getters["network/height"]).toEqual("setHeight");
   });
+
+  it("should set the magistrate property to enabled", () => {
+    store.dispatch("network/setHasMagistrateEnabled", true);
+
+    expect(store.getters["network/hasMagistrateEnabled"]).toEqual(true);
+  });
+
+  it("should set the magistrate to disabled", () => {
+    store.dispatch("network/setHasMagistrateEnabled", false);
+
+    expect(store.getters["network/hasMagistrateEnabled"]).toEqual(false);
+  });
 });
