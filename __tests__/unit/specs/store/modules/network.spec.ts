@@ -82,12 +82,12 @@ describe("Store > Network", () => {
   it("should set the magistrate property to enabled", () => {
     store.dispatch("network/setHasMagistrateEnabled", true);
 
-    expect(store.getters["network/setHasMagistrateEnabled"]).toEqual(true);
+    expect(store.getters["network/hasMagistrateEnabled"]).toEqual(true);
   });
 
   it("should set the magistrate to disabled", () => {
     store.dispatch("network/setHasMagistrateEnabled", false);
 
-    expect(store.getters["network/setHasMagistrateEnabled"]).toEqual(false);
+    expect(store.getters["network/hasMagistrateEnabled"]).toEqual(false);
   });
 });
