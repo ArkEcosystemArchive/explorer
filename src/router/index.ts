@@ -186,6 +186,17 @@ const router = new Router({
       meta: { title: (route: Route) => getTitle("Bridgechains") },
     },
     {
+      path: "/delegates/resigned",
+      redirect: to => ({ name: "delegates-resigned", params: { page: 1 } }),
+      meta: { title: (route: Route) => getTitle("Delegates") },
+    },
+    {
+      path: "/delegates/resigned/:page(\\d+)",
+      name: "delegates-resigned",
+      component: DelegateComponent,
+      meta: { title: (route: Route) => getTitle("Delegates") },
+    },
+    {
       path: "/delegates",
       redirect: to => ({ name: "delegates", params: { page: 1 } }),
       meta: { title: (route: Route) => getTitle("Delegates") },

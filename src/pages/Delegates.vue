@@ -6,6 +6,7 @@
         <TableDelegatesDesktop
           :delegates="delegates"
           :sort-query="sortParams"
+          :hide-ranks="resignedOnly"
           @on-sort-change="onSortChange"
         />
       </div>
@@ -45,6 +46,7 @@ export default class Delegates extends Vue {
   private delegates: IDelegate[] | null = null;
   private meta: any | null = null;
   private currentPage: number = 0;
+  private resignedOnly: boolean = false;
 
   @Watch("currentPage")
   public onCurrentPageChanged() {
@@ -53,9 +55,12 @@ export default class Delegates extends Vue {
 
   public async beforeRouteEnter(to: Route, from: Route, next: (vm?: any) => void) {
     try {
-      const { meta, data } = await DelegateService.all(Number(to.params.page));
+      const { meta, data } = to.name === "delegates-resigned" ?
+        await DelegateService.resigned(Number(to.params.page)) :
+        await DelegateService.all(Number(to.params.page));
 
       next((vm: Delegates) => {
+        vm.resignedOnly = to.name === "delegates-resigned";
         vm.currentPage = Number(to.params.page);
         vm.setDelegates(data);
         vm.setMeta(meta);
@@ -70,8 +75,11 @@ export default class Delegates extends Vue {
     this.meta = null;
 
     try {
-      const { meta, data } = await DelegateService.all(Number(to.params.page));
+      const { meta, data } = to.name === "delegates-resigned" ?
+        await DelegateService.resigned(Number(to.params.page)) :
+        await DelegateService.all(Number(to.params.page));
 
+      this.resignedOnly = to.name === "delegates-resigned";
       this.currentPage = Number(to.params.page);
       this.setDelegates(data);
       this.setMeta(meta);
@@ -93,7 +101,7 @@ export default class Delegates extends Vue {
     if (this.currentPage !== Number(this.$route.params.page)) {
       // @ts-ignore
       this.$router.push({
-        name: "delegates",
+        name: this.resignedOnly ? "delegates-resigned" : "delegates",
         params: {
           page: this.currentPage,
         },

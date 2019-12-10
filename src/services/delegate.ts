@@ -104,14 +104,16 @@ class DelegateService {
     return response.data;
   }
 
-  public async resigned(): Promise<IDelegate[]> {
+  public async resigned(page: number = 1, limit: number = 25): Promise<IApiDelegatesWrapper> {
     const response = (await ApiService.get("delegates", {
       params: {
         type: "resigned",
+        page,
+        limit,
       },
     })) as IApiDelegatesWrapper;
 
-    return response.data;
+    return response;
   }
 
   public async forged(): Promise<Array<{ delegate: string; forged: number }>> {

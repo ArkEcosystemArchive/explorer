@@ -55,21 +55,15 @@ export default class TableDelegatesDesktop extends Vue {
     },
   })
   public delegates: IDelegate[] | null;
+  @Prop({ required: false, default: false }) public hideRanks: boolean;
 
   get columns() {
     const columns = [
       {
-        label: this.$t("COMMON.RANK"),
-        field: "rank",
-        type: "number",
-        thClass: "start-cell w-32",
-        tdClass: "start-cell w-32",
-      },
-      {
         label: this.$t("WALLET.DELEGATE.USERNAME"),
         field: "username",
-        thClass: "text-left hidden md:table-cell",
-        tdClass: "text-left hidden md:table-cell",
+        thClass: this.usernameClass,
+        tdClass: this.usernameClass,
       },
       {
         label: this.$t("PAGES.DELEGATE_MONITOR.FORGED_BLOCKS"),
@@ -84,12 +78,28 @@ export default class TableDelegatesDesktop extends Vue {
       {
         label: this.$t("PAGES.DELEGATE_MONITOR.VOTES"),
         field: "votes",
+        type: "number",
         thClass: "end-cell hidden lg:table-cell",
         tdClass: "end-cell hidden lg:table-cell",
       },
     ];
+    if (!this.hideRanks) {
+      columns.unshift(
+        {
+          label: this.$t("COMMON.RANK"),
+          field: "rank",
+          type: "number",
+          thClass: "start-cell w-32",
+          tdClass: "start-cell w-32",
+        }
+      )
+    }
 
     return columns;
+  }
+
+  get usernameClass(): string {
+    return this.hideRanks ? "start-cell text-left" : "text-left";
   }
 
   private emitSortChange(params: ISortParameters[]) {
