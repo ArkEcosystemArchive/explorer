@@ -188,6 +188,9 @@ export default {
       WEBSITE: "Website",
       REPOSITORY: "Repository",
     },
+    DELEGATES: {
+      TITLE: "Delegates",
+    },
     DELEGATE_MONITOR: {
       TITLE: "Delegate Monitor",
       HEADER: {

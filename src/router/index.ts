@@ -24,6 +24,7 @@ const DelegateMonitorComponent = () => import(/* webpackChunkName: "delegate-mon
 const TopWalletsComponent = () => import(/* webpackChunkName: "top-wallets" */ "@/pages/TopWallets.vue");
 const BusinessesComponent = () => import(/* webpackChunkName: "businesses" */ "@/pages/Businesses.vue");
 const BridgechainsComponent = () => import(/* webpackChunkName: "bridgechains" */ "@/pages/Bridgechains.vue");
+const DelegateComponent = () => import(/* webpackChunkName: "delegates" */ "@/pages/Delegates.vue");
 const NotFoundComponent = () => import(/* webpackChunkName: "404" */ "@/pages/404.vue");
 
 Vue.use(Router);
@@ -183,6 +184,17 @@ const router = new Router({
       name: "bridgechains",
       component: BridgechainsComponent,
       meta: { title: (route: Route) => getTitle("Bridgechains") },
+    },
+    {
+      path: "/delegates",
+      redirect: to => ({ name: "delegates", params: { page: 1 } }),
+      meta: { title: (route: Route) => getTitle("Delegates") },
+    },
+    {
+      path: "/delegates/:page(\\d+)",
+      name: "delegates",
+      component: DelegateComponent,
+      meta: { title: (route: Route) => getTitle("Delegates") },
     },
     {
       path: "/404",
