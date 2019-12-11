@@ -56,7 +56,7 @@ export default class Delegates extends Vue {
   public async beforeRouteEnter(to: Route, from: Route, next: (vm?: any) => void) {
     try {
       const { meta, data } = to.name === "delegates-resigned" ?
-        await DelegateService.resigned(Number(to.params.page)) :
+        await DelegateService.allResigned(Number(to.params.page)) :
         await DelegateService.all(Number(to.params.page));
 
       next((vm: Delegates) => {
@@ -76,7 +76,7 @@ export default class Delegates extends Vue {
 
     try {
       const { meta, data } = to.name === "delegates-resigned" ?
-        await DelegateService.resigned(Number(to.params.page)) :
+        await DelegateService.allResigned(Number(to.params.page)) :
         await DelegateService.all(Number(to.params.page));
 
       this.resignedOnly = to.name === "delegates-resigned";
