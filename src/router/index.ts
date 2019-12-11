@@ -25,7 +25,7 @@ const TopWalletsComponent = () => import(/* webpackChunkName: "top-wallets" */ "
 const BusinessesComponent = () => import(/* webpackChunkName: "businesses" */ "@/pages/Businesses.vue");
 const BridgechainsComponent = () => import(/* webpackChunkName: "bridgechains" */ "@/pages/Bridgechains.vue");
 const NotFoundComponent = () => import(/* webpackChunkName: "404" */ "@/pages/404.vue");
-const UnikComponent = () => import("@/pages/Unik.vue");
+const UnikComponent = () => import(/* webpackChunkName: "unik" */ "@/pages/Unik.vue");
 
 Vue.use(Router);
 
