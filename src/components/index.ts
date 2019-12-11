@@ -35,6 +35,7 @@ Vue.component("TableWalletsMobile", require("@/components/tables/mobile/Wallets"
 Vue.component("TableLockTransactionsMobile", require("@/components/tables/mobile/LockTransactions").default);
 Vue.component("TableBusinessesMobile", require("@/components/tables/mobile/Businesses").default);
 Vue.component("TableBridgechainsMobile", require("@/components/tables/mobile/Bridgechains").default);
+Vue.component("TableDelegatesMobile", require("@/components/tables/mobile/Delegates").default);
 
 // Misc.
 Vue.component("ArkMeter", require("@/components/monitor/ArkMeter").default);

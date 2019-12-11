@@ -11,7 +11,7 @@
         />
       </div>
       <div class="sm:hidden">
-        <TableDelegatesDesktop :delegates="delegates" />
+        <TableDelegatesMobile :delegates="delegates" />
       </div>
       <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
     </section>
