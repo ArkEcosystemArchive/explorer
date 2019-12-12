@@ -81,6 +81,17 @@ describe("Services > Delegate", () => {
     ).rejects.toThrow();
   });
 
+  it("should retrieve the voterCount for a given public key", async () => {
+    const count = await DelegateService.voterCount("02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b", false);
+    expect(count).toBeGreaterThanOrEqual(0);
+  });
+
+  it("should be able to filter out low balance voters", async () => {
+    const count = await DelegateService.voterCount("02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b", false);
+    const countFiltered = await DelegateService.voterCount("02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b",);
+    expect(count).toBeGreaterThan(countFiltered);
+  });
+
   it("should return the delegate when searching by username", async () => {
     const data = await DelegateService.find("arkpool");
     expect(Object.keys(data).sort()).toEqual(delegatePropertyArray);
