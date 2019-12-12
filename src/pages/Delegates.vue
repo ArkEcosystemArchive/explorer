@@ -5,7 +5,7 @@
       <div class="hidden sm:block">
         <TableDelegatesDesktop
           :delegates="delegates"
-          :sort-query="sortParams"
+          :sort-query="sortParams[resignedOnly ? 'tableResigned' : 'table']"
           :hide-ranks="resignedOnly"
           @on-sort-change="onSortChange"
         />
@@ -34,13 +34,16 @@ export default class Delegates extends Vue {
   }
 
   get sortParams() {
-    return this.$store.getters["ui/TODO"];
+    return this.$store.getters["ui/delegateSortParams"];
   }
 
   set sortParams(params: ISortParameters) {
-    this.$store.dispatch("ui/TODO", {
-      field: params.field,
-      type: params.type,
+    this.$store.dispatch("ui/setDelegateSortParams", {
+      ...this.sortParams,
+      [this.resignedOnly ? "tableResigned" : "table"]: {
+        field: params.field,
+        type: params.type,
+      },
     });
   }
   private delegates: IDelegate[] | null = null;

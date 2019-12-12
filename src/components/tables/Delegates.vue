@@ -63,6 +63,7 @@ export default class TableDelegatesDesktop extends Vue {
         label: this.$t("COMMON.RANK"),
         field: "rank",
         type: "number",
+        sortFn: this.sortByRank,
         thClass: "start-cell w-32",
         tdClass: "start-cell w-32",
       },
@@ -99,6 +100,16 @@ export default class TableDelegatesDesktop extends Vue {
 
   private emitSortChange(params: ISortParameters[]) {
     this.$emit("on-sort-change", params[0]);
+  }
+
+  private sortByRank(x: number, y: number, col: number, rowX: any, rowY: any) {
+    if (x === null) {
+      return 1;
+    }
+    if (y === null) {
+      return -1;
+    }
+    return x < y ? 1 : -1;
   }
 }
 </script>
