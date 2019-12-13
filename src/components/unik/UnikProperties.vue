@@ -1,19 +1,21 @@
 <template>
-  <TableWrapper v-if="properties"
-    v-bind="$attrs"
-    :columns="columns"
-    :rows="properties"
-    :no-data-message="$t('UNIK.NO_PROPERTIES')"
-    >
-    <template slot-scope="data">
-      <div>
-        {{ data.row.key }}
-      </div>
-      <div>
-        {{ data.row.value }}
-      </div>
-    </template>
-  </TableWrapper>
+  <Loader :data="properties">
+    <TableWrapper
+       v-bind="$attrs"
+      :columns="columns"
+      :rows="properties"
+      :no-data-message="$t('UNIK.NO_PROPERTIES')"
+      >
+      <template slot-scope="data">
+        <div v-if="data.column.field === 'key'">
+          {{ data.row.key }}
+        </div>
+        <div v-else-if="data.column.field === 'value'">
+          {{ data.row.value }}
+        </div>
+      </template>
+    </TableWrapper>
+  </Loader>
 </template>
 
 <script lang="ts">
