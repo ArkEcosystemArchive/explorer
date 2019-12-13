@@ -9,6 +9,7 @@ and this project follows the major and minor version releases of [Core](https://
 
 ### Added
 
+- feat: add changelog [#797]
 - feat: delegate pagination [#792]
 - feat: show registered businesses [#778]
 - feat: bignumber arithmetic [#777]
