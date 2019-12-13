@@ -104,7 +104,7 @@
     </div>
 
     <!-- Mobile -->
-    <div v-if="wallet.address" class="px-5 sm:px-10 py-10 bg-theme-feature-background md:hidden">
+    <div v-if="wallet.address" class="px-5 sm:px-10 py-10 bg-theme-feature-background md:hidden overflow-hidden">
       <div class="flex justify-center mb-6">
         <div class="flex items-center p-2 bg-white rounded mx-auto">
           <QrCode :value="wallet.address" :options="{ size: 160 }" />
