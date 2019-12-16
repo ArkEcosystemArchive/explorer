@@ -4,7 +4,6 @@
        v-bind="$attrs"
       :columns="columns"
       :rows="properties"
-      :no-data-message="$t('UNIK.NO_PROPERTIES')"
       >
       <template slot-scope="data">
         <div v-if="data.column.field === 'key'">
@@ -30,8 +29,8 @@ export default class UnikProperties extends Vue {
       {
         label: this.$t("UNIK.KEY"),
         field: "key",
-        thClass: "text-right",
-        tdClass: "text-right",
+        thClass: "text-right w-64",
+        tdClass: "text-right w-64",
       },
       {
         label: this.$t("UNIK.VALUE"),
