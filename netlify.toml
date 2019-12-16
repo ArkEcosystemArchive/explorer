@@ -1,12 +1,12 @@
 [build]
   publish = "dist/"
-  command = "yarn build:dalinet --verbose"
+  command = "yarn build:dalinet --verbose --history"
 
 [context."develop"]
 # Nothing today
 
 [context."devnet"]
-  command = "yarn build:devnet --verbose"
+  command = "yarn build:devnet --verbose --history"
 
 [context."sandbox"]
 # Nothing today
