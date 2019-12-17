@@ -1,5 +1,5 @@
 import ApiService from "@/services/api";
-import { IApiTransactionWrapper, IApiTransactionsWrapper, ITransaction } from "../interfaces";
+import { IApiTransactionWrapper, IApiTransactionsWrapper, ITransaction, ITransactionSearchQuery } from "../interfaces";
 
 class TransactionService {
   public async latest(limit: number = 25): Promise<ITransaction[]> {
@@ -41,6 +41,12 @@ class TransactionService {
     const response = (await ApiService.get("transactions", {
       params,
     })) as IApiTransactionsWrapper;
+
+    return response;
+  }
+
+  public async search(query: ITransactionSearchQuery): Promise<IApiTransactionsWrapper> {
+    const response = (await ApiService.post("transactions/search", query)) as IApiTransactionsWrapper;
 
     return response;
   }
