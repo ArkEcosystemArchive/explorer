@@ -285,3 +285,26 @@ export interface IBridgechain {
   bridgechainRepository?: string;
   ports: object;
 }
+
+export interface ITransactionSearchQuery {
+  id?: string;
+  type?: string;
+  timestamp?: { from?: number; to?: number };
+  amount?: { from?: number; to?: number };
+  fee?: { from?: number };
+  vendorField?: string;
+}
+
+export interface IBlockSearchQuery {
+  id?: string;
+  generatorPublicKey?: string;
+  timestamp?: { from?: number; to?: number };
+  height?: { from?: number; to?: number };
+}
+
+export interface IWalletSearchQuery {
+  address?: string;
+  username?: string;
+  vote?: string;
+  balance?: { from?: number; to?: number };
+}
