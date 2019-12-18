@@ -32,7 +32,12 @@
       {{ $t("PAGES.BUSINESSES.TITLE") }}
     </RouterLink>
 
-    <RouterLink :to="{ name: 'advanced-search' }" tag="button" class="menu-button" @click.native="closeMenu">
+    <RouterLink
+      :to="{ name: 'advanced-search', params: { page: 1 } }"
+      tag="button"
+      class="menu-button"
+      @click.native="closeMenu"
+    >
       {{ $t("PAGES.ADVANCED_SEARCH.TITLE") }}
     </RouterLink>
 

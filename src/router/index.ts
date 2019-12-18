@@ -187,6 +187,11 @@ const router = new Router({
     },
     {
       path: "/advanced-search",
+      redirect: to => ({ name: "advanced-search", params: { page: 1 } }),
+      meta: { title: (route: Route) => getTitle("Advanced Search") },
+    },
+    {
+      path: "/advanced-search/:page(\\d+)",
       name: "advanced-search",
       component: AdvancedSearchComponent,
       meta: { title: (route: Route) => getTitle("Advanced Search") },
