@@ -72,14 +72,15 @@ describe("Mixins > Misc", () => {
 
   describe("readableTimestampFromOffset", () => {
     it("should return a readable timestamp from a specified offset", () => {
-      expect(wrapper.vm.readableTimestampFromOffset(1476668663, 1000000)).toEqual("10/28/2016 5:31:03 PM");
+      expect(wrapper.vm.readableTimestampFromOffset(1476668663, 1000000)).toEqual(moment.unix(1476668663 + 1000000).local().format("L LTS"));
     });
   });
 
   describe("readableTimestampFromEpoch", () => {
     store.dispatch("network/setEpoch", 1490101200);
     it("should return a readable timestamp from epoch", () => {
-      expect(wrapper.vm.readableTimestampFromEpoch(10000000)).toEqual("05/14/1970 12:41:41 AM");
+      const epoch = moment(1490101200).unix();
+      expect(wrapper.vm.readableTimestampFromEpoch(10000000)).toEqual(moment.unix(epoch + 10000000).local().format("L LTS"));
     });
   });
 
