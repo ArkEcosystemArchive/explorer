@@ -66,7 +66,7 @@ describe("Transaction Details", () => {
     cy.get("@count").then($count => {
       const count = $count.text();
 
-      cy.get("@count", { timeout: 20000 }).should($count2 => {
+      cy.get("@count", { timeout: 30000 }).should($count2 => {
         expect($count2.text()).not.to.eq(count);
       });
     });

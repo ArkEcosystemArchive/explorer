@@ -25,6 +25,6 @@ module.exports = {
   setupTestFrameworkScriptFile: "<rootDir>/__tests__/unit/jest.setup.js",
   collectCoverage: true,
   coverageDirectory: "<rootDir>/.coverage",
-  collectCoverageFrom: ["src/**/*.ts", "!**/node_modules/**"],
+  collectCoverageFrom: ["src/**/*.{ts,vue}", "!**/node_modules/**"],
   coverageReporters: ["json", "lcov", "text", "clover", "html"],
 };

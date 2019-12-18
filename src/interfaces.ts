@@ -215,6 +215,7 @@ export interface INetworkState {
   height: number;
   epoch: string | null;
   blocktime: number;
+  hasMagistrateEnabled: boolean;
 }
 
 export interface IUiState {
@@ -234,6 +235,7 @@ export interface IUiState {
   delegateSortParams: string | null;
   transactionSortParams: string | null;
   walletSortParams: string | null;
+  walletTransactionTab: string | null;
   hasAcceptedLinkDisclaimer: boolean;
 }
 

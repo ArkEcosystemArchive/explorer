@@ -4,7 +4,7 @@ import store from "@/store";
 import { IApiDelegateWrapper, IApiDelegatesWrapper, IApiDelegateVotersWrapper, IDelegate } from "../interfaces";
 
 class DelegateService {
-  public async all(): Promise<IDelegate[]> {
+  public async fetchEveryDelegate(): Promise<IDelegate[]> {
     const response = (await ApiService.get("delegates", {
       params: {
         page: 1,
@@ -26,6 +26,17 @@ class DelegateService {
     const results = await Promise.all(requests);
 
     return response.data.concat([].concat(...results.map(result => result.data)));
+  }
+
+  public async all(page: number = 1, limit: number = 25): Promise<IApiDelegatesWrapper> {
+    const response = (await ApiService.get("delegates", {
+      params: {
+        page,
+        limit,
+      },
+    })) as IApiDelegatesWrapper;
+
+    return response;
   }
 
   public async voters(query: string, page: number, limit = 25): Promise<IApiDelegateVotersWrapper> {
@@ -94,13 +105,20 @@ class DelegateService {
   }
 
   public async resigned(): Promise<IDelegate[]> {
+    const response = await this.allResigned();
+    return response.data;
+  }
+
+  public async allResigned(page: number = 1, limit: number = 25): Promise<IApiDelegatesWrapper> {
     const response = (await ApiService.get("delegates", {
       params: {
         type: "resigned",
+        page,
+        limit,
       },
     })) as IApiDelegatesWrapper;
 
-    return response.data;
+    return response;
   }
 
   public async forged(): Promise<Array<{ delegate: string; forged: number }>> {

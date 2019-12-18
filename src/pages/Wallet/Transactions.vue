@@ -109,7 +109,11 @@ export default class WalletTransactions extends Vue {
   }
 
   get type() {
-    return this.$route.params.type;
+    return this.$store.getters["ui/walletTransactionTab"];
+  }
+
+  set type(type: string) {
+    this.$store.dispatch("ui/setWalletTransactionTab", type);
   }
 
   get sortParams() {
@@ -141,6 +145,7 @@ export default class WalletTransactions extends Vue {
       );
 
       next((vm: WalletTransactions) => {
+        vm.type = to.params.type;
         vm.currentPage = Number(to.params.page);
         vm.setTransactions(data);
         vm.setMeta(meta);
@@ -162,6 +167,7 @@ export default class WalletTransactions extends Vue {
         Number(to.params.page),
       );
 
+      this.type = to.params.type;
       this.currentPage = Number(to.params.page);
       this.setTransactions(data);
       this.setMeta(meta);
@@ -192,11 +198,7 @@ export default class WalletTransactions extends Vue {
   }
 
   private changePage() {
-    if (
-      this.currentPage !== Number(this.$route.params.page) ||
-      this.address !== this.$route.params.address ||
-      this.type !== this.$route.params.type
-    ) {
+    if (this.currentPage !== Number(this.$route.params.page) || this.address !== this.$route.params.address) {
       // @ts-ignore
       this.$router.push({
         name: "wallet-transactions",

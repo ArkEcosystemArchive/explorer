@@ -1,3 +1,3 @@
-require('jest-extended');
+require("jest-extended");
 
 jest.setTimeout(30000);

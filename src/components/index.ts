@@ -18,7 +18,7 @@ Vue.component("LinkTransaction", require("@/components/links/LinkTransaction").d
 Vue.component("LinkWallet", require("@/components/links/LinkWallet").default);
 
 // Tables
-Vue.component("TableDelegates", require("@/components/tables/Delegates").default);
+Vue.component("TableDelegates", require("@/components/tables/DelegateMonitor").default);
 Vue.component("MultiPaymentTransactions", require("@/components/tables/MultiPaymentTransactions").default);
 
 Vue.component("TableBlocksDesktop", require("@/components/tables/Blocks").default);
@@ -27,6 +27,7 @@ Vue.component("TableWalletsDesktop", require("@/components/tables/Wallets").defa
 Vue.component("TableLockTransactionsDesktop", require("@/components/tables/LockTransactions").default);
 Vue.component("TableBusinessesDesktop", require("@/components/tables/Businesses").default);
 Vue.component("TableBridgechainsDesktop", require("@/components/tables/Bridgechains").default);
+Vue.component("TableDelegatesDesktop", require("@/components/tables/Delegates").default);
 
 Vue.component("TableBlocksMobile", require("@/components/tables/mobile/Blocks").default);
 Vue.component("TableTransactionsMobile", require("@/components/tables/mobile/Transactions").default);
@@ -34,6 +35,7 @@ Vue.component("TableWalletsMobile", require("@/components/tables/mobile/Wallets"
 Vue.component("TableLockTransactionsMobile", require("@/components/tables/mobile/LockTransactions").default);
 Vue.component("TableBusinessesMobile", require("@/components/tables/mobile/Businesses").default);
 Vue.component("TableBridgechainsMobile", require("@/components/tables/mobile/Bridgechains").default);
+Vue.component("TableDelegatesMobile", require("@/components/tables/mobile/Delegates").default);
 
 // Misc.
 Vue.component("ArkMeter", require("@/components/monitor/ArkMeter").default);

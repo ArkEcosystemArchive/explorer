@@ -24,11 +24,11 @@
       {{ $t("PAGES.DELEGATE_MONITOR.TITLE") }}
     </RouterLink>
 
-    <RouterLink :to="{ name: 'bridgechains', params: { page: 1 } }" tag="button" class="menu-button" @click.native="closeMenu">
+    <RouterLink v-if="hasMagistrateEnabled" :to="{ name: 'bridgechains', params: { page: 1 } }" tag="button" class="menu-button" @click.native="closeMenu">
       {{ $t("PAGES.BRIDGECHAINS.TITLE") }}
     </RouterLink>
 
-    <RouterLink :to="{ name: 'businesses', params: { page: 1 } }" tag="button" class="menu-button" @click.native="closeMenu">
+    <RouterLink v-if="hasMagistrateEnabled" :to="{ name: 'businesses', params: { page: 1 } }" tag="button" class="menu-button" @click.native="closeMenu">
       {{ $t("PAGES.BUSINESSES.TITLE") }}
     </RouterLink>
 
@@ -38,8 +38,13 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { mapGetters } from "vuex";
 
-@Component
+@Component({
+  computed: {
+    ...mapGetters("network", ["hasMagistrateEnabled"]),
+  },
+})
 export default class HeaderMenuDesktop extends Vue {
   private closeMenu(): void {
     this.$store.dispatch("ui/setMenuVisible", false);

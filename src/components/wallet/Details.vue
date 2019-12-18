@@ -104,15 +104,15 @@
     </div>
 
     <!-- Mobile -->
-    <div v-if="wallet.address" class="px-5 sm:px-10 py-10 bg-theme-feature-background md:hidden">
-      <div class="flex justify-center mb-10">
+    <div v-if="wallet.address" class="px-5 sm:px-10 py-10 bg-theme-feature-background md:hidden overflow-hidden">
+      <div class="flex justify-center mb-6">
         <div class="flex items-center p-2 bg-white rounded mx-auto">
           <QrCode :value="wallet.address" :options="{ size: 160 }" />
         </div>
       </div>
       <div class="px-2">
-        <div class="flex -mx-6 mb-8">
-          <div :class="{ 'border-r': wallet.publicKey }" class="md:w-1/2 px-6 w-full border-grey-dark">
+        <div class="flex flex-wrap -mx-6">
+          <div :class="{ 'border-r border-grey-dark -mr-1': wallet.publicKey }" class="md:w-1/2 px-6 flex-1 whitespace-no-wrap my-4">
             <div class="flex items-center text-grey mb-2">
               <span class="mr-2">{{ $t("WALLET.ADDRESS") }}</span>
               <SvgIcon
@@ -137,7 +137,7 @@
               <Clipboard v-if="wallet.address" :value="wallet.address" />
             </div>
           </div>
-          <div v-if="wallet.publicKey" class="md:w-1/2 px-6 w-full">
+          <div v-if="wallet.publicKey" class="md:w-1/2 px-6 flex-1 whitespace-no-wrap my-4">
             <div class="text-grey mb-2">
               {{ $t("WALLET.PUBLIC_KEY") }}
             </div>
@@ -147,8 +147,8 @@
             </div>
           </div>
         </div>
-        <div class="flex -mx-6">
-          <div :class="{ 'border-r border-grey-dark': isVoting }" class="md:w-1/2 px-6 w-full">
+        <div class="flex flex-wrap -mx-6">
+          <div :class="{ 'border-r border-grey-dark -mr-1': hasLockedBalance }" class="md:w-1/2 px-6 flex-1 whitespace-no-wrap my-4">
             <div class="text-grey mb-2">
               {{ $t("WALLET.BALANCE", { token: networkToken() }) }}
             </div>
@@ -164,7 +164,7 @@
             </div>
           </div>
 
-          <div v-if="view === 'public' && hasLockedBalance" class="md:w-1/2 px-6 w-full">
+          <div v-if="view === 'public' && hasLockedBalance" class="md:w-1/2 px-6 flex-1 whitespace-no-wrap my-4">
             <div class="flex items-center text-grey mb-2">
               {{ $t("WALLET.LOCKED_BALANCE") }}
               <SvgIcon class="ml-2" name="locked-balance" view-box="0 0 16 17" />

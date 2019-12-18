@@ -39,7 +39,7 @@
       <TransactionDetails :transaction="transaction" ref="transactionDetails" />
 
       <section
-        v-if="transaction.type === coreTransaction.MULTI_PAYMENT && transaction.typeGroup === typeGroupTransaction.CORE"
+        v-if="isMultiPayment(transaction.type, transaction.typeGroup)"
         class="page-section py-5 md:py-10"
       >
         <MultiPaymentTransactions :transaction="transaction" :page="currentPage" />
@@ -59,7 +59,6 @@ import NotFound from "@/components/utils/NotFound.vue";
 import TransactionDetails from "@/components/transaction/Details.vue";
 import MultiPaymentTransactions from "@/components/tables/MultiPaymentTransactions.vue";
 import TransactionService from "@/services/transaction";
-import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
 
 Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 
@@ -84,14 +83,6 @@ export default class TransactionPage extends Vue {
 
   get showPagination() {
     return this.meta && this.meta.pageCount >= 1;
-  }
-
-  get coreTransaction() {
-    return CoreTransaction;
-  }
-
-  get typeGroupTransaction() {
-    return TypeGroupTransaction;
   }
 
   public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
@@ -165,11 +156,8 @@ export default class TransactionPage extends Vue {
   }
 
   private calculateMeta() {
-    if (
-      this.transaction &&
-      this.transaction.type === CoreTransaction.MULTI_PAYMENT &&
-      this.transaction.typeGroup === TypeGroupTransaction.CORE
-    ) {
+    // @ts-ignore
+    if (this.transaction && this.isMultiPayment(this.transaction.type, this.transaction.typeGroup)) {
       const transactions = this.transaction.asset.payments.length;
       const pages = Math.ceil(transactions / 25);
       this.meta = {

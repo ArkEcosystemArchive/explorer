@@ -22,6 +22,7 @@ const state: IUiState = {
   delegateSortParams: null,
   transactionSortParams: null,
   walletSortParams: null,
+  walletTransactionTab: "all",
 };
 
 const actions: ActionTree<IUiState, {}> = {
@@ -153,6 +154,12 @@ const actions: ActionTree<IUiState, {}> = {
       value,
     });
   },
+  setWalletTransactionTab: ({ commit }, value) => {
+    commit({
+      type: types.SET_UI_WALLET_TRANSACTION_TAB,
+      value,
+    });
+  },
 };
 
 const mutations: MutationTree<IUiState> = {
@@ -195,6 +202,9 @@ const mutations: MutationTree<IUiState> = {
   [types.SET_UI_WALLET_SORT_PARAMS](state, payload: IStorePayload) {
     state.walletSortParams = payload.value;
   },
+  [types.SET_UI_WALLET_TRANSACTION_TAB](state, payload: IStorePayload) {
+    state.walletTransactionTab = payload.value;
+  },
 };
 
 const getters: GetterTree<IUiState, {}> = {
@@ -206,7 +216,7 @@ const getters: GetterTree<IUiState, {}> = {
   menuVisible: state => state.menuVisible,
 
   hasAcceptedLinkDisclaimer(state) {
-    return state.hasAcceptedLinkDisclaimer || localStorage.getItem("hasAcceptedLinkDisclaimer")
+    return state.hasAcceptedLinkDisclaimer || localStorage.getItem("hasAcceptedLinkDisclaimer");
   },
 
   blockSortParams(state) {
@@ -231,6 +241,9 @@ const getters: GetterTree<IUiState, {}> = {
       : {
           active: { field: "rank", type: "asc" },
           standby: { field: "rank", type: "asc" },
+          resigned: { field: "votes", type: "asc" },
+          table: { field: "rank", type: "asc" },
+          tableResigned: { field: "votes", type: "asc" },
         };
   },
 
@@ -243,6 +256,8 @@ const getters: GetterTree<IUiState, {}> = {
     const params = state.walletSortParams || localStorage.getItem("walletSortParams");
     return params ? JSON.parse(params) : { field: "originalIndex", type: "asc" };
   },
+
+  walletTransactionTab: state => state.walletTransactionTab,
 };
 
 export const ui: Module<IUiState, {}> = {

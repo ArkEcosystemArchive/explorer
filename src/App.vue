@@ -5,11 +5,19 @@
       'bg-theme-page-background text-theme-text-content min-h-screen font-sans xl:pt-8',
     ]"
   >
-    <AppHeader />
+    <div :class="{ 'blur': hasBlurFilter }">
+      <AppHeader />
 
-    <RouterView />
+      <RouterView />
 
-    <AppFooter />
+      <AppFooter />
+    </div>
+
+    <PortalTarget
+      name="modal"
+      multiple
+      @change="onPortalChange"
+    />
   </main>
 </template>
 
@@ -17,7 +25,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import AppHeader from "@/components/header/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
-import { BlockchainService, CryptoCompareService, DelegateService, MigrationService, NodeService } from "@/services";
+import { BlockchainService, BusinessService, CryptoCompareService, DelegateService, MigrationService, NodeService } from "@/services";
 import { mapGetters } from "vuex";
 import moment from "moment";
 
@@ -39,6 +47,7 @@ export default class App extends Vue {
   private language: string;
   private locale: string;
   private nightMode: boolean;
+  private hasBlurFilter: boolean = false;
 
   public async created() {
     MigrationService.executeMigrations();
@@ -97,6 +106,7 @@ export default class App extends Vue {
     this.updateSupply();
     this.updateHeight();
     this.updateDelegates();
+    this.checkForMagistrateEnabled();
   }
 
   public mounted() {
@@ -109,6 +119,14 @@ export default class App extends Vue {
 
   public prepareComponent() {
     this.initialiseTimers();
+  }
+
+  public setBlurFilter(isActive) {
+    this.hasBlurFilter = isActive;
+  }
+
+  public onPortalChange(isActive) {
+    this.hasBlurFilter = isActive;
   }
 
   public async updateCurrencyRate() {
@@ -132,12 +150,17 @@ export default class App extends Vue {
     const fetchedAt: number = parseInt(localStorage.getItem("delegatesFetchedAt") || "0", 10);
 
     if (!this.stateHasDelegates || !fetchedAt || this.updateRequired(fetchedAt)) {
-      const delegates = await DelegateService.all();
+      const delegates = await DelegateService.fetchEveryDelegate();
       this.$store.dispatch("delegates/setDelegates", {
         delegates,
         timestamp: Math.floor(Date.now() / 1000),
       });
     }
+  }
+
+  public async checkForMagistrateEnabled() {
+    const hasMagistrateEnabled = await BusinessService.isEnabled();
+    this.$store.dispatch("network/setHasMagistrateEnabled", hasMagistrateEnabled);
   }
 
   public updateRequired(timestamp: number): boolean {
@@ -175,3 +198,9 @@ export default class App extends Vue {
   }
 }
 </script>
+
+<style scoped>
+.blur {
+  filter: blur(4px)
+}
+</style>

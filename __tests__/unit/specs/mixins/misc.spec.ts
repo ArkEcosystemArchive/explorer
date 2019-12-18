@@ -61,4 +61,37 @@ describe("Mixins > Misc", () => {
       expect(wrapper.vm.readableNumber(100, 8)).toEqual("100.00000000");
     });
   });
+
+  describe("calculateMultipaymentAmount", () => {
+    const transaction = {
+      asset: {
+        payments: [
+          {
+            recipientId: "A1",
+            amount: "100",
+          },
+          {
+            recipientId: "A1",
+            amount: "100",
+          },
+          {
+            recipientId: "A2",
+            amount: "100",
+          },
+        ],
+      },
+    };
+
+    it("should return the correct amount if no address given", () => {
+      expect(wrapper.vm.calculateMultipaymentAmount(transaction).toFixed()).toEqual("300");
+    });
+
+    it("should return the correct amount if there is only one payment to the given address", () => {
+      expect(wrapper.vm.calculateMultipaymentAmount(transaction, "A2").toFixed()).toEqual("100");
+    });
+
+    it("should return the correct amount if there are multiple payments to the given address", () => {
+      expect(wrapper.vm.calculateMultipaymentAmount(transaction, "A1").toFixed()).toEqual("200");
+    });
+  });
 });

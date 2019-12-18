@@ -49,7 +49,7 @@
         </div>
 
         <div v-else-if="data.column.field === 'amount'">
-          <TransactionAmount :transaction="data.row" :type="data.row.type" />
+          <TransactionAmount :transaction="data.row" />
         </div>
       </template>
     </TableWrapper>
