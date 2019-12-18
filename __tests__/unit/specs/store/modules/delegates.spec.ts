@@ -33,4 +33,8 @@ describe("Store > Delegates", () => {
   it("should return null when delegate with public key does not exist", () => {
     expect(store.getters["delegates/byPublicKey"]("wrong public key")).toBe(null);
   });
+
+  it("should get whether delegates are set", () => {
+    expect(store.getters["delegates/stateHasDelegates"]).toEqual(true);
+  });
 });
