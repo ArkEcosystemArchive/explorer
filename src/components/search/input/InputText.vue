@@ -16,6 +16,7 @@
       <textarea
         v-if="inputType === 'textarea'"
         ref="input"
+        v-on:input="onInput"
         v-model="model"
         :class="[{ 'InputText__input--read-only': isReadOnly, 'InputText__input--large': isLarge }]"
         :rows="rows"
@@ -29,6 +30,7 @@
       <input
         v-else
         ref="input"
+        v-on:input="onInput"
         v-model="model"
         :class="[{ 'InputText__input--read-only': isReadOnly, 'InputText__input--large': isLarge }]"
         :name="name"
@@ -80,13 +82,16 @@ export default class InputText extends Vue {
     this.inputValue = value;
   }
 
+  private onInput(e) {
+    this.$emit("input", e);
+  }
+
   get model() {
     return this.inputValue;
   }
 
   set model(value: string) {
     this.inputValue = value;
-    this.$emit("input", value);
   }
 
   get isDirty() {

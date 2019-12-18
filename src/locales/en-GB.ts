@@ -161,19 +161,6 @@ export default {
     NO_RESULTS: "Nothing matched your search",
   },
 
-  ADVANCED_SEARCH: {
-    TRANSACTION: {
-      SEARCH: "Transaction ID",
-      TRANSACTION_TYPE: "Transaction Type",
-      DATE_FROM: "Date from",
-      DATE_TO: "Date to",
-      AMOUNT_FROM: "Amount from",
-      AMOUNT_TO: "Amount to",
-      FEE_FROM: "Fee from",
-      FEE_TO: "Fee to",
-    },
-  },
-
   BUTTON_CLIPBOARD: {
     SUCCESS: "Copied!",
     ERROR: "Error!",
@@ -238,6 +225,17 @@ export default {
     ADVANCED_SEARCH: {
       TITLE: "Advanced Search",
       RESULTS: "Results",
+      TYPE: "Search Type",
+      TRANSACTION: {
+        SEARCH: "Transaction ID",
+        TRANSACTION_TYPE: "Transaction Type",
+        DATE_FROM: "Date from",
+        DATE_TO: "Date to",
+        AMOUNT_FROM: "Amount from",
+        AMOUNT_TO: "Amount to",
+        FEE_FROM: "Fee from",
+        FEE_TO: "Fee to",
+      },
     },
     NOT_FOUND: {
       TITLE: "Ooops!",
