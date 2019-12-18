@@ -272,6 +272,7 @@ export default {
     CREATION: "UNIK Creation",
     UPDATE: "UNIK Update",
     TRANSFER: "UNIK Transfer",
+    DISCLOSE: "UNIK Disclose",
     OWNER: "Owner",
     CREATION_DATE: "Creation date",
     CATEGORY: "Category",
