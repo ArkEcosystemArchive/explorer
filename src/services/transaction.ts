@@ -1,5 +1,5 @@
 import ApiService from "@/services/api";
-import { IApiTransactionWrapper, IApiTransactionsWrapper, ITransaction, ITransactionSearchQuery } from "../interfaces";
+import { IApiTransactionWrapper, IApiTransactionsWrapper, ITransaction, ITransactionSearchParams } from "../interfaces";
 
 class TransactionService {
   public async latest(limit: number = 25): Promise<ITransaction[]> {
@@ -46,7 +46,7 @@ class TransactionService {
   }
 
   public async search(
-    body: ITransactionSearchQuery,
+    body: ITransactionSearchParams,
     page: number = 1,
     limit: number = 25,
   ): Promise<IApiTransactionsWrapper> {

@@ -286,7 +286,7 @@ export interface IBridgechain {
   ports: object;
 }
 
-export interface ITransactionSearchQuery {
+export interface ITransactionSearchParams {
   id?: string;
   type?: string;
   timestamp?: { from?: number; to?: number };
@@ -295,14 +295,14 @@ export interface ITransactionSearchQuery {
   vendorField?: string;
 }
 
-export interface IBlockSearchQuery {
+export interface IBlockSearchParams {
   id?: string;
   generatorPublicKey?: string;
   timestamp?: { from?: number; to?: number };
   height?: { from?: number; to?: number };
 }
 
-export interface IWalletSearchQuery {
+export interface IWalletSearchParams {
   address?: string;
   username?: string;
   vote?: string;

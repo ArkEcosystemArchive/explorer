@@ -34,9 +34,9 @@ import { TransactionService } from "@/services";
 import {
   ISortParameters,
   ITransaction,
-  ITransactionSearchQuery,
-  IWalletSearchQuery,
-  IBlockSearchQuery,
+  ITransactionSearchParams,
+  IWalletSearchParams,
+  IBlockSearchParams,
 } from "@/interfaces";
 import store from "@/store";
 
@@ -72,7 +72,7 @@ export default class AdvancedSearchPage extends Vue {
   private currentPage: number = 1;
   private searchTypes: string[] = ["transaction", "block", "wallet"];
   private searchType: string = "transaction";
-  private query: ITransactionSearchQuery = {};
+  private searchParams: ITransactionSearchParams = {};
   private submitted: boolean = false;
 
   @Watch("currentPage")
@@ -85,7 +85,7 @@ export default class AdvancedSearchPage extends Vue {
     this.meta = null;
 
     try {
-      const { meta, data } = await TransactionService.search(this.query, Number(to.params.page));
+      const { meta, data } = await TransactionService.search(this.searchParams, Number(to.params.page));
 
       this.currentPage = Number(to.params.page);
       this.setData(data);
@@ -125,7 +125,7 @@ export default class AdvancedSearchPage extends Vue {
 
   private onFormChange({ name, value }) {
     if (!value) {
-      this.removeFromQuery(name);
+      this.removeFromSearchParams(name);
       return;
     }
 
@@ -133,7 +133,7 @@ export default class AdvancedSearchPage extends Vue {
       const [parent, child] = name.split("-");
 
       name = parent;
-      value = { ...this.query[parent], [child]: Number(value) };
+      value = { ...this.searchParams[parent], [child]: Number(value) };
     }
 
     if (name.includes("timestamp")) {
@@ -142,20 +142,20 @@ export default class AdvancedSearchPage extends Vue {
       const [parent, child] = name.split("-");
 
       name = parent;
-      value = { ...this.query[parent], [child]: timestamp };
+      value = { ...this.searchParams[parent], [child]: timestamp };
     }
 
-    this.query = { ...this.query, [name]: value };
+    this.searchParams = { ...this.searchParams, [name]: value };
   }
 
-  private removeFromQuery(name: string): void {
+  private removeFromSearchParams(name: string): void {
     if (name.includes("-")) {
       const [parent, child] = name.split("-");
 
-      delete this.query[parent][child];
+      delete this.searchParams[parent][child];
     }
 
-    delete this.query[name];
+    delete this.searchParams[name];
   }
 
   private async search() {
@@ -164,7 +164,7 @@ export default class AdvancedSearchPage extends Vue {
     this.submitted = true;
 
     try {
-      const { meta, data } = await TransactionService.search(this.query);
+      const { meta, data } = await TransactionService.search(this.searchParams);
       this.setMeta(meta);
       this.setData(data);
     } catch {
