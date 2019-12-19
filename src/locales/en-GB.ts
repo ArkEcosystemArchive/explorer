@@ -225,12 +225,20 @@ export default {
     ADVANCED_SEARCH: {
       TITLE: "Advanced Search",
       RESULTS: "Results",
-      TYPE: "Search Type",
-      TRANSACTION: {
-        SEARCH: "Transaction ID",
-        TRANSACTION_TYPE: "Transaction Type",
+      SEARCH_TYPE: "Search Type",
+      GENERIC: {
         DATE_FROM: "Date from",
         DATE_TO: "Date to",
+      },
+      BLOCK: {
+        TOTAL_AMOUNT_FROM: "Total amount from",
+        TOTAL_AMOUNT_TO: "Total amount to",
+        TOTAL_FEE_FROM: "Total fee from",
+        TOTAL_FEE_TO: "Total fee to",
+        REWARD_FROM: "Reward from",
+        REWARD_TO: "Reward to",
+      },
+      TRANSACTION: {
         AMOUNT_FROM: "Amount from",
         AMOUNT_TO: "Amount to",
         FEE_FROM: "Fee from",

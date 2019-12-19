@@ -299,7 +299,10 @@ export interface IBlockSearchParams {
   id?: string;
   generatorPublicKey?: string;
   timestamp?: { from?: number; to?: number };
-  height?: { from?: number; to?: number };
+  totalAmount?: { from?: number; to?: number };
+  totalFee?: { from?: number; to?: number };
+  reward?: { from?: number; to?: number };
+  numberOfTransactions?: { from?: number; to?: number };
 }
 
 export interface IWalletSearchParams {

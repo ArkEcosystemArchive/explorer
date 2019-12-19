@@ -10,16 +10,38 @@
       :search="search"
       :onSearchTypeChange="onSearchTypeChange"
     />
-    <BlockSearchForm v-if="searchType === 'block'" />
-    <WalletSearchForm v-if="searchType === 'wallet'" />
+    <BlockSearchForm
+      v-if="searchType === 'block'"
+      @formChange="onFormChange"
+      :searchType="searchType"
+      :searchTypes="searchTypes"
+      :search="search"
+      :onSearchTypeChange="onSearchTypeChange"
+    />
+    <WalletSearchForm
+      v-if="searchType === 'wallet'"
+      @formChange="onFormChange"
+      :searchType="searchType"
+      :searchTypes="searchTypes"
+      :search="search"
+      :onSearchTypeChange="onSearchTypeChange"
+    />
 
     <section class="page-section py-5 md:py-10" v-if="submitted">
-      <div class="hidden sm:block">
+      <div v-if="searchType === 'transaction'" class="hidden sm:block">
         <TableTransactionsDesktop :transactions="data" :sort-query="sortParams" @on-sort-change="onSortChange" />
       </div>
-      <div class="sm:hidden">
+      <div v-if="searchType === 'transaction'" class="sm:hidden">
         <TableTransactionsMobile :transactions="data" />
       </div>
+
+      <div class="hidden sm:block" v-if="searchType === 'block'">
+        <TableBlocksDesktop :blocks="data" :sort-query="sortParams" @on-sort-change="onSortChange" />
+      </div>
+      <div class="sm:hidden" v-if="searchType === 'block'">
+        <TableBlocksMobile :blocks="data" />
+      </div>
+
       <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
     </section>
   </div>
@@ -30,10 +52,13 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { Route } from "vue-router";
 import { BlockSearchForm, TransactionSearchForm, WalletSearchForm } from "@/components/search";
-import { TransactionService } from "@/services";
+import { BlockService, TransactionService } from "@/services";
 import {
   ISortParameters,
+  IBlock,
+  IWallet,
   ITransaction,
+  IMeta,
   ITransactionSearchParams,
   IWalletSearchParams,
   IBlockSearchParams,
@@ -64,15 +89,27 @@ export default class AdvancedSearchPage extends Vue {
     });
   }
 
-  get showPagination() {
+  get showPagination(): boolean {
     return this.meta && this.meta.pageCount > 1;
   }
+
+  get searchService() {
+    return this.types[this.searchType].searchService;
+  }
+
+  private types: object = {
+    transaction: {
+      searchService: TransactionService.search,
+    },
+    block: { searchService: BlockService.search },
+    wallet: { searchService: "" },
+  };
   private data: any[] | null = null;
   private meta: any | null = null;
   private currentPage: number = 1;
   private searchTypes: string[] = ["transaction", "block", "wallet"];
-  private searchType: string = "transaction";
-  private searchParams: ITransactionSearchParams = {};
+  private searchType: string = "block";
+  private searchParams: ITransactionSearchParams | IBlockSearchParams | IWalletSearchParams = {};
   private submitted: boolean = false;
 
   @Watch("currentPage")
@@ -85,7 +122,7 @@ export default class AdvancedSearchPage extends Vue {
     this.meta = null;
 
     try {
-      const { meta, data } = await TransactionService.search(this.searchParams, Number(to.params.page));
+      const { meta, data } = await this.searchService(this.searchParams, Number(to.params.page));
 
       this.currentPage = Number(to.params.page);
       this.setData(data);
@@ -96,7 +133,7 @@ export default class AdvancedSearchPage extends Vue {
     }
   }
 
-  public setMeta(meta: any) {
+  public setMeta(meta: IMeta) {
     this.meta = meta;
   }
 
@@ -129,7 +166,13 @@ export default class AdvancedSearchPage extends Vue {
       return;
     }
 
-    if (name.includes("amount") || name.includes("fee")) {
+    if (
+      name.includes("amount") ||
+      name.includes("totalAmount") ||
+      name.includes("fee") ||
+      name.includes("totalFee") ||
+      name.includes("reward")
+    ) {
       const [parent, child] = name.split("-");
 
       name = parent;
@@ -158,13 +201,13 @@ export default class AdvancedSearchPage extends Vue {
     delete this.searchParams[name];
   }
 
-  private async search() {
+  private async search(): Promise<void> {
     this.setMeta(null);
     this.setData(null);
     this.submitted = true;
 
     try {
-      const { meta, data } = await TransactionService.search(this.searchParams);
+      const { meta, data } = await this.searchService(this.searchParams);
       this.setMeta(meta);
       this.setData(data);
     } catch {
@@ -175,11 +218,12 @@ export default class AdvancedSearchPage extends Vue {
   private onSearchTypeChange(searchType: string): void {
     this.setMeta(null);
     this.setData(null);
+    this.searchParams = {};
     this.submitted = false;
     this.searchType = searchType;
   }
 
-  private setData(data: any[]) {
+  private setData(data: ITransaction[] | IBlock[] | IWallet[]) {
     this.data = data;
   }
 

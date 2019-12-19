@@ -5,8 +5,8 @@
         v-on:input="onSearchTypeChange"
         :value="searchType"
         :items="searchTypes"
-        :label="$t('PAGES.ADVANCED_SEARCH.TYPE')"
-        name="time-format"
+        :label="$t('PAGES.ADVANCED_SEARCH.SEARCH_TYPE')"
+        :name="$t('PAGES.ADVANCED_SEARCH.SEARCH_TYPE')"
         class="flex-1"
       />
     </div>
@@ -14,9 +14,9 @@
     <div class="flex-grow w-full md:w-auto">
       <InputText
         @input="onInputChange"
-        :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.SEARCH')"
+        :label="$t(typeValues[searchType].label)"
+        :name="typeValues[searchType].name"
         class="my-3"
-        name="id"
         errors=""
       />
     </div>
@@ -42,5 +42,11 @@ export default class TransactionSearchForm extends Vue {
   @Prop({ required: true }) private searchTypes: string[];
   @Prop({ required: true }) private onSearchTypeChange: any;
   @Prop({ required: true }) private onInputChange: any;
+
+  private typeValues = {
+    transaction: { label: "TRANSACTION.ID", name: "id" },
+    block: { label: "BLOCK.ID", name: "id" },
+    wallet: { label: "WALLET.ADDRESS", name: "address" },
+  };
 }
 </script>
