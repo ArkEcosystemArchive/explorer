@@ -53,13 +53,12 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
   },
 })
 export default class AdvancedSearchPage extends Vue {
-
   get sortParams() {
-    return this.$store.getters["ui/bridgechainSortParams"];
+    return this.$store.getters["ui/transactionSortParams"];
   }
 
   set sortParams(params: ISortParameters) {
-    this.$store.dispatch("ui/setBridgechainSortParams", {
+    this.$store.dispatch("ui/setTransactionSortParams", {
       field: params.field,
       type: params.type,
     });
@@ -125,6 +124,11 @@ export default class AdvancedSearchPage extends Vue {
   }
 
   private onFormChange({ name, value }) {
+    if (!value) {
+      this.removeFromQuery(name);
+      return;
+    }
+
     if (name.includes("amount") || name.includes("fee")) {
       const [parent, child] = name.split("-");
 
@@ -142,6 +146,16 @@ export default class AdvancedSearchPage extends Vue {
     }
 
     this.query = { ...this.query, [name]: value };
+  }
+
+  private removeFromQuery(name: string): void {
+    if (name.includes("-")) {
+      const [parent, child] = name.split("-");
+
+      delete this.query[parent][child];
+    }
+
+    delete this.query[name];
   }
 
   private async search() {
