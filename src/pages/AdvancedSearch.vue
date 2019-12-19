@@ -159,6 +159,8 @@ export default class AdvancedSearchPage extends Vue {
   }
 
   private async search() {
+    this.setMeta(null);
+    this.setData(null);
     this.submitted = true;
 
     try {
