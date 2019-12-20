@@ -20,3 +20,8 @@
   to = "https://devnet.explorer.uns.network/"
   status = 302
   force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
