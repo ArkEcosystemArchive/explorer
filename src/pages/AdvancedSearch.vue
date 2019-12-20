@@ -3,43 +3,50 @@
     <ContentHeader>{{ $t("PAGES.ADVANCED_SEARCH.TITLE") }}</ContentHeader>
 
     <TransactionSearchForm
-      v-if="searchType === 'transaction'"
+      v-if="selectedType === 'transaction'"
       @formChange="onFormChange"
-      :searchType="searchType"
+      :selectedType="selectedType"
       :searchTypes="searchTypes"
       :search="search"
       :onSearchTypeChange="onSearchTypeChange"
     />
     <BlockSearchForm
-      v-if="searchType === 'block'"
+      v-if="selectedType === 'block'"
       @formChange="onFormChange"
-      :searchType="searchType"
+      :selectedType="selectedType"
       :searchTypes="searchTypes"
       :search="search"
       :onSearchTypeChange="onSearchTypeChange"
     />
     <WalletSearchForm
-      v-if="searchType === 'wallet'"
+      v-if="selectedType === 'wallet'"
       @formChange="onFormChange"
-      :searchType="searchType"
+      :selectedType="selectedType"
       :searchTypes="searchTypes"
       :search="search"
       :onSearchTypeChange="onSearchTypeChange"
     />
 
     <section class="page-section py-5 md:py-10" v-if="submitted">
-      <div v-if="searchType === 'transaction'" class="hidden sm:block">
+      <div v-if="selectedType === 'transaction'" class="hidden sm:block">
         <TableTransactionsDesktop :transactions="data" :sort-query="sortParams" @on-sort-change="onSortChange" />
       </div>
-      <div v-if="searchType === 'transaction'" class="sm:hidden">
+      <div v-if="selectedType === 'transaction'" class="sm:hidden">
         <TableTransactionsMobile :transactions="data" />
       </div>
 
-      <div class="hidden sm:block" v-if="searchType === 'block'">
+      <div class="hidden sm:block" v-if="selectedType === 'block'">
         <TableBlocksDesktop :blocks="data" :sort-query="sortParams" @on-sort-change="onSortChange" />
       </div>
-      <div class="sm:hidden" v-if="searchType === 'block'">
+      <div class="sm:hidden" v-if="selectedType === 'block'">
         <TableBlocksMobile :blocks="data" />
+      </div>
+
+      <div class="hidden sm:block" v-if="selectedType === 'wallet'">
+        <TableWalletsDesktop :wallets="data" total="1" :sort-query="sortParams" @on-sort-change="onSortChange" />
+      </div>
+      <div class="sm:hidden">
+        <TableWalletsMobile :wallets="data" total="1" />
       </div>
 
       <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
@@ -52,7 +59,7 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { Route } from "vue-router";
 import { BlockSearchForm, TransactionSearchForm, WalletSearchForm } from "@/components/search";
-import { BlockService, TransactionService } from "@/services";
+import { BlockService, TransactionService, WalletService } from "@/services";
 import {
   ISortParameters,
   IBlock,
@@ -78,12 +85,30 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
   },
 })
 export default class AdvancedSearchPage extends Vue {
+  private types: object = {
+    transaction: {
+      searchService: TransactionService.search,
+      sortParams: "ui/transactionSortParams",
+      setSortParams: "ui/setTransactionSortParams",
+    },
+    block: {
+      searchService: BlockService.search,
+      sortParams: "ui/blockSortParams",
+      setSortParams: "ui/setBlockSortParams",
+    },
+    wallet: {
+      searchService: WalletService.search,
+      sortParams: "ui/walletSortParams",
+      setSortParams: "ui/setWalletSortParams",
+    },
+  };
+
   get sortParams() {
-    return this.$store.getters["ui/transactionSortParams"];
+    return this.$store.getters[this.types[this.selectedType].sortParams];
   }
 
   set sortParams(params: ISortParameters) {
-    this.$store.dispatch("ui/setTransactionSortParams", {
+    this.$store.dispatch(this.types[this.selectedType].setSortParams, {
       field: params.field,
       type: params.type,
     });
@@ -94,21 +119,14 @@ export default class AdvancedSearchPage extends Vue {
   }
 
   get searchService() {
-    return this.types[this.searchType].searchService;
+    return this.types[this.selectedType].searchService;
   }
 
-  private types: object = {
-    transaction: {
-      searchService: TransactionService.search,
-    },
-    block: { searchService: BlockService.search },
-    wallet: { searchService: "" },
-  };
   private data: any[] | null = null;
   private meta: any | null = null;
   private currentPage: number = 1;
-  private searchTypes: string[] = ["transaction", "block", "wallet"];
-  private searchType: string = "block";
+  private searchTypes: string[] = Object.keys(this.types);
+  private selectedType: string = "wallet";
   private searchParams: ITransactionSearchParams | IBlockSearchParams | IWalletSearchParams = {};
   private submitted: boolean = false;
 
@@ -215,12 +233,12 @@ export default class AdvancedSearchPage extends Vue {
     }
   }
 
-  private onSearchTypeChange(searchType: string): void {
+  private onSearchTypeChange(selectedType: string): void {
     this.setMeta(null);
     this.setData(null);
     this.searchParams = {};
     this.submitted = false;
-    this.searchType = searchType;
+    this.selectedType = selectedType;
   }
 
   private setData(data: ITransaction[] | IBlock[] | IWallet[]) {

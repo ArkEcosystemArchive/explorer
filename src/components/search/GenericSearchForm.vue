@@ -3,7 +3,7 @@
     <div class="w-full md:w-64 md:mr-6">
       <InputSelect
         v-on:input="onSearchTypeChange"
-        :value="searchType"
+        :value="selectedType"
         :items="searchTypes"
         :label="$t('PAGES.ADVANCED_SEARCH.SEARCH_TYPE')"
         :name="$t('PAGES.ADVANCED_SEARCH.SEARCH_TYPE')"
@@ -14,8 +14,8 @@
     <div class="flex-grow w-full md:w-auto">
       <InputText
         @input="onInputChange"
-        :label="$t(typeValues[searchType].label)"
-        :name="typeValues[searchType].name"
+        :label="$t(typeValues[selectedType].label)"
+        :name="typeValues[selectedType].name"
         class="my-3"
         errors=""
       />
@@ -38,7 +38,7 @@ import { ITransactionType } from "@/interfaces";
   },
 })
 export default class TransactionSearchForm extends Vue {
-  @Prop({ required: true }) private searchType: string;
+  @Prop({ required: true }) private selectedType: string;
   @Prop({ required: true }) private searchTypes: string[];
   @Prop({ required: true }) private onSearchTypeChange: any;
   @Prop({ required: true }) private onInputChange: any;

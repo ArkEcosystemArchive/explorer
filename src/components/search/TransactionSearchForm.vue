@@ -2,15 +2,15 @@
   <section class="page-section mb-5 py-5 md:py-10 ">
     <GenericSearchForm
       :searchTypes="searchTypes"
-      :searchType="searchType"
+      :selectedType="selectedType"
       :onSearchTypeChange="onSearchTypeChange"
       :onInputChange="onInputChange"
     />
 
-    <div class="mb-5 mx-5 sm:mx-10">
-      <p class="font-bold">Additional Parameters</p>
+    <div class="mb-5 mx-5 sm:mx-10 mb-10">
+      <p class="font-bold mb-4">Additional Parameters</p>
 
-      <div class="flex flex-wrap justify-between my-4">
+      <div class="flex flex-wrap justify-between mb-4">
         <div class="w-full md:w-64 mb-4 md:mb-0">
           <InputSelect
             @input="onTypeChange"
@@ -19,26 +19,6 @@
             name="time-format"
             class="flex-1"
           />
-        </div>
-
-        <div class="flex w-full md:w-64 mb-4 md:mb-0">
-          <div class="w-1/2">
-            <InputDate
-              @input="onInputChange"
-              class="mr-3"
-              :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.DATE_FROM')"
-              name="timestamp-from"
-              errors=""
-            />
-          </div>
-          <div class="w-1/2">
-            <InputDate
-              @input="onInputChange"
-              :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.DATE_TO')"
-              name="timestamp-to"
-              errors=""
-            />
-          </div>
         </div>
 
         <div class="flex w-full md:w-64 mb-4 md:mb-0">
@@ -82,6 +62,26 @@
             />
           </div>
         </div>
+
+        <div class="flex w-full md:w-64 mb-4 md:mb-0">
+          <div class="w-1/2">
+            <InputDate
+              @input="onInputChange"
+              class="mr-3"
+              :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_FROM')"
+              name="timestamp-from"
+              errors=""
+            />
+          </div>
+          <div class="w-1/2">
+            <InputDate
+              @input="onInputChange"
+              :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_TO')"
+              name="timestamp-to"
+              errors=""
+            />
+          </div>
+        </div>
       </div>
 
       <InputText
@@ -116,7 +116,7 @@ import GenericSearchForm from "./GenericSearchForm.vue";
   },
 })
 export default class TransactionSearchForm extends Vue {
-  @Prop({ required: true }) private searchType: string;
+  @Prop({ required: true }) private selectedType: string;
   @Prop({ required: true }) private searchTypes: string[];
   @Prop({ required: true }) private onSearchTypeChange: any;
   @Prop({ required: true }) private search: any;

@@ -2,7 +2,7 @@
   <section class="page-section mb-5 py-5 md:py-10 ">
     <GenericSearchForm
       :searchTypes="searchTypes"
-      :searchType="searchType"
+      :selectedType="selectedType"
       :onSearchTypeChange="onSearchTypeChange"
       :onInputChange="onInputChange"
     />
@@ -107,7 +107,7 @@ import GenericSearchForm from "./GenericSearchForm.vue";
   },
 })
 export default class BlockSearchForm extends Vue {
-  @Prop({ required: true }) private searchType: string;
+  @Prop({ required: true }) private selectedType: string;
   @Prop({ required: true }) private searchTypes: string[];
   @Prop({ required: true }) private onSearchTypeChange: any;
   @Prop({ required: true }) private search: any;
