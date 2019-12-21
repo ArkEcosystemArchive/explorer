@@ -5,6 +5,7 @@
       :selectedType="selectedType"
       :onSearchTypeChange="onSearchTypeChange"
       :onInputChange="onInputChange"
+      :search="search"
     />
 
     <div class="mb-5 mx-5 sm:mx-10 mb-10">
@@ -25,6 +26,7 @@
           <div class="w-1/2">
             <InputNumber
               @input="onInputChange"
+              @keyup.enter.native="search"
               class="mr-3"
               :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.AMOUNT_FROM')"
               name="amount-from"
@@ -36,6 +38,7 @@
           <div class="w-1/2">
             <InputNumber
               @input="onInputChange"
+              @keyup.enter.native="search"
               :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.AMOUNT_TO')"
               name="amount-to"
               errors=""
@@ -47,6 +50,7 @@
           <div class="w-1/2">
             <InputNumber
               @input="onInputChange"
+              @keyup.enter.native="search"
               class="mr-3"
               :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.FEE_FROM')"
               name="fee-from"
@@ -56,6 +60,7 @@
           <div class="w-1/2">
             <InputNumber
               @input="onInputChange"
+              @keyup.enter.native="search"
               :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.FEE_TO')"
               name="fee-to"
               errors=""
@@ -67,6 +72,7 @@
           <div class="w-1/2">
             <InputDate
               @input="onInputChange"
+              @keyup.enter.native="search"
               class="mr-3"
               :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_FROM')"
               name="timestamp-from"
@@ -76,6 +82,7 @@
           <div class="w-1/2">
             <InputDate
               @input="onInputChange"
+              @keyup.enter.native="search"
               :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_TO')"
               name="timestamp-to"
               errors=""
@@ -86,6 +93,7 @@
 
       <InputText
         @input="onInputChange"
+        @keyup.enter.native="search"
         :label="$t('TRANSACTION.SMARTBRIDGE')"
         name="vendorField"
         errors=""

@@ -146,4 +146,10 @@ export default class InputText extends Vue {
 .InputText__input--read-only {
   cursor: text;
 }
+
+[type="date"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
 </style>

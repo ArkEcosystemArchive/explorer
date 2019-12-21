@@ -5,6 +5,7 @@
       :selectedType="selectedType"
       :onSearchTypeChange="onSearchTypeChange"
       :onInputChange="onInputChange"
+      :search="search"
     />
 
     <div class="mb-5 mx-5 sm:mx-10 mb-10">
@@ -15,6 +16,7 @@
           <div class="w-1/2">
             <InputNumber
               @input="onInputChange"
+              @keyup.enter.native="search"
               :label="$t('PAGES.ADVANCED_SEARCH.BLOCK.TOTAL_AMOUNT_FROM')"
               name="totalAmount-from"
               class="mr-3"
@@ -24,6 +26,7 @@
           <div class="w-1/2">
             <InputNumber
               @input="onInputChange"
+              @keyup.enter.native="search"
               :label="$t('PAGES.ADVANCED_SEARCH.BLOCK.TOTAL_AMOUNT_TO')"
               name="totalAmount-to"
               errors=""
@@ -35,6 +38,7 @@
           <div class="w-1/2">
             <InputNumber
               @input="onInputChange"
+              @keyup.enter.native="search"
               :label="$t('PAGES.ADVANCED_SEARCH.BLOCK.TOTAL_FEE_FROM')"
               name="totalFee-from"
               class="mr-3"
@@ -44,6 +48,7 @@
           <div class="w-1/2">
             <InputNumber
               @input="onInputChange"
+              @keyup.enter.native="search"
               :label="$t('PAGES.ADVANCED_SEARCH.BLOCK.TOTAL_FEE_TO')"
               name="totalFee-to"
               errors=""
@@ -55,6 +60,7 @@
           <div class="w-1/2">
             <InputDate
               @input="onInputChange"
+              @keyup.enter.native="search"
               :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_FROM')"
               name="timestamp-from"
               class="mr-3"
@@ -64,6 +70,7 @@
           <div class="w-1/2">
             <InputDate
               @input="onInputChange"
+              @keyup.enter.native="search"
               :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_TO')"
               name="timestamp-to"
               errors=""
@@ -76,6 +83,7 @@
         <div class="w-full mb-4 md:mb-0">
           <InputText
             @input="onInputChange"
+            @keyup.enter.native="search"
             :label="$t('BLOCK.GENERATED_BY')"
             name="generatorPublicKey"
             errors=""
