@@ -43,10 +43,15 @@
       </div>
 
       <div class="hidden sm:block" v-if="selectedType === 'wallet'">
-        <TableWalletsDesktop :wallets="data" total="1" :sort-query="sortParams" @on-sort-change="onSortChange" />
+        <TableWalletsSearchDesktop
+          :wallets="data"
+          :total="supply"
+          :sort-query="sortParams"
+          @on-sort-change="onSortChange"
+        />
       </div>
       <div class="sm:hidden">
-        <TableWalletsMobile :wallets="data" total="1" />
+        <TableWalletsSearchMobile :wallets="data" :total="supply" />
       </div>
 
       <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
@@ -70,6 +75,7 @@ import {
   IWalletSearchParams,
   IBlockSearchParams,
 } from "@/interfaces";
+import { inputProcessor } from "@/utils";
 import store from "@/store";
 
 Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
@@ -82,6 +88,7 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
   },
   computed: {
     ...mapGetters("ui", ["nightMode"]),
+    ...mapGetters("network", ["supply"]),
   },
 })
 export default class AdvancedSearchPage extends Vue {
@@ -129,6 +136,7 @@ export default class AdvancedSearchPage extends Vue {
   private selectedType: string = "wallet";
   private searchParams: ITransactionSearchParams | IBlockSearchParams | IWalletSearchParams = {};
   private submitted: boolean = false;
+  private supply: number;
 
   @Watch("currentPage")
   public onCurrentPageChanged() {
@@ -170,43 +178,23 @@ export default class AdvancedSearchPage extends Vue {
       });
     }
   }
-
-  private getNetworkTimestamp(date: string): number {
-    // @ts-ignore
-    const epochTimestamp = this.timestampFromDate(store.getters["network/epoch"]);
-    // @ts-ignore
-    return this.timestampFromDate(value) - epochTimestamp;
-  }
-
   private onFormChange({ name, value }) {
-    if (!value) {
+    let processedVal = inputProcessor(name, value);
+
+    // Remove field from search params when input is empty
+    if (!processedVal) {
       this.removeFromSearchParams(name);
       return;
     }
 
-    if (
-      name.includes("amount") ||
-      name.includes("totalAmount") ||
-      name.includes("fee") ||
-      name.includes("totalFee") ||
-      name.includes("reward")
-    ) {
+    // Create nested object value for to/from type params
+    if (name.includes("-")) {
       const [parent, child] = name.split("-");
-
       name = parent;
-      value = { ...this.searchParams[parent], [child]: Number(value) };
+      processedVal = { ...this.searchParams[parent], [child]: processedVal };
     }
 
-    if (name.includes("timestamp")) {
-      const timestamp = this.getNetworkTimestamp(value);
-
-      const [parent, child] = name.split("-");
-
-      name = parent;
-      value = { ...this.searchParams[parent], [child]: timestamp };
-    }
-
-    this.searchParams = { ...this.searchParams, [name]: value };
+    this.searchParams = { ...this.searchParams, [name]: processedVal };
   }
 
   private removeFromSearchParams(name: string): void {

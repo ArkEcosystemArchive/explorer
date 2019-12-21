@@ -24,6 +24,7 @@ Vue.component("MultiPaymentTransactions", require("@/components/tables/MultiPaym
 Vue.component("TableBlocksDesktop", require("@/components/tables/Blocks").default);
 Vue.component("TableTransactionsDesktop", require("@/components/tables/Transactions").default);
 Vue.component("TableWalletsDesktop", require("@/components/tables/Wallets").default);
+Vue.component("TableWalletsSearchDesktop", require("@/components/tables/WalletsSearch").default);
 Vue.component("TableLockTransactionsDesktop", require("@/components/tables/LockTransactions").default);
 Vue.component("TableBusinessesDesktop", require("@/components/tables/Businesses").default);
 Vue.component("TableBridgechainsDesktop", require("@/components/tables/Bridgechains").default);
@@ -31,6 +32,7 @@ Vue.component("TableBridgechainsDesktop", require("@/components/tables/Bridgecha
 Vue.component("TableBlocksMobile", require("@/components/tables/mobile/Blocks").default);
 Vue.component("TableTransactionsMobile", require("@/components/tables/mobile/Transactions").default);
 Vue.component("TableWalletsMobile", require("@/components/tables/mobile/Wallets").default);
+Vue.component("TableWalletsSearchMobile", require("@/components/tables/mobile/WalletsSearch").default);
 Vue.component("TableLockTransactionsMobile", require("@/components/tables/mobile/LockTransactions").default);
 Vue.component("TableBusinessesMobile", require("@/components/tables/mobile/Businesses").default);
 Vue.component("TableBridgechainsMobile", require("@/components/tables/mobile/Bridgechains").default);

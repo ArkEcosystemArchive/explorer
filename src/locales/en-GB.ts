@@ -11,6 +11,7 @@ export default {
     HEIGHT: "Height",
     ID: "ID",
     NO_RESULTS: "No results",
+    NOT_APPLICABLE: "Not applicable",
     RANK: "Rank",
     RELOAD: "Reload this page",
     SEE_ALL: "See all",
@@ -243,6 +244,10 @@ export default {
         AMOUNT_TO: "Amount to",
         FEE_FROM: "Fee from",
         FEE_TO: "Fee to",
+      },
+      WALLET: {
+        BALANCE_FROM: "Balance from",
+        BALANCE_TO: "Balance to",
       },
     },
     NOT_FOUND: {
