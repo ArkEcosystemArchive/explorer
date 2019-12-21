@@ -149,8 +149,8 @@ export interface IBlockchain {
   supply: string;
 }
 
-export interface IApiDelegateVotersWrapper {
-  data: ISimpleWallet[];
+export interface IApiWalletsWrapper {
+  data: IWallet[];
   meta: IMeta;
 }
 
@@ -161,15 +161,6 @@ export interface IApiTransactionWrapper {
 export interface IApiTransactionsWrapper {
   data: ITransaction[];
   meta: IMeta;
-}
-
-export interface ISimpleWallet {
-  address: string;
-  publicKey: string;
-  secondPublicKey?: string;
-  balance: string;
-  isDelegate: boolean;
-  vote: string;
 }
 
 export interface IApiNodeConfiguration {
