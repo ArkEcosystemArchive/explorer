@@ -1,18 +1,26 @@
 [build]
   publish = "dist/"
-  command = "yarn build:dalinet --verbose --history"
+  command = "yarn build:network --verbose --history"
 
-[context."develop"]
-# Nothing today
+# Dalinet
+[context."develop".environment]
+  CURRENT_NETWORK = "dalinet"
 
-[context."devnet"]
-  command = "yarn build:devnet --verbose --history"
+# Dalinet
+[context."dalinet".environment]
+  CURRENT_NETWORK = "dalinet"
 
-[context."sandbox"]
-# Nothing today
+# Sandbox
+[context."sandbox".environment]
+  CURRENT_NETWORK = "sandbox"
 
 # Livenet
-[context."master"]
+[context."livenet".environment]
+  CURRENT_NETWORK = "livenet"
+
+# Livenet
+[context."master".environment]
+  CURRENT_NETWORK = "livenet"
 
 # To remove when Livenet will be live
 [[redirects]]
