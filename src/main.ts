@@ -19,6 +19,9 @@ import VueGoodTablePlugin from "vue-good-table";
 import PortalVue from "portal-vue"
 import i18n from "./i18n";
 
+import VueMatomo from "vue-matomo"
+import MatomoConfig from "./config/matomo"
+
 // tslint:disable-next-line:no-var-requires
 require("./components");
 
@@ -33,6 +36,10 @@ Vue.use(VTooltip, {
 });
 Vue.use(VueGoodTablePlugin);
 Vue.use(PortalVue)
+
+if( process.env.VUE_APP_EXPLORER_CONFIG !== "dalinet" ){
+  Vue.use(VueMatomo,MatomoConfig)
+}
 
 Vue.mixin(mixins);
 
