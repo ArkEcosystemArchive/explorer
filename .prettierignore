@@ -1,3 +1,5 @@
 .coverage
 dist
 docs
+Desktop.vue
+Mobile.vue
