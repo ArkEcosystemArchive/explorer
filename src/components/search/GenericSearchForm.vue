@@ -5,10 +5,11 @@
         v-on:input="onSearchTypeChange"
         @keyup.enter.native="search"
         :value="selectedType"
-        :items="searchTypes"
+        :selectOptions="selectOptions"
         :label="$t('PAGES.ADVANCED_SEARCH.SEARCH_TYPE')"
         :name="$t('PAGES.ADVANCED_SEARCH.SEARCH_TYPE')"
         class="flex-1"
+        :errors="{}"
       />
     </div>
 
@@ -19,7 +20,7 @@
         :label="$t(types[selectedType].label)"
         :name="types[selectedType].name"
         class="my-3"
-        errors=""
+        errors="{}"
       />
     </div>
   </div>
@@ -42,9 +43,13 @@ export default class TransactionSearchForm extends Vue {
   @Prop({ required: true }) private search: any;
 
   private types = {
-    transaction: { label: "TRANSACTION.ID", name: "id" },
-    block: { label: "BLOCK.ID", name: "id" },
-    wallet: { label: "WALLET.ADDRESS", name: "address" },
+    transaction: { optionText: "COMMON.TRANSACTION", label: "TRANSACTION.ID", name: "id" },
+    block: { optionText: "COMMON.BLOCK", label: "BLOCK.ID", name: "id" },
+    wallet: { optionText: "COMMON.WALLET", label: "WALLET.ADDRESS", name: "address" },
   };
+
+  get selectOptions() {
+    return this.searchTypes.map(type => ({ value: type, display: this.$t(this.types[type].optionText) }));
+  }
 }
 </script>

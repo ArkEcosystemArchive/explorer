@@ -1,5 +1,5 @@
 <template>
-  <section class="page-section mb-5 py-5 md:py-10 ">
+  <section class="page-section mb-5 py-5 md:py-10">
     <GenericSearchForm
       :searchTypes="searchTypes"
       :selectedType="selectedType"
@@ -20,7 +20,7 @@
               :label="$t('PAGES.ADVANCED_SEARCH.BLOCK.TOTAL_AMOUNT_FROM')"
               name="totalAmount-from"
               class="mr-3"
-              errors=""
+              errors="{}"
             />
           </div>
           <div class="w-1/2">
@@ -29,7 +29,7 @@
               @keyup.enter.native="search"
               :label="$t('PAGES.ADVANCED_SEARCH.BLOCK.TOTAL_AMOUNT_TO')"
               name="totalAmount-to"
-              errors=""
+              errors="{}"
             />
           </div>
         </div>
@@ -42,7 +42,7 @@
               :label="$t('PAGES.ADVANCED_SEARCH.BLOCK.TOTAL_FEE_FROM')"
               name="totalFee-from"
               class="mr-3"
-              errors=""
+              errors="{}"
             />
           </div>
           <div class="w-1/2">
@@ -51,7 +51,7 @@
               @keyup.enter.native="search"
               :label="$t('PAGES.ADVANCED_SEARCH.BLOCK.TOTAL_FEE_TO')"
               name="totalFee-to"
-              errors=""
+              errors="{}"
             />
           </div>
         </div>
@@ -64,7 +64,7 @@
               :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_FROM')"
               name="timestamp-from"
               class="mr-3"
-              errors=""
+              errors="{}"
             />
           </div>
           <div class="w-1/2">
@@ -73,7 +73,7 @@
               @keyup.enter.native="search"
               :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_TO')"
               name="timestamp-to"
-              errors=""
+              errors="{}"
             />
           </div>
         </div>
@@ -86,23 +86,20 @@
             @keyup.enter.native="search"
             :label="$t('BLOCK.GENERATED_BY')"
             name="generatorPublicKey"
-            errors=""
+            errors="{}"
             class="pt-0"
           />
         </div>
       </div>
     </div>
 
-    <button class="button-lg" @click="search">
-      Search
-    </button>
+    <button class="button-lg" @click="search">Search</button>
   </section>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { InputText, InputNumber, InputDate, InputSelect } from "./input";
-import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
 import GenericSearchForm from "./GenericSearchForm.vue";
 
 @Component({
@@ -120,8 +117,8 @@ export default class BlockSearchForm extends Vue {
   @Prop({ required: true }) private onSearchTypeChange: any;
   @Prop({ required: true }) private search: any;
 
-  private onInputChange(e) {
-    const { name, value } = e.target;
+  private onInputChange(event: any) {
+    const { name, value } = event.target;
 
     this.emitInput({ name, value });
   }

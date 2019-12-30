@@ -1,5 +1,5 @@
 <template>
-  <section class="page-section mb-5 py-5 md:py-10 ">
+  <section class="page-section mb-5 py-5 md:py-10">
     <GenericSearchForm
       :searchTypes="searchTypes"
       :selectedType="selectedType"
@@ -8,7 +8,7 @@
       :search="search"
     />
 
-    <div class="mb-5 mx-5 sm:mx-10">
+    <div class="mb-5 mx-5 sm:mx-10 mb-10">
       <p class="font-bold mb-4">Additional Parameters</p>
 
       <div class="flex flex-wrap justify-between mb-4">
@@ -18,7 +18,7 @@
             @keyup.enter.native="search"
             :label="$t('WALLET.DELEGATE.USERNAME')"
             name="username"
-            errors=""
+            errors="{}"
           />
         </div>
         <div class="w-full md:w-1/4">
@@ -27,7 +27,7 @@
             @keyup.enter.native="search"
             :label="$t('WALLET.VOTING_FOR')"
             name="vote"
-            errors=""
+            errors="{}"
             class="pt-0"
           />
         </div>
@@ -40,7 +40,7 @@
               class="mr-3"
               :label="$t('PAGES.ADVANCED_SEARCH.WALLET.BALANCE_FROM')"
               name="balance-from"
-              errors=""
+              errors="{}"
               min="0"
             />
           </div>
@@ -51,16 +51,14 @@
               @keyup.enter.native="search"
               :label="$t('PAGES.ADVANCED_SEARCH.WALLET.BALANCE_TO')"
               name="balance-to"
-              errors=""
+              errors="{}"
             />
           </div>
         </div>
       </div>
     </div>
 
-    <button class="button-lg" @click="search">
-      Search
-    </button>
+    <button class="button-lg" @click="search">Search</button>
   </section>
 </template>
 

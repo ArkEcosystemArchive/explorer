@@ -21,6 +21,7 @@ export default {
     TRANSACTION: "Transaction",
     TRANSACTIONS: "Transactions",
     TYPE: "Type",
+    WALLET: "Wallet",
     ACCEPT: "Accept",
     CANCEL: "Cancel",
   },

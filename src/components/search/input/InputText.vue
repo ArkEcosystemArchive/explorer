@@ -27,6 +27,24 @@
         @focus="onFocus"
         @blur="onBlur"
       />
+      <select
+        v-else-if="inputType === 'select'"
+        ref="input"
+        v-on:input="onInput"
+        v-model="model"
+        :class="[{ 'InputText__input--read-only': isReadOnly, 'InputText__input--large': isLarge }]"
+        :name="name"
+        :disabled="isDisabled || isReadOnly"
+        :placeholder="placeholder"
+        class="InputText__input flex-1 resize-none"
+        @change="onChange"
+        @focus="onFocus"
+        @blur="onBlur"
+      >
+        <option v-for="selectOption in selectOptions" :key="selectOption.value" :value="selectOption.value">{{
+          selectOption.display
+        }}</option>
+      </select>
       <input
         v-else
         ref="input"
@@ -72,7 +90,7 @@ export default class InputText extends Vue {
   @Prop({ default: undefined }) public value!: string;
   @Prop() public errors!: { [key: string]: any };
   @Prop({ default: undefined }) public errorsKey!: string;
-
+  @Prop({ default: null }) public selectOptions!: Array<{ [key: string]: string }>;
   private inputType: string = "text";
   private isFocused: boolean = false;
   private inputValue: string = "";
@@ -82,16 +100,20 @@ export default class InputText extends Vue {
     this.inputValue = value;
   }
 
-  private onInput(e) {
-    this.$emit("input", e);
-  }
-
   get model() {
     return this.inputValue;
   }
 
   set model(value: string) {
     this.inputValue = value;
+  }
+
+  private onInput(event: any) {
+    this.$emit("input", event);
+  }
+
+  private onChange(event: any) {
+    this.$emit("change", event);
   }
 
   get isDirty() {

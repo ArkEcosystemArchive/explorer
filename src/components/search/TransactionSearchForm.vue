@@ -1,5 +1,5 @@
 <template>
-  <section class="page-section mb-5 py-5 md:py-10 ">
+  <section class="page-section mb-5 py-5 md:py-10">
     <GenericSearchForm
       :searchTypes="searchTypes"
       :selectedType="selectedType"
@@ -15,9 +15,10 @@
         <div class="w-full md:w-64 mb-4 md:mb-0">
           <InputSelect
             @input="onTypeChange"
-            :items="typesLocale"
+            :selectOptions="selectOptions"
             :label="$t('COMMON.TYPE')"
-            name="time-format"
+            errors="{}"
+            name="Transaction Types"
             class="flex-1"
           />
         </div>
@@ -30,7 +31,7 @@
               class="mr-3"
               :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.AMOUNT_FROM')"
               name="amount-from"
-              errors=""
+              errors="{}"
               min="0"
             />
           </div>
@@ -41,7 +42,7 @@
               @keyup.enter.native="search"
               :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.AMOUNT_TO')"
               name="amount-to"
-              errors=""
+              errors="{}"
             />
           </div>
         </div>
@@ -54,7 +55,7 @@
               class="mr-3"
               :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.FEE_FROM')"
               name="fee-from"
-              errors=""
+              errors="{}"
             />
           </div>
           <div class="w-1/2">
@@ -63,7 +64,7 @@
               @keyup.enter.native="search"
               :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.FEE_TO')"
               name="fee-to"
-              errors=""
+              errors="{}"
             />
           </div>
         </div>
@@ -76,7 +77,7 @@
               class="mr-3"
               :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_FROM')"
               name="timestamp-from"
-              errors=""
+              errors="{}"
             />
           </div>
           <div class="w-1/2">
@@ -85,7 +86,7 @@
               @keyup.enter.native="search"
               :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_TO')"
               name="timestamp-to"
-              errors=""
+              errors="{}"
             />
           </div>
         </div>
@@ -96,19 +97,17 @@
         @keyup.enter.native="search"
         :label="$t('TRANSACTION.SMARTBRIDGE')"
         name="vendorField"
-        errors=""
+        errors="{}"
         class="pt-0"
       />
     </div>
 
-    <button class="button-lg" @click="search">
-      Search
-    </button>
+    <button class="button-lg" @click="search">Search</button>
   </section>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import { InputText, InputNumber, InputDate, InputSelect } from "./input";
 import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
 import { ITransactionType } from "@/interfaces";
@@ -169,8 +168,8 @@ export default class TransactionSearchForm extends Vue {
     },
   ];
 
-  get typesLocale() {
-    return this.types.map(type => this.$t(`TRANSACTION.TYPES.${type.key}`));
+  get selectOptions() {
+    return this.types.map(type => ({ value: type.key, display: this.$t(`TRANSACTION.TYPES.${type.key}`) }));
   }
 
   private onInputChange(e) {
@@ -179,9 +178,8 @@ export default class TransactionSearchForm extends Vue {
     this.emitInput({ name, value });
   }
 
-  private onTypeChange(localeType: string) {
-    const index: any = this.typesLocale.findIndex(key => key === localeType);
-
+  private onTypeChange(event: any) {
+    const index: number = this.types.findIndex(transaction => transaction.key === event.target.value);
     const { type, typeGroup } = this.types[index];
 
     this.emitInput({ name: "type", value: type });

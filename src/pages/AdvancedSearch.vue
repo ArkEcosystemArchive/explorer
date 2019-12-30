@@ -133,7 +133,7 @@ export default class AdvancedSearchPage extends Vue {
   private meta: any | null = null;
   private currentPage: number = 1;
   private searchTypes: string[] = Object.keys(this.types);
-  private selectedType: string = "wallet";
+  private selectedType: string = "transaction";
   private searchParams: ITransactionSearchParams | IBlockSearchParams | IWalletSearchParams = {};
   private submitted: boolean = false;
   private supply: number;
@@ -221,12 +221,12 @@ export default class AdvancedSearchPage extends Vue {
     }
   }
 
-  private onSearchTypeChange(selectedType: string): void {
+  private onSearchTypeChange(event: any): void {
     this.setMeta(null);
     this.setData(null);
     this.searchParams = {};
     this.submitted = false;
-    this.selectedType = selectedType;
+    this.selectedType = event.target.value;
   }
 
   private setData(data: ITransaction[] | IBlock[] | IWallet[]) {
