@@ -49,13 +49,12 @@ export default class TableWalletsSearchDesktop extends Vue {
       {
         label: this.$t("WALLET.ADDRESS"),
         field: "address",
-        thClass: "start-cell w-32",
-        tdClass: "start-cell w-32",
+        thClass: "start-cell w-64",
+        tdClass: "start-cell w-64",
       },
       {
         label: this.$t("WALLET.VOTING_FOR"),
         field: "vote",
-        type: "string",
       },
       {
         label: this.$t("COMMON.BALANCE"),
