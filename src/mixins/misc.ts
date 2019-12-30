@@ -57,10 +57,6 @@ export default {
         .format("L LTS");
     },
 
-    timestampFromDate(date: string): number {
-      return new Date(date).getTime() / 1000;
-    },
-
     calculateMultipaymentAmount(transaction: ITransaction, address?: string, type: string = "all"): BigNumber {
       if (transaction.asset && transaction.asset.payments) {
         return transaction.asset.payments.reduce(
