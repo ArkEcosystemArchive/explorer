@@ -3,20 +3,19 @@
     <div class="w-full md:w-64 md:mr-6">
       <InputSelect
         v-on:input="onSearchTypeChange"
-        @keyup.enter.native="search"
         :value="selectedType"
         :selectOptions="selectOptions"
         :label="$t('PAGES.ADVANCED_SEARCH.SEARCH_TYPE')"
         :name="$t('PAGES.ADVANCED_SEARCH.SEARCH_TYPE')"
         class="flex-1"
-        :errors="{}"
+        errors="{}"
       />
     </div>
 
     <div class="flex-grow w-full md:w-auto">
       <InputText
         @input="onInputChange"
-        @keyup.enter.native="search"
+        @keyup.enter.native="onEnterKey"
         :label="$t(types[selectedType].label)"
         :name="types[selectedType].name"
         class="my-3"
@@ -39,8 +38,6 @@ export default class TransactionSearchForm extends Vue {
   @Prop({ required: true }) private selectedType: string;
   @Prop({ required: true }) private searchTypes: string[];
   @Prop({ required: true }) private onSearchTypeChange: any;
-  @Prop({ required: true }) private onInputChange: any;
-  @Prop({ required: true }) private search: any;
 
   private types = {
     transaction: { optionText: "COMMON.TRANSACTION", label: "TRANSACTION.ID", name: "id" },
@@ -50,6 +47,20 @@ export default class TransactionSearchForm extends Vue {
 
   get selectOptions() {
     return this.searchTypes.map(type => ({ value: type, display: this.$t(this.types[type].optionText) }));
+  }
+
+  private onInputChange(event: any) {
+    const { name, value } = event.target;
+
+    this.emitInput({ name, value });
+  }
+
+  private emitInput(value: object) {
+    this.$emit("formChange", value);
+  }
+
+  private onEnterKey(event: any) {
+    this.$emit("search");
   }
 }
 </script>

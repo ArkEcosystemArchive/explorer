@@ -1,109 +1,97 @@
 <template>
-  <section class="page-section mb-5 py-5 md:py-10">
-    <GenericSearchForm
-      :searchTypes="searchTypes"
-      :selectedType="selectedType"
-      :onSearchTypeChange="onSearchTypeChange"
-      :onInputChange="onInputChange"
-      :search="search"
-    />
+  <div class="mb-5 mx-5 sm:mx-10 mb-10">
+    <p class="font-bold mb-4">Additional Parameters</p>
 
-    <div class="mb-5 mx-5 sm:mx-10 mb-10">
-      <p class="font-bold mb-4">Additional Parameters</p>
+    <div class="flex flex-wrap justify-between mb-4">
+      <div class="w-full md:w-64 mb-4 md:mb-0">
+        <InputSelect
+          @input="onTypeChange"
+          :selectOptions="selectOptions"
+          :label="$t('COMMON.TYPE')"
+          errors="{}"
+          name="Transaction Types"
+          class="flex-1"
+        />
+      </div>
 
-      <div class="flex flex-wrap justify-between mb-4">
-        <div class="w-full md:w-64 mb-4 md:mb-0">
-          <InputSelect
-            @input="onTypeChange"
-            :selectOptions="selectOptions"
-            :label="$t('COMMON.TYPE')"
+      <div class="flex w-full md:w-64 mb-4 md:mb-0">
+        <div class="w-1/2">
+          <InputNumber
+            @input="onInputChange"
+            @keyup.enter.native="onEnterKey"
+            class="mr-3"
+            :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.AMOUNT_FROM')"
+            name="amount-from"
             errors="{}"
-            name="Transaction Types"
-            class="flex-1"
+            min="0"
           />
         </div>
 
-        <div class="flex w-full md:w-64 mb-4 md:mb-0">
-          <div class="w-1/2">
-            <InputNumber
-              @input="onInputChange"
-              @keyup.enter.native="search"
-              class="mr-3"
-              :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.AMOUNT_FROM')"
-              name="amount-from"
-              errors="{}"
-              min="0"
-            />
-          </div>
-
-          <div class="w-1/2">
-            <InputNumber
-              @input="onInputChange"
-              @keyup.enter.native="search"
-              :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.AMOUNT_TO')"
-              name="amount-to"
-              errors="{}"
-            />
-          </div>
-        </div>
-
-        <div class="flex w-full md:w-64 mb-4 md:mb-0">
-          <div class="w-1/2">
-            <InputNumber
-              @input="onInputChange"
-              @keyup.enter.native="search"
-              class="mr-3"
-              :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.FEE_FROM')"
-              name="fee-from"
-              errors="{}"
-            />
-          </div>
-          <div class="w-1/2">
-            <InputNumber
-              @input="onInputChange"
-              @keyup.enter.native="search"
-              :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.FEE_TO')"
-              name="fee-to"
-              errors="{}"
-            />
-          </div>
-        </div>
-
-        <div class="flex w-full md:w-64 mb-4 md:mb-0">
-          <div class="w-1/2">
-            <InputDate
-              @input="onInputChange"
-              @keyup.enter.native="search"
-              class="mr-3"
-              :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_FROM')"
-              name="timestamp-from"
-              errors="{}"
-            />
-          </div>
-          <div class="w-1/2">
-            <InputDate
-              @input="onInputChange"
-              @keyup.enter.native="search"
-              :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_TO')"
-              name="timestamp-to"
-              errors="{}"
-            />
-          </div>
+        <div class="w-1/2">
+          <InputNumber
+            @input="onInputChange"
+            @keyup.enter.native="onEnterKey"
+            :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.AMOUNT_TO')"
+            name="amount-to"
+            errors="{}"
+          />
         </div>
       </div>
 
-      <InputText
-        @input="onInputChange"
-        @keyup.enter.native="search"
-        :label="$t('TRANSACTION.SMARTBRIDGE')"
-        name="vendorField"
-        errors="{}"
-        class="pt-0"
-      />
+      <div class="flex w-full md:w-64 mb-4 md:mb-0">
+        <div class="w-1/2">
+          <InputNumber
+            @input="onInputChange"
+            @keyup.enter.native="onEnterKey"
+            class="mr-3"
+            :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.FEE_FROM')"
+            name="fee-from"
+            errors="{}"
+          />
+        </div>
+        <div class="w-1/2">
+          <InputNumber
+            @input="onInputChange"
+            @keyup.enter.native="onEnterKey"
+            :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.FEE_TO')"
+            name="fee-to"
+            errors="{}"
+          />
+        </div>
+      </div>
+
+      <div class="flex w-full md:w-64 mb-4 md:mb-0">
+        <div class="w-1/2">
+          <InputDate
+            @input="onInputChange"
+            @keyup.enter.native="onEnterKey"
+            class="mr-3"
+            :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_FROM')"
+            name="timestamp-from"
+            errors="{}"
+          />
+        </div>
+        <div class="w-1/2">
+          <InputDate
+            @input="onInputChange"
+            @keyup.enter.native="onEnterKey"
+            :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_TO')"
+            name="timestamp-to"
+            errors="{}"
+          />
+        </div>
+      </div>
     </div>
 
-    <button class="button-lg" @click="search">Search</button>
-  </section>
+    <InputText
+      @input="onInputChange"
+      @keyup.enter.native="onEnterKey"
+      :label="$t('TRANSACTION.SMARTBRIDGE')"
+      name="vendorField"
+      errors="{}"
+      class="pt-0"
+    />
+  </div>
 </template>
 
 <script lang="ts">
@@ -111,7 +99,6 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import { InputText, InputNumber, InputDate, InputSelect } from "./input";
 import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
 import { ITransactionType } from "@/interfaces";
-import GenericSearchForm from "./GenericSearchForm.vue";
 
 @Component({
   components: {
@@ -119,15 +106,9 @@ import GenericSearchForm from "./GenericSearchForm.vue";
     InputNumber,
     InputDate,
     InputSelect,
-    GenericSearchForm,
   },
 })
 export default class TransactionSearchForm extends Vue {
-  @Prop({ required: true }) private selectedType: string;
-  @Prop({ required: true }) private searchTypes: string[];
-  @Prop({ required: true }) private onSearchTypeChange: any;
-  @Prop({ required: true }) private search: any;
-
   private types: ITransactionType[] = [
     { key: "TRANSFER", type: CoreTransaction.TRANSFER, typeGroup: TypeGroupTransaction.CORE },
     { key: "SECOND_SIGNATURE", type: CoreTransaction.SECOND_SIGNATURE, typeGroup: TypeGroupTransaction.CORE },
@@ -172,8 +153,8 @@ export default class TransactionSearchForm extends Vue {
     return this.types.map(type => ({ value: type.key, display: this.$t(`TRANSACTION.TYPES.${type.key}`) }));
   }
 
-  private onInputChange(e) {
-    const { name, value } = e.target;
+  private onInputChange(event: any) {
+    const { name, value } = event.target;
 
     this.emitInput({ name, value });
   }
@@ -188,6 +169,10 @@ export default class TransactionSearchForm extends Vue {
 
   private emitInput(value: object) {
     this.$emit("formChange", value);
+  }
+
+  private onEnterKey(event: any) {
+    this.$emit("search");
   }
 }
 </script>

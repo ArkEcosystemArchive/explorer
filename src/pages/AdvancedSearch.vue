@@ -2,30 +2,46 @@
   <div class="max-w-2xl mx-auto md:pt-5">
     <ContentHeader>{{ $t("PAGES.ADVANCED_SEARCH.TITLE") }}</ContentHeader>
 
-    <TransactionSearchForm
-      v-if="selectedType === 'transaction'"
-      @formChange="onFormChange"
-      :selectedType="selectedType"
-      :searchTypes="searchTypes"
-      :search="search"
-      :onSearchTypeChange="onSearchTypeChange"
-    />
-    <BlockSearchForm
-      v-if="selectedType === 'block'"
-      @formChange="onFormChange"
-      :selectedType="selectedType"
-      :searchTypes="searchTypes"
-      :search="search"
-      :onSearchTypeChange="onSearchTypeChange"
-    />
-    <WalletSearchForm
-      v-if="selectedType === 'wallet'"
-      @formChange="onFormChange"
-      :selectedType="selectedType"
-      :searchTypes="searchTypes"
-      :search="search"
-      :onSearchTypeChange="onSearchTypeChange"
-    />
+    <section class="page-section mb-5 py-5 md:py-10">
+      <GenericSearchForm
+        @search="search"
+        @formChange="onFormChange"
+        :searchTypes="searchTypes"
+        :selectedType="selectedType"
+        :onSearchTypeChange="onSearchTypeChange"
+        :search="search"
+      />
+
+      <TransactionSearchForm
+        v-if="selectedType === 'transaction'"
+        @search="search"
+        @formChange="onFormChange"
+        :selectedType="selectedType"
+        :searchTypes="searchTypes"
+        :search="search"
+        :onSearchTypeChange="onSearchTypeChange"
+      />
+      <BlockSearchForm
+        v-if="selectedType === 'block'"
+        @search="search"
+        @formChange="onFormChange"
+        :selectedType="selectedType"
+        :searchTypes="searchTypes"
+        :search="search"
+        :onSearchTypeChange="onSearchTypeChange"
+      />
+      <WalletSearchForm
+        v-if="selectedType === 'wallet'"
+        @search="search"
+        @formChange="onFormChange"
+        :selectedType="selectedType"
+        :searchTypes="searchTypes"
+        :search="search"
+        :onSearchTypeChange="onSearchTypeChange"
+      />
+
+      <button class="button-lg" @click="search">Search</button>
+    </section>
 
     <section class="page-section py-5 md:py-10" v-if="submitted">
       <div v-if="selectedType === 'transaction'" class="hidden sm:block">
@@ -63,7 +79,7 @@
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { Route } from "vue-router";
-import { BlockSearchForm, TransactionSearchForm, WalletSearchForm } from "@/components/search";
+import { GenericSearchForm, BlockSearchForm, TransactionSearchForm, WalletSearchForm } from "@/components/search";
 import { BlockService, TransactionService, WalletService } from "@/services";
 import {
   ISortParameters,
@@ -82,6 +98,7 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 
 @Component({
   components: {
+    GenericSearchForm,
     BlockSearchForm,
     TransactionSearchForm,
     WalletSearchForm,
@@ -133,7 +150,7 @@ export default class AdvancedSearchPage extends Vue {
   private meta: any | null = null;
   private currentPage: number = 1;
   private searchTypes: string[] = Object.keys(this.types);
-  private selectedType: string = "transaction";
+  private selectedType: string = "block";
   private searchParams: ITransactionSearchParams | IBlockSearchParams | IWalletSearchParams = {};
   private submitted: boolean = false;
   private supply: number;
