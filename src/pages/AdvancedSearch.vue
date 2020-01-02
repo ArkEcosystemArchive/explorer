@@ -9,35 +9,18 @@
         :searchTypes="searchTypes"
         :selectedType="selectedType"
         :onSearchTypeChange="onSearchTypeChange"
-        :search="search"
       />
 
       <TransactionSearchForm
         v-if="selectedType === 'transaction'"
         @search="search"
         @formChange="onFormChange"
-        :selectedType="selectedType"
-        :searchTypes="searchTypes"
-        :search="search"
-        :onSearchTypeChange="onSearchTypeChange"
       />
-      <BlockSearchForm
-        v-if="selectedType === 'block'"
-        @search="search"
-        @formChange="onFormChange"
-        :selectedType="selectedType"
-        :searchTypes="searchTypes"
-        :search="search"
-        :onSearchTypeChange="onSearchTypeChange"
-      />
+      <BlockSearchForm v-if="selectedType === 'block'" @search="search" @formChange="onFormChange" />
       <WalletSearchForm
         v-if="selectedType === 'wallet'"
         @search="search"
         @formChange="onFormChange"
-        :selectedType="selectedType"
-        :searchTypes="searchTypes"
-        :search="search"
-        :onSearchTypeChange="onSearchTypeChange"
       />
 
       <button class="button-lg" @click="search">Search</button>
@@ -45,7 +28,11 @@
 
     <section class="page-section py-5 md:py-10" v-if="submitted">
       <div v-if="selectedType === 'transaction'" class="hidden sm:block">
-        <TableTransactionsDesktop :transactions="data" :sort-query="sortParams" @on-sort-change="onSortChange" />
+        <TableTransactionsDesktop
+          :transactions="data"
+          :sort-query="sortParams"
+          @on-sort-change="onSortChange"
+        />
       </div>
       <div v-if="selectedType === 'transaction'" class="sm:hidden">
         <TableTransactionsMobile :transactions="data" />
@@ -70,7 +57,12 @@
         <TableWalletsSearchMobile :wallets="data" :total="supply" />
       </div>
 
-      <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
+      <Pagination
+        v-if="showPagination"
+        :meta="meta"
+        :current-page="currentPage"
+        @page-change="onPageChange"
+      />
     </section>
   </div>
 </template>
@@ -150,7 +142,7 @@ export default class AdvancedSearchPage extends Vue {
   private meta: any | null = null;
   private currentPage: number = 1;
   private searchTypes: string[] = Object.keys(this.types);
-  private selectedType: string = "block";
+  private selectedType: string = "transaction";
   private searchParams: ITransactionSearchParams | IBlockSearchParams | IWalletSearchParams = {};
   private submitted: boolean = false;
   private supply: number;
@@ -195,7 +187,9 @@ export default class AdvancedSearchPage extends Vue {
       });
     }
   }
-  private onFormChange({ name, value }) {
+  private onFormChange(input: { name: string; value: string }) {
+    const { name, value } = input;
+    let processedName = name;
     let processedVal = inputProcessor(name, value);
 
     // Remove field from search params when input is empty
@@ -207,18 +201,23 @@ export default class AdvancedSearchPage extends Vue {
     // Create nested object value for to/from type params
     if (name.includes("-")) {
       const [parent, child] = name.split("-");
-      name = parent;
+      processedName = parent;
       processedVal = { ...this.searchParams[parent], [child]: processedVal };
     }
 
-    this.searchParams = { ...this.searchParams, [name]: processedVal };
+    this.searchParams = { ...this.searchParams, [processedName]: processedVal };
   }
 
   private removeFromSearchParams(name: string): void {
     if (name.includes("-")) {
       const [parent, child] = name.split("-");
-
       delete this.searchParams[parent][child];
+
+      if (!Object.keys(this.searchParams[parent]).length) {
+        delete this.searchParams[parent];
+      }
+
+      return;
     }
 
     delete this.searchParams[name];
@@ -227,6 +226,7 @@ export default class AdvancedSearchPage extends Vue {
   private async search(): Promise<void> {
     this.setMeta(null);
     this.setData(null);
+    this.currentPage = 1;
     this.submitted = true;
 
     try {
