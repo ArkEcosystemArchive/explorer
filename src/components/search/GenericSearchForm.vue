@@ -8,7 +8,6 @@
         :label="$t('PAGES.ADVANCED_SEARCH.SEARCH_TYPE')"
         :name="$t('PAGES.ADVANCED_SEARCH.SEARCH_TYPE')"
         class="flex-1"
-        errors="{}"
       />
     </div>
 
@@ -19,7 +18,6 @@
         :label="$t(types[selectedType].label)"
         :name="types[selectedType].name"
         class="my-3"
-        errors="{}"
       />
     </div>
   </div>

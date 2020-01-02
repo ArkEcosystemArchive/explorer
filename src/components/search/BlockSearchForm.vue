@@ -11,7 +11,6 @@
             :label="$t('PAGES.ADVANCED_SEARCH.BLOCK.TOTAL_AMOUNT_FROM')"
             name="totalAmount-from"
             class="mr-3"
-            errors="{}"
           />
         </div>
         <div class="w-1/2">
@@ -20,7 +19,6 @@
             @keyup.enter.native="onEnterKey"
             :label="$t('PAGES.ADVANCED_SEARCH.BLOCK.TOTAL_AMOUNT_TO')"
             name="totalAmount-to"
-            errors="{}"
           />
         </div>
       </div>
@@ -33,7 +31,6 @@
             :label="$t('PAGES.ADVANCED_SEARCH.BLOCK.TOTAL_FEE_FROM')"
             name="totalFee-from"
             class="mr-3"
-            errors="{}"
           />
         </div>
         <div class="w-1/2">
@@ -42,7 +39,6 @@
             @keyup.enter.native="onEnterKey"
             :label="$t('PAGES.ADVANCED_SEARCH.BLOCK.TOTAL_FEE_TO')"
             name="totalFee-to"
-            errors="{}"
           />
         </div>
       </div>
@@ -55,7 +51,6 @@
             :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_FROM')"
             name="timestamp-from"
             class="mr-3"
-            errors="{}"
           />
         </div>
         <div class="w-1/2">
@@ -64,7 +59,6 @@
             @keyup.enter.native="onEnterKey"
             :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_TO')"
             name="timestamp-to"
-            errors="{}"
           />
         </div>
       </div>
@@ -77,7 +71,6 @@
           @keyup.enter.native="onEnterKey"
           :label="$t('BLOCK.GENERATED_BY')"
           name="generatorPublicKey"
-          errors="{}"
           class="pt-0"
         />
       </div>

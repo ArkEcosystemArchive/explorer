@@ -8,7 +8,6 @@
           @input="onTypeChange"
           :selectOptions="selectOptions"
           :label="$t('COMMON.TYPE')"
-          errors="{}"
           name="Transaction Types"
           class="flex-1"
         />
@@ -22,7 +21,6 @@
             class="mr-3"
             :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.AMOUNT_FROM')"
             name="amount-from"
-            errors="{}"
             min="0"
           />
         </div>
@@ -33,7 +31,6 @@
             @keyup.enter.native="onEnterKey"
             :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.AMOUNT_TO')"
             name="amount-to"
-            errors="{}"
           />
         </div>
       </div>
@@ -46,7 +43,6 @@
             class="mr-3"
             :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.FEE_FROM')"
             name="fee-from"
-            errors="{}"
           />
         </div>
         <div class="w-1/2">
@@ -55,7 +51,6 @@
             @keyup.enter.native="onEnterKey"
             :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.FEE_TO')"
             name="fee-to"
-            errors="{}"
           />
         </div>
       </div>
@@ -68,7 +63,6 @@
             class="mr-3"
             :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_FROM')"
             name="timestamp-from"
-            errors="{}"
           />
         </div>
         <div class="w-1/2">
@@ -77,7 +71,6 @@
             @keyup.enter.native="onEnterKey"
             :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_TO')"
             name="timestamp-to"
-            errors="{}"
           />
         </div>
       </div>
@@ -88,7 +81,6 @@
       @keyup.enter.native="onEnterKey"
       :label="$t('TRANSACTION.SMARTBRIDGE')"
       name="vendorField"
-      errors="{}"
       class="pt-0"
     />
   </div>

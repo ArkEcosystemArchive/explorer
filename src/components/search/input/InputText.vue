@@ -6,7 +6,6 @@
     :is-disabled="isDisabled"
     :is-focused="isFocused"
     :is-invalid="isInvalid"
-    :warning-text="warning"
     :is-read-only="isReadOnly"
     :type="inputType"
     class="InputText"
@@ -36,14 +35,20 @@
         :name="name"
         :disabled="isDisabled || isReadOnly"
         :placeholder="placeholder"
-        class="InputText__input flex-1 resize-none"
+        class="InputText__input flex-1"
         @change="onChange"
         @focus="onFocus"
         @blur="onBlur"
       >
-        <option v-for="selectOption in selectOptions" :key="selectOption.value" :value="selectOption.value">{{
+        <option
+          v-for="selectOption in selectOptions"
+          :key="selectOption.value"
+          :value="selectOption.value"
+        >
+          {{
           selectOption.display
-        }}</option>
+          }}
+        </option>
       </select>
       <input
         v-else
@@ -88,8 +93,6 @@ export default class InputText extends Vue {
   @Prop({ default: false }) public isInvalid!: boolean;
   @Prop({ default: false }) public isReadOnly!: boolean;
   @Prop({ default: undefined }) public value!: string;
-  @Prop() public errors!: { [key: string]: any };
-  @Prop({ default: undefined }) public errorsKey!: string;
   @Prop({ default: null }) public selectOptions!: Array<{ [key: string]: string }>;
   private inputType: string = "text";
   private isFocused: boolean = false;
@@ -120,20 +123,6 @@ export default class InputText extends Vue {
     return (
       !!this.inputValue || this.inputType === "date" || this.inputType === "datetime-local" || this.inputType === "file"
     );
-  }
-
-  get isWarning() {
-    return !!this.isDirty && !!this.warning;
-  }
-
-  get warning() {
-    const errorsKey = this.name
-      .split("[")
-      .join(".")
-      .split("]")
-      .join("");
-
-    return this.errors[errorsKey] ? this.errors[errorsKey][0] : null;
   }
 
   private onFocus() {

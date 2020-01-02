@@ -9,7 +9,6 @@
           @keyup.enter.native="onEnterKey"
           :label="$t('WALLET.DELEGATE.USERNAME')"
           name="username"
-          errors="{}"
         />
       </div>
       <div class="w-full md:w-1/4">
@@ -18,7 +17,6 @@
           @keyup.enter.native="onEnterKey"
           :label="$t('WALLET.VOTING_FOR')"
           name="vote"
-          errors="{}"
           class="pt-0"
         />
       </div>
@@ -31,7 +29,6 @@
             class="mr-3"
             :label="$t('PAGES.ADVANCED_SEARCH.WALLET.BALANCE_FROM')"
             name="balance-from"
-            errors="{}"
             min="0"
           />
         </div>
@@ -42,7 +39,6 @@
             @keyup.enter.native="onEnterKey"
             :label="$t('PAGES.ADVANCED_SEARCH.WALLET.BALANCE_TO')"
             name="balance-to"
-            errors="{}"
           />
         </div>
       </div>
