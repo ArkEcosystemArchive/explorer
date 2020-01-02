@@ -2,8 +2,8 @@
   <div class="mb-5 mx-5 sm:mx-10 mb-10">
     <p class="font-bold mb-4">Additional Parameters</p>
 
-    <div class="flex flex-wrap justify-between mb-4">
-      <div class="flex w-full md:w-1/3 mb-4 md:mb-0">
+    <div class="flex flex-wrap justify-between">
+      <div class="flex w-full lg:w-1/3 mb-4 lg:mb-0">
         <div class="w-1/2">
           <InputNumber
             @input="onInputChange"
@@ -23,7 +23,7 @@
         </div>
       </div>
 
-      <div class="flex w-full md:w-1/3 mb-4 md:mb-0">
+      <div class="flex w-full lg:w-1/3 mb-4 lg:mb-0">
         <div class="w-1/2">
           <InputNumber
             @input="onInputChange"
@@ -43,14 +43,14 @@
         </div>
       </div>
 
-      <div class="flex w-full md:w-64 mb-4 md:mb-0">
+      <div class="flex w-full lg:w-auto mb-4 lg:mb-0">
         <div class="w-1/2">
           <InputDate
             @input="onInputChange"
             @keyup.enter.native="onEnterKey"
+            class="mr-3"
             :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_FROM')"
             name="timestamp-from"
-            class="mr-3"
           />
         </div>
         <div class="w-1/2">

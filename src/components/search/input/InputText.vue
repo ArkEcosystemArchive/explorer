@@ -17,12 +17,12 @@
         ref="input"
         v-on:input="onInput"
         v-model="model"
-        :class="[{ 'InputText__input--read-only': isReadOnly, 'InputText__input--large': isLarge }]"
+        :class="[{ 'InputText__input--read-only': isReadOnly, 'InputText__input--large': isLarge, 'text-grey': nightMode }]"
         :rows="rows"
         :name="name"
         :disabled="isDisabled || isReadOnly"
         :placeholder="placeholder"
-        class="InputText__input flex-1 border-b resize-none"
+        class="InputText__input flex-1 border-b text-black"
         @focus="onFocus"
         @blur="onBlur"
       />
@@ -31,11 +31,11 @@
         ref="input"
         v-on:input="onInput"
         v-model="model"
-        :class="[{ 'InputText__input--read-only': isReadOnly, 'InputText__input--large': isLarge }]"
+        :class="[{ 'InputText__input--read-only': isReadOnly, 'InputText__input--large': isLarge, 'text-grey': nightMode }]"
         :name="name"
         :disabled="isDisabled || isReadOnly"
         :placeholder="placeholder"
-        class="InputText__input flex-1"
+        class="InputText__input InputSelect__input flex-1 text-black"
         @change="onChange"
         @focus="onFocus"
         @blur="onBlur"
@@ -55,13 +55,14 @@
         ref="input"
         v-on:input="onInput"
         v-model="model"
-        :class="[{ 'InputText__input--read-only': isReadOnly, 'InputText__input--large': isLarge }]"
+        :class="[{ 'InputText__input--read-only': isReadOnly, 'InputText__input--large': isLarge, 'text-grey': nightMode }]"
         :name="name"
         :disabled="isDisabled || isReadOnly"
         :type="inputType"
         :value="value"
         :placeholder="placeholder"
-        class="InputText__input flex-1"
+        :min="inputType === 'number' && 0"
+        class="InputText__input flex-1 text-black"
         @focus="onFocus"
         @blur="onBlur"
       />
@@ -73,6 +74,7 @@
 <script lang="ts">
 import InputField from "./InputField.vue";
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
 
 @Component({
   components: {
@@ -81,6 +83,9 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
   data: (vm: InputText) => ({
     inputValue: vm.value,
   }),
+  computed: {
+    ...mapGetters("ui", ["nightMode"]),
+  },
 })
 export default class InputText extends Vue {
   @Prop({ default: null }) public label!: string | null;
@@ -137,7 +142,7 @@ export default class InputText extends Vue {
 
 <style>
 .InputText__input {
-  @apply .bg-transparent .text-grey-darkest;
+  @apply .bg-transparent .w-full;
 }
 
 .InputText__input::placeholder {
@@ -146,7 +151,6 @@ export default class InputText extends Vue {
 }
 
 .InputField--focused .InputText__input::placeholder {
-  @apply .text-grey;
   transition: color 0.1s;
 }
 
@@ -156,6 +160,10 @@ export default class InputText extends Vue {
 
 .InputText__input--read-only {
   cursor: text;
+}
+
+.InputSelect__input {
+  cursor: pointer;
 }
 
 [type="date"]::-webkit-inner-spin-button {

@@ -2,8 +2,8 @@
   <div class="mb-5 mx-5 sm:mx-10 mb-10">
     <p class="font-bold mb-4">Additional Parameters</p>
 
-    <div class="flex flex-wrap justify-between mb-4">
-      <div class="w-full md:w-64 mb-4 md:mb-0">
+    <div class="flex flex-wrap justify-between">
+      <div class="w-full lg:w-64 mb-4 lg:mb-0">
         <InputSelect
           @input="onTypeChange"
           :selectOptions="selectOptions"
@@ -13,7 +13,7 @@
         />
       </div>
 
-      <div class="flex w-full md:w-64 mb-4 md:mb-0">
+      <div class="flex w-full lg:w-56 mb-4 lg:mb-0">
         <div class="w-1/2">
           <InputNumber
             @input="onInputChange"
@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <div class="flex w-full md:w-64 mb-4 md:mb-0">
+      <div class="flex w-full lg:w-56 mb-4 lg:mb-0">
         <div class="w-1/2">
           <InputNumber
             @input="onInputChange"
@@ -55,7 +55,7 @@
         </div>
       </div>
 
-      <div class="flex w-full md:w-64 mb-4 md:mb-0">
+      <div class="flex w-full lg:w-auto mb-4 lg:mb-0">
         <div class="w-1/2">
           <InputDate
             @input="onInputChange"

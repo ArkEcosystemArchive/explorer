@@ -3,7 +3,7 @@
     <p class="font-bold mb-4">Additional Parameters</p>
 
     <div class="flex flex-wrap justify-between mb-4">
-      <div class="w-full md:w-1/4">
+      <div class="w-full lg:w-1/4">
         <InputText
           @input="onInputChange"
           @keyup.enter.native="onEnterKey"
@@ -11,7 +11,7 @@
           name="username"
         />
       </div>
-      <div class="w-full md:w-1/4">
+      <div class="w-full lg:w-1/4">
         <InputText
           @input="onInputChange"
           @keyup.enter.native="onEnterKey"
@@ -21,7 +21,7 @@
         />
       </div>
 
-      <div class="flex w-full md:w-auto">
+      <div class="flex w-full lg:w-auto">
         <div class="w-1/2">
           <InputNumber
             @input="onInputChange"
