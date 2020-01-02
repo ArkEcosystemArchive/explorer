@@ -22,11 +22,11 @@ export const inputProcessor = (inputName: string, inputValue: any): string | num
   const arktoshiValues = ["amount", "totalAmount", "fee", "totalFee", "reward", "balance"];
   const publicKeyValues = ["vote", "generatorPublicKey"];
 
-  if (arktoshiValues.filter(name => name.includes(inputName)).length) {
+  if (arktoshiValues.find(name => inputName.includes(name))) {
     value = Number(value) * 1e8;
   }
 
-  if (publicKeyValues.filter(name => name.includes(inputName)).length) {
+  if (publicKeyValues.find(name => inputName.includes(name))) {
     value = lookupPublicKey(value);
   }
 
