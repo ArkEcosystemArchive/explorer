@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-5 mx-5 sm:mx-10 mb-10">
+  <div class="mb-5 mx-5 sm:mx-10 mb-10" id="walletForm">
     <p class="font-bold mb-4">Additional Parameters</p>
 
     <div class="flex flex-wrap justify-between mb-4">

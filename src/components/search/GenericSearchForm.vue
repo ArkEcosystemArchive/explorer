@@ -1,12 +1,12 @@
 <template>
-  <div class="flex flex-wrap items-center mb-10 mx-5 sm:mx-10">
+  <div class="flex flex-wrap items-center mb-10 mx-5 sm:mx-10" id="genericForm">
     <div class="w-full md:w-64 md:mr-6">
       <InputSelect
         v-on:input="onSearchTypeChange"
         :value="selectedType"
         :selectOptions="selectOptions"
         :label="$t('PAGES.ADVANCED_SEARCH.SEARCH_TYPE')"
-        :name="$t('PAGES.ADVANCED_SEARCH.SEARCH_TYPE')"
+        name="search-type"
         class="flex-1"
       />
     </div>
