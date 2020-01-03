@@ -2,7 +2,7 @@
   <div class="flex flex-wrap items-center mb-10 mx-5 sm:mx-10" id="genericForm">
     <div class="w-full md:w-64 md:mr-6">
       <InputSelect
-        v-on:input="onSearchTypeChange"
+        v-on:input="onSelectChange"
         :value="selectedType"
         :selectOptions="selectOptions"
         :label="$t('PAGES.ADVANCED_SEARCH.SEARCH_TYPE')"
@@ -17,6 +17,7 @@
         @keyup.enter.native="onEnterKey"
         :label="$t(types[selectedType].label)"
         :name="types[selectedType].name"
+        :value="input"
         class="my-3"
       />
     </div>
@@ -32,10 +33,12 @@ import { InputText, InputSelect } from "./input";
     InputSelect,
   },
 })
-export default class TransactionSearchForm extends Vue {
+export default class GenericSearchForm extends Vue {
   @Prop({ required: true }) private selectedType: string;
   @Prop({ required: true }) private searchTypes: string[];
   @Prop({ required: true }) private onSearchTypeChange: any;
+
+  private input: string = "";
 
   private types = {
     transaction: { optionText: "COMMON.TRANSACTION", label: "TRANSACTION.ID", name: "id" },
@@ -47,8 +50,14 @@ export default class TransactionSearchForm extends Vue {
     return this.searchTypes.map(type => ({ value: type, display: this.$t(this.types[type].optionText) }));
   }
 
+  private onSelectChange(event: any) {
+    this.onSearchTypeChange(event);
+    this.input = "";
+  }
+
   private onInputChange(event: any) {
     const { name, value } = event.target;
+    this.input = value;
 
     this.emitInput({ name, value });
   }
