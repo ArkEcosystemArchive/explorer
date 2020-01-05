@@ -119,7 +119,9 @@ export default class ChartWrapper extends Vue {
           },
           position: "right",
           gridLines: {
+            display: true,
             color: "#282b38",
+            zeroLineColor: "#282b38",
           },
         },
       ],
@@ -128,6 +130,7 @@ export default class ChartWrapper extends Vue {
           gridLines: {
             display: true,
             color: "#282b38",
+            zeroLineColor: "#282b38",
           },
           ticks: {
             fontColor: "#838a9b",
