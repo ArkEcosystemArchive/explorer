@@ -4,9 +4,7 @@
       v-if="hasError || isLoading"
       class="absolute inset-0 flex flex-col items-center justify-center text-white z-10"
     >
-      <p v-if="hasError" class="mb-4">
-        {{ $t("MARKET_CHART.ERROR") }}
-      </p>
+      <p v-if="hasError" class="mb-4">{{ $t("MARKET_CHART.ERROR") }}</p>
       <button :disabled="isLoading" class="mt-4 pager-button items-center" @click="renderChart(1000)">
         <span v-if="!isLoading">{{ $t("MARKET_CHART.RELOAD") }}</span>
         <Loader v-else :data="null" />
@@ -30,9 +28,9 @@
             class="absolute left-0 mt-px bg-theme-content-background shadow-theme rounded border overflow-hidden text-sm"
           >
             <li v-for="type in ['price', 'volume']" :key="type">
-              <span class="dropdown-button" @click="setType(type)">
-                {{ currencyName }} {{ $t(`MARKET_CHART.${type.toUpperCase()}`) }}
-              </span>
+              <span class="dropdown-button" @click="setType(type)"
+                >{{ currencyName }} {{ $t(`MARKET_CHART.${type.toUpperCase()}`) }}</span
+              >
             </li>
           </ul>
         </div>

@@ -38,10 +38,7 @@
 
       <TransactionDetails :transaction="transaction" ref="transactionDetails" />
 
-      <section
-        v-if="isMultiPayment(transaction.type, transaction.typeGroup)"
-        class="page-section py-5 md:py-10"
-      >
+      <section v-if="isMultiPayment(transaction.type, transaction.typeGroup)" class="page-section py-5 md:py-10">
         <MultiPaymentTransactions :transaction="transaction" :page="currentPage" />
         <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
       </section>

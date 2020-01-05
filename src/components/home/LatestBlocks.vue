@@ -43,7 +43,10 @@ export default class LatestBlocks extends Vue {
   private async prepareComponent() {
     await this.getBlocks();
 
-    this.$store.watch(state => state.network.height, value => this.getBlocks());
+    this.$store.watch(
+      state => state.network.height,
+      value => this.getBlocks(),
+    );
   }
 
   private async getBlocks(): Promise<void> {

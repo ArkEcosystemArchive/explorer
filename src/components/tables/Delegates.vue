@@ -114,6 +114,4 @@ export default class TableDelegatesDesktop extends Vue {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

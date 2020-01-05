@@ -12,9 +12,11 @@
           <LinkWallet :address="data.row.address">
             {{ data.row.username }}
           </LinkWallet>
-          <span v-if="isActiveTab && data.row.isResigned" class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1">{{
-            $t("WALLET.DELEGATE.STATUS.RESIGNED")
-          }}</span>
+          <span
+            v-if="isActiveTab && data.row.isResigned"
+            class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1"
+            >{{ $t("WALLET.DELEGATE.STATUS.RESIGNED") }}</span
+          >
         </div>
 
         <div v-else-if="data.column.field === 'blocks.produced'">
@@ -128,11 +130,11 @@ export default class TableDelegates extends Vue {
   }
 
   get isActiveTab() {
-    return this.activeTab === "active"
+    return this.activeTab === "active";
   }
 
   get isResignedTab() {
-    return this.activeTab === "resigned"
+    return this.activeTab === "resigned";
   }
 
   private lastForgingTime(delegate: IDelegate) {

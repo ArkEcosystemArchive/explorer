@@ -50,7 +50,10 @@ export default class LastBlock extends Vue {
   private async prepareComponent() {
     await this.getBlock();
 
-    this.$store.watch(state => state.network.height, value => this.getBlock());
+    this.$store.watch(
+      state => state.network.height,
+      value => this.getBlock(),
+    );
   }
 
   private async getBlock() {
