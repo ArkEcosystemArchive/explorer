@@ -117,6 +117,7 @@ export default class ChartWrapper extends Vue {
             fontColor: "#838a9b",
             fontSize: 13,
           },
+          position: "right",
           gridLines: {
             color: "#282b38",
           },
@@ -131,6 +132,16 @@ export default class ChartWrapper extends Vue {
           ticks: {
             fontColor: "#838a9b",
             fontSize: 13,
+            callback(value, index, values) {
+              if (
+                ((values.length > 10 && index % 2 !== 0) || (values.length > 360 && index % 3 !== 0)) &&
+                index !== 364
+              ) {
+                return;
+              } else {
+                return value;
+              }
+            },
           },
         },
       ],
