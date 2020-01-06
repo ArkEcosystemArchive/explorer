@@ -24,11 +24,23 @@
       {{ $t("PAGES.DELEGATE_MONITOR.TITLE") }}
     </RouterLink>
 
-    <RouterLink v-if="hasMagistrateEnabled" :to="{ name: 'bridgechains', params: { page: 1 } }" tag="button" class="menu-button" @click.native="closeMenu">
+    <RouterLink
+      v-if="hasMagistrateEnabled"
+      :to="{ name: 'bridgechains', params: { page: 1 } }"
+      tag="button"
+      class="menu-button"
+      @click.native="closeMenu"
+    >
       {{ $t("PAGES.BRIDGECHAINS.TITLE") }}
     </RouterLink>
 
-    <RouterLink v-if="hasMagistrateEnabled" :to="{ name: 'businesses', params: { page: 1 } }" tag="button" class="menu-button" @click.native="closeMenu">
+    <RouterLink
+      v-if="hasMagistrateEnabled"
+      :to="{ name: 'businesses', params: { page: 1 } }"
+      tag="button"
+      class="menu-button"
+      @click.native="closeMenu"
+    >
       {{ $t("PAGES.BUSINESSES.TITLE") }}
     </RouterLink>
 

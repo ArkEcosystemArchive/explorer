@@ -15,11 +15,11 @@
           </div>
           <div class="flex items-center">
             <LinkWallet :address="delegate.address">
-                {{ delegate.username }}
-              </LinkWallet>
-              <span v-if="delegate.isResigned" class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1">{{
-                $t("WALLET.DELEGATE.STATUS.RESIGNED")
-              }}</span>
+              {{ delegate.username }}
+            </LinkWallet>
+            <span v-if="delegate.isResigned" class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1">{{
+              $t("WALLET.DELEGATE.STATUS.RESIGNED")
+            }}</span>
           </div>
         </div>
 

@@ -28,7 +28,10 @@ export default class ToggleTheme extends Vue {
 
   private prepareComponent() {
     this.setImageSource();
-    this.$store.watch(state => state.ui.nightMode, value => this.setImageSource());
+    this.$store.watch(
+      state => state.ui.nightMode,
+      value => this.setImageSource(),
+    );
   }
 
   private setImageSource() {

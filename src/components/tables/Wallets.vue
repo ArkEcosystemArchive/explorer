@@ -42,7 +42,6 @@ import { BigNumber } from "@/utils";
   },
 })
 export default class TableWalletsDesktop extends Vue {
-
   get truncateBalance() {
     return this.windowWidth < 700;
   }
@@ -102,7 +101,12 @@ export default class TableWalletsDesktop extends Vue {
 
   public supplyPercentage(balance: string): string {
     // @ts-ignore
-    return this.percentageString(BigNumber.make(balance).dividedBy(this.total).times(100).toNumber())
+    return this.percentageString(
+      BigNumber.make(balance)
+        .dividedBy(this.total)
+        .times(100)
+        .toNumber(),
+    );
   }
 
   private getRank(index: number) {

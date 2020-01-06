@@ -5,7 +5,7 @@
       'bg-theme-page-background text-theme-text-content min-h-screen font-sans xl:pt-8',
     ]"
   >
-    <div :class="{ 'blur': hasBlurFilter }">
+    <div :class="{ blur: hasBlurFilter }">
       <AppHeader />
 
       <RouterView />
@@ -13,11 +13,7 @@
       <AppFooter />
     </div>
 
-    <PortalTarget
-      name="modal"
-      multiple
-      @change="onPortalChange"
-    />
+    <PortalTarget name="modal" multiple @change="onPortalChange" />
   </main>
 </template>
 
@@ -25,7 +21,14 @@
 import { Component, Vue } from "vue-property-decorator";
 import AppHeader from "@/components/header/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
-import { BlockchainService, BusinessService, CryptoCompareService, DelegateService, MigrationService, NodeService } from "@/services";
+import {
+  BlockchainService,
+  BusinessService,
+  CryptoCompareService,
+  DelegateService,
+  MigrationService,
+  NodeService,
+} from "@/services";
 import { mapGetters } from "vuex";
 import moment from "moment";
 
@@ -201,6 +204,6 @@ export default class App extends Vue {
 
 <style scoped>
 .blur {
-  filter: blur(4px)
+  filter: blur(4px);
 }
 </style>
