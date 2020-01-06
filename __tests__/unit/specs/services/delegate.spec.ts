@@ -155,7 +155,7 @@ describe("Services > Delegate", () => {
     jest.setTimeout(20000); // Allow this function to take longer than the specified 5 seconds
     const data = await DelegateService.active();
     data.forEach(delegate => {
-      expect(Object.keys(delegate).sort()).toEqual(delegatePropertyArray.concat(["forgingStatus"]).sort());
+      expect(Object.keys(delegate).sort()).toEqual(expect.arrayContaining(delegatePropertyArray.concat(["forgingStatus"]).sort()));
     });
   });
 
