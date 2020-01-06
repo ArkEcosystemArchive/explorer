@@ -241,6 +241,9 @@ const getters: GetterTree<IUiState, {}> = {
       : {
           active: { field: "rank", type: "asc" },
           standby: { field: "rank", type: "asc" },
+          resigned: { field: "votes", type: "asc" },
+          table: { field: "rank", type: "asc" },
+          tableResigned: { field: "votes", type: "asc" },
         };
   },
 

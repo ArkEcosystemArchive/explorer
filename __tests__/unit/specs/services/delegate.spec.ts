@@ -35,15 +35,41 @@ describe("Services > Delegate", () => {
   });
 
   it("should return all available delegates", async () => {
-    const data = await DelegateService.all();
+    const data = await DelegateService.fetchEveryDelegate();
     expect(data.length).toBeGreaterThan(102);
     data.forEach(delegate => {
       expect(Object.keys(delegate).sort()).toEqual(delegatePropertyArray);
     });
   });
 
+  it("should return a list of delegates", async () => {
+    const { data } = await DelegateService.all();
+    expect(data).toHaveLength(25);
+    data.forEach(delegate => {
+      expect(Object.keys(delegate).sort()).toEqual(expect.arrayContaining(delegatePropertyArray));
+    });
+  });
+
+  it("should return delegates with page offset", async () => {
+    const { data } = await DelegateService.all(1);
+    expect(data).toHaveLength(25);
+    data.forEach(delegate => {
+      expect(Object.keys(delegate).sort()).toEqual(expect.arrayContaining(delegatePropertyArray));
+    });
+    expect(data.sort((a, b) => a.balance > b.balance)).toEqual(data);
+  });
+
+  it("should return delegates with page offset and given limit", async () => {
+    const { data } = await DelegateService.all(2, 20);
+    expect(data).toHaveLength(20);
+    data.forEach(delegate => {
+      expect(Object.keys(delegate).sort()).toEqual(expect.arrayContaining(delegatePropertyArray));
+    });
+    expect(data.sort((a, b) => a.balance > b.balance)).toEqual(data);
+  });
+
   it("should retrieve the voters based on given delegate address", async () => {
-    const { meta, data } = await DelegateService.voters("ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ");
+    const { data } = await DelegateService.voters("ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ");
     data.forEach(voter => {
       expect(Object.keys(voter).sort()).toEqual(expect.arrayContaining(voterPropertyArray));
     });
@@ -53,6 +79,17 @@ describe("Services > Delegate", () => {
     await expect(
       DelegateService.voters("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"),
     ).rejects.toThrow();
+  });
+
+  it("should retrieve the voterCount for a given public key", async () => {
+    const count = await DelegateService.voterCount("02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b", false);
+    expect(count).toBeGreaterThanOrEqual(0);
+  });
+
+  it("should be able to filter out low balance voters", async () => {
+    const count = await DelegateService.voterCount("02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b", false);
+    const countFiltered = await DelegateService.voterCount("02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b",);
+    expect(count).toBeGreaterThan(countFiltered);
   });
 
   it("should return the delegate when searching by username", async () => {
@@ -103,11 +140,22 @@ describe("Services > Delegate", () => {
     });
   });
 
+  it("should retrieve the resigned delegates", async () => {
+    // temporary set to devnet so the test passes
+    store.dispatch("network/setServer", "https://dexplorer.ark.io/api");
+
+    const { data } = await DelegateService.allResigned();
+    expect(data.length).toBeGreaterThan(0);
+    data.forEach(delegate => {
+      expect(Object.keys(delegate).sort()).toEqual(resignedDelegatePropertyArray);
+    });
+  });
+
   it("should return a list of active delegates and their stats", async () => {
     jest.setTimeout(20000); // Allow this function to take longer than the specified 5 seconds
     const data = await DelegateService.active();
     data.forEach(delegate => {
-      expect(Object.keys(delegate).sort()).toEqual(delegatePropertyArray.concat(["forgingStatus"]).sort());
+      expect(Object.keys(delegate).sort()).toEqual(expect.arrayContaining(delegatePropertyArray.concat(["forgingStatus"]).sort()));
     });
   });
 

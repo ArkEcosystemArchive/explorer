@@ -150,7 +150,7 @@ export default class App extends Vue {
     const fetchedAt: number = parseInt(localStorage.getItem("delegatesFetchedAt") || "0", 10);
 
     if (!this.stateHasDelegates || !fetchedAt || this.updateRequired(fetchedAt)) {
-      const delegates = await DelegateService.all();
+      const delegates = await DelegateService.fetchEveryDelegate();
       this.$store.dispatch("delegates/setDelegates", {
         delegates,
         timestamp: Math.floor(Date.now() / 1000),
