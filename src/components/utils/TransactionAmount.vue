@@ -74,6 +74,7 @@ export default class TransactionAmount extends Vue {
     // @ts-ignore
     if (
       this.transaction.sender === this.address &&
+      // @ts-ignore
       this.isMultiPayment(this.transaction.type, this.transaction.typeGroup)
     ) {
       // @ts-ignore
