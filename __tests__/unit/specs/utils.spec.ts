@@ -22,7 +22,7 @@ describe("Utils", () => {
     beforeAll(async () => {
       store.dispatch("network/setServer", "https://explorer.ark.io/api");
       const node = await NodeService.config();
-      const delegates = await DelegateService.all();
+      const delegates = await DelegateService.fetchEveryDelegate();
       store.dispatch("network/setEpoch", node.constants.epoch);
       store.dispatch("delegates/setDelegates", {
         delegates,
