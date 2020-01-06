@@ -112,7 +112,10 @@
       </div>
       <div class="px-2">
         <div class="flex flex-wrap -mx-6">
-          <div :class="{ 'border-r border-grey-dark -mr-1': wallet.publicKey }" class="md:w-1/2 px-6 flex-1 whitespace-no-wrap my-4">
+          <div
+            :class="{ 'border-r border-grey-dark -mr-1': wallet.publicKey }"
+            class="md:w-1/2 px-6 flex-1 whitespace-no-wrap my-4"
+          >
             <div class="flex items-center text-grey mb-2">
               <span class="mr-2">{{ $t("WALLET.ADDRESS") }}</span>
               <SvgIcon
@@ -148,7 +151,10 @@
           </div>
         </div>
         <div class="flex flex-wrap -mx-6">
-          <div :class="{ 'border-r border-grey-dark -mr-1': hasLockedBalance }" class="md:w-1/2 px-6 flex-1 whitespace-no-wrap my-4">
+          <div
+            :class="{ 'border-r border-grey-dark -mr-1': hasLockedBalance }"
+            class="md:w-1/2 px-6 flex-1 whitespace-no-wrap my-4"
+          >
             <div class="text-grey mb-2">
               {{ $t("WALLET.BALANCE", { token: networkToken() }) }}
             </div>

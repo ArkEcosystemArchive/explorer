@@ -35,7 +35,10 @@ export default class DelegateCount extends Vue {
   private prepareComponent() {
     this.getDelegateCount();
 
-    this.$store.watch(state => state.delegates.delegates, value => this.getDelegateCount());
+    this.$store.watch(
+      state => state.delegates.delegates,
+      value => this.getDelegateCount(),
+    );
   }
 
   private getDelegateCount() {

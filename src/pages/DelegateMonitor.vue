@@ -27,7 +27,14 @@
       />
 
       <div v-if="delegates && delegates.length === activeDelegates" class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
-        <RouterLink :to="{ name: activeTab === 'resigned' ? 'delegates-resigned' : 'delegates', params: { page: activeTab === 'standby' ? 5 : 3 } }" tag="button" class="button-lg">
+        <RouterLink
+          :to="{
+            name: activeTab === 'resigned' ? 'delegates-resigned' : 'delegates',
+            params: { page: activeTab === 'standby' ? 5 : 3 },
+          }"
+          tag="button"
+          class="button-lg"
+        >
           {{ $t("PAGINATION.SHOW_MORE") }}
         </RouterLink>
       </div>
