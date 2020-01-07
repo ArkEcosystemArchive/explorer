@@ -8,6 +8,7 @@
           @input="onTypeChange"
           :selectOptions="selectOptions"
           :label="$t('COMMON.TYPE')"
+          :value="selectOptions[0].value"
           name="Transaction Types"
           class="flex-1"
         />
