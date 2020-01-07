@@ -1,6 +1,6 @@
 <template>
   <div class="mb-5 mx-5 sm:mx-10 mb-10" id="blockForm">
-    <p class="font-bold mb-4">Additional Parameters</p>
+    <p class="font-bold mb-4">{{ $t("PAGES.ADVANCED_SEARCH.ADDITIONAL_PARAMETERS") }}</p>
 
     <div class="flex flex-wrap justify-between">
       <div class="flex w-full lg:w-1/3 mb-4 lg:mb-0">

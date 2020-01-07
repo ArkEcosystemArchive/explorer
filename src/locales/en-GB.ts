@@ -229,6 +229,7 @@ export default {
     },
     ADVANCED_SEARCH: {
       TITLE: "Advanced Search",
+      ADDITIONAL_PARAMETERS: "Additional Parameters",
       RESULTS: "Results",
       SEARCH_TYPE: "Search Type",
       GENERIC: {
