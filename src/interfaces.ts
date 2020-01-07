@@ -226,6 +226,7 @@ export interface IUiState {
   delegateSortParams: string | null;
   transactionSortParams: string | null;
   walletSortParams: string | null;
+  walletSearchSortParams: string | null;
   walletTransactionTab: string | null;
   hasAcceptedLinkDisclaimer: boolean;
 }

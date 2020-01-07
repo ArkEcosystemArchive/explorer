@@ -114,8 +114,8 @@ export default class AdvancedSearchPage extends Vue {
     },
     wallet: {
       searchService: WalletService.search,
-      sortParams: "ui/walletSortParams",
-      setSortParams: "ui/setWalletSortParams",
+      sortParams: "ui/walletSearchSortParams",
+      setSortParams: "ui/setWalletSearchSortParams",
     },
   };
 
@@ -153,8 +153,8 @@ export default class AdvancedSearchPage extends Vue {
   }
 
   public async beforeRouteUpdate(to: Route, from: Route, next: (vm?: any) => void) {
-    this.data = null;
-    this.meta = null;
+    this.setData(null);
+    this.setMeta(null);
 
     try {
       const { meta, data } = await this.searchService(this.searchParams, Number(to.params.page));
