@@ -132,7 +132,7 @@ export default class TableDelegates extends Vue {
   get isActiveTab() {
     return this.activeTab === "active";
   }
-  
+
   get isResignedTab() {
     return this.activeTab === "resigned";
   }

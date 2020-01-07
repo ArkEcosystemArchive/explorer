@@ -119,6 +119,15 @@ export default class AdvancedSearchPage extends Vue {
     },
   };
 
+  private data: any[] | null = null;
+  private meta: any | null = null;
+  private currentPage: number = 1;
+  private searchTypes: string[] = Object.keys(this.types);
+  private selectedType: string = "transaction";
+  private searchParams: ITransactionSearchParams | IBlockSearchParams | IWalletSearchParams = {};
+  private submitted: boolean = false;
+  private supply: number;
+
   get sortParams() {
     return this.$store.getters[this.types[this.selectedType].sortParams];
   }
@@ -137,15 +146,6 @@ export default class AdvancedSearchPage extends Vue {
   get searchService() {
     return this.types[this.selectedType].searchService;
   }
-
-  private data: any[] | null = null;
-  private meta: any | null = null;
-  private currentPage: number = 1;
-  private searchTypes: string[] = Object.keys(this.types);
-  private selectedType: string = "transaction";
-  private searchParams: ITransactionSearchParams | IBlockSearchParams | IWalletSearchParams = {};
-  private submitted: boolean = false;
-  private supply: number;
 
   @Watch("currentPage")
   public onCurrentPageChanged() {
@@ -193,7 +193,7 @@ export default class AdvancedSearchPage extends Vue {
     let processedVal = inputProcessor(name, value);
 
     // Remove field from search params when input is empty
-    if (!processedVal) {
+    if (processedVal !== 0 && !processedVal) {
       this.removeFromSearchParams(name);
       return;
     }

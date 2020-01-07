@@ -19,14 +19,10 @@
         </div>
 
         <div v-else-if="data.column.field === 'balance'">
-          <span>
-            {{ readableCrypto(data.row.balance, true, truncateBalance ? 2 : 8) }}
-          </span>
+          <span>{{ readableCrypto(data.row.balance, true, truncateBalance ? 2 : 8) }}</span>
         </div>
 
-        <div v-else-if="data.column.field === 'supply'">
-          {{ supplyPercentage(data.row.balance) }}
-        </div>
+        <div v-else-if="data.column.field === 'supply'">{{ supplyPercentage(data.row.balance) }}</div>
       </template>
     </TableWrapper>
   </Loader>
@@ -40,6 +36,17 @@ import { BigNumber } from "@/utils";
 
 @Component
 export default class TableWalletsSearchDesktop extends Vue {
+  @Prop({
+    required: true,
+    validator: value => {
+      return Array.isArray(value) || value === null;
+    },
+  })
+  public wallets: IWallet[] | null;
+  @Prop({ required: true }) public total: number;
+
+  private windowWidth: number = 0;
+
   get truncateBalance() {
     return this.windowWidth < 700;
   }
@@ -49,8 +56,8 @@ export default class TableWalletsSearchDesktop extends Vue {
       {
         label: this.$t("WALLET.ADDRESS"),
         field: "address",
-        thClass: "start-cell w-64",
-        tdClass: "start-cell w-64",
+        thClass: "start-cell",
+        tdClass: "start-cell",
       },
       {
         label: this.$t("WALLET.VOTING_FOR"),
@@ -67,23 +74,13 @@ export default class TableWalletsSearchDesktop extends Vue {
         field: "supply",
         type: "number",
         sortable: false,
-        thClass: "end-cell w-24 not-sortable",
-        tdClass: "end-cell w-24",
+        thClass: "end-cell not-sortable",
+        tdClass: "end-cell",
       },
     ];
 
     return columns;
   }
-  @Prop({
-    required: true,
-    validator: value => {
-      return Array.isArray(value) || value === null;
-    },
-  })
-  public wallets: IWallet[] | null;
-  @Prop({ required: true }) public total: number;
-
-  private windowWidth: number = 0;
 
   public mounted() {
     this.windowWidth = window.innerWidth;

@@ -17,22 +17,23 @@ const lookupPublicKey = (username: string): string | null => {
 };
 
 export const inputProcessor = (inputName: string, inputValue: any): string | number => {
-  let value = inputValue;
+  const value = inputValue;
 
   const arktoshiValues = ["amount", "totalAmount", "fee", "totalFee", "reward", "balance"];
   const publicKeyValues = ["vote", "generatorPublicKey"];
 
   if (arktoshiValues.find(name => inputName.includes(name))) {
     const valAsNum = Number(value);
-    value = valAsNum > 0 ? Number(value) * 1e8 : 0;
+    return valAsNum > 0 ? Number(value) * 1e8 : 0;
   }
 
   if (publicKeyValues.find(name => inputName.includes(name))) {
-    value = lookupPublicKey(value);
+    const publicKey = lookupPublicKey(value);
+    return publicKey ? publicKey : value;
   }
 
   if (inputName.includes("timestamp")) {
-    value = getNetworkTimestamp(inputValue);
+    return getNetworkTimestamp(inputValue);
   }
 
   return value;
