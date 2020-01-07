@@ -89,8 +89,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { InputText, InputNumber, InputDate, InputSelect } from "./input";
-import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
 import { ITransactionType } from "@/interfaces";
+import { transactionTypes } from "@/constants";
 
 @Component({
   components: {
@@ -101,45 +101,7 @@ import { ITransactionType } from "@/interfaces";
   },
 })
 export default class TransactionSearchForm extends Vue {
-  private types: ITransactionType[] = [
-    { key: "TRANSFER", type: CoreTransaction.TRANSFER, typeGroup: TypeGroupTransaction.CORE },
-    { key: "SECOND_SIGNATURE", type: CoreTransaction.SECOND_SIGNATURE, typeGroup: TypeGroupTransaction.CORE },
-    { key: "DELEGATE_REGISTRATION", type: CoreTransaction.DELEGATE_REGISTRATION, typeGroup: TypeGroupTransaction.CORE },
-    { key: "VOTE", type: CoreTransaction.VOTE, typeGroup: TypeGroupTransaction.CORE },
-    { key: "MULTI_SIGNATURE", type: CoreTransaction.MULTI_SIGNATURE, typeGroup: TypeGroupTransaction.CORE },
-    { key: "IPFS", type: CoreTransaction.IPFS, typeGroup: TypeGroupTransaction.CORE },
-    { key: "MULTI_PAYMENT", type: CoreTransaction.MULTI_PAYMENT, typeGroup: TypeGroupTransaction.CORE },
-    { key: "DELEGATE_RESIGNATION", type: CoreTransaction.DELEGATE_RESIGNATION, typeGroup: TypeGroupTransaction.CORE },
-    { key: "TIMELOCK", type: CoreTransaction.TIMELOCK, typeGroup: TypeGroupTransaction.CORE },
-    { key: "TIMELOCK_CLAIM", type: CoreTransaction.TIMELOCK_CLAIM, typeGroup: TypeGroupTransaction.CORE },
-    { key: "TIMELOCK_REFUND", type: CoreTransaction.TIMELOCK_REFUND, typeGroup: TypeGroupTransaction.CORE },
-    {
-      key: "BUSINESS_REGISTRATION",
-      type: MagistrateTransaction.BUSINESS_REGISTRATION,
-      typeGroup: TypeGroupTransaction.MAGISTRATE,
-    },
-    {
-      key: "BUSINESS_RESIGNATION",
-      type: MagistrateTransaction.BUSINESS_RESIGNATION,
-      typeGroup: TypeGroupTransaction.MAGISTRATE,
-    },
-    { key: "BUSINESS_UPDATE", type: MagistrateTransaction.BUSINESS_UPDATE, typeGroup: TypeGroupTransaction.MAGISTRATE },
-    {
-      key: "BRIDGECHAIN_REGISTRATION",
-      type: MagistrateTransaction.BRIDGECHAIN_REGISTRATION,
-      typeGroup: TypeGroupTransaction.MAGISTRATE,
-    },
-    {
-      key: "BRIDGECHAIN_RESIGNATION",
-      type: MagistrateTransaction.BRIDGECHAIN_RESIGNATION,
-      typeGroup: TypeGroupTransaction.MAGISTRATE,
-    },
-    {
-      key: "BRIDGECHAIN_UPDATE",
-      type: MagistrateTransaction.BRIDGECHAIN_UPDATE,
-      typeGroup: TypeGroupTransaction.MAGISTRATE,
-    },
-  ];
+  private types: ITransactionType[] = transactionTypes;
 
   get selectOptions() {
     return this.types.map(type => ({ value: type.key, display: this.$t(`TRANSACTION.TYPES.${type.key}`) }));
@@ -155,7 +117,7 @@ export default class TransactionSearchForm extends Vue {
     const index: number = this.types.findIndex(transaction => transaction.key === event.target.value);
     const { type, typeGroup } = this.types[index];
 
-    this.emitInput({ name: "type", value: type });
+    this.emitInput({ name: "type", value: type !== -1 ? type : null });
     this.emitInput({ name: "typeGroup", value: typeGroup });
   }
 
