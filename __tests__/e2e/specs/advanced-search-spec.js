@@ -146,10 +146,10 @@ describe("Advanced Search", () => {
         .contains("Search")
         .click();
 
-      cy.get("tbody tr")
+      cy.get("tbody tr", { timeout: 20000 })
         .first()
         .within(() => {
-          cy.get("td", { timeout: 20000 }).eq(4);
+          cy.get("td").eq(4);
           cy.contains("biz_classic");
         });
     });
@@ -199,10 +199,10 @@ describe("Advanced Search", () => {
         .contains("Search")
         .click();
 
-      cy.get("tbody tr")
+      cy.get("tbody tr", { timeout: 20000 })
         .first()
         .within(() => {
-          cy.get("td", { timeout: 20000 }).eq(1);
+          cy.get("td").eq(1);
           cy.contains("alessio");
         });
     });
