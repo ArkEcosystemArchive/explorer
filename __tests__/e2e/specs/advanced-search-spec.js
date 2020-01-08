@@ -149,7 +149,7 @@ describe("Advanced Search", () => {
       cy.get("tbody tr")
         .first()
         .within(() => {
-          cy.get("td").eq(4);
+          cy.get("td", { timeout: 20000 }).eq(4);
           cy.contains("biz_classic");
         });
     });
@@ -202,7 +202,7 @@ describe("Advanced Search", () => {
       cy.get("tbody tr")
         .first()
         .within(() => {
-          cy.get("td").eq(1);
+          cy.get("td", { timeout: 20000 }).eq(1);
           cy.contains("alessio");
         });
     });
