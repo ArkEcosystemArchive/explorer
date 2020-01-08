@@ -53,7 +53,7 @@
           @on-sort-change="onSortChange"
         />
       </div>
-      <div class="sm:hidden">
+      <div class="sm:hidden" v-if="selectedType === 'wallet'">
         <TableWalletsSearchMobile :wallets="data" :total="supply" />
       </div>
 

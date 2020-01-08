@@ -13,7 +13,7 @@
           <div class="mr-4">
             {{ $t("WALLET.VOTING_FOR") }}
           </div>
-          <LinkWallet :address="votedDelegate(row.vote).address" />
+          <LinkWallet v-if="row.vote" :address="votedDelegate(row.vote).address" />
         </div>
 
         <div class="list-row-border-b">
