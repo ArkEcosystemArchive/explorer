@@ -187,10 +187,19 @@ export default class AdvancedSearchPage extends Vue {
       });
     }
   }
-  private onFormChange(input: { name: string; value: string }) {
+  private async onFormChange(input: { name: string; value: string }) {
     const { name, value } = input;
     let processedName = name;
     let processedVal = inputProcessor(name, value);
+
+    // Fallback
+    if (!processedVal && ["vote", "generatorPublicKey"].includes(name)) {
+      try {
+        processedVal = (await WalletService.find(value)).publicKey;
+      } catch (error) {
+        processedVal = value;
+      }
+    }
 
     // Remove field from search params when input is empty
     if (processedVal !== 0 && !processedVal) {
