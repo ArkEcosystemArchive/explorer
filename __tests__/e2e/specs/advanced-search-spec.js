@@ -142,11 +142,13 @@ describe("Advanced Search", () => {
 
       cy.get("input[name=generatorPublicKey]").type("biz_classic");
 
+      cy.wait(2000)
+
       cy.get("button")
         .contains("Search")
         .click();
 
-      cy.get("tbody tr", { timeout: 20000 })
+      cy.get("tbody tr")
         .first()
         .within(() => {
           cy.get("td").eq(4);
@@ -178,6 +180,8 @@ describe("Advanced Search", () => {
 
       cy.get("input[name=username]").type("alessio");
 
+      cy.wait(2000)
+
       cy.get("button")
         .contains("Search")
         .click();
@@ -195,11 +199,13 @@ describe("Advanced Search", () => {
 
       cy.get("input[name=vote]").type("alessio");
 
+      cy.wait(2000)
+
       cy.get("button")
         .contains("Search")
         .click();
 
-      cy.get("tbody tr", { timeout: 20000 })
+      cy.get("tbody tr")
         .first()
         .within(() => {
           cy.get("td").eq(1);
