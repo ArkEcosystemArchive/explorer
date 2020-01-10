@@ -64,7 +64,7 @@
         </div>
       </template>
 
-      <div v-if="transactions && transactions.length >= 25" class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
+      <div v-if="transactions && meta.next" class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
         <RouterLink
           :to="{ name: 'wallet-transactions', params: { address: wallet.address, type, page: 2 } }"
           tag="button"
@@ -91,6 +91,7 @@ export default class WalletTransactions extends Vue {
   private receivedCount: number = 0;
   private sentCount: number = 0;
   private locksCount: number = 0;
+  private meta: any | null = null;
 
   get isTypeSent() {
     return this.type === "sent";
@@ -145,7 +146,7 @@ export default class WalletTransactions extends Vue {
 
     if (this.wallet.address !== undefined) {
       // @ts-ignore
-      const { data } = await TransactionService[`${this.type}ByAddress`](this.wallet.address, 1);
+      const { data, meta } = await TransactionService[`${this.type}ByAddress`](this.wallet.address, 1);
 
       // Only need to check for sent / received transactions
       if (!this.isTypeLocks) {
@@ -180,6 +181,7 @@ export default class WalletTransactions extends Vue {
           });
         }
         this.transactions = transactions;
+        this.meta = meta;
         return;
       } else {
         this.transactions = data.map((transaction: ITransaction) => ({ ...transaction, price: null }));
@@ -187,31 +189,27 @@ export default class WalletTransactions extends Vue {
     }
   }
 
-  private async getReceivedCount() {
+  private async getCountByType(type: string) {
     if (this.wallet && this.wallet.address) {
-      const response = await TransactionService.receivedByAddressCount(this.wallet.address);
-      this.receivedCount = response;
-    } else {
-      this.receivedCount = 0;
+      try {
+        const response = await TransactionService[`${type}ByAddressCount`](this.wallet.address);
+        this[`${type}Count`] = response;
+      } catch (error) {
+        this[`${type}Count`] = 0;
+      }
     }
   }
 
-  private async getSentCount() {
-    if (this.wallet && this.wallet.address) {
-      const response = await TransactionService.sentByAddressCount(this.wallet.address);
-      this.sentCount = response;
-    } else {
-      this.sentCount = 0;
-    }
+  private getReceivedCount() {
+    this.getCountByType("received");
   }
 
-  private async getLocksCount() {
-    if (this.wallet && this.wallet.address) {
-      const response = await TransactionService.locksByAddressCount(this.wallet.address);
-      this.locksCount = response;
-    } else {
-      this.locksCount = 0;
-    }
+  private getSentCount() {
+    this.getCountByType("sent");
+  }
+
+  private getLocksCount() {
+    this.getCountByType("locks");
   }
 
   private setType(type: string) {
