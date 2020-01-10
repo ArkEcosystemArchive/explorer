@@ -127,6 +127,7 @@ export default class AdvancedSearchPage extends Vue {
   private searchParams: ITransactionSearchParams | IBlockSearchParams | IWalletSearchParams = {};
   private submitted: boolean = false;
   private supply: number;
+  private lastFormChange: number = 0;
 
   get sortParams() {
     return this.$store.getters[this.types[this.selectedType].sortParams];
@@ -187,34 +188,30 @@ export default class AdvancedSearchPage extends Vue {
       });
     }
   }
-  private async onFormChange(input: { name: string; value: string }) {
-    const { name, value } = input;
-    let processedName = name;
-    let processedVal = inputProcessor(name, value);
 
-    // Fallback
-    if (!processedVal && ["vote", "generatorPublicKey"].includes(name)) {
-      try {
-        processedVal = (await WalletService.find(value)).publicKey;
-      } catch (error) {
-        processedVal = value;
-      }
+  private async onFormChange(input: { name: string; value: string }) {
+    let processedName = input.name;
+    const processedInput = await inputProcessor(input.name, input.value);
+
+    if (this.lastFormChange > processedInput.ts) {
+      return;
     }
 
     // Remove field from search params when input is empty
-    if (processedVal !== 0 && !processedVal) {
+    if (processedInput.value !== 0 && !processedInput.value) {
       this.removeFromSearchParams(name);
       return;
     }
 
     // Create nested object value for to/from type params
-    if (name.includes("-")) {
-      const [parent, child] = name.split("-");
+    if (input.name.includes("-")) {
+      const [parent, child] = input.name.split("-");
       processedName = parent;
-      processedVal = { ...this.searchParams[parent], [child]: processedVal };
+      processedInput.value = { ...this.searchParams[parent], [child]: processedInput.value };
     }
 
-    this.searchParams = { ...this.searchParams, [processedName]: processedVal };
+    this.searchParams = { ...this.searchParams, [processedName]: processedInput.value };
+    this.lastFormChange = processedInput.ts;
   }
 
   private removeFromSearchParams(name: string): void {
