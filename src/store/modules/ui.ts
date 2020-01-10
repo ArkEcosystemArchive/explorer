@@ -273,7 +273,7 @@ const getters: GetterTree<IUiState, {}> = {
 
   walletSearchSortParams(state) {
     const params = state.walletSearchSortParams || localStorage.getItem("walletSearchSortParams");
-    return params ? JSON.parse(params) : { field: "balance ", type: "desc" };
+    return params ? JSON.parse(params) : { field: "balance", type: "desc" };
   },
 
   walletTransactionTab: state => state.walletTransactionTab,
