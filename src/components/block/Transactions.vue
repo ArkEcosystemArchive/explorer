@@ -14,7 +14,7 @@
       <div class="sm:hidden">
         <TableTransactionsMobile :transactions="transactions" />
       </div>
-      <div v-if="transactions.length >= 25" class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
+      <div v-if="meta.next" class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
         <RouterLink
           :to="{ name: 'block-transactions', params: { block: block.id, page: 2 } }"
           tag="button"
@@ -37,6 +37,7 @@ export default class BlockTransactions extends Vue {
   @Prop({ required: true }) public block: IBlock;
 
   public transactions: ITransaction[] | null = null;
+  private meta: any | null = null;
 
   get sortParams(): ISortParameters {
     return this.$store.getters["ui/transactionSortParams"];
@@ -70,8 +71,9 @@ export default class BlockTransactions extends Vue {
     }
 
     if (this.block.transactions) {
-      const { data } = await TransactionService.byBlock(this.block.id);
+      const { data, meta } = await TransactionService.byBlock(this.block.id);
       this.transactions = data.map((transaction: ITransaction) => ({ ...transaction, price: null }));
+      this.meta = meta;
     }
   }
 
