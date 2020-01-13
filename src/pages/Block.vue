@@ -76,7 +76,10 @@ export default class BlockPage extends Vue {
   }
 
   private async prepareComponent() {
-    this.$store.watch(state => state.network.height, value => this.updateBlock());
+    this.$store.watch(
+      state => state.network.height,
+      value => this.updateBlock(),
+    );
   }
 
   private async updateBlock() {

@@ -243,7 +243,7 @@ describe("Delegate Monitor", () => {
         .should("exist");
 
       cy.url().should("include", "/delegate-monitor");
-      cy.get('button.button-lg').click();
+      cy.get("button.button-lg").click();
       cy.url().should("include", "delegates/");
     });
   });

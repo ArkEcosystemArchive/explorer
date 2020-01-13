@@ -82,13 +82,22 @@ describe("Services > Delegate", () => {
   });
 
   it("should retrieve the voterCount for a given public key", async () => {
-    const count = await DelegateService.voterCount("02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b", false);
+    const count = await DelegateService.voterCount(
+      "02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b",
+      false,
+    );
+
     expect(count).toBeGreaterThanOrEqual(0);
   });
 
   it("should be able to filter out low balance voters", async () => {
-    const count = await DelegateService.voterCount("02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b", false);
-    const countFiltered = await DelegateService.voterCount("02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b",);
+    const count = await DelegateService.voterCount(
+      "02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b",
+      false,
+    );
+    const countFiltered = await DelegateService.voterCount(
+      "02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b",
+    );
     expect(count).toBeGreaterThan(countFiltered);
   });
 
@@ -155,7 +164,7 @@ describe("Services > Delegate", () => {
     jest.setTimeout(20000); // Allow this function to take longer than the specified 5 seconds
     const data = await DelegateService.active();
     data.forEach(delegate => {
-      expect(Object.keys(delegate).sort()).toEqual(delegatePropertyArray.concat(["forgingStatus"]).sort());
+      expect(Object.keys(delegate).sort()).toEqual(expect.arrayContaining(delegatePropertyArray.concat(["forgingStatus"]).sort()));
     });
   });
 

@@ -30,7 +30,10 @@ export default class TotalForged extends Vue {
   private prepareComponent() {
     this.getTotal();
 
-    this.$store.watch(state => state.network.height, value => this.getTotal());
+    this.$store.watch(
+      state => state.network.height,
+      value => this.getTotal(),
+    );
   }
 
   private getTotal() {

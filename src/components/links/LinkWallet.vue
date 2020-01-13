@@ -1,11 +1,7 @@
 <template>
   <span class="block md:inline-block">
     <template v-if="isTransfer(type, typeGroup)">
-      <RouterLink
-        v-if="isKnown"
-        :to="{ name: 'wallet', params: { address: walletAddress } }"
-        class="flex items-center"
-      >
+      <RouterLink v-if="isKnown" :to="{ name: 'wallet', params: { address: walletAddress } }" class="flex items-center">
         <span
           v-tooltip="{
             content: getAddress(),
@@ -65,9 +61,7 @@
     <span v-else-if="isMultiPayment(type, typeGroup)"
       >{{ $t("TRANSACTION.TYPES.MULTI_PAYMENT") }} ({{ multiPaymentRecipientsCount }})</span
     >
-    <span v-else-if="isDelegateResignation(type, typeGroup)">{{
-      $t("TRANSACTION.TYPES.DELEGATE_RESIGNATION")
-    }}</span>
+    <span v-else-if="isDelegateResignation(type, typeGroup)">{{ $t("TRANSACTION.TYPES.DELEGATE_RESIGNATION") }}</span>
     <span v-else-if="isTimelock(type, typeGroup)">{{ $t("TRANSACTION.TYPES.TIMELOCK") }}</span>
     <span v-else-if="isTimelockClaim(type, typeGroup)">{{ $t("TRANSACTION.TYPES.TIMELOCK_CLAIM") }}</span>
     <span v-else-if="isTimelockRefund(type, typeGroup)">{{ $t("TRANSACTION.TYPES.TIMELOCK_REFUND") }}</span>
@@ -75,8 +69,12 @@
     <span v-else-if="isBusinessRegistration(type, typeGroup)">{{ $t("TRANSACTION.TYPES.BUSINESS_REGISTRATION") }}</span>
     <span v-else-if="isBusinessResignation(type, typeGroup)">{{ $t("TRANSACTION.TYPES.BUSINESS_RESIGNATION") }}</span>
     <span v-else-if="isBusinessUpdate(type, typeGroup)">{{ $t("TRANSACTION.TYPES.BUSINESS_UPDATE") }}</span>
-    <span v-else-if="isBridgechainRegistration(type, typeGroup)">{{ $t("TRANSACTION.TYPES.BRIDGECHAIN_REGISTRATION") }}</span>
-    <span v-else-if="isBridgechainResignation(type, typeGroup)">{{ $t("TRANSACTION.TYPES.BRIDGECHAIN_RESIGNATION") }}</span>
+    <span v-else-if="isBridgechainRegistration(type, typeGroup)">{{
+      $t("TRANSACTION.TYPES.BRIDGECHAIN_REGISTRATION")
+    }}</span>
+    <span v-else-if="isBridgechainResignation(type, typeGroup)">{{
+      $t("TRANSACTION.TYPES.BRIDGECHAIN_RESIGNATION")
+    }}</span>
     <span v-else-if="isBridgechainUpdate(type, typeGroup)">{{ $t("TRANSACTION.TYPES.BRIDGECHAIN_UPDATE") }}</span>
   </span>
 </template>
