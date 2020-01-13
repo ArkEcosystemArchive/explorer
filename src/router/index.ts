@@ -24,6 +24,7 @@ const DelegateMonitorComponent = () => import(/* webpackChunkName: "delegate-mon
 const TopWalletsComponent = () => import(/* webpackChunkName: "top-wallets" */ "@/pages/TopWallets.vue");
 const BusinessesComponent = () => import(/* webpackChunkName: "businesses" */ "@/pages/Businesses.vue");
 const BridgechainsComponent = () => import(/* webpackChunkName: "bridgechains" */ "@/pages/Bridgechains.vue");
+const AdvancedSearchComponent = () => import(/* webpackChunkName: "search" */ "@/pages/AdvancedSearch.vue");
 const DelegateComponent = () => import(/* webpackChunkName: "delegates" */ "@/pages/Delegates.vue");
 const NotFoundComponent = () => import(/* webpackChunkName: "404" */ "@/pages/404.vue");
 
@@ -184,6 +185,17 @@ const router = new Router({
       name: "bridgechains",
       component: BridgechainsComponent,
       meta: { title: (route: Route) => getTitle("Bridgechains") },
+    },
+    {
+      path: "/advanced-search",
+      redirect: to => ({ name: "advanced-search", params: { page: 1 } }),
+      meta: { title: (route: Route) => getTitle("Advanced Search") },
+    },
+    {
+      path: "/advanced-search/:page(\\d+)",
+      name: "advanced-search",
+      component: AdvancedSearchComponent,
+      meta: { title: (route: Route) => getTitle("Advanced Search") },
     },
     {
       path: "/delegates/resigned",

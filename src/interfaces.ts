@@ -149,8 +149,8 @@ export interface IBlockchain {
   supply: string;
 }
 
-export interface IApiDelegateVotersWrapper {
-  data: ISimpleWallet[];
+export interface IApiWalletsWrapper {
+  data: IWallet[];
   meta: IMeta;
 }
 
@@ -161,15 +161,6 @@ export interface IApiTransactionWrapper {
 export interface IApiTransactionsWrapper {
   data: ITransaction[];
   meta: IMeta;
-}
-
-export interface ISimpleWallet {
-  address: string;
-  publicKey: string;
-  secondPublicKey?: string;
-  balance: string;
-  isDelegate: boolean;
-  vote: string;
 }
 
 export interface IApiNodeConfiguration {
@@ -235,6 +226,7 @@ export interface IUiState {
   delegateSortParams: string | null;
   transactionSortParams: string | null;
   walletSortParams: string | null;
+  walletSearchSortParams: string | null;
   walletTransactionTab: string | null;
   hasAcceptedLinkDisclaimer: boolean;
 }
@@ -284,4 +276,30 @@ export interface IBridgechain {
   genesisHash: string;
   bridgechainRepository?: string;
   ports: object;
+}
+
+export interface ITransactionSearchParams {
+  id?: string;
+  type?: string;
+  timestamp?: { from?: number; to?: number };
+  amount?: { from?: number; to?: number };
+  fee?: { from?: number };
+  vendorField?: string;
+}
+
+export interface IBlockSearchParams {
+  id?: string;
+  generatorPublicKey?: string;
+  timestamp?: { from?: number; to?: number };
+  totalAmount?: { from?: number; to?: number };
+  totalFee?: { from?: number; to?: number };
+  reward?: { from?: number; to?: number };
+  numberOfTransactions?: { from?: number; to?: number };
+}
+
+export interface IWalletSearchParams {
+  address?: string;
+  username?: string;
+  vote?: string;
+  balance?: { from?: number; to?: number };
 }

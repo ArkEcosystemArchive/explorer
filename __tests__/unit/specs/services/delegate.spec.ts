@@ -86,6 +86,7 @@ describe("Services > Delegate", () => {
       "02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b",
       false,
     );
+
     expect(count).toBeGreaterThanOrEqual(0);
   });
 

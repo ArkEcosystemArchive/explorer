@@ -142,4 +142,55 @@ describe("Services > Transaction", () => {
   it("should fail with a 404 statusCode when an incorrect block id is given", async () => {
     await expect(TransactionService.byBlock("0")).rejects.toThrow();
   });
+
+  it("should return all transactions with a fee exceeding 25 ARK", async () => {
+    const minAmount = 25 * 1e8;
+    jest.setTimeout(30000);
+    const { data } = await TransactionService.search({
+      fee: { from: minAmount },
+    });
+    data.forEach(transaction => {
+      expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
+      expect(parseInt(transaction.fee)).toBeGreaterThanOrEqual(minAmount);
+    });
+  });
+
+  it("should return all transactions with an amount between 5000 and 6000 ARK", async () => {
+    const minAmount = 5000 * 1e8;
+    const maxAmount = 6000 * 1e8;
+    jest.setTimeout(30000);
+    const { data } = await TransactionService.search({
+      amount: { from: minAmount, to: maxAmount },
+    });
+    expect(data).toHaveLength(25);
+    data.forEach(transaction => {
+      expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
+      expect(parseInt(transaction.amount)).toBeLessThanOrEqual(maxAmount);
+      expect(parseInt(transaction.amount)).toBeGreaterThanOrEqual(minAmount);
+    });
+  });
+
+  it("should return the latest transactions when no arguments are passed", async () => {
+    jest.setTimeout(30000);
+    const { data } = await TransactionService.search();
+    expect(data).toHaveLength(25);
+    data.forEach(transaction => {
+      expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
+    });
+  });
 });
+
+describe("Services > Transaction (2.6)", () => {
+  beforeAll(() => {
+    store.dispatch("network/setServer", "https://dexplorer.ark.io/api/v2");
+  });
+
+  it("should return all transactions that have 'test' in their smartbridge field", async () => {
+    jest.setTimeout(30000);
+    const { data } = await TransactionService.search({ vendorField: 'test' });
+    expect(data).toHaveLength(25);
+    data.forEach(transaction => {
+      expect(transaction.vendorField.includes('test')).toBe(true);
+    });
+  });
+}
