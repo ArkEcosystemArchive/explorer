@@ -60,6 +60,14 @@ const getters: GetterTree<IDelegateState, {}> = {
     );
   },
 
+  byUsername: (_, getters) => (username: string) => {
+    return (
+      getters.delegates.find((delegate: IDelegate) => {
+        return delegate.username === username;
+      }) || null
+    );
+  },
+
   stateHasDelegates: state => {
     return !!state.delegates;
   },

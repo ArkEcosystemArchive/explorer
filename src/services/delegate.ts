@@ -1,7 +1,7 @@
 import { ApiService, ForgingService, WalletService, RoundService } from "@/services";
 import { roundFromHeight } from "@/utils";
 import store from "@/store";
-import { IApiDelegateWrapper, IApiDelegatesWrapper, IApiDelegateVotersWrapper, IDelegate } from "../interfaces";
+import { IApiDelegateWrapper, IApiDelegatesWrapper, IApiWalletsWrapper, IDelegate } from "../interfaces";
 
 class DelegateService {
   public async fetchEveryDelegate(): Promise<IDelegate[]> {
@@ -39,13 +39,13 @@ class DelegateService {
     return response;
   }
 
-  public async voters(query: string, page: number, limit = 25): Promise<IApiDelegateVotersWrapper> {
+  public async voters(query: string, page: number, limit = 25): Promise<IApiWalletsWrapper> {
     const response = (await ApiService.get(`delegates/${query}/voters`, {
       params: {
         page,
         limit,
       },
-    })) as IApiDelegateVotersWrapper;
+    })) as IApiWalletsWrapper;
 
     return response;
   }
@@ -58,12 +58,9 @@ class DelegateService {
           from: excludeLowBalances ? 1e7 : 0,
         },
       },
-      {
-        params: {
-          limit: 1,
-        },
-      },
-    )) as IApiDelegateVotersWrapper;
+      1,
+      1,
+    )) as IApiWalletsWrapper;
 
     return response.meta.totalCount;
   }
