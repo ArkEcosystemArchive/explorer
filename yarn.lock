@@ -11123,10 +11123,10 @@ vue-loader@^15.7.0:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
-vue-matomo@^3.13.0-0:
-  version "3.13.0-0"
-  resolved "https://registry.yarnpkg.com/vue-matomo/-/vue-matomo-3.13.0-0.tgz#dea85b03aab1e5df376d12fcf811daa37d883c5c"
-  integrity sha512-1AMnnmWcW+u1QVKfO96pYvoWApNZUAivj4Oa4i6Vx6zgcwvwetjckKkq5nWdGav/bf27Zx8WyMVUBXUxz/hGJg==
+vue-matomo@^3.13.0-2:
+  version "3.13.0-2"
+  resolved "https://registry.yarnpkg.com/vue-matomo/-/vue-matomo-3.13.0-2.tgz#8b4162548bd7ce6d989c710ab5f99f2ab19a88bc"
+  integrity sha512-WJke5Ht1l+yJ7XCQfRi7Zm8vHbgojS+JVomazSfno13tffm0V7zzPt4JtQiTvu/4MV1dUDGcgRojwpkBLddIHw==
 
 vue-property-decorator@^8.1.0:
   version "8.2.2"
