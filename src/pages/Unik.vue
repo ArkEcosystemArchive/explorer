@@ -5,7 +5,7 @@
     <template v-if="unikNotFound">
       <section class="page-section py-5 md:py-10 px-6">
         <div class="my-10 text-center">
-          <NotFound :data-id="unik.id" data-type="UNIK token" />
+          <NotFound :is-loading="isFetching" :data-id="unik.id" data-type="UNIK token" />
 
           <button :disabled="isFetching" class="mt-4 pager-button items-center" @click="fetchUnik">
             <span>{{ !isFetching ? $t("Reload this page") : $t("Loading...") }}</span>
