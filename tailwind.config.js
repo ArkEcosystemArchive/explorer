@@ -169,7 +169,7 @@ module.exports = {
 
     fontFamily: {
       sans: [
-        "Proxima Nova Regular",
+        "Inter Regular",
         "-apple-system",
         "BlinkMacSystemFont",
         "Segoe UI",
@@ -199,16 +199,16 @@ module.exports = {
 
     fontSize: {
       "0": 0,
-      "2xs": ".8125rem", // 13px
-      xs: ".875rem", // 14px
-      sm: "0.9375rem", // 15px
-      base: "1rem", // 16px
-      lg: "1.125rem", // 18px
-      xl: "1.25rem", // 20px
-      "2xl": "1.5rem", // 24px
-      "3xl": "1.875rem", // 30px
-      "4xl": "2.25rem", // 36px
-      "5xl": "3rem", // 48px
+      "2xs": ".75rem", // 12px
+      xs: ".75", // 12px
+      sm: ".8125rem", // 13px
+      base: "0.9375rem", // 15px
+      lg: "1rem", // 16px
+      xl: "1.125rem", // 18px
+      "2xl": "1.375rem", // 21px
+      "3xl": "1.75rem", // 28px
+      "4xl": "2rem", // 32px
+      "5xl": "2.5rem", // 40px
     },
 
     fontWeight: {
