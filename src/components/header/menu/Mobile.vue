@@ -46,7 +46,7 @@
       <RouterLink
         :to="{ name: 'businesses', params: { page: 1 } }"
         tag="div"
-        class="cursor-pointer py-5 w-64 flex-none"
+        class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border"
       >
         {{ $t("PAGES.BUSINESSES.TITLE") }}
       </RouterLink>
@@ -55,7 +55,7 @@
       <RouterLink
         :to="{ name: 'advanced-search', params: { page: 1 }   }"
         tag="div"
-        class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border"
+        class="cursor-pointer py-5 w-64 flex-none"
       >
         {{ $t("PAGES.ADVANCED_SEARCH.TITLE") }}
       </RouterLink>
