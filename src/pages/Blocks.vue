@@ -29,7 +29,7 @@ export default class BlockPage extends Vue {
   private currentPage: number = 0;
 
   get showPagination() {
-    return this.meta && this.meta.pageCount;
+    return this.meta && this.meta.pageCount > 1;
   }
 
   get sortParams() {
