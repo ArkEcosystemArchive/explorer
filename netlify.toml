@@ -2,6 +2,12 @@
   publish = "dist/"
   command = "yarn build:network --verbose --history"
 
+[context.deploy-preview.environment]
+  CURRENT_NETWORK = "dalinet"
+
+[context.branch-deploy.environment]
+  CURRENT_NETWORK = "dalinet"
+
 # Dalinet
 [context."develop".environment]
   CURRENT_NETWORK = "dalinet"
