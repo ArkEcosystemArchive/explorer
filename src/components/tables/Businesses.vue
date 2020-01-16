@@ -23,7 +23,9 @@
         </div>
 
         <div v-else-if="data.column.field === 'repository'">
-          <a :href="data.row.repository" target="_blank" rel="noopener noreferrer nofollow">{{ data.row.repository }}</a>
+          <a :href="data.row.repository" target="_blank" rel="noopener noreferrer nofollow">{{
+            data.row.repository
+          }}</a>
         </div>
       </template>
     </TableWrapper>
@@ -79,6 +81,4 @@ export default class TableBusinessesDesktop extends Vue {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

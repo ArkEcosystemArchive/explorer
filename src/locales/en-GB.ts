@@ -11,6 +11,7 @@ export default {
     HEIGHT: "Height",
     ID: "ID",
     NO_RESULTS: "No results",
+    NOT_APPLICABLE: "Not applicable",
     RANK: "Rank",
     RELOAD: "Reload this page",
     SEE_ALL: "See all",
@@ -20,6 +21,7 @@ export default {
     TRANSACTION: "Transaction",
     TRANSACTIONS: "Transactions",
     TYPE: "Type",
+    WALLET: "Wallet",
     ACCEPT: "Accept",
     CANCEL: "Cancel",
   },
@@ -193,6 +195,9 @@ export default {
       WEBSITE: "Website",
       REPOSITORY: "Repository",
     },
+    DELEGATES: {
+      TITLE: "Delegates",
+    },
     DELEGATE_MONITOR: {
       TITLE: "Network player Monitor",
       HEADER: {
@@ -226,6 +231,34 @@ export default {
     },
     TOP_WALLETS: {
       TITLE: "Top Wallets",
+    },
+    ADVANCED_SEARCH: {
+      TITLE: "Advanced Search",
+      ADDITIONAL_PARAMETERS: "Additional Parameters",
+      RESULTS: "Results",
+      SEARCH_TYPE: "Search Type",
+      GENERIC: {
+        DATE_FROM: "Date from",
+        DATE_TO: "Date to",
+      },
+      BLOCK: {
+        TOTAL_AMOUNT_FROM: "Total amount from",
+        TOTAL_AMOUNT_TO: "Total amount to",
+        TOTAL_FEE_FROM: "Total fee from",
+        TOTAL_FEE_TO: "Total fee to",
+        REWARD_FROM: "Reward from",
+        REWARD_TO: "Reward to",
+      },
+      TRANSACTION: {
+        AMOUNT_FROM: "Amount from",
+        AMOUNT_TO: "Amount to",
+        FEE_FROM: "Fee from",
+        FEE_TO: "Fee to",
+      },
+      WALLET: {
+        BALANCE_FROM: "Balance from",
+        BALANCE_TO: "Balance to",
+      },
     },
     NOT_FOUND: {
       TITLE: "Ooops!",

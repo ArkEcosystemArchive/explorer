@@ -56,7 +56,10 @@ export default class LatestTransactions extends Vue {
   private async prepareComponent() {
     await this.getTransactions();
 
-    this.$store.watch(state => state.network.height, value => this.getTransactions());
+    this.$store.watch(
+      state => state.network.height,
+      value => this.getTransactions(),
+    );
   }
 
   private async getTransactions() {

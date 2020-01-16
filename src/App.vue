@@ -5,7 +5,7 @@
       'bg-theme-page-background text-theme-text-content min-h-screen font-sans xl:pt-8',
     ]"
   >
-    <div :class="{ 'blur': hasBlurFilter }">
+    <div :class="{ blur: hasBlurFilter }">
       <AppHeader />
 
       <RouterView />
@@ -13,11 +13,7 @@
       <AppFooter />
     </div>
 
-    <PortalTarget
-      name="modal"
-      multiple
-      @change="onPortalChange"
-    />
+    <PortalTarget name="modal" multiple @change="onPortalChange" />
   </main>
 </template>
 
@@ -27,6 +23,7 @@ import AppHeader from "@/components/header/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
 import {
   BlockchainService,
+  BusinessService,
   CryptoCompareService,
   DelegateService,
   MigrationService,
@@ -114,6 +111,7 @@ export default class App extends Vue {
     this.updateUnikSupply();
     this.updateHeight();
     this.updateDelegates();
+    this.checkForMagistrateEnabled();
   }
 
   public mounted() {
@@ -162,12 +160,17 @@ export default class App extends Vue {
     const fetchedAt: number = parseInt(localStorage.getItem("delegatesFetchedAt") || "0", 10);
 
     if (!this.stateHasDelegates || !fetchedAt || this.updateRequired(fetchedAt)) {
-      const delegates = await DelegateService.all();
+      const delegates = await DelegateService.fetchEveryDelegate();
       this.$store.dispatch("delegates/setDelegates", {
         delegates,
         timestamp: Math.floor(Date.now() / 1000),
       });
     }
+  }
+
+  public async checkForMagistrateEnabled() {
+    const hasMagistrateEnabled = await BusinessService.isEnabled();
+    this.$store.dispatch("network/setHasMagistrateEnabled", hasMagistrateEnabled);
   }
 
   public updateRequired(timestamp: number): boolean {
@@ -209,6 +212,6 @@ export default class App extends Vue {
 
 <style scoped>
 .blur {
-  filter: blur(4px)
+  filter: blur(4px);
 }
 </style>

@@ -1,5 +1,5 @@
 import ApiService from "@/services/api";
-import { IApiBlockWrapper, IApiBlocksWrapper, IBlock } from "../interfaces";
+import { IApiBlockWrapper, IApiBlocksWrapper, IBlock, IBlockSearchParams } from "../interfaces";
 
 class BlockService {
   public async latest(limit: number = 25): Promise<IBlock[]> {
@@ -68,6 +68,17 @@ class BlockService {
     })) as IApiBlocksWrapper;
 
     return response.data![0];
+  }
+
+  public async search(body: IBlockSearchParams, page: number = 1, limit: number = 25): Promise<IApiBlocksWrapper> {
+    const response = (await ApiService.post("blocks/search", body, {
+      params: {
+        page,
+        limit,
+      },
+    })) as IApiBlocksWrapper;
+
+    return response;
   }
 }
 

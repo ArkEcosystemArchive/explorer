@@ -4,11 +4,7 @@
     <ContentHeader>{{ $t("PAGES.BUSINESSES.TITLE") }}</ContentHeader>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <TableBusinessesDesktop
-          :businesses="businesses"
-          :sort-query="sortParams"
-          @on-sort-change="onSortChange"
-        />
+        <TableBusinessesDesktop :businesses="businesses" :sort-query="sortParams" @on-sort-change="onSortChange" />
       </div>
       <div class="sm:hidden">
         <TableBusinessesMobile :businesses="businesses" />

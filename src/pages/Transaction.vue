@@ -44,10 +44,7 @@
 
       <TransactionDetails :transaction="transaction" ref="transactionDetails" />
 
-      <section
-        v-if="isMultiPayment(transaction.type, transaction.typeGroup)"
-        class="page-section py-5 md:py-10"
-      >
+      <section v-if="isMultiPayment(transaction.type, transaction.typeGroup)" class="page-section py-5 md:py-10">
         <MultiPaymentTransactions :transaction="transaction" :page="currentPage" />
         <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
       </section>
@@ -88,7 +85,7 @@ export default class TransactionPage extends Vue {
   private networkSymbol: string;
 
   get showPagination() {
-    return this.meta && this.meta.pageCount >= 1;
+    return this.meta && this.meta.pageCount > 1;
   }
 
   public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
@@ -153,8 +150,8 @@ export default class TransactionPage extends Vue {
       this.currentPage = page;
       this.meta.count = page;
       this.meta.self = page.toString();
-      this.meta.next = (page + 1).toString();
-      this.meta.previous = (page - 1).toString();
+      this.meta.next = page < this.meta.pageCount ? (page + 1).toString() : null;
+      this.meta.previous = page > 1 ? (page - 1).toString() : null;
 
       // @ts-ignore
       this.$refs.transactionDetails.$el.scrollIntoView(false);
@@ -167,11 +164,11 @@ export default class TransactionPage extends Vue {
       const transactions = this.transaction.asset.payments.length;
       const pages = Math.ceil(transactions / 25);
       this.meta = {
-        count: 1,
+        count: transactions >= 25 ? 25 : transactions,
         pageCount: pages,
         totalCount: transactions,
-        next: pages ? "2" : null,
-        previous: "0",
+        next: pages > 1 ? "2" : null,
+        previous: null,
         self: "1",
         first: "1",
         last: pages.toString(),

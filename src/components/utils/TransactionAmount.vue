@@ -46,12 +46,14 @@ export default class TransactionAmount extends Vue {
 
   get address() {
     return this.$route.params.address || this.transaction.sender !== this.$route.params.address
-        ? this.$route.params.address
-        : undefined;
+      ? this.$route.params.address
+      : undefined;
   }
 
   get showAmountInformation() {
-    return !this.isFee && this.transactionTab === "all" && this.address && this.amountToSelf && !this.amountToSelf.isZero()
+    return (
+      !this.isFee && this.transactionTab === "all" && this.address && this.amountToSelf && !this.amountToSelf.isZero()
+    );
   }
 
   get source() {
@@ -70,7 +72,11 @@ export default class TransactionAmount extends Vue {
 
   get amountToSelf() {
     // @ts-ignore
-    if (this.isMultiPayment(this.transaction.type, this.transaction.typeGroup)) {
+    if (
+      this.transaction.sender === this.address &&
+      // @ts-ignore
+      this.isMultiPayment(this.transaction.type, this.transaction.typeGroup)
+    ) {
       // @ts-ignore
       return this.calculateMultipaymentAmount(this.transaction, this.address, "received");
     }

@@ -28,7 +28,7 @@ export default class DisclaimerModal extends Vue {
   private showModal = false;
 
   public mounted() {
-    this.$store.getters["ui/hasAcceptedLinkDisclaimer"] ? this.showModal = false : this.showModal = true;
+    this.$store.getters["ui/hasAcceptedLinkDisclaimer"] ? (this.showModal = false) : (this.showModal = true);
   }
 
   private acceptTerms() {

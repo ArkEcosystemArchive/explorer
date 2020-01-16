@@ -80,17 +80,12 @@
           <div>{{ transaction.nonce }}</div>
         </div>
 
-        <div
-          v-if="isIpfs(transaction.type, transaction.typeGroup)"
-          class="list-row-border-b"
-        >
+        <div v-if="isIpfs(transaction.type, transaction.typeGroup)" class="list-row-border-b">
           <div class="mr-4">{{ $t("TRANSACTION.IPFS") }}</div>
           <div class="overflow-hidden break-all">{{ transaction.asset.ipfs }}</div>
         </div>
 
-        <div
-          v-if="isTimelock(transaction.type, transaction.typeGroup)"
-        >
+        <div v-if="isTimelock(transaction.type, transaction.typeGroup)">
           <div v-if="transaction.asset.lock.expiration.type === 1" class="list-row-border-b">
             <div class="mr-4">{{ $t("TRANSACTION.TIMELOCK.EXPIRATION") }}</div>
             <div>{{ readableTimestampFromEpoch(transaction.asset.lock.expiration.value) }}</div>
@@ -117,24 +112,14 @@
           </div>
         </div>
 
-        <div
-          v-if="
-            isTimelockClaim(transaction.type, transaction.typeGroup)
-          "
-          class="list-row-border-b"
-        >
+        <div v-if="isTimelockClaim(transaction.type, transaction.typeGroup)" class="list-row-border-b">
           <div class="mr-4">{{ $t("TRANSACTION.TIMELOCK.CLAIMED") }}</div>
           <div class="overflow-hidden break-all">
             <LinkTransaction :id="transaction.asset.claim.lockTransactionId" />
           </div>
         </div>
 
-        <div
-          v-if="
-            isTimelockRefund(transaction.type, transaction.typeGroup)
-          "
-          class="list-row-border-b"
-        >
+        <div v-if="isTimelockRefund(transaction.type, transaction.typeGroup)" class="list-row-border-b">
           <div class="mr-4">{{ $t("TRANSACTION.TIMELOCK.REFUNDED") }}</div>
           <div class="overflow-hidden break-all">
             <LinkTransaction :id="transaction.asset.refund.lockTransactionId" />
@@ -150,10 +135,7 @@
       </div>
     </section>
 
-    <section
-      v-if="isMultiSignature(transaction.type, transaction.typeGroup)"
-      class="page-section py-5 md:py-10 mb-5"
-    >
+    <section v-if="isMultiSignature(transaction.type, transaction.typeGroup)" class="page-section py-5 md:py-10 mb-5">
       <div class="px-5 sm:px-10">
         <div class="list-row-border-b">
           <div class="mr-4">{{ $t("TRANSACTION.MULTI_SIGNATURE.ADDRESS") }}</div>

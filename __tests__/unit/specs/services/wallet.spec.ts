@@ -43,4 +43,33 @@ describe("Services > Wallet", () => {
     });
     expect(data.sort((a, b) => a.balance > b.balance)).toEqual(data);
   });
+
+  it("should return all wallets that vote for '020431436cf94f3c6a6ba566fe9e42678db8486590c732ca6c3803a10a86f50b92'", async () => {
+    const { data } = await WalletService.search({
+      vote: "020431436cf94f3c6a6ba566fe9e42678db8486590c732ca6c3803a10a86f50b92",
+    });
+    expect(data).toHaveLength(25);
+    data.forEach(wallet => {
+      expect(wallet.vote).toBe("020431436cf94f3c6a6ba566fe9e42678db8486590c732ca6c3803a10a86f50b92");
+      expect(Object.keys(wallet).sort()).toEqual(expect.arrayContaining(walletPropertyArray));
+    });
+  });
+
+  it("should return all wallets that have a balance greater than 100,000", async () => {
+    const minBalance = 100000 * 1e8;
+    const { data } = await WalletService.search({ balance: { from: minBalance } });
+    expect(data).toHaveLength(25);
+    data.forEach(wallet => {
+      expect(parseInt(wallet.balance)).toBeGreaterThanOrEqual(minBalance);
+      expect(Object.keys(wallet).sort()).toEqual(expect.arrayContaining(walletPropertyArray));
+    });
+  });
+
+  it("should return the latest wallets when no arguments are passed", async () => {
+    const { data } = await WalletService.search();
+    expect(data).toHaveLength(25);
+    data.forEach(wallet => {
+      expect(Object.keys(wallet).sort()).toEqual(expect.arrayContaining(walletPropertyArray));
+    });
+  });
 });

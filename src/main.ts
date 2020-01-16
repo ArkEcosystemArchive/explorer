@@ -16,7 +16,7 @@ import mixins from "./mixins";
 import VTooltip from "v-tooltip";
 // @ts-ignore
 import VueGoodTablePlugin from "vue-good-table";
-import PortalVue from "portal-vue"
+import PortalVue from "portal-vue";
 import i18n from "./i18n";
 
 import VueMatomo from "vue-matomo"
@@ -35,7 +35,7 @@ Vue.use(VTooltip, {
   defaultContainer: "main",
 });
 Vue.use(VueGoodTablePlugin);
-Vue.use(PortalVue)
+Vue.use(PortalVue);
 
 if(process.env.VUE_APP_EXPLORER_CONFIG === "sandbox" || process.env.VUE_APP_EXPLORER_CONFIG === "livenet") {
   setupMatomoConfig();
