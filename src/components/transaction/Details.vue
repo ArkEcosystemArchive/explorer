@@ -86,9 +86,9 @@
         </div>
 
         <div v-if="isTimelock(transaction.type, transaction.typeGroup)">
-          <div class="list-row-border-b">
-            <div class="mr-4">{{ $t("TRANSACTION.TIMELOCK.SECRET_HASH") }}</div>
-            <div>{{ transaction.asset.lock.secretHash }}</div>
+          <div class="list-row-border-b-no-wrap">
+            <div class="mr-4 whitespace-no-wrap">{{ $t("TRANSACTION.TIMELOCK.SECRET_HASH") }}</div>
+            <div class="overflow-hidden break-all">{{ transaction.asset.lock.secretHash }}</div>
           </div>
 
           <div v-if="transaction.asset.lock.expiration.type === 1" class="list-row-border-b">
@@ -118,9 +118,9 @@
         </div>
 
         <div v-if="isTimelockClaim(transaction.type, transaction.typeGroup)">
-          <div class="list-row-border-b">
-            <div class="mr-4">{{ $t("TRANSACTION.TIMELOCK.UNLOCK_SECRET") }}</div>
-            <div>{{ transaction.asset.claim.unlockSecret }}</div>
+          <div class="list-row-border-b-no-wrap">
+            <div class="mr-4 whitespace-no-wrap">{{ $t("TRANSACTION.TIMELOCK.UNLOCK_SECRET_HEX") }}</div>
+            <div class="overflow-hidden break-all">{{ transaction.asset.claim.unlockSecret }}</div>
           </div>
 
           <div class="list-row-border-b">

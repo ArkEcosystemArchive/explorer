@@ -81,7 +81,7 @@ export default {
       SECRET_HASH: "Secret Hash",
       STATUS: "Timelock status",
       UNKNOWN: "Unknown",
-      UNLOCK_SECRET: "Unlock Secret",
+      UNLOCK_SECRET_HEX: "Unlock Secret (hex)",
     },
     TYPE: "Transaction type",
     TYPES: {
