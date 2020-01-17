@@ -59,5 +59,9 @@ export default {
 
       return addressFromPublicKey(secp256k1.publicKeyCombine(keys, true).toString("hex"));
     },
+
+    stringToHex(text: string): string {
+      return Buffer.from(text).toString("hex");
+    }
   },
 };

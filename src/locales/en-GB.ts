@@ -78,7 +78,7 @@ export default {
       EXPIRATION: "Expiration",
       OPEN: "Open lock",
       REFUNDED: "Refunded transaction",
-      SECRET_HASH: "Secret Hash",
+      SECRET_HASH_HEX: "Secret Hash (hex)",
       STATUS: "Timelock status",
       UNKNOWN: "Unknown",
       UNLOCK_SECRET_HEX: "Unlock Secret (hex)",
