@@ -78,8 +78,10 @@ export default {
       EXPIRATION: "Expiration",
       OPEN: "Open lock",
       REFUNDED: "Refunded transaction",
+      SECRET_HASH: "Secret Hash",
       STATUS: "Timelock status",
       UNKNOWN: "Unknown",
+      UNLOCK_SECRET: "Unlock Secret",
     },
     TYPE: "Transaction type",
     TYPES: {
