@@ -1,6 +1,6 @@
 <template>
-  <span class="block md:inline-block">
-    <template v-if="isTransfer(type, typeGroup)">
+  <span class="flex items-center">
+    <template v-if="isTransfer(type, typeGroup) || isTimelock(type, typeGroup)">
       <RouterLink v-if="isKnown" :to="{ name: 'wallet', params: { address: walletAddress } }" class="flex items-center">
         <span
           v-tooltip="{
@@ -37,6 +37,17 @@
           <span class="md:hidden">{{ truncate(address) }}</span>
         </span>
       </RouterLink>
+      <div v-if="isTimelock(type, typeGroup) && showTimelockIcon">
+        <SvgIcon
+          v-tooltip="{
+            content: $t('WALLET.TIMELOCK_TRANSACTION'),
+            placement: tooltipPlacement,
+          }"
+          class="ml-1"
+          name="became-active"
+          view-box="0 0 14 15"
+        />
+      </div>
     </template>
 
     <span v-else-if="isSecondSignature(type, typeGroup)">{{ $t("TRANSACTION.TYPES.SECOND_SIGNATURE") }}</span>
@@ -62,10 +73,8 @@
       >{{ $t("TRANSACTION.TYPES.MULTI_PAYMENT") }} ({{ multiPaymentRecipientsCount }})</span
     >
     <span v-else-if="isDelegateResignation(type, typeGroup)">{{ $t("TRANSACTION.TYPES.DELEGATE_RESIGNATION") }}</span>
-    <span v-else-if="isTimelock(type, typeGroup)">{{ $t("TRANSACTION.TYPES.TIMELOCK") }}</span>
     <span v-else-if="isTimelockClaim(type, typeGroup)">{{ $t("TRANSACTION.TYPES.TIMELOCK_CLAIM") }}</span>
     <span v-else-if="isTimelockRefund(type, typeGroup)">{{ $t("TRANSACTION.TYPES.TIMELOCK_REFUND") }}</span>
-
     <span v-else-if="isBusinessRegistration(type, typeGroup)">{{ $t("TRANSACTION.TYPES.BUSINESS_REGISTRATION") }}</span>
     <span v-else-if="isBusinessResignation(type, typeGroup)">{{ $t("TRANSACTION.TYPES.BUSINESS_RESIGNATION") }}</span>
     <span v-else-if="isBusinessUpdate(type, typeGroup)">{{ $t("TRANSACTION.TYPES.BUSINESS_UPDATE") }}</span>
@@ -98,6 +107,7 @@ export default class LinkWallet extends Vue {
   @Prop({ required: false, default: 1 }) public typeGroup: number;
   @Prop({ required: false, default: true }) public trunc: boolean;
   @Prop({ required: false, default: "top" }) public tooltipPlacement: string;
+  @Prop({ required: false, default: false }) public showTimelockIcon: boolean;
 
   private delegate: IDelegate | null | undefined = null;
   private votedDelegate: IDelegate | null | undefined = null;
