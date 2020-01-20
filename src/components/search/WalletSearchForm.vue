@@ -22,11 +22,10 @@
       </div>
 
       <div class="flex w-full lg:w-auto">
-        <div class="w-1/2">
+        <div class="w-1/2 mr-3">
           <InputNumber
             @input="onInputChange"
             @keyup.enter.native="onEnterKey"
-            class="mr-3"
             :label="$t('PAGES.ADVANCED_SEARCH.WALLET.BALANCE_FROM')"
             name="balance-from"
             min="0"

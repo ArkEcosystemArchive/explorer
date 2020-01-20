@@ -4,13 +4,12 @@
 
     <div class="flex flex-wrap justify-between">
       <div class="flex w-full lg:w-1/3 mb-4 lg:mb-0">
-        <div class="w-1/2">
+        <div class="w-1/2 mr-3">
           <InputNumber
             @input="onInputChange"
             @keyup.enter.native="onEnterKey"
             :label="$t('PAGES.ADVANCED_SEARCH.BLOCK.TOTAL_AMOUNT_FROM')"
             name="totalAmount-from"
-            class="mr-3"
           />
         </div>
         <div class="w-1/2">
@@ -24,13 +23,12 @@
       </div>
 
       <div class="flex w-full lg:w-1/3 mb-4 lg:mb-0">
-        <div class="w-1/2">
+        <div class="w-1/2 mr-3">
           <InputNumber
             @input="onInputChange"
             @keyup.enter.native="onEnterKey"
             :label="$t('PAGES.ADVANCED_SEARCH.BLOCK.TOTAL_FEE_FROM')"
             name="totalFee-from"
-            class="mr-3"
           />
         </div>
         <div class="w-1/2">
@@ -44,11 +42,10 @@
       </div>
 
       <div class="flex w-full lg:w-auto mb-4 lg:mb-0">
-        <div class="w-1/2">
+        <div class="w-1/2 mr-3">
           <InputDate
             @input="onInputChange"
             @keyup.enter.native="onEnterKey"
-            class="mr-3"
             :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_FROM')"
             name="timestamp-from"
           />

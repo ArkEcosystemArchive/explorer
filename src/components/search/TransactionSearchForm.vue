@@ -15,11 +15,10 @@
       </div>
 
       <div class="flex w-full lg:w-56 mb-4 lg:mb-0">
-        <div class="w-1/2">
+        <div class="w-1/2 mr-3">
           <InputNumber
             @input="onInputChange"
             @keyup.enter.native="onEnterKey"
-            class="mr-3"
             :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.AMOUNT_FROM')"
             name="amount-from"
             min="0"
@@ -37,11 +36,10 @@
       </div>
 
       <div class="flex w-full lg:w-56 mb-4 lg:mb-0">
-        <div class="w-1/2">
+        <div class="w-1/2 mr-3">
           <InputNumber
             @input="onInputChange"
             @keyup.enter.native="onEnterKey"
-            class="mr-3"
             :label="$t('PAGES.ADVANCED_SEARCH.TRANSACTION.FEE_FROM')"
             name="fee-from"
           />
@@ -57,11 +55,10 @@
       </div>
 
       <div class="flex w-full lg:w-auto mb-4 lg:mb-0">
-        <div class="w-1/2">
+        <div class="w-1/2 mr-3">
           <InputDate
             @input="onInputChange"
             @keyup.enter.native="onEnterKey"
-            class="mr-3"
             :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_FROM')"
             name="timestamp-from"
           />
