@@ -12,8 +12,7 @@ describe("Delegates", () => {
           .as("username")
           .should("exist");
         cy.get("@username")
-          .invoke("text")
-          .should("include", "Username");
+          .should("contain.text", "Username");
 
         cy.get("@username").should("not.have.class", "sorting-asc");
         cy.get("@username").should("not.have.class", "sorting-desc");

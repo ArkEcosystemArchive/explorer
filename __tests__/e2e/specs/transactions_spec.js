@@ -13,8 +13,7 @@ describe("Transactions", () => {
       .as("id")
       .should("exist");
     cy.get("@id")
-      .invoke("text")
-      .should("include", "ID");
+      .should("contain.text", "ID");
 
     cy.get("@id").should("not.have.class", "sorting-asc");
     cy.get("@id").should("not.have.class", "sorting-desc");
@@ -136,8 +135,7 @@ describe("Transactions", () => {
         .click();
       cy.get("span")
         .last()
-        .invoke("text")
-        .should("include", "Vote");
+        .should("contain.text", "Vote");
     });
   });
 });
