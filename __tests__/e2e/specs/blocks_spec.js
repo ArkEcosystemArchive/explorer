@@ -13,8 +13,7 @@ describe("Blocks", () => {
       .as("id")
       .should("exist");
     cy.get("@id")
-      .invoke("text")
-      .should("include", "ID");
+      .should("contain.text", "ID");
 
     cy.get("@id").should("not.have.class", "sorting-asc");
     cy.get("@id").should("not.have.class", "sorting-desc");

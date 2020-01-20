@@ -13,8 +13,7 @@ describe("Top Wallets", () => {
       .as("address")
       .should("exist");
     cy.get("@address")
-      .invoke("text")
-      .should("include", "Address");
+      .should("contain.text", "Address");
 
     cy.get("@address").should("not.have.class", "sorting-asc");
     cy.get("@address").should("not.have.class", "sorting-desc");

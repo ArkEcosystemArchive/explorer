@@ -27,8 +27,7 @@ describe("Bridgechains", () => {
           .as("creator")
           .should("exist");
         cy.get("@creator")
-          .invoke("text")
-          .should("include", "Creator");
+          .should("contain.text", "Creator");
 
         cy.get("@creator").should("not.have.class", "sorting-asc");
         cy.get("@creator").should("not.have.class", "sorting-desc");
