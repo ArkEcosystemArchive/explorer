@@ -204,20 +204,17 @@ describe("Components > Links > Wallet", () => {
     it("should display Timelock recipient for type 8", () => {
       wrapper = mountComponent({
         propsData: {
-          address: 'AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv',
+          address: testAddress,
           type: 8
         },
       });
 
-      // Delegate name is set after function call in mounted(), so we need to wait a little while
       expect(wrapper.contains("a")).toBe(true);
       expect(wrapper.findAll("a")).toHaveLength(1);
-      setTimeout(() => {
-        expect(wrapper.text()).not.toEqual(expect.stringContaining(testDelegateAddress));
-        expect(wrapper.text()).not.toEqual(expect.stringContaining(wrapper.vm.truncate(testDelegateAddress)));
-        expect(wrapper.text()).toEqual(expect.stringContaining("TestDelegate"));
-        done();
-      }, 500);
+      expect(wrapper.findAll("svg")).toHaveLength(1);
+      expect(wrapper.text()).not.toEqual(expect.stringContaining(testAddress));
+      expect(wrapper.text()).not.toEqual(expect.stringContaining(wrapper.vm.truncate(testAddress)));
+      expect(wrapper.text()).toEqual(expect.stringContaining("TestKnownWallet"));
     });
 
     it("should display Timelock Claim for type 9", () => {
