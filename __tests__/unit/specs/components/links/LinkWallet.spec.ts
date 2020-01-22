@@ -183,7 +183,7 @@ describe("Components > Links > Wallet", () => {
       expect(wrapper.text()).toEqual(expect.stringContaining("IPFS"));
     });
 
-    it("should display Timelock Transfer for type 6", () => {
+    it("should display Multipayment for type 6", () => {
       wrapper = mountComponent({
         propsData: { type: 6 },
       });
@@ -192,7 +192,7 @@ describe("Components > Links > Wallet", () => {
       expect(wrapper.text()).toEqual(expect.stringContaining("Multipayment"));
     });
 
-    it("should display Multi Payment for type 7", () => {
+    it("should display Delegate Resignation for type 7", () => {
       wrapper = mountComponent({
         propsData: { type: 7 },
       });
@@ -201,16 +201,26 @@ describe("Components > Links > Wallet", () => {
       expect(wrapper.text()).toEqual(expect.stringContaining("Delegate Resignation"));
     });
 
-    it("should display Delegate Resignation for type 8", () => {
+    it("should display Timelock recipient for type 8", () => {
       wrapper = mountComponent({
-        propsData: { type: 8 },
+        propsData: {
+          address: 'AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv',
+          type: 8
+        },
       });
 
-      expect(wrapper.contains("a")).toBe(false);
-      expect(wrapper.text()).toEqual(expect.stringContaining("Timelock"));
+      // Delegate name is set after function call in mounted(), so we need to wait a little while
+      expect(wrapper.contains("a")).toBe(true);
+      expect(wrapper.findAll("a")).toHaveLength(1);
+      setTimeout(() => {
+        expect(wrapper.text()).not.toEqual(expect.stringContaining(testDelegateAddress));
+        expect(wrapper.text()).not.toEqual(expect.stringContaining(wrapper.vm.truncate(testDelegateAddress)));
+        expect(wrapper.text()).toEqual(expect.stringContaining("TestDelegate"));
+        done();
+      }, 500);
     });
 
-    it("should display Timeelock Claim for type 9", () => {
+    it("should display Timelock Claim for type 9", () => {
       const wrapper = mount(LinkWallet, {
         propsData: { type: 9 },
         stubs: {
@@ -226,7 +236,7 @@ describe("Components > Links > Wallet", () => {
       expect(wrapper.text()).toEqual(expect.stringContaining("Timelock Claim"));
     });
 
-    it("should display Timeelock Refund for type 10", () => {
+    it("should display Timelock Refund for type 10", () => {
       const wrapper = mount(LinkWallet, {
         propsData: { type: 10 },
         stubs: {
