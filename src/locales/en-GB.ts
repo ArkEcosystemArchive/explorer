@@ -155,6 +155,7 @@ export default {
       VOTERS: "Voters",
       VOTER_THRESHOLD: "Only voters with more than 0.1 {token}",
     },
+    TIMELOCK_TRANSACTION: "Timelock transaction",
   },
 
   SEARCH: {
