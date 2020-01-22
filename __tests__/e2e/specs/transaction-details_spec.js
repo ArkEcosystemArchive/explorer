@@ -35,6 +35,14 @@ describe("Transaction Details", () => {
       .and("include.text", "Wallet summary");
   });
 
+  xit("should be possible to see the transaction type", () => {
+    // This tests does not work for mainnet yet because of the missing typeGroup property
+    cy.get(".page-section")
+      .find(".list-row-border-b")
+      .eq(2)
+      .should('include.text', 'Transfer');
+  });
+
   it("should be possible to click on the block id", () => {
     cy.get(".page-section")
       .find(".list-row")
@@ -57,7 +65,7 @@ describe("Transaction Details", () => {
   it("should refresh the confirmation count automatically", () => {
     cy.get(".page-section")
       .find(".list-row-border-b")
-      .eq(2)
+      .eq(3)
       .find("div")
       .should("have.length", 2)
       .last()

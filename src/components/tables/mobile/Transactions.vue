@@ -34,6 +34,7 @@
             :type="transaction.type"
             :asset="transaction.asset"
             :type-group="transaction.typeGroup"
+            :show-timelock-icon="true"
           />
         </div>
 
