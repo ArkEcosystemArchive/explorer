@@ -130,7 +130,7 @@ export default class LinkWallet extends Vue {
     return this.votedDelegate ? this.votedDelegate.username : "";
   }
 
-  get multiPaymentRecipientsCount() {
+  get multiPaymentRecipientsCount(): number {
     if (this.asset && this.asset.payments) {
       return this.asset.payments.length;
     }

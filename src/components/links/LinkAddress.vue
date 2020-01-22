@@ -88,6 +88,10 @@ export default class LinkAddress extends Vue {
     this.determine();
   }
 
+  public mounted(): void {
+    this.determine();
+  }
+
   private determine(): void {
     this.address ? this.findByAddress() : this.findByPublicKey();
   }
@@ -100,7 +104,7 @@ export default class LinkAddress extends Vue {
     this.delegate = this.delegates.find(d => d.publicKey === this.publicKey);
   }
 
-  private getAddress(): string | false {
+  private getAddress(): string | boolean {
     const knownOrDelegate = this.isKnown || this.delegate;
     const truncated = !this.hasDefaultSlot && this.trunc;
 
