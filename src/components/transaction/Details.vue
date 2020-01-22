@@ -12,13 +12,14 @@
         <div class="list-row-border-b">
           <div class="mr-4">{{ $t("TRANSACTION.RECIPIENT") }}</div>
           <div class="truncate">
-            <LinkWallet :address="transaction.sender" :trunc="false" tooltip-placement="left" />
+            <LinkWallet :address="transaction.recipient" :trunc="false" tooltip-placement="left" />
           </div>
         </div>
 
         <div class="list-row-border-b">
           <div class="mr-4">{{ $t("TRANSACTION.TYPE") }}</div>
-          <span v-if="isTimelock(transaction.type, transaction.typeGroup)">{{ $t("TRANSACTION.TYPES.TIMELOCK_CLAIM") }}</span>
+          <span v-if="isTransfer(transaction.type, transaction.typeGroup)">{{ $t("TRANSACTION.TYPES.TRANSFER") }}</span>
+          <span v-else-if="isTimelock(transaction.type, transaction.typeGroup)">{{ $t("TRANSACTION.TYPES.TIMELOCK_CLAIM") }}</span>
           <div v-else class="truncate">
             <LinkWallet
               :address="transaction.recipient"
