@@ -1,25 +1,36 @@
 module.exports = {
   root: true,
+
   parserOptions: {
-    parser: "babel-eslint",
+    parser: "@typescript-eslint/parser",
     sourceType: "module",
+    project: "./tsconfig.json",
   },
+
   env: {
     browser: true,
     node: true,
   },
-  extends: ["plugin:vue/recommended", "standard", "plugin:cypress/recommended"],
+
   globals: {
     GIT_DATE: true,
     GIT_VERSION: true,
   },
+
+  plugins: ["@typescript-eslint", "prettier"],
+
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:vue/recommended",
+    "plugin:prettier/recommended",
+  ],
+
   rules: {
-    // allow paren-less arrow functions
-    "arrow-parens": 0,
-    // allow async-await
-    "generator-star-spacing": 0,
-    // allow debugger during development
-    "no-debugger": process.env.NODE_ENV === "production" ? 2 : 0,
-    "vue/component-name-in-template-casing": ["warn", "PascalCase", {}],
+    indent: ["error", 2],
+    quotes: ["error", "double"],
   },
 };
