@@ -23,7 +23,7 @@ jobs:
 
       - name: Apply Cypress Workaround
         run: |
-         Xvfb :1 -screen 0 1280x800x24 &
+         Xvfb :1 -screen 0 1280x800x24 -nolisten unix &
          export DISPLAY=:1
 
       - name: Install
