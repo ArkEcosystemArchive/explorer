@@ -24,6 +24,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Apply Cypress Workaround
+        run: |
+         Xvfb :1 -screen 0 1280x800x24 &
+         export DISPLAY=:1
+
       - name: Install
         run: yarn install --frozen-lockfile
 
