@@ -62,14 +62,16 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { ITransactionType } from "@/interfaces";
-import { transactionTypes } from "@/constants";
 
 @Component
 export default class SelectionType extends Vue {
   @Prop({ required: false, default: false }) public inBanner: boolean;
-  private types: ITransactionType[] = transactionTypes;
   private transactionType: ITransactionType = { key: "ALL", type: -1 };
   private selectOpen: boolean = false;
+
+  get types() {
+    return this.$store.getters["network/enabledTransactionTypes"];
+  }
 
   get isOpen() {
     return this.selectOpen;

@@ -21,6 +21,8 @@
 import { Component, Vue } from "vue-property-decorator";
 import AppHeader from "@/components/header/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
+import { transactionTypes } from "@/constants";
+import { TypeGroupTransaction } from "@/enums";
 import {
   BlockchainService,
   BusinessService,
@@ -36,7 +38,7 @@ import moment from "moment";
   computed: {
     ...mapGetters("currency", { currencyName: "name" }),
     ...mapGetters("delegates", ["stateHasDelegates"]),
-    ...mapGetters("network", ["token"]),
+    ...mapGetters("network", ["hasMagistrateEnabled", "token"]),
     ...mapGetters("ui", ["language", "locale", "nightMode"]),
   },
   components: { AppHeader, AppFooter },
@@ -47,6 +49,7 @@ export default class App extends Vue {
   private currencyName: string;
   private stateHasDelegates: boolean;
   private token: string;
+  private hasMagistrateEnabled: boolean;
   private language: string;
   private locale: string;
   private nightMode: boolean;
@@ -109,7 +112,9 @@ export default class App extends Vue {
     this.updateSupply();
     this.updateHeight();
     this.updateDelegates();
-    this.checkForMagistrateEnabled();
+
+    await this.checkForMagistrateEnabled();
+    this.setEnabledTransactionTypes();
   }
 
   public mounted() {
@@ -164,6 +169,16 @@ export default class App extends Vue {
   public async checkForMagistrateEnabled() {
     const hasMagistrateEnabled = await BusinessService.isEnabled();
     this.$store.dispatch("network/setHasMagistrateEnabled", hasMagistrateEnabled);
+  }
+
+  public setEnabledTransactionTypes() {
+    let types = transactionTypes;
+
+    if (!this.hasMagistrateEnabled) {
+      types = types.filter(type => type.typeGroup !== TypeGroupTransaction.MAGISTRATE);
+    }
+
+    this.$store.dispatch("network/setEnabledTransactionTypes", types);
   }
 
   public updateRequired(timestamp: number): boolean {
