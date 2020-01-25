@@ -4,9 +4,10 @@ import NetworkMixin from "@/mixins/network";
 import TotalForged from "@/components/monitor/header/TotalForged";
 import { useI18n } from "../../../__utils__/i18n";
 import Vuex from "vuex";
+import { BigNumber } from "@/utils";
 
-const getTotalForged = (height, offset) => {
-  return height > offset ? (height - offset) * 2 : 0;
+const getTotalForged = (supply, initialSupply) => {
+  return BigNumber.make(supply).minus(initialSupply).dividedBy(1e8).toString();
 };
 
 describe("Components > Monitor > TotalForged", () => {
@@ -20,8 +21,8 @@ describe("Components > Monitor > TotalForged", () => {
     const i18n = useI18n(localVue);
 
     const networkState = {
-      height: 13515,
-      rewardOffset: 6413,
+      supply: "1500",
+      initialSupply: "1000",
     };
 
     store = new Vuex.Store({
@@ -30,18 +31,18 @@ describe("Components > Monitor > TotalForged", () => {
           namespaced: true,
           state: networkState,
           getters: {
-            height: () => networkState.height,
-            rewardOffset: () => networkState.rewardOffset,
+            supply: () => networkState.supply,
+            initialSupply: () => networkState.initialSupply,
           },
           mutations: {
-            setHeight(state, payload) {
-              state.height = payload.value;
+            setSupply(state, payload) {
+              state.supply = payload.value;
             },
           },
           actions: {
-            setHeight: ({ commit }, value) => {
+            setSupply: ({ commit }, value) => {
               commit({
-                type: "setHeight",
+                type: "setSupply",
                 value,
               });
             },
@@ -64,23 +65,23 @@ describe("Components > Monitor > TotalForged", () => {
 
     wrapper.vm.$nextTick(() => {
       expect(wrapper.find("div > div.text-lg").text()).toBe(
-        getTotalForged(store.getters["network/height"], store.getters["network/rewardOffset"]).toLocaleString(),
+        getTotalForged(store.getters["network/supply"], store.getters["network/initialSupply"]),
       );
       done();
     });
   });
 
-  it("should change calculated result when height changes", done => {
+  it("should change calculated result when supply changes", done => {
     expect.assertions(2);
 
     wrapper.vm.$nextTick(() => {
       const textBeforeChange = wrapper.find("div > div.text-lg").text();
-      store.dispatch("network/setHeight", 13518);
+      store.dispatch("network/setSupply", "2000");
 
       wrapper.vm.$nextTick(() => {
         const textAfterChange = wrapper.find("div > div.text-lg").text();
         expect(textAfterChange).toBe(
-          getTotalForged(store.getters["network/height"], store.getters["network/rewardOffset"]).toLocaleString(),
+          getTotalForged(store.getters["network/supply"], store.getters["network/initialSupply"]),
         );
         expect(textBeforeChange).not.toBe(textAfterChange);
 
