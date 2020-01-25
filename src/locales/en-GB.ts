@@ -138,6 +138,11 @@ export default {
     SUMMARY: "Wallet summary",
     QR_CODE: "QR Code",
     SCAN_FOR_ADDRESS: "Scan for address",
+    SCAN_FOR_URI: "Scan for URI",
+    ADVANCED_QR: {
+      EXPAND: "Show options",
+      COLLAPSE: "Hide options",
+    },
     DELEGATE: {
       FORGED_BLOCKS: "Forged blocks",
       TOTAL_FORGED: "Total forged",

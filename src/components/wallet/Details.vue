@@ -191,14 +191,35 @@
 
     <!-- Modal -->
     <Modal v-if="showModal" @close="toggleModal()">
-      <div class="text-center px-10 py-2">
+      <div :class="{ 'max-w-sm': !isCollapsed }" class="text-center px-10 py-2" >
         <p class="semibold text-3xl mb-4">
           {{ $t("WALLET.QR_CODE") }}
         </p>
-        <p class="mb-10">
-          {{ $t("WALLET.SCAN_FOR_ADDRESS") }}
+        <p class="mb-8">
+          {{ $t(`WALLET.SCAN_FOR_${isCollapsed ? "ADDRESS" : "URI"}`) }}
         </p>
-        <QrCode :value="wallet.address" :options="{ size: 160 }" />
+
+        <div class="flex justify-between items-center">
+          <QrCode class="rounded" :value="qrValue" :options="{ size: 160 }" />
+          <div v-if="!isCollapsed">
+            <InputNumber
+              @input="onInputChange"
+              :label="$t('TRANSACTION.AMOUNT')"
+              name="amount"
+            />
+            <InputText
+              @input="onInputChange"
+              :label="$t('TRANSACTION.SMARTBRIDGE')"
+              name="vendorField"
+            />
+          </div>
+        </div>
+
+        <span v-if="!isCollapsed" class="block mt-4 whitespace-no-wrap overflow-x-auto rounded mx-auto bg-theme-feature-background px-4 py-2 text-white font-mono">{{ qrValue }}</span>
+
+        <button class="mt-8 mx-auto pager-button items-center" @click="isCollapsed = !isCollapsed">
+          {{ $t(`WALLET.ADVANCED_QR.${this.isCollapsed ? "EXPAND" : "COLLAPSE"}`) }}
+        </button>
       </div>
     </Modal>
   </section>
@@ -209,9 +230,13 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { IWallet } from "@/interfaces";
 import WalletVoters from "@/components/wallet/Voters.vue";
+import { InputText, InputNumber } from "@/components/search/input";
+import { URI_QRCODE_SCHEME_PREFIX } from "@/constants";
 
 @Component({
   components: {
+    InputNumber,
+    InputText,
     WalletVoters,
   },
   computed: {
@@ -224,6 +249,15 @@ export default class WalletDetails extends Vue {
   private view: string = "public";
   private showModal: boolean = false;
   private knownWallets: { [key: string]: string };
+  private amount: number = 0;
+  private vendorField: string = "";
+  private isCollapsed: boolean = true;
+
+  @Watch("isCollapsed")
+  public onStatusChanged() {
+    this.amount = undefined;
+    this.vendorField = undefined;
+  }
 
   get name() {
     return this.knownWallets[this.wallet.address];
@@ -243,6 +277,29 @@ export default class WalletDetails extends Vue {
 
   get hasLockedBalance() {
     return !!this.wallet.lockedBalance;
+  }
+
+  get qrValue() {
+    return this.isCollapsed ? this.wallet.address : `${URI_QRCODE_SCHEME_PREFIX}${this.wallet.address}${this.formattedParams}`;
+  }
+
+  get formattedParams() {
+    const params = [];
+
+    if (this.amount) {
+      params.push(`amount=${this.amount}`);
+    }
+
+    if (this.vendorField) {
+      params.push(`vendorField=${this.vendorField}`);
+    }
+
+    return params.length > 0 ? `?${params.join("&")}` : "";
+  }
+
+  private onInputChange(event: any) {
+    const { name, value } = event.target;
+    this[name] = value;
   }
 
   private setView(view: string) {
