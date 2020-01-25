@@ -16,7 +16,7 @@ const state: INetworkState = {
   symbol: null,
   currencies: [],
   knownWallets: [],
-  supply: 0,
+  supply: null,
   initialSupply: null,
   height: 0,
   epoch: null,

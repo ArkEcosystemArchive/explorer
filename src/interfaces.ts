@@ -206,7 +206,7 @@ export interface INetworkState {
   symbol: string | null;
   currencies: any[];
   knownWallets: any[];
-  supply: number;
+  supply: string;
   initialSupply: string;
   height: number;
   epoch: string | null;
