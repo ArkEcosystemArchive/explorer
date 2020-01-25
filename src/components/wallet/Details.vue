@@ -308,6 +308,10 @@ export default class WalletDetails extends Vue {
 
   private toggleModal() {
     this.showModal = !this.showModal;
+
+    if (!this.showModal) {
+      this.isCollapsed = true;
+    }
   }
 }
 </script>
