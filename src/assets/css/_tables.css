@@ -68,7 +68,7 @@
 
 .vgt-table thead tr {
   background-color: var(--color-theme-table-row-sticky);
-  @apply .text-theme-text-thead .text-xs;
+  @apply .text-theme-text-thead;
 }
 
 .vgt-table thead th {

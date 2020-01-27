@@ -43,7 +43,7 @@ export default class TableWalletsSearchDesktop extends Vue {
     },
   })
   public wallets: IWallet[] | null;
-  @Prop({ required: true }) public total: number;
+  @Prop({ required: true }) public total: string;
 
   private windowWidth: number = 0;
 

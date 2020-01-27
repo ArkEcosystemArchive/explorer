@@ -53,7 +53,7 @@
     "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^1.3.0",
+    "@fullhuman/postcss-purgecss": "^2.0.0",
     "@kazupon/vue-i18n-loader": "^0.5.0",
     "@types/bytebuffer": "^5.0.40",
     "@types/jest": "^24.0.23",
@@ -68,7 +68,7 @@
     "@vue/cli-service": "^4.1.1",
     "@vue/test-utils": "^1.0.0-beta.29",
     "babel-core": "7.0.0-bridge.0",
-    "cross-env": "^6.0.3",
+    "cross-env": "^7.0.0",
     "es6-promise": "^4.2.8",
     "es6-promise-promise": "^1.0.0",
     "jest-extended": "^0.11.2",
@@ -83,7 +83,7 @@
     "svgo": "^1.3.2",
     "svgo-loader": "^2.2.1",
     "tailwindcss": "^1.1.4",
-    "ts-jest": "^24.2.0",
+    "ts-jest": "^25.0.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.7.3",
     "vue-cli-plugin-i18n": "^0.6.0",
