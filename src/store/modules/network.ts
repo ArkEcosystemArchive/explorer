@@ -16,11 +16,13 @@ const state: INetworkState = {
   symbol: null,
   currencies: [],
   knownWallets: [],
-  supply: 0,
+  supply: null,
+  initialSupply: null,
   height: 0,
   epoch: null,
   blocktime: 0,
   hasMagistrateEnabled: false,
+  hasHtlcEnabled: false,
 };
 
 const actions: ActionTree<INetworkState, {}> = {
@@ -96,6 +98,14 @@ const actions: ActionTree<INetworkState, {}> = {
       value,
     });
   },
+  setInitialSupply: ({ commit }, value) => {
+    localStorage.setItem("initialSupply", value);
+
+    commit({
+      type: types.SET_NETWORK_INITIAL_SUPPLY,
+      value,
+    });
+  },
   setHeight: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_HEIGHT,
@@ -117,6 +127,12 @@ const actions: ActionTree<INetworkState, {}> = {
   setHasMagistrateEnabled: ({ commit }, value: boolean) => {
     commit({
       type: types.SET_NETWORK_HAS_MAGISTRATE_ENABLED,
+      value,
+    });
+  },
+  setHasHtlcEnabled: ({ commit }, value: boolean) => {
+    commit({
+      type: types.SET_NETWORK_HAS_HTLC_ENABLED,
       value,
     });
   },
@@ -159,6 +175,9 @@ const mutations: MutationTree<INetworkState> = {
   [types.SET_NETWORK_SUPPLY](state, payload: IStorePayload) {
     state.supply = payload.value;
   },
+  [types.SET_NETWORK_INITIAL_SUPPLY](state, payload: IStorePayload) {
+    state.initialSupply = payload.value;
+  },
   [types.SET_NETWORK_HEIGHT](state, payload: IStorePayload) {
     state.height = payload.value;
   },
@@ -170,6 +189,9 @@ const mutations: MutationTree<INetworkState> = {
   },
   [types.SET_NETWORK_HAS_MAGISTRATE_ENABLED](state, payload: IStorePayload) {
     state.hasMagistrateEnabled = payload.value;
+  },
+  [types.SET_NETWORK_HAS_HTLC_ENABLED](state, payload: IStorePayload) {
+    state.hasHtlcEnabled = payload.value;
   },
 };
 
@@ -186,10 +208,12 @@ const getters: GetterTree<INetworkState, {}> = {
   currencies: state => state.currencies,
   knownWallets: state => state.knownWallets,
   supply: state => state.supply,
+  initialSupply: state => state.initialSupply,
   height: state => state.height,
   epoch: state => state.epoch,
   blocktime: state => state.blocktime,
   hasMagistrateEnabled: state => state.hasMagistrateEnabled,
+  hasHtlcEnabled: state => state.hasHtlcEnabled,
 };
 
 export const network: Module<INetworkState, {}> = {
