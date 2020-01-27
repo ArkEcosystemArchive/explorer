@@ -212,6 +212,7 @@ export interface INetworkState {
   epoch: string | null;
   blocktime: number;
   hasMagistrateEnabled: boolean;
+  hasHtlcEnabled: boolean;
 }
 
 export interface IUiState {
