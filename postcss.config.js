@@ -28,9 +28,11 @@ module.exports = {
             "tooltip-arrow",
             "tr",
             "td",
+            "th",
             "v-spinner",
           ],
           whitelistPatterns: [/^tooltip-bg-/, /^vgt-/],
+          whitelistPatternsChildren: [/^vgt-/],
         })
       : "",
   ],
