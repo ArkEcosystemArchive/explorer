@@ -38,7 +38,7 @@ import moment from "moment";
   computed: {
     ...mapGetters("currency", { currencyName: "name" }),
     ...mapGetters("delegates", ["stateHasDelegates"]),
-    ...mapGetters("network", ["hasMagistrateEnabled", "token"]),
+    ...mapGetters("network", ["hasHtlcEnabled", "hasMagistrateEnabled", "token"]),
     ...mapGetters("ui", ["language", "locale", "nightMode"]),
   },
   components: { AppHeader, AppFooter },
@@ -49,6 +49,7 @@ export default class App extends Vue {
   private currencyName: string;
   private stateHasDelegates: boolean;
   private token: string;
+  private hasHtlcEnabled: boolean;
   private hasMagistrateEnabled: boolean;
   private language: string;
   private locale: string;
@@ -177,6 +178,10 @@ export default class App extends Vue {
 
     if (!this.hasMagistrateEnabled) {
       types = types.filter(type => type.typeGroup !== TypeGroupTransaction.MAGISTRATE);
+    }
+
+    if (!this.hasHtlcEnabled) {
+      types = types.filter(type => !type.key.startsWith("TIMELOCK"));
     }
 
     this.$store.dispatch("network/setEnabledTransactionTypes", types);
