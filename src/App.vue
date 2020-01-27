@@ -92,6 +92,7 @@ export default class App extends Vue {
     this.$store.dispatch("network/setNethash", response.nethash);
     this.$store.dispatch("network/setEpoch", response.constants.epoch);
     this.$store.dispatch("network/setBlocktime", response.constants.blocktime);
+    this.$store.dispatch("network/setHasHtlcEnabled", !!response.constants.htlcEnabled);
 
     this.$store.dispatch("ui/setLanguage", localStorage.getItem("language") || "en-GB");
 
