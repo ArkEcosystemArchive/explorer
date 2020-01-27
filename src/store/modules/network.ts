@@ -16,7 +16,8 @@ const state: INetworkState = {
   symbol: null,
   currencies: [],
   knownWallets: [],
-  supply: 0,
+  supply: null,
+  initialSupply: null,
   height: 0,
   epoch: null,
   blocktime: 0,
@@ -98,6 +99,14 @@ const actions: ActionTree<INetworkState, {}> = {
       value,
     });
   },
+  setInitialSupply: ({ commit }, value) => {
+    localStorage.setItem("initialSupply", value);
+
+    commit({
+      type: types.SET_NETWORK_INITIAL_SUPPLY,
+      value,
+    });
+  },
   setHeight: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_HEIGHT,
@@ -173,6 +182,9 @@ const mutations: MutationTree<INetworkState> = {
   [types.SET_NETWORK_SUPPLY](state, payload: IStorePayload) {
     state.supply = payload.value;
   },
+  [types.SET_NETWORK_INITIAL_SUPPLY](state, payload: IStorePayload) {
+    state.initialSupply = payload.value;
+  },
   [types.SET_NETWORK_HEIGHT](state, payload: IStorePayload) {
     state.height = payload.value;
   },
@@ -206,6 +218,7 @@ const getters: GetterTree<INetworkState, {}> = {
   currencies: state => state.currencies,
   knownWallets: state => state.knownWallets,
   supply: state => state.supply,
+  initialSupply: state => state.initialSupply,
   height: state => state.height,
   epoch: state => state.epoch,
   blocktime: state => state.blocktime,

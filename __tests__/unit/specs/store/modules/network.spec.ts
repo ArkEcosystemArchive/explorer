@@ -73,6 +73,12 @@ describe("Store > Network", () => {
     expect(store.getters["network/supply"]).toEqual("setSupply");
   });
 
+  it("should set the network initial supply", () => {
+    store.dispatch("network/setInitialSupply", "initialSupply");
+
+    expect(store.getters["network/initialSupply"]).toEqual("initialSupply");
+  });
+
   it("should set the network height", () => {
     store.dispatch("network/setHeight", "setHeight");
 
