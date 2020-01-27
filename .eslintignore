@@ -3,3 +3,4 @@
 /dist/
 /*.js
 /node_modules/**
+/__tests__/unit/coverage/

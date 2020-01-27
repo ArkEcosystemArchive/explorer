@@ -107,6 +107,7 @@ export default {
       BRIDGECHAIN_UPDATE: "Bridgechain Update",
       SENT: "Sent",
       RECEIVED: "Received",
+      UNKNOWN: "Unknown",
     },
     ASSET: {
       BRIDGECHAINID: "Bridgechain ID",

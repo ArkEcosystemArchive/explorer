@@ -167,6 +167,10 @@ export interface IApiNodeConfiguration {
   [key: string]: any;
 }
 
+export interface IApiNodeConfigurationCrypto {
+  [key: string]: any;
+}
+
 export interface IApiNodeStatus {
   synced: boolean;
   now: number;
@@ -202,11 +206,13 @@ export interface INetworkState {
   symbol: string | null;
   currencies: any[];
   knownWallets: any[];
-  supply: number;
+  supply: string;
+  initialSupply: string;
   height: number;
   epoch: string | null;
   blocktime: number;
   hasMagistrateEnabled: boolean;
+  hasHtlcEnabled: boolean;
 }
 
 export interface IUiState {

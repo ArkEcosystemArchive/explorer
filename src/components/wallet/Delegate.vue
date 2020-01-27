@@ -38,7 +38,7 @@
                 }
               : {}
           "
-          class="text-grey text-2xs mr-1"
+          class="text-grey text-xs mr-1"
         >
           {{ percentageString(delegate.production.approval) }}
         </span>
