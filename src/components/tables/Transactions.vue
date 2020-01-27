@@ -32,6 +32,7 @@
             :type="data.row.type"
             :asset="data.row.asset"
             :type-group="data.row.typeGroup"
+            :show-timelock-icon="true"
           />
         </div>
 

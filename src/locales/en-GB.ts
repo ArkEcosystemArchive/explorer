@@ -107,6 +107,7 @@ export default {
       BRIDGECHAIN_UPDATE: "Bridgechain Update",
       SENT: "Sent",
       RECEIVED: "Received",
+      UNKNOWN: "Unknown",
     },
     ASSET: {
       BRIDGECHAINID: "Bridgechain ID",
@@ -155,6 +156,7 @@ export default {
       VOTERS: "Voters",
       VOTER_THRESHOLD: "Only voters with more than 0.1 {token}",
     },
+    TIMELOCK_TRANSACTION: "Timelock transaction",
   },
 
   SEARCH: {

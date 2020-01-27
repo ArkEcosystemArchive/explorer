@@ -12,12 +12,20 @@
         <div class="list-row-border-b">
           <div class="mr-4">{{ $t("TRANSACTION.RECIPIENT") }}</div>
           <div class="truncate">
+            <LinkWallet :address="transaction.recipient" :trunc="false" tooltip-placement="left" />
+          </div>
+        </div>
+
+        <div class="list-row-border-b">
+          <div class="mr-4">{{ $t("TRANSACTION.TYPE") }}</div>
+          <div class="truncate">
             <LinkWallet
               :address="transaction.recipient"
               :type="transaction.type"
               :asset="transaction.asset"
               :trunc="false"
               :type-group="transaction.typeGroup"
+              :showAsType="true"
               tooltip-placement="left"
             />
           </div>
