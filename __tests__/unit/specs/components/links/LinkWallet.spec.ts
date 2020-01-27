@@ -4,7 +4,7 @@ import TransactionTypesMixin from "@/mixins/transaction-types";
 import store from "@/store";
 import merge from "lodash/merge";
 
-import { LinkWallet } from "@/components/links";
+import { LinkWallet, LinkAddress } from "@/components/links";
 import SvgIcon from "@/components/SvgIcon";
 import { useI18n } from "../../../__utils__/i18n";
 
@@ -28,7 +28,8 @@ describe("Components > Links > Wallet", () => {
         {
           stubs: {
             RouterLink: RouterLinkStub,
-            SvgIcon: "<svg></svg>",
+            'SvgIcon': "<svg></svg>",
+            'LinkAddress': "<a>LinkAddress</a>"
           },
           i18n,
           localVue,
@@ -40,7 +41,7 @@ describe("Components > Links > Wallet", () => {
     );
   };
 
-  it("should display a full link to a wallet", () => {
+  it("should use LinkAddress for a transfer", () => {
     wrapper = mountComponent({
       propsData: {
         address: testAddress,
@@ -50,83 +51,10 @@ describe("Components > Links > Wallet", () => {
       },
     });
 
-    expect(wrapper.contains("a")).toBe(true);
-    expect(wrapper.findAll("a")).toHaveLength(1);
-    expect(wrapper.text()).toEqual(expect.stringContaining(testAddress));
-    expect(wrapper.text()).toEqual(expect.stringContaining(wrapper.vm.truncate(testAddress)));
-  });
-
-  it("should display a truncated link to a wallet", () => {
-    wrapper = mountComponent({
-      propsData: {
-        address: testAddress,
-        publicKey: testPublicKey,
-        type: 0,
-      },
-    });
+    console.log(wrapper.html())
 
     expect(wrapper.contains("a")).toBe(true);
     expect(wrapper.findAll("a")).toHaveLength(1);
-    expect(wrapper.text()).not.toEqual(expect.stringContaining(testAddress));
-    expect(wrapper.text()).toEqual(expect.stringContaining(wrapper.vm.truncate(testAddress)));
-  });
-
-  it("should display the name of a known address", () => {
-    store.dispatch("network/setKnownWallets", { AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv: "TestKnownWallet" });
-    wrapper = mountComponent({
-      propsData: {
-        address: testAddress,
-        publicKey: testPublicKey,
-        type: 0,
-      },
-    });
-
-    expect(wrapper.contains("a")).toBe(true);
-    expect(wrapper.findAll("a")).toHaveLength(1);
-    expect(wrapper.findAll("svg")).toHaveLength(1);
-    expect(wrapper.text()).not.toEqual(expect.stringContaining(testAddress));
-    expect(wrapper.text()).not.toEqual(expect.stringContaining(wrapper.vm.truncate(testAddress)));
-    expect(wrapper.text()).toEqual(expect.stringContaining("TestKnownWallet"));
-  });
-
-  it("should display the name of a delegate", done => {
-    store.dispatch("delegates/setDelegates", { delegates });
-    wrapper = mountComponent({
-      propsData: {
-        address: testDelegateAddress,
-        type: 0,
-      },
-    });
-
-    // Delegate name is set after function call in mounted(), so we need to wait a little while
-    expect(wrapper.contains("a")).toBe(true);
-    expect(wrapper.findAll("a")).toHaveLength(1);
-    setTimeout(() => {
-      expect(wrapper.text()).not.toEqual(expect.stringContaining(testDelegateAddress));
-      expect(wrapper.text()).not.toEqual(expect.stringContaining(wrapper.vm.truncate(testDelegateAddress)));
-      expect(wrapper.text()).toEqual(expect.stringContaining("TestDelegate"));
-      done();
-    }, 500);
-  });
-
-  it("should also find the delegate by public key", done => {
-    store.dispatch("delegates/setDelegates", { delegates });
-    wrapper = mountComponent({
-      propsData: {
-        publicKey: testDelegatePublicKey,
-        type: 0,
-      },
-    });
-
-    // Delegate name is set after function call in mounted(), so we need to wait a little while
-    expect(wrapper.contains("a")).toBe(true);
-    expect(wrapper.findAll("a")).toHaveLength(1);
-    setTimeout(() => {
-      expect(wrapper.text()).not.toEqual(expect.stringContaining(testDelegateAddress));
-      expect(wrapper.text()).not.toEqual(expect.stringContaining(wrapper.vm.truncate(testDelegateAddress)));
-      expect(wrapper.text()).toEqual(expect.stringContaining("TestDelegate"));
-      done();
-    }, 500);
   });
 
   describe("When given a transaction type > 0", () => {
@@ -201,32 +129,39 @@ describe("Components > Links > Wallet", () => {
       expect(wrapper.text()).toEqual(expect.stringContaining("Delegate Resignation"));
     });
 
-    it("should display Timelock recipient for type 8", () => {
+    it("should use LinkAddress and icon for Timelock recipient for type 8 when instructed", () => {
       wrapper = mountComponent({
         propsData: {
           address: testAddress,
-          type: 8
+          type: 8,
+          showTimelockIcon: true,
         },
       });
 
       expect(wrapper.contains("a")).toBe(true);
       expect(wrapper.findAll("a")).toHaveLength(1);
       expect(wrapper.findAll("svg")).toHaveLength(1);
-      expect(wrapper.text()).not.toEqual(expect.stringContaining(testAddress));
-      expect(wrapper.text()).not.toEqual(expect.stringContaining(wrapper.vm.truncate(testAddress)));
-      expect(wrapper.text()).toEqual(expect.stringContaining("TestKnownWallet"));
+    });
+
+    it("should use LinkAddress without icon for Timelock recipient for type 8 otherwise", () => {
+      wrapper = mountComponent({
+        propsData: {
+          address: testAddress,
+          type: 8,
+        },
+      });
+
+      expect(wrapper.contains("a")).toBe(true);
+      expect(wrapper.findAll("a")).toHaveLength(1);
+      expect(wrapper.findAll("svg")).toHaveLength(0);
     });
 
     it("should display Timelock Claim for type 9", () => {
-      const wrapper = mount(LinkWallet, {
-        propsData: { type: 9 },
-        stubs: {
-          RouterLink: RouterLinkStub,
+      wrapper = mountComponent({
+        propsData: {
+          address: testAddress,
+          type: 9
         },
-        i18n,
-        localVue,
-        mixins: [StringsMixin, TransactionTypesMixin],
-        store,
       });
 
       expect(wrapper.contains("a")).toBe(false);
@@ -234,19 +169,27 @@ describe("Components > Links > Wallet", () => {
     });
 
     it("should display Timelock Refund for type 10", () => {
-      const wrapper = mount(LinkWallet, {
-        propsData: { type: 10 },
-        stubs: {
-          RouterLink: RouterLinkStub,
+      wrapper = mountComponent({
+        propsData: {
+          address: testAddress,
+          type: 10
         },
-        i18n,
-        localVue,
-        mixins: [StringsMixin, TransactionTypesMixin],
-        store,
       });
 
       expect(wrapper.contains("a")).toBe(false);
       expect(wrapper.text()).toEqual(expect.stringContaining("Timelock Refund"));
+    });
+
+    it("should use LinkAddress as fallback if unknown type is used", () => {
+      wrapper = mountComponent({
+        propsData: {
+          address: testAddress,
+          type: 12345,
+        },
+      });
+
+      expect(wrapper.contains("a")).toBe(true);
+      expect(wrapper.findAll("a")).toHaveLength(1);
     });
   });
 });
