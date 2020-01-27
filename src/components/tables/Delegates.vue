@@ -32,7 +32,7 @@
         </div>
 
         <div v-else-if="data.column.field === 'votes'">
-          <span v-tooltip="$t('COMMON.SUPPLY_PERCENTAGE')" class="text-grey text-2xs mr-1">
+          <span v-tooltip="$t('COMMON.SUPPLY_PERCENTAGE')" class="text-grey text-xs mr-1">
             {{ percentageString(data.row.production.approval) }}
           </span>
           {{ readableCrypto(data.row.votes, true, 2) }}

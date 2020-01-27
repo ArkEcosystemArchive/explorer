@@ -18,15 +18,14 @@
 
         <div class="list-row-border-b">
           <div class="mr-4">{{ $t("TRANSACTION.TYPE") }}</div>
-          <span v-if="isTransfer(transaction.type, transaction.typeGroup)">{{ $t("TRANSACTION.TYPES.TRANSFER") }}</span>
-          <span v-else-if="isTimelock(transaction.type, transaction.typeGroup)">{{ $t("TRANSACTION.TYPES.TIMELOCK_CLAIM") }}</span>
-          <div v-else class="truncate">
+          <div class="truncate">
             <LinkWallet
               :address="transaction.recipient"
               :type="transaction.type"
               :asset="transaction.asset"
               :trunc="false"
               :type-group="transaction.typeGroup"
+              :showAsType="true"
               tooltip-placement="left"
             />
           </div>

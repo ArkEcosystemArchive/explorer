@@ -35,6 +35,7 @@
           <span>{{ receivedCount }}</span>
         </div>
         <div
+          v-if="hasHtlcEnabled"
           :class="{
             active: isTypeLocks,
             disabled: !locksCount,
@@ -111,6 +112,10 @@ export default class WalletTransactions extends Vue {
 
   set type(type: string) {
     this.$store.dispatch("ui/setWalletTransactionTab", type);
+  }
+
+  get hasHtlcEnabled() {
+    return this.$store.getters["network/hasHtlcEnabled"];
   }
 
   get sortParams() {

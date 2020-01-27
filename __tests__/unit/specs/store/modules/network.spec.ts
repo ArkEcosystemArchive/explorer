@@ -85,10 +85,22 @@ describe("Store > Network", () => {
     expect(store.getters["network/hasMagistrateEnabled"]).toEqual(true);
   });
 
-  it("should set the magistrate to disabled", () => {
+  it("should set the magistrate property to disabled", () => {
     store.dispatch("network/setHasMagistrateEnabled", false);
 
     expect(store.getters["network/hasMagistrateEnabled"]).toEqual(false);
+  });
+
+  it("should set the htlc property to enabled", () => {
+    store.dispatch("network/setHasHtlcEnabled", true);
+
+    expect(store.getters["network/hasHtlcEnabled"]).toEqual(true);
+  });
+
+  it("should set the htlc property to disabled", () => {
+    store.dispatch("network/setHasHtlcEnabled", false);
+
+    expect(store.getters["network/hasHtlcEnabled"]).toEqual(false);
   });
 
   it("should set the enabled transaction types", () => {

@@ -21,6 +21,7 @@ const state: INetworkState = {
   epoch: null,
   blocktime: 0,
   hasMagistrateEnabled: false,
+  hasHtlcEnabled: false,
   enabledTransactionTypes: [],
 };
 
@@ -121,6 +122,12 @@ const actions: ActionTree<INetworkState, {}> = {
       value,
     });
   },
+  setHasHtlcEnabled: ({ commit }, value: boolean) => {
+    commit({
+      type: types.SET_NETWORK_HAS_HTLC_ENABLED,
+      value,
+    });
+  },
   setEnabledTransactionTypes: ({ commit }, value: ITransactionType[]) => {
     commit({
       type: types.SET_NETWORK_ENABLED_TRANSACTION_TYPES,
@@ -178,6 +185,9 @@ const mutations: MutationTree<INetworkState> = {
   [types.SET_NETWORK_HAS_MAGISTRATE_ENABLED](state, payload: IStorePayload) {
     state.hasMagistrateEnabled = payload.value;
   },
+  [types.SET_NETWORK_HAS_HTLC_ENABLED](state, payload: IStorePayload) {
+    state.hasHtlcEnabled = payload.value;
+  },
   [types.SET_NETWORK_ENABLED_TRANSACTION_TYPES](state, payload: IStorePayload) {
     state.enabledTransactionTypes = payload.value;
   },
@@ -200,6 +210,7 @@ const getters: GetterTree<INetworkState, {}> = {
   epoch: state => state.epoch,
   blocktime: state => state.blocktime,
   hasMagistrateEnabled: state => state.hasMagistrateEnabled,
+  hasHtlcEnabled: state => state.hasHtlcEnabled,
   enabledTransactionTypes: state => state.enabledTransactionTypes,
 };
 
