@@ -73,6 +73,12 @@ describe("Store > Network", () => {
     expect(store.getters["network/supply"]).toEqual("setSupply");
   });
 
+  it("should set the network initial supply", () => {
+    store.dispatch("network/setInitialSupply", "initialSupply");
+
+    expect(store.getters["network/initialSupply"]).toEqual("initialSupply");
+  });
+
   it("should set the network height", () => {
     store.dispatch("network/setHeight", "setHeight");
 
@@ -85,9 +91,21 @@ describe("Store > Network", () => {
     expect(store.getters["network/hasMagistrateEnabled"]).toEqual(true);
   });
 
-  it("should set the magistrate to disabled", () => {
+  it("should set the magistrate property to disabled", () => {
     store.dispatch("network/setHasMagistrateEnabled", false);
 
     expect(store.getters["network/hasMagistrateEnabled"]).toEqual(false);
+  });
+
+  it("should set the htlc property to enabled", () => {
+    store.dispatch("network/setHasHtlcEnabled", true);
+
+    expect(store.getters["network/hasHtlcEnabled"]).toEqual(true);
+  });
+
+  it("should set the htlc property to disabled", () => {
+    store.dispatch("network/setHasHtlcEnabled", false);
+
+    expect(store.getters["network/hasHtlcEnabled"]).toEqual(false);
   });
 });

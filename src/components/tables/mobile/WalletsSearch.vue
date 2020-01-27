@@ -27,7 +27,7 @@
           <div class="mr-4">
             {{ $t("COMMON.SUPPLY") }}
           </div>
-          <div>{{ percentageString((row.balance / total) * 100) }}</div>
+          <div>{{ supplyPercentage(row.balance) }}</div>
         </div>
       </div>
       <div v-if="wallets && !wallets.length" class="px-5 md:px-10">
@@ -41,6 +41,7 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { IWallet } from "@/interfaces";
 import { mapGetters } from "vuex";
+import { BigNumber } from "@/utils";
 
 @Component
 export default class TableWalletsSearchMobile extends Vue {
@@ -51,7 +52,17 @@ export default class TableWalletsSearchMobile extends Vue {
     },
   })
   public wallets: IWallet[] | null;
-  @Prop({ required: true }) public total: number;
+  @Prop({ required: true }) public total: string;
+
+  public supplyPercentage(balance: string): string {
+    // @ts-ignore
+    return this.percentageString(
+      BigNumber.make(balance)
+        .dividedBy(this.total)
+        .times(100)
+        .toNumber(),
+    );
+  }
 
   private votedDelegate(vote) {
     return this.$store.getters["delegates/byPublicKey"](vote) || {};

@@ -76,6 +76,8 @@ export default class App extends Vue {
     this.$store.dispatch("network/setCurrencies", network.currencies);
     this.$store.dispatch("network/setKnownWallets", network.knownWallets);
 
+    this.fetchInitialSupply();
+
     if (network.defaults.currency) {
       this.$store.dispatch("currency/setName", localStorage.getItem("currencyName") || network.defaults.currency.name);
 
@@ -92,6 +94,7 @@ export default class App extends Vue {
     this.$store.dispatch("network/setNethash", response.nethash);
     this.$store.dispatch("network/setEpoch", response.constants.epoch);
     this.$store.dispatch("network/setBlocktime", response.constants.blocktime);
+    this.$store.dispatch("network/setHasHtlcEnabled", !!response.constants.htlcEnabled);
 
     this.$store.dispatch("ui/setLanguage", localStorage.getItem("language") || "en-GB");
 
@@ -130,6 +133,17 @@ export default class App extends Vue {
 
   public onPortalChange(isActive) {
     this.hasBlurFilter = isActive;
+  }
+
+  public async fetchInitialSupply() {
+    let initialSupply = localStorage.getItem("initialSupply");
+
+    if (!initialSupply) {
+      const crypto = await NodeService.crypto();
+      initialSupply = crypto.genesisBlock.totalAmount;
+    }
+
+    this.$store.dispatch("network/setInitialSupply", initialSupply);
   }
 
   public async updateCurrencyRate() {
