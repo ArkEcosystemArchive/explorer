@@ -7,7 +7,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test": "yarn test:unit && yarn test:e2e",
-    "lint": "vue-cli-service lint && prettier --write \"./*.{ts,js,json,md,vue}\" \"./src/**/*.{ts,js,json,md,vue}\" \"./__tests__/**/*.{ts,js,json,md,vue}\"",
+    "lint": "vue-cli-service lint --fix && prettier --write \"./*.{ts,js,json,md,vue}\" \"./src/**/*.{ts,js,json,md,vue}\" \"./__tests__/**/*.{ts,js,json,md,vue}\"",
     "build:devnet": "vue-cli-service build --network devnet",
     "build:mainnet": "vue-cli-service build --network mainnet",
     "build:testnet": "vue-cli-service build --network testnet",

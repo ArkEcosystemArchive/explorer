@@ -5,6 +5,7 @@ module.exports = {
     parser: "@typescript-eslint/parser",
     sourceType: "module",
     project: "./tsconfig.json",
+    extraFileExtensions: [".vue"],
   },
 
   env: {
@@ -30,7 +31,15 @@ module.exports = {
   ],
 
   rules: {
-    indent: ["error", 2],
+    "@typescript-eslint/ban-ts-ignore": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/interface-name-prefix": "off",
+    //indent: ["error", 2],
     quotes: ["error", "double"],
+    "prettier/prettier": "error",
   },
 };
