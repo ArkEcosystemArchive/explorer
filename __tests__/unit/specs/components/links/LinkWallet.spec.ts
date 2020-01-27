@@ -179,5 +179,17 @@ describe("Components > Links > Wallet", () => {
       expect(wrapper.contains("a")).toBe(false);
       expect(wrapper.text()).toEqual(expect.stringContaining("Timelock Refund"));
     });
+
+    it("should use LinkAddress as fallback if unknown type is used", () => {
+      wrapper = mountComponent({
+        propsData: {
+          address: testAddress,
+          type: 12345,
+        },
+      });
+
+      expect(wrapper.contains("a")).toBe(true);
+      expect(wrapper.findAll("a")).toHaveLength(1);
+    });
   });
 });
