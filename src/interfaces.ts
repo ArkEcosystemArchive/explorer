@@ -213,6 +213,7 @@ export interface INetworkState {
   blocktime: number;
   hasMagistrateEnabled: boolean;
   hasHtlcEnabled: boolean;
+  enabledTransactionTypes: ITransactionType[];
 }
 
 export interface IUiState {

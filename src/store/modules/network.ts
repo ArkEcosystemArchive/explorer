@@ -1,6 +1,6 @@
 /* tslint:disable:no-shadowed-variable */
 import * as types from "../mutation-types";
-import { IStorePayload, INetworkState } from "../../interfaces";
+import { IStorePayload, INetworkState, ITransactionType } from "../../interfaces";
 import { ActionTree, GetterTree, Module, MutationTree } from "vuex";
 
 const namespaced = true;
@@ -23,6 +23,7 @@ const state: INetworkState = {
   blocktime: 0,
   hasMagistrateEnabled: false,
   hasHtlcEnabled: false,
+  enabledTransactionTypes: [],
 };
 
 const actions: ActionTree<INetworkState, {}> = {
@@ -136,6 +137,12 @@ const actions: ActionTree<INetworkState, {}> = {
       value,
     });
   },
+  setEnabledTransactionTypes: ({ commit }, value: ITransactionType[]) => {
+    commit({
+      type: types.SET_NETWORK_ENABLED_TRANSACTION_TYPES,
+      value,
+    });
+  },
 };
 
 const mutations: MutationTree<INetworkState> = {
@@ -193,6 +200,9 @@ const mutations: MutationTree<INetworkState> = {
   [types.SET_NETWORK_HAS_HTLC_ENABLED](state, payload: IStorePayload) {
     state.hasHtlcEnabled = payload.value;
   },
+  [types.SET_NETWORK_ENABLED_TRANSACTION_TYPES](state, payload: IStorePayload) {
+    state.enabledTransactionTypes = payload.value;
+  },
 };
 
 const getters: GetterTree<INetworkState, {}> = {
@@ -214,6 +224,7 @@ const getters: GetterTree<INetworkState, {}> = {
   blocktime: state => state.blocktime,
   hasMagistrateEnabled: state => state.hasMagistrateEnabled,
   hasHtlcEnabled: state => state.hasHtlcEnabled,
+  enabledTransactionTypes: state => state.enabledTransactionTypes,
 };
 
 export const network: Module<INetworkState, {}> = {
