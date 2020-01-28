@@ -88,7 +88,6 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { InputText, InputNumber, InputDate, InputSelect } from "./input";
 import { ITransactionType } from "@/interfaces";
-import { transactionTypes } from "@/constants";
 
 @Component({
   components: {
@@ -99,7 +98,9 @@ import { transactionTypes } from "@/constants";
   },
 })
 export default class TransactionSearchForm extends Vue {
-  private types: ITransactionType[] = transactionTypes;
+  get types() {
+    return this.$store.getters["network/enabledTransactionTypes"];
+  }
 
   get selectOptions() {
     return this.types.map(type => ({ value: type.key, display: this.$t(`TRANSACTION.TYPES.${type.key}`) }));
