@@ -94,10 +94,10 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
     ...mapGetters("network", ["hasHtlcEnabled"]),
 
     availableTransactionTypes() {
-      const types = ['all', 'sent', 'received'];
+      const types = ["all", "sent", "received"];
 
       if (this.hasHtlcEnabled) {
-        types.push('locks');
+        types.push("locks");
       }
 
       return types;

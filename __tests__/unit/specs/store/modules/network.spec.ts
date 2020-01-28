@@ -120,4 +120,12 @@ describe("Store > Network", () => {
 
     expect(store.getters["network/hasHtlcEnabled"]).toEqual(false);
   });
+
+  it("should set the enabled transaction types", () => {
+    const types = [{ key: "test", type: 0 }];
+
+    store.dispatch("network/setEnabledTransactionTypes", types);
+
+    expect(store.getters["network/enabledTransactionTypes"]).toEqual(types);
+  });
 });
