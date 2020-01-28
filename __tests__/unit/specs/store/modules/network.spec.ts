@@ -49,6 +49,12 @@ describe("Store > Network", () => {
     expect(store.getters["network/token"]).toEqual("setToken");
   });
 
+  it("should set if the token is listed", () => {
+    store.dispatch("network/setIsListed", true);
+
+    expect(store.getters["network/isListed"]).toBeTrue();
+  });
+
   it("should set the network symbol", () => {
     store.dispatch("network/setSymbol", "setSymbol");
 
@@ -83,6 +89,12 @@ describe("Store > Network", () => {
     store.dispatch("network/setHeight", "setHeight");
 
     expect(store.getters["network/height"]).toEqual("setHeight");
+  });
+
+  it("should set the network blocktime", () => {
+    store.dispatch("network/setBlocktime", 100);
+
+    expect(store.getters["network/blocktime"]).toEqual(100);
   });
 
   it("should set the magistrate property to enabled", () => {
