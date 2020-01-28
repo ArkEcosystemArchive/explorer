@@ -4,11 +4,13 @@
   max-width: calc(100% - 9px);
 }
 
+/* purgecss start ignore */
 .tooltip[x-placement=top] .tooltip-inner,
 .tooltip[x-placement=bottom] .tooltip-inner {
   margin-left: 10px;
   margin-right: 10px;
 }
+/* purgecss end ignore */
 
 .tooltip .tooltip-inner {
   background: #f1f3fc;
@@ -47,6 +49,7 @@
   left: 11px !important;
 }
 
+/* purgecss start ignore */
 .tooltip[x-placement^='top'] {
   margin-bottom: 5px;
 }
@@ -106,6 +109,7 @@
   margin-left: 0;
   margin-right: 0;
 }
+/* purgecss end ignore */
 
 .tooltip.popover .popover-inner {
   background: #f9f9f9;
@@ -119,6 +123,7 @@
   border-color: #f9f9f9;
 }
 
+/* purgecss start ignore */
 .tooltip[aria-hidden='true'] {
   visibility: hidden;
   opacity: 0;
@@ -130,6 +135,7 @@
   opacity: 1;
   transition: opacity 0.15s;
 }
+/* purgecss end ignore */
 
 /* Forging */
 .tooltip.tooltip-bg-success .tooltip-inner,

@@ -31,7 +31,7 @@ module.exports = {
             "th",
             "v-spinner",
           ],
-          whitelistPatterns: [/^tooltip-bg-/, /^vgt-/, /^tooltip\[/],
+          whitelistPatterns: [/^tooltip-bg-/, /^vgt-/],
           whitelistPatternsChildren: [/^vgt-/],
         })
       : "",
