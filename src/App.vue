@@ -96,6 +96,16 @@ export default class App extends Vue {
     this.$store.dispatch("network/setBlocktime", response.constants.blocktime);
     this.$store.dispatch("network/setHasHtlcEnabled", !!response.constants.htlcEnabled);
 
+    if (network.alias === "Main") {
+      try {
+        await CryptoCompareService.price(response.token);
+        this.$store.dispatch("network/setIsListed", true);
+      } catch (e) {
+        // tslint:disable-next-line:no-console
+        console.log(e.message || e.data.error);
+      }
+    }
+
     this.$store.dispatch("ui/setLanguage", localStorage.getItem("language") || "en-GB");
 
     this.$store.dispatch("ui/setLocale", localStorage.getItem("locale") || navigator.language || "en-GB");
@@ -147,9 +157,14 @@ export default class App extends Vue {
   }
 
   public async updateCurrencyRate() {
-    if (this.currencyName !== this.token) {
-      const rate = await CryptoCompareService.price(this.currencyName);
-      this.$store.dispatch("currency/setRate", rate);
+    if (this.$store.getters["network/isListed"] && this.currencyName !== this.token) {
+      try {
+        const rate = await CryptoCompareService.price(this.currencyName);
+        this.$store.dispatch("currency/setRate", rate);
+      } catch (e) {
+        // tslint:disable-next-line:no-console
+        console.log(e.message || e.data.error);
+      }
     }
   }
 

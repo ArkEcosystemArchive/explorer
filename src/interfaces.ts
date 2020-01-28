@@ -203,6 +203,7 @@ export interface INetworkState {
   activeDelegates: number;
   rewardOffset: number;
   token: string | null;
+  isListed: boolean;
   symbol: string | null;
   currencies: any[];
   knownWallets: any[];

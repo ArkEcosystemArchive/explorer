@@ -25,6 +25,10 @@ export default {
       currency: string | null = null,
       normalise: boolean = true,
     ): string {
+      if (!value) {
+        return;
+      }
+
       const currencyName: string = currency || store.getters["currency/name"];
 
       if (normalise) {

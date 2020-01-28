@@ -13,6 +13,7 @@ const state: INetworkState = {
   activeDelegates: 51,
   rewardOffset: 51,
   token: null,
+  isListed: false,
   symbol: null,
   currencies: [],
   knownWallets: [],
@@ -71,6 +72,12 @@ const actions: ActionTree<INetworkState, {}> = {
   setToken: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_TOKEN,
+      value,
+    });
+  },
+  setIsListed: ({ commit }, value: boolean) => {
+    commit({
+      type: types.SET_NETWORK_TOKEN_IS_LISTED,
       value,
     });
   },
@@ -163,6 +170,9 @@ const mutations: MutationTree<INetworkState> = {
   [types.SET_NETWORK_TOKEN](state, payload: IStorePayload) {
     state.token = payload.value;
   },
+  [types.SET_NETWORK_TOKEN_IS_LISTED](state, payload: IStorePayload) {
+    state.isListed = payload.value;
+  },
   [types.SET_NETWORK_SYMBOL](state, payload: IStorePayload) {
     state.symbol = payload.value;
   },
@@ -204,6 +214,7 @@ const getters: GetterTree<INetworkState, {}> = {
   activeDelegates: state => state.activeDelegates,
   rewardOffset: state => state.rewardOffset,
   token: state => state.token,
+  isListed: state => state.isListed,
   symbol: state => state.symbol,
   currencies: state => state.currencies,
   knownWallets: state => state.knownWallets,
