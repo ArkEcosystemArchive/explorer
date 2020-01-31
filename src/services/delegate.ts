@@ -2,6 +2,7 @@ import { ApiService, ForgingService, WalletService, RoundService } from "@/servi
 import { roundFromHeight } from "@/utils";
 import store from "@/store";
 import { IApiDelegateWrapper, IApiDelegatesWrapper, IApiWalletsWrapper, IDelegate } from "../interfaces";
+import { apiLimit } from "@/constants";
 
 class DelegateService {
   public async fetchEveryDelegate(): Promise<IDelegate[]> {
@@ -75,13 +76,24 @@ class DelegateService {
     const height = store.getters["network/height"];
     const previousDelegates = await RoundService.delegates(roundFromHeight(height) - 1);
 
-    const response = (await ApiService.get("delegates", {
-      params: {
-        limit: activeDelegates,
-      },
-    })) as IApiDelegatesWrapper;
+    const delegates: IDelegate[] = [];
+    const requestCount = activeDelegates <= apiLimit ? 1 : Math.ceil(activeDelegates / apiLimit);
 
-    return response.data.map(delegate => {
+    for (let i = 0; i < requestCount; i++) {
+      const offset = i * apiLimit;
+      const limit = i === requestCount - 1 ? activeDelegates % apiLimit : Math.min(activeDelegates, apiLimit);
+
+      const response = (await ApiService.get("delegates", {
+        params: {
+          offset,
+          limit,
+        },
+      })) as IApiDelegatesWrapper;
+
+      delegates.push(...response.data);
+    }
+
+    return delegates.map(delegate => {
       delegate.forgingStatus = ForgingService.status(delegate, height, previousDelegates);
 
       return delegate;
