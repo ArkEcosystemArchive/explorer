@@ -106,7 +106,7 @@ class DelegateService {
     const response = (await ApiService.get("delegates", {
       params: {
         offset: activeDelegates,
-        limit: activeDelegates,
+        limit: activeDelegates < 25 ? 25 + (25 - activeDelegates % 25) : 25 - (activeDelegates % 25),
       },
     })) as IApiDelegatesWrapper;
 
