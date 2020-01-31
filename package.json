@@ -86,6 +86,7 @@
     "minimist": "^1.2.0",
     "moment-timezone": "^0.5.27",
     "prettier": "^1.19.1",
+    "prettier-eslint": "^9.0.1",
     "sinon": "^8.0.0",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
