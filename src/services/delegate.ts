@@ -2,7 +2,7 @@ import { ApiService, ForgingService, WalletService, RoundService } from "@/servi
 import { roundFromHeight } from "@/utils";
 import store from "@/store";
 import { IApiDelegateWrapper, IApiDelegatesWrapper, IApiWalletsWrapper, IDelegate } from "../interfaces";
-import { apiLimit } from "@/constants";
+import { apiLimit, paginationLimit } from "@/constants";
 
 class DelegateService {
   public async fetchEveryDelegate(): Promise<IDelegate[]> {
@@ -29,7 +29,7 @@ class DelegateService {
     return response.data.concat([].concat(...results.map(result => result.data)));
   }
 
-  public async all(page: number = 1, limit: number = 25): Promise<IApiDelegatesWrapper> {
+  public async all(page: number = 1, limit: number = paginationLimit): Promise<IApiDelegatesWrapper> {
     const response = (await ApiService.get("delegates", {
       params: {
         page,
@@ -40,7 +40,7 @@ class DelegateService {
     return response;
   }
 
-  public async voters(query: string, page: number, limit = 25): Promise<IApiWalletsWrapper> {
+  public async voters(query: string, page: number, limit = paginationLimit): Promise<IApiWalletsWrapper> {
     const response = (await ApiService.get(`delegates/${query}/voters`, {
       params: {
         page,
@@ -106,7 +106,7 @@ class DelegateService {
     const response = (await ApiService.get("delegates", {
       params: {
         offset: activeDelegates,
-        limit: activeDelegates < 25 ? 25 + (25 - activeDelegates % 25) : 25 - (activeDelegates % 25),
+        limit: activeDelegates < paginationLimit ? paginationLimit + (paginationLimit - activeDelegates % paginationLimit) : paginationLimit - (activeDelegates % paginationLimit),
       },
     })) as IApiDelegatesWrapper;
 
@@ -118,7 +118,7 @@ class DelegateService {
     return response.data;
   }
 
-  public async allResigned(page: number = 1, limit: number = 25): Promise<IApiDelegatesWrapper> {
+  public async allResigned(page: number = 1, limit: number = paginationLimit): Promise<IApiDelegatesWrapper> {
     const response = (await ApiService.get("delegates", {
       params: {
         type: "resigned",

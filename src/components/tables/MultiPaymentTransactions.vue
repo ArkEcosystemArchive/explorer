@@ -25,6 +25,7 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { IDelegate, ISortParameters, ITransaction } from "@/interfaces";
 import CryptoCompareService from "@/services/crypto-compare";
+import { paginationLimit } from "@/constants";
 
 @Component({
   computed: {
@@ -34,7 +35,7 @@ import CryptoCompareService from "@/services/crypto-compare";
 export default class MultiPaymentTransactions extends Vue {
   @Prop({ required: true }) public transaction: ITransaction;
   @Prop({ required: false, default: 0 }) public page: number;
-  @Prop({ required: false, default: 25 }) public count: number;
+  @Prop({ required: false, default: paginationLimit }) public count: number;
 
   private currencySymbol: string;
   private transactions: Array<{ recipientId: string; amount: string; price: number | null }> | null = null;

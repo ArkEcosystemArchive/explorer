@@ -43,3 +43,4 @@ export const transactionTypes: ITransactionType[] = [
 ];
 
 export const apiLimit: number = 100;
+export const paginationLimit: number = 25;
