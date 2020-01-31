@@ -1,6 +1,8 @@
 <template>
   <div class="mb-5 mx-5 sm:mx-10 mb-10" id="transactionForm">
-    <p class="font-bold mb-4">{{ $t("PAGES.ADVANCED_SEARCH.ADDITIONAL_PARAMETERS") }}</p>
+    <p class="font-bold mb-4">
+      {{ $t("PAGES.ADVANCED_SEARCH.ADDITIONAL_PARAMETERS") }}
+    </p>
 
     <div class="flex flex-wrap justify-between">
       <div class="w-full lg:w-64 mb-4 lg:mb-0">
@@ -88,21 +90,25 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { InputText, InputNumber, InputDate, InputSelect } from "./input";
 import { ITransactionType } from "@/interfaces";
-import { transactionTypes } from "@/constants";
 
 @Component({
   components: {
     InputText,
     InputNumber,
     InputDate,
-    InputSelect,
-  },
+    InputSelect
+  }
 })
 export default class TransactionSearchForm extends Vue {
-  private types: ITransactionType[] = transactionTypes;
+  get types() {
+    return this.$store.getters["network/enabledTransactionTypes"];
+  }
 
   get selectOptions() {
-    return this.types.map(type => ({ value: type.key, display: this.$t(`TRANSACTION.TYPES.${type.key}`) }));
+    return this.types.map((type) => ({
+      value: type.key,
+      display: this.$t(`TRANSACTION.TYPES.${type.key}`)
+    }));
   }
 
   private onInputChange(event: any) {
@@ -112,7 +118,9 @@ export default class TransactionSearchForm extends Vue {
   }
 
   private onTypeChange(event: any) {
-    const index: number = this.types.findIndex(transaction => transaction.key === event.target.value);
+    const index: number = this.types.findIndex(
+      (transaction) => transaction.key === event.target.value
+    );
     const { type, typeGroup } = this.types[index];
 
     this.emitInput({ name: "type", value: type !== -1 ? type : null });

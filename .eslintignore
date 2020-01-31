@@ -4,3 +4,4 @@
 /*.js
 /node_modules/**
 /__tests__/unit/coverage/
+/__tests__/**/*.spec.ts
