@@ -80,13 +80,13 @@ class DelegateService {
     const requestCount = Math.ceil(activeDelegates / apiLimit);
 
     for (let i = 0; i < requestCount; i++) {
-      const limit = i === requestCount - 1 ? activeDelegates % apiLimit : Math.min(activeDelegates, apiLimit);
-
       requests.push(
         ApiService.get("delegates", {
           params: {
             offset: i * apiLimit,
-            limit,
+            limit: i === requestCount - 1
+              ? activeDelegates % apiLimit
+              : Math.min(activeDelegates, apiLimit),
           },
         })
       );
