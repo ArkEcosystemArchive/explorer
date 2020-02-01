@@ -108,7 +108,9 @@ class DelegateService {
     const response = (await ApiService.get("delegates", {
       params: {
         offset: activeDelegates,
-        limit: activeDelegates < paginationLimit ? paginationLimit + (paginationLimit - activeDelegates % paginationLimit) : paginationLimit - (activeDelegates % paginationLimit),
+        limit: activeDelegates < paginationLimit
+          ? paginationLimit + (paginationLimit - activeDelegates % paginationLimit)
+          : paginationLimit - (activeDelegates % paginationLimit),
       },
     })) as IApiDelegatesWrapper;
 
