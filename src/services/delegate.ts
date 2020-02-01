@@ -76,22 +76,24 @@ class DelegateService {
     const height = store.getters["network/height"];
     const previousDelegates = await RoundService.delegates(roundFromHeight(height) - 1);
 
-    const delegates: IDelegate[] = [];
-    const requestCount = activeDelegates <= apiLimit ? 1 : Math.ceil(activeDelegates / apiLimit);
+    const requests = [];
+    const requestCount = Math.ceil(activeDelegates / apiLimit);
 
     for (let i = 0; i < requestCount; i++) {
-      const offset = i * apiLimit;
       const limit = i === requestCount - 1 ? activeDelegates % apiLimit : Math.min(activeDelegates, apiLimit);
 
-      const response = (await ApiService.get("delegates", {
-        params: {
-          offset,
-          limit,
-        },
-      })) as IApiDelegatesWrapper;
-
-      delegates.push(...response.data);
+      requests.push(
+        ApiService.get("delegates", {
+          params: {
+            offset: i * apiLimit,
+            limit,
+          },
+        })
+      );
     }
+
+    const results = await Promise.all(requests);
+    const delegates: IDelegate[] = [].concat(...results.map(result => result.data));
 
     return delegates.map(delegate => {
       delegate.forgingStatus = ForgingService.status(delegate, height, previousDelegates);
