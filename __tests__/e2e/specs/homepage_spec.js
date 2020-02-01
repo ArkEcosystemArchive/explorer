@@ -287,9 +287,10 @@ describe("Homepage", () => {
           expect($items[0]).to.contain.text("Home");
           expect($items[1]).to.contain.text("Top Wallets");
           expect($items[2]).to.contain.text("Delegate Monitor");
-          if ($items.length === 5) {
+          if ($items.length === 6) {
             expect($items[3]).to.contain.text("Bridgechains");
             expect($items[4]).to.contain.text("Businesses");
+            expect($items[5]).to.contain.text("Advanced Search");
           }
         });
 
