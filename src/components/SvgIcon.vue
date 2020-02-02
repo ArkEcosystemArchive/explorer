@@ -27,19 +27,21 @@ export default class SvgIcon extends Vue {
   }
 
   get iconPath() {
-    try {
-      let icon = require(`@/assets/images/svg/${this.name}.svg`);
-      if (Object.prototype.hasOwnProperty.call(icon, "default")) {
-        icon = icon.default;
+    if (this.name) {
+      try {
+        let icon = require(`@/assets/images/svg/${this.name}.svg`);
+        if (Object.prototype.hasOwnProperty.call(icon, "default")) {
+          icon = icon.default;
+        }
+
+        return icon.url;
+      } catch (e) {
+        // tslint:disable-next-line:no-console
+        console.log(e.message || e.data.error);
       }
 
-      return icon.url;
-    } catch (e) {
-      // tslint:disable-next-line:no-console
-      console.log(e.message || e.data.error);
+      return null;
     }
-
-    return null;
   }
 }
 </script>
