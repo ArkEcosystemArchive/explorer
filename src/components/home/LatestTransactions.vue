@@ -31,6 +31,7 @@ export default class LatestTransactions extends Vue {
   @Prop({ required: true }) public transactionType: number;
   @Prop({ required: true }) public transactionGroup: number;
 
+  private paginationLimit: number = paginationLimit;
   private transactions: ITransaction[] | null = null;
 
   get sortParams() {
