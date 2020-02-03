@@ -22,7 +22,7 @@
     "typings/**/*.d.ts",
     "src/**/*.ts",
     "src/**/*.vue",
-    "__tests__/**/*.ts",
+    "__tests__/**/*.ts"
   ],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }
