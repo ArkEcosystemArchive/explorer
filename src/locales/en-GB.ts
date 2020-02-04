@@ -69,6 +69,7 @@ export default {
     MULTI_SIGNATURE: {
       ADDRESS: "Generated address",
       MIN: "Minimum participants",
+      LIFETIME: "Lifetime",
       PARTICIPANTS: "Participants",
     },
     NONCE: "Nonce",
