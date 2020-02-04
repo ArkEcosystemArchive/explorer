@@ -12,14 +12,14 @@
         <div class="flex items-center text-grey mb-2">
           <span>{{ $t("WALLET.ADDRESS") }}</span>
           <SvgIcon
-            v-if="wallet.secondPublicKey"
+            v-if="hasSecondPublicKey"
             v-tooltip="$t('WALLET.SECOND_PASSPHRASE_ENABLED')"
             class="ml-2"
             name="second-passphrase"
             view-box="0 0 14 14"
           />
           <SvgIcon
-            v-if="wallet.multiSignature"
+            v-if="hasMultiSignature"
             v-tooltip="$t('WALLET.MULTI_SIGNATURE_WALLET')"
             class="ml-2"
             name="multi-signature"
@@ -119,13 +119,13 @@
             <div class="flex items-center text-grey mb-2">
               <span class="mr-2">{{ $t("WALLET.ADDRESS") }}</span>
               <SvgIcon
-                v-if="wallet.secondPublicKey"
+                v-if="hasSecondSignature"
                 v-tooltip="{ trigger: 'click', content: $t('WALLET.SECOND_PASSPHRASE_ENABLED') }"
                 name="second-passphrase"
                 view-box="0 0 14 14"
               />
               <SvgIcon
-                v-if="wallet.multiSignature"
+                v-if="hasMultiSignature"
                 v-tooltip="$t('WALLET.MULTI_SIGNATURE_WALLET')"
                 class="ml-2"
                 name="multi-signature"
@@ -243,6 +243,14 @@ export default class WalletDetails extends Vue {
 
   get hasLockedBalance() {
     return !!this.wallet.lockedBalance;
+  }
+
+  get hasSecondPublicKey() {
+    return this.wallet.attributes?.secondPublicKey || this.wallet.secondPublicKey;
+  }
+
+  get hasMultiSignature() {
+    return this.wallet.attributes?.multiSignature || this.wallet.multiSignature;
   }
 
   private setView(view: string) {
