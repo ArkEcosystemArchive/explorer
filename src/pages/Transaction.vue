@@ -56,6 +56,7 @@ import NotFound from "@/components/utils/NotFound.vue";
 import TransactionDetails from "@/components/transaction/Details.vue";
 import MultiPaymentTransactions from "@/components/tables/MultiPaymentTransactions.vue";
 import TransactionService from "@/services/transaction";
+import { paginationLimit } from "@/constants";
 
 Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 
@@ -156,9 +157,9 @@ export default class TransactionPage extends Vue {
     // @ts-ignore
     if (this.transaction && this.isMultiPayment(this.transaction.type, this.transaction.typeGroup)) {
       const transactions = this.transaction.asset.payments.length;
-      const pages = Math.ceil(transactions / 25);
+      const pages = Math.ceil(transactions / paginationLimit);
       this.meta = {
-        count: transactions >= 25 ? 25 : transactions,
+        count: transactions >= paginationLimit ? paginationLimit : transactions,
         pageCount: pages,
         totalCount: transactions,
         next: pages > 1 ? "2" : null,

@@ -1,6 +1,6 @@
 <template>
   <svg
-    v-if="name"
+    v-if="iconPath"
     v-bind="styles"
     :viewBox="viewBox"
     version="1.1"
@@ -27,12 +27,21 @@ export default class SvgIcon extends Vue {
   }
 
   get iconPath() {
-    let icon = require(`@/assets/images/svg/${this.name}.svg`);
-    if (Object.prototype.hasOwnProperty.call(icon, "default")) {
-      icon = icon.default;
-    }
+    if (this.name) {
+      try {
+        let icon = require(`@/assets/images/svg/${this.name}.svg`);
+        if (Object.prototype.hasOwnProperty.call(icon, "default")) {
+          icon = icon.default;
+        }
 
-    return icon.url;
+        return icon.url;
+      } catch (e) {
+        // tslint:disable-next-line:no-console
+        console.log(e.message || e.data.error);
+      }
+
+      return null;
+    }
   }
 }
 </script>

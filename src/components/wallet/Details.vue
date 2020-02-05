@@ -61,7 +61,7 @@
           {{ $t("WALLET.BALANCE", { token: networkToken() }) }}
         </div>
         <div class="text-lg text-white semibold">
-          <span v-tooltip="readableCurrency(wallet.balance)">
+          <span v-tooltip="showBalanceTooltip ? readableCurrency(wallet.balance) : ''">
             {{ readableCrypto(wallet.balance, false) }}
           </span>
         </div>
@@ -73,10 +73,10 @@
           <SvgIcon class="ml-2" name="locked-balance" view-box="0 0 16 17" />
         </div>
         <span
-          v-tooltip="{
+          v-tooltip="showBalanceTooltip ? {
             trigger: 'hover click',
             content: readableCurrency(wallet.lockedBalance || 0),
-          }"
+          } : ''"
           class="text-lg text-white semibold"
         >
           {{ readableCrypto(wallet.lockedBalance, false) }}
@@ -215,7 +215,8 @@ import WalletVoters from "@/components/wallet/Voters.vue";
     WalletVoters,
   },
   computed: {
-    ...mapGetters("network", ["knownWallets"]),
+    ...mapGetters("network", ["isListed", "knownWallets", "token"]),
+    ...mapGetters("currency", { currencyName: "name" }),
   },
 })
 export default class WalletDetails extends Vue {
@@ -224,6 +225,9 @@ export default class WalletDetails extends Vue {
   private view: string = "public";
   private showModal: boolean = false;
   private knownWallets: { [key: string]: string };
+  private isListed: boolean;
+  private token: string;
+  private currencyName: string;
 
   get name() {
     return this.knownWallets[this.wallet.address];
@@ -243,6 +247,10 @@ export default class WalletDetails extends Vue {
 
   get hasLockedBalance() {
     return !!this.wallet.lockedBalance;
+  }
+
+  get showBalanceTooltip() {
+    return this.isListed && this.token !== this.currencyName;
   }
 
   private setView(view: string) {
