@@ -174,6 +174,16 @@ describe("Delegate Monitor", () => {
       cy.get(".active-tab").should("include.text", "Standby");
       cy.get(".inactive-tab").should("include.text", "Active");
     });
+
+    it("should be possible to click the 'show more' button for active delegates", () => {
+      cy.get("h1")
+        .contains("Delegate Monitor")
+        .should("exist");
+
+      cy.url().should("include", "/delegate-monitor");
+      cy.get("button.button-lg").click();
+      cy.url().should("include", "delegates/");
+    });
   });
 
   describe("Standby Delegates", () => {
@@ -227,16 +237,6 @@ describe("Delegate Monitor", () => {
 
           cy.url().should("include", "wallets/");
         });
-    });
-
-    it("should be possible to click the 'show more' button for active delegates", () => {
-      cy.get("h1")
-        .contains("Delegate Monitor")
-        .should("exist");
-
-      cy.url().should("include", "/delegate-monitor");
-      cy.get("button.button-lg").click();
-      cy.url().should("include", "delegates/");
     });
   });
 });
