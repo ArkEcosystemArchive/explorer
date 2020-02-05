@@ -29,11 +29,11 @@
         </label>
       </div>
 
-      <span v-if="shouldDisplayCurrency" class="border-r mx-2 md:mx-4 lg:mx-6 my-4 block" />
-      <ToggleCurrency v-if="shouldDisplayCurrency" />
+      <span v-if="showToggleCurrency" class="border-r mx-2 md:mx-4 lg:mx-6 my-4 block" />
+      <ToggleCurrency v-if="showToggleCurrency" />
 
-      <span v-if="shouldDisplayChart" class="border-r mx-2 md:mx-4 lg:mx-6 my-4 hidden md:block" />
-      <ToggleChart v-if="shouldDisplayChart" />
+      <span v-if="showChart" class="border-r mx-2 md:mx-4 lg:mx-6 my-4 hidden md:block" />
+      <ToggleChart v-if="showChart" />
 
       <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4" />
       <ToggleTheme />
@@ -67,11 +67,11 @@ export default class HeaderDefault extends Vue {
   private networkDefaults: any;
   private menuVisible: boolean;
 
-  get shouldDisplayCurrency(): boolean {
+  get showToggleCurrency(): boolean {
     return this.networkDefaults.priceChartOptions.enabled;
   }
 
-  get shouldDisplayChart(): boolean {
+  get showChart(): boolean {
     return this.$route.name === "home" && this.networkDefaults.priceChartOptions.enabled;
   }
 

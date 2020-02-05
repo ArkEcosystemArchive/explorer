@@ -1,10 +1,5 @@
 <template>
   <span
-    v-tooltip="{
-      trigger: 'hover click',
-      content: source && price ? readableCurrency(source, price) : '',
-      placement: tooltipPlacement,
-    }"
     :class="
       !isFee
         ? {
@@ -15,7 +10,16 @@
     "
     class="flex items-center whitespace-no-wrap"
   >
-    <span class="ml-auto">{{ readableCrypto(source) }}</span>
+    <span
+      v-tooltip="{
+        trigger: 'hover click',
+        content: source && price ? readableCurrency(source, price) : '',
+        placement: tooltipPlacement,
+      }"
+      class="ml-auto"
+    >
+      {{ readableCrypto(source) }}
+    </span>
     <SvgIcon
       v-if="showAmountInformation"
       v-tooltip="{
