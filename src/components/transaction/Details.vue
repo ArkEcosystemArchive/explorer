@@ -175,18 +175,23 @@
             </li>
           </ul>
         </div>
-        <div v-if="isLegacyMultiSignature" class="list-row-border-b-no-wrap">
-          <div class="mr-4">{{ $t("TRANSACTION.MULTI_SIGNATURE.LIFETIME") }}</div>
-          <div>
-            {{ multiSignatureAsset.lifetime }}
-          </div>
-        </div>
-        <div class="list-row">
+        <div :class="isLegacyMultiSignature ? 'list-row-border-b-no-wrap' : 'list-row'">
           <div class="mr-4">{{ $t("TRANSACTION.MULTI_SIGNATURE.MIN") }}</div>
           <div>
             {{ multiSignatureAsset.min }} / {{ publicKeysFromMultiSignatureAsset.length }}
           </div>
         </div>
+        <template v-if="isLegacyMultiSignature">
+          <div class="list-row">
+            <div class="mr-4">{{ $t("TRANSACTION.MULTI_SIGNATURE.LIFETIME") }}</div>
+            <div>
+              {{ multiSignatureAsset.lifetime }}
+            </div>
+          </div>
+          <div v-if="isLegacyMultiSignature" class="list-row text-sm text-theme-text-secondary">
+            <span>* {{ $t("TRANSACTION.MULTI_SIGNATURE.LEGACY_NOTICE") }}</span>
+          </div>
+        </template>
       </div>
     </section>
 

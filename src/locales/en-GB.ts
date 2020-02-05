@@ -71,6 +71,7 @@ export default {
       MIN: "Minimum participants",
       LIFETIME: "Lifetime",
       PARTICIPANTS: "Participants",
+      LEGACY_NOTICE: "This transaction is a legacy Multisignature Registration",
     },
     NONCE: "Nonce",
     TIMELOCK: {
