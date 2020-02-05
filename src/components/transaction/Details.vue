@@ -155,7 +155,7 @@
       </div>
     </section>
 
-    <section v-if="isMultiSignature(transaction.type, transaction.typeGroup)" class="page-section py-5 md:py-10 mb-5">
+    <section v-if="isMultiSignature(transaction.type, transaction.typeGroup)" class="TransactionDetails__MultiSignature page-section py-5 md:py-10 mb-5">
       <div class="px-5 sm:px-10">
         <div class="list-row-border-b">
           <div class="mr-4">{{ $t("TRANSACTION.MULTI_SIGNATURE.ADDRESS") }}</div>
@@ -175,7 +175,7 @@
             </li>
           </ul>
         </div>
-        <div :class="isLegacyMultiSignature ? 'list-row-border-b-no-wrap' : 'list-row'">
+        <div :class="isLegacyMultiSignature ? 'list-row-border-b' : 'list-row'">
           <div class="mr-4">{{ $t("TRANSACTION.MULTI_SIGNATURE.MIN") }}</div>
           <div>
             {{ multiSignatureAsset.min }} / {{ publicKeysFromMultiSignatureAsset.length }}
@@ -219,14 +219,10 @@ import { TranslateResult } from "vue-i18n";
 import { mapGetters } from "vuex";
 import { ITransaction } from "@/interfaces";
 import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
-import { LinkTransaction } from "@/components/links";
 import CryptoCompareService from "@/services/crypto-compare";
 import TransactionService from "@/services/transaction";
 
 @Component({
-  components: {
-    LinkTransaction,
-  },
   computed: {
     ...mapGetters("currency", { currencySymbol: "symbol" }),
     ...mapGetters("network", ["height"]),
