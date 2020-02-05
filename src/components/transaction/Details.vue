@@ -175,7 +175,7 @@
             </li>
           </ul>
         </div>
-        <div v-if="isLegacyMultiSignature" class="list-row-norder-b-no-wrap">
+        <div v-if="isLegacyMultiSignature" class="list-row-border-b-no-wrap">
           <div class="mr-4">{{ $t("TRANSACTION.MULTI_SIGNATURE.LIFETIME") }}</div>
           <div>
             {{ multiSignatureAsset.lifetime }}
