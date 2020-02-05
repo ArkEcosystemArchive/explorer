@@ -41,8 +41,8 @@ export default {
       return addressFromPublicKey(publicKey);
     },
 
-    addressFromMultiSignatureAsset(asset, legacy = false): string {
-      if (legacy) {
+    addressFromMultiSignatureAsset(asset): string {
+      if (!!asset.keysgroup) {
         asset.publicKeys = asset.keysgroup.map(publicKey => publicKey.slice(1));
       }
 
