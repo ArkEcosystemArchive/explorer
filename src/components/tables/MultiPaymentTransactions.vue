@@ -25,18 +25,21 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { IDelegate, ISortParameters, ITransaction } from "@/interfaces";
 import CryptoCompareService from "@/services/crypto-compare";
+import { paginationLimit } from "@/constants";
 
 @Component({
   computed: {
     ...mapGetters("currency", { currencySymbol: "symbol" }),
+    ...mapGetters("network", ["isListed"]),
   },
 })
 export default class MultiPaymentTransactions extends Vue {
   @Prop({ required: true }) public transaction: ITransaction;
   @Prop({ required: false, default: 0 }) public page: number;
-  @Prop({ required: false, default: 25 }) public count: number;
+  @Prop({ required: false, default: paginationLimit }) public count: number;
 
   private currencySymbol: string;
+  private isListed: boolean;
   private transactions: Array<{ recipientId: string; amount: string; price: number | null }> | null = null;
 
   get columns() {
@@ -95,8 +98,10 @@ export default class MultiPaymentTransactions extends Vue {
       return;
     }
 
-    const promises = this.transactions.map(this.fetchPrice);
-    await Promise.all(promises);
+    if (this.isListed) {
+      const promises = this.transactions.map(this.fetchPrice);
+      await Promise.all(promises);
+    }
   }
 
   private emitSortChange(params: ISortParameters[]) {

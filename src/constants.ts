@@ -41,3 +41,6 @@ export const transactionTypes: ITransactionType[] = [
     typeGroup: TypeGroupTransaction.MAGISTRATE,
   },
 ];
+
+export const apiLimit: number = 100;
+export const paginationLimit: number = 25;

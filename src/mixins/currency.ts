@@ -27,13 +27,13 @@ export default {
     ): string {
       const currencyName: string = currency || store.getters["currency/name"];
 
-      if (normalise) {
-        value = parseInt(value.toString(), 10) / 1e8;
-      }
-
       let bigNumberValue = BigNumber.make(value);
 
-      bigNumberValue = bigNumberValue.times(rate) || BigNumber.make(store.getters["currency/rate"]);
+      if (normalise) {
+        bigNumberValue = bigNumberValue.dividedBy(1e8);
+      }
+
+      bigNumberValue = bigNumberValue.times(rate || BigNumber.make(store.getters["currency/rate"]));
 
       const cryptos: { [key: string]: string } = {
         ARK: "Ѧ",
@@ -43,10 +43,10 @@ export default {
       };
 
       return [store.getters["network/token"], "BTC", "ETH", "LTC"].some(c => currencyName.indexOf(c) > -1)
-        ? `${Number(value).toLocaleString(locale, {
+        ? `${Number(bigNumberValue).toLocaleString(locale, {
             maximumFractionDigits: 8,
           })} ${cryptos[currencyName]}`
-        : Number(value).toLocaleString(locale, {
+        : Number(bigNumberValue).toLocaleString(locale, {
             style: "currency",
             currency: currencyName,
           });

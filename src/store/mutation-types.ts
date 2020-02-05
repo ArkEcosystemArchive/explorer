@@ -29,6 +29,7 @@ export const SET_FORGED: string = "SET_FORGED";
 export const SET_NETWORK_DEFAULTS: string = "SET_NETWORK_DEFAULTS";
 export const SET_NETWORK_SERVER: string = "SET_NETWORK_SERVER";
 export const SET_NETWORK_TOKEN: string = "SET_NETWORK_TOKEN";
+export const SET_NETWORK_TOKEN_IS_LISTED: string = "SET_NETWORK_TOKEN_IS_LISTED";
 export const SET_NETWORK_SYMBOL: string = "SET_NETWORK_SYMBOL";
 export const SET_NETWORK_NETHASH: string = "SET_NETWORK_NETHASH";
 export const SET_NETWORK_CURRENCIES: string = "SET_NETWORK_CURRENCIES";
