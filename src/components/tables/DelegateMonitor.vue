@@ -61,7 +61,7 @@ import { IDelegate, ISortParameters } from "@/interfaces";
 export default class TableDelegates extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })
@@ -116,7 +116,7 @@ export default class TableDelegates extends Vue {
 
     if (this.activeTab !== "active") {
       // remove the columns for blocks, last forged and status
-      const index = columns.findIndex(el => {
+      const index = columns.findIndex((el) => {
         return el.field === "blocks.produced";
       });
       columns.splice(index, 3);

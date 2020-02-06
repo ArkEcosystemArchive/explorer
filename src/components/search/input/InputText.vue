@@ -15,47 +15,46 @@
       <textarea
         v-if="inputType === 'textarea'"
         ref="input"
-        v-on:input="onInput"
         v-model="model"
-        :class="[{ 'InputText__input--read-only': isReadOnly, 'InputText__input--large': isLarge, 'text-grey': nightMode }]"
+        :class="[
+          { 'InputText__input--read-only': isReadOnly, 'InputText__input--large': isLarge, 'text-grey': nightMode },
+        ]"
         :rows="rows"
         :name="name"
         :disabled="isDisabled || isReadOnly"
         :placeholder="placeholder"
         class="InputText__input flex-1 border-b text-black"
+        @input="onInput"
         @focus="onFocus"
         @blur="onBlur"
       />
       <select
         v-else-if="inputType === 'select'"
         ref="input"
-        v-on:input="onInput"
         v-model="model"
-        :class="[{ 'InputText__input--read-only': isReadOnly, 'InputText__input--large': isLarge, 'text-grey': nightMode }]"
+        :class="[
+          { 'InputText__input--read-only': isReadOnly, 'InputText__input--large': isLarge, 'text-grey': nightMode },
+        ]"
         :name="name"
         :disabled="isDisabled || isReadOnly"
         :placeholder="placeholder"
         class="InputText__input InputSelect__input flex-1 text-black"
+        @input="onInput"
         @change="onChange"
         @focus="onFocus"
         @blur="onBlur"
       >
-        <option
-          v-for="selectOption in selectOptions"
-          :key="selectOption.value"
-          :value="selectOption.value"
-        >
-          {{
-          selectOption.display
-          }}
+        <option v-for="selectOption in selectOptions" :key="selectOption.value" :value="selectOption.value">
+          {{ selectOption.display }}
         </option>
       </select>
       <input
         v-else
         ref="input"
-        v-on:input="onInput"
         v-model="model"
-        :class="[{ 'InputText__input--read-only': isReadOnly, 'InputText__input--large': isLarge, 'text-grey': nightMode }]"
+        :class="[
+          { 'InputText__input--read-only': isReadOnly, 'InputText__input--large': isLarge, 'text-grey': nightMode },
+        ]"
         :name="name"
         :disabled="isDisabled || isReadOnly"
         :type="inputType"
@@ -63,6 +62,7 @@
         :placeholder="placeholder"
         :min="inputType === 'number' && 0"
         class="InputText__input flex-1 text-black"
+        @input="onInput"
         @focus="onFocus"
         @blur="onBlur"
       />
@@ -99,9 +99,9 @@ export default class InputText extends Vue {
   @Prop({ default: false }) public isReadOnly!: boolean;
   @Prop({ default: undefined }) public value!: string;
   @Prop({ default: null }) public selectOptions!: Array<{ [key: string]: string }>;
-  private inputType: string = "text";
-  private isFocused: boolean = false;
-  private inputValue: string = "";
+  private inputType = "text";
+  private isFocused = false;
+  private inputValue = "";
 
   @Watch("value")
   public onValueChanged(value: string) {

@@ -25,7 +25,7 @@
               :asset="transaction.asset"
               :trunc="false"
               :type-group="transaction.typeGroup"
-              :showAsType="true"
+              :show-as-type="true"
               tooltip-placement="left"
             />
           </div>
@@ -155,7 +155,10 @@
       </div>
     </section>
 
-    <section v-if="isMultiSignature(transaction.type, transaction.typeGroup)" class="TransactionDetails__MultiSignature page-section py-5 md:py-10 mb-5">
+    <section
+      v-if="isMultiSignature(transaction.type, transaction.typeGroup)"
+      class="TransactionDetails__MultiSignature page-section py-5 md:py-10 mb-5"
+    >
       <div class="px-5 sm:px-10">
         <div v-if="!isLegacyMultiSignature" class="list-row-border-b">
           <div class="mr-4">{{ $t("TRANSACTION.MULTI_SIGNATURE.ADDRESS") }}</div>
@@ -171,15 +174,18 @@
           <div class="mr-4">{{ $t("TRANSACTION.MULTI_SIGNATURE.PARTICIPANTS") }}</div>
           <ul>
             <li v-for="publicKey in publicKeysFromMultiSignatureAsset" :key="publicKey" class="mb-1">
-              <LinkWallet :address="addressFromPublicKey(publicKey)" :trunc="false" tooltip-placement="left" class="justify-end" />
+              <LinkWallet
+                :address="addressFromPublicKey(publicKey)"
+                :trunc="false"
+                tooltip-placement="left"
+                class="justify-end"
+              />
             </li>
           </ul>
         </div>
         <div :class="isLegacyMultiSignature ? 'list-row-border-b' : 'list-row'">
           <div class="mr-4">{{ $t("TRANSACTION.MULTI_SIGNATURE.MIN") }}</div>
-          <div>
-            {{ multiSignatureAsset.min }} / {{ publicKeysFromMultiSignatureAsset.length }}
-          </div>
+          <div>{{ multiSignatureAsset.min }} / {{ publicKeysFromMultiSignatureAsset.length }}</div>
         </div>
         <template v-if="isLegacyMultiSignature">
           <div class="list-row">
@@ -231,7 +237,7 @@ import TransactionService from "@/services/transaction";
 export default class TransactionDetails extends Vue {
   @Prop({ required: true }) public transaction: ITransaction;
 
-  private initialBlockHeight: number = 0;
+  private initialBlockHeight = 0;
   private price: number | null = 0;
   private currencySymbol: string;
   private height: number;
@@ -256,7 +262,7 @@ export default class TransactionDetails extends Vue {
   }
 
   get isLegacyMultiSignature() {
-    return !!this.transaction.asset.multiSignatureLegacy
+    return !!this.transaction.asset.multiSignatureLegacy;
   }
 
   get multiSignatureAsset() {
@@ -265,7 +271,7 @@ export default class TransactionDetails extends Vue {
 
   get publicKeysFromMultiSignatureAsset() {
     return this.isLegacyMultiSignature
-      ? this.multiSignatureAsset.keysgroup.map(publicKey => publicKey.slice(1))
+      ? this.multiSignatureAsset.keysgroup.map((publicKey) => publicKey.slice(1))
       : this.multiSignatureAsset.publicKeys;
   }
 

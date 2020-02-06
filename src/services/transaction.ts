@@ -48,7 +48,7 @@ class TransactionService {
 
   public async search(
     body: ITransactionSearchParams,
-    page: number = 1,
+    page = 1,
     limit: number = paginationLimit,
   ): Promise<IApiTransactionsWrapper> {
     const response = (await ApiService.post("transactions/search", body, {
@@ -61,7 +61,7 @@ class TransactionService {
     return response;
   }
 
-  public async byBlock(id: string, page: number = 1, limit: number = paginationLimit): Promise<IApiTransactionsWrapper> {
+  public async byBlock(id: string, page = 1, limit: number = paginationLimit): Promise<IApiTransactionsWrapper> {
     const response = (await ApiService.get(`blocks/${id}/transactions`, {
       params: {
         orderBy: "timestamp:desc",
@@ -85,7 +85,11 @@ class TransactionService {
     return response;
   }
 
-  public async sentByAddress(address: string, page: number = 1, limit: number = paginationLimit): Promise<IApiTransactionsWrapper> {
+  public async sentByAddress(
+    address: string,
+    page = 1,
+    limit: number = paginationLimit,
+  ): Promise<IApiTransactionsWrapper> {
     const response = (await ApiService.get(`wallets/${address}/transactions/sent`, {
       params: {
         orderBy: "timestamp:desc",
@@ -99,7 +103,7 @@ class TransactionService {
 
   public async receivedByAddress(
     address: string,
-    page: number = 1,
+    page = 1,
     limit: number = paginationLimit,
   ): Promise<IApiTransactionsWrapper> {
     const response = (await ApiService.get(`wallets/${address}/transactions/received`, {
@@ -113,7 +117,11 @@ class TransactionService {
     return response;
   }
 
-  public async locksByAddress(address: string, page: number = 1, limit: number = paginationLimit): Promise<IApiTransactionsWrapper> {
+  public async locksByAddress(
+    address: string,
+    page = 1,
+    limit: number = paginationLimit,
+  ): Promise<IApiTransactionsWrapper> {
     const response = (await ApiService.get(`wallets/${address}/locks`, {
       params: {
         orderBy: "timestamp:desc",
@@ -127,7 +135,7 @@ class TransactionService {
 
   public async findUnlockedForLocks(
     transactionIds: string[],
-    page: number = 1,
+    page = 1,
     limit: number = paginationLimit,
   ): Promise<IApiTransactionsWrapper> {
     const response = (await ApiService.post(`locks/unlocked`, {

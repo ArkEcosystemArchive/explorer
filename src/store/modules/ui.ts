@@ -222,12 +222,12 @@ const mutations: MutationTree<IUiState> = {
 };
 
 const getters: GetterTree<IUiState, {}> = {
-  language: state => state.language,
-  locale: state => state.locale,
-  nightMode: state => state.nightMode,
-  priceChartOptions: state => state.priceChartOptions,
-  headerType: state => state.headerType,
-  menuVisible: state => state.menuVisible,
+  language: (state) => state.language,
+  locale: (state) => state.locale,
+  nightMode: (state) => state.nightMode,
+  priceChartOptions: (state) => state.priceChartOptions,
+  headerType: (state) => state.headerType,
+  menuVisible: (state) => state.menuVisible,
 
   hasAcceptedLinkDisclaimer(state) {
     return state.hasAcceptedLinkDisclaimer || localStorage.getItem("hasAcceptedLinkDisclaimer");
@@ -276,7 +276,7 @@ const getters: GetterTree<IUiState, {}> = {
     return params ? JSON.parse(params) : { field: "balance", type: "desc" };
   },
 
-  walletTransactionTab: state => state.walletTransactionTab,
+  walletTransactionTab: (state) => state.walletTransactionTab,
 };
 
 export const ui: Module<IUiState, {}> = {

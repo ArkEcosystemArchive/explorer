@@ -86,7 +86,7 @@ import CryptoCompareService from "@/services/crypto-compare";
 export default class TableTransactionsDesktop extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })
@@ -149,7 +149,7 @@ export default class TableTransactionsDesktop extends Vue {
     ];
 
     if (this.showConfirmations) {
-      columns = columns.filter(column => column.field !== "vendorField");
+      columns = columns.filter((column) => column.field !== "vendorField");
 
       columns.push({
         label: this.$t("COMMON.CONFIRMATIONS"),
@@ -166,7 +166,7 @@ export default class TableTransactionsDesktop extends Vue {
   }
 
   get showSmartBridgeIcon() {
-    return this.transactions!.some(transaction => {
+    return this.transactions!.some((transaction) => {
       return !!transaction.vendorField;
     });
   }

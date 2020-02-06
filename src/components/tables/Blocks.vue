@@ -71,12 +71,12 @@ import { mapGetters } from "vuex";
 @Component({
   computed: {
     ...mapGetters("network", ["isListed"]),
-  }
+  },
 })
 export default class TableBlocksDesktop extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })

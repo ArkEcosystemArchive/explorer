@@ -54,7 +54,7 @@ export default class App extends Vue {
   private language: string;
   private locale: string;
   private nightMode: boolean;
-  private hasBlurFilter: boolean = false;
+  private hasBlurFilter = false;
 
   public async created() {
     MigrationService.executeMigrations();
@@ -205,11 +205,11 @@ export default class App extends Vue {
     let types = transactionTypes;
 
     if (!this.hasMagistrateEnabled) {
-      types = types.filter(type => type.typeGroup !== TypeGroupTransaction.MAGISTRATE);
+      types = types.filter((type) => type.typeGroup !== TypeGroupTransaction.MAGISTRATE);
     }
 
     if (!this.hasHtlcEnabled) {
-      types = types.filter(type => !type.key.startsWith("TIMELOCK"));
+      types = types.filter((type) => !type.key.startsWith("TIMELOCK"));
     }
 
     this.$store.dispatch("network/setEnabledTransactionTypes", types);

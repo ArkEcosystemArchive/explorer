@@ -68,7 +68,7 @@ import { IDelegate } from "@/interfaces";
 export default class TableDelegatesMobile extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })

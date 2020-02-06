@@ -1,5 +1,5 @@
 <template>
-  <Modal v-if="showModal" :closeOutside="false" :showCancel="false">
+  <Modal v-if="showModal" :close-outside="false" :show-cancel="false">
     <div class="text-justify" style="max-width: 450px;">
       <p class="text-center semibold text-3xl mb-4">
         {{ $t("DISCLAIMER.TITLE") }}

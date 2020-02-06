@@ -97,8 +97,8 @@ export default class Pagination extends Vue {
   @Prop({ required: true }) public meta: IMeta;
   @Prop({ required: true }) public currentPage: number;
 
-  private pageInputVisible: boolean = false;
-  private mobileView: boolean = false;
+  private pageInputVisible = false;
+  private mobileView = false;
 
   get showPageInput() {
     return this.pageInputVisible;
@@ -185,7 +185,7 @@ export default class Pagination extends Vue {
     const WIDTH_THRESHOLD = 768;
     const widthQuery = window.matchMedia(`(max-width: ${WIDTH_THRESHOLD}px)`);
 
-    widthQuery.addListener(e => this.setMobileView(e.matches));
+    widthQuery.addListener((e) => this.setMobileView(e.matches));
 
     this.setMobileView(window.innerWidth < WIDTH_THRESHOLD);
   }

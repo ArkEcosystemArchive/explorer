@@ -48,8 +48,8 @@ export default class Delegates extends Vue {
   }
   private delegates: IDelegate[] | null = null;
   private meta: any | null = null;
-  private currentPage: number = 0;
-  private resignedOnly: boolean = false;
+  private currentPage = 0;
+  private resignedOnly = false;
 
   @Watch("currentPage")
   public onCurrentPageChanged() {

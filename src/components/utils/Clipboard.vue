@@ -12,8 +12,8 @@ import { IVTooltip } from "@/interfaces";
 export default class Clipboard extends Vue {
   @Prop({ required: true }) public value: string;
 
-  private copying: boolean = false;
-  private notSupported: boolean = false;
+  private copying = false;
+  private notSupported = false;
 
   private getTooltip() {
     const tooltip: IVTooltip = {

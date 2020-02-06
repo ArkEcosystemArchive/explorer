@@ -49,7 +49,7 @@ import { IBridgechain } from "@/interfaces";
 export default class TableBridgechainMobile extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })

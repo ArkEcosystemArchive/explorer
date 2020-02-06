@@ -40,7 +40,7 @@ import { IBusiness, ISortParameters } from "@/interfaces";
 export default class TableBusinessesDesktop extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })

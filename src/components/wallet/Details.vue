@@ -73,10 +73,14 @@
           <SvgIcon class="ml-2" name="locked-balance" view-box="0 0 16 17" />
         </div>
         <span
-          v-tooltip="showBalanceTooltip ? {
-            trigger: 'hover click',
-            content: readableCurrency(wallet.lockedBalance || 0),
-          } : ''"
+          v-tooltip="
+            showBalanceTooltip
+              ? {
+                  trigger: 'hover click',
+                  content: readableCurrency(wallet.lockedBalance || 0),
+                }
+              : ''
+          "
           class="text-lg text-white semibold"
         >
           {{ readableCrypto(wallet.lockedBalance, false) }}
@@ -222,8 +226,8 @@ import WalletVoters from "@/components/wallet/Voters.vue";
 export default class WalletDetails extends Vue {
   @Prop({ required: true }) public wallet: IWallet;
 
-  private view: string = "public";
-  private showModal: boolean = false;
+  private view = "public";
+  private showModal = false;
   private knownWallets: { [key: string]: string };
   private isListed: boolean;
   private token: string;

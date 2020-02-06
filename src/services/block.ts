@@ -71,7 +71,7 @@ class BlockService {
     return response.data![0];
   }
 
-  public async search(body: IBlockSearchParams, page: number = 1, limit: number = paginationLimit): Promise<IApiBlocksWrapper> {
+  public async search(body: IBlockSearchParams, page = 1, limit: number = paginationLimit): Promise<IApiBlocksWrapper> {
     const response = (await ApiService.post("blocks/search", body, {
       params: {
         page,

@@ -50,7 +50,7 @@ import { ITransactionType } from "@/interfaces";
   },
 })
 export default class HomePage extends Vue {
-  private dataView: string = "transactions";
+  private dataView = "transactions";
   private transactionType: ITransactionType = { key: "ALL", type: -1 };
 
   get isChartEnabled() {

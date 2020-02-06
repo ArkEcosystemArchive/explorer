@@ -34,7 +34,7 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 })
 export default class WalletPage extends Vue {
   private wallet: IWallet | null = null;
-  private activeTab: string = "all";
+  private activeTab = "all";
 
   get isDelegate() {
     if (this.wallet) {

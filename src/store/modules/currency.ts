@@ -71,10 +71,10 @@ const mutations: MutationTree<ICurrencyState> = {
 };
 
 const getters: GetterTree<ICurrencyState, {}> = {
-  name: state => state.name,
-  rate: state => state.rate,
-  symbol: state => state.symbol,
-  lastConversion: state => state.lastConversion,
+  name: (state) => state.name,
+  rate: (state) => state.rate,
+  symbol: (state) => state.symbol,
+  lastConversion: (state) => state.lastConversion,
 };
 
 export const currency: Module<ICurrencyState, {}> = {

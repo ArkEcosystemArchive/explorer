@@ -3,7 +3,7 @@ import { IApiBusinessesWrapper } from "../interfaces";
 import { paginationLimit } from "@/constants";
 
 class BusinessService {
-  public async all(page: number = 1, limit: number = paginationLimit): Promise<IApiBusinessesWrapper> {
+  public async all(page = 1, limit: number = paginationLimit): Promise<IApiBusinessesWrapper> {
     const response = (await ApiService.get(`businesses`, {
       params: {
         page,

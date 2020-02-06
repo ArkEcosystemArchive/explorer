@@ -51,8 +51,8 @@ export default class LastBlock extends Vue {
     await this.getBlock();
 
     this.$store.watch(
-      state => state.network.height,
-      value => this.getBlock(),
+      (state) => state.network.height,
+      (value) => this.getBlock(),
     );
   }
 
