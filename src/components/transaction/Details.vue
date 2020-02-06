@@ -161,7 +161,7 @@
           <div class="mr-4">{{ $t("TRANSACTION.MULTI_SIGNATURE.ADDRESS") }}</div>
           <div class="truncate">
             <LinkWallet
-              :address="addressFromMultiSignatureAsset(multiSignatureAsset)"
+              :address="isLegacyMultiSignature ? transaction.sender : addressFromMultiSignatureAsset(multiSignatureAsset)"
               :trunc="false"
               tooltip-placement="left"
             />
