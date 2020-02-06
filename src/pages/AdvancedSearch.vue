@@ -182,7 +182,7 @@ export default class AdvancedSearchPage extends Vue {
 
     // Remove field from search params when input is empty
     if (processedInput.value !== 0 && !processedInput.value) {
-      this.removeFromSearchParams(name);
+      this.removeFromSearchParams(input.name);
       return;
     }
 
