@@ -91,10 +91,16 @@ describe("Store > Network", () => {
     expect(store.getters["network/height"]).toEqual("setHeight");
   });
 
-  it("should set the network blocktime", () => {
-    store.dispatch("network/setBlocktime", 100);
+  it("should set the network epoch", () => {
+    store.dispatch("network/setEpoch", "1234");
 
-    expect(store.getters["network/blocktime"]).toEqual(100);
+    expect(store.getters["network/epoch"]).toEqual("1234");
+  });
+
+  it("should set the network blocktime", () => {
+    store.dispatch("network/setBlocktime", 10);
+
+    expect(store.getters["network/blocktime"]).toEqual(10);
   });
 
   it("should set the magistrate property to enabled", () => {
