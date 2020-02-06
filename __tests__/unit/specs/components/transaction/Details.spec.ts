@@ -5,14 +5,39 @@ import TransactionTypesMixin from "@/mixins/transaction-types";
 import StringsMixin from "@/mixins/strings";
 
 import TransactionDetails from "@/components/transaction/Details";
+import { CoreTransaction, TypeGroupTransaction } from "@/enums";
 import { useI18n } from "../../../__utils__/i18n";
 import Vuex from "vuex";
+import merge from "lodash/merge";
 
 describe("Components > Transaction > Details", () => {
   const localVue = createLocalVue();
   localVue.use(Vuex);
 
   const i18n = useI18n(localVue);
+
+  const mountComponent = config => {
+    return mount(
+      TransactionDetails,
+      merge(
+        {
+          stubs: {
+            LinkBlock: "<div></div>",
+            LinkWallet: "<div></div>",
+          },
+          mocks: {
+            addressFromPublicKey: () => "address",
+            addressFromMultiSignatureAsset: () => "multi-signature-address",
+          },
+          i18n,
+          localVue,
+          mixins: [CurrencyMixin, MiscMixin, StringsMixin, TransactionTypesMixin],
+          store,
+        },
+        config,
+      ),
+    );
+  };
 
   const store = new Vuex.Store({
     modules: {
@@ -33,7 +58,7 @@ describe("Components > Transaction > Details", () => {
   });
 
   it("should display the transaction details", () => {
-    const wrapper = mount(TransactionDetails, {
+    const wrapper = mountComponent({
       propsData: {
         transaction: {
           id: "transaction-id",
@@ -41,17 +66,65 @@ describe("Components > Transaction > Details", () => {
           vendorField: "vendor-field",
         },
       },
-      stubs: {
-        LinkWallet: "<div></div>",
-        LinkBlock: "<div></div>",
-      },
-      i18n,
-      localVue,
-      mixins: [CurrencyMixin, MiscMixin, StringsMixin, TransactionTypesMixin],
-      store,
     });
     expect(wrapper.findAll(".list-row-border-b")).toHaveLength(6);
     expect(wrapper.findAll(".list-row-border-b-no-wrap")).toHaveLength(2);
     expect(wrapper.findAll(".list-row")).toHaveLength(1);
+  });
+
+  describe("Multisignature Registration", () => {
+    it("should show asset details", () => {
+      const wrapper = mountComponent({
+        propsData: {
+          transaction: {
+            id: "transaction-id",
+            confirmations: 1,
+            type: CoreTransaction.MULTI_SIGNATURE,
+            typeGroup: TypeGroupTransaction.CORE,
+            asset: {
+              multiSignature: {
+                publicKeys: [
+                  "public-key",
+                ],
+                min: 1,
+              },
+            },
+          },
+        },
+      });
+
+      expect(wrapper.find(".TransactionDetails__MultiSignature").exists()).toBe(true);
+      expect(wrapper.find(".TransactionDetails__MultiSignature .list-row-border-b").text()).toEqual(expect.stringContaining("Generated address"));
+      expect(wrapper.find(".TransactionDetails__MultiSignature .list-row-border-b-no-wrap").text()).toEqual(expect.stringContaining("Participants"));
+      expect(wrapper.find(".TransactionDetails__MultiSignature .list-row").text()).toEqual(expect.stringContaining("Minimum participants"));
+    });
+
+    it("should show asset details for legacy transactions", () => {
+      const wrapper = mountComponent({
+        propsData: {
+          transaction: {
+            id: "transaction-id",
+            confirmations: 1,
+            type: CoreTransaction.MULTI_SIGNATURE,
+            typeGroup: TypeGroupTransaction.CORE,
+            asset: {
+              multiSignatureLegacy: {
+                keysgroup: [
+                  "+public-key",
+                ],
+                lifetime: 1,
+                min: 1,
+              },
+            },
+          },
+        },
+      });
+
+      expect(wrapper.find(".TransactionDetails__MultiSignature").exists()).toBe(true);
+      expect(wrapper.find(".TransactionDetails__MultiSignature .list-row-border-b-no-wrap").text()).toEqual(expect.stringContaining("Participants"));
+      expect(wrapper.find(".TransactionDetails__MultiSignature .list-row-border-b").text()).toEqual(expect.stringContaining("Minimum participants"));
+      expect(wrapper.findAll(".TransactionDetails__MultiSignature .list-row").at(0).text()).toEqual(expect.stringContaining("Lifetime"));
+      expect(wrapper.findAll(".TransactionDetails__MultiSignature .list-row").at(1).text()).toEqual(expect.stringContaining("This transaction is a legacy Multisignature Registration"));
+    });
   });
 });
