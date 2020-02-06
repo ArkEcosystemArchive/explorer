@@ -111,10 +111,17 @@ export default class App extends Vue {
       !!response.constants.htlcEnabled
     );
 
-    this.$store.dispatch(
-      "ui/setLanguage",
-      localStorage.getItem("language") || "en-GB"
-    );
+    if (network.alias === "Main") {
+      try {
+        await CryptoCompareService.price(response.token);
+        this.$store.dispatch("network/setIsListed", true);
+      } catch (e) {
+        // tslint:disable-next-line:no-console
+        console.log(e.message || e.data.error);
+      }
+    }
+
+    this.$store.dispatch("ui/setLanguage", localStorage.getItem("language") || "en-GB");
 
     this.$store.dispatch(
       "ui/setLocale",
@@ -173,9 +180,14 @@ export default class App extends Vue {
   }
 
   public async updateCurrencyRate() {
-    if (this.currencyName !== this.token) {
-      const rate = await CryptoCompareService.price(this.currencyName);
-      this.$store.dispatch("currency/setRate", rate);
+    if (this.$store.getters["network/isListed"] && this.currencyName !== this.token) {
+      try {
+        const rate = await CryptoCompareService.price(this.currencyName);
+        this.$store.dispatch("currency/setRate", rate);
+      } catch (e) {
+        // tslint:disable-next-line:no-console
+        console.log(e.message || e.data.error);
+      }
     }
   }
 

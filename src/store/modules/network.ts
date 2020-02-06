@@ -17,6 +17,7 @@ const state: INetworkState = {
   activeDelegates: 51,
   rewardOffset: 51,
   token: null,
+  isListed: false,
   symbol: null,
   currencies: [],
   knownWallets: [],
@@ -77,6 +78,12 @@ const actions: ActionTree<INetworkState, {}> = {
     commit({
       type: types.SET_NETWORK_TOKEN,
       value
+    });
+  },
+  setIsListed: ({ commit }, value: boolean) => {
+    commit({
+      type: types.SET_NETWORK_TOKEN_IS_LISTED,
+      value,
     });
   },
   setSymbol: ({ commit }, value) => {
@@ -174,6 +181,9 @@ const mutations: MutationTree<INetworkState> = {
   [types.SET_NETWORK_TOKEN](state, payload: IStorePayload) {
     state.token = payload.value;
   },
+  [types.SET_NETWORK_TOKEN_IS_LISTED](state, payload: IStorePayload) {
+    state.isListed = payload.value;
+  },
   [types.SET_NETWORK_SYMBOL](state, payload: IStorePayload) {
     state.symbol = payload.value;
   },
@@ -210,25 +220,26 @@ const mutations: MutationTree<INetworkState> = {
 };
 
 const getters: GetterTree<INetworkState, {}> = {
-  defaults: (state) => state.defaults,
-  server: (state) => state.server,
-  nethash: (state) => state.nethash,
-  alias: (state) => state.alias,
-  addressPrefix: (state) => state.addressPrefix,
-  activeDelegates: (state) => state.activeDelegates,
-  rewardOffset: (state) => state.rewardOffset,
-  token: (state) => state.token,
-  symbol: (state) => state.symbol,
-  currencies: (state) => state.currencies,
-  knownWallets: (state) => state.knownWallets,
-  supply: (state) => state.supply,
-  initialSupply: (state) => state.initialSupply,
-  height: (state) => state.height,
-  epoch: (state) => state.epoch,
-  blocktime: (state) => state.blocktime,
-  hasMagistrateEnabled: (state) => state.hasMagistrateEnabled,
-  hasHtlcEnabled: (state) => state.hasHtlcEnabled,
-  enabledTransactionTypes: (state) => state.enabledTransactionTypes
+  defaults: state => state.defaults,
+  server: state => state.server,
+  nethash: state => state.nethash,
+  alias: state => state.alias,
+  addressPrefix: state => state.addressPrefix,
+  activeDelegates: state => state.activeDelegates,
+  rewardOffset: state => state.rewardOffset,
+  token: state => state.token,
+  isListed: state => state.isListed,
+  symbol: state => state.symbol,
+  currencies: state => state.currencies,
+  knownWallets: state => state.knownWallets,
+  supply: state => state.supply,
+  initialSupply: state => state.initialSupply,
+  height: state => state.height,
+  epoch: state => state.epoch,
+  blocktime: state => state.blocktime,
+  hasMagistrateEnabled: state => state.hasMagistrateEnabled,
+  hasHtlcEnabled: state => state.hasHtlcEnabled,
+  enabledTransactionTypes: state => state.enabledTransactionTypes,
 };
 
 export const network: Module<INetworkState, {}> = {
