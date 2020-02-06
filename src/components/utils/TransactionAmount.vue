@@ -1,10 +1,5 @@
 <template>
   <span
-    v-tooltip="{
-      trigger: 'hover click',
-      content: source && price ? readableCurrency(source, price) : '',
-      placement: tooltipPlacement,
-    }"
     :class="
       !isFee
         ? {
@@ -15,7 +10,16 @@
     "
     class="flex items-center whitespace-no-wrap"
   >
-    <span class="ml-auto">{{ readableCrypto(source) }}</span>
+    <span
+      v-tooltip="{
+        trigger: 'hover click',
+        content: source && price ? readableCurrency(source, price) : '',
+        placement: tooltipPlacement,
+      }"
+      class="ml-auto"
+    >
+      {{ readableCrypto(source) }}
+    </span>
     <SvgIcon
       v-if="showAmountInformation"
       v-tooltip="{
@@ -46,12 +50,14 @@ export default class TransactionAmount extends Vue {
 
   get address() {
     return this.$route.params.address || this.transaction.sender !== this.$route.params.address
-        ? this.$route.params.address
-        : undefined;
+      ? this.$route.params.address
+      : undefined;
   }
 
   get showAmountInformation() {
-    return !this.isFee && this.transactionTab === "all" && this.address && this.amountToSelf && !this.amountToSelf.isZero()
+    return (
+      !this.isFee && this.transactionTab === "all" && this.address && this.amountToSelf && !this.amountToSelf.isZero()
+    );
   }
 
   get source() {
@@ -70,7 +76,11 @@ export default class TransactionAmount extends Vue {
 
   get amountToSelf() {
     // @ts-ignore
-    if (this.transaction.sender === this.address && this.isMultiPayment(this.transaction.type, this.transaction.typeGroup)) {
+    if (
+      this.transaction.sender === this.address &&
+      // @ts-ignore
+      this.isMultiPayment(this.transaction.type, this.transaction.typeGroup)
+    ) {
       // @ts-ignore
       return this.calculateMultipaymentAmount(this.transaction, this.address, "received");
     }

@@ -27,7 +27,11 @@
           <div class="mr-4">
             {{ $t("PAGES.BUSINESSES.REPOSITORY") }}
           </div>
-          <div><a :href="bridgechain.bridgechainRepository" target="_blank" rel="noopener noreferrer nofollow">{{ bridgechain.bridgechainRepository }}</a></div>
+          <div>
+            <a :href="bridgechain.bridgechainRepository" target="_blank" rel="noopener noreferrer nofollow">{{
+              bridgechain.bridgechainRepository
+            }}</a>
+          </div>
         </div>
       </div>
       <div v-if="bridgechains && !bridgechains.length" class="px-5 md:px-10">

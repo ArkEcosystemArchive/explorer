@@ -5,7 +5,7 @@
       'bg-theme-page-background text-theme-text-content min-h-screen font-sans xl:pt-8',
     ]"
   >
-    <div :class="{ 'blur': hasBlurFilter }">
+    <div :class="{ blur: hasBlurFilter }">
       <AppHeader />
 
       <RouterView />
@@ -13,11 +13,7 @@
       <AppFooter />
     </div>
 
-    <PortalTarget
-      name="modal"
-      multiple
-      @change="onPortalChange"
-    />
+    <PortalTarget name="modal" multiple @change="onPortalChange" />
   </main>
 </template>
 
@@ -25,7 +21,16 @@
 import { Component, Vue } from "vue-property-decorator";
 import AppHeader from "@/components/header/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
-import { BlockchainService, BusinessService, CryptoCompareService, DelegateService, MigrationService, NodeService } from "@/services";
+import { transactionTypes } from "@/constants";
+import { TypeGroupTransaction } from "@/enums";
+import {
+  BlockchainService,
+  BusinessService,
+  CryptoCompareService,
+  DelegateService,
+  MigrationService,
+  NodeService,
+} from "@/services";
 import { mapGetters } from "vuex";
 import moment from "moment";
 
@@ -33,7 +38,7 @@ import moment from "moment";
   computed: {
     ...mapGetters("currency", { currencyName: "name" }),
     ...mapGetters("delegates", ["stateHasDelegates"]),
-    ...mapGetters("network", ["token"]),
+    ...mapGetters("network", ["hasHtlcEnabled", "hasMagistrateEnabled", "token"]),
     ...mapGetters("ui", ["language", "locale", "nightMode"]),
   },
   components: { AppHeader, AppFooter },
@@ -44,6 +49,8 @@ export default class App extends Vue {
   private currencyName: string;
   private stateHasDelegates: boolean;
   private token: string;
+  private hasHtlcEnabled: boolean;
+  private hasMagistrateEnabled: boolean;
   private language: string;
   private locale: string;
   private nightMode: boolean;
@@ -73,6 +80,8 @@ export default class App extends Vue {
     this.$store.dispatch("network/setCurrencies", network.currencies);
     this.$store.dispatch("network/setKnownWallets", network.knownWallets);
 
+    this.fetchInitialSupply();
+
     if (network.defaults.currency) {
       this.$store.dispatch("currency/setName", localStorage.getItem("currencyName") || network.defaults.currency.name);
 
@@ -89,6 +98,17 @@ export default class App extends Vue {
     this.$store.dispatch("network/setNethash", response.nethash);
     this.$store.dispatch("network/setEpoch", response.constants.epoch);
     this.$store.dispatch("network/setBlocktime", response.constants.blocktime);
+    this.$store.dispatch("network/setHasHtlcEnabled", !!response.constants.htlcEnabled);
+
+    if (network.alias === "Main") {
+      try {
+        await CryptoCompareService.price(response.token);
+        this.$store.dispatch("network/setIsListed", true);
+      } catch (e) {
+        // tslint:disable-next-line:no-console
+        console.log(e.message || e.data.error);
+      }
+    }
 
     this.$store.dispatch("ui/setLanguage", localStorage.getItem("language") || "en-GB");
 
@@ -106,7 +126,9 @@ export default class App extends Vue {
     this.updateSupply();
     this.updateHeight();
     this.updateDelegates();
-    this.checkForMagistrateEnabled();
+
+    await this.checkForMagistrateEnabled();
+    this.setEnabledTransactionTypes();
   }
 
   public mounted() {
@@ -129,10 +151,26 @@ export default class App extends Vue {
     this.hasBlurFilter = isActive;
   }
 
+  public async fetchInitialSupply() {
+    let initialSupply = localStorage.getItem("initialSupply");
+
+    if (!initialSupply) {
+      const crypto = await NodeService.crypto();
+      initialSupply = crypto.genesisBlock.totalAmount;
+    }
+
+    this.$store.dispatch("network/setInitialSupply", initialSupply);
+  }
+
   public async updateCurrencyRate() {
-    if (this.currencyName !== this.token) {
-      const rate = await CryptoCompareService.price(this.currencyName);
-      this.$store.dispatch("currency/setRate", rate);
+    if (this.$store.getters["network/isListed"] && this.currencyName !== this.token) {
+      try {
+        const rate = await CryptoCompareService.price(this.currencyName);
+        this.$store.dispatch("currency/setRate", rate);
+      } catch (e) {
+        // tslint:disable-next-line:no-console
+        console.log(e.message || e.data.error);
+      }
     }
   }
 
@@ -161,6 +199,20 @@ export default class App extends Vue {
   public async checkForMagistrateEnabled() {
     const hasMagistrateEnabled = await BusinessService.isEnabled();
     this.$store.dispatch("network/setHasMagistrateEnabled", hasMagistrateEnabled);
+  }
+
+  public setEnabledTransactionTypes() {
+    let types = transactionTypes;
+
+    if (!this.hasMagistrateEnabled) {
+      types = types.filter(type => type.typeGroup !== TypeGroupTransaction.MAGISTRATE);
+    }
+
+    if (!this.hasHtlcEnabled) {
+      types = types.filter(type => !type.key.startsWith("TIMELOCK"));
+    }
+
+    this.$store.dispatch("network/setEnabledTransactionTypes", types);
   }
 
   public updateRequired(timestamp: number): boolean {
@@ -201,6 +253,6 @@ export default class App extends Vue {
 
 <style scoped>
 .blur {
-  filter: blur(4px)
+  filter: blur(4px);
 }
 </style>

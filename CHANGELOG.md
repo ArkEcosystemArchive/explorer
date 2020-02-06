@@ -27,7 +27,7 @@ and this project follows the major and minor version releases of [Core](https://
 - refactor: migrate remaining components to typescript ([#754](https://github.com/ArkEcosystem/explorer/issues/754))
 - refactor: replace img with SvgIcon ([#753](https://github.com/ArkEcosystem/explorer/issues/753))
 - chore(deps): add renovate.js ([#743](https://github.com/ArkEcosystem/explorer/issues/743))
-- ci: trigger workflows for push.* and pull_request.* events ([#741](https://github.com/ArkEcosystem/explorer/issues/741))
+- ci: trigger workflows for push._ and pull_request._ events ([#741](https://github.com/ArkEcosystem/explorer/issues/741))
 - ci: setup github action workflow for testing ([#740](https://github.com/ArkEcosystem/explorer/issues/740))
 
 ### Fixed

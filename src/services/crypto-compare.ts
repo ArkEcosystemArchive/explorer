@@ -41,7 +41,12 @@ class CryptoCompareService {
   }
 
   public async price(currency: string): Promise<number | undefined> {
-    const response = await this.get(`https://min-api.cryptocompare.com/data/price?fsym=ARK&tsyms=${currency}`);
+    const response = await this.get(`https://min-api.cryptocompare.com/data/price?fsym=${store.getters["network/token"]}&tsyms=${currency}`);
+
+    if (response.data.Response === "Error") {
+      throw new Error(response.data.Message);
+    }
+
     if (response.data[currency]) {
       return Number(response.data[currency]);
     }

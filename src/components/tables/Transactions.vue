@@ -32,6 +32,7 @@
             :type="data.row.type"
             :asset="data.row.asset"
             :type-group="data.row.typeGroup"
+            :show-timelock-icon="true"
           />
         </div>
 
@@ -78,7 +79,7 @@ import CryptoCompareService from "@/services/crypto-compare";
 
 @Component({
   computed: {
-    ...mapGetters("network", ["activeDelegates"]),
+    ...mapGetters("network", ["activeDelegates", "isListed"]),
     ...mapGetters("currency", { currencySymbol: "symbol" }),
   },
 })
@@ -93,6 +94,7 @@ export default class TableTransactionsDesktop extends Vue {
   @Prop({ required: false, default: false }) public showConfirmations: boolean;
 
   private activeDelegates: IDelegate[];
+  private isListed: boolean;
   private currencySymbol: string;
 
   get columns() {
@@ -196,8 +198,10 @@ export default class TableTransactionsDesktop extends Vue {
       return;
     }
 
-    const promises = this.transactions.map(this.fetchPrice);
-    await Promise.all(promises);
+    if (this.isListed) {
+      const promises = this.transactions.map(this.fetchPrice);
+      await Promise.all(promises);
+    }
   }
 
   private emitSortChange(params: ISortParameters[]) {

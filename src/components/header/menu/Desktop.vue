@@ -7,29 +7,15 @@
       <SvgIcon class="flex-none" name="menu" view-box="0 0 15 13" />
     </button>
 
-    <RouterLink :to="{ name: 'home' }" tag="button" class="menu-button" @click.native="closeMenu">
-      {{ $t("PAGES.HOME.TITLE") }}
-    </RouterLink>
-
     <RouterLink
-      :to="{ name: 'top-wallets', params: { page: 1 } }"
+      v-for="entry in entries"
+      :key="entry.name"
+      :to="entry"
       tag="button"
       class="menu-button"
       @click.native="closeMenu"
     >
-      {{ $t("PAGES.TOP_WALLETS.TITLE") }}
-    </RouterLink>
-
-    <RouterLink :to="{ name: 'delegate-monitor' }" tag="button" class="menu-button" @click.native="closeMenu">
-      {{ $t("PAGES.DELEGATE_MONITOR.TITLE") }}
-    </RouterLink>
-
-    <RouterLink v-if="hasMagistrateEnabled" :to="{ name: 'bridgechains', params: { page: 1 } }" tag="button" class="menu-button" @click.native="closeMenu">
-      {{ $t("PAGES.BRIDGECHAINS.TITLE") }}
-    </RouterLink>
-
-    <RouterLink v-if="hasMagistrateEnabled" :to="{ name: 'businesses', params: { page: 1 } }" tag="button" class="menu-button" @click.native="closeMenu">
-      {{ $t("PAGES.BUSINESSES.TITLE") }}
+      {{ $t(`PAGES.${normalizeName(entry.name)}.TITLE`) }}
     </RouterLink>
 
     <div class="flex-auto" />
@@ -37,15 +23,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Inject, Prop, Vue } from "vue-property-decorator";
 import { mapGetters } from "vuex";
+import { Location } from "vue-router";
 
-@Component({
-  computed: {
-    ...mapGetters("network", ["hasMagistrateEnabled"]),
-  },
-})
+@Component({})
 export default class HeaderMenuDesktop extends Vue {
+  @Prop({ required: true }) public entries: Location[];
+  @Inject("normalizeName") public normalizeName: (name: string) => string;
+
   private closeMenu(): void {
     this.$store.dispatch("ui/setMenuVisible", false);
   }

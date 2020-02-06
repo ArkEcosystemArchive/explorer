@@ -6,7 +6,7 @@
 
 > Designed and developed from the ground-up, using lean & fast developmental frameworks (Tailwind CSS & Vue.JS).
 
-[![Build Status](https://badgen.now.sh/circleci/github/ArkEcosystem/explorer)](https://circleci.com/gh/ArkEcosystem/explorer)
+[![Build Status](https://badgen.now.sh/github/status/ArkEcosystem/Explorer/develop)](https://github.com/ArkEcosystem/explorer/actions?query=branch%3Adevelop)
 [![Codecov](https://badgen.now.sh/codecov/c/github/arkecosystem/explorer)](https://codecov.io/gh/arkecosystem/explorer)
 [![License: MIT](https://badgen.now.sh/badge/license/MIT/green)](https://opensource.org/licenses/MIT)
 

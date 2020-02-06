@@ -66,8 +66,13 @@
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { IBlock, ISortParameters } from "@/interfaces";
 import CryptoCompareService from "@/services/crypto-compare";
+import { mapGetters } from "vuex";
 
-@Component
+@Component({
+  computed: {
+    ...mapGetters("network", ["isListed"]),
+  }
+})
 export default class TableBlocksDesktop extends Vue {
   @Prop({
     required: true,
@@ -76,6 +81,7 @@ export default class TableBlocksDesktop extends Vue {
     },
   })
   public blocks: IBlock[] | null;
+  private isListed: boolean;
 
   get columns() {
     const columns = [
@@ -160,8 +166,10 @@ export default class TableBlocksDesktop extends Vue {
       return;
     }
 
-    const promises = this.blocks.map(this.fetchPrice);
-    await Promise.all(promises);
+    if (this.isListed) {
+      const promises = this.blocks.map(this.fetchPrice);
+      await Promise.all(promises);
+    }
   }
 
   private emitSortChange(params: ISortParameters[]) {

@@ -96,8 +96,7 @@ describe("Wallet", () => {
         .click();
       cy.get("span")
         .last()
-        .invoke("text")
-        .should("include", "Received");
+        .should("contain.text", "Received");
     });
 
     cy.url().should("include", "wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs/transactions/received/1");
@@ -213,8 +212,7 @@ describe("Wallet", () => {
     cy.visit("/wallets/ffffffffffffffffffffffffffffffffff");
 
     cy.get("h1")
-      .invoke("text")
-      .should("include", "Ooops!");
+      .should("contain.text", "Ooops!");
     cy.url().should("include", "/404");
   });
 });

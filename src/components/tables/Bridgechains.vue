@@ -25,7 +25,9 @@
         </div>
 
         <div v-else-if="data.column.field === 'bridgechainRepository'">
-          <a :href="data.row.bridgechainRepository" target="_blank" rel="noopener noreferrer nofollow">{{ data.row.bridgechainRepository }}</a>
+          <a :href="data.row.bridgechainRepository" target="_blank" rel="noopener noreferrer nofollow">{{
+            data.row.bridgechainRepository
+          }}</a>
         </div>
       </template>
     </TableWrapper>
@@ -81,6 +83,4 @@ export default class TableBridgechainsDesktop extends Vue {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

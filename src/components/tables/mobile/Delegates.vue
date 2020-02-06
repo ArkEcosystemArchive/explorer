@@ -15,11 +15,11 @@
           </div>
           <div class="flex items-center">
             <LinkWallet :address="delegate.address">
-                {{ delegate.username }}
-              </LinkWallet>
-              <span v-if="delegate.isResigned" class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1">{{
-                $t("WALLET.DELEGATE.STATUS.RESIGNED")
-              }}</span>
+              {{ delegate.username }}
+            </LinkWallet>
+            <span v-if="delegate.isResigned" class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1">{{
+              $t("WALLET.DELEGATE.STATUS.RESIGNED")
+            }}</span>
           </div>
         </div>
 
@@ -46,7 +46,7 @@
             {{ $t("PAGES.DELEGATE_MONITOR.VOTES") }}
           </div>
           <div>
-            <span v-tooltip="$t('COMMON.SUPPLY_PERCENTAGE')" class="text-grey text-2xs mr-1">
+            <span v-tooltip="$t('COMMON.SUPPLY_PERCENTAGE')" class="text-grey text-xs mr-1">
               {{ percentageString(delegate.production.approval) }}
             </span>
             {{ readableCrypto(delegate.votes, true, 2) }}
