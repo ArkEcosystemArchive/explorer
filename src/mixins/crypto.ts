@@ -42,10 +42,6 @@ export default {
     },
 
     addressFromMultiSignatureAsset(asset): string {
-      if (!!asset.keysgroup) {
-        asset.publicKeys = asset.keysgroup.map(publicKey => publicKey.slice(1));
-      }
-
       const { min, publicKeys } = asset;
 
       for (const publicKey of publicKeys) {
