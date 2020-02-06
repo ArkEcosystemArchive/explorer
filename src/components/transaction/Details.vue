@@ -155,13 +155,13 @@
       </div>
     </section>
 
-    <section v-if="isMultiSignature(transaction.type, transaction.typeGroup)" class="page-section py-5 md:py-10 mb-5">
+    <section v-if="isMultiSignature(transaction.type, transaction.typeGroup)" class="TransactionDetails__MultiSignature page-section py-5 md:py-10 mb-5">
       <div class="px-5 sm:px-10">
-        <div class="list-row-border-b">
+        <div v-if="!isLegacyMultiSignature" class="list-row-border-b">
           <div class="mr-4">{{ $t("TRANSACTION.MULTI_SIGNATURE.ADDRESS") }}</div>
           <div class="truncate">
             <LinkWallet
-              :address="addressFromMultiSignatureAsset(transaction.asset.multiSignature)"
+              :address="addressFromMultiSignatureAsset(multiSignatureAsset)"
               :trunc="false"
               tooltip-placement="left"
             />
@@ -170,17 +170,28 @@
         <div class="list-row-border-b-no-wrap">
           <div class="mr-4">{{ $t("TRANSACTION.MULTI_SIGNATURE.PARTICIPANTS") }}</div>
           <ul>
-            <li v-for="publicKey in transaction.asset.multiSignature.publicKeys" :key="publicKey" class="mb-1">
-              <LinkWallet :address="addressFromPublicKey(publicKey)" :trunc="false" tooltip-placement="left" />
+            <li v-for="publicKey in publicKeysFromMultiSignatureAsset" :key="publicKey" class="mb-1">
+              <LinkWallet :address="addressFromPublicKey(publicKey)" :trunc="false" tooltip-placement="left" class="justify-end" />
             </li>
           </ul>
         </div>
-        <div class="list-row">
+        <div :class="isLegacyMultiSignature ? 'list-row-border-b' : 'list-row'">
           <div class="mr-4">{{ $t("TRANSACTION.MULTI_SIGNATURE.MIN") }}</div>
           <div>
-            {{ transaction.asset.multiSignature.min }} / {{ transaction.asset.multiSignature.publicKeys.length }}
+            {{ multiSignatureAsset.min }} / {{ publicKeysFromMultiSignatureAsset.length }}
           </div>
         </div>
+        <template v-if="isLegacyMultiSignature">
+          <div class="list-row">
+            <div class="mr-4">{{ $t("TRANSACTION.MULTI_SIGNATURE.LIFETIME") }}</div>
+            <div>
+              {{ multiSignatureAsset.lifetime }}
+            </div>
+          </div>
+          <div v-if="isLegacyMultiSignature" class="list-row text-sm text-theme-text-secondary">
+            <span>* {{ $t("TRANSACTION.MULTI_SIGNATURE.LEGACY_NOTICE") }}</span>
+          </div>
+        </template>
       </div>
     </section>
 
@@ -208,14 +219,10 @@ import { TranslateResult } from "vue-i18n";
 import { mapGetters } from "vuex";
 import { ITransaction } from "@/interfaces";
 import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
-import { LinkTransaction } from "@/components/links";
 import CryptoCompareService from "@/services/crypto-compare";
 import TransactionService from "@/services/transaction";
 
 @Component({
-  components: {
-    LinkTransaction,
-  },
   computed: {
     ...mapGetters("currency", { currencySymbol: "symbol" }),
     ...mapGetters("network", ["height"]),
@@ -246,6 +253,20 @@ export default class TransactionDetails extends Vue {
 
   get typeGroupTransaction() {
     return TypeGroupTransaction;
+  }
+
+  get isLegacyMultiSignature() {
+    return !!this.transaction.asset.multiSignatureLegacy
+  }
+
+  get multiSignatureAsset() {
+    return this.transaction.asset.multiSignature || this.transaction.asset.multiSignatureLegacy;
+  }
+
+  get publicKeysFromMultiSignatureAsset() {
+    return this.isLegacyMultiSignature
+      ? this.multiSignatureAsset.keysgroup.map(publicKey => publicKey.slice(1))
+      : this.multiSignatureAsset.publicKeys;
   }
 
   get assetField() {
