@@ -6,11 +6,7 @@
       class="HeaderMenuMobile__Entry"
       :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']"
     >
-      <RouterLink
-        :to="entry"
-        tag="div"
-        class="HeaderMenuMobile__Entry__Link"
-      >
+      <RouterLink :to="entry" tag="div" class="HeaderMenuMobile__Entry__Link">
         {{ $t(`PAGES.${normalizeName(entry.name)}.TITLE`) }}
       </RouterLink>
     </li>

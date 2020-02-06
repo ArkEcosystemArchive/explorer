@@ -71,7 +71,7 @@ import CryptoCompareService from "@/services/crypto-compare";
 export default class LockTransactionsDesktop extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })
@@ -120,7 +120,7 @@ export default class LockTransactionsDesktop extends Vue {
   }
 
   get showSmartBridgeIcon() {
-    return this.transactions!.some(transaction => {
+    return this.transactions!.some((transaction) => {
       return !!transaction.vendorField;
     });
   }

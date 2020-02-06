@@ -49,7 +49,7 @@ export default class TopWallets extends Vue {
   }
   private wallets: IWallet[] | null = null;
   private meta: any | null = null;
-  private currentPage: number = 0;
+  private currentPage = 0;
   private supply: string;
 
   @Watch("currentPage")

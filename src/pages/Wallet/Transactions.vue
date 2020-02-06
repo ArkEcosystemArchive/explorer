@@ -3,9 +3,7 @@
     <ContentHeader>{{ $t("COMMON.TRANSACTIONS") }}</ContentHeader>
 
     <section class="mb-5">
-      <div
-        class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between"
-      >
+      <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
         <div class="relative mr-6 flex-none">
           <SvgIcon class="block" name="transaction" view-box="0 0 43 39" />
           <div
@@ -36,14 +34,8 @@
               class="cursor-pointer flex items-center"
               @click="selectOpen = !selectOpen"
             >
-              <span class="mr-1">{{
-                $t(`TRANSACTION.TYPES.${type.toUpperCase()}`)
-              }}</span>
-              <SvgIcon
-                :class="{ 'rotate-180': selectOpen }"
-                name="caret"
-                view-box="0 0 16 16"
-              />
+              <span class="mr-1">{{ $t(`TRANSACTION.TYPES.${type.toUpperCase()}`) }}</span>
+              <SvgIcon :class="{ 'rotate-180': selectOpen }" name="caret" view-box="0 0 16 16" />
             </span>
             <ul
               v-show="selectOpen"
@@ -53,7 +45,7 @@
                 <RouterLink
                   :to="{
                     name: 'wallet-transactions',
-                    params: { address: address, type, page: 1 }
+                    params: { address: address, type, page: 1 },
                   }"
                   class="dropdown-button"
                 >
@@ -85,12 +77,7 @@
         <TableTransactionsMobile v-if="!isLocks" :transactions="transactions" />
         <TableLockTransactionsMobile v-else :transactions="transactions" />
       </div>
-      <Pagination
-        v-if="showPagination"
-        :meta="meta"
-        :current-page="currentPage"
-        @page-change="onPageChange"
-      />
+      <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
     </section>
   </div>
 </template>
@@ -99,13 +86,7 @@
 import { Component, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { Route } from "vue-router";
-import {
-  IBlock,
-  IDelegate,
-  ISortParameters,
-  ITransaction,
-  IWallet
-} from "@/interfaces";
+import { IBlock, IDelegate, ISortParameters, ITransaction, IWallet } from "@/interfaces";
 import TransactionService from "@/services/transaction";
 
 Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
@@ -123,8 +104,8 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
       }
 
       return types;
-    }
-  }
+    },
+  },
 })
 export default class WalletTransactions extends Vue {
   private transactions: ITransaction[] | null = null;
@@ -156,7 +137,7 @@ export default class WalletTransactions extends Vue {
   set sortParams(params: ISortParameters) {
     this.$store.dispatch("ui/setTransactionSortParams", {
       field: params.field,
-      type: params.type
+      type: params.type,
     });
   }
 
@@ -169,16 +150,13 @@ export default class WalletTransactions extends Vue {
     this.changePage();
   }
 
-  public async beforeRouteEnter(
-    to: Route,
-    from: Route,
-    next: (vm: any) => void
-  ) {
+  public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
     try {
       // @ts-ignore
-      const { meta, data } = await TransactionService[
-        `${to.params.type}ByAddress`
-      ](to.params.address, Number(to.params.page));
+      const { meta, data } = await TransactionService[`${to.params.type}ByAddress`](
+        to.params.address,
+        Number(to.params.page),
+      );
 
       next((vm: WalletTransactions) => {
         vm.type = to.params.type;
@@ -191,20 +169,17 @@ export default class WalletTransactions extends Vue {
     }
   }
 
-  public async beforeRouteUpdate(
-    to: Route,
-    from: Route,
-    next: (vm?: any) => void
-  ) {
+  public async beforeRouteUpdate(to: Route, from: Route, next: (vm?: any) => void) {
     this.selectOpen = false;
     this.transactions = null;
     this.meta = null;
 
     try {
       // @ts-ignore
-      const { meta, data } = await TransactionService[
-        `${to.params.type}ByAddress`
-      ](to.params.address, Number(to.params.page));
+      const { meta, data } = await TransactionService[`${to.params.type}ByAddress`](
+        to.params.address,
+        Number(to.params.page),
+      );
 
       this.type = to.params.type;
       this.currentPage = Number(to.params.page);
@@ -223,7 +198,7 @@ export default class WalletTransactions extends Vue {
 
     this.transactions = transactions.map((transaction) => ({
       ...transaction,
-      price: null
+      price: null,
     }));
   }
 
@@ -240,18 +215,15 @@ export default class WalletTransactions extends Vue {
   }
 
   private changePage() {
-    if (
-      this.currentPage !== Number(this.$route.params.page) ||
-      this.address !== this.$route.params.address
-    ) {
+    if (this.currentPage !== Number(this.$route.params.page) || this.address !== this.$route.params.address) {
       // @ts-ignore
       this.$router.push({
         name: "wallet-transactions",
         params: {
           address: this.address,
           type: this.type,
-          page: this.currentPage
-        }
+          page: this.currentPage,
+        },
       });
     }
   }

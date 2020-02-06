@@ -60,7 +60,7 @@ import DelegateService from "@/services/delegate";
 })
 export default class DelegateMonitor extends Vue {
   private delegates: IDelegate[] | null = null;
-  private activeTab: string = "active";
+  private activeTab = "active";
   private height: number;
 
   get sortParams() {

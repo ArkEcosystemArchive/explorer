@@ -1,24 +1,24 @@
 <template>
-  <div class="flex flex-wrap items-center mb-10 mx-5 sm:mx-10" id="genericForm">
+  <div id="genericForm" class="flex flex-wrap items-center mb-10 mx-5 sm:mx-10">
     <div class="w-full md:w-64 md:mr-6">
       <InputSelect
-        v-on:input="onSelectChange"
         :value="selectedType"
-        :selectOptions="selectOptions"
+        :select-options="selectOptions"
         :label="$t('PAGES.ADVANCED_SEARCH.SEARCH_TYPE')"
         name="search-type"
         class="flex-1"
+        @input="onSelectChange"
       />
     </div>
 
     <div class="flex-grow w-full md:w-auto">
       <InputText
-        @input="onInputChange"
-        @keyup.enter.native="onEnterKey"
         :label="$t(types[selectedType].label)"
         :name="types[selectedType].name"
         :value="input"
         class="my-3"
+        @input="onInputChange"
+        @keyup.enter.native="onEnterKey"
       />
     </div>
   </div>
@@ -38,7 +38,7 @@ export default class GenericSearchForm extends Vue {
   @Prop({ required: true }) private searchTypes: string[];
   @Prop({ required: true }) private onSearchTypeChange: any;
 
-  private input: string = "";
+  private input = "";
 
   private types = {
     transaction: { optionText: "COMMON.TRANSACTION", label: "TRANSACTION.ID", name: "id" },
@@ -47,7 +47,7 @@ export default class GenericSearchForm extends Vue {
   };
 
   get selectOptions() {
-    return this.searchTypes.map(type => ({ value: type, display: this.$t(this.types[type].optionText) }));
+    return this.searchTypes.map((type) => ({ value: type, display: this.$t(this.types[type].optionText) }));
   }
 
   private onSelectChange(event: any) {

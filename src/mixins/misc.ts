@@ -21,7 +21,7 @@ export default {
         : momentTime.fromNow();
     },
 
-    readableNumber(value: number, digits: number = 0, omitSeparator: boolean = false): string {
+    readableNumber(value: number, digits = 0, omitSeparator = false): string {
       if (omitSeparator) {
         return value.toFixed(digits);
       }
@@ -57,7 +57,7 @@ export default {
         .format("L LTS");
     },
 
-    calculateMultipaymentAmount(transaction: ITransaction, address?: string, type: string = "all"): BigNumber {
+    calculateMultipaymentAmount(transaction: ITransaction, address?: string, type = "all"): BigNumber {
       if (transaction.asset && transaction.asset.payments) {
         return transaction.asset.payments.reduce(
           (sum: BigNumber, { recipientId, amount }: { recipientId: string; amount: string }) => {

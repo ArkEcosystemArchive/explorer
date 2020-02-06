@@ -115,7 +115,7 @@ export default class TransactionAmount extends Vue {
     // @ts-ignore
     if (this.isMultiPayment(this.transaction.type, this.transaction.typeGroup)) {
       return (
-        this.transaction.asset.payments.find(payment => payment.recipientId === this.$route.params.address) &&
+        this.transaction.asset.payments.find((payment) => payment.recipientId === this.$route.params.address) &&
         (this.transactionTab === "received" || this.transaction.sender !== this.$route.params.address)
       );
     }

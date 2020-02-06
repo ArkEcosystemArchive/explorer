@@ -1,10 +1,6 @@
 /* tslint:disable:no-shadowed-variable */
 import * as types from "../mutation-types";
-import {
-  IStorePayload,
-  INetworkState,
-  ITransactionType
-} from "../../interfaces";
+import { IStorePayload, INetworkState, ITransactionType } from "../../interfaces";
 import { ActionTree, GetterTree, Module, MutationTree } from "vuex";
 
 const namespaced = true;
@@ -28,56 +24,56 @@ const state: INetworkState = {
   blocktime: 0,
   hasMagistrateEnabled: false,
   hasHtlcEnabled: false,
-  enabledTransactionTypes: []
+  enabledTransactionTypes: [],
 };
 
 const actions: ActionTree<INetworkState, {}> = {
   setDefaults: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_DEFAULTS,
-      value
+      value,
     });
   },
   setServer: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_SERVER,
-      value
+      value,
     });
   },
   setNethash: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_NETHASH,
-      value
+      value,
     });
   },
   setAlias: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_ALIAS,
-      value
+      value,
     });
   },
   setAddressPrefix: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_ADDRESS_PREFIX,
-      value
+      value,
     });
   },
   setActiveDelegates: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_ACTIVE_DELEGATES,
-      value
+      value,
     });
   },
   setRewardOffset: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_REWARD_OFFSET,
-      value
+      value,
     });
   },
   setToken: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_TOKEN,
-      value
+      value,
     });
   },
   setIsListed: ({ commit }, value: boolean) => {
@@ -89,25 +85,25 @@ const actions: ActionTree<INetworkState, {}> = {
   setSymbol: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_SYMBOL,
-      value
+      value,
     });
   },
   setCurrencies: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_CURRENCIES,
-      value
+      value,
     });
   },
   setKnownWallets: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_KNOWN_WALLETS,
-      value
+      value,
     });
   },
   setSupply: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_SUPPLY,
-      value
+      value,
     });
   },
   setInitialSupply: ({ commit }, value) => {
@@ -115,45 +111,45 @@ const actions: ActionTree<INetworkState, {}> = {
 
     commit({
       type: types.SET_NETWORK_INITIAL_SUPPLY,
-      value
+      value,
     });
   },
   setHeight: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_HEIGHT,
-      value
+      value,
     });
   },
   setEpoch: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_EPOCH,
-      value
+      value,
     });
   },
   setBlocktime: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_BLOCKTIME,
-      value
+      value,
     });
   },
   setHasMagistrateEnabled: ({ commit }, value: boolean) => {
     commit({
       type: types.SET_NETWORK_HAS_MAGISTRATE_ENABLED,
-      value
+      value,
     });
   },
   setHasHtlcEnabled: ({ commit }, value: boolean) => {
     commit({
       type: types.SET_NETWORK_HAS_HTLC_ENABLED,
-      value
+      value,
     });
   },
   setEnabledTransactionTypes: ({ commit }, value: ITransactionType[]) => {
     commit({
       type: types.SET_NETWORK_ENABLED_TRANSACTION_TYPES,
-      value
+      value,
     });
-  }
+  },
 };
 
 const mutations: MutationTree<INetworkState> = {
@@ -216,30 +212,30 @@ const mutations: MutationTree<INetworkState> = {
   },
   [types.SET_NETWORK_ENABLED_TRANSACTION_TYPES](state, payload: IStorePayload) {
     state.enabledTransactionTypes = payload.value;
-  }
+  },
 };
 
 const getters: GetterTree<INetworkState, {}> = {
-  defaults: state => state.defaults,
-  server: state => state.server,
-  nethash: state => state.nethash,
-  alias: state => state.alias,
-  addressPrefix: state => state.addressPrefix,
-  activeDelegates: state => state.activeDelegates,
-  rewardOffset: state => state.rewardOffset,
-  token: state => state.token,
-  isListed: state => state.isListed,
-  symbol: state => state.symbol,
-  currencies: state => state.currencies,
-  knownWallets: state => state.knownWallets,
-  supply: state => state.supply,
-  initialSupply: state => state.initialSupply,
-  height: state => state.height,
-  epoch: state => state.epoch,
-  blocktime: state => state.blocktime,
-  hasMagistrateEnabled: state => state.hasMagistrateEnabled,
-  hasHtlcEnabled: state => state.hasHtlcEnabled,
-  enabledTransactionTypes: state => state.enabledTransactionTypes,
+  defaults: (state) => state.defaults,
+  server: (state) => state.server,
+  nethash: (state) => state.nethash,
+  alias: (state) => state.alias,
+  addressPrefix: (state) => state.addressPrefix,
+  activeDelegates: (state) => state.activeDelegates,
+  rewardOffset: (state) => state.rewardOffset,
+  token: (state) => state.token,
+  isListed: (state) => state.isListed,
+  symbol: (state) => state.symbol,
+  currencies: (state) => state.currencies,
+  knownWallets: (state) => state.knownWallets,
+  supply: (state) => state.supply,
+  initialSupply: (state) => state.initialSupply,
+  height: (state) => state.height,
+  epoch: (state) => state.epoch,
+  blocktime: (state) => state.blocktime,
+  hasMagistrateEnabled: (state) => state.hasMagistrateEnabled,
+  hasHtlcEnabled: (state) => state.hasHtlcEnabled,
+  enabledTransactionTypes: (state) => state.enabledTransactionTypes,
 };
 
 export const network: Module<INetworkState, {}> = {
@@ -247,5 +243,5 @@ export const network: Module<INetworkState, {}> = {
   state,
   actions,
   mutations,
-  getters
+  getters,
 };

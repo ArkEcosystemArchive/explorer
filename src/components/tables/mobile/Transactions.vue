@@ -110,7 +110,7 @@ import { mapGetters } from "vuex";
 export default class TableTransactionsMobile extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })

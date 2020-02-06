@@ -26,10 +26,10 @@ class DelegateService {
 
     const results = await Promise.all(requests);
 
-    return response.data.concat([].concat(...results.map(result => result.data)));
+    return response.data.concat([].concat(...results.map((result) => result.data)));
   }
 
-  public async all(page: number = 1, limit: number = paginationLimit): Promise<IApiDelegatesWrapper> {
+  public async all(page = 1, limit: number = paginationLimit): Promise<IApiDelegatesWrapper> {
     const response = (await ApiService.get("delegates", {
       params: {
         page,
@@ -51,7 +51,7 @@ class DelegateService {
     return response;
   }
 
-  public async voterCount(publicKey: string, excludeLowBalances: boolean = true): Promise<number> {
+  public async voterCount(publicKey: string, excludeLowBalances = true): Promise<number> {
     const response = (await WalletService.search(
       {
         vote: publicKey,
@@ -84,18 +84,16 @@ class DelegateService {
         ApiService.get("delegates", {
           params: {
             offset: i * apiLimit,
-            limit: i === requestCount - 1
-              ? activeDelegates % apiLimit
-              : Math.min(activeDelegates, apiLimit),
+            limit: i === requestCount - 1 ? activeDelegates % apiLimit : Math.min(activeDelegates, apiLimit),
           },
-        })
+        }),
       );
     }
 
     const results = await Promise.all(requests);
-    const delegates: IDelegate[] = [].concat(...results.map(result => result.data));
+    const delegates: IDelegate[] = [].concat(...results.map((result) => result.data));
 
-    return delegates.map(delegate => {
+    return delegates.map((delegate) => {
       delegate.forgingStatus = ForgingService.status(delegate, height, previousDelegates);
 
       return delegate;
@@ -108,9 +106,10 @@ class DelegateService {
     const response = (await ApiService.get("delegates", {
       params: {
         offset: activeDelegates,
-        limit: activeDelegates < paginationLimit
-          ? paginationLimit + (paginationLimit - activeDelegates % paginationLimit)
-          : paginationLimit - (activeDelegates % paginationLimit),
+        limit:
+          activeDelegates < paginationLimit
+            ? paginationLimit + (paginationLimit - (activeDelegates % paginationLimit))
+            : paginationLimit - (activeDelegates % paginationLimit),
       },
     })) as IApiDelegatesWrapper;
 
@@ -122,7 +121,7 @@ class DelegateService {
     return response.data;
   }
 
-  public async allResigned(page: number = 1, limit: number = paginationLimit): Promise<IApiDelegatesWrapper> {
+  public async allResigned(page = 1, limit: number = paginationLimit): Promise<IApiDelegatesWrapper> {
     const response = (await ApiService.get("delegates", {
       params: {
         type: "resigned",

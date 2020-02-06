@@ -74,7 +74,7 @@ import { IBlock } from "@/interfaces";
 export default class TableBlocksMobile extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })

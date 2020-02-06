@@ -51,7 +51,7 @@ const router = new Router({
     },
     {
       path: "/wallets/:address/voters",
-      redirect: to => ({
+      redirect: (to) => ({
         name: "wallet-voters",
         params: { address: to.params.address, page: 1 },
       }),
@@ -65,7 +65,7 @@ const router = new Router({
     },
     {
       path: "/wallets/:address/blocks",
-      redirect: to => ({
+      redirect: (to) => ({
         name: "wallet-blocks",
         params: { address: to.params.address, page: 1 },
       }),
@@ -79,7 +79,7 @@ const router = new Router({
     },
     {
       path: "/wallets/:address/transactions",
-      redirect: to => ({
+      redirect: (to) => ({
         name: "wallet-transactions",
         params: { address: to.params.address, type: "all", page: 1 },
       }),
@@ -87,7 +87,7 @@ const router = new Router({
     },
     {
       path: "/wallets/:address/transactions/:type",
-      redirect: to => ({
+      redirect: (to) => ({
         name: "wallet-transactions",
         params: { address: to.params.address, type: to.params.type, page: 1 },
       }),
@@ -107,7 +107,7 @@ const router = new Router({
     },
     {
       path: "/block/:id/transactions",
-      redirect: to => ({
+      redirect: (to) => ({
         name: "block-transactions",
         params: { id: to.params.id, page: 1 },
       }),
@@ -121,7 +121,7 @@ const router = new Router({
     },
     {
       path: "/blocks",
-      redirect: to => ({ name: "blocks", params: { page: 1 } }),
+      redirect: (to) => ({ name: "blocks", params: { page: 1 } }),
       meta: { title: (route: Route) => getTitle("Blocks") },
     },
     {
@@ -138,7 +138,7 @@ const router = new Router({
     },
     {
       path: "/transactions",
-      redirect: to => ({ name: "transactions", params: { page: 1 } }),
+      redirect: (to) => ({ name: "transactions", params: { page: 1 } }),
       meta: { title: (route: Route) => getTitle("Transactions") },
     },
     {
@@ -155,7 +155,7 @@ const router = new Router({
     },
     {
       path: "/top-wallets",
-      redirect: to => ({ name: "top-wallets", params: { page: 1 } }),
+      redirect: (to) => ({ name: "top-wallets", params: { page: 1 } }),
       meta: { title: (route: Route) => getTitle("Top Wallets") },
     },
     {
@@ -166,7 +166,7 @@ const router = new Router({
     },
     {
       path: "/businesses",
-      redirect: to => ({ name: "businesses", params: { page: 1 } }),
+      redirect: (to) => ({ name: "businesses", params: { page: 1 } }),
       meta: { title: (route: Route) => getTitle("Businesses") },
     },
     {
@@ -177,7 +177,7 @@ const router = new Router({
     },
     {
       path: "/bridgechains",
-      redirect: to => ({ name: "bridgechains", params: { page: 1 } }),
+      redirect: (to) => ({ name: "bridgechains", params: { page: 1 } }),
       meta: { title: (route: Route) => getTitle("Bridgechains") },
     },
     {
@@ -188,7 +188,7 @@ const router = new Router({
     },
     {
       path: "/advanced-search",
-      redirect: to => ({ name: "advanced-search", params: { page: 1 } }),
+      redirect: (to) => ({ name: "advanced-search", params: { page: 1 } }),
       meta: { title: (route: Route) => getTitle("Advanced Search") },
     },
     {
@@ -199,7 +199,7 @@ const router = new Router({
     },
     {
       path: "/delegates/resigned",
-      redirect: to => ({ name: "delegates-resigned", params: { page: 1 } }),
+      redirect: (to) => ({ name: "delegates-resigned", params: { page: 1 } }),
       meta: { title: (route: Route) => getTitle("Delegates") },
     },
     {
@@ -210,7 +210,7 @@ const router = new Router({
     },
     {
       path: "/delegates",
-      redirect: to => ({ name: "delegates", params: { page: 1 } }),
+      redirect: (to) => ({ name: "delegates", params: { page: 1 } }),
       meta: { title: (route: Route) => getTitle("Delegates") },
     },
     {
@@ -233,7 +233,7 @@ const router = new Router({
     // 2.0 fallback redirects...
     {
       path: "/address/:address",
-      redirect: to => ({
+      redirect: (to) => ({
         name: "wallet",
         params: { address: to.params.address },
       }),
@@ -241,7 +241,7 @@ const router = new Router({
     },
     {
       path: "/tx/:id",
-      redirect: to => ({
+      redirect: (to) => ({
         name: "transaction",
         params: { id: to.params.id },
       }),
@@ -254,7 +254,7 @@ const router = new Router({
     },
     {
       path: "/topAccounts",
-      redirect: to => ({ name: "top-wallets", params: { page: 1 } }),
+      redirect: (to) => ({ name: "top-wallets", params: { page: 1 } }),
       meta: { title: (route: Route) => getTitle("Top Wallets") },
     },
   ],

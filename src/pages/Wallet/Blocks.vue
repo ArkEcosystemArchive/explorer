@@ -45,7 +45,7 @@ export default class WalletBlocks extends Vue {
   private username: string | null = null;
   private blocks: IBlock[] | null = null;
   private meta: any | null = null;
-  private currentPage: number = 0;
+  private currentPage = 0;
 
   get showPagination() {
     return this.meta && this.meta.pageCount > 1;
@@ -110,7 +110,7 @@ export default class WalletBlocks extends Vue {
       return;
     }
 
-    this.blocks = blocks.map(block => ({ ...block, price: null }));
+    this.blocks = blocks.map((block) => ({ ...block, price: null }));
   }
 
   private setMeta(meta: any) {

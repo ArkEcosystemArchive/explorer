@@ -58,7 +58,7 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 export default class TransactionsPage extends Vue {
   private transactions: ITransaction[] | null = null;
   private meta: any | null = null;
-  private currentPage: number = 0;
+  private currentPage = 0;
   private transactionType: { key: string; type: number; typeGroup?: number } = { key: "ALL", type: -1 };
 
   get showPagination() {
@@ -135,7 +135,7 @@ export default class TransactionsPage extends Vue {
       return;
     }
 
-    this.transactions = transactions.map(transaction => ({ ...transaction, price: null }));
+    this.transactions = transactions.map((transaction) => ({ ...transaction, price: null }));
   }
 
   private setMeta(meta: any) {

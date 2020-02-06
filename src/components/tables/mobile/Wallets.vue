@@ -52,7 +52,7 @@ import { paginationLimit } from "@/constants";
 export default class TableWalletsMobile extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })

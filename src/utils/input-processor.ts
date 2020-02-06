@@ -38,12 +38,12 @@ export const inputProcessor = async (
   const arktoshiValues = ["amount", "totalAmount", "fee", "totalFee", "reward", "balance"];
   const publicKeyValues = ["vote", "generatorPublicKey"];
 
-  if (arktoshiValues.find(name => inputName.includes(name))) {
+  if (arktoshiValues.find((name) => inputName.includes(name))) {
     const valAsNum = Number(inputValue);
     return { value: valAsNum > 0 ? Number(inputValue) * 1e8 : 0, ts };
   }
 
-  if (publicKeyValues.find(name => inputName.includes(name))) {
+  if (publicKeyValues.find((name) => inputName.includes(name))) {
     const publicKey = await lookupPublicKey(inputValue);
     return { value: publicKey ? publicKey : inputValue, ts };
   }

@@ -45,7 +45,7 @@ export default class Bridgechains extends Vue {
   }
   private bridgechains: IBridgechain[] | null = null;
   private meta: any | null = null;
-  private currentPage: number = 0;
+  private currentPage = 0;
 
   @Watch("currentPage")
   public onCurrentPageChanged() {

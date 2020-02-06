@@ -22,7 +22,7 @@ export default class SvgIcon extends Vue {
 
   get styles() {
     const size = Array.isArray(this.viewBox) ? this.viewBox : this.viewBox.split(" ");
-    const [x, y, width, height] = size.map(i => i + "px");
+    const [x, y, width, height] = size.map((i) => i + "px");
     return { x, y, width, height };
   }
 

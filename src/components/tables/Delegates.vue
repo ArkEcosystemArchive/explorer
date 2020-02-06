@@ -50,7 +50,7 @@ import { IDelegate, ISortParameters } from "@/interfaces";
 export default class TableDelegatesDesktop extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })

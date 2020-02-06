@@ -21,11 +21,7 @@
           {{ $t(`TRANSACTION.TYPES.${transactionType.key}`) }}
         </span>
 
-        <SvgIcon
-          :class="{ 'rotate-180': isOpen }"
-          name="caret"
-          view-box="0 0 16 16"
-        />
+        <SvgIcon :class="{ 'rotate-180': isOpen }" name="caret" view-box="0 0 16 16" />
       </span>
 
       <ul v-show="isOpen" class="SelectionType--options inset-x-0 mt-10">
@@ -38,10 +34,7 @@
     </div>
 
     <div class="hidden sm:block">
-      <span
-        :class="[inBanner ? bannerClasses : 'text-theme-text-thead']"
-        class="block mb-2 text-xs"
-      >
+      <span :class="[inBanner ? bannerClasses : 'text-theme-text-thead']" class="block mb-2 text-xs">
         {{ $t("COMMON.TYPE") }}
       </span>
 
@@ -50,15 +43,9 @@
         class="flex items-center cursor-pointer"
         @click="toggleDropdown"
       >
-        <span class="mr-1 md:whitespace-no-wrap">{{
-          $t(`TRANSACTION.TYPES.${transactionType.key}`)
-        }}</span>
+        <span class="mr-1 md:whitespace-no-wrap">{{ $t(`TRANSACTION.TYPES.${transactionType.key}`) }}</span>
 
-        <SvgIcon
-          :class="{ 'rotate-180': isOpen }"
-          name="caret"
-          view-box="0 0 16 16"
-        />
+        <SvgIcon :class="{ 'rotate-180': isOpen }" name="caret" view-box="0 0 16 16" />
       </span>
 
       <ul v-show="isOpen" class="SelectionType--options right-0 mt-2">
@@ -108,9 +95,7 @@ export default class SelectionType extends Vue {
 
   public created() {
     const savedType = localStorage.getItem("transactionType");
-    this.transactionType = savedType
-      ? JSON.parse(savedType)
-      : { key: "ALL", type: -1 };
+    this.transactionType = savedType ? JSON.parse(savedType) : { key: "ALL", type: -1 };
   }
 
   private filterTransactions(type: ITransactionType) {
