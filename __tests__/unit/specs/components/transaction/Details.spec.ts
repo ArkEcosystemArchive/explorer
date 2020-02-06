@@ -121,9 +121,8 @@ describe("Components > Transaction > Details", () => {
       });
 
       expect(wrapper.find(".TransactionDetails__MultiSignature").exists()).toBe(true);
-      expect(wrapper.findAll(".TransactionDetails__MultiSignature .list-row-border-b").at(0).text()).toEqual(expect.stringContaining("Generated address"));
-      expect(wrapper.findAll(".TransactionDetails__MultiSignature .list-row-border-b").at(1).text()).toEqual(expect.stringContaining("Minimum participants"));
       expect(wrapper.find(".TransactionDetails__MultiSignature .list-row-border-b-no-wrap").text()).toEqual(expect.stringContaining("Participants"));
+      expect(wrapper.find(".TransactionDetails__MultiSignature .list-row-border-b").text()).toEqual(expect.stringContaining("Minimum participants"));
       expect(wrapper.findAll(".TransactionDetails__MultiSignature .list-row").at(0).text()).toEqual(expect.stringContaining("Lifetime"));
       expect(wrapper.findAll(".TransactionDetails__MultiSignature .list-row").at(1).text()).toEqual(expect.stringContaining("This transaction is a legacy Multisignature Registration"));
     });
