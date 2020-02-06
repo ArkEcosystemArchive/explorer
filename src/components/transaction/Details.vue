@@ -157,11 +157,11 @@
 
     <section v-if="isMultiSignature(transaction.type, transaction.typeGroup)" class="TransactionDetails__MultiSignature page-section py-5 md:py-10 mb-5">
       <div class="px-5 sm:px-10">
-        <div class="list-row-border-b">
+        <div v-if="!isLegacyMultiSignature" class="list-row-border-b">
           <div class="mr-4">{{ $t("TRANSACTION.MULTI_SIGNATURE.ADDRESS") }}</div>
           <div class="truncate">
             <LinkWallet
-              :address="isLegacyMultiSignature ? transaction.sender : addressFromMultiSignatureAsset(multiSignatureAsset)"
+              :address="addressFromMultiSignatureAsset(multiSignatureAsset)"
               :trunc="false"
               tooltip-placement="left"
             />
