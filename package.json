@@ -7,7 +7,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test": "yarn test:unit && yarn test:e2e",
-    "lint": "vue-cli-service lint --fix && prettier --write",
+    "lint": "vue-cli-service lint --fix",
     "build:devnet": "vue-cli-service build --network devnet",
     "build:mainnet": "vue-cli-service build --network mainnet",
     "build:testnet": "vue-cli-service build --network testnet",

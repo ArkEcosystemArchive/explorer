@@ -74,6 +74,9 @@ jobs:
       - name: Install
         run: yarn install --frozen-lockfile
 
+      - name: Lint
+        run: yarn lint
+
       - name: Deploy
         run: yarn task:deploy:workflow
         env:
