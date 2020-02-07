@@ -43,8 +43,7 @@ export default class InputField extends Vue {
   @Prop({ required: true }) public type!: string;
 
   get inputClass() {
-    let inputClasses =
-      "InputField__input w-full pt-3 left-0 bg-transparent transition text-grey hover:border-theme-page-text focus:border-blue-500";
+    let inputClasses = "InputField__input w-full pt-3 left-0 bg-transparent transition text-grey";
     if (this.type !== "textarea") {
       inputClasses += " border-b border-theme-input-field-border h-10";
     }
@@ -56,6 +55,14 @@ export default class InputField extends Vue {
 <style>
 .InputField--disabled {
   pointer-events: none;
+}
+
+.InputField__input:focus {
+  @apply .border-blue;
+}
+
+.InputField__input:hover {
+  @apply .border-theme-input-field-border-hover;
 }
 
 .InputField__label {

@@ -4,8 +4,14 @@
       <span v-if="showAsType">
         {{ $t(`TRANSACTION.TYPES.${isTransfer(type, typeGroup) ? "TRANSFER" : "TIMELOCK"}`) }}
       </span>
-      <div v-else class="flex items-center">
-        <LinkAddress :address="address" :public-key="publicKey" :trunc="trunc" :tooltip-placement="tooltipPlacement" />
+      <div v-else class="flex items-center w-full">
+        <LinkAddress
+          :address="address"
+          :public-key="publicKey"
+          :trunc="trunc"
+          :tooltip-placement="tooltipPlacement"
+          container-class="w-full"
+        />
         <div v-if="isTimelock(type, typeGroup) && showTimelockIcon">
           <SvgIcon
             v-tooltip="{
