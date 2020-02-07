@@ -22,12 +22,23 @@
 
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <TableBlocksDesktop :blocks="blocks" :sort-query="sortParams" @on-sort-change="onSortChange" />
+        <TableBlocksDesktop
+          :blocks="blocks"
+          :hide-generated-by="true"
+          :sort-query="sortParams"
+          @on-sort-change="onSortChange"
+        />
       </div>
       <div class="sm:hidden">
         <TableBlocksMobile :blocks="blocks" />
       </div>
-      <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
+      <Pagination
+        v-if="showPagination"
+        :hide-generated-by="true"
+        :meta="meta"
+        :current-page="currentPage"
+        @page-change="onPageChange"
+      />
     </section>
   </div>
 </template>
