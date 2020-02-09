@@ -2,7 +2,7 @@ import LockService from "@/services/lock";
 import store from "@/store";
 
 const lockPropertyArray = [
-  "id",
+  "lockId",
   "amount",
   "secretHash",
   "senderPublicKey",
@@ -20,7 +20,7 @@ describe("Services > Lock", () => {
   });
 
   it("should find a lock by its id", async () => {
-    const data = await LockService.findLock("f82af75b25da5ce4485c586d8a467fe13460134ab86cafa2ad9633127f88935f");
-    expect(Object.keys(data).sort()).toEqual(expect.arrayContaining(lockPropertyArray).sort()));
+    const data = await LockService.find("f82af75b25da5ce4485c586d8a467fe13460134ab86cafa2ad9633127f88935f");
+    expect(Object.keys(data).sort()).toEqual(expect.arrayContaining(lockPropertyArray));
   });
 }

@@ -66,7 +66,7 @@ export interface IMeta {
 }
 
 export interface ILock {
-  id: string;
+  lockId: string;
   amount: BigNumber;
   secretHash: string;
   senderPublicKey: string;
