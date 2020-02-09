@@ -65,6 +65,19 @@ export interface IMeta {
   last: string;
 }
 
+export interface ILock {
+  id: string;
+  amount: BigNumber;
+  secretHash: string;
+  senderPublicKey: string;
+  recipientId: string;
+  timestamp: ITimestamp;
+  expirationType: number;
+  expirationValue: number;
+  isExpired: boolean;
+  vendorField?: string;
+}
+
 export interface ITransaction {
   id: string;
   blockId: string;
@@ -152,6 +165,10 @@ export interface IBlockchain {
 export interface IApiWalletsWrapper {
   data: IWallet[];
   meta: IMeta;
+}
+
+export interface IApiLockWrapper {
+  data: ILock;
 }
 
 export interface IApiTransactionWrapper {
