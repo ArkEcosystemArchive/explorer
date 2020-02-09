@@ -33,7 +33,7 @@
         <TableBlocksMobile :blocks="blocks" :hide-generated-by="true" />
       </div>
       <Pagination
-        v-if="showPagination
+        v-if="showPagination"
         :meta="meta"
         :current-page="currentPage"
         @page-change="onPageChange"
