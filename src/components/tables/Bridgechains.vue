@@ -42,7 +42,7 @@ import { IBridgechain, ISortParameters } from "@/interfaces";
 export default class TableBridgechainsDesktop extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })

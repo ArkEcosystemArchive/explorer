@@ -148,4 +148,10 @@ describe("Store > UI", () => {
 
     expect(store.getters["ui/walletSortParams"]).toEqual(params);
   });
+
+  it("should set the wallet transaction tab", () => {
+    store.dispatch("ui/setWalletTransactionTab", "all");
+
+    expect(store.getters["ui/walletTransactionTab"]).toEqual("all");
+  });
 });

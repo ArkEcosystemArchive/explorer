@@ -2,14 +2,15 @@
   <span class="flex items-center">
     <template v-if="isTransfer(type, typeGroup) || isTimelock(type, typeGroup)">
       <span v-if="showAsType">
-        {{ $t(`TRANSACTION.TYPES.${isTransfer(type, typeGroup) ? 'TRANSFER' : 'TIMELOCK'}`) }}
+        {{ $t(`TRANSACTION.TYPES.${isTransfer(type, typeGroup) ? "TRANSFER" : "TIMELOCK"}`) }}
       </span>
-      <div v-else class="flex items-center">
+      <div v-else class="flex items-center w-full">
         <LinkAddress
           :address="address"
           :public-key="publicKey"
           :trunc="trunc"
           :tooltip-placement="tooltipPlacement"
+          container-class="w-full"
         />
         <div v-if="isTimelock(type, typeGroup) && showTimelockIcon">
           <SvgIcon
@@ -66,7 +67,7 @@
       <LinkAddress
         v-else
         :address="address"
-        :publicKey="publicKey"
+        :public-key="publicKey"
         :trunc="trunc"
         :tooltip-placement="tooltipPlacement"
       />
@@ -82,7 +83,7 @@ import LinkAddress from "./LinkAddress.vue";
 
 @Component({
   components: {
-    LinkAddress
+    LinkAddress,
   },
   computed: {
     ...mapGetters("delegates", ["delegates"]),
@@ -153,7 +154,7 @@ export default class LinkWallet extends Vue {
   }
 
   private determineVote(): void {
-    this.votedDelegate = this.delegates.find(d => d.publicKey === this.votePublicKey);
+    this.votedDelegate = this.delegates.find((d) => d.publicKey === this.votePublicKey);
   }
 }
 </script>

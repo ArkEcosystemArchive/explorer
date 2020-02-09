@@ -44,8 +44,8 @@ export default class LatestBlocks extends Vue {
     await this.getBlocks();
 
     this.$store.watch(
-      state => state.network.height,
-      value => this.getBlocks(),
+      (state) => state.network.height,
+      (value) => this.getBlocks(),
     );
   }
 

@@ -67,7 +67,7 @@ import { ITransactionType } from "@/interfaces";
 export default class SelectionType extends Vue {
   @Prop({ required: false, default: false }) public inBanner: boolean;
   private transactionType: ITransactionType = { key: "ALL", type: -1 };
-  private selectOpen: boolean = false;
+  private selectOpen = false;
 
   get types() {
     return this.$store.getters["network/enabledTransactionTypes"];

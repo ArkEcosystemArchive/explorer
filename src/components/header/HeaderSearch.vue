@@ -47,8 +47,8 @@ import { LocaleMessage } from "vue-i18n";
 })
 export default class HeaderSearch extends Vue {
   private query: string | null = null;
-  private nothingFound: boolean = false;
-  private searchCount: number = 0;
+  private nothingFound = false;
+  private searchCount = 0;
   private placeholder: LocaleMessage | string = "Search";
 
   private delegates: [IDelegate];
@@ -65,7 +65,7 @@ export default class HeaderSearch extends Vue {
     const WIDTH_THRESHOLD = 1024;
     const widthQuery = window.matchMedia(`(max-width: ${WIDTH_THRESHOLD}px)`);
 
-    widthQuery.addListener(e => this.setMobilePlaceholder(e.matches));
+    widthQuery.addListener((e) => this.setMobilePlaceholder(e.matches));
 
     this.setMobilePlaceholder(window.innerWidth < WIDTH_THRESHOLD);
   }
@@ -87,7 +87,7 @@ export default class HeaderSearch extends Vue {
       this.updateSearchCount({ message: "No known wallet with that name could be found" });
     }
 
-    const del = this.delegates.find(d => d.username === this.query!.toLowerCase());
+    const del = this.delegates.find((d) => d.username === this.query!.toLowerCase());
     if (del) {
       this.changePage("wallet", { address: del.address });
       return;

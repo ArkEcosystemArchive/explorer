@@ -55,13 +55,13 @@ export default {
       }
 
       const minKey: string = publicKeyFromPassphrase(numberToHex(min));
-      const keys: Buffer[] = [minKey, ...publicKeys].map(p => Buffer.from(p, "hex"));
+      const keys: Buffer[] = [minKey, ...publicKeys].map((p) => Buffer.from(p, "hex"));
 
       return addressFromPublicKey(secp256k1.publicKeyCombine(keys, true).toString("hex"));
     },
 
     stringToHex(text: string): string {
       return Buffer.from(text).toString("hex");
-    }
+    },
   },
 };

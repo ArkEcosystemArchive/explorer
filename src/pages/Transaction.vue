@@ -36,7 +36,7 @@
         </div>
       </section>
 
-      <TransactionDetails :transaction="transaction" ref="transactionDetails" />
+      <TransactionDetails ref="transactionDetails" :transaction="transaction" />
 
       <section v-if="isMultiPayment(transaction.type, transaction.typeGroup)" class="page-section py-5 md:py-10">
         <MultiPaymentTransactions :transaction="transaction" :page="currentPage" />
@@ -72,10 +72,10 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 })
 export default class TransactionPage extends Vue {
   private transaction: ITransaction | null = null;
-  private transactionNotFound: boolean = false;
-  private isLoading: boolean = false;
+  private transactionNotFound = false;
+  private isLoading = false;
   private meta: any | null = null;
-  private currentPage: number = 1;
+  private currentPage = 1;
   private height: number;
   private networkSymbol: string;
 

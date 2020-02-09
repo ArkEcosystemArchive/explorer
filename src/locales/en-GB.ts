@@ -29,7 +29,7 @@ export default {
   DISCLAIMER: {
     TITLE: "Disclaimer",
     TEXT1:
-      "The following page is a directory for informational purposes only. {website} is in no way affiliated with the listed individuals and/or business entities listed herein. All links provided herein are third party websites that have not been verified and are owned by independent parties over which {website} has no control. {website} does not endorse or approve and makes no warranties, representations or undertakings relating to the content of third party websites.",
+      "The following page is a directory for informational purposes only. {website} is in no way affiliated with the listed individuals and/or business and bridgechain entities listed herein. All links provided herein are third party websites that have not been verified and are owned by independent parties over which {website} has no control. {website} does not endorse or approve and makes no warranties, representations or undertakings relating to the content of third party websites.",
     TEXT2: "By clicking “Accept” you will be confirming that you have read and are in agreement with all terms herein.",
   },
 
@@ -69,7 +69,9 @@ export default {
     MULTI_SIGNATURE: {
       ADDRESS: "Generated address",
       MIN: "Minimum participants",
+      LIFETIME: "Lifetime",
       PARTICIPANTS: "Participants",
+      LEGACY_NOTICE: "This transaction is a legacy Multisignature Registration",
     },
     NONCE: "Nonce",
     TIMELOCK: {

@@ -19,7 +19,7 @@ import { IWallet } from "@/interfaces";
 export default class WalletVote extends Vue {
   @Prop({ required: true }) public wallet: IWallet;
 
-  private view: string = "public";
+  private view = "public";
   private knownWallets: { [key: string]: string };
 
   get votedDelegate() {

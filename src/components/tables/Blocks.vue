@@ -71,20 +71,21 @@ import { mapGetters } from "vuex";
 @Component({
   computed: {
     ...mapGetters("network", ["isListed"]),
-  }
+  },
 })
 export default class TableBlocksDesktop extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })
   public blocks: IBlock[] | null;
+  @Prop({ required: false, default: false }) public hideGeneratedBy: boolean;
   private isListed: boolean;
 
   get columns() {
-    const columns = [
+    let columns = [
       {
         label: this.$t("COMMON.ID"),
         field: "id",
@@ -131,6 +132,10 @@ export default class TableBlocksDesktop extends Vue {
         tdClass: "end-cell hidden lg:table-cell",
       },
     ];
+
+    if (this.hideGeneratedBy) {
+      columns = columns.filter((column) => column.field !== "generator.username");
+    }
 
     return columns;
   }

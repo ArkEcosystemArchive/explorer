@@ -25,7 +25,7 @@ import { IDelegate } from "@/interfaces";
   },
 })
 export default class DelegateCount extends Vue {
-  private count: number = 0;
+  private count = 0;
   private delegates: IDelegate[];
 
   public mounted() {
@@ -36,8 +36,8 @@ export default class DelegateCount extends Vue {
     this.getDelegateCount();
 
     this.$store.watch(
-      state => state.delegates.delegates,
-      value => this.getDelegateCount(),
+      (state) => state.delegates.delegates,
+      (value) => this.getDelegateCount(),
     );
   }
 

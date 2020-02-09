@@ -4,48 +4,36 @@
 
     <section class="page-section mb-5 py-5 md:py-10">
       <GenericSearchForm
+        :search-types="searchTypes"
+        :selected-type="selectedType"
+        :on-search-type-change="onSearchTypeChange"
         @search="search"
         @formChange="onFormChange"
-        :searchTypes="searchTypes"
-        :selectedType="selectedType"
-        :onSearchTypeChange="onSearchTypeChange"
       />
 
-      <TransactionSearchForm
-        v-if="selectedType === 'transaction'"
-        @search="search"
-        @formChange="onFormChange"
-      />
+      <TransactionSearchForm v-if="selectedType === 'transaction'" @search="search" @formChange="onFormChange" />
       <BlockSearchForm v-if="selectedType === 'block'" @search="search" @formChange="onFormChange" />
-      <WalletSearchForm
-        v-if="selectedType === 'wallet'"
-        @search="search"
-        @formChange="onFormChange"
-      />
+      <WalletSearchForm v-if="selectedType === 'wallet'" @search="search" @formChange="onFormChange" />
 
       <button class="button-lg" @click="search">Search</button>
     </section>
 
-    <section class="page-section py-5 md:py-10" v-if="submitted">
+    <section v-if="submitted" class="page-section py-5 md:py-10">
       <div v-if="selectedType === 'transaction'" class="hidden sm:block">
-        <TableTransactionsDesktop
-          :transactions="data"
-          :sort-query="sortParams"
-          @on-sort-change="onSortChange"
-        />
+        <TableTransactionsDesktop :transactions="data" :sort-query="sortParams" @on-sort-change="onSortChange" />
       </div>
       <div v-if="selectedType === 'transaction'" class="sm:hidden">
         <TableTransactionsMobile :transactions="data" />
       </div>
 
-      <div class="hidden sm:block" v-if="selectedType === 'block'">
+      <div v-if="selectedType === 'block'" class="hidden sm:block">
         <TableBlocksDesktop :blocks="data" :sort-query="sortParams" @on-sort-change="onSortChange" />
       </div>
-      <div class="sm:hidden" v-if="selectedType === 'block'">
+      <div v-if="selectedType === 'block'" class="sm:hidden">
         <TableBlocksMobile :blocks="data" />
       </div>
 
-      <div class="hidden sm:block" v-if="selectedType === 'wallet'">
+      <div v-if="selectedType === 'wallet'" class="hidden sm:block">
         <TableWalletsSearchDesktop
           :wallets="data"
           :total="supply"
@@ -53,16 +41,11 @@
           @on-sort-change="onSortChange"
         />
       </div>
-      <div class="sm:hidden" v-if="selectedType === 'wallet'">
+      <div v-if="selectedType === 'wallet'" class="sm:hidden">
         <TableWalletsSearchMobile :wallets="data" :total="supply" />
       </div>
 
-      <Pagination
-        v-if="showPagination"
-        :meta="meta"
-        :current-page="currentPage"
-        @page-change="onPageChange"
-      />
+      <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
     </section>
   </div>
 </template>
@@ -121,13 +104,13 @@ export default class AdvancedSearchPage extends Vue {
 
   private data: any[] | null = null;
   private meta: any | null = null;
-  private currentPage: number = 1;
+  private currentPage = 1;
   private searchTypes: string[] = Object.keys(this.types);
-  private selectedType: string = "transaction";
+  private selectedType = "transaction";
   private searchParams: ITransactionSearchParams | IBlockSearchParams | IWalletSearchParams = {};
-  private submitted: boolean = false;
+  private submitted = false;
   private supply: number;
-  private lastFormChange: number = 0;
+  private lastFormChange = 0;
 
   get sortParams() {
     return this.$store.getters[this.types[this.selectedType].sortParams];
@@ -199,7 +182,7 @@ export default class AdvancedSearchPage extends Vue {
 
     // Remove field from search params when input is empty
     if (processedInput.value !== 0 && !processedInput.value) {
-      this.removeFromSearchParams(name);
+      this.removeFromSearchParams(input.name);
       return;
     }
 

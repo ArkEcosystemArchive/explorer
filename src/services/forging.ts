@@ -17,7 +17,7 @@ class ForgingService {
       return ForgingStatus.Forging;
     }
 
-    if (!previousDelegates.find(el => el.publicKey === delegate.publicKey)) {
+    if (!previousDelegates.find((el) => el.publicKey === delegate.publicKey)) {
       return ForgingStatus.BecameActive;
     }
 
@@ -51,7 +51,7 @@ class ForgingService {
 
     const remainingBlocks = activeDelegates - (height % activeDelegates) || activeDelegates;
 
-    delegates.forEach(delegate => {
+    delegates.forEach((delegate) => {
       switch (delegate.forgingStatus) {
         case ForgingStatus.Forging: {
           forging++;

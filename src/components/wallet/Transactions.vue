@@ -89,9 +89,9 @@ export default class WalletTransactions extends Vue {
   @Prop({ required: true }) public wallet: IWallet;
 
   private transactions: ITransaction[] | null = null;
-  private receivedCount: number = 0;
-  private sentCount: number = 0;
-  private locksCount: number = 0;
+  private receivedCount = 0;
+  private sentCount = 0;
+  private locksCount = 0;
   private meta: any | null = null;
 
   get isTypeSent() {

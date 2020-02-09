@@ -6,7 +6,7 @@ const locale = store.getters["ui/locale"];
 export default {
   methods: {
     // Note: due to BigNumber config the max decimals is 8
-    readableCrypto(value: string | undefined, appendCurrency: boolean = true, decimals: number = 8): string | void {
+    readableCrypto(value: string | undefined, appendCurrency = true, decimals = 8): string | void {
       if (value) {
         const bigNumberValue = BigNumber.make(value);
         const normalizedValue: string = Number(bigNumberValue.dividedBy(1e8)).toLocaleString(locale, {
@@ -23,7 +23,7 @@ export default {
       value: string | number,
       rate: number | null = null,
       currency: string | null = null,
-      normalise: boolean = true,
+      normalise = true,
     ): string {
       const currencyName: string = currency || store.getters["currency/name"];
 
@@ -42,7 +42,7 @@ export default {
         LTC: "Ł",
       };
 
-      return [store.getters["network/token"], "BTC", "ETH", "LTC"].some(c => currencyName.indexOf(c) > -1)
+      return [store.getters["network/token"], "BTC", "ETH", "LTC"].some((c) => currencyName.indexOf(c) > -1)
         ? `${Number(bigNumberValue).toLocaleString(locale, {
             maximumFractionDigits: 8,
           })} ${cryptos[currencyName]}`
@@ -53,7 +53,7 @@ export default {
     },
 
     rawCurrency(value: number, currencyName: string): string {
-      return [store.getters["network/token"], "BTC", "ETH", "LTC"].some(c => currencyName.indexOf(c) > -1)
+      return [store.getters["network/token"], "BTC", "ETH", "LTC"].some((c) => currencyName.indexOf(c) > -1)
         ? value.toLocaleString(locale, {
             maximumFractionDigits: 8,
           })

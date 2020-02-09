@@ -79,7 +79,7 @@ export default class HeaderDefault extends Vue {
     const WIDTH_THRESHOLD = 1024;
     const widthQuery = window.matchMedia(`(max-width: ${WIDTH_THRESHOLD}px)`);
 
-    widthQuery.addListener(e => this.setMobilePlaceholder(e.matches));
+    widthQuery.addListener((e) => this.setMobilePlaceholder(e.matches));
 
     this.setMobilePlaceholder(window.innerWidth < WIDTH_THRESHOLD);
   }
