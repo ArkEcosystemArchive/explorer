@@ -171,6 +171,11 @@ export interface IApiLockWrapper {
   data: ILock;
 }
 
+export interface IApiLocksWrapper {
+  data: ILock[];
+  meta: IMeta;
+}
+
 export interface IApiTransactionWrapper {
   data: ITransaction;
 }

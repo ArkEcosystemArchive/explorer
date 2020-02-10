@@ -19,8 +19,20 @@ describe("Services > Lock", () => {
     store.dispatch("network/setServer", "https://dexplorer.ark.io/api/v2");
   });
 
+  it("should return lock", async () => {
+    const { data } = await LockService.paginate();
+
+    data.forEach(lock => {
+      expect(Object.keys(lock).sort()).toEqual(expect.arrayContaining(lockPropertyArray));
+    });
+  });
+
   it("should find a lock by its id", async () => {
-    const data = await LockService.find("f82af75b25da5ce4485c586d8a467fe13460134ab86cafa2ad9633127f88935f");
-    expect(Object.keys(data).sort()).toEqual(expect.arrayContaining(lockPropertyArray));
+    const { data } = await LockService.paginate();
+
+    if (data.length) {
+      const lock = await LockService.find(data[0].lockId);
+      expect(Object.keys(lock).sort()).toEqual(expect.arrayContaining(lockPropertyArray));
+    }
   });
 }
