@@ -1,10 +1,6 @@
 name: Format
 
 on:
-    push:
-        branches:
-            - "master"
-            - "develop"
     pull_request:
         types: [ready_for_review, synchronize, opened]
 
