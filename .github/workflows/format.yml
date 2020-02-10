@@ -1,8 +1,8 @@
 name: Format
 
 on:
-    - pull_request
-    - push
+    pull_request:
+        types: [ready_for_review, synchronize, opened]
 
 jobs:
     eslint:
@@ -22,12 +22,10 @@ jobs:
             - name: Run eslint
               run: yarn lint
 
-            - name: Build
-              run: yarn build
-
-            - uses: stefanzweifel/git-auto-commit-action@v2.1.0
+            - uses: stefanzweifel/git-auto-commit-action@v2.3.0
               with:
                 commit_message: "style: resolve style guide violations"
+                commit_options: "--no-verify"
                 branch: ${{ github.head_ref }}
               env:
                 GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
