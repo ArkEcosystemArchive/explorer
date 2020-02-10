@@ -84,7 +84,6 @@
     "eslint-plugin-vue": "^6.1.2",
     "jest-extended": "^0.11.2",
     "jest-localstorage-mock": "^2.4.0",
-    "lint-staged": "^10.0.0",
     "minimist": "^1.2.0",
     "moment-timezone": "^0.5.27",
     "prettier": "^1.19.1",
@@ -106,18 +105,7 @@
   "bugs": {
     "url": "https://github.com/arkecosystem/explorer/issues"
   },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
   "license": "MIT",
-  "lint-staged": {
-    "*.ts": [
-      "vue-cli-service lint"
-    ],
-    "*.vue": [
-      "vue-cli-service lint"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/arkecosystem/explorer.git"
