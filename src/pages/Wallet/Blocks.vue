@@ -30,15 +30,9 @@
         />
       </div>
       <div class="sm:hidden">
-        <TableBlocksMobile :blocks="blocks" />
+        <TableBlocksMobile :blocks="blocks" :hide-generated-by="true" />
       </div>
-      <Pagination
-        v-if="showPagination"
-        :hide-generated-by="true"
-        :meta="meta"
-        :current-page="currentPage"
-        @page-change="onPageChange"
-      />
+      <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
     </section>
   </div>
 </template>
