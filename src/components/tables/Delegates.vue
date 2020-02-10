@@ -102,14 +102,14 @@ export default class TableDelegatesDesktop extends Vue {
     this.$emit("on-sort-change", params[0]);
   }
 
-  private sortByRank(x: number, y: number, col: number, rowX: any, rowY: any) {
+  private sortByRank(x: number, y: number) {
     if (x === null) {
       return 1;
     }
     if (y === null) {
       return -1;
     }
-    return x < y ? 1 : -1;
+    return x < y ? -1 : 1;
   }
 }
 </script>
