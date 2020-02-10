@@ -78,6 +78,7 @@ export default {
       BLOCKHEIGHT: "Expiration blockheight",
       CLAIMED: "Claimed transaction",
       EXPIRATION: "Expiration",
+      EXPIRED: "Expired lock",
       OPEN: "Open lock",
       REFUNDED: "Refunded transaction",
       SECRET_HASH: "Secret Hash",
