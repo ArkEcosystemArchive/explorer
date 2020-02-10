@@ -225,8 +225,7 @@ import { TranslateResult } from "vue-i18n";
 import { mapGetters } from "vuex";
 import { ITransaction } from "@/interfaces";
 import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
-import CryptoCompareService from "@/services/crypto-compare";
-import TransactionService from "@/services/transaction";
+import { CryptoCompareService, LockService, TransactionService } from "@/services";
 
 @Component({
   computed: {
@@ -339,7 +338,10 @@ export default class TransactionDetails extends Vue {
     if (this.isTimelock(this.transaction.type, this.transaction.typeGroup)) {
       const response = await TransactionService.findUnlockedForLocks([this.transaction.id]);
       if (response.data.length === 0) {
-        this.timelockStatus = this.$t("TRANSACTION.TIMELOCK.OPEN");
+        const lock = await LockService.find(this.transaction.id);
+        this.timelockStatus = lock.isExpired
+          ? this.$t("TRANSACTION.TIMELOCK.EXPIRED")
+          : this.$t("TRANSACTION.TIMELOCK.OPEN");
       } else if (response.data[0].type === CoreTransaction.TIMELOCK_CLAIM) {
         this.timelockStatus = this.$t("TRANSACTION.TIMELOCK.CLAIMED");
         this.timelockLink = response.data[0].id;
