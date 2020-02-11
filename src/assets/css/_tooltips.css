@@ -4,11 +4,13 @@
   max-width: calc(100% - 9px);
 }
 
+/* purgecss start ignore */
 .tooltip[x-placement=top] .tooltip-inner,
 .tooltip[x-placement=bottom] .tooltip-inner {
   margin-left: 10px;
   margin-right: 10px;
 }
+/* purgecss end ignore */
 
 .tooltip .tooltip-inner {
   background: #f1f3fc;
@@ -47,6 +49,7 @@
   left: 11px !important;
 }
 
+/* purgecss start ignore */
 .tooltip[x-placement^='top'] {
   margin-bottom: 5px;
 }
@@ -106,6 +109,7 @@
   margin-left: 0;
   margin-right: 0;
 }
+/* purgecss end ignore */
 
 .tooltip.popover .popover-inner {
   background: #f9f9f9;
@@ -119,6 +123,7 @@
   border-color: #f9f9f9;
 }
 
+/* purgecss start ignore */
 .tooltip[aria-hidden='true'] {
   visibility: hidden;
   opacity: 0;
@@ -130,47 +135,53 @@
   opacity: 1;
   transition: opacity 0.15s;
 }
+/* purgecss end ignore */
 
 /* Forging */
 .tooltip.tooltip-bg-success .tooltip-inner,
 .tooltip.tooltip-bg-forging .tooltip-inner {
-  background-color: #40a130;
-  color: white;
+  @apply text-white bg-status-forging;
 }
 
 .tooltip.tooltip-bg-success .tooltip-arrow,
 .tooltip.tooltip-bg-forging .tooltip-arrow {
-  border-color: #40a130;
+  @apply border-status-forging;
 }
 
 /* Missing */
-.tooltip.tooltip-bg-missed-block .tooltip-inner {
-  background-color: #f5bd5c;
-  color: white;
+.tooltip.tooltip-bg-missed-round .tooltip-inner {
+  @apply text-white bg-status-missed-round;
 }
 
-.tooltip.tooltip-bg-missed-block .tooltip-arrow {
-  border-color: #f5bd5c;
+.tooltip.tooltip-bg-missed-round .tooltip-arrow {
+  @apply border-status-missed-round;
 }
 
 /* Not Forging */
 .tooltip.tooltip-bg-error .tooltip-inner,
 .tooltip.tooltip-bg-not-forging .tooltip-inner {
-  background-color: #e23a3e;
-  color: white;
+  @apply text-white bg-status-not-forging;
 }
 
 .tooltip.tooltip-bg-error .tooltip-arrow,
 .tooltip.tooltip-bg-not-forging .tooltip-arrow {
-  border-color: #e23a3e;
+  @apply border-status-not-forging;
 }
 
 /* Never forged */
 .tooltip.tooltip-bg-never-forged .tooltip-inner {
-  background-color: #e23a3e;
-  color: white;
+  @apply text-white bg-status-not-forging;
 }
 
 .tooltip.tooltip-bg-never-forged .tooltip-arrow {
-  border-color: #e23a3e;
+  @apply border-status-not-forging;
+}
+
+/* Became active */
+.tooltip.tooltip-bg-became-active .tooltip-inner {
+  @apply text-white bg-status-became-active;
+}
+
+.tooltip.tooltip-bg-became-active .tooltip-arrow {
+  @apply border-status-became-active;
 }

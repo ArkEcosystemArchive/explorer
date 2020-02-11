@@ -16,6 +16,7 @@ import mixins from "./mixins";
 import VTooltip from "v-tooltip";
 // @ts-ignore
 import VueGoodTablePlugin from "vue-good-table";
+import PortalVue from "portal-vue";
 import i18n from "./i18n";
 
 // tslint:disable-next-line:no-var-requires
@@ -31,6 +32,7 @@ Vue.use(VTooltip, {
   defaultContainer: "main",
 });
 Vue.use(VueGoodTablePlugin);
+Vue.use(PortalVue);
 
 Vue.mixin(mixins);
 
@@ -38,5 +40,5 @@ new Vue({
   router,
   store,
   i18n,
-  render: h => h(App),
+  render: (h) => h(App),
 }).$mount("#app");

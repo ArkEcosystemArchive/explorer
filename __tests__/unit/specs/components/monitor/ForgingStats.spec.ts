@@ -38,7 +38,7 @@ describe("Components > Monitor > ForgingStats", () => {
     const divs = wrapper.findAll("div.text-grey");
     expect(divs).toHaveLength(4);
     expect(divs.at(0).text()).toBe("Forged block recently");
-    expect(divs.at(1).text()).toContain("Missed block");
+    expect(divs.at(1).text()).toContain("Missed round");
     expect(divs.at(2).text()).toBe("Not forging");
     expect(divs.at(3).text()).toContain("In queue for forging");
   });

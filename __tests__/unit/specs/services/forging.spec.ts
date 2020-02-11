@@ -5,7 +5,7 @@ const dummyDelegate = {
   username: "dummyDelegate",
   address: "ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ",
   publicKey: "02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b",
-  votes: 190970317659243,
+  votes: "190970317659243",
   rank: 1,
   blocks: {
     produced: 93305,
@@ -23,9 +23,9 @@ const dummyDelegate = {
     approval: 1.42,
   },
   forged: {
-    fees: 1149050072665,
-    rewards: 22182000000000,
-    total: 23331050072665,
+    fees: "1149050072665",
+    rewards: "22182000000000",
+    total: "23331050072665",
   },
 };
 
@@ -35,20 +35,13 @@ describe("Services > Forging", () => {
   });
 
   it("should return the status for the given delegate", () => {
-    const data = ForgingService.status(dummyDelegate, 4781312);
+    const data = ForgingService.status(dummyDelegate, 4781312, [
+      {
+        publicKey: dummyDelegate.publicKey,
+        votes: dummyDelegate.votes,
+      },
+    ]);
     expect(data).toBe(0);
-  });
-
-  it("should return the correct round", () => {
-    expect(ForgingService.round(4781111)).toBe(93747 + 1);
-  });
-
-  it("should return the correct round, when modulo is 0", () => {
-    expect(ForgingService.round(4781097)).toBe(93747);
-  });
-
-  it("should return 0 when given round is not a number", () => {
-    expect(ForgingService.round("a")).toBe(0);
   });
 
   it("should return an object of forging stats for the given delegates", () => {
@@ -57,13 +50,15 @@ describe("Services > Forging", () => {
       { forgingStatus: 1 },
       { forgingStatus: 2 },
       { forgingStatus: 3 },
-      { forgingStatus: 4 }, // Unprocessable
+      { forgingStatus: 4 },
+      { forgingStatus: 5 }, // Unprocessable
     ]);
     expect(data).toEqual({
       forging: 1,
-      missedBlock: 1,
+      missedRound: 1,
       notForging: 1,
       neverForged: 1,
+      becameActive: 1,
       remainingBlocks: 51,
     });
   });

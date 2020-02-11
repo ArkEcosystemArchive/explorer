@@ -5,7 +5,7 @@
       <span
         v-tooltip="{ content: $t('WALLET.DELEGATE.VOTER_THRESHOLD', { token: networkToken() }), placement: 'left' }"
         :class="voterCount ? 'mr-2' : ''"
-        >{{ readableNumber(voterCount, 0) }}</span
+        >{{ readableNumber(voterCount) }}</span
       >
       <RouterLink
         v-if="wallet.address && voterCount"
@@ -30,7 +30,7 @@ import DelegateService from "@/services/delegate";
 export default class WalletVoters extends Vue {
   @Prop({ required: true }) public wallet: IWallet;
 
-  private voterCount: number = 0;
+  private voterCount = 0;
 
   get delegate() {
     return this.$store.getters["delegates/byPublicKey"](this.wallet.publicKey);

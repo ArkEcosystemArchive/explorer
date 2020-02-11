@@ -133,7 +133,7 @@ export default {
       STATS: {
         FORGED: "Recentelijk block geforged",
         IN_QUEUE: "In de rij om te forgen",
-        MISSED: "Block gemist",
+        MISSED: "Ronde gemist",
         NOT_FORGING: "Niet aan het forgen",
       },
       STATUS: {
@@ -142,6 +142,7 @@ export default {
         MISSING: "Missend",
         NOT_FORGING: "Niet aan het forgen",
         NEVER_FORGED: "Nooit geforged",
+        BECAME_ACTIVE: "Werd actief",
       },
       VOTES: "Stemmen",
       TOOLTIP: "Laatste block @ {height} aan",

@@ -11,12 +11,10 @@ describe("Delegate Monitor", () => {
 
       cy.get("@divs")
         .eq(0)
-        .invoke("text")
-        .should("include", "Delegates");
+        .should("contain.text", "Delegates");
       cy.get("@divs")
         .eq(1)
-        .invoke("text")
-        .should("include", "Total forged");
+        .should("contain.text", "Total forged");
       cy.get("@divs")
         .eq(2)
         .invoke("text")
@@ -116,20 +114,16 @@ describe("Delegate Monitor", () => {
 
       cy.get("@fields")
         .eq(0)
-        .invoke("text")
-        .should("include", "Forged block recently");
+        .should("contain.text", "Forged block recently");
       cy.get("@fields")
         .eq(1)
-        .invoke("text")
-        .should("include", "Missed block");
+        .should("contain.text", "Missed round");
       cy.get("@fields")
         .eq(2)
-        .invoke("text")
-        .should("include", "Not forging");
+        .should("contain.text", "Not forging");
       cy.get("@fields")
         .eq(3)
-        .invoke("text")
-        .should("include", "In queue for forging");
+        .should("contain.text", "In queue for forging");
     });
 
     it("should be possible to sort the active delegates", () => {
@@ -138,8 +132,7 @@ describe("Delegate Monitor", () => {
         .as("name")
         .should("exist");
       cy.get("@name")
-        .invoke("text")
-        .should("include", "Username");
+        .should("contain.text", "Username");
 
       cy.get("@name").should("not.have.class", "sorting-asc");
       cy.get("@name").should("not.have.class", "sorting-desc");
@@ -181,6 +174,16 @@ describe("Delegate Monitor", () => {
       cy.get(".active-tab").should("include.text", "Standby");
       cy.get(".inactive-tab").should("include.text", "Active");
     });
+
+    it("should be possible to click the 'show more' button for active delegates", () => {
+      cy.get("h1")
+        .contains("Delegate Monitor")
+        .should("exist");
+
+      cy.url().should("include", "/delegate-monitor");
+      cy.get("button.button-lg").click();
+      cy.url().should("include", "delegates/");
+    });
   });
 
   describe("Standby Delegates", () => {
@@ -201,8 +204,7 @@ describe("Delegate Monitor", () => {
         .as("name")
         .should("exist");
       cy.get("@name")
-        .invoke("text")
-        .should("include", "Username");
+        .should("contain.text", "Username");
 
       cy.get("@name").should("not.have.class", "sorting-asc");
       cy.get("@name").should("not.have.class", "sorting-desc");

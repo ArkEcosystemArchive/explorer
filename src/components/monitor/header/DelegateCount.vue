@@ -1,7 +1,7 @@
 <template>
   <div class="hidden lg:flex items-center">
-    <div class="mr-6 flex-none">
-      <img class="block" src="@/assets/images/icons/group.svg" />
+    <div class="mr-6 flex-none text-blue">
+      <SvgIcon class="block" name="group" view-box="0 0 47 38" />
     </div>
     <div>
       <div class="text-grey mb-2">
@@ -25,7 +25,7 @@ import { IDelegate } from "@/interfaces";
   },
 })
 export default class DelegateCount extends Vue {
-  private count: number = 0;
+  private count = 0;
   private delegates: IDelegate[];
 
   public mounted() {
@@ -35,7 +35,10 @@ export default class DelegateCount extends Vue {
   private prepareComponent() {
     this.getDelegateCount();
 
-    this.$store.watch(state => state.delegates.delegates, value => this.getDelegateCount());
+    this.$store.watch(
+      (state) => state.delegates.delegates,
+      (value) => this.getDelegateCount(),
+    );
   }
 
   private getDelegateCount() {

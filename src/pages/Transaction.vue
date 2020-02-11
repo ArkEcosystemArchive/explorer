@@ -14,7 +14,7 @@
       <section class="mb-5">
         <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
           <div class="relative mr-6 flex-none">
-            <img class="block" src="@/assets/images/icons/transaction.svg" />
+            <SvgIcon class="block" name="transaction" view-box="0 0 43 39" />
             <div
               class="absolute text-theme-transaction-icon text-2xl"
               style="top: 50%; left: 50%; transform: translate(-50%, -50%);"
@@ -36,7 +36,12 @@
         </div>
       </section>
 
-      <TransactionDetails :transaction="transaction" />
+      <TransactionDetails ref="transactionDetails" :transaction="transaction" />
+
+      <section v-if="isMultiPayment(transaction.type, transaction.typeGroup)" class="page-section py-5 md:py-10">
+        <MultiPaymentTransactions :transaction="transaction" :page="currentPage" />
+        <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
+      </section>
     </template>
   </div>
 </template>
@@ -49,7 +54,9 @@ import { Route } from "vue-router";
 import { ISortParameters, ITransaction } from "@/interfaces";
 import NotFound from "@/components/utils/NotFound.vue";
 import TransactionDetails from "@/components/transaction/Details.vue";
+import MultiPaymentTransactions from "@/components/tables/MultiPaymentTransactions.vue";
 import TransactionService from "@/services/transaction";
+import { paginationLimit } from "@/constants";
 
 Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 
@@ -65,16 +72,23 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 })
 export default class TransactionPage extends Vue {
   private transaction: ITransaction | null = null;
-  private transactionNotFound: boolean = false;
-  private isLoading: boolean = false;
+  private transactionNotFound = false;
+  private isLoading = false;
+  private meta: any | null = null;
+  private currentPage = 1;
   private height: number;
   private networkSymbol: string;
+
+  get showPagination() {
+    return this.meta && this.meta.pageCount > 1;
+  }
 
   public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
     try {
       const transaction = await TransactionService.find(to.params.id);
       next((vm: TransactionPage) => {
         vm.setTransaction(transaction);
+        vm.calculateMeta();
       });
     } catch (e) {
       next((vm: TransactionPage) => {
@@ -93,6 +107,7 @@ export default class TransactionPage extends Vue {
     try {
       const transaction = await TransactionService.find(to.params.id);
       this.setTransaction(transaction);
+      this.calculateMeta();
       next();
     } catch (e) {
       console.log(e.message || e.data.error);
@@ -119,6 +134,41 @@ export default class TransactionPage extends Vue {
 
   private setTransaction(transaction: ITransaction) {
     this.transaction = transaction;
+  }
+
+  private setMeta(meta: any) {
+    this.meta = meta;
+  }
+
+  private onPageChange(page: number) {
+    if (this.currentPage !== page) {
+      this.currentPage = page;
+      this.meta.count = page;
+      this.meta.self = page.toString();
+      this.meta.next = page < this.meta.pageCount ? (page + 1).toString() : null;
+      this.meta.previous = page > 1 ? (page - 1).toString() : null;
+
+      // @ts-ignore
+      this.$refs.transactionDetails.$el.scrollIntoView(false);
+    }
+  }
+
+  private calculateMeta() {
+    // @ts-ignore
+    if (this.transaction && this.isMultiPayment(this.transaction.type, this.transaction.typeGroup)) {
+      const transactions = this.transaction.asset.payments.length;
+      const pages = Math.ceil(transactions / paginationLimit);
+      this.meta = {
+        count: transactions >= paginationLimit ? paginationLimit : transactions,
+        pageCount: pages,
+        totalCount: transactions,
+        next: pages > 1 ? "2" : null,
+        previous: null,
+        self: "1",
+        first: "1",
+        last: pages.toString(),
+      };
+    }
   }
 
   private onReload() {

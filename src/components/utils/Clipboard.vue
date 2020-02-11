@@ -1,6 +1,6 @@
 <template>
   <button v-tooltip="getTooltip()" class="ClipboardButton" @click="copy">
-    <img ref="copyImage" :class="{ 'animated wobble': copying }" class="block" src="@/assets/images/icons/copy.svg" />
+    <SvgIcon ref="copyImage" :class="{ 'animated wobble': copying }" class="block" name="copy" view-box="0 0 16 19" />
   </button>
 </template>
 
@@ -12,8 +12,8 @@ import { IVTooltip } from "@/interfaces";
 export default class Clipboard extends Vue {
   @Prop({ required: true }) public value: string;
 
-  private copying: boolean = false;
-  private notSupported: boolean = false;
+  private copying = false;
+  private notSupported = false;
 
   private getTooltip() {
     const tooltip: IVTooltip = {

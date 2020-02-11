@@ -8,6 +8,16 @@ describe("Components > SelectionType", () => {
   const localVue = createLocalVue();
   const i18n = useI18n(localVue);
 
+  const mocks = {
+    $store: {
+      getters: {
+        "network/enabledTransactionTypes": [
+          { key: "TIMELOCK_REFUND", type: 10, typeGroup: 1 },
+        ],
+      },
+    },
+  };
+
   localVue.directive("click-outside", clickOutside);
 
   it("should be possible to open and close the dropdown", () => {
@@ -15,6 +25,7 @@ describe("Components > SelectionType", () => {
       i18n,
       localVue,
       clickOutside,
+      mocks,
     });
 
     wrapper.find(".mr-1").trigger("click");
@@ -39,12 +50,13 @@ describe("Components > SelectionType", () => {
       i18n,
       localVue,
       clickOutside,
+      mocks,
     });
 
     wrapper.setData({ selectOpen: true });
     wrapper
       .findAll(".dropdown-button")
-      .at(11)
+      .at(1)
       .trigger("click");
     expect(wrapper.vm.selectOpen).toBeFalsy();
   });
@@ -54,13 +66,17 @@ describe("Components > SelectionType", () => {
       i18n,
       localVue,
       clickOutside,
+      mocks,
     });
 
     wrapper
       .findAll(".dropdown-button")
-      .at(11)
+      .at(1)
       .trigger("click");
-    expect(localStorage.setItem).toHaveBeenCalledWith("transactionType", "4");
-    expect(Number(localStorage.__STORE__.transactionType)).toBe(4);
+    expect(localStorage.setItem).toHaveBeenCalledWith(
+      "transactionType",
+      '{"key":"TIMELOCK_REFUND","type":10,"typeGroup":1}',
+    );
+    expect(localStorage.__STORE__.transactionType).toBe('{"key":"TIMELOCK_REFUND","type":10,"typeGroup":1}');
   });
 });

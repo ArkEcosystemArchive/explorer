@@ -2,7 +2,7 @@ describe("Wallet", () => {
   it("should be possible to copy the wallet address", () => {
     cy.visit("wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs");
 
-    cy.get(".ClipboardButton img.block")
+    cy.get(".ClipboardButton svg.block")
       .first()
       .as("btn");
     cy.get("@btn").should("not.have.class", "animated");
@@ -96,8 +96,7 @@ describe("Wallet", () => {
         .click();
       cy.get("span")
         .last()
-        .invoke("text")
-        .should("include", "Received");
+        .should("contain.text", "Received");
     });
 
     cy.url().should("include", "wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs/transactions/received/1");
@@ -120,11 +119,11 @@ describe("Wallet", () => {
   it("should show who the wallet voted for", () => {
     cy.visit("wallets/ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ");
 
-    cy.get(".WalletHeaderDesktop div")
+    cy.get(".WalletVote div")
       .contains("Voting for")
       .should("exist")
       .and("be.visible");
-    cy.get(".WalletHeaderDesktop div")
+    cy.get(".WalletVote div")
       .contains("Voting for")
       .siblings()
       .last()
@@ -132,13 +131,10 @@ describe("Wallet", () => {
       .should("exist");
   });
 
-  it("should hide the container if the wallet is not voting", () => {
+  it("should not show the container if the wallet is not voting", () => {
     cy.visit("wallets/AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv");
 
-    cy.get(".WalletHeaderDesktop div")
-      .contains("Voting for")
-      .should("exist")
-      .and("not.be.visible");
+    cy.get(".WalletVote").should("not.exist");
   });
 
   it("should show delegate information", () => {
@@ -216,8 +212,7 @@ describe("Wallet", () => {
     cy.visit("/wallets/ffffffffffffffffffffffffffffffffff");
 
     cy.get("h1")
-      .invoke("text")
-      .should("include", "Ooops!");
+      .should("contain.text", "Ooops!");
     cy.url().should("include", "/404");
   });
 });

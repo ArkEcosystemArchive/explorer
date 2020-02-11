@@ -25,6 +25,6 @@ import { mapGetters } from "vuex";
   },
 })
 export default class ErrorPage extends Vue {
-  private nightMode: string;
+  private nightMode: boolean;
 }
 </script>

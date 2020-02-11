@@ -18,25 +18,16 @@
         @click="toggleDropdown"
       >
         <span class="font-bold">
-          {{ $t(`TRANSACTION.TYPES.${types[transactionType + 1]}`) }}
+          {{ $t(`TRANSACTION.TYPES.${transactionType.key}`) }}
         </span>
 
-        <svg
-          :class="{ 'rotate-180': isOpen }"
-          xmlns="http://www.w3.org/2000/svg"
-          class="fill-current"
-          viewBox="0 0 20 20"
-          width="16px"
-          height="16px"
-        >
-          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-        </svg>
+        <SvgIcon :class="{ 'rotate-180': isOpen }" name="caret" view-box="0 0 16 16" />
       </span>
 
       <ul v-show="isOpen" class="SelectionType--options inset-x-0 mt-10">
-        <li v-for="(type, index) in types" :key="type">
-          <div class="dropdown-button" @click="filterTransactions(index - 1)">
-            {{ $t(`TRANSACTION.TYPES.${type}`) }}
+        <li v-for="type in types" :key="type.key">
+          <div class="dropdown-button" @click="filterTransactions(type)">
+            {{ $t(`TRANSACTION.TYPES.${type.key}`) }}
           </div>
         </li>
       </ul>
@@ -52,23 +43,15 @@
         class="flex items-center cursor-pointer"
         @click="toggleDropdown"
       >
-        <span class="mr-1 md:whitespace-no-wrap">{{ $t(`TRANSACTION.TYPES.${types[transactionType + 1]}`) }}</span>
-        <svg
-          :class="{ 'rotate-180': isOpen }"
-          class="fill-current"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          width="16px"
-          height="16px"
-        >
-          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-        </svg>
+        <span class="mr-1 md:whitespace-no-wrap">{{ $t(`TRANSACTION.TYPES.${transactionType.key}`) }}</span>
+
+        <SvgIcon :class="{ 'rotate-180': isOpen }" name="caret" view-box="0 0 16 16" />
       </span>
 
       <ul v-show="isOpen" class="SelectionType--options right-0 mt-2">
-        <li v-for="(type, index) in types" :key="type">
-          <div class="dropdown-button" @click="filterTransactions(index - 1)">
-            {{ $t(`TRANSACTION.TYPES.${type}`) }}
+        <li v-for="type in types" :key="type.key">
+          <div class="dropdown-button" @click="filterTransactions(type)">
+            {{ $t(`TRANSACTION.TYPES.${type.key}`) }}
           </div>
         </li>
       </ul>
@@ -78,13 +61,17 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { ITransactionType } from "@/interfaces";
 
 @Component
 export default class SelectionType extends Vue {
   @Prop({ required: false, default: false }) public inBanner: boolean;
-  private types: string[] = ["ALL", "TRANSFER", "SECOND_SIGNATURE", "DELEGATE_REGISTRATION", "VOTE", "MULTI_SIGNATURE"];
-  private transactionType: number = -1;
-  private selectOpen: boolean = false;
+  private transactionType: ITransactionType = { key: "ALL", type: -1 };
+  private selectOpen = false;
+
+  get types() {
+    return this.$store.getters["network/enabledTransactionTypes"];
+  }
 
   get isOpen() {
     return this.selectOpen;
@@ -107,17 +94,18 @@ export default class SelectionType extends Vue {
   }
 
   public created() {
-    this.transactionType = Number(localStorage.getItem("transactionType") || -1);
+    const savedType = localStorage.getItem("transactionType");
+    this.transactionType = savedType ? JSON.parse(savedType) : { key: "ALL", type: -1 };
   }
 
-  private filterTransactions(type: number) {
+  private filterTransactions(type: ITransactionType) {
     this.closeDropdown();
     this.setTransactionType(type);
     this.$emit("change", type);
   }
 
-  private setTransactionType(type: number) {
-    localStorage.setItem("transactionType", type.toString());
+  private setTransactionType(type: ITransactionType) {
+    localStorage.setItem("transactionType", JSON.stringify(type));
     this.transactionType = type;
   }
 
@@ -137,6 +125,7 @@ export default class SelectionType extends Vue {
 }
 
 .SelectionType--options {
-  @apply .absolute .bg-theme-content-background .shadow-theme .rounded .border .overflow-hidden .text-sm;
+  max-height: 15rem;
+  @apply .absolute .bg-theme-content-background .shadow-theme .rounded .border .overflow-hidden .text-sm .overflow-y-auto;
 }
 </style>

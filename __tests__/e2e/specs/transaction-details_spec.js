@@ -4,7 +4,7 @@ describe("Transaction Details", () => {
   });
 
   it("should be possible to copy the transaction id", () => {
-    cy.get(".ClipboardButton img.block").as("btn");
+    cy.get(".ClipboardButton svg.block").as("btn");
     cy.get("@btn").should("not.have.class", "animated");
     cy.get("@btn")
       .click()
@@ -35,6 +35,14 @@ describe("Transaction Details", () => {
       .and("include.text", "Wallet summary");
   });
 
+  xit("should be possible to see the transaction type", () => {
+    // This tests does not work for mainnet yet because of the missing typeGroup property
+    cy.get(".page-section")
+      .find(".list-row-border-b")
+      .eq(2)
+      .should('include.text', 'Transfer');
+  });
+
   it("should be possible to click on the block id", () => {
     cy.get(".page-section")
       .find(".list-row")
@@ -57,7 +65,7 @@ describe("Transaction Details", () => {
   it("should refresh the confirmation count automatically", () => {
     cy.get(".page-section")
       .find(".list-row-border-b")
-      .eq(2)
+      .eq(3)
       .find("div")
       .should("have.length", 2)
       .last()
@@ -66,7 +74,7 @@ describe("Transaction Details", () => {
     cy.get("@count").then($count => {
       const count = $count.text();
 
-      cy.get("@count", { timeout: 20000 }).should($count2 => {
+      cy.get("@count", { timeout: 30000 }).should($count2 => {
         expect($count2.text()).not.to.eq(count);
       });
     });

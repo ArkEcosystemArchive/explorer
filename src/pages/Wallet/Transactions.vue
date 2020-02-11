@@ -5,7 +5,7 @@
     <section class="mb-5">
       <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
         <div class="relative mr-6 flex-none">
-          <img class="block" src="@/assets/images/icons/transaction.svg" />
+          <SvgIcon class="block" name="transaction" view-box="0 0 43 39" />
           <div
             class="absolute text-theme-transaction-icon text-2xl"
             style="top: 50%; left: 50%; transform: translate(-50%, -50%);"
@@ -35,27 +35,21 @@
               @click="selectOpen = !selectOpen"
             >
               <span class="mr-1">{{ $t(`TRANSACTION.TYPES.${type.toUpperCase()}`) }}</span>
-              <svg
-                :class="{ 'rotate-180': selectOpen }"
-                class="fill-current"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                width="16px"
-                height="16px"
-              >
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-              </svg>
+              <SvgIcon :class="{ 'rotate-180': selectOpen }" name="caret" view-box="0 0 16 16" />
             </span>
             <ul
               v-show="selectOpen"
               class="absolute right-0 mt-px bg-theme-content-background shadow-theme rounded border overflow-hidden text-sm"
             >
-              <li v-for="txType in ['all', 'sent', 'received']" :key="txType">
+              <li v-for="type in availableTransactionTypes" :key="type">
                 <RouterLink
-                  :to="{ name: 'wallet-transactions', params: { address: address, type: txType, page: 1 } }"
+                  :to="{
+                    name: 'wallet-transactions',
+                    params: { address: address, type, page: 1 },
+                  }"
                   class="dropdown-button"
                 >
-                  {{ $t(`TRANSACTION.TYPES.${txType.toUpperCase()}`) }}
+                  {{ $t(`TRANSACTION.TYPES.${type.toUpperCase()}`) }}
                 </RouterLink>
               </li>
             </ul>
@@ -67,13 +61,21 @@
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
         <TableTransactionsDesktop
+          v-if="!isLocks"
+          :transactions="transactions"
+          :sort-query="sortParams"
+          @on-sort-change="onSortChange"
+        />
+        <TableLockTransactionsDesktop
+          v-else
           :transactions="transactions"
           :sort-query="sortParams"
           @on-sort-change="onSortChange"
         />
       </div>
       <div class="sm:hidden">
-        <TableTransactionsMobile :transactions="transactions" />
+        <TableTransactionsMobile v-if="!isLocks" :transactions="transactions" />
+        <TableLockTransactionsMobile v-else :transactions="transactions" />
       </div>
       <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
     </section>
@@ -92,13 +94,24 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 @Component({
   computed: {
     ...mapGetters("network", { networkSymbol: "symbol" }),
+    ...mapGetters("network", ["hasHtlcEnabled"]),
+
+    availableTransactionTypes() {
+      const types = ["all", "sent", "received"];
+
+      if (this.hasHtlcEnabled) {
+        types.push("locks");
+      }
+
+      return types;
+    },
   },
 })
 export default class WalletTransactions extends Vue {
   private transactions: ITransaction[] | null = null;
   private meta: any | null = null;
-  private currentPage: number = 0;
-  private selectOpen: boolean = false;
+  private currentPage = 0;
+  private selectOpen = false;
   private networkSymbol: string;
 
   get showPagination() {
@@ -110,7 +123,11 @@ export default class WalletTransactions extends Vue {
   }
 
   get type() {
-    return this.$route.params.type;
+    return this.$store.getters["ui/walletTransactionTab"];
+  }
+
+  set type(type: string) {
+    this.$store.dispatch("ui/setWalletTransactionTab", type);
   }
 
   get sortParams() {
@@ -122,6 +139,10 @@ export default class WalletTransactions extends Vue {
       field: params.field,
       type: params.type,
     });
+  }
+
+  get isLocks() {
+    return this.$route.params.type === "locks";
   }
 
   @Watch("currentPage")
@@ -138,6 +159,7 @@ export default class WalletTransactions extends Vue {
       );
 
       next((vm: WalletTransactions) => {
+        vm.type = to.params.type;
         vm.currentPage = Number(to.params.page);
         vm.setTransactions(data);
         vm.setMeta(meta);
@@ -159,6 +181,7 @@ export default class WalletTransactions extends Vue {
         Number(to.params.page),
       );
 
+      this.type = to.params.type;
       this.currentPage = Number(to.params.page);
       this.setTransactions(data);
       this.setMeta(meta);
@@ -173,7 +196,10 @@ export default class WalletTransactions extends Vue {
       return;
     }
 
-    this.transactions = transactions.map(transaction => ({ ...transaction, price: null }));
+    this.transactions = transactions.map((transaction) => ({
+      ...transaction,
+      price: null,
+    }));
   }
 
   private setMeta(meta: any) {
@@ -189,11 +215,7 @@ export default class WalletTransactions extends Vue {
   }
 
   private changePage() {
-    if (
-      this.currentPage !== Number(this.$route.params.page) ||
-      this.address !== this.$route.params.address ||
-      this.type !== this.$route.params.type
-    ) {
+    if (this.currentPage !== Number(this.$route.params.page) || this.address !== this.$route.params.address) {
       // @ts-ignore
       this.$router.push({
         name: "wallet-transactions",
@@ -206,6 +228,7 @@ export default class WalletTransactions extends Vue {
     }
   }
 
+  // TODO: handle difference in locks vs all / received / sent pages
   private onSortChange(params: ISortParameters) {
     this.sortParams = params;
   }

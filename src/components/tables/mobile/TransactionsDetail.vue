@@ -27,7 +27,12 @@
           <div class="mr-4">
             {{ $t("TRANSACTION.RECIPIENT") }}
           </div>
-          <LinkWallet :address="transaction.recipient" :type="transaction.type" :asset="transaction.asset" />
+          <LinkWallet
+            :address="transaction.recipient"
+            :type="transaction.type"
+            :asset="transaction.asset"
+            :type-group="transaction.typeGroup"
+          />
         </div>
 
         <div v-if="transaction.vendorField" class="list-row-border-b-no-wrap">
@@ -44,7 +49,7 @@
             {{ $t("TRANSACTION.AMOUNT") }}
           </div>
           <div>
-            <TransactionAmount :transaction="transaction" :type="transaction.type" />
+            <TransactionAmount :transaction="transaction" tooltip-placement="left" />
           </div>
         </div>
 
@@ -53,7 +58,7 @@
             {{ $t("TRANSACTION.FEE") }}
           </div>
           <div>
-            <TransactionAmount :transaction="data.row" :is-fee="true" />
+            <TransactionAmount :transaction="data.row" :is-fee="true" tooltip-placement="left" />
           </div>
         </div>
 
@@ -64,10 +69,10 @@
           <div class="flex items-center justify-end">
             <div
               v-if="transaction.confirmations <= activeDelegates"
-              class="flex items-center justify-end whitespace-no-wrap"
+              class="flex items-center justify-end whitespace-no-wrap text-green"
             >
-              <span class="text-green inline-block mr-2">{{ transaction.confirmations }}</span>
-              <img class="icon flex-none" src="@/assets/images/icons/clock.svg" />
+              <span class="inline-block mr-2">{{ readableNumber(transaction.confirmations) }}</span>
+              <SvgIcon class="icon flex-none" name="became-active" view-box="0 0 16 16" />
             </div>
             <div v-else>
               {{ $t("TRANSACTION.WELL_CONFIRMED") }}
@@ -95,7 +100,7 @@ import { mapGetters } from "vuex";
 export default class TableTransactionsDetailMobile extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })

@@ -25,6 +25,12 @@ describe("Store > Network", () => {
     expect(store.getters["network/alias"]).toEqual("setAlias");
   });
 
+  it("should set the network address prefix", () => {
+    store.dispatch("network/setAddressPrefix", "setAddressPrefix");
+
+    expect(store.getters["network/addressPrefix"]).toEqual("setAddressPrefix");
+  });
+
   it("should set the network active delegates", () => {
     store.dispatch("network/setActiveDelegates", "setActiveDelegates");
 
@@ -41,6 +47,12 @@ describe("Store > Network", () => {
     store.dispatch("network/setToken", "setToken");
 
     expect(store.getters["network/token"]).toEqual("setToken");
+  });
+
+  it("should set if the token is listed", () => {
+    store.dispatch("network/setIsListed", true);
+
+    expect(store.getters["network/isListed"]).toBeTrue();
   });
 
   it("should set the network symbol", () => {
@@ -67,9 +79,59 @@ describe("Store > Network", () => {
     expect(store.getters["network/supply"]).toEqual("setSupply");
   });
 
+  it("should set the network initial supply", () => {
+    store.dispatch("network/setInitialSupply", "initialSupply");
+
+    expect(store.getters["network/initialSupply"]).toEqual("initialSupply");
+  });
+
   it("should set the network height", () => {
     store.dispatch("network/setHeight", "setHeight");
 
     expect(store.getters["network/height"]).toEqual("setHeight");
+  });
+
+  it("should set the network epoch", () => {
+    store.dispatch("network/setEpoch", "1234");
+
+    expect(store.getters["network/epoch"]).toEqual("1234");
+  });
+
+  it("should set the network blocktime", () => {
+    store.dispatch("network/setBlocktime", 10);
+
+    expect(store.getters["network/blocktime"]).toEqual(10);
+  });
+
+  it("should set the magistrate property to enabled", () => {
+    store.dispatch("network/setHasMagistrateEnabled", true);
+
+    expect(store.getters["network/hasMagistrateEnabled"]).toEqual(true);
+  });
+
+  it("should set the magistrate property to disabled", () => {
+    store.dispatch("network/setHasMagistrateEnabled", false);
+
+    expect(store.getters["network/hasMagistrateEnabled"]).toEqual(false);
+  });
+
+  it("should set the htlc property to enabled", () => {
+    store.dispatch("network/setHasHtlcEnabled", true);
+
+    expect(store.getters["network/hasHtlcEnabled"]).toEqual(true);
+  });
+
+  it("should set the htlc property to disabled", () => {
+    store.dispatch("network/setHasHtlcEnabled", false);
+
+    expect(store.getters["network/hasHtlcEnabled"]).toEqual(false);
+  });
+
+  it("should set the enabled transaction types", () => {
+    const types = [{ key: "test", type: 0 }];
+
+    store.dispatch("network/setEnabledTransactionTypes", types);
+
+    expect(store.getters["network/enabledTransactionTypes"]).toEqual(types);
   });
 });

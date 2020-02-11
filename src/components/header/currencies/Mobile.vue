@@ -26,7 +26,7 @@ import CryptoCompareService from "@/services/crypto-compare";
   },
 })
 export default class HeaderCurrenciesMobile extends Vue {
-  private nightMode: string;
+  private nightMode: boolean;
   private currencyName: string;
   private currencies: string[];
 

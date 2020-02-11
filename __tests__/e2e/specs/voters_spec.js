@@ -13,8 +13,7 @@ describe("Voters", () => {
       .as("address")
       .should("exist");
     cy.get("@address")
-      .invoke("text")
-      .should("include", "Address");
+      .should("contain.text", "Address");
 
     cy.get("@address").should("not.have.class", "sorting-asc");
     cy.get("@address").should("not.have.class", "sorting-desc");
@@ -45,8 +44,7 @@ describe("Voters", () => {
     cy.visit("/wallets/ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ/voters/1");
 
     cy.get("h1 span")
-      .invoke("text")
-      .should("include", "arkpool");
+      .should("contain.text", "arkpool");
   });
 
   it("should be possible to click on a wallet address", () => {
@@ -77,8 +75,7 @@ describe("Voters", () => {
   it("should redirect to 404 if the wallet address is invalid", () => {
     cy.visit("/wallets/ffffffffffffffffffffffffffffffffff/voters/1");
     cy.get("h1")
-      .invoke("text")
-      .should("include", "Ooops!");
+      .should("contain.text", "Ooops!");
     cy.url().should("include", "/404");
   });
 });

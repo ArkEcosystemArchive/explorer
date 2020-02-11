@@ -95,6 +95,12 @@ describe("Store > UI", () => {
     expect(store.getters["ui/menuVisible"]).toEqual(false);
   });
 
+  it("should accept the link disclaimer", () => {
+    store.dispatch("ui/setHasAcceptedLinkDisclaimer", true);
+
+    expect(store.getters["ui/hasAcceptedLinkDisclaimer"]).toEqual(true);
+  });
+
   it("should set the block sort params", () => {
     const params = { field: "test" };
 
@@ -111,6 +117,22 @@ describe("Store > UI", () => {
     expect(store.getters["ui/delegateSortParams"]).toEqual(params);
   });
 
+  it("should set the business sort params", () => {
+    const params = { field: "test" };
+
+    store.dispatch("ui/setBusinessSortParams", params);
+
+    expect(store.getters["ui/businessSortParams"]).toEqual(params);
+  });
+
+  it("should set the bridgechain sort params", () => {
+    const params = { field: "test" };
+
+    store.dispatch("ui/setBridgechainSortParams", params);
+
+    expect(store.getters["ui/bridgechainSortParams"]).toEqual(params);
+  });
+
   it("should set the transaction sort params", () => {
     const params = { field: "test" };
 
@@ -125,5 +147,11 @@ describe("Store > UI", () => {
     store.dispatch("ui/setWalletSortParams", params);
 
     expect(store.getters["ui/walletSortParams"]).toEqual(params);
+  });
+
+  it("should set the wallet transaction tab", () => {
+    store.dispatch("ui/setWalletTransactionTab", "all");
+
+    expect(store.getters["ui/walletTransactionTab"]).toEqual("all");
   });
 });

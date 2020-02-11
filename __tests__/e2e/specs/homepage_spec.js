@@ -12,20 +12,16 @@ describe("Homepage", () => {
 
     cy.get("@fields")
       .eq(0)
-      .invoke("text")
-      .should("include", "Height");
+      .should("contain.text", "Height");
     cy.get("@fields")
       .eq(1)
-      .invoke("text")
-      .should("include", "Network");
+      .should("contain.text", "Network");
     cy.get("@fields")
       .eq(2)
-      .invoke("text")
-      .should("include", "Supply");
+      .should("contain.text", "Supply");
     cy.get("@fields")
       .eq(3)
-      .invoke("text")
-      .should("include", "Market Cap");
+      .should("contain.text", "Market Cap");
 
     cy.get("#line-chart").should("be.visible");
     cy.get(".active-tab")
@@ -49,8 +45,7 @@ describe("Homepage", () => {
           .click();
         cy.get("span")
           .eq(1)
-          .invoke("text")
-          .should("include", "Vote");
+          .should("contain.text", "Vote");
       });
   });
 
@@ -163,8 +158,7 @@ describe("Homepage", () => {
           .click();
         cy.get("button.chart-tab-active")
           .first()
-          .invoke("text")
-          .should("include", "Volume");
+          .should("contain.text", "Volume");
       });
 
       cy.get("h1").then($heading => {
@@ -182,8 +176,7 @@ describe("Homepage", () => {
 
       cy.get("button.chart-tab-active")
         .first()
-        .invoke("text")
-        .should("include", "Volume");
+        .should("contain.text", "Volume");
     });
 
     it("should contain buttons for the period", () => {
@@ -194,8 +187,7 @@ describe("Homepage", () => {
           .each(($btn, index, $btns) => {
             cy.wrap($btn)
               .should("be.visible")
-              .invoke("text")
-              .should("include", buttons[index]);
+              .should("contain.text", buttons[index]);
           })
           .then($btns => {
             cy.wrap($btns).should("have.length", buttons.length);
@@ -239,8 +231,7 @@ describe("Homepage", () => {
       cy.get("#line-chart").should("be.visible");
 
       cy.get("button.chart-tab-active")
-        .invoke("text")
-        .should("include", "Year");
+        .should("contain.text", "Year");
     });
   });
 
@@ -258,9 +249,7 @@ describe("Homepage", () => {
     it("should contain flag images", () => {
       cy.get("#language-icon").click();
 
-      cy.get(".language-menu img.flag-image").each(($flag, index, $flags) => {
-        expect($flag.attr("src")).to.contain("img/");
-      });
+      cy.get(".language-menu .flag-image").should("have.length.greaterThan", 0);
     });
 
     it("should be possible to change language", () => {
@@ -294,10 +283,15 @@ describe("Homepage", () => {
       cy.get("@menu")
         .find(".menu-button")
         .should($items => {
-          expect($items).to.have.length(3);
+          expect($items).to.have.length.within(3, 5);
           expect($items[0]).to.contain.text("Home");
           expect($items[1]).to.contain.text("Top Wallets");
           expect($items[2]).to.contain.text("Delegate Monitor");
+          if ($items.length === 6) {
+            expect($items[3]).to.contain.text("Bridgechains");
+            expect($items[4]).to.contain.text("Businesses");
+            expect($items[5]).to.contain.text("Advanced Search");
+          }
         });
 
       cy.get("@menu")
@@ -479,8 +473,7 @@ describe("Homepage", () => {
         });
 
         cy.get("div.tooltip-inner")
-          .invoke("text")
-          .should("include", "Nothing matched your search");
+          .should("contain.text", "Nothing matched your search");
       });
     });
   });

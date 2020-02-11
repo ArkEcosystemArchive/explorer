@@ -1,13 +1,20 @@
 @font-face {
-  font-family: 'Proxima Nova Regular';
-  src: url('../fonts/Proxima_Nova_Regular.otf');
+    font-family: 'Inter Bold';
+    src: url('../fonts/Inter-Bold.otf');
+    font-weight: 900;
 }
 
 @font-face {
-  font-family: 'Proxima Nova Semibold';
-  src: url('../fonts/Proxima_Nova_Semibold.otf');
+    font-family: 'Inter Regular';
+    src: url('../fonts/Inter-Regular.otf');
+    font-weight: 400;
 }
 
+@font-face {
+    font-family: 'Inter Semibold';
+    src: url('../fonts/Inter-SemiBold.otf');
+    font-weight: 600;
+}
 .semibold {
-  font-family: 'Proxima Nova Semibold';
+  font-family: 'Inter Semibold';
 }

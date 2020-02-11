@@ -1,13 +1,16 @@
+import { ForgingStatus } from "./enums";
+import { BigNumber } from "@/utils";
+
 export interface IBlock {
   id: string;
   version: number;
   height: number;
   previous: string;
   forged: {
-    reward: string;
-    fee: string;
-    total: string;
-    amount: string;
+    reward: BigNumber;
+    fee: BigNumber;
+    total: BigNumber;
+    amount: BigNumber;
   };
   payload: {
     hash: string;
@@ -39,11 +42,16 @@ export interface IDelegate {
     approval: number;
   };
   forged: {
-    fees: string;
-    rewards: string;
-    total: string;
+    fees: BigNumber;
+    rewards: BigNumber;
+    total: BigNumber;
   };
-  forgingStatus: number;
+  forgingStatus: ForgingStatus;
+}
+
+export interface IRoundDelegate {
+  publicKey: string;
+  votes: string;
 }
 
 export interface IMeta {
@@ -57,14 +65,39 @@ export interface IMeta {
   last: string;
 }
 
+export interface ILock {
+  lockId: string;
+  amount: BigNumber;
+  secretHash: string;
+  senderPublicKey: string;
+  recipientId: string;
+  timestamp: ITimestamp;
+  expirationType: number;
+  expirationValue: number;
+  isExpired: boolean;
+  vendorField?: string;
+}
+
 export interface ITransaction {
   id: string;
-  amount: string;
-  price?: number | null;
-  timestamp: ITimestamp;
-  vendorField: string;
+  blockId: string;
+  version?: number;
+  type: number;
+  typeGroup: number;
+  amount: BigNumber;
   fee: string;
+  sender: string;
+  senderPublicKey: string;
+  recipient: string;
+  signature: string;
+  vendorField: string;
   confirmations: number;
+  timestamp: ITimestamp;
+  asset?: any;
+  signatures?: string[];
+  price?: number | null;
+  nonce?: string;
+  lockStatus?: number;
 }
 
 export interface ISortParameters {
@@ -84,6 +117,8 @@ export interface IWallet {
   publicKey: string;
   vote: string;
   isDelegate: boolean;
+  isResigned?: boolean;
+  lockedBalance?: BigNumber;
 }
 
 export interface IApiResponse {
@@ -111,6 +146,10 @@ export interface IApiDelegatesWrapper {
   meta: IMeta;
 }
 
+export interface IApiRoundDelegatesWrapper {
+  data: IRoundDelegate[];
+}
+
 export interface IApiBlockchainWrapper {
   data: IBlockchain;
 }
@@ -123,8 +162,17 @@ export interface IBlockchain {
   supply: string;
 }
 
-export interface IApiDelegateVotersWrapper {
-  data: ISimpleWallet[];
+export interface IApiWalletsWrapper {
+  data: IWallet[];
+  meta: IMeta;
+}
+
+export interface IApiLockWrapper {
+  data: ILock;
+}
+
+export interface IApiLocksWrapper {
+  data: ILock[];
   meta: IMeta;
 }
 
@@ -137,16 +185,11 @@ export interface IApiTransactionsWrapper {
   meta: IMeta;
 }
 
-export interface ISimpleWallet {
-  address: string;
-  publicKey: string;
-  secondPublicKey?: string;
-  balance: string;
-  isDelegate: boolean;
-  vote: string;
+export interface IApiNodeConfiguration {
+  [key: string]: any;
 }
 
-export interface IApiNodeConfiguration {
+export interface IApiNodeConfigurationCrypto {
   [key: string]: any;
 }
 
@@ -178,14 +221,22 @@ export interface INetworkState {
   server: string | null;
   nethash: string | null;
   alias: string | null;
+  addressPrefix: number;
   activeDelegates: number;
   rewardOffset: number;
   token: string | null;
+  isListed: boolean;
   symbol: string | null;
   currencies: any[];
   knownWallets: any[];
-  supply: number;
+  supply: string;
+  initialSupply: string;
   height: number;
+  epoch: string | null;
+  blocktime: number;
+  hasMagistrateEnabled: boolean;
+  hasHtlcEnabled: boolean;
+  enabledTransactionTypes: ITransactionType[];
 }
 
 export interface IUiState {
@@ -200,9 +251,14 @@ export interface IUiState {
   headerType: string | null;
   menuVisible: boolean;
   blockSortParams: string | null;
+  businessSortParams: string | null;
+  bridgechainSortParams: string | null;
   delegateSortParams: string | null;
   transactionSortParams: string | null;
   walletSortParams: string | null;
+  walletSearchSortParams: string | null;
+  walletTransactionTab: string | null;
+  hasAcceptedLinkDisclaimer: boolean;
 }
 
 export interface IStorePayload {
@@ -217,4 +273,63 @@ export interface IVTooltip {
   hideOnTargetClick?: boolean;
   delay?: any;
   classes?: string;
+}
+
+export interface ITransactionType {
+  key: string;
+  type: number;
+  typeGroup?: number;
+}
+
+export interface IApiBusinessesWrapper {
+  data: IBusiness[];
+  meta: IMeta;
+}
+
+export interface IBusiness {
+  address: string;
+  publicKey: string;
+  name: string;
+  website: string;
+  repository?: string;
+}
+
+export interface IApiBridgechainsWrapper {
+  data: IBridgechain[];
+  meta: IMeta;
+}
+
+export interface IBridgechain {
+  publicKey: string;
+  name: string;
+  seedNodes: string[];
+  genesisHash: string;
+  bridgechainRepository?: string;
+  ports: object;
+}
+
+export interface ITransactionSearchParams {
+  id?: string;
+  type?: string;
+  timestamp?: { from?: number; to?: number };
+  amount?: { from?: number; to?: number };
+  fee?: { from?: number };
+  vendorField?: string;
+}
+
+export interface IBlockSearchParams {
+  id?: string;
+  generatorPublicKey?: string;
+  timestamp?: { from?: number; to?: number };
+  totalAmount?: { from?: number; to?: number };
+  totalFee?: { from?: number; to?: number };
+  reward?: { from?: number; to?: number };
+  numberOfTransactions?: { from?: number; to?: number };
+}
+
+export interface IWalletSearchParams {
+  address?: string;
+  username?: string;
+  vote?: string;
+  balance?: { from?: number; to?: number };
 }

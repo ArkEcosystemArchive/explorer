@@ -5,12 +5,15 @@
     <MonitorHeader />
 
     <section class="page-section py-5 md:py-10">
-      <nav class="mx-5 sm:mx-10 mb-4 border-b flex items-end">
+      <nav class="mx-5 sm:mx-10 mb-4 border-b flex items-end overflow-x-auto">
         <div :class="activeTab === 'active' ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'active'">
           {{ $t("PAGES.DELEGATE_MONITOR.ACTIVE") }}
         </div>
         <div :class="activeTab === 'standby' ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'standby'">
           {{ $t("PAGES.DELEGATE_MONITOR.STANDBY") }}
+        </div>
+        <div :class="activeTab === 'resigned' ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'resigned'">
+          {{ $t("PAGES.DELEGATE_MONITOR.RESIGNED") }}
         </div>
       </nav>
 
@@ -18,10 +21,23 @@
 
       <TableDelegates
         :delegates="delegates"
-        :show-standby="activeTab === 'standby'"
+        :active-tab="activeTab"
         :sort-query="sortParams[activeTab]"
         @on-sort-change="onSortChange"
       />
+
+      <div v-if="delegates && delegates.length === activeDelegates" class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
+        <RouterLink
+          :to="{
+            name: activeTab === 'resigned' ? 'delegates-resigned' : 'delegates',
+            params: { page: activeTab === 'standby' ? 5 : 3 },
+          }"
+          tag="button"
+          class="button-lg"
+        >
+          {{ $t("PAGINATION.SHOW_MORE") }}
+        </RouterLink>
+      </div>
     </section>
   </div>
 </template>
@@ -39,12 +55,12 @@ import DelegateService from "@/services/delegate";
     ForgingStats,
   },
   computed: {
-    ...mapGetters("network", ["height"]),
+    ...mapGetters("network", ["height", "activeDelegates"]),
   },
 })
 export default class DelegateMonitor extends Vue {
   private delegates: IDelegate[] | null = null;
-  private activeTab: string = "active";
+  private activeTab = "active";
   private height: number;
 
   get sortParams() {

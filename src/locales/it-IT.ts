@@ -133,7 +133,7 @@ export default {
       STATS: {
         FORGED: "Blocco forgiato recentemente",
         IN_QUEUE: "In coda per la forgiatura",
-        MISSED: "Blocco perso",
+        MISSED: "Turno perso",
         NOT_FORGING: "Non sta forgiando",
       },
       STATUS: {
@@ -142,6 +142,7 @@ export default {
         MISSING: "Sta mancando",
         NOT_FORGING: "Non sta forgiando",
         NEVER_FORGED: "Mai fiorgiato",
+        BECAME_ACTIVE: "Diventato attivo",
       },
       VOTES: "Voti",
       TOOLTIP: "Ultimo blocco @ {height}",

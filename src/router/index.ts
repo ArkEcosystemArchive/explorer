@@ -22,6 +22,10 @@ const TransactionComponent = () => import(/* webpackChunkName: "transaction" */ 
 const TransactionsComponent = () => import(/* webpackChunkName: "transactions" */ "@/pages/Transactions.vue");
 const DelegateMonitorComponent = () => import(/* webpackChunkName: "delegate-monitor" */ "@/pages/DelegateMonitor.vue");
 const TopWalletsComponent = () => import(/* webpackChunkName: "top-wallets" */ "@/pages/TopWallets.vue");
+const BusinessesComponent = () => import(/* webpackChunkName: "businesses" */ "@/pages/Businesses.vue");
+const BridgechainsComponent = () => import(/* webpackChunkName: "bridgechains" */ "@/pages/Bridgechains.vue");
+const AdvancedSearchComponent = () => import(/* webpackChunkName: "search" */ "@/pages/AdvancedSearch.vue");
+const DelegateComponent = () => import(/* webpackChunkName: "delegates" */ "@/pages/Delegates.vue");
 const NotFoundComponent = () => import(/* webpackChunkName: "404" */ "@/pages/404.vue");
 
 Vue.use(Router);
@@ -47,7 +51,7 @@ const router = new Router({
     },
     {
       path: "/wallets/:address/voters",
-      redirect: to => ({
+      redirect: (to) => ({
         name: "wallet-voters",
         params: { address: to.params.address, page: 1 },
       }),
@@ -61,7 +65,7 @@ const router = new Router({
     },
     {
       path: "/wallets/:address/blocks",
-      redirect: to => ({
+      redirect: (to) => ({
         name: "wallet-blocks",
         params: { address: to.params.address, page: 1 },
       }),
@@ -75,7 +79,7 @@ const router = new Router({
     },
     {
       path: "/wallets/:address/transactions",
-      redirect: to => ({
+      redirect: (to) => ({
         name: "wallet-transactions",
         params: { address: to.params.address, type: "all", page: 1 },
       }),
@@ -83,7 +87,7 @@ const router = new Router({
     },
     {
       path: "/wallets/:address/transactions/:type",
-      redirect: to => ({
+      redirect: (to) => ({
         name: "wallet-transactions",
         params: { address: to.params.address, type: to.params.type, page: 1 },
       }),
@@ -103,7 +107,7 @@ const router = new Router({
     },
     {
       path: "/block/:id/transactions",
-      redirect: to => ({
+      redirect: (to) => ({
         name: "block-transactions",
         params: { id: to.params.id, page: 1 },
       }),
@@ -117,7 +121,7 @@ const router = new Router({
     },
     {
       path: "/blocks",
-      redirect: to => ({ name: "blocks", params: { page: 1 } }),
+      redirect: (to) => ({ name: "blocks", params: { page: 1 } }),
       meta: { title: (route: Route) => getTitle("Blocks") },
     },
     {
@@ -134,7 +138,7 @@ const router = new Router({
     },
     {
       path: "/transactions",
-      redirect: to => ({ name: "transactions", params: { page: 1 } }),
+      redirect: (to) => ({ name: "transactions", params: { page: 1 } }),
       meta: { title: (route: Route) => getTitle("Transactions") },
     },
     {
@@ -151,7 +155,7 @@ const router = new Router({
     },
     {
       path: "/top-wallets",
-      redirect: to => ({ name: "top-wallets", params: { page: 1 } }),
+      redirect: (to) => ({ name: "top-wallets", params: { page: 1 } }),
       meta: { title: (route: Route) => getTitle("Top Wallets") },
     },
     {
@@ -159,6 +163,61 @@ const router = new Router({
       name: "top-wallets",
       component: TopWalletsComponent,
       meta: { title: (route: Route) => getTitle("Top Wallets") },
+    },
+    {
+      path: "/businesses",
+      redirect: (to) => ({ name: "businesses", params: { page: 1 } }),
+      meta: { title: (route: Route) => getTitle("Businesses") },
+    },
+    {
+      path: "/businesses/:page(\\d+)",
+      name: "businesses",
+      component: BusinessesComponent,
+      meta: { title: (route: Route) => getTitle("Businesses") },
+    },
+    {
+      path: "/bridgechains",
+      redirect: (to) => ({ name: "bridgechains", params: { page: 1 } }),
+      meta: { title: (route: Route) => getTitle("Bridgechains") },
+    },
+    {
+      path: "/bridgechains/:page(\\d+)",
+      name: "bridgechains",
+      component: BridgechainsComponent,
+      meta: { title: (route: Route) => getTitle("Bridgechains") },
+    },
+    {
+      path: "/advanced-search",
+      redirect: (to) => ({ name: "advanced-search", params: { page: 1 } }),
+      meta: { title: (route: Route) => getTitle("Advanced Search") },
+    },
+    {
+      path: "/advanced-search/:page(\\d+)",
+      name: "advanced-search",
+      component: AdvancedSearchComponent,
+      meta: { title: (route: Route) => getTitle("Advanced Search") },
+    },
+    {
+      path: "/delegates/resigned",
+      redirect: (to) => ({ name: "delegates-resigned", params: { page: 1 } }),
+      meta: { title: (route: Route) => getTitle("Delegates") },
+    },
+    {
+      path: "/delegates/resigned/:page(\\d+)",
+      name: "delegates-resigned",
+      component: DelegateComponent,
+      meta: { title: (route: Route) => getTitle("Delegates") },
+    },
+    {
+      path: "/delegates",
+      redirect: (to) => ({ name: "delegates", params: { page: 1 } }),
+      meta: { title: (route: Route) => getTitle("Delegates") },
+    },
+    {
+      path: "/delegates/:page(\\d+)",
+      name: "delegates",
+      component: DelegateComponent,
+      meta: { title: (route: Route) => getTitle("Delegates") },
     },
     {
       path: "/404",
@@ -174,7 +233,7 @@ const router = new Router({
     // 2.0 fallback redirects...
     {
       path: "/address/:address",
-      redirect: to => ({
+      redirect: (to) => ({
         name: "wallet",
         params: { address: to.params.address },
       }),
@@ -182,7 +241,7 @@ const router = new Router({
     },
     {
       path: "/tx/:id",
-      redirect: to => ({
+      redirect: (to) => ({
         name: "transaction",
         params: { id: to.params.id },
       }),
@@ -195,7 +254,7 @@ const router = new Router({
     },
     {
       path: "/topAccounts",
-      redirect: to => ({ name: "top-wallets", params: { page: 1 } }),
+      redirect: (to) => ({ name: "top-wallets", params: { page: 1 } }),
       meta: { title: (route: Route) => getTitle("Top Wallets") },
     },
   ],

@@ -11,7 +11,10 @@
       <div class="sm:hidden">
         <TableTransactionsMobile :transactions="transactions" />
       </div>
-      <div class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
+      <div
+        v-if="transactions && transactions.length === paginationLimit"
+        class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap"
+      >
         <RouterLink :to="{ name: 'transactions', params: { page: 2 } }" tag="button" class="button-lg">
           {{ $t("PAGINATION.SHOW_MORE") }}
         </RouterLink>
@@ -24,11 +27,14 @@
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { ISortParameters, ITransaction } from "@/interfaces";
 import TransactionService from "@/services/transaction";
+import { paginationLimit } from "@/constants";
 
 @Component
 export default class LatestTransactions extends Vue {
   @Prop({ required: true }) public transactionType: number;
+  @Prop({ required: true }) public transactionGroup: number;
 
+  private paginationLimit: number = paginationLimit;
   private transactions: ITransaction[] | null = null;
 
   get sortParams() {
@@ -55,11 +61,14 @@ export default class LatestTransactions extends Vue {
   private async prepareComponent() {
     await this.getTransactions();
 
-    this.$store.watch(state => state.network.height, value => this.getTransactions());
+    this.$store.watch(
+      (state) => state.network.height,
+      (value) => this.getTransactions(),
+    );
   }
 
   private async getTransactions() {
-    const { data } = await TransactionService.filterByType(1, this.transactionType);
+    const { data } = await TransactionService.filterByType(1, this.transactionType, this.transactionGroup);
 
     this.transactions = data.map((transaction: ITransaction) => ({ ...transaction, price: null }));
   }

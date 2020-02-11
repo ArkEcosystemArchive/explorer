@@ -1,7 +1,7 @@
 <template>
   <div class="HeaderSearch px-5 sm:px-10">
-    <button class="flex flex-none p-2" @click="$store.dispatch('ui/setHeaderType', null)">
-      <img src="@/assets/images/icons/cross.svg" />
+    <button class="flex flex-none p-2 text-theme-button-close" @click="$store.dispatch('ui/setHeaderType', null)">
+      <SvgIcon name="cross" view-box="0 0 14 14" />
     </button>
 
     <label for="search" class="hidden">
@@ -26,11 +26,7 @@
     />
 
     <button :disabled="!hasInput" class="search-icon text-grey hover:text-blue p-3 md:p-4 transition" @click="search">
-      <svg class="fill-current" width="20" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M1216 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z"
-        />
-      </svg>
+      <SvgIcon name="search" view-box="0 0 16 16" />
     </button>
   </div>
 </template>
@@ -51,8 +47,8 @@ import { LocaleMessage } from "vue-i18n";
 })
 export default class HeaderSearch extends Vue {
   private query: string | null = null;
-  private nothingFound: boolean = false;
-  private searchCount: number = 0;
+  private nothingFound = false;
+  private searchCount = 0;
   private placeholder: LocaleMessage | string = "Search";
 
   private delegates: [IDelegate];
@@ -69,7 +65,7 @@ export default class HeaderSearch extends Vue {
     const WIDTH_THRESHOLD = 1024;
     const widthQuery = window.matchMedia(`(max-width: ${WIDTH_THRESHOLD}px)`);
 
-    widthQuery.addListener(e => this.setMobilePlaceholder(e.matches));
+    widthQuery.addListener((e) => this.setMobilePlaceholder(e.matches));
 
     this.setMobilePlaceholder(window.innerWidth < WIDTH_THRESHOLD);
   }
@@ -91,7 +87,7 @@ export default class HeaderSearch extends Vue {
       this.updateSearchCount({ message: "No known wallet with that name could be found" });
     }
 
-    const del = this.delegates.find(d => d.username === this.query!.toLowerCase());
+    const del = this.delegates.find((d) => d.username === this.query!.toLowerCase());
     if (del) {
       this.changePage("wallet", { address: del.address });
       return;

@@ -67,12 +67,19 @@ module.exports = {
       "language-icon": "var(--language-icon)",
       "theme-accents": "var(--color-theme-accents)",
       "theme-transaction-icon": "var(--color-theme-transaction-icon)",
+      "theme-resigned-label": "var(--theme-resigned-label)",
+      "theme-input-field-border": "var(--theme-input-field-border)",
+      "theme-input-field-border-focus": "var(--theme-input-field-border-focus)",
+      "theme-input-field-border-hover": "var(--theme-input-field-border-hover)",
 
       "theme-text-thead": "var(--color-theme-text-thead)",
 
       "status-forging": "#40a130",
       "status-not-forging": "#e23a3e",
-      "status-missed-block": "#f5bd5c",
+      "status-missed-round": "#f5bd5c",
+      "status-became-active": "#037cff",
+
+      "link-color": "#3790ff",
       // END CUSTOM ADDED
 
       black: "#172130",
@@ -165,7 +172,7 @@ module.exports = {
 
     fontFamily: {
       sans: [
-        "Proxima Nova Regular",
+        "Inter Regular",
         "-apple-system",
         "BlinkMacSystemFont",
         "Segoe UI",
@@ -195,16 +202,15 @@ module.exports = {
 
     fontSize: {
       "0": 0,
-      "2xs": ".8125rem", // 13px
-      xs: ".875rem", // 14px
-      sm: "0.9375rem", // 15px
-      base: "1rem", // 16px
-      lg: "1.125rem", // 18px
-      xl: "1.25rem", // 20px
-      "2xl": "1.5rem", // 24px
-      "3xl": "1.875rem", // 30px
-      "4xl": "2.25rem", // 36px
-      "5xl": "3rem", // 48px
+      xs: ".75rem", // 12px
+      sm: ".8125rem", // 13px
+      base: "0.9375rem", // 15px
+      lg: "1rem", // 16px
+      xl: "1.125rem", // 18px
+      "2xl": "1.375rem", // 21px
+      "3xl": "1.75rem", // 28px
+      "4xl": "2rem", // 32px
+      "5xl": "2.5rem", // 40px
     },
 
     fontWeight: {
@@ -349,6 +355,7 @@ module.exports = {
       "32": "8rem",
       "40": "10rem",
       "48": "12rem",
+      "56": "14rem",
       "64": "16rem",
       "1/2": "50%",
       "1/3": "33.33333%",
