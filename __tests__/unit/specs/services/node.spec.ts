@@ -20,6 +20,7 @@ describe("Services > Node", () => {
         "constants",
         "transactionPool",
         "wif",
+        "core",
       ].sort(),
     );
   });

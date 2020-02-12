@@ -13,6 +13,7 @@ const delegatePropertyArray = [
   "blocks",
   "production",
   "forged",
+  "isResigned",
 ].sort();
 
 describe("Services > Search", () => {
@@ -94,6 +95,8 @@ describe("Services > Search", () => {
         "signature",
         "confirmations",
         "timestamp",
+        "nonce",
+        "typeGroup",
       ].sort(),
     );
   });
