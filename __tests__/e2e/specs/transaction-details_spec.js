@@ -35,8 +35,7 @@ describe("Transaction Details", () => {
       .and("include.text", "Wallet summary");
   });
 
-  xit("should be possible to see the transaction type", () => {
-    // This tests does not work for mainnet yet because of the missing typeGroup property
+  it("should be possible to see the transaction type", () => {
     cy.get(".page-section")
       .find(".list-row-border-b")
       .eq(2)
@@ -58,7 +57,7 @@ describe("Transaction Details", () => {
   it("should emojify the vendor field", () => {
     cy.get(".page-section")
       .find(".list-row-border-b-no-wrap")
-      .last()
+      .eq(1)
       .should("include.text", "ARK ❤️ you");
   });
 

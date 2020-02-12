@@ -12,8 +12,27 @@ const transactionPropertyArray = [
   "recipient",
   "signature",
   "confirmations",
+  "nonce",
+  "typeGroup",
+  "version",
 ].sort();
 // Note: asset, recipientId, signSignature and vendorField can also be returned, but are optional
+
+const multiSigTransactionPropertyArray = [
+  "id",
+  "blockId",
+  "type",
+  "timestamp",
+  "amount",
+  "fee",
+  "sender",
+  "recipient",
+  "signatures",
+  "confirmations",
+  "nonce",
+  "typeGroup",
+  "version",
+].sort();
 
 describe("Services > Transaction", () => {
   beforeAll(() => {
@@ -24,7 +43,9 @@ describe("Services > Transaction", () => {
     const data = await TransactionService.latest();
     expect(data).toHaveLength(25);
     data.forEach(transaction => {
-      expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
+      transaction.signatures
+        ? expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(multiSigTransactionPropertyArray))
+        : expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
     });
     expect(data.sort((a, b) => a.timestamp.unix > b.timestamp.unix)).toEqual(data);
   });
@@ -53,7 +74,9 @@ describe("Services > Transaction", () => {
     const { data } = await TransactionService.allByAddress("AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK", 1);
     expect(data).toHaveLength(25);
     data.forEach(transaction => {
-      expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
+      transaction.signatures
+        ? expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(multiSigTransactionPropertyArray))
+        : expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
     });
     expect(data.sort((a, b) => a.timestamp.unix < b.timestamp.unix)).toEqual(data);
   });
@@ -62,7 +85,9 @@ describe("Services > Transaction", () => {
     const { data } = await TransactionService.allByAddress("AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK", 2, 40);
     expect(data).toHaveLength(40);
     data.forEach(transaction => {
-      expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
+      transaction.signatures
+        ? expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(multiSigTransactionPropertyArray))
+        : expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
     });
     expect(data.sort((a, b) => a.timestamp.unix < b.timestamp.unix)).toEqual(data);
   });
@@ -71,7 +96,9 @@ describe("Services > Transaction", () => {
     const { data } = await TransactionService.sentByAddress("AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs");
     expect(data).toHaveLength(25);
     data.forEach(transaction => {
-      expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
+      transaction.signatures
+        ? expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(multiSigTransactionPropertyArray))
+        : expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
     });
     expect(data.sort((a, b) => a.timestamp.unix < b.timestamp.unix)).toEqual(data);
   });
@@ -80,7 +107,9 @@ describe("Services > Transaction", () => {
     const { data } = await TransactionService.sentByAddress("AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs", 3, 40);
     expect(data).toHaveLength(40);
     data.forEach(transaction => {
-      expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
+      transaction.signatures
+        ? expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(multiSigTransactionPropertyArray))
+        : expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
     });
     expect(data.sort((a, b) => a.timestamp.unix < b.timestamp.unix)).toEqual(data);
   });
@@ -89,7 +118,9 @@ describe("Services > Transaction", () => {
     const { data } = await TransactionService.receivedByAddress("AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK");
     expect(data).toHaveLength(25);
     data.forEach(transaction => {
-      expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
+      transaction.signatures
+        ? expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(multiSigTransactionPropertyArray))
+        : expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
     });
     expect(data.sort((a, b) => a.timestamp.unix < b.timestamp.unix)).toEqual(data);
   });
@@ -98,7 +129,9 @@ describe("Services > Transaction", () => {
     const { data } = await TransactionService.receivedByAddress("AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK", 3, 40);
     expect(data).toHaveLength(40);
     data.forEach(transaction => {
-      expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
+      transaction.signatures
+        ? expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(multiSigTransactionPropertyArray))
+        : expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
     });
     expect(data.sort((a, b) => a.timestamp.unix < b.timestamp.unix)).toEqual(data);
   });
@@ -125,7 +158,9 @@ describe("Services > Transaction", () => {
     const { data } = await TransactionService.byBlock("8034780571166969612");
     expect(data).toHaveLength(1);
     data.forEach(transaction => {
-      expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
+      transaction.signatures
+        ? expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(multiSigTransactionPropertyArray))
+        : expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
     });
   });
 
@@ -150,7 +185,9 @@ describe("Services > Transaction", () => {
       fee: { from: minAmount },
     });
     data.forEach(transaction => {
-      expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
+      transaction.signatures
+        ? expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(multiSigTransactionPropertyArray))
+        : expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
       expect(parseInt(transaction.fee)).toBeGreaterThanOrEqual(minAmount);
     });
   });
@@ -164,7 +201,9 @@ describe("Services > Transaction", () => {
     });
     expect(data).toHaveLength(25);
     data.forEach(transaction => {
-      expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
+      transaction.signatures
+        ? expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(multiSigTransactionPropertyArray))
+        : expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
       expect(parseInt(transaction.amount)).toBeLessThanOrEqual(maxAmount);
       expect(parseInt(transaction.amount)).toBeGreaterThanOrEqual(minAmount);
     });
@@ -175,7 +214,9 @@ describe("Services > Transaction", () => {
     const { data } = await TransactionService.search();
     expect(data).toHaveLength(25);
     data.forEach(transaction => {
-      expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
+      transaction.signatures
+        ? expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(multiSigTransactionPropertyArray))
+        : expect(Object.keys(transaction).sort()).toEqual(expect.arrayContaining(transactionPropertyArray));
     });
   });
 });
