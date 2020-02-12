@@ -89,7 +89,7 @@ jobs:
       - name: Codecov
         uses: codecov/codecov-action@v1
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+          token: 7547b714-819d-4353-8d10-634f1bb20dcb
           flags: unittests
 
   build-devnet:
