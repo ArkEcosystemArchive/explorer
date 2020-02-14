@@ -12,6 +12,7 @@ const delegatePropertyArray = [
   "blocks",
   "production",
   "forged",
+  "isResigned",
 ].sort();
 
 const resignedDelegatePropertyArray = [
@@ -38,7 +39,7 @@ describe("Services > Delegate", () => {
     const data = await DelegateService.fetchEveryDelegate();
     expect(data.length).toBeGreaterThan(102);
     data.forEach(delegate => {
-      expect(Object.keys(delegate).sort()).toEqual(delegatePropertyArray);
+      expect(Object.keys(delegate).sort()).toBeOneOf([delegatePropertyArray, resignedDelegatePropertyArray]);
     });
   });
 
