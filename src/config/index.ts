@@ -62,11 +62,6 @@ export const socialMedia = [
     viewBox: "0 0 14 16",
   },
   {
-    name: "steemit",
-    url: "https://steemit.ark.io",
-    viewBox: "0 0 16 16",
-  },
-  {
     name: "instagram",
     url: "https://instagram.ark.io",
     viewBox: "0 0 14 16",
