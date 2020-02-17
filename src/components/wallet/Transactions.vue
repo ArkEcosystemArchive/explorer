@@ -1,52 +1,47 @@
 <template>
-  <div class="WalletTransactions">
+  <div v-if="wallet" class="WalletTransactions">
     <h2 class="text-2xl mb-5 md:mb-6 px-5 sm:hidden text-theme-text-primary">
       {{ $t("COMMON.TRANSACTIONS") }}
     </h2>
     <section class="page-section py-5 md:py-10">
-      <nav class="TransactionsNavigation mx-5 md:mx-10">
-        <div
-          :class="{ active: !isTypeSent && !isTypeReceived && !isTypeLocks }"
-          class="TransactionsNavigation--tab"
-          @click="setType('all')"
-        >
-          {{ $t("TRANSACTION.TYPES.ALL") }}
-        </div>
-        <div
-          :class="{
-            active: isTypeSent,
-            disabled: !sentCount,
-          }"
-          class="TransactionsNavigation--tab"
-          @click="setType('sent')"
-        >
-          {{ $t("TRANSACTION.TYPES.SENT") }}
-          <span>{{ sentCount }}</span>
-        </div>
-        <div
-          :class="{
-            active: isTypeReceived,
-            disabled: !receivedCount,
-          }"
-          class="TransactionsNavigation--tab"
-          @click="setType('received')"
-        >
-          {{ $t("TRANSACTION.TYPES.RECEIVED") }}
-          <span>{{ receivedCount }}</span>
-        </div>
-        <div
+      <TabsNavigation>
+        <TabsNavigationItem
+          id="all"
+          :title="$t('TRANSACTION.TYPES.ALL')"
+          :is-active="!isTypeSent && !isTypeReceived && !isTypeLocks"
+          @click="setType"
+        />
+
+        <TabsNavigationItem
+          id="sent"
+          :title="$t('TRANSACTION.TYPES.SENT')"
+          :sub-title="sentCount"
+          :is-active="isTypeSent"
+          :is-disabled="!sentCount"
+          @click="setType"
+        />
+
+        <TabsNavigationItem
+          id="received"
+          :title="$t('TRANSACTION.TYPES.RECEIVED')"
+          :sub-title="receivedCount"
+          :is-active="isTypeReceived"
+          :is-disabled="!receivedCount"
+          @click="setType"
+        />
+
+        <TabsNavigationItem
           v-if="hasHtlcEnabled"
-          :class="{
-            active: isTypeLocks,
-            disabled: !locksCount,
-          }"
-          class="TransactionsNavigation--tab"
-          @click="setType('locks')"
-        >
-          {{ $t("TRANSACTION.TYPES.LOCKS") }}
-          <span>{{ locksCount }}</span>
-        </div>
-      </nav>
+          id="locks"
+          :title="$t('TRANSACTION.TYPES.LOCKS')"
+          :sub-title="locksCount"
+          :is-active="isTypeLocks"
+          :is-disabled="!locksCount"
+          @click="setType"
+        />
+      </TabsNavigation>
+
+      <div class="flex flex-col sm:flex-row items-center mx-5 sm:mx-0 mb-4 sm:mb-8 hidden" />
 
       <template v-if="isTypeLocks">
         <div class="hidden sm:block">
@@ -81,10 +76,16 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { ISortParameters, ITransaction, IWallet } from "@/interfaces";
+import { TabsNavigation, TabsNavigationItem } from "@/components/utils/tabs";
 import TransactionService from "@/services/transaction";
 import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
 
-@Component
+@Component({
+  components: {
+    TabsNavigation,
+    TabsNavigationItem,
+  },
+})
 export default class WalletTransactions extends Vue {
   @Prop({ required: true }) public wallet: IWallet;
 
@@ -232,29 +233,5 @@ export default class WalletTransactions extends Vue {
 <style scoped>
 .TransactionsNavigation {
   @apply .flex .items-end .mb-8 .border-b .whitespace-no-wrap .overflow-y-auto;
-}
-
-.TransactionsNavigation--tab {
-  @apply .text-lg .text-theme-text-secondary .border-transparent .mr-4 .py-4 .px-2 .cursor-pointer .border-b-3;
-}
-
-.TransactionsNavigation--tab:hover {
-  @apply .text-theme-text-primary .border-blue;
-}
-
-.TransactionsNavigation--tab.active {
-  @apply .text-2xl .border-blue .text-theme-text-primary;
-}
-
-.TransactionsNavigation--tab.disabled {
-  @apply .pointer-events-none .text-theme-text-tertiary;
-}
-
-.TransactionsNavigation--tab > span {
-  @apply .text-xs .text-theme-text-tertiary;
-}
-
-.TransactionsNavigation--tab.active > span {
-  @apply .text-theme-text-secondary;
 }
 </style>

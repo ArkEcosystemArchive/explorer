@@ -69,7 +69,7 @@
       </div>
     </div>
 
-    <WalletVoters :wallet="wallet" />
+    <WalletVoters :delegate="delegate" />
   </div>
 </template>
 

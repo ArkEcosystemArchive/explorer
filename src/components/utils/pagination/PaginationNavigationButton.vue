@@ -1,5 +1,10 @@
 <template>
-  <button v-if="isVisible" :class="`Pagination__Button--${type} pager-button`" @click="emitClick">
+  <button
+    v-if="isVisible"
+    :class="`Pagination__Button--${type} pager-button`"
+    :disabled="isDisabled"
+    @click="emitClick"
+  >
     <span v-if="type === 'next'" class="mr-1 hidden lg:inline">
       {{ $t(`PAGINATION.${type.toUpperCase()}`) }}
     </span>
@@ -18,6 +23,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 @Component
 export default class PaginationNavigationButton extends Vue {
   @Prop({ required: true }) public isVisible: boolean;
+  @Prop({ required: false, default: false }) public isDisabled: boolean;
   @Prop({ required: true }) public type: string;
 
   private emitClick() {

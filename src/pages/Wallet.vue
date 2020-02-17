@@ -2,16 +2,11 @@
   <div v-if="wallet" class="max-w-2xl mx-auto md:pt-5">
     <ContentHeader>{{ $t("WALLET.SUMMARY") }}</ContentHeader>
 
+    <WalletHeader :wallet="wallet" />
+
     <WalletDetails :wallet="wallet" />
 
-    <section v-show="isDelegate || wallet.vote" :class="{ 'py-5 md:py-10': isDelegate }" class="page-section mb-5">
-      <div class="px-5 sm:px-10">
-        <WalletDelegate v-if="isDelegate" :wallet="wallet" />
-        <WalletVote v-if="wallet.vote" :wallet="wallet" />
-      </div>
-    </section>
-
-    <WalletTransactions v-if="wallet" :wallet="wallet" />
+    <WalletTransactions :wallet="wallet" />
   </div>
 </template>
 
@@ -19,15 +14,15 @@
 import { Component, Vue } from "vue-property-decorator";
 import { Route } from "vue-router";
 import { IWallet } from "@/interfaces";
-import { WalletDelegate, WalletDetails, WalletTransactions, WalletVote } from "@/components/wallet";
+import { WalletDetails, WalletHeader, WalletTransactions, WalletVote } from "@/components/wallet";
 import WalletService from "@/services/wallet";
 
 Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 
 @Component({
   components: {
-    WalletDelegate,
     WalletDetails,
+    WalletHeader,
     WalletTransactions,
     WalletVote,
   },
@@ -37,9 +32,7 @@ export default class WalletPage extends Vue {
   private activeTab = "all";
 
   get isDelegate() {
-    if (this.wallet) {
-      return this.wallet.isDelegate;
-    }
+    return this.wallet?.isDelegate;
   }
 
   public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {

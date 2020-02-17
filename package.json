@@ -53,6 +53,7 @@
     "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
     "@fullhuman/postcss-purgecss": "^2.0.0",
     "@kazupon/vue-i18n-loader": "^0.5.0",
     "@types/bytebuffer": "^5.0.40",

@@ -2,29 +2,40 @@
   transition: all 0.1s ease-in;
 }
 
-.base-tab {
-  @apply .mr-4 .py-4 .px-2 .cursor-pointer .border-b-3;
+.Navigation {
+  @apply .flex .items-end .w-full .border-b;
 }
 
-.active-tab {
-  @apply .base-tab .text-lg .border-blue .text-theme-text-primary .transition;
+.Navigation__Tab {
+  @apply .text-lg .text-theme-text-secondary .border-transparent .mr-4 .py-4 .px-2 .cursor-pointer .border-b-3 .transition;
 }
 
-.inactive-tab {
-  @apply .base-tab .text-theme-text-secondary .border-transparent .transition;
+.Navigation__Tab > span {
+  @apply .text-xs .text-theme-text-tertiary;
 }
 
-.active-tab:hover,
-.inactive-tab:hover {
+.Navigation__Tab.active {
+  @apply .text-2xl .border-blue .text-theme-text-primary;
+}
+
+.Navigation__Tab.active > span {
+  @apply .text-theme-text-secondary;
+}
+
+.Navigation__Tab.disabled {
+  @apply .pointer-events-none .text-theme-text-tertiary;
+}
+
+.Navigation__Tab:hover {
   @apply .text-theme-text-primary .border-blue;
 }
 
 @screen sm {
-  .active-tab {
+  .Navigation__Tab.active {
     @apply .text-2xl;
   }
 
-  .inactive-tab {
+  .Navigation__Tab {
     @apply .text-lg;
   }
 }

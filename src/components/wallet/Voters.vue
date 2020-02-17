@@ -8,8 +8,8 @@
         >{{ readableNumber(voterCount) }}</span
       >
       <RouterLink
-        v-if="wallet.address && voterCount"
-        :to="{ name: 'wallet-voters', params: { address: wallet.address, username: wallet.username, page: 1 } }"
+        v-if="delegate.address && voterCount"
+        :to="{ name: 'wallet-voters', params: { address: delegate.address, username: delegate.username, page: 1 } }"
       >
         {{ $t("COMMON.SEE_ALL") }}
       </RouterLink>
@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import { IWallet } from "@/interfaces";
+import { IDelegate } from "@/interfaces";
 import DelegateService from "@/services/delegate";
 
 @Component({
@@ -28,17 +28,13 @@ import DelegateService from "@/services/delegate";
   },
 })
 export default class WalletVoters extends Vue {
-  @Prop({ required: true }) public wallet: IWallet;
+  @Prop({ required: true }) public delegate: IDelegate;
 
   private voterCount = 0;
 
-  get delegate() {
-    return this.$store.getters["delegates/byPublicKey"](this.wallet.publicKey);
-  }
-
-  @Watch("wallet")
-  public async onWalletChange(wallet: IWallet) {
-    if (wallet.username) {
+  @Watch("delegate")
+  public async onDelegateChange(delegate: IDelegate) {
+    if (delegate.username) {
       await this.getVoterCount();
     }
   }
@@ -48,8 +44,7 @@ export default class WalletVoters extends Vue {
   }
 
   private async getVoterCount() {
-    const count = await DelegateService.voterCount(this.wallet.publicKey);
-    this.voterCount = count;
+    this.voterCount = await DelegateService.voterCount(this.delegate.publicKey);
   }
 }
 </script>

@@ -106,6 +106,26 @@ export interface IWallet {
   isDelegate: boolean;
   isResigned?: boolean;
   lockedBalance?: BigNumber;
+  attributes?: IWalletAttributes;
+}
+
+export interface IWalletAttributes {
+  business?: IWalletBusinessAttribute;
+  vote?: string;
+  delegate?: { [key: string]: any };
+}
+
+export interface IWalletBusinessAttribute {
+  businessAsset: IBusiness;
+  bridgechains?: IBusinessBridgechains;
+  resigned?: boolean;
+}
+
+export interface IBusinessBridgechains {
+  [key: string]: {
+    bridgechainAsset: IBridgechain;
+    resigned?: boolean;
+  };
 }
 
 export interface IApiResponse {
@@ -269,6 +289,7 @@ export interface IBusiness {
   publicKey: string;
   name: string;
   website: string;
+  vat?: string;
   repository?: string;
 }
 

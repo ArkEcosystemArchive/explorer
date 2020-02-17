@@ -131,6 +131,20 @@ export default {
 
   WALLET: {
     ADDRESS: "Address",
+    BUSINESS: {
+      TITLE: "Business",
+      STATUS: {
+        TITLE: "Status",
+        RESIGNED: "Resigned",
+      },
+    },
+    BRIDGECHAINS: {
+      TITLE: "Bridgechains",
+      STATUS: {
+        TITLE: "Status",
+        RESIGNED: "Resigned",
+      },
+    },
     PUBLIC_KEY: "Public key",
     VERIFIED: "This is a verified address",
     VOTING_FOR: "Voting for",

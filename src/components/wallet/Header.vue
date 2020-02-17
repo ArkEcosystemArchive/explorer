@@ -212,18 +212,14 @@
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { IWallet } from "@/interfaces";
-import WalletVoters from "@/components/wallet/Voters.vue";
 
 @Component({
-  components: {
-    WalletVoters,
-  },
   computed: {
     ...mapGetters("network", ["isListed", "knownWallets", "token"]),
     ...mapGetters("currency", { currencyName: "name" }),
   },
 })
-export default class WalletDetails extends Vue {
+export default class WalletHeader extends Vue {
   @Prop({ required: true }) public wallet: IWallet;
 
   private view = "public";

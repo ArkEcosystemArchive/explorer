@@ -25,6 +25,7 @@
 
       <PaginationNavigationButton
         :is-visible="showPrevious"
+        :is-disabled="isPreviousDisabled"
         type="previous"
         :class="{ 'no-margin': !showNext }"
         class="mr-2"
@@ -70,6 +71,7 @@
 
       <PaginationNavigationButton
         :is-visible="showNext"
+        :is-disabled="isNextDisabled"
         type="next"
         :class="{ 'no-margin': !showPrevious }"
         class="ml-2"
@@ -96,6 +98,8 @@ import { PaginationNavigationButton, PaginationPageInput, PaginationSearchButton
 export default class Pagination extends Vue {
   @Prop({ required: true }) public meta: IMeta;
   @Prop({ required: true }) public currentPage: number;
+  @Prop({ required: false, default: false }) public alwaysShowPrevious: boolean;
+  @Prop({ required: false, default: false }) public alwaysShowNext: boolean;
 
   private pageInputVisible = false;
   private mobileView = false;
@@ -139,11 +143,19 @@ export default class Pagination extends Vue {
   }
 
   get showPrevious() {
-    return this.currentPage > 1;
+    return this.alwaysShowPrevious || this.currentPage > 1;
   }
 
   get showNext() {
-    return this.currentPage < this.pageCount;
+    return this.alwaysShowNext || this.currentPage < this.pageCount;
+  }
+
+  get isPreviousDisabled() {
+    return this.currentPage === 1;
+  }
+
+  get isNextDisabled() {
+    return this.currentPage === this.pageCount;
   }
 
   get showLast() {
