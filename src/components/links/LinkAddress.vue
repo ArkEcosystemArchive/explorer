@@ -97,11 +97,11 @@ export default class LinkAddress extends Vue {
   }
 
   private findByAddress(): void {
-    this.delegate = this.delegates.find(d => d.address === this.address);
+    this.delegate = this.delegates.find((d) => d.address === this.address);
   }
 
   private findByPublicKey(): void {
-    this.delegate = this.delegates.find(d => d.publicKey === this.publicKey);
+    this.delegate = this.delegates.find((d) => d.publicKey === this.publicKey);
   }
 
   private getAddress(): string | boolean {

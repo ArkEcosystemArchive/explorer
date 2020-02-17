@@ -42,7 +42,7 @@ const getters: GetterTree<IDelegateState, {}> = {
     return state.delegates ? state.delegates : JSON.parse(localStorage.getItem("delegates") as string) || [];
   },
 
-  forged: state => state.forged,
+  forged: (state) => state.forged,
 
   byPublicKey: (_, getters) => (publicKey: string) => {
     return (
@@ -68,7 +68,7 @@ const getters: GetterTree<IDelegateState, {}> = {
     );
   },
 
-  stateHasDelegates: state => {
+  stateHasDelegates: (state) => {
     return !!state.delegates;
   },
 };

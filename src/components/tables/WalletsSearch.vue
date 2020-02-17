@@ -38,14 +38,14 @@ import { BigNumber } from "@/utils";
 export default class TableWalletsSearchDesktop extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })
   public wallets: IWallet[] | null;
   @Prop({ required: true }) public total: string;
 
-  private windowWidth: number = 0;
+  private windowWidth = 0;
 
   get truncateBalance() {
     return this.windowWidth < 700;

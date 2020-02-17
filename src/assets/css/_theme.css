@@ -30,6 +30,9 @@
   --theme-button-close: #a0a6c8;
   --language-icon: #395174;
   --theme-resigned-label: #c53a4a;
+  --theme-input-field-border: #abbbca;
+  --theme-input-field-border-focus: #000000;
+  --theme-input-field-border-hover: #037cff;
 }
 
 .theme-light footer a {
@@ -71,6 +74,9 @@
   --theme-button-close: #787a86;
   --language-icon: #a1a2a6;
   --theme-resigned-label: #c53a4a;
+  --theme-input-field-border: #3d4852;
+  --theme-input-field-border-focus: #3d4852;
+  --theme-input-field-border-hover: #037cff;
 }
 
 .theme-dark footer a {

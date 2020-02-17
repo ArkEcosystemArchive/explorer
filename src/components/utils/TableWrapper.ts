@@ -38,7 +38,7 @@ export default class TableWrapper extends Vue {
           ...this.$attrs,
         },
         scopedSlots: {
-          "table-row": table =>
+          "table-row": (table) =>
             this.$scopedSlots.default!({
               ...table,
             }),

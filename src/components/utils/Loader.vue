@@ -22,7 +22,7 @@ import { PulseLoader } from "vue-spinner/dist/vue-spinner.min.js";
 export default class Loader extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })

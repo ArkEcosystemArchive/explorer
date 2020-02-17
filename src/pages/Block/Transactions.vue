@@ -29,7 +29,7 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 export default class BlockTransactions extends Vue {
   private transactions: ITransaction[] | null = null;
   private meta: any | null = null;
-  private currentPage: number = 0;
+  private currentPage = 0;
 
   get showPagination() {
     return this.meta && this.meta.pageCount > 1;
@@ -90,7 +90,7 @@ export default class BlockTransactions extends Vue {
       return;
     }
 
-    this.transactions = transactions.map(transaction => ({ ...transaction, price: null }));
+    this.transactions = transactions.map((transaction) => ({ ...transaction, price: null }));
   }
 
   private setMeta(meta: any) {

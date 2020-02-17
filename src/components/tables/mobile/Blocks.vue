@@ -32,7 +32,7 @@
           <div>{{ block.transactions }}</div>
         </div>
 
-        <div class="list-row-border-b">
+        <div v-if="!hideGeneratedBy" class="list-row-border-b">
           <div class="mr-4">
             {{ $t("BLOCK.GENERATED_BY") }}
           </div>
@@ -74,11 +74,12 @@ import { IBlock } from "@/interfaces";
 export default class TableBlocksMobile extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })
   public blocks: IBlock[] | null;
+  @Prop({ required: false, default: false }) public hideGeneratedBy: boolean;
 }
 </script>
 

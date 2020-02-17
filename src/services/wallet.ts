@@ -1,5 +1,6 @@
 import ApiService from "@/services/api";
 import { IApiWalletsWrapper, IWalletSearchParams } from "../interfaces";
+import { paginationLimit } from "@/constants";
 
 class WalletService {
   public async find(address: string) {
@@ -7,7 +8,7 @@ class WalletService {
     return response.data;
   }
 
-  public async top(page: number = 1, limit: number = 25) {
+  public async top(page = 1, limit: number = paginationLimit) {
     const response = await ApiService.get("wallets/top", {
       params: {
         page,
@@ -17,7 +18,11 @@ class WalletService {
     return response;
   }
 
-  public async search(body: IWalletSearchParams, page: number = 1, limit: number = 25): Promise<IApiWalletsWrapper> {
+  public async search(
+    body: IWalletSearchParams,
+    page = 1,
+    limit: number = paginationLimit,
+  ): Promise<IApiWalletsWrapper> {
     const response = (await ApiService.post("wallets/search", body, {
       params: {
         page,

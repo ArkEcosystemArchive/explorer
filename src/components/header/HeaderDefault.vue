@@ -15,7 +15,6 @@
       <div class="flex-auto flex items-center justify-center">
         <label for="search" class="hidden">{{ $t("SEARCH.PLACEHOLDER.SHORT") }}</label>
         <input
-          id="search"
           :placeholder="placeholder"
           class="search-input hidden sm:block w-full flex-auto sm:mr-2 py-2 md:py-4 sm:pl-4 bg-transparent"
           @focus="$store.dispatch('ui/setHeaderType', 'search')"
@@ -29,11 +28,11 @@
         </label>
       </div>
 
-      <span v-if="shouldDisplayCurrency" class="border-r mx-2 md:mx-4 lg:mx-6 my-4 block" />
-      <ToggleCurrency v-if="shouldDisplayCurrency" />
+      <span v-if="showToggleCurrency" class="border-r mx-2 md:mx-4 lg:mx-6 my-4 block" />
+      <ToggleCurrency v-if="showToggleCurrency" />
 
-      <span v-if="shouldDisplayChart" class="border-r mx-2 md:mx-4 lg:mx-6 my-4 hidden md:block" />
-      <ToggleChart v-if="shouldDisplayChart" />
+      <span v-if="showChart" class="border-r mx-2 md:mx-4 lg:mx-6 my-4 hidden md:block" />
+      <ToggleChart v-if="showChart" />
 
       <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4" />
       <ToggleTheme />
@@ -67,11 +66,11 @@ export default class HeaderDefault extends Vue {
   private networkDefaults: any;
   private menuVisible: boolean;
 
-  get shouldDisplayCurrency(): boolean {
+  get showToggleCurrency(): boolean {
     return this.networkDefaults.priceChartOptions.enabled;
   }
 
-  get shouldDisplayChart(): boolean {
+  get showChart(): boolean {
     return this.$route.name === "home" && this.networkDefaults.priceChartOptions.enabled;
   }
 
@@ -79,7 +78,7 @@ export default class HeaderDefault extends Vue {
     const WIDTH_THRESHOLD = 1024;
     const widthQuery = window.matchMedia(`(max-width: ${WIDTH_THRESHOLD}px)`);
 
-    widthQuery.addListener(e => this.setMobilePlaceholder(e.matches));
+    widthQuery.addListener((e) => this.setMobilePlaceholder(e.matches));
 
     this.setMobilePlaceholder(window.innerWidth < WIDTH_THRESHOLD);
   }

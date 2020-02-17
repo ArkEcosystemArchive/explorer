@@ -36,7 +36,7 @@
         </div>
       </section>
 
-      <TransactionDetails :transaction="transaction" ref="transactionDetails" />
+      <TransactionDetails ref="transactionDetails" :transaction="transaction" />
 
       <section v-if="isMultiPayment(transaction.type, transaction.typeGroup)" class="page-section py-5 md:py-10">
         <MultiPaymentTransactions :transaction="transaction" :page="currentPage" />
@@ -56,6 +56,7 @@ import NotFound from "@/components/utils/NotFound.vue";
 import TransactionDetails from "@/components/transaction/Details.vue";
 import MultiPaymentTransactions from "@/components/tables/MultiPaymentTransactions.vue";
 import TransactionService from "@/services/transaction";
+import { paginationLimit } from "@/constants";
 
 Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 
@@ -71,10 +72,10 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 })
 export default class TransactionPage extends Vue {
   private transaction: ITransaction | null = null;
-  private transactionNotFound: boolean = false;
-  private isLoading: boolean = false;
+  private transactionNotFound = false;
+  private isLoading = false;
   private meta: any | null = null;
-  private currentPage: number = 1;
+  private currentPage = 1;
   private height: number;
   private networkSymbol: string;
 
@@ -156,9 +157,9 @@ export default class TransactionPage extends Vue {
     // @ts-ignore
     if (this.transaction && this.isMultiPayment(this.transaction.type, this.transaction.typeGroup)) {
       const transactions = this.transaction.asset.payments.length;
-      const pages = Math.ceil(transactions / 25);
+      const pages = Math.ceil(transactions / paginationLimit);
       this.meta = {
-        count: transactions >= 25 ? 25 : transactions,
+        count: transactions >= paginationLimit ? paginationLimit : transactions,
         pageCount: pages,
         totalCount: transactions,
         next: pages > 1 ? "2" : null,

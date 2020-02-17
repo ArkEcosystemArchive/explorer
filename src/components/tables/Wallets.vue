@@ -35,6 +35,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import { ISortParameters, IWallet } from "@/interfaces";
 import { mapGetters } from "vuex";
 import { BigNumber } from "@/utils";
+import { paginationLimit } from "@/constants";
 
 @Component({
   computed: {
@@ -79,14 +80,14 @@ export default class TableWalletsDesktop extends Vue {
   }
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })
   public wallets: IWallet[] | null;
   @Prop({ required: true }) public total: string;
 
-  private windowWidth: number = 0;
+  private windowWidth = 0;
   private supply: string;
 
   public mounted() {
@@ -112,7 +113,7 @@ export default class TableWalletsDesktop extends Vue {
   private getRank(index: number) {
     const page = Number(this.$route.params.page) > 1 ? Number(this.$route.params.page) - 1 : 0;
 
-    return page * 25 + (index + 1);
+    return page * paginationLimit + (index + 1);
   }
 
   private emitSortChange(params: ISortParameters[]) {

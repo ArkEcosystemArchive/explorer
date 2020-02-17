@@ -50,7 +50,7 @@ import { IDelegate, ISortParameters } from "@/interfaces";
 export default class TableDelegatesDesktop extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })
@@ -102,14 +102,14 @@ export default class TableDelegatesDesktop extends Vue {
     this.$emit("on-sort-change", params[0]);
   }
 
-  private sortByRank(x: number, y: number, col: number, rowX: any, rowY: any) {
+  private sortByRank(x: number, y: number) {
     if (x === null) {
       return 1;
     }
     if (y === null) {
       return -1;
     }
-    return x < y ? 1 : -1;
+    return x < y ? -1 : 1;
   }
 }
 </script>

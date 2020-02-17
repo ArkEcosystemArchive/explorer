@@ -10,7 +10,7 @@ const REQUEST_INTERVAL = 50;
 
 const limiter = axios.create({});
 
-limiter.interceptors.request.use(config => {
+limiter.interceptors.request.use((config) => {
   return new Promise((resolve, reject) => {
     const interval = setInterval(() => {
       if (CryptoCompareService.pendingRequests < MAX_REQUESTS_PER_SECOND) {
@@ -23,25 +23,32 @@ limiter.interceptors.request.use(config => {
 });
 
 limiter.interceptors.response.use(
-  response => {
+  (response) => {
     CryptoCompareService.pendingRequests = Math.max(0, CryptoCompareService.pendingRequests - 1);
     return Promise.resolve(response);
   },
-  error => {
+  (error) => {
     CryptoCompareService.pendingRequests = Math.max(0, CryptoCompareService.pendingRequests - 1);
     return Promise.reject(error);
   },
 );
 
 class CryptoCompareService {
-  public static pendingRequests: number = 0;
+  public static pendingRequests = 0;
 
   public async get(url: string, options?: any) {
     return limiter.get(url, options);
   }
 
   public async price(currency: string): Promise<number | undefined> {
-    const response = await this.get(`https://min-api.cryptocompare.com/data/price?fsym=ARK&tsyms=${currency}`);
+    const response = await this.get(
+      `https://min-api.cryptocompare.com/data/price?fsym=${store.getters["network/token"]}&tsyms=${currency}`,
+    );
+
+    if (response.data.Response === "Error") {
+      throw new Error(response.data.Message);
+    }
+
     if (response.data[currency]) {
       return Number(response.data[currency]);
     }

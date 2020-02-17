@@ -22,10 +22,15 @@
 
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <TableBlocksDesktop :blocks="blocks" :sort-query="sortParams" @on-sort-change="onSortChange" />
+        <TableBlocksDesktop
+          :blocks="blocks"
+          :hide-generated-by="true"
+          :sort-query="sortParams"
+          @on-sort-change="onSortChange"
+        />
       </div>
       <div class="sm:hidden">
-        <TableBlocksMobile :blocks="blocks" />
+        <TableBlocksMobile :blocks="blocks" :hide-generated-by="true" />
       </div>
       <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
     </section>
@@ -45,7 +50,7 @@ export default class WalletBlocks extends Vue {
   private username: string | null = null;
   private blocks: IBlock[] | null = null;
   private meta: any | null = null;
-  private currentPage: number = 0;
+  private currentPage = 0;
 
   get showPagination() {
     return this.meta && this.meta.pageCount > 1;
@@ -110,7 +115,7 @@ export default class WalletBlocks extends Vue {
       return;
     }
 
-    this.blocks = blocks.map(block => ({ ...block, price: null }));
+    this.blocks = blocks.map((block) => ({ ...block, price: null }));
   }
 
   private setMeta(meta: any) {

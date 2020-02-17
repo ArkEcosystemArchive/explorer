@@ -45,7 +45,7 @@ export default class PaginationPageInput extends Vue {
 
   private query: string | null = null;
   private placeholder: LocaleMessage | null = null;
-  private hasError: boolean = false;
+  private hasError = false;
   private nightMode: boolean;
 
   get hasInput() {

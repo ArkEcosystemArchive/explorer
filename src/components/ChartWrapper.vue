@@ -72,9 +72,9 @@ import PriceChart from "@/components/charts/price-chart";
 })
 export default class ChartWrapper extends Vue {
   private error: string | null = null;
-  private isLoading: boolean = false;
-  private isOpen: boolean = false;
-  private componentKey: number = 0;
+  private isLoading = false;
+  private isOpen = false;
+  private componentKey = 0;
   private labels: string[] = [];
   private datasets: any[] = [];
   private options: object = {
@@ -166,7 +166,7 @@ export default class ChartWrapper extends Vue {
       // borderColor: '#037cff',
       callbacks: {
         // @ts-ignore
-        title: tooltipItem => this.readableCurrency(tooltipItem[0].yLabel, 1, null, false),
+        title: (tooltipItem) => this.readableCurrency(tooltipItem[0].yLabel, 1, null, false),
         label: (tooltipItem: any) => "",
       },
     },
@@ -249,7 +249,7 @@ export default class ChartWrapper extends Vue {
     this.$store.dispatch("ui/setPriceChartOption", { option: "type", value: type });
   }
 
-  private async renderChart(delay: number = 0) {
+  private async renderChart(delay = 0) {
     if (!this.datasets.length) {
       this.isLoading = true;
     }

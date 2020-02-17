@@ -64,20 +64,21 @@ import CryptoCompareService from "@/services/crypto-compare";
 
 @Component({
   computed: {
-    ...mapGetters("network", ["activeDelegates"]),
+    ...mapGetters("network", ["activeDelegates", "isListed"]),
     ...mapGetters("currency", { currencySymbol: "symbol" }),
   },
 })
 export default class LockTransactionsDesktop extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })
   public transactions: ITransaction[] | null;
 
   private activeDelegates: IDelegate[];
+  private isListed: boolean;
   private currencySymbol: string;
 
   get columns() {
@@ -119,7 +120,7 @@ export default class LockTransactionsDesktop extends Vue {
   }
 
   get showSmartBridgeIcon() {
-    return this.transactions!.some(transaction => {
+    return this.transactions!.some((transaction) => {
       return !!transaction.vendorField;
     });
   }
@@ -151,8 +152,10 @@ export default class LockTransactionsDesktop extends Vue {
       return;
     }
 
-    const promises = this.transactions.map(this.fetchPrice);
-    await Promise.all(promises);
+    if (this.isListed) {
+      const promises = this.transactions.map(this.fetchPrice);
+      await Promise.all(promises);
+    }
   }
 
   private emitSortChange(params: ISortParameters[]) {

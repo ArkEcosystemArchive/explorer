@@ -1,8 +1,9 @@
 import ApiService from "@/services/api";
 import { IApiBlockWrapper, IApiBlocksWrapper, IBlock, IBlockSearchParams } from "../interfaces";
+import { paginationLimit } from "@/constants";
 
 class BlockService {
-  public async latest(limit: number = 25): Promise<IBlock[]> {
+  public async latest(limit: number = paginationLimit): Promise<IBlock[]> {
     const response = (await ApiService.get("blocks", {
       params: {
         limit,
@@ -28,7 +29,7 @@ class BlockService {
     return response.data;
   }
 
-  public async paginate(page: number, limit = 25): Promise<IApiBlocksWrapper> {
+  public async paginate(page: number, limit = paginationLimit): Promise<IApiBlocksWrapper> {
     const response = (await ApiService.get("blocks", {
       params: {
         page,
@@ -39,7 +40,7 @@ class BlockService {
     return response;
   }
 
-  public async byAddress(address: string, page: number, limit = 25): Promise<IApiBlocksWrapper> {
+  public async byAddress(address: string, page: number, limit = paginationLimit): Promise<IApiBlocksWrapper> {
     const response = (await ApiService.get(`delegates/${address}/blocks`, {
       params: {
         page,
@@ -70,7 +71,7 @@ class BlockService {
     return response.data![0];
   }
 
-  public async search(body: IBlockSearchParams, page: number = 1, limit: number = 25): Promise<IApiBlocksWrapper> {
+  public async search(body: IBlockSearchParams, page = 1, limit: number = paginationLimit): Promise<IApiBlocksWrapper> {
     const response = (await ApiService.post("blocks/search", body, {
       params: {
         page,

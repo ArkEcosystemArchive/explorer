@@ -34,6 +34,10 @@ describe("Store > Delegates", () => {
     expect(store.getters["delegates/byPublicKey"]("wrong public key")).toBe(null);
   });
 
+  it("should get whether delegates are set", () => {
+    expect(store.getters["delegates/stateHasDelegates"]).toEqual(true);
+  });
+
   it("should get a single delegate by its username", () => {
     expect(store.getters["delegates/byUsername"]("delegate-1")).toEqual(delegates[0]);
   });

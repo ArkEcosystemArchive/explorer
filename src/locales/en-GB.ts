@@ -29,7 +29,7 @@ export default {
   DISCLAIMER: {
     TITLE: "Disclaimer",
     TEXT1:
-      "The following page is a directory for informational purposes only. {website} is in no way affiliated with the listed individuals and/or business entities listed herein. All links provided herein are third party websites that have not been verified and are owned by independent parties over which {website} has no control. {website} does not endorse or approve and makes no warranties, representations or undertakings relating to the content of third party websites.",
+      "The following page is a directory for informational purposes only. {website} is in no way affiliated with the listed individuals and/or business and bridgechain entities listed herein. All links provided herein are third party websites that have not been verified and are owned by independent parties over which {website} has no control. {website} does not endorse or approve and makes no warranties, representations or undertakings relating to the content of third party websites.",
     TEXT2: "By clicking “Accept” you will be confirming that you have read and are in agreement with all terms herein.",
   },
 
@@ -61,7 +61,7 @@ export default {
 
   TRANSACTION: {
     AMOUNT: "Amount",
-    AMOUNT_TO_SELF: "Excluding {amount} the sender sent to themself",
+    AMOUNT_TO_SELF: "Excluding {amount} sent to itself",
     BLOCK_ID: "Block ID",
     ID: "Transaction ID",
     IPFS: "IPFS Hash",
@@ -69,13 +69,16 @@ export default {
     MULTI_SIGNATURE: {
       ADDRESS: "Generated address",
       MIN: "Minimum participants",
+      LIFETIME: "Lifetime",
       PARTICIPANTS: "Participants",
+      LEGACY_NOTICE: "This transaction is a legacy Multisignature Registration",
     },
     NONCE: "Nonce",
     TIMELOCK: {
       BLOCKHEIGHT: "Expiration blockheight",
       CLAIMED: "Claimed transaction",
       EXPIRATION: "Expiration",
+      EXPIRED: "Expired lock",
       OPEN: "Open lock",
       REFUNDED: "Refunded transaction",
       SECRET_HASH: "Secret Hash",
@@ -110,6 +113,7 @@ export default {
       UNKNOWN: "Unknown",
     },
     ASSET: {
+      BRIDGECHAINASSETREPOSITORY: "Bridgechain Asset Repository",
       BRIDGECHAINID: "Bridgechain ID",
       BRIDGECHAINREPOSITORY: "Bridgechain repository",
       GENESISHASH: "Genesis hash",
@@ -293,7 +297,7 @@ export default {
     DEVELOPMENT: "Development",
     SUPPLY: "Supply",
     MARKET_CAP: "Market Cap",
-    TESTNET: "Testnet Local",
+    TESTNET_LOCAL: "Testnet Local",
   },
 
   FOOTER: {

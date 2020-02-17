@@ -66,19 +66,26 @@
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { IBlock, ISortParameters } from "@/interfaces";
 import CryptoCompareService from "@/services/crypto-compare";
+import { mapGetters } from "vuex";
 
-@Component
+@Component({
+  computed: {
+    ...mapGetters("network", ["isListed"]),
+  },
+})
 export default class TableBlocksDesktop extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })
   public blocks: IBlock[] | null;
+  @Prop({ required: false, default: false }) public hideGeneratedBy: boolean;
+  private isListed: boolean;
 
   get columns() {
-    const columns = [
+    let columns = [
       {
         label: this.$t("COMMON.ID"),
         field: "id",
@@ -126,6 +133,10 @@ export default class TableBlocksDesktop extends Vue {
       },
     ];
 
+    if (this.hideGeneratedBy) {
+      columns = columns.filter((column) => column.field !== "generator.username");
+    }
+
     return columns;
   }
 
@@ -160,8 +171,10 @@ export default class TableBlocksDesktop extends Vue {
       return;
     }
 
-    const promises = this.blocks.map(this.fetchPrice);
-    await Promise.all(promises);
+    if (this.isListed) {
+      const promises = this.blocks.map(this.fetchPrice);
+      await Promise.all(promises);
+    }
   }
 
   private emitSortChange(params: ISortParameters[]) {

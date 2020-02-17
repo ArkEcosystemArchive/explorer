@@ -61,7 +61,7 @@
           {{ $t("WALLET.BALANCE", { token: networkToken() }) }}
         </div>
         <div class="text-lg text-white semibold">
-          <span v-tooltip="readableCurrency(wallet.balance)">
+          <span v-tooltip="showBalanceTooltip ? readableCurrency(wallet.balance) : ''">
             {{ readableCrypto(wallet.balance, false) }}
           </span>
         </div>
@@ -73,10 +73,14 @@
           <SvgIcon class="ml-2" name="locked-balance" view-box="0 0 16 17" />
         </div>
         <span
-          v-tooltip="{
-            trigger: 'hover click',
-            content: readableCurrency(wallet.lockedBalance || 0),
-          }"
+          v-tooltip="
+            showBalanceTooltip
+              ? {
+                  trigger: 'hover click',
+                  content: readableCurrency(wallet.lockedBalance || 0),
+                }
+              : ''
+          "
           class="text-lg text-white semibold"
         >
           {{ readableCrypto(wallet.lockedBalance, false) }}
@@ -191,7 +195,7 @@
 
     <!-- Modal -->
     <Modal v-if="showModal" @close="toggleModal()">
-      <div :class="{ 'max-w-sm': !isCollapsed }" class="text-center px-10 py-2" >
+      <div :class="{ 'max-w-sm': !isCollapsed }" class="text-center px-10 py-2">
         <p class="semibold text-3xl mb-4">
           {{ $t("WALLET.QR_CODE") }}
         </p>
@@ -202,23 +206,19 @@
         <div class="flex justify-between items-center">
           <QrCode class="rounded" :value="qrValue" :options="{ size: 160 }" />
           <div v-if="!isCollapsed">
-            <InputNumber
-              @input="onInputChange"
-              :label="$t('TRANSACTION.AMOUNT')"
-              name="amount"
-            />
-            <InputText
-              @input="onInputChange"
-              :label="$t('TRANSACTION.SMARTBRIDGE')"
-              name="vendorField"
-            />
+            <InputNumber :label="$t('TRANSACTION.AMOUNT')" name="amount" @input="onInputChange" />
+            <InputText :label="$t('TRANSACTION.SMARTBRIDGE')" name="vendorField" @input="onInputChange" />
           </div>
         </div>
 
-        <span v-if="!isCollapsed" class="block mt-4 whitespace-no-wrap overflow-x-auto rounded mx-auto bg-theme-feature-background px-4 py-2 text-white font-mono">{{ qrValue }}</span>
+        <span
+          v-if="!isCollapsed"
+          class="block mt-4 whitespace-no-wrap overflow-x-auto rounded mx-auto bg-theme-feature-background px-4 py-2 text-white font-mono"
+          >{{ qrValue }}</span
+        >
 
         <button class="mt-8 mx-auto pager-button items-center" @click="isCollapsed = !isCollapsed">
-          {{ $t(`WALLET.ADVANCED_QR.${this.isCollapsed ? "EXPAND" : "COLLAPSE"}`) }}
+          {{ $t(`WALLET.ADVANCED_QR.${isCollapsed ? "EXPAND" : "COLLAPSE"}`) }}
         </button>
       </div>
     </Modal>
@@ -240,24 +240,22 @@ import { URI_QRCODE_SCHEME_PREFIX } from "@/constants";
     WalletVoters,
   },
   computed: {
-    ...mapGetters("network", ["knownWallets"]),
+    ...mapGetters("network", ["isListed", "knownWallets", "token"]),
+    ...mapGetters("currency", { currencyName: "name" }),
   },
 })
 export default class WalletDetails extends Vue {
   @Prop({ required: true }) public wallet: IWallet;
 
-  private view: string = "public";
-  private showModal: boolean = false;
+  private view = "public";
+  private showModal = false;
   private knownWallets: { [key: string]: string };
-  private amount: number = 0;
-  private vendorField: string = "";
-  private isCollapsed: boolean = true;
-
-  @Watch("isCollapsed")
-  public onStatusChanged() {
-    this.amount = undefined;
-    this.vendorField = undefined;
-  }
+  private isListed: boolean;
+  private token: string;
+  private currencyName: string;
+  private amount = 0;
+  private vendorField = "";
+  private isCollapsed = true;
 
   get name() {
     return this.knownWallets[this.wallet.address];
@@ -280,7 +278,9 @@ export default class WalletDetails extends Vue {
   }
 
   get qrValue() {
-    return this.isCollapsed ? this.wallet.address : `${URI_QRCODE_SCHEME_PREFIX}${this.wallet.address}${this.formattedParams}`;
+    return this.isCollapsed
+      ? this.wallet.address
+      : `${URI_QRCODE_SCHEME_PREFIX}${this.wallet.address}${this.formattedParams}`;
   }
 
   get formattedParams() {
@@ -295,6 +295,16 @@ export default class WalletDetails extends Vue {
     }
 
     return params.length > 0 ? `?${params.join("&")}` : "";
+  }
+
+  get showBalanceTooltip() {
+    return this.isListed && this.token !== this.currencyName;
+  }
+
+  @Watch("isCollapsed")
+  public onStatusChanged() {
+    this.amount = undefined;
+    this.vendorField = undefined;
   }
 
   private onInputChange(event: any) {

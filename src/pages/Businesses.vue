@@ -41,7 +41,7 @@ export default class Businesses extends Vue {
   }
   private businesses: IBusiness[] | null = null;
   private meta: any | null = null;
-  private currentPage: number = 0;
+  private currentPage = 0;
 
   @Watch("currentPage")
   public onCurrentPageChanged() {

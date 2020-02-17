@@ -41,8 +41,8 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 })
 export default class BlockPage extends Vue {
   private block: IBlock | null = null;
-  private blockNotFound: boolean = false;
-  private isLoading: boolean = false;
+  private blockNotFound = false;
+  private isLoading = false;
 
   public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
     try {
@@ -77,8 +77,8 @@ export default class BlockPage extends Vue {
 
   private async prepareComponent() {
     this.$store.watch(
-      state => state.network.height,
-      value => this.updateBlock(),
+      (state) => state.network.height,
+      (value) => this.updateBlock(),
     );
   }
 

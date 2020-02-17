@@ -42,6 +42,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import { IWallet } from "@/interfaces";
 import { mapGetters } from "vuex";
 import { BigNumber } from "@/utils";
+import { paginationLimit } from "@/constants";
 
 @Component({
   computed: {
@@ -51,7 +52,7 @@ import { BigNumber } from "@/utils";
 export default class TableWalletsMobile extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })
@@ -73,7 +74,7 @@ export default class TableWalletsMobile extends Vue {
   private getRank(index: number) {
     const page = Number(this.$route.params.page) > 1 ? Number(this.$route.params.page) - 1 : 0;
 
-    return page * 25 + (index + 1);
+    return page * paginationLimit + (index + 1);
   }
 }
 </script>
