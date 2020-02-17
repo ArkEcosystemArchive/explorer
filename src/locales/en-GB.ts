@@ -113,6 +113,7 @@ export default {
       UNKNOWN: "Unknown",
     },
     ASSET: {
+      BRIDGECHAINASSETREPOSITORY: "Bridgechain Asset Repository",
       BRIDGECHAINID: "Bridgechain ID",
       BRIDGECHAINREPOSITORY: "Bridgechain repository",
       GENESISHASH: "Genesis hash",

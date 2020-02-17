@@ -15,7 +15,6 @@
       <div class="flex-auto flex items-center justify-center">
         <label for="search" class="hidden">{{ $t("SEARCH.PLACEHOLDER.SHORT") }}</label>
         <input
-          id="search"
           :placeholder="placeholder"
           class="search-input hidden sm:block w-full flex-auto sm:mr-2 py-2 md:py-4 sm:pl-4 bg-transparent"
           @focus="$store.dispatch('ui/setHeaderType', 'search')"
