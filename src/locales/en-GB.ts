@@ -61,7 +61,7 @@ export default {
 
   TRANSACTION: {
     AMOUNT: "Amount",
-    AMOUNT_TO_SELF: "Excluding {amount} the sender sent to themself",
+    AMOUNT_TO_SELF: "Excluding {amount} sent to itself",
     BLOCK_ID: "Block ID",
     ID: "Transaction ID",
     IPFS: "IPFS Hash",
@@ -113,6 +113,7 @@ export default {
       UNKNOWN: "Unknown",
     },
     ASSET: {
+      BRIDGECHAINASSETREPOSITORY: "Bridgechain Asset Repository",
       BRIDGECHAINID: "Bridgechain ID",
       BRIDGECHAINREPOSITORY: "Bridgechain repository",
       GENESISHASH: "Genesis hash",
