@@ -59,7 +59,7 @@ import {
       const entries = [{ name: "home" }, { name: "top-wallets", params: { page: 1 } }, { name: "delegate-monitor" }];
 
       if (this.hasMagistrateEnabled) {
-        entries.push({ name: "bridgechains", params: { page: 1 } }, { name: "businesses", params: { page: 1 } });
+        entries.push({ name: "businesses", params: { page: 1 } }, { name: "bridgechains", params: { page: 1 } });
       }
 
       entries.push({ name: "advanced-search", params: { page: 1 } });
