@@ -209,7 +209,11 @@
       class="page-section py-5 md:py-10 mb-5"
     >
       <div class="px-5 sm:px-10">
-        <div v-for="(value, prop, index) in assetField" :key="prop" :class="index === Object.keys(assetField).length - 1 ? 'list-row' : 'list-row-border-b'">
+        <div
+          v-for="(value, prop, index) in assetField"
+          :key="prop"
+          :class="index === Object.keys(assetField).length - 1 ? 'list-row' : 'list-row-border-b'"
+        >
           <div class="mr-4">{{ $t(`TRANSACTION.ASSET.${prop.toUpperCase()}`) }}</div>
           <div class="overflow-hidden break-all">{{ value }}</div>
         </div>
