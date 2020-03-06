@@ -653,17 +653,17 @@ export class Sanitizer {
 
   private removeBadWords(value: string): string {
     const badwords = new BadWords();
-    badwords.addWords('pedo', 'pedophile');
+    badwords.addWords("pedo", "pedophile");
     return badwords.clean(value);
   }
 
   private removeSpam(value: string): string {
     const censorify = new Censorify();
     const exceptions = [
-      match => match.url === 'http://dpos.arky-delegate.info',
-      match => match.url === 'http://arky-delegate.info',
-      match => match.url === 'https://arkfun.io/',
-      match => match.url === 'https://ark.io/',
+      (match) => match.url === "http://dpos.arky-delegate.info",
+      (match) => match.url === "http://arky-delegate.info",
+      (match) => match.url === "https://arkfun.io/",
+      (match) => match.url === "https://ark.io/",
     ];
     censorify.set({ exceptions });
     return censorify.process(value);
