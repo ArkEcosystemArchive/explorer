@@ -93,4 +93,10 @@ describe("Mixins > Strings", () => {
       expect(wrapper.vm.emojify(":smile:")).toEqual("😄");
     });
   });
+
+  describe("sanitize", () => {
+    it("should sanitize the vendorfield", () => {
+      expect(wrapper.vm.sanitizeVendorfield("https://www.google.com/ Don't be an ash0le :smile:")).toEqual("*********************** Don't be an ****** 😄");
+    });
+  });
 });
