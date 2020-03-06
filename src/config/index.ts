@@ -10,6 +10,11 @@ export const brand = {
   },
 };
 
+export const knownWalletsUrls = {
+  mainnet: "https://raw.githubusercontent.com/ArkEcosystem/common/master/mainnet/known-wallets.json",
+  devnet: "https://raw.githubusercontent.com/ArkEcosystem/common/master/devnet/known-wallets.json",
+};
+
 export const socialMedia = [
   {
     name: "facebook",
