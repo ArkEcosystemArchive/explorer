@@ -644,33 +644,28 @@ export class Sanitizer {
   ];
 
   public apply(value: string): string {
-    value = this.removeNonAlpha(value);
-    value = this.removeSpam(value);
-
-    for (const shortUrl of this.shortUrls) {
-      value = value.replace(this.removeNonAlpha(shortUrl), "");
-    }
-    value = this.removeBadWords(value);
-    value = this.removeProtocols(value);
-    return value;
-  }
-
-  private removeNonAlpha(value: string): string {
-    return value.replace(/^[A-Za-z]+$/g, "");
-  }
-
-  private removeProtocols(value: string): string {
-    for (const protocol of ["http", "https", "ftp"]) {
-      value = value.replace(`${protocol}://`, "");
+    if (value) {
+      value = this.removeSpam(value);
+      value = this.removeBadWords(value);
     }
     return value;
   }
 
   private removeBadWords(value: string): string {
-    return new BadWords().clean(value);
+    const badwords = new BadWords();
+    badwords.addWords('pedo', 'pedophile');
+    return badwords.clean(value);
   }
 
   private removeSpam(value: string): string {
-    return new Censorify().process(value);
+    const censorify = new Censorify();
+    const exceptions = [
+      match => match.url === 'http://dpos.arky-delegate.info',
+      match => match.url === 'http://arky-delegate.info',
+      match => match.url === 'https://arkfun.io/',
+      match => match.url === 'https://ark.io/',
+    ];
+    censorify.set({ exceptions });
+    return censorify.process(value);
   }
 }
