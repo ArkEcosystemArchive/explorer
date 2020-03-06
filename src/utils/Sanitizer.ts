@@ -2,7 +2,6 @@ import BadWords from "bad-words";
 import Censorify from "censorify-it";
 
 export class Sanitizer {
-
   // Taken from https://github.com/boutetnico/url-shorteners/blob/master/list.txt
   private readonly shortUrls = [
     "0rz.tw",
