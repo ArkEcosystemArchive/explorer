@@ -80,7 +80,7 @@
 
         <div v-if="transaction.vendorField" class="list-row-border-b-no-wrap">
           <div class="mr-4">{{ $t("TRANSACTION.SMARTBRIDGE") }}</div>
-          <div class="overflow-hidden break-words">{{ emojify(transaction.vendorField) }}</div>
+          <div class="overflow-hidden break-words">{{ sanitizeVendorfield(transaction.vendorField) }}</div>
         </div>
 
         <div v-if="transaction.nonce" class="list-row-border-b-no-wrap">
