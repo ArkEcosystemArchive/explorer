@@ -358,7 +358,7 @@ describe("Homepage", () => {
           expect($heading2.text()).not.to.eq(heading);
         });
 
-        cy.url().should("include", "/wallets/AewxfHQobSc49a4radHp74JZCGP8LRe4xA);
+        cy.url().should("include", "/wallets/AewxfHQobSc49a4radHp74JZCGP8LRe4xA");
       });
     });
 
