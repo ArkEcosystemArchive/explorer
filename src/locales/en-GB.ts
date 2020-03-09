@@ -139,7 +139,7 @@ export default {
     BALANCE: "Balance ({token})",
     LOCKED_BALANCE: "Locked Balance",
     SECOND_PASSPHRASE_ENABLED: "Second signature enabled",
-    MULTI_SIGNATURE_WALLET: "Multi signature wallet",
+    MULTI_SIGNATURE_WALLET: "Multisignature wallet",
     SUMMARY: "Wallet summary",
     QR_CODE: "QR Code",
     SCAN_FOR_ADDRESS: "Scan for address",

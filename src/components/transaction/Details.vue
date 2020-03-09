@@ -173,7 +173,7 @@
         <div class="list-row-border-b-no-wrap">
           <div class="mr-4">{{ $t("TRANSACTION.MULTI_SIGNATURE.PARTICIPANTS") }}</div>
           <ul>
-            <li v-for="publicKey in publicKeysFromMultiSignatureAsset" :key="publicKey" class="mb-1">
+            <li v-for="publicKey in publicKeysFromMultiSignatureAsset" :key="publicKey" class="mb-1 text-right">
               <LinkWallet
                 :address="addressFromPublicKey(publicKey)"
                 :trunc="false"

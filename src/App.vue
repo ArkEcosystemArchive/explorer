@@ -31,7 +31,9 @@ import {
   MigrationService,
   NodeService,
 } from "@/services";
+import { knownWalletsUrls } from "@/config";
 import { mapGetters } from "vuex";
+import axios from "axios";
 import moment from "moment";
 
 @Component({
@@ -78,7 +80,16 @@ export default class App extends Vue {
     this.$store.dispatch("network/setActiveDelegates", network.activeDelegates);
     this.$store.dispatch("network/setRewardOffset", network.rewardOffset);
     this.$store.dispatch("network/setCurrencies", network.currencies);
-    this.$store.dispatch("network/setKnownWallets", network.knownWallets);
+
+    let knownWallets;
+
+    try {
+      knownWallets = (await axios.get(knownWalletsUrls[process.env.VUE_APP_EXPLORER_CONFIG])).data;
+    } catch (error) {
+      knownWallets = {};
+    } finally {
+      this.$store.dispatch("network/setKnownWallets", knownWallets);
+    }
 
     this.fetchInitialSupply();
 
