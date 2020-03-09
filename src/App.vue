@@ -57,6 +57,7 @@ export default class App extends Vue {
   private hasBlurFilter = false;
 
   public async created() {
+    // test
     MigrationService.executeMigrations();
 
     const network = require(`../networks/${process.env.VUE_APP_EXPLORER_CONFIG}`);
