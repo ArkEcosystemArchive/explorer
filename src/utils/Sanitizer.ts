@@ -664,6 +664,7 @@ export class Sanitizer {
       (match) => match.url === "http://arky-delegate.info",
       (match) => match.url === "https://arkfun.io/",
       (match) => match.url === "https://ark.io/",
+      (match) => match.raw === "Arkrelay.com",
     ];
     censorify.set({ exceptions });
     return censorify.process(value);
