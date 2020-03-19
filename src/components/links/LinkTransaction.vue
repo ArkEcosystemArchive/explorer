@@ -4,7 +4,7 @@
       <slot />
     </span>
     <template v-else>
-      <span v-if="showSmartBridgeIcon && smartBridge" v-tooltip="emojify(smartBridge)">
+      <span v-if="showSmartBridgeIcon && smartBridge" v-tooltip="sanitizeVendorfield(smartBridge)">
         <SvgIcon class="mr-2 fill-current hidden md:block" name="tag" view-box="0 0 18 18" />
       </span>
       <span v-else-if="showSmartBridgeIcon && !smartBridge">

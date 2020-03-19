@@ -30,6 +30,7 @@ module.exports = {
             "td",
             "th",
             "v-spinner",
+            "text-status-became-active"
           ],
           whitelistPatterns: [/^tooltip-bg-/, /^vgt-/],
           whitelistPatternsChildren: [/^vgt-/],

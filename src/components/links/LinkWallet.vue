@@ -100,7 +100,6 @@ export default class LinkWallet extends Vue {
   @Prop({ required: false, default: false }) public showTimelockIcon: boolean;
   @Prop({ required: false, default: false }) public showAsType: boolean;
 
-  private votedDelegate: IDelegate | null | undefined = null;
   private delegates: IDelegate[];
 
   get getVoteColor(): string {
@@ -123,6 +122,10 @@ export default class LinkWallet extends Vue {
     return "";
   }
 
+  get votedDelegate(): IDelegate | null {
+    return this.votePublicKey ? this.delegates.find((d) => d.publicKey === this.votePublicKey) : null;
+  }
+
   get votedDelegateAddress(): string {
     return this.votedDelegate ? this.votedDelegate.address : "";
   }
@@ -136,25 +139,6 @@ export default class LinkWallet extends Vue {
       return this.asset.payments.length;
     }
     return 0;
-  }
-
-  @Watch("delegates")
-  public onDelegateChanged() {
-    this.determine();
-  }
-
-  public mounted(): void {
-    this.determine();
-  }
-
-  private determine(): void {
-    if (this.votePublicKey) {
-      this.determineVote();
-    }
-  }
-
-  private determineVote(): void {
-    this.votedDelegate = this.delegates.find((d) => d.publicKey === this.votePublicKey);
   }
 }
 </script>
