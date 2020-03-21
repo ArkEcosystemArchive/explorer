@@ -204,7 +204,7 @@
     <section
       v-if="
         transaction.typeGroup === typeGroupTransaction.MAGISTRATE &&
-          transaction.type !== magistrateTransaction.BUSINESS_RESIGNATION
+        transaction.type !== magistrateTransaction.BUSINESS_RESIGNATION
       "
       class="page-section py-5 md:py-10 mb-5"
     >
