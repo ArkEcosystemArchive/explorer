@@ -16,11 +16,13 @@
         </div>
       </div>
 
-      <span
-        v-if="!isCollapsed"
-        class="block mt-4 whitespace-no-wrap overflow-x-auto rounded mx-auto bg-theme-feature-background px-4 py-2 text-white font-mono"
-        >{{ qrValue }}</span
-      >
+      <div v-if="!isCollapsed" class="flex items-center mt-4">
+        <span
+          class="block whitespace-no-wrap overflow-x-auto rounded mx-auto bg-theme-feature-background px-4 py-2 text-white font-mono mr-2"
+          >{{ qrValue }}</span
+        >
+        <Clipboard :value="qrValue" />
+      </div>
 
       <button class="mt-8 mx-auto pager-button items-center" @click="isCollapsed = !isCollapsed">
         {{ $t(`WALLET.ADVANCED_QR.${isCollapsed ? "EXPAND" : "COLLAPSE"}`) }}
