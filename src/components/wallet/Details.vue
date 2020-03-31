@@ -4,7 +4,7 @@
     <div class="WalletHeaderDesktop hidden md:flex xl:rounded-lg">
       <button
         class="address-button ml-10 mr-6 p-3 rounded flex-none hover-button-shadow transition"
-        @click="toggleModal()"
+        @click="toggleModal"
       >
         <SvgIcon class="block" name="qr" view-box="0 0 29 29" />
       </button>
@@ -193,18 +193,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
-    <Modal v-if="showModal" @close="toggleModal()">
-      <div class="text-center px-10 py-2">
-        <p class="semibold text-3xl mb-4">
-          {{ $t("WALLET.QR_CODE") }}
-        </p>
-        <p class="mb-10">
-          {{ $t("WALLET.SCAN_FOR_ADDRESS") }}
-        </p>
-        <QrCode :value="wallet.address" :options="{ size: 160 }" />
-      </div>
-    </Modal>
+    <QrModal v-if="showModal" :address="wallet.address" @close="toggleModal" />
   </section>
 </template>
 
@@ -213,10 +202,12 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { IWallet } from "@/interfaces";
 import WalletVoters from "@/components/wallet/Voters.vue";
+import { QrModal } from "@/components/modals";
 
 @Component({
   components: {
     WalletVoters,
+    QrModal,
   },
   computed: {
     ...mapGetters("network", ["isListed", "knownWallets", "token"]),
@@ -261,7 +252,7 @@ export default class WalletDetails extends Vue {
     this.view = view;
   }
 
-  private toggleModal() {
+  public toggleModal() {
     this.showModal = !this.showModal;
   }
 }
