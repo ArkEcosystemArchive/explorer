@@ -10,7 +10,7 @@
 
       <div class="flex justify-between items-center">
         <QrCode class="rounded" :value="qrValue" :options="{ size: 160 }" />
-        <div v-if="!isCollapsed">
+        <div v-if="!isCollapsed" class="ml-8">
           <InputNumber :label="$t('TRANSACTION.AMOUNT')" name="amount" @input="onInputChange" />
           <InputText :label="$t('TRANSACTION.SMARTBRIDGE')" name="vendorField" @input="onInputChange" />
         </div>
