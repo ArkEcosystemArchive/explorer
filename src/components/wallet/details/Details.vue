@@ -56,10 +56,7 @@ export default class WalletDetails extends Vue {
   private view: string = null;
 
   get showNavigation() {
-    return (
-      (this.isDelegate && this.isBusiness) ||
-      this.bridgechainCount
-    );
+    return (this.isDelegate && this.isBusiness) || this.bridgechainCount;
   }
 
   get isDelegate() {

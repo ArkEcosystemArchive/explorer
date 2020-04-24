@@ -85,7 +85,6 @@ export default class WalletBusiness extends Vue {
 }
 </script>
 
-
 <style>
 .WalletBridgechains > div {
   @apply .py-4 .flex .justify-between .flex-wrap;
