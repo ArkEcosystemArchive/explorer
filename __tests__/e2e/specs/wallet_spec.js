@@ -55,16 +55,16 @@ describe("Wallet", () => {
   it("should be possible to switch to other transaction types", () => {
     cy.visit("wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs");
 
-    cy.get(".TransactionsNavigation").within(() => {
-      cy.get(".TransactionsNavigation--tab")
+    cy.get(".TabsNavigation").within(() => {
+      cy.get(".TabsNavigationItem")
         .contains("Sent")
         .click();
-      cy.get(".TransactionsNavigation--tab")
+      cy.get(".TabsNavigationItem")
         .contains("Sent")
-        .should("have.class", "active");
-      cy.get(".TransactionsNavigation--tab")
+        .should("have.class", "TabsNavigationItem--active");
+      cy.get(".TabsNavigationItem")
         .contains("All")
-        .should("not.have.class", "active");
+        .should("not.have.class", "TabsNavigationItem--active");
     });
   });
 

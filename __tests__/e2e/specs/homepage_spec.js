@@ -24,10 +24,11 @@ describe("Homepage", () => {
       .should("contain.text", "Market Cap");
 
     cy.get("#line-chart").should("be.visible");
-    cy.get(".active-tab")
+
+    cy.get(".TabsNavigationItem--active")
       .contains("Latest transactions")
       .should("be.visible");
-    cy.get(".inactive-tab")
+    cy.get(".TabsNavigationItem:not(.TabsNavigationItem--active")
       .contains("Latest blocks")
       .should("be.visible");
   });
@@ -53,12 +54,12 @@ describe("Homepage", () => {
     cy.get("div")
       .contains("Latest blocks")
       .click();
-    cy.get(".active-tab").should("include.text", "Latest blocks");
-    cy.get(".inactive-tab").should("include.text", "Latest transactions");
+    cy.get(".TabsNavigationItem--active").should("include.text", "Latest blocks");
+    cy.get(".TabsNavigationItem:not(.TabsNavigationItem--active").should("include.text", "Latest transactions");
   });
 
   it("latest block table should refresh automatically", () => {
-    cy.get(".inactive-tab")
+    cy.get(".TabsNavigationItem:not(.TabsNavigationItem--active")
       .contains("Latest blocks")
       .click();
 
