@@ -1,7 +1,7 @@
 <template>
   <span
     v-click-outside="closeDropdown"
-    :class="{ 'sm:mb-4': !inBanner }"
+    :class="{ 'mb-4 sm:mb-8': !inBanner }"
     class="SelectionType w-full sm:w-auto px-5 sm:px-0 sm:mr-10"
   >
     <div class="flex sm:hidden w-full">

@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{ 'TabsNavigationItem--active': isActive, 'TabsNavigationItem--disabled': isDisabled }"
-    class="TabsNavigationItem transition"
+    class="TabsNavigationItem transition whitespace-no-wrap"
     @click.capture.stop="onClick"
   >
     {{ title }}
@@ -30,7 +30,7 @@ export default class TabsNavigationItem extends Vue {
 
 <style scoped>
 .TabsNavigationItem {
-  @apply .text-lg .text-theme-text-secondary .border-transparent .mr-4 .py-4 .px-2 .cursor-pointer .border-b-3;
+  @apply .text-theme-text-secondary .border-transparent .mr-4 .py-4 .px-2 .cursor-pointer .border-b-3;
 }
 
 .TabsNavigationItem > span {
@@ -42,7 +42,7 @@ export default class TabsNavigationItem extends Vue {
 }
 
 .TabsNavigationItem--active {
-  @apply .text-2xl .border-blue .text-theme-text-primary;
+  @apply .text-lg .border-blue .text-theme-text-primary;
 }
 
 .TabsNavigationItem--active > span {
@@ -51,5 +51,15 @@ export default class TabsNavigationItem extends Vue {
 
 .TabsNavigationItem--disabled {
   @apply .pointer-events-none .text-theme-text-tertiary;
+}
+
+@screen sm {
+  .TabsNavigationItem--active {
+    @apply .text-2xl;
+  }
+
+  .TabsNavigationItem:not(.TabsNavigationItem--active) {
+    @apply .text-lg;
+  }
 }
 </style>

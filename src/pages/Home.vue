@@ -74,3 +74,11 @@ export default class HomePage extends Vue {
   }
 }
 </script>
+
+<style scoped>
+@media (max-width: 575px) {
+  .TabsNavigation + .SelectionType {
+    @apply .mt-4;
+  }
+}
+</style>
