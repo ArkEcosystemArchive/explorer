@@ -3,7 +3,7 @@ import mixins from "@/mixins";
 import merge from "lodash/merge";
 
 import WalletDelegate from "@/components/wallet/details/Delegate";
-import { useI18n } from "../../../__utils__/i18n";
+import { useI18n } from "../../../../__utils__/i18n";
 import Vuex from "vuex";
 
 describe("Components > Wallet > Delegate", () => {
