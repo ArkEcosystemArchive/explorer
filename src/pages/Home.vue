@@ -7,19 +7,22 @@
     </section>
 
     <section class="page-section py-5 md:py-10">
-      <div class="flex flex-col sm:flex-row items-center mx-5 sm:mx-0 mb-4 sm:mb-8">
-        <nav :class="{ 'mb-8 sm:mb-4': dataView === 'transactions' }" class="Navigation mx-5 sm:mx-10">
-          <div
-            class="Navigation__Tab"
-            :class="{ active: dataView === 'transactions' }"
+      <div class="flex flex-col sm:flex-row items-center justify-between">
+        <TabsNavigation v-if="dataView">
+          <TabsNavigationItem
+            id="transactions"
+            :title="$t('PAGES.HOME.LATEST_TRANSACTIONS')"
+            :is-active="dataView === 'transactions'"
             @click="dataView = 'transactions'"
-          >
-            {{ $t("PAGES.HOME.LATEST_TRANSACTIONS") }}
-          </div>
-          <div class="Navigation__Tab" :class="{ active: dataView === 'blocks' }" @click="dataView = 'blocks'">
-            {{ $t("PAGES.HOME.LATEST_BLOCKS") }}
-          </div>
-        </nav>
+          />
+
+          <TabsNavigationItem
+            id="blocks"
+            :title="$t('PAGES.HOME.LATEST_BLOCKS')"
+            :is-active="dataView === 'blocks'"
+            @click="dataView = 'blocks'"
+          />
+        </TabsNavigation>
 
         <SelectionType v-if="dataView === 'transactions'" @change="onTypeChange" />
       </div>
@@ -40,6 +43,7 @@ import { Component, Vue } from "vue-property-decorator";
 import ChartWrapper from "@/components/ChartWrapper.vue";
 import { LatestBlocks, LatestTransactions } from "@/components/home";
 import SelectionType from "@/components/SelectionType.vue";
+import { TabsNavigation, TabsNavigationItem } from "@/components/utils/tabs";
 import { ITransactionType } from "@/interfaces";
 
 @Component({
@@ -48,6 +52,8 @@ import { ITransactionType } from "@/interfaces";
     LatestBlocks,
     LatestTransactions,
     SelectionType,
+    TabsNavigation,
+    TabsNavigationItem,
   },
 })
 export default class HomePage extends Vue {
