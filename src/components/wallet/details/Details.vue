@@ -1,6 +1,6 @@
 <template>
-  <section class="page-section py-5 md:py-10 mb-5">
-    <TabsNavigation v-if="view">
+  <section v-if="isDelegate || isBusiness" class="page-section py-5 md:py-10 mb-5">
+    <TabsNavigation v-if="showNavigation">
       <TabsNavigationItem
         v-if="isDelegate"
         id="delegate"
@@ -56,7 +56,10 @@ export default class WalletDetails extends Vue {
   private view: string = null;
 
   get showNavigation() {
-    return this.isBusiness;
+    return (
+      (this.isDelegate && this.isBusiness) ||
+      this.bridgechainCount
+    );
   }
 
   get isDelegate() {

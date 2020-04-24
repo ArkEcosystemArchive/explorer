@@ -4,7 +4,7 @@
 
     <WalletHeader :wallet="wallet" />
 
-    <WalletDetails v-if="wallet.isDelegate || wallet.isBusiness" :wallet="wallet" />
+    <WalletDetails :wallet="wallet" />
 
     <WalletTransactions :wallet="wallet" />
   </div>
