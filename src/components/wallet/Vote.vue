@@ -1,12 +1,10 @@
 <template>
-  <div v-if="isVoting" class="WalletVote">
-    <div class="list-row-border-t">
-      <div>{{ $t("WALLET.VOTING_FOR") }}</div>
-      <div>
-        <LinkWallet v-if="votedDelegate.address" :address="votedDelegate.address">
-          <span class="truncate">{{ votedDelegate.username }}</span>
-        </LinkWallet>
-      </div>
+  <div v-if="isVoting" class="WalletVote mt-2">
+    <div class="flex">
+      <span class="text-grey mr-1">{{ $t("WALLET.VOTING_FOR") }}</span>
+      <LinkWallet v-if="votedDelegate.address" :address="votedDelegate.address">
+        <span class="truncate">{{ votedDelegate.username }}</span>
+      </LinkWallet>
     </div>
   </div>
 </template>
@@ -19,9 +17,6 @@ import { IWallet } from "@/interfaces";
 export default class WalletVote extends Vue {
   @Prop({ required: true }) public wallet: IWallet;
 
-  private view = "public";
-  private knownWallets: { [key: string]: string };
-
   get votedDelegate() {
     return this.$store.getters["delegates/byPublicKey"](this.wallet.vote) || {};
   }
@@ -31,5 +26,3 @@ export default class WalletVote extends Vue {
   }
 }
 </script>
-
-<style scoped></style>

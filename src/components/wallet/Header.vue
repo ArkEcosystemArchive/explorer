@@ -3,10 +3,10 @@
     <!-- Desktop -->
     <div class="WalletHeaderDesktop hidden md:flex xl:rounded-lg">
       <button
-        class="address-button ml-10 mr-6 p-3 rounded flex-none hover-button-shadow transition"
+        class="address-button ml-10 mr-6 p-4 rounded flex-none hover-button-shadow transition"
         @click="toggleModal"
       >
-        <SvgIcon class="block" name="qr" view-box="0 0 29 29" />
+        <SvgIcon class="block" name="qr" view-box="0 0 35 35" />
       </button>
       <div v-if="view === 'public'" class="pr-8 flex-auto min-w-0">
         <div class="flex items-center text-grey mb-2">
@@ -36,12 +36,15 @@
             view-box="0 0 16 17"
           />
         </div>
+
         <div class="flex">
           <div class="text-lg text-white semibold truncate">
             <span class="mr-2">{{ wallet.address }}</span>
           </div>
           <Clipboard v-if="wallet.address" :value="wallet.address" />
         </div>
+
+        <WalletVote :wallet="wallet" />
       </div>
 
       <div v-if="view === 'private' && wallet.publicKey" class="pr-8 flex-auto min-w-0">
@@ -202,10 +205,12 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { IWallet } from "@/interfaces";
 import { QrModal } from "@/components/modals";
+import WalletVote from "@/components/wallet/Vote.vue";
 
 @Component({
   components: {
     QrModal,
+    WalletVote,
   },
   computed: {
     ...mapGetters("network", ["isListed", "knownWallets", "token"]),
