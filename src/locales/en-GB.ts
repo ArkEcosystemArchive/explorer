@@ -61,7 +61,7 @@ export default {
 
   TRANSACTION: {
     AMOUNT: "Amount",
-    AMOUNT_TO_SELF: "Excluding {amount} the sender sent to themself",
+    AMOUNT_TO_SELF: "Excluding {amount} sent to itself",
     BLOCK_ID: "Block ID",
     ID: "Transaction ID",
     IPFS: "IPFS Hash",
@@ -78,6 +78,7 @@ export default {
       BLOCKHEIGHT: "Expiration blockheight",
       CLAIMED: "Claimed transaction",
       EXPIRATION: "Expiration",
+      EXPIRED: "Expired lock",
       OPEN: "Open lock",
       REFUNDED: "Refunded transaction",
       SECRET_HASH: "Secret Hash",
@@ -112,6 +113,7 @@ export default {
       UNKNOWN: "Unknown",
     },
     ASSET: {
+      BRIDGECHAINASSETREPOSITORY: "Bridgechain Asset Repository",
       BRIDGECHAINID: "Bridgechain ID",
       BRIDGECHAINREPOSITORY: "Bridgechain repository",
       GENESISHASH: "Genesis hash",
@@ -151,10 +153,15 @@ export default {
     BALANCE: "Balance ({token})",
     LOCKED_BALANCE: "Locked Balance",
     SECOND_PASSPHRASE_ENABLED: "Second signature enabled",
-    MULTI_SIGNATURE_WALLET: "Multi signature wallet",
+    MULTI_SIGNATURE_WALLET: "Multisignature wallet",
     SUMMARY: "Wallet summary",
     QR_CODE: "QR Code",
     SCAN_FOR_ADDRESS: "Scan for address",
+    SCAN_FOR_URI: "Scan for URI",
+    ADVANCED_QR: {
+      EXPAND: "Show options",
+      COLLAPSE: "Hide options",
+    },
     DELEGATE: {
       FORGED_BLOCKS: "Forged blocks",
       TOTAL_FORGED: "Total forged",
@@ -304,7 +311,7 @@ export default {
     DEVELOPMENT: "Development",
     SUPPLY: "Supply",
     MARKET_CAP: "Market Cap",
-    TESTNET: "Testnet Local",
+    TESTNET_LOCAL: "Testnet Local",
   },
 
   FOOTER: {

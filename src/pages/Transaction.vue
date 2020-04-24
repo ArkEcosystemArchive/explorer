@@ -136,10 +136,6 @@ export default class TransactionPage extends Vue {
     this.transaction = transaction;
   }
 
-  private setMeta(meta: any) {
-    this.meta = meta;
-  }
-
   private onPageChange(page: number) {
     if (this.currentPage !== page) {
       this.currentPage = page;

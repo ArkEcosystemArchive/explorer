@@ -1,11 +1,11 @@
 describe("Bridgechains", () => {
-  xit("should show a disclaimer", () => {
+  it("should show a disclaimer", () => {
     cy.visit("/bridgechains/1");
 
     cy.get("div.modal-container").should("be.visible");
   });
 
-  xit("should be possible to dismiss the disclaimer", () => {
+  it("should be possible to dismiss the disclaimer", () => {
     cy.visit("/bridgechains/1");
 
     cy.get("div.modal-container button")
@@ -15,11 +15,11 @@ describe("Bridgechains", () => {
     cy.get("div.modal-container").should("not.be.visible");
   });
 
-  xit("should show up to 25 rows in the table", () => {
+  it("should show up to 25 rows in the table", () => {
     cy.get("table.vgt-table tbody tr").should("have.length.of.at.most", 25);
   });
 
-  xit("should be possible to sort the table", () => {
+  it("should be possible to sort the table", () => {
     cy.get("div.max-w-2xl").then($body => {
       if ($body.find("table").length) {
         cy.get("th")
@@ -42,6 +42,7 @@ describe("Bridgechains", () => {
   });
 
   xit("should be possible to navigate to the next page and back", () => {
+    // TODO: enable once we have more bridgechains
     cy.get("div.max-w-2xl").then($body => {
       if ($body.find("table").length) {
         cy.get(".Pagination__Button--previous").should("not.exist");
@@ -61,6 +62,7 @@ describe("Bridgechains", () => {
   });
 
   xit("should be possible to click on a creator address", () => {
+    // TODO: enable once we have bridgechains registered
     cy.get("div.max-w-2xl").then($body => {
       if ($body.find("table").length) {
         cy.get("h1")

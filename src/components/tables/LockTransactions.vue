@@ -44,7 +44,7 @@
 
         <div v-else-if="data.column.field === 'vendorField'">
           <div class="cell-smartbridge-truncate">
-            {{ emojify(data.row.vendorField) }}
+            {{ sanitizeVendorfield(data.row.vendorField) }}
           </div>
         </div>
 

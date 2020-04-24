@@ -10,6 +10,11 @@ export const brand = {
   },
 };
 
+export const knownWalletsUrls = {
+  mainnet: "https://raw.githubusercontent.com/ArkEcosystem/common/master/mainnet/known-wallets.json",
+  devnet: "https://raw.githubusercontent.com/ArkEcosystem/common/master/devnet/known-wallets.json",
+};
+
 export const socialMedia = [
   {
     name: "facebook",
@@ -60,11 +65,6 @@ export const socialMedia = [
     name: "discord",
     url: "https://discord.ark.io",
     viewBox: "0 0 14 16",
-  },
-  {
-    name: "steemit",
-    url: "https://steemit.ark.io",
-    viewBox: "0 0 16 16",
   },
   {
     name: "instagram",

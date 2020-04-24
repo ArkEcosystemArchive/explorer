@@ -80,7 +80,7 @@
 
         <div v-if="transaction.vendorField" class="list-row-border-b-no-wrap">
           <div class="mr-4">{{ $t("TRANSACTION.SMARTBRIDGE") }}</div>
-          <div class="overflow-hidden break-words">{{ emojify(transaction.vendorField) }}</div>
+          <div class="overflow-hidden break-words">{{ sanitizeVendorfield(transaction.vendorField) }}</div>
         </div>
 
         <div v-if="transaction.nonce" class="list-row-border-b-no-wrap">
@@ -173,7 +173,7 @@
         <div class="list-row-border-b-no-wrap">
           <div class="mr-4">{{ $t("TRANSACTION.MULTI_SIGNATURE.PARTICIPANTS") }}</div>
           <ul>
-            <li v-for="publicKey in publicKeysFromMultiSignatureAsset" :key="publicKey" class="mb-1">
+            <li v-for="publicKey in publicKeysFromMultiSignatureAsset" :key="publicKey" class="mb-1 text-right">
               <LinkWallet
                 :address="addressFromPublicKey(publicKey)"
                 :trunc="false"
@@ -209,7 +209,11 @@
       class="page-section py-5 md:py-10 mb-5"
     >
       <div class="px-5 sm:px-10">
-        <div v-for="(value, prop) in assetField" :key="prop" class="list-row-border-b">
+        <div
+          v-for="(value, prop, index) in assetField"
+          :key="prop"
+          :class="index === Object.keys(assetField).length - 1 ? 'list-row' : 'list-row-border-b'"
+        >
           <div class="mr-4">{{ $t(`TRANSACTION.ASSET.${prop.toUpperCase()}`) }}</div>
           <div class="overflow-hidden break-all">{{ value }}</div>
         </div>
@@ -225,8 +229,7 @@ import { TranslateResult } from "vue-i18n";
 import { mapGetters } from "vuex";
 import { ITransaction } from "@/interfaces";
 import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
-import CryptoCompareService from "@/services/crypto-compare";
-import TransactionService from "@/services/transaction";
+import { CryptoCompareService, LockService, TransactionService } from "@/services";
 
 @Component({
   computed: {
@@ -339,7 +342,10 @@ export default class TransactionDetails extends Vue {
     if (this.isTimelock(this.transaction.type, this.transaction.typeGroup)) {
       const response = await TransactionService.findUnlockedForLocks([this.transaction.id]);
       if (response.data.length === 0) {
-        this.timelockStatus = this.$t("TRANSACTION.TIMELOCK.OPEN");
+        const lock = await LockService.find(this.transaction.id);
+        this.timelockStatus = lock.isExpired
+          ? this.$t("TRANSACTION.TIMELOCK.EXPIRED")
+          : this.$t("TRANSACTION.TIMELOCK.OPEN");
       } else if (response.data[0].type === CoreTransaction.TIMELOCK_CLAIM) {
         this.timelockStatus = this.$t("TRANSACTION.TIMELOCK.CLAIMED");
         this.timelockLink = response.data[0].id;
