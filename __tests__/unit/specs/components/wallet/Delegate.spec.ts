@@ -1,7 +1,7 @@
 import { mount, createLocalVue, RouterLinkStub } from "@vue/test-utils";
 import mixins from "@/mixins";
 
-import WalletDelegate from "@/components/wallet/Delegate";
+import WalletDelegate from "@/components/wallet/details/Delegate";
 import { useI18n } from "../../../__utils__/i18n";
 import Vuex from "vuex";
 
