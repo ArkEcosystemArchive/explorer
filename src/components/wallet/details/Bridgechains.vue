@@ -1,26 +1,26 @@
 <template>
   <div class="WalletBridgechains">
-    <div class="list-row-border-b">
+    <div>
       <div>{{ $t("TRANSACTION.ASSET.NAME") }}</div>
       <div>{{ bridgechain.name }}</div>
     </div>
-    <div v-if="bridgechain.isResigned" class="list-row-border-b">
+    <div v-if="bridgechain.isResigned">
       <div>{{ $t("WALLET.BRIDGECHAINS.STATUS.TITLE") }}</div>
       <div class="text-status-not-forging">{{ $t("WALLET.BRIDGECHAINS.STATUS.RESIGNED") }}</div>
     </div>
-    <div class="list-row-border-b">
+    <div>
       <div>{{ $t("TRANSACTION.ASSET.SEEDNODES") }}</div>
       <div>{{ bridgechain.seedNodes }}</div>
     </div>
-    <div class="list-row-border-b">
+    <div>
       <div>{{ $t("TRANSACTION.ASSET.GENESISHASH") }}</div>
       <div>{{ bridgechain.genesisHash }}</div>
     </div>
-    <div v-if="bridgechain.bridgechainRepository" class="list-row-border-b">
+    <div v-if="bridgechain.bridgechainRepository">
       <div>{{ $t("TRANSACTION.ASSET.BRIDGECHAINREPOSITORY") }}</div>
       <div>{{ bridgechain.bridgechainRepository }}</div>
     </div>
-    <div class="list-row">
+    <div>
       <div>{{ $t("TRANSACTION.ASSET.PORTS") }}</div>
       <div>{{ bridgechain.ports }}</div>
     </div>
@@ -84,3 +84,14 @@ export default class WalletBusiness extends Vue {
   }
 }
 </script>
+
+
+<style>
+.WalletBridgechains > div {
+  @apply .py-4 .flex .justify-between .flex-wrap;
+}
+
+.WalletBridgechains > div:not(:last-child) {
+  @apply .border-b;
+}
+</style>

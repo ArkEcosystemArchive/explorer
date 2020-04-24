@@ -1,22 +1,22 @@
 <template>
   <div class="WalletBusiness">
-    <div class="list-row-border-b">
+    <div>
       <div>{{ $t("TRANSACTION.ASSET.NAME") }}</div>
       <div>{{ business.name }}</div>
     </div>
-    <div v-if="business.isResigned" class="list-row-border-b">
+    <div v-if="business.isResigned">
       <div>{{ $t("WALLET.BUSINESS.STATUS.TITLE") }}</div>
       <div class="text-status-not-forging">{{ $t("WALLET.BUSINESS.STATUS.RESIGNED") }}</div>
     </div>
-    <div class="list-row-border-b">
+    <div class="list-row">
       <div>{{ $t("TRANSACTION.ASSET.WEBSITE") }}</div>
       <div>{{ business.website }}</div>
     </div>
-    <div v-if="business.vat" class="list-row-border-b">
+    <div v-if="business.vat">
       <div>{{ $t("TRANSACTION.ASSET.VAT") }}</div>
       <div>{{ business.vat }}</div>
     </div>
-    <div class="list-row">
+    <div v-if="business.repository">
       <div>{{ $t("TRANSACTION.ASSET.REPOSITORY") }}</div>
       <div>{{ business.repository }}</div>
     </div>
@@ -43,3 +43,13 @@ export default class WalletBusiness extends Vue {
   }
 }
 </script>
+
+<style>
+.WalletBusiness > div {
+  @apply .py-4 .flex .justify-between .flex-wrap;
+}
+
+.WalletBusiness > div:not(:last-child) {
+  @apply .border-b;
+}
+</style>
