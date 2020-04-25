@@ -29,7 +29,7 @@
         />
       </div>
       <div class="sm:hidden">
-        <div class="mx-5 mb-4">
+        <div class="mb-4">
           <SelectionType @change="setType" />
         </div>
 
