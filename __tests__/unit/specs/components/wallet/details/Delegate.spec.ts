@@ -6,7 +6,7 @@ import WalletDelegate from "@/components/wallet/details/Delegate";
 import { useI18n } from "../../../../__utils__/i18n";
 import Vuex from "vuex";
 
-describe("Components > Wallet > Delegate", () => {
+describe("Components > Wallet > Details > Delegate", () => {
   let wrapper: Wrapper<Vue>;
 
   const localVue = createLocalVue();

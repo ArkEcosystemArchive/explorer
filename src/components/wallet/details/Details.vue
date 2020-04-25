@@ -1,5 +1,5 @@
 <template>
-  <section v-if="isDelegate || isBusiness" class="page-section py-5 md:py-10 mb-5">
+  <section v-if="!!view" class="page-section py-5 md:py-10 mb-5">
     <TabsNavigation v-if="showNavigation">
       <TabsNavigationItem
         v-if="isDelegate"
@@ -18,10 +18,10 @@
       />
 
       <TabsNavigationItem
-        v-if="isBusiness && bridgechains.length"
+        v-if="bridgechainCount"
         id="bridgechains"
         :title="$t('WALLET.BRIDGECHAINS.TITLE')"
-        :sub-title="bridgechains.length"
+        :sub-title="bridgechainCount"
         :is-active="view === 'bridgechains'"
         @click="setView"
       />
@@ -67,20 +67,12 @@ export default class WalletDetails extends Vue {
     return !!this.wallet?.attributes?.business;
   }
 
-  get bridgechains() {
-    return Object.values(this.wallet?.attributes?.business?.bridgechains || {}).map(
-      (bridgechain) => bridgechain.bridgechainAsset,
-    );
-  }
-
   get bridgechainCount() {
-    if (this.wallet?.attributes?.business?.bridgechains) {
-      return Object.keys(this.wallet?.attributes?.business?.bridgechains).length;
-    }
+    return Object.keys(this.wallet?.attributes?.business?.bridgechains || {}).length;
   }
 
   public mounted() {
-    this.view = this.isDelegate ? "delegate" : this.isBusiness ? "business" : null;
+    this.setView(this.isDelegate ? "delegate" : this.isBusiness ? "business" : null);
   }
 
   private setView(view) {

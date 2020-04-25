@@ -31,10 +31,6 @@ export default class WalletPage extends Vue {
   private wallet: IWallet | null = null;
   private activeTab = "all";
 
-  get isDelegate() {
-    return this.wallet?.isDelegate;
-  }
-
   public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
     try {
       const response = await WalletService.find(to.params.address);
