@@ -1,7 +1,7 @@
 <template>
-  <div v-if="isVoting" class="WalletVote mt-2">
-    <div class="flex">
-      <span class="text-grey mr-1">{{ $t("WALLET.VOTING_FOR") }}</span>
+  <div v-if="isVoting" class="WalletVote sm:mt-2">
+    <div class="flex flex-col sm:flex-row">
+      <span class="text-grey mb-2 sm:mb-0 sm:mr-1">{{ $t("WALLET.VOTING_FOR") }}</span>
       <LinkWallet v-if="votedDelegate.address" :address="votedDelegate.address">
         <span class="truncate">{{ votedDelegate.username }}</span>
       </LinkWallet>

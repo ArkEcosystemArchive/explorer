@@ -159,7 +159,7 @@
         </div>
         <div class="flex flex-wrap -mx-6">
           <div
-            :class="{ 'border-r border-grey-dark -mr-1': hasLockedBalance }"
+            :class="{ 'border-r border-grey-dark -mr-1': hasLockedBalance || isVoting }"
             class="md:w-1/2 px-6 flex-1 whitespace-no-wrap my-4"
           >
             <div class="text-grey mb-2">
@@ -177,20 +177,29 @@
             </div>
           </div>
 
-          <div v-if="view === 'public' && hasLockedBalance" class="md:w-1/2 px-6 flex-1 whitespace-no-wrap my-4">
-            <div class="flex items-center text-grey mb-2">
-              {{ $t("WALLET.LOCKED_BALANCE") }}
-              <SvgIcon class="ml-2" name="locked-balance" view-box="0 0 16 17" />
-            </div>
-            <span
-              v-tooltip="{
-                trigger: 'hover click',
-                content: readableCurrency(wallet.lockedBalance),
-              }"
-              class="text-white"
-            >
-              {{ readableCrypto(wallet.lockedBalance, false) }}
-            </span>
+          <div class="md:w-1/2 px-6 flex-1 whitespace-no-wrap my-4">
+            <template v-if="hasLockedBalance">
+              <div class="flex items-center text-grey mb-2">
+                {{ $t("WALLET.LOCKED_BALANCE") }}
+                <SvgIcon class="ml-2" name="locked-balance" view-box="0 0 16 17" />
+              </div>
+              <span
+                v-tooltip="{
+                  trigger: 'hover click',
+                  content: readableCurrency(wallet.lockedBalance),
+                }"
+                class="text-white"
+              >
+                {{ readableCrypto(wallet.lockedBalance, false) }}
+              </span>
+            </template>
+
+            <WalletVote v-else-if="isVoting" :wallet="wallet" />
+          </div>
+        </div>
+        <div v-if="hasLockedBalance && isVoting" class="flex flex-wrap -mx-6">
+          <div class="md:w-1/2 px-6 flex-1 whitespace-no-wrap my-4">
+            <WalletVote :wallet="wallet" />
           </div>
         </div>
       </div>
