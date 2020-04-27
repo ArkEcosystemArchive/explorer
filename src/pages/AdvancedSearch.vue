@@ -218,13 +218,13 @@ export default class AdvancedSearchPage extends Vue {
     this.currentPage = 1;
     this.submitted = true;
 
-    // try {
-    const { meta, data } = await this.searchService(this.searchParams);
-    this.setMeta(meta);
-    this.setData(data);
-    // } catch {
-    //   this.setData([]);
-    // }
+    try {
+      const { meta, data } = await this.searchService(this.searchParams);
+      this.setMeta(meta);
+      this.setData(data);
+    } catch {
+      this.setData([]);
+    }
   }
 
   private onSearchTypeChange(event: any): void {

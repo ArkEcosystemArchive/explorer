@@ -4,7 +4,7 @@ import { paginationLimit } from "@/constants";
 import { Sanitizer } from "@/utils/Sanitizer";
 import emoji from "node-emoji";
 
-const sanitizeVendorField = (transaction) => {
+const sanitizeVendorField = (transaction: ITransaction) => {
   if (transaction.vendorField) {
     const sanitizer = new Sanitizer();
 
