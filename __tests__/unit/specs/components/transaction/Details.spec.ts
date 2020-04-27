@@ -28,6 +28,7 @@ describe("Components > Transaction > Details", () => {
           mocks: {
             addressFromPublicKey: () => "address",
             addressFromMultiSignatureAsset: () => "multi-signature-address",
+            sanitizeVendorfield: (value) => value,
           },
           i18n,
           localVue,

@@ -87,7 +87,7 @@
     "eslint-plugin-vue": "^6.1.2",
     "jest-extended": "^0.11.2",
     "jest-localstorage-mock": "^2.4.0",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.3",
     "moment-timezone": "^0.5.27",
     "prettier": "^1.19.1",
     "prettier-eslint": "^9.0.1",
