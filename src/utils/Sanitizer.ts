@@ -646,11 +646,13 @@ export class Sanitizer {
   ];
 
   public isBad(value: string): boolean {
-    const alphaValue = value.replace(/[^a-zA-Z]/g, "");
+    if (!value) { return false }
+
+    const alphaValue = value.replace(/[^a-zA-Z0-9]/g, "");
 
     for (const bad of this.blacklist.concat(this.shortUrls)) {
       const badDirectly = alphaValue.includes(bad);
-      const badVariation = alphaValue.includes(bad.replace(/[^a-zA-Z]/g, ""));
+      const badVariation = alphaValue.includes(bad.replace(/[^a-zA-Z0-9]/g, ""));
 
       if (badDirectly || badVariation) {
         return true;
