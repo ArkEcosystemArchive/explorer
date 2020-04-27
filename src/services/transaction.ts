@@ -198,12 +198,14 @@ class TransactionService {
   }
 
   private sanitizeVendorField(transaction): void {
-    const sanitizer = new Sanitizer();
+    if (transaction.vendorField) {
+      const sanitizer = new Sanitizer();
 
-    if (sanitizer.isBad(transaction.vendorField)) {
-      delete transaction.vendorField;
-    } else {
-      transaction.vendorField = sanitizer.apply(emoji.emojify(transaction.vendorField));
+      if (sanitizer.isBad(transaction.vendorField)) {
+        delete transaction.vendorField;
+      } else {
+        transaction.vendorField = sanitizer.apply(emoji.emojify(transaction.vendorField));
+      }
     }
   }
 }
