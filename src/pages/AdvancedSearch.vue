@@ -2,7 +2,7 @@
   <div class="max-w-2xl mx-auto md:pt-5">
     <ContentHeader>{{ $t("PAGES.ADVANCED_SEARCH.TITLE") }}</ContentHeader>
 
-    <section class="page-section mb-5 py-5 md:py-10">
+    <section class="py-5 mb-5 page-section md:py-10">
       <GenericSearchForm
         :search-types="searchTypes"
         :selected-type="selectedType"
@@ -18,7 +18,7 @@
       <button class="button-lg" @click="search">Search</button>
     </section>
 
-    <section v-if="submitted" class="page-section py-5 md:py-10">
+    <section v-if="submitted" class="py-5 page-section md:py-10">
       <div v-if="selectedType === 'transaction'" class="hidden sm:block">
         <TableTransactionsDesktop :transactions="data" :sort-query="sortParams" @on-sort-change="onSortChange" />
       </div>
@@ -218,13 +218,13 @@ export default class AdvancedSearchPage extends Vue {
     this.currentPage = 1;
     this.submitted = true;
 
-    try {
+    // try {
       const { meta, data } = await this.searchService(this.searchParams);
       this.setMeta(meta);
       this.setData(data);
-    } catch {
-      this.setData([]);
-    }
+    // } catch {
+    //   this.setData([]);
+    // }
   }
 
   private onSearchTypeChange(event: any): void {

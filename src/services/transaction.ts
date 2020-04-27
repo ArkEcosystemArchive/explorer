@@ -4,6 +4,20 @@ import { paginationLimit } from "@/constants";
 import { Sanitizer } from "@/utils/Sanitizer";
 import emoji from "node-emoji";
 
+const sanitizeVendorField = (transaction) => {
+  if (transaction.vendorField) {
+    const sanitizer = new Sanitizer();
+
+    if (sanitizer.isBad(transaction.vendorField)) {
+      delete transaction.vendorField;
+    } else {
+      transaction.vendorField = sanitizer.apply(emoji.emojify(transaction.vendorField));
+    }
+  }
+
+  return transaction;
+};
+
 class TransactionService {
   public async latest(limit: number = paginationLimit): Promise<ITransaction[]> {
     const response = (await ApiService.get("transactions", {
@@ -13,7 +27,7 @@ class TransactionService {
       },
     })) as IApiTransactionsWrapper;
 
-    response.data.map(this.sanitizeVendorField);
+    response.data.map(sanitizeVendorField);
 
     return response.data;
   }
@@ -21,7 +35,7 @@ class TransactionService {
   public async find(id: string): Promise<ITransaction> {
     const response = (await ApiService.get(`transactions/${id}`)) as IApiTransactionWrapper;
 
-    this.sanitizeVendorField(response.data);
+    sanitizeVendorField(response.data);
 
     return response.data;
   }
@@ -50,7 +64,7 @@ class TransactionService {
       params,
     })) as IApiTransactionsWrapper;
 
-    response.data.map(this.sanitizeVendorField);
+    response.data.map(sanitizeVendorField);
 
     return response;
   }
@@ -67,7 +81,7 @@ class TransactionService {
       },
     })) as IApiTransactionsWrapper;
 
-    response.data.map(this.sanitizeVendorField);
+    response.data.map(sanitizeVendorField);
 
     return response;
   }
@@ -81,7 +95,7 @@ class TransactionService {
       },
     })) as IApiTransactionsWrapper;
 
-    response.data.map(this.sanitizeVendorField);
+    response.data.map(sanitizeVendorField);
 
     return response;
   }
@@ -95,7 +109,7 @@ class TransactionService {
       },
     })) as IApiTransactionsWrapper;
 
-    response.data.map(this.sanitizeVendorField);
+    response.data.map(sanitizeVendorField);
 
     return response;
   }
@@ -113,7 +127,7 @@ class TransactionService {
       },
     })) as IApiTransactionsWrapper;
 
-    response.data.map(this.sanitizeVendorField);
+    response.data.map(sanitizeVendorField);
 
     return response;
   }
@@ -131,7 +145,7 @@ class TransactionService {
       },
     })) as IApiTransactionsWrapper;
 
-    response.data.map(this.sanitizeVendorField);
+    response.data.map(sanitizeVendorField);
 
     return response;
   }
@@ -149,7 +163,7 @@ class TransactionService {
       },
     })) as IApiTransactionsWrapper;
 
-    response.data.map(this.sanitizeVendorField);
+    response.data.map(sanitizeVendorField);
 
     return response;
   }
@@ -163,7 +177,7 @@ class TransactionService {
       ids: transactionIds,
     })) as IApiTransactionsWrapper;
 
-    response.data.map(this.sanitizeVendorField);
+    response.data.map(sanitizeVendorField);
 
     return response;
   }
@@ -195,18 +209,6 @@ class TransactionService {
       },
     })) as IApiTransactionsWrapper;
     return response.meta.totalCount;
-  }
-
-  private sanitizeVendorField(transaction): void {
-    if (transaction.vendorField) {
-      const sanitizer = new Sanitizer();
-
-      if (sanitizer.isBad(transaction.vendorField)) {
-        delete transaction.vendorField;
-      } else {
-        transaction.vendorField = sanitizer.apply(emoji.emojify(transaction.vendorField));
-      }
-    }
   }
 }
 
