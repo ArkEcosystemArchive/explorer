@@ -646,7 +646,9 @@ export class Sanitizer {
   ];
 
   public isBad(value: string): boolean {
-    if (!value) { return false }
+    if (!value) {
+      return false;
+    }
 
     const alphaValue = value.replace(/[^a-zA-Z0-9]/g, "");
 
