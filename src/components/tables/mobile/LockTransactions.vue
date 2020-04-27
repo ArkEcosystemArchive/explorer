@@ -49,7 +49,7 @@
             {{ $t("TRANSACTION.SMARTBRIDGE") }}
           </div>
           <div class="text-right truncate">
-            {{ sanitizeVendorfield(transaction.vendorField) }}
+            {{ transaction.vendorField }}
           </div>
         </div>
 
