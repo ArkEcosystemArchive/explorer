@@ -52,11 +52,11 @@ describe("Advanced Search", () => {
       cy.get("tbody tr")
         .first()
         .within(() => {
-          cy.get("td").eq(2);
-          cy.contains("Genesis Wallet");
+          cy.get("td").eq(2)
+            .should("contain.text", "Genesis Wallet");
 
-          cy.get("td").eq(3);
-          cy.contains("genesis_50");
+          cy.get("td").eq(3)
+            .should("contain.text", "genesis_50");
         });
     });
 
@@ -73,11 +73,11 @@ describe("Advanced Search", () => {
       cy.get("tbody tr")
         .first()
         .within(() => {
-          cy.get("td").eq(5);
-          cy.contains("500");
+          cy.get("td").eq(5)
+            .should("contain.text", "500");
 
-          cy.get("td").eq(4);
-          cy.contains("1");
+          cy.get("td").eq(6)
+            .should("contain.text", "1");
         });
     });
 
@@ -90,8 +90,8 @@ describe("Advanced Search", () => {
         .contains("Search")
         .click();
 
-      cy.get("tbody");
-      cy.contains("No results");
+      cy.get("tbody")
+        .contains("No results");
     });
   });
 
@@ -108,14 +108,14 @@ describe("Advanced Search", () => {
       cy.get("tbody tr")
         .first()
         .within(() => {
-          cy.get("td").eq(1);
-          cy.contains("1");
+          cy.get("td").eq(1)
+            .should("contain.text", "1");
 
-          cy.get("td").eq(3);
-          cy.contains("1492");
+          cy.get("td").eq(3)
+            .should("contain.text", "1492");
 
-          cy.get("td").eq(5);
-          cy.contains("0");
+          cy.get("td").eq(5)
+            .should("contain.text", "0");
         });
     });
 
@@ -132,8 +132,8 @@ describe("Advanced Search", () => {
       cy.get("tbody tr")
         .first()
         .within(() => {
-          cy.get("td").eq(6);
-          cy.contains("25");
+          cy.get("td").eq(6)
+            .should("contain.text", "25");
         });
     });
 
@@ -151,8 +151,8 @@ describe("Advanced Search", () => {
       cy.get("tbody tr")
         .first()
         .within(() => {
-          cy.get("td").eq(4);
-          cy.contains("biz_classic");
+          cy.get("td").eq(4)
+            .should("contain.text", "biz_classic");
         });
     });
   });
@@ -170,8 +170,8 @@ describe("Advanced Search", () => {
       cy.get("tbody tr")
         .first()
         .within(() => {
-          cy.get("td").eq(0);
-          cy.contains("AdLb2r8XEmhNqW3CXyNGEEVZxXAfvTqPWR");
+          cy.get("td").eq(0)
+            .should("contain.text", "AdLb2r8XEmhNqW3CXyNGEEVZxXAfvTqPWR");
         });
     });
 
@@ -189,8 +189,8 @@ describe("Advanced Search", () => {
       cy.get("tbody tr")
         .first()
         .within(() => {
-          cy.get("td").eq(0);
-          cy.contains("alessio");
+          cy.get("td").eq(0)
+            .should("contain.text", "alessio");
         });
     });
 
@@ -208,8 +208,8 @@ describe("Advanced Search", () => {
       cy.get("tbody tr")
         .first()
         .within(() => {
-          cy.get("td").eq(1);
-          cy.contains("alessio");
+          cy.get("td").eq(1)
+            .should("contain.text", "alessio");
         });
     });
   });
