@@ -1,9 +1,7 @@
 import store from "@/store";
-import emoji from "node-emoji";
 import { Sanitizer } from "@/utils/Sanitizer";
 
 const locale = store.getters["ui/locale"];
-const sanitizerInstance = new Sanitizer();
 
 export default {
   methods: {
@@ -41,15 +39,6 @@ export default {
       }
 
       return "-";
-    },
-
-    sanitizeVendorfield(text: string): string {
-      const emojifiedText = this.emojify(text);
-      return sanitizerInstance.apply(emojifiedText);
-    },
-
-    emojify(text: string): string {
-      return emoji.emojify(text);
     },
   },
 };

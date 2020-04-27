@@ -3,6 +3,8 @@ import Censorify from "censorify-it";
 
 export class Sanitizer {
   // Taken from https://github.com/boutetnico/url-shorteners/blob/master/list.txt
+  private readonly blacklist = ["onion"];
+
   private readonly shortUrls = [
     "0rz.tw",
     "1-url.net",
@@ -643,11 +645,27 @@ export class Sanitizer {
     "zzb.bz",
   ];
 
+  public isBad(value: string): boolean {
+    const alphaValue = value.replace(/[^a-zA-Z]/g, "");
+
+    for (const bad of this.blacklist.concat(this.shortUrls)) {
+      const badDirectly = alphaValue.includes(bad);
+      const badVariation = alphaValue.includes(bad.replace(/[^a-zA-Z]/g, ""));
+
+      if (badDirectly || badVariation) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   public apply(value: string): string {
     if (value) {
       value = this.removeSpam(value);
       value = this.removeBadWords(value);
     }
+
     return value;
   }
 

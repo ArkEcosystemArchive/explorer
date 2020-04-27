@@ -38,7 +38,7 @@
 
         <div v-else-if="data.column.field === 'vendorField'">
           <div class="cell-smartbridge-truncate">
-            {{ sanitizeVendorfield(data.row.vendorField) }}
+            {{ data.row.vendorField }}
           </div>
         </div>
 
@@ -57,7 +57,7 @@
               class="flex items-center justify-end whitespace-no-wrap text-green"
             >
               <span class="inline-block mr-2">{{ readableNumber(data.row.confirmations) }}</span>
-              <SvgIcon class="icon flex-none" name="became-active" view-box="0 0 16 16" />
+              <SvgIcon class="flex-none icon" name="became-active" view-box="0 0 16 16" />
             </div>
             <div v-else>
               <div v-tooltip="readableNumber(data.row.confirmations) + ' ' + $t('COMMON.CONFIRMATIONS')">
