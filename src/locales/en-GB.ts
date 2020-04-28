@@ -195,6 +195,7 @@ export default {
       CREATOR: "Creator",
       SEED_SERVER: "Seed Server",
       REPOSITORY: "Repository",
+      RESIGNED: "Resigned",
     },
     BUSINESSES: {
       TITLE: "Businesses",
@@ -202,6 +203,7 @@ export default {
       CREATOR: "Creator",
       WEBSITE: "Website",
       REPOSITORY: "Repository",
+      RESIGNED: "Resigned",
     },
     DELEGATES: {
       TITLE: "Delegates",
