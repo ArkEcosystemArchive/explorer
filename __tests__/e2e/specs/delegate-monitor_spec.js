@@ -168,11 +168,11 @@ describe("Delegate Monitor", () => {
     });
 
     it("should be possible to switch to standby delegates", () => {
-      cy.get(".inactive-tab")
+      cy.get(".TabsNavigationItem")
         .contains("Standby")
         .click();
-      cy.get(".active-tab").should("include.text", "Standby");
-      cy.get(".inactive-tab").should("include.text", "Active");
+      cy.get(".TabsNavigationItem--active").should("include.text", "Standby");
+      cy.get(".TabsNavigationItem:not(.TabsNavigationItem--active").should("include.text", "Active");
     });
 
     it("should be possible to click the 'show more' button for active delegates", () => {
@@ -189,7 +189,7 @@ describe("Delegate Monitor", () => {
   describe("Standby Delegates", () => {
     beforeEach(() => {
       cy.visit("/delegate-monitor");
-      cy.get(".inactive-tab")
+      cy.get(".TabsNavigationItem")
         .contains("Standby")
         .click();
     });

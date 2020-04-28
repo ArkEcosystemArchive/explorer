@@ -5,17 +5,28 @@
     <MonitorHeader />
 
     <section class="page-section py-5 md:py-10">
-      <nav class="mx-5 sm:mx-10 mb-4 border-b flex items-end overflow-x-auto">
-        <div :class="activeTab === 'active' ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'active'">
-          {{ $t("PAGES.DELEGATE_MONITOR.ACTIVE") }}
-        </div>
-        <div :class="activeTab === 'standby' ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'standby'">
-          {{ $t("PAGES.DELEGATE_MONITOR.STANDBY") }}
-        </div>
-        <div :class="activeTab === 'resigned' ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'resigned'">
-          {{ $t("PAGES.DELEGATE_MONITOR.RESIGNED") }}
-        </div>
-      </nav>
+      <TabsNavigation>
+        <TabsNavigationItem
+          id="active"
+          :title="$t('PAGES.DELEGATE_MONITOR.ACTIVE')"
+          :is-active="activeTab === 'active'"
+          @click="activeTab = 'active'"
+        />
+
+        <TabsNavigationItem
+          id="standby"
+          :title="$t('PAGES.DELEGATE_MONITOR.STANDBY')"
+          :is-active="activeTab === 'standby'"
+          @click="activeTab = 'standby'"
+        />
+
+        <TabsNavigationItem
+          id="resigned"
+          :title="$t('PAGES.DELEGATE_MONITOR.RESIGNED')"
+          :is-active="activeTab === 'resigned'"
+          @click="activeTab = 'resigned'"
+        />
+      </TabsNavigation>
 
       <ForgingStats v-show="activeTab === 'active'" :delegates="delegates || []" />
 
@@ -47,12 +58,15 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { IDelegate, ISortParameters } from "@/interfaces";
 import { MonitorHeader, ForgingStats } from "@/components/monitor";
+import { TabsNavigation, TabsNavigationItem } from "@/components/utils/tabs";
 import DelegateService from "@/services/delegate";
 
 @Component({
   components: {
     MonitorHeader,
     ForgingStats,
+    TabsNavigation,
+    TabsNavigationItem,
   },
   computed: {
     ...mapGetters("network", ["height", "activeDelegates"]),
