@@ -6,7 +6,12 @@
           <div class="mr-4">
             {{ $t("PAGES.BRIDGECHAINS.NAME") }}
           </div>
-          <div>{{ bridgechain.name }}</div>
+          <div>
+            <span>{{ bridgechain.name }}</span>
+            <span v-if="bridgechain.isResigned" class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1">{{
+              $t("PAGES.BRIDGECHAINS.RESIGNED")
+            }}</span>
+          </div>
         </div>
 
         <div class="list-row-border-b">
