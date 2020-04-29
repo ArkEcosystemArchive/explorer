@@ -15,7 +15,7 @@
         </div>
 
         <div v-else-if="data.column.field === 'publicKey'">
-          <LinkWallet :address="addressFromPublicKey(data.row.publicKey)" />
+          <LinkWallet :address="data.row.address" />
         </div>
 
         <div v-else-if="data.column.field === 'seedNodes'">
