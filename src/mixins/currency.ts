@@ -6,7 +6,7 @@ const locale = store.getters["ui/locale"];
 export default {
   methods: {
     // Note: due to BigNumber config the max decimals is 8
-    readableCrypto(value: string | undefined, appendCurrency = true, decimals = 8): string | void {
+    readableCrypto(value: string | undefined, appendCurrency = true, decimals = 6): string | void {
       if (value) {
         const bigNumberValue = BigNumber.make(value);
         const normalizedValue: string = Number(bigNumberValue.dividedBy(1e8)).toLocaleString(locale, {
@@ -30,7 +30,7 @@ export default {
       let bigNumberValue = BigNumber.make(value);
 
       if (normalise) {
-        bigNumberValue = bigNumberValue.dividedBy(1e8);
+        bigNumberValue = bigNumberValue.dividedBy(1e6);
       }
 
       bigNumberValue = bigNumberValue.times(rate || BigNumber.make(store.getters["currency/rate"]));
@@ -55,7 +55,7 @@ export default {
     rawCurrency(value: number, currencyName: string): string {
       return [store.getters["network/token"], "BTC", "ETH", "LTC"].some((c) => currencyName.indexOf(c) > -1)
         ? value.toLocaleString(locale, {
-            maximumFractionDigits: 8,
+            maximumFractionDigits: 6,
           })
         : value.toLocaleString(locale, {
             minimumFractionDigits: 2,
