@@ -44,7 +44,7 @@ export default {
 
       return [store.getters["network/token"], "BTC", "ETH", "LTC"].some((c) => currencyName.indexOf(c) > -1)
         ? `${Number(bigNumberValue).toLocaleString(locale, {
-            maximumFractionDigits: 8,
+            maximumFractionDigits: 6,
           })} ${cryptos[currencyName]}`
         : Number(bigNumberValue).toLocaleString(locale, {
             style: "currency",
