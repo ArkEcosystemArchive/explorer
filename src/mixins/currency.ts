@@ -9,7 +9,7 @@ export default {
     readableCrypto(value: string | undefined, appendCurrency = true, decimals = 6): string | void {
       if (value) {
         const bigNumberValue = BigNumber.make(value);
-        const normalizedValue: string = Number(bigNumberValue.dividedBy(1e8)).toLocaleString(locale, {
+        const normalizedValue: string = Number(bigNumberValue.dividedBy(1000000)).toLocaleString(locale, {
           maximumFractionDigits: decimals,
         });
 
