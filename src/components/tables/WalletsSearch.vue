@@ -19,7 +19,7 @@
         </div>
 
         <div v-else-if="data.column.field === 'balance'">
-          <span>{{ readableCrypto(data.row.balance, true, truncateBalance ? 2 : 8) }}</span>
+          <span>{{ readableCrypto(data.row.balance, true, truncateBalance ? 2 : 6) }}</span>
         </div>
 
         <div v-else-if="data.column.field === 'supply'">{{ supplyPercentage(data.row.balance) }}</div>

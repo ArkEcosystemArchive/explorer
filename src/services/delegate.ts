@@ -56,7 +56,7 @@ class DelegateService {
       {
         vote: publicKey,
         balance: {
-          from: excludeLowBalances ? 1e7 : 0,
+          from: excludeLowBalances ? 1e6 : 0,
         },
       },
       1,
