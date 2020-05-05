@@ -1,7 +1,7 @@
 # Ark Explorer 3.0
 
 <p align="center">
-    <img src="/ARKExplorer.png" />
+    <img src="/InfinityExplorer.png" />
 </p>
 
 > Designed and developed from the ground-up, using lean & fast developmental frameworks (Tailwind CSS & Vue.JS).
