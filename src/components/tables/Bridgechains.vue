@@ -9,9 +9,10 @@
     >
       <template slot-scope="data">
         <div v-if="data.column.field === 'name'">
-          <span>
-            {{ data.row.name }}
-          </span>
+          <span>{{ data.row.name }}</span>
+          <span v-if="data.row.isResigned" class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1">{{
+            $t("PAGES.BRIDGECHAINS.RESIGNED")
+          }}</span>
         </div>
 
         <div v-else-if="data.column.field === 'publicKey'">

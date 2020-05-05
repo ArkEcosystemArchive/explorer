@@ -1,7 +1,7 @@
 # Ark Explorer 3.0
 
 <p align="center">
-    <img src="/ARKExplorer.png" />
+    <img src="/InfinityExplorer.png" />
 </p>
 
 > Designed and developed from the ground-up, using lean & fast developmental frameworks (Tailwind CSS & Vue.JS).
@@ -19,7 +19,7 @@ You can access it at [https://explorer.ark.io/](https://explorer.ark.io/).
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/ArkEcosystem/explorer
+git clone https://github.com/Plusid/explorer
 ```
 
 ### 2. Install Dependencies
@@ -129,4 +129,4 @@ This project exists thanks to all the people who [contribute](../../contributors
 
 ## License
 
-[MIT](LICENSE) © [ARK Ecosystem](https://ark.io)
+[MIT](LICENSE) © [Infinity](https://infinitysoftware.io)
