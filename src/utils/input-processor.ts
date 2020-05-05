@@ -40,7 +40,7 @@ export const inputProcessor = async (
 
   if (arktoshiValues.find((name) => inputName.includes(name))) {
     const valAsNum = Number(inputValue);
-    return { value: valAsNum > 0 ? Number(inputValue) * 1e6 : 0, ts };
+    return { value: valAsNum > 0 ? Number(inputValue) * 1e10 : 0, ts };
   }
 
   if (publicKeyValues.find((name) => inputName.includes(name))) {

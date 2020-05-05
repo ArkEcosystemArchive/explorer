@@ -32,7 +32,7 @@ describe("Mixins > Currency", () => {
   describe("rawCurrency", () => {
     it("should display selected cryptocurrency with 8 digits or less", () => {
       store.dispatch("network/setToken", "ARK");
-      expect(wrapper.vm.rawCurrency(10.1234567891234, "ARK")).toEqual(displayCrypto(10.12345679));
+      expect(wrapper.vm.rawCurrency(10.1234567891234, "ARK")).toEqual(displayCrypto(10.12345678));
       expect(wrapper.vm.rawCurrency(10.1234567891234, "ETH")).toEqual(displayCrypto(10.12345679));
       expect(wrapper.vm.rawCurrency(10.1234567891234, "BTC")).toEqual(displayCrypto(10.12345679));
       expect(wrapper.vm.rawCurrency(10.12345, "ARK")).toEqual(displayCrypto(10.12345));
