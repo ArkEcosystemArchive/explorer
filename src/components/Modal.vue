@@ -46,7 +46,7 @@ export default class Modal extends Vue {
   }
 
   private onEscKey(event: any) {
-    if (event.key === "Escape") {
+    if (event.keyCode === 27 || event.key === "Escape") {
       this.$emit("close");
     }
   }
