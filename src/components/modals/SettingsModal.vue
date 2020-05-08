@@ -1,8 +1,9 @@
 <template>
   <Modal @close="emitClose">
     <section class="SettingsModal__container">
-      <header>
-        <h2>{{ $t("SETTINGS.MODAL.TITLE") }}</h2>
+      <header class="SettingsModal__container__header">
+        <h2 class="text-3xl mb-4">{{ $t("SETTINGS.MODAL.TITLE") }}</h2>
+        <p class="semibold text-grey">{{ $t("SETTINGS.MODAL.DESCRIPTION") }}</p>
       </header>
     </section>
   </Modal>
