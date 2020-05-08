@@ -1,13 +1,26 @@
 <template>
-  <button class="px-2 py-4 hidden md:flex flex-none items-center border-b-2 mt-2px border-transparent hover:border-theme-accents hover:text-blue transition">
-    <SvgIcon name="filter" view-box="0 0 16 20" />
-  </button>
+  <div class="px-2 py-4 hidden md:flex flex-none items-center border-b-2 mt-2px border-transparent hover:border-theme-accents hover:text-blue transition">
+    <button @click="toggleModal">
+      <SvgIcon name="filter" view-box="0 0 16 20" />
+    </button>
+    <SettingsModal v-if="showModal" @close="toggleModal" />
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { SettingsModal } from "@/components/modals";
 
-@Component
+@Component({
+  components: {
+    SettingsModal,
+  },
+})
 export default class HeaderSettings extends Vue {
+  private showModal = false;
+
+  public toggleModal() {
+    this.showModal = !this.showModal;
+  }
 }
 </script>
