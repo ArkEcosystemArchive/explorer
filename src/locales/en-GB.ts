@@ -302,6 +302,13 @@ export default {
     TESTNET_LOCAL: "Testnet Local",
   },
 
+  SETTINGS: {
+    MODAL: {
+      TITLE: 'Explorer Settings',
+      DESCRIPTION: 'Customize your wallet to suit your needs'
+    }
+  },
+
   FOOTER: {
     ALL_RIGHTS_RESERVED: "All rights reserved",
     VERSION: "Version",
