@@ -39,6 +39,9 @@
 
       <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4 hidden md:block" />
       <ToggleLanguage />
+
+      <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4" />
+      <HeaderSettings />
     </div>
   </div>
 </template>
@@ -46,8 +49,9 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { mapGetters } from "vuex";
-import { ToggleChart, ToggleCurrency, ToggleLanguage, ToggleTheme } from "@/components/header/toggles";
 import { LocaleMessage } from "vue-i18n";
+import { ToggleChart, ToggleCurrency, ToggleLanguage, ToggleTheme } from "@/components/header/toggles";
+import HeaderSettings from "@/components/header/HeaderSettings.vue";
 
 @Component({
   components: {
@@ -55,6 +59,7 @@ import { LocaleMessage } from "vue-i18n";
     ToggleCurrency,
     ToggleLanguage,
     ToggleChart,
+    HeaderSettings,
   },
   computed: {
     ...mapGetters("network", { networkDefaults: "defaults" }),
