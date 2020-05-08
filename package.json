@@ -78,7 +78,7 @@
     "cross-env": "^7.0.0",
     "es6-promise": "^4.2.8",
     "es6-promise-promise": "^1.0.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-jest": "^23.6.0",
     "eslint-plugin-prettier": "^3.1.2",
