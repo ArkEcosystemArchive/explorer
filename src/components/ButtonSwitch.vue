@@ -21,15 +21,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Model, Prop, Vue, Watch } from 'vue-property-decorator'
+import { Component, Model, Prop, Vue, Watch } from "vue-property-decorator";
 
 @Component({
   data: (vm: ButtonSwitch) => ({
-    inputIsActive: vm.isActive
-  })
+    inputIsActive: vm.isActive,
+  }),
 })
 export default class ButtonSwitch extends Vue {
-  @Model('change', { default: false }) public isActive!: boolean;
+  @Model("change", { default: false }) public isActive!: boolean;
   @Prop({ default: false }) public isDisabled!: boolean;
   private inputIsActive = false;
 
@@ -39,10 +39,10 @@ export default class ButtonSwitch extends Vue {
 
   set model(value: boolean) {
     this.inputIsActive = value;
-    this.$emit('change', value);
+    this.$emit("change", value);
   }
 
-  @Watch('isActive')
+  @Watch("isActive")
   public onIsActiveChanged(isActive: boolean) {
     this.inputIsActive = isActive;
   }
