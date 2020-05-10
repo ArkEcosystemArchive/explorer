@@ -4,19 +4,12 @@
   >
     <div class="flex justify-between">
       <div class="flex flex-col max-w-xs mr-10">
-        <span
-          :class="itemLabelClass"
-          class="ListDividedItem__label"
-        >
-          {{ label }}
-        </span>
+        <span :class="itemLabelClass" class="ListDividedItem__label">{{ label }}</span>
         <span
           v-if="labelDescription"
           :class="itemLabelDescriptionClass"
           class="ListDividedItem__labelDescription hidden md:block"
-        >
-          {{ labelDescription }}
-        </span>
+        >{{ labelDescription }}</span>
       </div>
       <div :class="itemValueClass" class="ListDividedItem__value">
         <slot />

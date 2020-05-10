@@ -29,6 +29,7 @@
   --theme-button-text: #037cff;
   --theme-button-close: #a0a6c8;
   --language-icon: #395174;
+  --settings-icon: #395174;
   --theme-resigned-label: #c53a4a;
   --theme-input-field-border: #abbbca;
   --theme-input-field-border-focus: #000000;
@@ -74,6 +75,7 @@
   --theme-button-text: #fff;
   --theme-button-close: #787a86;
   --language-icon: #a1a2a6;
+  --settings-icon: #a1a2a6;
   --theme-resigned-label: #c53a4a;
   --theme-input-field-border: #3d4852;
   --theme-input-field-border-focus: #3d4852;
