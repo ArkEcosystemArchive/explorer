@@ -78,7 +78,7 @@
     "cross-env": "^7.0.0",
     "es6-promise": "^4.2.8",
     "es6-promise-promise": "^1.0.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-jest": "^23.6.0",
     "eslint-plugin-prettier": "^3.1.2",
@@ -99,7 +99,7 @@
     "ts-jest": "^25.0.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.7.3",
-    "vue-cli-plugin-i18n": "^0.6.0",
+    "vue-cli-plugin-i18n": "^1.0.0",
     "vue-cli-plugin-svg-sprite": "^1.0.0",
     "vue-good-table": "^2.18.1",
     "vue-template-compiler": "^2.6.10"
