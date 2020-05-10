@@ -8,10 +8,16 @@
         </header>
 
         <ListDivided>
-          <ListDividedItem :label="$t('MODAL_SETTINGS.CURRENCY.LABEL')" :label-description="$t('MODAL_SETTINGS.CURRENCY.DESCRIPTION')">
+          <ListDividedItem
+            :label="$t('MODAL_SETTINGS.CURRENCY.LABEL')"
+            :label-description="$t('MODAL_SETTINGS.CURRENCY.DESCRIPTION')"
+          >
             <button>ARK/USD</button>
           </ListDividedItem>
-          <ListDividedItem :label="$t('MODAL_SETTINGS.SMARTBRIDGE_SETTING.LABEL')" :label-description="$t('MODAL_SETTINGS.SMARTBRIDGE_SETTING.DESCRIPTION')">
+          <ListDividedItem
+            :label="$t('MODAL_SETTINGS.SMARTBRIDGE_SETTING.LABEL')"
+            :label-description="$t('MODAL_SETTINGS.SMARTBRIDGE_SETTING.DESCRIPTION')"
+          >
             <button>ARK/USD</button>
           </ListDividedItem>
         </ListDivided>

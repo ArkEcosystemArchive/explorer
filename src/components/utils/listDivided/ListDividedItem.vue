@@ -1,7 +1,5 @@
 <template>
-  <li
-    class="ListDividedItem flex flex-col py-4 w-full border-b border-dashed border-theme-line-separator"
-  >
+  <li class="ListDividedItem flex flex-col py-4 w-full border-b border-dashed border-theme-line-separator">
     <div class="flex justify-between">
       <div class="ListDividedItem__container__label flex flex-col">
         <span :class="itemLabelClass" class="ListDividedItem__label">{{ label }}</span>
@@ -9,7 +7,8 @@
           v-if="labelDescription"
           :class="itemLabelDescriptionClass"
           class="ListDividedItem__label__description hidden md:block"
-        >{{ labelDescription }}</span>
+          >{{ labelDescription }}</span
+        >
       </div>
       <div :class="itemValueClass" class="ListDividedItem__value">
         <slot />

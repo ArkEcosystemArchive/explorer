@@ -1,7 +1,7 @@
 <template>
   <button
     :class="{
-      'ButtonSwitch--active': inputIsActive
+      'ButtonSwitch--active': inputIsActive,
     }"
     :disabled="isDisabled"
     class="ButtonSwitch"
@@ -12,7 +12,7 @@
       <span
         :class="{
           'bg-theme-option-button-text': !inputIsActive,
-          'bg-blue': inputIsActive
+          'bg-blue': inputIsActive,
         }"
         class="ButtonSwitch__circle transition"
       />
