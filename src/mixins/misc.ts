@@ -8,10 +8,7 @@ const locale = store.getters["ui/locale"];
 export default {
   methods: {
     readableTimestamp(value: number): string {
-      return moment
-        .unix(value)
-        .local()
-        .format("L LTS");
+      return moment.unix(value).local().format("L LTS");
     },
 
     readableTimestampAgo(time: number, compareTime: number | undefined): string {

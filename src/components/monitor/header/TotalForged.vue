@@ -28,9 +28,7 @@ export default class TotalForged extends Vue {
       return 0;
     }
 
-    return BigNumber.make(this.supply)
-      .minus(this.initialSupply)
-      .toString();
+    return BigNumber.make(this.supply).minus(this.initialSupply).toString();
   }
 }
 </script>

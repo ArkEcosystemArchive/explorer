@@ -227,12 +227,7 @@ export default class App extends Vue {
   }
 
   public updateRequired(timestamp: number): boolean {
-    return (
-      timestamp <
-      moment()
-        .subtract(2, "minute")
-        .unix()
-    );
+    return timestamp < moment().subtract(2, "minute").unix();
   }
 
   public updateI18n() {
