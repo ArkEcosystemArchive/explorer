@@ -71,6 +71,7 @@ module.exports = {
       "theme-input-field-border": "var(--theme-input-field-border)",
       "theme-input-field-border-focus": "var(--theme-input-field-border-focus)",
       "theme-input-field-border-hover": "var(--theme-input-field-border-hover)",
+      "theme-line-separator": "var(--theme-line-separator)",
 
       "theme-text-thead": "var(--color-theme-text-thead)",
 

@@ -33,6 +33,7 @@
   --theme-input-field-border: #abbbca;
   --theme-input-field-border-focus: #000000;
   --theme-input-field-border-hover: #037cff;
+  --theme-line-separator: #dae1e7;
 }
 
 .theme-light footer a {
@@ -77,6 +78,7 @@
   --theme-input-field-border: #3d4852;
   --theme-input-field-border-focus: #3d4852;
   --theme-input-field-border-hover: #037cff;
+  --theme-line-separator: #585c6f;
 }
 
 .theme-dark footer a {
