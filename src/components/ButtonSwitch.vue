@@ -31,7 +31,7 @@ import { Component, Model, Prop, Vue, Watch } from "vue-property-decorator";
 export default class ButtonSwitch extends Vue {
   @Model("change", { default: false }) public isActive!: boolean;
   @Prop({ default: false }) public isDisabled!: boolean;
-  private inputIsActive = false;
+  private inputIsActive: boolean;
 
   get model() {
     return this.inputIsActive;

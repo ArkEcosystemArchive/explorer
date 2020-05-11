@@ -24,7 +24,10 @@
             :label="$t('MODAL_SETTINGS.CHART.LABEL')"
             :label-description="$t('MODAL_SETTINGS.CHART.DESCRIPTION')"
           >
-            <ButtonSwitch />
+            <ButtonSwitch
+              :is-active="isChartEnabled"
+              @change="toggleChart"
+            />
           </ListDividedItem>
           <ListDividedItem
             :label="$t('MODAL_SETTINGS.TRANSLATIONS.LABEL')"
@@ -36,10 +39,10 @@
       </div>
 
       <div class="SettingsModal__footer flex flex-row mt-5">
-        <button class="pager-button mr-3">
+        <button class="pager-button mr-3" @click="emitClose">
           {{ $t("COMMON.CANCEL") }}
         </button>
-        <button class="action-button py-4 px-8">
+        <button class="action-button py-4 px-8" @click="save">
           {{ $t("COMMON.SAVE") }}
         </button>
       </div>
@@ -58,6 +61,22 @@ import { ListDivided, ListDividedItem } from "@/components/utils/listDivided";
   },
 })
 export default class SettingsModal extends Vue {
+  private chartMode: boolean;
+
+  get isChartEnabled(): boolean {
+    this.chartMode = this.$store.getters["ui/priceChartOptions"].enabled;
+    return this.chartMode;
+  }
+
+  private toggleChart(enabled: boolean) {
+    this.chartMode = enabled;
+  }
+
+  private save() {
+    this.$store.dispatch("ui/setPriceChartOption", { option: "enabled", value: this.chartMode });
+    this.emitClose();
+  }
+
   public emitClose() {
     this.$emit("close");
   }
