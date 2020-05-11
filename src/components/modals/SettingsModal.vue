@@ -24,10 +24,7 @@
             :label="$t('MODAL_SETTINGS.CHART.LABEL')"
             :label-description="$t('MODAL_SETTINGS.CHART.DESCRIPTION')"
           >
-            <ButtonSwitch
-              :is-active="isChartEnabled"
-              @change="toggleChart"
-            />
+            <ButtonSwitch :is-active="isChartEnabled" @change="toggleChart" />
           </ListDividedItem>
           <ListDividedItem
             :label="$t('MODAL_SETTINGS.TRANSLATIONS.LABEL')"
