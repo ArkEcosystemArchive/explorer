@@ -67,6 +67,8 @@ module.exports = {
       "theme-action-button": "var(--theme-action-button)",
       "theme-action-button-text": "var(--theme-action-button-text)",
       "theme-action-button-text-hover": "var(--theme-action-button-text-hover)",
+      "theme-switch-button": "var(--theme-switch-button)",
+      "theme-switch-button-circle": "var(--theme-switch-button-circle)",
       "language-icon": "var(--language-icon)",
       "settings-icon": "var(--settings-icon)",
       "theme-accents": "var(--color-theme-accents)",

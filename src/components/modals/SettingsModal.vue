@@ -15,8 +15,20 @@
             <button>ARK/USD</button>
           </ListDividedItem>
           <ListDividedItem
-            :label="$t('MODAL_SETTINGS.SMARTBRIDGE_SETTING.LABEL')"
-            :label-description="$t('MODAL_SETTINGS.SMARTBRIDGE_SETTING.DESCRIPTION')"
+            :label="$t('MODAL_SETTINGS.DARK_THEME.LABEL')"
+            :label-description="$t('MODAL_SETTINGS.DARK_THEME.DESCRIPTION')"
+          >
+            <ButtonSwitch />
+          </ListDividedItem>
+          <ListDividedItem
+            :label="$t('MODAL_SETTINGS.CHART.LABEL')"
+            :label-description="$t('MODAL_SETTINGS.CHART.DESCRIPTION')"
+          >
+            <ButtonSwitch />
+          </ListDividedItem>
+          <ListDividedItem
+            :label="$t('MODAL_SETTINGS.TRANSLATIONS.LABEL')"
+            :label-description="$t('MODAL_SETTINGS.TRANSLATIONS.DESCRIPTION')"
           >
             <button>ARK/USD</button>
           </ListDividedItem>

@@ -310,10 +310,6 @@ export default {
       LABEL: "Currency",
       DESCRIPTION: "Choose which currency you want to equate the price of the ARK token with.",
     },
-    SMARTBRIDGE_SETTING: {
-      LABEL: "Smartbridge Setting",
-      DESCRIPTION: "Select the smartbridge display type.",
-    },
     DARK_THEME: {
       LABEL: "Dark Theme",
       DESCRIPTION: "Want to set the wallet to dark theme?",

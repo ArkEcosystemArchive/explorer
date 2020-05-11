@@ -11,7 +11,7 @@
     <span class="ButtonSwitch__line">
       <span
         :class="{
-          'bg-theme-option-button-text': !inputIsActive,
+          'bg-theme-switch-button-circle': !inputIsActive,
           'bg-blue': inputIsActive,
         }"
         class="ButtonSwitch__circle transition"
@@ -59,8 +59,7 @@ export default class ButtonSwitch extends Vue {
 
 <style scoped>
 .ButtonSwitch {
-  @apply .flex .items-center .justify-between .px-6 .py-4 .rounded .appearance-none .border .border-theme-button .cursor-pointer .bg-transparent;
-  min-width: 10rem;
+  @apply .flex .appearance-none .cursor-pointer;
 }
 .ButtonSwitch .ButtonSwitch__line {
   @apply .relative .w-8 .h-1 .rounded-full .relative .bg-theme-switch-button;

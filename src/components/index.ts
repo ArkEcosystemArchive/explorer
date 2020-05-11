@@ -41,6 +41,7 @@ Vue.component("TableDelegatesMobile", require("@/components/tables/mobile/Delega
 
 // Misc.
 Vue.component("ArkMeter", require("@/components/monitor/ArkMeter").default);
+Vue.component("ButtonSwitch", require("@/components/ButtonSwitch").default);
 Vue.component("ContentHeader", require("@/components/ContentHeader").default);
 Vue.component("DisclaimerModal", require("@/components/DisclaimerModal").default);
 Vue.component("Modal", require("@/components/Modal").default);
