@@ -28,6 +28,9 @@
   --theme-button-active: #c5dbed;
   --theme-button-text: #037cff;
   --theme-button-close: #a0a6c8;
+  --theme-action-button: #eff0f6;
+  --theme-action-button-text: #8d93ad;
+  --theme-action-button-text-hover: #789fba;
   --language-icon: #395174;
   --settings-icon: #395174;
   --theme-resigned-label: #c53a4a;
@@ -74,6 +77,9 @@
   --theme-button-active: #42434c;
   --theme-button-text: #fff;
   --theme-button-close: #787a86;
+  --theme-action-button: #333644;
+  --theme-action-button-text: #4c5166;
+  --theme-action-button-text-hover: #7983af;
   --language-icon: #a1a2a6;
   --settings-icon: #a1a2a6;
   --theme-resigned-label: #c53a4a;

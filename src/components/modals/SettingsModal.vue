@@ -1,12 +1,12 @@
 <template>
   <Modal @close="emitClose">
     <div class="SettingsModal">
-      <section class="SettingsModal__container">
-        <header class="SettingsModal__container__header">
-          <h2 class="text-3xl mb-4">{{ $t("MODAL_SETTINGS.TITLE") }}</h2>
-          <p class="semibold text-grey">{{ $t("MODAL_SETTINGS.DESCRIPTION") }}</p>
-        </header>
+      <div class="SettingsModal__header">
+        <h2 class="text-3xl mb-4">{{ $t("MODAL_SETTINGS.TITLE") }}</h2>
+        <p class="semibold text-grey mb-6">{{ $t("MODAL_SETTINGS.DESCRIPTION") }}</p>
+      </div>
 
+      <div class="SettingsModal__content">
         <ListDivided>
           <ListDividedItem
             :label="$t('MODAL_SETTINGS.CURRENCY.LABEL')"
@@ -21,7 +21,16 @@
             <button>ARK/USD</button>
           </ListDividedItem>
         </ListDivided>
-      </section>
+      </div>
+
+      <div class="SettingsModal__footer flex flex-row mt-5">
+        <button class="pager-button mr-3">
+          {{ $t('COMMON.CANCEL') }}
+        </button>
+        <button class="action-button py-4 px-8">
+          {{ $t('COMMON.SAVE') }}
+        </button>
+      </div>
     </div>
   </Modal>
 </template>

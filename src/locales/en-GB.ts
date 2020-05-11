@@ -24,6 +24,7 @@ export default {
     WALLET: "Wallet",
     ACCEPT: "Accept",
     CANCEL: "Cancel",
+    SAVE: "Save",
   },
 
   DISCLAIMER: {
@@ -323,14 +324,8 @@ export default {
     },
     TRANSLATIONS: {
       LABEL: "Translations",
-      DESCRIPTION: "The default language is English, but you can select another using JSON.",
+      DESCRIPTION: "The default language is English, but you can select another.",
     },
-    DISCLAIMER: {
-      TITLE: "Disclaimer",
-      TEXT:
-        "I agree by choosing to display the vendorfield, you accept that text from third parties outside of ARK.io's control may post text that cannot be censored, removed, or manipulated. ARK.io assumes no responsibility for the content and/or nature of the text displayed and the harm and/or liability that may arise over accessing such text.",
-    },
-    I_AGREE: "I agree",
   },
 
   FOOTER: {
