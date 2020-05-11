@@ -25,10 +25,10 @@
 
       <div class="SettingsModal__footer flex flex-row mt-5">
         <button class="pager-button mr-3">
-          {{ $t('COMMON.CANCEL') }}
+          {{ $t("COMMON.CANCEL") }}
         </button>
         <button class="action-button py-4 px-8">
-          {{ $t('COMMON.SAVE') }}
+          {{ $t("COMMON.SAVE") }}
         </button>
       </div>
     </div>
