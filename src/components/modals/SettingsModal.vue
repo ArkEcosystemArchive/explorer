@@ -111,10 +111,10 @@ export default class SettingsModal extends Vue {
   private onSelectChange(event: any) {
     const { name, value } = event.target;
 
-    if (name === 'currency') {
+    if (name === "currency") {
       this.currencyName = value;
       this.currencySymbol = this.currencies[value];
-    } else if (name === 'language') {
+    } else if (name === "language") {
       this.language = value;
     }
   }
