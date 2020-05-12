@@ -18,7 +18,7 @@
             :label="$t('MODAL_SETTINGS.DARK_THEME.LABEL')"
             :label-description="$t('MODAL_SETTINGS.DARK_THEME.DESCRIPTION')"
           >
-            <ButtonSwitch />
+            <ButtonSwitch :is-active="isNightEnabled" @change="toggleTheme" />
           </ListDividedItem>
           <ListDividedItem
             :label="$t('MODAL_SETTINGS.CHART.LABEL')"
@@ -58,11 +58,21 @@ import { ListDivided, ListDividedItem } from "@/components/utils/listDivided";
   },
 })
 export default class SettingsModal extends Vue {
+  private nightMode: boolean;
   private chartMode: boolean;
+
+  get isNightEnabled(): boolean {
+    this.nightMode = this.$store.getters["ui/nightMode"];
+    return this.nightMode;
+  }
 
   get isChartEnabled(): boolean {
     this.chartMode = this.$store.getters["ui/priceChartOptions"].enabled;
     return this.chartMode;
+  }
+
+  private toggleTheme(enabled: boolean) {
+    this.nightMode = enabled;
   }
 
   private toggleChart(enabled: boolean) {
@@ -70,6 +80,7 @@ export default class SettingsModal extends Vue {
   }
 
   private save() {
+    this.$store.dispatch("ui/setNightMode", this.nightMode);
     this.$store.dispatch("ui/setPriceChartOption", { option: "enabled", value: this.chartMode });
     this.emitClose();
   }
