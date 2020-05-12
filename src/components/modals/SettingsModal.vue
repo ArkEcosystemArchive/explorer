@@ -17,7 +17,7 @@
               :value="currencyName"
               name="currency"
               class="SettingsModal__inputSelect"
-              @input="onChangeCurrency"
+              @input="onSelectChange"
             />
           </ListDividedItem>
           <ListDividedItem
@@ -39,9 +39,9 @@
             <InputSelect
               :select-options="selectLanguages"
               :value="language"
-              name="currency"
+              name="language"
               class="SettingsModal__inputSelect"
-              @input="onChangeLanguage"
+              @input="onSelectChange"
             />
           </ListDividedItem>
         </ListDivided>
@@ -108,28 +108,21 @@ export default class SettingsModal extends Vue {
     this.language = this.$store.getters["ui/language"];
   }
 
-  private onChangeCurrency(event: any) {
-    const { value } = event.target;
-    this.currencyName = value;
-    this.currencySymbol = this.currencies[value];
+  private onSelectChange(event: any) {
+    const { name, value } = event.target;
+
+    if (name === 'currency') {
+      this.currencyName = value;
+      this.currencySymbol = this.currencies[value];
+    } else if (name === 'language') {
+      this.language = value;
+    }
   }
 
   private storeCurrency(currency: string, rate: number, symbol: string) {
     this.$store.dispatch("currency/setName", currency);
     this.$store.dispatch("currency/setRate", rate);
     this.$store.dispatch("currency/setSymbol", symbol);
-  }
-
-  private toggleTheme(enabled: boolean) {
-    this.nightMode = enabled;
-  }
-
-  private toggleChart(enabled: boolean) {
-    this.chartMode = enabled;
-  }
-
-  private onChangeLanguage(event: any) {
-    this.language = event.target.value;
   }
 
   private setLanguage(language: string) {
@@ -140,12 +133,32 @@ export default class SettingsModal extends Vue {
     moment.locale(language);
   }
 
+  private toggleTheme(enabled: boolean) {
+    this.nightMode = enabled;
+  }
+
+  private toggleChart(enabled: boolean) {
+    this.chartMode = enabled;
+  }
+
   private async save() {
-    const rate = await CryptoCompareService.price(this.currencyName);
-    this.storeCurrency(this.currencyName, rate!, this.currencySymbol);
-    this.$store.dispatch("ui/setNightMode", this.nightMode);
-    this.$store.dispatch("ui/setPriceChartOption", { option: "enabled", value: this.chartMode });
-    this.setLanguage(this.language);
+    if (this.currencyName !== this.$store.getters["currency/name"]) {
+      const rate = await CryptoCompareService.price(this.currencyName);
+      this.storeCurrency(this.currencyName, rate!, this.currencySymbol);
+    }
+
+    if (this.nightMode !== this.$store.getters["ui/nightMode"]) {
+      this.$store.dispatch("ui/setNightMode", this.nightMode);
+    }
+
+    if (this.chartMode !== this.$store.getters["ui/priceChartOptions"].enabled) {
+      this.$store.dispatch("ui/setPriceChartOption", { option: "enabled", value: this.chartMode });
+    }
+
+    if (this.language !== this.$store.getters["ui/language"]) {
+      this.setLanguage(this.language);
+    }
+
     this.emitClose();
   }
 
