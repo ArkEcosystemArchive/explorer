@@ -147,7 +147,7 @@ export default class WalletBlocks extends Vue {
         params: {
           address: this.address,
           username: this.username,
-          page: this.currentPage,
+          page: this.currentPage.toString(),
         },
       });
     }

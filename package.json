@@ -43,7 +43,7 @@
     "ripemd160": "^2.0.2",
     "secp256k1": "^4.0.1",
     "simple-sha256": "^1.0.0",
-    "v-tooltip": "^2.0.3",
+    "v-tooltip": "2.0.2",
     "vue": "^2.6.11",
     "vue-chartjs": "^3.5.0",
     "vue-class-component": "^7.2.3",
