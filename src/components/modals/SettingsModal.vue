@@ -13,10 +13,10 @@
             :label-description="$t('MODAL_SETTINGS.CURRENCY.DESCRIPTION')"
           >
             <InputSelect
-              :select-options="selectOptions"
+              :select-options="selectCurrencies"
               :value="currencyName"
               name="currency"
-              class="SettingsModal__input__currency"
+              class="SettingsModal__inputSelect"
               @input="onChangeCurrency"
             />
           </ListDividedItem>
@@ -36,7 +36,13 @@
             :label="$t('MODAL_SETTINGS.TRANSLATIONS.LABEL')"
             :label-description="$t('MODAL_SETTINGS.TRANSLATIONS.DESCRIPTION')"
           >
-            <button>ARK/USD</button>
+            <InputSelect
+              :select-options="selectLanguages"
+              :value="language"
+              name="currency"
+              class="SettingsModal__inputSelect"
+              @input="onChangeLanguage"
+            />
           </ListDividedItem>
         </ListDivided>
       </div>
@@ -56,6 +62,8 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { mapGetters } from "vuex";
+import moment from "moment";
+import { I18N } from "@/config";
 import CryptoCompareService from "@/services/crypto-compare";
 import { ListDivided, ListDividedItem } from "@/components/utils/listDivided";
 import { InputSelect } from "@/components/search/input";
@@ -76,11 +84,19 @@ export default class SettingsModal extends Vue {
   private currencies: string[];
   private nightMode: boolean;
   private chartMode: boolean;
+  private language: string;
 
-  get selectOptions() {
-    return Object.keys(this.currencies).map((currency) => ({
+  get selectCurrencies() {
+    return Object.keys(this.currencies).map((currency: string) => ({
       value: currency,
       display: currency,
+    }));
+  }
+
+  get selectLanguages() {
+    return I18N.enabledLocales.map((language: string) => ({
+      value: language,
+      display: language,
     }));
   }
 
@@ -89,6 +105,7 @@ export default class SettingsModal extends Vue {
     this.currencySymbol = this.$store.getters["currency/symbol"];
     this.nightMode = this.$store.getters["ui/nightMode"];
     this.chartMode = this.$store.getters["ui/priceChartOptions"].enabled;
+    this.language = this.$store.getters["ui/language"];
   }
 
   private onChangeCurrency(event: any) {
@@ -111,11 +128,24 @@ export default class SettingsModal extends Vue {
     this.chartMode = enabled;
   }
 
+  private onChangeLanguage(event: any) {
+    this.language = event.target.value;
+  }
+
+  private setLanguage(language: string) {
+    this.$store.dispatch("ui/setLanguage", language);
+    this.$i18n.locale = language;
+
+    this.$store.dispatch("ui/setLocale", language);
+    moment.locale(language);
+  }
+
   private async save() {
     const rate = await CryptoCompareService.price(this.currencyName);
     this.storeCurrency(this.currencyName, rate!, this.currencySymbol);
     this.$store.dispatch("ui/setNightMode", this.nightMode);
     this.$store.dispatch("ui/setPriceChartOption", { option: "enabled", value: this.chartMode });
+    this.setLanguage(this.language);
     this.emitClose();
   }
 
@@ -133,10 +163,10 @@ export default class SettingsModal extends Vue {
   @apply .max-w-xs;
 }
 
-.SettingsModal .SettingsModal__input__currency .InputField__wrapper {
+.SettingsModal .SettingsModal__inputSelect .InputField__wrapper {
   @apply .h-full .mb-0;
 }
-.SettingsModal .SettingsModal__input__currency .InputField__input {
+.SettingsModal .SettingsModal__inputSelect .InputField__input {
   @apply .border-none .pt-0 .h-full;
 }
 </style>
