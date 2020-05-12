@@ -6,10 +6,7 @@
         <p class="semibold text-grey mb-6">{{ $t("MODAL_SETTINGS.DESCRIPTION") }}</p>
       </div>
 
-      <div
-        v-if="isLoading"
-        class="absolute inset-0 flex flex-col items-center justify-center z-10"
-      >
+      <div v-if="isLoading" class="absolute inset-0 flex flex-col items-center justify-center z-10">
         <Loader :data="null" />
       </div>
 
