@@ -24,13 +24,13 @@
             :label="$t('MODAL_SETTINGS.DARK_THEME.LABEL')"
             :label-description="$t('MODAL_SETTINGS.DARK_THEME.DESCRIPTION')"
           >
-            <ButtonSwitch :is-active="nightMode" @change="toggleTheme" />
+            <ButtonSwitch :is-active="nightMode" class="mt-2" @change="toggleTheme" />
           </ListDividedItem>
           <ListDividedItem
             :label="$t('MODAL_SETTINGS.CHART.LABEL')"
             :label-description="$t('MODAL_SETTINGS.CHART.DESCRIPTION')"
           >
-            <ButtonSwitch :is-active="chartMode" @change="toggleChart" />
+            <ButtonSwitch :is-active="chartMode" class="mt-2" @change="toggleChart" />
           </ListDividedItem>
           <ListDividedItem
             :label="$t('MODAL_SETTINGS.TRANSLATIONS.LABEL')"
@@ -47,7 +47,7 @@
         </ListDivided>
       </div>
 
-      <div class="SettingsModal__footer flex flex-row mt-5">
+      <div class="SettingsModal__footer flex flex-row justify-center md:justify-start mt-5">
         <button class="pager-button mr-3" @click="emitClose">
           {{ $t("COMMON.CANCEL") }}
         </button>
