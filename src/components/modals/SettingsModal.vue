@@ -12,19 +12,25 @@
             :label="$t('MODAL_SETTINGS.CURRENCY.LABEL')"
             :label-description="$t('MODAL_SETTINGS.CURRENCY.DESCRIPTION')"
           >
-            <button>ARK/USD</button>
+            <InputSelect
+              :select-options="selectOptions"
+              :value="currencyName"
+              name="currency"
+              class="SettingsModal__input__currency"
+              @input="onChangeCurrency"
+            />
           </ListDividedItem>
           <ListDividedItem
             :label="$t('MODAL_SETTINGS.DARK_THEME.LABEL')"
             :label-description="$t('MODAL_SETTINGS.DARK_THEME.DESCRIPTION')"
           >
-            <ButtonSwitch :is-active="isNightEnabled" @change="toggleTheme" />
+            <ButtonSwitch :is-active="nightMode" @change="toggleTheme" />
           </ListDividedItem>
           <ListDividedItem
             :label="$t('MODAL_SETTINGS.CHART.LABEL')"
             :label-description="$t('MODAL_SETTINGS.CHART.DESCRIPTION')"
           >
-            <ButtonSwitch :is-active="isChartEnabled" @change="toggleChart" />
+            <ButtonSwitch :is-active="chartMode" @change="toggleChart" />
           </ListDividedItem>
           <ListDividedItem
             :label="$t('MODAL_SETTINGS.TRANSLATIONS.LABEL')"
@@ -49,26 +55,52 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import CryptoCompareService from "@/services/crypto-compare";
 import { ListDivided, ListDividedItem } from "@/components/utils/listDivided";
+import { InputSelect } from "@/components/search/input";
 
 @Component({
   components: {
+    InputSelect,
     ListDivided,
     ListDividedItem,
   },
+  computed: {
+    ...mapGetters("network", ["currencies"]),
+  },
 })
 export default class SettingsModal extends Vue {
+  private currencyName: string;
+  private currencySymbol: string;
+  private currencies: string[];
   private nightMode: boolean;
   private chartMode: boolean;
 
-  get isNightEnabled(): boolean {
-    this.nightMode = this.$store.getters["ui/nightMode"];
-    return this.nightMode;
+  get selectOptions() {
+    return Object.keys(this.currencies).map((currency) => ({
+      value: currency,
+      display: currency,
+    }));
   }
 
-  get isChartEnabled(): boolean {
+  public created() {
+    this.currencyName = this.$store.getters["currency/name"];
+    this.currencySymbol = this.$store.getters["currency/symbol"];
+    this.nightMode = this.$store.getters["ui/nightMode"];
     this.chartMode = this.$store.getters["ui/priceChartOptions"].enabled;
-    return this.chartMode;
+  }
+
+  private onChangeCurrency(event: any) {
+    const { value } = event.target;
+    this.currencyName = value;
+    this.currencySymbol = this.currencies[value];
+  }
+
+  private storeCurrency(currency: string, rate: number, symbol: string) {
+    this.$store.dispatch("currency/setName", currency);
+    this.$store.dispatch("currency/setRate", rate);
+    this.$store.dispatch("currency/setSymbol", symbol);
   }
 
   private toggleTheme(enabled: boolean) {
@@ -79,7 +111,9 @@ export default class SettingsModal extends Vue {
     this.chartMode = enabled;
   }
 
-  private save() {
+  private async save() {
+    const rate = await CryptoCompareService.price(this.currencyName);
+    this.storeCurrency(this.currencyName, rate!, this.currencySymbol);
     this.$store.dispatch("ui/setNightMode", this.nightMode);
     this.$store.dispatch("ui/setPriceChartOption", { option: "enabled", value: this.chartMode });
     this.emitClose();
@@ -97,5 +131,12 @@ export default class SettingsModal extends Vue {
 }
 .SettingsModal .ListDividedItem__label__description {
   @apply .max-w-xs;
+}
+
+.SettingsModal .SettingsModal__input__currency .InputField__wrapper {
+  @apply .h-full .mb-0;
+}
+.SettingsModal .SettingsModal__input__currency .InputField__input {
+  @apply .border-none .pt-0 .h-full;
 }
 </style>
