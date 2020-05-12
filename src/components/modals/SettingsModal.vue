@@ -6,6 +6,13 @@
         <p class="semibold text-grey mb-6">{{ $t("MODAL_SETTINGS.DESCRIPTION") }}</p>
       </div>
 
+      <div
+        v-if="isLoading"
+        class="absolute inset-0 flex flex-col items-center justify-center z-10"
+      >
+        <Loader :data="null" />
+      </div>
+
       <div class="SettingsModal__content">
         <ListDivided>
           <ListDividedItem
@@ -48,10 +55,10 @@
       </div>
 
       <div class="SettingsModal__footer flex flex-row justify-center md:justify-start mt-5">
-        <button class="pager-button mr-3" @click="emitClose">
+        <button :disabled="isLoading" class="pager-button mr-3" @click="emitClose">
           {{ $t("COMMON.CANCEL") }}
         </button>
-        <button class="action-button py-4 px-8" @click="save">
+        <button :disabled="isLoading" class="action-button py-4 px-8" @click="save">
           {{ $t("COMMON.SAVE") }}
         </button>
       </div>
@@ -79,9 +86,10 @@ import { InputSelect } from "@/components/search/input";
   },
 })
 export default class SettingsModal extends Vue {
+  private isLoading = false;
+  private currencies: string[];
   private currencyName: string;
   private currencySymbol: string;
-  private currencies: string[];
   private nightMode: boolean;
   private chartMode: boolean;
   private language: string;
@@ -142,6 +150,8 @@ export default class SettingsModal extends Vue {
   }
 
   private async save() {
+    this.isLoading = true;
+
     if (this.currencyName !== this.$store.getters["currency/name"]) {
       const rate = await CryptoCompareService.price(this.currencyName);
       this.storeCurrency(this.currencyName, rate!, this.currencySymbol);
