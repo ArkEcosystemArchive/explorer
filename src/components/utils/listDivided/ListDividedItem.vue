@@ -3,12 +3,9 @@
     <div class="flex justify-between">
       <div class="ListDividedItem__container__label flex flex-col">
         <span :class="itemLabelClass" class="ListDividedItem__label">{{ label }}</span>
-        <span
-          v-if="labelDescription"
-          :class="itemLabelDescriptionClass"
-          class="ListDividedItem__label__description"
-          >{{ labelDescription }}</span
-        >
+        <span v-if="labelDescription" :class="itemLabelDescriptionClass" class="ListDividedItem__label__description">{{
+          labelDescription
+        }}</span>
       </div>
       <div :class="itemValueClass" class="ListDividedItem__value">
         <slot />
