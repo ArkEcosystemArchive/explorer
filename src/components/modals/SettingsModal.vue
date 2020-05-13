@@ -70,11 +70,9 @@ import moment from "moment";
 import { I18N } from "@/config";
 import CryptoCompareService from "@/services/crypto-compare";
 import { ListDivided, ListDividedItem } from "@/components/utils/listDivided";
-import { InputSelect } from "@/components/search/input";
 
 @Component({
   components: {
-    InputSelect,
     ListDivided,
     ListDividedItem,
   },

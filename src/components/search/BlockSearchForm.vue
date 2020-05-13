@@ -77,16 +77,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import { InputText, InputNumber, InputDate, InputSelect } from "./input";
 
-@Component({
-  components: {
-    InputText,
-    InputNumber,
-    InputDate,
-    InputSelect,
-  },
-})
+@Component
 export default class BlockSearchForm extends Vue {
   private onInputChange(event: any) {
     const { name, value } = event.target;

@@ -33,15 +33,9 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import { InputText, InputNumber } from "@/components/search/input";
 import { URI_QRCODE_SCHEME_PREFIX } from "@/constants";
 
-@Component({
-  components: {
-    InputNumber,
-    InputText,
-  },
-})
+@Component
 export default class QrModal extends Vue {
   @Prop({ required: true }) public address: string;
 
