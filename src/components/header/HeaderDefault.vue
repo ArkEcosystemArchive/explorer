@@ -34,9 +34,6 @@
       <span v-if="showChart" class="border-r mx-2 md:mx-4 lg:mx-6 my-4 hidden md:block" />
       <ToggleChart v-if="showChart" />
 
-      <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4" />
-      <ToggleTheme />
-
       <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4 hidden md:block" />
       <ToggleLanguage />
 
@@ -50,12 +47,11 @@
 import { Component, Vue } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { LocaleMessage } from "vue-i18n";
-import { ToggleChart, ToggleCurrency, ToggleLanguage, ToggleTheme } from "@/components/header/toggles";
+import { ToggleChart, ToggleCurrency, ToggleLanguage } from "@/components/header/toggles";
 import HeaderSettings from "@/components/header/HeaderSettings.vue";
 
 @Component({
   components: {
-    ToggleTheme,
     ToggleCurrency,
     ToggleLanguage,
     ToggleChart,

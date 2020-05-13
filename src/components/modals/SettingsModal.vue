@@ -168,6 +168,7 @@ export default class SettingsModal extends Vue {
       this.setLanguage(this.language);
     }
 
+    this.isLoading = false;
     this.emitClose();
   }
 
