@@ -58,8 +58,6 @@ module.exports = {
       "theme-nav-border": "var(--nav-border)",
       "stat-background": "var(--stat-background)",
       "theme-text-tertiary": "var(--theme-text-tertiary)",
-      "chart-active": "var(--chart-active)",
-      "chart-inactive": "var(--chart-inactive)",
       "theme-button": "var(--theme-button)",
       "theme-button-active": "var(--theme-button-active)",
       "theme-button-text": "var(--theme-button-text)",
