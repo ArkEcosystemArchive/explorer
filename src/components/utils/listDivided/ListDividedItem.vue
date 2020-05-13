@@ -6,7 +6,7 @@
         <span
           v-if="labelDescription"
           :class="itemLabelDescriptionClass"
-          class="ListDividedItem__label__description hidden md:block"
+          class="ListDividedItem__label__description"
           >{{ labelDescription }}</span
         >
       </div>

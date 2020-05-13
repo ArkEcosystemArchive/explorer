@@ -15,6 +15,7 @@
           <ListDividedItem
             :label="$t('MODAL_SETTINGS.CURRENCY.LABEL')"
             :label-description="$t('MODAL_SETTINGS.CURRENCY.DESCRIPTION')"
+            item-label-description-class="hidden md:block"
           >
             <InputSelect
               :select-options="selectCurrencies"
@@ -27,18 +28,21 @@
           <ListDividedItem
             :label="$t('MODAL_SETTINGS.DARK_THEME.LABEL')"
             :label-description="$t('MODAL_SETTINGS.DARK_THEME.DESCRIPTION')"
+            item-label-description-class="hidden md:block"
           >
             <ButtonSwitch :is-active="nightMode" class="mt-2" @change="toggleTheme" />
           </ListDividedItem>
           <ListDividedItem
             :label="$t('MODAL_SETTINGS.CHART.LABEL')"
             :label-description="$t('MODAL_SETTINGS.CHART.DESCRIPTION')"
+            item-label-description-class="hidden md:block"
           >
             <ButtonSwitch :is-active="chartMode" class="mt-2" @change="toggleChart" />
           </ListDividedItem>
           <ListDividedItem
             :label="$t('MODAL_SETTINGS.TRANSLATIONS.LABEL')"
             :label-description="$t('MODAL_SETTINGS.TRANSLATIONS.DESCRIPTION')"
+            item-label-description-class="hidden md:block"
           >
             <InputSelect
               :select-options="selectLanguages"
