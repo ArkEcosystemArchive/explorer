@@ -10,7 +10,6 @@
     <div class="w-full relative hidden xl:flex">
       <HeaderSearch v-if="headerType === 'search'" />
       <HeaderCurrenciesDesktop v-else-if="headerType === 'currencies'" />
-      <HeaderLanguagesDesktop v-else-if="headerType === 'languages'" />
       <HeaderDefault v-else />
       <HeaderMenuDesktop v-if="menuVisible" :entries="menuEntries" />
     </div>
@@ -22,7 +21,6 @@
 
     <HeaderMenuMobile v-if="menuVisible" :entries="menuEntries" />
     <HeaderCurrenciesMobile v-else-if="headerType === 'currencies'" />
-    <HeaderLanguagesMobile v-else-if="headerType === 'languages'" />
   </header>
 </template>
 
@@ -34,8 +32,6 @@ import {
   HeaderSearch,
   HeaderCurrenciesDesktop,
   HeaderCurrenciesMobile,
-  HeaderLanguagesDesktop,
-  HeaderLanguagesMobile,
   HeaderMenuDesktop,
   HeaderMenuMobile,
 } from "@/components/header";
@@ -46,8 +42,6 @@ import {
     HeaderSearch,
     HeaderCurrenciesDesktop,
     HeaderCurrenciesMobile,
-    HeaderLanguagesDesktop,
-    HeaderLanguagesMobile,
     HeaderMenuDesktop,
     HeaderMenuMobile,
   },
