@@ -9,7 +9,7 @@ describe("Components > Utils > ListDivided", () => {
     expect(wrapper.isVueInstance()).toBe(true);
   });
 
-  describe("Components > Utils > ListDividedItem", () => {
+  describe("Components > Utils > ListDivided > ListDividedItem", () => {
     it("should render item", () => {
       const wrapper = mount(ListDividedItem, {
         propsData: {
