@@ -63,12 +63,7 @@ export default class TableWalletsMobile extends Vue {
 
   public supplyPercentage(balance: string): string {
     // @ts-ignore
-    return this.percentageString(
-      BigNumber.make(balance)
-        .dividedBy(this.total)
-        .times(100)
-        .toNumber(),
-    );
+    return this.percentageString(BigNumber.make(balance).dividedBy(this.total).times(100).toNumber());
   }
 
   private getRank(index: number) {

@@ -20,7 +20,7 @@ describe("Components > SelectionType", () => {
 
   localVue.directive("click-outside", clickOutside);
 
-  it("should be possible to open and close the dropdown", () => {
+  it("should be possible to open and close the dropdown", async () => {
     const wrapper = mount(SelectionType, {
       i18n,
       localVue,
@@ -28,7 +28,7 @@ describe("Components > SelectionType", () => {
       mocks,
     });
 
-    wrapper.find(".mr-1").trigger("click");
+    await wrapper.find(".mr-1").trigger("click");
     expect(
       wrapper
         .findAll("ul")
@@ -36,7 +36,7 @@ describe("Components > SelectionType", () => {
         .isVisible(),
     ).toBeTruthy();
 
-    wrapper.find(".mr-1").trigger("click");
+    await wrapper.find(".mr-1").trigger("click");
     expect(
       wrapper
         .findAll("ul")

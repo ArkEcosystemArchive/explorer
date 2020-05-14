@@ -96,7 +96,7 @@ export default class Bridgechains extends Vue {
       this.$router.push({
         name: "bridgechains",
         params: {
-          page: this.currentPage,
+          page: this.currentPage.toString(),
         },
       });
     }

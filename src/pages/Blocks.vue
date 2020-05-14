@@ -100,7 +100,7 @@ export default class BlockPage extends Vue {
       this.$router.push({
         name: "blocks",
         params: {
-          page: this.currentPage,
+          page: this.currentPage.toString(),
         },
       });
     }
