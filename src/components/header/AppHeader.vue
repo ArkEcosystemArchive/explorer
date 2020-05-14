@@ -9,7 +9,6 @@
 
     <div class="w-full relative hidden xl:flex">
       <HeaderSearch v-if="headerType === 'search'" />
-      <HeaderCurrenciesDesktop v-else-if="headerType === 'currencies'" />
       <HeaderDefault v-else />
       <HeaderMenuDesktop v-if="menuVisible" :entries="menuEntries" />
     </div>
@@ -20,7 +19,6 @@
     </div>
 
     <HeaderMenuMobile v-if="menuVisible" :entries="menuEntries" />
-    <HeaderCurrenciesMobile v-else-if="headerType === 'currencies'" />
   </header>
 </template>
 
@@ -30,8 +28,6 @@ import { mapGetters } from "vuex";
 import {
   HeaderDefault,
   HeaderSearch,
-  HeaderCurrenciesDesktop,
-  HeaderCurrenciesMobile,
   HeaderMenuDesktop,
   HeaderMenuMobile,
 } from "@/components/header";
@@ -40,8 +36,6 @@ import {
   components: {
     HeaderDefault,
     HeaderSearch,
-    HeaderCurrenciesDesktop,
-    HeaderCurrenciesMobile,
     HeaderMenuDesktop,
     HeaderMenuMobile,
   },

@@ -28,10 +28,10 @@
         </label>
       </div>
 
-      <span v-if="showToggleCurrency" class="border-r mx-2 md:mx-4 lg:mx-6 my-4 block" />
-      <ToggleCurrency v-if="showToggleCurrency" />
+      <span v-if="showCurrency" class="border-r mx-2 md:mx-4 lg:mx-6 my-4 block" />
+      <HeaderCurrency v-if="showCurrency" />
 
-      <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4" />
+      <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4 block" />
       <HeaderSettings />
     </div>
   </div>
@@ -41,12 +41,12 @@
 import { Component, Vue } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { LocaleMessage } from "vue-i18n";
-import { ToggleCurrency } from "@/components/header/toggles";
+import HeaderCurrency from "@/components/header/HeaderCurrency.vue";
 import HeaderSettings from "@/components/header/HeaderSettings.vue";
 
 @Component({
   components: {
-    ToggleCurrency,
+    HeaderCurrency,
     HeaderSettings,
   },
   computed: {
@@ -59,7 +59,7 @@ export default class HeaderDefault extends Vue {
   private networkDefaults: any;
   private menuVisible: boolean;
 
-  get showToggleCurrency(): boolean {
+  get showCurrency(): boolean {
     return this.networkDefaults.priceChartOptions.enabled;
   }
 
