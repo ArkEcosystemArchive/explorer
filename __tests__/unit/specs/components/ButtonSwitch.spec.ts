@@ -18,6 +18,7 @@ describe("Components > ButtonSwitch", () => {
   it("should toggle by method", () => {
     const wrapper = mount(ButtonSwitch);
     wrapper.vm.toggle();
+
     expect(wrapper.emitted("change")).toBeTruthy();
   });
 
@@ -27,6 +28,7 @@ describe("Components > ButtonSwitch", () => {
         isActive: true,
       },
     });
+
     expect(wrapper.contains(".ButtonSwitch--active")).toBeTruthy();
   });
 
@@ -37,6 +39,7 @@ describe("Components > ButtonSwitch", () => {
       },
     });
     wrapper.trigger("click");
+
     expect(wrapper.emitted("change")).toBeFalsy();
   });
 });
