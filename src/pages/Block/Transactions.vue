@@ -108,7 +108,7 @@ export default class BlockTransactions extends Vue {
         name: "block-transactions",
         params: {
           id: this.id,
-          page: this.currentPage,
+          page: this.currentPage.toString(),
         },
       });
     }

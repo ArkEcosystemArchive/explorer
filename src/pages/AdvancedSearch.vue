@@ -166,7 +166,7 @@ export default class AdvancedSearchPage extends Vue {
       this.$router.push({
         name: "advanced-search",
         params: {
-          page: this.currentPage,
+          page: this.currentPage.toString(),
         },
       });
     }

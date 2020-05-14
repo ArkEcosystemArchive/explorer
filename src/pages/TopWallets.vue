@@ -101,7 +101,7 @@ export default class TopWallets extends Vue {
       this.$router.push({
         name: "top-wallets",
         params: {
-          page: this.currentPage,
+          page: this.currentPage.toString(),
         },
       });
     }

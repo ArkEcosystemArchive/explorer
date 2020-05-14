@@ -92,7 +92,7 @@ export default class Businesses extends Vue {
       this.$router.push({
         name: "businesses",
         params: {
-          page: this.currentPage,
+          page: this.currentPage.toString(),
         },
       });
     }
