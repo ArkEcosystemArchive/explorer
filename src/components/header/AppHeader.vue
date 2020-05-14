@@ -25,12 +25,7 @@
 <script lang="ts">
 import { Component, Provide, Vue } from "vue-property-decorator";
 import { mapGetters } from "vuex";
-import {
-  HeaderDefault,
-  HeaderSearch,
-  HeaderMenuDesktop,
-  HeaderMenuMobile,
-} from "@/components/header";
+import { HeaderDefault, HeaderSearch, HeaderMenuDesktop, HeaderMenuMobile } from "@/components/header";
 
 @Component({
   components: {
