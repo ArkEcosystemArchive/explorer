@@ -1,6 +1,15 @@
 export const I18N = {
   defaultLocale: "en-GB",
   enabledLocales: ["en-GB", "en-US", "it-IT", "fr-FR", "nl-NL", "pl-PL", "pt-BR"],
+  languages: {
+    "en-GB": "English (UK)",
+    "en-US": "English (US)",
+    "it-IT": "Italian",
+    "fr-FR": "French",
+    "nl-NL": "Nederlands",
+    "pl-PL": "Polish",
+    "pt-BR": "Portuguese (BR)",
+  },
 };
 
 export const brand = {

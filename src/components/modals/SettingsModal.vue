@@ -101,9 +101,9 @@ export default class SettingsModal extends Vue {
   }
 
   get selectLanguages() {
-    return I18N.enabledLocales.map((language: string) => ({
+    return Object.keys(I18N.languages).map((language: string) => ({
       value: language,
-      display: language,
+      display: I18N.languages[language],
     }));
   }
 

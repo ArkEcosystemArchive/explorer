@@ -305,7 +305,7 @@ export default {
 
   MODAL_SETTINGS: {
     TITLE: "Explorer Settings",
-    DESCRIPTION: "Customize your wallet to suit your needs",
+    DESCRIPTION: "Customize the Explorer to suit your needs",
     CURRENCY: {
       LABEL: "Currency",
       DESCRIPTION: "Select a currency to be paired with the ARK token.",
