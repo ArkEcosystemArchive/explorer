@@ -222,7 +222,7 @@ export default class WalletTransactions extends Vue {
         params: {
           address: this.address,
           type: this.type,
-          page: this.currentPage,
+          page: this.currentPage.toString(),
         },
       });
     }

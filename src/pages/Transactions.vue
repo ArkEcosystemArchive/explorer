@@ -181,7 +181,7 @@ export default class TransactionsPage extends Vue {
       this.$router.push({
         name: "transactions",
         params: {
-          page: this.currentPage,
+          page: this.currentPage.toString(),
         },
       });
     }

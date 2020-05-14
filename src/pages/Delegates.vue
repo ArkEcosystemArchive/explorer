@@ -108,7 +108,7 @@ export default class Delegates extends Vue {
       this.$router.push({
         name: this.resignedOnly ? "delegates-resigned" : "delegates",
         params: {
-          page: this.currentPage,
+          page: this.currentPage.toString(),
         },
       });
     }

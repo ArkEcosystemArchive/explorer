@@ -46,7 +46,10 @@ describe("Components > Modals > QrModal", () => {
     const wrapper = mountComponent();
     wrapper.vm.isCollapsed = false;
 
-    expect(wrapper.findAll("input")).toHaveLength(2);
+    wrapper.vm.$nextTick(() => {
+      expect(wrapper.findAll("input")).toHaveLength(2);
+      done();
+    });
   });
 
   describe("formattedParams", () => {

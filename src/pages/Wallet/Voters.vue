@@ -118,7 +118,7 @@ export default class WalletVoters extends Vue {
         name: "wallet-voters",
         params: {
           address: this.address,
-          page: this.currentPage,
+          page: this.currentPage.toString(),
         },
       });
     }
