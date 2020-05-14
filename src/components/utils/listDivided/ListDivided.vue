@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import { ListDividedItem } from "@/components/utils/listDivided";
 
 @Component({
@@ -13,9 +13,7 @@ import { ListDividedItem } from "@/components/utils/listDivided";
     ListDividedItem,
   },
 })
-export default class ListDivided extends Vue {
-  @Prop({ default: null }) public items!: object | null;
-}
+export default class ListDivided extends Vue {}
 </script>
 
 <style>
