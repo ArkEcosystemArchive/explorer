@@ -1,7 +1,7 @@
 .theme-light {
-  --color-theme-text-thead: #C5C7CB;
+  --color-theme-text-thead: #c5c7cb;
   --color-theme-table-row-sticky: #fff;
-  --color-theme-accents: #EF192D;
+  --color-theme-accents: #ef192d;
   --color-theme-transaction-icon: #037cff;
 
   --color-theme-page-background-primary: #f5f6fa;
@@ -26,9 +26,6 @@
   --theme-button-active: #c5dbed;
   --theme-button-text: #037cff;
   --theme-button-close: #a0a6c8;
-  --theme-action-button: #eff0f6;
-  --theme-action-button-text: #8d93ad;
-  --theme-action-button-text-hover: #789fba;
   --theme-switch-button: #d1dfeb;
   --theme-switch-button-circle: #a2b0f5;
   --settings-icon: #395174;
@@ -47,9 +44,9 @@
 }
 
 .theme-dark {
-  --color-theme-text-thead: #A1A2A6;
+  --color-theme-text-thead: #a1a2a6;
   --color-theme-table-row-sticky: #25262c;
-  --color-theme-accents: #EF192D;
+  --color-theme-accents: #ef192d;
   --color-theme-transaction-icon: #037cff;
 
   --color-theme-page-background-primary: #1a1b1f;
@@ -74,9 +71,6 @@
   --theme-button-active: #42434c;
   --theme-button-text: #fff;
   --theme-button-close: #787a86;
-  --theme-action-button: #333644;
-  --theme-action-button-text: #4c5166;
-  --theme-action-button-text-hover: #7983af;
   --theme-switch-button: #383c4d;
   --theme-switch-button-circle: #5b627c;
   --settings-icon: #a1a2a6;
