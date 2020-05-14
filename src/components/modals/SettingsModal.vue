@@ -33,15 +33,15 @@
             <ButtonSwitch :is-active="nightMode" class="mt-2" @change="toggleTheme" />
           </ListDividedItem>
           <ListDividedItem
-            :label="$t('MODAL_SETTINGS.CHART.LABEL')"
-            :label-description="$t('MODAL_SETTINGS.CHART.DESCRIPTION')"
+            :label="$t('MODAL_SETTINGS.PRICE_CHART.LABEL')"
+            :label-description="$t('MODAL_SETTINGS.PRICE_CHART.DESCRIPTION')"
             item-label-description-class="hidden md:block"
           >
             <ButtonSwitch :is-active="chartMode" class="mt-2" @change="toggleChart" />
           </ListDividedItem>
           <ListDividedItem
-            :label="$t('MODAL_SETTINGS.TRANSLATIONS.LABEL')"
-            :label-description="$t('MODAL_SETTINGS.TRANSLATIONS.DESCRIPTION')"
+            :label="$t('MODAL_SETTINGS.LANGUAGE.LABEL')"
+            :label-description="$t('MODAL_SETTINGS.LANGUAGE.DESCRIPTION')"
             item-label-description-class="hidden md:block"
           >
             <InputSelect

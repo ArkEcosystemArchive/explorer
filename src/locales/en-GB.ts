@@ -308,19 +308,19 @@ export default {
     DESCRIPTION: "Customize your wallet to suit your needs",
     CURRENCY: {
       LABEL: "Currency",
-      DESCRIPTION: "Choose which currency you want to equate the price of the ARK token with.",
+      DESCRIPTION: "Select a currency to be paired with the ARK token.",
     },
     DARK_THEME: {
       LABEL: "Dark Theme",
-      DESCRIPTION: "Want to set the wallet to dark theme?",
+      DESCRIPTION: "Toggle the Dark Theme display mode.",
     },
-    CHART: {
-      LABEL: "Chart",
-      DESCRIPTION: "Do you want to activate the price chart on the home page?",
+    PRICE_CHART: {
+      LABEL: "Price Chart",
+      DESCRIPTION: "Toggle the Price Chart on the Homepage.",
     },
-    TRANSLATIONS: {
-      LABEL: "Translations",
-      DESCRIPTION: "The default language is English, but you can select another.",
+    LANGUAGE: {
+      LABEL: "Language",
+      DESCRIPTION: "Change the display language to your preferred language.",
     },
   },
 
