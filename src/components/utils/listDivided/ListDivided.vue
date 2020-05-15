@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { ListDividedItem } from "@/components/utils/listDivided";
+import ListDividedItem from "./ListDividedItem.vue";
 
 @Component({
   components: {
