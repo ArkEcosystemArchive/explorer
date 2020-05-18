@@ -12,9 +12,7 @@
 
       <div class="SettingsModal__content">
         <ListDivided>
-          <ListDividedItem
-            :label="$t('MODAL_SETTINGS.CURRENCY')"
-          >
+          <ListDividedItem :label="$t('MODAL_SETTINGS.CURRENCY')">
             <InputSelect
               :select-options="selectCurrencies"
               :value="currencyName"
@@ -23,19 +21,13 @@
               @input="onSelectChange"
             />
           </ListDividedItem>
-          <ListDividedItem
-            :label="$t('MODAL_SETTINGS.DARK_THEME')"
-          >
+          <ListDividedItem :label="$t('MODAL_SETTINGS.DARK_THEME')">
             <ButtonSwitch :is-active="nightMode" class="SettingsModal__toggle__darkTheme mt-2" @change="toggleTheme" />
           </ListDividedItem>
-          <ListDividedItem
-            :label="$t('MODAL_SETTINGS.PRICE_CHART')"
-          >
+          <ListDividedItem :label="$t('MODAL_SETTINGS.PRICE_CHART')">
             <ButtonSwitch :is-active="chartMode" class="SettingsModal__toggle__priceChart mt-2" @change="toggleChart" />
           </ListDividedItem>
-          <ListDividedItem
-            :label="$t('MODAL_SETTINGS.LANGUAGE')"
-          >
+          <ListDividedItem :label="$t('MODAL_SETTINGS.LANGUAGE')">
             <InputSelect
               :select-options="selectLanguages"
               :value="language"
