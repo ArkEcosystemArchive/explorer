@@ -116,8 +116,9 @@ describe("Components > Modals > SettingsModal", () => {
 
     it("should toggle to day mode", () => {
       wrapper = mountComponent();
+      wrapper.vm.nightMode = true;
 
-      wrapper.find(".SettingsModal__toggle__darkTheme").vm.$emit("change", false);
+      wrapper.find(".SettingsModal__toggle__darkTheme").vm.$emit("change");
 
       expect(wrapper.vm.nightMode).toBe(false);
     });
@@ -146,11 +147,11 @@ describe("Components > Modals > SettingsModal", () => {
       expect(el.findAll("option")).toHaveLength(7);
       expect(el.findAll("option").at(0).text()).toBe("English (UK)");
       expect(el.findAll("option").at(1).text()).toBe("English (US)");
-      expect(el.findAll("option").at(2).text()).toBe("Italian");
-      expect(el.findAll("option").at(3).text()).toBe("French");
+      expect(el.findAll("option").at(2).text()).toBe("Italiano");
+      expect(el.findAll("option").at(3).text()).toBe("Français");
       expect(el.findAll("option").at(4).text()).toBe("Nederlands");
-      expect(el.findAll("option").at(5).text()).toBe("Polish");
-      expect(el.findAll("option").at(6).text()).toBe("Portuguese (BR)");
+      expect(el.findAll("option").at(5).text()).toBe("Polski");
+      expect(el.findAll("option").at(6).text()).toBe("Português (BR)");
     });
 
     it("should change language " => () {
