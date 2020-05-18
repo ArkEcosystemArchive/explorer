@@ -41,11 +41,11 @@ button:disabled {
 }
 
 .action-button {
-  @apply .base-button .bg-blue .text-white .hover-button-shadow-definition .py-2 .px-4;
+  @apply .base-button .bg-blue .text-white .py-2 .px-4;
 }
 
 .action-button:enabled:hover {
-  @apply .opacity-75 .cursor-pointer;
+  @apply .hover-button-shadow-definition .cursor-pointer;
 }
 
 /* Menu Buttons */

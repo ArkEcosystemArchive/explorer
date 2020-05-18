@@ -13,9 +13,7 @@
       <div class="SettingsModal__content">
         <ListDivided>
           <ListDividedItem
-            :label="$t('MODAL_SETTINGS.CURRENCY.LABEL')"
-            :label-description="$t('MODAL_SETTINGS.CURRENCY.DESCRIPTION')"
-            item-label-description-class="hidden md:block"
+            :label="$t('MODAL_SETTINGS.CURRENCY')"
           >
             <InputSelect
               :select-options="selectCurrencies"
@@ -26,23 +24,17 @@
             />
           </ListDividedItem>
           <ListDividedItem
-            :label="$t('MODAL_SETTINGS.DARK_THEME.LABEL')"
-            :label-description="$t('MODAL_SETTINGS.DARK_THEME.DESCRIPTION')"
-            item-label-description-class="hidden md:block"
+            :label="$t('MODAL_SETTINGS.DARK_THEME')"
           >
             <ButtonSwitch :is-active="nightMode" class="SettingsModal__toggle__darkTheme mt-2" @change="toggleTheme" />
           </ListDividedItem>
           <ListDividedItem
-            :label="$t('MODAL_SETTINGS.PRICE_CHART.LABEL')"
-            :label-description="$t('MODAL_SETTINGS.PRICE_CHART.DESCRIPTION')"
-            item-label-description-class="hidden md:block"
+            :label="$t('MODAL_SETTINGS.PRICE_CHART')"
           >
             <ButtonSwitch :is-active="chartMode" class="SettingsModal__toggle__priceChart mt-2" @change="toggleChart" />
           </ListDividedItem>
           <ListDividedItem
-            :label="$t('MODAL_SETTINGS.LANGUAGE.LABEL')"
-            :label-description="$t('MODAL_SETTINGS.LANGUAGE.DESCRIPTION')"
-            item-label-description-class="hidden md:block"
+            :label="$t('MODAL_SETTINGS.LANGUAGE')"
           >
             <InputSelect
               :select-options="selectLanguages"
@@ -140,12 +132,12 @@ export default class SettingsModal extends Vue {
     moment.locale(language);
   }
 
-  private toggleTheme(enabled: boolean) {
-    this.nightMode = enabled;
+  private toggleTheme() {
+    this.nightMode = !this.nightMode;
   }
 
-  private toggleChart(enabled: boolean) {
-    this.chartMode = enabled;
+  private toggleChart() {
+    this.chartMode = !this.chartMode;
   }
 
   private async save() {
@@ -181,9 +173,6 @@ export default class SettingsModal extends Vue {
 <style>
 .SettingsModal .ListDividedItem__container__label {
   @apply .mr-10;
-}
-.SettingsModal .ListDividedItem__label__description {
-  @apply .max-w-xs;
 }
 
 .SettingsModal .SettingsModal__inputSelect .InputField__wrapper {

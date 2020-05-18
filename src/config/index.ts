@@ -4,11 +4,11 @@ export const I18N = {
   languages: {
     "en-GB": "English (UK)",
     "en-US": "English (US)",
-    "it-IT": "Italian",
-    "fr-FR": "French",
+    "it-IT": "Italiano",
+    "fr-FR": "Français",
     "nl-NL": "Nederlands",
-    "pl-PL": "Polish",
-    "pt-BR": "Portuguese (BR)",
+    "pl-PL": "Polski",
+    "pt-BR": "Português (BR)",
   },
 };
 

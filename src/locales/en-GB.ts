@@ -306,22 +306,10 @@ export default {
   MODAL_SETTINGS: {
     TITLE: "Explorer Settings",
     DESCRIPTION: "Customize the Explorer to suit your needs",
-    CURRENCY: {
-      LABEL: "Currency",
-      DESCRIPTION: "Select a currency to be paired with the ARK token.",
-    },
-    DARK_THEME: {
-      LABEL: "Dark Theme",
-      DESCRIPTION: "Toggle the Dark Theme display mode.",
-    },
-    PRICE_CHART: {
-      LABEL: "Price Chart",
-      DESCRIPTION: "Toggle the Price Chart on the Homepage.",
-    },
-    LANGUAGE: {
-      LABEL: "Language",
-      DESCRIPTION: "Change the display language to your preferred language.",
-    },
+    CURRENCY: "Currency",
+    DARK_THEME: "Dark Theme",
+    PRICE_CHART: "Price Chart",
+    LANGUAGE: "Language",
   },
 
   FOOTER: {
