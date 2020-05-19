@@ -12,7 +12,7 @@
 
       <div class="SettingsModal__content">
         <ListDivided>
-          <ListDividedItem :label="$t('MODAL_SETTINGS.CURRENCY')">
+          <ListDividedItem v-if="showCurrency" :label="$t('MODAL_SETTINGS.CURRENCY')">
             <InputSelect
               :select-options="selectCurrencies"
               :value="currencyName"
@@ -24,7 +24,7 @@
           <ListDividedItem :label="$t('MODAL_SETTINGS.DARK_THEME')">
             <ButtonSwitch :is-active="nightMode" class="SettingsModal__toggle__darkTheme mt-2" @change="toggleTheme" />
           </ListDividedItem>
-          <ListDividedItem :label="$t('MODAL_SETTINGS.PRICE_CHART')">
+          <ListDividedItem v-if="showCurrency" :label="$t('MODAL_SETTINGS.PRICE_CHART')">
             <ButtonSwitch :is-active="chartMode" class="SettingsModal__toggle__priceChart mt-2" @change="toggleChart" />
           </ListDividedItem>
           <ListDividedItem :label="$t('MODAL_SETTINGS.LANGUAGE')">
@@ -65,20 +65,25 @@ import { ListDivided, ListDividedItem } from "@/components/utils/listDivided";
     ListDividedItem,
   },
   computed: {
-    ...mapGetters("network", ["currencies"]),
+    ...mapGetters("network", { networkCurrencies: "currencies", networkDefaults: "defaults" }),
   },
 })
 export default class SettingsModal extends Vue {
   private isLoading = false;
-  private currencies: string[];
+  private networkCurrencies: string[];
+  private networkDefaults: any;
   private currencyName: string;
   private currencySymbol: string;
   private nightMode: boolean;
   private chartMode: boolean;
   private language: string;
 
+  get showCurrency(): boolean {
+    return this.networkDefaults.priceChartOptions.enabled;
+  }
+
   get selectCurrencies() {
-    return Object.keys(this.currencies).map((currency: string) => ({
+    return Object.keys(this.networkCurrencies).map((currency: string) => ({
       value: currency,
       display: currency,
     }));
@@ -104,7 +109,7 @@ export default class SettingsModal extends Vue {
 
     if (name === "currency") {
       this.currencyName = value;
-      this.currencySymbol = this.currencies[value];
+      this.currencySymbol = this.networkCurrencies[value];
     } else if (name === "language") {
       this.language = value;
     }

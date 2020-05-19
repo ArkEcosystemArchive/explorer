@@ -41,9 +41,13 @@ describe("Components > Modals > SettingsModal", () => {
         namespaced: true,
         state: {
           currencies: { BRL: "R$", EUR: "€", USD: "$" },
+          defaults: {
+            priceChartOptions: { enabled: true },
+          },
         },
         getters: {
           currencies: () => ({ BRL: "R$", EUR: "€", USD: "$" }),
+          defaults: () => ({ priceChartOptions: { enabled: true } }),
         },
       },
     },
