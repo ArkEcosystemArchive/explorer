@@ -80,60 +80,13 @@ describe("Homepage", () => {
   });
 
   describe("Header", () => {
-    it("should be possible to toggle chart", () => {
-      cy.get("#line-chart").should("be.visible");
-
-      cy.get("button.text-chart-active")
+    it("should show the explorer settings", () => {
+      cy.get("div.text-settings-icon")
         .first()
         .should("be.visible")
         .click();
-      cy.get("#line-chart").should("not.be.visible");
 
-      cy.get("button.text-chart-inactive")
-        .first()
-        .should("be.visible")
-        .click();
-      cy.get("#line-chart").should("be.visible");
-    });
-
-    it("should be possible to toggle theme", () => {
-      cy.get("button.text-yellow")
-        .first()
-        .as("themeButton");
-
-      cy.get("@themeButton")
-        .should("be.visible")
-        .click();
-      cy.get("main")
-        .should("be.visible")
-        .and("have.class", "theme-dark");
-
-      cy.get("@themeButton")
-        .should("be.visible")
-        .click();
-      cy.get("main")
-        .should("be.visible")
-        .and("have.class", "theme-light");
-    });
-
-    it("should be possible to change currency", () => {
-      cy.get("button")
-        .contains("ARK/USD")
-        .click();
-
-      cy.get(".menu-button").should("be.visible");
-      cy.get(".close-button").should("be.visible");
-
-      cy.get("button")
-        .contains("ETH")
-        .click();
-
-      cy.get("button")
-        .contains("ARK/ETH")
-        .should("exist");
-
-      cy.get(".menu-button").should("not.exist");
-      cy.get(".close-button").should("not.exist");
+      cy.get("div.modal-container").should("be.visible");
     });
   });
 
@@ -232,40 +185,6 @@ describe("Homepage", () => {
 
       cy.get("button.chart-tab-active")
         .should("contain.text", "Year");
-    });
-  });
-
-  describe("Languages", () => {
-    it("should open and close", () => {
-      cy.get("#language-icon").click();
-      cy.get(".language-menu")
-        .should("exist")
-        .and("be.visible");
-
-      cy.get(".close-button").click();
-      cy.get(".language-menu").should("not.exist");
-    });
-
-    it("should contain flag images", () => {
-      cy.get("#language-icon").click();
-
-      cy.get(".language-menu .flag-image").should("have.length.greaterThan", 0);
-    });
-
-    it("should be possible to change language", () => {
-      cy.get("#language-icon").click();
-
-      cy.get("h1").then($heading => {
-        const heading = $heading.text();
-
-        cy.get(".language-menu > .menu-button")
-          .last()
-          .click();
-
-        cy.get("h1").should($heading2 => {
-          expect($heading2.text()).not.to.eq(heading);
-        });
-      });
     });
   });
 

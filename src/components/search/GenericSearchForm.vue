@@ -26,13 +26,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { InputText, InputSelect } from "./input";
-@Component({
-  components: {
-    InputText,
-    InputSelect,
-  },
-})
+
+@Component
 export default class GenericSearchForm extends Vue {
   @Prop({ required: true }) private selectedType: string;
   @Prop({ required: true }) private searchTypes: string[];

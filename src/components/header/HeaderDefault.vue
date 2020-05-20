@@ -28,17 +28,11 @@
         </label>
       </div>
 
-      <span v-if="showToggleCurrency" class="border-r mx-2 md:mx-4 lg:mx-6 my-4 block" />
-      <ToggleCurrency v-if="showToggleCurrency" />
+      <span v-if="showCurrency" class="border-r mx-2 md:mx-4 lg:mx-6 my-4 block" />
+      <HeaderCurrency v-if="showCurrency" />
 
-      <span v-if="showChart" class="border-r mx-2 md:mx-4 lg:mx-6 my-4 hidden md:block" />
-      <ToggleChart v-if="showChart" />
-
-      <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4" />
-      <ToggleTheme />
-
-      <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4 hidden md:block" />
-      <ToggleLanguage />
+      <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4 block" />
+      <HeaderSettings />
     </div>
   </div>
 </template>
@@ -46,15 +40,14 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { mapGetters } from "vuex";
-import { ToggleChart, ToggleCurrency, ToggleLanguage, ToggleTheme } from "@/components/header/toggles";
 import { LocaleMessage } from "vue-i18n";
+import HeaderCurrency from "@/components/header/HeaderCurrency.vue";
+import HeaderSettings from "@/components/header/HeaderSettings.vue";
 
 @Component({
   components: {
-    ToggleTheme,
-    ToggleCurrency,
-    ToggleLanguage,
-    ToggleChart,
+    HeaderCurrency,
+    HeaderSettings,
   },
   computed: {
     ...mapGetters("network", { networkDefaults: "defaults" }),
@@ -66,12 +59,8 @@ export default class HeaderDefault extends Vue {
   private networkDefaults: any;
   private menuVisible: boolean;
 
-  get showToggleCurrency(): boolean {
+  get showCurrency(): boolean {
     return this.networkDefaults.priceChartOptions.enabled;
-  }
-
-  get showChart(): boolean {
-    return this.$route.name === "home" && this.networkDefaults.priceChartOptions.enabled;
   }
 
   public mounted() {

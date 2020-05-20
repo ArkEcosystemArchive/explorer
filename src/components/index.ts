@@ -39,8 +39,16 @@ Vue.component("TableBusinessesMobile", require("@/components/tables/mobile/Busin
 Vue.component("TableBridgechainsMobile", require("@/components/tables/mobile/Bridgechains").default);
 Vue.component("TableDelegatesMobile", require("@/components/tables/mobile/Delegates").default);
 
+// Inputs
+Vue.component("InputDate", require("@/components/input/InputDate").default);
+Vue.component("InputField", require("@/components/input/InputField").default);
+Vue.component("InputNumber", require("@/components/input/InputNumber").default);
+Vue.component("InputSelect", require("@/components/input/InputSelect").default);
+Vue.component("InputText", require("@/components/input/InputText").default);
+
 // Misc.
 Vue.component("ArkMeter", require("@/components/monitor/ArkMeter").default);
+Vue.component("ButtonSwitch", require("@/components/ButtonSwitch").default);
 Vue.component("ContentHeader", require("@/components/ContentHeader").default);
 Vue.component("DisclaimerModal", require("@/components/DisclaimerModal").default);
 Vue.component("Modal", require("@/components/Modal").default);
