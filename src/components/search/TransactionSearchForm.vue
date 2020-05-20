@@ -88,17 +88,9 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { InputText, InputNumber, InputDate, InputSelect } from "./input";
 import { ITransactionType } from "@/interfaces";
 
-@Component({
-  components: {
-    InputText,
-    InputNumber,
-    InputDate,
-    InputSelect,
-  },
-})
+@Component
 export default class TransactionSearchForm extends Vue {
   get types() {
     return this.$store.getters["network/enabledTransactionTypes"];
