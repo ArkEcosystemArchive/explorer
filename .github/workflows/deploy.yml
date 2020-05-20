@@ -14,7 +14,9 @@ jobs:
         node-version: [12.x]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: Get yarn cache
         id: yarn-cache
@@ -33,7 +35,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable --immutable-cache
 
       - name: Build
         run: yarn build
@@ -49,7 +51,9 @@ jobs:
         node-version: [12.x]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: Get yarn cache
         id: yarn-cache
@@ -68,7 +72,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable --immutable-cache
 
       - name: Build
         run: yarn build
@@ -86,7 +90,9 @@ jobs:
         node-version: [12.x]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: Get yarn cache
         id: yarn-cache
@@ -105,7 +111,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable --immutable-cache
 
       - name: Deploy
         run: yarn task:deploy:workflow
