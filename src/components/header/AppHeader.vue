@@ -9,8 +9,6 @@
 
     <div class="w-full relative hidden xl:flex">
       <HeaderSearch v-if="headerType === 'search'" />
-      <HeaderCurrenciesDesktop v-else-if="headerType === 'currencies'" />
-      <HeaderLanguagesDesktop v-else-if="headerType === 'languages'" />
       <HeaderDefault v-else />
       <HeaderMenuDesktop v-if="menuVisible" :entries="menuEntries" />
     </div>
@@ -21,33 +19,18 @@
     </div>
 
     <HeaderMenuMobile v-if="menuVisible" :entries="menuEntries" />
-    <HeaderCurrenciesMobile v-else-if="headerType === 'currencies'" />
-    <HeaderLanguagesMobile v-else-if="headerType === 'languages'" />
   </header>
 </template>
 
 <script lang="ts">
 import { Component, Provide, Vue } from "vue-property-decorator";
 import { mapGetters } from "vuex";
-import {
-  HeaderDefault,
-  HeaderSearch,
-  HeaderCurrenciesDesktop,
-  HeaderCurrenciesMobile,
-  HeaderLanguagesDesktop,
-  HeaderLanguagesMobile,
-  HeaderMenuDesktop,
-  HeaderMenuMobile,
-} from "@/components/header";
+import { HeaderDefault, HeaderSearch, HeaderMenuDesktop, HeaderMenuMobile } from "@/components/header";
 
 @Component({
   components: {
     HeaderDefault,
     HeaderSearch,
-    HeaderCurrenciesDesktop,
-    HeaderCurrenciesMobile,
-    HeaderLanguagesDesktop,
-    HeaderLanguagesMobile,
     HeaderMenuDesktop,
     HeaderMenuMobile,
   },

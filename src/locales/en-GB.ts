@@ -24,6 +24,7 @@ export default {
     WALLET: "Wallet",
     ACCEPT: "Accept",
     CANCEL: "Cancel",
+    SAVE: "Save",
   },
 
   DISCLAIMER: {
@@ -300,6 +301,15 @@ export default {
     SUPPLY: "Supply",
     MARKET_CAP: "Market Cap",
     TESTNET_LOCAL: "Testnet Local",
+  },
+
+  MODAL_SETTINGS: {
+    TITLE: "Explorer Settings",
+    DESCRIPTION: "Customize the Explorer to suit your needs",
+    CURRENCY: "Currency",
+    DARK_THEME: "Dark Theme",
+    PRICE_CHART: "Price Chart",
+    LANGUAGE: "Language",
   },
 
   FOOTER: {

@@ -15,7 +15,7 @@ button:disabled {
   transition: all 0.1s ease-in;
 }
 
-/* Pagination Buttons */
+/* Page & Pagination Buttons */
 
 .base-button {
   @apply .flex .flex-no-wrap .justify-center .items-center .bg-theme-button .text-theme-button-text .font-semibold .border-transparent .rounded .transition;
@@ -40,6 +40,13 @@ button:disabled {
   @apply .bg-blue .text-white .hover-button-shadow-definition .cursor-pointer;
 }
 
+.action-button {
+  @apply .base-button .bg-blue .text-white .py-2 .px-4;
+}
+
+.action-button:enabled:hover {
+  @apply .hover-button-shadow-definition .cursor-pointer;
+}
 
 /* Menu Buttons */
 

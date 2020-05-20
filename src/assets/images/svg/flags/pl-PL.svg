@@ -1,7 +1,0 @@
-<svg
- xmlns="http://www.w3.org/2000/svg"
- xmlns:xlink="http://www.w3.org/1999/xlink"
- viewBox="0 0 200 200" xml:space="preserve">
-<path style="fill:#F0F0F0;" d="M100,0C44.8,0,0,44.8,0,100h200C200,44.8,155.2,0,100,0z"/>
-<path style="fill:#D80027;" d="M200,100c0,55.2-44.8,100-100,100S0,155.2,0,100"/>
-</svg>
