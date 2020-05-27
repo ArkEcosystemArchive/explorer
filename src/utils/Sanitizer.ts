@@ -666,6 +666,7 @@ export class Sanitizer {
 
   public apply(value: string): string {
     if (value) {
+      value = this.sanitizeSpaces(value);
       value = this.removeSpam(value);
       value = this.removeBadWords(value);
     }
@@ -690,5 +691,15 @@ export class Sanitizer {
     ];
     censorify.set({ exceptions });
     return censorify.process(value);
+  }
+
+  private sanitizeSpaces(value: string): string {
+    // unicode space characters
+    value = value.replace(/[\u0020\u00a0\u2000-\u200a\u202f\u205f\u3000\u2800]/g, " ");
+
+    // unicode zero width space characters
+    value = value.replace(/[\u180e\u200b\ufeff]/g, "");
+
+    return value;
   }
 }
