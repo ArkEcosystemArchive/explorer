@@ -682,6 +682,7 @@ export class Sanitizer {
   private removeSpam(value: string): string {
     const censorify = new Censorify();
     const exceptions = [
+      new RegExp(/[+-]?\d+(\.\d+)/g),
       (match) => match.url === "http://dpos.arky-delegate.info",
       (match) => match.url === "http://arky-delegate.info",
       (match) => match.url === "https://arkfun.io/",
