@@ -690,15 +690,20 @@ export class Sanitizer {
       (match) => match.raw === "Arkrelay.com",
     ];
     censorify.set({ exceptions });
-    return censorify.process(value);
+    value = censorify.process(value);
+
+    const matches = value.match(/(?:https?|ftp|git):\/\/[\n\S]+/g) || [];
+
+    for (const match of matches) {
+        value = value.replace(match, Array(match.length + 1).join("*"));
+    }
+
+    return value;
   }
 
   private sanitizeSpaces(value: string): string {
     // unicode space characters
-    value = value.replace(/[\u0020\u00a0\u2000-\u200a\u202f\u205f\u3000\u2800]/g, " ");
-
-    // unicode zero width space characters
-    value = value.replace(/[\u180e\u200b\ufeff]/g, "");
+    value = value.replace(/[\u0020\u00a0\u2000-\u200a\u202f\u205f\u3000]/g, " ");
 
     return value;
   }
