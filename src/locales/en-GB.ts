@@ -28,6 +28,7 @@ export default {
     UNFILTERED: "Unfiltered",
     FILTERED: "Filtered",
     HIDDEN: "Hidden",
+    I_AGREE: "I Agree",
   },
 
   DISCLAIMER: {
@@ -35,6 +36,8 @@ export default {
     TEXT1:
       "The following page is a directory for informational purposes only. {website} is in no way affiliated with the listed individuals and/or business and bridgechain entities listed herein. All links provided herein are third party websites that have not been verified and are owned by independent parties over which {website} has no control. {website} does not endorse or approve and makes no warranties, representations or undertakings relating to the content of third party websites.",
     TEXT2: "By clicking “Accept” you will be confirming that you have read and are in agreement with all terms herein.",
+    TEXT3:
+      "I agree by choosing to display the vendorfield, you accept that text from third parties outside of ARK.io's control may post text that cannot be censored, removed, or manipulated. ARK.io assumes no responsibility for the content and/or nature of the text displayed and the harm and/or liability that may arise over accessing such text.",
   },
 
   MARKET_CHART: {
