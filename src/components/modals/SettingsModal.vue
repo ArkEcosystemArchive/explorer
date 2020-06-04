@@ -1,6 +1,6 @@
 <template>
   <Modal @close="emitClose">
-    <div class="SettingsModal" style="max-width: 400px;">
+    <div class="SettingsModal" style="width: 400px;">
       <div class="SettingsModal__header">
         <h2 class="text-3xl mb-4">{{ $t("MODAL_SETTINGS.TITLE") }}</h2>
         <p class="semibold text-grey mb-6">{{ $t("MODAL_SETTINGS.DESCRIPTION") }}</p>
@@ -47,7 +47,8 @@
           </ListDividedItem>
         </ListDivided>
 
-        <div class="text-justify">
+        <div v-if="showDisclaimer" class="text-justify">
+          <div class="pt-4 my-5 border-t border-theme-line-separator"></div>
           <p class="text-red semibold mb-2">{{ $t("DISCLAIMER.TITLE") }}:</p>
           <i18n path="DISCLAIMER.TEXT3" tag="p">
             <template v-slot:website>
@@ -78,7 +79,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import moment from "moment";
 import { I18N } from "@/config";
@@ -101,6 +102,7 @@ export default class SettingsModal extends Vue {
   private currencyName: string;
   private currencySymbol: string;
   private smartbridgeFilter: string;
+  private showDisclaimer = false;
   private nightMode: boolean;
   private chartMode: boolean;
   private language: string;
@@ -151,6 +153,9 @@ export default class SettingsModal extends Vue {
     if (name === "currency") {
       this.currencyName = value;
       this.currencySymbol = this.networkCurrencies[value];
+    } else if (name === "smartbridge-filter") {
+      this.smartbridgeFilter = value;
+      this.showDisclaimer = value === "unfiltered";
     } else if (name === "language") {
       this.language = value;
     }
