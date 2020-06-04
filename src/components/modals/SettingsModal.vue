@@ -1,6 +1,6 @@
 <template>
   <Modal @close="emitClose">
-    <div class="SettingsModal">
+    <div class="SettingsModal" style="max-width: 400px;">
       <div class="SettingsModal__header">
         <h2 class="text-3xl mb-4">{{ $t("MODAL_SETTINGS.TITLE") }}</h2>
         <p class="semibold text-grey mb-6">{{ $t("MODAL_SETTINGS.DESCRIPTION") }}</p>
@@ -46,6 +46,23 @@
             />
           </ListDividedItem>
         </ListDivided>
+
+        <div class="text-justify">
+          <p class="text-red semibold mb-2">{{ $t("DISCLAIMER.TITLE") }}:</p>
+          <i18n path="DISCLAIMER.TEXT3" tag="p">
+            <template v-slot:website>
+              <a href="https://ark.io/" target="_blank">ARK.io</a>
+            </template>
+          </i18n>
+          <div class="flex justify-center mt-3 mb-9">
+            <label class="flex items-center text-gray-500 font-bold">
+              <input type="checkbox" class="mr-2 leading-tight" />
+              <span class="text-sm">
+                {{ $t("COMMON.I_AGREE") }}
+              </span>
+            </label>
+          </div>
+        </div>
       </div>
 
       <div class="SettingsModal__footer flex flex-row justify-center md:justify-start mt-5">
