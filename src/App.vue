@@ -62,7 +62,7 @@ export default class App extends Vue {
     MigrationService.executeMigrations();
 
     const network = require(`../networks/${process.env.VUE_APP_EXPLORER_CONFIG}`);
-
+    const smartbridgeFilter = localStorage.getItem("smartbridgeFilter") || "filtered";
     const nightMode = localStorage.getItem("nightMode");
 
     let nightModeBoolean = nightMode === "true" ? true : false;
@@ -71,10 +71,9 @@ export default class App extends Vue {
       nightModeBoolean = network.alias === "Development";
     }
 
+    this.$store.dispatch("ui/setSmartbridgeFilter", smartbridgeFilter);
     this.$store.dispatch("ui/setNightMode", nightModeBoolean);
-
     this.$store.dispatch("network/setDefaults", network.defaults);
-
     this.$store.dispatch("network/setServer", network.server);
     this.$store.dispatch("network/setAlias", network.alias);
     this.$store.dispatch("network/setActiveDelegates", network.activeDelegates);
