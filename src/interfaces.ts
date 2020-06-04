@@ -242,6 +242,7 @@ export interface INetworkState {
 export interface IUiState {
   language: string;
   locale: string;
+  smartbridgeFilter: string;
   nightMode: boolean;
   priceChartOptions: {
     enabled: boolean;
