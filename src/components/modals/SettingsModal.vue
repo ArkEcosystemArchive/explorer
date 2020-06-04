@@ -24,7 +24,7 @@
           <ListDividedItem :label="$t('MODAL_SETTINGS.SMARTBRIDGE_FILTER')">
             <InputSelect
               :select-options="selectSmartbridgeFilter"
-              :value="currencyName"
+              :value="smartbridgeFilter"
               name="smartbridge-filter"
               class="SettingsModal__inputSelect SettingsModal__select__smartbridge-filter"
               @input="onSelectChange"
@@ -83,11 +83,16 @@ export default class SettingsModal extends Vue {
   private networkDefaults: any;
   private currencyName: string;
   private currencySymbol: string;
+  private smartbridgeFilter: string;
   private nightMode: boolean;
   private chartMode: boolean;
   private language: string;
 
-  private readonly smartbridgeFilterTypes = ["COMMON.UNFILTERED", "COMMON.FILTERED", "COMMON.HIDDEN"];
+  private readonly smartbridgeFilterTypes = {
+    unfiltered: "COMMON.UNFILTERED",
+    filtered: "COMMON.FILTERED",
+    hidden: "COMMON.HIDDEN",
+  };
 
   get showCurrency(): boolean {
     return this.networkDefaults.priceChartOptions.enabled;
@@ -101,9 +106,9 @@ export default class SettingsModal extends Vue {
   }
 
   get selectSmartbridgeFilter() {
-    return this.smartbridgeFilterTypes.map((type: string) => ({
-      value: this.$t(type),
-      display: this.$t(type),
+    return Object.keys(this.smartbridgeFilterTypes).map((type: string) => ({
+      value: type,
+      display: this.$t(this.smartbridgeFilterTypes[type]),
     }));
   }
 
@@ -117,6 +122,7 @@ export default class SettingsModal extends Vue {
   public created() {
     this.currencyName = this.$store.getters["currency/name"];
     this.currencySymbol = this.$store.getters["currency/symbol"];
+    this.smartbridgeFilter = this.$store.getters["ui/smartbridgeFilter"];
     this.nightMode = this.$store.getters["ui/nightMode"];
     this.chartMode = this.$store.getters["ui/priceChartOptions"].enabled;
     this.language = this.$store.getters["ui/language"];
