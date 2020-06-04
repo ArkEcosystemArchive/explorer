@@ -25,6 +25,9 @@ export default {
     ACCEPT: "Accept",
     CANCEL: "Cancel",
     SAVE: "Save",
+    UNFILTERED: "Unfiltered",
+    FILTERED: "Filtered",
+    HIDDEN: "Hidden",
   },
 
   DISCLAIMER: {
@@ -307,6 +310,7 @@ export default {
     TITLE: "Explorer Settings",
     DESCRIPTION: "Customize the Explorer to suit your needs",
     CURRENCY: "Currency",
+    SMARTBRIDGE_FILTER: "Smartbridge Filter",
     DARK_THEME: "Dark Theme",
     PRICE_CHART: "Price Chart",
     LANGUAGE: "Language",

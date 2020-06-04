@@ -21,6 +21,15 @@
               @input="onSelectChange"
             />
           </ListDividedItem>
+          <ListDividedItem :label="$t('MODAL_SETTINGS.SMARTBRIDGE_FILTER')">
+            <InputSelect
+              :select-options="selectSmartbridgeFilter"
+              :value="currencyName"
+              name="smartbridge-filter"
+              class="SettingsModal__inputSelect SettingsModal__select__smartbridge-filter"
+              @input="onSelectChange"
+            />
+          </ListDividedItem>
           <ListDividedItem :label="$t('MODAL_SETTINGS.DARK_THEME')">
             <ButtonSwitch :is-active="nightMode" class="SettingsModal__toggle__darkTheme mt-2" @change="toggleTheme" />
           </ListDividedItem>
@@ -78,6 +87,8 @@ export default class SettingsModal extends Vue {
   private chartMode: boolean;
   private language: string;
 
+  private readonly smartbridgeFilterTypes = ["COMMON.UNFILTERED", "COMMON.FILTERED", "COMMON.HIDDEN"];
+
   get showCurrency(): boolean {
     return this.networkDefaults.priceChartOptions.enabled;
   }
@@ -86,6 +97,13 @@ export default class SettingsModal extends Vue {
     return Object.keys(this.networkCurrencies).map((currency: string) => ({
       value: currency,
       display: currency,
+    }));
+  }
+
+  get selectSmartbridgeFilter() {
+    return this.smartbridgeFilterTypes.map((type: string) => ({
+      value: this.$t(type),
+      display: this.$t(type),
     }));
   }
 
