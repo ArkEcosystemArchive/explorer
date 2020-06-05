@@ -1,6 +1,6 @@
 <template>
   <Modal @close="emitClose">
-    <div class="SettingsModal" style="width: 400px;">
+    <div class="SettingsModal" style="max-width: 400px;">
       <div class="SettingsModal__header">
         <h2 class="text-3xl mb-4">{{ $t("MODAL_SETTINGS.TITLE") }}</h2>
         <p class="semibold text-grey mb-6">{{ $t("MODAL_SETTINGS.DESCRIPTION") }}</p>
@@ -57,20 +57,27 @@
           </i18n>
           <div class="flex justify-center mt-3 mb-9">
             <label class="flex items-center text-gray-500 font-bold">
-              <input type="checkbox" class="mr-2 leading-tight" />
-              <span class="text-sm">
-                {{ $t("COMMON.I_AGREE") }}
-              </span>
+              <input
+                type="checkbox"
+                class="mr-2 leading-tight"
+                :checked="hasAcceptedTerms"
+                @change="toggleAcceptTerms"
+              />
+              <span class="text-sm">{{ $t("COMMON.I_AGREE") }}</span>
             </label>
           </div>
         </div>
       </div>
 
       <div class="SettingsModal__footer flex flex-row justify-center md:justify-start mt-5">
-        <button :disabled="isLoading" class="pager-button mr-3" @click="emitClose">
+        <button class="SettingsModal__button_cancel pager-button mr-3" :disabled="isLoading" @click="emitClose">
           {{ $t("COMMON.CANCEL") }}
         </button>
-        <button :disabled="isLoading" class="action-button py-4 px-8" @click="save">
+        <button
+          class="SettingsModal__button_save action-button py-4 px-8"
+          :disabled="(showDisclaimer && !hasAcceptedTerms) || isLoading"
+          @click="save"
+        >
           {{ $t("COMMON.SAVE") }}
         </button>
       </div>
@@ -96,16 +103,17 @@ import { ListDivided, ListDividedItem } from "@/components/utils/listDivided";
   },
 })
 export default class SettingsModal extends Vue {
-  private isLoading = false;
   private networkCurrencies: string[];
   private networkDefaults: any;
   private currencyName: string;
   private currencySymbol: string;
-  private smartbridgeFilter: string;
-  private showDisclaimer = false;
+  private smartbridgeFilter = "filtered";
   private nightMode: boolean;
   private chartMode: boolean;
   private language: string;
+  private isAcceptTerms = false;
+  private notShowDisclaimer = false;
+  private isLoading = false;
 
   private readonly smartbridgeFilterTypes = {
     unfiltered: "COMMON.UNFILTERED",
@@ -138,6 +146,14 @@ export default class SettingsModal extends Vue {
     }));
   }
 
+  get showDisclaimer() {
+    return this.smartbridgeFilter === "unfiltered" && !this.notShowDisclaimer;
+  }
+
+  get hasAcceptedTerms() {
+    return this.isAcceptTerms;
+  }
+
   public created() {
     this.currencyName = this.$store.getters["currency/name"];
     this.currencySymbol = this.$store.getters["currency/symbol"];
@@ -145,6 +161,8 @@ export default class SettingsModal extends Vue {
     this.nightMode = this.$store.getters["ui/nightMode"];
     this.chartMode = this.$store.getters["ui/priceChartOptions"].enabled;
     this.language = this.$store.getters["ui/language"];
+    this.isAcceptTerms = this.$store.getters["ui/hasAcceptedSmartbridgeFilterDisclaimer"];
+    this.notShowDisclaimer = this.$store.getters["ui/hasAcceptedSmartbridgeFilterDisclaimer"];
   }
 
   private onSelectChange(event: any) {
@@ -155,7 +173,8 @@ export default class SettingsModal extends Vue {
       this.currencySymbol = this.networkCurrencies[value];
     } else if (name === "smartbridge-filter") {
       this.smartbridgeFilter = value;
-      this.showDisclaimer = value === "unfiltered";
+      this.isAcceptTerms = false;
+      this.notShowDisclaimer = false;
     } else if (name === "language") {
       this.language = value;
     }
@@ -175,6 +194,10 @@ export default class SettingsModal extends Vue {
     moment.locale(language);
   }
 
+  private toggleAcceptTerms() {
+    this.isAcceptTerms = !this.isAcceptTerms;
+  }
+
   private toggleTheme() {
     this.nightMode = !this.nightMode;
   }
@@ -189,6 +212,11 @@ export default class SettingsModal extends Vue {
     if (this.currencyName !== this.$store.getters["currency/name"]) {
       const rate = await CryptoCompareService.price(this.currencyName);
       this.storeCurrency(this.currencyName, rate!, this.currencySymbol);
+    }
+
+    if (this.smartbridgeFilter !== this.$store.getters["ui/smartbridgeFilter"]) {
+      this.$store.dispatch("ui/setSmartbridgeFilter", this.smartbridgeFilter);
+      this.$store.dispatch("ui/setHasAcceptedSmartbridgeFilterDisclaimer", this.isAcceptTerms);
     }
 
     if (this.nightMode !== this.$store.getters["ui/nightMode"]) {
@@ -223,5 +251,9 @@ export default class SettingsModal extends Vue {
 }
 .SettingsModal .SettingsModal__inputSelect .InputField__input {
   @apply .border-none .pt-0 .h-full;
+}
+
+.SettingsModal__button_save:disabled {
+  @apply .cursor-not-allowed;
 }
 </style>
