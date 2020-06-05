@@ -47,7 +47,7 @@
           </ListDividedItem>
         </ListDivided>
 
-        <div v-if="showDisclaimer" class="text-justify">
+        <div v-if="showDisclaimer" class="SettingsModal__disclaimer text-justify">
           <div class="pt-4 my-5 border-t border-theme-line-separator"></div>
           <p class="text-red semibold mb-2">{{ $t("DISCLAIMER.TITLE") }}:</p>
           <i18n path="DISCLAIMER.TEXT3" tag="p">
@@ -59,7 +59,7 @@
             <label class="flex items-center text-gray-500 font-bold">
               <input
                 type="checkbox"
-                class="mr-2 leading-tight"
+                class="SettingsModal__disclaimer__terms__checkbox mr-2 leading-tight"
                 :checked="hasAcceptedTerms"
                 @change="toggleAcceptTerms"
               />
@@ -70,11 +70,11 @@
       </div>
 
       <div class="SettingsModal__footer flex flex-row justify-center md:justify-start mt-5">
-        <button class="SettingsModal__button_cancel pager-button mr-3" :disabled="isLoading" @click="emitClose">
+        <button class="SettingsModal__cancel__button pager-button mr-3" :disabled="isLoading" @click="emitClose">
           {{ $t("COMMON.CANCEL") }}
         </button>
         <button
-          class="SettingsModal__button_save action-button py-4 px-8"
+          class="SettingsModal__save__button action-button py-4 px-8"
           :disabled="(showDisclaimer && !hasAcceptedTerms) || isLoading"
           @click="save"
         >
@@ -260,7 +260,7 @@ export default class SettingsModal extends Vue {
   @apply .border-none .pt-0 .h-full;
 }
 
-.SettingsModal .SettingsModal__button_save:disabled {
+.SettingsModal .SettingsModal__save__button:disabled {
   @apply .cursor-not-allowed;
 }
 
