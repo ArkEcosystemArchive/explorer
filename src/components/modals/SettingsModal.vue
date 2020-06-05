@@ -146,6 +146,7 @@ export default class SettingsModal extends Vue {
     }));
   }
 
+  // No longer show the disclaimer if the user has accepted the terms
   get showDisclaimer() {
     return this.smartbridgeFilter === "unfiltered" && !this.notShowDisclaimer;
   }
