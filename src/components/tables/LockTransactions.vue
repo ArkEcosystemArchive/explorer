@@ -66,6 +66,7 @@ import CryptoCompareService from "@/services/crypto-compare";
   computed: {
     ...mapGetters("network", ["activeDelegates", "isListed"]),
     ...mapGetters("currency", { currencySymbol: "symbol" }),
+    ...mapGetters("ui", ["smartbridgeFilter"]),
   },
 })
 export default class LockTransactionsDesktop extends Vue {
@@ -80,6 +81,7 @@ export default class LockTransactionsDesktop extends Vue {
   private activeDelegates: IDelegate[];
   private isListed: boolean;
   private currencySymbol: string;
+  private smartbridgeFilter: string;
 
   get columns() {
     const columns = [
@@ -106,6 +108,7 @@ export default class LockTransactionsDesktop extends Vue {
         field: "vendorField",
         thClass: "text-right cell-smartbridge",
         tdClass: "text-right cell-smartbridge",
+        hidden: this.smartbridgeFilter === "hidden",
       },
       {
         label: this.$t("TRANSACTION.AMOUNT"),
@@ -120,6 +123,10 @@ export default class LockTransactionsDesktop extends Vue {
   }
 
   get showSmartBridgeIcon() {
+    if (this.smartbridgeFilter === 'hidden') {
+      return false;
+    }
+
     return this.transactions!.some((transaction) => {
       return !!transaction.vendorField;
     });
