@@ -1,6 +1,6 @@
 <template>
   <Modal @close="emitClose">
-    <div class="SettingsModal" style="max-width: 400px;">
+    <div class="SettingsModal">
       <div class="SettingsModal__header">
         <h2 class="text-3xl mb-4">{{ $t("MODAL_SETTINGS.TITLE") }}</h2>
         <p class="semibold text-grey mb-6">{{ $t("MODAL_SETTINGS.DESCRIPTION") }}</p>
@@ -10,7 +10,7 @@
         <Loader :data="null" />
       </div>
 
-      <div class="SettingsModal__content">
+      <div :class="{ 'SettingsModal__content__disclaimer--show': showDisclaimer }" class="SettingsModal__content p-0">
         <ListDivided>
           <ListDividedItem v-if="showCurrency" :label="$t('MODAL_SETTINGS.CURRENCY')">
             <InputSelect
@@ -244,6 +244,10 @@ export default class SettingsModal extends Vue {
 </script>
 
 <style>
+.SettingsModal {
+  max-width: 400px;
+}
+
 .SettingsModal .ListDividedItem__container__label {
   @apply .mr-10;
 }
@@ -255,7 +259,14 @@ export default class SettingsModal extends Vue {
   @apply .border-none .pt-0 .h-full;
 }
 
-.SettingsModal__button_save:disabled {
+.SettingsModal .SettingsModal__button_save:disabled {
   @apply .cursor-not-allowed;
+}
+
+@media (max-height: 768px) {
+  .SettingsModal .SettingsModal__content__disclaimer--show {
+    @apply .pr-3 .overflow-auto;
+    max-height: 400px;
+  }
 }
 </style>
