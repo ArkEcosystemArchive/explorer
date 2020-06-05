@@ -123,7 +123,7 @@ export default class LockTransactionsDesktop extends Vue {
   }
 
   get showSmartBridgeIcon() {
-    if (this.smartbridgeFilter === 'hidden') {
+    if (this.smartbridgeFilter === "hidden") {
       return false;
     }
 

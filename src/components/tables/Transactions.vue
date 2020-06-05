@@ -169,7 +169,7 @@ export default class TableTransactionsDesktop extends Vue {
   }
 
   get showSmartBridgeIcon() {
-    if (this.smartbridgeFilter === 'hidden') {
+    if (this.smartbridgeFilter === "hidden") {
       return false;
     }
 

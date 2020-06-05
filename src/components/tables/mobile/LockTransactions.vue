@@ -44,7 +44,10 @@
           />
         </div>
 
-        <div v-if="smartbridgeFilter !== 'hidden' && truncate(transaction.vendorField || '')" class="list-row-border-b-no-wrap">
+        <div
+          v-if="smartbridgeFilter !== 'hidden' && truncate(transaction.vendorField || '')"
+          class="list-row-border-b-no-wrap"
+        >
           <div class="mr-4">
             {{ $t("TRANSACTION.SMARTBRIDGE") }}
           </div>
