@@ -260,7 +260,6 @@ export interface IUiState {
   walletSearchSortParams: string | null;
   walletTransactionTab: string | null;
   hasAcceptedLinkDisclaimer: boolean;
-  hasAcceptedSmartbridgeFilterDisclaimer: boolean;
 }
 
 export interface IStorePayload {

@@ -161,8 +161,11 @@ export default class SettingsModal extends Vue {
     this.nightMode = this.$store.getters["ui/nightMode"];
     this.chartMode = this.$store.getters["ui/priceChartOptions"].enabled;
     this.language = this.$store.getters["ui/language"];
-    this.isAcceptTerms = this.$store.getters["ui/hasAcceptedSmartbridgeFilterDisclaimer"];
-    this.notShowDisclaimer = this.$store.getters["ui/hasAcceptedSmartbridgeFilterDisclaimer"];
+
+    if (this.smartbridgeFilter === "unfiltered") {
+      this.isAcceptTerms = true;
+      this.notShowDisclaimer = true;
+    }
   }
 
   private onSelectChange(event: any) {
@@ -216,7 +219,6 @@ export default class SettingsModal extends Vue {
 
     if (this.smartbridgeFilter !== this.$store.getters["ui/smartbridgeFilter"]) {
       this.$store.dispatch("ui/setSmartbridgeFilter", this.smartbridgeFilter);
-      this.$store.dispatch("ui/setHasAcceptedSmartbridgeFilterDisclaimer", this.isAcceptTerms);
     }
 
     if (this.nightMode !== this.$store.getters["ui/nightMode"]) {

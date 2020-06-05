@@ -17,7 +17,6 @@ const state: IUiState = {
   headerType: null,
   menuVisible: false,
   hasAcceptedLinkDisclaimer: false,
-  hasAcceptedSmartbridgeFilterDisclaimer: false,
   blockSortParams: null,
   businessSortParams: null,
   bridgechainSortParams: null,
@@ -88,14 +87,6 @@ const actions: ActionTree<IUiState, {}> = {
 
     commit({
       type: types.SET_UI_HAS_ACCEPTED_LINK_DISCLAIMER,
-      value,
-    });
-  },
-  setHasAcceptedSmartbridgeFilterDisclaimer: ({ commit }, value: boolean) => {
-    localStorage.setItem("hasAcceptedSmartbridgeFilterDisclaimer", JSON.stringify(value));
-
-    commit({
-      type: types.SET_UI_HAS_ACCEPTED_SMARTBRIDGE_FILTER_DISCLAIMER,
       value,
     });
   },
@@ -213,9 +204,6 @@ const mutations: MutationTree<IUiState> = {
   [types.SET_UI_HAS_ACCEPTED_LINK_DISCLAIMER](state, payload: IStorePayload) {
     state.hasAcceptedLinkDisclaimer = payload.value;
   },
-  [types.SET_UI_HAS_ACCEPTED_SMARTBRIDGE_FILTER_DISCLAIMER](state, payload: IStorePayload) {
-    state.hasAcceptedSmartbridgeFilterDisclaimer = payload.value;
-  },
   [types.SET_UI_PRICE_CHART_OPTIONS](state, payload: IStorePayload) {
     state.priceChartOptions = payload.value;
   },
@@ -256,12 +244,6 @@ const getters: GetterTree<IUiState, {}> = {
 
   hasAcceptedLinkDisclaimer(state) {
     return state.hasAcceptedLinkDisclaimer || localStorage.getItem("hasAcceptedLinkDisclaimer");
-  },
-
-  hasAcceptedSmartbridgeFilterDisclaimer(state) {
-    return (
-      state.hasAcceptedSmartbridgeFilterDisclaimer || localStorage.getItem("hasAcceptedSmartbridgeFilterDisclaimer")
-    );
   },
 
   blockSortParams(state) {
