@@ -7,11 +7,16 @@ import emoji from "node-emoji";
 const sanitizeVendorField = (transaction: ITransaction) => {
   if (transaction.vendorField) {
     const sanitizer = new Sanitizer();
+    const smartbridgeFilter = localStorage.getItem("smartbridgeFilter") || "filtered";
 
-    if (sanitizer.isBad(transaction.vendorField)) {
-      delete transaction.vendorField;
-    } else {
+    if (smartbridgeFilter === "unfiltered") {
       transaction.vendorField = sanitizer.apply(emoji.emojify(transaction.vendorField));
+    } else {
+      if (sanitizer.isBad(transaction.vendorField)) {
+        delete transaction.vendorField;
+      } else {
+        transaction.vendorField = sanitizer.apply(emoji.emojify(transaction.vendorField));
+      }
     }
   }
 
