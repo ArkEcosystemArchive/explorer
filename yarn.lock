@@ -2868,10 +2868,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"animate.css@npm:^3.7.2":
-  version: 3.7.2
-  resolution: "animate.css@npm:3.7.2"
-  checksum: 3/6b5be1b5fea17fda69f44aa81c38e48093ac00e0025c6329c15b340c7b54e49e1b4d6f120ca78b28febd966be26bf5c0b5d73d63420d78a977ccda224faae964
+"animate.css@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "animate.css@npm:4.1.0"
+  checksum: 3/96d8192e1c1c33707bfb8fdd74246adb491d3ab849d2b0a3435f0b9fcf4adb8e14b07013595b38e0d02c8ab276032e3b4f31609c7a8385a45b1a3f9474140cbb
   languageName: node
   linkType: hard
 
@@ -3053,7 +3053,7 @@ __metadata:
     "@vue/eslint-config-typescript": ^5.0.2
     "@vue/test-utils": ^1.0.2
     "@yarnpkg/pnpify": ^2.0.0-rc.22
-    animate.css: ^3.7.2
+    animate.css: ^4.1.0
     axios: ^0.19.2
     babel-core: 7.0.0-bridge.0
     bad-words: ^3.0.3
