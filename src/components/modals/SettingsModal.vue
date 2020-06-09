@@ -56,14 +56,14 @@
             </template>
           </i18n>
           <div class="flex justify-center mt-3 mb-9">
-            <label class="flex items-center text-gray-500 font-bold">
+            <label class="flex items-center text-gray-500">
               <input
                 type="checkbox"
                 class="SettingsModal__disclaimer__terms__checkbox mr-2 leading-tight"
                 :checked="hasAcceptedTerms"
                 @change="toggleAcceptTerms"
               />
-              <span class="text-sm">{{ $t("COMMON.I_AGREE") }}</span>
+              <span class="text-sm font-bold">{{ $t("COMMON.I_AGREE") }}</span>
             </label>
           </div>
         </div>
@@ -261,7 +261,7 @@ export default class SettingsModal extends Vue {
 }
 
 .SettingsModal .SettingsModal__save__button:disabled {
-  @apply .cursor-not-allowed;
+  @apply .bg-theme-button .opacity-75 .cursor-not-allowed;
 }
 
 @media (max-height: 768px) {
