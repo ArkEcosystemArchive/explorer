@@ -1,5 +1,5 @@
 <template>
-  <Modal @close="emitClose">
+  <Modal @close="emitClose" container-classes="bg-theme-content-background">
     <div class="SettingsModal">
       <div class="SettingsModal__header">
         <h2 class="text-3xl mb-4">{{ $t("MODAL_SETTINGS.TITLE") }}</h2>
