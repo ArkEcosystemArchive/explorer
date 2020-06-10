@@ -1,6 +1,12 @@
 <template>
   <button v-tooltip="getTooltip()" class="ClipboardButton" @click="copy">
-    <SvgIcon ref="copyImage" :class="{ 'animated wobble': copying }" class="block" name="copy" view-box="0 0 16 19" />
+    <SvgIcon
+      ref="copyImage"
+      :class="{ 'animate__animated animate__wobble': copying }"
+      class="block"
+      name="copy"
+      view-box="0 0 16 19"
+    />
   </button>
 </template>
 
