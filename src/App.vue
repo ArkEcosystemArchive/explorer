@@ -72,9 +72,7 @@ export default class App extends Vue {
     }
 
     this.$store.dispatch("ui/setNightMode", nightModeBoolean);
-
     this.$store.dispatch("network/setDefaults", network.defaults);
-
     this.$store.dispatch("network/setServer", network.server);
     this.$store.dispatch("network/setAlias", network.alias);
     this.$store.dispatch("network/setActiveDelegates", network.activeDelegates);
@@ -120,6 +118,8 @@ export default class App extends Vue {
         console.log(e.message || e.data.error);
       }
     }
+
+    this.$store.dispatch("ui/setSmartbridgeFilter", localStorage.getItem("smartbridgeFilter") || "filtered");
 
     this.$store.dispatch("ui/setLanguage", localStorage.getItem("language") || "en-GB");
 
