@@ -5,10 +5,10 @@ describe("Transaction Details", () => {
 
   it("should be possible to copy the transaction id", () => {
     cy.get(".ClipboardButton svg.block").as("btn");
-    cy.get("@btn").should("not.have.class", "animated");
+    cy.get("@btn").should("not.have.class", "animate__animated");
     cy.get("@btn")
       .click()
-      .should("not.class", "animated");
+      .should("not.class", "animate__animated");
   });
 
   it("should be possible to click on the sender", () => {
