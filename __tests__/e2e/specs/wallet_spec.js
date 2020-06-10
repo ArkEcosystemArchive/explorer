@@ -5,10 +5,10 @@ describe("Wallet", () => {
     cy.get(".ClipboardButton svg.block")
       .first()
       .as("btn");
-    cy.get("@btn").should("not.have.class", "animated");
+    cy.get("@btn").should("not.have.class", "animate__animated");
     cy.get("@btn")
       .click()
-      .should("have.class", "animated");
+      .should("have.class", "animate__animated");
   });
 
   it("should show the wallet's balance", () => {
