@@ -11,7 +11,7 @@ const sanitizeVendorField = (transaction: ITransaction) => {
     const smartbridgeFilter = store.getters["ui/smartbridgeFilter"];
 
     if (smartbridgeFilter === "unfiltered") {
-      transaction.vendorField = sanitizer.apply(emoji.emojify(transaction.vendorField));
+      transaction.vendorField = emoji.emojify(transaction.vendorField);
     } else {
       if (sanitizer.isBad(transaction.vendorField)) {
         delete transaction.vendorField;
