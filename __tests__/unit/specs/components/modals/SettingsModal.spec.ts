@@ -105,6 +105,65 @@ describe("Components > Modals > SettingsModal", () => {
     });
   });
 
+  describe("Smartbridge Filter", () => {
+    it("should show the smartbridge filter", () => {
+      wrapper = mountComponent();
+
+      const el = wrapper.find(".SettingsModal__select__smartbridge-filter");
+
+      expect(el.findAll("option")).toHaveLength(3);
+      expect(el.findAll("option").at(0).text()).toBe("Unfiltered");
+      expect(el.findAll("option").at(1).text()).toBe("Filtered");
+      expect(el.findAll("option").at(2).text()).toBe("Hidden");
+    });
+
+    it("should change the smartbridge filter" => () {
+      wrapper = mountComponent();
+
+      wrapper.find(".SettingsModal__select__smartbridge-filter").vm.$emit("input", {
+        target: {
+          name: "smartbridge-filter",
+          value: "hidden",
+        }
+      });
+
+      expect(wrapper.vm.smartbridgeFilter).toBe("hidden");
+    });
+
+    it("should show disclaimer" => () {
+      wrapper = mountComponent();
+
+      wrapper.find(".SettingsModal__select__smartbridge-filter").vm.$emit("input", {
+        target: {
+          name: "smartbridge-filter",
+          value: "Unfiltered",
+        }
+      });
+
+      wrapper.vm.$nextTick(() => {
+        const div = wrapper.find(".SettingsModal__disclaimer");
+        expect(div.isVisible()).toBeTrue();
+      });
+    });
+
+    it("should accept the disclaimer" => () {
+      wrapper = mountComponent();
+
+      wrapper.find(".SettingsModal__select__smartbridge-filter").vm.$emit("input", {
+        target: {
+          name: "smartbridge-filter",
+          value: "Unfiltered",
+        }
+      });
+
+      wrapper.vm.$nextTick(() => {
+        const checkbox = wrapper.find(".SettingsModal__disclaimer__terms__checkbox");
+        checkbox.trigger("click");
+        expect(wrapper.vm.isAcceptTerms).toBe(true);
+      });
+    });
+  });
+
   describe("Dark Theme", () => {
     it("should toggle to night mode", done => {
       wrapper = mountComponent();

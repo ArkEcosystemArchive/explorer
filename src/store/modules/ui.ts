@@ -7,6 +7,7 @@ const namespaced = true;
 const state: IUiState = {
   language: "en-GB",
   locale: navigator.language || "en-GB",
+  smartbridgeFilter: "filtered",
   nightMode: false,
   priceChartOptions: {
     enabled: true,
@@ -40,6 +41,14 @@ const actions: ActionTree<IUiState, {}> = {
 
     commit({
       type: types.SET_UI_LOCALE,
+      value,
+    });
+  },
+  setSmartbridgeFilter: ({ commit }, value: string) => {
+    localStorage.setItem("smartbridgeFilter", value);
+
+    commit({
+      type: types.SET_UI_SMARTBRIDGE_FILTER,
       value,
     });
   },
@@ -180,6 +189,9 @@ const mutations: MutationTree<IUiState> = {
   [types.SET_UI_LOCALE](state, payload: IStorePayload) {
     state.locale = payload.value;
   },
+  [types.SET_UI_SMARTBRIDGE_FILTER](state, payload: IStorePayload) {
+    state.smartbridgeFilter = payload.value;
+  },
   [types.SET_UI_NIGHT_MODE](state, payload: IStorePayload) {
     state.nightMode = payload.value;
   },
@@ -224,6 +236,7 @@ const mutations: MutationTree<IUiState> = {
 const getters: GetterTree<IUiState, {}> = {
   language: (state) => state.language,
   locale: (state) => state.locale,
+  smartbridgeFilter: (state) => state.smartbridgeFilter,
   nightMode: (state) => state.nightMode,
   priceChartOptions: (state) => state.priceChartOptions,
   headerType: (state) => state.headerType,
