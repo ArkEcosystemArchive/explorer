@@ -28,8 +28,6 @@ const stringToHex = (text: string): string => Buffer.from(text).toString("hex");
 const publicKeyFromPassphrase = (passphrase: string): string => privateKeyFromPassphrase(passphrase).publicKey;
 
 const addressFromPublicKey = (publicKey: string): string => {
-  console.log(publicKey);
-  console.log(Buffer.from(publicKey, "hex"));
   const buffer = Buffer.from(new RIPEMD160().update(Buffer.from(publicKey, "hex")).digest("hex"), "hex");
   const payload = Buffer.alloc(21);
 
