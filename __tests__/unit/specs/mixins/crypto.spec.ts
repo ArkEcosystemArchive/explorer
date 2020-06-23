@@ -2,10 +2,9 @@ import { createLocalVue, shallowMount, Wrapper } from "@vue/test-utils";
 import CryptoMixin from "@/mixins/crypto";
 import store from "@/store";
 import Vue from "vue";
-import RIPEMD160 from "ripemd160";
 
 describe("Mixins > Crypto", () => {
-let wrapper: Wrapper<Vue>;
+  let wrapper: Wrapper<Vue>;
 
   beforeEach(() => {
     const localVue = createLocalVue();
