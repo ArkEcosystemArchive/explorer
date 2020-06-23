@@ -17,10 +17,14 @@ const privateKeyFromPassphrase = (passphrase: string): { publicKey: string; priv
   const privateKey: Buffer = Buffer.from(sync(passphrase), "hex");
 
   return {
-    publicKey: secp256k1.publicKeyCreate(privateKey, true).toString("hex"),
+    publicKey: stringToHex(secp256k1.publicKeyCreate(privateKey, true)),
     // @ts-ignore
     privateKey: privateKey.toString("hex"),
   };
+};
+
+const stringToHex = (text: string): string => {
+  return Buffer.from(text).toString("hex");
 };
 
 const publicKeyFromPassphrase = (passphrase: string): string => privateKeyFromPassphrase(passphrase).publicKey;
@@ -57,11 +61,7 @@ export default {
       const minKey: string = publicKeyFromPassphrase(numberToHex(min));
       const keys: Buffer[] = [minKey, ...publicKeys].map((p) => Buffer.from(p, "hex"));
 
-      return addressFromPublicKey(secp256k1.publicKeyCombine(keys, true).toString("hex"));
-    },
-
-    stringToHex(text: string): string {
-      return Buffer.from(text).toString("hex");
+      return addressFromPublicKey(stringToHex(secp256k1.publicKeyCombine(keys, true)));
     },
   },
 };
