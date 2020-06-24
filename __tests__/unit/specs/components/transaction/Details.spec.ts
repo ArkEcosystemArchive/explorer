@@ -26,8 +26,8 @@ describe("Components > Transaction > Details", () => {
             LinkWallet: "<div></div>",
           },
           mocks: {
-            addressFromPublicKey: () => "address",
-            addressFromMultiSignatureAsset: () => "multi-signature-address",
+            addressFromPublicKey: async () => "address",
+            addressFromMultiSignatureAsset: async () => "multi-signature-address",
             sanitizeVendorfield: (value) => value,
           },
           i18n,
