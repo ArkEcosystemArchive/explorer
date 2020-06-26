@@ -84,7 +84,6 @@ export default class App extends Vue {
     try {
       knownWallets = (await axios.get(knownWalletsUrls[process.env.VUE_APP_EXPLORER_CONFIG])).data;
     } catch (error) {
-      console.log(error)
       knownWallets = {};
     } finally {
       this.$store.dispatch("network/setKnownWallets", knownWallets);
