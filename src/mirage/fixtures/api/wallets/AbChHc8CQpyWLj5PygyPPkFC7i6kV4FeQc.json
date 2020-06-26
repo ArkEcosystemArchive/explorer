@@ -1,0 +1,30 @@
+{
+  "data": {
+    "address": "AbChHc8CQpyWLj5PygyPPkFC7i6kV4FeQc",
+    "publicKey": "0216c351be32d835ac3f10c0b95365d9d4d69fc2d74a95b0808a3faafdf714cb7b",
+    "nonce": "1203",
+    "balance": "18014333738",
+    "attributes": {
+      "delegate": {
+        "username": "royalties",
+        "voteBalance": "0",
+        "forgedFees": "0",
+        "forgedRewards": "0",
+        "producedBlocks": 0,
+        "resigned": true
+      },
+      "vote": "03364c62f7c5a7948dcaacdc72bac595e8f6e79944e722d05c8346d68aa1331b4a",
+      "business": {
+        "businessAsset": {
+          "name": "CryptologyLicenses",
+          "website": "https://cryptology.pe",
+          "repository": "https://github.com/wownmedia"
+        }
+      }
+    },
+    "isDelegate": true,
+    "isResigned": true,
+    "vote": "03364c62f7c5a7948dcaacdc72bac595e8f6e79944e722d05c8346d68aa1331b4a",
+    "username": "royalties"
+  }
+}

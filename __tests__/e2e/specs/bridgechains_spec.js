@@ -41,7 +41,7 @@ describe("Bridgechains", () => {
     });
   });
 
-  xit("should be possible to navigate to the next page and back", () => {
+  it.skip("should be possible to navigate to the next page and back", () => {
     // TODO: enable once we have more bridgechains
     cy.get("div.max-w-2xl").then($body => {
       if ($body.find("table").length) {
@@ -61,7 +61,7 @@ describe("Bridgechains", () => {
     });
   });
 
-  xit("should be possible to click on a creator address", () => {
+  it.skip("should be possible to click on a creator address", () => {
     // TODO: enable once we have bridgechains registered
     cy.get("div.max-w-2xl").then($body => {
       if ($body.find("table").length) {
