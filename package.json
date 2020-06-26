@@ -58,7 +58,7 @@
     "@fullhuman/postcss-purgecss": "^2.2.0",
     "@kazupon/vue-i18n-loader": "^0.5.0",
     "@types/bytebuffer": "^5.0.41",
-    "@types/jest": "^25.2.1",
+    "@types/jest": "^26.0.0",
     "@types/lodash": "^4.14.150",
     "@types/node-emoji": "^1.8.1",
     "@types/prettier": "^2.0.0",
