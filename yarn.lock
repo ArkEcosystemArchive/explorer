@@ -3081,6 +3081,7 @@ __metadata:
     eslint-plugin-simple-import-sort: ^5.0.3
     eslint-plugin-vue: ^6.2.2
     express: ^4.17.1
+    hash-wasm: ^3.3.0
     jest-extended: ^0.11.5
     jest-localstorage-mock: ^2.4.2
     lodash: ^4.17.15
@@ -3094,7 +3095,6 @@ __metadata:
     prettier: ^2.0.5
     prettier-eslint: ^9.0.1
     qrious: ^4.0.2
-    ripemd160: ^2.0.2
     secp256k1: ^4.0.1
     simple-sha256: ^1.0.0
     sinon: ^9.0.2
@@ -7828,6 +7828,13 @@ fsevents@~2.1.2:
   version: 2.0.0
   resolution: "hash-sum@npm:2.0.0"
   checksum: 3/9d833f05e8b9cb318ff0154c3864b0d2aaf4bd675a4b65377fb4d12eed13505423deb45e85b484affd71da3d3c8b8fe30e83bf81ca9a1dd6f3523043d9281e34
+  languageName: node
+  linkType: hard
+
+"hash-wasm@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "hash-wasm@npm:3.3.0"
+  checksum: 3/f3b5d01717c2d6dd7bf1eb479dd388058265e964d322b1df2557313f60f63cff9e4f6a201762a04e116e3b52c66d8e432df994c795553acab86e92c19a933150
   languageName: node
   linkType: hard
 
@@ -13759,7 +13766,7 @@ resolve@1.1.7:
   languageName: node
   linkType: hard
 
-"ripemd160@npm:^2.0.0, ripemd160@npm:^2.0.1, ripemd160@npm:^2.0.2":
+"ripemd160@npm:^2.0.0, ripemd160@npm:^2.0.1":
   version: 2.0.2
   resolution: "ripemd160@npm:2.0.2"
   dependencies:
