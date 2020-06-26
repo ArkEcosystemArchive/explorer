@@ -90,7 +90,7 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       this.get("/delegates", (schema, request) => {
-        const response = loadFixture("delegates");
+        const response = loadFixture(`delegates-page-${request.queryParams.page || 1}`);
 
         if (request.queryParams.limit) {
           response.data = response.data.slice(0, request.queryParams.limit);

@@ -3,7 +3,7 @@ describe("Homepage", () => {
     cy.visit("");
   });
 
-  it.only("should contain expected components", () => {
+  it.skip("should contain expected components", () => {
     cy.get(".bg-stat-background")
       .first()
       .children()
