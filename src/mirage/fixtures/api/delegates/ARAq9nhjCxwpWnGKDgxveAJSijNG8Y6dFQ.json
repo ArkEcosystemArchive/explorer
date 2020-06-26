@@ -1,0 +1,20 @@
+{
+  "data": {
+    "username": "arkpool",
+    "address": "ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ",
+    "publicKey": "02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b",
+    "votes": "171652775312301",
+    "rank": 12,
+    "isResigned": false,
+    "blocks": {
+      "produced": 249582,
+      "last": {
+        "id": "8cb8c0fb23ff766257f28b459554e78dd823d5d214f690ac5e8c238a2e0aee43",
+        "height": 12734045,
+        "timestamp": { "epoch": 103055368, "unix": 1593156568, "human": "2020-06-26T07:29:28.000Z" }
+      }
+    },
+    "production": { "approval": 1.14 },
+    "forged": { "fees": "552554332555", "rewards": "49748400000000", "total": "50300954332555" }
+  }
+}

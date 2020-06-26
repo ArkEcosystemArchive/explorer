@@ -1,4 +1,4 @@
-describe("Advanced Search", () => {
+describe.skip("Advanced Search", () => {
   beforeEach(() => {
     cy.visit("/advanced-search");
   });

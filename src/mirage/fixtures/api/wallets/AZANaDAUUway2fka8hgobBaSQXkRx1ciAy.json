@@ -1,0 +1,29 @@
+{
+  "data": {
+    "address": "AZANaDAUUway2fka8hgobBaSQXkRx1ciAy",
+    "publicKey": "03c6f8546a296ad828f64b4cc0e343acf93012717b6297dd33208912553be869c9",
+    "nonce": "5",
+    "balance": "30022868",
+    "attributes": {
+      "business": {
+        "businessAsset": { "name": "Zan", "website": "https://www.zan.com" },
+        "resigned": true,
+        "bridgechains": {
+          "2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867": {
+            "bridgechainAsset": {
+              "name": "ZanChain",
+              "ports": { "@arkecosystem/core-api": 4003 },
+              "seedNodes": ["185.16.61.97"],
+              "genesisHash": "2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867",
+              "bridgechainRepository": "https://github.com/",
+              "bridgechainAssetRepository": "https://github.com/"
+            },
+            "resigned": true
+          }
+        }
+      }
+    },
+    "isDelegate": false,
+    "isResigned": false
+  }
+}

@@ -61,7 +61,7 @@ describe("Transaction Details", () => {
       .should("include.text", "ARK ❤️ you");
   });
 
-  it("should refresh the confirmation count automatically", () => {
+  it.skip("should refresh the confirmation count automatically", () => {
     cy.get(".page-section")
       .find(".list-row-border-b")
       .eq(3)

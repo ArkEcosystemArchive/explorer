@@ -1,0 +1,39 @@
+{
+  "data": {
+    "address": "APTzMNCTPsDj6VcL8egi2weXJFgHGmCZGp",
+    "publicKey": "028fe98e42e159f2450a52371dfb23ae69a39fc5fee6545690b7f51bfcee933357",
+    "nonce": "1",
+    "balance": "3111952817563",
+    "attributes": {
+      "delegate": {
+        "username": "binance_staking",
+        "voteBalance": "335618537556133",
+        "forgedFees": "6405527948",
+        "forgedRewards": "3095000000000",
+        "producedBlocks": 15475,
+        "rank": 1,
+        "lastBlock": {
+          "version": 0,
+          "timestamp": 103056144,
+          "height": 12734142,
+          "previousBlockHex": "f3da130a8d4ae3eb253a90cb0512207623795219cd97219d196f551ea69d595f",
+          "previousBlock": "f3da130a8d4ae3eb253a90cb0512207623795219cd97219d196f551ea69d595f",
+          "numberOfTransactions": 0,
+          "totalAmount": "0",
+          "totalFee": "0",
+          "reward": "200000000",
+          "payloadLength": 0,
+          "payloadHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "generatorPublicKey": "028fe98e42e159f2450a52371dfb23ae69a39fc5fee6545690b7f51bfcee933357",
+          "blockSignature": "3044022047d655afa616b931d4817b84bb0bb9ef425c40645508945a1033cdaabbc84e42022018b3d1a0a51486d655e2fdead16b8999c241c7aa9b8cf09ea7320a4d957b2c7e",
+          "idHex": "9fc7e96022e7a8f15f99123121e4eefdd0ba11a2d5314502f5a2f17bed8339e3",
+          "id": "9fc7e96022e7a8f15f99123121e4eefdd0ba11a2d5314502f5a2f17bed8339e3"
+        },
+        "round": 249690
+      }
+    },
+    "isDelegate": true,
+    "isResigned": false,
+    "username": "binance_staking"
+  }
+}

@@ -25,7 +25,7 @@ describe("Delegate Monitor", () => {
         });
     });
 
-    it("should fetch the delegates automatically", () => {
+    it.skip("should fetch the delegates automatically", () => {
       cy.get(".vgt-table.bordered", { timeout: 20000 }).should("be.visible");
 
       cy.get("div")
@@ -43,7 +43,7 @@ describe("Delegate Monitor", () => {
       });
     });
 
-    it("should fetch the latest block automatically", () => {
+    it.skip("should fetch the latest block automatically", () => {
       cy.get(".MonitorHeader div")
         .contains("Last block")
         .siblings()

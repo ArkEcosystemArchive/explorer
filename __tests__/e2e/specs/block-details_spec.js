@@ -42,7 +42,7 @@ describe("Block Details", () => {
     cy.get("table.vgt-table").should("not.exist");
   });
 
-  it("should refresh the confirmation count automatically", () => {
+  it.skip("should refresh the confirmation count automatically", () => {
     cy.visit("/block/3487084709104787070");
 
     cy.get(".page-section")

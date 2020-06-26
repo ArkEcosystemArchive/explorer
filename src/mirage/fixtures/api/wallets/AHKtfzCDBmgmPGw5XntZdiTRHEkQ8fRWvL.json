@@ -1,0 +1,12 @@
+{
+  "data": {
+    "address": "AHKtfzCDBmgmPGw5XntZdiTRHEkQ8fRWvL",
+    "publicKey": "0273aa8ad7536baa5777e4fb68922d9598c27d69b758a615f80a9e1c1a1322b193",
+    "nonce": "36",
+    "balance": "0",
+    "attributes": { "vote": "035845a4f1125ce10f4cbe8a271378b0004c5722874a72dc214044107e4b21b324" },
+    "isDelegate": false,
+    "isResigned": false,
+    "vote": "035845a4f1125ce10f4cbe8a271378b0004c5722874a72dc214044107e4b21b324"
+  }
+}
