@@ -100,7 +100,7 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       this.get("/delegates/:id", (schema, request) => {
-          return loadFixture(`delegates/${request.params.id}`);
+        return loadFixture(`delegates/${request.params.id}`);
       });
 
       this.get("/delegates/:id/blocks", (schema, request) => {
