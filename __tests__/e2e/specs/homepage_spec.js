@@ -57,7 +57,7 @@ describe("Homepage", () => {
     cy.get(".inactive-tab").should("include.text", "Latest transactions");
   });
 
-  it("latest block table should refresh automatically", () => {
+  it.skip("latest block table should refresh automatically", () => {
     cy.get(".inactive-tab")
       .contains("Latest blocks")
       .click();
@@ -96,7 +96,7 @@ describe("Homepage", () => {
     });
   });
 
-  describe("Chart", () => {
+  describe.skip("Chart", () => {
     it("should be possible to persistently change type", () => {
       cy.get("button.chart-tab")
         .contains("Price")
@@ -281,7 +281,7 @@ describe("Homepage", () => {
       });
     });
 
-    it("should be possible to search for a delegate", () => {
+    it.skip("should be possible to search for a delegate", () => {
       cy.get("h1").then($heading => {
         const heading = $heading.text();
 
