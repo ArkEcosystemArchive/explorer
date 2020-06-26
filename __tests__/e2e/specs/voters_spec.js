@@ -26,6 +26,8 @@ describe("Voters", () => {
   });
 
   it("should be possible to navigate to the next page and back", () => {
+    cy.visit("/wallets/ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ/voters/1");
+
     cy.get(".Pagination__Button--previous").should("not.exist");
     cy.get(".Pagination__Button--next")
       .should("exist")
