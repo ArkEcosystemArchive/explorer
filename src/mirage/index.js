@@ -74,6 +74,10 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       this.get("https://min-api.cryptocompare.com/data/price", (schema, request) => {
+        if (request.queryParams.tsyms) {
+          return { USD: 0.3419 };
+        }
+
         return {
           ARK: 1,
         };
