@@ -3,7 +3,7 @@ describe("Homepage", () => {
     cy.visit("/");
   });
 
-  it.skip("should contain expected components", () => {
+  it("should contain expected components", () => {
     cy.get(".bg-stat-background").first().children().as("fields").should("have.length", 4);
 
     cy.get("@fields").eq(0).should("contain.text", "Height");

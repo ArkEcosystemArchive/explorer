@@ -1,0 +1,44 @@
+{
+  "data": {
+    "address": "ALessioRJeVFrDBD2tckrT3fTvsZzESocA",
+    "publicKey": "02630c5942b003b2c4ec184862e4ac41578e0a79777da1332b384d3169f4d5eadd",
+    "nonce": "1601",
+    "balance": "6266726467",
+    "attributes": {
+      "secondPublicKey": "0245e5da176a651b851a79bdd2db344d105b1c3e8969786ac9193ae989b83391e5",
+      "delegate": {
+        "username": "alessio",
+        "voteBalance": "129898336981652",
+        "forgedFees": "25000000",
+        "forgedRewards": "21969400000000",
+        "producedBlocks": 109847,
+        "rank": 48,
+        "lastBlock": {
+          "version": 0,
+          "timestamp": 103126776,
+          "height": 12742971,
+          "previousBlockHex": "b18e84cda2289c1c12d89af848919661f76f1d75b15e0ebb4b88f047f1ae7f12",
+          "previousBlock": "b18e84cda2289c1c12d89af848919661f76f1d75b15e0ebb4b88f047f1ae7f12",
+          "numberOfTransactions": 0,
+          "totalAmount": "0",
+          "totalFee": "0",
+          "reward": "200000000",
+          "payloadLength": 0,
+          "payloadHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "generatorPublicKey": "02630c5942b003b2c4ec184862e4ac41578e0a79777da1332b384d3169f4d5eadd",
+          "blockSignature": "3045022100956c4d4645cedb4608b19a2eeb570b710249f8aba11cf609670ea5632839a9a302201285fdc5079c111e618e4ddef22c4d19a1a06d8d04b9bb84d37ac73193a2bcd5",
+          "idHex": "d2eca68c27ed919c59d03b180d2798a2a4cff480fdb5088cd93ec7757d423043",
+          "id": "d2eca68c27ed919c59d03b180d2798a2a4cff480fdb5088cd93ec7757d423043"
+        },
+        "round": 249863
+      },
+      "vote": "02630c5942b003b2c4ec184862e4ac41578e0a79777da1332b384d3169f4d5eadd",
+      "business": { "businessAsset": { "name": "Alessio", "website": "https://github.com/alessiodf" } }
+    },
+    "isDelegate": true,
+    "isResigned": false,
+    "vote": "02630c5942b003b2c4ec184862e4ac41578e0a79777da1332b384d3169f4d5eadd",
+    "username": "alessio",
+    "secondPublicKey": "0245e5da176a651b851a79bdd2db344d105b1c3e8969786ac9193ae989b83391e5"
+  }
+}
