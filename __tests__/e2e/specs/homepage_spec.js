@@ -1,6 +1,6 @@
 describe("Homepage", () => {
   beforeEach(() => {
-    cy.visit("");
+    cy.visit("/");
   });
 
   it.skip("should contain expected components", () => {
@@ -281,7 +281,7 @@ describe("Homepage", () => {
       });
     });
 
-    it.skip("should be possible to search for a delegate", () => {
+    it("should be possible to search for a delegate", () => {
       cy.get("h1").then($heading => {
         const heading = $heading.text();
 
