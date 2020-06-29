@@ -1,8 +1,8 @@
 import secp256k1 from "secp256k1";
-import RIPEMD160 from "ripemd160";
 import { Buffer } from "buffer/";
 import bs58check from "bs58check";
 import { sync } from "simple-sha256";
+import { ripemd160 } from "hash-wasm";
 
 import store from "@/store";
 
@@ -27,8 +27,8 @@ const stringToHex = (text: string): string => Buffer.from(text).toString("hex");
 
 const publicKeyFromPassphrase = (passphrase: string): string => privateKeyFromPassphrase(passphrase).publicKey;
 
-const addressFromPublicKey = (publicKey: string): string => {
-  const buffer = Buffer.from(new RIPEMD160().update(Buffer.from(publicKey, "hex")).digest("hex"), "hex");
+const addressFromPublicKey = async (publicKey: string): Promise<string> => {
+  const buffer = Buffer.from(await ripemd160(Buffer.from(publicKey, "hex")), "hex");
   const payload = Buffer.alloc(21);
 
   payload.writeUInt8(store.getters["network/addressPrefix"], 0);
@@ -39,11 +39,10 @@ const addressFromPublicKey = (publicKey: string): string => {
 
 export default {
   methods: {
-    addressFromPublicKey(publicKey: string): string {
+    async addressFromPublicKey(publicKey: string): Promise<string> {
       return addressFromPublicKey(publicKey);
     },
-
-    addressFromMultiSignatureAsset(asset): string {
+    async addressFromMultiSignatureAsset(asset): Promise<string> {
       const { min, publicKeys } = asset;
 
       for (const publicKey of publicKeys) {

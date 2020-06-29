@@ -23,15 +23,17 @@ describe("Mixins > Crypto", () => {
 
   // TODO: enable once the Buffer issue is solved
   describe("addressFromPublicKey", () => {
-    it.skip("should generate a correct address from a public key", () => {
-      expect(wrapper.vm.addressFromPublicKey("02dff0fdf2ca1ac13a08627e6ca1821b72fb07b50e6b4f73042ca1ac6c26108e82")).toEqual("ANkHGk5uZqNrKFNY5jtd4A88zzFR3LnJbe");
-    })
+    it("should generate a correct address from a public key", async () => {
+      await expect(
+        wrapper.vm.addressFromPublicKey("02dff0fdf2ca1ac13a08627e6ca1821b72fb07b50e6b4f73042ca1ac6c26108e82"),
+      ).resolves.toEqual("ANkHGk5uZqNrKFNY5jtd4A88zzFR3LnJbe");
+    });
   });
 
   // TODO: enable once the Buffer issue is solved
   describe("addressFromMultiSignatureAsset", () => {
-    it.skip("should generate a correct address from a multisignature asset", () => {
-      expect(wrapper.vm.addressFromMultiSignatureAsset({
+    it("should generate a correct address from a multisignature asset", async () => {
+      await expect(wrapper.vm.addressFromMultiSignatureAsset({
           "publicKeys": [
             "02fb3def2593a00c5b84620addf28ff21bac452bd71a37d4d8e24f301683a81b56",
             "021b358bdb2ff2fe20fd0b3ff2d1806e99c45864a1bff2adc200c407405dad6ee6",
@@ -41,8 +43,8 @@ describe("Mixins > Crypto", () => {
           ],
           "min": 3
         }
-      )).toEqual("AXxNbmaKspf9UqgKhfTRDdn89NidP2gXWh");
+      )).resolves.toEqual("AXxNbmaKspf9UqgKhfTRDdn89NidP2gXWh");
     });
-  };
+  });
 
 });
