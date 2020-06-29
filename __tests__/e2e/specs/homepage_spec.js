@@ -33,7 +33,7 @@ describe("Homepage", () => {
     cy.get(".inactive-tab").should("include.text", "Latest transactions");
   });
 
-  it.skip("latest block table should refresh automatically", () => {
+  it("latest block table should refresh automatically", () => {
     cy.get(".inactive-tab").contains("Latest blocks").click();
 
     cy.get("tbody tr")
@@ -192,8 +192,9 @@ describe("Homepage", () => {
   });
 
   describe("Search", () => {
-    // TODO: why does this randomly fail on CI?
-    it.skip("should be possible to search for a known wallet", () => {
+    it("should be possible to search for a known wallet", () => {
+      cy.wait(2000); // To ensure known wallets are fetched beforehand
+
       cy.get("h1").then(($heading) => {
         const heading = $heading.text();
 

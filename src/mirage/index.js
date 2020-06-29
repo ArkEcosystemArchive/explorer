@@ -136,8 +136,15 @@ export function makeServer({ environment = "development" } = {}) {
         return blockchain;
       });
 
+      let blocksRequestedBefore = false;
       this.get("/blocks", (schema, request) => {
-        const response = loadFixture("api/blocks");
+        const response = blocksRequestedBefore ? loadFixture("api/blocks-page-2") : loadFixture("api/blocks");
+
+        if (!blocksRequestedBefore) {
+          blocksRequestedBefore = true;
+        } else {
+          blocksRequestedBefore = false;
+        }
 
         if (request.queryParams.limit) {
           response.data = response.data.slice(0, request.queryParams.limit);
@@ -183,8 +190,21 @@ export function makeServer({ environment = "development" } = {}) {
         };
       });
 
+      let delegatesRequestedBefore = false;
       this.get("/delegates", (schema, request) => {
-        const response = loadFixture(`api/delegates-page-${request.queryParams.page || 1}`);
+        let page = request.queryParams.page || 1;
+
+        if (delegatesRequestedBefore && page === 1) {
+          page = 2;
+        }
+
+        const response = loadFixture(`api/delegates-page-${page}`);
+
+        if (!delegatesRequestedBefore) {
+          delegatesRequestedBefore = true;
+        } else {
+          delegatesRequestedBefore = false;
+        }
 
         if (request.queryParams.limit) {
           response.data = response.data.slice(0, request.queryParams.limit);

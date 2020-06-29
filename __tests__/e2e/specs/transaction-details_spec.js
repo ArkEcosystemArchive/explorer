@@ -35,7 +35,7 @@ describe("Transaction Details", () => {
     cy.get(".page-section").find(".list-row-border-b-no-wrap").eq(1).should("include.text", "ARK ❤️ you");
   });
 
-  it.only("should refresh the confirmation count automatically", () => {
+  it("should refresh the confirmation count automatically", () => {
     cy.get(".page-section").find(".list-row-border-b").eq(3).find("div").should("have.length", 2).last().as("count");
 
     cy.get("@count").then(($count) => {
