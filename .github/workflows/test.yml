@@ -35,7 +35,11 @@ jobs:
         run: yarn build
 
       - name: Test
-        run: yarn test:e2e:ci
+        uses: faustbrian/github-action@master
+        with:
+          parallel: true
+          start: yarn serve:mainnet
+          wait-on: "http://localhost:8080"
 
       - name: Upload Screenshots
         uses: actions/upload-artifact@v1
