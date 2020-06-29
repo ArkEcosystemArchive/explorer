@@ -15,6 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        node-version: [12.x]
         containers: [1, 2, 3]
 
     steps:
@@ -34,12 +35,7 @@ jobs:
         run: yarn build
 
       - name: Test
-        uses: cypress-io/github-action@v2
-        with:
-          parallel: true
-          # build: yarn build:mainnet
-          start: yarn serve:mainnet
-          wait-on: "http://localhost:8080"
+        run: yarn test:e2e:ci
 
       - name: Upload Screenshots
         uses: actions/upload-artifact@v1
