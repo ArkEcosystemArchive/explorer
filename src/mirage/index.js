@@ -98,7 +98,7 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       this.get("https://min-api.cryptocompare.com/data/histoday", (schema, request) => {
-        const limit = Number(request.queryParams.limit)
+        const limit = Number(request.queryParams.limit);
 
         if (limit === 7) {
           return loadFixture("chart/week");
@@ -106,7 +106,7 @@ export function makeServer({ environment = "development" } = {}) {
 
         if (limit === 30) {
           return loadFixture("chart/month");
-  }
+        }
 
         if (limit === 120) {
           return loadFixture("chart/quarter");
@@ -323,7 +323,9 @@ export function makeServer({ environment = "development" } = {}) {
         const { id } = JSON.parse(request.requestBody);
 
         if (id === "44d9d0a3093232b9368a24af90577741df8340b93732db23b90d44f6590d3e42") {
-          return loadFixture("api/transactions/search/44d9d0a3093232b9368a24af90577741df8340b93732db23b90d44f6590d3e42");
+          return loadFixture(
+            "api/transactions/search/44d9d0a3093232b9368a24af90577741df8340b93732db23b90d44f6590d3e42",
+          );
         }
       });
 
