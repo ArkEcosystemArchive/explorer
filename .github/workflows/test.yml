@@ -34,7 +34,10 @@ jobs:
         run: yarn build
 
       - name: Test
-        run: yarn test:e2e:ci
+        uses: cypress-io/github-action@v2
+        with:
+          record: true
+          parallel: true
 
       - name: Upload Screenshots
         uses: actions/upload-artifact@v1
