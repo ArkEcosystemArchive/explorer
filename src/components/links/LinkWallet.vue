@@ -6,7 +6,7 @@
       </span>
       <div v-else class="flex items-center w-full">
         <LinkAddress
-          :address="address"
+          :address="addressResolved"
           :public-key="publicKey"
           :trunc="trunc"
           :tooltip-placement="tooltipPlacement"
@@ -66,7 +66,7 @@
       <span v-if="showAsType">{{ $t("TRANSACTION.TYPES.UNKNOWN") }}</span>
       <LinkAddress
         v-else
-        :address="address"
+        :address="addressResolved"
         :public-key="publicKey"
         :trunc="trunc"
         :tooltip-placement="tooltipPlacement"
@@ -100,7 +100,19 @@ export default class LinkWallet extends Vue {
   @Prop({ required: false, default: false }) public showTimelockIcon: boolean;
   @Prop({ required: false, default: false }) public showAsType: boolean;
 
+  public addressResolved: string | undefined;
+
   private delegates: IDelegate[];
+
+  public async mounted() {
+    this.addressResolved = await this.address;
+  }
+
+  public data() {
+    return {
+      addressResolved: undefined,
+    };
+  }
 
   get getVoteColor(): string {
     return this.isUnvote ? "text-red" : "text-green";
