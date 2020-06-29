@@ -38,7 +38,7 @@ describe("Services > Delegate", () => {
   it("should return all available delegates", async () => {
     const data = await DelegateService.fetchEveryDelegate();
     expect(data.length).toBeGreaterThan(102);
-    data.forEach(delegate => {
+    data.forEach((delegate) => {
       expect(Object.keys(delegate).sort()).toBeOneOf([delegatePropertyArray, resignedDelegatePropertyArray]);
     });
   });
@@ -46,7 +46,7 @@ describe("Services > Delegate", () => {
   it("should return a list of delegates", async () => {
     const { data } = await DelegateService.all();
     expect(data).toHaveLength(25);
-    data.forEach(delegate => {
+    data.forEach((delegate) => {
       expect(Object.keys(delegate).sort()).toEqual(expect.arrayContaining(delegatePropertyArray));
     });
   });
@@ -54,7 +54,7 @@ describe("Services > Delegate", () => {
   it("should return delegates with page offset", async () => {
     const { data } = await DelegateService.all(1);
     expect(data).toHaveLength(25);
-    data.forEach(delegate => {
+    data.forEach((delegate) => {
       expect(Object.keys(delegate).sort()).toEqual(expect.arrayContaining(delegatePropertyArray));
     });
     expect(data.sort((a, b) => a.balance > b.balance)).toEqual(data);
@@ -63,7 +63,7 @@ describe("Services > Delegate", () => {
   it("should return delegates with page offset and given limit", async () => {
     const { data } = await DelegateService.all(2, 20);
     expect(data).toHaveLength(20);
-    data.forEach(delegate => {
+    data.forEach((delegate) => {
       expect(Object.keys(delegate).sort()).toEqual(expect.arrayContaining(delegatePropertyArray));
     });
     expect(data.sort((a, b) => a.balance > b.balance)).toEqual(data);
@@ -71,7 +71,7 @@ describe("Services > Delegate", () => {
 
   it("should retrieve the voters based on given delegate address", async () => {
     const { data } = await DelegateService.voters("ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ");
-    data.forEach(voter => {
+    data.forEach((voter) => {
       expect(Object.keys(voter).sort()).toEqual(expect.arrayContaining(voterPropertyArray));
     });
   });
@@ -124,8 +124,7 @@ describe("Services > Delegate", () => {
     ).rejects.toThrow();
   });
 
-  // TODO restore once fixed in core
-  it.skip("should fail if the public key exists but does not correspond to a delegate", async () => {
+  it("should fail if the public key exists but does not correspond to a delegate", async () => {
     await expect(
       DelegateService.find("021d03bace0687a1a5e797f884b13fb46f817ec32de1374a7f223f24404401d220"),
     ).rejects.toThrow();
@@ -134,7 +133,7 @@ describe("Services > Delegate", () => {
   it("should retrieve the standby delegates", async () => {
     const data = await DelegateService.standby();
     expect(data.length).toBeGreaterThan(0);
-    data.forEach(delegate => {
+    data.forEach((delegate) => {
       expect(Object.keys(delegate).sort()).toEqual(delegatePropertyArray);
     });
   });
@@ -145,7 +144,7 @@ describe("Services > Delegate", () => {
 
     const data = await DelegateService.resigned();
     expect(data).toBeArray();
-    data.forEach(delegate => {
+    data.forEach((delegate) => {
       expect(Object.keys(delegate).sort()).toEqual(resignedDelegatePropertyArray);
     });
   });
@@ -156,7 +155,7 @@ describe("Services > Delegate", () => {
 
     const { data } = await DelegateService.allResigned();
     expect(data.length).toBeGreaterThan(0);
-    data.forEach(delegate => {
+    data.forEach((delegate) => {
       expect(Object.keys(delegate).sort()).toEqual(resignedDelegatePropertyArray);
     });
   });
@@ -164,14 +163,16 @@ describe("Services > Delegate", () => {
   it("should return a list of active delegates and their stats", async () => {
     jest.setTimeout(20000); // Allow this function to take longer than the specified 5 seconds
     const data = await DelegateService.active();
-    data.forEach(delegate => {
-      expect(Object.keys(delegate).sort()).toEqual(expect.arrayContaining(delegatePropertyArray.concat(["forgingStatus"]).sort()));
+    data.forEach((delegate) => {
+      expect(Object.keys(delegate).sort()).toEqual(
+        expect.arrayContaining(delegatePropertyArray.concat(["forgingStatus"]).sort()),
+      );
     });
   });
 
   it("should return a list of delegates and their forged amounts", async () => {
     const data = await DelegateService.forged();
-    data.forEach(delegate => {
+    data.forEach((delegate) => {
       expect(Object.keys(delegate).sort()).toEqual(["delegate", "forged"]);
     });
   });
