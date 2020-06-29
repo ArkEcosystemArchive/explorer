@@ -1,8 +1,8 @@
 import secp256k1 from "secp256k1";
-import RIPEMD160 from "ripemd160";
 import { Buffer } from "buffer/";
 import bs58check from "bs58check";
 import { sync } from "simple-sha256";
+import { ripemd160 } from "hash-wasm";
 
 import store from "@/store";
 
@@ -17,16 +17,18 @@ const privateKeyFromPassphrase = (passphrase: string): { publicKey: string; priv
   const privateKey: Buffer = Buffer.from(sync(passphrase), "hex");
 
   return {
-    publicKey: secp256k1.publicKeyCreate(privateKey, true).toString("hex"),
+    publicKey: stringToHex(secp256k1.publicKeyCreate(privateKey, true)),
     // @ts-ignore
     privateKey: privateKey.toString("hex"),
   };
 };
 
+const stringToHex = (text: string): string => Buffer.from(text).toString("hex");
+
 const publicKeyFromPassphrase = (passphrase: string): string => privateKeyFromPassphrase(passphrase).publicKey;
 
-const addressFromPublicKey = (publicKey: string): string => {
-  const buffer = Buffer.from(new RIPEMD160().update(Buffer.from(publicKey, "hex")).digest("hex"), "hex");
+const addressFromPublicKey = async (publicKey: string): Promise<string> => {
+  const buffer = Buffer.from(await ripemd160(Buffer.from(publicKey, "hex")), "hex");
   const payload = Buffer.alloc(21);
 
   payload.writeUInt8(store.getters["network/addressPrefix"], 0);
@@ -37,11 +39,10 @@ const addressFromPublicKey = (publicKey: string): string => {
 
 export default {
   methods: {
-    addressFromPublicKey(publicKey: string): string {
+    async addressFromPublicKey(publicKey: string): Promise<string> {
       return addressFromPublicKey(publicKey);
     },
-
-    addressFromMultiSignatureAsset(asset): string {
+    async addressFromMultiSignatureAsset(asset): Promise<string> {
       const { min, publicKeys } = asset;
 
       for (const publicKey of publicKeys) {
@@ -57,11 +58,7 @@ export default {
       const minKey: string = publicKeyFromPassphrase(numberToHex(min));
       const keys: Buffer[] = [minKey, ...publicKeys].map((p) => Buffer.from(p, "hex"));
 
-      return addressFromPublicKey(secp256k1.publicKeyCombine(keys, true).toString("hex"));
-    },
-
-    stringToHex(text: string): string {
-      return Buffer.from(text).toString("hex");
+      return addressFromPublicKey(stringToHex(secp256k1.publicKeyCombine(keys, true)));
     },
   },
 };

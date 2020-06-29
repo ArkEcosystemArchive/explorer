@@ -77,6 +77,12 @@ describe("Store > UI", () => {
     expect(store.getters["ui/locale"]).toEqual("nl-NL");
   });
 
+  it("should set the smartbridge filter", () => {
+    store.dispatch("ui/setSmartbridgeFilter", "filtered");
+
+    expect(store.getters["ui/smartbridgeFilter"]).toEqual("filtered");
+  });
+
   it("should set the header type", () => {
     store.dispatch("ui/setHeaderType", "headerType");
 

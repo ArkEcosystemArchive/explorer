@@ -2868,10 +2868,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"animate.css@npm:^3.7.2":
-  version: 3.7.2
-  resolution: "animate.css@npm:3.7.2"
-  checksum: 3/6b5be1b5fea17fda69f44aa81c38e48093ac00e0025c6329c15b340c7b54e49e1b4d6f120ca78b28febd966be26bf5c0b5d73d63420d78a977ccda224faae964
+"animate.css@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "animate.css@npm:4.1.0"
+  checksum: 3/96d8192e1c1c33707bfb8fdd74246adb491d3ab849d2b0a3435f0b9fcf4adb8e14b07013595b38e0d02c8ab276032e3b4f31609c7a8385a45b1a3f9474140cbb
   languageName: node
   linkType: hard
 
@@ -3053,7 +3053,7 @@ __metadata:
     "@vue/eslint-config-typescript": ^5.0.2
     "@vue/test-utils": ^1.0.2
     "@yarnpkg/pnpify": ^2.0.0-rc.22
-    animate.css: ^3.7.2
+    animate.css: ^4.1.0
     axios: ^0.19.2
     babel-core: 7.0.0-bridge.0
     bad-words: ^3.0.3
@@ -3074,6 +3074,7 @@ __metadata:
     eslint-plugin-simple-import-sort: ^5.0.3
     eslint-plugin-vue: ^6.2.2
     express: ^4.17.1
+    hash-wasm: ^3.3.0
     jest-extended: ^0.11.5
     jest-localstorage-mock: ^2.4.2
     lodash: ^4.17.15
@@ -3086,7 +3087,6 @@ __metadata:
     prettier: ^2.0.5
     prettier-eslint: ^9.0.1
     qrious: ^4.0.2
-    ripemd160: ^2.0.2
     secp256k1: ^4.0.1
     simple-sha256: ^1.0.0
     sinon: ^9.0.2
@@ -7813,6 +7813,13 @@ fsevents@~2.1.2:
   version: 2.0.0
   resolution: "hash-sum@npm:2.0.0"
   checksum: 3/9d833f05e8b9cb318ff0154c3864b0d2aaf4bd675a4b65377fb4d12eed13505423deb45e85b484affd71da3d3c8b8fe30e83bf81ca9a1dd6f3523043d9281e34
+  languageName: node
+  linkType: hard
+
+"hash-wasm@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "hash-wasm@npm:3.3.0"
+  checksum: 3/f3b5d01717c2d6dd7bf1eb479dd388058265e964d322b1df2557313f60f63cff9e4f6a201762a04e116e3b52c66d8e432df994c795553acab86e92c19a933150
   languageName: node
   linkType: hard
 
@@ -13574,7 +13581,7 @@ resolve@1.1.7:
   languageName: node
   linkType: hard
 
-"ripemd160@npm:^2.0.0, ripemd160@npm:^2.0.1, ripemd160@npm:^2.0.2":
+"ripemd160@npm:^2.0.0, ripemd160@npm:^2.0.1":
   version: 2.0.2
   resolution: "ripemd160@npm:2.0.2"
   dependencies:

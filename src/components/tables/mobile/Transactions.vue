@@ -38,7 +38,10 @@
           />
         </div>
 
-        <div v-if="truncate(transaction.vendorField || '')" class="list-row-border-b-no-wrap">
+        <div
+          v-if="smartbridgeFilter !== 'hidden' && truncate(transaction.vendorField || '')"
+          class="list-row-border-b-no-wrap"
+        >
           <div class="mr-4">
             {{ $t("TRANSACTION.SMARTBRIDGE") }}
           </div>
@@ -105,6 +108,7 @@ import { mapGetters } from "vuex";
 @Component({
   computed: {
     ...mapGetters("network", ["activeDelegates"]),
+    ...mapGetters("ui", ["smartbridgeFilter"]),
   },
 })
 export default class TableTransactionsMobile extends Vue {
@@ -118,6 +122,7 @@ export default class TableTransactionsMobile extends Vue {
   @Prop({ required: false, default: false }) public showConfirmations: boolean;
 
   private activeDelegates: IDelegate[];
+  private smartbridgeFilter: string;
 }
 </script>
 

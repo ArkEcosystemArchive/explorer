@@ -1,3 +1,4 @@
+import store from "@/store";
 import ApiService from "@/services/api";
 import { IApiTransactionWrapper, IApiTransactionsWrapper, ITransaction, ITransactionSearchParams } from "../interfaces";
 import { paginationLimit } from "@/constants";
@@ -7,11 +8,16 @@ import emoji from "node-emoji";
 const sanitizeVendorField = (transaction: ITransaction) => {
   if (transaction.vendorField) {
     const sanitizer = new Sanitizer();
+    const smartbridgeFilter = store.getters["ui/smartbridgeFilter"];
 
-    if (sanitizer.isBad(transaction.vendorField)) {
-      delete transaction.vendorField;
+    if (smartbridgeFilter === "unfiltered") {
+      transaction.vendorField = emoji.emojify(transaction.vendorField);
     } else {
-      transaction.vendorField = sanitizer.apply(emoji.emojify(transaction.vendorField));
+      if (sanitizer.isBad(transaction.vendorField)) {
+        delete transaction.vendorField;
+      } else {
+        transaction.vendorField = sanitizer.apply(emoji.emojify(transaction.vendorField));
+      }
     }
   }
 
