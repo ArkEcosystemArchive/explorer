@@ -42,6 +42,8 @@ export function makeServer({ environment = "development" } = {}) {
     },
 
     routes() {
+      this.passthrough();
+
       this.get("https://raw.githubusercontent.com/ArkEcosystem/common/master/mainnet/known-wallets.json", () => {
         return {
           AagJoLEnpXYkxYdYkmdDSNMLjjBkLJ6T67: "ACF Hot Wallet",
@@ -152,6 +154,20 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       this.post("/blocks/search", (schema, request) => {
+        const requestBody = JSON.parse(request.requestBody);
+
+        if (requestBody.totalFee) {
+          return loadFixture("api/blocks/search/by-total-fee");
+        }
+
+        if (requestBody.generatorPublicKey) {
+          return loadFixture("api/blocks/search/by-generator-public-key");
+        }
+
+        if (requestBody.id) {
+          return loadFixture("api/blocks/search/by-id");
+        }
+
         return {
           meta: {},
           data: [],
@@ -320,13 +336,20 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       this.post("/transactions/search", (schema, request) => {
-        const { id } = JSON.parse(request.requestBody);
+        const requestBody = JSON.parse(request.requestBody);
 
-        if (id === "44d9d0a3093232b9368a24af90577741df8340b93732db23b90d44f6590d3e42") {
-          return loadFixture(
-            "api/transactions/search/44d9d0a3093232b9368a24af90577741df8340b93732db23b90d44f6590d3e42",
-          );
+        if (requestBody.amount && requestBody.fee) {
+          return loadFixture("api/transactions/search/by-amount-and-fee");
         }
+
+        if (requestBody.id !== "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff") {
+          return loadFixture("api/transactions/search/by-id");
+        }
+
+        return {
+          meta: {},
+          data: [],
+        };
       });
 
       this.get("/transactions/types", (schema, request) => {
@@ -404,7 +427,24 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       this.post("/wallets/search", (schema, request) => {
-        return loadFixture("api/wallets/search");
+        const requestBody = JSON.parse(request.requestBody);
+
+        if (requestBody.vote) {
+          return loadFixture("api/wallets/search/by-vote");
+        }
+
+        if (requestBody.username) {
+          return loadFixture("api/wallets/search/by-username");
+        }
+
+        if (requestBody.address) {
+          return loadFixture("api/wallets/search/by-address");
+        }
+
+        return {
+          meta: {},
+          data: [],
+        };
       });
 
       this.get("/wallets/top", (schema, request) => {

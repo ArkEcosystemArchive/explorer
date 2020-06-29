@@ -35,8 +35,9 @@ describe("Businesses", () => {
     });
   });
 
-  it.skip("should be possible to navigate to the next page and back", () => {
-    // TODO: enable once we have more businesses
+  it("should be possible to navigate to the next page and back", () => {
+    cy.get("div.modal-container button").contains("Accept").click();
+
     cy.get("div.max-w-2xl").then(($body) => {
       if ($body.find("table").length) {
         cy.get(".Pagination__Button--previous").should("not.exist");

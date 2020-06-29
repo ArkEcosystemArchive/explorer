@@ -35,8 +35,9 @@ describe("Bridgechains", () => {
     });
   });
 
-  it.skip("should be possible to navigate to the next page and back", () => {
-    // TODO: enable once we have more bridgechains
+  it("should be possible to navigate to the next page and back", () => {
+    cy.get("div.modal-container button").contains("Accept").click();
+
     cy.get("div.max-w-2xl").then(($body) => {
       if ($body.find("table").length) {
         cy.get(".Pagination__Button--previous").should("not.exist");
@@ -54,7 +55,6 @@ describe("Bridgechains", () => {
   it("should be possible to click on a creator address", () => {
     cy.get("div.modal-container button").contains("Accept").click();
 
-    // TODO: enable once we have bridgechains registered
     cy.get("div.max-w-2xl").then(($body) => {
       if ($body.find("table").length) {
         cy.get("h1")
