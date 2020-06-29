@@ -1,6 +1,6 @@
 import { Factory, Model, Server } from "miragejs";
 
-const loadFixture = (fixture) => require(`./fixtures/api/${fixture}.json`);
+const loadFixture = (fixture) => require(`./fixtures/${fixture}.json`);
 
 export function makeServer({ environment = "development" } = {}) {
   return new Server({
@@ -93,16 +93,40 @@ export function makeServer({ environment = "development" } = {}) {
         };
       });
 
+      this.get("https://min-api.cryptocompare.com/data/histohour", (schema, request) => {
+        return loadFixture("chart/day");
+      });
+
+      this.get("https://min-api.cryptocompare.com/data/histoday", (schema, request) => {
+        const limit = Number(request.queryParams.limit)
+
+        if (limit === 7) {
+          return loadFixture("chart/week");
+        }
+
+        if (limit === 30) {
+          return loadFixture("chart/month");
+  }
+
+        if (limit === 120) {
+          return loadFixture("chart/quarter");
+        }
+
+        if (limit === 365) {
+          return loadFixture("chart/year");
+        }
+      });
+
       // ARK API
       this.urlPrefix = "https://explorer.ark.io";
       this.namespace = "api";
 
       this.get("/blockchain", (schema, request) => {
-        return require("./fixtures/api/blockchain.json");
+        return loadFixture("api/blockchain");
       });
 
       this.get("/blocks", (schema, request) => {
-        const response = loadFixture("blocks");
+        const response = loadFixture("api/blocks");
 
         if (request.queryParams.limit) {
           response.data = response.data.slice(0, request.queryParams.limit);
@@ -112,19 +136,19 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       this.get("/blocks/:id", (schema, request) => {
-        return loadFixture(`blocks/${request.params.id}`);
+        return loadFixture(`api/blocks/${request.params.id}`);
       });
 
       this.get("/blocks/:id/transactions", (schema, request) => {
-        return loadFixture(`blocks/${request.params.id}/transactions`);
+        return loadFixture(`api/blocks/${request.params.id}/transactions`);
       });
 
       this.get("/blocks/first", (schema, request) => {
-        return loadFixture("blocks/first");
+        return loadFixture("api/blocks/first");
       });
 
       this.get("/blocks/last", (schema, request) => {
-        return loadFixture("blocks/last");
+        return loadFixture("api/blocks/last");
       });
 
       this.post("/blocks/search", (schema, request) => {
@@ -135,7 +159,7 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       this.get("/delegates", (schema, request) => {
-        const response = loadFixture(`delegates-page-${request.queryParams.page || 1}`);
+        const response = loadFixture(`api/delegates-page-${request.queryParams.page || 1}`);
 
         if (request.queryParams.limit) {
           response.data = response.data.slice(0, request.queryParams.limit);
@@ -145,7 +169,7 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       this.get("/delegates/:id", (schema, request) => {
-        return loadFixture(`delegates/${request.params.id}`);
+        return loadFixture(`api/delegates/${request.params.id}`);
       });
 
       this.get("/delegates/:id/blocks", (schema, request) => {
@@ -156,7 +180,7 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       this.get("/delegates/:id/voters", (schema, request) => {
-        const response = loadFixture(`delegates/${request.params.id}/voters`);
+        const response = loadFixture(`api/delegates/${request.params.id}/voters`);
 
         if (request.queryParams.limit) {
           response.data = response.data.slice(0, request.queryParams.limit);
@@ -201,11 +225,11 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       this.get("/node/configuration", (schema, request) => {
-        return loadFixture("node/configuration");
+        return loadFixture("api/node/configuration");
       });
 
       this.get("/node/configuration/crypto", (schema, request) => {
-        return loadFixture("node/configuration/crypto");
+        return loadFixture("api/node/configuration/crypto");
       });
 
       this.get("/node/fees", (schema, request) => {
@@ -254,14 +278,14 @@ export function makeServer({ environment = "development" } = {}) {
         let response;
 
         if (request.queryParams.senderId) {
-          response = loadFixture(`wallets/${request.queryParams.senderId}/transactions/sent`);
+          response = loadFixture(`api/wallets/${request.queryParams.senderId}/transactions/sent`);
         }
 
         if (request.queryParams.recipientId) {
-          response = loadFixture(`wallets/${request.queryParams.recipientId}/transactions/received`);
+          response = loadFixture(`api/wallets/${request.queryParams.recipientId}/transactions/received`);
         }
 
-        response = loadFixture("transactions");
+        response = loadFixture("api/transactions");
 
         if (request.queryParams.limit) {
           response.data = response.data.slice(0, request.queryParams.limit);
@@ -278,7 +302,7 @@ export function makeServer({ environment = "development" } = {}) {
       // });
 
       this.get("/transactions/:id", (schema, request) => {
-        return loadFixture(`transactions/${request.params.id}`);
+        return loadFixture(`api/transactions/${request.params.id}`);
       });
 
       this.get("/transactions/fees", (schema, request) => {
@@ -299,7 +323,7 @@ export function makeServer({ environment = "development" } = {}) {
         const { id } = JSON.parse(request.requestBody);
 
         if (id === "44d9d0a3093232b9368a24af90577741df8340b93732db23b90d44f6590d3e42") {
-          return loadFixture("transactions/search/44d9d0a3093232b9368a24af90577741df8340b93732db23b90d44f6590d3e42");
+          return loadFixture("api/transactions/search/44d9d0a3093232b9368a24af90577741df8340b93732db23b90d44f6590d3e42");
         }
       });
 
@@ -346,43 +370,43 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       this.get("/wallets/:id", (schema, request) => {
-        return loadFixture(`wallets/${request.params.id}`);
+        return loadFixture(`api/wallets/${request.params.id}`);
       });
 
       this.get("/wallets/:id/locks", (schema, request) => {
-        return loadFixture(`wallets/${request.params.id}/locks`);
+        return loadFixture(`api/wallets/${request.params.id}/locks`);
       });
 
       this.get("/wallets/:id/transactions", (schema, request) => {
         if (request.params.senderId) {
-          return loadFixture(`wallets/${request.params.senderId}/transactions/sent`);
+          return loadFixture(`api/wallets/${request.params.senderId}/transactions/sent`);
         }
 
         if (request.params.recipientId) {
-          return loadFixture(`wallets/${request.params.recipientId}/transactions/received`);
+          return loadFixture(`api/wallets/${request.params.recipientId}/transactions/received`);
         }
 
-        return loadFixture(`wallets/${request.params.id}/transactions`);
+        return loadFixture(`api/wallets/${request.params.id}/transactions`);
       });
 
       this.get("/wallets/:id/transactions/received", (schema, request) => {
-        return loadFixture(`wallets/${request.params.id}/transactions/received`);
+        return loadFixture(`api/wallets/${request.params.id}/transactions/received`);
       });
 
       this.get("/wallets/:id/transactions/sent", (schema, request) => {
-        return loadFixture(`wallets/${request.params.id}/transactions/sent`);
+        return loadFixture(`api/wallets/${request.params.id}/transactions/sent`);
       });
 
       this.get("/wallets/:id/votes", (schema, request) => {
-        return loadFixture(`wallets/${request.params.id}/votes`);
+        return loadFixture(`api/wallets/${request.params.id}/votes`);
       });
 
       this.post("/wallets/search", (schema, request) => {
-        return loadFixture("wallets/search");
+        return loadFixture("api/wallets/search");
       });
 
       this.get("/wallets/top", (schema, request) => {
-        const response = loadFixture("wallets/top");
+        const response = loadFixture("api/wallets/top");
 
         if (request.queryParams.limit) {
           response.data = response.data.slice(0, request.queryParams.limit);
@@ -393,7 +417,7 @@ export function makeServer({ environment = "development" } = {}) {
 
       // ARK Magistrate
       this.get("/businesses", (schema, request) => {
-        const response = loadFixture("businesses");
+        const response = loadFixture("api/businesses");
 
         if (request.queryParams.limit) {
           response.data = response.data.slice(0, request.queryParams.limit);
@@ -403,7 +427,7 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       this.get("/bridgechains", (schema, request) => {
-        const response = loadFixture("bridgechains");
+        const response = loadFixture("api/bridgechains");
 
         if (request.queryParams.limit) {
           response.data = response.data.slice(0, request.queryParams.limit);
