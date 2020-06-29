@@ -65,7 +65,7 @@ describe("Homepage", () => {
     });
   });
 
-  describe.only("Chart", () => {
+  describe("Chart", () => {
     it("should be possible to persistently change type", () => {
       cy.get("button.chart-tab").contains("Price").should("have.class", "chart-tab-active");
 
