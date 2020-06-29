@@ -42,8 +42,6 @@ export function makeServer({ environment = "development" } = {}) {
     },
 
     routes() {
-      this.passthrough();
-
       this.get("https://raw.githubusercontent.com/ArkEcosystem/common/master/mainnet/known-wallets.json", () => {
         return {
           AagJoLEnpXYkxYdYkmdDSNMLjjBkLJ6T67: "ACF Hot Wallet",
