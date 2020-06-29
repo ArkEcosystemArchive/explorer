@@ -121,8 +121,19 @@ export function makeServer({ environment = "development" } = {}) {
       this.urlPrefix = "https://explorer.ark.io";
       this.namespace = "api";
 
+      let blockchainHeight = 0;
       this.get("/blockchain", (schema, request) => {
-        return loadFixture("api/blockchain");
+        const blockchain = loadFixture("api/blockchain");
+
+        if (blockchainHeight) {
+          blockchainHeight = blockchainHeight + 1;
+        } else {
+          blockchainHeight = blockchain.data.block.height + 1;
+        }
+
+        blockchain.data.block.height = blockchainHeight;
+
+        return blockchain;
       });
 
       this.get("/blocks", (schema, request) => {
