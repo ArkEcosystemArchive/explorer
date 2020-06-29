@@ -35,7 +35,7 @@ jobs:
         run: yarn build
 
       - name: Test
-        uses: faustbrian/github-action@master
+        uses: faustbrian/github-action@59bb7e61dc1ff00ee0034d575912fff0a1336b24
         with:
           parallel: true
           start: yarn serve:mainnet
