@@ -9,7 +9,7 @@
         <InputSelect
           :select-options="selectOptions"
           :label="$t('COMMON.TYPE')"
-          :value="selectOptions[0].value"
+          :value="transactionType.key"
           name="Transaction Types"
           class="flex-1"
           @input="onTypeChange"
@@ -92,6 +92,8 @@ import { ITransactionType } from "@/interfaces";
 
 @Component
 export default class TransactionSearchForm extends Vue {
+  private transactionType: ITransactionType = { key: "ALL", type: -1 };
+
   get types() {
     return this.$store.getters["network/enabledTransactionTypes"];
   }
