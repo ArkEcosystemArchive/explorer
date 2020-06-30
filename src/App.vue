@@ -18,6 +18,7 @@
 </template>
 
 <script lang="ts">
+import { Managers } from "@arkecosystem/crypto";
 import { Component, Vue } from "vue-property-decorator";
 import AppHeader from "@/components/header/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
@@ -62,6 +63,8 @@ export default class App extends Vue {
     MigrationService.executeMigrations();
 
     const network = require(`../networks/${process.env.VUE_APP_EXPLORER_CONFIG}`);
+
+    Managers.configManager.setFromPreset(process.env.VUE_APP_EXPLORER_CONFIG || ("devnet" as any));
 
     const nightMode = localStorage.getItem("nightMode");
 

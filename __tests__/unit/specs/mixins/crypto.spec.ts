@@ -1,3 +1,4 @@
+import { Managers } from "@arkecosystem/crypto";
 import { createLocalVue, shallowMount, Wrapper } from "@vue/test-utils";
 import CryptoMixin from "@/mixins/crypto";
 import store from "@/store";
@@ -7,6 +8,8 @@ describe("Mixins > Crypto", () => {
   let wrapper: Wrapper<Vue>;
 
   beforeEach(() => {
+    Managers.configManager.setFromPreset("mainnet");
+
     const localVue = createLocalVue();
 
     const TestComponent = {
