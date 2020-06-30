@@ -1,0 +1,20 @@
+{
+  "data": {
+    "username": "genesis_1",
+    "address": "AeLpRK8rFVtBeyBVqBtdQpWDfLzaiNujKr",
+    "publicKey": "03c075494ad044ab8c0b2dc7ccd19f649db844a4e558e539d3ac2610c4b90a5139",
+    "votes": "0",
+    "rank": 1011,
+    "isResigned": false,
+    "blocks": {
+      "produced": 15,
+      "last": {
+        "id": "3365850177548074590",
+        "height": 735,
+        "timestamp": { "epoch": 16544, "unix": 1490117744, "human": "2017-03-21T17:35:44.000Z" }
+      }
+    },
+    "production": { "approval": 0 },
+    "forged": { "fees": "100000000", "rewards": "0", "total": "100000000" }
+  }
+}

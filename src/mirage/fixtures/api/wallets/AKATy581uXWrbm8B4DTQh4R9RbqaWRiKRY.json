@@ -1,0 +1,43 @@
+{
+  "data": {
+    "address": "AKATy581uXWrbm8B4DTQh4R9RbqaWRiKRY",
+    "publicKey": "0232b96d57ac27f9a99242bc886e433baa89f596d435153c9dae47222c0d1cecc3",
+    "nonce": "77370",
+    "balance": "30492560040",
+    "attributes": {
+      "secondPublicKey": "02283096138930dfc817b2565c6968c86a2acd167d2ad591a7d7ad247b4d4fd157",
+      "delegate": {
+        "username": "arkmoon",
+        "voteBalance": "152883066370603",
+        "forgedFees": "377993684085",
+        "forgedRewards": "40865200000000",
+        "producedBlocks": 204326,
+        "rank": 21,
+        "lastBlock": {
+          "version": 0,
+          "timestamp": 103062832,
+          "height": 12734978,
+          "previousBlockHex": "d6ead4b0274f2e18d2f8ca90038b5cf4e27e1aeb963c32f25b7af4a87ec5fdab",
+          "previousBlock": "d6ead4b0274f2e18d2f8ca90038b5cf4e27e1aeb963c32f25b7af4a87ec5fdab",
+          "numberOfTransactions": 0,
+          "totalAmount": "0",
+          "totalFee": "0",
+          "reward": "200000000",
+          "payloadLength": 0,
+          "payloadHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "generatorPublicKey": "0232b96d57ac27f9a99242bc886e433baa89f596d435153c9dae47222c0d1cecc3",
+          "blockSignature": "3045022100f4b44262b3ca559cef2b255cefec84467a55931703ac4f7cfd65e5f9f0a9963f022013726cb12c509a3af4454bda77216f3c557c252d35ea01afc2914f81e667bd63",
+          "idHex": "f9e4e6e0b15c925b0a026129500287dfa16efd2ada5779462603ccdf30e3951b",
+          "id": "f9e4e6e0b15c925b0a026129500287dfa16efd2ada5779462603ccdf30e3951b"
+        },
+        "round": 249706
+      },
+      "vote": "0232b96d57ac27f9a99242bc886e433baa89f596d435153c9dae47222c0d1cecc3"
+    },
+    "isDelegate": true,
+    "isResigned": false,
+    "vote": "0232b96d57ac27f9a99242bc886e433baa89f596d435153c9dae47222c0d1cecc3",
+    "username": "arkmoon",
+    "secondPublicKey": "02283096138930dfc817b2565c6968c86a2acd167d2ad591a7d7ad247b4d4fd157"
+  }
+}

@@ -4,25 +4,19 @@ describe("Advanced Search", () => {
   });
 
   it("should show the transaction search form", () => {
-    cy.get("select[name=search-type]")
-      .select("transaction")
-      .should("have.value", "transaction");
+    cy.get("select[name=search-type]").select("transaction").should("have.value", "transaction");
 
     cy.get("#transactionForm").should("exist");
   });
 
   it("should show the block search form", () => {
-    cy.get("select[name=search-type]")
-      .select("block")
-      .should("have.value", "block");
+    cy.get("select[name=search-type]").select("block").should("have.value", "block");
 
     cy.get("#blockForm").should("exist");
   });
 
   it("should show the wallet search form", () => {
-    cy.get("select[name=search-type]")
-      .select("wallet")
-      .should("have.value", "wallet");
+    cy.get("select[name=search-type]").select("wallet").should("have.value", "wallet");
 
     cy.get("#walletForm").should("exist");
   });
@@ -30,9 +24,7 @@ describe("Advanced Search", () => {
   it("should clear the form when a different search type is selected", () => {
     cy.get("select[name=search-type]").select("block");
 
-    cy.get("input[name=id]")
-      .type("sometestvalue")
-      .should("have.value", "sometestvalue");
+    cy.get("input[name=id]").type("sometestvalue").should("have.value", "sometestvalue");
 
     cy.get("select[name=search-type]").select("transaction");
 
@@ -45,18 +37,14 @@ describe("Advanced Search", () => {
 
       cy.get("input[name=id]").type("44d9d0a3093232b9368a24af90577741df8340b93732db23b90d44f6590d3e42");
 
-      cy.get("button")
-        .contains("Search")
-        .click();
+      cy.get("button").contains("Search").click();
 
       cy.get("tbody tr")
         .first()
         .within(() => {
-          cy.get("td").eq(2)
-            .should("contain.text", "Genesis Wallet");
+          cy.get("td").eq(2).should("contain.text", "Genesis Wallet");
 
-          cy.get("td").eq(3)
-            .should("contain.text", "genesis_50");
+          cy.get("td").eq(3).should("contain.text", "genesis_50");
         });
     });
 
@@ -66,18 +54,14 @@ describe("Advanced Search", () => {
       cy.get("input[name=amount-from]").type("500");
       cy.get("input[name=amount-to]").type("500");
       cy.get("input[name=fee-from]").type("1");
-      cy.get("input[name=fee-to]")
-        .type("1")
-        .type("{enter}");
+      cy.get("input[name=fee-to]").type("1").type("{enter}");
 
       cy.get("tbody tr")
         .first()
         .within(() => {
-          cy.get("td").eq(5)
-            .should("contain.text", "500");
+          cy.get("td").eq(5).should("contain.text", "500");
 
-          cy.get("td").eq(6)
-            .should("contain.text", "1");
+          cy.get("td").eq(6).should("contain.text", "1");
         });
     });
 
@@ -86,12 +70,9 @@ describe("Advanced Search", () => {
 
       cy.get("input[name=id]").type("fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
 
-      cy.get("button")
-        .contains("Search")
-        .click();
+      cy.get("button").contains("Search").click();
 
-      cy.get("tbody")
-        .contains("No results");
+      cy.get("tbody").contains("No results");
     });
   });
 
@@ -101,21 +82,16 @@ describe("Advanced Search", () => {
 
       cy.get("input[name=id]").type("4366553906931540162");
 
-      cy.get("button")
-        .contains("Search")
-        .click();
+      cy.get("button").contains("Search").click();
 
       cy.get("tbody tr")
         .first()
         .within(() => {
-          cy.get("td").eq(1)
-            .should("contain.text", "1");
+          cy.get("td").eq(1).should("contain.text", "1");
 
-          cy.get("td").eq(3)
-            .should("contain.text", "1492");
+          cy.get("td").eq(3).should("contain.text", "1492");
 
-          cy.get("td").eq(5)
-            .should("contain.text", "0");
+          cy.get("td").eq(5).should("contain.text", "0");
         });
     });
 
@@ -125,15 +101,12 @@ describe("Advanced Search", () => {
       cy.get("input[name=totalFee-from]").type("25");
       cy.get("input[name=totalFee-to]").type("25");
 
-      cy.get("button")
-        .contains("Search")
-        .click();
+      cy.get("button").contains("Search").click();
 
       cy.get("tbody tr")
         .first()
         .within(() => {
-          cy.get("td").eq(6)
-            .should("contain.text", "25");
+          cy.get("td").eq(6).should("contain.text", "25");
         });
     });
 
@@ -144,15 +117,12 @@ describe("Advanced Search", () => {
 
       cy.get("input[name=generatorPublicKey]").type("biz_classic");
 
-      cy.get("button")
-        .contains("Search")
-        .click();
+      cy.get("button").contains("Search").click();
 
       cy.get("tbody tr")
         .first()
         .within(() => {
-          cy.get("td").eq(4)
-            .should("contain.text", "biz_classic");
+          cy.get("td").eq(4).should("contain.text", "biz_classic");
         });
     });
   });
@@ -163,15 +133,12 @@ describe("Advanced Search", () => {
 
       cy.get("input[name=address]").type("AdLb2r8XEmhNqW3CXyNGEEVZxXAfvTqPWR");
 
-      cy.get("button")
-        .contains("Search")
-        .click();
+      cy.get("button").contains("Search").click();
 
       cy.get("tbody tr")
         .first()
         .within(() => {
-          cy.get("td").eq(0)
-            .should("contain.text", "AdLb2r8XEmhNqW3CXyNGEEVZxXAfvTqPWR");
+          cy.get("td").eq(0).should("contain.text", "AdLb2r8XEmhNqW3CXyNGEEVZxXAfvTqPWR");
         });
     });
 
@@ -182,15 +149,12 @@ describe("Advanced Search", () => {
 
       cy.get("input[name=username]").type("alessio");
 
-      cy.get("button")
-        .contains("Search")
-        .click();
+      cy.get("button").contains("Search").click();
 
       cy.get("tbody tr")
         .first()
         .within(() => {
-          cy.get("td").eq(0)
-            .should("contain.text", "alessio");
+          cy.get("td").eq(0).should("contain.text", "alessio");
         });
     });
 
@@ -201,15 +165,12 @@ describe("Advanced Search", () => {
 
       cy.get("input[name=vote]").type("alessio");
 
-      cy.get("button")
-        .contains("Search")
-        .click();
+      cy.get("button").contains("Search").click();
 
       cy.get("tbody tr")
         .first()
         .within(() => {
-          cy.get("td").eq(1)
-            .should("contain.text", "alessio");
+          cy.get("td").eq(1).should("contain.text", "alessio");
         });
     });
   });

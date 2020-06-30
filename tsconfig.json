@@ -18,11 +18,6 @@
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
-  "include": [
-    "typings/**/*.d.ts",
-    "src/**/*.ts",
-    "src/**/*.vue",
-    "__tests__/**/*.ts"
-  ],
+  "include": ["typings/**/*.d.ts", "src/**/*.ts", "src/**/*.vue", "__tests__/**/*.ts", "__tests__/support/mirage.js"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

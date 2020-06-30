@@ -1,0 +1,11 @@
+{
+  "data": {
+    "address": "AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv",
+    "publicKey": "021d03bace0687a1a5e797f884b13fb46f817ec32de1374a7f223f24404401d220",
+    "nonce": "11",
+    "balance": "5000100",
+    "attributes": {},
+    "isDelegate": false,
+    "isResigned": false
+  }
+}

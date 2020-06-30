@@ -1,0 +1,31 @@
+{
+  "meta": {
+    "totalCountIsEstimate": false,
+    "count": 1,
+    "pageCount": 5,
+    "totalCount": 5,
+    "next": "/transactions?recipientId=AZANaDAUUway2fka8hgobBaSQXkRx1ciAy&limit=1&transform=true&page=2",
+    "previous": null,
+    "self": "/transactions?recipientId=AZANaDAUUway2fka8hgobBaSQXkRx1ciAy&limit=1&transform=true&page=1",
+    "first": "/transactions?recipientId=AZANaDAUUway2fka8hgobBaSQXkRx1ciAy&limit=1&transform=true&page=1",
+    "last": "/transactions?recipientId=AZANaDAUUway2fka8hgobBaSQXkRx1ciAy&limit=1&transform=true&page=5"
+  },
+  "data": [
+    {
+      "id": "5348423224cbf3dd3bc5e412e6d816b98cf9c655ffb4ba835861caf002aaab78",
+      "blockId": "bda46ccef31777690480a731699fe2359f1ee47cc462862a921532760148424a",
+      "version": 2,
+      "type": 1,
+      "typeGroup": 2,
+      "amount": "0",
+      "fee": "10000000",
+      "sender": "AZANaDAUUway2fka8hgobBaSQXkRx1ciAy",
+      "senderPublicKey": "03c6f8546a296ad828f64b4cc0e343acf93012717b6297dd33208912553be869c9",
+      "recipient": "AZANaDAUUway2fka8hgobBaSQXkRx1ciAy",
+      "signature": "1932bcdfb382820ec02b5a35bd002a33d586f19e08fd486145e45180a3e28072eb89c5b873f2bd56820f9081a609b00c77d46644de5442175be20376a0efab48",
+      "confirmations": 1209125,
+      "timestamp": { "epoch": 93384208, "unix": 1583485408, "human": "2020-03-06T09:03:28.000Z" },
+      "nonce": "4"
+    }
+  ]
+}
