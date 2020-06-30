@@ -51,8 +51,6 @@ describe("Components > Links > Wallet", () => {
       },
     });
 
-    console.log(wrapper.html())
-
     expect(wrapper.contains("a")).toBe(true);
     expect(wrapper.findAll("a")).toHaveLength(1);
   });

@@ -1,0 +1,27 @@
+{
+  "data": {
+    "address": "AeLpRK8rFVtBeyBVqBtdQpWDfLzaiNujKr",
+    "publicKey": "03c075494ad044ab8c0b2dc7ccd19f649db844a4e558e539d3ac2610c4b90a5139",
+    "nonce": "1",
+    "balance": "100000000",
+    "attributes": {
+      "delegate": {
+        "username": "genesis_1",
+        "voteBalance": "0",
+        "forgedFees": "100000000",
+        "forgedRewards": "0",
+        "producedBlocks": 15,
+        "rank": 1011,
+        "lastBlock": {
+          "id": "3365850177548074590",
+          "height": 735,
+          "timestamp": 16544,
+          "generatorPublicKey": "03c075494ad044ab8c0b2dc7ccd19f649db844a4e558e539d3ac2610c4b90a5139"
+        }
+      }
+    },
+    "isDelegate": true,
+    "isResigned": false,
+    "username": "genesis_1"
+  }
+}

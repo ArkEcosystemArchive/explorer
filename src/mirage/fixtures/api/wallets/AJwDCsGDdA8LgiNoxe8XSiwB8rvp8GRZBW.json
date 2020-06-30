@@ -1,0 +1,31 @@
+{
+  "data": {
+    "address": "AJwDCsGDdA8LgiNoxe8XSiwB8rvp8GRZBW",
+    "publicKey": "025687c1facbaf87b43a46cb78ddec6e4ddb115d1e5a91b53cef5a2c7305a47adc",
+    "nonce": "4876",
+    "balance": "0",
+    "attributes": {
+      "secondPublicKey": "022aff285805372e86e9bd6ffe0a7d6ee40e5e22bde4d21d3fa0734c1849d64fac",
+      "delegate": {
+        "username": "zillion",
+        "voteBalance": "6764596439",
+        "forgedFees": "115437157370",
+        "forgedRewards": "24552400000000",
+        "producedBlocks": 122762,
+        "rank": 107,
+        "lastBlock": {
+          "id": "e254edba943a612fd1a103c5500bdbf96d97bd459e0c1627ead85fdbcd952a0f",
+          "height": 11604802,
+          "timestamp": 94014944,
+          "generatorPublicKey": "025687c1facbaf87b43a46cb78ddec6e4ddb115d1e5a91b53cef5a2c7305a47adc"
+        }
+      },
+      "vote": "025687c1facbaf87b43a46cb78ddec6e4ddb115d1e5a91b53cef5a2c7305a47adc"
+    },
+    "isDelegate": true,
+    "isResigned": false,
+    "vote": "025687c1facbaf87b43a46cb78ddec6e4ddb115d1e5a91b53cef5a2c7305a47adc",
+    "username": "zillion",
+    "secondPublicKey": "022aff285805372e86e9bd6ffe0a7d6ee40e5e22bde4d21d3fa0734c1849d64fac"
+  }
+}

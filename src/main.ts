@@ -4,6 +4,8 @@ require("es6-promise").polyfill();
 import "@/assets/css/style.css";
 import "nprogress/nprogress.css";
 
+import { makeServer } from "./mirage";
+
 import Vue from "vue";
 import { sync } from "vuex-router-sync";
 // @ts-ignore
@@ -18,6 +20,11 @@ import VTooltip from "v-tooltip";
 import VueGoodTablePlugin from "vue-good-table";
 import PortalVue from "portal-vue";
 import i18n from "./i18n";
+
+// @ts-ignore
+if (window.Cypress) {
+  makeServer();
+}
 
 // tslint:disable-next-line:no-var-requires
 require("./components");

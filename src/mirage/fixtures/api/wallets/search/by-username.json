@@ -1,0 +1,56 @@
+{
+  "meta": {
+    "count": 1,
+    "pageCount": 1,
+    "totalCount": 1,
+    "next": null,
+    "previous": null,
+    "self": "/wallets/search?page=1&limit=25",
+    "first": "/wallets/search?page=1&limit=25",
+    "last": "/wallets/search?page=1&limit=25"
+  },
+  "data": [
+    {
+      "address": "ALessioRJeVFrDBD2tckrT3fTvsZzESocA",
+      "publicKey": "02630c5942b003b2c4ec184862e4ac41578e0a79777da1332b384d3169f4d5eadd",
+      "nonce": "1603",
+      "balance": "6866725867",
+      "attributes": {
+        "secondPublicKey": "0245e5da176a651b851a79bdd2db344d105b1c3e8969786ac9193ae989b83391e5",
+        "delegate": {
+          "username": "alessio",
+          "voteBalance": "129010207893302",
+          "forgedFees": "25000000",
+          "forgedRewards": "22054800000000",
+          "producedBlocks": 110274,
+          "rank": 48,
+          "lastBlock": {
+            "version": 0,
+            "timestamp": 103301120,
+            "height": 12764763,
+            "previousBlockHex": "137ea50cb9264ed021067198bd12715dff2120d293320805f6b1253132d085cd",
+            "previousBlock": "137ea50cb9264ed021067198bd12715dff2120d293320805f6b1253132d085cd",
+            "numberOfTransactions": 0,
+            "totalAmount": "0",
+            "totalFee": "0",
+            "reward": "200000000",
+            "payloadLength": 0,
+            "payloadHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "generatorPublicKey": "02630c5942b003b2c4ec184862e4ac41578e0a79777da1332b384d3169f4d5eadd",
+            "blockSignature": "30440220183c8e2ed2fba6180a753f6f034309d0ca282e2b737bacc6e44f09d2c0e6f4a2022022ceb50da47414d2004f24ab8145a21fd896a2bebc599ab2a735142d03d59950",
+            "idHex": "0463efa56df271c922bd20b900214df4a9bf0b9778869e08aa9b93644d26960b",
+            "id": "0463efa56df271c922bd20b900214df4a9bf0b9778869e08aa9b93644d26960b"
+          },
+          "round": 250291
+        },
+        "vote": "02630c5942b003b2c4ec184862e4ac41578e0a79777da1332b384d3169f4d5eadd",
+        "business": { "businessAsset": { "name": "Alessio", "website": "https://github.com/alessiodf" } }
+      },
+      "isDelegate": true,
+      "isResigned": false,
+      "vote": "02630c5942b003b2c4ec184862e4ac41578e0a79777da1332b384d3169f4d5eadd",
+      "username": "alessio",
+      "secondPublicKey": "0245e5da176a651b851a79bdd2db344d105b1c3e8969786ac9193ae989b83391e5"
+    }
+  ]
+}

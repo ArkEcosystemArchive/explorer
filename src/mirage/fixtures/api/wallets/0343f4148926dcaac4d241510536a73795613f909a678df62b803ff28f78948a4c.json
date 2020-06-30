@@ -1,0 +1,31 @@
+{
+  "data": {
+    "address": "ATEXKwUAaxwLgavPX2SV2D2AKJkU7XBnLh",
+    "publicKey": "0343f4148926dcaac4d241510536a73795613f909a678df62b803ff28f78948a4c",
+    "nonce": "2",
+    "balance": "180000000",
+    "attributes": {
+      "business": {
+        "businessAsset": {
+          "vat": "833439300",
+          "name": "ARK Ecosystem",
+          "website": "https://ark.io",
+          "repository": "https://ark.io/arkecosystem"
+        },
+        "bridgechains": {
+          "6e84d08bd299ed97c212c886c98a57e36545c8f5d645ca7eeae63a8bd62d8988": {
+            "bridgechainAsset": {
+              "name": "ARK",
+              "ports": { "@arkecosystem/core-api": 4003 },
+              "seedNodes": ["5.196.105.32", "5.196.105.34", "178.32.65.136", "178.32.65.139", "54.38.120.32"],
+              "genesisHash": "6e84d08bd299ed97c212c886c98a57e36545c8f5d645ca7eeae63a8bd62d8988",
+              "bridgechainRepository": "https://github.com/arkecosystem"
+            }
+          }
+        }
+      }
+    },
+    "isDelegate": false,
+    "isResigned": false
+  }
+}

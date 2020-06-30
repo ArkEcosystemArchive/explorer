@@ -1,0 +1,13 @@
+{
+  "meta": {
+    "count": 0,
+    "pageCount": 1,
+    "totalCount": 0,
+    "next": null,
+    "previous": null,
+    "self": "/wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs/locks?limit=1&page=1",
+    "first": "/wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs/locks?limit=1&page=1",
+    "last": null
+  },
+  "data": []
+}

@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "count": 1,
+    "pageCount": 1415,
+    "totalCount": 1415,
+    "next": "/wallets/search?page=2&limit=1",
+    "previous": null,
+    "self": "/wallets/search?page=1&limit=1",
+    "first": "/wallets/search?page=1&limit=1",
+    "last": "/wallets/search?page=1415&limit=1"
+  },
+  "data": [
+    {
+      "address": "AdNYKkZYawQ4b1Yd8gW9M2P86aDeg726NT",
+      "publicKey": "03b60c65309a7d64aa736d46d48d08ab5273cd09be06aec059350c4e21d75dca88",
+      "nonce": "1",
+      "balance": "9815884089506",
+      "attributes": {
+        "vote": "02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b"
+      },
+      "isDelegate": false,
+      "isResigned": false,
+      "vote": "02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b"
+    }
+  ]
+}

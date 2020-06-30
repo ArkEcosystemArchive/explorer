@@ -1,0 +1,50 @@
+{
+  "data": {
+    "address": "Aa74QyqAFBsevReox3rMWy6FhMUyJVGPop",
+    "publicKey": "03364c62f7c5a7948dcaacdc72bac595e8f6e79944e722d05c8346d68aa1331b4a",
+    "nonce": "96193",
+    "balance": "42916260413",
+    "attributes": {
+      "secondPublicKey": "02a9b8946cce559d585df2b0168ac2b13459344ed7a14274c5b535c7c9b77f3f52",
+      "delegate": {
+        "username": "cryptology",
+        "voteBalance": "132028101996803",
+        "forgedFees": "220065949525",
+        "forgedRewards": "29111600000000",
+        "producedBlocks": 145558,
+        "rank": 46,
+        "lastBlock": {
+          "version": 0,
+          "timestamp": 103053720,
+          "height": 12733839,
+          "previousBlockHex": "9d385603a924df6715e1f774d5ecc4b879297c7feb172bae9c48621d94d9ee2f",
+          "previousBlock": "9d385603a924df6715e1f774d5ecc4b879297c7feb172bae9c48621d94d9ee2f",
+          "numberOfTransactions": 0,
+          "totalAmount": "0",
+          "totalFee": "0",
+          "reward": "200000000",
+          "payloadLength": 0,
+          "payloadHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "generatorPublicKey": "03364c62f7c5a7948dcaacdc72bac595e8f6e79944e722d05c8346d68aa1331b4a",
+          "blockSignature": "3045022100b0fac75f274d17afeb26a8a2055430d66fdf4945fceeb4e6808a1745251e4fa902203abcb2c37cf2b113907f21ad9f30dda2c1e76b85b2d99159abcb9491d000c883",
+          "idHex": "534d86ffe3ac7815441848a96712045a0b1a272a04fd84dce03bc8ab98b29f46",
+          "id": "534d86ffe3ac7815441848a96712045a0b1a272a04fd84dce03bc8ab98b29f46"
+        },
+        "round": 249684
+      },
+      "vote": "03364c62f7c5a7948dcaacdc72bac595e8f6e79944e722d05c8346d68aa1331b4a",
+      "business": {
+        "businessAsset": {
+          "name": "Cryptology",
+          "website": "https://cryptology.pe",
+          "repository": "https://github.com/wownmedia"
+        }
+      }
+    },
+    "isDelegate": true,
+    "isResigned": false,
+    "vote": "03364c62f7c5a7948dcaacdc72bac595e8f6e79944e722d05c8346d68aa1331b4a",
+    "username": "cryptology",
+    "secondPublicKey": "02a9b8946cce559d585df2b0168ac2b13459344ed7a14274c5b535c7c9b77f3f52"
+  }
+}

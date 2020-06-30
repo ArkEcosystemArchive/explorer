@@ -1,0 +1,282 @@
+{
+  "meta": {
+    "count": 25,
+    "pageCount": 5,
+    "totalCount": 107,
+    "next": "/bridgechains?page=2&limit=25",
+    "previous": null,
+    "self": "/bridgechains?page=1&limit=25",
+    "first": "/bridgechains?page=1&limit=25",
+    "last": "/bridgechains?page=5&limit=25"
+  },
+  "data": [
+    {
+      "publicKey": "0343f4148926dcaac4d241510536a73795613f909a678df62b803ff28f78948a4c",
+      "address": "DNSrsDUq5injGBdNXPV7v7u1Qy9LZfWEdM",
+      "name": "888",
+      "seedNodes": ["142.93.246.48"],
+      "genesisHash": "c00bf8d16eb581edd6b67c58e722dff767334fc80423f369c7c9a0cec8f2517b",
+      "bridgechainRepository": "https://github.com/sleepdefic1t/888_core.git",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "bridgechainAssetRepository": "https://github.com/sleepdefic1t/888_explorer.git",
+      "isResigned": false
+    },
+    {
+      "publicKey": "02aebc5fae193beff6d80a4508c56b4b52cf28a8f99daf98998f8cc04bf515995b",
+      "address": "D5PDHXJnFt29FBsjAEjySSYEZok6aiR9uq",
+      "name": "ARK",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "seedNodes": ["195.171.43.170"],
+      "genesisHash": "6e84d08bd299ed97c212c886c98a57e36545c8f5d645ca7eeae63a8bd62d8988",
+      "bridgechainRepository": "http://ark.io",
+      "bridgechainAssetRepository": "http://ark.io",
+      "isResigned": true
+    },
+    {
+      "publicKey": "037fde73baaa48eb75c013fe9ff52a74a096d48b9978351bdcb5b72331ca37487c",
+      "address": "DDVQowudZ1Tn8gceHXv2hgiEX3TRVVkSsT",
+      "name": "ARK",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "seedNodes": ["167.114.29.51", "167.114.29.52", "167.114.29.53", "167.114.29.54", "167.114.29.55"],
+      "genesisHash": "2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867",
+      "bridgechainRepository": "https://github.com/arkecosystem",
+      "isResigned": false
+    },
+    {
+      "publicKey": "03c6f8546a296ad828f64b4cc0e343acf93012717b6297dd33208912553be869c9",
+      "address": "DMLFXKep2RdqzzVuegwMngJHvuH7SZNW14",
+      "name": "ARK Devnet",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "seedNodes": ["167.114.29.51", "167.114.29.52", "167.114.29.53", "167.114.29.54"],
+      "genesisHash": "2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867",
+      "bridgechainRepository": "https://github.com/arkecosystem",
+      "bridgechainAssetRepository": "https://ark.io",
+      "isResigned": false
+    },
+    {
+      "publicKey": "0209189f2dadff6d2ae13a968578cbf7d48e6f068ff90a8e3944dd8fbe3fd5cd01",
+      "address": "DMLFXKep2RdqzzVuegwMngJHvuH7SZNW14",
+      "name": "ARK Mainnet",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "seedNodes": ["5.196.105.32", "178.32.65.136", "178.32.65.142", "5.196.105.44", "54.38.120.38"],
+      "genesisHash": "6e84d08bd299ed97c212c886c98a57e36545c8f5d645ca7eeae63a8bd62d8988",
+      "bridgechainRepository": "https://github.com/arkecosystem",
+      "bridgechainAssetRepository": "https://ark.io",
+      "isResigned": false
+    },
+    {
+      "publicKey": "0265ead7ad9bf9ded94ac396c4f73f1596c833f80425f3c262133e6f8d99e496b2",
+      "address": "DAFWvCpShKptdhAfLFJwHFXrHsuCaUMtUs",
+      "name": "BrassBridge",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "seedNodes": ["167.114.43.51"],
+      "genesisHash": "2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867",
+      "bridgechainRepository": "https://github.com/elaine-egan/brass-bridge",
+      "bridgechainAssetRepository": "https://github.com/elaine-egan/brass-bridge",
+      "isResigned": false
+    },
+    {
+      "publicKey": "0360c4b7c81d6a84888abb4e6707dc9bdf7205e551b3044513424eae1f9ca64f3d",
+      "address": "DDvrVAYKfS6sdSu1Jmqk8y1okciZh8pwrA",
+      "name": "CrazyChain",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "seedNodes": ["95.179.235.167"],
+      "genesisHash": "2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867",
+      "bridgechainRepository": "https://github.com/samharperpittam/piechain_core",
+      "isResigned": false
+    },
+    {
+      "publicKey": "03153c994e5306b2fbba9bb533f22871e12e4c1d1d3960d1eeef385ab143b258b4",
+      "address": "DRgh1n8oyGHDE6xXVq4yhh3sSajAr7uHJY",
+      "name": "DARKnet",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "seedNodes": ["167.114.43.51"],
+      "genesisHash": "2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867",
+      "bridgechainRepository": "https://github.com/c0nsol3/DARKnet",
+      "isResigned": false
+    },
+    {
+      "publicKey": "034e35d2c030f3a2680b6a95cc154bf0ee00844b5b9fbb870f591d3492a74915d6",
+      "address": "DGma7qk3bL1dkB8cqGwLjK6fdtA3Q123Zz",
+      "name": "Devnet",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "seedNodes": ["167.99.92.224", "95.179.235.167"],
+      "genesisHash": "2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867",
+      "bridgechainRepository": "http://dev.commmm",
+      "bridgechainAssetRepository": "http://dev.commmmm",
+      "isResigned": true
+    },
+    {
+      "publicKey": "032cfbb18f4e49952c6d6475e8adc6d0cba00b81ef6606cc4927b78c6c50558beb",
+      "address": "DACFobAjNEKsc1CtPSMyp5uA4wp6uC3fgC",
+      "name": "Eggs",
+      "seedNodes": ["167.114.43.51"],
+      "genesisHash": "2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867",
+      "bridgechainRepository": "https://github.com/cambo",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "bridgechainAssetRepository": "https://github.com/cambo",
+      "isResigned": false
+    },
+    {
+      "publicKey": "027b85fe54596dc62262199b6b74f70e82a2935d31fa0c1ad3b2c554a5c2dc186a",
+      "address": "DU4pUwtNR8ZEqmvXUcuyKj4kw1b9xx9xNB",
+      "name": "G-Chain",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "seedNodes": ["116.203.190.17"],
+      "genesisHash": "2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867",
+      "bridgechainRepository": "https://github.com/samharperpittam/g",
+      "bridgechainAssetRepository": "http://www.g-chain.com",
+      "isResigned": false
+    },
+    {
+      "publicKey": "030111185c9f2f787471289df36172f84f280a7fe570ae46f0af0807c263b724d0",
+      "address": "DTmGUcpDmGSRttP4xzWQ5q3CSJfhNLo4KP",
+      "name": "GT",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "seedNodes": ["81.106.99.189"],
+      "genesisHash": "6e84d08bd299ed97c212c886c98a57e36545c8f5d645ca7eeae63a8bd62d8988",
+      "bridgechainRepository": "http://www.goog.com",
+      "bridgechainAssetRepository": "http://www.goog.comm",
+      "isResigned": true
+    },
+    {
+      "publicKey": "02786f8b39633eb3666e85332f98ac500132766715902312d04a8cfb59cf89c235",
+      "address": "DUSfNiPnzmuwJ6Ymfv1cMZTkZ3e7yLjkNE",
+      "name": "Greatchain",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "seedNodes": ["136.244.110.100"],
+      "genesisHash": "36e0876a8111d1fe892ea80e6aa239f05d8c52dd3ba047837323669adf9f5031",
+      "bridgechainRepository": "https://github.com/doubled1c3/core",
+      "isResigned": false
+    },
+    {
+      "publicKey": "03b6a3ad6275e9783df39ffb3848280e5e01479da9b43ee58694c8b747e0eb82a4",
+      "address": "D5PDHXJnFt29FBsjAEjySSYEZok6aiR9uq",
+      "name": "Hola",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "seedNodes": ["136.244.110.100"],
+      "genesisHash": "36e0876a8111d1fe892ea80e6aa239f05d8c52dd3ba047837323669adf9f5031",
+      "bridgechainRepository": "http://www.google.om",
+      "bridgechainAssetRepository": "http://www.google.ommmmm",
+      "isResigned": true
+    },
+    {
+      "publicKey": "02b6e13903ef9ea26fe719dd46f1c476ed6edd99ff1f6076970b891621f463c0c2",
+      "address": "DKanNjAKiai2U8WFLpUoUMQnxG4u5xpQb4",
+      "name": "Mario Kingdom",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "seedNodes": ["49.12.64.65"],
+      "genesisHash": "5cca0e1327edd6d8d6c85e9ac28c8263c4542186823fca6a37104b8a29f57148",
+      "bridgechainRepository": "https://github.com/samharperpittam/piechain9_core",
+      "bridgechainAssetRepository": "https://github.com/samharperpittam/piechain9_core",
+      "isResigned": false
+    },
+    {
+      "publicKey": "034e35d2c030f3a2680b6a95cc154bf0ee00844b5b9fbb870f591d3492a74915d6",
+      "address": "DGma7qk3bL1dkB8cqGwLjK6fdtA3Q123Zz",
+      "name": "Muhchain",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "seedNodes": ["136.244.110.100"],
+      "genesisHash": "36e0876a8111d1fe892ea80e6aa239f05d8c52dd3ba047837323669adf9f5031",
+      "bridgechainRepository": "http://www.go.com",
+      "bridgechainAssetRepository": "http://www.go.com",
+      "isResigned": true
+    },
+    {
+      "publicKey": "03c456e5eb3f7e2f9ad4d046a0410fb5d3233dc3dacaf79eac3dc8384154126f14",
+      "address": "DPaMZLNW8KD3WduwZGJagKv5rc1QWX6iMa",
+      "name": "My-Bridgechain.1_1",
+      "ports": { "@arkecosystem/core-api": 4103 },
+      "seedNodes": ["94.130.111.14"],
+      "genesisHash": "3b177c421b2ac70df09e30c9dc2d86bfddf1ef3f072ee3fea1c5d58d8002393a",
+      "bridgechainRepository": "http://www.google.com/repot",
+      "bridgechainAssetRepository": "http://www.google.com/assetttt",
+      "isResigned": true
+    },
+    {
+      "publicKey": "02a3fc188f93d1eaa7367860ecc2b9ac11c6f0376b9f1b7ed875eb9fb654f7ffdf",
+      "address": "DQxxB9NVrZRd3L4R5gVH7V2FDBY9DnQ73G",
+      "name": "My-Bridgechain.Rules_Yeah",
+      "ports": { "@arkecosystem/core-api": 4103 },
+      "seedNodes": ["94.130.111.14"],
+      "genesisHash": "bc62b37829a52a5c61a5e851bb3fd1bb68799e25b2db985d8984731cbaebd6e7",
+      "bridgechainRepository": "http://www.google.com",
+      "bridgechainAssetRepository": "http://www.google.com/asssets",
+      "isResigned": true
+    },
+    {
+      "publicKey": "02c1363cb2f101eb5649e65f13c8219eba1961ff541b177504ec7139044f1c4f33",
+      "address": "DKMKjrrW47rR1A3LjFm4oMz7YNfTCQmU6K",
+      "name": "My-Bridgechain.Test_1",
+      "ports": { "@arkecosystem/core-api": 4103 },
+      "seedNodes": ["94.130.57.217", "94.130.111.14"],
+      "genesisHash": "837b697e26a1d7b74897cc4b75d24ed3805980d3571fea83a61bf4977e47e912",
+      "bridgechainRepository": "http://www.google.com",
+      "bridgechainAssetRepository": "http://www.google.com",
+      "isResigned": true
+    },
+    {
+      "publicKey": "03e8e6be4ce1f7a6e21cac5f8bb90ae654ca91990a8923bb0feaebeba93e894a3f",
+      "address": "DGdapFJn44CPUHJGXYFSMg6uSshfhUdoUo",
+      "name": "My-Bridgechain.Test_1",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "seedNodes": ["94.130.172.58"],
+      "genesisHash": "5ccf9a03e812063bc0cd3ef83edd7cdd89440d930c51ae8c336d9f71479cb26f",
+      "bridgechainRepository": "http://www.google.com",
+      "bridgechainAssetRepository": "http://www.google.comm",
+      "isResigned": true
+    },
+    {
+      "publicKey": "02db9adccc12edb6f17fc82137cc9395c58529940b530a8e450b1cf125bcbfc8aa",
+      "address": "DDfa3CzbmX94Vs4G7z3oXJgZCucsGGFyjz",
+      "name": "MyBridgechain",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "seedNodes": ["167.172.61.45", "104.248.9.95", "192.241.155.55", "165.227.215.246"],
+      "genesisHash": "3fe5471f6ac52841c9178c363c997f831c43223f6f92f36e473d93ffba0104c5",
+      "bridgechainRepository": "http://github.com/myrepo/core",
+      "bridgechainAssetRepository": "http://github.com/myrepo/assets",
+      "isResigned": true
+    },
+    {
+      "publicKey": "03d5a99d0fd5c8b5cd4bde11bc94e13f1c07e9a0fbec37efcbe9dac9f3a9f3c974",
+      "address": "DMNx4U8ZBtvBPDGFsykXtGBTZeY24jJcm3",
+      "name": "MyBridgechain",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "seedNodes": ["159.203.102.78"],
+      "genesisHash": "82099a7396cb670d34b80f262571f5e82b7c7653ddedbc3ca42f51642f1cd516",
+      "bridgechainRepository": "http://www.google.com/",
+      "bridgechainAssetRepository": "http://www.google.com/",
+      "isResigned": false
+    },
+    {
+      "publicKey": "0388a7bacc0ef2682dd7be3a76513d16c5bdaefc112abd88850fbef3ad96afd697",
+      "address": "D62wUbp2uUL9pofNmT6aqxLnHJn389yXaW",
+      "name": "MyChain",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "seedNodes": ["136.244.110.100"],
+      "genesisHash": "36e0876a8111d1fe892ea80e6aa239f05d8c52dd3ba047837323669adf9f5031",
+      "bridgechainRepository": "http://www.github.com/myrepo/core",
+      "isResigned": true
+    },
+    {
+      "publicKey": "02cd9f56a176c843724eb58d3ef89dc88915a814bdcf284b02933e0dd203630a83",
+      "address": "DFyLKkWs12QwDTi8BywQN5ssa5CMK3dr6d",
+      "name": "MyChain",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "seedNodes": ["167.71.241.199"],
+      "genesisHash": "28c883f6217f9fcd574b3680df1fb2b7dc9b0404f3d83d733ffc1ad5227ba478",
+      "bridgechainRepository": "http://noneofyourbusiness.com",
+      "isResigned": false
+    },
+    {
+      "publicKey": "0388a7bacc0ef2682dd7be3a76513d16c5bdaefc112abd88850fbef3ad96afd697",
+      "address": "D62wUbp2uUL9pofNmT6aqxLnHJn389yXaW",
+      "name": "MyDevnet",
+      "ports": { "@arkecosystem/core-api": 4003 },
+      "seedNodes": ["206.189.234.23"],
+      "genesisHash": "4803a76c90df2730416b91798df8b98f078645fbc9ea540ee7b7d97f16b6c498",
+      "bridgechainRepository": "http://www.google.com",
+      "isResigned": true
+    }
+  ]
+}

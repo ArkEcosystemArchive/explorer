@@ -1,0 +1,31 @@
+{
+  "meta": {
+    "totalCountIsEstimate": false,
+    "count": 1,
+    "pageCount": 1,
+    "totalCount": 1,
+    "next": null,
+    "previous": null,
+    "self": "/blocks/12287662939647858585/transactions?orderBy=timestamp%3Adesc&page=1&limit=25&transform=true",
+    "first": "/blocks/12287662939647858585/transactions?orderBy=timestamp%3Adesc&page=1&limit=25&transform=true",
+    "last": "/blocks/12287662939647858585/transactions?orderBy=timestamp%3Adesc&page=1&limit=25&transform=true"
+  },
+  "data": [
+    {
+      "id": "1b88cc13bcd7bd200a86ab2e41b48ae802af0b4ffce7e06cb8b1a4c5c5982869",
+      "blockId": "12287662939647858585",
+      "version": 1,
+      "type": 0,
+      "typeGroup": 1,
+      "amount": "4015000000",
+      "fee": "10000000",
+      "sender": "AT1ey8r3hunSBTKKJhiuuxyXFidf5J3b9F",
+      "senderPublicKey": "033bd08c72fb268d59c55d4b854c28a564b65d8bad7e8bb78276fcffec5a8fa0e0",
+      "recipient": "AeBhJqS811wy9zKTPQqyoZZSwcQXquVgPQ",
+      "signature": "3045022100d92b8cb54138e6631a0ef6649814dba6a56a6628038b77581f1781baccdecb6e02204098cdffb9a5546bb2e7911b75d89300a4f9476796bf16dce42472312da15c56",
+      "confirmations": 8047614,
+      "timestamp": { "epoch": 37953416, "unix": 1528054616, "human": "2018-06-03T19:36:56.000Z" },
+      "nonce": "1"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "Response": "Success",
+  "Type": 100,
+  "Aggregated": false,
+  "Data": [
+    {
+      "time": 1592784000,
+      "high": 0.2864,
+      "low": 0.2579,
+      "open": 0.2524,
+      "volumefrom": 6933264.65,
+      "volumeto": 1860194.91,
+      "close": 0.2683
+    },
+    {
+      "time": 1592870400,
+      "high": 0.2837,
+      "low": 0.2621,
+      "open": 0.2683,
+      "volumefrom": 4546547.82,
+      "volumeto": 1203925.86,
+      "close": 0.2648
+    },
+    {
+      "time": 1592956800,
+      "high": 0.323,
+      "low": 0.2555,
+      "open": 0.2648,
+      "volumefrom": 8792728.89,
+      "volumeto": 2504169.19,
+      "close": 0.2848
+    },
+    {
+      "time": 1593043200,
+      "high": 0.2961,
+      "low": 0.264,
+      "open": 0.2848,
+      "volumefrom": 4753031.42,
+      "volumeto": 1376002.6,
+      "close": 0.2895
+    },
+    {
+      "time": 1593129600,
+      "high": 0.3576,
+      "low": 0.2546,
+      "open": 0.2895,
+      "volumefrom": 5245713.43,
+      "volumeto": 1390114.06,
+      "close": 0.265
+    },
+    {
+      "time": 1593216000,
+      "high": 0.3435,
+      "low": 0.2327,
+      "open": 0.265,
+      "volumefrom": 5243689.86,
+      "volumeto": 1546364.14,
+      "close": 0.2949
+    },
+    {
+      "time": 1593302400,
+      "high": 0.3477,
+      "low": 0.2456,
+      "open": 0.2949,
+      "volumefrom": 3598263.48,
+      "volumeto": 905323.09,
+      "close": 0.2516
+    },
+    {
+      "time": 1593388800,
+      "high": 0.3073,
+      "low": 0.2463,
+      "open": 0.2516,
+      "volumefrom": 432415.09,
+      "volumeto": 107584.87,
+      "close": 0.2463
+    }
+  ],
+  "TimeTo": 1593388800,
+  "TimeFrom": 1592784000,
+  "FirstValueInArray": true,
+  "ConversionType": { "type": "multiply", "conversionSymbol": "BTC" },
+  "RateLimit": {},
+  "HasWarning": false
+}

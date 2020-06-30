@@ -1,0 +1,776 @@
+{
+  "meta": {
+    "count": 100,
+    "pageCount": 2,
+    "totalCount": 100,
+    "next": null,
+    "previous": null,
+    "self": "/businesses?transform=true&page=1&limit=100",
+    "first": "/businesses?transform=true&page=1&limit=100",
+    "last": "/businesses?transform=true&page=1&limit=100"
+  },
+  "data": [
+    {
+      "address": "ATEXKwUAaxwLgavPX2SV2D2AKJkU7XBnLh",
+      "publicKey": "0343f4148926dcaac4d241510536a73795613f909a678df62b803ff28f78948a4c",
+      "vat": "833439300",
+      "name": "ARK Ecosystem",
+      "website": "https://ark.io",
+      "repository": "https://ark.io/arkecosystem",
+      "isResigned": false
+    },
+    {
+      "address": "ALessioRJeVFrDBD2tckrT3fTvsZzESocA",
+      "publicKey": "02630c5942b003b2c4ec184862e4ac41578e0a79777da1332b384d3169f4d5eadd",
+      "name": "Alessio",
+      "website": "https://github.com/alessiodf",
+      "isResigned": false
+    },
+    {
+      "address": "ARk6tx47Lstn2DJNKWL1cD2YNMutDcyDEa",
+      "publicKey": "02c0eb51578944990e486635007e962ced20a6f2c1cccdfd14d6a067327cd035b4",
+      "name": "Ark_directory",
+      "website": "https://arkdirectory.com/",
+      "isResigned": false
+    },
+    {
+      "address": "Aa74QyqAFBsevReox3rMWy6FhMUyJVGPop",
+      "publicKey": "03364c62f7c5a7948dcaacdc72bac595e8f6e79944e722d05c8346d68aa1331b4a",
+      "name": "Cryptology",
+      "website": "https://cryptology.pe",
+      "repository": "https://github.com/wownmedia",
+      "isResigned": false
+    },
+    {
+      "address": "AbChHc8CQpyWLj5PygyPPkFC7i6kV4FeQc",
+      "publicKey": "0216c351be32d835ac3f10c0b95365d9d4d69fc2d74a95b0808a3faafdf714cb7b",
+      "name": "CryptologyLicenses",
+      "website": "https://cryptology.pe",
+      "repository": "https://github.com/wownmedia",
+      "isResigned": false
+    },
+    {
+      "address": "AFun3ZuMLj5z1UwxtvsUVHWf15ue1BQKtR",
+      "publicKey": "02618fd3094afc436742a1e47dab922a1d8892ae791d1b426d125f6bd691634427",
+      "name": "Delegate Fun",
+      "website": "https://www.arkfun.io",
+      "isResigned": false
+    },
+    {
+      "address": "AbxUBkEmEGb3kahQUKJ6LfqsKWGcy3nTij",
+      "publicKey": "03242784474bc911c482861d18d5974c2c79ed61f931982e1ce42e3e3994559e41",
+      "name": "Dutch Pool",
+      "website": "https://dutchpool.io",
+      "repository": "https://github.com/dutchpool",
+      "isResigned": false
+    },
+    {
+      "address": "AXBXtYnbvCT6dEYXN67psZvJhBDH3W5kDX",
+      "publicKey": "0239e196716cb5242f0ba7ea25372fa22a8fab03cc1b5dd2575f0275cdefc0e957",
+      "name": "Espresso",
+      "website": "https://example.com",
+      "isResigned": false
+    },
+    {
+      "address": "AQwTP4kT6rdE9ASyY3sbcMLyWKp4diKtjC",
+      "publicKey": "02b54f00d9de5a3ace28913fe78a15afcfe242926e94d9b517d06d2705b261f992",
+      "name": "Kolap",
+      "website": "http://kolap.com",
+      "isResigned": false
+    },
+    {
+      "address": "AJxBSFjs1tRM4jCAi5rx8YfuVU3Ln4Lc4w",
+      "publicKey": "02aebc5fae193beff6d80a4508c56b4b52cf28a8f99daf98998f8cc04bf515995b",
+      "name": "Pieface",
+      "website": "http://nowebsite.gov",
+      "repository": "http://nowebsite.gov",
+      "isResigned": false
+    },
+    {
+      "address": "AZANaDAUUway2fka8hgobBaSQXkRx1ciAy",
+      "publicKey": "03c6f8546a296ad828f64b4cc0e343acf93012717b6297dd33208912553be869c9",
+      "name": "Zan",
+      "website": "https://www.zan.com",
+      "isResigned": true
+    },
+    {
+      "address": "AKdr5d9AMEnsKYxpDcoHdyyjSCKVx3r9Nj",
+      "publicKey": "020431436cf94f3c6a6ba566fe9e42678db8486590c732ca6c3803a10a86f50b92",
+      "name": "biz_classic",
+      "website": "https://classicdelegate.biz",
+      "isResigned": false
+    },
+    {
+      "address": "AaAy8BZkjV86YN7xUtZ35iwyXRMQKtKoAy",
+      "publicKey": "02fa6902e91e127d6d3410f6abc271a79ae24029079caa0db5819757e3c1c1c5a4",
+      "name": "biz_private",
+      "website": "https://privatedelegate.biz/",
+      "isResigned": false
+    },
+    {
+      "address": "AGvhBGb4cCZnP2wUo1oCSi83LUtGDG7Y6X",
+      "publicKey": "02902de3fcb257e9248e2ae668d2e314027f0ca05c1eb21e1c5817c7580014669f",
+      "name": "cams_yellow_jacket",
+      "website": "https://www.camsyellowjacket.com/",
+      "repository": "https://github.com/cambo",
+      "isResigned": false
+    },
+    {
+      "address": "Aasu14aTs9ipZdy1FMv7ay1Vqn3jPskA8t",
+      "publicKey": "02c7455bebeadde04728441e0f57f82f972155c088252bf7c1365eb0dc84fbf5de",
+      "name": "jarunik",
+      "website": "https://jarunik.com",
+      "repository": "https://github.com/jarunik",
+      "isResigned": false
+    },
+    {
+      "address": "AVL2SfiaaKPD6dV3KwFxqcBbzmtfeYDaoj",
+      "publicKey": "0273f311dce939562a92695583521b4782fdaf7c04f0a1d8643447adca76443111",
+      "name": "lemii",
+      "website": "https://github.com/lemii",
+      "isResigned": false
+    },
+    {
+      "address": "AZ4y2VNHv9aJLfL4AiX1LZciSeeWQHkM8B",
+      "publicKey": "037fde73baaa48eb75c013fe9ff52a74a096d48b9978351bdcb5b72331ca37487c",
+      "vat": "12345678",
+      "name": "mybusiness",
+      "website": "https://www.mybusiness.com/",
+      "repository": "https://www.mybusiness.com/",
+      "isResigned": true
+    },
+    {
+      "address": "ATEXKwUAaxwLgavPX2SV2D2AKJkU7XBnLh",
+      "publicKey": "0343f4148926dcaac4d241510536a73795613f909a678df62b803ff28f78948a4c",
+      "vat": "833439300",
+      "name": "ARK Ecosystem",
+      "website": "https://ark.io",
+      "repository": "https://ark.io/arkecosystem",
+      "isResigned": false
+    },
+    {
+      "address": "ALessioRJeVFrDBD2tckrT3fTvsZzESocA",
+      "publicKey": "02630c5942b003b2c4ec184862e4ac41578e0a79777da1332b384d3169f4d5eadd",
+      "name": "Alessio",
+      "website": "https://github.com/alessiodf",
+      "isResigned": false
+    },
+    {
+      "address": "ARk6tx47Lstn2DJNKWL1cD2YNMutDcyDEa",
+      "publicKey": "02c0eb51578944990e486635007e962ced20a6f2c1cccdfd14d6a067327cd035b4",
+      "name": "Ark_directory",
+      "website": "https://arkdirectory.com/",
+      "isResigned": false
+    },
+    {
+      "address": "Aa74QyqAFBsevReox3rMWy6FhMUyJVGPop",
+      "publicKey": "03364c62f7c5a7948dcaacdc72bac595e8f6e79944e722d05c8346d68aa1331b4a",
+      "name": "Cryptology",
+      "website": "https://cryptology.pe",
+      "repository": "https://github.com/wownmedia",
+      "isResigned": false
+    },
+    {
+      "address": "AbChHc8CQpyWLj5PygyPPkFC7i6kV4FeQc",
+      "publicKey": "0216c351be32d835ac3f10c0b95365d9d4d69fc2d74a95b0808a3faafdf714cb7b",
+      "name": "CryptologyLicenses",
+      "website": "https://cryptology.pe",
+      "repository": "https://github.com/wownmedia",
+      "isResigned": false
+    },
+    {
+      "address": "AFun3ZuMLj5z1UwxtvsUVHWf15ue1BQKtR",
+      "publicKey": "02618fd3094afc436742a1e47dab922a1d8892ae791d1b426d125f6bd691634427",
+      "name": "Delegate Fun",
+      "website": "https://www.arkfun.io",
+      "isResigned": false
+    },
+    {
+      "address": "AbxUBkEmEGb3kahQUKJ6LfqsKWGcy3nTij",
+      "publicKey": "03242784474bc911c482861d18d5974c2c79ed61f931982e1ce42e3e3994559e41",
+      "name": "Dutch Pool",
+      "website": "https://dutchpool.io",
+      "repository": "https://github.com/dutchpool",
+      "isResigned": false
+    },
+    {
+      "address": "AXBXtYnbvCT6dEYXN67psZvJhBDH3W5kDX",
+      "publicKey": "0239e196716cb5242f0ba7ea25372fa22a8fab03cc1b5dd2575f0275cdefc0e957",
+      "name": "Espresso",
+      "website": "https://example.com",
+      "isResigned": false
+    },
+    {
+      "address": "AQwTP4kT6rdE9ASyY3sbcMLyWKp4diKtjC",
+      "publicKey": "02b54f00d9de5a3ace28913fe78a15afcfe242926e94d9b517d06d2705b261f992",
+      "name": "Kolap",
+      "website": "http://kolap.com",
+      "isResigned": false
+    },
+    {
+      "address": "AJxBSFjs1tRM4jCAi5rx8YfuVU3Ln4Lc4w",
+      "publicKey": "02aebc5fae193beff6d80a4508c56b4b52cf28a8f99daf98998f8cc04bf515995b",
+      "name": "Pieface",
+      "website": "http://nowebsite.gov",
+      "repository": "http://nowebsite.gov",
+      "isResigned": false
+    },
+    {
+      "address": "AZANaDAUUway2fka8hgobBaSQXkRx1ciAy",
+      "publicKey": "03c6f8546a296ad828f64b4cc0e343acf93012717b6297dd33208912553be869c9",
+      "name": "Zan",
+      "website": "https://www.zan.com",
+      "isResigned": true
+    },
+    {
+      "address": "AKdr5d9AMEnsKYxpDcoHdyyjSCKVx3r9Nj",
+      "publicKey": "020431436cf94f3c6a6ba566fe9e42678db8486590c732ca6c3803a10a86f50b92",
+      "name": "biz_classic",
+      "website": "https://classicdelegate.biz",
+      "isResigned": false
+    },
+    {
+      "address": "AaAy8BZkjV86YN7xUtZ35iwyXRMQKtKoAy",
+      "publicKey": "02fa6902e91e127d6d3410f6abc271a79ae24029079caa0db5819757e3c1c1c5a4",
+      "name": "biz_private",
+      "website": "https://privatedelegate.biz/",
+      "isResigned": false
+    },
+    {
+      "address": "AGvhBGb4cCZnP2wUo1oCSi83LUtGDG7Y6X",
+      "publicKey": "02902de3fcb257e9248e2ae668d2e314027f0ca05c1eb21e1c5817c7580014669f",
+      "name": "cams_yellow_jacket",
+      "website": "https://www.camsyellowjacket.com/",
+      "repository": "https://github.com/cambo",
+      "isResigned": false
+    },
+    {
+      "address": "Aasu14aTs9ipZdy1FMv7ay1Vqn3jPskA8t",
+      "publicKey": "02c7455bebeadde04728441e0f57f82f972155c088252bf7c1365eb0dc84fbf5de",
+      "name": "jarunik",
+      "website": "https://jarunik.com",
+      "repository": "https://github.com/jarunik",
+      "isResigned": false
+    },
+    {
+      "address": "AVL2SfiaaKPD6dV3KwFxqcBbzmtfeYDaoj",
+      "publicKey": "0273f311dce939562a92695583521b4782fdaf7c04f0a1d8643447adca76443111",
+      "name": "lemii",
+      "website": "https://github.com/lemii",
+      "isResigned": false
+    },
+    {
+      "address": "AZ4y2VNHv9aJLfL4AiX1LZciSeeWQHkM8B",
+      "publicKey": "037fde73baaa48eb75c013fe9ff52a74a096d48b9978351bdcb5b72331ca37487c",
+      "vat": "12345678",
+      "name": "mybusiness",
+      "website": "https://www.mybusiness.com/",
+      "repository": "https://www.mybusiness.com/",
+      "isResigned": true
+    },
+    {
+      "address": "ATEXKwUAaxwLgavPX2SV2D2AKJkU7XBnLh",
+      "publicKey": "0343f4148926dcaac4d241510536a73795613f909a678df62b803ff28f78948a4c",
+      "vat": "833439300",
+      "name": "ARK Ecosystem",
+      "website": "https://ark.io",
+      "repository": "https://ark.io/arkecosystem",
+      "isResigned": false
+    },
+    {
+      "address": "ALessioRJeVFrDBD2tckrT3fTvsZzESocA",
+      "publicKey": "02630c5942b003b2c4ec184862e4ac41578e0a79777da1332b384d3169f4d5eadd",
+      "name": "Alessio",
+      "website": "https://github.com/alessiodf",
+      "isResigned": false
+    },
+    {
+      "address": "ARk6tx47Lstn2DJNKWL1cD2YNMutDcyDEa",
+      "publicKey": "02c0eb51578944990e486635007e962ced20a6f2c1cccdfd14d6a067327cd035b4",
+      "name": "Ark_directory",
+      "website": "https://arkdirectory.com/",
+      "isResigned": false
+    },
+    {
+      "address": "Aa74QyqAFBsevReox3rMWy6FhMUyJVGPop",
+      "publicKey": "03364c62f7c5a7948dcaacdc72bac595e8f6e79944e722d05c8346d68aa1331b4a",
+      "name": "Cryptology",
+      "website": "https://cryptology.pe",
+      "repository": "https://github.com/wownmedia",
+      "isResigned": false
+    },
+    {
+      "address": "AbChHc8CQpyWLj5PygyPPkFC7i6kV4FeQc",
+      "publicKey": "0216c351be32d835ac3f10c0b95365d9d4d69fc2d74a95b0808a3faafdf714cb7b",
+      "name": "CryptologyLicenses",
+      "website": "https://cryptology.pe",
+      "repository": "https://github.com/wownmedia",
+      "isResigned": false
+    },
+    {
+      "address": "AFun3ZuMLj5z1UwxtvsUVHWf15ue1BQKtR",
+      "publicKey": "02618fd3094afc436742a1e47dab922a1d8892ae791d1b426d125f6bd691634427",
+      "name": "Delegate Fun",
+      "website": "https://www.arkfun.io",
+      "isResigned": false
+    },
+    {
+      "address": "AbxUBkEmEGb3kahQUKJ6LfqsKWGcy3nTij",
+      "publicKey": "03242784474bc911c482861d18d5974c2c79ed61f931982e1ce42e3e3994559e41",
+      "name": "Dutch Pool",
+      "website": "https://dutchpool.io",
+      "repository": "https://github.com/dutchpool",
+      "isResigned": false
+    },
+    {
+      "address": "AXBXtYnbvCT6dEYXN67psZvJhBDH3W5kDX",
+      "publicKey": "0239e196716cb5242f0ba7ea25372fa22a8fab03cc1b5dd2575f0275cdefc0e957",
+      "name": "Espresso",
+      "website": "https://example.com",
+      "isResigned": false
+    },
+    {
+      "address": "AQwTP4kT6rdE9ASyY3sbcMLyWKp4diKtjC",
+      "publicKey": "02b54f00d9de5a3ace28913fe78a15afcfe242926e94d9b517d06d2705b261f992",
+      "name": "Kolap",
+      "website": "http://kolap.com",
+      "isResigned": false
+    },
+    {
+      "address": "AJxBSFjs1tRM4jCAi5rx8YfuVU3Ln4Lc4w",
+      "publicKey": "02aebc5fae193beff6d80a4508c56b4b52cf28a8f99daf98998f8cc04bf515995b",
+      "name": "Pieface",
+      "website": "http://nowebsite.gov",
+      "repository": "http://nowebsite.gov",
+      "isResigned": false
+    },
+    {
+      "address": "AZANaDAUUway2fka8hgobBaSQXkRx1ciAy",
+      "publicKey": "03c6f8546a296ad828f64b4cc0e343acf93012717b6297dd33208912553be869c9",
+      "name": "Zan",
+      "website": "https://www.zan.com",
+      "isResigned": true
+    },
+    {
+      "address": "AKdr5d9AMEnsKYxpDcoHdyyjSCKVx3r9Nj",
+      "publicKey": "020431436cf94f3c6a6ba566fe9e42678db8486590c732ca6c3803a10a86f50b92",
+      "name": "biz_classic",
+      "website": "https://classicdelegate.biz",
+      "isResigned": false
+    },
+    {
+      "address": "AaAy8BZkjV86YN7xUtZ35iwyXRMQKtKoAy",
+      "publicKey": "02fa6902e91e127d6d3410f6abc271a79ae24029079caa0db5819757e3c1c1c5a4",
+      "name": "biz_private",
+      "website": "https://privatedelegate.biz/",
+      "isResigned": false
+    },
+    {
+      "address": "AGvhBGb4cCZnP2wUo1oCSi83LUtGDG7Y6X",
+      "publicKey": "02902de3fcb257e9248e2ae668d2e314027f0ca05c1eb21e1c5817c7580014669f",
+      "name": "cams_yellow_jacket",
+      "website": "https://www.camsyellowjacket.com/",
+      "repository": "https://github.com/cambo",
+      "isResigned": false
+    },
+    {
+      "address": "Aasu14aTs9ipZdy1FMv7ay1Vqn3jPskA8t",
+      "publicKey": "02c7455bebeadde04728441e0f57f82f972155c088252bf7c1365eb0dc84fbf5de",
+      "name": "jarunik",
+      "website": "https://jarunik.com",
+      "repository": "https://github.com/jarunik",
+      "isResigned": false
+    },
+    {
+      "address": "AVL2SfiaaKPD6dV3KwFxqcBbzmtfeYDaoj",
+      "publicKey": "0273f311dce939562a92695583521b4782fdaf7c04f0a1d8643447adca76443111",
+      "name": "lemii",
+      "website": "https://github.com/lemii",
+      "isResigned": false
+    },
+    {
+      "address": "AZ4y2VNHv9aJLfL4AiX1LZciSeeWQHkM8B",
+      "publicKey": "037fde73baaa48eb75c013fe9ff52a74a096d48b9978351bdcb5b72331ca37487c",
+      "vat": "12345678",
+      "name": "mybusiness",
+      "website": "https://www.mybusiness.com/",
+      "repository": "https://www.mybusiness.com/",
+      "isResigned": true
+    },
+    {
+      "address": "ATEXKwUAaxwLgavPX2SV2D2AKJkU7XBnLh",
+      "publicKey": "0343f4148926dcaac4d241510536a73795613f909a678df62b803ff28f78948a4c",
+      "vat": "833439300",
+      "name": "ARK Ecosystem",
+      "website": "https://ark.io",
+      "repository": "https://ark.io/arkecosystem",
+      "isResigned": false
+    },
+    {
+      "address": "ALessioRJeVFrDBD2tckrT3fTvsZzESocA",
+      "publicKey": "02630c5942b003b2c4ec184862e4ac41578e0a79777da1332b384d3169f4d5eadd",
+      "name": "Alessio",
+      "website": "https://github.com/alessiodf",
+      "isResigned": false
+    },
+    {
+      "address": "ARk6tx47Lstn2DJNKWL1cD2YNMutDcyDEa",
+      "publicKey": "02c0eb51578944990e486635007e962ced20a6f2c1cccdfd14d6a067327cd035b4",
+      "name": "Ark_directory",
+      "website": "https://arkdirectory.com/",
+      "isResigned": false
+    },
+    {
+      "address": "Aa74QyqAFBsevReox3rMWy6FhMUyJVGPop",
+      "publicKey": "03364c62f7c5a7948dcaacdc72bac595e8f6e79944e722d05c8346d68aa1331b4a",
+      "name": "Cryptology",
+      "website": "https://cryptology.pe",
+      "repository": "https://github.com/wownmedia",
+      "isResigned": false
+    },
+    {
+      "address": "AbChHc8CQpyWLj5PygyPPkFC7i6kV4FeQc",
+      "publicKey": "0216c351be32d835ac3f10c0b95365d9d4d69fc2d74a95b0808a3faafdf714cb7b",
+      "name": "CryptologyLicenses",
+      "website": "https://cryptology.pe",
+      "repository": "https://github.com/wownmedia",
+      "isResigned": false
+    },
+    {
+      "address": "AFun3ZuMLj5z1UwxtvsUVHWf15ue1BQKtR",
+      "publicKey": "02618fd3094afc436742a1e47dab922a1d8892ae791d1b426d125f6bd691634427",
+      "name": "Delegate Fun",
+      "website": "https://www.arkfun.io",
+      "isResigned": false
+    },
+    {
+      "address": "AbxUBkEmEGb3kahQUKJ6LfqsKWGcy3nTij",
+      "publicKey": "03242784474bc911c482861d18d5974c2c79ed61f931982e1ce42e3e3994559e41",
+      "name": "Dutch Pool",
+      "website": "https://dutchpool.io",
+      "repository": "https://github.com/dutchpool",
+      "isResigned": false
+    },
+    {
+      "address": "AXBXtYnbvCT6dEYXN67psZvJhBDH3W5kDX",
+      "publicKey": "0239e196716cb5242f0ba7ea25372fa22a8fab03cc1b5dd2575f0275cdefc0e957",
+      "name": "Espresso",
+      "website": "https://example.com",
+      "isResigned": false
+    },
+    {
+      "address": "AQwTP4kT6rdE9ASyY3sbcMLyWKp4diKtjC",
+      "publicKey": "02b54f00d9de5a3ace28913fe78a15afcfe242926e94d9b517d06d2705b261f992",
+      "name": "Kolap",
+      "website": "http://kolap.com",
+      "isResigned": false
+    },
+    {
+      "address": "AJxBSFjs1tRM4jCAi5rx8YfuVU3Ln4Lc4w",
+      "publicKey": "02aebc5fae193beff6d80a4508c56b4b52cf28a8f99daf98998f8cc04bf515995b",
+      "name": "Pieface",
+      "website": "http://nowebsite.gov",
+      "repository": "http://nowebsite.gov",
+      "isResigned": false
+    },
+    {
+      "address": "AZANaDAUUway2fka8hgobBaSQXkRx1ciAy",
+      "publicKey": "03c6f8546a296ad828f64b4cc0e343acf93012717b6297dd33208912553be869c9",
+      "name": "Zan",
+      "website": "https://www.zan.com",
+      "isResigned": true
+    },
+    {
+      "address": "AKdr5d9AMEnsKYxpDcoHdyyjSCKVx3r9Nj",
+      "publicKey": "020431436cf94f3c6a6ba566fe9e42678db8486590c732ca6c3803a10a86f50b92",
+      "name": "biz_classic",
+      "website": "https://classicdelegate.biz",
+      "isResigned": false
+    },
+    {
+      "address": "AaAy8BZkjV86YN7xUtZ35iwyXRMQKtKoAy",
+      "publicKey": "02fa6902e91e127d6d3410f6abc271a79ae24029079caa0db5819757e3c1c1c5a4",
+      "name": "biz_private",
+      "website": "https://privatedelegate.biz/",
+      "isResigned": false
+    },
+    {
+      "address": "AGvhBGb4cCZnP2wUo1oCSi83LUtGDG7Y6X",
+      "publicKey": "02902de3fcb257e9248e2ae668d2e314027f0ca05c1eb21e1c5817c7580014669f",
+      "name": "cams_yellow_jacket",
+      "website": "https://www.camsyellowjacket.com/",
+      "repository": "https://github.com/cambo",
+      "isResigned": false
+    },
+    {
+      "address": "Aasu14aTs9ipZdy1FMv7ay1Vqn3jPskA8t",
+      "publicKey": "02c7455bebeadde04728441e0f57f82f972155c088252bf7c1365eb0dc84fbf5de",
+      "name": "jarunik",
+      "website": "https://jarunik.com",
+      "repository": "https://github.com/jarunik",
+      "isResigned": false
+    },
+    {
+      "address": "AVL2SfiaaKPD6dV3KwFxqcBbzmtfeYDaoj",
+      "publicKey": "0273f311dce939562a92695583521b4782fdaf7c04f0a1d8643447adca76443111",
+      "name": "lemii",
+      "website": "https://github.com/lemii",
+      "isResigned": false
+    },
+    {
+      "address": "AZ4y2VNHv9aJLfL4AiX1LZciSeeWQHkM8B",
+      "publicKey": "037fde73baaa48eb75c013fe9ff52a74a096d48b9978351bdcb5b72331ca37487c",
+      "vat": "12345678",
+      "name": "mybusiness",
+      "website": "https://www.mybusiness.com/",
+      "repository": "https://www.mybusiness.com/",
+      "isResigned": true
+    },
+    {
+      "address": "ATEXKwUAaxwLgavPX2SV2D2AKJkU7XBnLh",
+      "publicKey": "0343f4148926dcaac4d241510536a73795613f909a678df62b803ff28f78948a4c",
+      "vat": "833439300",
+      "name": "ARK Ecosystem",
+      "website": "https://ark.io",
+      "repository": "https://ark.io/arkecosystem",
+      "isResigned": false
+    },
+    {
+      "address": "ALessioRJeVFrDBD2tckrT3fTvsZzESocA",
+      "publicKey": "02630c5942b003b2c4ec184862e4ac41578e0a79777da1332b384d3169f4d5eadd",
+      "name": "Alessio",
+      "website": "https://github.com/alessiodf",
+      "isResigned": false
+    },
+    {
+      "address": "ARk6tx47Lstn2DJNKWL1cD2YNMutDcyDEa",
+      "publicKey": "02c0eb51578944990e486635007e962ced20a6f2c1cccdfd14d6a067327cd035b4",
+      "name": "Ark_directory",
+      "website": "https://arkdirectory.com/",
+      "isResigned": false
+    },
+    {
+      "address": "Aa74QyqAFBsevReox3rMWy6FhMUyJVGPop",
+      "publicKey": "03364c62f7c5a7948dcaacdc72bac595e8f6e79944e722d05c8346d68aa1331b4a",
+      "name": "Cryptology",
+      "website": "https://cryptology.pe",
+      "repository": "https://github.com/wownmedia",
+      "isResigned": false
+    },
+    {
+      "address": "AbChHc8CQpyWLj5PygyPPkFC7i6kV4FeQc",
+      "publicKey": "0216c351be32d835ac3f10c0b95365d9d4d69fc2d74a95b0808a3faafdf714cb7b",
+      "name": "CryptologyLicenses",
+      "website": "https://cryptology.pe",
+      "repository": "https://github.com/wownmedia",
+      "isResigned": false
+    },
+    {
+      "address": "AFun3ZuMLj5z1UwxtvsUVHWf15ue1BQKtR",
+      "publicKey": "02618fd3094afc436742a1e47dab922a1d8892ae791d1b426d125f6bd691634427",
+      "name": "Delegate Fun",
+      "website": "https://www.arkfun.io",
+      "isResigned": false
+    },
+    {
+      "address": "AbxUBkEmEGb3kahQUKJ6LfqsKWGcy3nTij",
+      "publicKey": "03242784474bc911c482861d18d5974c2c79ed61f931982e1ce42e3e3994559e41",
+      "name": "Dutch Pool",
+      "website": "https://dutchpool.io",
+      "repository": "https://github.com/dutchpool",
+      "isResigned": false
+    },
+    {
+      "address": "AXBXtYnbvCT6dEYXN67psZvJhBDH3W5kDX",
+      "publicKey": "0239e196716cb5242f0ba7ea25372fa22a8fab03cc1b5dd2575f0275cdefc0e957",
+      "name": "Espresso",
+      "website": "https://example.com",
+      "isResigned": false
+    },
+    {
+      "address": "AQwTP4kT6rdE9ASyY3sbcMLyWKp4diKtjC",
+      "publicKey": "02b54f00d9de5a3ace28913fe78a15afcfe242926e94d9b517d06d2705b261f992",
+      "name": "Kolap",
+      "website": "http://kolap.com",
+      "isResigned": false
+    },
+    {
+      "address": "AJxBSFjs1tRM4jCAi5rx8YfuVU3Ln4Lc4w",
+      "publicKey": "02aebc5fae193beff6d80a4508c56b4b52cf28a8f99daf98998f8cc04bf515995b",
+      "name": "Pieface",
+      "website": "http://nowebsite.gov",
+      "repository": "http://nowebsite.gov",
+      "isResigned": false
+    },
+    {
+      "address": "AZANaDAUUway2fka8hgobBaSQXkRx1ciAy",
+      "publicKey": "03c6f8546a296ad828f64b4cc0e343acf93012717b6297dd33208912553be869c9",
+      "name": "Zan",
+      "website": "https://www.zan.com",
+      "isResigned": true
+    },
+    {
+      "address": "AKdr5d9AMEnsKYxpDcoHdyyjSCKVx3r9Nj",
+      "publicKey": "020431436cf94f3c6a6ba566fe9e42678db8486590c732ca6c3803a10a86f50b92",
+      "name": "biz_classic",
+      "website": "https://classicdelegate.biz",
+      "isResigned": false
+    },
+    {
+      "address": "AaAy8BZkjV86YN7xUtZ35iwyXRMQKtKoAy",
+      "publicKey": "02fa6902e91e127d6d3410f6abc271a79ae24029079caa0db5819757e3c1c1c5a4",
+      "name": "biz_private",
+      "website": "https://privatedelegate.biz/",
+      "isResigned": false
+    },
+    {
+      "address": "AGvhBGb4cCZnP2wUo1oCSi83LUtGDG7Y6X",
+      "publicKey": "02902de3fcb257e9248e2ae668d2e314027f0ca05c1eb21e1c5817c7580014669f",
+      "name": "cams_yellow_jacket",
+      "website": "https://www.camsyellowjacket.com/",
+      "repository": "https://github.com/cambo",
+      "isResigned": false
+    },
+    {
+      "address": "Aasu14aTs9ipZdy1FMv7ay1Vqn3jPskA8t",
+      "publicKey": "02c7455bebeadde04728441e0f57f82f972155c088252bf7c1365eb0dc84fbf5de",
+      "name": "jarunik",
+      "website": "https://jarunik.com",
+      "repository": "https://github.com/jarunik",
+      "isResigned": false
+    },
+    {
+      "address": "AVL2SfiaaKPD6dV3KwFxqcBbzmtfeYDaoj",
+      "publicKey": "0273f311dce939562a92695583521b4782fdaf7c04f0a1d8643447adca76443111",
+      "name": "lemii",
+      "website": "https://github.com/lemii",
+      "isResigned": false
+    },
+    {
+      "address": "AZ4y2VNHv9aJLfL4AiX1LZciSeeWQHkM8B",
+      "publicKey": "037fde73baaa48eb75c013fe9ff52a74a096d48b9978351bdcb5b72331ca37487c",
+      "vat": "12345678",
+      "name": "mybusiness",
+      "website": "https://www.mybusiness.com/",
+      "repository": "https://www.mybusiness.com/",
+      "isResigned": true
+    },
+    {
+      "address": "AaAy8BZkjV86YN7xUtZ35iwyXRMQKtKoAy",
+      "publicKey": "02fa6902e91e127d6d3410f6abc271a79ae24029079caa0db5819757e3c1c1c5a4",
+      "name": "biz_private",
+      "website": "https://privatedelegate.biz/",
+      "isResigned": false
+    },
+    {
+      "address": "AGvhBGb4cCZnP2wUo1oCSi83LUtGDG7Y6X",
+      "publicKey": "02902de3fcb257e9248e2ae668d2e314027f0ca05c1eb21e1c5817c7580014669f",
+      "name": "cams_yellow_jacket",
+      "website": "https://www.camsyellowjacket.com/",
+      "repository": "https://github.com/cambo",
+      "isResigned": false
+    },
+    {
+      "address": "Aasu14aTs9ipZdy1FMv7ay1Vqn3jPskA8t",
+      "publicKey": "02c7455bebeadde04728441e0f57f82f972155c088252bf7c1365eb0dc84fbf5de",
+      "name": "jarunik",
+      "website": "https://jarunik.com",
+      "repository": "https://github.com/jarunik",
+      "isResigned": false
+    },
+    {
+      "address": "AVL2SfiaaKPD6dV3KwFxqcBbzmtfeYDaoj",
+      "publicKey": "0273f311dce939562a92695583521b4782fdaf7c04f0a1d8643447adca76443111",
+      "name": "lemii",
+      "website": "https://github.com/lemii",
+      "isResigned": false
+    },
+    {
+      "address": "AZ4y2VNHv9aJLfL4AiX1LZciSeeWQHkM8B",
+      "publicKey": "037fde73baaa48eb75c013fe9ff52a74a096d48b9978351bdcb5b72331ca37487c",
+      "vat": "12345678",
+      "name": "mybusiness",
+      "website": "https://www.mybusiness.com/",
+      "repository": "https://www.mybusiness.com/",
+      "isResigned": true
+    },
+    {
+      "address": "AaAy8BZkjV86YN7xUtZ35iwyXRMQKtKoAy",
+      "publicKey": "02fa6902e91e127d6d3410f6abc271a79ae24029079caa0db5819757e3c1c1c5a4",
+      "name": "biz_private",
+      "website": "https://privatedelegate.biz/",
+      "isResigned": false
+    },
+    {
+      "address": "AGvhBGb4cCZnP2wUo1oCSi83LUtGDG7Y6X",
+      "publicKey": "02902de3fcb257e9248e2ae668d2e314027f0ca05c1eb21e1c5817c7580014669f",
+      "name": "cams_yellow_jacket",
+      "website": "https://www.camsyellowjacket.com/",
+      "repository": "https://github.com/cambo",
+      "isResigned": false
+    },
+    {
+      "address": "Aasu14aTs9ipZdy1FMv7ay1Vqn3jPskA8t",
+      "publicKey": "02c7455bebeadde04728441e0f57f82f972155c088252bf7c1365eb0dc84fbf5de",
+      "name": "jarunik",
+      "website": "https://jarunik.com",
+      "repository": "https://github.com/jarunik",
+      "isResigned": false
+    },
+    {
+      "address": "AVL2SfiaaKPD6dV3KwFxqcBbzmtfeYDaoj",
+      "publicKey": "0273f311dce939562a92695583521b4782fdaf7c04f0a1d8643447adca76443111",
+      "name": "lemii",
+      "website": "https://github.com/lemii",
+      "isResigned": false
+    },
+    {
+      "address": "AZ4y2VNHv9aJLfL4AiX1LZciSeeWQHkM8B",
+      "publicKey": "037fde73baaa48eb75c013fe9ff52a74a096d48b9978351bdcb5b72331ca37487c",
+      "vat": "12345678",
+      "name": "mybusiness",
+      "website": "https://www.mybusiness.com/",
+      "repository": "https://www.mybusiness.com/",
+      "isResigned": true
+    },
+    {
+      "address": "AaAy8BZkjV86YN7xUtZ35iwyXRMQKtKoAy",
+      "publicKey": "02fa6902e91e127d6d3410f6abc271a79ae24029079caa0db5819757e3c1c1c5a4",
+      "name": "biz_private",
+      "website": "https://privatedelegate.biz/",
+      "isResigned": false
+    },
+    {
+      "address": "AGvhBGb4cCZnP2wUo1oCSi83LUtGDG7Y6X",
+      "publicKey": "02902de3fcb257e9248e2ae668d2e314027f0ca05c1eb21e1c5817c7580014669f",
+      "name": "cams_yellow_jacket",
+      "website": "https://www.camsyellowjacket.com/",
+      "repository": "https://github.com/cambo",
+      "isResigned": false
+    },
+    {
+      "address": "Aasu14aTs9ipZdy1FMv7ay1Vqn3jPskA8t",
+      "publicKey": "02c7455bebeadde04728441e0f57f82f972155c088252bf7c1365eb0dc84fbf5de",
+      "name": "jarunik",
+      "website": "https://jarunik.com",
+      "repository": "https://github.com/jarunik",
+      "isResigned": false
+    },
+    {
+      "address": "AVL2SfiaaKPD6dV3KwFxqcBbzmtfeYDaoj",
+      "publicKey": "0273f311dce939562a92695583521b4782fdaf7c04f0a1d8643447adca76443111",
+      "name": "lemii",
+      "website": "https://github.com/lemii",
+      "isResigned": false
+    },
+    {
+      "address": "AZ4y2VNHv9aJLfL4AiX1LZciSeeWQHkM8B",
+      "publicKey": "037fde73baaa48eb75c013fe9ff52a74a096d48b9978351bdcb5b72331ca37487c",
+      "vat": "12345678",
+      "name": "mybusiness",
+      "website": "https://www.mybusiness.com/",
+      "repository": "https://www.mybusiness.com/",
+      "isResigned": true
+    }
+  ]
+}
