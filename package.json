@@ -29,7 +29,7 @@
     "bignumber.js": "^9.0.0",
     "bs58check": "^2.1.2",
     "buffer": "^5.6.0",
-    "censorify-it": "^2.1.4",
+    "censorify-it": "^3.0.0",
     "chart.js": "^2.9.3",
     "connect-history-api-fallback": "^1.6.0",
     "core-js": "^3.6.5",
