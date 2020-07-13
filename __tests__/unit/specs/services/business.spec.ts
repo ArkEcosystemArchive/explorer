@@ -4,7 +4,7 @@ import store from "@/store";
 const businessPropertyArray = ["address", "publicKey", "name", "website"].sort();
 // Note: repository can also be returned, but is optional
 
-describe("Services > Business", () => {
+describe.skip("Services > Business", () => {
   // Note: devnet server
   beforeAll(() => {
     store.dispatch("network/setServer", "https://dexplorer.ark.io/api/v2");
@@ -13,7 +13,7 @@ describe("Services > Business", () => {
   it("should return a list of businesses", async () => {
     const { data } = await BusinessService.all();
     expect(data).toHaveLength(25);
-    data.forEach(business => {
+    data.forEach((business) => {
       expect(Object.keys(business).sort()).toEqual(expect.arrayContaining(businessPropertyArray));
     });
   });
@@ -21,7 +21,7 @@ describe("Services > Business", () => {
   it("should return businesses with page offset", async () => {
     const { data } = await BusinessService.all(1);
     expect(data).toHaveLength(25);
-    data.forEach(business => {
+    data.forEach((business) => {
       expect(Object.keys(business).sort()).toEqual(expect.arrayContaining(businessPropertyArray));
     });
     expect(data.sort((a, b) => a.balance > b.balance)).toEqual(data);
@@ -30,7 +30,7 @@ describe("Services > Business", () => {
   it("should return businesses with page offset and given limit", async () => {
     const { data } = await BusinessService.all(2, 20);
     expect(data).toHaveLength(20);
-    data.forEach(business => {
+    data.forEach((business) => {
       expect(Object.keys(business).sort()).toEqual(expect.arrayContaining(businessPropertyArray));
     });
     expect(data.sort((a, b) => a.balance > b.balance)).toEqual(data);
