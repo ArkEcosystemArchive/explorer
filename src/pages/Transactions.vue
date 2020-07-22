@@ -43,6 +43,7 @@
 <script lang="ts">
 /* tslint:disable:no-console */
 import { Component, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
 import { Route } from "vue-router";
 import { ISortParameters, ITransaction } from "@/interfaces";
 import SelectionType from "@/components/SelectionType.vue";
@@ -54,12 +55,16 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
   components: {
     SelectionType,
   },
+  computed: {
+    ...mapGetters("ui", ["smartbridgeFilter"]),
+  },
 })
 export default class TransactionsPage extends Vue {
   private transactions: ITransaction[] | null = null;
   private meta: any | null = null;
   private currentPage = 0;
   private transactionType: { key: string; type: number; typeGroup?: number } = { key: "ALL", type: -1 };
+  private smartbridgeFilter: string;
 
   get showPagination() {
     return this.meta && this.meta.pageCount > 1;
@@ -79,6 +84,13 @@ export default class TransactionsPage extends Vue {
   @Watch("currentPage")
   public onCurrentPageChanged() {
     this.changePage();
+  }
+
+  @Watch("smartbridgeFilter")
+  public onSmartbridgeFilterChanged() {
+    if (this.smartbridgeFilter !== "hidden") {
+      this.getTransactions();
+    }
   }
 
   public created() {

@@ -25,17 +25,23 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
 import { ISortParameters, ITransaction } from "@/interfaces";
 import TransactionService from "@/services/transaction";
 import { paginationLimit } from "@/constants";
 
-@Component
+@Component({
+  computed: {
+    ...mapGetters("ui", ["smartbridgeFilter"]),
+  },
+})
 export default class LatestTransactions extends Vue {
   @Prop({ required: true }) public transactionType: number;
   @Prop({ required: true }) public transactionGroup: number;
 
   private paginationLimit: number = paginationLimit;
   private transactions: ITransaction[] | null = null;
+  private smartbridgeFilter: string;
 
   get sortParams() {
     return this.$store.getters["ui/transactionSortParams"];
@@ -52,6 +58,13 @@ export default class LatestTransactions extends Vue {
   public async onTransactionTypeChanged(): Promise<void> {
     this.transactions = null;
     await this.getTransactions();
+  }
+
+  @Watch("smartbridgeFilter")
+  public async onSmartbridgeFilterChanged(): Promise<void> {
+    if (this.smartbridgeFilter !== "hidden") {
+      await this.getTransactions();
+    }
   }
 
   public async mounted(): Promise<void> {

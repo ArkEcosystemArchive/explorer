@@ -29,15 +29,21 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
 import { IBlock, ISortParameters, ITransaction } from "../../interfaces";
 import TransactionService from "@/services/transaction";
 
-@Component
+@Component({
+  computed: {
+    ...mapGetters("ui", ["smartbridgeFilter"]),
+  },
+})
 export default class BlockTransactions extends Vue {
   @Prop({ required: true }) public block: IBlock;
 
   public transactions: ITransaction[] | null = null;
   private meta: any | null = null;
+  private smartbridgeFilter: string;
 
   get sortParams(): ISortParameters {
     return this.$store.getters["ui/transactionSortParams"];
@@ -54,6 +60,13 @@ export default class BlockTransactions extends Vue {
   public onBlockChanged() {
     this.resetTransactions();
     this.getTransactions();
+  }
+
+  @Watch("smartbridgeFilter")
+  public onSmartbridgeFilterChanged() {
+    if (this.smartbridgeFilter !== "hidden") {
+      this.getTransactions();
+    }
   }
 
   public mounted() {

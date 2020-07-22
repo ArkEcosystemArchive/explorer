@@ -68,6 +68,7 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
   computed: {
     ...mapGetters("network", ["height"]),
     ...mapGetters("network", { networkSymbol: "symbol" }),
+    ...mapGetters("ui", ["smartbridgeFilter"]),
   },
 })
 export default class TransactionPage extends Vue {
@@ -78,9 +79,17 @@ export default class TransactionPage extends Vue {
   private currentPage = 1;
   private height: number;
   private networkSymbol: string;
+  private smartbridgeFilter: string;
 
   get showPagination() {
     return this.meta && this.meta.pageCount > 1;
+  }
+
+  @Watch("smartbridgeFilter")
+  public onSmartbridgeFilterChanged() {
+    if (this.smartbridgeFilter !== "hidden") {
+      this.fetchTransaction();
+    }
   }
 
   public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
