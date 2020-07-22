@@ -4,9 +4,9 @@
 __metadata:
   version: 4
 
-"@arkecosystem/crypto@npm:^2.6.42":
-  version: 2.6.42
-  resolution: "@arkecosystem/crypto@npm:2.6.42"
+"@arkecosystem/crypto@npm:^2.6.49":
+  version: 2.6.49
+  resolution: "@arkecosystem/crypto@npm:2.6.49"
   dependencies:
     "@arkecosystem/utils": ^1.1
     "@types/bytebuffer": ^5.0.40
@@ -28,7 +28,7 @@ __metadata:
     lodash.sumby: ^4.6.0
     tiny-glob: ^0.2.6
     wif: ^2.0.6
-  checksum: 3/c0eaee29224b81e76dc34a433b2469043acfa10bc327165f2f7145cbab3136bb5ec1454637c38868c756b4d2e1c39a7fea99574bb4fb3e1fe6c3511046ae729a
+  checksum: 3/1b673251e1ff3e5f63a12d7faa3f5e8afdc5d1a26463748eb7185b25c465b1a55dc173d9161875d8eec3a29b5b4bd2ceed68abeb405d5ae11c95ca737b1e5a75
   languageName: node
   linkType: hard
 
@@ -3102,7 +3102,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ark-explorer@workspace:."
   dependencies:
-    "@arkecosystem/crypto": ^2.6.42
+    "@arkecosystem/crypto": ^2.6.49
     "@fullhuman/postcss-purgecss": ^2.2.0
     "@kazupon/vue-i18n-loader": ^0.5.0
     "@types/jest": ^25.2.1
