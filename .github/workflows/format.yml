@@ -28,3 +28,23 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "style: resolve style guide violations"
+
+  rustywind:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Format
+        run: |
+          export PATH="$(yarn global bin):$PATH"
+          yarn global add rustywind
+          rustywind --write resources/views
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "style: resolve style guide violations"
+          branch: ${{ github.head_ref }}
