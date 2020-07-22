@@ -38,6 +38,11 @@ jobs:
           ref: ${{ github.head_ref }}
           token: ${{ secrets.GH_TOKEN }}
 
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
       - name: Format
         run: |
           export PATH="$(yarn global bin):$PATH"
