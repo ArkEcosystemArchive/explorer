@@ -22,7 +22,7 @@
     "test:unit": "vue-cli-service test:unit --maxWorkers=2"
   },
   "dependencies": {
-    "@arkecosystem/crypto": "^2.6.42",
+    "@arkecosystem/crypto": "^2.6.49",
     "@types/nprogress": "^0.2.0",
     "animate.css": "^4.1.0",
     "axios": "^0.19.2",
