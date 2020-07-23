@@ -4,8 +4,8 @@
 
     <MonitorHeader />
 
-    <section class="page-section py-5 md:py-10">
-      <nav class="mx-5 sm:mx-10 mb-4 border-b flex items-end overflow-x-auto">
+    <section class="py-5 page-section md:py-10">
+      <nav class="flex items-end mx-5 mb-4 overflow-x-auto border-b sm:mx-10">
         <div :class="activeTab === 'active' ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'active'">
           {{ $t("PAGES.DELEGATE_MONITOR.ACTIVE") }}
         </div>
@@ -26,7 +26,7 @@
         @on-sort-change="onSortChange"
       />
 
-      <div v-if="delegates && delegates.length === activeDelegates" class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
+      <div v-if="delegates && delegates.length === activeDelegates" class="flex flex-wrap mx-5 mt-5 sm:mx-10 md:mt-10">
         <RouterLink
           :to="{
             name: activeTab === 'resigned' ? 'delegates-resigned' : 'delegates',

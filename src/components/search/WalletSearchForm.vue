@@ -1,6 +1,6 @@
 <template>
-  <div id="walletForm" class="mb-5 mx-5 sm:mx-10 mb-10">
-    <p class="font-bold mb-4">{{ $t("PAGES.ADVANCED_SEARCH.ADDITIONAL_PARAMETERS") }}</p>
+  <div id="walletForm" class="mx-5 mb-5 mb-10 sm:mx-10">
+    <p class="mb-4 font-bold">{{ $t("PAGES.ADVANCED_SEARCH.ADDITIONAL_PARAMETERS") }}</p>
 
     <div class="flex flex-wrap justify-between mb-4">
       <div class="w-full lg:w-1/4">

@@ -1,7 +1,7 @@
 <template>
-  <div class="px-2 md:px-4 py-3 md:py-6 flex items-center text-sm mt-2px">
-    <SvgIcon class="md:mr-2 flex-none text-link-color" :name="`currencies/${currencyName}`" view-box="0 0 22 16" />
-    <span class="whitespace-no-wrap text-theme-text-content hidden md:inline-block">
+  <div class="flex items-center px-2 py-3 text-sm md:px-4 md:py-6 mt-2px">
+    <SvgIcon class="flex-none md:mr-2 text-link-color" :name="`currencies/${currencyName}`" view-box="0 0 22 16" />
+    <span class="hidden whitespace-no-wrap text-theme-text-content md:inline-block">
       {{ networkToken() }}/{{ currencyName }}: {{ rawCurrency(currencyRate, currencyName) }}
     </span>
   </div>

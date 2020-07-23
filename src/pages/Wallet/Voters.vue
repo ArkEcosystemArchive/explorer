@@ -3,7 +3,7 @@
     <ContentHeader
       >{{ $t("WALLET.DELEGATE.VOTERS") }} <span v-if="delegate">- {{ delegate.username }}</span></ContentHeader
     >
-    <section class="page-section py-5 md:py-10">
+    <section class="py-5 page-section md:py-10">
       <div class="hidden sm:block">
         <TableWalletsDesktop
           :wallets="wallets"

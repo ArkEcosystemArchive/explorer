@@ -1,6 +1,6 @@
 <template>
   <div class="HeaderDefault">
-    <div class="px-4 md:px-8 flex-auto flex">
+    <div class="flex flex-auto px-4 md:px-8">
       <button
         :class="[
           menuVisible ? 'border-theme-accents' : 'border-transparent',
@@ -11,27 +11,27 @@
         <SvgIcon class="flex-none mr-3" name="menu" view-box="0 0 15 13" />
         <span class="semibold">{{ $t("HEADER.MENU") }}</span>
       </button>
-      <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4" />
-      <div class="flex-auto flex items-center justify-center">
+      <span class="mx-2 my-4 border-r md:mx-4 lg:mx-6" />
+      <div class="flex items-center justify-center flex-auto">
         <label for="search" class="hidden">{{ $t("SEARCH.PLACEHOLDER.SHORT") }}</label>
         <input
           :placeholder="placeholder"
-          class="search-input hidden sm:block w-full flex-auto sm:mr-2 py-2 md:py-4 sm:pl-4 bg-transparent"
+          class="flex-auto hidden w-full py-2 bg-transparent search-input sm:block sm:mr-2 md:py-4 sm:pl-4"
           @focus="$store.dispatch('ui/setHeaderType', 'search')"
         />
         <label
           for="search"
-          class="search-icon text-grey hover:text-blue p-3 md:p-4 transition"
+          class="p-3 search-icon text-grey hover:text-blue md:p-4 transition"
           @click="$store.dispatch('ui/setHeaderType', 'search')"
         >
           <SvgIcon name="search" view-box="0 0 16 16" />
         </label>
       </div>
 
-      <span v-if="showCurrency" class="border-r mx-2 md:mx-4 lg:mx-6 my-4 block" />
+      <span v-if="showCurrency" class="block mx-2 my-4 border-r md:mx-4 lg:mx-6" />
       <HeaderCurrency v-if="showCurrency" />
 
-      <span class="border-r mx-2 md:mx-4 lg:mx-6 my-4 block" />
+      <span class="block mx-2 my-4 border-r md:mx-4 lg:mx-6" />
       <HeaderSettings />
     </div>
   </div>

@@ -3,7 +3,7 @@
     <ContentHeader>{{ $t("COMMON.TRANSACTION") }}</ContentHeader>
 
     <template v-if="transactionNotFound">
-      <section class="page-section py-5 md:py-10 px-6">
+      <section class="px-6 py-5 page-section md:py-10">
         <div class="my-10 text-center">
           <NotFound :is-loading="isLoading" :data-id="transaction.id" data-type="transaction" @reload="onReload" />
         </div>
@@ -12,22 +12,22 @@
 
     <template v-else>
       <section class="mb-5">
-        <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
-          <div class="relative mr-6 flex-none">
+        <div class="flex items-center justify-between px-5 py-8 sm:px-10 bg-theme-feature-background xl:rounded-lg">
+          <div class="relative flex-none mr-6">
             <SvgIcon class="block" name="transaction" view-box="0 0 43 39" />
             <div
-              class="absolute text-theme-transaction-icon text-2xl"
+              class="absolute text-2xl text-theme-transaction-icon"
               style="top: 50%; left: 50%; transform: translate(-50%, -50%);"
             >
               {{ networkSymbol }}
             </div>
           </div>
           <div class="flex-auto min-w-0">
-            <div class="text-grey mb-2">
+            <div class="mb-2 text-grey">
               {{ $t("TRANSACTION.ID") }}
             </div>
             <div class="flex">
-              <div class="text-xl text-white semibold truncate">
+              <div class="text-xl text-white truncate semibold">
                 <span class="mr-2">{{ transaction.id }}</span>
               </div>
               <Clipboard v-if="transaction.id" :value="transaction.id" />
@@ -38,7 +38,7 @@
 
       <TransactionDetails ref="transactionDetails" :transaction="transaction" />
 
-      <section v-if="isMultiPayment(transaction.type, transaction.typeGroup)" class="page-section py-5 md:py-10">
+      <section v-if="isMultiPayment(transaction.type, transaction.typeGroup)" class="py-5 page-section md:py-10">
         <MultiPaymentTransactions :transaction="transaction" :page="currentPage" />
         <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
       </section>

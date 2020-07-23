@@ -2,19 +2,19 @@
   <span
     v-click-outside="closeDropdown"
     :class="{ 'sm:mb-4': !inBanner }"
-    class="SelectionType w-full sm:w-auto sm:mr-10"
+    class="w-full SelectionType sm:w-auto sm:mr-10"
   >
-    <div class="flex sm:hidden w-full">
+    <div class="flex w-full sm:hidden">
       <span
         :class="`bg-${backgroundColor} text-${secondaryTextColor}`"
-        class="flex items-center rounded-l py-4 px-6 text-xs"
+        class="flex items-center px-6 py-4 text-xs rounded-l"
       >
         {{ $t("COMMON.TYPE") }}
       </span>
 
       <span
         :class="`border-${backgroundColor} text-${primaryTextColor}`"
-        class="flex flex-1 items-center justify-between border rounded-r cursor-pointer p-4"
+        class="flex items-center justify-between flex-1 p-4 border rounded-r cursor-pointer"
         @click="toggleDropdown"
       >
         <span class="font-bold">
@@ -24,7 +24,7 @@
         <SvgIcon :class="{ 'rotate-180': isOpen }" name="caret" view-box="0 0 16 16" />
       </span>
 
-      <ul v-show="isOpen" class="SelectionType--options inset-x-0 mt-10">
+      <ul v-show="isOpen" class="inset-x-0 mt-10 SelectionType--options">
         <li v-for="type in types" :key="type.key">
           <div class="dropdown-button" @click="filterTransactions(type)">
             {{ $t(`TRANSACTION.TYPES.${type.key}`) }}
@@ -48,7 +48,7 @@
         <SvgIcon :class="{ 'rotate-180': isOpen }" name="caret" view-box="0 0 16 16" />
       </span>
 
-      <ul v-show="isOpen" class="SelectionType--options right-0 mt-2">
+      <ul v-show="isOpen" class="right-0 mt-2 SelectionType--options">
         <li v-for="type in types" :key="type.key">
           <div class="dropdown-button" @click="filterTransactions(type)">
             {{ $t(`TRANSACTION.TYPES.${type.key}`) }}

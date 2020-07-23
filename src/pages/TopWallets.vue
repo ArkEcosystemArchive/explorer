@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
     <ContentHeader>{{ $t("PAGES.TOP_WALLETS.TITLE") }}</ContentHeader>
-    <section class="page-section py-5 md:py-10">
+    <section class="py-5 page-section md:py-10">
       <div class="hidden sm:block">
         <TableWalletsDesktop
           :wallets="wallets"

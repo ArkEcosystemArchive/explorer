@@ -14,7 +14,7 @@
           </LinkWallet>
           <span
             v-if="isActiveTab && data.row.isResigned"
-            class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1"
+            class="p-1 ml-2 text-sm text-white rounded bg-theme-resigned-label"
             >{{ $t("WALLET.DELEGATE.STATUS.RESIGNED") }}</span
           >
         </div>
@@ -39,7 +39,7 @@
         </div>
 
         <div v-else-if="data.column.field === 'votes'">
-          <span v-tooltip="$t('COMMON.SUPPLY_PERCENTAGE')" class="text-grey text-xs mr-1">
+          <span v-tooltip="$t('COMMON.SUPPLY_PERCENTAGE')" class="mr-1 text-xs text-grey">
             {{ percentageString(data.row.production.approval) }}
           </span>
           {{ readableCrypto(data.row.votes, true, 2) }}

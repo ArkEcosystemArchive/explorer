@@ -1,15 +1,15 @@
 <template>
   <section
-    class="mb-5 bg-theme-feature-background xl:rounded-lg flex flex-col md:flex-row items-center px-5 sm:px-10 py-8"
+    class="flex flex-col items-center px-5 py-8 mb-5 bg-theme-feature-background xl:rounded-lg md:flex-row sm:px-10"
   >
-    <div class="flex items-center flex-auto w-full md:w-auto mb-5 md:mb-0 truncate md:mr-10">
+    <div class="flex items-center flex-auto w-full mb-5 truncate md:w-auto md:mb-0 md:mr-10">
       <SvgIcon class="mr-6" name="block" view-box="0 0 35 38" />
       <div class="flex-auto min-w-0">
-        <div class="text-grey mb-2">
+        <div class="mb-2 text-grey">
           {{ $t("BLOCK.ID") }}
         </div>
         <div class="flex">
-          <div class="text-xl text-white semibold truncate">
+          <div class="text-xl text-white truncate semibold">
             <span v-tooltip="block.id" class="mr-2">
               {{ block.id }}
             </span>
@@ -18,14 +18,14 @@
         </div>
       </div>
     </div>
-    <div class="flex w-full md:block md:w-auto justify-between whitespace-no-wrap">
-      <button :disabled="isFirstBlock" class="block-pager-button mr-5" @click="prevHandler">
+    <div class="flex justify-between w-full whitespace-no-wrap md:block md:w-auto">
+      <button :disabled="isFirstBlock" class="mr-5 block-pager-button" @click="prevHandler">
         <SvgIcon class="inline" name="pagination/previous" view-box="0 0 11 11" />
-        <span class="ml-2 hidden md:block inline-button">{{ $t("BLOCK.PAGINATION.PREVIOUS") }}</span>
+        <span class="hidden ml-2 md:block inline-button">{{ $t("BLOCK.PAGINATION.PREVIOUS") }}</span>
         <span class="ml-2 md:hidden">{{ $t("PAGINATION.PREVIOUS") }}</span>
       </button>
       <button :disabled="isLastBlock" class="block-pager-button" @click="nextHandler">
-        <span class="mr-2 hidden md:block inline-button">{{ $t("BLOCK.PAGINATION.NEXT") }}</span>
+        <span class="hidden mr-2 md:block inline-button">{{ $t("BLOCK.PAGINATION.NEXT") }}</span>
         <span class="mr-2 md:hidden">{{ $t("PAGINATION.NEXT") }}</span>
         <SvgIcon class="inline" name="pagination/next" view-box="0 0 11 11" />
       </button>

@@ -2,14 +2,14 @@
   <div class="max-w-2xl mx-auto md:pt-5">
     <ContentHeader>{{ $t("COMMON.TRANSACTIONS") }}</ContentHeader>
 
-    <section class="hidden sm:block mb-5">
-      <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
+    <section class="hidden mb-5 sm:block">
+      <div class="flex items-center justify-between px-5 py-8 sm:px-10 bg-theme-feature-background xl:rounded-lg">
         <div class="flex-auto min-w-0">
-          <div class="text-grey mb-2">
+          <div class="mb-2 text-grey">
             {{ $t("TRANSACTION.TYPE") }}
           </div>
           <div class="flex">
-            <div class="text-lg text-white semibold truncate">
+            <div class="text-lg text-white truncate semibold">
               <span class="mr-2">{{ $t(`TRANSACTION.TYPES.${transactionType.key}`) }}</span>
             </div>
           </div>
@@ -20,7 +20,7 @@
       </div>
     </section>
 
-    <section class="page-section py-5 md:py-10">
+    <section class="py-5 page-section md:py-10">
       <div class="hidden sm:block">
         <TableTransactionsDesktop
           :transactions="transactions"

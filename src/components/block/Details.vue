@@ -1,5 +1,5 @@
 <template>
-  <section class="page-section py-5 md:py-10 mb-5">
+  <section class="py-5 mb-5 page-section md:py-10">
     <div class="px-5 sm:px-10">
       <div class="list-row-border-b">
         <div class="mr-4">

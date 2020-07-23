@@ -1,15 +1,15 @@
 <template>
   <section class="mb-5">
     <!-- Desktop -->
-    <div class="WalletHeaderDesktop hidden md:flex xl:rounded-lg">
+    <div class="hidden WalletHeaderDesktop md:flex xl:rounded-lg">
       <button
-        class="address-button ml-10 mr-6 p-3 rounded flex-none hover-button-shadow transition"
+        class="flex-none p-3 ml-10 mr-6 rounded address-button hover-button-shadow transition"
         @click="toggleModal"
       >
         <SvgIcon class="block" name="qr" view-box="0 0 29 29" />
       </button>
-      <div v-if="view === 'public'" class="pr-8 flex-auto min-w-0">
-        <div class="flex items-center text-grey mb-2">
+      <div v-if="view === 'public'" class="flex-auto min-w-0 pr-8">
+        <div class="flex items-center mb-2 text-grey">
           <span>{{ $t("WALLET.ADDRESS") }}</span>
           <SvgIcon
             v-if="wallet.secondPublicKey"
@@ -37,19 +37,19 @@
           />
         </div>
         <div class="flex">
-          <div class="text-lg text-white semibold truncate">
+          <div class="text-lg text-white truncate semibold">
             <span class="mr-2">{{ wallet.address }}</span>
           </div>
           <Clipboard v-if="wallet.address" :value="wallet.address" />
         </div>
       </div>
 
-      <div v-if="view === 'private' && wallet.publicKey" class="pr-8 flex-auto min-w-0">
-        <div class="text-grey mb-2">
+      <div v-if="view === 'private' && wallet.publicKey" class="flex-auto min-w-0 pr-8">
+        <div class="mb-2 text-grey">
           {{ $t("WALLET.PUBLIC_KEY") }}
         </div>
         <div class="flex">
-          <div class="text-lg text-white semibold truncate mr-2">
+          <div class="mr-2 text-lg text-white truncate semibold">
             <span>{{ wallet.publicKey }}</span>
           </div>
           <Clipboard v-if="wallet.publicKey" :value="wallet.publicKey" />
@@ -57,7 +57,7 @@
       </div>
 
       <div v-if="view === 'public'" class="flex-none border-r border-grey-dark px-9">
-        <div class="text-grey mb-2">
+        <div class="mb-2 text-grey">
           {{ $t("WALLET.BALANCE", { token: networkToken() }) }}
         </div>
         <div class="text-lg text-white semibold">
@@ -68,7 +68,7 @@
       </div>
 
       <div v-if="view === 'public' && hasLockedBalance" class="flex-none border-r border-grey-dark px-9">
-        <div class="flex items-center text-grey mb-2">
+        <div class="flex items-center mb-2 text-grey">
           {{ $t("WALLET.LOCKED_BALANCE") }}
           <SvgIcon class="ml-2" name="locked-balance" view-box="0 0 16 17" />
         </div>
@@ -91,7 +91,7 @@
         <button
           :disabled="!wallet.publicKey"
           :class="view === 'public' ? 'bg-blue-darker' : 'bg-transparent text-blue-light'"
-          class="py-3 px-3 rounded-md text-white font-normal text-xs hover:text-blue transition"
+          class="px-3 py-3 text-xs font-normal text-white rounded-md hover:text-blue transition"
           @click="setView('public')"
         >
           <SvgIcon class="block" name="globe" view-box="0 0 17 17" />
@@ -99,7 +99,7 @@
         <button
           v-if="wallet.publicKey"
           :class="view === 'private' ? 'bg-blue-darker' : 'bg-transparent text-blue-light'"
-          class="py-3 px-3 rounded-md text-white font-normal text-xs hover:text-blue transition"
+          class="px-3 py-3 text-xs font-normal text-white rounded-md hover:text-blue transition"
           @click="setView('private')"
         >
           <SvgIcon class="block" name="key" view-box="0 0 13 14" />
@@ -108,9 +108,9 @@
     </div>
 
     <!-- Mobile -->
-    <div v-if="wallet.address" class="px-5 sm:px-10 py-10 bg-theme-feature-background md:hidden overflow-hidden">
+    <div v-if="wallet.address" class="px-5 py-10 overflow-hidden sm:px-10 bg-theme-feature-background md:hidden">
       <div class="flex justify-center mb-6">
-        <div class="flex items-center p-2 bg-white rounded mx-auto">
+        <div class="flex items-center p-2 mx-auto bg-white rounded">
           <QrCode :value="wallet.address" :options="{ size: 160 }" />
         </div>
       </div>
@@ -118,9 +118,9 @@
         <div class="flex flex-wrap -mx-6">
           <div
             :class="{ 'border-r border-grey-dark -mr-1': wallet.publicKey }"
-            class="md:w-1/2 px-6 flex-1 whitespace-no-wrap my-4"
+            class="flex-1 px-6 my-4 whitespace-no-wrap md:w-1/2"
           >
-            <div class="flex items-center text-grey mb-2">
+            <div class="flex items-center mb-2 text-grey">
               <span class="mr-2">{{ $t("WALLET.ADDRESS") }}</span>
               <SvgIcon
                 v-if="wallet.secondPublicKey"
@@ -136,19 +136,19 @@
                 view-box="0 0 14 14"
               />
             </div>
-            <div v-if="name" class="text-white semibold flex">
+            <div v-if="name" class="flex text-white semibold">
               {{ name }}
             </div>
-            <div class="text-white flex">
+            <div class="flex text-white">
               <span class="mr-2">{{ truncate(wallet.address) }}</span>
               <Clipboard v-if="wallet.address" :value="wallet.address" />
             </div>
           </div>
-          <div v-if="wallet.publicKey" class="md:w-1/2 px-6 flex-1 whitespace-no-wrap my-4">
-            <div class="text-grey mb-2">
+          <div v-if="wallet.publicKey" class="flex-1 px-6 my-4 whitespace-no-wrap md:w-1/2">
+            <div class="mb-2 text-grey">
               {{ $t("WALLET.PUBLIC_KEY") }}
             </div>
-            <div class="text-white flex">
+            <div class="flex text-white">
               <span class="mr-2">{{ truncate(wallet.publicKey) }}</span>
               <Clipboard v-if="wallet.publicKey" :value="wallet.publicKey" />
             </div>
@@ -157,9 +157,9 @@
         <div class="flex flex-wrap -mx-6">
           <div
             :class="{ 'border-r border-grey-dark -mr-1': hasLockedBalance }"
-            class="md:w-1/2 px-6 flex-1 whitespace-no-wrap my-4"
+            class="flex-1 px-6 my-4 whitespace-no-wrap md:w-1/2"
           >
-            <div class="text-grey mb-2">
+            <div class="mb-2 text-grey">
               {{ $t("WALLET.BALANCE", { token: networkToken() }) }}
             </div>
             <div class="text-white">
@@ -174,8 +174,8 @@
             </div>
           </div>
 
-          <div v-if="view === 'public' && hasLockedBalance" class="md:w-1/2 px-6 flex-1 whitespace-no-wrap my-4">
-            <div class="flex items-center text-grey mb-2">
+          <div v-if="view === 'public' && hasLockedBalance" class="flex-1 px-6 my-4 whitespace-no-wrap md:w-1/2">
+            <div class="flex items-center mb-2 text-grey">
               {{ $t("WALLET.LOCKED_BALANCE") }}
               <SvgIcon class="ml-2" name="locked-balance" view-box="0 0 16 17" />
             </div>
