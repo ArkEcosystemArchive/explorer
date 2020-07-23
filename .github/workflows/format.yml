@@ -48,6 +48,7 @@ jobs:
           curl https://avencera.github.io/rustywind/install.sh --output install.sh
           sudo bash install.sh --git avencera/rustywind
           $(which rustywind) --write src
+          rm install.sh
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
