@@ -45,7 +45,8 @@ jobs:
 
       - name: Format
         run: |
-          curl -LSfs https://avencera.github.io/rustywind/install.sh | sh -s -- --git avencera/rustywind
+          curl https://avencera.github.io/rustywind/install.sh
+          sudo bash install.sh
           $(which rustywind) --write src
 
       - uses: stefanzweifel/git-auto-commit-action@v4
