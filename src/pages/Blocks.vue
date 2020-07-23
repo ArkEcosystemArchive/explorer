@@ -2,7 +2,7 @@
   <div class="max-w-2xl mx-auto md:pt-5">
     <ContentHeader>{{ $t("COMMON.BLOCKS") }}</ContentHeader>
 
-    <section class="page-section py-5 md:py-10">
+    <section class="py-5 page-section md:py-10">
       <div class="hidden sm:block">
         <TableBlocksDesktop :blocks="blocks" :sort-query="sortParams" @on-sort-change="onSortChange" />
       </div>

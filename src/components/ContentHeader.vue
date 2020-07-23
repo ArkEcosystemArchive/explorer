@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="flex justify-between flex-wrap px-5 sm:px-10 xl:px-0">
-      <h1 class="text-2xl md:text-3xl mb-5 md:mb-6 text-theme-text-primary sm:mr-5">
+    <div class="flex flex-wrap justify-between px-5 sm:px-10 xl:px-0">
+      <h1 class="mb-5 text-2xl md:text-3xl md:mb-6 text-theme-text-primary sm:mr-5">
         <slot />
       </h1>
       <div
-        class="hidden sm:flex items-center text-theme-text-tertiary text-xs px-3 sm:px-8 xl:px-6 py-3 mb-5 md:mb-6 bg-stat-background rounded-md"
+        class="items-center hidden px-3 py-3 mb-5 text-xs sm:flex text-theme-text-tertiary sm:px-8 xl:px-6 md:mb-6 bg-stat-background rounded-md"
       >
         <div class="pr-6">{{ $t("COMMON.HEIGHT") }}: {{ readableNumber(height) }}</div>
         <div class="pr-6">{{ $t("HEADER.NETWORK") }}: {{ $t(`HEADER.${alias.replace(" ", "_").toUpperCase()}`) }}</div>
@@ -18,7 +18,7 @@
       </div>
     </div>
     <div
-      class="sm:hidden flex items-center justify-between text-theme-text-tertiary text-xs px-5 sm:px-8 xl:px-6 py-3 bg-stat-background"
+      class="flex items-center justify-between px-5 py-3 text-xs sm:hidden text-theme-text-tertiary sm:px-8 xl:px-6 bg-stat-background"
     >
       <div class="mr-2">
         <span>{{ $t("COMMON.HEIGHT") }}:</span>
@@ -30,7 +30,7 @@
       </div>
       <div>
         <span>{{ $t("HEADER.SUPPLY") }}:</span>
-        <span class="block md:inline-block whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }}</span>
+        <span class="block whitespace-no-wrap md:inline-block">{{ readableCrypto(supply, true, 0) }}</span>
       </div>
     </div>
   </div>

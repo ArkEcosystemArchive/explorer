@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="page-section py-5 md:py-10 mb-5">
+    <section class="py-5 mb-5 page-section md:py-10">
       <div class="px-5 sm:px-10">
         <div class="list-row-border-b">
           <div class="mr-4">{{ $t("TRANSACTION.SENDER") }}</div>
@@ -157,7 +157,7 @@
 
     <section
       v-if="isMultiSignature(transaction.type, transaction.typeGroup)"
-      class="TransactionDetails__MultiSignature page-section py-5 md:py-10 mb-5"
+      class="py-5 mb-5 TransactionDetails__MultiSignature page-section md:py-10"
     >
       <div class="px-5 sm:px-10">
         <div v-if="!isLegacyMultiSignature" class="list-row-border-b">
@@ -194,7 +194,7 @@
               {{ multiSignatureAsset.lifetime }}
             </div>
           </div>
-          <div v-if="isLegacyMultiSignature" class="list-row text-sm text-theme-text-secondary">
+          <div v-if="isLegacyMultiSignature" class="text-sm list-row text-theme-text-secondary">
             <span>* {{ $t("TRANSACTION.MULTI_SIGNATURE.LEGACY_NOTICE") }}</span>
           </div>
         </template>
@@ -206,7 +206,7 @@
         transaction.typeGroup === typeGroupTransaction.MAGISTRATE &&
         transaction.type !== magistrateTransaction.BUSINESS_RESIGNATION
       "
-      class="page-section py-5 md:py-10 mb-5"
+      class="py-5 mb-5 page-section md:py-10"
     >
       <div class="px-5 sm:px-10">
         <div

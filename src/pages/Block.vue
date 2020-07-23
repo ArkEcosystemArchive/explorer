@@ -3,7 +3,7 @@
     <ContentHeader>{{ $t("COMMON.BLOCK") }}</ContentHeader>
 
     <template v-if="blockNotFound">
-      <section class="page-section py-5 md:py-10 px-6">
+      <section class="px-6 py-5 page-section md:py-10">
         <div class="my-10 text-center">
           <NotFound :is-loading="isLoading" :data-id="block.id" data-type="block" @reload="onReload" />
         </div>

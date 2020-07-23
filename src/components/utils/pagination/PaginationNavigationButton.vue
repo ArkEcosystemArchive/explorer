@@ -1,12 +1,12 @@
 <template>
   <button v-if="isVisible" :class="`Pagination__Button--${type} pager-button`" @click="emitClick">
-    <span v-if="type === 'next'" class="mr-1 hidden lg:inline">
+    <span v-if="type === 'next'" class="hidden mr-1 lg:inline">
       {{ $t(`PAGINATION.${type.toUpperCase()}`) }}
     </span>
 
     <SvgIcon :name="`pagination/${type}`" view-box="0 0 13 13" />
 
-    <span v-if="type === 'previous'" class="ml-1 hidden lg:inline">
+    <span v-if="type === 'previous'" class="hidden ml-1 lg:inline">
       {{ $t(`PAGINATION.${type.toUpperCase()}`) }}
     </span>
   </button>

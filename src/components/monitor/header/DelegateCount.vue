@@ -1,13 +1,13 @@
 <template>
-  <div class="hidden lg:flex items-center">
-    <div class="mr-6 flex-none text-blue">
+  <div class="items-center hidden lg:flex">
+    <div class="flex-none mr-6 text-blue">
       <SvgIcon class="block" name="group" view-box="0 0 47 38" />
     </div>
     <div>
-      <div class="text-grey mb-2">
+      <div class="mb-2 text-grey">
         {{ $t("COMMON.DELEGATES") }}
       </div>
-      <div class="text-lg text-white semibold truncate">
+      <div class="text-lg text-white truncate semibold">
         {{ count }}
       </div>
     </div>

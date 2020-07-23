@@ -1,6 +1,6 @@
 <template>
   <section class="mb-5">
-    <div class="MonitorHeader px-5 sm:px-10 py-8 xl:rounded-lg">
+    <div class="px-5 py-8 MonitorHeader sm:px-10 xl:rounded-lg">
       <DelegateCount />
 
       <TotalForged />

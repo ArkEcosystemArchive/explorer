@@ -3,35 +3,35 @@
     <ContentHeader>{{ $t("COMMON.TRANSACTIONS") }}</ContentHeader>
 
     <section class="mb-5">
-      <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
-        <div class="relative mr-6 flex-none">
+      <div class="flex items-center justify-between px-5 py-8 sm:px-10 bg-theme-feature-background xl:rounded-lg">
+        <div class="relative flex-none mr-6">
           <SvgIcon class="block" name="transaction" view-box="0 0 43 39" />
           <div
-            class="absolute text-theme-transaction-icon text-2xl"
+            class="absolute text-2xl text-theme-transaction-icon"
             style="top: 50%; left: 50%; transform: translate(-50%, -50%);"
           >
             {{ networkSymbol }}
           </div>
         </div>
         <div class="flex-auto min-w-0">
-          <div class="text-grey mb-2">
+          <div class="mb-2 text-grey">
             {{ $t("WALLET.ADDRESS") }}
           </div>
           <div class="flex">
-            <div class="text-lg text-white semibold truncate">
+            <div class="text-lg text-white truncate semibold">
               <span class="mr-2">{{ address }}</span>
             </div>
             <Clipboard v-if="address" :value="address" />
           </div>
         </div>
         <div class="flex flex-col ml-4">
-          <div class="text-grey mb-2">
+          <div class="mb-2 text-grey">
             {{ $t("COMMON.TYPE") }}
           </div>
-          <div class="relative text-white z-20">
+          <div class="relative z-20 text-white">
             <span
               v-click-outside="closeDropdown"
-              class="cursor-pointer flex items-center"
+              class="flex items-center cursor-pointer"
               @click="selectOpen = !selectOpen"
             >
               <span class="mr-1">{{ $t(`TRANSACTION.TYPES.${type.toUpperCase()}`) }}</span>
@@ -39,7 +39,7 @@
             </span>
             <ul
               v-show="selectOpen"
-              class="absolute right-0 mt-px bg-theme-content-background shadow-theme rounded border overflow-hidden text-sm"
+              class="absolute right-0 mt-px overflow-hidden text-sm border rounded bg-theme-content-background shadow-theme"
             >
               <li v-for="type in availableTransactionTypes" :key="type">
                 <RouterLink
@@ -58,7 +58,7 @@
       </div>
     </section>
 
-    <section class="page-section py-5 md:py-10">
+    <section class="py-5 page-section md:py-10">
       <div class="hidden sm:block">
         <TableTransactionsDesktop
           v-if="!isLocks"

@@ -1,5 +1,5 @@
 <template>
-  <ul class="HeaderMenuMobile block xl:hidden">
+  <ul class="block HeaderMenuMobile xl:hidden">
     <li
       v-for="entry in entries"
       :key="entry.name"

@@ -2,10 +2,10 @@
   <Portal to="modal">
     <transition name="modal" appear>
       <div class="modal-mask" @click="emitOutsideClick()">
-        <div class="flex items-center justify-center absolute inset-0">
+        <div class="absolute inset-0 flex items-center justify-center">
           <div
             :class="containerClasses"
-            class="modal-container bg-theme-page-background text-theme-text-content rounded shadow-theme mx-4 sm:mx-auto relative p-6 sm:p-10"
+            class="relative p-6 mx-4 rounded modal-container bg-theme-page-background text-theme-text-content shadow-theme sm:mx-auto sm:p-10"
             @click.stop
           >
             <button

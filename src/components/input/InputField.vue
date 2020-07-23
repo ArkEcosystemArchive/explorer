@@ -11,18 +11,18 @@
     class="InputField"
   >
     <div
-      class="InputField__wrapper relative appearance-none mb-1 inline-flex items-end w-full"
+      class="relative inline-flex items-end w-full mb-1 appearance-none InputField__wrapper"
       :class="type !== 'textarea' ? 'h-12' : ''"
     >
       <slot :inputClass="inputClass" />
       <label
         v-show="label"
-        class="absolute pointer-events-none text-grey truncate"
+        class="absolute truncate pointer-events-none text-grey"
         :class="type !== 'textarea' ? 'InputField__label' : 'InputField__label__textarea'"
         >{{ label }}</label
       >
     </div>
-    <p v-show="helperText || warningText" class="InputField__helper text-grey-400 text-xs mt-1">
+    <p v-show="helperText || warningText" class="mt-1 text-xs InputField__helper text-grey-400">
       <slot name="helper">{{ helperText || warningText }}</slot>
     </p>
   </section>

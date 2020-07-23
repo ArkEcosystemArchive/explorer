@@ -2,15 +2,15 @@
   <Modal container-classes="bg-theme-content-background" @close="emitClose">
     <div class="SettingsModal">
       <div class="SettingsModal__header">
-        <h2 class="text-3xl mb-4">{{ $t("MODAL_SETTINGS.TITLE") }}</h2>
-        <p class="semibold text-grey mb-6">{{ $t("MODAL_SETTINGS.DESCRIPTION") }}</p>
+        <h2 class="mb-4 text-3xl">{{ $t("MODAL_SETTINGS.TITLE") }}</h2>
+        <p class="mb-6 semibold text-grey">{{ $t("MODAL_SETTINGS.DESCRIPTION") }}</p>
       </div>
 
-      <div v-if="isLoading" class="absolute inset-0 flex flex-col items-center justify-center z-10">
+      <div v-if="isLoading" class="absolute inset-0 z-10 flex flex-col items-center justify-center">
         <Loader :data="null" />
       </div>
 
-      <div :class="{ 'SettingsModal__content__disclaimer--show': showDisclaimer }" class="SettingsModal__content p-0">
+      <div :class="{ 'SettingsModal__content__disclaimer--show': showDisclaimer }" class="p-0 SettingsModal__content">
         <ListDivided>
           <ListDividedItem v-if="showCurrency" :label="$t('MODAL_SETTINGS.CURRENCY')">
             <InputSelect
@@ -31,10 +31,10 @@
             />
           </ListDividedItem>
           <ListDividedItem :label="$t('MODAL_SETTINGS.DARK_THEME')">
-            <ButtonSwitch :is-active="nightMode" class="SettingsModal__toggle__darkTheme mt-2" @change="toggleTheme" />
+            <ButtonSwitch :is-active="nightMode" class="mt-2 SettingsModal__toggle__darkTheme" @change="toggleTheme" />
           </ListDividedItem>
           <ListDividedItem v-if="showCurrency" :label="$t('MODAL_SETTINGS.PRICE_CHART')">
-            <ButtonSwitch :is-active="chartMode" class="SettingsModal__toggle__priceChart mt-2" @change="toggleChart" />
+            <ButtonSwitch :is-active="chartMode" class="mt-2 SettingsModal__toggle__priceChart" @change="toggleChart" />
           </ListDividedItem>
           <ListDividedItem :label="$t('MODAL_SETTINGS.LANGUAGE')">
             <InputSelect
@@ -47,9 +47,9 @@
           </ListDividedItem>
         </ListDivided>
 
-        <div v-if="showDisclaimer" class="SettingsModal__disclaimer text-justify">
+        <div v-if="showDisclaimer" class="text-justify SettingsModal__disclaimer">
           <div class="pt-4 my-5 border-t border-theme-line-separator"></div>
-          <p class="text-red semibold mb-2">{{ $t("DISCLAIMER.TITLE") }}:</p>
+          <p class="mb-2 text-red semibold">{{ $t("DISCLAIMER.TITLE") }}:</p>
           <i18n path="DISCLAIMER.TEXT3" tag="p">
             <template v-slot:website>
               <a href="https://ark.io/" target="_blank">ARK.io</a>
@@ -59,7 +59,7 @@
             <label class="flex items-center text-gray-500">
               <input
                 type="checkbox"
-                class="SettingsModal__disclaimer__terms__checkbox mr-2 leading-tight"
+                class="mr-2 leading-tight SettingsModal__disclaimer__terms__checkbox"
                 :checked="hasAcceptedTerms"
                 @change="toggleAcceptTerms"
               />
@@ -69,12 +69,12 @@
         </div>
       </div>
 
-      <div class="SettingsModal__footer flex flex-row justify-center md:justify-start mt-5">
-        <button class="SettingsModal__cancel__button pager-button mr-3" :disabled="isLoading" @click="emitClose">
+      <div class="flex flex-row justify-center mt-5 SettingsModal__footer md:justify-start">
+        <button class="mr-3 SettingsModal__cancel__button pager-button" :disabled="isLoading" @click="emitClose">
           {{ $t("COMMON.CANCEL") }}
         </button>
         <button
-          class="SettingsModal__save__button action-button py-4 px-8"
+          class="px-8 py-4 SettingsModal__save__button action-button"
           :disabled="(showDisclaimer && !hasAcceptedTerms) || isLoading"
           @click="save"
         >

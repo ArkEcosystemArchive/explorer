@@ -14,7 +14,7 @@
       </span>
     </i18n>
 
-    <button :disabled="isLoading" class="button-lg mt-4" @click="emitReload">
+    <button :disabled="isLoading" class="mt-4 button-lg" @click="emitReload">
       <span v-if="!isLoading">{{ $t("COMMON.RELOAD") }}</span>
       <Loader v-else :data="null" />
     </button>
