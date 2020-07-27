@@ -4,7 +4,7 @@
 
     <WalletDetails :wallet="wallet" />
 
-    <section v-show="isDelegate || wallet.vote" :class="{ 'py-5 md:py-10': isDelegate }" class="page-section mb-5">
+    <section v-show="isDelegate || wallet.vote" :class="{ 'py-5 md:py-10': isDelegate }" class="mb-5 page-section">
       <div class="px-5 sm:px-10">
         <WalletDelegate v-if="isDelegate" :wallet="wallet" />
         <WalletVote v-if="wallet.vote" :wallet="wallet" />

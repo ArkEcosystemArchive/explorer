@@ -1,14 +1,14 @@
 <template>
   <Modal v-if="address" @close="emitClose">
-    <div :class="{ 'max-w-sm': !isCollapsed }" class="text-center px-10 py-2">
-      <p class="semibold text-3xl mb-4">
+    <div :class="{ 'max-w-sm': !isCollapsed }" class="px-10 py-2 text-center">
+      <p class="mb-4 text-3xl semibold">
         {{ $t("WALLET.QR_CODE") }}
       </p>
       <p class="mb-8">
         {{ $t(`WALLET.SCAN_FOR_${isCollapsed ? "ADDRESS" : "URI"}`) }}
       </p>
 
-      <div class="flex justify-between items-center">
+      <div class="flex items-center justify-between">
         <QrCode class="rounded" :value="qrValue" :options="{ size: 160 }" />
         <div v-if="!isCollapsed" class="ml-8">
           <InputNumber :label="$t('TRANSACTION.AMOUNT')" name="amount" @input="onInputChange" />
@@ -18,13 +18,13 @@
 
       <div v-if="!isCollapsed" class="flex items-center mt-4">
         <span
-          class="block whitespace-no-wrap overflow-x-auto rounded mx-auto bg-theme-feature-background px-4 py-2 text-white font-mono mr-2"
+          class="block px-4 py-2 mx-auto mr-2 overflow-x-auto font-mono text-white whitespace-no-wrap rounded bg-theme-feature-background"
           >{{ qrValue }}</span
         >
         <Clipboard :value="qrValue" />
       </div>
 
-      <button class="mt-8 mx-auto pager-button items-center" @click="isCollapsed = !isCollapsed">
+      <button class="items-center mx-auto mt-8 pager-button" @click="isCollapsed = !isCollapsed">
         {{ $t(`WALLET.ADVANCED_QR.${isCollapsed ? "EXPAND" : "COLLAPSE"}`) }}
       </button>
     </div>

@@ -1,5 +1,5 @@
 <template>
-  <div id="genericForm" class="flex flex-wrap items-center mb-10 mx-5 sm:mx-10">
+  <div id="genericForm" class="flex flex-wrap items-center mx-5 mb-10 sm:mx-10">
     <div class="w-full md:w-64 md:mr-6">
       <InputSelect
         :value="selectedType"

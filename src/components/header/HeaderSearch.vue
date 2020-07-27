@@ -1,5 +1,5 @@
 <template>
-  <div class="HeaderSearch px-5 sm:px-10">
+  <div class="px-5 HeaderSearch sm:px-10">
     <button class="flex flex-none p-2 text-theme-button-close" @click="$store.dispatch('ui/setHeaderType', null)">
       <SvgIcon name="cross" view-box="0 0 14 14" />
     </button>
@@ -21,11 +21,11 @@
       :placeholder="placeholder"
       :class="{ 'text-grey': nightMode }"
       type="search"
-      class="search-input w-full flex-auto mr-2 py-4 pl-4 bg-transparent"
+      class="flex-auto w-full py-4 pl-4 mr-2 bg-transparent search-input"
       @keyup.enter="search"
     />
 
-    <button :disabled="!hasInput" class="search-icon text-grey hover:text-blue p-3 md:p-4 transition" @click="search">
+    <button :disabled="!hasInput" class="p-3 search-icon text-grey hover:text-blue md:p-4 transition" @click="search">
       <SvgIcon name="search" view-box="0 0 16 16" />
     </button>
   </div>

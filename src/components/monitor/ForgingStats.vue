@@ -1,9 +1,9 @@
 <template>
   <div class="ForgingStats">
     <div
-      class="w-1/2 lg:w-1/4 flex items-center px-6 my-6 border-r border-theme-border-secondary flex-col sm:flex-row text-center sm:text-left"
+      class="flex flex-col items-center w-1/2 px-6 my-6 text-center border-r lg:w-1/4 border-theme-border-secondary sm:flex-row sm:text-left"
     >
-      <div class="Meter mb-4 sm:mb-0 text-status-forging">
+      <div class="mb-4 Meter sm:mb-0 text-status-forging">
         <ArkMeter :percentage="percentage(totals.forging)" />
         <SvgIcon class="MeterIcon" name="forging" view-box="0 0 19 17" />
       </div>
@@ -18,9 +18,9 @@
     </div>
 
     <div
-      class="w-1/2 lg:w-1/4 flex items-center px-6 my-6 lg:border-r border-theme-border-secondary flex-col sm:flex-row text-center sm:text-left"
+      class="flex flex-col items-center w-1/2 px-6 my-6 text-center lg:w-1/4 lg:border-r border-theme-border-secondary sm:flex-row sm:text-left"
     >
-      <div class="Meter mb-4 sm:mb-0 text-status-missed-round">
+      <div class="mb-4 Meter sm:mb-0 text-status-missed-round">
         <ArkMeter :percentage="percentage(totals.missedRound)" />
         <SvgIcon class="MeterIcon" name="missed-round" view-box="0 0 19 17" />
       </div>
@@ -37,9 +37,9 @@
     <hr class="block lg:hidden" />
 
     <div
-      class="w-1/2 lg:w-1/4 flex items-center px-6 my-6 border-r border-theme-border-secondary flex-col sm:flex-row text-center sm:text-left"
+      class="flex flex-col items-center w-1/2 px-6 my-6 text-center border-r lg:w-1/4 border-theme-border-secondary sm:flex-row sm:text-left"
     >
-      <div class="Meter mb-4 sm:mb-0 text-status-not-forging">
+      <div class="mb-4 Meter sm:mb-0 text-status-not-forging">
         <ArkMeter :percentage="percentage(totals.notForging + totals.neverForged)" />
         <SvgIcon class="MeterIcon" name="not-forging" view-box="0 0 19 17" />
       </div>
@@ -53,8 +53,8 @@
       </div>
     </div>
 
-    <div class="w-1/2 lg:w-1/4 flex items-center px-6 my-6 flex-col sm:flex-row text-center sm:text-left">
-      <div class="Meter mb-4 sm:mb-0 text-blue">
+    <div class="flex flex-col items-center w-1/2 px-6 my-6 text-center lg:w-1/4 sm:flex-row sm:text-left">
+      <div class="mb-4 Meter sm:mb-0 text-blue">
         <ArkMeter :percentage="percentage(totals.remainingBlocks)" />
       </div>
       <div class="p-0 sm:pl-4">

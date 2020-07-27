@@ -1,6 +1,6 @@
 <template>
-  <div v-click-outside="closePageInput" class="Pagination mx-5 sm:mx-10 mt-5 md:mt-10">
-    <div class="PaginationBar--small relative">
+  <div v-click-outside="closePageInput" class="mx-5 mt-5 Pagination sm:mx-10 md:mt-10">
+    <div class="relative PaginationBar--small">
       <PaginationPageInput
         :is-visible="showPageInput"
         :page-count="pageCount"
@@ -12,7 +12,7 @@
 
       <PaginationSearchButton
         :class="{ 'opacity-0': showPageInput }"
-        class="w-full justify-center"
+        class="justify-center w-full"
         :hover-scale="false"
         @click="openPageInput"
       >
@@ -31,7 +31,7 @@
         @click="emitPrevious"
       />
 
-      <div class="PaginationBar--large relative">
+      <div class="relative PaginationBar--large">
         <PaginationPageInput
           :is-visible="showPageInput"
           :page-count="pageCount"
@@ -41,7 +41,7 @@
           @close="closePageInput"
         />
 
-        <div :class="{ 'opacity-0': showPageInput }" class="hidden md:flex px-3 bg-theme-button rounded">
+        <div :class="{ 'opacity-0': showPageInput }" class="hidden px-3 rounded md:flex bg-theme-button">
           <PaginationSearchButton :is-visible="pageButtons[0] !== 1" @click="openPageInput" />
 
           <button
@@ -61,7 +61,7 @@
           />
         </div>
 
-        <div class="flex md:hidden bg-theme-button rounded">
+        <div class="flex rounded md:hidden bg-theme-button">
           <PaginationSearchButton :hover-scale="false" :class="{ 'opacity-0': showPageInput }" @click="openPageInput">
             {{ $t("PAGINATION.PAGE") }} {{ currentPage }} {{ $t("PAGINATION.OF") }} {{ pageCount }}
           </PaginationSearchButton>

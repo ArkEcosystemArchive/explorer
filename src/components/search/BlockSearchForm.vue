@@ -1,9 +1,9 @@
 <template>
-  <div id="blockForm" class="mb-5 mx-5 sm:mx-10 mb-10">
-    <p class="font-bold mb-4">{{ $t("PAGES.ADVANCED_SEARCH.ADDITIONAL_PARAMETERS") }}</p>
+  <div id="blockForm" class="mx-5 mb-5 mb-10 sm:mx-10">
+    <p class="mb-4 font-bold">{{ $t("PAGES.ADVANCED_SEARCH.ADDITIONAL_PARAMETERS") }}</p>
 
     <div class="flex flex-wrap justify-between">
-      <div class="flex w-full lg:w-1/3 mb-4 lg:mb-0">
+      <div class="flex w-full mb-4 lg:w-1/3 lg:mb-0">
         <div class="w-1/2 mr-3">
           <InputNumber
             :label="$t('PAGES.ADVANCED_SEARCH.BLOCK.TOTAL_AMOUNT_FROM')"
@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <div class="flex w-full lg:w-1/3 mb-4 lg:mb-0">
+      <div class="flex w-full mb-4 lg:w-1/3 lg:mb-0">
         <div class="w-1/2 mr-3">
           <InputNumber
             :label="$t('PAGES.ADVANCED_SEARCH.BLOCK.TOTAL_FEE_FROM')"
@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <div class="flex w-full lg:w-auto mb-4 lg:mb-0">
+      <div class="flex w-full mb-4 lg:w-auto lg:mb-0">
         <div class="w-1/2 mr-3">
           <InputDate
             :label="$t('PAGES.ADVANCED_SEARCH.GENERIC.DATE_FROM')"

@@ -13,7 +13,7 @@
       </div>
       <div
         v-if="transactions && transactions.length === paginationLimit"
-        class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap"
+        class="flex flex-wrap mx-5 mt-5 sm:mx-10 md:mt-10"
       >
         <RouterLink :to="{ name: 'transactions', params: { page: 2 } }" tag="button" class="button-lg">
           {{ $t("PAGINATION.SHOW_MORE") }}

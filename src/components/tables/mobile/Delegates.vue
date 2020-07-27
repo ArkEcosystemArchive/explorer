@@ -17,7 +17,7 @@
             <LinkWallet :address="delegate.address">
               {{ delegate.username }}
             </LinkWallet>
-            <span v-if="delegate.isResigned" class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1">{{
+            <span v-if="delegate.isResigned" class="p-1 ml-2 text-sm text-white rounded bg-theme-resigned-label">{{
               $t("WALLET.DELEGATE.STATUS.RESIGNED")
             }}</span>
           </div>
@@ -46,7 +46,7 @@
             {{ $t("PAGES.DELEGATE_MONITOR.VOTES") }}
           </div>
           <div>
-            <span v-tooltip="$t('COMMON.SUPPLY_PERCENTAGE')" class="text-grey text-xs mr-1">
+            <span v-tooltip="$t('COMMON.SUPPLY_PERCENTAGE')" class="mr-1 text-xs text-grey">
               {{ percentageString(delegate.production.approval) }}
             </span>
             {{ readableCrypto(delegate.votes, true, 2) }}

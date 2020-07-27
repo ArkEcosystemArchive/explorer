@@ -1,5 +1,5 @@
 <template>
-  <ul class="ListDivided list-reset w-full">
+  <ul class="w-full ListDivided list-reset">
     <slot />
   </ul>
 </template>

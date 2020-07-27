@@ -1,12 +1,12 @@
 <template>
-  <footer class="AppFooter px-5 md:px-10 flex-col lg:flex-row">
-    <div class="mb-4 lg:mb-0 text-center md:text-left">
-      <span class="block md:inline-block mb-4 md:mb-0 text-center"
+  <footer class="flex-col px-5 AppFooter md:px-10 lg:flex-row">
+    <div class="mb-4 text-center lg:mb-0 md:text-left">
+      <span class="block mb-4 text-center md:inline-block md:mb-0"
         >&copy; <a :href="brandData.footer.url" target="_blank">{{ brandData.footer.text }}</a> | {{ year }}.
         {{ $t("FOOTER.ALL_RIGHTS_RESERVED") }}</span
       >
       <div class="block md:inline-block">
-        <span class="hidden md:inline-block px-1">|</span>
+        <span class="hidden px-1 md:inline-block">|</span>
         <span
           >{{ $t("FOOTER.VERSION") }}: <a :href="versionLink" target="_blank">{{ version }}</a> |
           {{ $t("FOOTER.DATE") }}: {{ date }}</span

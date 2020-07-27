@@ -1,10 +1,10 @@
 <template>
   <div class="WalletTransactions">
-    <h2 class="text-2xl mb-5 md:mb-6 px-5 sm:hidden text-theme-text-primary">
+    <h2 class="px-5 mb-5 text-2xl md:mb-6 sm:hidden text-theme-text-primary">
       {{ $t("COMMON.TRANSACTIONS") }}
     </h2>
-    <section class="page-section py-5 md:py-10">
-      <nav class="TransactionsNavigation mx-5 md:mx-10">
+    <section class="py-5 page-section md:py-10">
+      <nav class="mx-5 TransactionsNavigation md:mx-10">
         <div
           :class="{ active: !isTypeSent && !isTypeReceived && !isTypeLocks }"
           class="TransactionsNavigation--tab"
@@ -65,7 +65,7 @@
         </div>
       </template>
 
-      <div v-if="transactions && meta.next" class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
+      <div v-if="transactions && meta.next" class="flex flex-wrap mx-5 mt-5 sm:mx-10 md:mt-10">
         <RouterLink
           :to="{ name: 'wallet-transactions', params: { address: wallet.address, type, page: 2 } }"
           tag="button"

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-settings-icon px-3 md:px-2 py-3 md:py-4 flex flex-none items-center border-b-2 mt-2px border-transparent hover:border-theme-accents hover:text-blue transition cursor-pointer"
+    class="flex items-center flex-none px-3 py-3 border-b-2 border-transparent cursor-pointer text-settings-icon md:px-2 md:py-4 mt-2px hover:border-theme-accents hover:text-blue transition"
     @click="toggleModal"
   >
     <SvgIcon name="filter" view-box="0 0 16 20" />

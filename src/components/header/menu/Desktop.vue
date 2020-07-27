@@ -1,7 +1,7 @@
 <template>
   <div class="HeaderMenuDesktop md:px-8 sm:flex xl:rounded-r-md">
     <button
-      class="px-4 py-3 md:py-6 flex-none flex items-center border-b-2 mt-2px mr-3 border-transparent hover:border-theme-accents text-theme-text-secondary"
+      class="flex items-center flex-none px-4 py-3 mr-3 border-b-2 border-transparent md:py-6 mt-2px hover:border-theme-accents text-theme-text-secondary"
       @click="closeMenu"
     >
       <SvgIcon class="flex-none" name="menu" view-box="0 0 15 13" />

@@ -10,7 +10,7 @@
       <template slot-scope="data">
         <div v-if="data.column.field === 'name'">
           <span>{{ data.row.name }}</span>
-          <span v-if="data.row.isResigned" class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1">{{
+          <span v-if="data.row.isResigned" class="p-1 ml-2 text-sm text-white rounded bg-theme-resigned-label">{{
             $t("PAGES.BRIDGECHAINS.RESIGNED")
           }}</span>
         </div>

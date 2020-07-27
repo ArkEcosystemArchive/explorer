@@ -8,7 +8,7 @@
           </div>
           <div>
             <span>{{ business.name }}</span>
-            <span v-if="business.isResigned" class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1">{{
+            <span v-if="business.isResigned" class="p-1 ml-2 text-sm text-white rounded bg-theme-resigned-label">{{
               $t("PAGES.BUSINESSES.RESIGNED")
             }}</span>
           </div>

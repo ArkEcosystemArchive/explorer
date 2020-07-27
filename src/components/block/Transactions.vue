@@ -1,9 +1,9 @@
 <template>
   <div v-if="transactions && transactions.length > 0">
-    <h2 class="text-2xl mb-5 md:mb-6 px-5 sm:hidden text-theme-text-primary">
+    <h2 class="px-5 mb-5 text-2xl md:mb-6 sm:hidden text-theme-text-primary">
       {{ $t("COMMON.TRANSACTIONS") }}
     </h2>
-    <section class="page-section py-5 md:py-10">
+    <section class="py-5 page-section md:py-10">
       <div class="hidden sm:block">
         <TableTransactionsDesktop
           :transactions="transactions"
@@ -14,7 +14,7 @@
       <div class="sm:hidden">
         <TableTransactionsMobile :transactions="transactions" />
       </div>
-      <div v-if="meta.next" class="mx-5 sm:mx-10 mt-5 md:mt-10 flex flex-wrap">
+      <div v-if="meta.next" class="flex flex-wrap mx-5 mt-5 sm:mx-10 md:mt-10">
         <RouterLink
           :to="{ name: 'block-transactions', params: { block: block.id, page: 2 } }"
           tag="button"
