@@ -80,11 +80,16 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { mapGetters } from "vuex";
 import { ISortParameters, ITransaction, IWallet } from "@/interfaces";
 import TransactionService from "@/services/transaction";
 import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
 
-@Component
+@Component({
+  computed: {
+    ...mapGetters("ui", ["smartbridgeFilter"]),
+  },
+})
 export default class WalletTransactions extends Vue {
   @Prop({ required: true }) public wallet: IWallet;
 
@@ -93,6 +98,7 @@ export default class WalletTransactions extends Vue {
   private sentCount = 0;
   private locksCount = 0;
   private meta: any | null = null;
+  private smartbridgeFilter: string;
 
   get isTypeSent() {
     return this.type === "sent";
@@ -136,6 +142,13 @@ export default class WalletTransactions extends Vue {
     this.getSentCount();
     this.getReceivedCount();
     this.getLocksCount();
+  }
+
+  @Watch("smartbridgeFilter")
+  public onSmartbridgeFilterChanged() {
+    if (this.smartbridgeFilter !== "hidden") {
+      this.getTransactions();
+    }
   }
 
   public mounted() {
