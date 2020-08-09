@@ -13,7 +13,11 @@
         </div>
 
         <div v-else-if="data.column.field === 'vote'">
-          <LinkWallet v-if="data.row.vote" :key="votedDelegate(data.row.vote).address" :address="votedDelegate(data.row.vote).address">
+          <LinkWallet
+            v-if="data.row.vote"
+            :key="votedDelegate(data.row.vote).address"
+            :address="votedDelegate(data.row.vote).address"
+          >
             <span class="truncate">{{ votedDelegate(data.row.vote).username }}</span>
           </LinkWallet>
         </div>
