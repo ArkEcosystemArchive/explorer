@@ -31,7 +31,7 @@
         </div>
 
         <div v-else-if="data.column.field === 'generator.username'">
-          <LinkWallet :address="data.row.generator.address" />
+          <LinkWallet :key="data.row.generator.address" :address="data.row.generator.address" />
         </div>
 
         <div v-else-if="data.column.field === 'forged.total'">

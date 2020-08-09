@@ -18,7 +18,7 @@
           <div class="mr-4">
             {{ $t("PAGES.BRIDGECHAINS.CREATOR") }}
           </div>
-          <div><LinkWallet :address="bridgechain.publicKey" /></div>
+          <div><LinkWallet :key="bridgechain.publicKey" :address="bridgechain.publicKey" /></div>
         </div>
 
         <div :class="bridgechain.seedNodes ? 'list-row-border-b' : 'list-row'">

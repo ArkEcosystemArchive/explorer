@@ -23,11 +23,12 @@
         </div>
 
         <div v-else-if="data.column.field === 'sender'">
-          <LinkWallet :address="data.row.sender" />
+          <LinkWallet :key="data.row.sender" :address="data.row.sender" />
         </div>
 
         <div v-else-if="data.column.field === 'recipient'">
           <LinkWallet
+            :key="data.row.recipient"
             :address="data.row.recipient"
             :type="data.row.type"
             :asset="data.row.asset"

@@ -13,7 +13,7 @@
           <div class="mr-4">
             {{ $t("WALLET.ADDRESS") }}
           </div>
-          <LinkWallet :address="row.address" />
+          <LinkWallet :key="row.address" :address="row.address" />
         </div>
 
         <div class="list-row-border-b">
