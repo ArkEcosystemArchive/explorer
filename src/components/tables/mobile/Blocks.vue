@@ -37,7 +37,7 @@
             {{ $t("BLOCK.GENERATED_BY") }}
           </div>
           <div v-if="block.generator">
-            <LinkWallet :address="block.generator.address" />
+            <LinkWallet :key="block.generator.address" :address="block.generator.address" />
           </div>
         </div>
 

@@ -9,7 +9,7 @@
     >
       <template slot-scope="data">
         <div v-if="data.column.field === 'username'" class="flex items-center">
-          <LinkWallet :address="data.row.address">
+          <LinkWallet :key="data.row.address" :address="data.row.address">
             {{ data.row.username }}
           </LinkWallet>
           <span

@@ -9,11 +9,15 @@
     >
       <template slot-scope="data">
         <div v-if="data.column.field === 'address'">
-          <LinkWallet :address="data.row.address" :trunc="false" />
+          <LinkWallet :key="data.row.address" :address="data.row.address" :trunc="false" />
         </div>
 
         <div v-else-if="data.column.field === 'vote'">
-          <LinkWallet v-if="data.row.vote" :address="votedDelegate(data.row.vote).address">
+          <LinkWallet
+            v-if="data.row.vote"
+            :key="votedDelegate(data.row.vote).address"
+            :address="votedDelegate(data.row.vote).address"
+          >
             <span class="truncate">{{ votedDelegate(data.row.vote).username }}</span>
           </LinkWallet>
         </div>

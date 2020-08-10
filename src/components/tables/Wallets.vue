@@ -13,7 +13,7 @@
         </div>
 
         <div v-else-if="data.column.field === 'address'">
-          <LinkWallet :address="data.row.address" :trunc="false" />
+          <LinkWallet :key="data.row.address" :address="data.row.address" :trunc="false" />
         </div>
 
         <div v-else-if="data.column.field === 'balance'">

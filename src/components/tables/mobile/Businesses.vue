@@ -18,7 +18,7 @@
           <div class="mr-4">
             {{ $t("PAGES.BUSINESSES.CREATOR") }}
           </div>
-          <div><LinkWallet :address="business.address" /></div>
+          <div><LinkWallet :key="business.address" :address="business.address" /></div>
         </div>
 
         <div :class="business.repository ? 'list-row-border-b' : 'list-row'">

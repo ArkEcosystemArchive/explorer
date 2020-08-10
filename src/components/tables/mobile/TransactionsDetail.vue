@@ -20,7 +20,7 @@
           <div class="mr-4">
             {{ $t("TRANSACTION.SENDER") }}
           </div>
-          <LinkWallet :address="transaction.sender" />
+          <LinkWallet :key="transaction.sender" :address="transaction.sender" />
         </div>
 
         <div class="list-row-border-b">
@@ -28,6 +28,7 @@
             {{ $t("TRANSACTION.RECIPIENT") }}
           </div>
           <LinkWallet
+            :key="transaction.recipient"
             :address="transaction.recipient"
             :type="transaction.type"
             :asset="transaction.asset"

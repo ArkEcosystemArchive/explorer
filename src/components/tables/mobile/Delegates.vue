@@ -14,7 +14,7 @@
             {{ $t("WALLET.DELEGATE.USERNAME") }}
           </div>
           <div class="flex items-center">
-            <LinkWallet :address="delegate.address">
+            <LinkWallet :key="delegate.address" :address="delegate.address">
               {{ delegate.username }}
             </LinkWallet>
             <span v-if="delegate.isResigned" class="p-1 ml-2 text-sm text-white rounded bg-theme-resigned-label">{{

@@ -37,6 +37,7 @@
             {{ $t("TRANSACTION.RECIPIENT") }}
           </div>
           <LinkWallet
+            :key="transaction.recipientId"
             :address="transaction.recipientId"
             :type="transaction.type"
             :asset="transaction.asset"
