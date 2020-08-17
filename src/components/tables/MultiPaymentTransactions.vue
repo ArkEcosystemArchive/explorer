@@ -9,7 +9,7 @@
     >
       <template slot-scope="data">
         <div v-if="data.column.field === 'recipientId'">
-          <LinkWallet :address="data.row.recipientId" :type="0" :trunc="false" />
+          <LinkWallet :key="data.row.recipientId" :address="data.row.recipientId" :type="0" :trunc="false" />
         </div>
 
         <div v-else-if="data.column.field === 'amount'">

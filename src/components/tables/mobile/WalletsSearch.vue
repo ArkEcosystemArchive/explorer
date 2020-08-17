@@ -6,14 +6,18 @@
           <div class="mr-4">
             {{ $t("WALLET.ADDRESS") }}
           </div>
-          <LinkWallet :address="row.address" />
+          <LinkWallet :key="row.address" :address="row.address" />
         </div>
 
         <div class="list-row-border-b">
           <div class="mr-4">
             {{ $t("WALLET.VOTING_FOR") }}
           </div>
-          <LinkWallet v-if="row.vote" :address="votedDelegate(row.vote).address" />
+          <LinkWallet
+            v-if="row.vote"
+            :key="votedDelegate(row.vote).address"
+            :address="votedDelegate(row.vote).address"
+          />
         </div>
 
         <div class="list-row-border-b">

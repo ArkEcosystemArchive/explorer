@@ -35,6 +35,7 @@
 
         <div v-else-if="data.column.field === 'recipientId'">
           <LinkWallet
+            :key="data.row.recipientId"
             :address="data.row.recipientId"
             :type="data.row.type"
             :asset="data.row.asset"

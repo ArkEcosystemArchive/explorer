@@ -81,6 +81,7 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
   computed: {
     ...mapGetters("ui", ["nightMode"]),
     ...mapGetters("network", ["supply"]),
+    ...mapGetters("ui", ["smartbridgeFilter"]),
   },
 })
 export default class AdvancedSearchPage extends Vue {
@@ -111,6 +112,7 @@ export default class AdvancedSearchPage extends Vue {
   private submitted = false;
   private supply: number;
   private lastFormChange = 0;
+  private smartbridgeFilter: string;
 
   get sortParams() {
     return this.$store.getters[this.types[this.selectedType].sortParams];
@@ -134,6 +136,13 @@ export default class AdvancedSearchPage extends Vue {
   @Watch("currentPage")
   public onCurrentPageChanged() {
     this.changePage();
+  }
+
+  @Watch("smartbridgeFilter")
+  public onSmartbridgeFilterChanged() {
+    if (this.smartbridgeFilter !== "hidden") {
+      this.search();
+    }
   }
 
   public async beforeRouteUpdate(to: Route, from: Route, next: (vm?: any) => void) {

@@ -84,7 +84,8 @@ class DelegateService {
         ApiService.get("delegates", {
           params: {
             offset: i * apiLimit,
-            limit: i === requestCount - 1 ? activeDelegates % apiLimit : Math.min(activeDelegates, apiLimit),
+            limit:
+              (i === requestCount - 1 ? activeDelegates % apiLimit : Math.min(activeDelegates, apiLimit)) || apiLimit,
           },
         }),
       );

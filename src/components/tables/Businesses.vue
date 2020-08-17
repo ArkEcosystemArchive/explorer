@@ -16,7 +16,7 @@
         </div>
 
         <div v-else-if="data.column.field === 'address'">
-          <LinkWallet :address="data.row.address" />
+          <LinkWallet :key="data.row.address" :address="data.row.address" />
         </div>
 
         <div v-else-if="data.column.field === 'website'">

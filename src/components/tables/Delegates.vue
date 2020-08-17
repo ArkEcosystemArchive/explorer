@@ -15,7 +15,7 @@
         </div>
 
         <div v-else-if="data.column.field === 'username'" class="flex items-center">
-          <LinkWallet :address="data.row.address">
+          <LinkWallet :key="data.row.address" :address="data.row.address">
             {{ data.row.username }}
           </LinkWallet>
           <span v-if="data.row.isResigned" class="p-1 ml-2 text-sm text-white rounded bg-theme-resigned-label">{{
