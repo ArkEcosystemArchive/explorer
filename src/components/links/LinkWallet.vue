@@ -70,8 +70,7 @@
     }}</span>
     <span v-else-if="isDeveloperEntityResignation(type, typeGroup, asset)">{{
       $t("TRANSACTION.TYPES.DEVELOPER_ENTITY_RESIGNATION")
-    }}</span>
-    <span v-else-if="isDeveloperEntityUpdate(type, typeGroup, asset)">{{
+    }}</span>    <span v-else-if="isDeveloperEntityUpdate(type, typeGroup, asset)">{{
       $t("TRANSACTION.TYPES.DEVELOPER_ENTITY_UPDATE")
     }}</span>
     <span v-else-if="isCorePluginEntityRegistration(type, typeGroup, asset)">{{
