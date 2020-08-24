@@ -24,7 +24,14 @@ import AppHeader from "@/components/header/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
 import { transactionTypes } from "@/constants";
 import { TypeGroupTransaction } from "@/enums";
-import { BlockchainService, CryptoCompareService, DelegateService, EntityService, MigrationService, NodeService } from "@/services";
+import {
+  BlockchainService,
+  CryptoCompareService,
+  DelegateService,
+  EntityService,
+  MigrationService,
+  NodeService,
+} from "@/services";
 import { knownWalletsUrls } from "@/config";
 import { mapGetters } from "vuex";
 import axios from "axios";
