@@ -151,6 +151,7 @@ export default {
       SUBTYPE: "Sub-Type",
       ACTION: "Action",
       DATA: "Data",
+      REGISTRATIONID: "Registration ID",
     },
     SENDER: "Sender",
     RECIPIENT: "Recipient",
