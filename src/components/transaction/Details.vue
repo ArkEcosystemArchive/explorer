@@ -279,20 +279,47 @@ export default class TransactionDetails extends Vue {
   }
 
   get assetField() {
-    switch (this.transaction.type) {
-      case MagistrateTransaction.BUSINESS_REGISTRATION:
-        return this.transaction.asset.businessRegistration;
-      case MagistrateTransaction.BUSINESS_UPDATE:
-        return this.transaction.asset.businessUpdate;
-      case MagistrateTransaction.BRIDGECHAIN_REGISTRATION:
-        return this.transaction.asset.bridgechainRegistration;
-      case MagistrateTransaction.BRIDGECHAIN_RESIGNATION:
-        return this.transaction.asset.bridgechainResignation;
-      case MagistrateTransaction.BRIDGECHAIN_UPDATE:
-        return this.transaction.asset.bridgechainUpdate;
-      default:
-        return [];
+    // @ts-ignore
+    if(this.isLegacyBusinessRegistration(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
+      return this.transaction.asset.businessRegistration;
     }
+
+    // @ts-ignore
+    if(this.isLegacyBusinessUpdate(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
+      return this.transaction.asset.businessUpdate;
+    }
+
+    // @ts-ignore
+    if(this.isLegacyBridgechainRegistration(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
+      return this.transaction.asset.bridgechainRegistration;
+    }
+
+    // @ts-ignore
+    if(this.isLegacyBridgechainResignation(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
+      return this.transaction.asset.bridgechainResignation;
+    }
+
+    // @ts-ignore
+    if(this.isLegacyBridgechainUpdate(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
+      return this.transaction.asset.bridgechainUpdate;
+    }
+
+    // @ts-ignore
+    if(this.isEntityRegistration(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
+      return this.transaction.asset;
+    }
+
+    // @ts-ignore
+    if(this.isEntityResignation(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
+      return this.transaction.asset;
+    }
+
+    // @ts-ignore
+    if(this.isEntityUpdate(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
+      return this.transaction.asset;
+    }
+
+    return [];
   }
 
   @Watch("transaction")

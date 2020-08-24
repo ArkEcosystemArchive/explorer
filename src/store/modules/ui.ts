@@ -18,8 +18,6 @@ const state: IUiState = {
   menuVisible: false,
   hasAcceptedLinkDisclaimer: false,
   blockSortParams: null,
-  businessSortParams: null,
-  bridgechainSortParams: null,
   delegateSortParams: null,
   transactionSortParams: null,
   walletSortParams: null,
@@ -114,26 +112,6 @@ const actions: ActionTree<IUiState, {}> = {
       value,
     });
   },
-  setBusinessSortParams: ({ commit }, value) => {
-    value = JSON.stringify(value);
-
-    localStorage.setItem("businessSortParams", value);
-
-    commit({
-      type: types.SET_UI_BUSINESS_SORT_PARAMS,
-      value,
-    });
-  },
-  setBridgechainSortParams: ({ commit }, value) => {
-    value = JSON.stringify(value);
-
-    localStorage.setItem("bridgechainSortParams", value);
-
-    commit({
-      type: types.SET_UI_BRIDGECHAIN_SORT_PARAMS,
-      value,
-    });
-  },
   setDelegateSortParams: ({ commit }, value) => {
     value = JSON.stringify(value);
 
@@ -210,12 +188,6 @@ const mutations: MutationTree<IUiState> = {
   [types.SET_UI_BLOCK_SORT_PARAMS](state, payload: IStorePayload) {
     state.blockSortParams = payload.value;
   },
-  [types.SET_UI_BUSINESS_SORT_PARAMS](state, payload: IStorePayload) {
-    state.businessSortParams = payload.value;
-  },
-  [types.SET_UI_BRIDGECHAIN_SORT_PARAMS](state, payload: IStorePayload) {
-    state.bridgechainSortParams = payload.value;
-  },
   [types.SET_UI_DELEGATE_SORT_PARAMS](state, payload: IStorePayload) {
     state.delegateSortParams = payload.value;
   },
@@ -249,16 +221,6 @@ const getters: GetterTree<IUiState, {}> = {
   blockSortParams(state) {
     const params = state.blockSortParams || localStorage.getItem("blockSortParams");
     return params ? JSON.parse(params) : { field: "height", type: "desc" };
-  },
-
-  businessSortParams(state) {
-    const params = state.businessSortParams || localStorage.getItem("businessSortParams");
-    return params ? JSON.parse(params) : { field: "name", type: "asc" };
-  },
-
-  bridgechainSortParams(state) {
-    const params = state.bridgechainSortParams || localStorage.getItem("bridgechainSortParams");
-    return params ? JSON.parse(params) : { field: "name", type: "asc" };
   },
 
   delegateSortParams(state) {

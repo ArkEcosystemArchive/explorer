@@ -22,8 +22,6 @@ const TransactionComponent = () => import(/* webpackChunkName: "transaction" */ 
 const TransactionsComponent = () => import(/* webpackChunkName: "transactions" */ "@/pages/Transactions.vue");
 const DelegateMonitorComponent = () => import(/* webpackChunkName: "delegate-monitor" */ "@/pages/DelegateMonitor.vue");
 const TopWalletsComponent = () => import(/* webpackChunkName: "top-wallets" */ "@/pages/TopWallets.vue");
-const BusinessesComponent = () => import(/* webpackChunkName: "businesses" */ "@/pages/Businesses.vue");
-const BridgechainsComponent = () => import(/* webpackChunkName: "bridgechains" */ "@/pages/Bridgechains.vue");
 const AdvancedSearchComponent = () => import(/* webpackChunkName: "search" */ "@/pages/AdvancedSearch.vue");
 const DelegateComponent = () => import(/* webpackChunkName: "delegates" */ "@/pages/Delegates.vue");
 const NotFoundComponent = () => import(/* webpackChunkName: "404" */ "@/pages/404.vue");
@@ -163,28 +161,6 @@ const router = new Router({
       name: "top-wallets",
       component: TopWalletsComponent,
       meta: { title: (route: Route) => getTitle("Top Wallets") },
-    },
-    {
-      path: "/businesses",
-      redirect: (to) => ({ name: "businesses", params: { page: 1 } }),
-      meta: { title: (route: Route) => getTitle("Businesses") },
-    },
-    {
-      path: "/businesses/:page(\\d+)",
-      name: "businesses",
-      component: BusinessesComponent,
-      meta: { title: (route: Route) => getTitle("Businesses") },
-    },
-    {
-      path: "/bridgechains",
-      redirect: (to) => ({ name: "bridgechains", params: { page: 1 } }),
-      meta: { title: (route: Route) => getTitle("Bridgechains") },
-    },
-    {
-      path: "/bridgechains/:page(\\d+)",
-      name: "bridgechains",
-      component: BridgechainsComponent,
-      meta: { title: (route: Route) => getTitle("Bridgechains") },
     },
     {
       path: "/advanced-search",

@@ -16,29 +16,110 @@ export const transactionTypes: ITransactionType[] = [
   { key: "TIMELOCK", type: CoreTransaction.TIMELOCK, typeGroup: TypeGroupTransaction.CORE },
   { key: "TIMELOCK_CLAIM", type: CoreTransaction.TIMELOCK_CLAIM, typeGroup: TypeGroupTransaction.CORE },
   { key: "TIMELOCK_REFUND", type: CoreTransaction.TIMELOCK_REFUND, typeGroup: TypeGroupTransaction.CORE },
+  // Magistrate 2.0
   {
-    key: "BUSINESS_REGISTRATION",
+    key: "BUSINESS_ENTITY_REGISTRATION",
+    type: MagistrateTransaction.ENTITY,
+    typeGroup: TypeGroupTransaction.MAGISTRATE,
+  },
+  {
+    key: "BUSINESS_ENTITY_RESIGNATION",
+    type: MagistrateTransaction.ENTITY,
+    typeGroup: TypeGroupTransaction.MAGISTRATE,
+  },
+  {
+    key: "BUSINESS_ENTITY_UPDATE",
+    type: MagistrateTransaction.ENTITY,
+    typeGroup: TypeGroupTransaction.MAGISTRATE,
+  },
+  {
+    key: "DEVELOPER_ENTITY_REGISTRATION",
+    type: MagistrateTransaction.ENTITY,
+    typeGroup: TypeGroupTransaction.MAGISTRATE,
+  },
+  {
+    key: "DEVELOPER_ENTITY_RESIGNATION",
+    type: MagistrateTransaction.ENTITY,
+    typeGroup: TypeGroupTransaction.MAGISTRATE,
+  },
+  {
+    key: "DEVELOPER_ENTITY_UPDATE",
+    type: MagistrateTransaction.ENTITY,
+    typeGroup: TypeGroupTransaction.MAGISTRATE,
+  },
+  {
+    key: "CORE_PLUGIN_ENTITY_REGISTRATION",
+    type: MagistrateTransaction.ENTITY,
+    typeGroup: TypeGroupTransaction.MAGISTRATE,
+  },
+  {
+    key: "CORE_PLUGIN_ENTITY_RESIGNATION",
+    type: MagistrateTransaction.ENTITY,
+    typeGroup: TypeGroupTransaction.MAGISTRATE,
+  },
+  {
+    key: "CORE_PLUGIN_ENTITY_UPDATE",
+    type: MagistrateTransaction.ENTITY,
+    typeGroup: TypeGroupTransaction.MAGISTRATE,
+  },
+  {
+    key: "DESKTOP_PLUGIN_ENTITY_REGISTRATION",
+    type: MagistrateTransaction.ENTITY,
+    typeGroup: TypeGroupTransaction.MAGISTRATE,
+  },
+  {
+    key: "DESKTOP_PLUGIN_ENTITY_RESIGNATION",
+    type: MagistrateTransaction.ENTITY,
+    typeGroup: TypeGroupTransaction.MAGISTRATE,
+  },
+  {
+    key: "DESKTOP_PLUGIN_ENTITY_UPDATE",
+    type: MagistrateTransaction.ENTITY,
+    typeGroup: TypeGroupTransaction.MAGISTRATE,
+  },
+  {
+    key: "DELEGATE_ENTITY_REGISTRATION",
+    type: MagistrateTransaction.ENTITY,
+    typeGroup: TypeGroupTransaction.MAGISTRATE,
+  },
+  {
+    key: "DELEGATE_ENTITY_RESIGNATION",
+    type: MagistrateTransaction.ENTITY,
+    typeGroup: TypeGroupTransaction.MAGISTRATE,
+  },
+  {
+    key: "DELEGATE_ENTITY_UPDATE",
+    type: MagistrateTransaction.ENTITY,
+    typeGroup: TypeGroupTransaction.MAGISTRATE,
+  },
+  // Magistrate 1.0
+  {
+    key: "LEGACY_BUSINESS_REGISTRATION",
     type: MagistrateTransaction.BUSINESS_REGISTRATION,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
   },
   {
-    key: "BUSINESS_RESIGNATION",
+    key: "LEGACY_BUSINESS_RESIGNATION",
     type: MagistrateTransaction.BUSINESS_RESIGNATION,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
   },
-  { key: "BUSINESS_UPDATE", type: MagistrateTransaction.BUSINESS_UPDATE, typeGroup: TypeGroupTransaction.MAGISTRATE },
   {
-    key: "BRIDGECHAIN_REGISTRATION",
+    key: "LEGACY_BUSINESS_UPDATE",
+    type: MagistrateTransaction.BUSINESS_UPDATE,
+    typeGroup: TypeGroupTransaction.MAGISTRATE,
+  },
+  {
+    key: "LEGACY_BRIDGECHAIN_REGISTRATION",
     type: MagistrateTransaction.BRIDGECHAIN_REGISTRATION,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
   },
   {
-    key: "BRIDGECHAIN_RESIGNATION",
+    key: "LEGACY_BRIDGECHAIN_RESIGNATION",
     type: MagistrateTransaction.BRIDGECHAIN_RESIGNATION,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
   },
   {
-    key: "BRIDGECHAIN_UPDATE",
+    key: "LEGACY_BRIDGECHAIN_UPDATE",
     type: MagistrateTransaction.BRIDGECHAIN_UPDATE,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
   },

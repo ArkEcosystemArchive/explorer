@@ -24,14 +24,7 @@ import AppHeader from "@/components/header/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
 import { transactionTypes } from "@/constants";
 import { TypeGroupTransaction } from "@/enums";
-import {
-  BlockchainService,
-  BusinessService,
-  CryptoCompareService,
-  DelegateService,
-  MigrationService,
-  NodeService,
-} from "@/services";
+import { BlockchainService, CryptoCompareService, DelegateService, MigrationService, NodeService } from "@/services";
 import { knownWalletsUrls } from "@/config";
 import { mapGetters } from "vuex";
 import axios from "axios";
@@ -211,8 +204,8 @@ export default class App extends Vue {
   }
 
   public async checkForMagistrateEnabled() {
-    const hasMagistrateEnabled = await BusinessService.isEnabled();
-    this.$store.dispatch("network/setHasMagistrateEnabled", hasMagistrateEnabled);
+    // TODO: check if magistrate is enabled via milestones
+    this.$store.dispatch("network/setHasMagistrateEnabled", true);
   }
 
   public setEnabledTransactionTypes() {

@@ -485,27 +485,6 @@ export function makeServer({ environment = "development" } = {}) {
 
         return response;
       });
-
-      // ARK Magistrate
-      this.get("/businesses", (schema, request) => {
-        const response = loadFixture("api/businesses");
-
-        if (request.queryParams.limit) {
-          response.data = response.data.slice(0, request.queryParams.limit);
-        }
-
-        return response;
-      });
-
-      this.get("/bridgechains", (schema, request) => {
-        const response = loadFixture("api/bridgechains");
-
-        if (request.queryParams.limit) {
-          response.data = response.data.slice(0, request.queryParams.limit);
-        }
-
-        return response;
-      });
     },
   });
 }
