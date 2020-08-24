@@ -289,15 +289,15 @@ export default class TransactionDetails extends Vue {
       return this.transaction.asset.businessUpdate;
     }
 
-    // @ts-ignore
     if (
+      // @ts-ignore
       this.isLegacyBridgechainRegistration(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)
     ) {
       return this.transaction.asset.bridgechainRegistration;
     }
 
-    // @ts-ignore
     if (
+      // @ts-ignore
       this.isLegacyBridgechainResignation(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)
     ) {
       return this.transaction.asset.bridgechainResignation;
