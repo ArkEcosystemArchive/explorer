@@ -1,8 +1,9 @@
 import ApiService from "./api";
-import BlockService from "./block";
 import BlockchainService from "./blockchain";
+import BlockService from "./block";
 import CryptoCompareService from "./crypto-compare";
 import DelegateService from "./delegate";
+import EntityService from "./entity";
 import ForgingService from "./forging";
 import LockService from "./lock";
 import MigrationService from "./migration";
@@ -18,6 +19,7 @@ export {
   BlockchainService,
   CryptoCompareService,
   DelegateService,
+  EntityService,
   ForgingService,
   LockService,
   MigrationService,
