@@ -280,42 +280,46 @@ export default class TransactionDetails extends Vue {
 
   get assetField() {
     // @ts-ignore
-    if(this.isLegacyBusinessRegistration(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
+    if (this.isLegacyBusinessRegistration(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
       return this.transaction.asset.businessRegistration;
     }
 
     // @ts-ignore
-    if(this.isLegacyBusinessUpdate(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
+    if (this.isLegacyBusinessUpdate(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
       return this.transaction.asset.businessUpdate;
     }
 
     // @ts-ignore
-    if(this.isLegacyBridgechainRegistration(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
+    if (
+      this.isLegacyBridgechainRegistration(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)
+    ) {
       return this.transaction.asset.bridgechainRegistration;
     }
 
     // @ts-ignore
-    if(this.isLegacyBridgechainResignation(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
+    if (
+      this.isLegacyBridgechainResignation(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)
+    ) {
       return this.transaction.asset.bridgechainResignation;
     }
 
     // @ts-ignore
-    if(this.isLegacyBridgechainUpdate(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
+    if (this.isLegacyBridgechainUpdate(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
       return this.transaction.asset.bridgechainUpdate;
     }
 
     // @ts-ignore
-    if(this.isEntityRegistration(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
+    if (this.isEntityRegistration(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
       return this.transaction.asset;
     }
 
     // @ts-ignore
-    if(this.isEntityResignation(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
+    if (this.isEntityResignation(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
       return this.transaction.asset;
     }
 
     // @ts-ignore
-    if(this.isEntityUpdate(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
+    if (this.isEntityUpdate(this.transaction.type, this.transaction.typeGroup, this.transaction.asset)) {
       return this.transaction.asset;
     }
 
