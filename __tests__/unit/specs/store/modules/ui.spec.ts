@@ -123,22 +123,6 @@ describe("Store > UI", () => {
     expect(store.getters["ui/delegateSortParams"]).toEqual(params);
   });
 
-  it("should set the business sort params", () => {
-    const params = { field: "test" };
-
-    store.dispatch("ui/setBusinessSortParams", params);
-
-    expect(store.getters["ui/businessSortParams"]).toEqual(params);
-  });
-
-  it("should set the bridgechain sort params", () => {
-    const params = { field: "test" };
-
-    store.dispatch("ui/setBridgechainSortParams", params);
-
-    expect(store.getters["ui/bridgechainSortParams"]).toEqual(params);
-  });
-
   it("should set the transaction sort params", () => {
     const params = { field: "test" };
 
