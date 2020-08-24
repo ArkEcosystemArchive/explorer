@@ -1,4 +1,11 @@
-import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction, MagistrateTransactionEntityType, MagistrateTransactionEntitySubType, MagistrateTransactionEntityAction } from "@/enums";
+import {
+  CoreTransaction,
+  MagistrateTransaction,
+  TypeGroupTransaction,
+  MagistrateTransactionEntityType,
+  MagistrateTransactionEntitySubType,
+  MagistrateTransactionEntityAction,
+} from "@/enums";
 
 const isCoreTypeGroup = (typeGroup: number): boolean => {
   return typeGroup === TypeGroupTransaction.CORE;
@@ -57,24 +64,30 @@ export default {
     // Magistrate 2.0
 
     isEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
-      return isMagistrateTypeGroup(typeGroup) &&
+      return (
+        isMagistrateTypeGroup(typeGroup) &&
         type === MagistrateTransaction.ENTITY &&
         asset &&
-        asset.action === MagistrateTransactionEntityAction.REGISTER;
+        asset.action === MagistrateTransactionEntityAction.REGISTER
+      );
     },
 
     isEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
-      return isMagistrateTypeGroup(typeGroup) &&
+      return (
+        isMagistrateTypeGroup(typeGroup) &&
         type === MagistrateTransaction.ENTITY &&
         asset &&
-        asset.action === MagistrateTransactionEntityAction.RESIGN;
+        asset.action === MagistrateTransactionEntityAction.RESIGN
+      );
     },
 
     isEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
-      return isMagistrateTypeGroup(typeGroup) &&
+      return (
+        isMagistrateTypeGroup(typeGroup) &&
         type === MagistrateTransaction.ENTITY &&
         asset &&
-        asset.action === MagistrateTransactionEntityAction.UPDATE;
+        asset.action === MagistrateTransactionEntityAction.UPDATE
+      );
     },
 
     isBusinessEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
