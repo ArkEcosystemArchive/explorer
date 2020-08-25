@@ -371,6 +371,10 @@ export function makeServer({ environment = "development" } = {}) {
           return loadFixture("api/transactions/search/by-amount-and-fee");
         }
 
+        if (!requestBody.id) {
+          return loadFixture("api/transactions/search/transactions");
+        }
+
         if (requestBody.id !== "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff") {
           return loadFixture("api/transactions/search/by-id");
         }
