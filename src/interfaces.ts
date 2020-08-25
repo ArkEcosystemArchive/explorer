@@ -278,6 +278,7 @@ export interface ITransactionType {
   key: string;
   type: number;
   typeGroup?: number;
+  asset?: Record<string, string | number>;
 }
 
 export interface ITransactionSearchParams {

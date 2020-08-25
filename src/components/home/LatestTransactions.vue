@@ -38,6 +38,7 @@ import { paginationLimit } from "@/constants";
 export default class LatestTransactions extends Vue {
   @Prop({ required: true }) public transactionType: number;
   @Prop({ required: true }) public transactionGroup: number;
+  @Prop({ required: true }) public transactionAsset: object;
 
   private paginationLimit: number = paginationLimit;
   private transactions: ITransaction[] | null = null;
@@ -81,7 +82,12 @@ export default class LatestTransactions extends Vue {
   }
 
   private async getTransactions() {
-    const { data } = await TransactionService.filterByType(1, this.transactionType, this.transactionGroup);
+    const { data } = await TransactionService.filterByType(
+      1,
+      this.transactionType,
+      this.transactionGroup,
+      this.transactionAsset,
+    );
 
     this.transactions = data.map((transaction: ITransaction) => ({ ...transaction, price: null }));
   }

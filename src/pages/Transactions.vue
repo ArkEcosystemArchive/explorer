@@ -63,7 +63,7 @@ export default class TransactionsPage extends Vue {
   private transactions: ITransaction[] | null = null;
   private meta: any | null = null;
   private currentPage = 0;
-  private transactionType: { key: string; type: number; typeGroup?: number } = { key: "ALL", type: -1 };
+  private transactionType: { key: string; type: number; typeGroup?: number; asset?: object; } = { key: "ALL", type: -1 };
   private smartbridgeFilter: string;
 
   get showPagination() {
@@ -107,6 +107,7 @@ export default class TransactionsPage extends Vue {
         Number(to.params.page),
         transactionType.type,
         transactionType.typeGroup,
+        transactionType.asset,
       );
 
       next((vm: TransactionsPage) => {
@@ -131,6 +132,7 @@ export default class TransactionsPage extends Vue {
         Number(to.params.page),
         transactionType.type,
         transactionType.typeGroup,
+        transactionType.asset,
       );
 
       this.currentPage = Number(to.params.page);
@@ -178,6 +180,7 @@ export default class TransactionsPage extends Vue {
         this.currentPage,
         this.transactionType.type,
         this.transactionType.typeGroup,
+        this.transactionType.asset,
       );
 
       this.setTransactions(data);

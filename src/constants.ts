@@ -1,5 +1,5 @@
 import { ITransactionType } from "@/interfaces";
-import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
+import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction, MagistrateTransactionEntityAction, MagistrateTransactionEntityType, MagistrateTransactionEntitySubType } from "@/enums";
 
 export const URI_QRCODE_SCHEME_PREFIX = "ark:";
 
@@ -21,76 +21,151 @@ export const transactionTypes: ITransactionType[] = [
     key: "BUSINESS_ENTITY_REGISTRATION",
     type: MagistrateTransaction.ENTITY,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
+    asset: {
+      type: MagistrateTransactionEntityType.BUSINESS,
+      subType: MagistrateTransactionEntitySubType.NONE,
+      action: MagistrateTransactionEntityAction.REGISTER
+    },
   },
   {
     key: "BUSINESS_ENTITY_RESIGNATION",
     type: MagistrateTransaction.ENTITY,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
+    asset: {
+      type: MagistrateTransactionEntityType.BUSINESS,
+      subType: MagistrateTransactionEntitySubType.NONE,
+      action: MagistrateTransactionEntityAction.RESIGN
+    },
   },
   {
     key: "BUSINESS_ENTITY_UPDATE",
     type: MagistrateTransaction.ENTITY,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
+    asset: {
+      type: MagistrateTransactionEntityType.BUSINESS,
+      subType: MagistrateTransactionEntitySubType.NONE,
+      action: MagistrateTransactionEntityAction.UPDATE
+    },
   },
   {
     key: "DEVELOPER_ENTITY_REGISTRATION",
     type: MagistrateTransaction.ENTITY,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
+    asset: {
+      type: MagistrateTransactionEntityType.DEVELOPER,
+      subType: MagistrateTransactionEntitySubType.NONE,
+      action: MagistrateTransactionEntityAction.REGISTER
+    },
   },
   {
     key: "DEVELOPER_ENTITY_RESIGNATION",
     type: MagistrateTransaction.ENTITY,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
+    asset: {
+      type: MagistrateTransactionEntityType.DEVELOPER,
+      subType: MagistrateTransactionEntitySubType.NONE,
+      action: MagistrateTransactionEntityAction.RESIGN
+    },
   },
   {
     key: "DEVELOPER_ENTITY_UPDATE",
     type: MagistrateTransaction.ENTITY,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
+    asset: {
+      type: MagistrateTransactionEntityType.DEVELOPER,
+      subType: MagistrateTransactionEntitySubType.NONE,
+      action: MagistrateTransactionEntityAction.UPDATE
+    },
   },
   {
     key: "CORE_PLUGIN_ENTITY_REGISTRATION",
     type: MagistrateTransaction.ENTITY,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
+    asset: {
+      type: MagistrateTransactionEntityType.PLUGIN,
+      subType: MagistrateTransactionEntitySubType.PLUGIN_CORE,
+      action: MagistrateTransactionEntityAction.REGISTER
+    },
   },
   {
     key: "CORE_PLUGIN_ENTITY_RESIGNATION",
     type: MagistrateTransaction.ENTITY,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
+    asset: {
+      type: MagistrateTransactionEntityType.PLUGIN,
+      subType: MagistrateTransactionEntitySubType.PLUGIN_CORE,
+      action: MagistrateTransactionEntityAction.RESIGN
+    },
   },
   {
     key: "CORE_PLUGIN_ENTITY_UPDATE",
     type: MagistrateTransaction.ENTITY,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
+    asset: {
+      type: MagistrateTransactionEntityType.PLUGIN,
+      subType: MagistrateTransactionEntitySubType.PLUGIN_CORE,
+      action: MagistrateTransactionEntityAction.UPDATE
+    },
   },
   {
     key: "DESKTOP_PLUGIN_ENTITY_REGISTRATION",
     type: MagistrateTransaction.ENTITY,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
+    asset: {
+      type: MagistrateTransactionEntityType.PLUGIN,
+      subType: MagistrateTransactionEntitySubType.PLUGIN_DESKTOP,
+      action: MagistrateTransactionEntityAction.REGISTER
+    },
   },
   {
     key: "DESKTOP_PLUGIN_ENTITY_RESIGNATION",
     type: MagistrateTransaction.ENTITY,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
+    asset: {
+      type: MagistrateTransactionEntityType.PLUGIN,
+      subType: MagistrateTransactionEntitySubType.PLUGIN_DESKTOP,
+      action: MagistrateTransactionEntityAction.RESIGN
+    },
   },
   {
     key: "DESKTOP_PLUGIN_ENTITY_UPDATE",
     type: MagistrateTransaction.ENTITY,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
+    asset: {
+      type: MagistrateTransactionEntityType.PLUGIN,
+      subType: MagistrateTransactionEntitySubType.PLUGIN_DESKTOP,
+      action: MagistrateTransactionEntityAction.UPDATE
+    },
   },
   {
     key: "DELEGATE_ENTITY_REGISTRATION",
     type: MagistrateTransaction.ENTITY,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
+    asset: {
+      type: MagistrateTransactionEntityType.DELEGATE,
+      subType: MagistrateTransactionEntitySubType.NONE,
+      action: MagistrateTransactionEntityAction.REGISTER
+    },
   },
   {
     key: "DELEGATE_ENTITY_RESIGNATION",
     type: MagistrateTransaction.ENTITY,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
+    asset: {
+      type: MagistrateTransactionEntityType.DELEGATE,
+      subType: MagistrateTransactionEntitySubType.NONE,
+      action: MagistrateTransactionEntityAction.RESIGN
+    },
   },
   {
     key: "DELEGATE_ENTITY_UPDATE",
     type: MagistrateTransaction.ENTITY,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
+    asset: {
+      type: MagistrateTransactionEntityType.DELEGATE,
+      subType: MagistrateTransactionEntitySubType.NONE,
+      action: MagistrateTransactionEntityAction.UPDATE
+    },
   },
   // Magistrate 1.0
   {
