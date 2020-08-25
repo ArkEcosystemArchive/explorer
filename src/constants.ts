@@ -1,5 +1,12 @@
 import { ITransactionType } from "@/interfaces";
-import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction, MagistrateTransactionEntityAction, MagistrateTransactionEntityType, MagistrateTransactionEntitySubType } from "@/enums";
+import {
+  CoreTransaction,
+  MagistrateTransaction,
+  TypeGroupTransaction,
+  MagistrateTransactionEntityAction,
+  MagistrateTransactionEntityType,
+  MagistrateTransactionEntitySubType,
+} from "@/enums";
 
 export const URI_QRCODE_SCHEME_PREFIX = "ark:";
 
@@ -24,7 +31,7 @@ export const transactionTypes: ITransactionType[] = [
     asset: {
       type: MagistrateTransactionEntityType.BUSINESS,
       subType: MagistrateTransactionEntitySubType.NONE,
-      action: MagistrateTransactionEntityAction.REGISTER
+      action: MagistrateTransactionEntityAction.REGISTER,
     },
   },
   {
@@ -34,7 +41,7 @@ export const transactionTypes: ITransactionType[] = [
     asset: {
       type: MagistrateTransactionEntityType.BUSINESS,
       subType: MagistrateTransactionEntitySubType.NONE,
-      action: MagistrateTransactionEntityAction.RESIGN
+      action: MagistrateTransactionEntityAction.RESIGN,
     },
   },
   {
@@ -44,7 +51,7 @@ export const transactionTypes: ITransactionType[] = [
     asset: {
       type: MagistrateTransactionEntityType.BUSINESS,
       subType: MagistrateTransactionEntitySubType.NONE,
-      action: MagistrateTransactionEntityAction.UPDATE
+      action: MagistrateTransactionEntityAction.UPDATE,
     },
   },
   {
@@ -54,7 +61,7 @@ export const transactionTypes: ITransactionType[] = [
     asset: {
       type: MagistrateTransactionEntityType.DEVELOPER,
       subType: MagistrateTransactionEntitySubType.NONE,
-      action: MagistrateTransactionEntityAction.REGISTER
+      action: MagistrateTransactionEntityAction.REGISTER,
     },
   },
   {
@@ -64,7 +71,7 @@ export const transactionTypes: ITransactionType[] = [
     asset: {
       type: MagistrateTransactionEntityType.DEVELOPER,
       subType: MagistrateTransactionEntitySubType.NONE,
-      action: MagistrateTransactionEntityAction.RESIGN
+      action: MagistrateTransactionEntityAction.RESIGN,
     },
   },
   {
@@ -74,7 +81,7 @@ export const transactionTypes: ITransactionType[] = [
     asset: {
       type: MagistrateTransactionEntityType.DEVELOPER,
       subType: MagistrateTransactionEntitySubType.NONE,
-      action: MagistrateTransactionEntityAction.UPDATE
+      action: MagistrateTransactionEntityAction.UPDATE,
     },
   },
   {
@@ -84,7 +91,7 @@ export const transactionTypes: ITransactionType[] = [
     asset: {
       type: MagistrateTransactionEntityType.PLUGIN,
       subType: MagistrateTransactionEntitySubType.PLUGIN_CORE,
-      action: MagistrateTransactionEntityAction.REGISTER
+      action: MagistrateTransactionEntityAction.REGISTER,
     },
   },
   {
@@ -94,7 +101,7 @@ export const transactionTypes: ITransactionType[] = [
     asset: {
       type: MagistrateTransactionEntityType.PLUGIN,
       subType: MagistrateTransactionEntitySubType.PLUGIN_CORE,
-      action: MagistrateTransactionEntityAction.RESIGN
+      action: MagistrateTransactionEntityAction.RESIGN,
     },
   },
   {
@@ -104,7 +111,7 @@ export const transactionTypes: ITransactionType[] = [
     asset: {
       type: MagistrateTransactionEntityType.PLUGIN,
       subType: MagistrateTransactionEntitySubType.PLUGIN_CORE,
-      action: MagistrateTransactionEntityAction.UPDATE
+      action: MagistrateTransactionEntityAction.UPDATE,
     },
   },
   {
@@ -114,7 +121,7 @@ export const transactionTypes: ITransactionType[] = [
     asset: {
       type: MagistrateTransactionEntityType.PLUGIN,
       subType: MagistrateTransactionEntitySubType.PLUGIN_DESKTOP,
-      action: MagistrateTransactionEntityAction.REGISTER
+      action: MagistrateTransactionEntityAction.REGISTER,
     },
   },
   {
@@ -124,7 +131,7 @@ export const transactionTypes: ITransactionType[] = [
     asset: {
       type: MagistrateTransactionEntityType.PLUGIN,
       subType: MagistrateTransactionEntitySubType.PLUGIN_DESKTOP,
-      action: MagistrateTransactionEntityAction.RESIGN
+      action: MagistrateTransactionEntityAction.RESIGN,
     },
   },
   {
@@ -134,7 +141,7 @@ export const transactionTypes: ITransactionType[] = [
     asset: {
       type: MagistrateTransactionEntityType.PLUGIN,
       subType: MagistrateTransactionEntitySubType.PLUGIN_DESKTOP,
-      action: MagistrateTransactionEntityAction.UPDATE
+      action: MagistrateTransactionEntityAction.UPDATE,
     },
   },
   {
@@ -144,7 +151,7 @@ export const transactionTypes: ITransactionType[] = [
     asset: {
       type: MagistrateTransactionEntityType.DELEGATE,
       subType: MagistrateTransactionEntitySubType.NONE,
-      action: MagistrateTransactionEntityAction.REGISTER
+      action: MagistrateTransactionEntityAction.REGISTER,
     },
   },
   {
@@ -154,7 +161,7 @@ export const transactionTypes: ITransactionType[] = [
     asset: {
       type: MagistrateTransactionEntityType.DELEGATE,
       subType: MagistrateTransactionEntitySubType.NONE,
-      action: MagistrateTransactionEntityAction.RESIGN
+      action: MagistrateTransactionEntityAction.RESIGN,
     },
   },
   {
@@ -164,7 +171,7 @@ export const transactionTypes: ITransactionType[] = [
     asset: {
       type: MagistrateTransactionEntityType.DELEGATE,
       subType: MagistrateTransactionEntitySubType.NONE,
-      action: MagistrateTransactionEntityAction.UPDATE
+      action: MagistrateTransactionEntityAction.UPDATE,
     },
   },
   // Magistrate 1.0

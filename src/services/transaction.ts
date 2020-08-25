@@ -69,10 +69,12 @@ class TransactionService {
       body.asset = asset;
     }
 
-    const response = (await ApiService.post("transactions/search", body, { params: {
-      page,
-      limit,
-    } })) as IApiTransactionsWrapper;
+    const response = (await ApiService.post("transactions/search", body, {
+      params: {
+        page,
+        limit,
+      },
+    })) as IApiTransactionsWrapper;
 
     response.data.map(sanitizeVendorField);
 
