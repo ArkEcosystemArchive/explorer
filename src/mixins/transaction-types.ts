@@ -1,4 +1,11 @@
-import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
+import {
+  CoreTransaction,
+  MagistrateTransaction,
+  TypeGroupTransaction,
+  MagistrateTransactionEntityType,
+  MagistrateTransactionEntitySubType,
+  MagistrateTransactionEntityAction,
+} from "@/enums";
 
 const isCoreTypeGroup = (typeGroup: number): boolean => {
   return typeGroup === TypeGroupTransaction.CORE;
@@ -10,71 +17,220 @@ const isMagistrateTypeGroup = (typeGroup: number): boolean => {
 
 export default {
   methods: {
-    isTransfer(type: number, typeGroup: number): boolean {
+    isTransfer(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return isCoreTypeGroup(typeGroup) && type === CoreTransaction.TRANSFER;
     },
 
-    isSecondSignature(type: number, typeGroup: number): boolean {
+    isSecondSignature(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return isCoreTypeGroup(typeGroup) && type === CoreTransaction.SECOND_SIGNATURE;
     },
 
-    isDelegateRegistration(type: number, typeGroup: number): boolean {
+    isDelegateRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return isCoreTypeGroup(typeGroup) && type === CoreTransaction.DELEGATE_REGISTRATION;
     },
 
-    isVote(type: number, typeGroup: number): boolean {
+    isVote(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return isCoreTypeGroup(typeGroup) && type === CoreTransaction.VOTE;
     },
 
-    isMultiSignature(type: number, typeGroup: number): boolean {
+    isMultiSignature(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return isCoreTypeGroup(typeGroup) && type === CoreTransaction.MULTI_SIGNATURE;
     },
 
-    isIpfs(type: number, typeGroup: number): boolean {
+    isIpfs(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return isCoreTypeGroup(typeGroup) && type === CoreTransaction.IPFS;
     },
 
-    isDelegateResignation(type: number, typeGroup: number): boolean {
+    isDelegateResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return isCoreTypeGroup(typeGroup) && type === CoreTransaction.DELEGATE_RESIGNATION;
     },
 
-    isMultiPayment(type: number, typeGroup: number): boolean {
+    isMultiPayment(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return isCoreTypeGroup(typeGroup) && type === CoreTransaction.MULTI_PAYMENT;
     },
 
-    isTimelock(type: number, typeGroup: number): boolean {
+    isTimelock(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return isCoreTypeGroup(typeGroup) && type === CoreTransaction.TIMELOCK;
     },
 
-    isTimelockClaim(type: number, typeGroup: number): boolean {
+    isTimelockClaim(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return isCoreTypeGroup(typeGroup) && type === CoreTransaction.TIMELOCK_CLAIM;
     },
 
-    isTimelockRefund(type: number, typeGroup: number): boolean {
+    isTimelockRefund(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return isCoreTypeGroup(typeGroup) && type === CoreTransaction.TIMELOCK_REFUND;
     },
 
-    isBusinessRegistration(type: number, typeGroup: number): boolean {
+    // Magistrate 2.0
+
+    isEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        isMagistrateTypeGroup(typeGroup) &&
+        type === MagistrateTransaction.ENTITY &&
+        asset &&
+        asset.action === MagistrateTransactionEntityAction.REGISTER
+      );
+    },
+
+    isEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        isMagistrateTypeGroup(typeGroup) &&
+        type === MagistrateTransaction.ENTITY &&
+        asset &&
+        asset.action === MagistrateTransactionEntityAction.RESIGN
+      );
+    },
+
+    isEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        isMagistrateTypeGroup(typeGroup) &&
+        type === MagistrateTransaction.ENTITY &&
+        asset &&
+        asset.action === MagistrateTransactionEntityAction.UPDATE
+      );
+    },
+
+    isBusinessEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        this.isEntityRegistration(type, typeGroup, asset) &&
+        asset.type === MagistrateTransactionEntityType.BUSINESS &&
+        asset.subType === MagistrateTransactionEntitySubType.NONE
+      );
+    },
+
+    isBusinessEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        this.isEntityResignation(type, typeGroup, asset) &&
+        asset.type === MagistrateTransactionEntityType.BUSINESS &&
+        asset.subType === MagistrateTransactionEntitySubType.NONE
+      );
+    },
+
+    isBusinessEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        this.isEntityUpdate(type, typeGroup, asset) &&
+        asset.type === MagistrateTransactionEntityType.BUSINESS &&
+        asset.subType === MagistrateTransactionEntitySubType.NONE
+      );
+    },
+
+    isDeveloperEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        this.isEntityRegistration(type, typeGroup, asset) &&
+        asset.type === MagistrateTransactionEntityType.DEVELOPER &&
+        asset.subType === MagistrateTransactionEntitySubType.NONE
+      );
+    },
+
+    isDeveloperEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        this.isEntityResignation(type, typeGroup, asset) &&
+        asset.type === MagistrateTransactionEntityType.DEVELOPER &&
+        asset.subType === MagistrateTransactionEntitySubType.NONE
+      );
+    },
+
+    isDeveloperEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        this.isEntityUpdate(type, typeGroup, asset) &&
+        asset.type === MagistrateTransactionEntityType.DEVELOPER &&
+        asset.subType === MagistrateTransactionEntitySubType.NONE
+      );
+    },
+
+    isCorePluginEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        this.isEntityRegistration(type, typeGroup, asset) &&
+        asset.type === MagistrateTransactionEntityType.PLUGIN &&
+        asset.subType === MagistrateTransactionEntitySubType.PLUGIN_CORE
+      );
+    },
+
+    isCorePluginEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        this.isEntityResignation(type, typeGroup, asset) &&
+        asset.type === MagistrateTransactionEntityType.PLUGIN &&
+        asset.subType === MagistrateTransactionEntitySubType.PLUGIN_CORE
+      );
+    },
+
+    isCorePluginEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        this.isEntityUpdate(type, typeGroup, asset) &&
+        asset.type === MagistrateTransactionEntityType.PLUGIN &&
+        asset.subType === MagistrateTransactionEntitySubType.PLUGIN_CORE
+      );
+    },
+
+    isDesktopPluginEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        this.isEntityRegistration(type, typeGroup, asset) &&
+        asset.type === MagistrateTransactionEntityType.PLUGIN &&
+        asset.subType === MagistrateTransactionEntitySubType.PLUGIN_DESKTOP
+      );
+    },
+
+    isDesktopPluginEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        this.isEntityResignation(type, typeGroup, asset) &&
+        asset.type === MagistrateTransactionEntityType.PLUGIN &&
+        asset.subType === MagistrateTransactionEntitySubType.PLUGIN_DESKTOP
+      );
+    },
+
+    isDesktopPluginEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        this.isEntityUpdate(type, typeGroup, asset) &&
+        asset.type === MagistrateTransactionEntityType.PLUGIN &&
+        asset.subType === MagistrateTransactionEntitySubType.PLUGIN_DESKTOP
+      );
+    },
+
+    isDelegateEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        this.isEntityRegistration(type, typeGroup, asset) &&
+        asset.type === MagistrateTransactionEntityType.DELEGATE &&
+        asset.subType === MagistrateTransactionEntitySubType.NONE
+      );
+    },
+
+    isDelegateEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        this.isEntityResignation(type, typeGroup, asset) &&
+        asset.type === MagistrateTransactionEntityType.DELEGATE &&
+        asset.subType === MagistrateTransactionEntitySubType.NONE
+      );
+    },
+
+    isDelegateEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        this.isEntityUpdate(type, typeGroup, asset) &&
+        asset.type === MagistrateTransactionEntityType.DELEGATE &&
+        asset.subType === MagistrateTransactionEntitySubType.NONE
+      );
+    },
+
+    isLegacyBusinessRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return isMagistrateTypeGroup(typeGroup) && type === MagistrateTransaction.BUSINESS_REGISTRATION;
     },
 
-    isBusinessResignation(type: number, typeGroup: number): boolean {
+    isLegacyBusinessResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return isMagistrateTypeGroup(typeGroup) && type === MagistrateTransaction.BUSINESS_RESIGNATION;
     },
 
-    isBusinessUpdate(type: number, typeGroup: number): boolean {
+    isLegacyBusinessUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return isMagistrateTypeGroup(typeGroup) && type === MagistrateTransaction.BUSINESS_UPDATE;
     },
 
-    isBridgechainRegistration(type: number, typeGroup: number): boolean {
+    isLegacyBridgechainRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return isMagistrateTypeGroup(typeGroup) && type === MagistrateTransaction.BRIDGECHAIN_REGISTRATION;
     },
 
-    isBridgechainResignation(type: number, typeGroup: number): boolean {
+    isLegacyBridgechainResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return isMagistrateTypeGroup(typeGroup) && type === MagistrateTransaction.BRIDGECHAIN_RESIGNATION;
     },
 
-    isBridgechainUpdate(type: number, typeGroup: number): boolean {
+    isLegacyBridgechainUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return isMagistrateTypeGroup(typeGroup) && type === MagistrateTransaction.BRIDGECHAIN_UPDATE;
     },
   },

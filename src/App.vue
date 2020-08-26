@@ -26,9 +26,9 @@ import { transactionTypes } from "@/constants";
 import { TypeGroupTransaction } from "@/enums";
 import {
   BlockchainService,
-  BusinessService,
   CryptoCompareService,
   DelegateService,
+  EntityService,
   MigrationService,
   NodeService,
 } from "@/services";
@@ -211,7 +211,7 @@ export default class App extends Vue {
   }
 
   public async checkForMagistrateEnabled() {
-    const hasMagistrateEnabled = await BusinessService.isEnabled();
+    const hasMagistrateEnabled = await EntityService.isEnabled();
     this.$store.dispatch("network/setHasMagistrateEnabled", hasMagistrateEnabled);
   }
 

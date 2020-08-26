@@ -371,6 +371,10 @@ export function makeServer({ environment = "development" } = {}) {
           return loadFixture("api/transactions/search/by-amount-and-fee");
         }
 
+        if (!requestBody.id) {
+          return loadFixture("api/transactions/search/transactions");
+        }
+
         if (requestBody.id !== "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff") {
           return loadFixture("api/transactions/search/by-id");
         }
@@ -478,27 +482,6 @@ export function makeServer({ environment = "development" } = {}) {
 
       this.get("/wallets/top", (schema, request) => {
         const response = loadFixture("api/wallets/top");
-
-        if (request.queryParams.limit) {
-          response.data = response.data.slice(0, request.queryParams.limit);
-        }
-
-        return response;
-      });
-
-      // ARK Magistrate
-      this.get("/businesses", (schema, request) => {
-        const response = loadFixture("api/businesses");
-
-        if (request.queryParams.limit) {
-          response.data = response.data.slice(0, request.queryParams.limit);
-        }
-
-        return response;
-      });
-
-      this.get("/bridgechains", (schema, request) => {
-        const response = loadFixture("api/bridgechains");
 
         if (request.queryParams.limit) {
           response.data = response.data.slice(0, request.queryParams.limit);

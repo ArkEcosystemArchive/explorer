@@ -19,6 +19,27 @@ export enum MagistrateTransaction {
   BRIDGECHAIN_REGISTRATION = 3,
   BRIDGECHAIN_RESIGNATION = 4,
   BRIDGECHAIN_UPDATE = 5,
+  ENTITY = 6,
+}
+
+export enum MagistrateTransactionEntityType {
+  BUSINESS = 0,
+  BRIDGECHAIN = 1, // not used anymore but type is kept in enum
+  DEVELOPER = 2,
+  PLUGIN = 3,
+  DELEGATE = 4,
+}
+
+export enum MagistrateTransactionEntitySubType {
+  NONE = 0,
+  PLUGIN_CORE = 1,
+  PLUGIN_DESKTOP = 2,
+}
+
+export enum MagistrateTransactionEntityAction {
+  REGISTER = 0,
+  UPDATE = 1,
+  RESIGN = 2,
 }
 
 export enum TypeGroupTransaction {

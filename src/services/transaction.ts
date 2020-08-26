@@ -50,24 +50,30 @@ class TransactionService {
     page: number,
     type: number,
     typeGroup?: number,
+    asset?: object,
     limit: number = paginationLimit,
   ): Promise<IApiTransactionsWrapper> {
-    const params: any = {
+    const body: any = {
       orderBy: "timestamp:desc",
-      page,
-      limit,
     };
 
     if (type !== -1) {
-      params.type = type;
+      body.type = type;
     }
 
     if (typeGroup) {
-      params.typeGroup = typeGroup;
+      body.typeGroup = typeGroup;
     }
 
-    const response = (await ApiService.get("transactions", {
-      params,
+    if (asset) {
+      body.asset = asset;
+    }
+
+    const response = (await ApiService.post("transactions/search", body, {
+      params: {
+        page,
+        limit,
+      },
     })) as IApiTransactionsWrapper;
 
     response.data.map(sanitizeVendorField);

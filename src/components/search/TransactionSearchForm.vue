@@ -113,10 +113,11 @@ export default class TransactionSearchForm extends Vue {
 
   private onTypeChange(event: any) {
     const index: number = this.types.findIndex((transaction) => transaction.key === event.target.value);
-    const { type, typeGroup } = this.types[index];
+    const { type, typeGroup, asset } = this.types[index];
 
     this.emitInput({ name: "type", value: type !== -1 ? type : null });
     this.emitInput({ name: "typeGroup", value: typeGroup });
+    this.emitInput({ name: "asset", value: asset });
   }
 
   private emitInput(value: object) {

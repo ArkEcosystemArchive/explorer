@@ -252,8 +252,6 @@ export interface IUiState {
   headerType: string | null;
   menuVisible: boolean;
   blockSortParams: string | null;
-  businessSortParams: string | null;
-  bridgechainSortParams: string | null;
   delegateSortParams: string | null;
   transactionSortParams: string | null;
   walletSortParams: string | null;
@@ -280,33 +278,7 @@ export interface ITransactionType {
   key: string;
   type: number;
   typeGroup?: number;
-}
-
-export interface IApiBusinessesWrapper {
-  data: IBusiness[];
-  meta: IMeta;
-}
-
-export interface IBusiness {
-  address: string;
-  publicKey: string;
-  name: string;
-  website: string;
-  repository?: string;
-}
-
-export interface IApiBridgechainsWrapper {
-  data: IBridgechain[];
-  meta: IMeta;
-}
-
-export interface IBridgechain {
-  publicKey: string;
-  name: string;
-  seedNodes: string[];
-  genesisHash: string;
-  bridgechainRepository?: string;
-  ports: object;
+  asset?: Record<string, string | number>;
 }
 
 export interface ITransactionSearchParams {

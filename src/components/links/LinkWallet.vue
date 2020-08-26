@@ -1,8 +1,9 @@
 <template>
   <span class="flex items-center">
-    <template v-if="isTransfer(type, typeGroup) || isTimelock(type, typeGroup)">
+    <template v-if="isTransfer(type, typeGroup, asset) || isTimelock(type, typeGroup, asset)">
       <span v-if="showAsType">
-        {{ $t(`TRANSACTION.TYPES.${isTransfer(type, typeGroup) ? "TRANSFER" : "TIMELOCK"}`) }}
+        {{ $t(`TRANSACTION.TYPES.${isTransfer(type, typeGroup, asset) ? "TRANSFER" : "TIMELOCK"}`) }}
+        {{ asset }}
       </span>
       <div v-else class="flex items-center w-full">
         <LinkAddress
@@ -12,7 +13,7 @@
           :tooltip-placement="tooltipPlacement"
           container-class="w-full"
         />
-        <div v-if="isTimelock(type, typeGroup) && showTimelockIcon">
+        <div v-if="isTimelock(type, typeGroup, asset) && showTimelockIcon">
           <SvgIcon
             v-tooltip="{
               content: $t('WALLET.TIMELOCK_TRANSACTION'),
@@ -26,9 +27,11 @@
       </div>
     </template>
 
-    <span v-else-if="isSecondSignature(type, typeGroup)">{{ $t("TRANSACTION.TYPES.SECOND_SIGNATURE") }}</span>
-    <span v-else-if="isDelegateRegistration(type, typeGroup)">{{ $t("TRANSACTION.TYPES.DELEGATE_REGISTRATION") }}</span>
-    <span v-else-if="isVote(type, typeGroup)">
+    <span v-else-if="isSecondSignature(type, typeGroup, asset)">{{ $t("TRANSACTION.TYPES.SECOND_SIGNATURE") }}</span>
+    <span v-else-if="isDelegateRegistration(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.DELEGATE_REGISTRATION")
+    }}</span>
+    <span v-else-if="isVote(type, typeGroup, asset)">
       <RouterLink
         v-if="votedDelegateAddress"
         v-tooltip="{
@@ -43,24 +46,79 @@
         >
       </RouterLink>
     </span>
-    <span v-else-if="isMultiSignature(type, typeGroup)">{{ $t("TRANSACTION.TYPES.MULTI_SIGNATURE") }}</span>
-    <span v-else-if="isIpfs(type, typeGroup)">{{ $t("TRANSACTION.TYPES.IPFS") }}</span>
-    <span v-else-if="isMultiPayment(type, typeGroup)"
+    <span v-else-if="isMultiSignature(type, typeGroup, asset)">{{ $t("TRANSACTION.TYPES.MULTI_SIGNATURE") }}</span>
+    <span v-else-if="isIpfs(type, typeGroup, asset)">{{ $t("TRANSACTION.TYPES.IPFS") }}</span>
+    <span v-else-if="isMultiPayment(type, typeGroup, asset)"
       >{{ $t("TRANSACTION.TYPES.MULTI_PAYMENT") }} ({{ multiPaymentRecipientsCount }})</span
     >
-    <span v-else-if="isDelegateResignation(type, typeGroup)">{{ $t("TRANSACTION.TYPES.DELEGATE_RESIGNATION") }}</span>
-    <span v-else-if="isTimelockClaim(type, typeGroup)">{{ $t("TRANSACTION.TYPES.TIMELOCK_CLAIM") }}</span>
-    <span v-else-if="isTimelockRefund(type, typeGroup)">{{ $t("TRANSACTION.TYPES.TIMELOCK_REFUND") }}</span>
-    <span v-else-if="isBusinessRegistration(type, typeGroup)">{{ $t("TRANSACTION.TYPES.BUSINESS_REGISTRATION") }}</span>
-    <span v-else-if="isBusinessResignation(type, typeGroup)">{{ $t("TRANSACTION.TYPES.BUSINESS_RESIGNATION") }}</span>
-    <span v-else-if="isBusinessUpdate(type, typeGroup)">{{ $t("TRANSACTION.TYPES.BUSINESS_UPDATE") }}</span>
-    <span v-else-if="isBridgechainRegistration(type, typeGroup)">{{
-      $t("TRANSACTION.TYPES.BRIDGECHAIN_REGISTRATION")
+    <span v-else-if="isDelegateResignation(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.DELEGATE_RESIGNATION")
     }}</span>
-    <span v-else-if="isBridgechainResignation(type, typeGroup)">{{
-      $t("TRANSACTION.TYPES.BRIDGECHAIN_RESIGNATION")
+    <span v-else-if="isTimelockClaim(type, typeGroup, asset)">{{ $t("TRANSACTION.TYPES.TIMELOCK_CLAIM") }}</span>
+    <span v-else-if="isTimelockRefund(type, typeGroup, asset)">{{ $t("TRANSACTION.TYPES.TIMELOCK_REFUND") }}</span>
+    <span v-else-if="isBusinessEntityRegistration(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.BUSINESS_ENTITY_REGISTRATION")
     }}</span>
-    <span v-else-if="isBridgechainUpdate(type, typeGroup)">{{ $t("TRANSACTION.TYPES.BRIDGECHAIN_UPDATE") }}</span>
+    <span v-else-if="isBusinessEntityResignation(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.BUSINESS_ENTITY_RESIGNATION")
+    }}</span>
+    <span v-else-if="isBusinessEntityUpdate(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.BUSINESS_ENTITY_UPDATE")
+    }}</span>
+    <span v-else-if="isDeveloperEntityRegistration(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.DEVELOPER_ENTITY_REGISTRATION")
+    }}</span>
+    <span v-else-if="isDeveloperEntityResignation(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.DEVELOPER_ENTITY_RESIGNATION")
+    }}</span>
+    <span v-else-if="isDeveloperEntityUpdate(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.DEVELOPER_ENTITY_UPDATE")
+    }}</span>
+    <span v-else-if="isCorePluginEntityRegistration(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.CORE_PLUGIN_ENTITY_REGISTRATION")
+    }}</span>
+    <span v-else-if="isCorePluginEntityResignation(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.CORE_PLUGIN_ENTITY_RESIGNATION")
+    }}</span>
+    <span v-else-if="isCorePluginEntityUpdate(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.CORE_PLUGIN_ENTITY_UPDATE")
+    }}</span>
+    <span v-else-if="isDesktopPluginEntityRegistration(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.DESKTOP_PLUGIN_ENTITY_REGISTRATION")
+    }}</span>
+    <span v-else-if="isDesktopPluginEntityResignation(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.DESKTOP_PLUGIN_ENTITY_RESIGNATION")
+    }}</span>
+    <span v-else-if="isDesktopPluginEntityUpdate(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.DESKTOP_PLUGIN_ENTITY_UPDATE")
+    }}</span>
+    <span v-else-if="isDelegateEntityRegistration(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.DELEGATE_ENTITY_REGISTRATION")
+    }}</span>
+    <span v-else-if="isDelegateEntityResignation(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.DELEGATE_ENTITY_RESIGNATION")
+    }}</span>
+    <span v-else-if="isDelegateEntityUpdate(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.DELEGATE_ENTITY_UPDATE")
+    }}</span>
+    <span v-else-if="isLegacyBusinessRegistration(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.LEGACY_BUSINESS_REGISTRATION")
+    }}</span>
+    <span v-else-if="isLegacyBusinessResignation(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.LEGACY_BUSINESS_RESIGNATION")
+    }}</span>
+    <span v-else-if="isLegacyBusinessUpdate(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.LEGACY_BUSINESS_UPDATE")
+    }}</span>
+    <span v-else-if="isLegacyBridgechainRegistration(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.LEGACY_BRIDGECHAIN_REGISTRATION")
+    }}</span>
+    <span v-else-if="isLegacyBridgechainResignation(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.LEGACY_BRIDGECHAIN_RESIGNATION")
+    }}</span>
+    <span v-else-if="isLegacyBridgechainUpdate(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.LEGACY_BRIDGECHAIN_UPDATE")
+    }}</span>
     <!-- By default we simply link to a recipient as we don't know this type / typegroup combination -->
     <div v-else>
       <span v-if="showAsType">{{ $t("TRANSACTION.TYPES.UNKNOWN") }}</span>

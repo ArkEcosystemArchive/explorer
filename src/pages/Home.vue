@@ -27,6 +27,7 @@
         v-if="dataView === 'transactions'"
         :transaction-type="transactionType.type"
         :transaction-group="transactionType.typeGroup"
+        :transaction-asset="transactionType.asset"
       />
 
       <LatestBlocks v-if="dataView === 'blocks'" />
