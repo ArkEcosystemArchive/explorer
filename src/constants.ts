@@ -30,7 +30,7 @@ export const transactionTypes: ITransactionType[] = [
     typeGroup: TypeGroupTransaction.MAGISTRATE,
     asset: {
       type: MagistrateTransactionEntityType.BUSINESS,
-      subType: MagistrateTransactionEntitySubType.NONE,
+      // subType: MagistrateTransactionEntitySubType.NONE,
       action: MagistrateTransactionEntityAction.REGISTER,
     },
   },
@@ -40,7 +40,7 @@ export const transactionTypes: ITransactionType[] = [
     typeGroup: TypeGroupTransaction.MAGISTRATE,
     asset: {
       type: MagistrateTransactionEntityType.BUSINESS,
-      subType: MagistrateTransactionEntitySubType.NONE,
+      // subType: MagistrateTransactionEntitySubType.NONE,
       action: MagistrateTransactionEntityAction.RESIGN,
     },
   },
@@ -50,7 +50,7 @@ export const transactionTypes: ITransactionType[] = [
     typeGroup: TypeGroupTransaction.MAGISTRATE,
     asset: {
       type: MagistrateTransactionEntityType.BUSINESS,
-      subType: MagistrateTransactionEntitySubType.NONE,
+      // subType: MagistrateTransactionEntitySubType.NONE,
       action: MagistrateTransactionEntityAction.UPDATE,
     },
   },
@@ -60,7 +60,7 @@ export const transactionTypes: ITransactionType[] = [
     typeGroup: TypeGroupTransaction.MAGISTRATE,
     asset: {
       type: MagistrateTransactionEntityType.PRODUCT,
-      subType: MagistrateTransactionEntitySubType.NONE,
+      // subType: MagistrateTransactionEntitySubType.NONE,
       action: MagistrateTransactionEntityAction.REGISTER,
     },
   },
@@ -70,7 +70,7 @@ export const transactionTypes: ITransactionType[] = [
     typeGroup: TypeGroupTransaction.MAGISTRATE,
     asset: {
       type: MagistrateTransactionEntityType.PRODUCT,
-      subType: MagistrateTransactionEntitySubType.NONE,
+      // subType: MagistrateTransactionEntitySubType.NONE,
       action: MagistrateTransactionEntityAction.RESIGN,
     },
   },
@@ -80,7 +80,7 @@ export const transactionTypes: ITransactionType[] = [
     typeGroup: TypeGroupTransaction.MAGISTRATE,
     asset: {
       type: MagistrateTransactionEntityType.PRODUCT,
-      subType: MagistrateTransactionEntitySubType.NONE,
+      // subType: MagistrateTransactionEntitySubType.NONE,
       action: MagistrateTransactionEntityAction.UPDATE,
     },
   },
@@ -90,7 +90,7 @@ export const transactionTypes: ITransactionType[] = [
     typeGroup: TypeGroupTransaction.MAGISTRATE,
     asset: {
       type: MagistrateTransactionEntityType.DEVELOPER,
-      subType: MagistrateTransactionEntitySubType.NONE,
+      // subType: MagistrateTransactionEntitySubType.NONE,
       action: MagistrateTransactionEntityAction.REGISTER,
     },
   },
@@ -100,7 +100,7 @@ export const transactionTypes: ITransactionType[] = [
     typeGroup: TypeGroupTransaction.MAGISTRATE,
     asset: {
       type: MagistrateTransactionEntityType.DEVELOPER,
-      subType: MagistrateTransactionEntitySubType.NONE,
+      // subType: MagistrateTransactionEntitySubType.NONE,
       action: MagistrateTransactionEntityAction.RESIGN,
     },
   },
@@ -110,7 +110,7 @@ export const transactionTypes: ITransactionType[] = [
     typeGroup: TypeGroupTransaction.MAGISTRATE,
     asset: {
       type: MagistrateTransactionEntityType.DEVELOPER,
-      subType: MagistrateTransactionEntitySubType.NONE,
+      // subType: MagistrateTransactionEntitySubType.NONE,
       action: MagistrateTransactionEntityAction.UPDATE,
     },
   },
@@ -120,7 +120,7 @@ export const transactionTypes: ITransactionType[] = [
     typeGroup: TypeGroupTransaction.MAGISTRATE,
     asset: {
       type: MagistrateTransactionEntityType.MODULE,
-      subType: MagistrateTransactionEntitySubType.NONE,
+      // subType: MagistrateTransactionEntitySubType.NONE,
       action: MagistrateTransactionEntityAction.REGISTER,
     },
   },
@@ -130,7 +130,7 @@ export const transactionTypes: ITransactionType[] = [
     typeGroup: TypeGroupTransaction.MAGISTRATE,
     asset: {
       type: MagistrateTransactionEntityType.MODULE,
-      subType: MagistrateTransactionEntitySubType.NONE,
+      // subType: MagistrateTransactionEntitySubType.NONE,
       action: MagistrateTransactionEntityAction.RESIGN,
     },
   },
@@ -140,7 +140,7 @@ export const transactionTypes: ITransactionType[] = [
     typeGroup: TypeGroupTransaction.MAGISTRATE,
     asset: {
       type: MagistrateTransactionEntityType.MODULE,
-      subType: MagistrateTransactionEntitySubType.NONE,
+      // subType: MagistrateTransactionEntitySubType.NONE,
       action: MagistrateTransactionEntityAction.UPDATE,
     },
   },
@@ -150,7 +150,7 @@ export const transactionTypes: ITransactionType[] = [
     typeGroup: TypeGroupTransaction.MAGISTRATE,
     asset: {
       type: MagistrateTransactionEntityType.DELEGATE,
-      subType: MagistrateTransactionEntitySubType.NONE,
+      // subType: MagistrateTransactionEntitySubType.NONE,
       action: MagistrateTransactionEntityAction.REGISTER,
     },
   },
@@ -160,7 +160,7 @@ export const transactionTypes: ITransactionType[] = [
     typeGroup: TypeGroupTransaction.MAGISTRATE,
     asset: {
       type: MagistrateTransactionEntityType.DELEGATE,
-      subType: MagistrateTransactionEntitySubType.NONE,
+      // subType: MagistrateTransactionEntitySubType.NONE,
       action: MagistrateTransactionEntityAction.RESIGN,
     },
   },
@@ -170,7 +170,7 @@ export const transactionTypes: ITransactionType[] = [
     typeGroup: TypeGroupTransaction.MAGISTRATE,
     asset: {
       type: MagistrateTransactionEntityType.DELEGATE,
-      subType: MagistrateTransactionEntitySubType.NONE,
+      // subType: MagistrateTransactionEntitySubType.NONE,
       action: MagistrateTransactionEntityAction.UPDATE,
     },
   },
