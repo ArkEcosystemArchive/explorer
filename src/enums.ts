@@ -26,14 +26,12 @@ export enum MagistrateTransactionEntityType {
   BUSINESS = 0,
   PRODUCT = 1,
   DEVELOPER = 2,
-  PLUGIN = 3,
+  MODULE = 3,
   DELEGATE = 4,
 }
 
 export enum MagistrateTransactionEntitySubType {
   NONE = 0,
-  PLUGIN_CORE = 1,
-  PLUGIN_DESKTOP = 2,
 }
 
 export enum MagistrateTransactionEntityAction {

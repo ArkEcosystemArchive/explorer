@@ -92,15 +92,6 @@
     <span v-else-if="isCorePluginEntityUpdate(type, typeGroup, asset)">{{
       $t("TRANSACTION.TYPES.CORE_PLUGIN_ENTITY_UPDATE")
     }}</span>
-    <span v-else-if="isDesktopPluginEntityRegistration(type, typeGroup, asset)">{{
-      $t("TRANSACTION.TYPES.DESKTOP_PLUGIN_ENTITY_REGISTRATION")
-    }}</span>
-    <span v-else-if="isDesktopPluginEntityResignation(type, typeGroup, asset)">{{
-      $t("TRANSACTION.TYPES.DESKTOP_PLUGIN_ENTITY_RESIGNATION")
-    }}</span>
-    <span v-else-if="isDesktopPluginEntityUpdate(type, typeGroup, asset)">{{
-      $t("TRANSACTION.TYPES.DESKTOP_PLUGIN_ENTITY_UPDATE")
-    }}</span>
     <span v-else-if="isDelegateEntityRegistration(type, typeGroup, asset)">{{
       $t("TRANSACTION.TYPES.DELEGATE_ENTITY_REGISTRATION")
     }}</span>

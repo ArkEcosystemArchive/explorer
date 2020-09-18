@@ -186,30 +186,6 @@ export default {
       );
     },
 
-    isDesktopPluginEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
-      return (
-        this.isEntityRegistration(type, typeGroup, asset) &&
-        asset.type === MagistrateTransactionEntityType.PLUGIN &&
-        asset.subType === MagistrateTransactionEntitySubType.PLUGIN_DESKTOP
-      );
-    },
-
-    isDesktopPluginEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
-      return (
-        this.isEntityResignation(type, typeGroup, asset) &&
-        asset.type === MagistrateTransactionEntityType.PLUGIN &&
-        asset.subType === MagistrateTransactionEntitySubType.PLUGIN_DESKTOP
-      );
-    },
-
-    isDesktopPluginEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
-      return (
-        this.isEntityUpdate(type, typeGroup, asset) &&
-        asset.type === MagistrateTransactionEntityType.PLUGIN &&
-        asset.subType === MagistrateTransactionEntitySubType.PLUGIN_DESKTOP
-      );
-    },
-
     isDelegateEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
         this.isEntityRegistration(type, typeGroup, asset) &&

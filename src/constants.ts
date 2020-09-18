@@ -145,36 +145,6 @@ export const transactionTypes: ITransactionType[] = [
     },
   },
   {
-    key: "DESKTOP_PLUGIN_ENTITY_REGISTRATION",
-    type: MagistrateTransaction.ENTITY,
-    typeGroup: TypeGroupTransaction.MAGISTRATE,
-    asset: {
-      type: MagistrateTransactionEntityType.PLUGIN,
-      subType: MagistrateTransactionEntitySubType.PLUGIN_DESKTOP,
-      action: MagistrateTransactionEntityAction.REGISTER,
-    },
-  },
-  {
-    key: "DESKTOP_PLUGIN_ENTITY_RESIGNATION",
-    type: MagistrateTransaction.ENTITY,
-    typeGroup: TypeGroupTransaction.MAGISTRATE,
-    asset: {
-      type: MagistrateTransactionEntityType.PLUGIN,
-      subType: MagistrateTransactionEntitySubType.PLUGIN_DESKTOP,
-      action: MagistrateTransactionEntityAction.RESIGN,
-    },
-  },
-  {
-    key: "DESKTOP_PLUGIN_ENTITY_UPDATE",
-    type: MagistrateTransaction.ENTITY,
-    typeGroup: TypeGroupTransaction.MAGISTRATE,
-    asset: {
-      type: MagistrateTransactionEntityType.PLUGIN,
-      subType: MagistrateTransactionEntitySubType.PLUGIN_DESKTOP,
-      action: MagistrateTransactionEntityAction.UPDATE,
-    },
-  },
-  {
     key: "DELEGATE_ENTITY_REGISTRATION",
     type: MagistrateTransaction.ENTITY,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
