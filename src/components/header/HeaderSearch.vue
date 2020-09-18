@@ -25,7 +25,7 @@
       @keyup.enter="search"
     />
 
-    <button :disabled="!hasInput" class="p-3 search-icon text-grey hover:text-blue md:p-4 transition" @click="search">
+    <button :disabled="!hasInput" class="p-3 transition search-icon text-grey hover:text-blue md:p-4" @click="search">
       <SvgIcon name="search" view-box="0 0 16 16" />
     </button>
   </div>

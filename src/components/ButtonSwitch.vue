@@ -14,7 +14,7 @@
           'bg-theme-switch-button-circle': !inputIsActive,
           'bg-blue': inputIsActive,
         }"
-        class="ButtonSwitch__circle transition"
+        class="transition ButtonSwitch__circle"
       />
     </span>
   </button>

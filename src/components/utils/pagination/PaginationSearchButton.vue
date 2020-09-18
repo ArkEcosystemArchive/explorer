@@ -2,7 +2,7 @@
   <button
     v-if="isVisible"
     :class="{ 'hover-scale': hoverScale }"
-    class="Pagination__Button--search transition"
+    class="transition Pagination__Button--search"
     @click="emitClick"
   >
     <span v-if="hasDefaultSlot">

@@ -21,7 +21,7 @@
         />
         <label
           for="search"
-          class="p-3 search-icon text-grey hover:text-blue md:p-4 transition"
+          class="p-3 transition search-icon text-grey hover:text-blue md:p-4"
           @click="$store.dispatch('ui/setHeaderType', 'search')"
         >
           <SvgIcon name="search" view-box="0 0 16 16" />
