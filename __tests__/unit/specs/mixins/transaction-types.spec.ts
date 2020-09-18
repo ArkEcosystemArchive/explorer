@@ -48,91 +48,91 @@ describe("Mixins > Transaction Types", () => {
 
       expect(wrapper.vm.isBusinessEntityRegistration(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
         type: MagistrateTransactionEntityType.BUSINESS,
-        subType: MagistrateTransactionEntitySubType.NONE,
+        // subType: MagistrateTransactionEntitySubType.NONE,
         action: MagistrateTransactionEntityAction.REGISTER,
       })).toEqual(true);
 
       expect(wrapper.vm.isBusinessEntityResignation(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
         type: MagistrateTransactionEntityType.BUSINESS,
-        subType: MagistrateTransactionEntitySubType.NONE,
+        // subType: MagistrateTransactionEntitySubType.NONE,
         action: MagistrateTransactionEntityAction.RESIGN,
       })).toEqual(true);
 
       expect(wrapper.vm.isBusinessEntityUpdate(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
         type: MagistrateTransactionEntityType.BUSINESS,
-        subType: MagistrateTransactionEntitySubType.NONE,
+        // subType: MagistrateTransactionEntitySubType.NONE,
         action: MagistrateTransactionEntityAction.UPDATE,
       })).toEqual(true);
 
-      expect(wrapper.vm.isDeveloperEntityRegistration(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
-        type: MagistrateTransactionEntityType.DEVELOPER,
-        subType: MagistrateTransactionEntitySubType.NONE,
+      expect(wrapper.vm.isProductEntityRegistration(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
+        type: MagistrateTransactionEntityType.PRODUCT,
+        // subType: MagistrateTransactionEntitySubType.NONE,
         action: MagistrateTransactionEntityAction.REGISTER,
       })).toEqual(true);
 
-      expect(wrapper.vm.isDeveloperEntityResignation(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
-        type: MagistrateTransactionEntityType.DEVELOPER,
-        subType: MagistrateTransactionEntitySubType.NONE,
+      expect(wrapper.vm.isProductEntityResignation(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
+        type: MagistrateTransactionEntityType.PRODUCT,
+        // subType: MagistrateTransactionEntitySubType.NONE,
         action: MagistrateTransactionEntityAction.RESIGN,
       })).toEqual(true);
 
-      expect(wrapper.vm.isDeveloperEntityUpdate(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
-        type: MagistrateTransactionEntityType.DEVELOPER,
-        subType: MagistrateTransactionEntitySubType.NONE,
+      expect(wrapper.vm.isProductEntityUpdate(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
+        type: MagistrateTransactionEntityType.PRODUCT,
+        // subType: MagistrateTransactionEntitySubType.NONE,
         action: MagistrateTransactionEntityAction.UPDATE,
       })).toEqual(true);
 
-      expect(wrapper.vm.isCorePluginEntityRegistration(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
+      expect(wrapper.vm.isPluginEntityRegistration(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
         type: MagistrateTransactionEntityType.PLUGIN,
-        subType: MagistrateTransactionEntitySubType.PLUGIN_CORE,
+        // subType: MagistrateTransactionEntitySubType.NONE,
         action: MagistrateTransactionEntityAction.REGISTER,
       })).toEqual(true);
 
-      expect(wrapper.vm.isCorePluginEntityResignation(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
+      expect(wrapper.vm.isPluginEntityResignation(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
         type: MagistrateTransactionEntityType.PLUGIN,
-        subType: MagistrateTransactionEntitySubType.PLUGIN_CORE,
+        // subType: MagistrateTransactionEntitySubType.NONE,
         action: MagistrateTransactionEntityAction.RESIGN,
       })).toEqual(true);
 
-      expect(wrapper.vm.isCorePluginEntityUpdate(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
+      expect(wrapper.vm.isPluginEntityUpdate(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
         type: MagistrateTransactionEntityType.PLUGIN,
-        subType: MagistrateTransactionEntitySubType.PLUGIN_CORE,
+        // subType: MagistrateTransactionEntitySubType.NONE,
         action: MagistrateTransactionEntityAction.UPDATE,
       })).toEqual(true);
 
-      expect(wrapper.vm.isDesktopPluginEntityRegistration(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
-        type: MagistrateTransactionEntityType.PLUGIN,
-        subType: MagistrateTransactionEntitySubType.PLUGIN_DESKTOP,
+      expect(wrapper.vm.isModuleEntityRegistration(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
+        type: MagistrateTransactionEntityType.MODULE,
+        // subType: MagistrateTransactionEntitySubType.NONE,
         action: MagistrateTransactionEntityAction.REGISTER,
       })).toEqual(true);
 
-      expect(wrapper.vm.isDesktopPluginEntityResignation(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
-        type: MagistrateTransactionEntityType.PLUGIN,
-        subType: MagistrateTransactionEntitySubType.PLUGIN_DESKTOP,
+      expect(wrapper.vm.isModuleEntityResignation(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
+        type: MagistrateTransactionEntityType.MODULE,
+        // subType: MagistrateTransactionEntitySubType.NONE,
         action: MagistrateTransactionEntityAction.RESIGN,
       })).toEqual(true);
 
-      expect(wrapper.vm.isDesktopPluginEntityUpdate(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
-        type: MagistrateTransactionEntityType.PLUGIN,
-        subType: MagistrateTransactionEntitySubType.PLUGIN_DESKTOP,
+      expect(wrapper.vm.isModuleEntityUpdate(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
+        type: MagistrateTransactionEntityType.MODULE,
+        // subType: MagistrateTransactionEntitySubType.NONE,
         action: MagistrateTransactionEntityAction.UPDATE,
       })).toEqual(true);
 
       expect(wrapper.vm.isDelegateEntityRegistration(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
         type: MagistrateTransactionEntityType.DELEGATE,
-        subType: MagistrateTransactionEntitySubType.NONE,
+        // subType: MagistrateTransactionEntitySubType.NONE,
         action: MagistrateTransactionEntityAction.REGISTER,
       })).toEqual(true);
 
       expect(wrapper.vm.isDelegateEntityResignation(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
         type: MagistrateTransactionEntityType.DELEGATE,
-        subType: MagistrateTransactionEntitySubType.NONE,
+        // subType: MagistrateTransactionEntitySubType.NONE,
         action: MagistrateTransactionEntityAction.RESIGN,
       })).toEqual(true);
 
       expect(wrapper.vm.isDelegateEntityUpdate(MagistrateTransaction.ENTITY, TypeGroupTransaction.MAGISTRATE, {
         type: MagistrateTransactionEntityType.DELEGATE,
-        subType: MagistrateTransactionEntitySubType.NONE,
+        // subType: MagistrateTransactionEntitySubType.NONE,
         action: MagistrateTransactionEntityAction.UPDATE,
       })).toEqual(true);
 
