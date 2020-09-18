@@ -162,27 +162,27 @@ export default {
       );
     },
 
-    isCorePluginEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+    isModuleEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
         this.isEntityRegistration(type, typeGroup, asset) &&
-        asset.type === MagistrateTransactionEntityType.PLUGIN &&
-        asset.subType === MagistrateTransactionEntitySubType.PLUGIN_CORE
+        asset.type === MagistrateTransactionEntityType.MODULE &&
+        asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
 
-    isCorePluginEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+    isModuleEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
         this.isEntityResignation(type, typeGroup, asset) &&
-        asset.type === MagistrateTransactionEntityType.PLUGIN &&
-        asset.subType === MagistrateTransactionEntitySubType.PLUGIN_CORE
+        asset.type === MagistrateTransactionEntityType.MODULE &&
+        asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
 
-    isCorePluginEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+    isModuleEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
         this.isEntityUpdate(type, typeGroup, asset) &&
-        asset.type === MagistrateTransactionEntityType.PLUGIN &&
-        asset.subType === MagistrateTransactionEntitySubType.PLUGIN_CORE
+        asset.type === MagistrateTransactionEntityType.MODULE &&
+        asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
 

@@ -83,14 +83,14 @@
     <span v-else-if="isDeveloperEntityUpdate(type, typeGroup, asset)">{{
       $t("TRANSACTION.TYPES.DEVELOPER_ENTITY_UPDATE")
     }}</span>
-    <span v-else-if="isCorePluginEntityRegistration(type, typeGroup, asset)">{{
-      $t("TRANSACTION.TYPES.CORE_PLUGIN_ENTITY_REGISTRATION")
+    <span v-else-if="isModuleEntityRegistration(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.MODULE_ENTITY_REGISTRATION")
     }}</span>
-    <span v-else-if="isCorePluginEntityResignation(type, typeGroup, asset)">{{
-      $t("TRANSACTION.TYPES.CORE_PLUGIN_ENTITY_RESIGNATION")
+    <span v-else-if="isModuleEntityResignation(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.MODULE_ENTITY_RESIGNATION")
     }}</span>
-    <span v-else-if="isCorePluginEntityUpdate(type, typeGroup, asset)">{{
-      $t("TRANSACTION.TYPES.CORE_PLUGIN_ENTITY_UPDATE")
+    <span v-else-if="isModuleEntityUpdate(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.MODULE_ENTITY_UPDATE")
     }}</span>
     <span v-else-if="isDelegateEntityRegistration(type, typeGroup, asset)">{{
       $t("TRANSACTION.TYPES.DELEGATE_ENTITY_REGISTRATION")
