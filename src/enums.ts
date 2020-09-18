@@ -25,7 +25,7 @@ export enum MagistrateTransaction {
 export enum MagistrateTransactionEntityType {
   BUSINESS = 0,
   PRODUCT = 1,
-  DEVELOPER = 2,
+  PLUGIN = 2,
   MODULE = 3,
   DELEGATE = 4,
 }

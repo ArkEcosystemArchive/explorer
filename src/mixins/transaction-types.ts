@@ -132,23 +132,23 @@ export default {
       );
     },
 
-    isDeveloperEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+    isPluginEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
-        this.isEntityRegistration(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.DEVELOPER
+        this.isEntityRegistration(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.PLUGIN
         // asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
 
-    isDeveloperEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+    isPluginEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
-        this.isEntityResignation(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.DEVELOPER
+        this.isEntityResignation(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.PLUGIN
         // asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
 
-    isDeveloperEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+    isPluginEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
-        this.isEntityUpdate(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.DEVELOPER
+        this.isEntityUpdate(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.PLUGIN
         // asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },

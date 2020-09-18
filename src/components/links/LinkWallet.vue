@@ -74,14 +74,14 @@
     <span v-else-if="isProductEntityUpdate(type, typeGroup, asset)">{{
       $t("TRANSACTION.TYPES.PRODUCT_ENTITY_UPDATE")
     }}</span>
-    <span v-else-if="isDeveloperEntityRegistration(type, typeGroup, asset)">{{
-      $t("TRANSACTION.TYPES.DEVELOPER_ENTITY_REGISTRATION")
+    <span v-else-if="isPluginEntityRegistration(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.PLUGIN_ENTITY_REGISTRATION")
     }}</span>
-    <span v-else-if="isDeveloperEntityResignation(type, typeGroup, asset)">{{
-      $t("TRANSACTION.TYPES.DEVELOPER_ENTITY_RESIGNATION")
+    <span v-else-if="isPluginEntityResignation(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.PLUGIN_ENTITY_RESIGNATION")
     }}</span>
-    <span v-else-if="isDeveloperEntityUpdate(type, typeGroup, asset)">{{
-      $t("TRANSACTION.TYPES.DEVELOPER_ENTITY_UPDATE")
+    <span v-else-if="isPluginEntityUpdate(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.PLUGIN_ENTITY_UPDATE")
     }}</span>
     <span v-else-if="isModuleEntityRegistration(type, typeGroup, asset)">{{
       $t("TRANSACTION.TYPES.MODULE_ENTITY_REGISTRATION")
