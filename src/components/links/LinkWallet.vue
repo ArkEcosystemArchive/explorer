@@ -125,9 +125,7 @@
     <span v-else-if="isUndefinedResignation(type, typeGroup, asset)">{{
       $t("TRANSACTION.TYPES.UNDEFINED_RESIGNATION")
     }}</span>
-    <span v-else-if="isUndefinedUpdate(type, typeGroup, asset)">{{
-      $t("TRANSACTION.TYPES.UNDEFINED_UPDATE")
-    }}</span>
+    <span v-else-if="isUndefinedUpdate(type, typeGroup, asset)">{{ $t("TRANSACTION.TYPES.UNDEFINED_UPDATE") }}</span>
     <!-- By default we simply link to a recipient as we don't know this type / typegroup combination -->
     <div v-else>
       <span v-if="showAsType">{{ $t("TRANSACTION.TYPES.UNDEFINED") }}</span>

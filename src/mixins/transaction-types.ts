@@ -225,19 +225,22 @@ export default {
 
     isUndefinedRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
-        this.isEntityRegistration(type, typeGroup, asset) && !Object.values(MagistrateTransactionEntityType).includes(asset.type)
+        this.isEntityRegistration(type, typeGroup, asset) &&
+        !Object.values(MagistrateTransactionEntityType).includes(asset.type)
       );
     },
 
     isUndefinedResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
-        this.isEntityResignation(type, typeGroup, asset) && !Object.values(MagistrateTransactionEntityType).includes(asset.type)
+        this.isEntityResignation(type, typeGroup, asset) &&
+        !Object.values(MagistrateTransactionEntityType).includes(asset.type)
       );
     },
 
     isUndefinedUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
-        this.isEntityUpdate(type, typeGroup, asset) && !Object.values(MagistrateTransactionEntityType).includes(asset.type)
+        this.isEntityUpdate(type, typeGroup, asset) &&
+        !Object.values(MagistrateTransactionEntityType).includes(asset.type)
       );
     },
   },
