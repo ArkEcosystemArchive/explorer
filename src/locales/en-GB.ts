@@ -132,9 +132,13 @@ export default {
       LEGACY_BRIDGECHAIN_REGISTRATION: "Bridgechain Registration (Legacy)",
       LEGACY_BRIDGECHAIN_RESIGNATION: "Bridgechain Resignation (Legacy)",
       LEGACY_BRIDGECHAIN_UPDATE: "Bridgechain Update (Legacy)",
+      // Unknown type
+      UNDEFINED_REGISTRATION: "Undefined Registration",
+      UNDEFINED_RESIGNATION: "Undefined Resignation",
+      UNDEFINED_UPDATE: "Undefined Update",
+      UNDEFINED: "Undefined",
       SENT: "Sent",
       RECEIVED: "Received",
-      UNKNOWN: "Unknown",
     },
     ASSET: {
       BRIDGECHAINASSETREPOSITORY: "Bridgechain Asset Repository",
