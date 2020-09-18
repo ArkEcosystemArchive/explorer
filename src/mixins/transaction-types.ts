@@ -114,6 +114,30 @@ export default {
       );
     },
 
+    isProductEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        this.isEntityRegistration(type, typeGroup, asset) &&
+        asset.type === MagistrateTransactionEntityType.PRODUCT &&
+        asset.subType === MagistrateTransactionEntitySubType.NONE
+      );
+    },
+
+    isProductEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        this.isEntityResignation(type, typeGroup, asset) &&
+        asset.type === MagistrateTransactionEntityType.PRODUCT &&
+        asset.subType === MagistrateTransactionEntitySubType.NONE
+      );
+    },
+
+    isProductEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
+      return (
+        this.isEntityUpdate(type, typeGroup, asset) &&
+        asset.type === MagistrateTransactionEntityType.PRODUCT &&
+        asset.subType === MagistrateTransactionEntitySubType.NONE
+      );
+    },
+
     isDeveloperEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
         this.isEntityRegistration(type, typeGroup, asset) &&
@@ -209,6 +233,8 @@ export default {
         asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
+
+    // Magistrate 1.0
 
     isLegacyBusinessRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return isMagistrateTypeGroup(typeGroup) && type === MagistrateTransaction.BUSINESS_REGISTRATION;

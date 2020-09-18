@@ -65,6 +65,15 @@
     <span v-else-if="isBusinessEntityUpdate(type, typeGroup, asset)">{{
       $t("TRANSACTION.TYPES.BUSINESS_ENTITY_UPDATE")
     }}</span>
+    <span v-else-if="isProductEntityRegistration(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.PRODUCT_ENTITY_REGISTRATION")
+    }}</span>
+    <span v-else-if="isProductEntityResignation(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.PRODUCT_ENTITY_RESIGNATION")
+    }}</span>
+    <span v-else-if="isProductEntityUpdate(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.PRODUCT_ENTITY_UPDATE")
+    }}</span>
     <span v-else-if="isDeveloperEntityRegistration(type, typeGroup, asset)">{{
       $t("TRANSACTION.TYPES.DEVELOPER_ENTITY_REGISTRATION")
     }}</span>

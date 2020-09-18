@@ -24,7 +24,7 @@ export enum MagistrateTransaction {
 
 export enum MagistrateTransactionEntityType {
   BUSINESS = 0,
-  BRIDGECHAIN = 1, // not used anymore but type is kept in enum
+  PRODUCT = 1,
   DEVELOPER = 2,
   PLUGIN = 3,
   DELEGATE = 4,

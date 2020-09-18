@@ -55,6 +55,36 @@ export const transactionTypes: ITransactionType[] = [
     },
   },
   {
+    key: "PRODUCT_ENTITY_REGISTRATION",
+    type: MagistrateTransaction.ENTITY,
+    typeGroup: TypeGroupTransaction.MAGISTRATE,
+    asset: {
+      type: MagistrateTransactionEntityType.PRODUCT,
+      subType: MagistrateTransactionEntitySubType.NONE,
+      action: MagistrateTransactionEntityAction.REGISTER,
+    },
+  },
+  {
+    key: "PRODUCT_ENTITY_RESIGNATION",
+    type: MagistrateTransaction.ENTITY,
+    typeGroup: TypeGroupTransaction.MAGISTRATE,
+    asset: {
+      type: MagistrateTransactionEntityType.PRODUCT,
+      subType: MagistrateTransactionEntitySubType.NONE,
+      action: MagistrateTransactionEntityAction.RESIGN,
+    },
+  },
+  {
+    key: "PRODUCT_ENTITY_UPDATE",
+    type: MagistrateTransaction.ENTITY,
+    typeGroup: TypeGroupTransaction.MAGISTRATE,
+    asset: {
+      type: MagistrateTransactionEntityType.PRODUCT,
+      subType: MagistrateTransactionEntitySubType.NONE,
+      action: MagistrateTransactionEntityAction.UPDATE,
+    },
+  },
+  {
     key: "DEVELOPER_ENTITY_REGISTRATION",
     type: MagistrateTransaction.ENTITY,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
