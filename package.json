@@ -25,7 +25,7 @@
     "@arkecosystem/crypto": "^2.6.49",
     "@types/nprogress": "^0.2.0",
     "animate.css": "^4.1.0",
-    "axios": "^0.19.2",
+    "axios": "^0.20.0",
     "bad-words": "^3.0.3",
     "bignumber.js": "^9.0.0",
     "censorify-it": "^2.1.4",
