@@ -93,105 +93,90 @@ export default {
     isBusinessEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
         this.isEntityRegistration(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.BUSINESS
-        // asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
 
     isBusinessEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
         this.isEntityResignation(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.BUSINESS
-        // asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
 
     isBusinessEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
         this.isEntityUpdate(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.BUSINESS
-        // asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
 
     isProductEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
         this.isEntityRegistration(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.PRODUCT
-        // asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
 
     isProductEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
         this.isEntityResignation(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.PRODUCT
-        // asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
 
     isProductEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
         this.isEntityUpdate(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.PRODUCT
-        // asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
 
     isPluginEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
         this.isEntityRegistration(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.PLUGIN
-        // asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
 
     isPluginEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
         this.isEntityResignation(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.PLUGIN
-        // asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
 
     isPluginEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
         this.isEntityUpdate(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.PLUGIN
-        // asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
 
     isModuleEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
         this.isEntityRegistration(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.MODULE
-        // asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
 
     isModuleEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
         this.isEntityResignation(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.MODULE
-        // asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
 
     isModuleEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
         this.isEntityUpdate(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.MODULE
-        // asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
 
     isDelegateEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
         this.isEntityRegistration(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.DELEGATE
-        // asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
 
     isDelegateEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
         this.isEntityResignation(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.DELEGATE
-        // asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
 
     isDelegateEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
       return (
         this.isEntityUpdate(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.DELEGATE
-        // asset.subType === MagistrateTransactionEntitySubType.NONE
       );
     },
 
