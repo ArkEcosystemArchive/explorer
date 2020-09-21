@@ -40,7 +40,7 @@
             <button
               :key="period"
               :class="{ 'chart-tab-active': priceChartOptions.period === period }"
-              class="chart-tab transition"
+              class="transition chart-tab"
               @click="setPeriod(period)"
             >
               {{ $t(`MARKET_CHART.${period.toUpperCase()}`) }}

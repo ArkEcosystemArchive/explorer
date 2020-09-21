@@ -3,7 +3,7 @@
     <!-- Desktop -->
     <div class="hidden WalletHeaderDesktop md:flex xl:rounded-lg">
       <button
-        class="flex-none p-3 ml-10 mr-6 rounded address-button hover-button-shadow transition"
+        class="flex-none p-3 ml-10 mr-6 transition rounded address-button hover-button-shadow"
         @click="toggleModal"
       >
         <SvgIcon class="block" name="qr" view-box="0 0 29 29" />
@@ -91,7 +91,7 @@
         <button
           :disabled="!wallet.publicKey"
           :class="view === 'public' ? 'bg-blue-darker' : 'bg-transparent text-blue-light'"
-          class="px-3 py-3 text-xs font-normal text-white rounded-md hover:text-blue transition"
+          class="px-3 py-3 text-xs font-normal text-white transition rounded-md hover:text-blue"
           @click="setView('public')"
         >
           <SvgIcon class="block" name="globe" view-box="0 0 17 17" />
@@ -99,7 +99,7 @@
         <button
           v-if="wallet.publicKey"
           :class="view === 'private' ? 'bg-blue-darker' : 'bg-transparent text-blue-light'"
-          class="px-3 py-3 text-xs font-normal text-white rounded-md hover:text-blue transition"
+          class="px-3 py-3 text-xs font-normal text-white transition rounded-md hover:text-blue"
           @click="setView('private')"
         >
           <SvgIcon class="block" name="key" view-box="0 0 13 14" />

@@ -49,7 +49,7 @@
             :key="page"
             :disabled="page === currentPage"
             :class="{ active: page === currentPage }"
-            class="Pagination__Button transition"
+            class="transition Pagination__Button"
             @click="emitPageChange(page)"
           >
             <span>{{ page }}</span>

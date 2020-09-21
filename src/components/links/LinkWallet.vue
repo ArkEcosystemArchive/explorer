@@ -65,32 +65,32 @@
     <span v-else-if="isBusinessEntityUpdate(type, typeGroup, asset)">{{
       $t("TRANSACTION.TYPES.BUSINESS_ENTITY_UPDATE")
     }}</span>
-    <span v-else-if="isDeveloperEntityRegistration(type, typeGroup, asset)">{{
-      $t("TRANSACTION.TYPES.DEVELOPER_ENTITY_REGISTRATION")
+    <span v-else-if="isProductEntityRegistration(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.PRODUCT_ENTITY_REGISTRATION")
     }}</span>
-    <span v-else-if="isDeveloperEntityResignation(type, typeGroup, asset)">{{
-      $t("TRANSACTION.TYPES.DEVELOPER_ENTITY_RESIGNATION")
+    <span v-else-if="isProductEntityResignation(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.PRODUCT_ENTITY_RESIGNATION")
     }}</span>
-    <span v-else-if="isDeveloperEntityUpdate(type, typeGroup, asset)">{{
-      $t("TRANSACTION.TYPES.DEVELOPER_ENTITY_UPDATE")
+    <span v-else-if="isProductEntityUpdate(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.PRODUCT_ENTITY_UPDATE")
     }}</span>
-    <span v-else-if="isCorePluginEntityRegistration(type, typeGroup, asset)">{{
-      $t("TRANSACTION.TYPES.CORE_PLUGIN_ENTITY_REGISTRATION")
+    <span v-else-if="isPluginEntityRegistration(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.PLUGIN_ENTITY_REGISTRATION")
     }}</span>
-    <span v-else-if="isCorePluginEntityResignation(type, typeGroup, asset)">{{
-      $t("TRANSACTION.TYPES.CORE_PLUGIN_ENTITY_RESIGNATION")
+    <span v-else-if="isPluginEntityResignation(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.PLUGIN_ENTITY_RESIGNATION")
     }}</span>
-    <span v-else-if="isCorePluginEntityUpdate(type, typeGroup, asset)">{{
-      $t("TRANSACTION.TYPES.CORE_PLUGIN_ENTITY_UPDATE")
+    <span v-else-if="isPluginEntityUpdate(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.PLUGIN_ENTITY_UPDATE")
     }}</span>
-    <span v-else-if="isDesktopPluginEntityRegistration(type, typeGroup, asset)">{{
-      $t("TRANSACTION.TYPES.DESKTOP_PLUGIN_ENTITY_REGISTRATION")
+    <span v-else-if="isModuleEntityRegistration(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.MODULE_ENTITY_REGISTRATION")
     }}</span>
-    <span v-else-if="isDesktopPluginEntityResignation(type, typeGroup, asset)">{{
-      $t("TRANSACTION.TYPES.DESKTOP_PLUGIN_ENTITY_RESIGNATION")
+    <span v-else-if="isModuleEntityResignation(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.MODULE_ENTITY_RESIGNATION")
     }}</span>
-    <span v-else-if="isDesktopPluginEntityUpdate(type, typeGroup, asset)">{{
-      $t("TRANSACTION.TYPES.DESKTOP_PLUGIN_ENTITY_UPDATE")
+    <span v-else-if="isModuleEntityUpdate(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.MODULE_ENTITY_UPDATE")
     }}</span>
     <span v-else-if="isDelegateEntityRegistration(type, typeGroup, asset)">{{
       $t("TRANSACTION.TYPES.DELEGATE_ENTITY_REGISTRATION")
@@ -119,9 +119,16 @@
     <span v-else-if="isLegacyBridgechainUpdate(type, typeGroup, asset)">{{
       $t("TRANSACTION.TYPES.LEGACY_BRIDGECHAIN_UPDATE")
     }}</span>
+    <span v-else-if="isUndefinedRegistration(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.UNDEFINED_REGISTRATION")
+    }}</span>
+    <span v-else-if="isUndefinedResignation(type, typeGroup, asset)">{{
+      $t("TRANSACTION.TYPES.UNDEFINED_RESIGNATION")
+    }}</span>
+    <span v-else-if="isUndefinedUpdate(type, typeGroup, asset)">{{ $t("TRANSACTION.TYPES.UNDEFINED_UPDATE") }}</span>
     <!-- By default we simply link to a recipient as we don't know this type / typegroup combination -->
     <div v-else>
-      <span v-if="showAsType">{{ $t("TRANSACTION.TYPES.UNKNOWN") }}</span>
+      <span v-if="showAsType">{{ $t("TRANSACTION.TYPES.UNDEFINED") }}</span>
       <LinkAddress
         v-else
         :address="addressResolved"
