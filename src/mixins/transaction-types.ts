@@ -103,9 +103,7 @@ export default {
     },
 
     isBusinessEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
-      return (
-        this.isEntityUpdate(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.BUSINESS
-      );
+      return this.isEntityUpdate(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.BUSINESS;
     },
 
     isProductEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
@@ -115,51 +113,35 @@ export default {
     },
 
     isProductEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
-      return (
-        this.isEntityResignation(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.PRODUCT
-      );
+      return this.isEntityResignation(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.PRODUCT;
     },
 
     isProductEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
-      return (
-        this.isEntityUpdate(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.PRODUCT
-      );
+      return this.isEntityUpdate(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.PRODUCT;
     },
 
     isPluginEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
-      return (
-        this.isEntityRegistration(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.PLUGIN
-      );
+      return this.isEntityRegistration(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.PLUGIN;
     },
 
     isPluginEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
-      return (
-        this.isEntityResignation(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.PLUGIN
-      );
+      return this.isEntityResignation(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.PLUGIN;
     },
 
     isPluginEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
-      return (
-        this.isEntityUpdate(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.PLUGIN
-      );
+      return this.isEntityUpdate(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.PLUGIN;
     },
 
     isModuleEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
-      return (
-        this.isEntityRegistration(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.MODULE
-      );
+      return this.isEntityRegistration(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.MODULE;
     },
 
     isModuleEntityResignation(type: number, typeGroup: number, asset: Record<string, any>): boolean {
-      return (
-        this.isEntityResignation(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.MODULE
-      );
+      return this.isEntityResignation(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.MODULE;
     },
 
     isModuleEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
-      return (
-        this.isEntityUpdate(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.MODULE
-      );
+      return this.isEntityUpdate(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.MODULE;
     },
 
     isDelegateEntityRegistration(type: number, typeGroup: number, asset: Record<string, any>): boolean {
@@ -175,9 +157,7 @@ export default {
     },
 
     isDelegateEntityUpdate(type: number, typeGroup: number, asset: Record<string, any>): boolean {
-      return (
-        this.isEntityUpdate(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.DELEGATE
-      );
+      return this.isEntityUpdate(type, typeGroup, asset) && asset.type === MagistrateTransactionEntityType.DELEGATE;
     },
 
     // Magistrate 1.0
