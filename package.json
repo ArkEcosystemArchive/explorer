@@ -24,6 +24,7 @@
   "dependencies": {
     "@arkecosystem/crypto": "^2.6.57",
     "@types/nprogress": "^0.2.0",
+    "@vue/compiler-sfc": "^3.0.0",
     "animate.css": "^4.1.1",
     "axios": "^0.20.0",
     "bad-words": "^3.0.3",
