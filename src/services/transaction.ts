@@ -28,7 +28,6 @@ class TransactionService {
   public async latest(limit: number = paginationLimit): Promise<ITransaction[]> {
     const response = (await ApiService.get("transactions", {
       params: {
-        orderBy: "timestamp:desc",
         limit,
       },
     })) as IApiTransactionsWrapper;
@@ -53,9 +52,7 @@ class TransactionService {
     asset?: object,
     limit: number = paginationLimit,
   ): Promise<IApiTransactionsWrapper> {
-    const body: any = {
-      orderBy: "timestamp:desc",
-    };
+    const body: any = {};
 
     if (type !== -1) {
       body.type = type;
@@ -101,7 +98,6 @@ class TransactionService {
   public async byBlock(id: string, page = 1, limit: number = paginationLimit): Promise<IApiTransactionsWrapper> {
     const response = (await ApiService.get(`blocks/${id}/transactions`, {
       params: {
-        orderBy: "timestamp:desc",
         page,
         limit,
       },
@@ -115,7 +111,6 @@ class TransactionService {
   public async allByAddress(address: string, page = 1, limit = paginationLimit): Promise<IApiTransactionsWrapper> {
     const response = (await ApiService.get(`wallets/${address}/transactions`, {
       params: {
-        orderBy: "timestamp:desc",
         page,
         limit,
       },
@@ -133,7 +128,6 @@ class TransactionService {
   ): Promise<IApiTransactionsWrapper> {
     const response = (await ApiService.get(`wallets/${address}/transactions/sent`, {
       params: {
-        orderBy: "timestamp:desc",
         page,
         limit,
       },
@@ -151,7 +145,6 @@ class TransactionService {
   ): Promise<IApiTransactionsWrapper> {
     const response = (await ApiService.get(`wallets/${address}/transactions/received`, {
       params: {
-        orderBy: "timestamp:desc",
         page,
         limit,
       },
@@ -169,7 +162,6 @@ class TransactionService {
   ): Promise<IApiTransactionsWrapper> {
     const response = (await ApiService.get(`wallets/${address}/locks`, {
       params: {
-        orderBy: "timestamp:desc",
         page,
         limit,
       },
