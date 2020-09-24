@@ -70,6 +70,7 @@ class TransactionService {
       params: {
         page,
         limit,
+        orderBy: "timestamp:desc",
       },
     })) as IApiTransactionsWrapper;
 
