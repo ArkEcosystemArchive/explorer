@@ -53,9 +53,7 @@ class TransactionService {
     asset?: object,
     limit: number = paginationLimit,
   ): Promise<IApiTransactionsWrapper> {
-    const body: any = {
-      orderBy: "timestamp:desc",
-    };
+    const body: any = {};
 
     if (type !== -1) {
       body.type = type;
@@ -73,6 +71,7 @@ class TransactionService {
       params: {
         page,
         limit,
+        orderBy: "timestamp:desc",
       },
     })) as IApiTransactionsWrapper;
 
