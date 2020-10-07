@@ -3,6 +3,7 @@ import ApiService from "@/services/api";
 import { IApiTransactionWrapper, IApiTransactionsWrapper, ITransaction, ITransactionSearchParams } from "../interfaces";
 import { paginationLimit } from "@/constants";
 import { Sanitizer } from "@/utils/Sanitizer";
+import dotify from "node-dotify"
 import emoji from "node-emoji";
 
 const sanitizeVendorField = (transaction: ITransaction) => {
@@ -88,7 +89,7 @@ class TransactionService {
       params: {
         page,
         limit,
-        ...parameters,
+        ...dotify(parameters),
       },
     })) as IApiTransactionsWrapper;
 

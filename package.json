@@ -35,6 +35,7 @@
     "express": "^4.17.1",
     "lodash": "^4.17.15",
     "moment": "^2.25.3",
+    "node-dotify": "^1.0.2",
     "node-emoji": "^1.10.0",
     "nprogress": "^0.2.0",
     "portal-vue": "^2.1.7",
