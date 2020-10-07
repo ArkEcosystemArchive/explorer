@@ -19,14 +19,15 @@ class WalletService {
   }
 
   public async search(
-    body: IWalletSearchParams,
+    parameters: IWalletSearchParams,
     page = 1,
     limit: number = paginationLimit,
   ): Promise<IApiWalletsWrapper> {
-    const response = (await ApiService.post("wallets/search", body, {
+    const response = (await ApiService.get("wallets/search", {
       params: {
         page,
         limit,
+        ...parameters,
       },
     })) as IApiWalletsWrapper;
 

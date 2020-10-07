@@ -52,24 +52,25 @@ class TransactionService {
     asset?: object,
     limit: number = paginationLimit,
   ): Promise<IApiTransactionsWrapper> {
-    const body: any = {};
+    const parameters: any = {};
 
     if (type !== -1) {
-      body.type = type;
+      parameters.type = type;
     }
 
     if (typeGroup) {
-      body.typeGroup = typeGroup;
+      parameters.typeGroup = typeGroup;
     }
 
     if (asset) {
-      body.asset = asset;
+      parameters.asset = asset;
     }
 
-    const response = (await ApiService.post("transactions/search", body, {
+    const response = (await ApiService.get("transactions", {
       params: {
         page,
         limit,
+        ...parameters,
       },
     })) as IApiTransactionsWrapper;
 
@@ -79,14 +80,15 @@ class TransactionService {
   }
 
   public async search(
-    body: ITransactionSearchParams,
+    parameters: ITransactionSearchParams,
     page = 1,
     limit: number = paginationLimit,
   ): Promise<IApiTransactionsWrapper> {
-    const response = (await ApiService.post("transactions/search", body, {
+    const response = (await ApiService.get("transactions", {
       params: {
         page,
         limit,
+        ...parameters,
       },
     })) as IApiTransactionsWrapper;
 

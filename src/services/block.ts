@@ -71,11 +71,12 @@ class BlockService {
     return response.data![0];
   }
 
-  public async search(body: IBlockSearchParams, page = 1, limit: number = paginationLimit): Promise<IApiBlocksWrapper> {
-    const response = (await ApiService.post("blocks/search", body, {
+  public async search(parameters: IBlockSearchParams, page = 1, limit: number = paginationLimit): Promise<IApiBlocksWrapper> {
+    const response = (await ApiService.get("blocks/search", {
       params: {
         page,
         limit,
+        ...parameters,
       },
     })) as IApiBlocksWrapper;
 
