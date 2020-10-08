@@ -1,8 +1,8 @@
-import { Factory, Model, Server } from "miragejs";
+const { Factory, Model, Server } = require("miragejs");
 
 const loadFixture = (fixture) => require(`./fixtures/${fixture}.json`);
 
-export function makeServer({ environment = "development" } = {}) {
+exports.makeServer = function makeServer({ environment = "development" } = {}) {
   return new Server({
     environment,
 
@@ -458,4 +458,4 @@ export function makeServer({ environment = "development" } = {}) {
       });
     },
   });
-}
+};

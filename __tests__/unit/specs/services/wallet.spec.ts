@@ -14,11 +14,11 @@ const walletPropertyArray = [
 ].sort();
 // Note: publicKey, secondPublicKey, username and vote can also be returned, but are optional
 
-describe("Services > Wallet", () => {
-  beforeAll(() => {
-    store.dispatch("network/setServer", "https://explorer.ark.io/api/v2");
-  });
+beforeAll(() => {
+  store.dispatch("network/setServer", "https://explorer.ark.io/api");
+});
 
+describe("Services > Wallet", () => {
   it("should return address when searching for existing wallet", async () => {
     const data = await WalletService.find("ATsPMTAHNsUwKedzNpjTNRfcj1oRGaX5xC");
     expect(Object.keys(data).sort()).toEqual(expect.arrayContaining(walletPropertyArray));
