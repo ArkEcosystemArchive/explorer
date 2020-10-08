@@ -127,7 +127,7 @@ class DelegateService {
       params: {
         page,
         limit,
-        "attributes.delegate.resigned": 1,
+        isResigned: true,
       },
     })) as IApiDelegatesWrapper;
 
