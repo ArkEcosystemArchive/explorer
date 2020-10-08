@@ -1,12 +1,31 @@
 import ApiService from "@/services/api";
-import { IApiWalletsWrapper, IWalletSearchParams } from "../interfaces";
+import { IApiWalletsWrapper, IWallet, IWalletSearchParams } from "../interfaces";
 import { paginationLimit } from "@/constants";
-import dotify from "node-dotify"
+import dotProp from "dot-prop";
+import dotify from "node-dotify";
+
+const hydrate = (data: IWallet): IWallet => {
+  return {
+    address: dotProp.get(data, "address"),
+    username: dotProp.get(data, "attributes.delegate.username"),
+    publicKey: dotProp.get(data, "publicKey"),
+    vote: dotProp.get(data, "attributes.vote"),
+    isDelegate: dotProp.has(data, "attributes.delegate"),
+    isResigned: dotProp.get(data, "attributes.delegate.resigned"),
+    lockedBalance: dotProp.get(data, "attributes.htlc.lockedBalance"),
+    secondPublicKey: dotProp.get(data, "secondPublicKey"),
+    multiSignature: dotProp.get(data, "attributes.multiSignature"),
+  };
+};
+
+const hydrateMany = (wallets: IWallet[]): IWallet[] => {
+  return wallets.map((wallet: IWallet) => hydrate(wallet));
+};
 
 class WalletService {
   public async find(address: string) {
     const response = await ApiService.get(`wallets/${address}`);
-    return response.data;
+    return hydrate(response.data);
   }
 
   public async top(page = 1, limit: number = paginationLimit) {
@@ -16,6 +35,9 @@ class WalletService {
         limit,
       },
     });
+
+    response.data = hydrateMany(response.data);
+
     return response;
   }
 
@@ -31,6 +53,8 @@ class WalletService {
         ...dotify(parameters),
       },
     })) as IApiWalletsWrapper;
+
+    response.data = hydrateMany(response.data);
 
     return response;
   }

@@ -6,7 +6,7 @@
       <div class="w-full lg:w-1/4">
         <InputText
           :label="$t('WALLET.DELEGATE.USERNAME')"
-          name="username"
+          name="attributes.delegate.username"
           @input="onInputChange"
           @keyup.enter.native="onEnterKey"
         />
@@ -14,7 +14,7 @@
       <div class="w-full lg:w-1/4">
         <InputText
           :label="$t('WALLET.VOTING_FOR')"
-          name="vote"
+          name="attributes.vote"
           class="pt-0"
           @input="onInputChange"
           @keyup.enter.native="onEnterKey"

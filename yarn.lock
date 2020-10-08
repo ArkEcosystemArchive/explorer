@@ -3133,6 +3133,7 @@ __metadata:
     connect-history-api-fallback: ^1.6.0
     core-js: ^3.6.5
     cross-env: ^7.0.2
+    dot-prop: ^6.0.0
     es6-promise: ^4.2.8
     es6-promise-promise: ^1.0.0
     eslint: ^7.0.0
@@ -6063,6 +6064,15 @@ __metadata:
   dependencies:
     is-obj: ^2.0.0
   checksum: 3/d2f62e0b5ec467edb8e278ab6070955f0a4aec973ec1fa837ff6152f3cdd96cd2a04c7e2626cb3eac4f639b8f6786b5b87d3c01df7ba729693c636cb78b7ae93
+  languageName: node
+  linkType: hard
+
+"dot-prop@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "dot-prop@npm:6.0.0"
+  dependencies:
+    is-obj: ^2.0.0
+  checksum: 3/015f2effc94c0440c88ca83dc30a706d00b53f132d753bf3f1ffac8ac6da22372164428d61d96c894fcdb0aac309cb020afd5f96c7c4e3d7b1388417855d4864
   languageName: node
   linkType: hard
 

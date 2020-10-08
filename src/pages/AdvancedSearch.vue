@@ -229,6 +229,7 @@ export default class AdvancedSearchPage extends Vue {
 
     try {
       const { meta, data } = await this.searchService(this.searchParams);
+
       this.setMeta(meta);
       this.setData(data);
     } catch {
