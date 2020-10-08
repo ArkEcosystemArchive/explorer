@@ -125,9 +125,9 @@ class DelegateService {
   public async allResigned(page = 1, limit: number = paginationLimit): Promise<IApiDelegatesWrapper> {
     const response = (await ApiService.get("delegates", {
       params: {
-        type: "resigned",
         page,
         limit,
+        "attributes.delegate.resigned": 1,
       },
     })) as IApiDelegatesWrapper;
 
