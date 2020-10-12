@@ -36,7 +36,7 @@ const multiSigTransactionPropertyArray = [
 
 describe("Services > Transaction", () => {
   beforeAll(() => {
-    store.dispatch("network/setServer", "https://explorer.ark.io/api/v2");
+    store.dispatch("network/setServer", "https://explorer.ark.io/api");
   });
 
   it("should return the latest transactions ordered by timestamp descending", async () => {

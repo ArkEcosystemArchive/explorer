@@ -32,6 +32,7 @@
     "chart.js": "^2.9.3",
     "connect-history-api-fallback": "^1.6.0",
     "core-js": "^3.6.5",
+    "dot-prop": "^6.0.0",
     "express": "^4.17.1",
     "lodash": "^4.17.15",
     "moment": "^2.25.3",

@@ -1,8 +1,8 @@
-import { Factory, Model, Server } from "miragejs";
+const { Factory, Model, Server } = require("miragejs");
 
 const loadFixture = (fixture) => require(`./fixtures/${fixture}.json`);
 
-export function makeServer({ environment = "development" } = {}) {
+exports.makeServer = function makeServer({ environment = "development" } = {}) {
   return new Server({
     environment,
 
@@ -150,6 +150,18 @@ export function makeServer({ environment = "development" } = {}) {
           response.data = response.data.slice(0, request.queryParams.limit);
         }
 
+        if (request.queryParams.totalFee) {
+          return loadFixture("api/blocks/search/by-total-fee");
+        }
+
+        if (request.queryParams.generatorPublicKey) {
+          return loadFixture("api/blocks/search/by-generator-public-key");
+        }
+
+        if (request.queryParams.id) {
+          return loadFixture("api/blocks/search/by-id");
+        }
+
         return response;
       });
 
@@ -167,27 +179,6 @@ export function makeServer({ environment = "development" } = {}) {
 
       this.get("/blocks/last", (schema, request) => {
         return loadFixture("api/blocks/last");
-      });
-
-      this.post("/blocks/search", (schema, request) => {
-        const requestBody = JSON.parse(request.requestBody);
-
-        if (requestBody.totalFee) {
-          return loadFixture("api/blocks/search/by-total-fee");
-        }
-
-        if (requestBody.generatorPublicKey) {
-          return loadFixture("api/blocks/search/by-generator-public-key");
-        }
-
-        if (requestBody.id) {
-          return loadFixture("api/blocks/search/by-id");
-        }
-
-        return {
-          meta: {},
-          data: [],
-        };
       });
 
       let delegatesRequestedBefore = false;
@@ -232,13 +223,6 @@ export function makeServer({ environment = "development" } = {}) {
         }
 
         return response;
-      });
-
-      this.post("/delegates/search", (schema, request) => {
-        return {
-          meta: {},
-          data: [],
-        };
       });
 
       this.get("/locks", (schema, request) => {
@@ -339,12 +323,24 @@ export function makeServer({ environment = "development" } = {}) {
         return response;
       });
 
-      // this.post("/transactions", (schema, request) => {
-      //   return {
-      //     meta: {},
-      //     data: [],
-      //   };
-      // });
+      this.get("/transactions", (schema, request) => {
+        if (request.queryParams.amount && request.queryParams.fee) {
+          return loadFixture("api/transactions/search/by-amount-and-fee");
+        }
+
+        if (!request.queryParams.id) {
+          return loadFixture("api/transactions/search/transactions");
+        }
+
+        if (request.queryParams.id !== "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff") {
+          return loadFixture("api/transactions/search/by-id");
+        }
+
+        return {
+          meta: {},
+          data: [],
+        };
+      });
 
       this.get("/transactions/:id", (schema, request) => {
         return loadFixture(`api/transactions/${request.params.id}`);
@@ -358,27 +354,6 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       this.get("/transactions/schemas", (schema, request) => {
-        return {
-          meta: {},
-          data: [],
-        };
-      });
-
-      this.post("/transactions/search", (schema, request) => {
-        const requestBody = JSON.parse(request.requestBody);
-
-        if (requestBody.amount && requestBody.fee) {
-          return loadFixture("api/transactions/search/by-amount-and-fee");
-        }
-
-        if (!requestBody.id) {
-          return loadFixture("api/transactions/search/transactions");
-        }
-
-        if (requestBody.id !== "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff") {
-          return loadFixture("api/transactions/search/by-id");
-        }
-
         return {
           meta: {},
           data: [],
@@ -421,6 +396,19 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       this.get("/wallets", (schema, request) => {
+        console.log("wuts");
+        if (request.queryParams["attributes.vote"]) {
+          return loadFixture("api/wallets/search/by-vote");
+        }
+
+        if (request.queryParams["attributes.username"]) {
+          return loadFixture("api/wallets/search/by-username");
+        }
+
+        if (request.queryParams.address) {
+          return loadFixture("api/wallets/search/by-address");
+        }
+
         return {
           meta: {},
           data: [],
@@ -459,27 +447,6 @@ export function makeServer({ environment = "development" } = {}) {
         return loadFixture(`api/wallets/${request.params.id}/votes`);
       });
 
-      this.post("/wallets/search", (schema, request) => {
-        const requestBody = JSON.parse(request.requestBody);
-
-        if (requestBody.vote) {
-          return loadFixture("api/wallets/search/by-vote");
-        }
-
-        if (requestBody.username) {
-          return loadFixture("api/wallets/search/by-username");
-        }
-
-        if (requestBody.address) {
-          return loadFixture("api/wallets/search/by-address");
-        }
-
-        return {
-          meta: {},
-          data: [],
-        };
-      });
-
       this.get("/wallets/top", (schema, request) => {
         const response = loadFixture("api/wallets/top");
 
@@ -491,4 +458,4 @@ export function makeServer({ environment = "development" } = {}) {
       });
     },
   });
-}
+};

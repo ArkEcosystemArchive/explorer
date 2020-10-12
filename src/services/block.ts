@@ -1,7 +1,7 @@
 import ApiService from "@/services/api";
 import { IApiBlockWrapper, IApiBlocksWrapper, IBlock, IBlockSearchParams } from "../interfaces";
 import { paginationLimit } from "@/constants";
-import dotify from "node-dotify"
+import dotify from "node-dotify";
 
 class BlockService {
   public async latest(limit: number = paginationLimit): Promise<IBlock[]> {
@@ -72,7 +72,11 @@ class BlockService {
     return response.data![0];
   }
 
-  public async search(parameters: IBlockSearchParams, page = 1, limit: number = paginationLimit): Promise<IApiBlocksWrapper> {
+  public async search(
+    parameters: IBlockSearchParams,
+    page = 1,
+    limit: number = paginationLimit,
+  ): Promise<IApiBlocksWrapper> {
     const response = (await ApiService.get("blocks", {
       params: {
         page,

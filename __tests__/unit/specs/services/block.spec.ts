@@ -17,13 +17,13 @@ const blockPropertyArray = [
 
 describe("Services > Block", () => {
   beforeAll(() => {
-    store.dispatch("network/setServer", "https://explorer.ark.io/api/v2");
+    store.dispatch("network/setServer", "https://explorer.ark.io/api");
   });
 
   it("should return the latest blocks", async () => {
     const data = await BlockService.latest();
     expect(data).toHaveLength(25);
-    data.forEach(block => {
+    data.forEach((block) => {
       expect(Object.keys(block).sort()).toEqual(blockPropertyArray);
     });
     expect(data.sort((a, b) => a.height > b.height)).toEqual(data);
@@ -48,7 +48,7 @@ describe("Services > Block", () => {
     jest.setTimeout(30000);
     const { data } = await BlockService.paginate();
     expect(data).toHaveLength(25);
-    data.forEach(block => {
+    data.forEach((block) => {
       expect(Object.keys(block).sort()).toEqual(blockPropertyArray);
     });
     expect(data.sort((a, b) => a.height > b.height)).toEqual(data);
@@ -58,7 +58,7 @@ describe("Services > Block", () => {
     jest.setTimeout(30000);
     const { data } = await BlockService.byAddress("AeaqhUKfBtVqNhtMct3piBiWfdhbRwbg4W");
     expect(data).toHaveLength(25);
-    data.forEach(block => {
+    data.forEach((block) => {
       expect(Object.keys(block).sort()).toEqual(blockPropertyArray);
     });
     expect(data.sort((a, b) => a.height > b.height)).toEqual(data);
@@ -124,7 +124,7 @@ describe("Services > Block", () => {
       totalFee: { from: minAmount },
     });
     expect(data).toHaveLength(25);
-    data.forEach(block => {
+    data.forEach((block) => {
       expect(Object.keys(block).sort()).toEqual(blockPropertyArray);
       expect(parseInt(block.forged.fee)).toBeGreaterThanOrEqual(minAmount);
     });
@@ -138,7 +138,7 @@ describe("Services > Block", () => {
       totalAmount: { from: minAmount, to: maxAmount },
     });
     expect(data).toHaveLength(25);
-    data.forEach(block => {
+    data.forEach((block) => {
       expect(Object.keys(block).sort()).toEqual(blockPropertyArray);
       expect(parseInt(block.forged.amount)).toBeLessThanOrEqual(maxAmount);
       expect(parseInt(block.forged.amount)).toBeGreaterThanOrEqual(minAmount);
@@ -152,7 +152,7 @@ describe("Services > Block", () => {
       generatorPublicKey: publicKey,
     });
     expect(data).toHaveLength(25);
-    data.forEach(block => {
+    data.forEach((block) => {
       expect(Object.keys(block).sort()).toEqual(blockPropertyArray);
       expect(block.generator.publicKey).toBe(publicKey);
     });
@@ -162,7 +162,7 @@ describe("Services > Block", () => {
     jest.setTimeout(30000);
     const { data } = await BlockService.search();
     expect(data).toHaveLength(25);
-    data.forEach(block => {
+    data.forEach((block) => {
       expect(Object.keys(block).sort()).toEqual(blockPropertyArray);
     });
   });
