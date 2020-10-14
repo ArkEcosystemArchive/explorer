@@ -7,6 +7,7 @@ import dotify from "node-dotify";
 const hydrate = (data: IWallet): IWallet => {
   return {
     address: dotProp.get(data, "address"),
+    balance: dotProp.get(data, "balance"),
     username: dotProp.get(data, "attributes.delegate.username"),
     publicKey: dotProp.get(data, "publicKey"),
     vote: dotProp.get(data, "attributes.vote"),

@@ -113,6 +113,7 @@ export interface ITimestamp {
 
 export interface IWallet {
   address: string;
+  balance: string;
   username: string;
   publicKey: string;
   vote: string;
