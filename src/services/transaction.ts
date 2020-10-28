@@ -64,7 +64,9 @@ class TransactionService {
     }
 
     if (asset) {
-      parameters.asset = asset;
+      for (const [key, value] of Object.entries(asset)) {
+        parameters[`asset.${key}`] = value;
+      }
     }
 
     const response = (await ApiService.get("transactions", {
